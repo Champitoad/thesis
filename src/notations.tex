@@ -1,0 +1,153 @@
+% Proof trees macros
+
+\NewDocumentCommand{\rnm}{mO{}tr}
+  {{\small$
+    \IfBooleanT{#3}{\overline}{
+      #1
+    }^{#2}$}}
+
+\NewDocumentCommand{\R}{oO{}trtd}{
+  \expandafter\prftree\expanded{
+    \IfBooleanT{#4}{[d]}
+    \IfValueT{#1}{[r]{
+      \unexpanded{\rnm{#1}}
+      [#2]
+      \IfBooleanT{#3}{r}
+    }}
+  }
+}
+
+\newcommand{\rnmsf}[1]{\rnm{\mathsf{#1}}}
+
+\newcommand{\hypo}{\prfassumption}
+\newcommand{\summ}{\prfsummary}
+
+% -------------------------------
+% ---------- Notations ----------
+% -------------------------------
+
+\newcommand{\nats}{\mathbb{N}}
+
+% Vertical reflection in math mode
+\newcommand{\vrefl}[1]{\text{\raisebox{\depth}{\scalebox{-1}[-1]{$#1$}}}}
+
+\newcommand{\sep}{\;\!;\!\;}
+
+\newcommand{\seq}{\Rightarrow}
+\newcommand{\limp}{\supset}
+
+\newcommand{\mcirc}{\mathbin{⚬}}
+\newcommand{\mdiam}{◇}
+
+\DeclareRobustCommand{\sys}[1]{$\mathsf{#1}$}
+
+\newcommand{\hole}{\square}
+\newcommand{\cfill}[2]{#1\{#2\}}
+
+\newcommand{\step}{\rightarrow}
+\newcommand{\steps}{\step^\ast}
+\newcommand{\notstep}{\nrightarrow}
+\newcommand{\notsteps}{\nrightarrow^\ast}
+\newcommand{\nsteps}[1]{\step^{#1}}
+\newcommand{\deriv}[3]{#1 : #2 \steps #3}
+\newcommand{\irule}[3]{#1 : #2 \rightarrow #3}
+
+\newcommand{\fentails}{\sdtstile{}{}}
+\newcommand{\fequiv}{\sdststile{}{}}
+\newcommand{\nturn}[1]{\lefteqn{\lapbox{1.88ex}{\raisebox{.38ex}{\scriptsize/}}}\mathbin{#1}}
+
+\newcommand{\bv}{\mathsf{bv}}
+\newcommand{\fv}{\mathsf{fv}}
+\renewcommand{\emptyset}{⌀}
+\newcommand{\subst}[3]{#1 [ #2 / #3 ]}
+\newcommand{\compr}[2]{\left\{#1 ~\middle|~ #2\right\}}
+\newcommand{\fset}[3]{\{#3\}_{#1}^{#2}}
+
+% Flowers
+
+\newcommand{\Nature}{\text{\ding{96}}}
+\newcommand{\Culture}{\text{\ding{34}}}
+
+\newcommand{\flower}[2]{#1 \csup #2}
+\newcommand{\garden}[2]{#1 \cdot #2}
+
+\newcommand{\flowers}{\mathbb{F}}
+\newcommand{\gardens}{\mathbb{G}}
+
+\newcommand{\interp}[1]{\llbracket #1 \rrbracket}
+
+\newcommand{\chyp}[2]{#1 \prec #2}
+
+\newcommand{\parity}[1]{\mathsf{par}(#1)}
+
+% First-order
+
+\newcommand{\vars}{\mathcal{V}}
+\newcommand{\fsymbs}{\mathcal{F}}
+\newcommand{\psymbs}{\mathcal{P}}
+\newcommand{\arity}{\mathsf{ar}}
+\newcommand{\dom}{\mathsf{supp}}
+\newcommand{\terms}{\mathbb{T}}
+\newcommand{\csts}{\mathbb{C}}
+
+\newcommand{\closed}[1]{\underline{#1}}
+\newcommand{\restr}[2]{#1 |_{#2}}
+\newcommand{\update}[3]{#1 |_{#2} #3}
+\newcommand{\idsubst}{\mathsf{1}}
+\newcommand{\cstsubst}[1]{\overline{#1}}
+
+% Kripke
+
+\newcommand{\rewolF}[1]{\text{\ding{95}}(#1)}
+
+\newcommand{\forces}{\,\Vdash\,}
+\newcommand{\nforces}{\,\nVdash\,}
+\newcommand{\eforces}[3]{#1\,\Vdash\,#2\,[#3]}
+\newcommand{\neforces}[3]{#1\,\nVdash\,#2\,[#3]}
+\newcommand{\access}{\leq}
+
+\newcommand{\completion}[1]{\mathsf{Com}(#1)}
+\newcommand{\ncompletion}[2]{\mathsf{Com}^{#2}(#1)}
+
+\newcommand{\sequiv}{\mathop{\vrefl{{\vDash}}{\vDash}}}
+
+% Actema
+
+\DeclareMathOperator{\rew}{~~\rhd~~}
+\DeclareMathOperator{\mrew}{~~\rhd^\ast~~}
+\DeclareMathOperator{\syneq}{~\equiv~}
+\DeclareMathOperator{\link}{~@~}
+\DeclareMathOperator{\forw}{~\varoast~}
+\DeclareMathOperator{\back}{~\varogreaterthan~}
+
+\newcommand{\rever}{^*}
+\newcommand{\phole}{\square}
+\newcommand{\fhole}{\boxdot}
+\newcommand{\ifill}[2]{#1\left\{#2\right\}}
+\newcommand{\efill}[2]{#1\left[#2\right]}
+
+\DeclareRobustCommand{\sys}[1]{$\mathsf{#1}$}
+\newcommand{\pair}[2]{\left\langle #1, #2 \right\rangle}
+
+\newcommand{\ra}{\rightarrow}
+\newcommand{\FV}{\mbox{FV}}
+\newcommand{\ocp}{\square_+}
+\newcommand{\ocn}{\square_-}
+\newcommand{\uA}{\select{A}}
+\newcommand{\uB}{\select{B}}
+\newcommand{\uC}{\select{C}}
+\newcommand{\select}[1]{\fbox{$#1$}}
+\newcommand{\stepto}{~~~~\mapsto~~~}
+\newcommand{\inv}{\mathsf{inv}}
+\newcommand{\uvars}{\mathsf{U}}
+\newcommand{\lvar}{l}
+\newcommand{\lvarp}{l_+}
+\newcommand{\lvarn}{l_-}
+
+\newcommand{\mother}{\mbox{\textsf{Mother}}}
+\newcommand{\rich}{\mbox{\textsf{Rich}}}
+\newcommand{\human}{\mbox{\textsf{Hum}}}
+\newcommand{\mortal}{\mbox{\textsf{Mort}}}
+\newcommand{\socrates}{\mbox{\textsf{Socr}}}
+
+\newcommand{\suc}[1]{#1\!\oplus\! 1}
