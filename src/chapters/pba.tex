@@ -1402,27 +1402,27 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
 
         {(B \land C) \back A}&\step&        {B \back A}&\mathsf{L \land_1}\\
         {(C \land B) \back A}&\step&        {B \back A}&\mathsf{L \land_2}\\
-        {A \back (B \land C)}&\step&        {(A \back B) \land C}&\mathsf{R \land_1}\\
-        {A \back (C \land B)}&\step&        {C \land (A \back B)}&\mathsf{R \land_2}\\[1em]
+        {A \back~(B \land C)}&\step&        {(A \back B) \land C}&\mathsf{R \land_1}\\
+        {A \back~(C \land B)}&\step&        {C \land (A \back B)}&\mathsf{R \land_2}\\[1em]
         
         {(B \lor C) \back A}&\step&        {(B \back A) \land (C \limp A)}~~~~~~~~~&\mathsf{L \lor_1}\rever\\
         {(C \lor B) \back A}&\step&        {(C \limp A) \land (B \back A)}&\mathsf{L \lor_2}\rever\\
-        {A \back (B \lor C)}&\step&        {(A \back B) \lor C}&\mathsf{R \lor_1}\\
-        {A \back (C \lor B)}&\step&        {C \lor (A \back B)}&\mathsf{R \lor_2}\\[1em]
+        {A \back~(B \lor C)}&\step&        {(A \back B) \lor C}&\mathsf{R \lor_1}\\
+        {A \back~(C \lor B)}&\step&        {C \lor (A \back B)}&\mathsf{R \lor_2}\\[1em]
 
         {(C \limp B) \back A}&\step&        {C \land (B \back A)}&\mathsf{L\!\!\limp_2}\\
-        {A \back (B \limp C)}&\step&        {(A \forw B) \limp C}&\mathsf{R\!\!\limp_1}\rever\\
-        {A \back (C \limp B)}&\step&        {C \limp (A \back B)}&\mathsf{R\!\!\limp_2}\rever\\[1em]
+        {A \back~(B \limp C)}&\step&        {(A \forw B) \limp C}&\mathsf{R\!\!\limp_1}\rever\\
+        {A \back~(C \limp B)}&\step&        {C \limp (A \back B)}&\mathsf{R\!\!\limp_2}\rever\\[1em]
 
         % {A \back \neg B}&\step&        {\neg (A \forw B)}&\mathsf{R\neg}\rever\\[1em]
 
         {(\forall x. B) \back A}&\step&        {\subst{B}{x}{t} \back A}&\mathsf{L \forall i}\\
         {(\forall x. B) \back A}&\step&        {\exists x. (B \back A)}&\mathsf{L \forall s}\\
-        {A \back (\forall x. B)}&\step&        {\forall x. (A \back B)}&\mathsf{R \forall s}\rever\\[1em]
+        {A \back~(\forall x. B)}&\step&        {\forall x. (A \back B)}&\mathsf{R \forall s}\rever\\[1em]
 
         {(\exists x. B) \back A}&\step&        {\forall x. (B \back A)}&\mathsf{L \exists s}\rever\\
-        {A \back (\exists x. B)}&\step&        {A \back \subst{B}{x}{t}}&\mathsf{R \exists i}\\
-        {A \back (\exists x. B)}&\step&        {\exists x. (A \back B)}&\mathsf{R \exists s}\\
+        {A \back~(\exists x. B)}&\step&        {A \back \subst{B}{x}{t}}&\mathsf{R \exists i}\\
+        {A \back~(\exists x. B)}&\step&        {\exists x. (A \back B)}&\mathsf{R \exists s}\\
     \end{array}
   \end{mathpar}
   ~\\[1em]
@@ -1433,37 +1433,37 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
       %   {\ifill{\eta}{\efill{A}{A} \forw \efill{B}{B}}}
       %   {\ifill{\eta}{\ifill{A}{A} \land \ifill{B}{B}}}
       % \\
-      {A \forw (t = u)} &\step& {\subst{A}{t}{u}}&\mathsf{F\!\!=_1}\\
-      {A \forw (u = t)} &\step& {\subst{A}{t}{u}}&\mathsf{F\!\!=_2}\\[1em]
+      {A \forw~(t = u)} &\step& {\subst{A}{t}{u}}&\mathsf{F\!\!=_1}\\
+      {A \forw~(u = t)} &\step& {\subst{A}{t}{u}}&\mathsf{F\!\!=_2}\\[1em]
 
-        {A \forw (B \land C)} &\step&   {A \forw B}&\mathsf{F\land_1}\\
-        {A \forw (C \land B)}&\step&        {A \forw B}&
+        {A \forw~(B \land C)} &\step&   {A \forw B}&\mathsf{F\land_1}\\
+        {A \forw~(C \land B)}&\step&        {A \forw B}&
             \mathsf{F \land_2}\\[1em]
 
-        {A \forw (B \lor C)}& \step&       {(A \forw B) \lor C}
+        {A \forw~(B \lor C)}& \step&       {(A \forw B) \lor C}
       &
       \mathsf{F \lor_1}\\
-        {A \forw (C \lor B)}&\step&        {C \lor (A \forw B)}&
+        {A \forw~(C \lor B)}&\step&        {C \lor (A \forw B)}&
             \mathsf{F \lor_2}\\[1em]
 
-        {A \forw (B \limp C)}
+        {A \forw~(B \limp C)}
 &\step&        {(A \back B) \limp C}
       &\mathsf{F\!\!\limp_1}\\
-        {A \forw (C \limp B)}&\step&        {C \limp (A \forw B)}&
+        {A \forw~(C \limp B)}&\step&        {C \limp (A \forw B)}&
             \mathsf{F\!\!\limp_2}\\[1em]
 
 %         {A \forw \neg B}
 % &\step&        {\neg (A \back B)}
 %       &\mathsf{F\neg}\\[1em]
 
-        {A \forw (\forall x. B)}
+        {A \forw~(\forall x. B)}
 &\step&        {A \forw \subst{B}{x}{t}}
       &
       \mathsf{F \forall i}\\
-        {A \forw (\forall x. B)}&\step&        {\forall x. (A \forw B)}&
+        {A \forw~(\forall x. B)}&\step&        {\forall x. (A \forw B)}&
             \mathsf{F \forall s}\\[1em]
 
-              {A \forw (\exists x. B)}&\step&{\exists x. (A \forw B)}&
+              {A \forw~(\exists x. B)}&\step&{\exists x. (A \forw B)}&
               \mathsf{F \exists s}\rever\\[1em]
               
           {B \forw A}&\step&
