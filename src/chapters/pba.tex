@@ -71,8 +71,8 @@ proof-theoretical foundations for the semantics of DnD actions, which constitute
 the main innovation of this work, will be investigated more thoroughly in
 \refch{pbl}, although the most important meta-theoretical properties will be
 exposed here with outlines of their proofs. More advanced features of the
-paradigm that go beyond the core logic, as well as its integration in a
-mainstream proof assistant, are presented in \refch{beyond}.
+proof-by-action paradigm that go beyond the core logic, as well as its
+integration in a mainstream proof assistant, are presented in \refch{beyond}.
 
 We have started to implement the paradigm in a prototype named {\em Actema} (for
 Active Mathematics) running through a web HTML5/JavaScript interface. At the
@@ -85,20 +85,20 @@ the way DnD actions are to be translated into proof construction steps in an
 intuitive and practical way. A description of the overall architecture and
 implementation design of Actema will be provided in \refch{beyond}.
 
-The chapter is organized as follows. \refsec{setting} briefly outlines
-its logical setting. \refsec{aristote} describes the basic features of
-a graphical proof interface based on our principles, and illustrates them with a
-famous syllogism from Aristotle. \refsec{clicks} shows how it can
-integrate basic proof-by-pointing capabilities. \refsec{newitems} shows
-very briefly how one can add new formulas and objects to the current goal. The
-next two sections explain, through further examples, how the drag-and-drop
-paradigm works; first for so-called \emph{rewrite} actions involving equalities,
-then for actions involving logical connectives and quantifiers.
-\refsec{correctness} introduces the notions of context and polarity, in
-order to prove the correctness of our system. \refsec{linkages}
-explains how DnD actions are specified by the user interactively, through
-schemas called \emph{linkages}. \refsec{action} describes how linkages
-translate into logical steps, as well as some properties of this translation.
+The chapter is organized as follows. \refsec{setting} briefly outlines its
+logical setting. \refsec{aristote} describes the basic features of a graphical
+proof interface based on our principles, and illustrates them with a famous
+syllogism from Aristotle. \refsec{clicks} shows how it can integrate basic
+proof-by-pointing capabilities. \refsec{newitems} shows very briefly how one can
+add new formulas and objects to the current goal. The next two sections explain,
+through further examples, how drag-and-drop actions work; first for
+so-called \emph{rewrite} actions involving equalities, then for actions
+involving logical connectives and quantifiers. \refsec{correctness} introduces
+the notions of context and polarity, in order to prove the correctness of our
+system. \refsec{linkages} explains how DnD actions are specified by the user
+interactively, through schemas called \emph{linkages}. \refsec{action} describes
+how linkages translate into logical steps, and sections \ref{sec:productivity}
+and \ref{sec:invert} discuss some properties of this translation.
 \refsec{edukera} studies a proof of a small logical riddle in Actema,
 highlighting some benefits of our approach compared to textual systems. We end
 with a discussion on some related works in \refsec{related-work}.
@@ -160,10 +160,9 @@ $$\forall x.\forall y. x=y\land A \limp \subst{A}{x}{y}.$$
  \begin{center}
 \fbox {   \includegraphics[width=1.3\textwidth]{actions-tag.png}}
  \end{center}
- \caption{A partial screenshot showing a goal in the Actema prototype. The
-   conclusion is red on the right, the two hypotheses blue on the
-   left. The grey dotted arrows have been added to show the two
-   possible actions.}
+ \caption{A partial screenshot showing a goal in the Actema prototype}
+ The conclusion is red on the right, the two hypotheses blue on the left. The
+   grey dotted arrows have been added to show the two possible actions.
  \labfig{aristote}
  \end{figure*}
 
@@ -510,7 +509,7 @@ patterns which duplicate parts of the structure of terms.
   \begin{center}
     \fbox{\includegraphics[width=1.3\textwidth]{oneplusone.png}}
   \end{center}
-  \caption{Proving $1 + 1 = 2$ in Peano arithmetic.}
+  \caption{Proving $1 + 1 = 2$ in Peano arithmetic}
   \labfig{oneplusone}
 \end{figure*}
 
@@ -555,7 +554,7 @@ in the conclusion. Similar rules (\rnmsf{F\!\!=_1} and \rnmsf{F\!\!=_2}) are
 used to perform rewritings in hypotheses.
 
 
-\section{Drag-and-Dropping through Connectives}
+\section{Drag-and-Dropping through Connectives}\labsec{dnd-examples}
 We mentioned in \refsec{clicks} that it is possible to destruct logical
 connectives through click actions. In many cases however, this will not be
 necessary: because a drag-and-drop involves subterms of the items involved, one
@@ -981,7 +980,7 @@ notation of definition~\ref{def:polarity}, we can state:
 \begin{remark}
   For some rules, like \rnmsf{R\!\!\limp_1}, the left-hand and
   right-hand propositions are equivalent:
-  $$A \limp B \limp C ~~~\Leftrightarrow~~~ A \land B \limp A$$ Such rules are
+  $$A \limp B \limp C ~~~\Leftrightarrow~~~ A \land B \limp C$$ Such rules are
   called {\em invertible} and their names are tagged by *. This point will be
   relevant in \refsec{invert}.
 \end{remark}
@@ -990,15 +989,16 @@ notation of definition~\ref{def:polarity}, we can state:
 An easy but important technical point is that rewrite rules preserve the
 polarity of contexts around redexes, in the following precise sense:
 \begin{lemma}[Polarity preservation]\label{prop:rules-preserve-polarity}
+  \phantom{a}
   \begin{itemize}
     \item
       If $C\select{A\back B} \step C'\select{A'\back B'}$
       (resp. $C\select{A \forw B} \step $ $ C' \allowbreak\select{A' \forw B'}$) then
       $C\square$ and $C'\square$ have the same polarity.
-      \item
-        If $C\select{A\back B} \step C'\select{A'\forw B'}$ (resp.
-        $C\select{A\forw B} \step C'\select{A'\back B'}$) then $C\square$ and
-        $C'\square$ have opposite polarities.
+    \item
+      If $C\select{A\back B} \step C'\select{A'\forw B'}$ (resp.
+      $C\select{A\forw B} \step C'\select{A'\back B'}$) then $C\square$ and
+      $C'\square$ have opposite polarities.
   \end{itemize}
 
 \end{lemma}
@@ -1039,7 +1039,11 @@ allowing multiple selections\sidenote{In fact, a restricted kind of
 multi-occurrence rewrite is already available in the online prototype of Actema:
 one needs to enter \emph{selection mode}, by either toggling the dedicated
 button (the one with the mouse cursor in \reffig{aristote}), or holding down the
-\texttt{shift} key.}.
+\texttt{shift} key. Then one can click successively on all occurrences of a term
+$t$ that are to be rewritten, in order to add them to the selection. To perform
+the rewriting to some other term $u$, the last step is to drag an equality
+hypothesis $t = u$ (or $u = t$) and drop it on any item holding one of the
+selected occurrences of $t$.}.
 \end{remark}
 
 Each kind of DnD action is mapped in the system to a specific form of linkage,
@@ -1073,6 +1077,41 @@ informal up to now: that of \emph{logical} action and \emph{rewrite} action.
   % \item \emph{Instanciation} actions correspond to specialization of universal
   % hypotheses, and witness choice for existential goals.
 \end{itemize}
+
+By forgetting the information on which subterms are selected, one can see any
+linkage as a formula whose topmost ``connective'' is a linking operator $\link
+\in \{\back,\forw\}$. Then it is natural to view linkages as the redexes of the
+rewrite rules of \reffig{DISL}, although from the user's standpoint linkages
+only happen at the top level\sidenote{In fact this is more of a limitation of
+Actema's current interface: one cannot link two subterms that live in the same
+item, because dragging actions can only be performed on \emph{entire} items. But
+in the original formulation and implementation of \emph{subformula linking}
+\cite{Chaudhuri2013}, linkages can be created between arbitrary subformulas. We
+come back to this issue in \refch{sfl}.}.
+
+\subsection{Validity}
+
+In the original formulation of subformula linking \cite{Chaudhuri2013},
+a semantics is associated to every logical linkage, even when the
+selected subformulas $A$ and $A'$ are not unifiable. This is made possible by the
+addition of so-called \emph{release} rules\sidenote{A terminology coming from
+the line of works on \emph{focusing} in proof theory \cite{andreoli1992}, see
+also \refsec{invert}.}, which simply turn linking operators into their
+associated logical connective. In our setting this would give the following
+rewrite rules:
+\begin{mathpar}
+  \begin{array}{r@{\quad}c@{\quad}lr}
+    {A \back B}&\step&A \limp B &\mathsf{Brel}\\
+    {A \forw B}&\step&A \land B &\mathsf{Frel}
+  \end{array}
+\end{mathpar}
+However in this work we opt for a different approach: instead we define a
+\emph{validity criterion} on linkages, which guarantees that they give rise to
+the behaviors described in the previous sections. This can be compared to the
+\emph{correctness criterions} of proof-nets in linear logic, which select only
+objects corresponding to correct proofs among a larger class of (possibly
+incorrect) proof structures.
+
 In both cases, we impose the following condition:
 \begin{condition}[Unification]\label{cond:unif}
   The linked subterms ($A$ and $A'$ or $t$ and $t'$) must be \emph{unifiable}
@@ -1087,12 +1126,11 @@ In both cases, we impose the following condition:
 \todo{ Give the details of how the unification problem is defined, to be used in
   the fully detailed proof of productivity. }
 
-There are also additional restrictions on the polarities of contexts.
-Assuming we work in a goal $\Gamma\seq C$:
+There are also additional restrictions on the polarities of contexts:
   
 \begin{condition}[Polarity]\label{cond:pol}
-  The following conditions are necessary for the linkage $B\select{A}\link
-  D\select{A'}$ to be a logical linkage:
+  Given a goal $Γ \seq C$, the following conditions are necessary for the
+  linkage $B\select{A}\link D\select{A'}$ to be a logical linkage:
   \begin{enumerate}
     \item $B\select{A}\in \Gamma$,
     \item $D\select{A'} \begin{cases}
@@ -1115,7 +1153,7 @@ Assuming we work in a goal $\Gamma\seq C$:
       \end{cases}$
     \item $B\hole$ is positive
   \end{enumerate}
-  or $B\select{\select{t} = u} \equiv C$, then ${\link} \text{is} \back$ and:
+  or $B\select{\select{t} = u} \equiv C$, $\link$ is $\back$ and:
   \begin{enumerate}
     \item $D\select{t'} \in \Gamma$
     \item $B\hole$ is negative
@@ -1367,10 +1405,17 @@ proof step:
   C\select{t'}$), or does not correspond to a known form of linkage. In this case
   the procedure stops here, and the system does not propose any action to the
   user; \label{step:linkage}
-\item \textbf{Unification:} the system tries to unify the selected subterms $A$
-  and $A'$ (resp. $t$ and $t'$), which either yields a substitution $\sigma$, or
-  fails. In this case we stop like in the previous step;
-  \label{step:unification}
+\item \textbf{Validity:} the system verifies that the linkage is \emph{valid},
+  by performing successively the following checks:
+  \begin{enumerate}
+    \item \textbf{Polarity:} the linkage must satisfy condition \ref{cond:pol};
+    \item \textbf{Unification:} the selected subterms $A$ and $A'$ (resp. $t$
+    and $t'$) must be unifiable, yielding a substitution $\sigma$;
+    \item \textbf{Dependencies:} the substitution $\sigma$ must satisfy
+    condition \ref{cond:unif}.
+  \end{enumerate}
+  The procedure stops if it fails at any of the above checks;
+  \label{step:validity}
 \item \textbf{Linking:} the system then chooses a rewriting start\-ing from the linkage. Thanks to
   theorem \ref{thm:productivity}, this re\-writing always ends with a proposition of
   the form $D\select{\sigma(A) \back \sigma(A')}$ $$\text{(resp.
@@ -1388,14 +1433,16 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
   property~\ref{prop:correctness}. \label{step:goal-modification}
 \end{enumerate}
 
-\todo{ Put Backward, Forward and Unit rules side by side on one page (removing
-  the margin). }
+\todo{Remove page break (while keeping the wide page layout for the rules).}
+
+\pagelayout{wide} % No margins
 \begin{figure}
   \fontsize{10}{10.5}\selectfont
     \renewcommand{\arraystretch}{1.25}
-  \textsc{Backward}\\
   \begin{mathpar}
-    \begin{array}{r@{\quad}c@{\quad}lc}
+    \begin{array}{r@{\quad}c@{\quad}lr}
+        \multicolumn{4}{c}{\textsc{Backward}} \\[2em]
+
         {A \back A}&\step&\top &\mathsf{id}\\
         {t = u \back A}&\step&\subst{A}{t}{u} &\mathsf{L\!\!=_1}\\
         {u = t \back A}&\step&\subst{A}{t}{u} &\mathsf{L\!\!=_2}\\[1em]
@@ -1405,7 +1452,7 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
         {A \back~(B \land C)}&\step&        {(A \back B) \land C}&\mathsf{R \land_1}\\
         {A \back~(C \land B)}&\step&        {C \land (A \back B)}&\mathsf{R \land_2}\\[1em]
         
-        {(B \lor C) \back A}&\step&        {(B \back A) \land (C \limp A)}~~~~~~~~~&\mathsf{L \lor_1}\rever\\
+        {(B \lor C) \back A}&\step&        {(B \back A) \land (C \limp A)}&\mathsf{L \lor_1}\rever\\
         {(C \lor B) \back A}&\step&        {(C \limp A) \land (B \back A)}&\mathsf{L \lor_2}\rever\\
         {A \back~(B \lor C)}&\step&        {(A \back B) \lor C}&\mathsf{R \lor_1}\\
         {A \back~(C \lor B)}&\step&        {C \lor (A \back B)}&\mathsf{R \lor_2}\\[1em]
@@ -1424,11 +1471,13 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
         {A \back~(\exists x. B)}&\step&        {A \back \subst{B}{x}{t}}&\mathsf{R \exists i}\\
         {A \back~(\exists x. B)}&\step&        {\exists x. (A \back B)}&\mathsf{R \exists s}\\
     \end{array}
-  \end{mathpar}
-  ~\\[1em]
-  \textsc{Forward}\\
-  \begin{mathpar}
-    \begin{array}{r@{\quad}c@{\quad}lc}
+  % \end{mathpar}
+  \and
+  % \textsc{Forward}\\
+  % \begin{mathpar}
+    \begin{array}{r@{\quad}c@{\quad}lr}
+      \multicolumn{4}{c}{\textsc{Forward}} \\[2em]
+
       % \R[\mathsf{lnn}]
       %   {\ifill{\eta}{\efill{A}{A} \forw \efill{B}{B}}}
       %   {\ifill{\eta}{\ifill{A}{A} \land \ifill{B}{B}}}
@@ -1478,7 +1527,7 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
   \labfig{DISL}
 \end{figure}
 
-\begin{figure*}
+\begin{figure}
   \fontsize{10}{10.5}\selectfont
   {\textsc{Units}}\\
   \begin{mathpar}
@@ -1534,7 +1583,8 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
   % \end{framed}
   \caption{Unit elimination rules}
   \labfig{DISL-U}
-\end{figure*}
+\end{figure}
+\pagelayout{margin} % Restore margins
 
 
 %% =======
@@ -1593,7 +1643,7 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
 %% \end{itemize}
 
 
-\subsection{Productivity}
+\section{Productivity}\labsec{productivity}
 
 An important property of the linking step \ref{step:linking} is that there is
 always a rewriting sequence that brings together the selected subterms, which
@@ -1627,21 +1677,27 @@ ensures that we can proceed to the interaction step \ref{step:interaction}.
 
 Because the rewrite rules are terminating, the important point is to show that
 one can always apply a rule until one reaches an interaction rule on the
-linkage. In other words, it is possible to find at least one rule which
-preserves conditions \ref{cond:unif} and \ref{cond:pol} on linkages:
+selected subterms. In other words, it is possible to find at least one rule
+which preserves conditions \ref{cond:unif} and \ref{cond:pol} on linkages:
 
-\begin{lemma}[Valid Progress]\label{thm:vprogress}
-  If a linkage $\mathcal{L}$ is valid, then either:
+\begin{lemma}[Valid Progress]\label{thm:vprogress} If a linkage $\mathcal{L} =
+  C\select{A} \link C'\select{A'}$ (resp. $C\select{t} \link C'\select{t'}$) is
+  valid, then either:
   \begin{enumerate}
-    \item $\mathcal{L} \in \{
-        \select{A}\back \select{A},\,
-        \select{t} = u \back A\select{t},\,
-        u = \select{t} \back A\select{t},\, 
-        \select{t} = u \forw A\select{t},\,
-        u = \select{t} \forw A\select{t}
-      \}$;
-    \item or $\mathcal{L} \step D\select{\mathcal{L'}}$ with
-      $\mathcal{L'}$ valid.
+    \item $\mathcal{L} = \select{A} \back \select{A}$ (resp. $C\hole \in \{\hole
+    = u, u = \hole\}$ for some $u$ and $t \equiv t'$);
+    % \item $\mathcal{L} \in \{
+    %     \select{A}\back \select{A},\,
+    %     \select{t} = u \back C\select{t},\,
+    %     u = \select{t} \back C\select{t},\, 
+    %     \select{t} = u \forw C\select{t},\,
+    %     u = \select{t} \forw C\select{t}
+    %   \}$ for some $A, C\hole, t, u$;
+    \item or $\mathcal{L} \step E\select{\mathcal{L'}}$ for some $E\hole,
+      \mathcal{L'}$ with $\mathcal{L'}$ valid and
+      $$\mathcal{L'} = D\select{\sigma(A)} \link' D'\select{\sigma(A')}$$ (resp.
+      $D\select{\sigma(t)} \link' D'\select{\sigma(t')}$) for some $D\hole,
+      D'\hole$, linking operator $\link'$ and unifying substitution $\sigma$.
   \end{enumerate}
 \end{lemma}
 
@@ -1701,7 +1757,7 @@ is a sequence of reductions with one of the following forms:
 %   By induction over the sizes of $B\square$ and $C\square$...
 % \end{proof}
 
-\subsection{Choosing the Best Derivation}\labsec{invert}
+\section{Choosing the Best Derivation}\labsec{invert}
 
 A last point to deal with is non-confluence and in particular choosing
 between first simplifying the head connective on the right or the left
@@ -1798,7 +1854,7 @@ drag-and-drops. This is the solution chosen in \cite{Chaudhuri2013} and
 \section{A More Advanced Example}\labsec{edukera}
 \begin{figure*}
   \fbox{\includegraphics[width=1.3\textwidth]{edukera.png}}
-\caption{The beginning of an example due to Edukera.}\labfig{edukera}
+\caption{The beginning of an example due to Edukera}\labfig{edukera}
 \end{figure*}
 
 It is too early to perform a detailed case study comparing our approach
@@ -1889,8 +1945,6 @@ also deals with intuitionistic logic. Interestingly, some ideas like forward
 proof steps or the use of colors appeared independently in his and our work. A
 difference is that we give the possibility to link first-order terms in addition
 to propositions, which is the basis for rewrite actions.
-
-
 
 
 % More
@@ -2004,7 +2058,69 @@ text-heavy presentation at two levels:
 % capability, and in fact solves some of the problems induced by the limitation of
 % PbP to a single selection.
 
+
+\subsubsection*{Canonical Proofs}
+
+The idea of reducing a proof to a collection of links between its dual formulas
+is not new, and can be traced back to the \emph{matings} of Andrews
+\cite{1674698} in the context of automated deduction. Matings are \emph{sets} of
+links covering all \emph{atomic} occurrences, and proofs are matings satisfying
+certain conditions. Our work differs in that we are interested in
+\emph{interactive} deduction, and thus consider links as a mechanism of
+inference rather than a syntactic criterion to discriminate proofs. Then a proof
+is better understood as a \emph{list} of links, and the atomicity constraint is
+relaxed to gain expressivity, since the creation of links is offloaded to the
+user instead of the search procedure.
+
+Another line of work, starting with the \emph{proof-nets} of Girard
+\cite{girard_linear_1987}, is concerned with the more fundamental problem of
+\emph{proof identity}, which requires a canonical notion of proof object
+\cite{strasburger-problem-2019}. In the case of unit-free multiplicative linear
+logic, the absence of any form of duplication/sharing/removal mechanism allows
+to completely characterize a proof-net by the set of its \emph{axiom} links, the
+difference with matings being that correctness of a proof structure can be
+checked in \emph{polynomial} instead of exponential time, because of the absence
+of duplication.
+% This is because adding
+% additives or exponentials, which can encode intuitionistic and classical logic,
+% requires additional structure to represent uses of weakening and contraction.
+% The \emph{combinatorial proofs} of Hughes \cite{Hughes_2006}
+% \cite{heijltjes_intuitionistic_2019} are examples of polynomially-checkable
+% proof objects exhibiting such structure, and have recently been extended to
+% handle first-order classical quantifiers \cite{hughes2019firstorder}
+% (intuitionistic quantifiers are still an open problem).
+% This compartmentalization of axiom links and structural rules resembles the
+% distinction between interaction phases and manual applications of {\rnmsf{conn}}
+% and {\rnmsf{wkn}} in \sys{DISL^0}, which is itself inspired by the
+% \emph{decomposition theorem} of deep inference formalisms.
+% Another approach to canonicity is to consider a generalization of focused proofs
+% called \emph{maximally multi-focused proofs}, which have been proven isomorphic
+% to compact representations of proofs such as proof-nets
+% \cite{ausiello_canonical_2008} and expansion tree proofs
+% \cite{chaudhuri_multi-focused_2016}. We conjecture that our system \sys{ISL^1_2}
+% could be reformulated as a multi-focused proof system, where foci correspond to
+% the linked formulas, and thus their number is restricted to exactly 2.
+There is an analogy between the correctness criterions of proof-nets, and the
+validity criterion of linkages:
+\begin{itemize}
+  \item they both identify a subset of valid objects among a larger set of
+  structures characterized by links on formulas;
+  \item they both have many possible \emph{sequential} readings, that is sequent
+  calculus proofs for proof nets, and deep inference, CoS-style proofs for
+  linkages\sidenote{Note that invalid linkages still give rise to CoS-style
+  \emph{derivations}, but not \emph{proofs} since they do not end with $\top$.
+  The incorrect proof structures of Girard are more general in this respect as
+  they cannot always be mapped to correct sequent calculus derivations.}.
+\end{itemize}
+Hence, our approach to subformula linking seems to exhibit some properties of
+canonical proofs, but at the level of \emph{partial proofs}: well-formed
+linkages make for \emph{compact-parallel-spatial} representations of inferences,
+whose operational meaning is given by their \emph{detailed-sequential-temporal}
+CoS derivations.
+
+
 \subsubsection*{Explicit Proof Objects}
+
 Finally let us mention various recent implementations proposing various ways to
 construct proofs graphically: Building Blocks~\cite{buildingblocks}, the
 Incredible Proof Machine~\cite{blanchette-visual-2016},
@@ -2013,6 +2129,7 @@ coLLecT~\cite{clickcollect}. In particular, Logitext and Click \& coLLecT
 exploit the same idea of associating click actions on head connectives to
 inference rules in sequent calculus. But these systems focus more on explicating
 the proof object than on making its construction easier.
+
 
 % \section{Conclusion and Perspectives}
 % This work started as a very practical effort. Discovering and
