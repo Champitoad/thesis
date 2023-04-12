@@ -93,8 +93,8 @@ proof-by-pointing capabilities. \refsec{newitems} shows very briefly how one can
 add new formulas and objects to the current goal. The next two sections explain,
 through further examples, how drag-and-drop actions work; first for
 so-called \emph{rewrite} actions involving equalities, then for actions
-involving logical connectives and quantifiers. \refsec{correctness} introduces
-the notions of context and polarity, in order to prove the correctness of our
+involving logical connectives and quantifiers. \refsec{soundness} introduces
+the notions of context and polarity, in order to prove the soundness of our
 system. \refsec{linkages} explains how DnD actions are specified by the user
 interactively, through schemas called \emph{linkages}. \refsec{action} describes
 how linkages translate into logical steps, and sections \ref{sec:productivity}
@@ -289,13 +289,6 @@ $$
 The final result is the new hypothesis. We come back to the study of the rewrite
 rules of ${\back}$ and ${\forw}$ further down.
 
-% Note however that the correctness of the system is ensured by the following
-% properties:
-% \begin{property}
-%   If $A \vdash B \step C$, then $A, C \vdash B$ is provable. If $A \forw B
-%   \step C$, then $A, B \vdash C$ is provable.
-% \end{property}
-
 
 \section{Proof Steps through Clicks}\labsec{clicks}
 Drag-and-drop actions involve two items. Some proof steps involve only
@@ -371,93 +364,6 @@ given in \reftab{click-rules}. A few remarks are in order:
 	\bottomrule
 \end{tabular}
 \end{table}
-
-      
-% As is common, the user interacts with one goal at a time. A first way
-% to do so is by clicking on an item of the goal. This will result in a proof
-% construction step; that is the goal is replaced by a list of new
-% goals. In the case where this list is empty, the goal is solved.
-% The precise effect of the click action depends on:
-% \begin{itemize}
-% \item the nature of the item (hypothesis or conclusion),
-% \item the statement of the item (whether it is a conjunction,
-%   disjunction, {\em etc}\dots),
-% \item possibly the location of the click (on which subformula of the
-%   item's statement it occurs).
-% \end{itemize}
-
-% The simple cases correspond to the introduction rule (for the
-% conclusion) or the elimination rule (for the hypotheses) of the head 
-% connective or quantifier of the statement. For instance, clicking at
-% the root of a conclusion $A\land B$ will transform the goal into two
-% goals of respective conclusions $A$ and $B$.
-
-% We describe this behavior through the following notation:
-% $$
-% \Gamma\vdash A \/\select{\land}\/ B  \steps [\Gamma\vdash A ;~ \Gamma\vdash
-%   B]
-% $$
-% The squared connective is the location where the click is performed. On
-% the right-hand part, we see a list of two sequents, because this
-% action replaces the goal by two new subgoals.
-
-% A simple case where the right-hand list is empty is for the
-% trivially true proposition $\top$:
-% $$
-% \Gamma\vdash \select{\top}\steps []
-% $$
-
-% \begin{remark}
-%   At this stage we should point out that this notation is not meant to
-%   lay out the rules underlying the system or its implementation. We
-%   just use it to illustrate its behavior on examples, in the way one
-%   would do during a demonstration.
-%   %% The logical mechanisms which allow
-%   %% to achieve this behavior are detailled later on.
-% \end{remark}
-
-
-% The following cases correspond to the introduction rules for
-% implication and disjunction. Note that in the latter case, one chooses
-% between left and right introduction by clicking on the corresponding
-% subformula:
-% $$
-% \begin{array}{c}
-%   \Gamma\vdash A\/ \select{\limp\hbox to -4pt{\vbox to
-%   5pt{\vfill}}}\/ B \steps [\Gamma,A\vdash B]\\[6pt]
-%   \Gamma\vdash \select{A}\lor B \steps [\Gamma\vdash A]\qquad\qquad
-%   \Gamma\vdash A\lor \select{B} \steps [\Gamma\vdash B]
-%   \end{array}
-% $$
-% Symmetrically, here are cases corresponding to elimination rules for
-% the propositional connectives:
-% $$
-% \begin{array}{rcl}
-%   \Gamma, A\select{\land}B\vdash C &\steps& [\Gamma,A,B\vdash C]\\
-%     \Gamma,A\select{\lor}B\vdash C &\steps& [\Gamma,A\vdash C;~
-%       \Gamma,B\vdash C]\\
-%     % \Gamma,A\select{\limp}C\vdash C &\steps& [\Gamma,A \limp C\vdash A]\\
-%     \Gamma, \select{\bot}\vdash C & \steps & []\\
-% \end{array}
-% $$
-% For quantifiers, we only provide behaviors corresponding to the
-% introduction rule for $\forall$ and the elimination rule for
-% $\exists$, the dual rules being better taken care of by drag-and-drop
-% actions:
-% $$
-% \begin{array}{rcl}
-%   \Gamma,\select{\exists x.}A\vdash B&\steps&[\Gamma,A\vdash B]\\
-%   \Gamma\vdash\select{\forall x.}A&\steps&[\Gamma\vdash A]
-% \end{array}
-% $$
-% Note that in both cases we make freshness assumptions for the variable
-% $x$.
-
-% We should point out that it is perfectly possible to extend or combine
-% these behaviors and allow clicking under nested connectives or
-% quantifiers; something like:
-% $$\Gamma\vdash (A\lor\select{B})\land C\steps [\Gamma\vdash B;~ 
-%   \Gamma\vdash C].$$
 
 
 It is possible to associate some more complex effects to click actions performed
@@ -881,7 +787,7 @@ $$
 \end{array}$$
 
 
-\section{Correctness}\labsec{correctness}
+\section{Soundness}\labsec{soundness}
 
 All examples up to now followed the scheme for DnD actions sketched in
 \refsec{aristote}:
@@ -893,10 +799,10 @@ All examples up to now followed the scheme for DnD actions sketched in
   hypothesis $C$ by applying a sequence of rewrite rules $A \forw B \steps C$.
 \end{itemize}
 
-Thus for such actions to be logically correct, we have to make sure that our
+Thus for such actions to be logically sound, we have to make sure that our
 rewrite system satisfies the following property:
 
-\begin{theorem}[Correctness]\label{prop:correctness}
+\begin{theorem}[Soundness]\label{prop:soundness}
   \phantom{a}
   \begin{itemize}
     \item If $A \back B \steps C$, then $A, C \seq B$ is provable.
@@ -913,7 +819,7 @@ any depth inside formulas:
   not used elsewhere.
 
   Given another proposition $B$, we write $A\select{B}$ for the
-  proposition obtained by replacing $\square$ in $A\square$ by $B$. Note
+  proposition obtained by replacing $\hole$ in $A\hole$ by $B$. Note
   that this replacement is not a substitution because it allows variable
   capture. For instance $\forall x.\select{P(x)}$ is the proposition
   $\forall x.P(x)$.
@@ -921,22 +827,22 @@ any depth inside formulas:
 
 \begin{definition}[Path]\label{def:path}
 A path is a proposition where one subformula has been
-selected. Formally, a path is a pair $(A\square, B)$ formed by one
+selected. Formally, a path is a pair $(A\hole, B)$ formed by one
 context and one proposition:
 \begin{itemize}
-\item $A\square$ is called the {\em context} of the path,
+\item $A\hole$ is called the {\em context} of the path,
 \item $B$ is called the {\em selection} of the path.
 \end{itemize}
 
-The path $(A\square, B)$ can be viewed as the proposition
+The path $(A\hole, B)$ can be viewed as the proposition
 $A\select{B}$.  For readability, we will generally also write
-$A\select{B}$ for the path $(A\square, B)$.
+$A\select{B}$ for the path $(A\hole, B)$.
 \end{definition}
 
 \begin{definition}[Inversions]
   Given a context $A\hole$, the number of inversions in $A\hole$,
   written $\inv(A\hole)$, is the number of subterms of $A\hole$
-  which are of the form $C\square\limp D$; that is the number of
+  which are of the form $C\hole\limp D$; that is the number of
   times the hole is on the left-hand side of an implication.
   \end{definition}
 \noindent  For instance:
@@ -950,7 +856,7 @@ $$
 
 \begin{definition}[Polarity of a context]\label{def:polarity}
 We will write $A^+\hole$ to specify that a context is {\em positive},
-meaning that $\inv(A^+\square)$ is even. Symmetrically, $A^-\hole$ will be
+meaning that $\inv(A^+\hole)$ is even. Symmetrically, $A^-\hole$ will be
 used for {\em negative} contexts, meaning that $\inv(A^-\hole)$ is odd.
 \end{definition}
 The following simple covariance and contravariance property will be used
@@ -965,7 +871,7 @@ extensively later on:
 
 For each rule, interpreting $\back$ as $\limp$ and $\forw$ as $\land$ in the
 right-hand side is enough to show that the rule satisfies property
-\ref{prop:correctness} locally. But for rewritings taking place deeper inside a
+\ref{prop:soundness} locally. But for rewritings taking place deeper inside a
 proposition, we need to consider the polarity of their context. Using the
 notation of definition~\ref{def:polarity}, we can state:
 \begin{lemma}\label{lemma:rules-valid-in-context}
@@ -994,19 +900,19 @@ polarity of contexts around redexes, in the following precise sense:
     \item
       If $C\select{A\back B} \step C'\select{A'\back B'}$
       (resp. $C\select{A \forw B} \step $ $ C' \allowbreak\select{A' \forw B'}$) then
-      $C\square$ and $C'\square$ have the same polarity.
+      $C\hole$ and $C'\hole$ have the same polarity.
     \item
       If $C\select{A\back B} \step C'\select{A'\forw B'}$ (resp.
-      $C\select{A\forw B} \step C'\select{A'\back B'}$) then $C\square$ and
-      $C'\square$ have opposite polarities.
+      $C\select{A\forw B} \step C'\select{A'\back B'}$) then $C\hole$ and
+      $C'\hole$ have opposite polarities.
   \end{itemize}
 
 \end{lemma}
 
 Combining lemmas \ref{lemma:rules-valid-in-context} and
-\ref{prop:rules-preserve-polarity}, we obtain the central correctness result
+\ref{prop:rules-preserve-polarity}, we obtain the central soundness result
 about the rewrite rules:
-\begin{lemma}[Contextual correctness]\label{lemma:rewriting-valid-in-context}
+\begin{lemma}[Contextual soundness]\label{lemma:rewriting-valid-in-context}
   \phantom{a}
   \begin{itemize}
     \item If $C^+\select{A\back B}\steps D$ then $D \seq C^+\select{A\limp B}$ is provable.
@@ -1019,14 +925,14 @@ about the rewrite rules:
 We do not detail the proof here, but it relies crucially on the covariance and
 contravariance property \ref{prop:cov}.
 
-Finally, the correctness theorem \ref{prop:correctness} is obtained as the
+Finally, the soundness theorem \ref{prop:soundness} is obtained as the
 special case where the rewriting starts in the (positive) empty context.
 
-Detailed proofs of all the lemmas can be found in \refsec{dnd-correctness}.
+Detailed proofs of all the lemmas can be found in \refsec{dnd-soundness}.
 
 \section{Linkages}\labsec{linkages}
 
-In demonstrating correctness, we focused solely on the two \emph{items} involved
+In demonstrating soundness, we focused solely on the two \emph{items} involved
 in a DnD action. But every DnD action also specifies the \emph{selection} of a
 subterm in each item. We call \emph{linkage} the combined data of the two items
 together with the selection, since the intent is to \emph{link} the subterms
@@ -1079,13 +985,13 @@ informal up to now: that of \emph{logical} action and \emph{rewrite} action.
 \end{itemize}
 
 By forgetting the information on which subterms are selected, one can see any
-linkage as a formula whose topmost ``connective'' is a linking operator $\link
-\in \{\back,\forw\}$. Then it is natural to view linkages as the redexes of the
+linkage as a formula whose topmost connective is a linking operator $\link \in
+\{\back,\forw\}$. Then it is natural to view linkages as the redexes of the
 rewrite rules of \reffig{DISL}, although from the user's standpoint linkages
 only happen at the top level\sidenote{In fact this is more of a limitation of
 Actema's current interface: one cannot link two subterms that live in the same
 item, because dragging actions can only be performed on \emph{entire} items. But
-in the original formulation and implementation of \emph{subformula linking}
+in the original formulation and implementation of subformula linking
 \cite{Chaudhuri2013}, linkages can be created between arbitrary subformulas. We
 come back to this issue in \refch{sfl}.}.
 
@@ -1107,45 +1013,56 @@ rewrite rules:
 \end{mathpar}
 However in this work we opt for a different approach: instead we define a
 \emph{validity criterion} on linkages, which guarantees that they give rise to
-the behaviors described in the previous sections. This can be compared to the
-\emph{correctness criterions} of proof-nets in linear logic, which select only
-objects corresponding to correct proofs among a larger class of (possibly
-incorrect) proof structures.
+the behaviors described in the previous sections. The criterion tackles two
+issues:
+\begin{itemize}
+  \item \textbf{Polarity:} the selected subterms must have opposite
+  \emph{polarities}, so that the \emph{negative} subterm justifies the
+  \emph{positive} one;
+  \item \textbf{Identity:} the selected subterms must be \emph{unifiable}, so
+  that after instantiating some quantifiers in their context they can interact
+  through the {\rnmsf{id}} rule or the equality rules {\rnmsf{L{=}_i},
+  \rnmsf{F{=}_i}}.
+\end{itemize}
+One benefit of using this criterion is that it filters out all linkages whose
+semantics relies on release rules, capturing intuitively a notion of
+\emph{productivity}: instead of just moving around subformulas, we know for sure
+that some simplification occurs, either a justification with the {\rnmsf{id}}
+rule on logical linkages, or a rewriting with the equality rules on rewrite
+linkages. This will be stated more formally in \refsec{productivity}.
 
-In both cases, we impose the following condition:
-\begin{condition}[Unification]\label{cond:unif}
-  The linked subterms ($A$ and $A'$ or $t$ and $t'$) must be \emph{unifiable}
-  with respect to the variables quantified in their contexts $B\hole$, $C\hole$.
-  We do not detail all the constraints of this unification problem, but the
-  essential idea is that a variable is unifiable if and only if its quantifier
-  is \emph{instantiable}. This in turn can be determined by the polarity of the
-  context surrounding the quantifier. One also needs to check that the unifier
-  does not create circular dependencies between variables.
-\end{condition}
+Validity is very useful to support the \emph{suggestion} mechanism implemented
+in Actema. The idea is that when the user starts dragging an item, this
+indicates to the system that she wants to perform a DnD action involving
+subterms of this item. Then the system can suggest such possible actions by
+highlighting subterms in the goal which form a valid linkage with the dragged
+item. This would not work with the ``release'' semantics mentioned earlier,
+since then all subterms would be highlighted, providing no useful information to
+the user.
 
-\todo{ Give the details of how the unification problem is defined, to be used in
-  the fully detailed proof of productivity. }
+\subsection{Polarity}
 
-There are also additional restrictions on the polarities of contexts:
-  
+The restrictions on polarities are captured formally by the following condition:
+
 \begin{condition}[Polarity]\label{cond:pol}
-  Given a goal $Γ \seq C$, the following conditions are necessary for the
-  linkage $B\select{A}\link D\select{A'}$ to be a logical linkage:
+  
+  Given a goal $Γ \seq C$, the following must be true for a logical linkage
+  $B\select{A}\link D\select{A'}$ to be valid:
   \begin{enumerate}
-    \item $B\select{A}\in \Gamma$,
+    \item $B\select{A}\in \Gamma$;\label{clause:hyp}
     \item $D\select{A'} \begin{cases}
       \equiv C & \text{if $\link$ is $\back$} \\
       \in \Gamma & \text{if $\link$ is $\forw$}
-      \end{cases}$
-    \item $(\inv(B\hole), \inv(D\hole)) \in \begin{cases}
-      \{(0,0),(1,1),(0,2)\} & \text{if $\link$ is $\back$} \\
-      \{(0,1),(1,0)\} & \text{if $\link$ is $\forw$}
-    \end{cases}$
+      \end{cases}$\label{clause:concl}
+    \item $\inv(B\hole)$ has the same (resp. opposite) parity as $\inv(D\hole)$
+    if $\link$ is $\back$ (resp. $\forw$);\label{clause:opposite}
+    \item if $\link$ is $\back$ and $\inv(D\hole) = 0$, then $\inv(B\hole) =
+    0$\label{clause:intuit}.
   \end{enumerate}
 
-  Similarly, the following conditions are necessary for the linkage
-  $$B\select{\select{t} = u} {\link} D\select{t'}$$ to be a rewrite linkage.
-  Either $B\select{\select{t} = u}\in \Gamma$, then:
+  Similarly, the following must be true for a rewrite linkage
+  $$B\select{\select{t} = u} {\link} D\select{t'}$$ to be valid:
+  either $B\select{\select{t} = u}\in \Gamma$, then
   \begin{enumerate}
     \item $D\select{t'} \begin{cases}
       \equiv C & \text{if $\link$ is $\back$} \\
@@ -1153,35 +1070,176 @@ There are also additional restrictions on the polarities of contexts:
       \end{cases}$
     \item $B\hole$ is positive
   \end{enumerate}
-  or $B\select{\select{t} = u} \equiv C$, $\link$ is $\back$ and:
+  or $B\select{\select{t} = u} \equiv C$, $\link$ is $\back$ and
   \begin{enumerate}
-    \item $D\select{t'} \in \Gamma$
-    \item $B\hole$ is negative
+    \item $D\select{t'} \in \Gamma$;
+    \item $B\hole$ is negative.
   \end{enumerate}
 \end{condition}
 
-\begin{remark}
-The main reason for limiting the number of inversions in a path to 2
-is that we place ourselves in intuitionistic logic. In classical
-logic, one could, for instance, imagine the following behavior:
-$$(\select{A}\limp B)\limp C\back \select{A}~~\steps~~ C\limp A$$
-But this would not be valid intuitionistically.
-\end{remark}
+One understands that for rewrite linkages, this simply guarantees that the
+equality is in negative position in the given goal. For logical linkages,
+clauses \ref{clause:hyp}, \ref{clause:concl}, \ref{clause:opposite} ensure that
+the selected subformulas have opposite polarities, and clause
+\ref{clause:intuit} ensures that the linkage makes sense in our
+\emph{intuitionistic} setting. Indeed one could imagine the following behavior
+in classical logic:
+$$(\select{A}\limp B)\limp C\back \select{A}~~\steps~~ C\limp A$$ which gives a
+proof of Peirce's law when replacing $C$ with $A$. We will come back to this
+example in \refsec{sfl-classical}, but for now we can just remark that there is
+no way to handle it with the rules of \reffig{DISL} because we lack a
+hypothetical {\rnmsf{L{\limp}_1}} rule for redexes of the form $B\select{A}
+\limp C \back D\select{A'}$.
 
-\todo{ Put the more general polarity condition from my internship report, and
-  ensure it works correctly in the fully detailed proof of productivity (in
-  annex). }
+\todo{ Ensure condition \ref{cond:pol} works correctly in the fully detailed
+  proof of productivity (in annex). }
+
+\subsection{Identity}
+
+A context binds variables in the selected proposition. These variables
+will be unifiable or not depending upon: (1) the nature of the quantifier
+($\forall$ or $\exists$), (2) whether they occur in a hypothesis or a
+conclusion, and (3) whether they occur on the left-hand of an (odd number
+of) implication(s). Therefore, we start by splitting the list of
+variables bound by a context in two parts.
+
+
+\begin{definition}[Positive and negative variables]
+Given a context $A\hole$ seen as a tree, one can always start from
+the root and traverse the branch of $A\hole$ that leads to its hole
+$\hole$. We write $\lvar(A\hole)$ the list of all variables
+quantified along the way. This list is ordered, the variables closer
+to the root coming first.
+
+$\lvar(A\hole)$ can be seen as the interleaving of two sublists
+$\lvarp(A\hole)$ and $\lvarn(A\hole)$ of \emph{positively} and
+\emph{negatively unifiable} variables, in the following precise sense:
+$x \in \lvarp(A\hole)$ (resp. $x \in \lvarn(A\hole))$ iff there
+are contexts $B\hole$, $C^+\hole$ and $D^-\hole$ such that
+$A\hole$ is either $C^+\select{\exists x. B\hole}$ or
+$D^-\select{\forall x. B\hole}$ (resp. $D^-\select{\exists x. B\hole}$
+or $C^+\select{\forall x. B\hole}$).
+
+For instance, if $A\hole = \forall x. \exists y. (B \land ((\exists x'. \forall
+y'. \hole) \limp \forall z. C))$, then we have:
+\begin{mathpar}
+  \lvar(A\hole) = [x, y, x', y'] \and
+  \lvarp(A\hole) = [y, y'] \and
+  \lvarn(A\hole) = [x, x']
+\end{mathpar}
+
+
+% The three lists are defined recursively over the structure of $A\hole$ by the
+% following equations:$$
+% \begin{array}{c}
+% \begin{array}{rclrcl}
+%   \lvar(\hole)\eqb []&  \lvar(\forall x.A\hole) \eqb x::\lvar(A\hole)\\
+%   \lvar(P(t_1, \dots , t_n)\eqb []& \qquad   \lvar(\exists x.A\hole) \eqb x::\lvar(A\hole)\\
+% \end{array}\\
+% \begin{array}{rcl}
+%     \lvar(A\hole\vee B),  \lvar(B\vee A\hole),  \lvar(A\hole\wedge B), \lvar(B\wedge A\hole),&&\\ \lvar(A\hole\implies B), \lvar(B\implies A\hole)\eqb \lvar(A\hole)\\
+%   \lvarn(\hole), \lvarp(\hole),
+%   \lvarn(P(t_1, \dots , t_n)),\lvarp(P(t_1, \dots , t_n))\eqb []\\
+  
+%   \lvarn(\forall x.A\hole) = x::\lvarn(A\hole)&\qquad&
+%   \lvarn(\exists x.A\hole) = \lvarn(A\hole)\\
+%     \lvarn(A\hole\vee B),  \lvarn(B\vee A\hole),  \lvarn(A\hole\wedge B), \lvarn(B\wedge A\hole)\eqb \lvarn(A\hole)\\
+%     \lvarn(A\hole\implies B)\eqb \lvarp(A\hole)\\
+%       \lvarp(\forall x.A\hole) \eqb \lvarp(A\hole)\\
+%   \lvarp(\exists x.A\hole \eqb x::\lvarp(A\hole)\\
+%    \lvarp(A\hole\vee B),  \lvarp(B\vee A\hole),  \lvarp(A\hole\wedge B), \lvarp(B\wedge A\hole)\eqb \lvarp(A\hole)\\
+%      \lvarp(A\hole\implies B)\eqb \lvarn(A\hole)\\
+% \end{array}
+% \end{array}
+% $$
+% The three lists are naturally extended to linkages as sets by taking the union
+% of the lists associated with the two contexts of the linkage.
+\end{definition}
+
+% As we have seen, variables bound in linked formulas are unifiable or
+% not, depending on their quantifier, the position of this quantifier,
+% and whether they are in a hypothesis or the conclusion.
+
+\begin{definition}[Unifiable variables]\label{def:uvars}
+  The set $\uvars(\mathcal{L})$ of {\em unifiable variables} of a linkage
+  $\mathcal{L} = B\select{A}\link C\select{A'}$ is:
+  \begin{itemize}
+  \item $\lvarn(B\hole)\cup\lvarp(C\hole)$ if $\link$ is $\back$, and
+  \item $\lvarn(B\hole)\cup\lvarn(C\hole)$ if $\link$ is $\forw$.
+  \end{itemize}
+\end{definition}
+
+The following notions of substitution and unification are the usual ones and we
+do not go into details:
+ 
+\begin{definition}[Substitution]
+  A \emph{substitution} is a mapping from variables to terms such that $\{x ~|~
+  \sigma(x)\neq x\}$ is finite; we call this set the {\em domain} of $\sigma$.
+
+  When $\sigma(x)=x$ we say that $x$ is  {\em not instantiated} by
+  $\sigma$.
+  
+  %% A mapping $\sigma$ from variables to terms is a substitution of
+  %% domain $l$ when $\forall x\notin l, \sigma(x)=x$. When
+  %% $\sigma(x)=x$, we also say that $x$ is
+  
+  Given a proposition $A$ and a substitution $\sigma$, we write
+  $\sigma(A)$ for the \emph{application} of $\sigma$ to $A$ in the usual way.
+  %% For contexts, substitution in the special propositional variable
+  %% $\hole$ is defined trivially by $\hole[\sigma] = \hole$.
+\end{definition}
+
+\begin{definition}[Unification] Given two propositions $A$ and $A'$ and a list of variables
+  $l$, we say that a substitution $\sigma$ \emph{unifies} $A$ and $A'$ over $l$
+  when $\sigma(A)=\sigma(A')$ and the domain of $\sigma$ is a subset of $l$. 
+
+  If such a substitution exists, we say that $A$ and $A'$ are \emph{unifiable}
+  over $l$.
+\end{definition}
+Given $A$, $A'$ and $l$, the well-known unification algorithm decides
+whether $A$ and $A'$ are unifiable over $l$ and constructs the
+substitution when it exists~\cite{Montanari}.
+
+\begin{condition}[Identity]\label{cond:unif} 
+  For a linkage $B\select{A}\link C\select{A'}$ to be valid, the following must
+  be true:
+  \begin{enumerate}
+   \item There exists a substitution $\sigma$ which unifies $A$ and
+     $A'$ over the unifiable variables of the linkage.
+   \item \label{lab:cond} Furthermore, the unification respects the order over
+     the variables. More precisely, we request that there exists a list $l$
+     which is an interleaving of $\lvar(B\hole)$ and $\lvar(C\hole)$ such
+     that, given a unifiable variable $x$ in the domain of $\sigma$, all
+     variables occuring in $\sigma(x)$ are placed before $x$ in $l$:
+     $$\forall
+     y\in\fv(\sigma(x))\cap(\lvar(B\hole)\cup\lvar(C\hole)), y <_l x.$$
+     \end{enumerate}
+\end{condition}
+
+The last condition ensures acyclicity and will prohibit invalid
+linkages as described in section~\refsec{acyclicity}. More precisely,
+the list $l$ specifies the order in which the quantifiers will be
+treated in the proof construction.
+
+
+% \begin{condition}[Unification]\label{cond:unif}
+%   The linked subterms ($A$ and $A'$ or $t$ and $t'$) must be \emph{unifiable}
+%   with respect to the variables quantified in their contexts $B\hole$, $C\hole$.
+%   We do not detail all the constraints of this unification problem, but the
+%   essential idea is that a variable is unifiable if and only if its quantifier
+%   is \emph{instantiable}. This in turn can be determined by the polarity of the
+%   context surrounding the quantifier. One also needs to check that the unifier
+%   does not create circular dependencies between variables.
+% \end{condition}
+
+Finally we can state the full validity criterion for linkages:
 
 \begin{definition}[Valid linkage]
   We say that a linkage $\mathcal{L}$ is \emph{valid} if it satisfies conditions
-  \ref{cond:unif} and \ref{cond:pol}.
+  \ref{cond:pol} and \ref{cond:unif}.
 \end{definition}
 
-One understands that for logical linkages, condition \ref{cond:pol} guarantees
-that there is one positive and one negative occurrence among $A$ and $A'$. For
-rewrite linkages, it guarantees that the equality is in negative position.
-
-One can also check that all the examples given up to here were based on valid
+One can check that all the examples given up to here were based on valid
 linkages.
 
 % \subsubsection{Unification}
@@ -1196,50 +1254,50 @@ linkages.
 % variables bound by a context in two parts.
 
 % \begin{definition}[Positive and negative variables]
-% Given a context $A\square$ seen as a tree, one can always start from
-% the root and traverse the branch of $A\square$ that leads to its hole
-% $\square$. We write $\lvar(A\square)$ the list of all variables
+% Given a context $A\hole$ seen as a tree, one can always start from
+% the root and traverse the branch of $A\hole$ that leads to its hole
+% $\hole$. We write $\lvar(A\hole)$ the list of all variables
 % quantified along the way. This list is ordered, the variables closer
 % to the root coming first.
 
-% $\lvar(A\square)$ can be seen as the interleaving of two sublists
-% $\lvarp(A\square)$ and $\lvarn(A\square)$ of \emph{positively} and
+% $\lvar(A\hole)$ can be seen as the interleaving of two sublists
+% $\lvarp(A\hole)$ and $\lvarn(A\hole)$ of \emph{positively} and
 % \emph{negatively unifiable} variables, in the following precise sense:
-% $x \in \lvarp(A\square)$ (resp. $x \in \lvarn(A\square))$ iff there
-% are contexts $B\square$, $P\square$ and $N\square$ such that
-% $A\square$ is either $P\select{\exists x. B\square}$ or
-% $N\select{\forall x. B\square}$ (resp. $N\select{\exists x. B\square}$
-% or $P\select{\forall x. B\square}$).
+% $x \in \lvarp(A\hole)$ (resp. $x \in \lvarn(A\hole))$ iff there
+% are contexts $B\hole$, $P\hole$ and $N\hole$ such that
+% $A\hole$ is either $P\select{\exists x. B\hole}$ or
+% $N\select{\forall x. B\hole}$ (resp. $N\select{\exists x. B\hole}$
+% or $P\select{\forall x. B\hole}$).
 
-% For instance, if $A\square = \forall x. \exists y. (B \land ((\exists x'. \forall
-% y'. \square) \limp \forall z. C))$, then we have:
+% For instance, if $A\hole = \forall x. \exists y. (B \land ((\exists x'. \forall
+% y'. \hole) \limp \forall z. C))$, then we have:
 % \begin{mathpar}
-%   \lvar(A\square) = [x, y, x', y'] \and
-%   \lvarp(A\square) = [y, y'] \and
-%   \lvarn(A\square) = [x, x']
+%   \lvar(A\hole) = [x, y, x', y'] \and
+%   \lvarp(A\hole) = [y, y'] \and
+%   \lvarn(A\hole) = [x, x']
 % \end{mathpar}
 
 
-% % The three lists are defined recursively over the structure of $A\square$ by the
+% % The three lists are defined recursively over the structure of $A\hole$ by the
 % % following equations:$$
 % % \begin{array}{c}
 % % \begin{array}{rclrcl}
-% %   \lvar(\square)\eqb []&  \lvar(\forall x.A\square) \eqb x::\lvar(A\square)\\
-% %   \lvar(P(t_1, \dots , t_n)\eqb []& \qquad   \lvar(\exists x.A\square) \eqb x::\lvar(A\square)\\
+% %   \lvar(\hole)\eqb []&  \lvar(\forall x.A\hole) \eqb x::\lvar(A\hole)\\
+% %   \lvar(P(t_1, \dots , t_n)\eqb []& \qquad   \lvar(\exists x.A\hole) \eqb x::\lvar(A\hole)\\
 % % \end{array}\\
 % % \begin{array}{rcl}
-% %     \lvar(A\square\lor B),  \lvar(B\lor A\square),  \lvar(A\square\land B), \lvar(B\land A\square),&&\\ \lvar(A\square\limp B), \lvar(B\limp A\square)\eqb \lvar(A\square)\\
-% %   \lvarn(\square), \lvarp(\square),
+% %     \lvar(A\hole\lor B),  \lvar(B\lor A\hole),  \lvar(A\hole\land B), \lvar(B\land A\hole),&&\\ \lvar(A\hole\limp B), \lvar(B\limp A\hole)\eqb \lvar(A\hole)\\
+% %   \lvarn(\hole), \lvarp(\hole),
 % %   \lvarn(P(t_1, \dots , t_n)),\lvarp(P(t_1, \dots , t_n))\eqb []\\
   
-% %   \lvarn(\forall x.A\square) = x::\lvarn(A\square)&\qquad&
-% %   \lvarn(\exists x.A\square) = \lvarn(A\square)\\
-% %     \lvarn(A\square\lor B),  \lvarn(B\lor A\square),  \lvarn(A\square\land B), \lvarn(B\land A\square)\eqb \lvarn(A\square)\\
-% %     \lvarn(A\square\limp B)\eqb \lvarp(A\square)\\
-% %       \lvarp(\forall x.A\square) \eqb \lvarp(A\square)\\
-% %   \lvarp(\exists x.A\square \eqb x::\lvarp(A\square)\\
-% %    \lvarp(A\square\lor B),  \lvarp(B\lor A\square),  \lvarp(A\square\land B), \lvarp(B\land A\square)\eqb \lvarp(A\square)\\
-% %      \lvarp(A\square\limp B)\eqb \lvarn(A\square)\\
+% %   \lvarn(\forall x.A\hole) = x::\lvarn(A\hole)&\qquad&
+% %   \lvarn(\exists x.A\hole) = \lvarn(A\hole)\\
+% %     \lvarn(A\hole\lor B),  \lvarn(B\lor A\hole),  \lvarn(A\hole\land B), \lvarn(B\land A\hole)\eqb \lvarn(A\hole)\\
+% %     \lvarn(A\hole\limp B)\eqb \lvarp(A\hole)\\
+% %       \lvarp(\forall x.A\hole) \eqb \lvarp(A\hole)\\
+% %   \lvarp(\exists x.A\hole \eqb x::\lvarp(A\hole)\\
+% %    \lvarp(A\hole\lor B),  \lvarp(B\lor A\hole),  \lvarp(A\hole\land B), \lvarp(B\land A\hole)\eqb \lvarp(A\hole)\\
+% %      \lvarp(A\hole\limp B)\eqb \lvarn(A\hole)\\
 % % \end{array}
 % % \end{array}
 % % $$
@@ -1254,8 +1312,8 @@ linkages.
 % \begin{definition}\label{def:uvars}
 %   The set $\uvars(\mathcal{L})$ of {\em unifiable variables} of a linkage $\mathcal{L}$ is:
 %   \begin{itemize}
-%   \item $\lvarn(B\square)\cup\lvarp(C\square)$ if $\mathcal{L} = B\select{A}\back C\select{A'}$, and
-%   \item $\lvarn(B\square)\cup\lvarn(C\square)$ if $\mathcal{L} = B\select{A}* C\select{A'}$.
+%   \item $\lvarn(B\hole)\cup\lvarp(C\hole)$ if $\mathcal{L} = B\select{A}\back C\select{A'}$, and
+%   \item $\lvarn(B\hole)\cup\lvarn(C\hole)$ if $\mathcal{L} = B\select{A}* C\select{A'}$.
 %   \end{itemize}
 % \end{definition}
 
@@ -1276,7 +1334,7 @@ linkages.
 %   Given a proposition $A$ and a substitution $\sigma$, we write
 %   $A[\sigma]$ for the \emph{application} of $\sigma$ to $A$ in the usual way.
 %   %% For contexts, substitution in the special propositional variable
-%   %% $\square$ is defined trivially by $\square[\sigma] = \square$.
+%   %% $\hole$ is defined trivially by $\hole[\sigma] = \hole$.
 % \end{definition}
 
 % \begin{definition} Given two propositions $A$ and $A'$ and a list of variables
@@ -1301,11 +1359,11 @@ linkages.
 %      $A'$ over the unifiable variables of the linkage.
 %    \item \label{lab:cond} Furthermore, the unification respects the order over
 %      the variables. More precisely, we request that there exists a list $l$
-%      which is an interleaving of $\lvar(B\square)$ and $\lvar(C\square)$ such
+%      which is an interleaving of $\lvar(B\hole)$ and $\lvar(C\hole)$ such
 %      that, given a unifiable variable $x$ in the domain of $\sigma$, all
 %      variables occuring in $\sigma(x)$ are placed before $x$ in $l$:
 %      $$\forall
-%      y\in\FV(\sigma(x))\cap(\lvar(B\square)\cup\lvar(C\square)), y <_l x.$$
+%      y\in\FV(\sigma(x))\cap(\lvar(B\hole)\cup\lvar(C\hole)), y <_l x.$$
 %      \end{enumerate}
 % \end{definition}
 
@@ -1429,8 +1487,8 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
 \item \textbf{Goal modification:} the two previous steps produced a formula $E$.
   In the case of a forward linkage, a hypothesis $E$ is added to the goal; in
   the case of a backward linkage, the goal's conclusion becomes $E$. In both
-  cases, the logical correctness is guaranteed by
-  property~\ref{prop:correctness}. \label{step:goal-modification}
+  cases, the logical soundness is guaranteed by
+  property~\ref{prop:soundness}. \label{step:goal-modification}
 \end{enumerate}
 
 \todo{Remove page break (while keeping the wide page layout for the rules).}
@@ -1598,9 +1656,9 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
 %% \begin{itemize}
 %%   \item The formulas are of the form $A\select{B\vdash C}$ of
 %%     $A\select{B * C}$,
-%%   \item in the first case, $A\square$ is a positive context (that is
-%%     $\inv(A\square)$ is even, in the second case, it is a negative
-%%     context ($\inv(A\square)$ is odd),
+%%   \item in the first case, $A\hole$ is a positive context (that is
+%%     $\inv(A\hole)$ is even, in the second case, it is a negative
+%%     context ($\inv(A\hole)$ is odd),
 %%   \item logically, $A\select{B\vdash C}$ is equivalent to
 %%     $A\select{B\limp C}$ and $A\select{B*C}$ is equivalent to
 %%     $A\select{B\land C}$.
@@ -1660,12 +1718,12 @@ ensures that we can proceed to the interaction step \ref{step:interaction}.
 %% \emph{productivity}, and provide in the following an outline of its proof.
 
 %% \begin{definition}[Size]
-%% The \emph{size} of a context $A\square$ is the positive integer
-%% $\size{A\square}$ corresponding to the depth at which the hole $\square$ occurs
-%% in $A\square$.
+%% The \emph{size} of a context $A\hole$ is the positive integer
+%% $\size{A\hole}$ corresponding to the depth at which the hole $\hole$ occurs
+%% in $A\hole$.
 
 %% The \emph{size} of a linkage $\mathcal{L} = B\select{A} \link C\select{A'}$ is
-%% defined as $\size{\mathcal{L}} = \size{B\square} + \size{C\square}$.
+%% defined as $\size{\mathcal{L}} = \size{B\hole} + \size{C\hole}$.
 %% \end{definition}
 
 %% \begin{lemma}[Decreasing]\label{thm:decreasing}
@@ -1754,7 +1812,7 @@ is a sequence of reductions with one of the following forms:
 %   (resp. $B\select{A} * C\select{A'}$).
 % \end{lemma}
 % \begin{proof}
-%   By induction over the sizes of $B\square$ and $C\square$...
+%   By induction over the sizes of $B\hole$ and $C\hole$...
 % \end{proof}
 
 \section{Choosing the Best Derivation}\labsec{invert}
@@ -1930,13 +1988,16 @@ seems out of reach for about any user in a tactic based prover. At
 least as important is the fact that the proof can be performed without
 typing any text, especially no intermediate statement. 
 
+
 \section{Related Works}\labsec{related-work}
 
+
 \subsubsection*{Subformula Linking}
+
 Although the primary motivation is very practical, it benefitted a lot from
 recent works in proof theory, especially \emph{deep inference}. A key step was
 the discovery of the work of Kaustuv Chaudhuri~\cite{Chaudhuri2013} who had
-noticed how formula linking in deep inference could be used for proof
+noticed how subformula linking in deep inference could be used for proof
 construction in linear logic. His variant of the calculus of structures was very
 important for designing the rewrite rules which underly our system, and in
 \refch{pbl} we analyse proof calculi based on our rules that are closer to his
@@ -1945,6 +2006,66 @@ also deals with intuitionistic logic. Interestingly, some ideas like forward
 proof steps or the use of colors appeared independently in his and our work. A
 difference is that we give the possibility to link first-order terms in addition
 to propositions, which is the basis for rewrite actions.
+
+
+\subsubsection*{Canonical Proofs}
+
+The idea of reducing a proof to a collection of links between its dual formulas
+is not new, and can be traced back to the \emph{matings} of Andrews
+\cite{1674698} in the context of automated deduction. Matings are \emph{sets} of
+links covering all \emph{atomic} occurrences, and proofs are matings satisfying
+certain conditions. Our work differs in that we are interested in
+\emph{interactive} deduction, and thus consider links as a mechanism of
+inference rather than a syntactic criterion to discriminate proofs. Then a proof
+is better understood as a \emph{list} of links, and the atomicity constraint is
+relaxed to gain expressivity, since the creation of links is offloaded to the
+user instead of the search procedure.
+
+Another line of work, starting with the \emph{proof-nets} of Girard
+\cite{girard_linear_1987}, is concerned with the more fundamental problem of
+\emph{proof identity}, which requires a canonical notion of proof object
+\cite{strasburger-problem-2019}. In the case of unit-free multiplicative linear
+logic, the absence of any form of duplication/sharing/removal mechanism allows
+to completely characterize a proof-net by the set of its \emph{axiom} links. The
+difference with matings is that correctness of a proof structure can be
+checked in \emph{polynomial} instead of exponential time, because of the absence
+of duplication.
+% This is because adding
+% additives or exponentials, which can encode intuitionistic and classical logic,
+% requires additional structure to represent uses of weakening and contraction.
+% The \emph{combinatorial proofs} of Hughes \cite{Hughes_2006}
+% \cite{heijltjes_intuitionistic_2019} are examples of polynomially-checkable
+% proof objects exhibiting such structure, and have recently been extended to
+% handle first-order classical quantifiers \cite{hughes2019firstorder}
+% (intuitionistic quantifiers are still an open problem).
+% This compartmentalization of axiom links and structural rules resembles the
+% distinction between interaction phases and manual applications of {\rnmsf{conn}}
+% and {\rnmsf{wkn}} in \sys{DISL^0}, which is itself inspired by the
+% \emph{decomposition theorem} of deep inference formalisms.
+% Another approach to canonicity is to consider a generalization of focused proofs
+% called \emph{maximally multi-focused proofs}, which have been proven isomorphic
+% to compact representations of proofs such as proof-nets
+% \cite{ausiello_canonical_2008} and expansion tree proofs
+% \cite{chaudhuri_multi-focused_2016}. We conjecture that our system \sys{ISL^1_2}
+% could be reformulated as a multi-focused proof system, where foci correspond to
+% the linked formulas, and thus their number is restricted to exactly 2.
+There is an analogy between the correctness criterions of proof-nets, and the
+validity criterion of linkages:
+\begin{itemize}
+  \item they both identify a subset of valid objects among a larger set of
+  structures characterized by links on formulas;
+  \item they both allow many different \emph{sequential} readings, that is
+  sequent calculus proofs for proof nets, and deep inference, CoS-style proofs
+  for linkages\sidenote{Note that invalid linkages still give rise to CoS-style
+  \emph{derivations}, but not \emph{proofs} since they do not end with $\top$.
+  The incorrect proof structures of Girard are in a sense more parallel as they
+  cannot always be mapped to correct sequent calculus derivations.}.
+\end{itemize}
+Hence, our approach to subformula linking seems to exhibit some properties of
+canonical proofs, but at the level of \emph{partial proofs}: valid linkages make
+for \emph{compact-parallel-spatial} representations of inferences, whose
+operational meaning is given by their \emph{detailed-sequential-temporal} CoS
+derivations.
 
 
 % More
@@ -2057,66 +2178,6 @@ text-heavy presentation at two levels:
 % Isar proof. We conjecture that our drag-and-drop mechanism also has this
 % capability, and in fact solves some of the problems induced by the limitation of
 % PbP to a single selection.
-
-
-\subsubsection*{Canonical Proofs}
-
-The idea of reducing a proof to a collection of links between its dual formulas
-is not new, and can be traced back to the \emph{matings} of Andrews
-\cite{1674698} in the context of automated deduction. Matings are \emph{sets} of
-links covering all \emph{atomic} occurrences, and proofs are matings satisfying
-certain conditions. Our work differs in that we are interested in
-\emph{interactive} deduction, and thus consider links as a mechanism of
-inference rather than a syntactic criterion to discriminate proofs. Then a proof
-is better understood as a \emph{list} of links, and the atomicity constraint is
-relaxed to gain expressivity, since the creation of links is offloaded to the
-user instead of the search procedure.
-
-Another line of work, starting with the \emph{proof-nets} of Girard
-\cite{girard_linear_1987}, is concerned with the more fundamental problem of
-\emph{proof identity}, which requires a canonical notion of proof object
-\cite{strasburger-problem-2019}. In the case of unit-free multiplicative linear
-logic, the absence of any form of duplication/sharing/removal mechanism allows
-to completely characterize a proof-net by the set of its \emph{axiom} links, the
-difference with matings being that correctness of a proof structure can be
-checked in \emph{polynomial} instead of exponential time, because of the absence
-of duplication.
-% This is because adding
-% additives or exponentials, which can encode intuitionistic and classical logic,
-% requires additional structure to represent uses of weakening and contraction.
-% The \emph{combinatorial proofs} of Hughes \cite{Hughes_2006}
-% \cite{heijltjes_intuitionistic_2019} are examples of polynomially-checkable
-% proof objects exhibiting such structure, and have recently been extended to
-% handle first-order classical quantifiers \cite{hughes2019firstorder}
-% (intuitionistic quantifiers are still an open problem).
-% This compartmentalization of axiom links and structural rules resembles the
-% distinction between interaction phases and manual applications of {\rnmsf{conn}}
-% and {\rnmsf{wkn}} in \sys{DISL^0}, which is itself inspired by the
-% \emph{decomposition theorem} of deep inference formalisms.
-% Another approach to canonicity is to consider a generalization of focused proofs
-% called \emph{maximally multi-focused proofs}, which have been proven isomorphic
-% to compact representations of proofs such as proof-nets
-% \cite{ausiello_canonical_2008} and expansion tree proofs
-% \cite{chaudhuri_multi-focused_2016}. We conjecture that our system \sys{ISL^1_2}
-% could be reformulated as a multi-focused proof system, where foci correspond to
-% the linked formulas, and thus their number is restricted to exactly 2.
-There is an analogy between the correctness criterions of proof-nets, and the
-validity criterion of linkages:
-\begin{itemize}
-  \item they both identify a subset of valid objects among a larger set of
-  structures characterized by links on formulas;
-  \item they both have many possible \emph{sequential} readings, that is sequent
-  calculus proofs for proof nets, and deep inference, CoS-style proofs for
-  linkages\sidenote{Note that invalid linkages still give rise to CoS-style
-  \emph{derivations}, but not \emph{proofs} since they do not end with $\top$.
-  The incorrect proof structures of Girard are more general in this respect as
-  they cannot always be mapped to correct sequent calculus derivations.}.
-\end{itemize}
-Hence, our approach to subformula linking seems to exhibit some properties of
-canonical proofs, but at the level of \emph{partial proofs}: well-formed
-linkages make for \emph{compact-parallel-spatial} representations of inferences,
-whose operational meaning is given by their \emph{detailed-sequential-temporal}
-CoS derivations.
 
 
 \subsubsection*{Explicit Proof Objects}
