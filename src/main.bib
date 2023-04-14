@@ -101,13 +101,6 @@
   file        = {Chaudhuri - 2013 - Subformula Linking as an Interaction Method.pdf:/home/pablo/Zotero/storage/JABGNC97/Chaudhuri - 2013 - Subformula Linking as an Interaction Method.pdf:application/pdf}
 }
 
-@inproceedings{edukera,
-  title     = {Pr{\'e}sentation de la plateforme edukera},
-  author    = {Rognier, Benoit and Duhamel, Guillaume},
-  booktitle = {Vingt-septi{\`e}mes Journ{\'e}es Francophones des Langages Applicatifs (JFLA 2016)},
-  year      = {2016}
-}
-
 @incollection{PbP,
   location    = {Berlin, Heidelberg},
   title       = {Proof by pointing},
@@ -315,20 +308,6 @@
   file      = {Haydon and Sobociński - 2020 - Compositional Diagrammatic First-Order Logic.pdf:/home/pablo/Zotero/storage/56GM7HEW/Haydon and Sobociński - 2020 - Compositional Diagrammatic First-Order Logic.pdf:application/pdf}
 }
 
-@article{girard_linear_1987,
-  title    = {Linear logic},
-  volume   = {50},
-  issn     = {0304-3975},
-  url      = {http://www.sciencedirect.com/science/article/pii/0304397587900454},
-  doi      = {https://doi.org/10.1016/0304-3975(87)90045-4},
-  abstract = {The familiar connective of negation is broken into two operations: linear negation which is the purely negative part of negation and the modality “of course” which has the meaning of a reaffirmation. Following this basic discovery, a completely new approach to the whole area between constructive logics and programmation is initiated.},
-  number   = {1},
-  journal  = {Theoretical Computer Science},
-  author   = {Girard, Jean-Yves},
-  year     = {1987},
-  pages    = {1 -- 101}
-}
-
 @book{oostra_graficos_2010,
   series    = {Cuadernos de {Sistemática} {Peirceana}},
   title     = {Los gráficos {Alfa} de {Peirce} aplicados a la lógica intuicionista},
@@ -338,23 +317,6 @@
   author    = {Oostra, Arnold},
   year      = {2010},
   file      = {Ham - Universidad Nacional de Colombia.pdf:/home/pablo/Zotero/storage/EJ6ZMCD2/Ham - Universidad Nacional de Colombia.pdf:application/pdf}
-}
-
-@article{andreoli_logic_1992,
-  title    = {Logic {Programming} with {Focusing} {Proofs} in {Linear} {Logic}},
-  volume   = {2},
-  issn     = {0955-792X, 1465-363X},
-  url      = {https://academic.oup.com/logcom/article-lookup/doi/10.1093/logcom/2.3.297},
-  doi      = {10.1093/logcom/2.3.297},
-  abstract = {The deep symmetry of Linear Logic 18] makes it suitable for providing abstract models of computation, free from implementation details which are, by nature, oriented and non symmetrical. I propose here one such model, in the area of Logic Programming, where the basic computational principle is Computation = Proof search. Proofs considered here are those of the Gentzen style sequent calculus for Linear Logic. However, proofs in this system may be redundant, in that two proofs can be syntactically di erent although identical up to some irrelevant reordering or simpli cation of the applications of the inference rules. This leads to an untractable proof search where the search procedure is forced to make costly choices which turn out to be irrelevant. To overcome this problem, a subclass of proofs, called the {\textbackslash}focusing" proofs, which is both complete (any derivable formula in Linear Logic has a focusing proof) and tractable (many irrelevant choices in the search are eliminated when aimed at focusing proofs) is identi ed. The main constraint underlying the speci cation of focusing proofs has been to preserve the symmetry of Linear Logic, which is its most salient feature. In particular, dual connectives have dual properties with respect to focusing proofs.},
-  language = {en},
-  number   = {3},
-  urldate  = {2020-06-09},
-  journal  = {Journal of Logic and Computation},
-  author   = {Andreoli, Jean-Marc},
-  year     = {1992},
-  pages    = {297--347},
-  file     = {Andreoli - 1992 - Logic Programming with Focusing Proofs in Linear L.pdf:/home/pablo/Zotero/storage/FNMAD6M2/Andreoli - 1992 - Logic Programming with Focusing Proofs in Linear L.pdf:application/pdf}
 }
 
 @article{ullrich_beyond_2022,
@@ -407,22 +369,22 @@
 
 
 @inproceedings{omar-filling-2021,
-	address = {New York, NY, USA},
-	series = {{PLDI} 2021},
-	title = {Filling typed holes with live {GUIs}},
-	isbn = {978-1-4503-8391-2},
-	url = {https://doi.org/10.1145/3453483.3454059},
-	doi = {10.1145/3453483.3454059},
-	abstract = {Text editing is powerful, but some types of expressions are more naturally represented and manipulated graphically. Examples include expressions that compute colors, music, animations, tabular data, plots, diagrams, and other domain-specific data structures. This paper introduces live literals, or livelits, which allow clients to fill holes of types like these by directly manipulating a user-defined GUI embedded persistently into code. Uniquely, livelits are compositional: a livelit GUI can itself embed spliced expressions, which are typed, lexically scoped, and can in turn embed other livelits. Livelits are also uniquely live: a livelit can provide continuous feedback about the run-time implications of the client’s choices even when splices mention bound variables, because the system continuously gathers closures associated with the hole that the livelit is filling. We integrate livelits into Hazel, a live hole-driven programming environment, and describe case studies that exercise these novel capabilities. We then define a simply typed livelit calculus, which specifies how livelits operate as live graphical macros. The metatheory of macro expansion has been mechanized in Agda.},
-	urldate = {2021-12-10},
-	booktitle = {Proceedings of the 42nd {ACM} {SIGPLAN} {International} {Conference} on {Programming} {Language} {Design} and {Implementation}},
-	publisher = {Association for Computing Machinery},
-	author = {Omar, Cyrus and Moon, David and Blinn, Andrew and Voysey, Ian and Collins, Nick and Chugh, Ravi},
-	month = jun,
-	year = {2021},
-	keywords = {GUIs, live programming, macros, typed holes},
-	pages = {511--525},
-	file = {Full Text PDF:C\:\\Users\\pablo\\Zotero\\storage\\CL9UM2WP\\Omar et al. - 2021 - Filling typed holes with live GUIs.pdf:application/pdf},
+  address   = {New York, NY, USA},
+  series    = {{PLDI} 2021},
+  title     = {Filling typed holes with live {GUIs}},
+  isbn      = {978-1-4503-8391-2},
+  url       = {https://doi.org/10.1145/3453483.3454059},
+  doi       = {10.1145/3453483.3454059},
+  abstract  = {Text editing is powerful, but some types of expressions are more naturally represented and manipulated graphically. Examples include expressions that compute colors, music, animations, tabular data, plots, diagrams, and other domain-specific data structures. This paper introduces live literals, or livelits, which allow clients to fill holes of types like these by directly manipulating a user-defined GUI embedded persistently into code. Uniquely, livelits are compositional: a livelit GUI can itself embed spliced expressions, which are typed, lexically scoped, and can in turn embed other livelits. Livelits are also uniquely live: a livelit can provide continuous feedback about the run-time implications of the client’s choices even when splices mention bound variables, because the system continuously gathers closures associated with the hole that the livelit is filling. We integrate livelits into Hazel, a live hole-driven programming environment, and describe case studies that exercise these novel capabilities. We then define a simply typed livelit calculus, which specifies how livelits operate as live graphical macros. The metatheory of macro expansion has been mechanized in Agda.},
+  urldate   = {2021-12-10},
+  booktitle = {Proceedings of the 42nd {ACM} {SIGPLAN} {International} {Conference} on {Programming} {Language} {Design} and {Implementation}},
+  publisher = {Association for Computing Machinery},
+  author    = {Omar, Cyrus and Moon, David and Blinn, Andrew and Voysey, Ian and Collins, Nick and Chugh, Ravi},
+  month     = jun,
+  year      = {2021},
+  keywords  = {GUIs, live programming, macros, typed holes},
+  pages     = {511--525},
+  file      = {Full Text PDF:C\:\\Users\\pablo\\Zotero\\storage\\CL9UM2WP\\Omar et al. - 2021 - Filling typed holes with live GUIs.pdf:application/pdf}
 }
 
 @inproceedings{isar,
@@ -444,58 +406,36 @@
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 @inproceedings{clickcollect,
-  TITLE = {{Click and coLLecT An Interactive Linear Logic Prover}},
-  AUTHOR = {Callies, Etienne and Laurent, Olivier},
-  URL = {https://hal-lirmm.ccsd.cnrs.fr/lirmm-03271501},
-  BOOKTITLE = {{5th International Workshop on Trends in Linear Logic and Applications (TLLA 2021)}},
-  ADDRESS = {Rome (virtual), Italy},
-  YEAR = {2021},
-  MONTH = Jun,
-  PDF = {https://hal-lirmm.ccsd.cnrs.fr/lirmm-03271501/file/TLLA_2021_paper_4.pdf},
-  HAL_ID = {lirmm-03271501},
-  HAL_VERSION = {v1},
+  title       = {{Click and coLLecT An Interactive Linear Logic Prover}},
+  author      = {Callies, Etienne and Laurent, Olivier},
+  url         = {https://hal-lirmm.ccsd.cnrs.fr/lirmm-03271501},
+  booktitle   = {{5th International Workshop on Trends in Linear Logic and Applications (TLLA 2021)}},
+  address     = {Rome (virtual), Italy},
+  year        = {2021},
+  month       = Jun,
+  pdf         = {https://hal-lirmm.ccsd.cnrs.fr/lirmm-03271501/file/TLLA_2021_paper_4.pdf},
+  hal_id      = {lirmm-03271501},
+  hal_version = {v1}
 }
 
-
-@inproceedings{buildingblocks,
-  author    = {Sorin Lerner and
-               Stephen R. Foster and
-               William G. Griswold},
-  editor    = {Bo Begole and
-               Jinwoo Kim and
-               Kori Inkpen and
-               Woontack Woo},
-  title     = {Polymorphic Blocks: Formalism-Inspired {UI} for Structured Connectors},
-  booktitle = {Proceedings of the 33rd Annual {ACM} Conference on Human Factors in
-               Computing Systems, {CHI} 2015, Seoul, Republic of Korea, April 18-23,
-               2015},
-  pages     = {3063--3072},
-  publisher = {{ACM}},
-  year      = {2015},
-  url       = {https://doi.org/10.1145/2702123.2702302},
-  doi       = {10.1145/2702123.2702302},
-  timestamp = {Fri, 12 Mar 2021 15:27:48 +0100},
-  biburl    = {https://dblp.org/rec/conf/chi/LernerFG15.bib},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}
 
 @inproceedings{edukera,
-  title={Pr{\'e}sentation de la plateforme edukera},
-  author={Rognier, Benoit and Duhamel, Guillaume},
-  booktitle={Vingt-septi{\`e}mes Journ{\'e}es Francophones des Langages Applicatifs (JFLA 2016)},
-  year={2016}
+  title     = {Pr{\'e}sentation de la plateforme edukera},
+  author    = {Rognier, Benoit and Duhamel, Guillaume},
+  booktitle = {Vingt-septi{\`e}mes Journ{\'e}es Francophones des Langages Applicatifs (JFLA 2016)},
+  year      = {2016}
 }
 @techreport{SSR,
-  TITLE = {{A Small Scale Reflection Extension for the Coq system}},
-  AUTHOR = {Gonthier, Georges and Mahboubi, Assia and Tassi, Enrico},
-  URL = {https://hal.inria.fr/inria-00258384},
-  TYPE = {Research Report},
-  NUMBER = {RR-6455},
-  INSTITUTION = {{Inria Saclay Ile de France}},
-  YEAR = {2016},
-  PDF = {https://hal.inria.fr/inria-00258384v17/file/main.pdf},
-  HAL_ID = {inria-00258384},
-  HAL_VERSION = {v17},
+  title       = {{A Small Scale Reflection Extension for the Coq system}},
+  author      = {Gonthier, Georges and Mahboubi, Assia and Tassi, Enrico},
+  url         = {https://hal.inria.fr/inria-00258384},
+  type        = {Research Report},
+  number      = {RR-6455},
+  institution = {{Inria Saclay Ile de France}},
+  year        = {2016},
+  pdf         = {https://hal.inria.fr/inria-00258384v17/file/main.pdf},
+  hal_id      = {inria-00258384},
+  hal_version = {v17}
 }
 
 @incollection{Chaudhuri2013,
@@ -521,27 +461,6 @@
   file        = {Chaudhuri - 2013 - Subformula Linking as an Interaction Method.pdf:/home/pablo/Zotero/storage/JABGNC97/Chaudhuri - 2013 - Subformula Linking as an Interaction Method.pdf:application/pdf}
 }
 
-@incollection{PbP,
-  location    = {Berlin, Heidelberg},
-  title       = {Proof by pointing},
-  volume      = {789},
-  isbn        = {978-3-540-57887-1 978-3-540-48383-0},
-  url         = {http://link.springer.com/10.1007/3-540-57887-0_94},
-  abstract    = {This paper presents a principle for using locations in logical expressions to guide the process of building proofs. Using a sequentstyle presentation of theorem provers, we annotate the inference rules to specify an algorithmthat associates the construction of a proof tree to a location within a goal sequent. This principle provides a natural and effective use of the mouse in the user-interface of computer proof assistants. The implementation of the algorithm in a variety of theorem provers is discussed.},
-  pages       = {141--160},
-  booktitle   = {Theoretical Aspects of Computer Software},
-  publisher   = {Springer Berlin Heidelberg},
-  author      = {Bertot, Yves and Kahn, Gilles and Théry, Laurent},
-  editor      = {Hagiya, Masami and Mitchell, John C.},
-  editorb     = {Goos, Gerhard and Hartmanis, Juris},
-  editorbtype = {redactor},
-  urldate     = {2020-04-21},
-  date        = {1994},
-  year        = {1994},
-  langid      = {english},
-  doi         = {10.1007/3-540-57887-0_94},
-  note        = {Series Title: Lecture Notes in Computer Science},
-}
 
 @article{andreoli1992,
   title        = {Logic Programming with Focusing Proofs in Linear Logic},
@@ -551,7 +470,7 @@
   abstract     = {The deep symmetry of Linear Logic 18] makes it suitable for providing abstract models of computation, free from implementation details which are, by nature, oriented and non symmetrical. I propose here one such model, in the area of Logic Programming, where the basic computational principle is Computation = Proof search. Proofs considered here are those of the Gentzen style sequent calculus for Linear Logic. However, proofs in this system may be redundant, in that two proofs can be syntactically di erent although identical up to some irrelevant reordering or simpli cation of the applications of the inference rules. This leads to an untractable proof search where the search procedure is forced to make costly choices which turn out to be irrelevant. To overcome this problem, a subclass of proofs, called the {\textbackslash}focusing" proofs, which is both complete (any derivable formula in Linear Logic has a focusing proof) and tractable (many irrelevant choices in the search are eliminated when aimed at focusing proofs) is identi ed. The main constraint underlying the speci cation of focusing proofs has been to preserve the symmetry of Linear Logic, which is its most salient feature. In particular, dual connectives have dual properties with respect to focusing proofs.},
   pages        = {297--347},
   number       = {3},
-  journal = {Journal of Logic and Computation},
+  journal      = {Journal of Logic and Computation},
   shortjournal = {J Logic Computation},
   author       = {Andreoli, Jean-Marc},
   urldate      = {2020-06-09},
@@ -570,26 +489,26 @@
   pages   = {347-370}
 }
 @book{ISOSBook,
-  author = {Di Cosmo, Roberto},
-  title = {Isomorphisms of types: from $\lambda$-calculus to  information retrieval
-      and language design},
-  publisher = {Birkhauser},
-  year = {1995},
-  x-topic = {typeis},
+  author       = {Di Cosmo, Roberto},
+  title        = {Isomorphisms of types: from $\lambda$-calculus to  information retrieval
+                  and language design},
+  publisher    = {Birkhauser},
+  year         = {1995},
+  x-topic      = {typeis},
   dmi-category = {livre},
-  url = {http://www.ens.fr/users/dicosmo/Publications/ISObook.html},
-  html = {http://www.ens.fr/users/dicosmo/Publications/ISObook.html},
-  htmlurl = {\htmladdnormallink{Contents and Overview}{http://www.ens.fr/users/dicosmo/Publications/ISObook.html}},
-  note = {ISBN-0-8176-3763-X},
+  url          = {http://www.ens.fr/users/dicosmo/Publications/ISObook.html},
+  html         = {http://www.ens.fr/users/dicosmo/Publications/ISObook.html},
+  htmlurl      = {\htmladdnormallink{Contents and Overview}{http://www.ens.fr/users/dicosmo/Publications/ISObook.html}},
+  note         = {ISBN-0-8176-3763-X},
   abstract-url = {http://www.dicosmo.org/Publications/Abstracts.html#ISOSBook}
 }
 
 @unpublished{ChaudhuriTLLA,
-  title={Interactive Proof Building with Direct Manipulation for Linear Logic (and Cousins)},
-author={Chaudhuri, Kaustuv},
-  note={Invited Talk at the {\em Linearity \& TLLA} workshop},
-  year={2020}
-  }
+  title  = {Interactive Proof Building with Direct Manipulation for Linear Logic (and Cousins)},
+  author = {Chaudhuri, Kaustuv},
+  note   = {Invited Talk at the {\em Linearity \& TLLA} workshop},
+  year   = {2020}
+}
 
 @article{strasburger-problem-2019,
   title        = {The problem of proof identity, and why computer scientists should care about Hilbert's 24th problem},
@@ -599,12 +518,12 @@ author={Chaudhuri, Kaustuv},
   doi          = {10.1098/rsta.2018.0038},
   pages        = {20180038},
   number       = {2140},
-  journal = {Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences},
+  journal      = {Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences},
   shortjournal = {Phil. Trans. R. Soc. A.},
   author       = {Straßburger, Lutz},
   urldate      = {2020-08-08},
   date         = {2019-03-11},
-  year = {2019},
+  year         = {2019},
   langid       = {english},
   file         = {Straßburger - 2019 - The problem of proof identity, and why computer sc.pdf:/home/pablo/Zotero/storage/5K3BB6AB/Straßburger - 2019 - The problem of proof identity, and why computer sc.pdf:application/pdf}
 }
@@ -639,12 +558,12 @@ author={Chaudhuri, Kaustuv},
   abstract     = {A focused proof system provides a normal form to cut-free proofs in which the application of invertible and non-invertible inference rules is structured. Within linear logic, the focused proof system of Andreoli provides an elegant and comprehensive normal form for cut-free proofs. Within intuitionistic and classical logics, there are various diﬀerent proof systems in the literature that exhibit focusing behavior. These focused proof systems have been applied to both the proof search and the proof normalization approaches to computation. We present a new, focused proof system for intuitionistic logic, called {LJF}, and show how other intuitionistic proof systems can be mapped into the new system by inserting logical connectives that prematurely stop focusing. We also use {LJF} to design a focused proof system {LKF} for classical logic. Our approach to the design and analysis of these systems is based on the completeness of focusing in linear logic and on the notion of polarity that appears in Girard’s {LC} and {LU} proof systems.},
   pages        = {4747--4768},
   number       = {46},
-  journal = {Theoretical Computer Science},
+  journal      = {Theoretical Computer Science},
   shortjournal = {Theoretical Computer Science},
   author       = {Liang, Chuck and Miller, Dale},
   urldate      = {2020-08-12},
   date         = {2009-11},
-  year = {2009},
+  year         = {2009},
   langid       = {english},
   file         = {Liang et Miller - 2009 - Focusing and polarization in linear, intuitionisti.pdf:/home/pablo/Zotero/storage/HW7RWGCC/Liang et Miller - 2009 - Focusing and polarization in linear, intuitionisti.pdf:application/pdf}
 }
@@ -668,26 +587,26 @@ author={Chaudhuri, Kaustuv},
 }
 
 @techreport{Guglielmi1999ACO,
-  title  = {A Calculus of Order and Interaction},
-  author = {Alessio Guglielmi},
-  year   = {1999},
+  title       = {A Calculus of Order and Interaction},
+  author      = {Alessio Guglielmi},
+  year        = {1999},
   institution = {Technische Universität Dresden},
-  url = {https://www.researchgate.net/publication/2807151_A_Calculus_of_Order_and_Interaction}
+  url         = {https://www.researchgate.net/publication/2807151_A_Calculus_of_Order_and_Interaction}
 }
 
 @article{girard-linear-1987,
-  title        = {Linear logic},
-  volume       = {50},
-  issn         = {0304-3975},
-  url          = {http://www.sciencedirect.com/science/article/pii/0304397587900454},
-  doi          = {https://doi.org/10.1016/0304-3975(87)90045-4},
-  abstract     = {The familiar connective of negation is broken into two operations: linear negation which is the purely negative part of negation and the modality “of course” which has the meaning of a reaffirmation. Following this basic discovery, a completely new approach to the whole area between constructive logics and programmation is initiated.},
-  pages        = {1 -- 101},
-  number       = {1},
-  journal = {Theoretical Computer Science},
-  author       = {Girard, Jean-Yves},
-  date         = {1987},
-  year         = {1987}
+  title    = {Linear logic},
+  volume   = {50},
+  issn     = {0304-3975},
+  url      = {http://www.sciencedirect.com/science/article/pii/0304397587900454},
+  doi      = {https://doi.org/10.1016/0304-3975(87)90045-4},
+  abstract = {The familiar connective of negation is broken into two operations: linear negation which is the purely negative part of negation and the modality “of course” which has the meaning of a reaffirmation. Following this basic discovery, a completely new approach to the whole area between constructive logics and programmation is initiated.},
+  pages    = {1 -- 101},
+  number   = {1},
+  journal  = {Theoretical Computer Science},
+  author   = {Girard, Jean-Yves},
+  date     = {1987},
+  year     = {1987}
 }
 
 @article{doi:10.1098/rsta.1984.0067,
@@ -725,145 +644,158 @@ author={Chaudhuri, Kaustuv},
 }
 
 @techreport{amerkad-mathematics-2001,
-	title = {Mathematics and {Proof} {Presentation} in {Pcoq}},
-	url = {https://hal.inria.fr/inria-00072274},
-	number = {RR-4313},
-	urldate = {2021-12-08},
-	institution = {INRIA},
-	author = {Amerkad, Ahmed and Bertot, Yves and Pottier, Loïc and Rideau, Laurence},
-	month = nov,
-	year = {2001},
-	keywords = {INTERFACE, MATHEMATICAL PRINTING, PROOF, PROOF ASSISTANT},
+  title       = {Mathematics and {Proof} {Presentation} in {Pcoq}},
+  url         = {https://hal.inria.fr/inria-00072274},
+  number      = {RR-4313},
+  urldate     = {2021-12-08},
+  institution = {INRIA},
+  author      = {Amerkad, Ahmed and Bertot, Yves and Pottier, Loïc and Rideau, Laurence},
+  month       = nov,
+  year        = {2001},
+  keywords    = {INTERFACE, MATHEMATICAL PRINTING, PROOF, PROOF ASSISTANT}
 }
 
 
 @article{robinson-formalizing-1993,
-	title = {Formalizing a {Hierarchical} {Structure} of {Practical} {Mathematical} {Reasoning}},
-	volume = {3},
-	issn = {0955-792X},
-	url = {https://doi.org/10.1093/logcom/3.1.47},
-	doi = {10.1093/logcom/3.1.47},
-	abstract = {Traditionally, mathematical logic has been content with ‘in principle’ formalizations of deductive inference, which place little emphasis on the description of practical reasoning. Requirements for formal descriptions of practical inference methods are now emerging however. For example, interactive reasoning systems are needed for verification of computer systems, and should support practically convenient reasoning techniques as strongly as possible. This paper describes a proof paradigm which formalises a hierarchical, problem-reduction style of reasoning which is widely useful in practical reasoning. It is a goal directed paradigm, which gives a central role to equivalence transformations. A hierarchy of subgoals can co-exist at a single point in the proof, and these subgoals may be of arbitrary type. The approach allows good access to contextual information when transforming subgoals, and can be applied to a variety of logics.},
-	number = {1},
-	urldate = {2021-12-08},
-	journal = {Journal of Logic and Computation},
-	author = {Robinson, Peter J. and Staples, John},
-	month = feb,
-	year = {1993},
-	pages = {47--61},
-	file = {Full Text PDF:C\:\\Users\\pablo\\Zotero\\storage\\3UYZT2DV\\ROBINSON et STAPLES - 1993 - Formalizing a Hierarchical Structure of Practical .pdf:application/pdf;Snapshot:C\:\\Users\\pablo\\Zotero\\storage\\IS8HFMKR\\1043242.html:text/html},
+  title    = {Formalizing a {Hierarchical} {Structure} of {Practical} {Mathematical} {Reasoning}},
+  volume   = {3},
+  issn     = {0955-792X},
+  url      = {https://doi.org/10.1093/logcom/3.1.47},
+  doi      = {10.1093/logcom/3.1.47},
+  abstract = {Traditionally, mathematical logic has been content with ‘in principle’ formalizations of deductive inference, which place little emphasis on the description of practical reasoning. Requirements for formal descriptions of practical inference methods are now emerging however. For example, interactive reasoning systems are needed for verification of computer systems, and should support practically convenient reasoning techniques as strongly as possible. This paper describes a proof paradigm which formalises a hierarchical, problem-reduction style of reasoning which is widely useful in practical reasoning. It is a goal directed paradigm, which gives a central role to equivalence transformations. A hierarchy of subgoals can co-exist at a single point in the proof, and these subgoals may be of arbitrary type. The approach allows good access to contextual information when transforming subgoals, and can be applied to a variety of logics.},
+  number   = {1},
+  urldate  = {2021-12-08},
+  journal  = {Journal of Logic and Computation},
+  author   = {Robinson, Peter J. and Staples, John},
+  month    = feb,
+  year     = {1993},
+  pages    = {47--61},
+  file     = {Full Text PDF:C\:\\Users\\pablo\\Zotero\\storage\\3UYZT2DV\\ROBINSON et STAPLES - 1993 - Formalizing a Hierarchical Structure of Practical .pdf:application/pdf;Snapshot:C\:\\Users\\pablo\\Zotero\\storage\\IS8HFMKR\\1043242.html:text/html}
 }
 
 @inproceedings{grundy-window-1991,
-	title = {Window {Inference} {In} {The} {HOL} {System}},
-	doi = {10.1109/HOL.1991.596285},
-	booktitle = {1991 {International} {Workshop} on the {HOL} {Theorem} {Proving} {System} and {Its} {Applications}},
-	author = {Grundy, J.},
-	month = aug,
-	year = {1991},
-	keywords = {Australia, Calculus, Laboratories, Packaging},
-	pages = {177--189},
-	file = {IEEE Xplore Full Text PDF:C\:\\Users\\pablo\\Zotero\\storage\\CP5QSJL2\\Grundy - 1991 - Window Inference In The HOL System.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\pablo\\Zotero\\storage\\SH78C3NX\\596285.html:text/html},
+  title     = {Window {Inference} {In} {The} {HOL} {System}},
+  doi       = {10.1109/HOL.1991.596285},
+  booktitle = {1991 {International} {Workshop} on the {HOL} {Theorem} {Proving} {System} and {Its} {Applications}},
+  author    = {Grundy, J.},
+  month     = aug,
+  year      = {1991},
+  keywords  = {Australia, Calculus, Laboratories, Packaging},
+  pages     = {177--189},
+  file      = {IEEE Xplore Full Text PDF:C\:\\Users\\pablo\\Zotero\\storage\\CP5QSJL2\\Grundy - 1991 - Window Inference In The HOL System.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\pablo\\Zotero\\storage\\SH78C3NX\\596285.html:text/html}
 }
 
 
 @incollection{ahrendt-using-2016,
-	address = {Cham},
-	title = {Using the {KeY} {Prover}},
-	volume = {10001},
-	isbn = {978-3-319-49811-9 978-3-319-49812-6},
-	url = {http://link.springer.com/10.1007/978-3-319-49812-6_15},
-	language = {en},
-	urldate = {2021-11-23},
-	booktitle = {Deductive {Software} {Verification} – {The} {KeY} {Book}},
-	publisher = {Springer International Publishing},
-	author = {Ahrendt, Wolfgang and Grebing, Sarah},
-	editor = {Ahrendt, Wolfgang and Beckert, Bernhard and Bubel, Richard and Hähnle, Reiner and Schmitt, Peter H. and Ulbrich, Mattias},
-	year = {2016},
-	doi = {10.1007/978-3-319-49812-6_15},
-	note = {Series Title: Lecture Notes in Computer Science},
-	pages = {495--539},
-	file = {Ahrendt et Grebing - 2016 - Using the KeY Prover.pdf:C\:\\Users\\pablo\\Zotero\\storage\\CY87PBHF\\Ahrendt et Grebing - 2016 - Using the KeY Prover.pdf:application/pdf},
+  address   = {Cham},
+  title     = {Using the {KeY} {Prover}},
+  volume    = {10001},
+  isbn      = {978-3-319-49811-9 978-3-319-49812-6},
+  url       = {http://link.springer.com/10.1007/978-3-319-49812-6_15},
+  language  = {en},
+  urldate   = {2021-11-23},
+  booktitle = {Deductive {Software} {Verification} – {The} {KeY} {Book}},
+  publisher = {Springer International Publishing},
+  author    = {Ahrendt, Wolfgang and Grebing, Sarah},
+  editor    = {Ahrendt, Wolfgang and Beckert, Bernhard and Bubel, Richard and Hähnle, Reiner and Schmitt, Peter H. and Ulbrich, Mattias},
+  year      = {2016},
+  doi       = {10.1007/978-3-319-49812-6_15},
+  note      = {Series Title: Lecture Notes in Computer Science},
+  pages     = {495--539},
+  file      = {Ahrendt et Grebing - 2016 - Using the KeY Prover.pdf:C\:\\Users\\pablo\\Zotero\\storage\\CY87PBHF\\Ahrendt et Grebing - 2016 - Using the KeY Prover.pdf:application/pdf}
 }
 
 @book{zhan-design-2019,
-	title = {Design of point-and-click user interfaces for proof assistants},
-	abstract = {In interactive theorem proving, human users interact with proof assistants to construct and verify formal proofs. The most popular proof assistants today all have user interfaces that are largely text-based. This leads to a steep learning curve for new users of these tools. In this paper, we propose a framework for designing user interfaces for proof assistants based on pointing and clicking. While a main goal of the design is ease of learning for new users, we intend for the design to be suitable for real verification tasks. The design is also extensible, allowing custom proof methods and search functionality to be added in a convenient way. We implement our ideas in a web interface, with backend provided by holpy, a new system for interactive theorem proving implemented in Python. The resulting user interface is tested on theorems in logic, sets, functions, Peano arithmetic, and lists, demonstrating its applicability in a wide range of areas.},
-	author = {Zhan, Bohua and Ji, Zhenyan and Zhou, Wenfan and Xiang, Chaozhu and Hou, Jie and Sun, Wenhui},
-	month = aug,
-	year = {2019},
-	file = {Full Text PDF:C\:\\Users\\pablo\\Zotero\\storage\\JR53JYII\\Zhan et al. - 2019 - Design of point-and-click user interfaces for proo.pdf:application/pdf},
+  title    = {Design of point-and-click user interfaces for proof assistants},
+  abstract = {In interactive theorem proving, human users interact with proof assistants to construct and verify formal proofs. The most popular proof assistants today all have user interfaces that are largely text-based. This leads to a steep learning curve for new users of these tools. In this paper, we propose a framework for designing user interfaces for proof assistants based on pointing and clicking. While a main goal of the design is ease of learning for new users, we intend for the design to be suitable for real verification tasks. The design is also extensible, allowing custom proof methods and search functionality to be added in a convenient way. We implement our ideas in a web interface, with backend provided by holpy, a new system for interactive theorem proving implemented in Python. The resulting user interface is tested on theorems in logic, sets, functions, Peano arithmetic, and lists, demonstrating its applicability in a wide range of areas.},
+  author   = {Zhan, Bohua and Ji, Zhenyan and Zhou, Wenfan and Xiang, Chaozhu and Hou, Jie and Sun, Wenhui},
+  month    = aug,
+  year     = {2019},
+  file     = {Full Text PDF:C\:\\Users\\pablo\\Zotero\\storage\\JR53JYII\\Zhan et al. - 2019 - Design of point-and-click user interfaces for proo.pdf:application/pdf}
 }
 
 @incollection{goos-tas-2000,
-	address = {Berlin, Heidelberg},
-	title = {{TAS} — {A} {Generic} {Window} {Inference} {System}},
-	volume = {1869},
-	isbn = {978-3-540-67863-2 978-3-540-44659-0},
-	url = {http://link.springer.com/10.1007/3-540-44659-1_25},
-	abstract = {This paper presents work on technology for transformational proof and program development, as used by window inference calculi and transformation systems. The calculi are characterised by a certain class of theorems in the underlying logic. Our transformation system TAS compiles these rules to concrete deduction support, complete with a graphical user interface with command-language-free user interaction by gestures like drag\&drop and proof-by-pointing, and a development management for transformational proofs. It is generic in the sense that it is completely independent of the particular window inference or transformational calculus, and can be instantiated to many diﬀerent ones; three such instantiations are presented in the paper.},
-	language = {en},
-	urldate = {2021-12-08},
-	booktitle = {Theorem {Proving} in {Higher} {Order} {Logics}},
-	publisher = {Springer Berlin Heidelberg},
-	author = {Lüth, Christoph and Wolff, Burkhart},
-	editor = {Goos, Gerhard and Hartmanis, Juris and van Leeuwen, Jan and Aagaard, Mark and Harrison, John},
-	year = {2000},
-	doi = {10.1007/3-540-44659-1_25},
-	note = {Series Title: Lecture Notes in Computer Science},
-	pages = {406--423},
-	file = {Lüth et Wolff - 2000 - TAS — A Generic Window Inference System.pdf:C\:\\Users\\pablo\\Zotero\\storage\\2BTD79Y6\\Lüth et Wolff - 2000 - TAS — A Generic Window Inference System.pdf:application/pdf},
+  address   = {Berlin, Heidelberg},
+  title     = {{TAS} — {A} {Generic} {Window} {Inference} {System}},
+  volume    = {1869},
+  isbn      = {978-3-540-67863-2 978-3-540-44659-0},
+  url       = {http://link.springer.com/10.1007/3-540-44659-1_25},
+  abstract  = {This paper presents work on technology for transformational proof and program development, as used by window inference calculi and transformation systems. The calculi are characterised by a certain class of theorems in the underlying logic. Our transformation system TAS compiles these rules to concrete deduction support, complete with a graphical user interface with command-language-free user interaction by gestures like drag\&drop and proof-by-pointing, and a development management for transformational proofs. It is generic in the sense that it is completely independent of the particular window inference or transformational calculus, and can be instantiated to many diﬀerent ones; three such instantiations are presented in the paper.},
+  language  = {en},
+  urldate   = {2021-12-08},
+  booktitle = {Theorem {Proving} in {Higher} {Order} {Logics}},
+  publisher = {Springer Berlin Heidelberg},
+  author    = {Lüth, Christoph and Wolff, Burkhart},
+  editor    = {Goos, Gerhard and Hartmanis, Juris and van Leeuwen, Jan and Aagaard, Mark and Harrison, John},
+  year      = {2000},
+  doi       = {10.1007/3-540-44659-1_25},
+  note      = {Series Title: Lecture Notes in Computer Science},
+  pages     = {406--423},
+  file      = {Lüth et Wolff - 2000 - TAS — A Generic Window Inference System.pdf:C\:\\Users\\pablo\\Zotero\\storage\\2BTD79Y6\\Lüth et Wolff - 2000 - TAS — A Generic Window Inference System.pdf:application/pdf}
 }
 
 @inproceedings{grundy-window-1992,
-	address = {London},
-	title = {A {Window} {Inference} {Tool} for {Refinement}},
-	isbn = {978-1-4471-3550-0},
-	abstract = {This paper proposes a refinement tool based on a style of reasoning called window inference. Window inference allows a user to transform one expression into another while maintaining some specified relationship between them. A program refinement tool is described which combines window inference with an approach to refinement that treats programs as predicates.},
-	booktitle = {5th {Refinement} {Workshop}},
-	publisher = {Springer London},
-	author = {Grundy, Jim},
-	editor = {Jones, Cliff B. and Shaw, Roger C. and Denvir, Tim},
-	year = {1992},
-	pages = {230--254},
+  address   = {London},
+  title     = {A {Window} {Inference} {Tool} for {Refinement}},
+  isbn      = {978-1-4471-3550-0},
+  abstract  = {This paper proposes a refinement tool based on a style of reasoning called window inference. Window inference allows a user to transform one expression into another while maintaining some specified relationship between them. A program refinement tool is described which combines window inference with an approach to refinement that treats programs as predicates.},
+  booktitle = {5th {Refinement} {Workshop}},
+  publisher = {Springer London},
+  author    = {Grundy, Jim},
+  editor    = {Jones, Cliff B. and Shaw, Roger C. and Denvir, Tim},
+  year      = {1992},
+  pages     = {230--254}
 }
 
 @inproceedings{langbacka-tkwinhol-1995,
-	address = {Berlin, Heidelberg},
-	series = {Lecture {Notes} in {Computer} {Science}},
-	title = {{TkWinHOL}: {A} tool for {Window} {Inference} in {HOL}},
-	isbn = {978-3-540-44784-9},
-	shorttitle = {{TkWinHOL}},
-	doi = {10.1007/3-540-60275-5_69},
-	abstract = {Window inference is a method for contextual rewriting and refinement, supported by the HOL Window Inference Library. This paper describes a user-friendly interface for window inference. The interface permits the user to select subexpressions by pointing and clicking and to select transformations from menus. The correctness of each transformation step is proved automatically by the HOL system. The interface can be tailored to particular user-defined theories. One such extension, for program refinement, is described.},
-	language = {en},
-	booktitle = {Higher {Order} {Logic} {Theorem} {Proving} and {Its} {Applications}},
-	publisher = {Springer},
-	author = {Långbacka, Thomas and Rukšėnas, Rimvydas and von Wright, Joakim},
-	editor = {Thomas Schubert, E. and Windley, Philip J. and Alves-Foss, James},
-	year = {1995},
-	keywords = {Associative Operator, High Order Logic, Predicate Transformer, Program Variable, Proof Obligation},
-	pages = {245--260},
+  address    = {Berlin, Heidelberg},
+  series     = {Lecture {Notes} in {Computer} {Science}},
+  title      = {{TkWinHOL}: {A} tool for {Window} {Inference} in {HOL}},
+  isbn       = {978-3-540-44784-9},
+  shorttitle = {{TkWinHOL}},
+  doi        = {10.1007/3-540-60275-5_69},
+  abstract   = {Window inference is a method for contextual rewriting and refinement, supported by the HOL Window Inference Library. This paper describes a user-friendly interface for window inference. The interface permits the user to select subexpressions by pointing and clicking and to select transformations from menus. The correctness of each transformation step is proved automatically by the HOL system. The interface can be tailored to particular user-defined theories. One such extension, for program refinement, is described.},
+  language   = {en},
+  booktitle  = {Higher {Order} {Logic} {Theorem} {Proving} and {Its} {Applications}},
+  publisher  = {Springer},
+  author     = {Långbacka, Thomas and Rukšėnas, Rimvydas and von Wright, Joakim},
+  editor     = {Thomas Schubert, E. and Windley, Philip J. and Alves-Foss, James},
+  year       = {1995},
+  keywords   = {Associative Operator, High Order Logic, Predicate Transformer, Program Variable, Proof Obligation},
+  pages      = {245--260}
 }
 
 @inproceedings{elliott-tangible,
-  author = {Elliott, Conal M.},
-  title = {Tangible Functional Programming},
-  year = {2007},
-  isbn = {9781595938152},
+  author    = {Elliott, Conal M.},
+  title     = {Tangible Functional Programming},
+  year      = {2007},
+  isbn      = {9781595938152},
   publisher = {Association for Computing Machinery},
-  address = {New York, NY, USA},
-  url = {https://doi.org/10.1145/1291151.1291163},
-  doi = {10.1145/1291151.1291163},
-  abstract = {We present a user-friendly approach to unifying program creation and execution, based on a notion of "tangible values" (TVs), which are visual and interactive manifestations of pure values, including functions. Programming happens by gestural composition of TVs. Our goal is to give end-users the ability to create parameterized, composable content without imposing the usual abstract and linguistic working style of programmers. We hope that such a system will put the essence of programming into the hands of many more people, and in particular people with artistic/visual creative style.In realizing this vision, we develop algebras for visual presentation and for "deep" function application, where function and argument may both be nested within a structure of tuples, functions, etc. Composition gestures are translated into chains of combinators that act simultaneously on statically typed values and their visualizations.},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/1291151.1291163},
+  doi       = {10.1145/1291151.1291163},
+  abstract  = {We present a user-friendly approach to unifying program creation and execution, based on a notion of "tangible values" (TVs), which are visual and interactive manifestations of pure values, including functions. Programming happens by gestural composition of TVs. Our goal is to give end-users the ability to create parameterized, composable content without imposing the usual abstract and linguistic working style of programmers. We hope that such a system will put the essence of programming into the hands of many more people, and in particular people with artistic/visual creative style.In realizing this vision, we develop algebras for visual presentation and for "deep" function application, where function and argument may both be nested within a structure of tuples, functions, etc. Composition gestures are translated into chains of combinators that act simultaneously on statically typed values and their visualizations.},
   booktitle = {Proceedings of the 12th ACM SIGPLAN International Conference on Functional Programming},
-  pages = {59–70},
-  numpages = {12},
-  keywords = {interactive programming, end-user programming, gestural composition, arrows, interactive visualization, combinator libraries},
-  location = {Freiburg, Germany},
-  series = {ICFP '07}
+  pages     = {59–70},
+  numpages  = {12},
+  keywords  = {interactive programming, end-user programming, gestural composition, arrows, interactive visualization, combinator libraries},
+  location  = {Freiburg, Germany},
+  series    = {ICFP '07}
 }
 
-@ARTICLE{1674698,  author={ {Andrews}},  journal={IEEE Transactions on Computers},
-title={Refutations by Matings},   year={1976},  volume={C-25},  number={8},
-pages={801-807},}
+@article{1674698,
+  author  = { {Andrews}},
+  journal = {IEEE Transactions on Computers},
+  title   = {Refutations by Matings},
+  year    = {1976},
+  volume  = {C-25},
+  number  = {8},
+  pages   = {801-807}
+}
+
+@online{gg2,
+  author = {GeoGebra GmbH},
+  title  = {{G}eo{G}ebra Geometry},
+  note   = {\url{http://www.geogebra.org/geometry}},
+  year   = {2023}
+}

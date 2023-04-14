@@ -66,18 +66,19 @@ In this chapter, we focus on how both \emph{click} and \emph{drag-and-drop}
 (DnD) actions upon the formulas of a sequent can implement proof construction
 operations corresponding to the core logic; that is how they deal with logical
 connectives, quantifiers and equality. We present these core principles through
-various illustrations and examples in first-order logic. The technical and
-proof-theoretical foundations for the semantics of DnD actions, which constitute
-the main innovation of this work, will be investigated more thoroughly in
-\refch{pbl}, although the most important meta-theoretical properties will be
-exposed here with outlines of their proofs. More advanced features of the
-proof-by-action paradigm that go beyond the core logic, as well as its
-integration in a mainstream proof assistant, are presented in \refch{beyond}.
+various illustrations and examples in first-order logic.
+% The technical and proof-theoretical foundations for the semantics of DnD
+% actions, which constitute the main innovation of this work, will be investigated
+% more thoroughly in \refch{pbl}, although the most important meta-theoretical
+% properties will be exposed here with outlines of their proofs.
+More advanced features of the proof-by-action paradigm that go beyond the core
+logic, as well as its integration in a mainstream proof assistant, are presented
+in \refch{beyond}.
 
 We have started to implement the paradigm in a prototype named {\em Actema} (for
 Active Mathematics) running through a web HTML5/JavaScript interface. At the
 time of writing, an online version of the prototype can be accessed at
-\url{https://actema.xyz/}\marginnote[120pt]{\textbf{TODO:} Have a more durable
+\url{https://actema.xyz/}\marginnote[240pt]{\textbf{TODO:} Have a more durable
 way to access the prototype? More generally, what is the correct way to
 incorporate software artifacts in a thesis?}. This possibility to experiment in
 practice, even though yet on a small scale, gave valuable feedback for crafting
@@ -91,17 +92,20 @@ proof interface based on our principles, and illustrates them with a famous
 syllogism from Aristotle. \refsec{clicks} shows how it can integrate basic
 proof-by-pointing capabilities. \refsec{newitems} shows very briefly how one can
 add new formulas and objects to the current goal. The next two sections explain,
-through further examples, how drag-and-drop actions work; first for
-so-called \emph{rewrite} actions involving equalities, then for actions
-involving logical connectives and quantifiers. \refsec{soundness} introduces
-the notions of context and polarity, in order to prove the soundness of our
-system. \refsec{linkages} explains how DnD actions are specified by the user
+through further examples, how drag-and-drop actions work; first for so-called
+\emph{rewrite} actions involving equalities, then for actions involving logical
+connectives and quantifiers. \refsec{soundness} introduces the notions of
+context and polarity, in order to prove the soundness of our system.
+\refsec{linkages} explains how DnD actions are specified by the user
 interactively, through schemas called \emph{linkages}. \refsec{action} describes
-how linkages translate into logical steps, and sections \ref{sec:productivity}
-and \ref{sec:invert} discuss some properties of this translation.
-\refsec{edukera} studies a proof of a small logical riddle in Actema,
-highlighting some benefits of our approach compared to textual systems. We end
-with a discussion on some related works in \refsec{related-work}.
+how linkages translate into logical steps, and sections \refsec{productivity}
+and \refsec{invert} discuss some properties of this translation.
+\refsec{dnd-completeness} shows how DnD actions can be turned into a complete
+deductive system without any need for click actions, and \refsec{dnd-classical}
+presents an extension of the paradigm that can handle multiple conclusions and
+classical logic. \refsec{edukera} studies a proof of a small logical riddle in
+Actema, highlighting some benefits of our approach compared to textual systems.
+We end with a discussion on some related works in \refsec{related-work}.
 
 % \section{Motivations}\labsec{motivations} Since this work is about changing
 % the very way the user interacts with an interactive theorem prover, we feel it
@@ -136,13 +140,14 @@ with a discussion on some related works in \refsec{related-work}.
 % our work to help making future proof systems more suited for education.
 
 \section{Logical Setting}\labsec{setting}
-Any proof system must implement a given logical formalism. What we
-describe here ought to be applied to a wide range of formalisms, but
-in this chapter we focus on the core of intuitionistic first-order logic
-with equality (FOL). This allows us to consider sequents where
-hypotheses are unordered which, in turn, simplifies the technical
-presentation.  We will thus write $\Gamma,A \seq C$ for a sequent
-where $A$ is among the hypotheses.
+
+Any proof system must implement a given logical formalism. What we describe here
+ought to be applied to a wide range of formalisms, but in this chapter we focus
+mainly on the core of intuitionistic first-order logic with equality
+(FOL)\sidenote{Except in \refsec{dnd-classical} which is dedicated to classical
+first-order logic.}. This allows us to consider sequents where hypotheses are
+unordered which, in turn, simplifies the technical presentation. We will thus
+write $\Gamma,A \seq C$ for a sequent where $A$ is among the hypotheses.
 
 We use and do not recall the usual definitions of terms and propositions in
 first order logic. We assume a first order language (function and predicate
@@ -341,6 +346,13 @@ given in \reftab{click-rules}. A few remarks are in order:
   drag-and-drop the item holding the selected subexpression instead.
 \end{itemize}
 
+\begin{remark}[Click completeness]\label{rem:click-completeness}
+  From the previous remarks and the completeness of the cut-free sequent
+  calculus \sys{LJ}, it follows that click actions, when combined with new
+  object declarations and DnD instantiations, provide a sufficient set of
+  interactions to prove any true formula of (intuitionistic) first-order logic.
+\end{remark}
+
 \begin{table}[]
 \caption[]{Mapping of click actions to inference rules}
 \labtab{click-rules}
@@ -368,11 +380,12 @@ given in \reftab{click-rules}. A few remarks are in order:
 
 It is possible to associate some more complex effects to click actions performed
 on locations deeper under connectives. This is the essence of proof-by-pointing,
-and~\cite{PbP} provides ample description. Since we here focus on drag-and-drop
-actions, we do not detail further more advanced PbP features. However we stress
-that these features are essentially compatible with what we describe in this
-work. In fact the version of Actema presented in \refch{beyond} provides an
-implementation of proof-by-pointing available as a contextual menu action.
+and~\cite{PbP} provides ample description. Since we here focus more on
+drag-and-drop actions, we do not detail further more advanced PbP features.
+However we stress that these features are essentially compatible with what we
+describe in this work. In fact the version of Actema presented in \refch{beyond}
+provides an implementation of proof-by-pointing available as a contextual menu
+action.
 
 \section{Adding New Items}\labsec{newitems}
 
@@ -385,20 +398,25 @@ for the statement of the conjecture, or the name and expression defining the
 object. The \texttt{+hyp} button will also create a new subgoal requiring to
 prove the conjecture within the current context.
 
-This mechanism and the syntax are for now very crude. The design of
-possible smoother tools is an important issue but left for future
-work\sidenote{For instance~\cite{omar-filling-2021} deals with a
-  similar problem in the context of functional programming.}.
+% This mechanism and the syntax are for now very crude. The design of
+% possible smoother tools is an important issue but left for future
+% work\sidenote{For instance~\cite{omar-filling-2021} deals with a
+%   similar problem in the context of functional programming.}.
 
-% Currently we ask the user to input textual data, in an idiosyncratic syntax
-% specific to the logic of the Actema prototype. A desirable, but highly
-% non-trivial feature would be to provide some elaborate input mechanism tailored
-% for the type of object the user wants to create. This would obviously require
-% some extensibility to new domain-specific input interfaces, which lies outside
-% the scope of this article\sidenote{For a related work that tackles this problem
-% in the context of functional programming, see e.g. \cite{omar-filling-2021}}.
-% Note however that it seems like a necessary feature if one wants to achieve a
-% fully graphical theorem proving environment.
+For now we ask the user to input textual data, in an idiosyncratic syntax
+specific to the logic of Actema. A desirable, but highly non-trivial feature
+would be to provide some elaborate input mechanism tailored to the type of
+object the user wants to create. This would obviously require some extensibility
+to new domain-specific input interfaces: typically one could imagine plugging a
+tool like GeoGebra to construct geometrical figures \cite{gg2}, or a categorical
+diagram editor like YADE\todo{add citation/link to Ambroise Lafont's work}. We
+will not explore the design of such features in this thesis, since we focus on
+finding a universal interface for logical reasoning rather than domain-specific
+interfaces for particular types of mathematical reasoning\sidenote{For a related
+work that tackles this problem in the context of functional programming, see
+\cite{omar-filling-2021}.}. Note however that it is a necessary feature if one
+wants to achieve a fully graphical theorem proving environment which is
+accessible to non-expert users.
 
 \section{A Simple Example Involving Equality}\labsec{equality}
 
@@ -941,15 +959,15 @@ to make them interact in some way.
 \begin{remark}
 In this chapter we only consider linkages between two subterms, but as noted in
 \refsec{equality}, rewriting is an example of action that can benefit from
-allowing multiple selections\sidenote{In fact, a restricted kind of
-multi-occurrence rewrite is already available in the online prototype of Actema:
-one needs to enter \emph{selection mode}, by either toggling the dedicated
-button (the one with the mouse cursor in \reffig{aristote}), or holding down the
-\texttt{shift} key. Then one can click successively on all occurrences of a term
-$t$ that are to be rewritten, in order to add them to the selection. To perform
-the rewriting to some other term $u$, the last step is to drag an equality
-hypothesis $t = u$ (or $u = t$) and drop it on any item holding one of the
-selected occurrences of $t$.}.
+allowing multiple selections\sidenote{A restricted kind of multi-occurrence
+rewrite is already available in the online prototype of Actema: one needs to
+enter \emph{selection mode}, by either toggling the dedicated button (the one
+with the mouse cursor in \reffig{aristote}), or holding down the \texttt{shift}
+key. Then one can click successively on all occurrences of a term $t$ that are
+to be rewritten, in order to add them to the selection. To perform the rewriting
+to some other term $u$, the last step is to drag an equality hypothesis $t = u$
+(or $u = t$) and drop it on any item holding one of the selected occurrences of
+$t$.}.
 \end{remark}
 
 Each kind of DnD action is mapped in the system to a specific form of linkage,
@@ -1909,6 +1927,14 @@ drag-and-drops. This is the solution chosen in \cite{Chaudhuri2013} and
 %% \textit{On devrait mentionner quelquepart que la propriété de permutabilité n'est pas tout à fait vérifiée dans notre système à cause des règles forward pour $\lor$ et $\Rightarrow$ (et peut-être d'autres paires de règles).}
 
 
+\section{Completeness of DnD}\labsec{dnd-completeness}
+
+\todo{TODO}
+
+\section{Classical Logic and Multiple Conclusions}\labsec{dnd-classical}
+
+\todo{TODO}
+
 \section{A More Advanced Example}\labsec{edukera}
 \begin{figure*}
   \fbox{\includegraphics[width=1.3\textwidth]{edukera.png}}
@@ -2022,14 +2048,14 @@ relaxed to gain expressivity, since the creation of links is offloaded to the
 user instead of the search procedure.
 
 Another line of work, starting with the \emph{proof-nets} of Girard
-\cite{girard_linear_1987}, is concerned with the more fundamental problem of
+\cite{girard-linear-1987}, is concerned with the more fundamental problem of
 \emph{proof identity}, which requires a canonical notion of proof object
 \cite{strasburger-problem-2019}. In the case of unit-free multiplicative linear
 logic, the absence of any form of duplication/sharing/removal mechanism allows
-to completely characterize a proof-net by the set of its \emph{axiom} links. The
-difference with matings is that correctness of a proof structure can be
-checked in \emph{polynomial} instead of exponential time, because of the absence
-of duplication.
+to completely characterize a proof-net by the set of its \emph{axiom}
+links\sidenote{The difference with matings is that correctness of a proof
+structure can be checked in \emph{polynomial} instead of exponential time.},
+because of the absence of duplication.
 % This is because adding
 % additives or exponentials, which can encode intuitionistic and classical logic,
 % requires additional structure to represent uses of weakening and contraction.
