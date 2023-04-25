@@ -353,7 +353,7 @@ given in \reftab{click-rules}. A few remarks are in order:
   interactions to prove any true formula of (intuitionistic) first-order logic.
 \end{remark}
 
-\begin{table}[]
+\begin{table}[H]
 \caption[]{Mapping of click actions to inference rules}
 \labtab{click-rules}
 \begin{tabular}{ccc}
@@ -386,6 +386,7 @@ However we stress that these features are essentially compatible with what we
 describe in this work. In fact the version of Actema presented in \refch{beyond}
 provides an implementation of proof-by-pointing available as a contextual menu
 action.
+
 
 \section{Adding New Items}\labsec{newitems}
 
@@ -711,8 +712,8 @@ $$
 This last example illustrates how partial instantiation abstracts away the order
 in which quantifiers are declared, very much like the partial application
 presented earlier for implication\sidenote{This fact should not be too
-surprising to readers familiar with dependent type theory, where implication is
-usually defined as a special case of universal quantification.}.
+surprising to the reader familiar with dependent type theory, where implication
+is usually defined as a special case of universal quantification.}.
 %% What the last example stresses is, again, that syntactical details,
 %% here the order in which variables are quantified, are much less
 %% relevant in the gestual proof constructions than in their textual
@@ -946,7 +947,7 @@ contravariance property \ref{prop:cov}.
 Finally, the soundness theorem \ref{prop:soundness} is obtained as the
 special case where the rewriting starts in the (positive) empty context.
 
-Detailed proofs of all the lemmas can be found in \refsec{dnd-soundness}.
+Detailed proofs of all the lemmas can be found in \refsec{app:dnd-soundness}.
 
 \section{Linkages}\labsec{linkages}
 
@@ -1011,24 +1012,28 @@ Actema's current interface: one cannot link two subterms that live in the same
 item, because dragging actions can only be performed on \emph{entire} items. But
 in the original formulation and implementation of subformula linking
 \cite{Chaudhuri2013}, linkages can be created between arbitrary subformulas. We
-come back to this issue in \refch{sfl}.}.
+come back to this issue in \refsec{dnd-completeness}.}.
 
 \subsection{Validity}
 
-In the original formulation of subformula linking \cite{Chaudhuri2013},
-a semantics is associated to every logical linkage, even when the
-selected subformulas $A$ and $A'$ are not unifiable. This is made possible by the
+In the original formulation of subformula linking \cite{Chaudhuri2013}, a
+semantics is associated to every logical linkage, even when the selected
+subformulas $A$ and $A'$ are not unifiable. This is made possible by the
 addition of so-called \emph{release} rules\sidenote{A terminology coming from
 the line of works on \emph{focusing} in proof theory \cite{andreoli1992}, see
 also \refsec{invert}.}, which simply turn linking operators into their
-associated logical connective. In our setting this would give the following
-rewrite rules:
+associated logical connective. In our setting this would give the rewrite rules
+of figure \reffig{rellink}.
+\begin{marginfigure}
 \begin{mathpar}
   \begin{array}{r@{\quad}c@{\quad}lr}
     {A \back B}&\step&A \limp B &\mathsf{Brel}\\
     {A \forw B}&\step&A \land B &\mathsf{Frel}
   \end{array}
 \end{mathpar}
+\caption{Release rules}
+\labfig{rellink}
+\end{marginfigure}
 However in this work we opt for a different approach: instead we define a
 \emph{validity criterion} on linkages, which guarantees that they give rise to
 the behaviors described in the previous sections. The criterion tackles two
@@ -1105,9 +1110,9 @@ in classical logic:
 $$(\select{A}\limp B)\limp C\back \select{A}~~\steps~~ C\limp A$$ which gives a
 proof of Peirce's law when replacing $C$ with $A$. We will come back to this
 example in \refsec{sfl-classical}, but for now we can just remark that there is
-no way to handle it with the rules of \reffig{DISL} because we lack a
-hypothetical {\rnmsf{L{\limp}_1}} rule for redexes of the form $B\select{A}
-\limp C \back D\select{A'}$.
+no way to handle it with the rules of \reffig{DISL} because we lack a rule
+{\rnmsf{L{\limp}_1}} for redexes of the form $B\select{A} \limp C \back
+D\select{A'}$.
 
 \todo{ Ensure condition \ref{cond:pol} works correctly in the fully detailed
   proof of productivity (in annex). }
@@ -1493,7 +1498,7 @@ proof step:
   The procedure stops if it fails at any of the above checks;
   \label{step:validity}
 \item \textbf{Linking:} the system then chooses a rewriting start\-ing from the linkage. Thanks to
-  theorem \ref{thm:productivity}, this re\-writing always ends with a proposition of
+  theorem \refthm{productivity}, this re\-writing always ends with a proposition of
   the form $D\select{\sigma(A) \back \sigma(A')}$ $$\text{(resp.
   $D\select{\select{\sigma(t)} = u \link C_0\select{\sigma(t')}}$);}$$
   \label{step:linking}
@@ -1798,7 +1803,7 @@ Then we can state the following \emph{productivity theorem}, which is a direct
 consequence of the previous lemma and the fact that the rewrite rules
 terminate:
 
-\begin{theorem}[Productivity]\label{thm:productivity}
+\begin{theorem}[Productivity]\labthm{productivity}
 If $\mathcal{L}$ is a valid linkage, then there
 is a sequence of reductions with one of the following forms:
 \begin{mathpar}
@@ -1841,30 +1846,79 @@ of $\forw$ or $\back$. For instance in
 $\select{A}\lor B \back B\lor\select{A}$ one can apply either
 \rnmsf{L\lor_1} or \rnmsf{R\lor_2}.
 
-Interestingly, an answer is provided by {\em
-  focusing}. It has been noticed by Andreoli~\cite{andreoli1992} that, in
-bottom-up proof search, one should apply the invertible logical
-rules first. In our framework, this translates into first applying the
-invertible rewrite rules (the ones marked by a *).  In the case of the
-example above, this means performing \rnmsf{L\lor_1} first, which
-leads to the following behavior:
+Interestingly, an answer is provided by {\em focusing}. It has been noticed by
+Andreoli~\cite{andreoli1992} that, in bottom-up proof search, one should apply
+the invertible logical rules first since they preserve provability. In our
+framework, this translates into first applying the invertible rewrite rules (the
+ones marked by a *). In the case of the example above, this means performing
+\rnmsf{L\lor_1} first, which leads to the following behavior:
 $$\select{A}\lor B \back B\lor\select{A}\steps B\limp B\lor A.$$
-This is indeed the ``right'' choice, since applying \rnmsf{R\lor_2}
-first would lead to a dead-end:
+This is indeed the ``right'' choice, since applying \rnmsf{R\lor_2} first would
+lead to a dead-end\sidenote{Interestingly in this case it creates a dead-end
+only in intuitionistic logic: in classical logic both results are provable.}:
 $$\select{A}\lor B \back B\lor\select{A}\steps B\lor(B\limp A).$$
 
-When two invertible rules can be applied, the order is irrelevant. There are
-cases where two non-invertible rules can be applied. The vast majority of them
-commute in terms of provability, but not necessarily in the shape of the
-resulting formula\sidenote{In fact the only rules which do not give equivalent
-results when commuted are the critical pairs \rnmsf{F\!\!\lor_i /~F\!\!\limp_2}
-for $i \in \{1,2\}$, as was noted independently in
-\cite{DBLP:conf/cade/Chaudhuri21}.}. Therefore our specification still leaves
-room for some choices. Currently, we have a heuristic prioritizing of the rules
-that sticks to what is presented in examples. One could also choose to leave the
-disambiguation to the user, e.g. by looking at the \emph{orientation} of
-drag-and-drops. This is the solution chosen in \cite{Chaudhuri2013} and
-\cite{DBLP:conf/cade/Chaudhuri21}.
+The general scheme for choosing a rule to apply to a redex $C\select{A} \link
+D\select{B}$ is the following\sidenote{A less deterministic version of
+this scheme is already present implicitly in the proof of the productivity
+theorem in \refsec{vprogress}.}:
+\begin{enumerate}
+  \item If $C\hole$ = $D\hole = \hole$, we just apply the {\rnmsf{id}} rule
+  (assuming $A = B$ by \refthm{productivity}).
+  \item If only one context is non-empty, say $C\hole$, we look at its head
+  connective as well as the side where its hole resides:
+  \begin{itemize}
+    \item either $C\hole = C_0\hole \mcirc E$ for some binary connective
+    $\mcirc$, and we choose the rule {\rnmsf{L\mcirc_1}} (resp.
+    {\rnmsf{F\mcirc_1}}) if $\link = \back$ (resp. $\link = \forw$);
+    \item or $C\hole = E \mcirc C_0\hole$ and we choose the rule
+    {\rnmsf{L\mcirc_2}} (resp. {\rnmsf{F\mcirc_2}}) if $\link = \back$ (resp.
+    $\link = \forw$).
+  \end{itemize}
+  In the case where it is $D\hole$ which is non-empty, we apply the same logic
+  but with the right rules {\rnmsf{R\mcirc_i}} instead of the left rules
+  {\rnmsf{L\mcirc_i}}.
+  \item If both contexts are non-empty, then the previous logic determines one
+  rule for $C\hole$ and one rule for $D\hole$, giving rise to the ambiguity
+  described in the above example.
+\end{enumerate}
+  
+There are three possibilities when analysing invertibility of the two rules in
+the third case:
+\begin{enumerate}
+  \item if both are invertible, then the order of application does not matter
+  since we preserve provability at the end;
+  \item if only one is invertible, we apply it first following the focusing
+  discipline;
+  \item if neither are invertible, we want to choose the order that maximizes
+  the preservation of provability. It turns out that in almost all cases the two
+  rules commute, that is the formulas obtained in the two orderings are
+  equivalent. The only exceptions are the critical pairs \rnmsf{F\!\!\lor_i
+  /~F\!\!\limp_2} for $i \in \{1,2\}$, as was noted independently in
+  \cite{DBLP:conf/cade/Chaudhuri21}. In this case, one should rely on
+  information given by the user to choose the right ordering, which can be done
+  by exploiting the \emph{orientation} of the associated DnD action, that is
+  distinguishing between the source path and the destination path\sidenote{Note
+  that in the current implementation of Actema, we instead rely on an arbitrary
+  prioritizing fixed in the system, which can hinder in some cases the ability
+  to prove a goal through DnD actions. In practice, one rarely encounters such
+  cases in real examples.}.
+\end{enumerate}
+For detailed proofs of permutability of the rewrite rules, we refer to
+\refsec{focusing}.
+
+% In the third case when two invertible rules can be applied, the order is
+% irrelevant since provability is preserved in the end. There are cases where two
+% non-invertible rules can be applied. The vast majority of them commute in terms
+% of provability, but not necessarily in the shape of the resulting
+% formula\sidenote{In fact the only rules which do not give equivalent results
+% when commuted are the critical pairs \rnmsf{F\!\!\lor_i /~F\!\!\limp_2} for $i
+% \in \{1,2\}$, as was noted independently in \cite{DBLP:conf/cade/Chaudhuri21}.}.
+% Therefore our specification still leaves room for some choices. Currently, we
+% have a heuristic prioritizing of the rules that sticks to what is presented in
+% examples. One could also choose to leave the disambiguation to the user, e.g. by
+% looking at the \emph{orientation} of drag-and-drops. This is the solution chosen
+% in \cite{Chaudhuri2013} and \cite{DBLP:conf/cade/Chaudhuri21}.
 % One might also just forbid cases that are too ambiguous or
 % counter-intuitive (e.g. ).
 
@@ -1929,17 +1983,87 @@ drag-and-drops. This is the solution chosen in \cite{Chaudhuri2013} and
 
 \section{Completeness of DnD}\labsec{dnd-completeness}
 
-\todo{TODO}
+To enable a fully graphical approach to theorem proving that does not rely on a
+textual proof language, it is important to show that (a subset of) the set of
+actions exposed to the user is \emph{complete} with respect to provability. That
+is, any formula $A$ which is \emph{true} in our logic --- here intuitionistic
+FOL --- can be proved by executing a sequence of graphical actions that reduces
+it to the empty goal. We noticed in remark \ref{rem:click-completeness} that
+click actions are a sufficient basis for completeness. While we believe that a
+combination of both click and DnD actions is more comfortable to handle a
+variety of proof situations, it is still interesting to consider the question of
+completeness for DnD actions alone. It turns out that the answer is positive:
+the mechanism of \emph{subformula linking} underlying DnD actions is powerful
+enough to capture provability in FOL. This has already been shown by Chaudhuri
+in \cite{Chaudhuri2013} for linear logic, and \cite{DBLP:conf/cade/Chaudhuri21}
+for intuitionistic logic. Here we give a completeness proof for a system based
+on a slight extension of our rewrite rules, following ideas from these works.
+
+\begin{remark}
+  What we prove in this section is a \emph{weak} form of completeness: we show
+  that for any true formula, there always exists a derivation in our subformula
+  linking system, but this derivation does not necessarily coincide with the one
+  chosen by the deterministic implementation of DnD actions outlined in
+  \refsec{invert}. The gap between this theoretical completeness and the
+  practical completeness of the implementation should in principle be bridged by
+  the focusing theorems of \refsec{focusing}, but we did not attempt a full
+  formalization of this. A venue for future work would be a certified
+  implementation of subformula linking in Coq as presented in \refch{beyond},
+  with an additional formal proof of completeness based on the focusing
+  theorems.
+\end{remark}
+
+\begin{marginfigure}
+  \begin{mathpar}
+    \begin{array}{r@{\quad}c@{\quad}lr}
+        {C^+\select{A \limp B}}&\step&{C^+\select{A \back B}} &\mathsf{B}\\
+        {C^-\select{A \land B}}&\step&{C^-\select{A \forw B}} &\mathsf{F}\\
+    \end{array}
+  \end{mathpar}
+  \caption{Linkage formation rules}
+  \labfig{newlink}
+\end{marginfigure}
+
+To the rewrite rules of \reffig{DISL} and \reffig{DISL-U}, we add \emph{linkage
+formation} rules (\reffig{newlink}), which are a deep generalization of linkage
+creation between two formulas of a sequent. Rule {\rnmsf{B}} creates a
+\emph{backward} linkage between $\limp$-linked formulas in any positive context
+$C^+\hole$, and dually rule {\rnmsf{F}} creates a \emph{forward} linkage between
+$\land$-linked formulas in any negative context $C^-\hole$\sidenote{This is
+reminiscent of the adjunction between the product and the exponential in
+\emph{cartesian closed categories}, which respectively interpret conjunction and
+implication in the Curry-Howard-Lambek correspondance for intuitionistic
+logic.}. Note that contrary to the other rules, linkage creation rules are not
+closed under arbitrary contexts: indeed the polarity restrictions are necessary
+to ensure soundness, as reviewed in \refsec{soundness}. A backward linkage in a
+sequent $\Gamma, D\select{A} \seq E\select{B}$ would be encoded by the instance
+$$C^+\select{D\select{A} \limp E\select{B}} \step C^+\select{D\select{A} \back
+E\select{B}}$$ of {\rnmsf{B}} where $C^+\hole = \bigwedge Γ \limp \hole$, while
+a forward linkage in a sequent $\Gamma, D\select{A}, E\select{B} \seq F$ would
+be encoded by the instance $$C^-\select{D\select{A} \land E\select{B}} \step
+C^-\select{D\select{A} \forw E\select{B}}$$ of {\rnmsf{F}} where $C^-\hole =
+\bigwedge \Gamma \wedge \hole \limp F$.
+
+% Since linkages created by rules {\rnmsf{B} and \rnmsf{F}} are not necessarily
+% valid, one needs to add the so-called \emph{release} rules already mentioned in
+% \refsec{linkages} (\reffig{rellink}).
+
+Then to state the completeness theorem, we need a notion of truth for our
+formulas. As in \cite{Chaudhuri2013}, we will simply rely on the completeness of
+cut-free sequent calculus by performing a proof by simulation, whose details are
+layed out in \refsec{app:dnd-completeness}.
+
+\begin{theorem}[Completeness of subformula linking]
+  If $\Gamma \seq C$ is provable in \sys{LJ}, then $\bigwedge \Gamma \limp C
+  \steps \top$.
+\end{theorem}
 
 \section{Classical Logic and Multiple Conclusions}\labsec{dnd-classical}
 
 \todo{TODO}
 
+
 \section{A More Advanced Example}\labsec{edukera}
-\begin{figure*}
-  \fbox{\includegraphics[width=1.3\textwidth]{edukera.png}}
-\caption{The beginning of an example due to Edukera}\labfig{edukera}
-\end{figure*}
 
 It is too early to perform a detailed case study comparing our approach
 to interactive theorem proving with others --- tactic-based,
@@ -1958,6 +2082,12 @@ show that the two following assumptions are incompatible:
 \item[(2)] $\forall x. \neg\rich(x) \limp \rich(\mother(x)).$
 \end{itemize}
 The original goal thus corresponds to the illustration of \reffig{edukera}.
+
+\begin{figure*}
+  \fbox{\includegraphics[width=1.3\textwidth]{edukera.png}}
+  \caption{The beginning of an example due to Edukera}
+  \labfig{edukera}
+\end{figure*}
 
 It is quite natural to approach this problem in a forward manner, by starting
 from the hypotheses to establish new facts. And a first point illustrated by
