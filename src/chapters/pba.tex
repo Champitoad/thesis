@@ -181,10 +181,10 @@ calculus is straightforward (and actually done in the Actema prototype).  Some
 interesting points may show up when considering how to apply this work to more
 complex formalisms like type theories. We will not explore these questions here.
 
-Another interesting question is how our approach extends to classical logic(s),
-by using multi-conclusion sequents. In this chapter we only give a few hints on
-this topic. A more thorough investigation will be done in
-\refsec{sfl-classical}.
+% Another interesting question is how our approach extends to classical logic(s),
+% by using multi-conclusion sequents. In this chapter we only give a few hints on
+% this topic. A more thorough investigation will be done in
+% \refsec{sfl-classical}.
 
 \section{A First Example}\labsec{aristote}
 
@@ -2005,12 +2005,11 @@ on a slight extension of our rewrite rules, following ideas from these works.
   linking system, but this derivation does not necessarily coincide with the one
   chosen by the deterministic implementation of DnD actions outlined in
   \refsec{invert}. The gap between this theoretical completeness and the
-  practical completeness of the implementation should in principle be bridged by
-  the focusing theorems of \refsec{focusing}, but we did not attempt a full
+  practical completeness of the implementation should in part be bridged by the
+  focusing theorems of \refsec{focusing}, but we did not attempt a full
   formalization of this. A venue for future work would be a certified
   implementation of subformula linking in Coq as presented in \refch{beyond},
-  with an additional formal proof of completeness based on the focusing
-  theorems.
+  with an additional formal proof of completeness.
 \end{remark}
 
 \begin{marginfigure}
@@ -2033,10 +2032,11 @@ $\land$-linked formulas in any negative context $C^-\hole$\sidenote{This is
 reminiscent of the adjunction between the product and the exponential in
 \emph{cartesian closed categories}, which respectively interpret conjunction and
 implication in the Curry-Howard-Lambek correspondance for intuitionistic
-logic.}. Note that contrary to the other rules, linkage creation rules are not
-closed under arbitrary contexts: indeed the polarity restrictions are necessary
-to ensure soundness, as reviewed in \refsec{soundness}. A backward linkage in a
-sequent $\Gamma, D\select{A} \seq E\select{B}$ would be encoded by the instance
+logic.}. Note that contrary to the rules considered up to now, linkage formation
+rules are not closed under arbitrary contexts: indeed the polarity restrictions
+are necessary to ensure soundness, as reviewed in \refsec{soundness}. A backward
+linkage in a sequent $\Gamma, D\select{A} \seq E\select{B}$ would be encoded by
+the instance
 $$C^+\select{D\select{A} \limp E\select{B}} \step C^+\select{D\select{A} \back
 E\select{B}}$$ of {\rnmsf{B}} where $C^+\hole = \bigwedge Γ \limp \hole$, while
 a forward linkage in a sequent $\Gamma, D\select{A}, E\select{B} \seq F$ would
@@ -2044,14 +2044,72 @@ be encoded by the instance $$C^-\select{D\select{A} \land E\select{B}} \step
 C^-\select{D\select{A} \forw E\select{B}}$$ of {\rnmsf{F}} where $C^-\hole =
 \bigwedge \Gamma \wedge \hole \limp F$.
 
-% Since linkages created by rules {\rnmsf{B} and \rnmsf{F}} are not necessarily
-% valid, one needs to add the so-called \emph{release} rules already mentioned in
-% \refsec{linkages} (\reffig{rellink}).
+\begin{marginfigure}
+  \begin{mathpar}
+    \begin{array}{r@{\quad}c@{\quad}lr}
+        {C^-\select{A}}&\step&{C^-\select{A \land A}} &\mathsf{conn}\\
+        {C^-\select{A}}&\step&{C^-\select{\top}} &\mathsf{weak}\\
+    \end{array}
+  \end{mathpar}
+  \caption{Resource rules}
+  \labfig{reslink}
+\end{marginfigure}
+
+Another necessary ingredient is the addition of a deep version of the
+\emph{structural rules} of sequent calculus. We already have the {\rnmsf{Fcomm}}
+rule to handle commutativity of the $\forw$ operator, which acts as a kind of
+\emph{exchange} rule. Then we add the equivalent of \emph{contraction} and
+\emph{weakening} with the rules {\rnmsf{conn}} and {\rnmsf{weak}}
+(\reffig{reslink}). These allow to erase and duplicate hypotheses at will, by
+identifying any subformula occurring in a negative context as a hypothesis. Thus
+once again we need to be careful about polarity, and cannot close these rules
+under arbitrary contexts.
+
+\begin{marginfigure}
+  \begin{mathpar}
+    \begin{array}{r@{\,}c@{\,}lr}
+        {C^+\select{A \limp B}}&\step&{C^+\select{A \limp (A \back B)}} &\mathsf{Bconn}\\
+        {C^-\select{A \land B}}&\step&{C^-\select{A \land (A \forw B) \land B}} &\mathsf{Fconn}\\
+    \end{array}
+  \end{mathpar}
+  \caption{Duplicating linkage formation rules}
+  \labfig{newreslink}
+\end{marginfigure}
+
+An alternative to the full contraction rule {\rnmsf{conn}} is to systematically
+duplicate negative formulas in the linkage formation rules, giving the rules
+{\rnmsf{Bconn} and \rnmsf{Fconn}} of \reffig{newreslink}. This models more
+closely what we do in Actema, where hypotheses involved in a DnD action are
+always preserved in the new goal. This is important from a usability standpoint,
+because this ensures the user needs not fret with manual duplication of
+hypotheses in order to complete a proof. The downside is that the context always
+grows bigger, but this can be balanced by exposing the weakening rule in the
+interface. In Actema it is mapped to a ``delete'' button placed next to every
+hypothesis (the little gray trashbin icons in \reffig{oneplusone}). But for the
+purpose of completeness only, the weakening rule {\rnmsf{weak}} should be
+admissible since its role is already played by the absorption rules
+{\rnmsf{absl}, \rnmsf{absr} and \rnmsf{absq}} of \reffig{DISL-U}. For the sake
+of conciseness of the completeness proof, we will stick to the linkage formation
+rules of \reffig{newlink}.
+
+Lastly, because linkages created by rules {\rnmsf{B} and \rnmsf{F}} are not
+necessarily valid, one needs to add the so-called \emph{release} rules already
+mentioned in \refsec{linkages} (\reffig{rellink}). In fact these rules are
+crucial in order to simulate rules from sequent calculus, which will be the
+backbone of our completeness proof as in \cite{Chaudhuri2013}. It is interesting
+to consider the question of completeness without release rules, especially since
+we do not use them in the semantics of DnD actions. We conjecture that it should
+hold but would require a completely different argument, maybe of a more semantic
+nature like the original proof of Gödel with Tarski models\sidenote{Or Kripke
+models in an intuitionistic setting. }. Another possibility would be to use some
+new representation of proofs that is in-between syntax and semantics, like the
+combinatorial proofs of Hughes \cite{Hughes_2006} which are known to be closely
+related to deep inference proofs.
 
 Then to state the completeness theorem, we need a notion of truth for our
-formulas. As in \cite{Chaudhuri2013}, we will simply rely on the completeness of
-cut-free sequent calculus by performing a proof by simulation, whose details are
-layed out in \refsec{app:dnd-completeness}.
+formulas. As just mentioned, we simply rely on the completeness of cut-free
+sequent calculus by performing a proof by simulation, whose details are layed
+out in \refsec{app:dnd-completeness}.
 
 \begin{theorem}[Completeness of subformula linking]
   If $\Gamma \seq C$ is provable in \sys{LJ}, then $\bigwedge \Gamma \limp C
@@ -2059,6 +2117,63 @@ layed out in \refsec{app:dnd-completeness}.
 \end{theorem}
 
 \section{Classical Logic and Multiple Conclusions}\labsec{dnd-classical}
+
+In virtually every proof assistant, the goals the user is faced with are
+sequents of the form $\Gamma \seq C$, with a \emph{single} conclusion $C$ to be
+proved under many hypotheses in $\Gamma$. Historically, this form of sequent was
+introduced by Gentzen to formalize the rules of intuitionistic logic in his
+sequent calculus \sys{LJ}. But his main interest was in classical logic, as
+intuitionistic logic was still in its infancy and almost all of mathematics had
+been developed in a classical setting. Interestingly, he found that the right
+syntax to develop a rich metatheory of his classical sequent calculus \sys{LK}
+consisted in \emph{multi-conclusion} sequents of the form $\Gamma \seq \Delta$,
+where $\Delta$ is a list of conclusions that should be read
+\emph{disjunctively}. That is, a sequent
+$$A_1, \ldots, A_n \seq C_1, \ldots, C_m$$
+has the same meaning as the formula
+$$\bigwedge_{i=1}^{n}{A_i} \limp \bigvee_{j=1}^{m}{C_j}$$
+
+Later logicians have proposed various multi-conclusion sequent calculi for
+intuitionistic logic, the most famous being \sys{GHCP} from Dragalin
+\cite{dragalin_mathematical_1990}. Dyckhoff notes that such calculi are more
+suited to implementation of automated proof search procedures
+\cite{dyckhoff_contraction-free_1992}, notably because they allow sharing code
+with classical calculi.
+
+Still we do not know of any proof assistant, classical or intuitionistic, that
+exposes multi-conclusion sequents as goals in its user interface. One reason is
+that most proof/tactic languages are based on the rules of natural deduction,
+which use single-conclusion sequent. Another reason is that having one
+conclusion removes the need to designate it with an explicit name or number, as
+is the case with hypotheses\sidenote{The current trend is to use user-chosen or
+automatically generated strings for names as in Coq and Lean, but some provers
+like HOL Light ask for the position in the list as an integer to designate a
+particular hypothesis.}. And the explicit handling of names in tactic
+invokations is known to be tedious and time-consuming, to the point that some
+tactic languages like SSReflect have been designed around this problem
+\cite{SSR}. Thus having multiple conclusions would only double the effort for no
+compelling reason.
+
+However in our graphical paradigm based on direct manipulation, hypotheses and
+conclusions are designated by the act of \emph{pointing} at them with a mouse,
+finger or any other pointing device\sidenote{With the recent advances in natural
+language processing and voice recognition, one could also imagine instead a
+system of vocal commands based on the spelling of formulas. This could be an
+important alternative for users with impaired vision and/or motricity. This
+remark also extends to click and DnD actions, which could be triggered by voice
+commands once the items/subterms they apply to have been selected (also
+vocally).}. This opens up the possibility of exposing multiple conclusions in
+the interface, with associated graphical proof actions. In the layout of Actema,
+this corresponds to having zero or multiple red items instead of a single one.
+While we did not implement such an extension, we explore in this section the
+theoretical foundations that would be necessary for it to come to fruition.
+
+\subsection{Click Actions}
+
+\todo{TODO}
+
+
+\subsection{DnD Actions}
 
 \todo{TODO}
 
