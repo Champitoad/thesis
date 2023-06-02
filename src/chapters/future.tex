@@ -1,0 +1,286 @@
+\setchapterpreamble[u]{\margintoc}
+\chapter{Towards Fully Graphical Theorem Proving}
+\labch{future}
+
+The chapter is organized as follows: we end with a discussion on some related
+works in \refsec{related-work}.
+
+\section{SFL in Higher-Order Logics}
+
+\section{SFL-based Lemma Search}
+
+\section{Interactive Mathematical Notations}
+
+\section{Graphical Proof Evolution}
+
+\subsection{Translation to Textual Proof Languages}
+
+\subsection{Reviewing through Animation}
+
+\section{Related Works}\labsec{related-work}
+
+% \subsection*{Subformula Linking}
+
+% Although the primary motivation is very practical, it benefitted a lot from
+% recent works in proof theory, especially \emph{deep inference}. A key step was
+% the discovery of the work of Kaustuv Chaudhuri~\cite{Chaudhuri2013} who had
+% noticed how subformula linking in deep inference could be used for proof
+% construction in linear logic. His variant of the calculus of structures was very
+% important for designing the rewrite rules which underly our system, and in
+% \refch{sfl} we analyse proof calculi based on our rules that are closer to his
+% original formulation. In more recent work~\cite{DBLP:conf/cade/Chaudhuri21} he
+% also deals with intuitionistic logic. Interestingly, some ideas like forward
+% proof steps or the use of colors appeared independently in his and our work. A
+% difference is that we give the possibility to link first-order terms in addition
+% to propositions, which is the basis for rewrite actions.
+
+
+\subsection*{Canonical Proofs}
+
+The idea of reducing a proof to a collection of links between its dual formulas
+is not new, and can be traced back to the \emph{matings} of Andrews
+\sidecite{1674698} in the context of automated deduction. Matings are
+\emph{sets} of links covering all \emph{atomic} occurrences, and proofs are
+matings satisfying certain conditions. Our work differs in that we are
+interested in \emph{interactive} deduction, and thus consider links as a
+mechanism of inference rather than a syntactic criterion to discriminate proofs.
+Then a proof is better understood as a \emph{list} of links, and the atomicity
+constraint is relaxed to gain expressivity, since the creation of links is
+offloaded to the user instead of the search procedure.
+
+Another line of work, starting with the \emph{proof-nets} of Girard
+\sidecite{girard-linear-1987}, is concerned with the more fundamental problem of
+\emph{proof identity}, which requires a canonical notion of proof object
+\sidecite{strasburger-problem-2019}. In the case of unit-free multiplicative
+linear logic, the absence of any form of duplication/sharing/removal mechanism
+allows to completely characterize a proof-net by the set of its \emph{axiom}
+links\sidenote{The difference with matings is that correctness of a proof
+structure can be checked in \emph{polynomial} instead of exponential time.},
+because of the absence of duplication.
+% This is because adding
+% additives or exponentials, which can encode intuitionistic and classical logic,
+% requires additional structure to represent uses of weakening and contraction.
+% The \emph{combinatorial proofs} of Hughes \cite{Hughes_2006}
+% \cite{heijltjes_intuitionistic_2019} are examples of polynomially-checkable
+% proof objects exhibiting such structure, and have recently been extended to
+% handle first-order classical quantifiers \cite{hughes2019firstorder}
+% (intuitionistic quantifiers are still an open problem).
+% This compartmentalization of axiom links and structural rules resembles the
+% distinction between interaction phases and manual applications of {\rnmsf{conn}}
+% and {\rnmsf{wkn}} in \sys{DISL^0}, which is itself inspired by the
+% \emph{decomposition theorem} of deep inference formalisms.
+% Another approach to canonicity is to consider a generalization of focused proofs
+% called \emph{maximally multi-focused proofs}, which have been proven isomorphic
+% to compact representations of proofs such as proof-nets
+% \cite{ausiello_canonical_2008} and expansion tree proofs
+% \cite{chaudhuri_multi-focused_2016}. We conjecture that our system \sys{ISL^1_2}
+% could be reformulated as a multi-focused proof system, where foci correspond to
+% the linked formulas, and thus their number is restricted to exactly 2.
+There is an analogy between the correctness criterions of proof-nets, and the
+validity criterion of linkages:
+\begin{itemize}
+  \item they both identify a subset of valid objects among a larger set of
+  structures characterized by links on formulas;
+  \item they both allow many different \emph{sequential} readings, that is
+  sequent calculus proofs for proof nets, and deep inference, CoS-style proofs
+  for linkages\sidenote{Note that invalid linkages still give rise to CoS-style
+  \emph{derivations}, but not \emph{proofs} since they do not end with $\top$.
+  The incorrect proof structures of Girard are in a sense more parallel as they
+  cannot always be mapped to correct sequent calculus derivations.}.
+\end{itemize}
+Hence, our approach to subformula linking seems to exhibit some properties of
+canonical proofs, but at the level of \emph{partial proofs}: valid linkages make
+for \emph{compact-parallel-spatial} representations of inferences, whose
+operational meaning is given by their \emph{detailed-sequential-temporal} CoS
+derivations.
+
+
+% More
+% broadly, we envision a generalization of the linking method to any set of
+% subexpressions, which might or might not be equivalent or have equivalent types,
+% depending on the semantics of the action under consideration. Such a generalized
+% method might be dubbed \emph{``link inference''}. Subformula linking then
+% corresponds to a particular kind of action, which justifies any occurrence of
+% proposition given another known, unifiable proposition.
+
+\subsection*{Window Inference}
+
+We have already mentioned Proof-by-Pointing, which was part of the CtCoq and
+Pcoq efforts \sidecite{amerkad-mathematics-2001} to design a graphical user
+interface for the Coq proof assistant. Another contemporary line of work was the
+one based on \emph{window inference}, initially pioneered by P.J. Robinson and
+J. Staples. In \sidecite{robinson-formalizing-1993}, window inference is
+described as a general proof-theoretical framework, which aims to accomodate for
+the pervasive use of \emph{equivalence transformations} throughout mathematics
+and computer science.
+
+% In \cite{robinson-formalizing-1993}, they describe it as a new kind
+% of proof-theoretic framework, which aims to accomodate for the pervasive use of
+% \emph{equivalence transformations} throughout mathematics and computer science.
+% For this purpose, it provides facilities for describing how to focus on specific
+% subexpressions, and perform transformations on them that preserve a given
+% equivalence relation, while keeping and exploiting information from the context
+% where they occur. It is noted in \cite{grundy-window-1991} that the framework
+% can be extended to more general relations like preorders, which might typically
+% be used to capture the entailment relation of a logic.
+Window inference has been used both for general-purpose logics like HOL
+\sidecite{grundy-window-1991}, and in more specialized settings like program
+refinement \sidecite{grundy-window-1992}. It naturally lends itself to
+integration in a graphical user interface (\sidecite{langbacka-tkwinhol-1995},
+\sidecite{goos-tas-2000}), where the user can \emph{focus} on a subexpression by
+clicking on it. One is then presented with a new \emph{graphical} window,
+holding the selected expression as well as an extended set of hypotheses
+exposing information inferrable from the context of the expression. The user can
+pick from a list of valid transformations to be applied to the expression,
+before closing the window. This propagates the transformations to the parent
+window by replacing the old subexpression by the new one, without modifying the
+surrounding context.
+
+This process is quite reminiscent of the rewriting produced by our DnD
+actions.  One key difference is that window inference rules can be
+applied stepwise, while we choose to hide the sequence of rules that
+justifies a DnD. The window inference approach gives to the user a
+precise control of the transformations to be performed and thus could
+inspire interesting extensions of our work.
+
+% This is because
+% DnD actions embody the specific intent of justifying an \emph{expression} by
+% another \emph{user-specified} expression, which is either assumed to be, or
+% trivially equivalent. In contrast, window inference is about justifying the
+% \emph{equivalence} of an expression to another, \emph{not yet specified}
+% expression. Another way to see it is that our ``link inference'' technique aims
+% to capture the process of \emph{applying} some knowledge, while window inference
+% provides an interface for the \emph{construction} of new knowledge. They thus
+% appear as equally valid and even complementary approaches, that could benefit
+% from being implemented in the same interface.
+
+\subsection*{Tangible Functional Programming}
+
+We noticed an interesting connection with the work of Conal Elliott on
+tangible functional programming \sidecite{elliott-tangible}. His concept
+of \emph{deep application} of $\lambda$-terms seems related to the
+notion of subformula linking, when viewing function and product types
+as implications and conjunctions through the formulae-as-types
+interpretation. He also devised a system of basic combinators which
+are composed sequentially to compute the result of a DnD, though it
+follows a more complex dynamic than our rewrite rules. Even if the
+mapping between proofs and programs is not exact in this case, it
+suggests a possible interesting field of application for the
+Curry-Howard correspondance, in the realm of graphical
+proving/programming environments.
+
+\subsection*{Other Gestural Proof Systems}
+
+There are other proof systems which include drag-and-drop features. Two of them
+are the KeY Prover \sidecite{ahrendt-using-2016} and TAS
+\sidecite{goos-tas-2000}. TAS is a window inference system tailored for program
+refinement, and uses DnD actions between an expression and a transformation, in
+order to apply the latter to the former.
+%This is obviously different from our use of DnD between entities
+%of the same kind, and can be explained by the comparison made in the previous
+%paragraph.
+As for the KeY Prover, its usage of DnD overlaps only a very small
+portion of usecases that we hinted at in \refsec{edukera}, namely
+the instantiation of quantifiers with objects.
+
+We can also mention the recent work of Zhan et al. \sidecite{zhan-design-2019}.
+They share with us the vision of a proof assistant mainly driven by gestural
+actions, which requires far less textual inputs from the user. However, they
+only consider point-and-click actions, and rely on a text-heavy presentation at
+two levels:
+\begin{enumerate}
+  \item the proof state, which is a structured proof text in the style of
+  Isar~\sidecite{isar};
+  \item the proof commands, which can only be performed through choices in textual menus.
+\end{enumerate}
+
+% The latter can be useful to integrate specific actions which do not fit
+% naturally in the gestural paradigm. But because basic reasoning with logical
+% connectives and equations occurs so often in virtually any proof, we believe it
+% deserves a special treatment in the interface, and our work shows that
+% drag-and-drop gestures can be used efficiently for that purpose. This was
+% already a concern in \cite{amerkad-mathematics-2001}, where PbP is seen as a
+% mean to \emph{``increase the bandwidth between the user and the logical
+% engine''}, along with other devices like advanced graphical notations. The
+% authors also described how PbP is partially compatible with the production
+% \emph{in real time} of a proof text in quasi-natural language, thus close to an
+% Isar proof. We conjecture that our drag-and-drop mechanism also has this
+% capability, and in fact solves some of the problems induced by the limitation of
+% PbP to a single selection.
+
+
+\subsection*{Explicit Proof Objects}
+
+Finally let us mention various recent implementations proposing various ways to
+construct proofs graphically: Building Blocks~\sidecite{buildingblocks}, the
+Incredible Proof Machine~\sidecite{blanchette-visual-2016},
+Logitext\sidenote{\url{http://logitext.mit.edu/main}} and Click \&
+coLLecT~\cite{clickcollect}. In particular, Logitext and Click \& coLLecT
+exploit the same idea of associating click actions on head connectives to
+inference rules in sequent calculus. But these systems focus more on explicating
+the proof object than on making its construction easier.
+
+
+% \section{Conclusion and Perspectives}
+% This work started as a very practical effort. Discovering and
+% understanding the links with more theoretically grounded approaches,
+% and especially deep inference, made us aware that there may be more
+% proof theoretical depth to this idea than we first thought. But, most
+% importantly, adapting the logical rules and tools of deep inference to
+% the practical question we encountered, allowed us to structure our
+% proposal and to define the ``right'' behavior for the system. We were
+% able to extend the deep inference approach to the use of
+% equalities~\refsec{equality}, which may be an originality of this
+% work. It seems imaginable to proceed similarly with other mathematical
+% relations. 
+
+% More generally, we hope that our treatment of equality can be the
+% start for providing graphical or gestural tools to perform algebraic
+% transformations of expressions (be there in the conclusion or in
+% hypotheses). As mentioned above, Window Inference could serve as an
+% inspiration here. This seems promising to us, since describing such a
+% transformation is notoriously tedious when using textual commands.
+
+% Even a small prototype allowed us to experiment on some non-trivial
+% examples and to make some first encouraging experiences. In various
+% cases, like the one described in section~\refsec{edukera}, we have
+% observed shorter or more straightforward proofs than in textual
+% provers. Another nice point is that some syntactical details, like the
+% name of proof tactics become irrelevant in the gestural setting. More
+% generally, we feel that using such a system, one may indeed develop a
+% good intuition for the behavior of the logical items. But this is
+% obviously a user interface or user experience question which is too
+% early to quantify. Also, some novel questions appear when implementing
+% such a graphical system: what are the good user interface choices, how
+% to obtain a good look-and-feel, what visual feedback the system should
+% provide\dots
+
+% On the other hand, we should acknowledge that certain styles of proofs,
+% where a large number of subcases can be immediately solved through the
+% same short textual tactic sequence, may be less well suited for the
+% gestural approach (the SSReflect~\cite{SSR} dialect for Coq is very
+% well suited for such cases).
+
+
+% Among future lines of work, it will be interesting to explore how some
+% automation fits into this framework. One example is the \emph{point-and-shoot}
+% paradigm of \cite{PbP}. But the DnD feature could open up new possibilities,
+% like having the system perform some automated deduction to prove equivalences or
+% implications between the two squared formulas (which would thus no longer be
+% required to be strictly equal or unifiable).
+
+% Another obvious and important point to be tackled next is to provide a
+% smooth way to invoke a library of lemmas in a graphical proof. We
+% believe this could raise some interesting questions.
+
+% An also promising line of work is to extend our approach to classical
+% logic. A point being that the graphical setting could smoothly handle
+% multiple conclusions with less spurious overhead than text commands.
+
+
+% An important difference with the days of the
+% pioneering work on proof-by-pointing is that developers can now rely on
+% powerful and standardized libraries, which make the construction of
+% user interfaces much faster and easier, giving new room for
+% experimentation and proposals. But bringing everything together in
+% simple commands remains a complicated theoretical and development task.

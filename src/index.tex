@@ -110,9 +110,11 @@ the property of working well on touch-based devices of varying screen sizes.
 \etocstandarddisplaystyle % "toc display" as if etoc was not loaded
 \etocstandardlines % "toc lines as if etoc was not loaded
 
+\setcounter{tocdepth}{1}
 \tableofcontents % Output the table of contents
 
 \listoffigures % Output the list of figures
+\setcounter{tocdepth}{2}
 
 % Comment both of the following lines to have the LOF and the LOT on different pages
 \let\cleardoublepage\bigskip
@@ -138,7 +140,7 @@ the property of working well on touch-based devices of varying screen sizes.
 % \input{chapters/structural-proof-theory.tex}
 
 \pagelayout{wide} % No margins
-\addpart{Manipulating formulas}
+\addpart{Symbolic Manipulations}
 \pagelayout{margin} % Restore margins
 
 \todo{Add some illustrations in the margin, e.g. screenshot of Coq proof view or proof script?}
@@ -213,13 +215,14 @@ manipulation of the proof state.
 
 
 \input{chapters/pba.tex}
-
-% \input{chapters/pbl.tex}
-
-% \input{chapters/beyond}
+\input{chapters/sfl.tex}
+\input{chapters/advanced.tex}
+\input{chapters/sfl-classical.tex}
+\input{chapters/plugin.tex}
+\input{chapters/future.tex}
 
 \pagelayout{wide} % No margins
-\addpart{Manipulating goals}
+\addpart{Iconic Manipulations}
 \pagelayout{margin} % Restore margins
 
 % \input{chapters/bubbles.tex}
@@ -240,7 +243,7 @@ manipulation of the proof state.
 \addpart{Appendix}
 \pagelayout{margin} % Restore margins
 
-\input{appendix/pba.tex}
+% \input{appendix/pba.tex}
 
 %----------------------------------------------------------------------------------------
 

@@ -1,0 +1,80 @@
+\setchapterpreamble[u]{\margintoc}
+\chapter{Classical Logic and Parallel Conclusions}
+\labch{sfl-classical}
+
+In virtually every proof assistant, the goals the user is faced with are
+sequents of the form $\Gamma \seq C$, with a \emph{single} conclusion $C$ to be
+proved under many hypotheses in $\Gamma$. Historically, this form of sequent was
+introduced by Gentzen to formalize the rules of intuitionistic logic in his
+sequent calculus \sys{LJ}. But his main interest was in classical logic, as
+intuitionistic logic was still in its infancy and almost all of mathematics had
+been developed in a classical setting. Interestingly, he found that the right
+syntax to develop a rich metatheory of his classical sequent calculus \sys{LK}
+consisted in \emph{multi-conclusion} sequents of the form $\Gamma \seq \Delta$,
+where $\Delta$ is a list of conclusions that should be read
+\emph{disjunctively}. That is, a sequent
+$$A_1, \ldots, A_n \seq C_1, \ldots, C_m$$
+has the same meaning as the formula
+$$\bigwedge_{i=1}^{n}{A_i} \limp \bigvee_{j=1}^{m}{C_j}$$
+
+\begin{marginfigure}
+  \begin{mathpar}
+    \R[R\lor]
+      {\Gamma \seq A, B, \Delta}
+      {\Gamma \seq A \lor B, \Delta}
+  \end{mathpar}
+  \caption{Multiplicative right introduction rule for disjunction}
+  \labfig{multintro}
+\end{marginfigure}
+
+Later logicians have proposed various multi-conclusion sequent calculi for
+intuitionistic logic, the most famous being \sys{GHCP} from Dragalin
+\sidecite{dragalin_mathematical_1990}. Dyckhoff noted that such calculi are more
+suited to implementation of automated proof search procedures
+\sidecite{dyckhoff_contraction-free_1992} because they allow sharing code with
+classical calculi, but more importantly because one can delay choices of
+disjuncts to prove with the ``multiplicative''\sidenote{Terminology borrowed
+from linear logic, where {\rnmsf{R\lor}} is exactly the right introduction rule
+for multiplicative disjunction $\parr$.} introduction rule {\rnmsf{R\lor}}
+(\reffig{multintro}). This property is also desirable in the setting of
+interactive proof search as noted by Ayers\sidenote{Section 3.1.3 of his thesis
+\cite{ayers_thesis}.}, because this reduces the need for the user to guess in
+advance or backtrack; and contrary to a computer, it is very easy for a human
+to lose track of the proof search history when backtracking multiple times.
+
+That being said, we do not know of any proof assistant, whether classical or
+intuitionistic, that exposes goals with multiple conclusions in its user
+interface. One reason is that most proof/tactic languages are based on the rules
+of natural deduction, which use single-conclusion sequents. Another reason is
+that having one conclusion removes the need to designate it with an explicit
+name or number, as is the case with hypotheses\sidenote{The current trend is to
+have user-chosen or automatically generated strings for names as in Coq and
+Lean, but some provers like HOL Light ask for the position in the list as an
+integer to designate a particular hypothesis.}. And the explicit handling of
+names in tactic invokations is known to be tedious and time-consuming, to the
+point that some tactic languages like SSReflect have been designed around this
+problem \sidecite{SSR}. Thus having multiple conclusions would only double the
+effort for no compelling reason.
+
+However in our graphical paradigm based on direct manipulation, hypotheses and
+conclusions are designated by the act of \emph{pointing} at them with a mouse,
+finger or any other pointing device\sidenote{With the recent advances in natural
+language processing and voice recognition, one could also imagine a system based
+on the selection of subterms by spelling their content. Then click and DnD
+actions could be triggered by voice commands once the subterms they apply to
+have been selected. This could be an important alternative for users with
+impaired vision and/or motricity.}. This opens up the possibility of exposing
+multiple conclusions in the interface, with associated graphical proof actions.
+In the layout of Actema, this corresponds to having zero or multiple red items
+instead of a single one. While we did not implement such an extension, we
+explore in this section the theoretical foundations that would be necessary for
+it to come to fruition.
+
+\subsection{Click Actions}
+
+In \refsec{clicks}
+
+
+\subsection{DnD Actions}
+
+\todo{TODO}
