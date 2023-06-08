@@ -19,7 +19,7 @@ $$\bigwedge_{i=1}^{n}{A_i} \limp \bigvee_{j=1}^{m}{C_j}$$
 
 \begin{marginfigure}
   \begin{mathpar}
-    \R[R\lor]
+    \R[\lor R]
       {\Gamma \seq A, B, \Delta}
       {\Gamma \seq A \lor B, \Delta}
   \end{mathpar}
@@ -34,13 +34,13 @@ suited to implementation of automated proof search procedures
 \sidecite{dyckhoff_contraction-free_1992} because they allow sharing code with
 classical calculi, but more importantly because one can delay choices of
 disjuncts to prove with the ``multiplicative''\sidenote{Terminology borrowed
-from linear logic, where {\rnmsf{R\lor}} is exactly the right introduction rule
-for multiplicative disjunction $\parr$.} introduction rule {\rnmsf{R\lor}}
+from linear logic, where {\rnmsf{\lor R}} is exactly the right introduction rule
+for multiplicative disjunction $\parr$.} introduction rule {\rnmsf{\lor R}}
 (\reffig{multintro}). This property is also desirable in the setting of
 interactive proof search as noted by Ayers\sidenote{Section 3.1.3 of his thesis
 \cite{ayers_thesis}.}, because this reduces the need for the user to guess in
-advance or backtrack; and contrary to a computer, it is very easy for a human
-to lose track of the proof search history when backtracking multiple times.
+advance or backtrack; and contrary to a computer, it is very easy for a human to
+lose track of the proof search history when backtracking multiple times.
 
 That being said, we do not know of any proof assistant, whether classical or
 intuitionistic, that exposes goals with multiple conclusions in its user
@@ -67,12 +67,112 @@ impaired vision and/or motricity.}. This opens up the possibility of exposing
 multiple conclusions in the interface, with associated graphical proof actions.
 In the layout of Actema, this corresponds to having zero or multiple red items
 instead of a single one. While we did not implement such an extension, we
-explore in this section the theoretical foundations that would be necessary for
-it to come to fruition.
+explore in this chapter its design, and the theoretical foundations that would
+be necessary for it to come to fruition.
 
 \subsection{Click Actions}
 
-In \refsec{clicks}
+In \reftab{click-rules}, we showed how click actions in Actema are in direct
+correspondance with the rules of the single-conclusion sequent calculus \sys{LJ}
+for intuitionistic logic. Following the literature mentioned earlier, we just
+need to replace two actions/introduction rules to get a multi-conclusion system
+capturing either intuitionistic or classical first-order logic:
+
+\begin{marginfigure}
+  \begin{mathpar}
+    \R[{\limp}R*c]
+      {\Gamma, A \seq B, \Delta}
+      {\Gamma \seq A \limp B, \Delta}
+  \end{mathpar}
+  \caption{Classical multi-conclusion right introduction rule for implication}
+  \labfig{multi-imp-intro-class}
+\end{marginfigure}
+
+\begin{marginfigure}
+  \begin{mathpar}
+    \R[{\limp}R*i]
+      {\Gamma, A \seq B}
+      {\Gamma \seq A \limp B, \Delta}
+  \end{mathpar}
+  \caption{Intuitionistic multi-conclusion right introduction rule for implication}
+  \labfig{multi-imp-intro-intui}
+\end{marginfigure}
+
+\begin{itemize}
+  \item clicking on a red disjunction $A \lor B$ breaks it into two conclusions
+  $A$ and $B$. This is the dual behavior to click actions on blue conjunctions,
+  and corresponds to the {\rnmsf{\lor R}} rule of \reffig{multintro}, which is
+  common to both the intuitionistic and classical variants;
+  \item as before, clicking on a red implication $A \limp B$ breaks it into an
+  hypothesis $A$ and a conclusion $B$. Without further changes, this corresponds
+  to the right introduction rule from the classical sequent calculus \sys{LK} of
+  Gentzen (named {\rnmsf{{\limp}R*c}} in \reffig{multi-imp-intro-class}), and
+  our set of actions becomes a proof system for classical logic. To go back to
+  intuitionistic logic, one needs the additional behavior that all the other
+  conclusions of the goal are removed. This corresponds to the right
+  introduction rule from the \sys{GHCP} calculus of Dragalin (named
+  {\rnmsf{{\limp}R*i}} in \reffig{multi-imp-intro-intui}).
+\end{itemize}
+
+\begin{remark}
+  In the special case of intuitionistic sequents with one conclusion, the two
+  variants {\rnmsf{{\limp}R*c}} and {\rnmsf{{\limp}R*i}} collapse into the usual
+  {\rnmsf{{\limp}R}} rule.
+\end{remark}
+Note that we only modified the behavior of the disjunction $\lor$ and
+implication $\limp$ connectives; and for the latter, only in the case when there
+are at least two parallel conclusions, and thus implicitly a disjunction. Then
+it is interesting to notice that the classical behavior of the other connectives
+($\bot, \land, \forall, \exists$) essentially arises from their interaction with
+(positive) disjunctive statements.
+
+If we stick to intuitionistic logic, the benefits of having multiple conclusions
+are unclear. Indeed while the {\rnmsf{\lor R}} rule is invertible, the
+{\rnmsf{{\limp}R*i}} rule is not, and thus at some point the choice of which
+conclusion to prove must be made by the user irreversibly, even if the choice is
+delayed. On the other hand the {\rnmsf{{\limp}R*c}} rule \emph{is} invertible:
+this is known to allow the formulation of sequent calculi for classical logic
+where \emph{all} rules are invertible, like the \sys{G3c} calculus of
+\sidecite{negri_structural_2001}. In the propositional case, this gives a
+constructive decision procedure for the question of provability: given a sequent
+$\Gamma \seq \Delta$, one just has to choose any formula in $\Gamma$ or $\Delta$
+and apply the introduction rule associated to its main connective, or the axiom
+rule whenever possible. In Actema, this would correspond to having the user
+click randomly on blue and red items until all goals are solved. The procedure
+ends because all introduction rules destroy the main connective, and none of
+them duplicate formulas: thus the total size of the sequent decreases strictly
+after each rule application.
+
+\begin{marginfigure}
+  \begin{mathpar}
+    \R[\forall L*]
+      {\Gamma, \forall x. A, \subst{A}{t}{x} \seq \Delta}
+      {\Gamma, \forall x. A \seq \Delta}
+    \and
+    \R[\exists R*]
+      {\Gamma \seq \subst{A}{t}{x}, \exists x. A, \Delta}
+      {\Gamma \seq \exists x. A, \Delta}
+  \end{mathpar}
+  \caption{Multi-conclusion instantiation rules for quantifiers}
+  \labfig{multi-inst}
+\end{marginfigure}
+
+When dealing with quantifiers, the situation is not so simple: if one wants
+invertible introduction rules, it is necessary to duplicate the quantified
+formula being instantiated, which can seen as the root cause of undecidability
+in predicate logic as noted by Girard\sidenote{Section 3.3.2 of The Blind Spot
+\cite{girard:hal-01322183}.}. This is already what happens in Actema for the
+universal quantifier: dropping a term $t$ on a blue item $\forall x. A$ will
+produce a new hypothesis $\subst{A}{t}{x}$, while keeping the original $\forall
+x. A$ item. This corresponds to the invertible left introduction rule of
+\sys{G3c} ({\rnmsf{\forall L*}} in \reffig{multi-inst}). But in the
+single-conclusion framework, dropping a term $t$ on a red item $\exists x. A$
+necessarily replaces it by the instantiated conclusion $\subst{A}{t}{x}$.
+Allowing multiple conclusions circumvents this problem and restores the symmetry
+between $\forall$ and $\exists$, since we can create a new conclusion for
+$\subst{A}{t}{x}$ while preserving the old one. This corresponds to the
+invertible right introduction rule of \sys{G3c} ({\rnmsf{\exists R*}} in
+\reffig{multi-inst}).
 
 
 \subsection{DnD Actions}
