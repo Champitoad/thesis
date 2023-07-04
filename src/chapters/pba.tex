@@ -246,7 +246,7 @@ $$\begin{array}{lll}
     \step &
            \human(\socrates)\land(\select{\mortal(\socrates)}
            \back \select{\mortal(\socrates)}) &
-                                                 \mathsf{L\!\!\limp_2}\\
+                                                 \mathsf{L{\limp}_2}\\
     \step &  \human(\socrates)\land \top &
                                            \mathsf{id}\\
     \step & \human(\socrates)&\mathsf{neur}\\
@@ -274,7 +274,7 @@ $$
   \begin{array}{lll}
     &  \forall x .\select{\human(x)}\limp\mortal(x) \forw \select{\human(\socrates)}&\\
     \step & \select{\human(\socrates)}\limp\mortal(\socrates) \forw \select{\human(\socrates)}& \mathsf{F \forall i}\\
-    \step & (\select{\human(\socrates)}\back \select{\human(\socrates)} )\limp\mortal(\socrates) &\mathsf{F\!\!\limp_1}\\
+    \step & (\select{\human(\socrates)}\back \select{\human(\socrates)} )\limp\mortal(\socrates) &\mathsf{F{\limp}_1}\\
     \step & \top \limp\mortal(\socrates) &\mathsf{id}\\
     \step & \mortal(\socrates) & \mathsf{neul}\\
   \end{array}
@@ -362,7 +362,6 @@ given in \reftab{click-rules}. A few remarks are in order:
   $∀$ & \rnmsf{∀R} & $\emptyset$ \\
 	\midrule
   $∃$ & $\emptyset$ & \rnmsf{∃L} \\
-	\bottomrule
 \end{tabular}
 \end{table}
 
@@ -446,7 +445,7 @@ expressions modulo \emph{pretty-printing}, e.g. decimal notation.}:
         \step & \forall y. \select{1 + \suc{y}} = \suc{(1 + y)} \back \select{1 + 1} = 2 &\mathsf{L\forall i} \\
         \step & \select{1 + \suc{0}} = \suc{(1 + 0)} \back \select{1 + 1} = 2 &\mathsf{L\forall i} \\
         \syneq & \select{1 + 1} = \suc{(1 + 0)} \back \select{1 + 1} = 2 & \\
-        \step & \suc{(1 + 0)} = 2 &\mathsf{L\!\!=_1}
+        \step & \suc{(1 + 0)} = 2 &\mathsf{L{=}_1}
       \end{array}
     $$
   \item We link the right-hand side $x + 0$ of the first addition axiom with $1 + 0$ in the conclusion, which rewrites $1 + 0$ into $1$:
@@ -454,7 +453,7 @@ expressions modulo \emph{pretty-printing}, e.g. decimal notation.}:
       \begin{array}{lll}
         & \forall x. x = \select{x + 0} \back \suc{(\select{1 + 0})} = 2 & \\
         \step & 1 = \select{1 + 0} \back \suc{(\select{1 + 0})} = 2 &\mathsf{L\forall i} \\
-        \step & \suc{1} = 2 &\mathsf{L\!\!=_2} \\
+        \step & \suc{1} = 2 &\mathsf{L{=}_2} \\
         \syneq & 2 = 2 &
       \end{array}
     $$
@@ -464,7 +463,7 @@ We end up with the conclusion $2 = 2$, which is provable by a simple click.
 Notice how the orientation of the two rewritings is determined by which side of
 the equality is selected. Also, in this case, the rewritings
 correspond to backward proof steps, because the rewriting is performed
-in the conclusion. Similar rules (\rnmsf{F\!\!=_1} and \rnmsf{F\!\!=_2}) are
+in the conclusion. Similar rules (\rnmsf{F{=}_1} and \rnmsf{F{=}_2}) are
 used to perform rewritings in hypotheses.
 
 
@@ -525,7 +524,7 @@ $$
 \begin{array}{llll}
   \select{A} \lor B \forw \neg \select{A}
     & \step & (\select{A} \forw \neg\select{A}) \lor B &\mathsf{F\lor_1}\\
-    & \step & \neg (\select{A} \back \select{A}) \lor B &\mathsf{F\!\!\limp\!\!_1}\\
+    & \step & \neg (\select{A} \back \select{A}) \lor B &\mathsf{F{\limp}_1}\\
     & \step & \neg \top \lor B &\mathsf{id}\\
     & \step & \bot \lor B &\mathsf{neul}\\
     & \step & B &\mathsf{neul}\\
@@ -552,7 +551,7 @@ $$
   A\limp \select{B} \back \select{B} &\step& A\land (\select{B}
                                                 \back
                                                 \select{B})&\mathsf{L
-                                                             \!\!\limp_2}\\
+                                                             {\limp}_2}\\
                                          &\step&A\land\top & \mathsf{id}\\
     &\step& A&\mathsf{neul}
 \end{array}
@@ -617,7 +616,7 @@ arbitrary syntactical details, like the order of hypotheses or whether
 they come in curryfied form or not.
 
 Also, the rules for implication combined with the rules for equality
-\rnmsf{L\!\!=_i} or \rnmsf{F\!\!=_i} naturally give access to {\em
+\rnmsf{L{=}_i} or \rnmsf{F{=}_i} naturally give access to {\em
   conditional rewriting}; we detail this in combination with
 quantifiers in the next section.
 
@@ -626,7 +625,7 @@ quantifiers in the next section.
 
 
 As for red implications, they also have a backward semantics with the rules
-\rnmsf{R\!\!\limp\!\!_1} and \rnmsf{R\!\!\limp\!\!_2}, but most of the time one
+\rnmsf{R{\limp}_1} and \rnmsf{R{\limp}_2}, but most of the time one
 will want to destruct them immediately by click. An exception could be if one
 wants to simplify some part of an implicative, inductive goal before starting
 the induction.
@@ -779,8 +778,8 @@ $$
 \begin{array}{lll}
   &\forall x. x\neq 0 \limp \select{f(x)} = g(x) \back A(\select{f(t)}) &\\
   \step & t\neq 0 \limp \select{f(t)} = g(t) \back A(\select{f(t)}) &\mathsf{L \forall i}\\
-  \step & t\neq 0 \land (\select{f(t)} = g(t) \back A(\select{f(t)})) & \mathsf{L\!\!\limp_2}\\
-  \step &  t\neq 0 \land A(g(t)) &\mathsf{L\!\!=_1} \\
+  \step & t\neq 0 \land (\select{f(t)} = g(t) \back A(\select{f(t)})) & \mathsf{L{\limp}_2}\\
+  \step &  t\neq 0 \land A(g(t)) &\mathsf{L{=}_1} \\
 \end{array}$$
 
 One could similarly do such a rewrite in a hypothesis. Furthermore,
@@ -790,8 +789,8 @@ $$
   &\forall x. x\neq 0 \limp \select{f(x)} = g(x) \back \exists y . A(\select{f(y)})
   &\mathsf{R \exists s}\\
   \step &\exists y. ( \forall x. x\neq 0 \limp \select{f(x)} = g(x) \back A(\select{f(y)})) &\mathsf{L \forall i}\\
-  \step & \exists y. ( y\neq 0 \land ( \select{f(y)} = g(y) \back A(\select{f(y)}) )) &\mathsf{L\!\!\limp_2} \\
-  \step & \exists y .( y\neq 0 \land A(g(t))) &\mathsf{L\!\!=_1} \\
+  \step & \exists y. ( y\neq 0 \land ( \select{f(y)} = g(y) \back A(\select{f(y)}) )) &\mathsf{L{\limp}_2} \\
+  \step & \exists y .( y\neq 0 \land A(g(t))) &\mathsf{L{=}_1} \\
 \end{array}$$
 
 
@@ -806,8 +805,8 @@ $$
         \multicolumn{4}{c}{\textsc{Backward}} \\[2em]
 
         {A \back A}&\step&\top &\mathsf{id}\\
-        {t = u \back A}&\step&\subst{A}{t}{u} &\mathsf{L\!\!=_1}\\
-        {u = t \back A}&\step&\subst{A}{t}{u} &\mathsf{L\!\!=_2}\\[1em]
+        {t = u \back \subst{A}{t}{x}}&\step&\subst{A}{u}{x} &\mathsf{L{=}_1}\\
+        {t = u \back \subst{A}{u}{x}}&\step&\subst{A}{t}{x} &\mathsf{L{=}_2}\\[1em]
 
         {(B \land C) \back A}&\step&        {B \back A}&\mathsf{L \land_1}\\
         {(C \land B) \back A}&\step&        {B \back A}&\mathsf{L \land_2}\\
@@ -819,9 +818,9 @@ $$
         {A \back~(B \lor C)}&\step&        {(A \back B) \lor C}&\mathsf{R \lor_1}\\
         {A \back~(C \lor B)}&\step&        {C \lor (A \back B)}&\mathsf{R \lor_2}\\[1em]
 
-        {(C \limp B) \back A}&\step&        {C \land (B \back A)}&\mathsf{L\!\!\limp_2}\\
-        {A \back~(B \limp C)}&\step&        {(A \forw B) \limp C}&\mathsf{R\!\!\limp_1}\rever\\
-        {A \back~(C \limp B)}&\step&        {C \limp (A \back B)}&\mathsf{R\!\!\limp_2}\rever\\[1em]
+        {(C \limp B) \back A}&\step&        {C \land (B \back A)}&\mathsf{L{\limp}_2}\\
+        {A \back~(B \limp C)}&\step&        {(A \forw B) \limp C}&\mathsf{R{\limp}_1}\rever\\
+        {A \back~(C \limp B)}&\step&        {C \limp (A \back B)}&\mathsf{R{\limp}_2}\rever\\[1em]
 
         % {A \back \neg B}&\step&        {\neg (A \forw B)}&\mathsf{R\neg}\rever\\[1em]
 
@@ -844,8 +843,8 @@ $$
       %   {\ifill{\eta}{\efill{A}{A} \forw \efill{B}{B}}}
       %   {\ifill{\eta}{\ifill{A}{A} \land \ifill{B}{B}}}
       % \\
-      {A \forw~(t = u)} &\step& {\subst{A}{t}{u}}&\mathsf{F\!\!=_1}\\
-      {A \forw~(u = t)} &\step& {\subst{A}{t}{u}}&\mathsf{F\!\!=_2}\\[1em]
+      {\subst{A}{t}{x} \forw~(t = u)} &\step& {\subst{A}{u}{x}}&\mathsf{F{=}_1}\\
+      {\subst{A}{u}{x} \forw~(t = u)} &\step& {\subst{A}{t}{x}}&\mathsf{F{=}_2}\\[1em]
 
         {A \forw~(B \land C)} &\step&   {A \forw B}&\mathsf{F\land_1}\\
         {A \forw~(C \land B)}&\step&        {A \forw B}&
@@ -859,9 +858,9 @@ $$
 
         {A \forw~(B \limp C)}
 &\step&        {(A \back B) \limp C}
-      &\mathsf{F\!\!\limp_1}\\
+      &\mathsf{F{\limp}_1}\\
         {A \forw~(C \limp B)}&\step&        {C \limp (A \forw B)}&
-            \mathsf{F\!\!\limp_2}\\[1em]
+            \mathsf{F{\limp}_2}\\[1em]
 
 %         {A \forw \neg B}
 % &\step&        {\neg (A \back B)}

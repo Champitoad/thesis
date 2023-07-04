@@ -158,7 +158,7 @@ sense coined by Gentzen. In the case of intuitionistic logic that is:
   designate it as the goal's {\em conclusion},
 	\item a set of propositions $\Gamma$ corresponding to {\em hypotheses}.
 \end{itemize}
-On paper, this sequent is written $\Gamma\vdash C$.  The user performs
+On paper, this sequent is written $\Gamma\seq C$.  The user performs
 {\em actions} on one such goal at a time, and the actions transform
 the goal, or rather replace the goal by a new set of goals. When this
 set is empty, the goal is said to be solved.
@@ -166,10 +166,10 @@ set is empty, the goal is said to be solved.
 The actions performed by the user can be more or less
 sophisticated. But, fundamentally, one finds elementary commands which
 correspond roughly to the logical rules, generally of natural
-deduction. For instance, a goal $\Gamma\vdash A\vee B$
-(resp. $\Gamma\vdash A\wedge B$) can be turned into either a goal
-$\Gamma\vdash A$ or a goal $\Gamma\vdash B$ (resp. into two goals
-$\Gamma\vdash A$ and $\Gamma\vdash B$).
+deduction. For instance, a goal $\Gamma\seq A\vee B$
+(resp. $\Gamma\seq A\wedge B$) can be turned into either a goal
+$\Gamma\seq A$ or a goal $\Gamma\seq B$ (resp. into two goals
+$\Gamma\seq A$ and $\Gamma\seq B$).
 
 To sum up, during the proof construction process, a state is a set of
 sequents. These goals/sequents are modified by {\em commands}, which
@@ -214,8 +214,8 @@ at both levels of formulas and goals, as a general principle of direct
 manipulation of the proof state.
 
 
-% \input{chapters/pba.tex}
-% \input{chapters/sfl.tex}
+\input{chapters/pba.tex}
+\input{chapters/sfl.tex}
 % \input{chapters/advanced.tex}
 \input{chapters/sfl-classical.tex}
 % \input{chapters/plugin.tex}
@@ -226,15 +226,10 @@ manipulation of the proof state.
 \pagelayout{margin} % Restore margins
 
 % \input{chapters/bubbles.tex}
-
 % \input{chapters/eg.tex}
-
 % \input{chapters/flowers.tex}
-
 % \input{chapters/search.tex}
-
 % \input{chapters/flowerprover.tex}
-
 % \input{chapters/curryhoward.tex}
 
 \appendix % From here onwards, chapters are numbered with letters, as is the appendix convention

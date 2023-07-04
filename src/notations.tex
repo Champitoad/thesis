@@ -17,6 +17,17 @@
   }
 }
 
+\NewDocumentCommand{\Rsf}{oO{}trtd}{
+  \expandafter\prftree\expanded{
+    \IfBooleanT{#4}{[d]}
+    \IfValueT{#1}{[r]{
+      \unexpanded{\rnmsf{#1}}
+      [#2]
+      \IfBooleanT{#3}{r}
+    }}
+  }
+}
+
 \newcommand{\rnmsf}[1]{\rnm{\mathsf{#1}}}
 
 \newcommand{\hypo}{\prfassumption}
@@ -119,12 +130,14 @@
 \DeclareMathOperator{\link}{\,@\,}
 \DeclareMathOperator{\forw}{\,\varoast\,}
 \DeclareMathOperator{\back}{\,\varogreaterthan\,}
+\DeclareMathOperator{\para}{\,\varobar\,}
 
 \newcommand{\rever}{^*}
 \newcommand{\phole}{\square}
 \newcommand{\fhole}{\boxdot}
 \newcommand{\ifill}[2]{#1\left\{#2\right\}}
 \newcommand{\efill}[2]{#1\left[#2\right]}
+\newcommand{\lint}[1]{\lfloor#1\rfloor}
 
 \DeclareRobustCommand{\sys}[1]{$\mathsf{#1}$}
 \newcommand{\pair}[2]{\left\langle #1, #2 \right\rangle}

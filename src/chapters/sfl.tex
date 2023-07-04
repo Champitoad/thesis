@@ -25,8 +25,8 @@ to understand the status of quantified variables (\refsec{identity}).
 As is standard in term rewriting, our notion of context will correspond to that
 of a (formula) tree with a distinguished leaf called its
 \emph{hole}\sidenote{More precisely, our contexts correspond to what is called a
-``structure'' in the first deep inference formalism to date, the \emph{calculus
-of structures} (see \refsec{cos}).}.
+``structure'' in the first deep inference formalism to date, the \emph{Calculus
+of Structures} (see \refsec{cos}).}.
 
 \begin{definition}[Context]\label{def:context}
   A context, written $A\hole$, is a proposition containing exactly
@@ -80,7 +80,7 @@ used for {\em negative} contexts, meaning that $\inv(A^-\hole)$ is odd.
 
 In addition to the items involved, every DnD action specifies the
 \emph{selection} of a subterm in each item, which can be expressed formally as a
-path (definition \ref{def:path}). We call \emph{linkage} the combined data of
+path (Definition \ref{def:path}). We call \emph{linkage} the combined data of
 the two items together with the selection, since the intent is to \emph{link}
 the subterms to make them interact in some way.
 
@@ -121,7 +121,7 @@ informal up to now: that of \emph{logical} action and \emph{rewrite} action.
   \item \emph{Logical} linkages link two subformulas. Thus they have the form
   $B\select{A} \link C\select{A'}$.
   \item \emph{Rewrite} linkages link one side of an equality with a first-order
-  term. Using liberally the notations from definitions \ref{def:context} and
+  term. Using liberally the notations from Definitions \ref{def:context} and
   \ref{def:path}, they thus have the form
   $$B\select{\select{t} = u} \link C
   \select{t'} \text{\ (or symmetrically $B\select{u = \select{t}} \link C
@@ -212,58 +212,95 @@ interface that makes this methodology more intuitive and discoverable is the
 main goal of this work, and (valid) DnD actions seem to be a good candidate as a
 core principle for such a methodology.
 
-\subsection{Polarity}
+\subsection{Polarity}\labsec{polarity}
 
 The restrictions on polarities are captured formally by the following condition:
 
+% \begin{condition}[Polarity]\label{cond:pol}
+  
+%   Given a goal $Γ \seq C$, the following must be true for a logical linkage
+%   $B\select{A}\link D\select{A'}$ to be valid:
+%   \begin{enumerate}
+%     \item $B\select{A}\in \Gamma$;\label{clause:hyp}
+%     \item $D\select{A'} \begin{cases}
+%       \equiv C & \text{if $\link$ is $\back$} \\
+%       \in \Gamma & \text{if $\link$ is $\forw$}
+%       \end{cases}$\label{clause:concl}
+%     \item $\inv(B\hole)$ has the same (resp. opposite) parity as $\inv(D\hole)$
+%     if $\link$ is $\back$ (resp. $\forw$);\label{clause:opposite}
+%     \item if $\link$ is $\back$ and $\inv(D\hole) = 0$, then $\inv(B\hole) =
+%     0$\label{clause:intuit}.
+%   \end{enumerate}
+
+%   Similarly, the following must be true for a rewrite linkage
+%   $$B\select{\select{t} = u} {\link} D\select{t'}$$ to be valid:
+%   either $B\select{\select{t} = u}\in \Gamma$, then
+%   \begin{enumerate}
+%     \item $D\select{t'} \begin{cases}
+%       \equiv C & \text{if $\link$ is $\back$} \\
+%       \in \Gamma & \text{if $\link$ is $\forw$}
+%       \end{cases}$
+%     \item $B\hole$ is positive
+%   \end{enumerate}
+%   or $B\select{\select{t} = u} \equiv C$, $\link$ is $\back$ and
+%   \begin{enumerate}
+%     \item $D\select{t'} \in \Gamma$;
+%     \item $B\hole$ is negative.
+%   \end{enumerate}
+% \end{condition}
+
+% One understands that for rewrite linkages, this simply guarantees that the
+% equality is in negative position in the given goal. For logical linkages,
+% Clauses \ref{clause:hyp}, \ref{clause:concl}, \ref{clause:opposite} ensure that
+% the selected subformulas have opposite polarities, and Clause
+% \ref{clause:intuit} ensures that the linkage makes sense in our
+% \emph{intuitionistic} setting.
+
 \begin{condition}[Polarity]\label{cond:pol}
   
-  Given a goal $Γ \seq C$, the following must be true for a logical linkage
+  The following must be true for a logical linkage
   $B\select{A}\link D\select{A'}$ to be valid:
   \begin{enumerate}
-    \item $B\select{A}\in \Gamma$;\label{clause:hyp}
-    \item $D\select{A'} \begin{cases}
-      \equiv C & \text{if $\link$ is $\back$} \\
-      \in \Gamma & \text{if $\link$ is $\forw$}
-      \end{cases}$\label{clause:concl}
-    \item $\inv(B\hole)$ has the same (resp. opposite) parity as $\inv(D\hole)$
-    if $\link$ is $\back$ (resp. $\forw$);\label{clause:opposite}
+    \item the parity of $\inv(B\hole)$ is:
+      \begin{enumerate}
+        \item the same as $\inv(D\hole)$ if $\link = \back$
+        \item the opposite of $\inv(D\hole)$ if $\link = \forw$
+      \end{enumerate}\label{clause:opposite}
     \item if $\link$ is $\back$ and $\inv(D\hole) = 0$, then $\inv(B\hole) =
     0$\label{clause:intuit}.
   \end{enumerate}
 
-  Similarly, the following must be true for a rewrite linkage
-  $$B\select{\select{t} = u} {\link} D\select{t'}$$ to be valid:
-  either $B\select{\select{t} = u}\in \Gamma$, then
+  The following must be true for a rewrite linkage $B\select{t} @ D\select{t'}$
+  to be valid:
   \begin{enumerate}
-    \item $D\select{t'} \begin{cases}
-      \equiv C & \text{if $\link$ is $\back$} \\
-      \in \Gamma & \text{if $\link$ is $\forw$}
-      \end{cases}$
-    \item $B\hole$ is positive
-  \end{enumerate}
-  or $B\select{\select{t} = u} \equiv C$, $\link$ is $\back$ and
-  \begin{enumerate}
-    \item $D\select{t'} \in \Gamma$;
-    \item $B\hole$ is negative.
+    \item if $B\hole$ holds the equality, then it must be:
+      \begin{enumerate}
+        \item positive if $\link = \back$;
+        \item positive if $\link = \forw$;
+      \end{enumerate}
+    \item if $D\hole$ holds the equality, then it must be:
+      \begin{enumerate} 
+        \item negative if $\link = \back$;
+        \item positive if $\link = \forw$.
+      \end{enumerate}
   \end{enumerate}
 \end{condition}
 
 One understands that for rewrite linkages, this simply guarantees that the
-equality is in negative position in the given goal. For logical linkages,
-clauses \ref{clause:hyp}, \ref{clause:concl}, \ref{clause:opposite} ensure that
-the selected subformulas have opposite polarities, and clause
-\ref{clause:intuit} ensures that the linkage makes sense in our
-\emph{intuitionistic} setting. Indeed one could imagine the following behavior
+equality is in negative position. For logical linkages, Clause
+\ref{clause:opposite} ensures that the selected subformulas have opposite
+polarities, and Clause \ref{clause:intuit} ensures that the linkage makes sense
+in our \emph{intuitionistic} setting.
+
+Indeed one could imagine the following behavior
 in classical logic:
 $$(\select{A}\limp B)\limp C\back \select{A}~~\steps~~ C\limp A$$ which gives a
 proof of Peirce's law when replacing $C$ with $A$. We will come back to this
-example in \refsec{sfl-classical}, but for now we can just remark that there is
-no way to handle it with the rules of \reffig{DISL} because we lack a rule
-{\rnmsf{L{\limp}_1}} for redexes of the form $B\select{A} \limp C \back
-D\select{A'}$.
+example in \refch{sfl-classical}, but for now we can just remark that there is
+no way to handle it with the rules of \reffig{DISL} because we lack a rule for
+redexes of the form $B\select{A} \limp C \back D\select{A'}$.
 
-\todo{ Ensure condition \ref{cond:pol} works correctly in the fully detailed
+\todo{ Ensure Condition \ref{cond:pol} works correctly in the fully detailed
   proof of productivity (in annex). }
 
 \subsection{Identity}\labsec{identity}
@@ -292,8 +329,8 @@ $A\hole$ is either $C^+\select{\exists x. B\hole}$ or
 $D^-\select{\forall x. B\hole}$ (resp. $D^-\select{\exists x. B\hole}$
 or $C^+\select{\forall x. B\hole}$).
 
-For instance, if $A\hole = \forall x. \exists y. (B \land ((\exists x'. \forall
-y'. \hole) \limp \forall z. C))$, then we have:
+For instance, if $A\hole \equiv \forall x. \exists y. (B \land ((\exists x'.
+\forall y'. \hole) \limp \forall z. C))$, then we have:
 \begin{mathpar}
   \lvar(A\hole) = [x, y, x', y'] \and
   \lvarp(A\hole) = [y, y'] \and
@@ -334,7 +371,7 @@ y'. \hole) \limp \forall z. C))$, then we have:
 
 \begin{definition}[Unifiable variables]\label{def:uvars}
   The set $\uvars(\mathcal{L})$ of {\em unifiable variables} of a linkage
-  $\mathcal{L} = B\select{A}\link C\select{A'}$ is:
+  $\mathcal{L} \equiv B\select{A}\link C\select{A'}$ is:
   \begin{itemize}
   \item $\lvarn(B\hole)\cup\lvarp(C\hole)$ if $\link$ is $\back$, and
   \item $\lvarn(B\hole)\cup\lvarn(C\hole)$ if $\link$ is $\forw$.
@@ -346,14 +383,14 @@ do not go into details:
  
 \begin{definition}[Substitution]
   A \emph{substitution} is a mapping from variables to terms such that $\{x ~|~
-  \sigma(x)\neq x\}$ is finite; we call this set the {\em domain} of $\sigma$.
+  \sigma(x)\not\equiv x\}$ is finite; we call this set the {\em domain} of $\sigma$.
 
-  When $\sigma(x)=x$ we say that $x$ is  {\em not instantiated} by
+  When $\sigma(x)\equiv x$ we say that $x$ is  {\em not instantiated} by
   $\sigma$.
   
   %% A mapping $\sigma$ from variables to terms is a substitution of
-  %% domain $l$ when $\forall x\notin l, \sigma(x)=x$. When
-  %% $\sigma(x)=x$, we also say that $x$ is
+  %% domain $l$ when $\forall x\notin l, \sigma(x)\equivx$. When
+  %% $\sigma(x)\equivx$, we also say that $x$ is
   
   Given a proposition $A$ and a substitution $\sigma$, we write
   $\sigma(A)$ for the \emph{application} of $\sigma$ to $A$ in the usual way.
@@ -363,7 +400,7 @@ do not go into details:
 
 \begin{definition}[Unification] Given two propositions $A$ and $A'$ and a list of variables
   $l$, we say that a substitution $\sigma$ \emph{unifies} $A$ and $A'$ over $l$
-  when $\sigma(A)=\sigma(A')$ and the domain of $\sigma$ is a subset of $l$. 
+  when $\sigma(A)\equiv\sigma(A')$ and the domain of $\sigma$ is a subset of $l$. 
 
   If such a substitution exists, we say that $A$ and $A'$ are \emph{unifiable}
   over $l$.
@@ -377,19 +414,19 @@ substitution when it exists~\sidecite{Montanari}.
   be true:
   \begin{enumerate}
    \item There exists a substitution $\sigma$ which unifies $A$ and
-     $A'$ over the unifiable variables of the linkage.
+     $A'$ over the unifiable variables of the linkage.\label{clause:unif}
    \item \label{lab:cond} Furthermore, the unification respects the order over
      the variables. More precisely, we request that there exists a list $l$
      which is an interleaving of $\lvar(B\hole)$ and $\lvar(C\hole)$ such
      that, given a unifiable variable $x$ in the domain of $\sigma$, all
      variables occuring in $\sigma(x)$ are placed before $x$ in $l$:
-     $$\forall
-     y\in\fv(\sigma(x))\cap(\lvar(B\hole)\cup\lvar(C\hole)), y <_l x.$$
-     \end{enumerate}
+     $$\forall y\in\fv(\sigma(x))\cap(\lvar(B\hole)\cup\lvar(C\hole)), y <_l
+     x.$$\label{clause:deps}
+  \end{enumerate}
 \end{condition}
 
 The last condition ensures acyclicity and will prohibit invalid
-linkages as described in section~\refsec{acyclicity}. More precisely,
+linkages as described in \refsec{acyclicity}. More precisely,
 the list $l$ specifies the order in which the quantifiers will be
 treated in the proof construction.
 
@@ -406,8 +443,8 @@ treated in the proof construction.
 
 Finally we can state the full validity criterion for linkages:
 
-\begin{definition}[Valid linkage]
-  We say that a linkage $\mathcal{L}$ is \emph{valid} if it satisfies conditions
+\begin{definition}[Valid linkage]\labdef{valid-linkage}
+  We say that a linkage $\mathcal{L}$ is \emph{valid} if it satisfies Conditions
   \ref{cond:pol} and \ref{cond:unif}.
 \end{definition}
 
@@ -617,7 +654,7 @@ First some remarks can be made about the rewrite rules of \reffig{DISL}:
 \item The set of rewrite rules is obviously non-confluent. 
 \item It is also terminating, because the number of connectives or quantifiers
   under $\forw$ or $\back$ decreases\sidenote{Except for the \textsf{Fcomm} rule
-  which is just meant to make the $\forw$ operator symmetric; formally, the
+  which is just meant to make the $\forw$ operator commutative; formally, the
   only infinite reduction paths end with an infinite iteration of
   \textsf{Fcomm}.}.
 \end{itemize}
@@ -638,17 +675,17 @@ proof step:
 \item \textbf{Validity:} the system verifies that the linkage is \emph{valid},
   by performing successively the following checks:
   \begin{enumerate}
-    \item \textbf{Polarity:} the linkage must satisfy condition \ref{cond:pol};
+    \item \textbf{Polarity:} the linkage must satisfy Condition \ref{cond:pol};
     \item \textbf{Unification:} the selected subterms $A$ and $A'$ (resp. $t$
     and $t'$) must be unifiable, yielding a substitution $\sigma$;
     \item \textbf{Dependencies:} the substitution $\sigma$ must satisfy
-    condition \ref{cond:unif}.
+    Condition \ref{cond:unif}.
   \end{enumerate}
   The procedure stops if it fails at any of the above checks;
   \label{step:validity}
-\item \textbf{Linking:} the system then chooses a rewriting start\-ing from the linkage. Thanks to
-  theorem \refthm{productivity}, this re\-writing always ends with a proposition of
-  the form $D\select{\sigma(A) \back \sigma(A')}$ $$\text{(resp.
+\item \textbf{Linking:} the system then chooses a rewriting start\-ing from the
+  linkage. Thanks to \refthm{productivity}, this re\-writing always ends with a
+  proposition of the form $D\select{\sigma(A) \back \sigma(A')}$ $$\text{(resp.
   $D\select{\select{\sigma(t)} = u \link C_0\select{\sigma(t')}}$);}$$
   \label{step:linking}
 \item \textbf{Interaction:} thus one can apply the {\rnmsf{id}} rule (resp. an equality rule in
@@ -660,7 +697,7 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
   In the case of a forward linkage, a hypothesis $E$ is added to the goal; in
   the case of a backward linkage, the goal's conclusion becomes $E$. In both
   cases, the logical soundness is guaranteed by
-  property~\ref{prop:soundness}. \label{step:goal-modification}
+  Property~\ref{prop:soundness}. \label{step:goal-modification}
 \end{enumerate}
 
 %% =======
@@ -720,7 +757,7 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
 
 \section{Soundness}\labsec{soundness}
 
-\todo{Detailed proofs of all lemmas.}
+% \todo{Detailed proofs of all lemmas.}
 
 All examples up to now followed the scheme for DnD actions sketched in
 \refsec{aristote}:
@@ -738,39 +775,66 @@ rewrite system satisfies the following property:
 \begin{theorem}[Soundness]\label{prop:soundness}
   \phantom{a}
   \begin{itemize}
-    \item If $A \back B \steps C$, then $A, C \seq B$ is provable.
-    \item If $A \forw B \steps C$, then $A, B \seq C$ is provable.
+    \item If $A \back B \steps C$, then $A, C \seq B$.
+    \item If $A \forw B \steps C$, then $A, B \seq C$.
   \end{itemize}
 \end{theorem}
 
 The following simple covariance and contravariance property will be used
 extensively later on:
 \begin{lemma}[Variance]\label{prop:cov}
-  If $\, \Gamma, A\seq B$ is provable, then so are $\, \Gamma, C^+\select{A}\seq C^+\select{B}$
+  If $\, \Gamma, A\seq B$, then $\, \Gamma, C^+\select{A}\seq C^+\select{B}$
   and $\, \Gamma, D^-\select{B}\seq D^-\select{A}$.
 \end{lemma}
-%% \begin{proof}
-%%   By induction over the structures of $P\hole$ and $N\hole$.
-%% \end{proof}
+\begin{proof}
+  By induction on the depths of $C^+\hole$ and $D^-\hole$.
+\end{proof}
 
-For each rule, interpreting $\back$ as $\limp$ and $\forw$ as $\land$ in the
-right-hand side is enough to show that the rule satisfies property
-\ref{prop:soundness} locally. But for rewritings taking place deeper inside a
-proposition, we need to consider the polarity of their context. Using the
-notation of definition~\ref{def:polarity}, we can state:
-\begin{lemma}\label{lemma:rules-valid-in-context}
+For each rule, interpreting $\back$ as $\limp$ and $\forw$ as $\land$ is enough
+to show that the rule satisfies Property \ref{prop:soundness} locally. Formally,
+we can define a mapping from formulas containing linking operators to usual
+formulas where they have been replaced by their interpretation:
+
+\begin{definition}[Interpretation of linking operators]
+  The mapping $\lint{\cdot}$ is defined inductively as follows:
+  \begin{align*}
+    \lint{A \back B} &= \lint{A} \limp \lint{B} & \\
+    \lint{A \forw B} &= \lint{A} \land \lint{B} & \\
+    \lint{A \mcirc B} &= \lint{A} \mcirc \lint{B} &\text{for $\mcirc \in \{\land, \lor, \limp\}$} \\
+    \lint{\mdiam x. A} &= \mdiam x. \lint{A} &\text{for $\mdiam \in \{\forall, \exists\}$} \\
+    \lint{\dagger} &= \dagger &\text{for $\dagger \in \{\top, \bot\}$} \\
+    \lint{a} &= a &\text{for $a$ atomic} 
+  \end{align*}
+\end{definition}
+
+For rewritings taking place deeper inside a proposition however, we need to
+consider the polarity of their context.
+
+% Using the notation of definition~\ref{def:polarity}, we can state:
+
+\begin{lemma}[Local soundness]\label{lemma:rules-valid-in-context}
   \phantom{a}
   \begin{itemize}
-    \item If $C^+\select{A\back B}\step D$ then $D \seq C^+\select{A\limp B}$ is provable.
-    \item If $C^-\select{A\back B} \step D$ then $C^-\select{A\limp B}\seq D$ is provable.
-    \item If $C^+\select{A \forw B} \step D$ then $ C^+\select{A \land B}\seq D$ is provable.
-    \item If $C^-\select{A \forw B} \step D$ then $D \seq C^-\select{A \land B}$ is provable.
+    \item If $C^+\select{A\back B}\step D$ then $\lint{D} \seq C^+\select{A\limp B}$.
+    \item If $C^-\select{A\back B} \step D$ then $C^-\select{A\limp B}\seq \lint{D}$.
+    \item If $C^+\select{A \forw B} \step D$ then $ C^+\select{A \land B}\seq \lint{D}$.
+    \item If $C^-\select{A \forw B} \step D$ then $\lint{D} \seq C^-\select{A \land B}$.
   \end{itemize}
 \end{lemma}
+\begin{proof}
+  First notice that $D$ is necessarily of the form $C\select{D_0}$ where $A
+  \link B \step D_0$\sidenote{Indeed an implicit assumption in this section,
+  which is preserved by all the rules, is that a formula contains at most one
+  linking operator. Thus if $C\select{A \link B} \step D$, the only possible
+  redex is $A \link B$.}. Then by careful analysis of each rule, it is
+  straightforward to show that $\lint{D_0} \seq A \limp B$ if $\link = \back$ or
+  $A \land B \seq \lint{D_0}$ if $\link = \forw$. We can conclude in each case
+  by applying Lemma \ref{prop:cov} with $C\hole$ accordingly.
+\end{proof}
 \begin{remark}
   For some rules, like \rnmsf{R\!\!\limp_1}, the left-hand and
   right-hand propositions are equivalent:
-  $$A \limp B \limp C ~~~\Leftrightarrow~~~ A \land B \limp C$$ Such rules are
+  $$A \limp B \limp C ~~~\Longleftrightarrow~~~ A \land B \limp C$$ Such rules are
   called {\em invertible} and their names are tagged by *. This point will be
   relevant in \refsec{invert}.
 \end{remark}
@@ -778,7 +842,7 @@ notation of definition~\ref{def:polarity}, we can state:
 
 An easy but important technical point is that rewrite rules preserve the
 polarity of contexts around redexes, in the following precise sense:
-\begin{lemma}[Polarity preservation]\label{prop:rules-preserve-polarity}
+\begin{fact}[Polarity preservation]\label{prop:rules-preserve-polarity}
   \phantom{a}
   \begin{itemize}
     \item
@@ -790,29 +854,48 @@ polarity of contexts around redexes, in the following precise sense:
       $C\select{A\forw B} \step C'\select{A'\back B'}$) then $C\hole$ and
       $C'\hole$ have opposite polarities.
   \end{itemize}
+\end{fact}
 
-\end{lemma}
-
-Combining lemmas \ref{lemma:rules-valid-in-context} and
+Combining Lemma \ref{lemma:rules-valid-in-context} and Fact
 \ref{prop:rules-preserve-polarity}, we obtain the central soundness result
 about the rewrite rules:
 \begin{lemma}[Contextual soundness]\label{lemma:rewriting-valid-in-context}
   \phantom{a}
   \begin{itemize}
-    \item If $C^+\select{A\back B}\steps D$ then $D \seq C^+\select{A\limp B}$ is provable.
-    \item If $C^-\select{A\back B} \steps D$ then $C^-\select{A\limp B}\seq D$ is provable.
-    \item If $C^+\select{A \forw B} \steps D$ then $ C^+\select{A \land B}\seq D$ is provable.
-    \item If $C^-\select{A \forw B} \steps D$ then $D \seq C^-\select{A \land B}$ is provable.
+    \item If $C^+\select{A\back B}\steps D$ then $\lint{D} \seq C^+\select{A\limp B}$.
+    \item If $C^-\select{A\back B} \steps D$ then $C^-\select{A\limp B}\seq \lint{D}$.
+    \item If $C^+\select{A \forw B} \steps D$ then $ C^+\select{A \land B}\seq \lint{D}$.
+    \item If $C^-\select{A \forw B} \steps D$ then $\lint{D} \seq C^-\select{A \land B}$.
   \end{itemize}
 \end{lemma}
+\begin{proof}
+  By induction on the length of the derivation. The base case is trivial by
+  reflexivity of entailment. We give the proof for the first statement in the
+  list, other cases work similarly. We can assume without loss of generality
+  that the derivation has the following shape:
+  $$C^+\select{A \back B} \step C'\select{A' \link B'} \steps D$$
+  Then we reason by case on the linking operator $\link$:
+  \begin{itemize}
+    \item $\link = \back$: by Fact \ref{prop:rules-preserve-polarity}, $C'$ must
+    be positive. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
+    \limp B'}$. By Lemma \ref{lemma:rules-valid-in-context} we have
+    $C'\select{A' \limp B'} \seq C^+\select{A \limp B}$. Thus by transitivity
+    $\lint{D} \seq C^+\select{A \limp B}$.
+    \item $\link = \forw$: by Fact \ref{prop:rules-preserve-polarity}, $C'$ must
+    be negative. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
+    \land B'}$. By Lemma \ref{lemma:rules-valid-in-context} we have
+    $C'\select{A' \land B'} \seq C^+\select{A \limp B}$. Thus by transitivity
+    $\lint{D} \seq C^+\select{A \limp B}$.
+  \end{itemize}
+\end{proof}
 
-We do not detail the proof here, but it relies crucially on the covariance and
-contravariance property \ref{prop:cov}.
+% We do not detail the proof here, but it relies crucially on the covariance and
+% contravariance property \ref{prop:cov}.
 
-Finally, the soundness theorem \ref{prop:soundness} is obtained as the
-special case where the rewriting starts in the (positive) empty context.
+Finally, soundness (Theorem \ref{prop:soundness}) is obtained as the special
+case where the rewriting starts in the (positive) empty context.
 
-Detailed proofs of all the lemmas can be found in \refsec{app:dnd-soundness}.
+% Detailed proofs of all the lemmas can be found in \refsec{app:dnd-soundness}.
 
 % In the previous chapter, we showed how to associate a logical behaviour to
 % drag-and-drop actions involving two subterms in a sequent, by following a set of
@@ -862,13 +945,13 @@ ensures that we can proceed to the interaction step \ref{step:interaction}.
 Because the rewrite rules are terminating, the important point is to show that
 one can always apply a rule until one reaches an interaction rule on the
 selected subterms. In other words, it is possible to find at least one rule
-which preserves conditions \ref{cond:unif} and \ref{cond:pol} on linkages:
+which preserves Conditions \ref{cond:pol} and \ref{cond:unif} on linkages:
 
-\begin{lemma}[Valid Progress]\label{thm:vprogress} If a linkage $\mathcal{L} =
+\begin{lemma}[Valid Progress]\label{thm:vprogress} If a linkage $\mathcal{L} \equiv
   C\select{A} \link C'\select{A'}$ (resp. $C\select{t} \link C'\select{t'}$) is
   valid, then either:
   \begin{enumerate}
-    \item $\mathcal{L} = \select{A} \back \select{A}$ (resp. $C\hole \in \{\hole
+    \item $\mathcal{L} \equiv \select{A} \back \select{A}$ (resp. $C\hole \in \{\hole
     = u, u = \hole\}$ for some $u$ and $t \equiv t'$);
     % \item $\mathcal{L} \in \{
     %     \select{A}\back \select{A},\,
@@ -878,40 +961,45 @@ which preserves conditions \ref{cond:unif} and \ref{cond:pol} on linkages:
     %     u = \select{t} \forw C\select{t}
     %   \}$ for some $A, C\hole, t, u$;
     \item or $\mathcal{L} \step E\select{\mathcal{L'}}$ for some $E\hole,
-      \mathcal{L'}$ with $\mathcal{L'}$ valid and
-      $$\mathcal{L'} = D\select{\sigma(A)} \link' D'\select{\sigma(A')}$$ (resp.
-      $D\select{\sigma(t)} \link' D'\select{\sigma(t')}$) for some $D\hole,
-      D'\hole$, linking operator $\link'$ and unifying substitution $\sigma$.
+      \mathcal{L'}$ with $\mathcal{L'}$ valid.
+      % and
+      % $$\mathcal{L'} \equiv D\select{\sigma(A)} \link' D'\select{\sigma(A')}$$ (resp.
+      % $D\select{\sigma(t)} \link' D'\select{\sigma(t')}$) for some $D\hole,
+      % D'\hole$, linking operator $\link'$ and unifying substitution $\sigma$.
   \end{enumerate}
 \end{lemma}
 
-A detailed proof is given hereafter. It is not fundamentally difficult, but
-understandably verbose. The two main points are:
+A detailed proof is given hereafter for the case of logical linkages. It is not
+fundamentally difficult, but understandably verbose. The two main points are:
 \begin{itemize}
 \item The rules involving a connective always preserve validity.
 \item When one can apply a rule involving a quantifier $\forall x$ (resp.
   $\exists x$), one checks whether the substitution instantiates $x$ or not. In
-  the first case one performs the instantiation rule \rnmsf{L\forall_i} or
-  \rnmsf{F\forall_i} (resp. \rnmsf{R\exists_i}); in the second case the
-  corresponding \textsf{s} rule.
+  the first case one performs the instantiation rule \rnmsf{L\forall i} or
+  \rnmsf{F\forall i} (resp. \rnmsf{R\exists i}); in the second case the
+  corresponding switch rule in {\small $\{\mathsf{L\forall s}, \mathsf{R\forall
+  s}, \mathsf{F\forall s}\}$} (resp. {\small $\{\mathsf{L\exists s},
+  \mathsf{R\exists s}, \mathsf{F\exists s}\}$}).
 \end{itemize}
 \begin{proof}
-  Let $\mathcal{L} = B\select{A} \link C\select{A'}$.\\
+  Let $\mathcal{L} \equiv B\select{A} \link C\select{A'}$ be a valid linkage.\\
   \begin{enumerate}
     \setlength{\itemsep}{1em}
-    \item By condition~\ref{cond:pol}, we know that a forward linkage cannot
-    verify $(\inv(B\square), \inv(C\square)) = (0,0)$, thus $\mathcal{L}$ must
-    be a backward linkage. Also $\lvar(B\square)$ and $\lvar(C\square)$ are
-    empty, hence by definition~\ref{def:valid-linkage} $A$ and $A'$ are unified
-    by an empty substitution, which entails that $A = A'$.
+    \item Suppose $B\hole \equiv C\hole \equiv \square$. By
+    Condition~\ref{cond:pol}, we know that a forward linkage cannot verify
+    $(\inv(B\square), \inv(C\square)) = (0,0)$, thus $\mathcal{L}$ must be a
+    backward linkage. Also $\lvar(B\square)$ and $\lvar(C\square)$ are empty,
+    hence by Condition~\ref{cond:unif} $A$ and $A'$ are unified by an empty
+    substitution, which entails that $A \equiv A'$. Therefore we are in the
+    first case where $\mathcal{L} \equiv \select{A} \back \select{A}$.
 
-    \item In the following, we show that we can always apply a rewrite rule that
-    produces a new, valid linkage $\mathcal{L'}$.
+    \item Otherwise, either $B\hole$ or $C\hole$ is non-empty. In the following,
+    we show that we can always apply a rewrite rule that produces a new, valid
+    linkage $\mathcal{L'} \equiv B' \link' C'$.
     
-    Let $\sigma$ and $\lvar$ be respectively the substitution and
-    interleaving of the quantified variables of $B\square$ and $C\square$ given
-    by definition \ref{def:valid-linkage}, with $\lvar$ decomposed as $x ::
-    \lvar'$.
+    Let $\sigma$ and $\lvar$ be respectively the substitution and interleaving
+    of the quantified variables of $B\square$ and $C\square$ given by Condition
+    \ref{cond:unif}, with $\lvar$ decomposed as $x \Colon \lvar'$.
     
     \begin{itemize}
       \item If $x$ is quantified at the head of either $B\square$ or $C\square$,
@@ -922,7 +1010,7 @@ understandably verbose. The two main points are:
           \rnmsf{R\forall s}, \rnmsf{R\exists s}, \rnmsf{F\forall s},
           \rnmsf{F\exists s})] Only if $x$ is not in the domain of $\sigma$. In
           forward mode and when $B\square$ binds $x$, one must first apply the
-          rule \rnmsf{Fcomm} to put $B\select{A}$ on the right of $\ast$, so
+          rule \rnmsf{Fcomm} to put $B\select{A}$ on the right of $\forw$, so
           that the switch rule is applicable. Now we show that $\mathcal{L'}$ is
           valid:
 
@@ -931,20 +1019,20 @@ understandably verbose. The two main points are:
             \renewcommand{\labelenumii}{\theenumii}
             \renewcommand{\theenumii}{\arabic{enumii}.}
 
-            \item Trivial since none of the switch rules changes the number of
-            inversions.
+            \item $\mathcal{L'}$ satisfies Condition \ref{cond:pol} trivially
+            since none of the switch rules changes the number of inversions.
 
             \item For each switch rule we can show, using the fact that $x$ is
             not in the domain of $\sigma$, that $\uvars(\mathcal{L'}) =
             \uvars(\mathcal{L})$. Since the selected formulas $A$ and $A'$ stay
-            untouched by the reduction, we can choose $\sigma$ as a valid
-            unifier that ranges over $\uvars(\mathcal{L'})$.
+            untouched by the rule, we can choose $\sigma$ as a valid unifier
+            that ranges over $\uvars(\mathcal{L'})$.
             
             \item In all switch rules, we have $\lvar(\mathcal{L'}) = \lvar'$
             because the quantifier of $x$ is moved in the outer context of the
-            linkage. Thus we can just take $\lvar'$ as interleaving, and the
-            condition will still be verified because $\lvar'$ is a sublist of
-            $\lvar$.
+            linkage. Thus we can just take $\lvar'$ as interleaving, and
+            Condition \ref{cond:unif} will still be verified because $\lvar'$ is
+            a sublist of $\lvar$.
           \end{enumerate}
 
           \item[Instantiation rule (\rnmsf{L\forall i}, \rnmsf{R\exists i},
@@ -957,8 +1045,9 @@ understandably verbose. The two main points are:
             \renewcommand{\labelenumii}{\theenumii}
             \renewcommand{\theenumii}{\arabic{enumii}.}
             
-            \item Trivial since none of the instantiation rules changes the
-            number of inversions.
+            \item $\mathcal{L'}$ satisfies Condition \ref{cond:pol} trivially
+            since none of the instantiation rules changes the number of
+            inversions.
 
             \item For each instantiation rule we can show, using the fact that
             $x$ is instantiated by $\sigma$, that $\uvars(\mathcal{L'}) =
@@ -973,26 +1062,26 @@ understandably verbose. The two main points are:
             $B\square$, that is $B\square$ without the head quantifier binding
             $x$. \\
 
-            First we can assert that $B_0\select{A}[x \setminus \sigma(x)] =
-            B_0[x \setminus \sigma(x)]\select{A[x \setminus \sigma(x)]}$.
-            Indeed, condition 3 of definition \ref{def:valid-linkage} guarantees
+            First we can assert that $\subst{B_0\select{A}}{\sigma(x)}{x} \equiv
+            \subst{B_0}{\sigma(x)}{x}\select{\subst{A}{\sigma(x)}{x}}$. Indeed,
+            Clause \ref{clause:deps} of Condition \ref{cond:unif} guarantees
             that for any free variable $y$ of $\sigma(x)$, $y \not\in
             \lvar(B_0\square)$, and thus the above instantiation can propagate
             safely to $A$ without capture. To convince yourself that $y \not\in
             \lvar(B_0\square)$, suppose the contrary. Then $y \in
-            \lvar(B\square)$, and by condition 3 $y$ must be placed before $x$
-            in $\lvar$. But this is impossible since $x$ is the first element of
-            $\lvar$!\\
+            \lvar(B\square)$, and by Clause \ref{clause:deps} $y$ must be placed
+            before $x$ in $\lvar$. But this is impossible since $x$ is the first
+            element of $\lvar$!\\
             
             So we know that the selected formula on the left of $\mathcal{L'}$
-            is $A[x \setminus \sigma(x)]$, while it is still $A'$ on the right.
+            is $\subst{A}{\sigma(x)}{x}$, while it is still $A'$ on the right.
             Thus it only remains to show that
-            $$A[x \setminus \sigma(x)][\sigma \setminus x] = A'[\sigma \setminus
-            x].$$ On the left we have by definition that $A[x \setminus
-            \sigma(x)][\sigma \setminus x] = A[\sigma]$, and on the right we
-            have $A'[\sigma \setminus x] = A'[\sigma]$ because $x$ cannot occur
-            in $A'$ since it is bound in $B_0\square$ (here we rely on the
-            Barendregt convention).
+            $$\subst{A}{\sigma(x)}{x}[\sigma \setminus x] \equiv A'[\sigma
+            \setminus x].$$ On the left we have by definition that
+            $\subst{A}{\sigma(x)}{x}[\sigma \setminus x] \equiv A[\sigma]$, and
+            on the right we have $A'[\sigma \setminus x] \equiv A'[\sigma]$
+            because $x$ cannot occur in $A'$ since it is bound in $B_0\square$
+            (here we rely on the Barendregt convention).
 
             \item In all instantiation rules, we have $\lvar(\mathcal{L'}) =
             \lvar'$ because the quantifier of $x$ is removed by the
@@ -1001,13 +1090,13 @@ understandably verbose. The two main points are:
           
         \end{description}
 
-      \item If $x$ is not quantified at the head of $B$ or $C$, then either both
-      heads are propositional connectives, or one is a propositional connective
-      and the other is empty. In boths cases we can choose a backward (resp.
-      forward) rule of the form \rnmsf{B\circ_i} (resp. \rnmsf{F\circ_i}), where
-      $\circ$ is the connective, and $i$ the index of the direct subcontext
-      where $A$ or $A'$ occurs. Again we check the conditions of definition
-      \ref{def:valid-linkage}:
+      \item If $x$ is not quantified at the head of $B\hole$ or $C\hole$, then
+      either both heads are propositional connectives, or one is a propositional
+      connective and the other is empty. In both cases we can choose either a
+      rule of the form {\rnmsf{L\mcirc_i}}, {\rnmsf{R\mcirc_i}} or
+      {\rnmsf{F\mcirc_i}}, where $\mcirc$ is the connective and $i$ the index of
+      the direct subcontext where $A$ or $A'$ occurs, or the {\rnmsf{Fcomm}}
+      rule. Again we check the conditions of Definition \ref{def:valid-linkage}:
       
       \begin{enumerate}
         \setlength{\itemsep}{0.8em}
@@ -1016,17 +1105,81 @@ understandably verbose. The two main points are:
             
         \item In most rules the number of inversions stays unchanged. The only
         exceptions are \rnmsf{R\!\!\limp_1} and \rnmsf{F\!\!\limp_1}, which
-        decrease the number of inversions of the right context by $1$. Thus for
-        \rnmsf{R\!\!\limp_1} which is backward, we start with either $(1,1)$ or
-        $(0,2)$, and obtain $(1,0)$ or $(0,1)$ which are valid according to
-        condition \ref{cond:pol} since $\mathcal{L'}$ is forward. Conversely for
-        \rnmsf{F\!\!\limp_1} which is forward, we must start with $(1,0)$, and
-        obtain $(0,0)$ which is valid since $\mathcal{L'}$ is backward.
+        decrease the number of inversions of the right context $C\hole$ by $1$.
+        But since they are also the only rules that change the linking operator,
+        the truth of Clause \ref{clause:opposite} is preserved: if the parities
+        were opposite (resp. identical) in $\mathcal{L}$, then $\mathcal{L}$
+        must be forward (resp. backward). Thus $\mathcal{L'}$ is necessarily
+        backward (resp. forward), and so the parities in $\mathcal{L'}$ must be
+        identical (resp. opposite), which is the case thanks to the inversion
+        decrement.
+
+        For Clause \ref{clause:intuit}, we can distinguish two cases:
+        \begin{itemize}
+          \item If $\mathcal{L}$ is backward, then either we apply the
+          {\rnmsf{R{\limp}_1}} rule and $\mathcal{L'}$ is forward, and thus
+          satisfies Clause \ref{clause:intuit} trivially; or we apply another
+          backward rule and $\mathcal{L'}$ is backward. Now suppose
+          $\inv(C'\hole) = 0$. Then we must have $\inv(C\hole) = \inv(C'\hole) =
+          0$ and $\inv(B\hole) = \inv(B'\hole)$ since all backward rules other
+          than {\rnmsf{R{\limp}_1}} preserve the number of inversions. And
+          because $\mathcal{L}$ satisfies Clause \ref{clause:intuit} by
+          validity, we can deduce that $\inv(B\hole) = 0$, and thus
+          $\inv(B'\hole) = 0$.
+          \item If $\mathcal{L}$ is forward, then either we apply a forward rule
+          that is neither {\rnmsf{F{\limp}_1}} nor {\rnmsf{Fcomm}} and
+          $\mathcal{L'}$ is forward, and thus satisfies Clause
+          \ref{clause:intuit} trivially; or we consider applying either
+          {\rnmsf{F{\limp}_1}} of {\rnmsf{Fcomm}}. There are three cases:
+          \begin{itemize}
+            \item If $\inv(C\hole) > 1$, then we can safely apply
+            {\rnmsf{F{\limp}_1}} since we have $\inv(C'\hole) = \inv(C\hole) - 1 >
+            0$;
+            \item If $\inv(C\hole) = 0$, then $C\hole$ is empty and we are
+            forced to apply {\rnmsf{Fcomm}} so that we can apply the forward
+            rule corresponding to the head connective of $B\hole$. Then $C\hole$
+            ends up on the left of $\forw$, thus if we apply
+            {\rnmsf{F{\limp}_1}} for $B\hole$ Clause \ref{clause:intuit} will be
+            satisfied trivially;
+            \item If $\inv(C\hole = 1)$, then either $\inv(B\hole) = 0$ and we
+            can safely apply {\rnmsf{F{\limp}_1}} since $\inv(B'\hole) =
+            \inv(B\hole)$; or $\inv(B\hole) > 0$, and we cannot apply
+            {\rnmsf{F{\limp}_1}} because we would end up with $\inv(C'\hole) =
+            0$ and $\inv(B'\hole) > 0$, thus violating Clause
+            \ref{clause:intuit}. Hence as in the previous case, we need to apply
+            {\rnmsf{Fcomm}} first. Then it cannot be the case that $\inv(B\hole)
+            = 1$ because we would have $\inv(B\hole) = \inv(C\hole)$, which
+            violates Clause \ref{clause:opposite} from the validity of
+            $\mathcal{L}$. Thus $\inv(B\hole) > 1$, which entails that we can
+            safely apply {\rnmsf{F{\limp}_1}} on $B\hole$ as in the first case.
+          \end{itemize}
+          Notice that whenever we apply the {\rnmsf{Fcomm}} rule, it is to apply
+          the rule corresponding to the head connective of $B\hole$ immediately
+          afterwards: we never enter a loop by applying {\rnmsf{Fcomm}} twice in
+          a row. Thus technically there are two reduction steps, but we treat
+          them as one.
+        \end{itemize}
+        
+        % suppose that $\mathcal{L'}$ is backward
+        % and $\inv(C'\hole) = 0$. Then if we applied rule {\rnmsf{F{\limp}_1}} we
+        % must have $\inv(C\hole) = 1$ and $\mathcal{L}$ is forward. Otherwise in
+        % every other applicable rule the parity and operator are preserved, thus
+        % $\inv(C\hole) = 0$ and $\mathcal{L}$ is backward. In both cases we have
+        % that $\inv(B\hole) = \inv(B'\hole)$, and we want to show that
+        % $\inv(B'\hole) = 0$. In the first case by Clause \ref{clause:opposite}
+        % we know that the $\inv(B\hole)$ is even.
+        
+        % Thus for \rnmsf{R\!\!\limp_1} which is backward, we start with either
+        % $(1,1)$ or $(0,2)$, and obtain $(1,0)$ or $(0,1)$ which are valid
+        % according to Condition \ref{cond:pol} since $\mathcal{L'}$ is forward.
+        % Conversely for \rnmsf{F\!\!\limp_1} which is forward, we must start with
+        % $(1,0)$, and obtain $(0,0)$ which is valid since $\mathcal{L'}$ is
+        % backward.
 
         \item Since we do not deal with quantifiers, we can just take the same
         unifier $\sigma$.
 
-        \item Same here, we take the same interleaving $l$.
+        \item Idem here, we take the same interleaving $l$.
       \end{enumerate}
     \end{itemize} 
   \end{enumerate}
@@ -1051,6 +1204,13 @@ is a sequence of reductions with one of the following forms:
   \mathcal{L} \steps D\select{u = \select{t} \link A\select{t}}
 \end{mathpar}
 \end{theorem}
+
+\todo{ Explain why the productivity theorem is interesting in terms of UX, i.e.
+  it ensures non-trivial progress in the reasoning: we managed to connect some
+  dots in the problem and actually solve a subgoal. That is, either the
+  conclusion is strictly weakened, or the assumptions are strictly strengthened,
+  instead of having just an equivalent goal written in a different way (at least
+  in the case of logical linkages).}
 
 %% \begin{proof}
 %%   By recurrence on $\size{\mathcal{L}}$:
@@ -1105,19 +1265,18 @@ only in intuitionistic logic: in classical logic both results are provable.}:
 $$\select{A}\lor B \back B\lor\select{A}\steps B\lor(B\limp A).$$
 
 The general scheme for choosing a rule to apply to a redex $C\select{A} \link
-D\select{B}$ is the following\sidenote{A less deterministic version of
-this scheme is already present implicitly in the proof of the valid progress
-lemma \ref{thm:vprogress}}:
+D\select{B}$ is the following\sidenote{A less deterministic version of this
+scheme is already present implicitly in the proof of Lemma \ref{thm:vprogress}}:
 \begin{enumerate}
-  \item If $C\hole$ = $D\hole = \hole$, we just apply the {\rnmsf{id}} rule
-  (assuming $A = B$ by \refthm{productivity}).
+  \item If $C\hole \equiv D\hole \equiv \hole$, we just apply the {\rnmsf{id}} rule
+  (assuming $A \equiv B$ by Lemma \ref{thm:vprogress}).
   \item If only one context is non-empty, say $C\hole$, we look at its head
   connective as well as the side where its hole resides:
   \begin{itemize}
-    \item either $C\hole = C_0\hole \mcirc E$ for some binary connective
+    \item either $C\hole \equiv C_0\hole \mcirc E$ for some binary connective
     $\mcirc$, and we choose the rule {\rnmsf{L\mcirc_1}} (resp.
     {\rnmsf{F\mcirc_1}}) if $\link = \back$ (resp. $\link = \forw$);
-    \item or $C\hole = E \mcirc C_0\hole$ and we choose the rule
+    \item or $C\hole \equiv E \mcirc C_0\hole$ and we choose the rule
     {\rnmsf{L\mcirc_2}} (resp. {\rnmsf{F\mcirc_2}}) if $\link = \back$ (resp.
     $\link = \forw$).
   \end{itemize}
@@ -1237,7 +1396,7 @@ textual proof language, it is important to show that (a subset of) the set of
 actions exposed to the user is \emph{complete} with respect to provability. That
 is, any formula $A$ which is \emph{true} in our logic --- here intuitionistic
 FOL --- can be proved by executing a sequence of graphical actions that reduces
-it to the empty goal. We noticed in remark \ref{rem:click-completeness} that
+it to the empty goal. We noticed in Remark \ref{rem:click-completeness} that
 click actions are a sufficient basis for completeness. While we believe that a
 combination of both click and DnD actions is more comfortable to handle a
 variety of proof situations, it is still interesting to consider the question of
@@ -1255,10 +1414,10 @@ on a slight extension of our rewrite rules, following ideas from these works.
   deterministic procedure outlined in \refsec{invert}. There are two aspects
   that make the stronger version hard to prove in practice:
   \begin{itemize}
-    \item To show that the choices performed by the SFL procedure always allow
-    to find a proof when there exists one, it would be necessary to formulate
-    and prove a \emph{focusing theorem} based on the permutability of rules
-    mentioned at the end of \refsec{invert}.
+    \item To show that the choices performed by the focusing procedure always
+    allow to find a proof when there exists one, it would be necessary to
+    formulate and prove a \emph{focusing theorem} based on the permutability of
+    rules mentioned at the end of \refsec{invert}.
     \item Even then, some additional rules of our subformula linking system are
     not simulated in any way by the DnD procedure of \refsec{action}. We will come
     back to this point soon.
@@ -1293,14 +1452,16 @@ reminiscent of the adjunction between the product and the exponential in
 implication in the Curry-Howard-Lambek correspondance for intuitionistic
 logic.}. Note that contrary to the rules considered up to now, linkage formation
 rules are not closed under arbitrary contexts: indeed the polarity restrictions
-are necessary to ensure soundness, as reviewed in \refsec{soundness}. A backward
+are necessary to ensure soundness, as reviewed in \refsec{soundness}. In fact we
+also need to add polarity restrictions to the linking rules of \reffig{DISL} to
+ensure that they  A backward
 linkage in a sequent $\Gamma, D\select{A} \seq E\select{B}$ would be encoded by
 the instance
 $$C^+\select{D\select{A} \limp E\select{B}} \step C^+\select{D\select{A} \back
-E\select{B}}$$ of {\rnmsf{B}} where $C^+\hole = \bigwedge Γ \limp \hole$, while
+E\select{B}}$$ of {\rnmsf{B}} where $C^+\hole \equiv \bigwedge Γ \limp \hole$, while
 a forward linkage in a sequent $\Gamma, D\select{A}, E\select{B} \seq F$ would
 be encoded by the instance $$C^-\select{D\select{A} \land E\select{B}} \step
-C^-\select{D\select{A} \forw E\select{B}}$$ of {\rnmsf{F}} where $C^-\hole =
+C^-\select{D\select{A} \forw E\select{B}}$$ of {\rnmsf{F}} where $C^-\hole \equiv
 \bigwedge \Gamma \wedge \hole \limp F$.
 
 \begin{marginfigure}
@@ -1344,14 +1505,15 @@ because this ensures the user needs not fret with manual duplication of
 hypotheses in order to complete a proof. The downside is that the context always
 grows bigger, but this can be balanced by exposing the weakening rule in the
 interface. In Actema it is mapped to a ``delete'' button placed next to every
-hypothesis (the little gray trashbin icons in \reffig{oneplusone}). But for the
-purpose of completeness only, the weakening rule {\rnmsf{weak}} should be
-admissible since its role is already played by the absorption rules
-{\rnmsf{absl}, \rnmsf{absr} and \rnmsf{absq}} of \reffig{DISL-U}. For the sake
-of conciseness of the completeness proof, we will stick to the linkage formation
-rules of \reffig{newlink}.
+hypothesis (the little gray trashbin icons in \reffig{oneplusone}).
+% But for the purpose of completeness only, the weakening rule {\rnmsf{weak}}
+% should be admissible since its role is already played by the absorption rules
+% {\rnmsf{absl}, \rnmsf{absr} and \rnmsf{absq}} of \reffig{DISL-U}.
+In our proof we will use all the rules in $\{\text{{\rnmsf{conn}},
+{\rnmsf{weak}}, {\rnmsf{B}}, {\rnmsf{F}}, {\rnmsf{Bconn}}, {\rnmsf{Fconn}}}\}$,
+in order to make derivations more concise.
 
-Lastly, because linkages created by rules {\rnmsf{B} and \rnmsf{F}} are not
+Because linkages created by rules {\rnmsf{B} and \rnmsf{F}} are not
 necessarily valid, one needs to add the so-called \emph{release} rules already
 mentioned in \refsec{linkages} (\reffig{rellink}). In fact these rules are
 crucial in order to simulate rules from sequent calculus, which will be the
@@ -1360,10 +1522,31 @@ to consider the question of completeness without release rules, especially since
 we do not use them in the semantics of DnD actions. We conjecture that it should
 hold but would require a completely different argument, maybe of a more semantic
 nature like the original proof of Gödel with Tarski models\sidenote{Or Kripke
-models in an intuitionistic setting. }. Another possibility would be to use a
+models in an intuitionistic setting. }. Another possibility might be to use a
 more canonical representation of proofs that is in-between syntax and semantics,
 like the combinatorial proofs of Hughes \sidecite{Hughes_2006} which are known
 to be closely related to deep inference proofs.
+
+\begin{marginfigure}
+  \begin{mathpar}
+    \begin{array}{r@{\quad}c@{\quad}lr}
+        {t = t}&\step&{\top} &\mathsf{refl}\\
+    \end{array}
+  \end{mathpar}
+  \caption{Reflexivity rule for $=$}
+  \labfig{refl-rule}
+\end{marginfigure}
+
+Lastly, a trivial but necessary addition is the rule {\rnmsf{refl}} of
+\reffig{refl-rule} stating the reflexivity of $=$. It was not introduced before
+because it is already handled by click actions on red items in Actema
+(\refsec{clicks}), but here we want a self-contained system that models as
+closely as possible the space of proofs that can be built through DnD actions
+only. In this context, one could imagine restricting the usage of the
+{\rnmsf{refl}} rule to the unit elimination phase of \refsec{action}, where it
+would play the same role as the rules of \reffig{DISL-U}. Thus adding this rule
+does not correspond morally to modelling a click action, nor to a modification
+of the semantics of DnD actions as for release rules.
 
 \todo{ It seems that the question of admissibility of the release rules is very
   similar to the question of admissibility of the {\rnmsf{fence}} rule in the
@@ -1371,10 +1554,274 @@ to be closely related to deep inference proofs.
   sequent calculus rules, but do not appear in real proofs because of the
   arbitrary deep/global power of link formation/iteration rules. }
 
-Then we simply rely on the completeness of cut-free sequent calculus by
-performing a proof by simulation:
+Then we simply rely on the completeness of sequent calculus by performing a
+proof by simulation. There are many variants of sequent calculi for
+intuitionistic first-order logic described in the literature. In our case the
+choice mostly does not matter: all we need is that it is \emph{analytic}, i.e.
+satisifies the subformula property. Indeed the very idea of subformula linking
+is based on analyticity: one should be able to prove a statement by the sole act
+of linking sub-sentences already present in the statement.
+
+We chose the calculus \sys{G3i} from \cite{negri_structural_2001} as our basis,
+because all structural rules are admissible in it (but they would be
+straightforward to simulate). The only modification we do is that we model
+hypotheses in sequents as lists instead of multisets, to make the translation
+from sequents to formulas completely deterministic. Thus we need to add the
+exchange rule {\rnm{exch}}, which is simulated straightforwardly with the
+{\rnmsf{Fcomm}} rule as mentioned earlier. We also add introduction rules
+{\rnm{{=}R}} and {\rnm{{=}L}} for equality. In particular we chose to use a left
+introduction rule {\rnm{{=}L}} capturing Leibniz's elimination scheme, which
+maps directly to our rules {\rnmsf{L{=}_i}}. We could not find mention of such a
+rule in the literature, where instead people use either a non-analytic
+rule\todo{cite nlab at https://ncatlab.org/nlab/show/sequent+calculus}, a
+unification-based rule\todo{cite Dale Miller's paper}, or the more traditional
+axiomatic formulation of equality as a congruent equivalence relation instead of
+a left introduction rule\todo{cite someone}. But our rule looks reasonable
+enough, so we did not attempt a formal justification of soundness/completeness
+that would certainly lead us astray.
 
 \begin{theorem}[Completeness of subformula linking]
-  If $\Gamma \seq C$ is provable in \sys{LJ}, then $\bigwedge \Gamma \limp C
-  \steps \top$.
+  If $\Gamma \seq A$ is provable in $\text{\sys{G3i}} + \{exch, {=}R, {=}L\}$,
+  then $\bigwedge \Gamma \limp A \steps \top$.
 \end{theorem}
+\begin{proof}
+  By induction on the depth of the derivation of $\Gamma \seq A$. The base case
+  simulates the rules {\rnm{ax}}, {\rnm{\top R}}, {\rnm{\bot L}} and
+  {\rnm{{=}R}}. Other rules are simulated as usual by composing the derivations
+  obtained from the induction hypotheses, making a crucial use of the release
+  rules {\rnmsf{Brel}} and {\rnmsf{Frel}}. The full mapping from sequent
+  calculus rules to derivations in our subformula linking calculus is given in
+  the following table. Note that we treat conjunctive formulas modulo
+  associativity to avoid bureaucratic details.
+
+  \newcommand{\mt}{\qquad\mapsto\qquad}
+  \begin{align*}
+    \R[ax]
+      {\Gamma, A \seq A}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \land A \limp A & \\
+      \step & \Gamma \land A \back A & \mathsf{B} \\
+      \step & A \back A & \mathsf{L\land_2} \\
+      \step & \top & \mathsf{id}
+    \end{array}
+    \\\\
+    \R[exch]
+      {\summ[$\pi_1$]{\Gamma, B, A, \Gamma' \seq C}}
+      {\Gamma, A, B, \Gamma' \seq C}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \land A \land B \land \Gamma' \limp C & \\
+      \step & \Gamma \land (A \forw B) \land \Gamma' \limp C & \mathsf{F} \\
+      \step & \Gamma \land (B \forw A) \land \Gamma' \limp C & \mathsf{Fcomm} \\
+      \step & \Gamma \land B \land A \land \Gamma' \limp C & \mathsf{Frel} \\
+      \steps & \top & IH(\pi_1)
+    \end{array}
+    \\\\
+    \R[\top R]
+      {}
+      {\Gamma \seq \top}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \limp \top & \\
+      \step & \top & \mathsf{absr}
+    \end{array}
+    \\\\
+    \R[\land R]
+      {\summ[$\pi_1$]{\Gamma \seq A}}
+      {\summ[$\pi_2$]{\Gamma \seq B}}
+      {\Gamma \seq A \land B}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \limp A \land B & \\
+      \step & \Gamma \limp (\Gamma \back A \land B) & \mathsf{Bconn} \\
+      \step & \Gamma \limp (\Gamma \back A) \land B & \mathsf{R\land_1} \\
+      \step & \Gamma \limp (\Gamma \limp A) \land B & \mathsf{Brel} \\
+      \steps & \Gamma \limp \top \land B & IH(\pi_1) \\
+      \step & \Gamma \limp B & \mathsf{neul} \\
+      \steps & \top & IH(\pi_2)
+    \end{array}
+    \\\\
+    \R[\lor R_i]
+      {\summ[$\pi_1$]{\Gamma \seq A_i}}
+      {\Gamma \seq A_0 \lor A_1}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \limp A_0 \lor A_1 & \\
+      \step & \Gamma \back A_0 \lor A_1 & \mathsf{B} \\
+      \step & (\Gamma \back A_i) \lor A_{1 - i} & \mathsf{R\lor_i} \\
+      \step & (\Gamma \limp A_i) \lor A_{1 - i} & \mathsf{Brel} \\
+      \steps & \top \lor A_{1 - i} & IH(\pi_1) \\
+      \step & \top & \mathsf{absl}
+    \end{array}
+    \\\\
+    \R[{\limp}R]
+      {\summ[$\pi_1$]{\Gamma, A \seq B}}
+      {\Gamma \seq A \limp B}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \limp A \limp B & \\
+      \step & \Gamma \back A \limp B & \mathsf{B} \\
+      \step & (\Gamma \forw A) \limp B & \mathsf{R{\limp}_1} \\
+      \step & \Gamma \land A \limp B & \mathsf{Frel} \\
+      \steps & \top & IH(\pi_1)
+    \end{array}
+    \\\\
+    \prftree[r][l]{$\forall R$}{$x \not\in \fv(\Gamma)$}
+      {\summ[$\pi_1$]{\Gamma \seq A}}
+      {\Gamma \seq \forall x. A}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \limp \forall x. A & \\
+      \step & \Gamma \back \forall x. A & \mathsf{B} \\
+      \step & \forall x. (\Gamma \back A) & \mathsf{R\forall s} \\
+      \step & \forall x. \Gamma \limp A & \mathsf{Brel} \\
+      \steps & \forall x. \top & IH(\pi_1) \\
+      \step & \top & \mathsf{absq}
+    \end{array}
+    \\\\
+    \R[\exists R]
+      {\summ[$\pi_1$]{\Gamma \seq \subst{A}{t}{x}}}
+      {\Gamma \seq \exists x. A}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \limp \exists x. A & \\
+      \step & \Gamma \back \exists x. A & \mathsf{B} \\
+      \step & \Gamma \back \subst{A}{t}{x} & \mathsf{R\exists i} \\
+      \step & \Gamma \limp \subst{A}{t}{x} & \mathsf{Brel} \\
+      \steps & \top & IH(\pi_1)
+    \end{array}
+    \\\\
+    \R[{=}R]
+      {}
+      {\Gamma \seq t = t}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \limp t = t & \\
+      \step & \Gamma \limp \top & \mathsf{refl} \\
+      \step & \top & \mathsf{absr}
+    \end{array}
+    \\\\
+    \R[\top L]
+      {\summ[$\pi_1$]{\Gamma \seq C}}
+      {\Gamma, \top \seq C}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \land \top \limp C & \\
+      \step & \Gamma \limp C & \mathsf{neur} \\
+      \steps & \top & IH(\pi_1)
+    \end{array}
+    \\\\
+    \R[\bot L]
+      {}
+      {\Gamma, \bot \seq C}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \land \bot \limp C & \\
+      \step & \Gamma \land \bot \back C & \mathsf{B} \\
+      \step & \bot \back C & \mathsf{L\land_2} \\
+      \step & \bot \limp C & \mathsf {Brel} \\
+      \step & \top & \mathsf{efq}
+    \end{array}
+    \\\\
+    \R[\land L]
+      {\summ[$\pi_1$]{\Gamma, A, B \seq C}}
+      {\Gamma, A \land B \seq C}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \land A \land B \limp C & \\
+      \steps & \top & IH(\pi_1)
+    \end{array}
+    \\\\
+    \R[\lor L]
+      {\summ[$\pi_1$]{\Gamma, A \seq C}}
+      {\summ[$\pi_2$]{\Gamma, B \seq C}}
+      {\Gamma, A \lor B \seq C}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \land (A \lor B) \limp C & \\
+      \step & \Gamma \land (A \lor B) \limp (\Gamma \land (A \lor B) \back C) & \mathsf{Bconn} \\
+      \step & \Gamma \land \top \limp (\Gamma \land (A \lor B) \back C) & \mathsf{weak} \\
+      \step & \Gamma \limp (\Gamma \land (A \lor B) \back C) & \mathsf{neur} \\
+      \step & \Gamma \limp (A \lor B \back C) & \mathsf{L\land_2} \\
+      \step & \Gamma \limp (A \back C) \land (B \limp C) & \mathsf{L\lor_1} \\
+      \step & \Gamma \limp (A \limp C) \land (B \limp C) & \mathsf{Brel} \\
+      \step & \Gamma \limp (\Gamma \back (A \limp C) \land (B \limp C)) & \mathsf{Bconn} \\
+      \step & \Gamma \limp (\Gamma \back A \limp C) \land (B \limp C) & \mathsf{R\land_1} \\
+      \step & \Gamma \limp ((\Gamma \forw A) \limp C) \land (B \limp C) & \mathsf{R{\limp}_1} \\
+      \step & \Gamma \limp (\Gamma \land A \limp C) \land (B \limp C) & \mathsf{Frel} \\
+      \steps & \Gamma \limp \top \land (B \limp C) & IH(\pi_1) \\
+      \step & \Gamma \limp B \limp C & \mathsf{neul} \\
+      \step & \Gamma \back B \limp C & \mathsf{B} \\
+      \step & (\Gamma \forw B) \limp C & \mathsf{R{\limp}_1} \\
+      \step & \Gamma \land B \limp C & \mathsf{Frel} \\
+      \steps & \top & IH(\pi_2)
+    \end{array}
+    \\\\
+    \R[{\limp}L]
+      {\summ[$\pi_1$]{\Gamma, A \limp B \seq A}}
+      {\summ[$\pi_2$]{\Gamma, B \seq C}}
+      {\Gamma, A \limp B \seq C}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \land (A \limp B) \limp C & \\
+      \step & \Gamma \land \Gamma \land (A \limp B) \limp C & \mathsf{conn} \\
+      \step & \Gamma \land (\Gamma \forw A \limp B) \limp C & \mathsf{F} \\
+      \step & \Gamma \land ((\Gamma \back A) \limp B) \limp C & \mathsf{F{\limp}_1} \\
+      \step & \Gamma \land ((\Gamma \limp A) \limp B) \limp C & \mathsf{Brel} \\
+      \steps & \Gamma \land (\top \limp B) \limp C & IH(\pi_1) \\
+      \step & \Gamma \land B \limp C & \mathsf{neul} \\
+      \steps & \top & IH(\pi_2)
+    \end{array}
+    \\\\
+    \R[\forall L]
+      {\summ[$\pi_1$]{\Gamma, \subst{A}{t}{x} \seq C}}
+      {\Gamma, \forall x. A \seq C}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \land (\forall x. A) \limp C & \\
+      \step & \Gamma \land (\forall x. A) \limp (\Gamma \land (\forall x. A) \back C) & \mathsf{Bconn} \\
+      \step & \Gamma \land (\forall x. A) \limp (\forall x. A \back C) & \mathsf{L\land_2} \\
+      \step & \Gamma \land \top \limp (\forall x. A \back C) & \mathsf{weak} \\
+      \step & \Gamma \limp (\forall x. A \back C) & \mathsf{neur} \\
+      \step & \Gamma \limp (\subst{A}{t}{x} \back C) & \mathsf{L\forall i} \\
+      \step & \Gamma \limp (\subst{A}{t}{x} \limp C) & \mathsf{Brel} \\
+      \step & \Gamma \back (\subst{A}{t}{x} \limp C) & \mathsf{B} \\
+      \step & (\Gamma \forw \subst{A}{t}{x}) \limp C & \mathsf{R{\limp}_1} \\
+      \step & \Gamma \land \subst{A}{t}{x} \limp C & \mathsf{Frel} \\
+      \steps & \top & IH(\pi_1)
+    \end{array}
+    \\\\
+    \prftree[r][l]{$\exists L$}{$x \not\in \fv(\Gamma) \cup \fv(C)$}
+      {\summ[$\pi_1$]{\Gamma, A \seq C}}
+      {\Gamma, \exists x. A \seq C}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \land (\exists x. A) \limp C & \\
+      \step & \Gamma \land (\exists x. A) \limp (\Gamma \land (\exists x. A) \back C) & \mathsf{Bconn} \\
+      \step & \Gamma \land (\exists x. A) \limp (\exists x. A \back C) & \mathsf{L\land_2} \\
+      \step & \Gamma \land \top \limp (\exists x. A \back C) & \mathsf{weak} \\
+      \step & \Gamma \limp (\exists x. A \back C) & \mathsf{neur} \\
+      \step & \Gamma \limp \forall x. (A \back C) & \mathsf{L\exists s} \\
+      \step & \Gamma \limp \forall x. A \limp C & \mathsf{Brel} \\
+      \step & \Gamma \back \forall x. A \limp C & \mathsf{B} \\
+      \step & \forall x. (\Gamma \back A \limp C) & \mathsf{R\forall s} \\
+      \step & \forall x. (\Gamma \forw A) \limp C & \mathsf{R{\limp}_1} \\
+      \step & \forall x. \Gamma \land A \limp C & \mathsf{Frel} \\
+      \steps & \forall x. \top & IH(\pi_1) \\
+      \step & \top & \mathsf{absq}
+    \end{array}
+    \\\\
+    \R[{=}L]
+      {\summ[$\pi_1$]{\Gamma, t = u \seq \subst{A}{u}{x}}}
+      {\Gamma, t = u \seq \subst{A}{t}{x}}
+    &\mt
+    \begin{array}{lll}
+            & \Gamma \land t = u \limp \subst{A}{t}{x} & \\
+      \step & \Gamma \land t = u \limp (\Gamma \land t = u \back \subst{A}{t}{x}) & \mathsf{Bconn} \\
+      \step & \Gamma \land t = u \limp (t = u \back \subst{A}{t}{x}) & \mathsf{L\land_2} \\
+      \step & \Gamma \land t = u \limp \subst{A}{u}{x} & \mathsf{L{=}_1} \\
+      \steps & \top & IH(\pi_1)
+    \end{array}
+  \end{align*}
+\end{proof}
