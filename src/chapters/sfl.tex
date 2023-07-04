@@ -1562,23 +1562,48 @@ satisifies the subformula property. Indeed the very idea of subformula linking
 is based on analyticity: one should be able to prove a statement by the sole act
 of linking sub-sentences already present in the statement.
 
+\begin{marginfigure}
+\begin{mathpar}
+  \R[Ref]
+    {\Gamma, t = t \seq C}
+    {\Gamma \seq C}
+  \\
+  \top \quad\step\quad t = t \quad \mathsf{ref}
+\end{mathpar}
+\caption{Non-analytic reflexivity rules}
+\labfig{ref-rule}
+\end{marginfigure}
+
 We chose the calculus \sys{G3i} from \cite{negri_structural_2001} as our basis,
 because all structural rules are admissible in it (but they would be
-straightforward to simulate). The only modification we do is that we model
+straightforward to simulate). The first modification we do is that we model
 hypotheses in sequents as lists instead of multisets, to make the translation
 from sequents to formulas completely deterministic. Thus we need to add the
 exchange rule {\rnm{exch}}, which is simulated straightforwardly with the
-{\rnmsf{Fcomm}} rule as mentioned earlier. We also add introduction rules
-{\rnm{{=}R}} and {\rnm{{=}L}} for equality. In particular we chose to use a left
-introduction rule {\rnm{{=}L}} capturing Leibniz's elimination scheme, which
-maps directly to our rules {\rnmsf{L{=}_i}}. We could not find mention of such a
-rule in the literature, where instead people use either a non-analytic
-rule\todo{cite nlab at https://ncatlab.org/nlab/show/sequent+calculus}, a
-unification-based rule\todo{cite Dale Miller's paper}, or the more traditional
-axiomatic formulation of equality as a congruent equivalence relation instead of
-a left introduction rule\todo{cite someone}. But our rule looks reasonable
-enough, so we did not attempt a formal justification of soundness/completeness
-that would certainly lead us astray.
+{\rnmsf{Fcomm}} rule as mentioned earlier. The second modification we do is
+adding introduction rules {\rnm{{=}R}} and {\rnm{{=}L}} for equality. The left
+introduction rule {\rnm{{=}L}} captures Leibniz's elimination scheme, and is in
+fact the rule {\rnm{Repl}} from \cite{negri_structural_2001} (modulo the fact
+that we use single-succedant instead of multi-succedant sequents). The right
+introduction rule {\rnm{{=}R}} is an axiomatic reflexivity rule instead of the
+{\rnm{Ref}} rule from \cite{negri_structural_2001} (\reffig{ref-rule}). The
+reason is that we cannot simulate the latter directly without adding its
+equivalent {\rnmsf{ref}} to our calculus (\reffig{ref-rule}), because it breaks
+the subformula property. We conjecture that using {\rnm{{=}R}} instead of
+{\rnm{Ref}} does not break the cut admissibility theorem from
+\cite{negri_structural_2001}.
+
+% We could not find mention of such a rule in the literature, where instead people
+% use either a non-analytic rule\todo{cite nlab at
+% https://ncatlab.org/nlab/show/sequent+calculus}, a unification-based
+% rule\todo{cite Dale Miller's paper}, or the more traditional axiomatic
+% formulation of equality as a congruent equivalence relation instead of a left
+% introduction rule\todo{cite someone}. But our rule looks reasonable enough, so
+% we did not attempt a formal justification of soundness/completeness that would
+% certainly lead us astray. The only problematic aspect would be if it breaks cut
+% admissibility. We conjecture it does not, and postpone an update of the cut
+% admissibility proof of \cite{negri_structural_2001} with our equality rules as
+% future work.
 
 \begin{theorem}[Completeness of subformula linking]
   If $\Gamma \seq A$ is provable in $\text{\sys{G3i}} + \{exch, {=}R, {=}L\}$,
