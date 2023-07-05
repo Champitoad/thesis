@@ -300,9 +300,6 @@ example in \refch{sfl-classical}, but for now we can just remark that there is
 no way to handle it with the rules of \reffig{DISL} because we lack a rule for
 redexes of the form $B\select{A} \limp C \back D\select{A'}$.
 
-\todo{ Ensure Condition \ref{cond:pol} works correctly in the fully detailed
-  proof of productivity (in annex). }
-
 \subsection{Identity}\labsec{identity}
 
 A context binds variables in the selected proposition. These variables
@@ -757,7 +754,6 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
 
 \section{Soundness}\labsec{soundness}
 
-% \todo{Detailed proofs of all lemmas.}
 
 All examples up to now followed the scheme for DnD actions sketched in
 \refsec{aristote}:
@@ -1205,12 +1201,23 @@ is a sequence of reductions with one of the following forms:
 \end{mathpar}
 \end{theorem}
 
-\todo{ Explain why the productivity theorem is interesting in terms of UX, i.e.
-  it ensures non-trivial progress in the reasoning: we managed to connect some
-  dots in the problem and actually solve a subgoal. That is, either the
-  conclusion is strictly weakened, or the assumptions are strictly strengthened,
-  instead of having just an equivalent goal written in a different way (at least
-  in the case of logical linkages).}
+This is the formal counterpart to the notion of productivity mentioned in
+\refsec{validity}. Intuitively, this theorem ensures non-trivial progress in the
+reasoning: we managed to connect some dots in the problem and actually solve a
+subgoal. That is, either the conclusion is \emph{strictly} weakened after a
+backward DnD, or the assumptions are \emph{strictly} strengthened after a
+forward DnD, instead of having just an equivalent goal written in a different
+way\sidenote{This remark only applies to logical linkages however, since
+rewriting equalities can only produce equivalent statements. Some proof
+assistants provide facilities to rewrite arbitrary relations in subterms of
+arbitrary depth, such as Coq with its \emph{generalized rewriting} mechanism
+\cite{coqman-genrew}. This includes non-symmetric relations that can produce
+non-equivalent statements, and there is no reason in principle it could not be
+integrated in our paradigm, in the form of generalized substitution rules in
+place of {\rnmsf{L{=}_i}} and {\rnmsf{F{=}_i}}.}. This again contrasts with the
+release semantics of subformula linking which do not provide this guarantee of
+productivity, or with the logical reasoning tactics of proof assistants based on
+natural deduction rules.
 
 %% \begin{proof}
 %%   By recurrence on $\size{\mathcal{L}}$:
@@ -1292,7 +1299,7 @@ There are three possibilities when analysing invertibility of the two rules in
 the third case:
 \begin{enumerate}
   \item if both are invertible, then the order of application does not matter
-  since we preserve provability at the end;
+  since we preserve provability in the end;
   \item if only one is invertible, we apply it first following the focusing
   discipline;
   \item if neither are invertible, we want to choose the order that maximizes
@@ -1452,9 +1459,7 @@ reminiscent of the adjunction between the product and the exponential in
 implication in the Curry-Howard-Lambek correspondance for intuitionistic
 logic.}. Note that contrary to the rules considered up to now, linkage formation
 rules are not closed under arbitrary contexts: indeed the polarity restrictions
-are necessary to ensure soundness, as reviewed in \refsec{soundness}. In fact we
-also need to add polarity restrictions to the linking rules of \reffig{DISL} to
-ensure that they  A backward
+are necessary to ensure soundness, as reviewed in \refsec{soundness}. A backward
 linkage in a sequent $\Gamma, D\select{A} \seq E\select{B}$ would be encoded by
 the instance
 $$C^+\select{D\select{A} \limp E\select{B}} \step C^+\select{D\select{A} \back
@@ -1509,7 +1514,7 @@ hypothesis (the little gray trashbin icons in \reffig{oneplusone}).
 % But for the purpose of completeness only, the weakening rule {\rnmsf{weak}}
 % should be admissible since its role is already played by the absorption rules
 % {\rnmsf{absl}, \rnmsf{absr} and \rnmsf{absq}} of \reffig{DISL-U}.
-In our proof we will use all the rules in $\{\text{{\rnmsf{conn}},
+In our completeness proof we will use all the rules in $\{\text{{\rnmsf{conn}},
 {\rnmsf{weak}}, {\rnmsf{B}}, {\rnmsf{F}}, {\rnmsf{Bconn}}, {\rnmsf{Fconn}}}\}$,
 in order to make derivations more concise.
 
@@ -1543,7 +1548,7 @@ because it is already handled by click actions on red items in Actema
 (\refsec{clicks}), but here we want a self-contained system that models as
 closely as possible the space of proofs that can be built through DnD actions
 only. In this context, one could imagine restricting the usage of the
-{\rnmsf{refl}} rule to the unit elimination phase of \refsec{action}, where it
+{\rnmsf{refl}} rule to the unit elimination phase (\refsec{action}), where it
 would play the same role as the rules of \reffig{DISL-U}. Thus adding this rule
 does not correspond morally to modelling a click action, nor to a modification
 of the semantics of DnD actions as for release rules.
@@ -1576,22 +1581,22 @@ of linking sub-sentences already present in the statement.
 
 We chose the calculus \sys{G3i} from \cite{negri_structural_2001} as our basis,
 because all structural rules are admissible in it (but they would be
-straightforward to simulate). The first modification we do is that we model
-hypotheses in sequents as lists instead of multisets, to make the translation
-from sequents to formulas completely deterministic. Thus we need to add the
-exchange rule {\rnm{exch}}, which is simulated straightforwardly with the
-{\rnmsf{Fcomm}} rule as mentioned earlier. The second modification we do is
-adding introduction rules {\rnm{{=}R}} and {\rnm{{=}L}} for equality. The left
-introduction rule {\rnm{{=}L}} captures Leibniz's elimination scheme, and is in
-fact the rule {\rnm{Repl}} from \cite{negri_structural_2001} (modulo the fact
-that we use single-succedant instead of multi-succedant sequents). The right
-introduction rule {\rnm{{=}R}} is an axiomatic reflexivity rule instead of the
-{\rnm{Ref}} rule from \cite{negri_structural_2001} (\reffig{ref-rule}). The
-reason is that we cannot simulate the latter directly without adding its
-equivalent {\rnmsf{ref}} to our calculus (\reffig{ref-rule}), because it breaks
-the subformula property. We conjecture that using {\rnm{{=}R}} instead of
-{\rnm{Ref}} does not break the cut admissibility theorem from
-\cite{negri_structural_2001}.
+straightforward to simulate apart from the cut rule). The first modification we
+do is that we model hypotheses in sequents as lists instead of multisets, to
+make the translation from sequents to formulas completely deterministic. Thus we
+need to add the exchange rule {\rnm{exch}}, which is simulated straightforwardly
+with the {\rnmsf{Fcomm}} rule as mentioned earlier. The second modification we
+do is adding introduction rules {\rnm{{=}R}} and {\rnm{{=}L}} for equality. The
+left introduction rule {\rnm{{=}L}} captures Leibniz's elimination scheme, and
+is in fact the rule {\rnm{Repl}} from \cite{negri_structural_2001} (modulo the
+fact that we use single-succedant instead of multi-succedant sequents). The
+right introduction rule {\rnm{{=}R}} is an axiomatic reflexivity rule, instead
+of the {\rnm{Ref}} rule from \cite{negri_structural_2001} (\reffig{ref-rule}).
+The reason is that we cannot simulate the latter directly without adding its
+equivalent rule {\rnmsf{ref}} to our calculus (\reffig{ref-rule}), which we do
+not want to do because it would break the subformula property. We conjecture
+that using {\rnm{{=}R}} instead of {\rnm{Ref}} does not break the cut
+admissibility theorem from \cite{negri_structural_2001}.
 
 % We could not find mention of such a rule in the literature, where instead people
 % use either a non-analytic rule\todo{cite nlab at
@@ -1605,7 +1610,7 @@ the subformula property. We conjecture that using {\rnm{{=}R}} instead of
 % admissibility proof of \cite{negri_structural_2001} with our equality rules as
 % future work.
 
-\begin{theorem}[Completeness of subformula linking]
+\begin{theorem}[Completeness of subformula linking]\labthm{sfl-completeness}
   If $\Gamma \seq A$ is provable in $\text{\sys{G3i}} + \{exch, {=}R, {=}L\}$,
   then $\bigwedge \Gamma \limp A \steps \top$.
 \end{theorem}
@@ -1838,14 +1843,13 @@ the subformula property. We conjecture that using {\rnm{{=}R}} instead of
     \end{array}
     \\\\
     \R[{=}L]
-      {\summ[$\pi_1$]{\Gamma, t = u \seq \subst{A}{u}{x}}}
-      {\Gamma, t = u \seq \subst{A}{t}{x}}
+      {\summ[$\pi_1$]{\Gamma, t = u, \subst{A}{u}{x}, \subst{A}{t}{x} \seq C}}
+      {\Gamma, t = u, \subst{A}{t}{x} \seq C}
     &\mt
     \begin{array}{lll}
-            & \Gamma \land t = u \limp \subst{A}{t}{x} & \\
-      \step & \Gamma \land t = u \limp (\Gamma \land t = u \back \subst{A}{t}{x}) & \mathsf{Bconn} \\
-      \step & \Gamma \land t = u \limp (t = u \back \subst{A}{t}{x}) & \mathsf{L\land_2} \\
-      \step & \Gamma \land t = u \limp \subst{A}{u}{x} & \mathsf{L{=}_1} \\
+            & \Gamma \land t = u \land \subst{A}{t}{x} \limp C & \\
+      \step & \Gamma \land t = u \land (t = u \forw \subst{A}{t}{x}) \land \subst{A}{t}{x} \limp C & \mathsf{Fconn} \\
+      \step & \Gamma \land t = u \land \subst{A}{u}{x} \land \subst{A}{t}{x} \limp C & \mathsf{F{=}_1} \\
       \steps & \top & IH(\pi_1)
     \end{array}
   \end{align*}

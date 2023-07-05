@@ -284,7 +284,7 @@ that handle interaction with the antecedant of an implication: this is because
 it is the only way to switch polarity when descending into a direct subformula,
 which is what triggers the change of mode.
 
-\section{Soundness and Validity}
+\section{Metatheory of Parallel Reasoning}
 
 Like backward rules, a parallel rule $A \step B$ will be logically sound if $B$
 entails $A$. Then if one wants to stick to an intuitionistic setting, one has to
@@ -303,12 +303,12 @@ is those linkages who satisfy productivity (\refthm{productivity}) and thus will
 always terminate on an instance of either the {\rnmsf{id}} rule (backward mode)
 or the equality rules (backward/forward modes). Thus if there is no way to reach
 either forward or backward mode from a parallel linkage, it has no meaning in
-our paradigm. Then if we trust that the rules of \reffig{parallel} are the only
-ones possible to get a correct subformula linking semantics, it seems that
-parallel reasoning only makes sense in a classical setting. While we will not be
-able to show the uniqueness of our set of rules, in the rest of this chapter we
-confirm that it works correctly by extending the results of \refch{sfl} to the
-classical, multi-conclusion setting.
+our paradigm. Then if we trust that rules {\rnmsf{L{\limp}_1}} and
+{\rnmsf{P{\limp}_1}} are necessary to get the intended semantics, it seems that
+parallel reasoning only makes sense in a classical setting. In the rest of this
+chapter we only show that the rules of \reffig{parallel} are sufficient for our
+purpose, by extending the results of \refch{sfl} to the classical,
+multi-conclusion setting.
 
 We start by updating the validity criterion on linkages, more specifically we
 drop Clause \ref{clause:intuit} of Condition \ref{cond:pol} about the polarities
@@ -361,7 +361,9 @@ We add the two following cases to Lemmas \ref{lemma:rules-valid-in-context} and
 \end{itemize}
 The proof of Lemma \ref{lemma:rules-valid-in-context} is easily extended by
 inspecting each parallel rule, and we already mentioned that the backward rule
-{\rnmsf{L{\limp}_1}} is sound classically.
+{\rnmsf{L{\limp}_1}} is sound classically. Note that now sequents have multiple
+conclusions, thus one needs to use rules from a multi-succedant calculus such as
+\sys{G3c} \cite{negri_structural_2001}.
 
 Polarity preservation (Fact \ref{prop:rules-preserve-polarity}) is also true
 with $\para$, we just need to add the missing cases from \reffig{modes-schema}:
@@ -372,9 +374,9 @@ with $\para$, we just need to add the missing cases from \reffig{modes-schema}:
   \para B} \step C'\select{A' \back B'}$) then $C\hole$ and $C'\hole$ have the
   same polarity.
 \end{itemize}
-Finally, the proof of Lemma \ref{lemma:rewriting-valid-in-context} is also
-extended straightforwardly. We only write the added case for $\para$ in the
-proof of the first statement:
+The proof of Lemma \ref{lemma:rewriting-valid-in-context} is also extended
+straightforwardly. We only write the added case for $\para$ in the proof of the
+first statement:
 \begin{itemize}
   \item $\link = \para$: by Fact \ref{prop:rules-preserve-polarity}, $C'$ must
   be positive. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
@@ -383,11 +385,18 @@ proof of the first statement:
   $\lint{D} \seq C^+\select{A \limp B}$.
 \end{itemize}
 
-\section{Productivity and Focusing}
+Regarding completeness (\refthm{sfl-completeness}), we already noticed that our
+rules now allow us to prove Peirce's law, which is known to be sufficient to
+recover classical logic from intuitionistic logic.
 
-About focusing, we can just remark that some rules that were not invertible in
-intuitionistic logic become invertible in classical logic. Therefore the
-dynamics of focusing should be different, and it might be interesting to compare
-the behaviors of intuitionistic and classical DnD actions on specific examples.
+The proof of productivity (\refthm{productivity}) is again extended
+straightforwardedly, by considering the additional case of parallel linkages and
+using arguments ``dual'' to those used for forward linkages. There is even less
+work to do regarding the preservation of Condition \ref{cond:pol} since we
+dropped the intuitionistic restriction.
 
-\section{Completeness}
+Finally about focusing (\refsec{invert}), we can just remark that some rules
+that were not invertible in intuitionistic logic become invertible in classical
+logic. Therefore the dynamics of focusing should be different, and it might be
+interesting to compare the behaviors of intuitionistic and classical DnD actions
+on specific examples.
