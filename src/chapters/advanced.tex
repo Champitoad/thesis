@@ -2,24 +2,44 @@
 \chapter{Proof-by-Action in Practice}
 \labch{advanced}
 
+In the previous chapters, we explained the core principles of our so-called
+Proof-by-Action paradigm and especially its drag-and-drop actions, first through
+basic and abstract examples in \refch{pba}, and then from a proof-theoretical
+perspective in \refch{sfl}. The goal of this chapter is to provide a better
+sense of what proofs by action/DnD look like in practice, and how they compare
+to more traditional approaches to interactive theorem proving. To that effect,
+we perform a case study of a few select examples, unrolling and commenting in
+details one or many of their proofs. Although still basic, they are
+full-fledged, concrete logical riddles or mathematical problems that one might
+give as exercise to an undergraduate student learning formal proofs. Note that
+our analysis will stay quite informal and opinionated: a more systematic
+approach such as a user study would allow for a better evaluation of our
+paradigm, but at the time of writing of this thesis the Actema prototype is not
+mature enough to conduct a project of this scale.
+
 The chapter is organized as follows: \refsec{edukera} studies a proof of a small
 logical riddle in Actema, highlighting some benefits of our approach compared to
-textual systems.
+textual systems. \refsec{funcs} explores how basic properties about functions
+between sets can be proved graphically, introducing the use of definitions in
+addition to logical reasoning steps. In \refsec{arith} we prove equations in
+Peano arithmetic, showing how one can easily incorporate additional actions into
+the paradigm to deal with more specialized forms of reasoning: \emph{induction}
+and \emph{automatic computation}.
 
-\section{A More Advanced Example}\labsec{edukera}
+\section{Forward reasoning}\labsec{edukera}
 
-It is too early to perform a detailed case study comparing our approach
-to interactive theorem proving with others --- tactic-based,
-declarative, {\em etc}\dots~This is due primarily to the fact that
-our prototype is not mature enough; it cannot handle lemmas and
-implements a limited formalism. However some examples allow to get a
-glimpse of specificities and possible advantages of proofs by actions.
+% It is too early to perform a detailed case study comparing our approach
+% to interactive theorem proving with others --- tactic-based,
+% declarative, {\em etc}\dots~This is due primarily to the fact that
+% our prototype is not mature enough; it cannot handle lemmas and
+% implements a limited formalism. However some examples allow to get a
+% glimpse of specificities and possible advantages of proofs by actions.
 
-One such example is a small logical riddle, which we borrow from a
-textual educational system, Edukera~\sidecite{edukera}. One considers a
-population of people, with at least one individual $h$, together with a
-single function $\mother$ and one predicate $\rich$. The aim is to
-show that the two following assumptions are incompatible:
+Our first example is a small logical riddle, which we borrow from a textual
+educational system, Edukera~\sidecite{edukera}. One considers a population of
+people, with at least one individual $h$, together with a single function
+$\mother$ and one predicate $\rich$. The aim is to show that the two following
+assumptions are incompatible:
 \begin{itemize}
 \item[(1)] $\forall x. \neg\rich(x)\lor \neg\rich(\mother(\mother(x)))$,
 \item[(2)] $\forall x. \neg\rich(x) \limp \rich(\mother(x)).$
@@ -80,9 +100,15 @@ One can then finish the case by combining $(7)$ and $(2)$ which yields
 $$\rich(\mother(\mother(h)))$$ contradicting $(4')$. These two last steps each
 correspond to a simple DnD. The other case, $\neg\rich(h)$, is quite similar.
 
-Such a simple example is not sufficient to provide significant
-metrics. Note however that once a user has understood the proof, the
-riddle is routinely solved in less than a minute in Actema, which
-seems out of reach for about any user in a tactic based prover. At
-least as important is the fact that the proof can be performed without
-typing any text, especially no intermediate statement. 
+% Such a simple example is not sufficient to provide significant metrics.
+Note that once a user has understood the proof, the riddle is routinely solved
+in less than a minute in Actema, which seems out of reach for about any user in
+a tactic based prover. At least as important is the fact that the proof can be
+performed without typing any text, especially no intermediate statement. 
+
+
+\section{Sets and Functions}\labsec{funcs}
+
+
+
+\section{Basic Arithmetic}\labsec{arith}
