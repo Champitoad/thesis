@@ -27,31 +27,114 @@ $$\bigwedge_{i=1}^{n}{A_i} \limp \bigvee_{j=1}^{m}{C_j}$$
   \labfig{multintro}
 \end{marginfigure}
 
-Later logicians have proposed various multi-conclusion sequent calculi for
-intuitionistic logic, the most famous being \sys{GHCP} from Dragalin
-\sidecite{dragalin_mathematical_1990}. Dyckhoff noted that such calculi are more
-suited to implementation of automated proof search procedures
-\sidecite{dyckhoff_contraction-free_1992} because they allow sharing code with
-classical calculi, but more importantly because one can delay choices of
-disjuncts to prove with the ``multiplicative''\sidenote{Terminology borrowed
-from linear logic, where {\rnmsf{\lor R}} is exactly the right introduction rule
-for multiplicative disjunction $\parr$.} introduction rule {\rnmsf{\lor R}}
-(\reffig{multintro}). This property is also desirable in the setting of
-interactive proof search as noted by Ayers\sidenote{Section 3.1.3 of his thesis
-\cite{ayers_thesis}.}, because this reduces the need for the user to guess in
-advance or backtrack; and contrary to a computer, it is very easy for a human to
-lose track of the proof search history when backtracking multiple times.
+\begin{marginfigure}
+  \begin{mathpar}
+    \R[\lor R]
+      {\R[\neg R]
+        {\R[ax]
+          {}
+          {A \seq \select{A}}}
+        {\seq A, \select{\neg A}}}
+      {\seq \select{A \lor \neg A}}
+  \end{mathpar}
+  \caption{Proof of the excluded middle in \sys{LK}}
+  \labfig{lk-tnd}
+\end{marginfigure}
 
-That being said, we do not know of any proof assistant, whether classical or
-intuitionistic, that exposes goals with multiple conclusions in its user
-interface. One reason is that most proof/tactic languages are based on the rules
-of natural deduction, which use single-conclusion sequents. Another reason is
-that having one conclusion removes the need to designate it with an explicit
-name or number, as is the case with hypotheses\sidenote{The current trend is to
-have user-chosen or automatically generated strings for names as in Coq and
-Lean, but some provers like HOL Light ask for the position in the list as an
-integer to designate a particular hypothesis.}. And the explicit handling of
-names in tactic invokations is known to be tedious and time-consuming, to the
+One way to get a multi-conclusion sequent in \sys{LK} is to apply the
+``multiplicative''\sidenote{Terminology borrowed from linear logic, where
+{\rnm{\lor R}} is exactly the right introduction rule for multiplicative
+disjunction $\parr$.} introduction rule {\rnm{\lor R}} (\reffig{multintro}). For
+instance, \reffig{lk-tnd} shows a proof of the law of excluded middle, where for
+each rule we squared the principal formula.
+% Following the mapping of click actions to sequent calculus rules
+% (\reftab{click-rules}),
+One could imagine performing the same proof in Actema by successively clicking
+on these principal formulas, following a bottom-up reading of the sequent
+calculus derivation seen as the trace of a proof search process. First we decide
+to prove $A \lor \neg A$: this amounts to proving alternatively $A$ or $\neg
+A$, which now appear as two separate red items in the same tab. Then we try to
+prove $\neg A$, with the usual method of supposing $A$ to find a contradiction.
+However instead of a contradiction, we decide to backtrack and prove the
+alternative conclusion $A$, which is now trivial by assumption. We come back to
+these multi-conclusion click actions in \refsec{classical-click}.
+
+It is clear in the proof that the negative occurrence of $A$ in $\neg A$ is the
+one that becomes the assumption $A$ that justifies the conclusion $A$ in the
+last step. It would be natural to specify this causal relationship by linking
+directly the two occurrences of $A$, as we do with DnD actions in Actema.
+However for this to be possible, we need to introduce a new linking operator ---
+let us note it $\para$ --- that works between two conclusions, where $A \para B$
+is obviously interpreted as $A \lor B$. Then after clicking on $A \lor \neg A$
+we can just finish the proof by connecting $A$ and $\neg A$:
+$$\select{A} \para \neg \select{A} ~~\steps~~ \top$$
+
+This would avoid the additional step of clicking on $\neg A$ to turn it into an
+hypothesis, and suggests the possibility of a more general behavior
+associated to this $\para$ operator for arbitrary logical connectives. This is
+what we explore in \refsec{classical-dnd}.
+
+\section{Backtracking}
+
+% \begin{marginfigure}
+%   \begin{mathpar}
+%     \R[raa]
+%       {\Gamma, \neg A \seq \bot}
+%       {\Gamma \seq A}
+%   \end{mathpar}
+%   \caption{Rule of \textit{reductio ad absurdum}}
+%   \labfig{raa}
+% \end{marginfigure}
+
+Interestingly, the classical aspect of the proof of $A \lor \neg A$ in
+\reffig{lk-tnd} comes exclusively from the \emph{backtracking} operation during
+the last step, a phenomemon which is well known in the literature on
+constructive/computational properties of classical logic\todo{add references}.
+Then one can see the introduction rules {\rnm{\lor R_1}} and {\rnm{\lor R_2}},
+and the restriction of intuitionistic sequents to one conclusion, as ways to
+prevent such backtracking by forcing the choice of disjunct to prove at an early
+stage.
+% \sidenote{Although the ability to backtrack can be reintroduced in other
+% ways, for example with the rule of \textit{reductio ad absurdum} (\reffig{raa})
+% (TODO: add reference).}.
+
+In fact backtracking can still be performed, but at the meta-level of the proof
+search process instead of the object-level of inference rules. In an interactive
+theorem prover, this corresponds to the ability for the user to \emph{undo} an
+inference and go back to a previous proof state. However keeping track of the
+times we undo/redo inferences is very hard to do as humans, and the user
+interfaces of current proof assistants do not provide any mechanism for it
+either. This has already been noted by Ayers\sidenote{Section 3.1.3 of his
+thesis \cite{ayers_thesis}.}, and is a good motivation for trying to design
+proof systems where the need for meta-level backtracking is reduced, or even
+removed. One way to do this is to maximize the proportion of inference rules
+that are \emph{invertible}, meaning that their premisses always follow from
+their conclusion. Indeed when looking at rules as tactics (see
+\refsec{itps}), it means that they will always reduce a provable goal to
+provable subgoals, and thus can never induce a backtracking point. The
+{\rnm{\lor R}} rule is an example of invertible rule, and in \sys{LK} it can
+replace the other, non-invertible rules {\rnm{\lor L_1}} and {\rnm{\lor L_2}}.
+
+But {\rnm{\lor R}} requires multi-conclusion sequents, and Gentzen restricted
+their use to classical logic. It turns out that logicians after Gentzen have
+proposed various multi-conclusion sequent calculi that work for intuitionistic
+logic, the most famous being \sys{GHCP} from Dragalin
+\sidecite{dragalin_mathematical_1990}, which uses {\rnm{\lor R}}. In the rest of
+this chapter, we will consider to what extent one can benefit from having
+multiple conclusions in an intuitionistic setting.
+
+\section{Implementation in theorem provers}
+
+Despite the aforementioned benefits of multi-conclusion sequents, we do not know
+of any proof assistant, whether classical or intuitionistic, that exposes them
+in its user interface. One reason is that most proof/tactic languages are based
+on the rules of natural deduction, which use single-conclusion sequents. Another
+reason is that having one conclusion removes the need to designate it with an
+explicit name or number, as is the case with hypotheses\sidenote{The current
+trend is to have user-chosen or automatically generated strings for names as in
+Coq and Lean, but some provers like HOL Light ask for the position in the list
+as an integer to designate a particular hypothesis.}. And the explicit handling
+of names in tactic invokations is known to be tedious and time-consuming, to the
 point that some tactic languages like SSReflect have been designed around this
 problem \sidecite{SSR}. Thus having multiple conclusions would only double the
 effort for no compelling reason.
@@ -64,12 +147,12 @@ on the selection of subterms by spelling their content. Then click and DnD
 actions could be triggered by voice commands once the subterms they apply to
 have been selected. This could be an important alternative for users with
 impaired vision and/or motricity.}. This opens up the possibility of exposing
-multiple conclusions in the interface, with associated graphical proof actions.
-In the layout of Actema, this corresponds to having zero or multiple red items
-instead of a single one. While we did not implement such an extension, we
-explore in this chapter its design, and the theoretical foundations behind it.
+multiple conclusions in the interface with associated graphical proof actions,
+as outlined in the introductory example on the excluded middle. While we did not
+implement such an extension, we explore in the following sections its design,
+and the theoretical foundations behind it.
 
-\section{Click Actions}
+\section{Click Actions}\labsec{classical-click}
 
 In \reftab{click-rules}, we showed how click actions in Actema are in direct
 correspondance with the rules of the single-conclusion sequent calculus \sys{LJ}
@@ -168,7 +251,7 @@ conclusion for $\subst{A}{t}{x}$ while preserving the old one. This corresponds
 to the invertible right introduction rule of \sys{G3c} ({\rnmsf{\exists R*}} in
 \reffig{multi-inst}).
 
-\section{DnD Actions}
+\section{DnD Actions}\labsec{classical-dnd}
 
 Once we allow for more than one conclusion, it is natural to wonder whether it
 makes sense to also allow for DnD actions between two conclusions. But we
@@ -179,21 +262,22 @@ third mode of reasoning, at least in the traditional way of building proofs we
 are used to, either on paper or with proof assistants. However from a purely
 formal point of view, there is nothing preventing us from trying to design
 rewrite rules for a new linking operator, by following the same recipe we used
-for $\back$ and $\forw$.
+for $\back$ and $\forw$. Furthermore, we already saw earlier in the excluded
+middle example that such an operator did seem useful.
 
-When looking for a proof of a sequent with multiple conclusions, there is this
-idea that unless we commit to proving one conclusion and give up on the others
-by applying the {\rnmsf{{\limp}R*i}} rule, we can switch freely our focus
-between the different conclusions. Thus in a way, we are looking for proofs of
-all the conclusions \emph{in parallel}, and we stop as soon as we find
-one\sidenote{This is also related to the $\parr$ connective of linear logic
-which uses the {\rnmsf{\lor R}} rule of \reffig{multintro}, and whose spelling
-``par'' is historically motivated by an understanding of the multiplicative
-fragment of \sys{LL} as a logic of parallel computation
-\cite{girard-linear-1987}.}. Hence I choose to call this third kind of
-interaction between two conclusions \emph{parallel} reasoning. It will be
-captured by the $\para$ operator, whose notation is suggestive of the parallel
-composition $\mid$ from process calculi.
+When looking for a proof of a sequent with multiple conclusions, unless we
+commit to proving one conclusion and give up on the others by applying the
+{\rnmsf{{\limp}R*i}} rule, we can switch freely our focus between the different
+conclusions. Thus in a way, we are looking for proofs of all the conclusions
+\emph{in parallel}, and we stop as soon as we find one\sidenote{This is also
+related to the $\parr$ connective of linear logic which uses the {\rnmsf{\lor
+R}} rule of \reffig{multintro}, and whose spelling ``par'' is historically
+motivated by an understanding of the multiplicative fragment of \sys{LL} as a
+logic of parallel computation \cite{girard-linear-1987}.}. Hence I choose to
+call this third kind of interaction between two conclusions \emph{parallel}
+reasoning. This justifies the choice of notation for the parallel linking
+operator $\para$, which is suggestive of the parallel composition $\mid$ from
+process calculi.
 
 The rules governing $\para$ are presented in \reffig{parallel}. A parallel
 linkage can be created either by drag-and-dropping two conclusions together, or
