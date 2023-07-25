@@ -21,10 +21,11 @@
 
       tectonic = pkgs.tectonic;
       biber = pkgs_biber.biber;
+      pygments = pkgs.python311Packages.pygments;
     in
     {
       devShell.${system} = pkgs.mkShell {
-        packages = [ tectonic biber ];
+        packages = [ tectonic biber pygments ];
       };
     };
 }

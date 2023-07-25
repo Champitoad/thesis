@@ -57,6 +57,7 @@
 % \usepackage{adjustbox}
 % \usepackage{pifont}
 % \usepackage{turnstile}
+\usepackage{minted}
 
 % \usepackage{unicode-math}
 % \usepackage[old-default]{fontsetup}
@@ -90,7 +91,7 @@
 % \newtheorem{conjecture}{Conjecture}
 % \newtheorem{condition}{Condition}
 
-% Package config
+%%% Package config
 
 % tabularx
 \newcolumntype{O}[1]{>{\setlength\hsize{#1\hsize}}c}
@@ -103,7 +104,7 @@
 \definecolor{pos}{HTML}{C80000}
 \definecolor{neg}{HTML}{0000C8}
 
-%% prftree
+% prftree
 \prflineextra=0em
 \prflinepadbefore=0.5ex
 \prflinepadafter=0.5ex
@@ -113,8 +114,14 @@
 
 \allowdisplaybreaks
 
-\input{notations}
+% Custom LaTeX preamble for alectryon
+% \usepackage{cmap} % fix search and cut-and-paste in Acrobat
+% \usepackage{ifthen}
+% \usepackage{alectryon}
+% \usepackage{pygments}
 
-% \includeonly{pba}
+%%% Notations
+
+\input{notations}
 
 \begin{document}

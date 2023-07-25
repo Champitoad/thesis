@@ -9,22 +9,33 @@ perspective in \refch{sfl}. The goal of this chapter is to provide a better
 sense of what proofs by action/DnD look like in practice, and how they compare
 to more traditional approaches to interactive theorem proving. To that effect,
 we perform a case study of a few select examples, unrolling and commenting in
-details one or many of their proofs. Although still basic, they are
-full-fledged, concrete logical riddles or mathematical problems that one might
-give as exercise to an undergraduate student learning formal proofs. Note that
-our analysis will stay quite informal and opinionated: a more systematic
-approach such as a user study would allow for a better evaluation of our
-paradigm, but at the time of writing of this thesis the Actema prototype is not
-mature enough to conduct a project of this scale.
+details one or many of their proofs. Although still basic, they are fully
+fledged, concrete logical riddles or mathematical problems that one might give
+as exercise to an undergraduate student learning formal proofs. Note that our
+analysis will stay quite informal and opinionated: a more systematic approach
+such as a user study would allow for a better evaluation of our paradigm, but at
+the time of writing of this thesis the Actema prototype is not mature enough to
+conduct a project of this scale.
 
 The chapter is organized as follows: \refsec{edukera} studies a proof of a small
 logical riddle in Actema, highlighting some benefits of our approach compared to
 textual systems. \refsec{funcs} explores how basic properties about functions
 between sets can be proved graphically, introducing the use of definitions in
 addition to logical reasoning steps. In \refsec{arith} we prove equations in
-Peano arithmetic, showing how one can easily incorporate additional actions into
-the paradigm to deal with more specialized forms of reasoning: \emph{induction}
-and \emph{automatic computation}.
+Peano arithmetic, showing how one can incorporate additional actions into the
+paradigm to deal with more specialized forms of reasoning: \emph{induction} and
+\emph{automatic computation}.
+
+\todo{ Explain that for all examples, we provide a Coq proof script that tries
+  to follow the structure of the graphical proof, for the sake of comparison
+  with a more standard text-based interface. But this would obviously compare
+  differently with other textual approaches, e.g. Isar which is more
+  declarative, and thus farther from the Proof-by-Action paradigm. }
+
+\todo{ Maybe advise the reader to reproduce the examples herself? Supposes an
+  easy way to setup and use coq-actema: nix seems like a good option, but maybe
+  JsCoq could be doable with some efforts, and would provide an even more
+  out-of-the-box experience.}
 
 \section{Forward reasoning}\labsec{edukera}
 
@@ -79,8 +90,8 @@ one obtains
 $(6) ~\rich(\mother(\mother(\mother(h)))).$
 \medskip
 
-The next step is a good example where the DnD is useful. By bringing
-this new fact to the right-hand part of
+The next step is a good example where DnD actions are useful. By bringing this
+new fact to the right-hand part of
 
 \medskip
 $(1)~\forall x. \neg\rich(x)\lor \neg\select{\rich(\mother(\mother(x)))}$
@@ -106,9 +117,93 @@ in less than a minute in Actema, which seems out of reach for about any user in
 a tactic based prover. At least as important is the fact that the proof can be
 performed without typing any text, especially no intermediate statement. 
 
+To conclude this example, we propose in \reffig{edukera-coq} a complete proof of
+the riddle formalized in the Coq proof assistant, which follows very closely the
+structure of the graphical proof just outlined. To make the correspondence more
+visible and ease the comparison, we interspersed the proof script with comments
+of the form \texttt{(** [actions] *)}, where \texttt{[actions]} is a
+sentence describing a sequence of actions in Actema that produces the same goal
+transformation as the tactics preceding the comment. There are a few interesting
+things to note:
+\begin{itemize}
+  \item We chose to name manually all the hypotheses introduced in the course of
+  the proof. This is generally considered good practice in the Coq community,
+  because it makes proof scripts easier to maintain. In our case it also has the
+  advantage of expliciting which hypotheses are used exactly in the reasoning,
+  something that an Actema user does with her pointing device when designating
+  the blue items involved in an action. It appears clearly in
+  \reffig{edukera-coq} that in a moderately long proof like this based mostly on
+  forward reasoning, one needs to keep track of \emph{a lot} of names, which can
+  be overwhelming for many users. This is especially true for beginners
+  discovering Coq, because the syntax for assigning names, based on patterns
+  like \texttt{[H | H]} that reproduce the subgoal structure, can induce a steep
+  learning curve. Of course this problem is mitigated trivially in Actema, since
+  names are not needed.
+
+  \item There is no exact correspondence between the tactics of Coq and the
+  actions of Actema: some tactics are simulated by multiple actions, and often a
+  complex sequence of tactics can be simulated by a single action\sidenote{This
+  was already noticed in \cite{PbP}, where clicking on a subformula can simulate
+  a sequence of introduction rules of arbitrary length.}.
+  
+  For instance, line 23 does at the same time a specialization of the hypothesis
+  $H_2 : \forall x. \neg \rich(\mother(\mother(x))) \lor \neg \rich(x)$ to the
+  individual $h$ with the application \texttt{(H2 h)}, and a case analysis with
+  the \texttt{destruct} tactic. In Actema this is performed in two steps, first
+  by drag-and-dropping $h$ on $H_2$, and then by clicking on the resulting
+  hypothesis\sidenote{This could also be achieved in two steps in Coq, by using
+  the \texttt{specialize} tactic instead of the inlined application.}.
+
+  In the other direction, a pattern of reasoning that occurs multiple times in
+  the proof is the combination of $H_2$ with another hypothesis which
+  contradicts one of the two cases, in order to deduce the truth of the other
+  case. While it is captured straightforwardly in Actema with a single DnD
+  between the contradictory statements, it requires in Coq a decomposition into
+  many administrative steps:
+  \begin{enumerate}
+    \item first a case analysis with \texttt{destruct}, where the expression
+    instantiating $H_2$ (e.g. $\mother(mother(h))$) needs to be written down
+    explicitly, instead of being inferred automatically from unification;
+    \item optionally focusing on the subgoal corresponding to the contradictory
+    case if it is the right disjunct (line 56), which requires to know a
+    somewhat idiosyncratic and infrequently used syntax of the tactic language;
+    \item and finally expliciting the contradiction with \texttt{apply} and
+    \texttt{exact}.
+  \end{enumerate}
+
+  \item More generally, the actions of Actema are more \emph{versatile} and
+  \emph{context-dependent} than the tactics of Coq. For instance, click actions
+  have a different effect depending on the main connective of the formula being
+  clicked, but provide a unique interface for applying rules of natural
+  deduction/sequent calculus. On the contrary, there is almost one tactic for
+  dealing with each logical connective in Coq, e.g. \texttt{intros} for $\limp$
+  and $\forall$, \texttt{split} for $\land$, \texttt{left} and \texttt{right}
+  for $\lor$, \texttt{exists} for $\exists$, etc. The same remark applies to DnD
+  actions, whose functionalities are provided in Coq by many different tactics:
+  \texttt{apply \_}, \texttt{apply \_ in \_}, \texttt{pose proof},
+  \texttt{specialize}, etc.
+\end{itemize}
+
+\begin{figure}[p]
+  % \fontsize{8}{8.5}\selectfont
+  % \input{listings/coq-actema-edukera.tex}
+  \input{listings/Edukera.tex}
+  \caption{Coq proof script formalizing Edukera's riddle}
+  \labfig{edukera-coq}
+\end{figure}
+
+From this detailed comparison, it appears that the interface offered by the
+Proof-by-Action paradigm might be more suited to forward reasoning than the
+tactic language of Coq, at least in some respects. It makes the flow of
+argumentation more straightforward to express with DnD actions, and avoids the
+overheads of name management and syntax memorization. This altogether shall
+prove to be particularly helpful to beginners and learners of the proof
+assistant.
+
 
 \section{Sets and Functions}\labsec{funcs}
 
+Blablibli
 
 
 \section{Basic Arithmetic}\labsec{arith}
