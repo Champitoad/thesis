@@ -184,7 +184,7 @@ things to note:
   \texttt{specialize}, etc.
 \end{itemize}
 
-\begin{figure}[p]
+\begin{figure}
   % \fontsize{8}{8.5}\selectfont
   % \input{listings/coq-actema-edukera.tex}
   \input{listings/Edukera.tex}
@@ -203,7 +203,290 @@ assistant.
 
 \section{Sets and Functions}\labsec{funcs}
 
-Blablibli
+Our second example comes from a preprint of Bartzia et al.
+\cite{bartzia_proof_nodate}, where it is chosen specifically for a case study
+aiming to compare the features of different proof assistants' interfaces in an
+educational setting. It is ``a typical exercise about sets, relations and
+functions, as commonly found in introductory courses about reasoning and
+proof.'' (p. 6):
 
+\begin{exercise}
+  Given three sets $A$, $B$ and $C$ such that $C \subseteq A$ and a function $f
+  : A \to B$, show that:
+  \begin{enumerate}
+    \item $C \subseteq f^{-1}(f(C))$.
+    \item If $f$ is injective then $f^{-1}(f(C)) \subseteq C$.
+  \end{enumerate}
+  where $f(D)$ and $f^{-1}(E)$ denote respectively the direct and inverse image
+  (or preimage) of sets $D \subseteq A$ and $E \subseteq B$ by $f$.
+\end{exercise}
+
+Compared to our previous example, this exercise has the particularity of
+involving multiple \emph{definitions}, here about sets and functions between
+them. There are many possible ways to handle definitions in a formal proof
+system. A common one is to decompose the definition into a new function or
+predicate symbol, the definition's \emph{head}, and a universally parametrized
+equality or equivalence between the head and the \emph{body} of the definition.
+For instance, the concept of injectivity can be encoded as a unary predicate
+$\injective(\cdot)$ on functions, satisfying the following equivalence:
+$$\forall A.\ \forall B.\ \forall f{:}A \to B.~\ \injective(f) ~\lequiv~ \forall x
+\in A.\ \forall y \in A.\ f(x) = f(y) \limp x = y$$
+
+Notice that $\injective(\cdot)$ is a \emph{higher-order} predicate, since it
+takes any function as argument. Depending on the underlying logical framework,
+this might have an impact on the exact way the definition is encoded. Here we do
+not want to bother with such implementation details, and simply assume that
+higher-order definitions are possible, even though Actema is currently limited
+to first-order logic. In practice this does not affect the semantics of
+graphical actions, and we can imagine having a first-order set theory such as
+\sys{ZF} to make everything work behind the scenes\sidenote{See also
+\refch{future} for a discussion on a type-theoretical higher-order extension of
+Actema.}.
+
+Let us now describe how to prove the second question of the exercise in the
+Proof-by-Action paradigm. The first thing we want to do is to unfold the
+definition of set inclusion in the conclusion $f^{-1}(f(C)) \subseteq C$, so
+that we can see how to prove logically such an inclusion. One might imagine
+multiple kinds of graphical actions for doing this. In Actema we implemented a
+general \emph{subterm selection} mechanism, where the user can successively
+point at different subterms appearing in the goal\sidenote{The details of how
+Actema's interface enables the designation of subterms through pointing shall be
+investigated elsewhere in this thesis (\refch{plugin}?). Basically we want to
+mention:
+\begin{itemize}
+  \item The mapping of \emph{spans} of text in the linear, textual notation to
+  the underlying tree structure of terms, exploiting the tree structure of the
+  HTML DOM tree (same technique used in the ProofWidgets framework
+  \cite{ayers_graphical_2021}). The data required for this mapping should be
+  provided by the proof engine when sending the goal to the interface, and
+  \cite{ayers_graphical_2021} describes how they had to modify the
+  pretty-printer of Lean upstream in order to expose this data. We do not know
+  of any API in Coq that exposes this data, at least not in the low-level OCaml
+  API we use for the plugin, and a forciori neither in higher-level APIs like
+  those of ELPI or SerAPI. Thus we might need similar upstream changes to Coq in
+  order to support interactive selection of subterms in pretty-printed form.
+  \item When multiple spans overlap at a pointed location, we disambiguate by
+  selecting the one \emph{deepest} in the term structure (this would not work in
+  the other direction, since this would always select the root term!). This is
+  implemented easily in HTML/JavaScript by disabling the mechanism of
+  \emph{event bubbling} with the \texttt{stopPropagation()} method of the
+  \texttt{Event} interface (TODO: cite Mozilla documentation).
+\end{itemize}}
+--- either in the context or the conclusion --- and then choose from a list of
+available actions taking the selection as argument. In our case we can select
+the whole conclusion, and then choose to apply the \action{Unfold} action:
+$$\select{f^{-1}(f(C)) \subseteq C} \qquad \text{(\action{Unfold})}$$
+The system will be able to tell that we
+selected an instance of the two-place inclusion predicate $\cdot \subseteq
+\cdot$, and thus will replace the head of this definition by its body,
+instantiating parameters accordingly. This gives us a new conclusion
+$$\forall x. x \in f^{-1}(f(C)) \limp x \in C$$
+on which we can click twice to introduce a new variable $x$ in the context,
+together with the hypothesis:
+\begin{itemize}
+  \item[(1)] $x \in f^{-1}(f(C))$
+\end{itemize}
+
+Now there is no available action on the conclusion $x \in C$, because set
+membership is a \emph{primitive} predicate in set theory: it does not have any
+associated definition in the sense mentioned above\sidenote{Formally, the
+meaning of $\in$ in a set theory such as \sys{ZF} comes from the various axioms
+involving it. One might call such a definition \emph{behavioral}, since the
+meaning of the symbol emerges from the way it can be used in proofs through
+axioms. In contrast, the usual notion of mathematical definition we tackle in
+this chapter might be called \emph{nominal}, because it essentially amounts to
+giving a name (the head) to a reoccurring pattern of statement (the body). Note
+that the syntax of first-order logic is unaware of this distinction, since in
+both cases the defined concepts are encoded as \emph{atomic} predicates. This is
+usually not the case of logical frameworks found in proof assistants: for
+instance, the duality between \emph{judgmental} (nominal) and
+\emph{propositional} (behavioral) equality is at the heart of Martin-Löf's type
+theory, and it is used extensively in Coq to perform automation, both in the
+computation of expressions and the matching of statements modulo definitions.}.
+But we can still unfold some definitions in the context, which might suggest
+further possible interactions. First we can unfold the definition of preimage
+used in $(1)$ by selecting the precise corresponding subterm:
+$$x \in \select{f^{-1}(f(C))} \qquad \text{(\action{Unfold})}$$
+which, assuming a definition based on set comprehension, gives:
+\begin{itemize}
+  \item[(1)] $x \in \compr{a \in A}{f(a) \in f(C)}$
+\end{itemize}
+At this stage, we would like to make the set comprehension in $(1)$ disappear,
+by simply deducing $f(x) \in f(C)$ from it. But depending on the underlying
+logical framework, the way to perform this deduction step in Proof-by-Action
+will vary:
+
+\begin{description}
+  \item[In \sys{ZF} set theory]
+    We would need to invoke explicitly the \emph{axiom of comprehension}, which
+    states the following:
+    $$\forall \phi.\ \forall D.\ \forall y.\ y \in \compr{d \in D}{\phi} ~~\lequiv~~ (y \in D \land \subst{\phi}{y}{d})$$
+    Note that this is again a higher-order statement, but this time because it
+    quantifies over every formula $\phi$\sidenote{Traditionnally, logicians
+    preferred to speak of \emph{axiom schemas}, that is denumerable sets of
+    axioms, rather than higher-order axioms, in order to stay purely in a
+    first-order setting. But this does not make much sense from an
+    implementation point of view, as a proof engine will only be able to
+    manipulate a finite amount of axioms.}. Thus we assume that the underlying
+    proof engine can handle such higher-order statements, and in particular that
+    the axiom of comprehension is available in its database of lemmas.
+    
+    In Actema, one can freely search in this database by typing text in a search
+    bar, typically in this case the keyword ``comprehension''. Then the system
+    will show a list of lemmas whose names match the keywords, and the user can
+    click on the lemma she is interested in, in order to add it as a blue item
+    in the current context\sidenote{This feature is currently implemented solely
+    in the online version of Actema, with a toy database of 3 lemmas about
+    arithmetic. This is because the online version is based on a custom proof
+    engine in first-order logic, which cannot reuse libraries of lemmas from a
+    real proof assistant.}. An alternative and more precise way of retrieving a
+    lemma is to search by \emph{content} of the statement instead of searching
+    by name. State-of-the-art proof assistants usually provide facilities for
+    this: for instance Coq has a \texttt{Search} command which can take
+    \emph{patterns}, i.e. terms with holes or metavariables, in order to filter
+    out results that do not match the given pattern. In Actema, we implemented a
+    novel feature which replaces patterns by a selection of subterms in the
+    current goal, similarly to what is given as argument to contextual actions
+    like \action{Unfold}. Then the system will only look for lemmas which can be
+    used in a DnD action involving precisely the current selection of subterms.
+    In this case, selecting the full statement of $(1)$ and searching:
+    $$\select{x \in \compr{a \in A}{f(a) \in f(C)}} \qquad
+    \text{(\action{Search})}$$
+    should return the comprehension axiom among other lemmas, because this axiom
+    and $(1)$ can interact through the following forward DnD:
+    $$\select{x \in \compr{a \in A}{f(a) \in f(C)}} ~~\forw~~ \forall \phi.\
+    \forall D.\ \forall y.\ \select{y \in \compr{d \in D}{\phi}} ~~\lequiv~~ (y
+    \in D \land \subst{\phi}{y}{d})$$ by substituting $D$ with $A$, $d$ with
+    $a$, $y$ with $x$ and $\phi$ with $f(a) \in f(C)$. Performing this DnD will
+    finally result in a new hypothesis corresponding to the intended unfolding
+    of the definition of set comprehension\sidenote{Here in the sense of a
+    \emph{behavioral} definition.}:
+    \begin{itemize}
+      \item[(2)] $x \in A \land f(x) \in f(C)$
+    \end{itemize}
+  
+  \item[In higher-order type theory] In type theory, every mathematical object
+  or statement is ultimately encoded as a function, in the sense of the
+  $\lambda$-calculus. It is Alonzo Church who first got the idea of representing
+  a set by its \emph{characteristic function} in his higher-order logic, as a
+  $\lambda$-term of type $\iota \to \omicron$ where $\iota$ is the type of
+  individuals, and $\omicron$ the type of propositions\todo{add citation}. With
+  this encoding, the only way to construct a set is by comprehension, and set
+  membership corresponds to function application; that is, $\compr{x \in
+  A}{\phi}$ is identified with the characteristic function $\lambda x{:}A.\
+  \phi$, and $x \in t$ is the application $t\ x$\sidenote{Note that this induces
+  a strict hierarchical notion of set as in Russell's type theory, where sets
+  containing other sets have a higher-order type, i.e. they correspond to
+  functions taking other functions as arguments.}. Then if we consider
+  $\lambda$-terms modulo $\beta$-equivalence, unfolding the ``definition'' of
+  set comprehension just amounts to performing one step of
+  $\beta$-reduction\sidenote{One can consider this as a third kind of definition
+  qualified of \emph{computational}. In Martin-Löf's type theory, it is merged
+  with nominal definitions in the concept of judgmental equality. In Coq they
+  are distinguished: computational and nominal definitions correspond
+  respectively to $\beta$-reduction and $\delta$-reduction.}: hypothesis $(1)$
+  becomes
+  $$(\lambda a{:}A.\ f(C)\ f(a))\ x$$
+  which $\beta$-reduces to
+  $$f(C)\ f(x)$$ which we can translate back as $f(x) \in f(C)$. This encoding
+  has now found its way in the libraries of many proof assistants based on type
+  theory, and is the one used in the Coq solution to the exercise provided in
+  annex of \cite{bartzia_proof_nodate}. To perform $\beta$-reduction in Coq,
+  there is a tactic called \texttt{simpl} as in ``simplify''\sidenote{There are
+  also \texttt{simp} tactics available in Isabelle and Lean, although they are
+  not restricted to $\beta$-reduction and can perform rewriting of arbitrary
+  equalities and equivalences present in the lemma database, as long as they are
+  flagged as simplification rules.}. Coming back to Proof-by-Action, one can
+  easily imagine a corresponding \action{Simplify} or \action{Compute}
+  contextual action, which performs $\beta$-reduction inside of the selected
+  subterm. Then the previous transormation is achieved by applying this action
+  on hypothesis $(1)$:
+  $$\select{x \in \compr{a \in A}{f(a) \in f(C)}} \qquad \text{(\action{Simplify})}$$
+\end{description}
+From a user perspective, the two styles of actions induced by the two types of
+logical frameworks differ mainly in one aspect: while the definition of set
+comprehension is \emph{implicit} in the type-theoretical encoding, it must be
+manipulated \emph{explicitly} when using the axiom of comprehension\sidenote{In
+fact one could also use the axiom of comprehension implicitly by relying on
+stronger automation. For example in Isabelle/Isar, one would write explicitly
+the desired goal $f(x) \in f(C)$, refer to the axiom by its name in the library,
+and then let the engine find the details of how to apply it. But writing
+statements manually goes against the philosophy of Proof-by-Action, which
+explores to what extent proofs can be carried by pure manipulation of the proof
+state. Of course there is still an escape hatch for doing this when strictly
+necessary or more convenient.}. Depending on the user's background and context
+of usage, one might prefer one style over the other. Typically in an educational
+setting, having to manipulate explicitly the axiomatic definition might be more
+instructive, but also more confusing when carrying formal proofs for the first
+time.
+
+Going back to the proof, we now have the following context of hypotheses:
+\begin{itemize}
+  \item[(0)] $\injective(f)$
+  \item[(2)] $f(x) \in f(C)$
+\end{itemize}
+We can unfold the definition of direct image in $(2)$ the same way we did for
+the inverse image in $(1)$: first perform the contextual action
+$$f(x) \in \select{f(C)} \qquad \text{(\action{Unfold})}$$
+which gives us
+\begin{itemize}
+  \item[(2)] $f(x) \in \compr{b \in B}{\exists a \in A.\ a \in C \land b = f(a)}$
+\end{itemize}
+Then we can simplify the set comprehension with
+$$\select{f(x) \in \compr{b \in B}{\exists a \in A.\ a \in C \land b = f(a)}} \qquad \text{(\action{Simplify})}$$
+which gives us
+\begin{itemize}
+  \item[(3)] $\exists a \in A.\ a \in C \land f(x) = f(a)$
+\end{itemize}
+Now since $f$ is injective, we should be able to deduce that $x = a$. First we
+unfold the definition of injectivity in $(0)$:
+$$\select{\injective(f)} \qquad \text{(\action{Unfold})}$$
+which gives us
+\begin{itemize}
+  \item[(0)] $\forall y \in A.\ \forall z \in A.\ f(y) = f(z) \limp y = z$
+\end{itemize}
+Then we can use injectivity with the following forward DnD between $(0)$ and
+$(3)$:
+$$\forall y \in A.\ \forall z \in A.\ \select{f(y) = f(z)} \limp y = z ~~\forw~~ \exists a \in A.\ a \in C \land \select{f(x) = f(a)}$$
+which gives us immediately that $x = a$ in
+\begin{itemize}
+  \item[(4)] $\exists a \in A.\ a \in C \land x = a$
+\end{itemize}
+The last steps consist in clicking twice on $(4)$ to introduce $a$ in the
+context together with
+\begin{itemize}
+  \item[(5)] $a \in C \land x = a$
+\end{itemize}
+doing a backward DnD with $(5)$ to rewrite $x$ in the conclusion into $a$:
+$$a \in C \land \select{x} = a ~~\back~~ \select{x} \in C$$
+and finally a backward DnD with $(5)$ to conclude the proof:
+$$\select{a \in C} \land x = a ~~\back~~ \select{a \in C}$$
+
+For the sake of completeness, we included in \reffig{funset-defs},
+\reffig{funset-q1} and \reffig{funset-q2} a Coq formalization of the
+definitions, solution to the first question, and solution to the second question
+of the exercise, respectively. We simply took the data provided in
+\cite{bartzia_proof_nodate}, and added corresponding Actema actions below tactic
+invokations, as in the previous section. It is quite close to the graphical proof
+just outlined for the second question, hence we do not add further commentary.
+
+\begin{figure}
+  \input{listings/funset-defs.tex}
+  \caption{Preliminary definitions in Coq of an exercise on abstract functions}
+  \labfig{funset-defs}
+\end{figure}
+
+\begin{figure}
+  \input{listings/funset-q1.tex}
+  \caption{Solution in Coq to the first question of an exercise on abstract functions}
+  \labfig{funset-q1}
+\end{figure}
+
+\begin{figure}
+  \input{listings/funset-q2.tex}
+  \caption{Solution in Coq to the second question of an exercise on abstract functions}
+  \labfig{funset-q2}
+\end{figure}
 
 \section{Basic Arithmetic}\labsec{arith}
+
