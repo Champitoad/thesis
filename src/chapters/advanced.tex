@@ -336,20 +336,21 @@ will vary:
     will show a list of lemmas whose names match the keywords, and the user can
     click on the lemma she is interested in, in order to add it as a blue item
     in the current context\sidenote{This feature is currently implemented solely
-    in the online version of Actema, with a toy database of 3 lemmas about
-    arithmetic. This is because the online version is based on a custom proof
-    engine in first-order logic, which cannot reuse libraries of lemmas from a
-    real proof assistant.}. An alternative and more precise way of retrieving a
-    lemma is to search by \emph{content} of the statement instead of searching
-    by name. State-of-the-art proof assistants usually provide facilities for
-    this: for instance Coq has a \texttt{Search} command which can take
-    \emph{patterns}, i.e. terms with holes or metavariables, in order to filter
-    out results that do not match the given pattern. In Actema, we implemented a
-    novel feature which replaces patterns by a selection of subterms in the
-    current goal, similarly to what is given as argument to contextual actions
-    like \action{Unfold}. Then the system will only look for lemmas which can be
-    used in a DnD action involving precisely the current selection of subterms.
-    In this case, selecting the full statement of $(1)$ and searching:
+    in the standalone version of Actema, with a toy database of 3 lemmas about
+    arithmetic. This is because the standalone version is based on a custom
+    proof engine in first-order logic, which cannot reuse libraries of lemmas
+    from a real proof assistant.}. An alternative and more precise way of
+    retrieving a lemma is to search by \emph{content} of the statement instead
+    of searching by name. State-of-the-art proof assistants usually provide
+    facilities for this: for instance Coq has a \texttt{Search} command which
+    can take \emph{patterns}, i.e. terms with holes or so-called
+    \emph{metavariables}, in order to filter out results that do not match the
+    given pattern. In Actema, we implemented a novel feature which replaces
+    patterns by a selection of subterms in the current goal, similarly to what
+    is given as argument to contextual actions like \action{Unfold}. Then the
+    system will only look for lemmas which can be used in a DnD action involving
+    precisely the current selection of subterms. In this case, selecting the
+    full statement of $(1)$ and searching:
     $$\select{x \in \compr{a \in A}{f(a) \in f(C)}} \qquad
     \text{(\action{Search})}$$
     should return the comprehension axiom among other lemmas, because this axiom
@@ -488,5 +489,130 @@ just outlined for the second question, hence we do not add further commentary.
   \labfig{funset-q2}
 \end{figure}
 
-\section{Basic Arithmetic}\labsec{arith}
 
+\section{Peano Arithmetic}\labsec{arith}
+
+In our last example, we will analyse a common proof often taught in logic
+courses: the commutativity of addition in Peano arithmetic. The novelty compared
+to previous examples is that it involves reasoning by \emph{induction}, which
+usually has special support in mainstream proof assistants. In the
+Proof-by-Action paradigm, it seems natural to map it to a special contextual
+action \action{Induction}, whose availability and effect will depend on the
+selected subterm. One could also imagine manipulating explicitly induction
+schemes as blue items, in the same way we did for the axiom of comprehension in
+the previous section. In this section we focus on describing features of the
+more convenient contextual action.
+
+First and foremost, it only makes sense to apply induction to a variable which
+is quantified \emph{universally}, either because it appears in the context, or
+because it is bound by a $\forall$ in the conclusion. In the first case, one can
+access the contextual action in Actema by selecting the green item corresponding
+to the variable; in the latter case, by selecting the subterm of the conclusion
+whose head connective is the binding $\forall$\sidenote{In the standalone
+version of Actema, induction is performed by clicking directly on green items,
+rather than through a contextual action.}. This could also work by selecting any
+occurrence of the variable regardless of its binding point, since the system can
+always infer it. The only condition is that if the variable is bound by a
+$\forall$, it must occur in a \emph{strictly positive} location, i.e. in the
+conclusion and not on the left of an implication $\limp$. Obviously the variable
+should also be of an \emph{inductive} type, i.e. one which is mapped to an
+induction scheme in the system\sidenote{The standalone version of Actema only
+supports induction on natural numbers, but in a proof assistant like Coq or Lean
+one can easily check if a given type is inductive.}. Then the \action{Induction}
+action will simply apply the associated induction scheme. In our commutativity
+example, we can thus start the proof like so:
+$$\select{\forall n \in \nats.\ \forall m \in \nats.\ n + m = m + n} \qquad
+\text{(\action{Induction})}$$
+which performs an induction on $n$, generating the two following subgoals:
+$$\forall m \in \nats.\ 0 + m = m + 0 \qquad \text{and} \qquad \forall m \in \nats.\ \suc{n} + m = m + \suc{n}$$
+where $S(n)$ denotes the successor of $n$, and the second subgoal has a new
+variable $n \in \nats$ in its context, together with the induction hypothesis
+\begin{itemize}
+  \item[(1)] $\forall x \in \nats.\ n + x = x + n$
+\end{itemize}
+The proofs of the two subgoals can be done by induction on $m$. We focus on the
+second one, which is a bit more involved. As mentioned above, an alternative way
+of performing induction is to first introduce $m$ in the context by clicking on
+the conclusion, and then selecting it to access the contextual action:
+$$\select{m \in \nats} \qquad \text{(\action{Induction})}$$
+which generates again two new subgoals:
+$$S(n) + 0 = 0 + S(n) \qquad \text{and} \qquad S(n) + S(m) = S(m) + S(n)$$ where
+the second subgoal has a new variable $m \in \nats$ in its context, together
+with the induction hypothesis
+\begin{itemize}
+  \item[(2)] $S(n) + m = m + S(n)$
+\end{itemize}
+Let us now focus on the first subgoal. Once again, as with set comprehension in
+the previous section, the addition operation may have a more \emph{axiomatic} or
+more \emph{computational} definition, depending on the underlying logical
+framework and library used. For instance in Coq's standard library, it is
+implemented as a \emph{program} built by recursion on the left-hand argument.
+Thus in this setting, if one performs computation in the whole conclusion like
+so:
+$$\select{S(n) + 0 = 0 + S(n)} \qquad \text{\action{Simplify}}$$
+this will give a new conclusion
+$$S(n + 0) = S(n)$$
+where the addition program was able to automatically evaluate $S(n) + 0$ to $S(n
++ 0)$ on the left-hand side of the equality, and $0 + S(n)$ to $S(n)$ on the
+right-hand side. If the proof engine does not offer such a level of automation,
+one can always fallback to using Peano axioms manually, provided they are
+available in the lemma database. As we have already seen, the most convenient
+way to do this in the Proof-by-Action paradigm is to perform a \action{Search}
+action. For example to evaluate $S(n) + 0$, one might first select it in the
+conclusion and then make a search query:
+$$\select{S(n) + 0} = 0 + S(n) \qquad \text{(\action{Search})}$$
+Among the results which are Peano axioms, one will only find the following
+ones:
+\begin{itemize}
+  \item[(a)] $\forall x.\ 0 \not= S(x)$
+  \item[(b)] $\forall x.\ \forall y.\ S(x) = S(y) \limp x = y$
+  \item[(c)] $\forall x.\ \forall y.\ S(x) + y = S(x + y)$
+\end{itemize}
+because the other axioms do not contain any subterm that could form a
+\emph{valid} backward linkage with the selection\sidenote{See \refsec{validity}
+for the notion of validity of a linkage.}. Of course we are interested in axiom
+$(c)$, which we can use through the following backward DnD:
+$$\forall x.\ \forall y.\ \select{S(x) + y} = S(x + y) ~~\back~~ \select{S(n) + 0} = 0 + S(n)$$
+in order to rewrite $S(n) + 0$ into $S(n + 0)$ in the conclusion.
+
+Now notice that the addition program earlier was not able to evaluate $n + 0$ to
+$n$. This is because $0$ occurs on the right-hand side of $+$, and the program
+is not aware of the commutativity of addition, which is precisely what we are
+trying to prove. Fortunately, we can apply our induction hypothesis on $n$
+$(1)$, with the following backward DnD:
+$$\forall x \in \nats.\ \select{n + x} = x + n ~~\back~~ S(\select{n + 0}) = S(n)$$
+which rewrites $n + 0$ into $0 + n$ in the conclusion:
+$$S(0 + n) = S(n)$$
+Now we can continue the computation:
+$$S(\select{0 + n}) = S(n) \qquad \text{(\action{Simplify})}$$
+and conclude the base case of the induction on $m$ by reflexivity, by clicking
+on the conclusion $S(n) = S(n)$.
+
+The inductive case of the induction on $m$ works similarly, but obviously we
+will also need to use the induction hypothesis on $m$ $(2)$. First we compute
+everywhere we can in the conclusion:
+$$\select{S(n) + S(m) = S(m) + S(n)} \qquad \text{\action{Simplify}}$$
+% which gives the new conclusion
+% $$\select{S(n + S(m)) = S(m + S(n))} \qquad \text{\action{Simplify}}$$
+Then we can apply the induction hypothesis on $n$ $(1)$:
+$$\forall x.\ \select{n + x} = x + n ~~\back~~ S(\select{n + S(m)}) = S(m + S(n))$$
+and also the induction hypothesis on $m$ $(2)$:
+$$S(n) + m = \select{m + S(n)} ~~\back~~ S(S(m) + n) = S(\select{m + S(n)})$$
+Again we compute everywhere:
+$$\select{S(S(m) + n) = S(S(n) + m)} \qquad \text{(\action{Simplify})}$$
+apply the induction hypothesis on $n$ $(1)$ once again:
+$$\forall x.\ n + x = \select{x + n} ~~\back~~ S(S(\select{m + n})) = S(S(n + m))$$
+and conclude by reflexivity on $S(S(n + m)) = S(S(n + m))$.
+
+\begin{figure}
+  \input{listings/coq-peano.tex}
+  \caption{Proof of commutativity of addition on natural numbers in Coq}
+  \labfig{coq-peano}
+\end{figure}
+
+As in previous sections, the interested reader can find a complete Coq
+formalization in \reffig{coq-peano}, which follows the same structure as the
+graphical proof just outlined. In this case the correspondence between Coq
+tactics and graphical actions is almost exact. This suggests that designing a
+compiler from proofs-by-action to Coq proof scripts might be a reasonable
+endeavor. It will indeed be one of the subjects of \refch{plugin}.
