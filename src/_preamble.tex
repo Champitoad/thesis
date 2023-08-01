@@ -58,8 +58,11 @@
 % \usepackage{pifont}
 % \usepackage{turnstile}
 \usepackage{minted}
+\usepackage{fontspec}
+\usepackage{newunicodechar}
+\newfontfamily{\mathsymbolfont}{LibertinusMath-Regular.otf}
+\newunicodechar{⊆}{{\mathsymbolfont\subseteq}}
 
-% \usepackage{unicode-math}
 % \usepackage[old-default]{fontsetup}
 % \setmathfont{LibertinusMath-Regular.otf}[range=\vdash]
 % \setmathfont{LibertinusMath-Regular.otf}[range=\nvdash]
