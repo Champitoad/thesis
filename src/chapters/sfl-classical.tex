@@ -30,10 +30,10 @@ $$\bigwedge_{i=1}^{n}{A_i} \limp \bigvee_{j=1}^{m}{C_j}$$
 \begin{marginfigure}
   \begin{mathpar}
     \R[\lor R]
-      {\R[\neg R]
+      {\R[{\limp} R]
         {\R[ax]
           {}
-          {A \seq \select{A}}}
+          {A \seq \select{A}, \bot}}
         {\seq A, \select{\neg A}}}
       {\seq \select{A \lor \neg A}}
   \end{mathpar}
@@ -98,22 +98,22 @@ stage.
 % ways, for example with the rule of \textit{reductio ad absurdum} (\reffig{raa})
 % (TODO: add reference).}.
 
-In fact backtracking can still be performed, but at the meta-level of the proof
-search process instead of the object-level of inference rules. In an interactive
-theorem prover, this corresponds to the ability for the user to \emph{undo} an
-inference and go back to a previous proof state. However keeping track of the
-times we undo/redo inferences is very hard to do as humans, and the user
-interfaces of current proof assistants do not provide any mechanism for it
-either. This has already been noted by Ayers\sidenote{Section 3.1.3 of his
-thesis \cite{ayers_thesis}.}, and is a good motivation for trying to design
+In fact backtracking can still be performed in intuitionistic logic, but at the
+meta-level of the proof search process instead of the object-level of inference
+rules. In an interactive theorem prover, this corresponds to the ability for the
+user to \emph{undo} an inference and go back to a previous proof state. However
+keeping track of the times we undo/redo inferences is very hard to do as humans,
+and the user interfaces of current proof assistants do not provide any mechanism
+for it either. This has already been noted by Ayers\sidenote{Section 3.1.3 of
+his thesis \cite{ayers_thesis}.}, and is a good motivation for trying to design
 proof systems where the need for meta-level backtracking is reduced, or even
 removed. One way to do this is to maximize the proportion of inference rules
 that are \emph{invertible}, meaning that their premisses always follow from
-their conclusion. Indeed when looking at rules as tactics (see
-\refsec{itps}), it means that they will always reduce a provable goal to
-provable subgoals, and thus can never induce a backtracking point. The
-{\rnm{\lor R}} rule is an example of invertible rule, and in \sys{LK} it can
-replace the other, non-invertible rules {\rnm{\lor L_1}} and {\rnm{\lor L_2}}.
+their conclusion. Indeed when looking at rules as tactics (see \refsec{itps}),
+it means that they will always reduce a provable goal to provable subgoals, and
+thus can never induce a backtracking point. The {\rnm{\lor R}} rule is an
+example of invertible rule, and in \sys{LK} it can replace the other,
+non-invertible rules {\rnm{\lor R_1}} and {\rnm{\lor R_2}}.
 
 But {\rnm{\lor R}} requires multi-conclusion sequents, and Gentzen restricted
 their use to classical logic. It turns out that logicians after Gentzen have
@@ -389,10 +389,9 @@ or the equality rules (backward/forward modes). Thus if there is no way to reach
 either forward or backward mode from a parallel linkage, it has no meaning in
 our paradigm. Then if we trust that rules {\rnmsf{L{\limp}_1}} and
 {\rnmsf{P{\limp}_1}} are necessary to get the intended semantics, it seems that
-parallel reasoning only makes sense in a classical setting. In the rest of this
-chapter we only show that the rules of \reffig{parallel} are sufficient for our
-purpose, by extending the results of \refch{sfl} to the classical,
-multi-conclusion setting.
+parallel reasoning only makes sense in a classical setting. In the following, we
+only show that the rules of \reffig{parallel} are sufficient for our purpose, by
+extending the results of \refch{sfl} to the classical, multi-conclusion setting.
 
 We start by updating the validity criterion on linkages, more specifically we
 drop Clause \ref{clause:intuit} of Condition \ref{cond:pol} about the polarities
