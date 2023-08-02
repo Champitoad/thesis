@@ -1,3 +1,38 @@
 \setchapterpreamble[u]{\margintoc}
 \chapter{Integration in a Proof Assistant}
 \labch{plugin}
+
+In the previous chapters, we introduced the Proof-by-Action paradigm
+(\refch{pba}), and tried to convince the reader that it is both theoretically
+sound with its firm grounding in deep inference proof theory (\refch{sfl} and
+\refch{sfl-classical}), and practically useful by analysing proofs of
+mathematical problems expressed within it (\refch{advanced}). We also mentioned
+multiple times our prototype of interface implementing Proof-by-Action called
+Actema, and in particular the fact that it exists as a \emph{standalone} web
+application with its own proof engine. This is convenient for distributing it
+online as a publicly available website, so that people can immediately try it
+out without the hassles of installation procedures. However due to both
+historical choices in its design and lack of human resources for development,
+Actema's proof engine is quite limited in features:
+\begin{itemize}
+  \item it can only handle goals expressed in many-sorted intuitionistic
+    first-order logic (hereafter iFOL), whereas all state-of-the-art proof
+    assistants support higher-order logic in one form or another; and higher-order
+    features are crucial when one wants to formalize many mathematical notions in a
+    concise way, as witnessed by the example of \refsec{funcs};
+  \item it does not implement a certified logical kernel for checking proof
+    objects, which makes it hard to trust and interoperate with;
+  \item it has no mechanism for adding new mathematical notations, only ad hoc
+    support for arithmetical expressions; thus formulas become very quickly
+    impossible to read and manipulate;
+  \item it has poor support for managing libraries of definitions, lemmas and
+    proofs, partly because of the previous items.
+\end{itemize}
+To address the previous limitations, and thus enable a confrontation of the
+Proof-by-Action paradigm to real mathematical developments, we decided to build
+\texttt{coq-actema}, a Coq plugin that directly connects Actema to a running
+instance of the Coq proof assistant. The idea is that Actema should act as an
+enhanced graphical, interactive proof view that integrates in the usual
+text-based workflow of proof scripts. In the following, we discuss briefly some
+motivations that lead to the development of coq-actema, and describe its over-
+all design and architecture.
