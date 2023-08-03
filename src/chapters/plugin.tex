@@ -9,30 +9,136 @@ sound with its firm grounding in deep inference proof theory (\refch{sfl} and
 mathematical problems expressed within it (\refch{advanced}). We also mentioned
 multiple times our prototype of interface implementing Proof-by-Action called
 Actema, and in particular the fact that it exists as a \emph{standalone} web
-application with its own proof engine. This is convenient for distributing it
-online as a publicly available website, so that people can immediately try it
-out without the hassles of installation procedures. However due to both
-historical choices in its design and lack of human resources for development,
-Actema's proof engine is quite limited in features:
+application with its own proof engine \cite{Actema:link}. This is convenient for
+distributing it online as a publicly available website, so that people can
+immediately try it out without the hassles of installation procedures. However
+due to both historical choices in its design and lack of human resources for
+development, Actema's proof engine is quite limited in its features:
 \begin{itemize}
   \item it can only handle goals expressed in many-sorted intuitionistic
-    first-order logic (hereafter iFOL), whereas all state-of-the-art proof
-    assistants support higher-order logic in one form or another; and higher-order
-    features are crucial when one wants to formalize many mathematical notions in a
-    concise way, as witnessed by the example of \refsec{funcs};
-  \item it does not implement a certified logical kernel for checking proof
+    first-order logic (hereafter iFOL), whereas all state-of-the-art PAs support
+    \emph{higher-order logic} in one form or another; and higher-order features
+    are crucial for formalizing many mathematical notions in a concise way, as
+    witnessed by the example of \refsec{funcs};
+  \item it does not implement a \emph{certified logical kernel} for checking proof
     objects, which makes it hard to trust and interoperate with;
-  \item it has no mechanism for adding new mathematical notations, only ad hoc
-    support for arithmetical expressions; thus formulas become very quickly
-    impossible to read and manipulate;
-  \item it has poor support for managing libraries of definitions, lemmas and
-    proofs, partly because of the previous items.
+  \item it has no mechanism for adding new \emph{mathematical notations}, only
+    ad hoc support for arithmetical expressions; thus formulas become very
+    quickly impossible to read and manipulate;
+  \item it has poor support for managing \emph{libraries} of definitions, lemmas
+    and proofs, partly because of the previous items.
 \end{itemize}
-To address the previous limitations, and thus enable a confrontation of the
+% Typically, the example studied in \refsec{funcs} cannot be carried out in the
+% standalone version of Actema, because it lacks support for defining new
+% predicates --- especially when they are higher-order like $\injective(\cdot)$
+% --- as well as new notations for them like $\subseteq$ for set inclusion.
+
+To address these limitations, and thus enable a confrontation of the
 Proof-by-Action paradigm to real mathematical developments, we decided to build
 \texttt{coq-actema}, a Coq plugin that directly connects Actema to a running
-instance of the Coq proof assistant. The idea is that Actema should act as an
-enhanced graphical, interactive proof view that integrates in the usual
-text-based workflow of proof scripts. In the following, we discuss briefly some
-motivations that lead to the development of coq-actema, and describe its over-
-all design and architecture.
+instance of the Coq PA. The idea is that Actema should act as an enhanced
+graphical, interactive proof view that integrates in the usual text-based
+workflow of proof scripts. Thus instead of trying to turn Actema into a
+full-fledged PA, we exploit the over 30 years of effort that have been put in
+the development of Coq, and limit the role of Actema to that of a novel frontend
+for building proofs in Coq. This shall open the way to more advanced
+experimentations through the huge body of theories already developed in Coq, and
+make the Proof-by-Action paradigm visible to the large community of existing
+users of this popular PA.
+
+Note that the same approach should be applicable in principle to any ITP that
+supports at least iFOL, and provides an interaction protocol for building proofs
+in a goal-directed manner. This includes other popular PAs such as Lean and
+Isabelle, but also more specialized software like the Why3 platform for
+deductive program verification, the Meta-F* framework in the F* programming
+language, or the EasyCrypt toolset for proving cryptographic protocols\todo{add
+citations}.
+
+% Moreover, since Actema works with goals expressed in iFOL, the same approach
+% could be applied to any goal-directed ITP whose logical framework supports iFOL,
+% which is virtually every ITP.
+
+The chapter is organized as follows: we start in \refsec{actema} by explaining
+the implementation design of the Actema web application, which follows the
+standard conceptual separation between frontend and backend. In
+\refsec{whyplugin}, we reflect on some considerations that led us to the
+specific choice of a Coq plugin, in order to integrate the Actema web app with
+Coq. Then in \refsec{architecture} we present the architecture of the
+\texttt{coq-actema} system, which structures all interactions between the user,
+Coq and Actema. \refsec{protocol} describes in more details the main usage
+scenario of \texttt{coq-actema}, following the flow of data and control between
+the different processes involved. \refsec{compilation} explains how the various
+graphical actions performed by the user in Actema are compiled into Coq tactics,
+ultimately producing certified proof terms. Finally in \refsec{pluginfuture}, we
+discuss possible avenues for extending the usability of \texttt{coq-actema} to a
+broader class of Coq goals, as well as prospective solutions to the problem of
+\emph{proof evolution} in our graphical paradigm.
+
+\section{Actema}\labsec{actema}
+
+At its core, Actema is a web application made of two components: a
+\emph{frontend} that implements the graphical interface with which the user
+interacts, written in HTML/CSS and JavaScript with the Vue.js framework
+\cite{Vuejs}; and a \emph{backend} that implements the proof engine, written in
+OCaml and compiled to JavaScript (JS hereafter) with js\_of\_ocaml
+\cite{vouillon_bytecode_2014}. The two components interact through an
+object-oriented API written in OCaml, which is loaded at runtime in the form of
+a JS object called \texttt{engine}, and whose methods can be called from the Vue
+components in the frontend.
+
+The \texttt{engine} object provides various high-level methods for handling the
+current \emph{proof state}. Common operations include getting the list of open
+subgoals, querying available proof actions on a subgoal, or applying a given
+proof action. Lower-level methods are also available in other objects to inspect
+the data of the proof state. For instance,
+$$\mathtt{engine.subgoals[0].context[0]}$$
+will return an object representing the first hypothesis of the first subgoal;
+and this object itself exposes an \texttt{html} method, which returns a string
+holding the HTML code used to display the statement of the hypothesis.
+
+\todo{Add a little side figure illustrating an API call to the backend? Or we
+wait for the description of the sequence diagram of \refsec{protocol}.}
+
+In the standalone version of Actema, the proof engine takes care of computing
+the new subgoals stemming from actions performed by the user. It is thus
+responsible for defining the \emph{semantics} of proof actions. It is also in
+charge of various other tasks that process the logical data of the proof state,
+typically checking the \emph{validity} of linkages during a DnD action, which
+requires the use of a unification algorithm (see \refsec{validity}).
+
+In the \texttt{coq-actema} system to be introduced in the next sections, we
+instead delegate the definition and computation of the semantics of proof
+actions to the Coq plugin, which relies on Coq's proof engine. This allows us to
+leverage the facilities already provided by Coq to handle the proof state and
+generate proof terms in its own logical framework, the Calculus of Construction.
+This does not make the backend of Actema completely irrelevant however: we still
+need it so that Actema can maintain its own, first-order version of the proof
+state, with additional metadata used to display and interact graphically with
+objects and statements. Also tasks related to the querying of both display data
+and proof actions, like the \texttt{html} method and unification algorithm
+mentioned earlier, are at the time of writing of this thesis still performed in
+Actema's backend. It is unclear to what extent this should rather be a
+responsibility of the Coq plugin, relegating Actema to a pure role of frontend
+to the PA\sidenote{For instance in the ProofWidgets framework of Lean
+\cite{ayers_graphical_2021}, all these tasks are implemented in the
+meta-programming language of Lean itself, which makes it easily extensible by
+(expert) users of the PA.}.
+
+\section{Why a plugin?}\labsec{whyplugin}
+
+\section{The \texttt{coq-actema} system}\labsec{architecture}
+
+\section{Interaction protocol}\labsec{protocol}
+
+\section{Compiling actions}\labsec{compilation}
+
+\section{Future works}\labsec{pluginfuture}
+
+\begin{itemize}
+  \item Switch to \emph{higher-order logic} in Actema's backend
+  \item Extend HTTP protocol to support \emph{lemma search}
+  \item Display goal with Coq \emph{notations} (or develop a framework for
+    \emph{interactive} notations in the style of ProofWidgets)
+  \item Individual translation of actions to reusable tactic calls
+  \item Replay mode
+\end{itemize}

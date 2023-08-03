@@ -79,14 +79,14 @@ can be integrated in a mainstream proof assistant.
 We have started to implement the paradigm in a prototype named {\em Actema} (for
 Active Mathematics) running through a web HTML5/JavaScript interface. At the
 time of writing, a standalone version of the prototype (i.e. which does not use
-an existing theorem prover as its backend) can be accessed online at
-\url{https://actema.xyz/}\marginnote[240pt]{\textbf{TODO:} Have a more durable
-way to access the prototype? More generally, what is the correct way to
-incorporate software artifacts in a thesis?}. This possibility to experiment in
-practice, even though yet on a small scale, gave valuable feedback for crafting
-the way DnD actions are to be translated into proof construction steps in an
-intuitive and practical way. A description of the overall architecture and
-implementation design of Actema will be provided in \refch{plugin}.
+an existing theorem prover as its backend) is publicly available online
+\cite{Actema:link}\marginnote[240pt]{\textbf{TODO:} Have a more durable way to
+access the prototype? More generally, what is the correct way to incorporate
+software artifacts in a thesis?}. This possibility to experiment in practice,
+even though yet on a small scale, gave valuable feedback for crafting the way
+DnD actions are to be translated into proof construction steps in an intuitive
+and practical way. A description of the overall architecture and implementation
+design of Actema will be provided in \refch{plugin}.
 
 The chapter is organized as follows. \refsec{setting} briefly outlines its
 logical setting. \refsec{aristote} describes the basic features of a graphical
@@ -947,3 +947,108 @@ $$
   \labfig{DISL-U}
 \end{figure}
 \pagelayout{margin} % Restore margins
+
+\section{Related works}\labsec{pbao-rw}
+
+\subsection*{Window Inference}
+
+We have already mentioned Proof-by-Pointing, which was part of the CtCoq and
+Pcoq efforts \sidecite{amerkad-mathematics-2001} to design a graphical user
+interface for the Coq proof assistant. Another contemporary line of work was the
+one based on \emph{window inference}, initially pioneered by P.J. Robinson and
+J. Staples. In \sidecite{robinson-formalizing-1993}, window inference is
+described as a general proof-theoretical framework, which aims to accomodate for
+the pervasive use of \emph{equivalence transformations} throughout mathematics
+and computer science.
+
+% In \cite{robinson-formalizing-1993}, they describe it as a new kind
+% of proof-theoretic framework, which aims to accomodate for the pervasive use of
+% \emph{equivalence transformations} throughout mathematics and computer science.
+% For this purpose, it provides facilities for describing how to focus on specific
+% subexpressions, and perform transformations on them that preserve a given
+% equivalence relation, while keeping and exploiting information from the context
+% where they occur. It is noted in \cite{grundy-window-1991} that the framework
+% can be extended to more general relations like preorders, which might typically
+% be used to capture the entailment relation of a logic.
+Window inference has been used both for general-purpose logics like HOL
+\sidecite{grundy-window-1991}, and in more specialized settings like program
+refinement \sidecite{grundy-window-1992}. It naturally lends itself to
+integration in a graphical user interface (\sidecite{langbacka-tkwinhol-1995},
+\sidecite{goos-tas-2000}), where the user can \emph{focus} on a subexpression by
+clicking on it. One is then presented with a new \emph{graphical} window,
+holding the selected expression as well as an extended set of hypotheses
+exposing information inferrable from the context of the expression. The user can
+pick from a list of valid transformations to be applied to the expression,
+before closing the window. This propagates the transformations to the parent
+window by replacing the old subexpression by the new one, without modifying the
+surrounding context.
+
+This process is quite reminiscent of the rewriting produced by our DnD
+actions.  One key difference is that window inference rules can be
+applied stepwise, while we choose to hide the sequence of rules that
+justifies a DnD. The window inference approach gives to the user a
+precise control of the transformations to be performed and thus could
+inspire interesting extensions of our work.
+
+% This is because
+% DnD actions embody the specific intent of justifying an \emph{expression} by
+% another \emph{user-specified} expression, which is either assumed to be, or
+% trivially equivalent. In contrast, window inference is about justifying the
+% \emph{equivalence} of an expression to another, \emph{not yet specified}
+% expression. Another way to see it is that our ``link inference'' technique aims
+% to capture the process of \emph{applying} some knowledge, while window inference
+% provides an interface for the \emph{construction} of new knowledge. They thus
+% appear as equally valid and even complementary approaches, that could benefit
+% from being implemented in the same interface.
+
+
+\subsection*{Other Gestural Proof Systems}
+
+There are other proof systems which include drag-and-drop features. Two of them
+are the KeY Prover \sidecite{ahrendt-using-2016} and TAS
+\sidecite{goos-tas-2000}. TAS is a window inference system tailored for program
+refinement, and uses DnD actions between an expression and a transformation, in
+order to apply the latter to the former.
+%This is obviously different from our use of DnD between entities
+%of the same kind, and can be explained by the comparison made in the previous
+%paragraph.
+As for the KeY Prover, its usage of DnD overlaps only a very small
+portion of usecases that we hinted at in \refsec{edukera}, namely
+the instantiation of quantifiers with objects.
+
+We can also mention the recent work of Zhan et al. \sidecite{zhan-design-2019}.
+They share with us the vision of a proof assistant mainly driven by gestural
+actions, which requires far less textual inputs from the user. However, they
+only consider point-and-click actions, and rely on a text-heavy presentation at
+two levels:
+\begin{enumerate}
+  \item the proof state, which is a structured proof text in the style of
+  Isar~\sidecite{isar};
+  \item the proof commands, which can only be performed through choices in textual menus.
+\end{enumerate}
+
+% The latter can be useful to integrate specific actions which do not fit
+% naturally in the gestural paradigm. But because basic reasoning with logical
+% connectives and equations occurs so often in virtually any proof, we believe it
+% deserves a special treatment in the interface, and our work shows that
+% drag-and-drop gestures can be used efficiently for that purpose. This was
+% already a concern in \cite{amerkad-mathematics-2001}, where PbP is seen as a
+% mean to \emph{``increase the bandwidth between the user and the logical
+% engine''}, along with other devices like advanced graphical notations. The
+% authors also described how PbP is partially compatible with the production
+% \emph{in real time} of a proof text in quasi-natural language, thus close to an
+% Isar proof. We conjecture that our drag-and-drop mechanism also has this
+% capability, and in fact solves some of the problems induced by the limitation of
+% PbP to a single selection.
+
+
+\subsection*{Explicit Proof Objects}
+
+Finally let us mention various recent implementations proposing various ways to
+construct proofs graphically: Building Blocks~\sidecite{buildingblocks}, the
+Incredible Proof Machine~\sidecite{blanchette-visual-2016},
+Logitext\sidenote{\url{http://logitext.mit.edu/main}} and Click \&
+coLLecT~\cite{clickcollect}. In particular, Logitext and Click \& coLLecT
+exploit the same idea of associating click actions on head connectives to
+inference rules in sequent calculus. But these systems focus more on explicating
+the proof object than on making its construction easier.

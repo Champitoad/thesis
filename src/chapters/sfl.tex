@@ -1864,3 +1864,88 @@ admissibility theorem from \cite{negri_structural_2001}.
     \end{array}
   \end{align*}
 \end{proof}
+
+\section{Related works}\labsec{sfl-rw}
+
+\subsection*{Canonical Proofs}
+
+The idea of reducing a proof to a collection of links between its dual formulas
+is not new, and can be traced back to the \emph{matings} of Andrews
+\sidecite{1674698} in the context of automated deduction. Matings are
+\emph{sets} of links covering all \emph{atomic} occurrences, and proofs are
+matings satisfying certain conditions. Our work differs in that we are
+interested in \emph{interactive} deduction, and thus consider links as a
+mechanism of inference rather than a syntactic criterion to discriminate proofs.
+Then a proof is better understood as a \emph{list} of links, and the atomicity
+constraint is relaxed to gain expressivity, since the creation of links is
+offloaded to the user instead of the search procedure.
+
+Another line of work, starting with the \emph{proof-nets} of Girard
+\sidecite{girard-linear-1987}, is concerned with the more fundamental problem of
+\emph{proof identity}, which requires a canonical notion of proof object
+\sidecite{strasburger-problem-2019}. In the case of unit-free multiplicative
+linear logic, the absence of any form of duplication/sharing/removal mechanism
+allows to completely characterize a proof-net by the set of its \emph{axiom}
+links\sidenote{The difference with matings is that correctness of a proof
+structure can be checked in \emph{polynomial} instead of exponential time.},
+because of the absence of duplication.
+% This is because adding
+% additives or exponentials, which can encode intuitionistic and classical logic,
+% requires additional structure to represent uses of weakening and contraction.
+% The \emph{combinatorial proofs} of Hughes \cite{Hughes_2006}
+% \cite{heijltjes_intuitionistic_2019} are examples of polynomially-checkable
+% proof objects exhibiting such structure, and have recently been extended to
+% handle first-order classical quantifiers \cite{hughes2019firstorder}
+% (intuitionistic quantifiers are still an open problem).
+% This compartmentalization of axiom links and structural rules resembles the
+% distinction between interaction phases and manual applications of {\rnmsf{conn}}
+% and {\rnmsf{wkn}} in \sys{DISL^0}, which is itself inspired by the
+% \emph{decomposition theorem} of deep inference formalisms.
+% Another approach to canonicity is to consider a generalization of focused proofs
+% called \emph{maximally multi-focused proofs}, which have been proven isomorphic
+% to compact representations of proofs such as proof-nets
+% \cite{ausiello_canonical_2008} and expansion tree proofs
+% \cite{chaudhuri_multi-focused_2016}. We conjecture that our system \sys{ISL^1_2}
+% could be reformulated as a multi-focused proof system, where foci correspond to
+% the linked formulas, and thus their number is restricted to exactly 2.
+There is an analogy between the correctness criterions of proof-nets, and the
+validity criterion of linkages:
+\begin{itemize}
+  \item they both identify a subset of valid objects among a larger set of
+  structures characterized by links on formulas;
+  \item they both allow many different \emph{sequential} readings, that is
+  sequent calculus proofs for proof nets, and deep inference, CoS-style proofs
+  for linkages\sidenote{Note that invalid linkages still give rise to CoS-style
+  \emph{derivations}, but not \emph{proofs} since they do not end with $\top$.
+  The incorrect proof structures of Girard are in a sense more parallel as they
+  cannot always be mapped to correct sequent calculus derivations.}.
+\end{itemize}
+Hence, our approach to subformula linking seems to exhibit some properties of
+canonical proofs, but at the level of \emph{partial proofs}: valid linkages make
+for \emph{compact-parallel-spatial} representations of inferences, whose
+operational meaning is given by their \emph{detailed-sequential-temporal} CoS
+derivations.
+
+
+% More
+% broadly, we envision a generalization of the linking method to any set of
+% subexpressions, which might or might not be equivalent or have equivalent types,
+% depending on the semantics of the action under consideration. Such a generalized
+% method might be dubbed \emph{``link inference''}. Subformula linking then
+% corresponds to a particular kind of action, which justifies any occurrence of
+% proposition given another known, unifiable proposition.
+
+\subsection*{Tangible Functional Programming}
+
+We noticed an interesting connection with the work of Conal Elliott on
+tangible functional programming \sidecite{elliott-tangible}. His concept
+of \emph{deep application} of $\lambda$-terms seems related to the
+notion of subformula linking, when viewing function and product types
+as implications and conjunctions through the formulae-as-types
+interpretation. He also devised a system of basic combinators which
+are composed sequentially to compute the result of a DnD, though it
+follows a more complex dynamic than our rewrite rules. Even if the
+mapping between proofs and programs is not exact in this case, it
+suggests a possible interesting field of application for the
+Curry-Howard correspondance, in the realm of graphical
+proving/programming environments.
