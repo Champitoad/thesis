@@ -9,11 +9,12 @@ sound with its firm grounding in deep inference proof theory (\refch{sfl} and
 mathematical problems expressed within it (\refch{advanced}). We also mentioned
 multiple times our prototype of interface implementing Proof-by-Action called
 Actema, and in particular the fact that it exists as a \emph{standalone} web
-application with its own proof engine \sidecite{Actema:link}. This is convenient
-for distributing it online as a publicly available website, so that people can
-immediately try it out without the hassles of installation procedures. However
-due to both historical choices in its design and lack of human resources for
-development, Actema's proof engine is quite limited in its features:
+application with its own proof engine \sidecite[5em]{Actema:link}. This is
+convenient for distributing it online as a publicly available website, so that
+people can immediately try it out without the hassles of installation
+procedures. However due to both historical choices in its design and lack of
+human resources for development, Actema's proof engine is quite limited in its
+features:
 \begin{itemize}
   \item it can only handle goals expressed in many-sorted intuitionistic
     first-order logic (hereafter iFOL), whereas all state-of-the-art PAs support
@@ -268,8 +269,15 @@ section.
 Regarding the implementation of the \process{Plugin}, we chose to do it in the
 standard way by interfacing with the \texttt{coq-core} API in OCaml
 \sidecite{CoqCore}, although it has been encouraged in recent versions of Coq to
-interface with more stable APIs such as the one provided by coq-elpi
-\sidecite{CoqELPI} and MetaCoq \sidecite{MetaCoq}.
+interface with more stable APIs such as those provided by Coq-Elpi
+\sidecite{CoqELPI} and MetaCoq \sidecite{MetaCoq}\sidenote{Indeed breaking
+changes are frequently introduced in \texttt{coq-core} with newer versions of
+Coq, which requires more maintenance efforts from plugin developers.}. The main
+reason is that our plugin performs \emph{side effects} by interacting with an
+external environment: the file system when saving and retrieving graphical
+proofs, and the network when issueing HTTP requests to Actema. Those cannot be
+implemented in the aforementioned frameworks, and in fact are not part of the
+\texttt{coq-core} API either.
 
 \section{Interaction protocol}\labsec{protocol}
 
