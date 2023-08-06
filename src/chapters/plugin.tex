@@ -281,6 +281,34 @@ implemented in the aforementioned frameworks, and in fact are not part of the
 
 \section{Interaction protocol}\labsec{protocol}
 
+\begin{figure*}[ht]
+  \includegraphics[angle=90,height=\textheight]{protocol-1.pdf}
+  \vspace{2em}
+  \caption{Sequence diagram of \texttt{coq-actema}'s interaction protocol ---
+  non-interactive case}
+  \labfig{protocol}
+\end{figure*}
+
+\begin{figure*}[ht]
+  \includegraphics[angle=90,height=\textheight]{protocol-2.pdf}
+  \vspace{2em}
+  \caption{Sequence diagram of \texttt{coq-actema}'s interaction protocol ---
+    breaking out of the interaction loop}
+  \labfig{protocol}
+\end{figure*}
+
+\begin{figure*}[ht]
+  \includegraphics[angle=90,height=0.9\textheight]{protocol-3.pdf}
+  \vspace{2em}
+  \caption{Sequence diagram of \texttt{coq-actema}'s interaction protocol ---
+    applying an action}
+  \labfig{protocol}
+\end{figure*}
+
+We will now unroll in details a complete interaction in \texttt{coq-actema},
+starting from the \process{User} call to the \texttt{actema} tactic, and ending
+with the new subgoals being display in the \process{IDE}. 
+
 \section{Compiling actions}\labsec{compilation}
 
 \section{Future works}\labsec{pluginfuture}
