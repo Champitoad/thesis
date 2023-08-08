@@ -9,7 +9,7 @@ sound with its firm grounding in deep inference proof theory (\refch{sfl} and
 mathematical problems expressed within it (\refch{advanced}). We also mentioned
 multiple times our prototype of interface implementing Proof-by-Action called
 Actema, and in particular the fact that it exists as a \emph{standalone} web
-application with its own proof engine \sidecite[5em]{Actema:link}. This is
+application with its own proof engine \sidecite[10em]{Actema:link}. This is
 convenient for distributing it online as a publicly available website, so that
 people can immediately try it out without the hassles of installation
 procedures. However due to both historical choices in its design and lack of
@@ -281,40 +281,279 @@ implemented in the aforementioned frameworks, and in fact are not part of the
 
 \section{Interaction protocol}\labsec{protocol}
 
-\begin{figure*}[ht]
+\begin{figure*}
   \includegraphics[angle=90,height=\textheight]{protocol-1.pdf}
   \vspace{2em}
   \caption{Sequence diagram of \texttt{coq-actema}'s interaction protocol ---
-  non-interactive case}
-  \labfig{protocol}
+  non-interactive mode}
+  \labfig{protocol1}
 \end{figure*}
 
-\begin{figure*}[ht]
+\begin{figure*}
   \includegraphics[angle=90,height=\textheight]{protocol-2.pdf}
   \vspace{2em}
   \caption{Sequence diagram of \texttt{coq-actema}'s interaction protocol ---
     breaking out of the interaction loop}
-  \labfig{protocol}
+  \labfig{protocol2}
 \end{figure*}
 
-\begin{figure*}[ht]
+\begin{figure*}
   \includegraphics[angle=90,height=0.9\textheight]{protocol-3.pdf}
   \vspace{2em}
   \caption{Sequence diagram of \texttt{coq-actema}'s interaction protocol ---
     applying an action}
-  \labfig{protocol}
+  \labfig{protocol3}
 \end{figure*}
 
-We will now unroll in details a complete interaction in \texttt{coq-actema},
-starting from the \process{User} call to the \texttt{actema} tactic, and ending
-with the new subgoals being display in the \process{IDE}. 
+We will now unroll the details of a complete interaction in \texttt{coq-actema},
+starting from the \process{User} calling the \texttt{actema} tactic in her
+\process{IDE}, and ending with her viewing the new subgoals displayed in the
+\process{IDE}. We chose to represent this with a \emph{sequence diagram}, as
+specified by the UML standard \cite{enwiki:1153944336}. This kind of diagram is
+used to depict runtime behavior of a system, showing interactions between
+objects and the messages they exchange in the order they occur chronologically.
+In our case, the objects are the different processes described in the previous
+section, as well as the \process{User}. Since the full interaction is quite
+involved, we split the diagram in three parts: \reffig{protocol1} includes the
+beginning of the interaction, focusing on the non-interactive mode of the
+\texttt{actema} tactic where the \process{Plugin} communicates with Coq's kernel
+and the \process{Database}. \reffig{protocol2} and \reffig{protocol3} tackle the
+interactive mode of the \texttt{actema} tactic: \reffig{protocol2} focuses on
+the conditions for breaking out of the interaction loop, and \reffig{protocol3}
+on the interactions at work when the \process{User} performs a proof action in
+Actema.
+
+\subsection{Translating goals}
+
+The first task performed by the \process{Plugin} when calling the
+\texttt{actema} tactic is to ask the kernel for the data of the subgoal $G$
+currently under focus. Then for the goal $G$ to be understandable by the
+\process{Backend} of Actema, the \process{Plugin} will translate it into a new
+representation $\trgoal{G}$ in a custom datatype. In order to share the
+definition of this datatype across implementations of the \process{Plugin} and
+\process{Backend}, we decided to use the ATD data specification language
+\cite{ATD}. It provides a set of tools to automatically generate idiomatic
+datatype definitions in a few target languages --- including OCaml --- along
+with (de)serialization and validation helpers. This is particularly fit for our
+usecase, where we need to serialize complex data like $\trgoal{G}$ in order to
+transmit it over HTTP messages. Since both the \process{Plugin} and
+\process{Backend} are written in OCaml, it also allows us to share across
+implementations our own domain-specific helpers for manipulating this data.
+
+\begin{figure}
+  \input{listings/atd-fo.tex}
+  \caption{ATD definitions for first-order formulas and environments}
+  \labfig{atd-fo}
+\end{figure}
+
+\begin{figure}
+  \input{listings/atd-goals.tex}
+  \caption{ATD definitions for goals}
+  \labfig{atd-goals}
+\end{figure}
+
+The ATD definition of goals is given by the \texttt{goal} type in
+\reffig{atd-goals}\sidenote{The syntax is almost the same as that of OCaml
+datatypes, for the reader already acquainted with this language.}. It relies on
+the ATD types \texttt{form} of \emph{formulas}, and \texttt{env} of
+\emph{environments} of available constants and variables. In our setting, these
+correspond respectively to the formulas and \emph{signatures} of many-sorted
+first-order logic, whose ATD definitions are given in \reffig{atd-fo}. But one
+could imagine using formulas and environments in higher-order logic instead, and
+this would not change the structure of the \texttt{goal} datatype. Note that
+hypotheses are encoded with a \texttt{h\_id} attribute corresponding to their
+string identifier in the Coq goal, even though we do not display it in Actema's
+interface. This is required later by the plugin to compile actions into tactics,
+because we need to identify which Coq hypotheses correspond to those designated
+graphically by the \process{User} (see \refsec{compilation}).
+
+\subsection{Retrieving actions}
+
+The next step for the \process{Plugin} is to check if there already exists a
+graphical proof associated to $\trgoal{G}$ in the \process{Database}. If so,
+then it retrieves it in the form of a list $A$ of \emph{actions}, whose data
+format will be precised in \refsec{compilation}. There is also a positive
+integer $n_i$ associated to each action $A_i$ in the list, corresponding to the
+index of the goal to which $A_i$ applies in the list of subgoals. Then each
+$A_i$ is compiled into a tactic $\traction{A_i}$, and all the $\traction{A_i}$
+are composed into a unique tactic $\tau$, which is executed by the kernel on $G$
+to apply the full sequence of actions.
+
+\begin{remark}
+  Currently the translation $\trgoal{\cdot}$ is not \emph{injective}: it might
+  map two different Coq goals to the same Actema goal, because strictly
+  higher-order subterms are translated into a \texttt{dummy} atomic predicate.
+  Thus one might retrieve a proof from a different goal when calling the
+  \texttt{actema} tactic. However this is not problematic, since the
+  \process{User} cannot perform any actions involving the part of the two goals
+  that make them distinct; they might as well be seen as the same goal from her
+  point of view. It can thus be considered as a feature that maximizes proof
+  reuse.
+\end{remark}
+
+Otherwise the \texttt{actema} tactic has never been executed on $\trgoal{G}$,
+and thus we let the \process{User} provide a (partial) proof in Actema. First
+the \process{Plugin} retrieves the list $Gs$ of all subgoals, instead of just
+the one under focus. If $Gs$ is empty, which would happen after all subgoals
+have been solved from Actema, then it sends a \request{QED} request to Actema so
+that the latter can update its view accordingly, and the interaction loop with
+Actema stops here\sidenote{In \reffig{protocol2} and \reffig{protocol3}, we
+depict requests as being sent to the \process{Frontend} of Actema. This is an
+imprecision for trading some readability, since as reviewed in
+\refsec{architecture} it is the \process{Server} which handles communication
+with the \process{Plugin}, and in particular forwards requests to the
+\process{Frontend}.}.
+
+Otherwise there is at least one subgoal, and we send an \request{action} HTTP
+request to Actema, whose body contains the translated subgoals $\trgoal{Gs}$. To
+do this, we chose to serialize $\trgoal{Gs}$ with the Biniou helpers
+autogenerated by atdgen, the OCaml backend of ATD. According to its authors:
+``Biniou is a binary format extensible like JSON but more compact and faster to
+process'' \sidecite{atdgen}. This data is then deserialized and compiled into a
+set $\mathcal{G}$ of HTML DOM nodes by the \process{Backend}, so that the goals
+can be rendered by the \process{Frontend} and exposed to the \process{User}.
+Then the \process{User} has two options:
+\begin{itemize}
+  \item she can apply either a click, DnD or contextual action\sidenote{See
+  \refsec{funcs} for an introductory example of contextual action with
+  \action{Unfold}.}. The precise protocol followed for applying an action is
+  summarized in \reftab{action-protocol}. Let us focus on the more complex case
+  of DnD actions. The \textbf{Start} column describes how the \process{User}
+  \emph{starts} the action, here by dragging some item $I$ of the current
+  subgoal. Then the \process{Frontend} asks the \process{Backend} for the set
+  $\mathcal{A}$ of all available DnD actions involving $I$. The
+  \textbf{Selection} column describes how the computation of $\mathcal{A}$ is
+  impacted by the set $S$ of subterms that are selected in the current subgoal.
+  For DnD actions, we essentially filter out all linkages that do not match the
+  selection. The \textbf{Render} column describes how $\mathcal{A}$ is
+  \emph{rendered} to the \process{User}: here we highlight all valid drop
+  targets, which correspond to subterms of the current goal located in other
+  items\sidenote{Highlighting is here understood in a \emph{visual} sense: in
+  the current implementation of Actema, subterms are indicated graphically by
+  squaring them. But one could imagine other modalities for highlighting,
+  typically \emph{spelling} the subterms with a speech synthesis algorithm for
+  users with impaired vision.}. Lastly, the \textbf{End} column describes how
+  the user chooses a specific action $A \in \mathcal{A}$ to apply, here by
+  dropping $I$ on a given target. Then $A$ is serialized and sent in the body of
+  the response to the \request{action} request, together with the index $n$ of
+  the subgoal under focus in Actema. The \process{Plugin} can therefore compile
+  $A$ into a tactic $\traction{A}$ which is executed on the $n^{\text{th}}$ Coq
+  subgoal, giving a new list of subgoals which is sent again to Actema for
+  another round of the interaction loop.
+
+  \item or she can click on a \texttt{Done} button in Actema's interface: this
+  has the effect of answering the \request{action} request from the
+  \process{Plugin} with a \request{done} response, and the interaction loop with
+  Actema stops here. This will happen when the \process{User} wants to go back
+  to editing the proof script, either because she is satisfied with the new
+  subgoals obtained from previous actions, or because she is stuck and wants to
+  try native Coq tactics instead. Indeed our protocol is \emph{synchronous}: the
+  \process{IDE}'s interface is stuck until the \texttt{actema} tactic has
+  finished its execution, and thus one cannot edit the proof script \emph{and}
+  build a proof in Actema at the same time.
+  % \sidenote{This is because the
+  % \emph{document checking model} of most Coq IDEs is itself synchronous: when
+  % the \process{User} modifies the proof script at a location before the current
+  % execution point, the proof state goes back to how it was at that location, and
+  % every command/tactic coming after it needs to be reinterpreted.}
+\end{itemize}
+
+\begin{table*}[]
+  \def\arraystretch{1.5}
+  \begin{tabular}{|c|C{0.2\textwidth}|C{0.4\textwidth}|C{0.25\textwidth}|C{0.2\textwidth}|}
+  \hline
+  \textbf{Kind} & \textbf{Start}       & \textbf{Selection $S$} &
+  \textbf{Render}                      & \textbf{End} \\ \hline
+  Click         & Hover item $I$       & Ignored & Highlight $P \subseteq
+  \subterms{I}$ & Click on some $p \in P$    \\ \hline
+  DnD           & Drag item $I$        &
+      If $\exists p \in S \cap \subterms{I}$ then match only $p \link q$ where
+      $q \in \compl{\subterms{I}}$
+      \newline
+      If $\exists q \in S \cap \compl{\subterms{I}}$ then match only $p
+      \link q$ where $p \in \subterms{I}$
+    & Highlight $Q \subseteq \compl{\subterms{I}}$ & Drop on some $q \in Q$ \\ \hline
+  Contextual    & Open menu & Populate menu only with actions
+  applicable on $S$ & Show menu & Choose an item in the menu \\ \hline
+  \end{tabular}
+  \raggedright
+  \parbox{\textwidth}{
+    \vspace{1.5em}
+    We introduced some notations for conciseness:
+    \begin{itemize}
+      \item $p, q$ denote paths to subterms of the current goal
+      \item $P, Q$ and the selection $S$ denote sets of paths
+      \item $\subterms{I}$ denotes the set of paths within item $I$
+      \item $\compl{\subterms{I}}$ denotes the complement of $\subterms{I}$, i.e.
+      all paths in all items $J \not= I$
+      \item $p @ q$ is a linkage as introduced in \refsec{linkages}
+    \end{itemize}}
+
+  \caption{Protocol for applying an action in Actema}
+  \labtab{action-protocol}
+\end{table*}
+
 
 \section{Compiling actions}\labsec{compilation}
+
+Once it has received the actions to execute, either from the \process{Database}
+or the \process{User}, the \process{Plugin} will compile them with a function
+$\traction{\cdot}$ which translates any action $A$ into a Coq tactic
+$\traction{A}$. This function actually has access to some other data used for
+interpreting actions: Coq's goal $G$, its Actema translation $\trgoal{G}$, and a
+bijective mapping $\Sigma$ between Coq constants in the environment of $G$ and
+the corresponding Actema symbols in the first-order signature of $\trgoal{G}$.
+
+\subsection{The \texttt{action} datatype}
+
+\begin{figure}
+  \input{listings/atd-actions.tex}
+  \caption{ATD definitions for actions}
+  \labfig{atd-actions}
+\end{figure}
+
+The \texttt{action} datatype is described thoroughly in the ATD specification
+provided in \reffig{atd-actions}. It is a big algebraic datatype, where each
+constructor encodes a particular \emph{type} of action. An action's type is
+equivalent to the \emph{signature} of a tactic, i.e. its name and the types of
+its arguments. In particular, the translation function $\traction{\cdot}$ is
+defined as a big pattern-matching on the action's type\sidenote{Note that an
+action's type is orthogonal to what we referred to as its \emph{kind} in
+\reftab{action-protocol}, that is the interface mechanism through which it is
+accessible. One might for example want to map some action types to \emph{vocal
+commands} instead of click or DnD gestures.}. The arguments in action types rely
+on most datatypes defined previously in \reffig{atd-fo} and \reffig{atd-goals},
+and on two new datatypes: the type \texttt{ipath} of \emph{paths}, which is used
+pervasively to designate subterms of the current subgoal (that are typically
+indicated by the \process{User} through pointing); and the type \texttt{itrace}
+of \emph{subformula linking traces}, which is used in the compilation of DnD
+actions that perform subformula linking as described in \refch{sfl}.
+
+Most click and contextual actions have a straightforward translation as Coq
+tactics. For instance, the \texttt{AIntro} action that corresponds to a click on
+the conclusion $C$ will be mapped to the Coq tactic that introduces the main
+connective of $C$, and is thus defined by case on the latter: \texttt{intro} for
+$\limp$ and $\forall$, \texttt{split} for $\land$, etc. The actions
+\texttt{AInd}, \texttt{ASimpl} and \texttt{ARed} correspond respectively to the
+contextual actions \action{Induction}, \action{Simplify} and \action{Unfold}
+introduced in \refch{advanced}, and are mapped almost directly to the equivalent
+Coq tactics \texttt{induction}, \texttt{simpl} and \texttt{red}. The only
+difference is that they have a \emph{deep inference} flavor, since they can all
+be applied on an arbitrary subterm selected by the \process{User}. This relies
+on our implementation of deep inference semantics directly in Coq, that we now
+briefly describe.
+
+\subsection{Implementing deep inference semantics}
+
+
 
 \section{Future works}\labsec{pluginfuture}
 
 \begin{itemize}
   \item Switch to \emph{higher-order logic} in Actema's backend
+  \item Design a new architecture/protocol that supports \emph{continuous,
+  incremental document checking} (typically by inserting tactic calls in the
+  proof script for each action, maybe coq-lsp can do that?)
   \item Extend HTTP protocol to support \emph{lemma search}
   \item Display goal with Coq \emph{notations} (or develop a framework for
     \emph{interactive} notations in the style of ProofWidgets)

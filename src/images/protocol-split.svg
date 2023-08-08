@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="0.58799267"
-     inkscape:cx="2858.8792"
-     inkscape:cy="1426.0382"
+     inkscape:zoom="0.94566024"
+     inkscape:cx="2611.9317"
+     inkscape:cy="1627.9631"
      inkscape:window-width="1920"
      inkscape:window-height="1020"
      inkscape:window-x="0"
@@ -19451,7 +19451,8 @@
                      stroke-dasharray="none"
                      id="path464-1" />
                   <g
-                     id="g472-2">
+                     id="g472-2"
+                     transform="translate(4.1925263)">
                     <g
                        id="g468-8" />
                     <text
@@ -19467,7 +19468,7 @@
                        text-anchor="start"
                        dominant-baseline="alphabetic"
                        xml:space="preserve"
-                       id="text470-0">File system</text>
+                       id="text470-0">Database</text>
                   </g>
                 </g>
                 <g
@@ -22465,12 +22466,12 @@
              font-style="normal"
              font-weight="normal"
              text-decoration="normal"
-             x="26.664936"
+             x="30.857437"
              y="1930.3207"
              text-anchor="start"
              dominant-baseline="alphabetic"
              xml:space="preserve"
-             id="text55369">File system</text>
+             id="text55369">Database</text>
         </g>
         <g
            id="g55377">
@@ -29773,12 +29774,12 @@
              font-style="normal"
              font-weight="normal"
              text-decoration="normal"
-             x="26.664936"
+             x="30.857437"
              y="1930.3207"
              text-anchor="start"
              dominant-baseline="alphabetic"
              xml:space="preserve"
-             id="text48478">File system</text>
+             id="text48478">Database</text>
         </g>
         <g
            id="g48486">
@@ -36482,7 +36483,8 @@
          stroke-dasharray="none"
          id="path464-1-99" />
       <g
-         id="g472-2-4">
+         id="g472-2-4"
+         transform="translate(4.1925263)">
         <g
            id="g468-8-8" />
         <text
@@ -36498,7 +36500,7 @@
            text-anchor="start"
            dominant-baseline="alphabetic"
            xml:space="preserve"
-           id="text470-0-7">File system</text>
+           id="text470-0-7">Database</text>
       </g>
     </g>
   </g>
@@ -36552,12 +36554,12 @@
          font-style="normal"
          font-weight="normal"
          text-decoration="normal"
-         x="26.664936"
+         x="30.857437"
          y="1930.3207"
          text-anchor="start"
          dominant-baseline="alphabetic"
          xml:space="preserve"
-         id="text48478-7">File system</text>
+         id="text48478-7">Database</text>
     </g>
   </g>
   <g
@@ -36582,7 +36584,8 @@
        stroke-dasharray="none"
        id="path464-1-4" />
     <g
-       id="g472-2-46">
+       id="g472-2-46"
+       transform="translate(4.1925263)">
       <g
          id="g468-8-3" />
       <text
@@ -36598,7 +36601,7 @@
          text-anchor="start"
          dominant-baseline="alphabetic"
          xml:space="preserve"
-         id="text470-0-9">File system</text>
+         id="text470-0-9">Database</text>
     </g>
   </g>
 </svg>

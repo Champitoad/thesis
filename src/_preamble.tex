@@ -29,7 +29,6 @@
 
 \makeindex[columns=3, title=Alphabetical Index, intoc] % Make LaTeX produce the files required to compile the index
 
-% \usepackage{rotating}
 \usepackage{tabularx}
 \usepackage{makecell}
 % \usepackage{tabulary}
@@ -100,6 +99,9 @@
 % tabularx
 \newcolumntype{O}[1]{>{\setlength\hsize{#1\hsize}}c}
 \newcolumntype{M}[1]{>{\small}m{#1\hsize}}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 % makecell
 \renewcommand\theadfont{\bfseries\normalsize}
