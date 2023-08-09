@@ -617,15 +617,151 @@ that \texttt{reflect} is the inverse of \texttt{reify}.
 
 \section{Future works}\labsec{pluginfuture}
 
+The \texttt{coq-actema} system described in this chapter has been successfully
+implemented and tested on various simple examples, including those of
+\refsec{edukera} and \refsec{arith}. But there are many Coq goals that cannot be
+properly handled in Actema, which still hinders the usability of the system in
+real mathematical developments, even in an educational setting. Typically, the
+example of \refsec{funcs} cannot be completely performed in Actema, in this case
+because of the lack of support for \emph{higher-order} functions and predicates,
+but also because of the poor support for user-defined \emph{notations}. Those
+are only a few of the current limitations of \texttt{coq-actema}, and we
+describe in the following pages how they could be overcome, both to widen the
+scope and improve the UX of the system.
+
+\subsection{Higher-order logic}
+
+The importance of being able to express and manipulate higher-order functions
+and predicates has been stressed multiple times before. The fact that Actema is
+limited to first-order logic is mostly a historical contingency, motivated by
+the fact that some algorithms like unification are more tractable in this
+setting. But now that we rely on Coq's proof engine, there is no fundamental
+reason for maintaining this choice. Because the language of statements is at the
+foundation of a logical framework, many other components of a proof assistant
+will depend on it. Thus the switch to higher-order logic should be done as soon
+as possible, to limit the amount of refactoring work to perform in the future.
+This will require changes to Actema's \process{Backend} and \process{Frontend},
+but also to the Coq \process{Plugin}\sidenote{The Coq theory implementing the
+tactics for deep inference-based actions already has partial support for
+higher-order goals, thus work remains mostly on the side of the translation
+module for Actema written in OCaml.} and the ATD datatype definitions enabling
+communication between the two.
+
+One central question in the transition to higher-order logic is how unification
+of subterms will be handled. Algorithms in this setting are known to be
+incomplete because of undecidability \sidecite{huet_undecidability_1973}, and
+their implementation can be very tricky. The most sensible option seems to rely
+on the implementation already provided by Coq, which is the fruit of years of
+development and improvements. But this would require changing the interaction
+protocol of \texttt{coq-actema}, by allowing the \process{Backend} of Actema to
+make unification requests to the \process{Plugin}. This might be doable without
+changing the current client-server architecture, but will probably involve some
+intricate design decisions.
+
+\subsection{Notations}
+
+Display goal with Coq \emph{notations} (or develop a framework for
+\emph{interactive} notations in the style of ProofWidgets)
+
+\subsection{Lemma search}
+
+Extend HTTP protocol to support \emph{lemma search}
+
+% \subsection{Tighter IDE integration}
+
+% Design a new architecture/protocol that supports \emph{continuous, incremental
+% document checking} (typically by inserting tactic calls in the proof script
+% for each action, maybe coq-lsp can do that?)
+
+\subsection{Proof evolution}
+
+An important question when designing a proving environment is how users will be
+able to manipulate an \emph{existing} (partial) proof, either one they have
+built in the past, one that was built by other people, or a mix of both in a
+collaborative context. This is a complex problem spanning various activities
+that are involved in the lifecycle of a proof: modifying it while it is being
+constructed; reading it for the first time, or many months/years after it was
+written; updating it after slight changes to the statement of its theorem;
+etc\sidenote{Not very surprisingly, those activities are commonly found in the
+context of \emph{programming} environments. Thus one might get insight by
+cross-pollinating ideas from both domains, in the spirit of the Curry-Howard
+correspondence (which also underlies the design of Coq).}. One might even argue
+that thinking about the best way to \emph{represent} a proof leads to more
+fundamental questions, that have been much debated both in proof theory and the
+history and philosophy of mathematics: what is the essence of a proof, seen as a
+meta-mathematical object \sidecite{strasburger-problem-2019}? What are the roles
+played by informal and formal proofs, both in the teaching of mathematics, and
+the social and scientific practice of mathematicians
+\cite{bartzia_proof_nodate}?
+
+In the literature and community of people designing proof assistants, these
+various problematics are generally regrouped under the term of \emph{proof
+evolution}. A fundamental remark about the Proof-by-Action paradigm, and thus
+about the \texttt{coq-actema} system, is that it has not been designed with
+proof evolution in mind from the outset. Indeed, a proof built with the
+\texttt{actema} tactic will provide the least possible amount of information in
+the proof script, since we can just witness the call to that tactic. And
+currently there are no facilities to visualize the associated sequence of
+actions stored in the \process{Database} of graphical proofs.
+
+The first question that should be answered is: how do we represent statically a
+sequence of graphical actions, let alone a single action? For a machine
+representation, we can just dump the data of the action invokation, and this is
+indeed what we do with the \process{Database}. But finding a human-readable
+representation that an average user can quickly manipulate and reason about is a
+lot more delicate. The most direct way may be to abandon text altogether, and
+just replay the action on the interface through a graphical animation. This is
+an intrisically temporal and dynamic representation, akin to a mathematician
+unfolding her demonstration on the blackboard. One could then imagine an
+interface dedicated to the richly-structured navigation inside this sequence of
+animations, in the style of an improved video player.
+
+A more conservative solution would be to find a systematic way to translate a
+sequence of actions into a proof text. The question of generating declarative
+proof texts from imperative proof scripts has already been explored by some
+authors, especially in the case of proofs expressed in natural
+language\sidenote{See for example section 3.6 of E. Ayers' thesis
+\cite{ayers_thesis}. We can also mention ongoing work of Patrick Massot in the
+Lean proof assistant \cite{LeanIPAM}.}. Our hope is that the structure of proofs
+in the Proof-by-Action paradigm might be well-suited to the generation of
+readable and concise proof texts, thanks notably to the subformula linking
+semantics of DnD actions that exhibit clearly the flow of argumentation.
+
+An even more pragmatic solution, that should be straightforward to implement in
+the short-term, consists in inserting tactic invokations in the proof script
+that are in one-to-one correspondence with graphical actions. Since we actually
+compile actions into tactics, this is in principle easy to implement. However,
+there are currently two drawbacks to this approach:
 \begin{itemize}
-  \item Switch to \emph{higher-order logic} in Actema's backend (this implies
-  possibly delegating unification to Coq)
-  \item Design a new architecture/protocol that supports \emph{continuous,
-  incremental document checking} (typically by inserting tactic calls in the
-  proof script for each action, maybe coq-lsp can do that?)
-  \item Extend HTTP protocol to support \emph{lemma search}
-  \item Display goal with Coq \emph{notations} (or develop a framework for
-    \emph{interactive} notations in the style of ProofWidgets)
-  \item Individual translation of actions to reusable tactic calls
-  \item Replay mode
+  \item Since most tactics are deep inference-based, they take as arguments the
+  paths to manipulated subterms, in the form of lists of integers. Those are
+  hard to read by humans, and very sensible to small changes in the shape of the
+  goal. This is even worse for the \texttt{backward} and \texttt{forward}
+  tactics, because they also take as argument the subformula linking trace,
+  which is a very complex data structure expressed in our deep embedding of
+  first-order logic, and hence should not leak into the user interface.
+  Hopefully, relying on Coq's unification instead of Actema's should mitigate
+  the complexity of the trace, by removing the need to incorporate full
+  substitutions. There is also the possibility of replacing integer-based paths
+  by \emph{patterns} in the {\ssreflect} language, which are known to be a more
+  robust way to designate subterms. But this would require the design of some
+  clever algorithm, able to generate patterns that correctly generalize the
+  \process{User}'s intent from the sole data of selected paths.
+
+  \item The interaction protocol described in \refsec{protocol} does not provide
+  any way to send requests to the \process{IDE}, which would be necessary to
+  actually insert the tactic invokation at the right location in the proof
+  script, and this as soon as the action is performed by the \process{User}. A
+  ``brutal'' solution would be to reimplement \texttt{coq-actema} as an
+  extension of a specific IDE, typically VsCoq which is also based on web
+  technologies \cite{VsCoq}. But this would require some big implementation
+  efforts, in addition to locking the \process{User} into this specific IDE. A
+  better option might be to directly interact with a \emph{language server}
+  implementing the Language Server Protocol (LSP) \cite{LSP}. The
+  \texttt{coq-lsp} project aims to provide such a server for Coq, but at the
+  time of writing of this thesis does not implement yet all methods of the LSP
+  standard. The one that interests us in particular is the
+  \texttt{textDocument/codeAction} method, for which support is currently
+  planned \cite{coq-lsp-proto}. Then \texttt{coq-actema} would stay compatible
+  with all IDEs that run \texttt{coq-lsp}.
 \end{itemize}
