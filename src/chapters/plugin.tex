@@ -514,7 +514,7 @@ the corresponding Actema symbols in the first-order signature of $\trgoal{G}$.
 
 The \texttt{action} datatype is described thoroughly in the ATD specification
 provided in \reffig{atd-actions}. It is a big algebraic datatype, where each
-constructor encodes a particular \emph{type} of action. An action's type is
+constructor encodes a specific \emph{type} of action. An action's type is
 equivalent to the \emph{signature} of a tactic, i.e. its name and the types of
 its arguments. In particular, the translation function $\traction{\cdot}$ is
 defined as a big pattern-matching on the action's type\sidenote{Note that an
@@ -527,7 +527,7 @@ and on two new datatypes: the type \texttt{ipath} of \emph{paths}, which is used
 pervasively to designate subterms of the current subgoal (that are typically
 indicated by the \process{User} through pointing); and the type \texttt{itrace}
 of \emph{subformula linking traces}, which is used in the compilation of DnD
-actions that perform subformula linking as described in \refch{sfl}.
+actions that perform subformula linking, to be described soon.
 
 Most click and contextual actions have a straightforward translation as Coq
 tactics. For instance, the \texttt{AIntro} action that corresponds to a click on
@@ -543,14 +543,83 @@ be applied on an arbitrary subterm selected by the \process{User}. This relies
 on our implementation of deep inference semantics directly in Coq, that we now
 briefly describe.
 
-\subsection{Implementing deep inference semantics}
+\subsection{Deep inference semantics}
 
+In a deep inference setting, one can reason on subterms located arbitrarily
+\emph{deep} inside statements, usually by applying some kind of rewriting rules
+on them. In particular, the semantics of DnD actions described in \refch{sfl}
+are based on the rules of SFL (\reffig{DISL}). To implement them, we chose to do
+a \emph{deep embedding} of first-order logic inside the logic of Coq, the
+Calculus of Inductive Constructions (\sys{CoIC} hereafter). Here the word
+``deep'' has a different meaning, related to the fact that we encode the
+statements of first-order logic with our own custom datatypes, instead of
+reusing the statements of \sys{CoIC}. This makes it easier to define the SFL
+rewrite rules, in particular because we need to manipulate \emph{contexts}
+\ref{def:context} explicitly, and those are not available for \sys{CoIC}
+propositions.
+
+Then we use a technique called \emph{computational reflection} in order to apply
+the embedded deep inference semantics to Coq goals. Originating from the
+\emph{small scale reflection} methodology supported by the {\ssreflect}
+framework \cite{SSR}, it consists in translating Coq objects into their
+equivalent formulation in the deep embedding with a \texttt{reify} function,
+reasoning on the deep embedding with Coq programs (also called
+\emph{fixpoints}), and then translating objects back into Coq with a
+\texttt{reflect} function. It is easy to implement the \texttt{reflect} function
+because the datatypes in a deep embedding are almost always defined as
+\emph{inductive} types, and thus one can easily do pattern-matching on them. It
+is a different story for the \texttt{reify} function, especially in our case:
+indeed we want to translate the statements of Coq goals into first-order
+propositions. But Coq statements are objects of type \texttt{Prop}, and thus
+cannot be pattern-matched on inside \sys{CoIC}\sidenote{For reasons of
+consistency of the logic, well-known in the literature on type theory.}. Thus we
+need to have recourse to a \emph{meta-programming} language in order to inspect
+the structure of Coq goals. Here we use the standard {\ltac} language, which
+provides powerful constructs for pattern-matching on goals\sidenote{A downside
+of {\ltac} is that it is an \emph{untyped} language, which makes it hard to
+debug and maintain. One might consider a cleaner implementation with more recent
+alternatives in the Coq ecosystem, like the successor to {\ltac} Ltac2
+\cite{Ltac2}, or the MetaCoq project \cite{MetaCoq}.}.
+
+The most complex tactics are those implementing backward and forward DnD
+actions, called respectively \texttt{backward} and \texttt{forward}. They rely
+on two Coq fixpoints \texttt{b3} and \texttt{f3} which respectively compute the
+new conclusion $\mathtt{b3}(p, q, T)$ from a backward linkage $p \back q$, and
+the new hypothesis $\mathtt{f3}(p, q, T)$ from a forward linkage $p \forw q$,
+where $T$ is the so-called \emph{subformula linking trace} mentioned earlier. Of
+course the paths $p, q$ and the trace $T$ are all expressed with custom Coq
+datatypes relying on our deep embedding of first-order logic. The role of the
+trace in particular is to provide the list of SFL rewrite rules to apply,
+including Coq terms instantiating quantifiers that were computed in Actema by
+unification of the two linked subformulas. Then we formulate in Coq two theorems
+that guarantee the logical \emph{soundness} of \texttt{b3} and \texttt{f3}
+(\reffig{dnd-snd}). Note that the theorems are formulated using the native
+implication connective \texttt{->} of Coq, thanks to the \texttt{reflect}
+function. The final tactics \texttt{backward} and \texttt{forward} can thus
+modify the goal by simply applying these theorems, first reifying the goal with
+the \texttt{reify} function, and then relying on the fact (also proved in Coq)
+that \texttt{reflect} is the inverse of \texttt{reify}.
+
+\begin{figure}
+  \input{listings/dnd-snd.tex}
+  \caption{Soundness theorems of DnD fixpoints in Coq}
+  \labfig{dnd-snd}
+\end{figure}
+
+% \begin{theorem}[Soundness of DnD fixpoints]~\\
+%   $$\forall p.\ \forall q.\ \forall T.\ \mathtt{reflect}(p) \limp
+%   \mathtt{reflect}(\mathtt{b3}(p, q, T)) \limp \mathtt{reflect}(q)$$
+%   \center{and}
+%   $$\forall p.\ \forall q.\ \forall T.\ \mathtt{reflect}(p) \limp
+%   \mathtt{reflect}(q) \limp \mathtt{reflect}(\mathtt{f3}(p, q, T))$$
+% \end{theorem}
 
 
 \section{Future works}\labsec{pluginfuture}
 
 \begin{itemize}
-  \item Switch to \emph{higher-order logic} in Actema's backend
+  \item Switch to \emph{higher-order logic} in Actema's backend (this implies
+  possibly delegating unification to Coq)
   \item Design a new architecture/protocol that supports \emph{continuous,
   incremental document checking} (typically by inserting tactic calls in the
   proof script for each action, maybe coq-lsp can do that?)
