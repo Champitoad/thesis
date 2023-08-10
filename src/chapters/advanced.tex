@@ -240,8 +240,7 @@ higher-order definitions are possible, even though Actema is currently limited
 to first-order logic. In practice this does not affect the semantics of
 graphical actions, and we can imagine having a first-order set theory such as
 \sys{ZF} to make everything work behind the scenes\sidenote{See also
-\refch{future} for a discussion on a type-theoretical higher-order extension of
-Actema.}.
+\refsec{pluginfuture} for a discussion on a higher-order extension of Actema.}.
 
 Let us now describe how to prove the second question of the exercise in the
 Proof-by-Action paradigm. The first thing we want to do is to unfold the
@@ -249,32 +248,10 @@ definition of set inclusion in the conclusion $f^{-1}(f(C)) \subseteq C$, so
 that we can see how to prove logically such an inclusion. One might imagine
 multiple kinds of graphical actions for doing this. In Actema we implemented a
 general \emph{subterm selection} mechanism, where the user can successively
-point at different subterms appearing in the goal\sidenote{The details of how
-Actema's interface enables the designation of subterms through pointing shall be
-investigated elsewhere in this thesis (\refch{plugin}?). Basically we want to
-mention:
-\begin{itemize}
-  \item The mapping of \emph{spans} of text in the linear, textual notation to
-  the underlying tree structure of terms, exploiting the tree structure of the
-  HTML DOM tree (same technique used in the ProofWidgets framework
-  \cite{ayers_graphical_2021}). The data required for this mapping should be
-  provided by the proof engine when sending the goal to the interface, and
-  \cite{ayers_graphical_2021} describes how they had to modify the
-  pretty-printer of Lean upstream in order to expose this data. We do not know
-  of any API in Coq that exposes this data, at least not in the low-level OCaml
-  API we use for the plugin, and a forciori neither in higher-level APIs like
-  those of ELPI or SerAPI. Thus we might need similar upstream changes to Coq in
-  order to support interactive selection of subterms in pretty-printed form.
-  \item When multiple spans overlap at a pointed location, we disambiguate by
-  selecting the one \emph{deepest} in the term structure (this would not work in
-  the other direction, since this would always select the root term!). This is
-  implemented easily in HTML/JavaScript by disabling the mechanism of
-  \emph{event bubbling} with the \texttt{stopPropagation()} method of the
-  \texttt{Event} interface (TODO: cite Mozilla documentation).
-\end{itemize}}
---- either in the context or the conclusion --- and then choose from a list of
-available actions taking the selection as argument. In our case we can select
-the whole conclusion, and then choose to apply the \action{Unfold} action:
+point at different subterms appearing in the goal --- either in the context or
+the conclusion --- and then choose from a list of available actions taking the
+selection as argument. In our case we can select the whole conclusion, and then
+choose to apply the \action{Unfold} action:
 $$\select{f^{-1}(f(C)) \subseteq C} \qquad \text{(\action{Unfold})}$$
 The system will be able to tell that we
 selected an instance of the two-place inclusion predicate $\cdot \subseteq
@@ -335,22 +312,18 @@ will vary:
     bar, typically in this case the keyword ``comprehension''. Then the system
     will show a list of lemmas whose names match the keywords, and the user can
     click on the lemma she is interested in, in order to add it as a blue item
-    in the current context\sidenote{This feature is currently implemented solely
-    in the standalone version of Actema, with a toy database of 3 lemmas about
-    arithmetic. This is because the standalone version is based on a custom
-    proof engine in first-order logic, which cannot reuse libraries of lemmas
-    from a real proof assistant.}. An alternative and more precise way of
-    retrieving a lemma is to search by \emph{content} of the statement instead
-    of searching by name. State-of-the-art proof assistants usually provide
-    facilities for this: for instance Coq has a \texttt{Search} command which
-    can take \emph{patterns}, i.e. terms with holes or so-called
-    \emph{metavariables}, in order to filter out results that do not match the
-    given pattern. In Actema, we implemented a novel feature which replaces
-    patterns by a selection of subterms in the current goal, similarly to what
-    is given as argument to contextual actions like \action{Unfold}. Then the
-    system will only look for lemmas which can be used in a DnD action involving
-    precisely the current selection of subterms. In this case, selecting the
-    full statement of $(1)$ and searching:
+    in the current context. An alternative and more precise way of retrieving a
+    lemma is to search by \emph{content} of the statement instead of searching
+    by name. State-of-the-art proof assistants usually provide facilities for
+    this: for instance Coq has a \texttt{Search} command which can take
+    \emph{patterns}, i.e. terms with holes or so-called \emph{metavariables}, in
+    order to filter out results that do not match the given pattern. In Actema,
+    we implemented a novel feature which replaces patterns by a selection of
+    subterms in the current goal, similarly to what is given as argument to
+    contextual actions like \action{Unfold}. Then the system will only look for
+    lemmas which can be used in a DnD action involving precisely the current
+    selection of subterms. In this case, selecting the full statement of $(1)$
+    and searching:
     $$\select{x \in \compr{a \in A}{f(a) \in f(C)}} \qquad
     \text{(\action{Search})}$$
     should return the comprehension axiom among other lemmas, because this axiom

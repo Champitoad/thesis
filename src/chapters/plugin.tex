@@ -9,7 +9,7 @@ sound with its firm grounding in deep inference proof theory (\refch{sfl} and
 mathematical problems expressed within it (\refch{advanced}). We also mentioned
 multiple times our prototype of interface implementing Proof-by-Action called
 Actema, and in particular the fact that it exists as a \emph{standalone} web
-application with its own proof engine \sidecite[10em]{Actema:link}. This is
+application with its own proof engine \sidecite[20em]{Actema:link}. This is
 convenient for distributing it online as a publicly available website, so that
 people can immediately try it out without the hassles of installation
 procedures. However due to both historical choices in its design and lack of
@@ -660,12 +660,65 @@ intricate design decisions.
 
 \subsection{Notations}
 
-Display goal with Coq \emph{notations} (or develop a framework for
-\emph{interactive} notations in the style of ProofWidgets)
+Another big limitation already mentioned in the introduction of this chapter, is
+that we do not handle custom \emph{notations} for displaying
+terms\sidenote{Apart from expressions in Peano arithmetic, for which we have ad
+hoc support.}. It is however a crucial feature for making proofs in a specific
+domain tractable, especially in the Proof-by-Action paradigm where one needs to
+manipulate directly statements in the goal. Now that we are connected to Coq, we
+can in principle reuse the notation system already implemented within Coq. The
+\texttt{coq-core} OCaml API indeed exposes methods for pretty-printing Coq terms
+using their assigned notations. The problem is that these methods only return
+\emph{strings}, but in order to manipulate terms interactively in Actema we also
+need access to \emph{trees} mapping their subterm structure to the
+pretty-printed string. At the time of writing there is no support for the latter
+as far as we know, but we learned that it is planned through private
+communication with the Coq development team. The same problem was met by the
+developers of the ProofWidgets framework in Lean, and they had to modify the
+pretty-printer of Lean upstream\sidenote{Section 4.1 of
+\cite{ayers_graphical_2021}.}.
+
+Once one has support for custom notations displayed in an HTML page, it is
+tempting to also allow for arbitrary HTML/JS code, instead of just textual
+notations. This opens the space for very rich graphical and interactive
+representations of mathematical objects, which could greatly improve the
+accessibility of PAs, but also their expert usage by enabling domain-specific
+interfaces targetting non-standard methods of reasoning. A typical example is
+the \emph{diagrammatic} reasoning pervasive in \emph{category theory}, which is
+very hard and cumbersome to express as manipulation of logical statements.
+Actually a system very similar to \texttt{coq-actema} is currently being
+developed by Luc Chabassier \todo{add citation}, for the very purpose of
+integrating diagrammatic proofs in category theory to the traditional proof
+script workflow. One could imagine in the long-term embedding this system as a
+subsystem of \texttt{coq-actema}, through an advanced protocol for interactive
+notations.
+
+In fact the ProofWidgets framework mentioned earlier has been designed with this
+usecase in mind from the outset. But they rely on a very different architecture
+compared to that of \texttt{coq-actema}, where the methods generating the
+HTML/JS code of pretty-printed terms are directly implemented in a DSL embedded
+in the meta-programming language of the PA. While this allows easy access to all
+meta-programming facilities for manipulating terms, this makes their framework
+only usable within Lean, while Actema could in principle be used with any PA
+that implements a corresponding plugin (for example with a \texttt{lean-actema}
+variant of our system).
 
 \subsection{Lemma search}
 
-Extend HTTP protocol to support \emph{lemma search}
+We already described in \refsec{funcs} the \emph{lemma search} feature of
+Actema. Currently it is implemented only in its standalone version. Adding
+support for it in \texttt{coq-actema} would require additional efforts compared
+to other contextual actions like \action{Induction}. Indeed we do not only need
+access to the current goal, but also to the full global environment of Coq where
+lemmas are stored. While in the standalone version we had a toy lemma database
+with very few entries, the standard library of Coq contains thousands of lemmas.
+And to reuse our selection-based filtering algorithm implemented in Actema, we
+would need translate the entire library into statements understandable by
+Actema's \process{Backend}, and then send it over HTTP. This is clearly a loss
+of computing resources, that could be avoided by delegating filtering to the
+\process{Plugin} instead. But since filtering is based on the validity criterion
+of linkages (\refsec{validity}), this means reimplementing the latter in the
+plugin.
 
 % \subsection{Tighter IDE integration}
 
