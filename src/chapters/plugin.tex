@@ -276,8 +276,7 @@ Coq, which requires more maintenance efforts from plugin developers.}. The main
 reason is that our plugin performs \emph{side effects} by interacting with an
 external environment: the file system when saving and retrieving graphical
 proofs, and the network when issueing HTTP requests to Actema. Those cannot be
-implemented in the aforementioned frameworks, and in fact are not part of the
-\texttt{coq-core} API either.
+implemented in the aforementioned frameworks.
 
 \section{Interaction protocol}\labsec{protocol}
 
@@ -365,7 +364,7 @@ hypotheses are encoded with a \texttt{h\_id} attribute corresponding to their
 string identifier in the Coq goal, even though we do not display it in Actema's
 interface. This is required later by the plugin to compile actions into tactics,
 because we need to identify which Coq hypotheses correspond to those designated
-graphically by the \process{User} (see \refsec{compilation}).
+graphically by the \process{User}.
 
 \subsection{Retrieving actions}
 
@@ -658,6 +657,17 @@ make unification requests to the \process{Plugin}. This might be doable without
 changing the current client-server architecture, but will probably involve some
 intricate design decisions.
 
+A more radical solution would be to replace the \request{actions} request from
+the \process{Frontend} to the \process{Backend} by a \texttt{start} response
+from the \process{Frontend} to the \process{Plugin}, with the data of the
+selection in its body. Then we could completely delegate the computation of
+available actions to the \process{Plugin}, allowing us to freely use Coq's
+unification. This might not be too hard since we should be able to directly
+reuse OCaml code from the \process{Backend}, but is a deeper structural change
+to the interaction protocol, that makes the \process{Plugin} responsible for an
+important part of Actema's behavior. And this would induce a lot of unnecessary
+reimplementation efforts if we were to port the \process{Plugin} to other PAs.
+
 \subsection{Notations}
 
 Another big limitation already mentioned in the introduction of this chapter, is
@@ -687,11 +697,10 @@ interfaces targetting non-standard methods of reasoning. A typical example is
 the \emph{diagrammatic} reasoning pervasive in \emph{category theory}, which is
 very hard and cumbersome to express as manipulation of logical statements.
 Actually a system very similar to \texttt{coq-actema} is currently being
-developed by Luc Chabassier \todo{add citation}, for the very purpose of
-integrating diagrammatic proofs in category theory to the traditional proof
-script workflow. One could imagine in the long-term embedding this system as a
-subsystem of \texttt{coq-actema}, through an advanced protocol for interactive
-notations.
+developed by Luc Chabassier \cite{LucTalk}, for the very purpose of integrating
+diagrammatic proofs in category theory to the traditional proof script workflow.
+One could imagine in the long-term embedding this system as a subsystem of
+\texttt{coq-actema}, through an advanced protocol for interactive notations.
 
 In fact the ProofWidgets framework mentioned earlier has been designed with this
 usecase in mind from the outset. But they rely on a very different architecture
@@ -712,13 +721,12 @@ to other contextual actions like \action{Induction}. Indeed we do not only need
 access to the current goal, but also to the full global environment of Coq where
 lemmas are stored. While in the standalone version we had a toy lemma database
 with very few entries, the standard library of Coq contains thousands of lemmas.
-And to reuse our selection-based filtering algorithm implemented in Actema, we
-would need translate the entire library into statements understandable by
-Actema's \process{Backend}, and then send it over HTTP. This is clearly a loss
-of computing resources, that could be avoided by delegating filtering to the
-\process{Plugin} instead. But since filtering is based on the validity criterion
-of linkages (\refsec{validity}), this means reimplementing the latter in the
-plugin.
+And to use our selection-based filtering algorithm implemented in Actema, we
+need to translate the entire library into statements understandable by Actema's
+\process{Backend}, and then send it over HTTP. Thus it will be important to
+implement some cache mechanism to remember which lemmas have already been
+exported to Actema's own database, to avoid recomputing the translation each
+time.
 
 % \subsection{Tighter IDE integration}
 

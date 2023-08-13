@@ -1,7 +1,55 @@
 \setchapterpreamble[u]{\margintoc}
-\chapter{Bubble Calculus}
+\chapter{Bubble Calculi}
 \labch{bubbles}
 
-\section{Single-succedant}
+We introduce a new kind of nested sequent proof systems dubbed \emph{bubble
+calculi}. Inspired by the \emph{membrane} mechanism of the chemical abstract
+machine \sidecite[10em]{berry_chemical_1989}, so-called \emph{bubbles}
+internalize the notion of \emph{subgoal} inside sequents, rather than through
+the tree structure induced by inference rules. This allows for a more
+hierarchical representation of the proof state, where contexts can be shared
+between different subgoals. In addition to the usual textual syntax, bubble
+calculi can be expressed in a graphical syntax, where logical meaning is
+captured by \emph{physical} constraints on diagrammatic manipulations, instead
+of \emph{virtual} restrictions on available inference rules. In the chemical
+metaphor, \emph{intuitionism} is then characterized as the phenomenon of
+\emph{repulsion} between objects that have the same polarity.
 
-\section{Multi-succedant}
+The chapter is organized mostly chronologically, following the evolution of our
+idea of a bubble calculus through the addition of new features. We start in
+\refsec{chemical} with the genesis of the idea, coming from the observation that
+our Proof-by-Action paradigm (\refch{pba}) lends itself quite naturally to a
+metaphorical interpretation, where actions are seen as \emph{chemical}
+reactions. In \refsec{first-calculus} we introduce a first proof system for
+intuitionistic logic, based on multiset rewriting rules for so-called
+\emph{solutions} made of bubbles and formulas. Then in \refsec{non-determinism}
+we motivate our quest for a system where all introduction rules for logical
+connectives are \emph{invertible}, in order to reduce non-determinism in proof
+search. To that effect, we extend in \refsec{colors} the syntax of solutions so
+that they can hold multiple parallel conclusions that themselves contain
+solutions, corresponding to a \emph{polarization} of bubbles. This gives rise in
+\refsec{polarized-calculus} to the full \emph{polarized bubble calculus}, based
+on a novel distinction between \emph{branching} and \emph{non-branching}
+solutions, corresponding respectively to the branchings of
+\sidecite{guenot_nested_2013} and more traditional nested sequents. In
+\refsec{bubbles-soundness} we show that by adding or removing 4 inference rules
+that define the \emph{porosity} of bubbles, one gets 4 subsystems that capture
+respectively intuitionistic, dual-intuitionistic, bi-intuitionistic and
+classical logic. Finally in \refsec{bubbles-completeness} we support this claim
+by showing that our system is not only sound, but also complete with respect to
+standard sequent calculi.
+
+
+\section{The chemical metaphor}\labsec{chemical}
+
+\section{A first calculus}\labsec{first-calculus}
+
+\section{Reducing non-determinism}\labsec{non-determinism}
+
+\section{Coloring bubbles}\labsec{colors}
+
+\section{Polarized bubble calculus}\labsec{polarized-calculus}
+
+\section{Soundness}\labsec{bubbles-soundness}
+
+\section{Completeness}\labsec{bubbles-completeness}
