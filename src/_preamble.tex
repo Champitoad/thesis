@@ -43,7 +43,6 @@
 \usepackage{cmll}
 % \usepackage{float}
 % \usepackage{framed}
-\usepackage{xcolor}
 \usepackage{tikz-cd}
 % \usepackage{graphicx}
 % \usepackage[inline]{enumitem}
@@ -57,6 +56,16 @@
 % \usepackage{adjustbox}
 % \usepackage{pifont}
 % \usepackage{turnstile}
+
+% TikZiT
+\usepackage{tikzit}
+\input{drawings/bubbles.tikzstyles}
+\input{drawings/bubbles.tikzdefs}
+\renewcommand{\tikzfig}[1]{
+\InputIfFileExists{./drawings/#1.tikz}{}{{\color{red}\colorbox{pink}{missing file : #1}}}
+}
+
+
 \usepackage{minted}
 \usepackage{fontspec}
 \usepackage{newunicodechar}
@@ -64,6 +73,7 @@
 \newunicodechar{⊆}{{\mathsymbolfont\subseteq}}
 
 % \usepackage[old-default]{fontsetup}
+\setmathfont{STIX2Math.otf}[range=\Coloneq]
 % \setmathfont{LibertinusMath-Regular.otf}[range=\vdash]
 % \setmathfont{LibertinusMath-Regular.otf}[range=\nvdash]
 % \setmathfont{LibertinusMath-Regular.otf}[range=\vDash]
@@ -107,8 +117,11 @@
 \renewcommand\theadfont{\bfseries\normalsize}
 
 % xcolor
+\usepackage{xcolor}
 \definecolor{pos}{HTML}{C80000}
 \definecolor{neg}{HTML}{0000C8}
+\definecolor{hypo}{HTML}{007BFF}
+\definecolor{conc}{HTML}{DC3545}
 
 % prftree
 \prflineextra=0em

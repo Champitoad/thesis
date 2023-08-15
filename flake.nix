@@ -22,10 +22,16 @@
       tectonic = pkgs.tectonic;
       biber = pkgs_biber.biber;
       pygments = pkgs.python311Packages.pygments;
+
+      tikzit = pkgs.tikzit;
+      texlive = pkgs.texlive.combined.scheme-full;
+
+      buildPackages = [ tectonic biber pygments ];
+      devPackages = [ tikzit texlive ];
     in
     {
       devShell.${system} = pkgs.mkShell {
-        packages = [ tectonic biber pygments ];
+        packages = buildPackages ++ devPackages;
       };
     };
 }

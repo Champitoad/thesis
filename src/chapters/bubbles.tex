@@ -4,12 +4,12 @@
 
 We introduce a new kind of nested sequent proof systems dubbed \emph{bubble
 calculi}. Inspired by the \emph{membrane} mechanism of the chemical abstract
-machine \sidecite[10em]{berry_chemical_1989}, so-called \emph{bubbles}
-internalize the notion of \emph{subgoal} inside sequents, rather than through
-the tree structure induced by inference rules. This allows for a more
-hierarchical representation of the proof state, where contexts can be shared
-between different subgoals. In addition to the usual textual syntax, bubble
-calculi can be expressed in a graphical syntax, where logical meaning is
+machine ({\cham} hereafter) \sidecite[10em]{berry_chemical_1989}, so-called
+\emph{bubbles} internalize the notion of \emph{subgoal} inside sequents, rather
+than through the tree structure induced by inference rules. This allows for a
+more hierarchical representation of the proof state, where contexts can be
+shared between different subgoals. In addition to the usual textual syntax,
+bubble calculi can be expressed in a graphical syntax, where logical meaning is
 captured by \emph{physical} constraints on diagrammatic manipulations, instead
 of \emph{virtual} restrictions on available inference rules. In the chemical
 metaphor, \emph{intuitionism} is then characterized as the phenomenon of
@@ -30,7 +30,7 @@ that they can hold multiple parallel conclusions that themselves contain
 solutions, corresponding to a \emph{polarization} of bubbles. This gives rise in
 \refsec{polarized-calculus} to the full \emph{polarized bubble calculus}, based
 on a novel distinction between \emph{branching} and \emph{non-branching}
-solutions, corresponding respectively to the branchings of
+solutions, corresponding respectively to the branchings of Guenot
 \sidecite{guenot_nested_2013} and more traditional nested sequents. In
 \refsec{bubbles-soundness} we show that by adding or removing 4 inference rules
 that define the \emph{porosity} of bubbles, one gets 4 subsystems that capture
@@ -42,7 +42,183 @@ standard sequent calculi.
 
 \section{The chemical metaphor}\labsec{chemical}
 
+The Proof-by-Action paradigm introduced in \refch{pba} offers multiple ways to
+the user to attack the proof of a theorem: DnD actions for subformula linking
+and equality rewriting are the main mechanism, but they only work in a goal
+comprising multiple items. Since it is customary in proof assistants to specify
+the goal to be proved as a single logical formula, one needs a way to decompose
+it into many items for further processing through DnD. This is precisely what
+the introduction rules for logical connectives in sequent calculus do, and
+following the Proof-by-Pointing paradigm \cite{PbP} we map them to click
+actions.
+
+So visually, a proof in Actema consists in breaking logical items into subitems
+positioned freely in space, and then bringing those subitems together to make
+them interact and produce a new item. This is quite evocative of a
+\emph{chemical reaction} controlled by the user, where logical formulas are akin
+to molecules made of propositional atoms linked together by logical
+connectives\sidenote{This precise metaphor about the molecular structure of
+propositions can already be found in Russell's introduction to Wittgenstein's
+Tractatus Logico-Philosophicus, which was the main inspiration to his philosophy
+of \emph{logical atomism} \cite{tractatus-chemical}\cite{klement_russells_2020}.
+Even earlier in the history of logic, C. S. Peirce took inspiration from
+chemical diagrams to devise his \emph{existential graphs} (that we introduce in
+\refch{eg}) \cite{Roberts1973-chemical}.}. Click actions are then a mean to
+``heat'' molecules to the point of breaking these chemical bonds. The most
+canonical examples are the right-introduction rule for implication $\limp$ and
+the left-introduction rule for conjunction $\land$, which break respectively a
+conclusion/red item/positive ion into a hypothesis/blue item/negative ion and a
+new conclusion, and a hypothesis into two hypotheses. In fact, it is strongly
+conjectured that these are the only click actions needed to obtain a complete
+deductive system for propositional logic: breaking red implications allows for
+backward DnDs, and blue conjunctions for forward DnDs\sidenote{In predicate
+logic, one would also need the right (resp. left) introduction rule for
+$\forall$ (resp. $\exists$). It might also be the case that backward DnDs alone
+are sufficient for completeness, since a linkage of the form $A \back \select{B}
+\limp C$ will involve a forward phase. In this case only the right introduction
+rules for $\limp$ and $\forall$ would be required.}.
+% \sidenote{Interestingly,
+% those rules are the basis for the adjunction between $\land$ and $\limp$ in the
+% interpretation of IPL into cartesian closed categories.}
+
+Rather than completeness, the issue here is \emph{consistency} of the user
+interface: if the user is allowed to decompose red $\limp$ and blue $\land$, she
+will assume naturally that she can also decompose blue $\limp$ and red $\land$,
+as well as $\lor$ of any color. While red $\lor$ can be handled by pointing
+directly at the disjunct to be proved, other configurations correspond to rules
+of sequent calculus with multiple premisses. In Actema, this corresponds to
+creating a new subgoal for each premise, where subgoals are displayed one at a
+time in different \emph{tabs}: this new interface mechanism breaks the chemical
+metaphor. The root cause lies in the way sequent calculus implements
+\emph{context-scoping}: each subgoal will share the same initial context of
+hypotheses, but future hypotheses ``buried'' in the conclusions must be
+available only in their respective subgoals. The tabs mechanism implements this
+by forcing the user to focus on exactly one tab/subgoal, thus making it
+impossible to display items from different subgoals on the same screen, which
+renders interaction between them physically impossible.
+
+
 \section{A first calculus}\labsec{first-calculus}
+
+In order to accomodate context-scoping within the chemical metaphor, we were led
+to explore a notion of \emph{bubble} inspired by the \emph{membranes} of the
+{\cham} \cite{berry_chemical_1989}. The latter are used to delineate zones of
+\emph{local} interaction, which are still porous to external data. This is
+precisely what we want to do here: let us consider that the user tries to prove
+the sequent $\Gamma \seq A \land B$. By clicking on the red item $A \land B$,
+she will break it into two bubbles $\bubbleT{\seq A}$ and $\bubbleT{\seq B}$.
+Then she might decompose $A$ and $B$ further into sequents $\sigma_A = \Gamma_A
+\seq C_A$ and $\sigma_B = \Gamma_B \seq C_B$, and use hypotheses from $\Gamma$
+by dragging them inside either $\bubbleT{\sigma_A}$ or $\bubbleT{\sigma_B}$.
+However, hypotheses from $\Gamma_A$ and $\Gamma_B$ cannot be dragged out from
+their respective bubble, since then they could be used in the other bubble and
+violate context-scoping.
+
+This situation is illustrated in \reffig{bubbles-flow}, where bubbles are
+represented by gray circles, and possible drag moves of formulas by arrows. More
+specifically, green and orange arrows symbolize respectively valid and invalid
+moves. Notice how this graphical depiction of bubbles exhibits their
+\emph{topological} behavior: while objects can enter inside bubbles from the
+outside, they get blocked by the membrane in the opposite direction. Indeed the
+only relevant feature of the circle representation is that it divides the space
+into an \emph{interior} and an \emph{exterior}. Then the \emph{nesting} of
+circles and the \emph{positions} of formulas relative to them encode
+respectively the \emph{tree} structure of the proof, and the scope of hypotheses
+in it.
+
+\begin{figure}
+  \scalebox{1.5}{\tikzfig{bubbles-flow}}
+  \caption{Context-scoping in bubbles as topological constraints}
+  \labfig{bubbles-flow}
+\end{figure}
+
+Bubbles can therefore be seen as a way to internalize in the syntax of sequents
+the notion of \emph{subgoal}, which requires in turn to allow nesting of
+sequents inside each other. The proof state is not a set of subgoals anymore,
+but a single nested sequent of this sort, that we call a
+\emph{solution}\sidenote{The term ``solution'' refers here to the metaphor of a
+\emph{chemical solution} made up of an unordered collection of molecules. Which
+is quite ironic, since we use it to denote goals waiting to be proved, that is
+problems lacking a solution\dots}. In textual syntax, solutions $\sigma$ are
+generated by the following grammar:
+\begin{align*}
+  \sigma &\Coloneq \Gamma \piq{\sigma_1 \sep \ldots \sep \sigma_n} \Delta &\text{(Solutions)}
+  \\
+  \Gamma &\Coloneq A_1, \ldots, A_n &\text{(Hypotheses)}
+  \\
+  \Delta &\Coloneq \emptyset \mid A &\text{(Conclusions)}
+\end{align*}
+where the $A_i$ and $A$ are usual formulas of FOL. Thus solutions are just like
+the single-conclusion sequents of \sys{LJ}, except that we add a collection of
+nested sequents $\sigma_i$ that will represent subgoals, or premisses of usual
+inference rules. To be more precise, the collections of hypotheses $A_i$ and
+solutions $\sigma_i$ are \emph{multisets}, which gives the following mutually
+recursive definitions:
+\begin{definition}[Ion]
+  An \emph{ion} is a formula charged either \emph{negatively} (hypothesis) or
+  \emph{positively} (conclusion).
+\end{definition}
+\begin{definition}[Bubble]
+  A \emph{bubble} is a solution enclosed in a membrane.
+\end{definition}
+\begin{definition}[Solution]
+  A \emph{solution} $\sigma$ is a multiset of ions and bubbles. It is
+  \emph{single-conclusion} if it contains at most one positive ion.
+\end{definition}
+In this section we only deal with single-conclusion solutions, but the more
+general case will be studied starting from \refsec{colors}. Also in the above
+definitions, bubbles play a purely metaphorical role and could be dispensed
+with. But it will be useful later on to distinguish them conceptually from
+solutions.
+
+\todo{ motivate the fact that a solution can have 0 conclusion through the
+  example of the positive $\land$ rule }
+
+Inference rules are just rewriting rules on solutions, and a proof of a solution
+is a sequence of rewrites starting from (or in our proof-search setting, ending
+with) the empty solution $\piq{}$. Thus we arrived at a formalism which is a
+blend of deep inference and sequent calculus, and therefore that can express the
+rules associated with both click and DnD actions. We call this system the
+\emph{single-succedant intuitionistic bubble calculus}, or \sys{BJ_s} for short,
+and a more visual presentation in terms of multiset rewriting as in
+\cite{berry_chemical_1989} is available in draft \cite{ICPM}.
+
+% Currently we have proved neither soundness nor completeness of the \sys{BJ_s}, and
+% though it might still need small adjustments, we believe it should be
+% straightforward to do so.
+
+Beyond the recovered uniformity of the user interface in terms of the chemical
+metaphor, \sys{BJ_s} exhibits many features that are interesting both at the
+proof-theoretical and user-experience levels:
+\begin{itemize}
+  \item It implements a form of \emph{context-sharing} between subgoals: that
+    is, one can perform transformations on shared hypotheses (forward reasoning)
+    without going back to a proof state anterior to the splitting of said
+    subgoals.
+  \item The tree structure of subgoals is immediately apparent in the proof
+    state through nested bubbles. Thus part of the information on the proof
+    construction process, which was made implicit and temporal in the proof
+    state history, is now made explicit and spatial in the proof state
+    itself\sidenote{This concern of finding an explicit graphical representation
+    of the ``motions of reasoning \emph{in actu}'', and not only the states of
+    mind, can be found already in the works of Peirce on his existential graphs
+    \cite{Roberts1973-inactu}. We will come back to this soon.}. There are
+    multiple ways to visualize trees on a planar surface, but if we are to
+    maintain the bubble metaphor, \emph{zoomable user interfaces} seem to be a
+    right fit: they allow for efficient space management and navigation, and
+    zooming in intuitively conveys the idea of focusing on a specific subgoal.
+    One could also zoom out to have an overview of the different subgoals and
+    their shared context, something which is hard to do in current proof
+    assistants.
+  \item Most inference rules are \emph{local}, in the sense that applying some
+    action to one or two items will not involve other items (the only exceptions
+    are clicks on blue $\bot$ and $\lor$, but the only extra item they involve
+    is the conclusion). Non-local rules are less natural for a beginner, because
+    they modify a global state (here other items) which is not clearly
+    correlated to the transformed data. This is of limited importance however in
+    our case, because sequent calculus rules always perform the same trivial
+    operation on the global state: duplicating the whole context of hypotheses.
+\end{itemize}
 
 \section{Reducing non-determinism}\labsec{non-determinism}
 

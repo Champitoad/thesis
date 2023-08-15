@@ -30,12 +30,14 @@
 
 \newcommand{\rnmsf}[1]{\rnm{\mathsf{#1}}}
 
-\newcommand{\hypo}{\prfassumption}
+\newcommand{\assum}{\prfassumption}
 \newcommand{\summ}{\prfsummary}
 
 % -------------------------------
 % ---------- Notations ----------
 % -------------------------------
+
+\newcommand{\Ceq}{\mathrel{\vcenter{\hbox{::}}{=}}}
 
 \newcommand{\nats}{\mathbb{N}}
 
@@ -75,6 +77,20 @@
 \newcommand{\compr}[2]{\left\{#1 ~\middle|~ #2\right\}}
 \newcommand{\compl}[1]{\overline{#1}}
 \newcommand{\fset}[3]{\{#3\}_{#1}^{#2}}
+
+\newcommand{\hypo}[1]{{\color{hypo} #1}}
+\newcommand{\conc}[1]{{\color{conc} #1}}
+
+% Bubbles
+
+\newcommand{\cham}{\textsc{Cham}}
+
+\newcommand{\bubbleT}[1]{\llparenthesis~#1~\rrparenthesis}
+\newcommand{\piq}[1]{\mathbin{\langle #1 \rangle}}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\newcommand{\bubble}[3]{\circled{\hypo{#1} ~~ #2 ~~ \conc{#3}}}
 
 % Flowers
 
