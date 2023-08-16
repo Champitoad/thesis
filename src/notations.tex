@@ -86,11 +86,20 @@
 \newcommand{\cham}{\textsc{Cham}}
 
 \newcommand{\bubbleT}[1]{\llparenthesis~#1~\rrparenthesis}
-\newcommand{\piq}[1]{\mathbin{\langle #1 \rangle}}
+\newcommand{\piq}[1]{~\langle #1 \rangle~}
 
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 \newcommand{\bubble}[3]{\circled{\hypo{#1} ~~ #2 ~~ \conc{#3}}}
+
+\newcommand{\ainterp}[1]{\llbracket #1 \rrbracket^a}
+\newcommand{\sinterp}[1]{\llbracket #1 \rrbracket^s}
+
+\newcommand{\identity}{\textsc{$\mathbb{I}$dentity}}
+\newcommand{\flow}{\textsc{$\mathbb{F}$low}}
+\newcommand{\resource}{\textsc{$\mathbb{R}$esource}}
+\newcommand{\heating}{\textsc{$\mathbb{H}$eating}}
+\newcommand{\popping}{\textsc{$\mathbb{P}$opping}}
 
 % Flowers
 
