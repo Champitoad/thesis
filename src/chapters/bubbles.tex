@@ -212,63 +212,57 @@ solutions that entails a different encoding of the proof structure in them.
 
 \subsection{Sequent-style rules}
 
-\todo{Reorganize layout of \reffig{sequent-BJ} to match that of
-\reffig{graphical-BJ}}
-
-\begin{figure}
+\begin{figure*}
   \begin{framed}
-
-  \identity
-  \vspace{0.8em}
+  \renewcommand{\arraystretch}{3}
   \begin{mathpar}
+  \begin{array}{r@{\quad}l}
+    \multicolumn{2}{c}{\identity} \\[1em]
+
     \R[\mathsf{i}{\downarrow}]
       {\Gamma \piq{\mathcal{S}} {}}
       {\Gamma, A \piq{\mathcal{S}} A}
-    \and
+    &
     \R[\mathsf{i}{\uparrow}]
       {\Gamma \piq{\mathcal{S} \sep {} \piq{} A \sep A \piq{} \Delta} {}}
-      {\Gamma \piq{\mathcal{S}} \Delta}
-  \end{mathpar}
-  \vspace{0.4em}
+      {\Gamma \piq{\mathcal{S}} \Delta} \\
+  \end{array}
+  \and
+  \begin{array}{r@{\quad}l}
+    \multicolumn{2}{c}{\resource} \\[1em]
 
-  \resource
-  \vspace{0.8em}
-  \begin{mathpar}
     \R[\mathsf{w}]
       {\Gamma \piq{\mathcal{S}} \Delta}
       {\Gamma, A \piq{\mathcal{S}} \Delta}
-    \and
+    &
     \R[\mathsf{c}]
       {\Gamma, A, A \piq{\mathcal{S}} \Delta}
-      {\Gamma, A \piq{\mathcal{S}} \Delta}
-  \end{mathpar}
-  \vspace{0.4em}
+      {\Gamma, A \piq{\mathcal{S}} \Delta} \\
+  \end{array}
+  \\
+  \begin{array}{r}
+    \multicolumn{1}{c}{\flow} \\[1em]
 
-  \flow
-  \vspace{0.8em}
-  \begin{mathpar}
     \R[\mathsf{f{-}}]
       {\Gamma \piq{\mathcal{S} \sep \Gamma', A \piq{\mathcal{S'}} \Delta'} \Delta}
       {\Gamma, A \piq{\mathcal{S} \sep \Gamma' \piq{\mathcal{S'}} \Delta'} \Delta}
-  \end{mathpar}
-  \vspace{0.4em}
+  \end{array}
+  \and
+  \begin{array}{r}
+    \multicolumn{1}{c}{\popping} \\[1em]
 
-  \popping
-  \vspace{0.8em}
-  \begin{mathpar}
     \R[\mathsf{p}]
       {\Gamma \piq{\mathcal{S}} \Delta}
       {\Gamma \piq{\mathcal{S} \sep \piq{}} \Delta}
-  \end{mathpar}
-  \vspace{0.4em}
+  \end{array}
+  \\
+  \begin{array}{c@{\quad}c}
+    \multicolumn{2}{c}{\heating} \\[1em]
 
-  \heating
-  \vspace{0.8em}
-  \begin{mathpar}
     \R[\top{-}]
       {\Gamma \piq{\mathcal{S}} \Delta}
       {\Gamma, \top \piq{\mathcal{S}} \Delta}
-    \and
+    &
     \R[\top{+}]
       {\Gamma \piq{\mathcal{S}} {}}
       {\Gamma \piq{\mathcal{S}} \top}
@@ -276,23 +270,24 @@ solutions that entails a different encoding of the proof structure in them.
     \R[\bot{-}]
       {\Gamma \piq{\mathcal{S}} {}}
       {\Gamma, \bot \piq{\mathcal{S}} \Delta}
-    \\
+    &\\
     \R[\land{-}]
       {\Gamma, A, B \piq{\mathcal{S}} \Delta}
       {\Gamma, A \land B \piq{\mathcal{S}} \Delta}
-    \and
+    &
     \R[\land{+}]
       {\Gamma \piq{\mathcal{S} \sep {} \piq{} A \sep {} \piq{} B} {}}
       {\Gamma \piq{\mathcal{S}} A \land B}
     \\
+    \multirow{2}{*}{
     \R[\lor{-}]
       {\Gamma \piq{\mathcal{S} \sep A \piq{} \Delta \sep B \piq{} \Delta} {}}
-      {\Gamma, A \lor B \piq{\mathcal{S}} \Delta}
-    \and
+      {\Gamma, A \lor B \piq{\mathcal{S}} \Delta}}
+    &
     \R[\lor{+}_1]
       {\Gamma \piq{\mathcal{S}} A}
       {\Gamma \piq{\mathcal{S}} A \lor B}
-    \and
+    \\&
     \R[\lor{+}_2]
       {\Gamma \piq{\mathcal{S}} B}
       {\Gamma \piq{\mathcal{S}} A \lor B}
@@ -300,7 +295,7 @@ solutions that entails a different encoding of the proof structure in them.
     \R[{\limp}{-}]
       {\Gamma \piq{\mathcal{S} \sep {} \piq{} A \sep B \piq{} \Delta}}
       {\Gamma, A \limp B \piq{\mathcal{S}} \Delta}
-    \and
+    &
     \R[{\limp}{+}]
       {\Gamma, A \piq{\mathcal{S}} B}
       {\Gamma \piq{\mathcal{S}} A \limp B}
@@ -308,7 +303,7 @@ solutions that entails a different encoding of the proof structure in them.
     \R[\forall{-}]
       {\Gamma, \subst{A}{t}{x} \piq{\mathcal{S}} \Delta}
       {\Gamma, \forall x. A \piq{\mathcal{S}} \Delta}
-    \and
+    &
     \R[\forall{+}]
       {\Gamma \piq{\mathcal{S}} A}
       {\Gamma \piq{\mathcal{S}} \forall x. A}
@@ -316,19 +311,19 @@ solutions that entails a different encoding of the proof structure in them.
     \R[\exists{-}]
       {\Gamma, A \piq{\mathcal{S}} \Delta}
       {\Gamma, \exists x. A \piq{\mathcal{S}} \Delta}
-    \and
+    &
     \R[\exists{+}]
       {\Gamma \piq{\mathcal{S}} \subst{A}{t}{x}}
       {\Gamma \piq{\mathcal{S}} \exists x. A}
+  \end{array}
   \end{mathpar}
-  \vspace{0.4em}
 
   In the {\rnm{\forall{+}}} and {\rnm{\exists{-}}} rules, $x$ is not free in
   $\Gamma$, $\Delta$ and $\mathcal{S}$.
   \end{framed}
   \caption{Sequent-style presentation of the asymmetric bubble calculus \sys{BJ}}
   \labfig{sequent-BJ}
-\end{figure}
+\end{figure*}
 
 Our initial idea for a proof system based on solutions was quite simple: we take
 the inference rules of \sys{LJ}, and turn them all into unary rules by encoding
@@ -376,12 +371,12 @@ subsolutions of arbitrary depth:
 Then every rule of \reffig{sequent-BJ} is applicable in any
 context $U\hole$. That is:
 $$\vcenter{\R{S}{T}} \quad \text{should be read as} \quad
-\vcenter{\R{U\select{S}}{U\select{T}}} \quad \text{for all $U$}$$
+\vcenter{\R{U\select{S}}{U\select{T}}} \quad \text{for all $U\hole$}$$
 
 \begin{definition}[\sys{BJ}-derivation]\labdef{BJ-deriv}
 A \emph{derivation} $\deriv{\mathcal{D}}{S}{T}$ in \sys{BJ} is a list
 $\mathcal{D}$ of (instances of) inference rules with premiss $T$ and conclusion
-$S$\sidenote{The direction of the arrow is from conclusion to premiss, to stay
+$S$\sidenote[][-10cm]{The direction of the arrow is from conclusion to premiss, to stay
 consistent with our setting of interactive proof building where inference rules
 are seen as goal-modifying actions.}.
 \end{definition}
@@ -392,7 +387,59 @@ $\deriv{\mathcal{D}}{S}{\piq{}}$ that reduces $S$ to the empty solution, which
 denotes the proof state where there are no subgoals left.
 \end{definition}
 
-\todo{Side figure illustrating a sequent-style proof in \sys{BJ}}
+\begin{marginfigure}
+  \begin{mathpar}
+    \R[{\limp}{+}]
+    {\R[{\land}{+}]
+    {\R[{\limp}{+}]
+    {\R[{\limp}{+}]
+    {\R[\mathsf{c}]
+    {\R[\mathsf{f}{-}]
+    {\R[\mathsf{f}{-}]
+    {\R[{\limp}{-}]
+    {\R[\mathsf{i}{\downarrow}]
+    {\R[\mathsf{p}]
+    {\R[{\lor}{+}_1]
+    {\R[\mathsf{f}{-}]
+    {\R[\mathsf{i}{\downarrow}]
+    {\R[\mathsf{p}]
+    {\R[\mathsf{p}]
+    {\R[{\limp}{-}]
+    {\R[\mathsf{i}{\downarrow}]
+    {\R[\mathsf{p}]
+    {\R[{\lor}{+}_2]
+    {\R[\mathsf{f}{-}]
+    {\R[\mathsf{i}{\downarrow}]
+    {\R[\mathsf{p}]
+    {\R[\mathsf{p}]
+    {\piq{}}
+    {\piq{\piq{}}}}
+    {\piq{\piq{\piq{}}}}}
+    {\piq{\piq{B \piq{} B} {}}}}
+    {\piq{B \piq{{} \piq{} B} {}}}}
+    {\piq{B \piq{{} \piq{} A \lor B} {}}}}
+    {\piq{B \piq{{} \piq{} A \lor B \sep \piq{}} {}}}}
+    {\piq{B \piq{{} \piq{} A \lor B \sep C \piq{} C} {}}}}
+    {\piq{B, A \lor B \limp C \piq{} C} {}}}
+    {\piq{\piq{} \sep B, A \lor B \limp C \piq{} C} {}}}
+    {\piq{\piq{\piq{}} \sep B, A \lor B \limp C \piq{} C} {}}}
+    {\piq{\piq{A \piq{} A} \sep B, A \lor B \limp C \piq{} C} {}}}
+    {\piq{A \piq{{} \piq{} A} {} \sep B, A \lor B \limp C \piq{} C} {}}}
+    {\piq{A \piq{{} \piq{} A \lor B} {} \sep B, A \lor B \limp C \piq{} C} {}}}
+    {\piq{A \piq{{} \piq{} A \lor B \sep \piq{}} {} \sep B, A \lor B \limp C \piq{} C} {}}}
+    {\piq{A \piq{{} \piq{} A \lor B \sep C \piq{} C} {} \sep B, A \lor B \limp C \piq{} C} {}}}
+    {\piq{A, A \lor B \limp C \piq{} C \sep B, A \lor B \limp C \piq{} C} {}}}
+    {A \lor B \limp C \piq{A, A \lor B \limp C \piq{} C \sep B \piq{} C} {}}}
+    {A \lor B \limp C, A \lor B \limp C \piq{A \piq{} C \sep B \piq{} C} {}}}
+    {A \lor B \limp C \piq{A \piq{} C \sep B \piq{} C} {}}}
+    {A \lor B \limp C \piq{A \piq{} C \sep {} \piq{} B \limp C} {}}}
+    {A \lor B \limp C \piq{{} \piq{} A \limp C \sep {} \piq{} B \limp C} {}}}
+    {A \lor B \limp C \piq{} (A \limp C) \land (B \limp C)}}
+    {{} \piq{} (A \lor B \limp C) \limp (A \limp C) \land (B \limp C)}
+  \end{mathpar}
+  \caption{Example of sequent-style proof in \sys{BJ}}
+  \labfig{ex-seq-BJ}
+\end{marginfigure}
 
 \subsection{Graphical rules}
 
@@ -531,31 +578,34 @@ denotes the proof state where there are no subgoals left.
   \labfig{graphical-BJ}
 \end{figure*}
 
-While the sequent-style presentation of \sys{BJ}'s rules clearly shows its
-filiation with sequent calculus, its syntax is quite heavy, and obscures an
-important property of the rules: they almost always preserve the contexts
-$\Gamma, \Delta$ of formulas and $\mathcal{S}$ of bubbles. That is, the rules of
-\sys{BJ} are \emph{local}. This enables a more concise and graphical
-presentation of the rules in \reffig{graphical-BJ}, where \sys{BJ} is seen as a
-multiset rewriting system just like the {\cham} thanks to \refdef{solution}.
-Instead of relying on a notion of solution context, we define formally what it
-means to be a subsolution:
+While the sequent-style presentation of \sys{BJ} clearly shows its filiation
+with sequent calculus, its syntax is quite heavy, and obscures an important
+property of the rules: they almost always preserve the contexts $\Gamma, \Delta$
+of formulas and $\mathcal{S}$ of bubbles. That is, the rules of \sys{BJ} are
+\emph{local}. This enables a more concise and graphical presentation of the
+rules in \reffig{graphical-BJ}, where \sys{BJ} is seen as a multiset rewriting
+system just like the {\cham} thanks to \refdef{solution}. Instead of relying on
+a notion of solution context, we define formally what it means to be a
+subsolution:
 
 \begin{definition}[Subsolution]
   $S$ is a \emph{subsolution} of $T$, written $S \subsol T$, if either $S
   \subseteq T$ or $S \subsol T_0$ for some $T_0 \in T$, where $\subseteq$
   denotes multiset inclusion. 
-\end{definition}\todo{add definition of multiset inclusion somewhere?}
+\end{definition}
 
 Then a multiset rewriting rule $\rrule{\mathsf{r}}{S}{T}$ can be applied in a
-solution $U$ whenever $S \subsol U$, by replacing $S$ by $T$ inside $U$. The
-notions of derivation (\refdef{BJ-deriv}) and proof (\refdef{BJ-proof}) stay
-unchanged, by observing that the rewriting rule $\rrule{\mathsf{r}}{S}{T}$ from
-$S$ to $T$ and the inference rule $\irule{\mathsf{r}}{S}{T}$ with premiss $T$
-and conclusion $S$ denote the same rule $\mathsf{r}$.
+solution $U$ whenever $S \subsol U$, by replacing one occurrence of $S$ by $T$
+inside $U$. The notions of derivation (\refdef{BJ-deriv}) and proof
+(\refdef{BJ-proof}) stay unchanged, by observing that the rewriting rule
+$\rrule{\mathsf{r}}{S}{T}$ from $S$ to $T$ and the inference rule
+$\irule{\mathsf{r}}{S}{T}$ with premiss $T$ and conclusion $S$ denote the same
+rule $\mathsf{r}$.
+
+\todo{add definition of multiset inclusion somewhere?}
 
 Beyond the recovered uniformity of the user interface in terms of the chemical
-metaphor, \sys{BJ} exhibits many features that are interesting both at the
+metaphor, \sys{BJ} exhibits some features that are interesting both at the
 proof-theoretical and user-experience levels:
 \begin{itemize}
   \item It implements a form of \emph{context-sharing} between subgoals: that
@@ -569,14 +619,14 @@ proof-theoretical and user-experience levels:
     proof state itself\sidenote{This concern of finding an explicit graphical
     representation of the ``motions of reasoning \emph{in actu}'', and not only
     the states of mind, can be found already in the works of Peirce on his
-    existential graphs \cite{Roberts1973-inactu}. We will come back to this
-    soon.}. There are multiple ways to visualize trees on a planar surface, but
-    if we are to maintain the bubble metaphor, \emph{zoomable user interfaces}
-    seem to be a right fit: they allow for efficient space management and
-    navigation, and zooming in intuitively conveys the idea of focusing on a
-    specific subgoal. One could also zoom out to have an overview of the
-    different subgoals and their shared context, something which is hard to do
-    in current proof assistants.
+    existential graphs \cite{Roberts1973-inactu}. We will come back to this in
+    \refch{eg}.}. There are multiple ways to visualize trees on a planar
+    surface, but if we are to maintain the bubble metaphor, \emph{zoomable user
+    interfaces} seem to be a right fit: they allow for efficient space
+    management and navigation, and zooming in intuitively conveys the idea of
+    focusing on a specific subgoal. One could also zoom out to have an overview
+    of the different subgoals and their shared context, something which is hard
+    to do in current proof assistants.
   \item From a user perspective, the locality of rules means that applying some
     action to one or two items will not involve other items (the only exceptions
     are clicks on blue $\bot$ and $\lor$, but the only extra item they involve
