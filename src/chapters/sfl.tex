@@ -38,9 +38,9 @@ of a (formula) tree with a distinguished leaf called its
 ``structure'' in the first deep inference formalism to date, the \emph{Calculus
 of Structures} (see \refsec{cos}).}.
 
-\begin{definition}[Context]\label{def:context}
-  A context, written $A\hole$, is a proposition containing exactly
-  one occurrence of a specific propositional variable $\hole$ which is
+\begin{definition}[Formula context]\label{def:formula-context}
+  A \emph{formula context}, written $A\hole$, is a proposition containing
+  exactly one occurrence of a specific propositional variable $\hole$ which is
   not used elsewhere.
 
   Given another proposition $B$, we write $A\select{B}$ for the
@@ -131,7 +131,7 @@ informal up to now: that of \emph{logical} action and \emph{rewrite} action.
   \item \emph{Logical} linkages link two subformulas. Thus they have the form
   $B\select{A} \link C\select{A'}$.
   \item \emph{Rewrite} linkages link one side of an equality with a first-order
-  term. Using liberally the notations from Definitions \ref{def:context} and
+  term. Using liberally the notations from Definitions \ref{def:formula-context} and
   \ref{def:path}, they thus have the form
   $$B\select{\select{t} = u} \link C
   \select{t'} \text{\ (or symmetrically $B\select{u = \select{t}} \link C

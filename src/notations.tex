@@ -65,6 +65,7 @@
 \newcommand{\nsteps}[1]{\step^{#1}}
 \newcommand{\deriv}[3]{#1 : #2 \steps #3}
 \newcommand{\irule}[3]{#1 : #2 \rightarrow #3}
+\newcommand{\rrule}[3]{#2 \rightarrow_{#1} #3}
 
 \newcommand{\fentails}{\sdtstile{}{}}
 \newcommand{\fequiv}{\sdststile{}{}}
@@ -86,11 +87,11 @@
 \newcommand{\cham}{\textsc{Cham}}
 
 \newcommand{\bubbleT}[1]{\llparenthesis~#1~\rrparenthesis}
-\newcommand{\piq}[1]{~\langle #1 \rangle~}
+\newcommand{\piq}[1]{\mathbin{\langle #1 \rangle}}
 
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
-\newcommand{\bubble}[3]{\circled{\hypo{#1} ~~ #2 ~~ \conc{#3}}}
+\newcommand{\bubble}[1]{\color{bubble}\circled{$#1$}}
 
 \newcommand{\ainterp}[1]{\llbracket #1 \rrbracket^a}
 \newcommand{\sinterp}[1]{\llbracket #1 \rrbracket^s}
@@ -100,6 +101,8 @@
 \newcommand{\resource}{\textsc{$\mathbb{R}$esource}}
 \newcommand{\heating}{\textsc{$\mathbb{H}$eating}}
 \newcommand{\popping}{\textsc{$\mathbb{P}$opping}}
+
+\newcommand{\subsol}{\prec}
 
 % Flowers
 
