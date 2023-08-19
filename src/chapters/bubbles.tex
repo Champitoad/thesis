@@ -333,25 +333,27 @@ calculus for intuitionistic logic dubbed \sys{BJ}. It is divided in five groups:
 \begin{itemize}
   \item The {\identity}, {\resource} and {\heating} groups correspond
   respectively to the identity, structural and logical rules of sequent
-  calculus, following the terminology of \sidecite{girard:hal-01322183}; that
+  calculus, following the terminology of \sidecite{girard:hal-01322183}. More
+  precisely, rules {\rnmsf{i{\downarrow}}} and {\rnmsf{i[\uparrow]}} correspond
+  to the axiom and cut rules; rules {\rnmsf{w}} and {\rnmsf{c}} to the weakening
+  and contraction rules; and every rule of the form $\mcirc{-}$ (resp.) that
   is, the axiom and cut rules, the contraction and weakening rules, and
   introduction rules for logical connectives.
   \item The {\flow} and {\popping} groups are new, and define the behavior of
-  bubbles.
-  More specifically, $\mathbb{F}$-rules characterize how information flows in
-  solutions by specifying what kinds of objects can traverse bubbles, and in
-  which direction. They play the same role as \emph{switch} rules in formalisms
-  based on the Calculus of Structures \cite{Guglielmi1999ACO}, which includes
-  our own subformula linking rules (\reffig{DISL}). In the asymmetric bubble
-  calculus there is only one $\mathbb{F}$-rule {\rnmsf{f{-}}} allowing
-  hypotheses to flow inside bubbles.
+  bubbles. More specifically, $\mathbb{F}$-rules characterize how information
+  flows in solutions by specifying what kinds of objects can traverse bubbles,
+  and in which direction. They play the same role as \emph{switch} rules in
+  formalisms based on CoS \cite{Guglielmi1999ACO}, which includes our own
+  subformula linking rules (\reffig{DISL}). In the asymmetric bubble calculus
+  there is only one $\mathbb{F}$-rule {\rnmsf{f{-}}} allowing hypotheses to flow
+  inside bubbles.
   
   As their name suggests, $\mathbb{P}$-rules allow to \emph{pop} empty bubbles,
-  which can be interpreted as the action of dismissing solved subgoals. In the
-  Calculus of Structures they would correspond to congruence rules handling the
-  truth unit $\top$, and in subformula linking to the unit rules
-  (\reffig{DISL-U}). In the asymmetric bubble calculus there is only one
-  $\mathbb{P}$-rule {\rnmsf{p}} allowing to pop any empty bubble.
+  which can be interpreted as the action of dismissing solved subgoals. In CoS
+  they would correspond to congruence rules handling the truth unit $\top$, and
+  in subformula linking to the unit rules (\reffig{DISL-U}). In the asymmetric
+  bubble calculus there is only one $\mathbb{P}$-rule {\rnmsf{p}} allowing to
+  pop any empty bubble.
 \end{itemize}
 
 Now that we have rules for manipulating solutions, and since solutions can be
@@ -373,12 +375,12 @@ context $U\hole$. That is:
 $$\vcenter{\R{S}{T}} \quad \text{should be read as} \quad
 \vcenter{\R{U\select{S}}{U\select{T}}} \quad \text{for all $U\hole$}$$
 
-\begin{definition}[\sys{BJ}-derivation]\labdef{BJ-deriv}
-A \emph{derivation} $\deriv{\mathcal{D}}{S}{T}$ in \sys{BJ} is a list
-$\mathcal{D}$ of (instances of) inference rules with premiss $T$ and conclusion
-$S$\sidenote[][-10cm]{The direction of the arrow is from conclusion to premiss, to stay
-consistent with our setting of interactive proof building where inference rules
-are seen as goal-modifying actions.}.
+\begin{definition}[\sys{BJ}-derivation]\labdef{BJ-deriv} A \emph{derivation}
+$\deriv{\mathcal{D}}{S}{T}$ in \sys{BJ} is a list $\mathcal{D}$ of (instances
+of) inference rules with premiss $T$ and conclusion $S$\sidenote[][-10cm]{The
+direction of the arrow is from conclusion to premiss, to stay consistent with
+our interactive proof building setting where inference rules are seen as
+goal-modifying actions.}.
 \end{definition}
 
 \begin{definition}[\sys{BJ}-proof]\labdef{BJ-proof}
@@ -440,6 +442,51 @@ denotes the proof state where there are no subgoals left.
   \caption{Example of sequent-style proof in \sys{BJ}}
   \labfig{ex-seq-BJ}
 \end{marginfigure}
+
+\subsection{Proof-as-trace}
+
+An example of proof in \sys{BJ} is shown in \reffig{ex-seq-BJ}, where the
+focused subsolution is highlighted for each inference. Notice that many rules
+could have been applied in a different order: for instance all applications of
+the {\rnmsf{p}} rule could have been postponed to the top/end of the derivation.
+This is generally true of all formalisms based on CoS, which is known in the
+deep inference literature for its ``bureaucracy''. In \sys{BJ},
+$\mathbb{H}$-rules aggravate the matter by adding all inessential rule
+permutations from sequent calculus to those of CoS. As our wording suggests,
+this is usually perceived negatively in deep inference proof theory, where a
+central question is that of finding \emph{canonical} representations of proof
+objects \sidecite{strasburger-problem-2019}.
+
+However in our interactive proof-building setting, it should rather be seen as a
+\emph{desirable} property of the system. Indeed, one consequence is that the
+user has more freedom to organize her reasoning in whichever order she wants, in
+an incremental and guided way. One should remember that in the Proof-by-Action
+paradigm, the focus is not the proof object, which is implicit and hidden to the
+user, but the \emph{process} of building it. Then a \sys{BJ}-derivation is
+better understood as the \emph{trace} of this building process, rather than the
+constructed proof\sidenote{The idea of \emph{proof-as-trace} is relatively
+common in logic programming \cite{miller_survey_2022}, but not so much in deep
+inference proof theory. It is Jean-Baptise Joinet who --- through private
+communication --- shared with us his idea of applying it in this setting, based
+on his own work interpreting CoS for \sys{MLL} as a system for building
+\emph{multiplicative proof nets} \cite{joinet_completeness_2007}.}. And the fact
+that this trace corresponds, or can be reduced to a more canonical
+representation is of no concern to the user. What matters for a good
+proof-building interface is to be as flexible as possible, in order to match the
+user's own mental process of argumentation.
+
+Of course flexibility comes at a price, and the rules of \sys{BJ} are probably
+too numerous and low-level to provide a good basis for a user interface. Some of
+these concerns will be tackled in \refsec{invertible-calculus}, but we think a
+better answer might have been found with the proof system introduced in
+\refch{flowers}, and its associated prototype of GUI presented in
+\refch{flowerprover}.
+
+\todo{ This section might be getting too long with too many subsections; will
+  probably need to move philosophical reflections like this somewhere else.
+  Maybe a conclusion to this chapter? But the ideas seem to apply to all systems
+  in this thesis, and thus may deserve a more general rewording in
+  \refch{intro}. }
 
 \subsection{Graphical rules}
 
@@ -572,6 +619,8 @@ denotes the proof state where there are no subgoals left.
   \end{array}
   \vspace{2em}
   \end{mathpar}
+  In the {\rnm{\bot{-}}}, {\rnm{\lor{-}}} and {\rnm{{\limp}{-}}} rules, $\Delta$
+  is either empty, or a singleton of one positive ion.\\
   In the {\rnm{\forall{+}}} and {\rnm{\exists{-}}} rules, $y$ is fresh.
   \end{framed}
   \caption{Graphical presentation of the asymmetric bubble calculus \sys{BJ}}
@@ -602,7 +651,13 @@ $\rrule{\mathsf{r}}{S}{T}$ from $S$ to $T$ and the inference rule
 $\irule{\mathsf{r}}{S}{T}$ with premiss $T$ and conclusion $S$ denote the same
 rule $\mathsf{r}$.
 
-\todo{add definition of multiset inclusion somewhere?}
+\todo{Add definition of multiset inclusion somewhere?}
+
+\todo{Add graphical version of \reffig{ex-seq-BJ}}
+
+\section{Back to Proof-by-Action}
+
+\todo{Describe precisely how rules can be mapped to graphical actions.}
 
 Beyond the recovered uniformity of the user interface in terms of the chemical
 metaphor, \sys{BJ} exhibits some features that are interesting both at the
@@ -629,10 +684,10 @@ proof-theoretical and user-experience levels:
     to do in current proof assistants.
   \item From a user perspective, the locality of rules means that applying some
     action to one or two items will not involve other items (the only exceptions
-    are clicks on blue $\bot$ and $\lor$, but the only extra item they involve
-    is the conclusion). Non-local rules are less natural for a beginner, because
-    they modify a global state (here other items) which is not clearly
-    correlated to the transformed data.
+    are clicks on blue $\bot$, $\lor$ and ${\limp}$, but the only extra item
+    they involve is the conclusion). Non-local rules are less natural for a
+    beginner, because they modify a global state (here other items) which is not
+    clearly correlated to the transformed data.
     % This is of limited importance however in our case, because sequent calculus
     % rules always perform the same trivial operation on the global state:
     % duplicating the whole context of hypotheses.
