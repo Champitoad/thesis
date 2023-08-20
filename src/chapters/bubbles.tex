@@ -25,7 +25,13 @@ way to control the scope of hypotheses inside nested sequents that we call
 \emph{solutions}. In \refsec{asymmetric} we describe a first proof system for
 intuitionistic logic dubbed \emph{asymmetric bubble calculus}, based on multiset
 rewriting rules on solutions comprising at most one conclusion. Then in
-\refsec{non-determinism} we motivate our quest for a system where all
+\refsec{bubbles-pba} we import back ideas from this bubble calculus to the realm
+of GUIs for interactive proof building, analysing their possible impact for UX
+improvements.
+
+\todo{Maybe relocate in a new chapter starting from here?}
+
+In \refsec{non-determinism} we motivate our quest for a system where all
 introduction rules for logical connectives are \emph{invertible}, in order to
 reduce non-determinism in proof search. To that effect, we extend in
 \refsec{colors} the syntax of solutions so that bubbles can themselves be
@@ -367,12 +373,6 @@ rule $\mathsf{r}$.
 
 \todo{Add definition of multiset inclusion somewhere?}
 
-\begin{figure*}
-  \input{figures/ex-gra-BJ.tex}
-  \caption{Example of graphical proof in \sys{BJ}}
-  \labfig{ex-gra-BJ}
-\end{figure*}
-
 \todo{Maybe split both \reffig{ex-gra-BJ} and \reffig{ex-seq-BJ} in two figures,
 one for the beginning of the proof upto {\rnmsf{f{-}}}, and a generic one for
 the two subproofs starting with {\rnmsf{{\limp}{-}}}.}
@@ -414,44 +414,253 @@ language} with \texttt{jump} instructions (Section 6.3.1 of
 calculus could still be relevant \emph{computationally}, typically by enabling
 efficient implementations of the rules with a small memory footprint.
 
-\section{Back to Proof-by-Action}
+\begin{figure*}
+  \input{figures/ex-gra-BJ.tex}
+  \caption{Example of graphical proof in \sys{BJ}}
+  \labfig{ex-gra-BJ}
+\end{figure*}
 
-\todo{Describe precisely how rules can be mapped to graphical actions, based on
-the intuition given by \reffig{ex-gra-BJ}.}
+\section{Back to Proof-by-Action}\labsec{bubbles-pba}
+
+When looking at the \sys{BJ}-proof of \reffig{ex-gra-BJ}, the astute reader
+might have been reminded of the Proof-by-Action paradigm as introduced in
+\refch{pba}, by seeing redexes as the items involved in a graphical action ---
+there are always at most two. More precisely, the following correspondence can
+be established:
+\begin{itemize}
+  \item $\mathbb{H}$-rules correspond to \emph{click} actions on blue
+  ({\rnm{\mcirc{-}}} rules) or red items ({\rnm{\mcirc{+}}} rules);
+  \item the {\rnmsf{i{\downarrow}}} rule corresponds to the most basic DnD
+  action between dual occurrences of a formula;
+  \item the {\rnmsf{c}} rule was not discussed in \refch{pba}, because DnD
+  actions systematically duplicate the involved hypotheses.
+\end{itemize}
+As mentioned earlier when comparing \sys{BJ} to \sys{LJ}, the novelty here lies
+with $\mathbb{H}$-rules, $\mathbb{F}$-rules and $\mathbb{P}$-rules that deal
+with \emph{bubbles}. Remember that the goal behind the idea of bubble calculus
+was precisely to provide a new way to manipulate subgoals through bubbles
+instead of tabs, which are more in line with the chemical metaphor. It is quite
+easy to imagine a GUI presenting the proof state as a solution, in a graphical
+layout close to that of \reffig{ex-gra-BJ}\sidenote{Although there might be some
+challenges in implementing an efficient layouting algorithm for bubbles,
+typically to make solutions fit into the screen.}. Like formulas in blue and red
+items, whole subgoals could now be shown on the same screen in their respective
+bubbles, and be freely moved around with a pointing device. Following are some
+ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
+
+\begin{marginfigure}
+  $$
+  \begin{array}{rcll}
+    \hypo{A}~~~\hypo{B} &\step &\hypo{A \forw B} &\forw \\
+    \hypo{A}~~~\conc{B} &\step &\conc{A \back B} &\back \\
+  \end{array}
+  $$
+  \caption{Linkage creation rules for \sys{BJ}}
+  \labfig{bubbles-linkage}
+\end{marginfigure}
+
+\begin{marginfigure}
+  $$
+  \begin{array}{rcll}
+    &\step &\dvar{x \coloneq t} &\delta \\[1em]
+
+    \dvar{\delta}~~~{\bubble{S}} &\step &\bubble{\dvar{\delta}~~~S} &\mathsf{f}\delta \\[1em]
+
+    \conc{\forall x. A} &\step &\dvar{y}~~~\conc{\subst{A}{y}{x}} &\forall{+} \\
+    \hypo{\exists x. A} &\step &\dvar{y}~~~\hypo{\subst{A}{y}{x}} &\exists{-} \\[1em]
+
+    \dvar{y}~~~{\hypo{\forall x. A}} &\step &\hypo{\subst{A}{y}{x}} &\forall{-}\mathsf{h} \\
+    \dvar{y}~~~{\conc{\exists x. A}} &\step &\conc{\subst{A}{y}{x}} &\exists{+}\mathsf{h} \\[1em]
+
+    \dvar{x \coloneq t}~~~{\hypo{\forall x. A}} &\step &\hypo{\subst{A}{t}{x}} &\forall{-}\mathsf{b} \\
+    \dvar{x \coloneq t}~~~{\conc{\exists x. A}} &\step &\conc{\subst{A}{t}{x}} &\exists{+}\mathsf{b} \\
+  \end{array}
+  $$
+  In the {\rnm{\forall{+}}} and {\rnm{\exists{-}}} rules, $y$ is fresh.
+  \caption{Rules for variables and definitions in \sys{BJ}}
+  \labfig{bubbles-vars}
+\end{marginfigure}
+
+\begin{description}
+  \item[\textbf{\popping}]
+    The {\rnmsf{p}} rule can be mapped very straightforwardly to the action of
+    clicking on the area of an empty bubble, in order to pop it. It could also
+    be entirely automated, by letting the proof engine eagerly pop empty bubbles
+    as soon as they appear in a solution.
+  \item[\textbf{\flow}]
+    The {\rnmsf{f{-}}} rule plays a special role, in that it would not be mapped
+    to any particular action. Indeed it captures the way information flows in
+    solutions, and we already described in \refsec{bubbles} how this is
+    reflected in the topological behavior of bubbles. Thus it could be
+    implemented in the graphical interface as a kind of \emph{physics engine}:
+    when dragging an item around the proof canvas, it would get stuck on the
+    membrane of bubbles, except if it is blue and the drag movement goes inward.
+    This of course would provide a level of interactivity unseen before in a
+    proving interface, making it very discoverable and playful. It also combines
+    nicely with DnD actions in general: for instance a sequence of applications
+    of {\rnmsf{f{-}}} followed by {\rnmsf{i{\downarrow}}} could be performed as
+    a single DnD action, where the dragged hypothesis crosses successively the
+    various bubbles in its way.
+  \item[\textbf{\resource}]
+    % In Actema, hypotheses are displayed in blue items inside a reserved zone
+    % holding the entire context, including also local variables and definitions
+    % in green items. The resource behavior of blue items placed by the user in
+    % the proof canvas differs from those in the context zone: while the former
+    % are consumed after a backward or forward DnD, the latter are preserved and
+    % thus implicitly duplicated\sidenote{In the literature on focusing in linear
+    % logic, this corresponds roughly to the distinction between the \emph{storage
+    % zone} in sequents where formulas can be duplicated and discarded at will,
+    % and the \emph{linear zone} where they cannot.}. In a bubble-based GUI, one
+    % could keep this behavior, where the context is filled with all items 
+    The contraction rule {\rnmsf{c}} could be mapped to a specific triggering
+    input when starting to drag a blue item $\hypo{A}$ (e.g. a shortkey if a
+    keyboard is available, or a long press on the item on a touchscreen), which
+    has the effect of keeping a copy of $A$ at its original location in addition
+    to moving the item\sidenote{This mechanism is quite standard in GUIs that
+    manipulate duplicable resources like file managers, where one maintains the
+    \texttt{CTRL} key to enable copy mode. It was also chosen by K. Chaudhuri to
+    implement contraction in his \sys{ProfInt} prototype for subformula linking
+    in intuitionistic logic \cite{ProfInt}.}. As for the weakening rule
+    {\rnmsf{w}}, it could be available as a contextual action when selecting
+    blue items.
+  \item[\textbf{\heating}]
+    For $\mathbb{H}$-rules that spawn bubbles like {\rnm{\land{+}}}, it is
+    important that bubbles stay close to the item being clicked, in order to
+    make the transformation clear visually. One could even imagine a small
+    animation that smoothly turns the main connective into bubbles, to convey
+    more effectively the intuition that heating rules break logical connectives
+    seen as chemical bonds.
+
+    Regarding the rules involving quantifiers, two remarks are in order:
+    \begin{itemize}
+      \item In Actema, rules {\rnm{\forall{+}}} and {\rnm{\exists{-}}} would
+      introduce a new green variable in the context. To accomodate for this in a
+      bubble-based GUI, one needs to extend the notion of solution so that
+      it incorporates local variables, in addition to ions and bubbles:
+      \begin{align*}
+        \Gamma, \Delta &\Coloneq \iota_1, \ldots, \iota_n \\
+        \iota &\Coloneq A \mid \delta \\
+        \delta &\Coloneq x \mid x \coloneq t
+        % \delta &\Coloneq x \coloneq \beta \\
+        % \beta &\Coloneq \emptyset \mid t
+      \end{align*}
+      % In this syntax, $x \coloneq t$ represents a local definition with name $x$
+      % and body $t$, and $x \coloneq \emptyset$ a local variable. That is,
+      % variables are seen as definitions without a body. 
+      Then green items $\dvar{\delta}$ would behave like blue items, with an
+      additional $\mathbb{F}$-rule for moving them inside bubbles (rule
+      {\rnm{\mathsf{f}\delta}} in \reffig{bubbles-vars}).
+      \item Instantiation rules {\rnm{\forall{-}}} and {\rnm{\exists{+}}} could
+      be mapped as in Actema to DnD actions with a green item, corresponding to
+      the alternative formulation of \reffig{bubbles-vars}. This way all the
+      rules of \sys{BJ} become \emph{analytic}: if $S \step T$ and $S_0 \subsol
+      S$, then $S_0 \subsol T$\sidenote{Except the {\rnmsf{i{\downarrow}}} rule
+      which will be shown to be admissible in \refsec{bubbles-completeness}, and
+      the {\rnm{\delta}} rule of \reffig{bubbles-vars}.}.
+    \end{itemize}
+
+  \item[\textbf{\identity}]
+    Although the {\rnmsf{i{\downarrow}}} rule only corresponds to the base case
+    of DnD actions, it would be easy to integrate their full SFL semantics
+    directly in \sys{BJ}. Indeed our SFL rules (\reffig{DISL}) are already
+    expressed as rewriting rules, just like the graphical rules of \sys{BJ}
+    (\reffig{graphical-BJ}). Thus it is just a matter of adding linkage creation
+    rules like those of \refsec{dnd-completeness}, but between adjacent formulas
+    in a solution (see \reffig{bubbles-linkage}).
+
+    The cut rule was handled in Actema with a separate \textsf{+hyp} button,
+    which adds the cut formula $A$ (input by the user in a dialog box) as a new
+    hypothesis in the current goal, and as the conclusion in a new subgoal (see
+    \refsec{newitems}). Since subgoals are now reified as bubbles, the
+    {\rnmsf{i{\uparrow}}} rule could be mapped instead to a contextual action
+    available on any red item $\conc{\Delta}$, which would have the effect of
+    spawning a bubble around it with a blue item $\hypo{A}$, and another bubble
+    nearby it with a red item $\conc{A}$.
+
+    Finally, an analog to the cut rule {\rnmsf{i{\uparrow}}} is the rule
+    {\rnm{\delta}} for adding new definitions (\reffig{bubbles-vars}). Their
+    similarity is more striking in a logical framework like Martin-Löf type
+    theory, where mathematical objects and propositions are expressed in the
+    same language. In Actema it is handled with a separate \textsf{+expr}
+    button, and could here be mapped to a contextual action available anywhere
+    on the proof canvas\sidenote{In type theory, the body of type $T$ of the
+    definition could be left for completion as a new subgoal with conclusion
+    $T$, and thus be expressed as a new bubble that can be solved later.}.
+\end{description}
 
 Beyond the recovered uniformity of the user interface in terms of the chemical
 metaphor, \sys{BJ} exhibits some features that are interesting both at the
 proof-theoretical and user-experience levels:
-\begin{itemize}
-  \item It implements a form of \emph{context-sharing} between subgoals: that
-    is, one can perform transformations on shared hypotheses (forward reasoning)
-    without going back to a proof state anterior to the splitting of said
-    subgoals.
-  \item The tree structure of subgoals is immediately apparent in the proof
-    state through the nesting of solutions in bubbles. Thus part of the
+\begin{description}
+  \item[\textbf{Factorization}] It implements a form of \emph{context-sharing}
+    between subgoals: that is, one can perform transformations on shared
+    hypotheses (forward reasoning) without going back to a proof state anterior
+    to the splitting of said subgoals. This should simplify the navigation in
+    the proof as it is being constructed, by avoiding the need to locate these
+    splitting points. In fact often beginners (but also occasionally seasoned
+    users) do not have the reflex to do this, precisely because the interface
+    makes it difficult. This results in proofs with a lot of duplicated
+    arguments, since splitting goals systematically duplicates the context of
+    hypotheses. Thus bubbles can be seen as a mechanism that favors by default a
+    style of proof with better factorization of subproofs.
+
+  \item[\textbf{Navigation}] The tree structure of subgoals is immediately
+    apparent in the proof state through the nesting of bubbles. Thus part of the
     information on the proof construction process, which was made implicit and
     temporal in the proof state history, is now made explicit and spatial in the
     proof state itself\sidenote{This concern of finding an explicit graphical
     representation of the ``motions of reasoning \emph{in actu}'', and not only
     the states of mind, can be found already in the works of Peirce on his
     existential graphs \cite{Roberts1973-inactu}. We will come back to this in
-    \refch{eg}.}. There are multiple ways to visualize trees on a planar
-    surface, but if we are to maintain the bubble metaphor, \emph{zoomable user
-    interfaces} seem to be a right fit: they allow for efficient space
-    management and navigation, and zooming in intuitively conveys the idea of
-    focusing on a specific subgoal. One could also zoom out to have an overview
-    of the different subgoals and their shared context, something which is hard
-    to do in current proof assistants.
-  \item From a user perspective, the locality of rules means that applying some
-    action to one or two items will not involve other items (the only exceptions
-    are clicks on blue $\bot$, $\lor$ and ${\limp}$, but the only extra item
-    they involve is the conclusion). Non-local rules are less natural for a
-    beginner, because they modify a global state (here other items) which is not
-    clearly correlated to the transformed data.
+    \refch{eg}.}.
+    
+    There are multiple ways to visualize trees on a planar surface, but if we
+    are to maintain the bubble metaphor, \emph{zoomable user interfaces} seem to
+    be a right fit: they allow for efficient space management and navigation,
+    and zooming in intuitively conveys the idea of focusing on a specific
+    subgoal. One could also zoom out to have an overview of the different
+    subgoals and their shared context, something which is hard to do in current
+    proof assistants.
+    
+    When zoomed in on a subgoal, the shared contexts around it will not be
+    visible anymore. While this is useful to focus attention and avoid being
+    distracted by other subgoals, it can quickly become cumbersome for the user
+    to always have to zoom out in order to retrieve hypotheses from these shared
+    contexts. One solution would be to rebrand the context zone of Actema as a
+    \emph{global} context zone, where all the shared contexts available in the
+    subgoal under focus are merged in a single list, and immediately accessible
+    for manipulation. Of course actions performed in the context zone would be
+    reflected in the proof canvas, and vice versa.
+
+  \item[\textbf{Goal diffing}] From a user perspective, the locality of rules
+    means that applying some action to one or two items will not involve other
+    items\sidenote{The only exceptions are clicks on blue $\bot$, $\lor$ and
+    ${\limp}$, but the only extra item they involve is the conclusion.}.
+    Non-local rules are less natural for a beginner because they modify a global
+    state (here other items and subgoals) which is not clearly correlated to the
+    transformed data, often because it is not immediately visible.
+
+    For instance in Actema, many users have reported difficulties in
+    understanding the effect of click actions that create new subgoals. A first
+    reason that can easily be remedied, is that there was not enough visual
+    feedback to indicate the newly created tabs. But a deeper limitation is that
+    the user needs to explicitly focus on these subgoals to show their content,
+    which they might not do immediately. And then it gets difficult to keep
+    track of the origin of said subgoals without a way to visualize the tree
+    structure of the proof.
+
+    All these concerns can be addressed within the bubble metaphor: since
+    bubbles are items freely positioned on the canvas, all the new items
+    produced by an action can stay near the location where the action was
+    initiated (i.e. the click or drop location); and since all transformations
+    are local, all items not involved in the action can have their locations
+    preserved. In other words, bubbles make it easier to understand the
+    \emph{difference} between a goal and subgoals generated by a proof action,
+    which is crucial when learning the semantics of actions through practice.
     % This is of limited importance however in our case, because sequent calculus
     % rules always perform the same trivial operation on the global state:
     % duplicating the whole context of hypotheses.
-\end{itemize}
+\end{description}
 
 \section{Reducing non-determinism}\labsec{non-determinism}
 
@@ -464,12 +673,3 @@ proof-theoretical and user-experience levels:
 \section{Completeness}\labsec{bubbles-completeness}
 
 \section{Invertible calculus}\labsec{invertible-calculus}
-
-\section{Integrating subformula linking}\labsec{bubbles-sfl}
-
-\todo{ Present interaction rules from the Intuitionistic Chemical Proof Machine.
-They account both for SFL DnD, and other kinds of DnD actions like quantifier
-instantiations if we extend the notion of solutions to include local
-definitions. Note that this could also work with a sequent-style presentation,
-but the local character of the graphical presentation is closer to the intuition
-of the objects actually involved in the action. }

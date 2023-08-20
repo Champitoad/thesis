@@ -18,8 +18,8 @@ $$
       ~~~\bubble{\hypo{B}~~~\conc{C}}} &\mathsf{f{-}} \\
   \step &\bubble{
       \begin{array}{@{}c@{}}
-        \hypo{A}~~~\conc{C} \\
-        \select{\hypo{A \lor B \limp C}}
+        \hypo{A} \\
+        \select{\hypo{A \lor B \limp C}~~~\conc{C}}
       \end{array}}
       ~~~\bubble{
         \begin{array}{@{}c@{}}
@@ -82,8 +82,8 @@ $$
   \step &
       ~~~\bubble{
         \begin{array}{@{}c@{}}
-          \hypo{B}~~~\conc{C} \\
-          \select{\hypo{A \lor B \limp C}}
+          \hypo{B} \\
+          \select{\hypo{A \lor B \limp C}~~~\conc{C}}
         \end{array}} &\mathsf{{\limp}{-}} \\
   \step &
       ~~~\bubble{

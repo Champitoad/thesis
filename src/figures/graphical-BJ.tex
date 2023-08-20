@@ -4,13 +4,14 @@
 \begin{array}{r@{\quad}c@{\quad}lr}
   \multicolumn{4}{c}{\identity} \\[2em]
 
-    \hypo{A}~~~\conc{A}
+   \hypo{A}~~~\conc{A}
   &\step
   &
   &\mathsf{i}{\downarrow} \\
 
+   \conc{\Delta}
   &\step
-  &\bubble{\conc{A}}~~~\bubble{\hypo{A}}
+  &\bubble{\conc{A}}~~~\bubble{\hypo{A}~~~\conc{\Delta}}
   &\mathsf{i}{\uparrow} \\
 \end{array}
 \and
