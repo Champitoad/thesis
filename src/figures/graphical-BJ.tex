@@ -1,0 +1,132 @@
+\begin{framed}
+\renewcommand{\arraystretch}{1.25}
+\begin{mathpar}
+\begin{array}{r@{\quad}c@{\quad}lr}
+  \multicolumn{4}{c}{\identity} \\[2em]
+
+    \hypo{A}~~~\conc{A}
+  &\step
+  &
+  &\mathsf{i}{\downarrow} \\
+
+  &\step
+  &\bubble{\conc{A}}~~~\bubble{\hypo{A}}
+  &\mathsf{i}{\uparrow} \\
+\end{array}
+\and
+\begin{array}{r@{\quad}c@{\quad}lr}
+  \multicolumn{4}{c}{\resource} \\[2em]
+
+    \hypo{A}
+  &\step
+  &
+  &\mathsf{w} \\
+
+    \hypo{A}
+  &\step
+  &\hypo{A~~~A}
+  &\mathsf{c} \\
+\end{array}
+\vspace{2em}\\
+\begin{array}{r@{\quad}c@{\quad}lr}
+  \multicolumn{4}{c}{\flow} \\[2em]
+
+    \hypo{A}~~~\bubble{\color{black}S}
+  &\step
+  &\bubble{\hypo{A}~~~S}
+  &\mathsf{f{-}} \\
+\end{array}
+\and
+\begin{array}{r@{\quad}c@{\quad}lr}
+  \multicolumn{4}{c}{\popping} \\[2em]
+
+    \bubble{\phantom{S}}
+  &\step
+  &
+  &\mathsf{p} \\
+\end{array}
+\vspace{2em}
+\\
+\begin{array}{r@{\quad}c@{\quad}lr@{\qquad\qquad}r@{\quad}c@{\quad}lr}
+  \multicolumn{8}{c}{\heating} \\[2em]
+
+    \hypo{\top}
+  &\step
+  &
+  &\mathsf{\top{-}}
+
+  &\conc{\top}
+  &\step
+  &
+  &\mathsf{\top{+}} \\
+
+    \hypo{\bot}~~~\conc{\Delta}
+  &\step
+  &
+  &\mathsf{\bot{-}}
+
+  &&&&\\
+
+    \hypo{A \land B}
+  &\step
+  &\hypo{A}~~~\hypo{B}
+  &\mathsf{\land{-}}
+
+  &\conc{A \land B}
+  &\step
+  &\bubble{\conc{A}}~~~\bubble{\conc{B}}
+  &\mathsf{\land{+}} \\
+
+    \multirow{2}{*}{$\hypo{A \lor B}~~~\conc{\Delta}$}
+  &\multirow{2}{*}{$\step$}
+  &\multirow{2}{*}{$\bubble{\hypo{A}~~~\conc{\Delta}}~~~\bubble{\hypo{B}~~~\conc{\Delta}}$}
+  &\multirow{2}{*}{$\mathsf{\lor{-}}$}
+
+  &\conc{A \lor B}
+  &\step
+  &\conc{A}
+  &\mathsf{\lor{+}_2} \\
+
+  &&&
+
+  &\conc{A \lor B}
+  &\step
+  &\conc{B}
+  &\mathsf{\lor{+}_2} \\
+
+    \hypo{A \limp B}~~~\conc{\Delta}
+  &\step
+  &\bubble{\conc{A}}~~~\bubble{\hypo{B}~~~\conc{\Delta}}
+  &\mathsf{{\limp}{-}}
+
+  &\conc{A \limp B}
+  &\step
+  &\hypo{A}~~~\conc{B}
+  &\mathsf{{\limp}{+}} \\
+
+    \hypo{\forall x. A}
+  &\step
+  &\hypo{\subst{A}{t}{x}}
+  &\mathsf{\forall{-}}
+
+  &\conc{\forall x. A}
+  &\step
+  &\conc{\subst{A}{y}{x}}
+  &\mathsf{\forall{+}} \\
+
+    \hypo{\exists x. A}
+  &\step
+  &\hypo{\subst{A}{y}{x}}
+  &\mathsf{\exists{-}}
+
+  &\conc{\exists x. A}
+  &\step
+  &\conc{\subst{A}{t}{x}}
+  &\mathsf{\exists{+}} \\
+\end{array}
+\vspace{2em}
+\end{mathpar}
+In the {\rnm{\bot{-}}}, {\rnm{\lor{-}}} and {\rnm{{\limp}{-}}} rules, $\Delta$
+is either empty, or a singleton of one positive ion.\\
+In the {\rnm{\forall{+}}} and {\rnm{\exists{-}}} rules, $y$ is fresh.
+\end{framed}

@@ -1,2 +1,4 @@
 build
 .direnv
+src/output-buffer/**
+_minted*

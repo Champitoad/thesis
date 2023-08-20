@@ -213,114 +213,7 @@ solutions that entails a different encoding of the proof structure in them.
 \subsection{Sequent-style rules}
 
 \begin{figure*}
-  \begin{framed}
-  \renewcommand{\arraystretch}{3}
-  \begin{mathpar}
-  \begin{array}{r@{\quad}l}
-    \multicolumn{2}{c}{\identity} \\[1em]
-
-    \R[\mathsf{i}{\downarrow}]
-      {\Gamma \piq{\mathcal{S}} {}}
-      {\Gamma, A \piq{\mathcal{S}} A}
-    &
-    \R[\mathsf{i}{\uparrow}]
-      {\Gamma \piq{\mathcal{S} \sep {} \piq{} A \sep A \piq{} \Delta} {}}
-      {\Gamma \piq{\mathcal{S}} \Delta} \\
-  \end{array}
-  \and
-  \begin{array}{r@{\quad}l}
-    \multicolumn{2}{c}{\resource} \\[1em]
-
-    \R[\mathsf{w}]
-      {\Gamma \piq{\mathcal{S}} \Delta}
-      {\Gamma, A \piq{\mathcal{S}} \Delta}
-    &
-    \R[\mathsf{c}]
-      {\Gamma, A, A \piq{\mathcal{S}} \Delta}
-      {\Gamma, A \piq{\mathcal{S}} \Delta} \\
-  \end{array}
-  \\
-  \begin{array}{r}
-    \multicolumn{1}{c}{\flow} \\[1em]
-
-    \R[\mathsf{f{-}}]
-      {\Gamma \piq{\mathcal{S} \sep \Gamma', A \piq{\mathcal{S'}} \Delta'} \Delta}
-      {\Gamma, A \piq{\mathcal{S} \sep \Gamma' \piq{\mathcal{S'}} \Delta'} \Delta}
-  \end{array}
-  \and
-  \begin{array}{r}
-    \multicolumn{1}{c}{\popping} \\[1em]
-
-    \R[\mathsf{p}]
-      {\Gamma \piq{\mathcal{S}} \Delta}
-      {\Gamma \piq{\mathcal{S} \sep \piq{}} \Delta}
-  \end{array}
-  \\
-  \begin{array}{c@{\quad}c}
-    \multicolumn{2}{c}{\heating} \\[1em]
-
-    \R[\top{-}]
-      {\Gamma \piq{\mathcal{S}} \Delta}
-      {\Gamma, \top \piq{\mathcal{S}} \Delta}
-    &
-    \R[\top{+}]
-      {\Gamma \piq{\mathcal{S}} {}}
-      {\Gamma \piq{\mathcal{S}} \top}
-    \\
-    \R[\bot{-}]
-      {\Gamma \piq{\mathcal{S}} {}}
-      {\Gamma, \bot \piq{\mathcal{S}} \Delta}
-    &\\
-    \R[\land{-}]
-      {\Gamma, A, B \piq{\mathcal{S}} \Delta}
-      {\Gamma, A \land B \piq{\mathcal{S}} \Delta}
-    &
-    \R[\land{+}]
-      {\Gamma \piq{\mathcal{S} \sep {} \piq{} A \sep {} \piq{} B} {}}
-      {\Gamma \piq{\mathcal{S}} A \land B}
-    \\
-    \multirow{2}{*}{
-    \R[\lor{-}]
-      {\Gamma \piq{\mathcal{S} \sep A \piq{} \Delta \sep B \piq{} \Delta} {}}
-      {\Gamma, A \lor B \piq{\mathcal{S}} \Delta}}
-    &
-    \R[\lor{+}_1]
-      {\Gamma \piq{\mathcal{S}} A}
-      {\Gamma \piq{\mathcal{S}} A \lor B}
-    \\&
-    \R[\lor{+}_2]
-      {\Gamma \piq{\mathcal{S}} B}
-      {\Gamma \piq{\mathcal{S}} A \lor B}
-    \\
-    \R[{\limp}{-}]
-      {\Gamma \piq{\mathcal{S} \sep {} \piq{} A \sep B \piq{} \Delta}}
-      {\Gamma, A \limp B \piq{\mathcal{S}} \Delta}
-    &
-    \R[{\limp}{+}]
-      {\Gamma, A \piq{\mathcal{S}} B}
-      {\Gamma \piq{\mathcal{S}} A \limp B}
-    \\
-    \R[\forall{-}]
-      {\Gamma, \subst{A}{t}{x} \piq{\mathcal{S}} \Delta}
-      {\Gamma, \forall x. A \piq{\mathcal{S}} \Delta}
-    &
-    \R[\forall{+}]
-      {\Gamma \piq{\mathcal{S}} A}
-      {\Gamma \piq{\mathcal{S}} \forall x. A}
-    \\
-    \R[\exists{-}]
-      {\Gamma, A \piq{\mathcal{S}} \Delta}
-      {\Gamma, \exists x. A \piq{\mathcal{S}} \Delta}
-    &
-    \R[\exists{+}]
-      {\Gamma \piq{\mathcal{S}} \subst{A}{t}{x}}
-      {\Gamma \piq{\mathcal{S}} \exists x. A}
-  \end{array}
-  \end{mathpar}
-
-  In the {\rnm{\forall{+}}} and {\rnm{\exists{-}}} rules, $x$ is not free in
-  $\Gamma$, $\Delta$ and $\mathcal{S}$.
-  \end{framed}
+  \input{figures/sequent-BJ.tex}
   \caption{Sequent-style presentation of the asymmetric bubble calculus \sys{BJ}}
   \labfig{sequent-BJ}
 \end{figure*}
@@ -377,7 +270,7 @@ $$\vcenter{\R{S}{T}} \quad \text{should be read as} \quad
 
 \begin{definition}[\sys{BJ}-derivation]\labdef{BJ-deriv} A \emph{derivation}
 $\deriv{\mathcal{D}}{S}{T}$ in \sys{BJ} is a list $\mathcal{D}$ of (instances
-of) inference rules with premiss $T$ and conclusion $S$\sidenote[][-10cm]{The
+of) inference rules with premiss $T$ and conclusion $S$\sidenote[][-14cm]{The
 direction of the arrow is from conclusion to premiss, to stay consistent with
 our interactive proof building setting where inference rules are seen as
 goal-modifying actions.}.
@@ -390,55 +283,7 @@ denotes the proof state where there are no subgoals left.
 \end{definition}
 
 \begin{marginfigure}
-  \begin{mathpar}
-    \R[{\limp}{+}]
-    {\R[{\land}{+}]
-    {\R[{\limp}{+}]
-    {\R[{\limp}{+}]
-    {\R[\mathsf{c}]
-    {\R[\mathsf{f}{-}]
-    {\R[\mathsf{f}{-}]
-    {\R[{\limp}{-}]
-    {\R[\mathsf{i}{\downarrow}]
-    {\R[\mathsf{p}]
-    {\R[{\lor}{+}_1]
-    {\R[\mathsf{f}{-}]
-    {\R[\mathsf{i}{\downarrow}]
-    {\R[\mathsf{p}]
-    {\R[\mathsf{p}]
-    {\R[{\limp}{-}]
-    {\R[\mathsf{i}{\downarrow}]
-    {\R[\mathsf{p}]
-    {\R[{\lor}{+}_2]
-    {\R[\mathsf{f}{-}]
-    {\R[\mathsf{i}{\downarrow}]
-    {\R[\mathsf{p}]
-    {\R[\mathsf{p}]
-    {\piq{}}
-    {\piq{\piq{}}}}
-    {\piq{\piq{\piq{}}}}}
-    {\piq{\piq{B \piq{} B} {}}}}
-    {\piq{B \piq{{} \piq{} B} {}}}}
-    {\piq{B \piq{{} \piq{} A \lor B} {}}}}
-    {\piq{B \piq{{} \piq{} A \lor B \sep \piq{}} {}}}}
-    {\piq{B \piq{{} \piq{} A \lor B \sep C \piq{} C} {}}}}
-    {\piq{B, A \lor B \limp C \piq{} C} {}}}
-    {\piq{\piq{} \sep B, A \lor B \limp C \piq{} C} {}}}
-    {\piq{\piq{\piq{}} \sep B, A \lor B \limp C \piq{} C} {}}}
-    {\piq{\piq{A \piq{} A} \sep B, A \lor B \limp C \piq{} C} {}}}
-    {\piq{A \piq{{} \piq{} A} {} \sep B, A \lor B \limp C \piq{} C} {}}}
-    {\piq{A \piq{{} \piq{} A \lor B} {} \sep B, A \lor B \limp C \piq{} C} {}}}
-    {\piq{A \piq{{} \piq{} A \lor B \sep \piq{}} {} \sep B, A \lor B \limp C \piq{} C} {}}}
-    {\piq{A \piq{{} \piq{} A \lor B \sep C \piq{} C} {} \sep B, A \lor B \limp C \piq{} C} {}}}
-    {\piq{A, A \lor B \limp C \piq{} C \sep B, A \lor B \limp C \piq{} C} {}}}
-    {A \lor B \limp C \piq{A, A \lor B \limp C \piq{} C \sep B \piq{} C} {}}}
-    {A \lor B \limp C, A \lor B \limp C \piq{A \piq{} C \sep B \piq{} C} {}}}
-    {A \lor B \limp C \piq{A \piq{} C \sep B \piq{} C} {}}}
-    {A \lor B \limp C \piq{A \piq{} C \sep {} \piq{} B \limp C} {}}}
-    {A \lor B \limp C \piq{{} \piq{} A \limp C \sep {} \piq{} B \limp C} {}}}
-    {A \lor B \limp C \piq{} (A \limp C) \land (B \limp C)}}
-    {{} \piq{} (A \lor B \limp C) \limp (A \limp C) \land (B \limp C)}
-  \end{mathpar}
+  \input{figures/ex-seq-BJ.tex}
   \caption{Example of sequent-style proof in \sys{BJ}}
   \labfig{ex-seq-BJ}
 \end{marginfigure}
@@ -446,9 +291,9 @@ denotes the proof state where there are no subgoals left.
 \subsection{Proof-as-trace}
 
 An example of proof in \sys{BJ} is shown in \reffig{ex-seq-BJ}, where the
-focused subsolution is highlighted for each inference. Notice that many rules
-could have been applied in a different order: for instance all applications of
-the {\rnmsf{p}} rule could have been postponed to the top/end of the derivation.
+focused subsolution is squared for each inference. Notice that many rules could
+have been applied in a different order: for instance all applications of the
+{\rnmsf{p}} rule could have been postponed to the top/end of the derivation.
 This is generally true of all formalisms based on CoS, which is known in the
 deep inference literature for its ``bureaucracy''. In \sys{BJ},
 $\mathbb{H}$-rules aggravate the matter by adding all inessential rule
@@ -477,8 +322,8 @@ user's own mental process of argumentation.
 
 Of course flexibility comes at a price, and the rules of \sys{BJ} are probably
 too numerous and low-level to provide a good basis for a user interface. Some of
-these concerns will be tackled in \refsec{invertible-calculus}, but we think a
-better answer might have been found with the proof system introduced in
+these concerns will be tackled in the following sections, but we think a better
+answer might have been found with the proof system introduced in
 \refch{flowers}, and its associated prototype of GUI presented in
 \refch{flowerprover}.
 
@@ -491,138 +336,7 @@ better answer might have been found with the proof system introduced in
 \subsection{Graphical rules}
 
 \begin{figure*}
-  \begin{framed}
-  \renewcommand{\arraystretch}{1.25}
-  \begin{mathpar}
-  \begin{array}{r@{\quad}c@{\quad}lr}
-    \multicolumn{4}{c}{\identity} \\[2em]
-
-     \hypo{A}~~\conc{A}
-    &\step
-    &
-    &\mathsf{i}{\downarrow} \\
-
-    &\step
-    &\bubble{\conc{A}}~~\bubble{\hypo{A}}
-    &\mathsf{i}{\uparrow} \\
-  \end{array}
-  \and
-  \begin{array}{r@{\quad}c@{\quad}lr}
-    \multicolumn{4}{c}{\resource} \\[2em]
-
-     \hypo{A}
-    &\step
-    &
-    &\mathsf{w} \\
-
-     \hypo{A}
-    &\step
-    &\hypo{A~~A}
-    &\mathsf{c} \\
-  \end{array}
-  \vspace{2em}\\
-  \begin{array}{r@{\quad}c@{\quad}lr}
-    \multicolumn{4}{c}{\flow} \\[2em]
-
-     \hypo{A}~~\bubble{\color{black}S}
-    &\step
-    &\bubble{\hypo{A}~~S}
-    &\mathsf{f{-}} \\
-  \end{array}
-  \and
-  \begin{array}{r@{\quad}c@{\quad}lr}
-    \multicolumn{4}{c}{\popping} \\[2em]
-
-     \bubble{\phantom{S}}
-    &\step
-    &
-    &\mathsf{p} \\
-  \end{array}
-  \vspace{2em}
-  \\
-  \begin{array}{r@{\quad}c@{\quad}lr@{\qquad\qquad}r@{\quad}c@{\quad}lr}
-    \multicolumn{8}{c}{\heating} \\[2em]
-
-     \hypo{\top}
-    &\step
-    &
-    &\mathsf{\top{-}}
-
-    &\conc{\top}
-    &\step
-    &
-    &\mathsf{\top{+}} \\
-
-     \hypo{\bot}~~\conc{\Delta}
-    &\step
-    &
-    &\mathsf{\bot{-}}
-
-    &&&&\\
-
-     \hypo{A \land B}
-    &\step
-    &\hypo{A}~~\hypo{B}
-    &\mathsf{\land{-}}
-
-    &\conc{A \land B}
-    &\step
-    &\bubble{\conc{A}}~~\bubble{\conc{B}}
-    &\mathsf{\land{+}} \\
-
-     \multirow{2}{*}{$\hypo{A \lor B}~~\conc{\Delta}$}
-    &\multirow{2}{*}{$\step$}
-    &\multirow{2}{*}{$\bubble{\hypo{A}~~\conc{\Delta}}~~\bubble{\hypo{B}~~\conc{\Delta}}$}
-    &\multirow{2}{*}{$\mathsf{\lor{-}}$}
-
-    &\conc{A \lor B}
-    &\step
-    &\conc{A}
-    &\mathsf{\lor{+}_2} \\
-
-    &&&
-
-    &\conc{A \lor B}
-    &\step
-    &\conc{B}
-    &\mathsf{\lor{+}_2} \\
-
-     \hypo{A \limp B}~~\conc{\Delta}
-    &\step
-    &\bubble{\conc{A}}~~\bubble{\hypo{B}~~\conc{\Delta}}
-    &\mathsf{{\limp}{-}}
-
-    &\conc{A \limp B}
-    &\step
-    &\hypo{A}~~\conc{B}
-    &\mathsf{{\limp}{+}} \\
-
-     \hypo{\forall x. A}
-    &\step
-    &\hypo{\subst{A}{t}{x}}
-    &\mathsf{\forall{-}}
-
-    &\conc{\forall x. A}
-    &\step
-    &\conc{\subst{A}{y}{x}}
-    &\mathsf{\forall{+}} \\
-
-     \hypo{\exists x. A}
-    &\step
-    &\hypo{\subst{A}{y}{x}}
-    &\mathsf{\exists{-}}
-
-    &\conc{\exists x. A}
-    &\step
-    &\conc{\subst{A}{t}{x}}
-    &\mathsf{\exists{+}} \\
-  \end{array}
-  \vspace{2em}
-  \end{mathpar}
-  In the {\rnm{\bot{-}}}, {\rnm{\lor{-}}} and {\rnm{{\limp}{-}}} rules, $\Delta$
-  is either empty, or a singleton of one positive ion.\\
-  In the {\rnm{\forall{+}}} and {\rnm{\exists{-}}} rules, $y$ is fresh.
-  \end{framed}
+  \input{figures/graphical-BJ}
   \caption{Graphical presentation of the asymmetric bubble calculus \sys{BJ}}
   \labfig{graphical-BJ}
 \end{figure*}
@@ -631,7 +345,7 @@ While the sequent-style presentation of \sys{BJ} clearly shows its filiation
 with sequent calculus, its syntax is quite heavy, and obscures an important
 property of the rules: they almost always preserve the contexts $\Gamma, \Delta$
 of formulas and $\mathcal{S}$ of bubbles. That is, the rules of \sys{BJ} are
-\emph{local}. This enables a more concise and graphical presentation of the
+\emph{local}. This enables a more economical and graphical presentation of the
 rules in \reffig{graphical-BJ}, where \sys{BJ} is seen as a multiset rewriting
 system just like the {\cham} thanks to \refdef{solution}. Instead of relying on
 a notion of solution context, we define formally what it means to be a
@@ -653,11 +367,57 @@ rule $\mathsf{r}$.
 
 \todo{Add definition of multiset inclusion somewhere?}
 
-\todo{Add graphical version of \reffig{ex-seq-BJ}}
+\begin{figure*}
+  \input{figures/ex-gra-BJ.tex}
+  \caption{Example of graphical proof in \sys{BJ}}
+  \labfig{ex-gra-BJ}
+\end{figure*}
+
+\todo{Maybe split both \reffig{ex-gra-BJ} and \reffig{ex-seq-BJ} in two figures,
+one for the beginning of the proof upto {\rnmsf{f{-}}}, and a generic one for
+the two subproofs starting with {\rnmsf{{\limp}{-}}}.}
+
+\reffig{ex-gra-BJ} shows the graphical presentation of the same \sys{BJ}-proof
+as in \reffig{ex-seq-BJ}. Whereas in \reffig{ex-seq-BJ} we squared the whole
+subsolutions corresponding to the conclusions of inference rules, here we
+squared on each line the redex modified by the associated rewriting rule. This
+example highlights the greater locality of the rewriting approach, by indicating
+more precisely which parts of the proof state are changed by the rules. But it
+still over-approximates the modifications that really need to be performed to
+carry the transformations. Indeed, by only exposing the data of a redex $S$ and
+a reddendum $T$, a rewriting rule $\rrule{\mathsf{r}}{S}{T}$ can only be
+interpreted as the deletion of $S$ followed by the insertion $T$. Taking for
+instance the {\rnmsf{{\limp}{-}}} rule in \reffig{graphical-BJ}, one can
+describe its graphical behavior more finely as resulting from the following
+sequence of \emph{edits}:
+\begin{enumerate}
+  \item Erase the $\hypo{{\limp}}$ connective;
+  \item Change the polarity of $\hypo{A}$ from hypothesis to conclusion;
+  \item Insert a new empty bubble;
+  \item Move $\conc{A}$ in this bubble;
+  \item Insert a new empty bubble;
+  \item Move $\hypo{B}$ in this bubble;
+  \item If $\conc{\Delta}$ is not empty, also move $\conc{\Delta}$ in this bubble.
+\end{enumerate}
+It would be interesting to consider the question of finding a minimal set of
+edit operations like these, that can simulate all the rules of
+\sys{BJ}\sidenote{As will become apparent in \refsec{bubbles-completeness},
+\sys{BJ} itself provides a finer-grained simulation of the rules of sequent
+calculus, which in turn is known to be a more detailed variant of \emph{natural
+deduction}. Interestingly through the Curry-Howard isomorphism, this would
+correspond to a \emph{chain of compilation}, starting from the higher-level
+$\lambda$-calculus (natural deduction), going into abstract machines (sequent
+calculus) \cite{downen_sequent_2016}, down to something akin to \emph{assembly
+language} with \texttt{jump} instructions (Section 6.3.1 of
+\cite{guenot_nested_2013}).}. Note however that most of the above edits are
+\emph{unsound} as reasoning steps. If not for logical insight, such an edit
+calculus could still be relevant \emph{computationally}, typically by enabling
+efficient implementations of the rules with a small memory footprint.
 
 \section{Back to Proof-by-Action}
 
-\todo{Describe precisely how rules can be mapped to graphical actions.}
+\todo{Describe precisely how rules can be mapped to graphical actions, based on
+the intuition given by \reffig{ex-gra-BJ}.}
 
 Beyond the recovered uniformity of the user interface in terms of the chemical
 metaphor, \sys{BJ} exhibits some features that are interesting both at the
