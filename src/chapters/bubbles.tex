@@ -425,16 +425,11 @@ efficient implementations of the rules with a small memory footprint.
 When looking at the \sys{BJ}-proof of \reffig{ex-gra-BJ}, the astute reader
 might have been reminded of the Proof-by-Action paradigm as introduced in
 \refch{pba}, by seeing redexes as the items involved in a graphical action ---
-there are always at most two. More precisely, the following correspondence can
-be established:
-\begin{itemize}
-  \item $\mathbb{H}$-rules correspond to \emph{click} actions on blue
-  ({\rnm{\mcirc{-}}} rules) or red items ({\rnm{\mcirc{+}}} rules);
-  \item the {\rnmsf{i{\downarrow}}} rule corresponds to the most basic DnD
-  action between dual occurrences of a formula;
-  \item the {\rnmsf{c}} rule was not discussed in \refch{pba}, because DnD
-  actions systematically duplicate the involved hypotheses.
-\end{itemize}
+there are always at most two. More precisely, $\mathbb{H}$-rules correspond to
+\emph{click} actions on blue ({\rnm{\mcirc{-}}} rules) or red items
+({\rnm{\mcirc{+}}} rules), and the {\rnmsf{i{\downarrow}}} rule corresponds to
+the most basic DnD action between dual occurrences of a formula.
+
 As mentioned earlier when comparing \sys{BJ} to \sys{LJ}, the novelty here lies
 with $\mathbb{H}$-rules, $\mathbb{F}$-rules and $\mathbb{P}$-rules that deal
 with \emph{bubbles}. Remember that the goal behind the idea of bubble calculus
@@ -455,38 +450,29 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     \hypo{A}~~~\conc{B} &\step &\conc{A \back B} &\back \\
   \end{array}
   $$
-  \caption{Linkage creation rules for \sys{BJ}}
+  \caption{Linkage creation rules in \sys{BJ}}
   \labfig{bubbles-linkage}
 \end{marginfigure}
 
-\begin{marginfigure}
-  $$
-  \begin{array}{rcll}
-    &\step &\dvar{x \coloneq t} &\delta \\[1em]
+% \begin{marginfigure}
+%   $$
+%   \begin{array}{rcll}
+%     \conc{t = t} &\step &&{=}{+} \\
+%     \hypo{t = u}~~~A &\step &\subst{A}{u}{t} &{=}{-}1 \\
+%     \hypo{t = u}~~~A &\step &\subst{A}{t}{u} &{=}{-}2 \\
+%   \end{array}
+%   $$
+%   \caption{Rules for equality in \sys{BJ}}
+%   \labfig{bubbles-eq}
+% \end{marginfigure}
 
-    \dvar{\delta}~~~{\bubble{S}} &\step &\bubble{\dvar{\delta}~~~S} &\mathsf{f}\delta \\[1em]
-
-    \conc{\forall x. A} &\step &\dvar{y}~~~\conc{\subst{A}{y}{x}} &\forall{+} \\
-    \hypo{\exists x. A} &\step &\dvar{y}~~~\hypo{\subst{A}{y}{x}} &\exists{-} \\[1em]
-
-    \dvar{y}~~~{\hypo{\forall x. A}} &\step &\hypo{\subst{A}{y}{x}} &\forall{-}\mathsf{h} \\
-    \dvar{y}~~~{\conc{\exists x. A}} &\step &\conc{\subst{A}{y}{x}} &\exists{+}\mathsf{h} \\[1em]
-
-    \dvar{x \coloneq t}~~~{\hypo{\forall x. A}} &\step &\hypo{\subst{A}{t}{x}} &\forall{-}\mathsf{b} \\
-    \dvar{x \coloneq t}~~~{\conc{\exists x. A}} &\step &\conc{\subst{A}{t}{x}} &\exists{+}\mathsf{b} \\
-  \end{array}
-  $$
-  In the {\rnm{\forall{+}}} and {\rnm{\exists{-}}} rules, $y$ is fresh.
-  \caption{Rules for variables and definitions in \sys{BJ}}
-  \labfig{bubbles-vars}
-\end{marginfigure}
+% \begin{marginfigure}
+%   \input{figures/bubbles-vars.tex}
+%   \caption{Rules for variables and definitions in \sys{BJ}}
+%   \labfig{bubbles-vars}
+% \end{marginfigure}
 
 \begin{description}
-  \item[\textbf{\popping}]
-    The {\rnmsf{p}} rule can be mapped very straightforwardly to the action of
-    clicking on the area of an empty bubble, in order to pop it. It could also
-    be entirely automated, by letting the proof engine eagerly pop empty bubbles
-    as soon as they appear in a solution.
   \item[\textbf{\flow}]
     The {\rnmsf{f{-}}} rule plays a special role, in that it would not be mapped
     to any particular action. Indeed it captures the way information flows in
@@ -501,6 +487,11 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     of {\rnmsf{f{-}}} followed by {\rnmsf{i{\downarrow}}} could be performed as
     a single DnD action, where the dragged hypothesis crosses successively the
     various bubbles in its way.
+  \item[\textbf{\popping}]
+    The {\rnmsf{p}} rule can be mapped very straightforwardly to the action of
+    clicking on the area of an empty bubble, in order to pop it. It could also
+    be entirely automated, by letting the proof engine eagerly pop empty bubbles
+    as soon as they appear in a solution.
   \item[\textbf{\resource}]
     % In Actema, hypotheses are displayed in blue items inside a reserved zone
     % holding the entire context, including also local variables and definitions
@@ -523,42 +514,6 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     in intuitionistic logic \cite{ProfInt}.}. As for the weakening rule
     {\rnmsf{w}}, it could be available as a contextual action when selecting
     blue items.
-  \item[\textbf{\heating}]
-    For $\mathbb{H}$-rules that spawn bubbles like {\rnm{\land{+}}}, it is
-    important that bubbles stay close to the item being clicked, in order to
-    make the transformation clear visually. One could even imagine a small
-    animation that smoothly turns the main connective into bubbles, to convey
-    more effectively the intuition that heating rules break logical connectives
-    seen as chemical bonds.
-
-    Regarding the rules involving quantifiers, two remarks are in order:
-    \begin{itemize}
-      \item In Actema, rules {\rnm{\forall{+}}} and {\rnm{\exists{-}}} would
-      introduce a new green variable in the context. To accomodate for this in a
-      bubble-based GUI, one needs to extend the notion of solution so that
-      it incorporates local variables, in addition to ions and bubbles:
-      \begin{align*}
-        \Gamma, \Delta &\Coloneq \iota_1, \ldots, \iota_n \\
-        \iota &\Coloneq A \mid \delta \\
-        \delta &\Coloneq x \mid x \coloneq t
-        % \delta &\Coloneq x \coloneq \beta \\
-        % \beta &\Coloneq \emptyset \mid t
-      \end{align*}
-      % In this syntax, $x \coloneq t$ represents a local definition with name $x$
-      % and body $t$, and $x \coloneq \emptyset$ a local variable. That is,
-      % variables are seen as definitions without a body. 
-      Then green items $\dvar{\delta}$ would behave like blue items, with an
-      additional $\mathbb{F}$-rule for moving them inside bubbles (rule
-      {\rnm{\mathsf{f}\delta}} in \reffig{bubbles-vars}).
-      \item Instantiation rules {\rnm{\forall{-}}} and {\rnm{\exists{+}}} could
-      be mapped as in Actema to DnD actions with a green item, corresponding to
-      the alternative formulation of \reffig{bubbles-vars}. This way all the
-      rules of \sys{BJ} become \emph{analytic}: if $S \step T$ and $S_0 \subsol
-      S$, then $S_0 \subsol T$\sidenote{Except the {\rnmsf{i{\downarrow}}} rule
-      which will be shown to be admissible in \refsec{bubbles-completeness}, and
-      the {\rnm{\delta}} rule of \reffig{bubbles-vars}.}.
-    \end{itemize}
-
   \item[\textbf{\identity}]
     Although the {\rnmsf{i{\downarrow}}} rule only corresponds to the base case
     of DnD actions, it would be easy to integrate their full SFL semantics
@@ -577,15 +532,50 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     spawning a bubble around it with a blue item $\hypo{A}$, and another bubble
     nearby it with a red item $\conc{A}$.
 
-    Finally, an analog to the cut rule {\rnmsf{i{\uparrow}}} is the rule
-    {\rnm{\delta}} for adding new definitions (\reffig{bubbles-vars}). Their
-    similarity is more striking in a logical framework like Martin-Löf type
-    theory, where mathematical objects and propositions are expressed in the
-    same language. In Actema it is handled with a separate \textsf{+expr}
-    button, and could here be mapped to a contextual action available anywhere
-    on the proof canvas\sidenote{In type theory, the body of type $T$ of the
-    definition could be left for completion as a new subgoal with conclusion
-    $T$, and thus be expressed as a new bubble that can be solved later.}.
+    % Finally, an analog to the cut rule {\rnmsf{i{\uparrow}}} is the rule
+    % {\rnmsf{d\uparrow}} for adding new definitions (\reffig{bubbles-vars}).
+    % Their similarity is more striking in a logical framework like Martin-Löf
+    % type theory, where mathematical objects and propositions are expressed in
+    % the same language. In Actema it is handled with a separate \textsf{+expr}
+    % button, and could here be mapped to a contextual action available anywhere
+    % on the proof canvas\sidenote{In type theory, the body of type $T$ of the
+    % definition could be left for completion as a new subgoal with conclusion
+    % $T$, and thus be expressed as a new bubble that can be solved later.}.
+  \item[\textbf{\heating}]
+    For $\mathbb{H}$-rules that spawn bubbles like {\rnm{\land{+}}}, it is
+    important that bubbles stay close to the item being clicked, in order to
+    make the transformation clear visually. One could even imagine a small
+    animation that smoothly turns the main connective into bubbles, to convey
+    more effectively the intuition that heating rules break logical connectives
+    seen as chemical bonds.
+
+    % Regarding the rules involving quantifiers, two remarks are in order:
+    % \begin{itemize}
+    %   \item In Actema, rules {\rnm{\forall{+}}} and {\rnm{\exists{-}}} would
+    %   introduce a new green variable in the context. To accomodate for this in a
+    %   bubble-based GUI, one needs to extend the notion of solution so that
+    %   it incorporates local variables, in addition to formulas:
+    %   \begin{align*}
+    %     \Gamma, \Delta &\Coloneq \iota_1, \ldots, \iota_n \\
+    %     % \iota &\Coloneq A \mid \delta \\
+    %     % \delta &\Coloneq x \mid \ldef{x}{t}
+    %     \iota &\Coloneq A \mid \ldef{x}{\beta} \\
+    %     \beta &\Coloneq \emptyset \mid t
+    %   \end{align*}
+    %   In this syntax, $\ldef{x}{t}$ represents a local definition with name $x$
+    %   and body $t$, and $\ldef{x}{\emptyset}$ a local variable with name $x$.
+    %   That is, variables are seen as definitions without a body. Then rules
+    %   {\rnm{\forall{+}}} and {\rnm{\exists{-}}} are modified accordingly (see
+    %   \reffig{bubbles-vars}).
+    %   \item Instantiation rules {\rnm{\forall{-}}} and {\rnm{\exists{+}}} could
+    %   be mapped as in Actema to DnD actions with a green item, corresponding to
+    %   the alternative formulation of \reffig{bubbles-vars}. This way all the
+    %   rules of \sys{BJ} become \emph{analytic}: if $S \step T$, then every
+    %   subterm occurring in $T$ also occurs in $S$\sidenote{The only exceptions
+    %   are the {\rnmsf{i{\downarrow}}} rule which will be shown to be admissible
+    %   in \refsec{bubbles-completeness}, and the {\rnmsf{d{\uparrow}}} rule of
+    %   \reffig{bubbles-vars}.}.
+    % \end{itemize}
 \end{description}
 
 Beyond the recovered uniformity of the user interface in terms of the chemical
