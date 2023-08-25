@@ -1,51 +1,46 @@
 \setchapterpreamble[u]{\margintoc}
-\chapter{Bubble Calculi}
+\chapter{Asymmetric Bubble Calculus}
 \labch{bubbles}
 
-We introduce a new kind of nested sequent proof systems dubbed \emph{bubble
-calculi}. Inspired by the \emph{membrane} mechanism of the chemical abstract
+We introduce a new kind of nested sequent proof system dubbed \emph{bubble
+calculus}. Inspired by the \emph{membrane} mechanism of the chemical abstract
 machine ({\cham} hereafter) \sidecite[25em]{berry_chemical_1989}, so-called
 \emph{bubbles} internalize the notion of \emph{subgoal} inside sequents, rather
 than through the tree structure induced by inference rules. This allows for a
 more hierarchical representation of the proof state, where contexts can be
-shared between different subgoals. In addition to the usual textual syntax,
-bubble calculi can be expressed in a graphical syntax, where logical meaning is
+shared between different subgoals. In addition to the usual textual syntax, the
+bubble calculus can be expressed in a graphical syntax, where logical meaning is
 captured by \emph{physical} constraints on diagrammatic manipulations, instead
-of \emph{virtual} restrictions on available inference rules. In the chemical
-metaphor, \emph{intuitionism} is then characterized as the phenomenon of
-\emph{repulsion} between objects that have the same polarity.
+of \emph{virtual} restrictions on available inference rules.
 
-The chapter is organized mostly chronologically, following the evolution of our
-idea of a bubble calculus through the addition of new features. We start in
-\refsec{chemical} with the genesis of the idea, coming from the observation that
-our Proof-by-Action paradigm (\refch{pba}) lends itself quite naturally to a
-metaphorical interpretation, where actions are seen as \emph{chemical}
-reactions. In \refsec{bubbles} we introduce the concept of \emph{bubble} as a
-way to control the scope of hypotheses inside nested sequents that we call
-\emph{solutions}. In \refsec{asymmetric} we describe a first proof system for
-intuitionistic logic dubbed \emph{asymmetric bubble calculus}, based on multiset
-rewriting rules on solutions comprising at most one conclusion. Then in
-\refsec{bubbles-pba} we import back ideas from this bubble calculus to the realm
-of GUIs for interactive proof building, analysing their possible impact for UX
-improvements.
+% We introduce a new kind of nested sequent proof systems dubbed \emph{bubble
+% calculi}. Inspired by the \emph{membrane} mechanism of the chemical abstract
+% machine ({\cham} hereafter) \sidecite[25em]{berry_chemical_1989}, so-called
+% \emph{bubbles} internalize the notion of \emph{subgoal} inside sequents, rather
+% than through the tree structure induced by inference rules. This allows for a
+% more hierarchical representation of the proof state, where contexts can be
+% shared between different subgoals. In addition to the usual textual syntax,
+% bubble calculi can be expressed in a graphical syntax, where logical meaning is
+% captured by \emph{physical} constraints on diagrammatic manipulations, instead
+% of \emph{virtual} restrictions on available inference rules. In the chemical
+% metaphor, \emph{intuitionism} is then characterized as the phenomenon of
+% \emph{repulsion} between objects that have the same polarity.
 
-\todo{Maybe relocate in a new chapter starting from here?}
+This chapter and the next are organized mostly chronologically, following the
+evolution of our idea of a bubble calculus through the addition of new features.
+\todo{Put this sentence in the introduction.}
 
-In \refsec{non-determinism} we motivate our quest for a system where all
-introduction rules for logical connectives are \emph{invertible}, in order to
-reduce non-determinism in proof search. To that effect, we extend in
-\refsec{colors} the syntax of solutions so that bubbles can themselves be
-\emph{polarized}. This gives rise in \refsec{symmetric-calculus} to the full
-\emph{symmetric bubble calculus}, where the subgoal tree is encoded by a new
-distinction between \emph{branching} and \emph{terminal} solutions. In
-\refsec{bubbles-soundness} we show that by adding or removing 4 inference rules
-that define the \emph{porosity} of bubbles, one gets 4 subsystems that capture
-respectively intuitionistic, dual-intuitionistic, bi-intuitionistic and
-classical logic. In \refsec{bubbles-completeness} we support this claim by
-showing that our system is not only sound, but also complete with respect to
-standard sequent calculi. Finally we present a fully invertible variant of the
-symmetric bubble calculus in \refsec{invertible-calculus}, inspired by ideas
-that will be developed in subsequent chapters.
+We start in \refsec{chemical} with the genesis of the idea of bubble calculus,
+coming from the observation that our Proof-by-Action paradigm (\refch{pba})
+lends itself quite naturally to a metaphorical interpretation, where actions are
+seen as \emph{chemical} reactions. In \refsec{bubbles} we introduce the concept
+of \emph{bubble} as a way to control the scope of hypotheses inside nested
+sequents that we call \emph{solutions}. In \refsec{asymmetric} we describe our
+proof system for intuitionistic logic dubbed \emph{asymmetric bubble calculus},
+based on multiset rewriting rules on solutions comprising at most one
+conclusion. Finally in \refsec{bubbles-pba} we import back ideas from this
+bubble calculus to the realm of GUIs for interactive proof building, analysing
+their possible impact for UX improvements.
 
 
 \section{The chemical metaphor}\labsec{chemical}
@@ -58,7 +53,7 @@ the goal to be proved as a single logical formula, one needs a way to decompose
 it into many items for further processing through DnD. This is precisely what
 the introduction rules for logical connectives in sequent calculus do, and
 following the Proof-by-Pointing paradigm \cite{PbP} we map them to click
-actions.
+actions (see \refsec{clicks}).
 
 So visually, a proof in Actema consists in breaking logical items into subitems
 positioned freely in space, and then bringing those subitems together to make
@@ -189,13 +184,13 @@ sequents.
 
 \begin{remark}
 In this section we only deal with single-conclusion solutions, but the more
-general case will be studied starting from \refsec{colors}.
+general case will be studied starting from \refsec{branching}.
 \end{remark}
 
 Just like a sequent, a solution is semantically equivalent to an implication,
 except that we add the \emph{conjunction} of all subgoals to the consequent:
 
-\begin{definition}[Asymmetric interpretation]
+\begin{definition}[Asymmetric interpretation]\labdef{ainterp}
   The \emph{asymmetric interpretation} of a solution is defined recursively by:
   $$\ainterp{\Gamma \piq{S_1 \sep \ldots \sep S_n} \Delta} = \bigwedge \Gamma
     \limp \bigwedge \Delta \land \bigwedge_i{\ainterp{S_i}}$$
@@ -213,8 +208,8 @@ solutions:
   tree, i.e. a branching point where we created multiple subgoals.
 \end{itemize}
 This will soon become clearer with examples of derivations in our calculus. In
-\refsec{symmetric-calculus}, we will consider a different interpretation of
-solutions that entails a different encoding of the proof structure in them.
+\refsec{branching}, we will consider a different interpretation of solutions that
+entails a different encoding of the proof structure in them.
 
 \subsection{Sequent-style rules}
 
@@ -233,7 +228,7 @@ calculus for intuitionistic logic dubbed \sys{BJ}. It is divided in five groups:
   \item The {\identity}, {\resource} and {\heating} groups correspond
   respectively to the identity, structural and logical rules of sequent
   calculus, following the terminology of \sidecite{girard:hal-01322183}. More
-  precisely, rules {\rnmsf{i{\downarrow}}} and {\rnmsf{i[\uparrow]}} correspond
+  precisely, rules {\rnmsf{i{\downarrow}}} and {\rnmsf{i{\uparrow}}} correspond
   to the axiom and cut rules; rules {\rnmsf{w}} and {\rnmsf{c}} to the weakening
   and contraction rules; and every rule of the form $\mcirc{-}$ (resp.) that
   is, the axiom and cut rules, the contraction and weakening rules, and
@@ -276,7 +271,7 @@ $$\vcenter{\R{S}{T}} \quad \text{should be read as} \quad
 
 \begin{definition}[\sys{BJ}-derivation]\labdef{BJ-deriv} A \emph{derivation}
 $\deriv{\mathcal{D}}{S}{T}$ in \sys{BJ} is a list $\mathcal{D}$ of (instances
-of) inference rules with premiss $T$ and conclusion $S$\sidenote[][-14cm]{The
+of) inference rules with premiss $T$ and conclusion $S$\sidenote[][-15cm]{The
 direction of the arrow is from conclusion to premiss, to stay consistent with
 our interactive proof building setting where inference rules are seen as
 goal-modifying actions.}.
@@ -328,7 +323,7 @@ user's own mental process of argumentation.
 
 Of course flexibility comes at a price, and the rules of \sys{BJ} are probably
 too numerous and low-level to provide a good basis for a user interface. Some of
-these concerns will be tackled in the following sections, but we think a better
+these concerns will be tackled in \refch{bubbles-symm}, but we think a better
 answer might have been found with the proof system introduced in
 \refch{flowers}, and its associated prototype of GUI presented in
 \refch{flowerprover}.
@@ -651,15 +646,3 @@ proof-theoretical and user-experience levels:
     % rules always perform the same trivial operation on the global state:
     % duplicating the whole context of hypotheses.
 \end{description}
-
-\section{Reducing non-determinism}\labsec{non-determinism}
-
-\section{Coloring bubbles}\labsec{colors}
-
-\section{Symmetric calculus}\labsec{symmetric-calculus}
-
-\section{Soundness}\labsec{bubbles-soundness}
-
-\section{Completeness}\labsec{bubbles-completeness}
-
-\section{Invertible calculus}\labsec{invertible-calculus}

@@ -3,3 +3,5 @@
 \definecolor{hypo}{HTML}{007BFF}
 \definecolor{conc}{HTML}{DC3545}
 \definecolor{dorange}{HTML}{FF6F00}
+
+\newcommand{\limp}{\supset}

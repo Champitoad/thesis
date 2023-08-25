@@ -1,0 +1,6 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=conc] (13) at (0, 2) {$(A \limp B) \lor C$};
+		\node [style=hypo] (14) at (0, 0.75) {$A \limp (B \lor C)$};
+	\end{pgfonlayer}
+\end{tikzpicture}

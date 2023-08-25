@@ -1,0 +1,284 @@
+\setchapterpreamble[u]{\margintoc}
+\chapter{Symmetric Bubble Calculi}
+\labch{bubbles-symm}
+
+\todo{Introductory paragraph}
+
+The chapter is organized as follows: in \refsec{non-determinism} we motivate our
+quest for a system where all introduction rules for logical connectives are
+\emph{invertible}, in order to reduce non-determinism in proof search and enable
+a fully \emph{iconic} approach to proof building. To that effect, we relax in
+\refsec{branching} the restriction to single-conclusion solutions, which
+requires a new distinction between \emph{closed} and \emph{open} solutions. This
+gives rise in \refsec{colors} to an extension of the syntax of solutions, where
+bubbles can themselves be \emph{polarized}. In \refsec{symmetric-calculus} we
+introduce a core \emph{symmetric bubble calculus} called ``system \sys{B}''. In
+\refsec{bubbles-soundness} we show that by adding or removing 4 inference rules
+to system \sys{B} that define the \emph{porosity} of bubbles, one gets 4 systems
+that capture respectively intuitionistic, dual-intuitionistic, bi-intuitionistic
+and classical logic. In \refsec{bubbles-completeness} we support this claim by
+showing that the systems are not only sound, but also complete with respect to
+standard sequent calculi. In \refsec{invertible-calculus} we present a fully
+invertible variant of system \sys{B}, inspired by ideas that will be developed
+in subsequent chapters. Despite the invertibility of introduction rules, it
+turns out that this variant does not satisfy the \emph{decomposability}
+property. We fix this defect in \refsec{decomposable-calculus} with yet another
+variant of the system, finally achieving full iconicity.
+
+\section{Non-determinism and iconicity}\labsec{non-determinism}
+
+In all known sequent calculus formulations of intuitionistic logic, there are at
+least two rules which are invariably \emph{non-invertible}:
+\begin{enumerate}
+  \item a left introduction rule for $\limp$ (there might be many ones, as in
+  the calculus \sys{LJT} of \sidecite{dyckhoff_contraction-free_1992});
+  \item the right introduction for either:
+    \begin{itemize}
+      \item $\lor$ when sequents have at most or exactly one conclusion;
+      \item $\limp$ when sequents have multiple conclusions, e.g. in the
+        multi-succedant variant of \sys{LJT} in
+        \cite{dyckhoff_contraction-free_1992}.
+    \end{itemize}
+\end{enumerate}
+In \sys{BJ}, this means that click actions on blue $\hypo{\limp}$ and red
+$\conc{\lor}$ need to be performed in a specific order to be able to complete
+proofs.
+
+In his thesis \cite{guenot_nested_2013}, Guenot introduced a specific kind of
+nested sequent system, where like in \sys{BJ} inference rules can be expressed
+as rewriting rules. An interesting feature of these systems is that all
+introduction rules for connectives are \emph{invertible}, which means that in
+proof search, formulas can be completely decomposed until atoms are reached
+before applying other rules. Non-determinism then arises in the choice of atoms
+that are to be connected in axioms, as well as the choice of sub-sequents to be
+duplicated for reuse.
+
+In our graphical setting, this would translate to an interface where all click
+actions are redundant. Although we already considered this possibility in
+\refsec{dnd-completeness}, here it goes further by making even \emph{logical
+connectives} superfluous, since all other rules work purely on the structure of
+sequents. This means that all logical connectives could be replaced by
+metaphorical constructs like bubbles, which suggest \emph{physically} the
+possible transformations on the proof state. Unfortunately, the systems in
+\cite{guenot_nested_2013} only handle classical logic and the implicative
+fragment of intuitionistic logic. Thus began our quest for a nested sequent
+system in the style of Guenot capturing full intuitionistic logic\sidenote{Other
+nested sequent systems for full intuitionistic logic exist
+\cite{fitting-nested-2014}, but they are based on tree-shaped proofs, and
+thus ignore the whole \emph{raison d'être} of our concept of bubble.}.
+
+
+\section{Conclusions and branching}\labsec{branching}
+
+The first direction we followed was to relax the constraint that solutions must
+be single-conclusion. Indeed as already noted in \refsec{sfl-backtracking}, a
+notable property of sequent calculi with multiple conclusions is that their
+right introduction rule for $\lor$ is invertible.
+
+The main difficulty lies in the way one should interpret a multi-conclusion
+solution $S$ as a formula $\rinterp{S}$. If we just take the asymmetric
+interpretation (\refdef{ainterp}) and group conclusions disjunctively instead of
+conjunctively, we get
+$$
+\rinterp{\Gamma \piq{\mathcal{S}} \Delta} =
+\bigwedge \Gamma \limp \bigvee \Delta \land \bigwedge_{S \in \mathcal{S}}{\rinterp{S}}
+$$
+But this interpretation breaks on the 0-ary case when $\Delta$ is empty: instead
+of seeing $\Gamma \piq{\mathcal{S}}$ as a node of the proof tree with hypotheses
+$\Gamma$ and subgoals $\mathcal{S}$, it trivializes it to $\rinterp{\Gamma
+\piq{\mathcal{S}}} = \bigwedge \Gamma \limp \bot$, i.e. a goal where one has to
+find a contradiction in $\Gamma$; which is obviously not what we have in mind.
+
+\begin{marginfigure}
+  $$
+  \R[\land R*]
+    {\Gamma \seq A, \Delta}
+    {\Gamma \seq B, \Delta}
+    {\Gamma \seq A \land B, \Delta}
+  $$
+  \caption{Multi-conclusion right introduction rule for conjunction}
+  \labfig{multi-and-intro}
+\end{marginfigure}
+
+A key observation was that in the rules of multi-conclusion sequent calculi, one
+usually distributes the context $\Delta$ of conclusions in all premisses: this
+restores a perfect symmetry with respect to the context of hypotheses $\Gamma$,
+as illustrated by the {\rnm{\land R*}} rule (\reffig{multi-and-intro}). Then our
+idea was that instead of implementing distribution/sharing of conclusions inside
+inference rules, we could do it implicitly in the interpretation of solutions.
+This is already what happens in the asymmetric interpretation for hypotheses
+(\refdef{ainterp}); indeed the context $\Gamma$ is shared among subgoals,
+because:
+\begin{enumerate}
+  \item it appears on the left of an implication $\limp$
+  \item bubbles are joined conjunctively, and
+  \item implication distributes over conjunction thanks to the equivalence $A
+  \limp B \land C \semequiv (A \limp B) \land (A \limp C)$.
+\end{enumerate}
+But what does it mean precisely to share conclusions among subgoals? If we
+consider the two following solutions:
+$$
+\underbrace{\bubble{\hypo{A}~~~\conc{B}}~~~\bubble{\hypo{C}~~~\conc{D}}~~~\conc{E}}_{S} \qquad\qquad
+\underbrace{\bubble{\hypo{A}~~~\conc{B}~~~\conc{E}}~~~\bubble{\hypo{C}~~~\conc{D}~~~\conc{E}}}_{T}
+$$
+we would like to have $\rinterp{S} \semequiv \rinterp{T} \semequiv (A \limp B
+\lor E) \land (C \limp D \lor E)$. Since disjunction distributes over
+conjunction, a first naive try would give the following interpretation, where we
+just replaced $\land$ by $\lor$ compared to the previous attempt:
+$$
+\rinterp{\Gamma \piq{\mathcal{S}} \Delta} =
+\bigwedge{\Gamma} \limp \bigwedge_{S \in \mathcal{S}}{\rinterp{S}} \lor \bigvee \Delta
+$$
+But this immediately fails whenever $\mathcal{S} = \emptyset$, because it
+trivializes to $\bigwedge \Gamma \limp \top \lor \bigvee \Delta \semequiv \top$
+instead of $\bigwedge \Gamma \limp \bigvee \Delta$. The only way we found around
+this defect was to internalize \emph{syntactically} a distinction between two
+kinds of solutions\sidenote{In the terminology of Martin-Löf, we could say that
+we now have two distinct forms of \emph{judgment}.}:
+\begin{itemize}
+  \item \emph{closed} solutions $\Gamma \piq{\mathcal{S}} \Delta$ correspond
+  to branching nodes in the proof tree, or to closed leaves when $\mathcal{S} =
+  \emptyset$ (i.e. solved subgoals). Thus it becomes sensical to have
+  $\rinterp{\Gamma \piq{} \Delta} = \top$. In the asymmetric interpretation,
+  closed solutions were encoded by solutions with no conclusions;
+  \item \emph{open} solutions $\Gamma \seq \Delta$ correspond to open leaves
+  in the proof tree (i.e. unsolved subgoals). In the asymmetric interpretation,
+  they were encoded by solutions with one conclusion.
+\end{itemize}
+Then we keep the last proposed interpretation for closed solutions, and
+interpret open solutions like usual sequents:
+$$\rinterp{\Gamma \seq \Delta} = \bigwedge{\Gamma} \limp \bigvee{\Delta}$$ To be
+able to abstract from the particular kind of solution at hand, we reframe the
+syntax of solutions with so-called \emph{branching} operators $\J$:
+\begin{align*}
+  S, T, U &\Coloneq \Gamma \J \Delta \\
+  \J, \JB &\Coloneq {\seq} \mid \piq{\mathcal{S}}
+\end{align*}
+Graphically, closed solutions with no bubbles can be distinguished from
+open solutions by painting their \emph{background} on the proof canvas in
+green, the intent being to suggest that they have already been solved. A
+pathological example is the distinction between the closed empty bubble
+$\bbubble{\phantom{a}}$ and the open empty bubble $\bubble{\phantom{a}}$,
+who are interpreted respectively by $\rinterp{\piq{\piq{}}} = \top$ and
+$\rinterp{\piq{\seq}} = \bot$.
+
+Now if we come back to our target example, it still fails because we assign two
+non-equivalent interpretations to $S$ and $T$. To show this, let us try to
+derive the equivalence through some algebraic developments:
+\begin{align}
+  \rinterp{S} &= \top \limp ((A \limp B) \land (C \limp D)) \lor E \nonumber\\
+              &\semequiv ((A \limp B) \land (C \limp D)) \lor E \\
+              &\semequiv ((A \limp B) \lor E) \land ((C \limp D) \lor E) \\
+              &\semequiv (A \limp B \lor E) \land (C \limp D \lor E) \labeq{grishin}\\
+              &\semequiv ((A \limp B) \land (C \limp D)) \lor E \\
+  \rinterp{T} &= \top \limp ((A \limp B \lor E) \land (C \limp D \lor E)) \lor \bot \nonumber
+\end{align}
+Wait, we did manage to prove it! The trick resides in \refeq{grishin}, which
+uses twice the equivalence $(A \limp B) \lor C \equiv A \limp (B \lor C)$. It
+turns out that this equivalence is true in classical logic, but \emph{not} in
+intuitionistic logic. More precisely, it is the implication $G \triangleq (A
+\limp (B \lor C)) \limp ((A \limp B) \lor C)$ which is not provable
+intuitionistically\sidenote{This was already noticed in
+\cite{clouston-annotation-free-2013}, with the linear version $(A \multimap (B
+\parr C)) \multimap ((A \multimap B) \parr C)$ of $G$ called Grishin (a) and its
+converse Grishin (b). More precisely, it is affirmed that while Grishin (b) is
+valid in \sys{FILL}, the restriction of the classical multiplicative linear
+logic \sys{MLL} to single-conclusion sequents, adding Grishin (a) makes
+\sys{FILL} collapse to \sys{MLL}.}. Thus according to this interpretation $T$
+entails $S$, but $S$ does not entail $T$.
+
+To remedy this situation, we opted for a different strategy: instead of finding
+a logical formula capturing the distributive semantics of conclusions over
+subgoals, we hardcode the latter by defining the interpretation function on
+closed solutions through \emph{non-structural} recursion. This gives the
+following final definition:
+
+\begin{definition}[Symmetric interpretation]\labdef{sinterp}
+  The \emph{symmetric interpretation} of a solution is defined recursively by:
+  \begin{align*}
+    \rinterp{\Gamma \piq{\mathcal{S}} \Delta} &=
+      \bigwedge_{S \in \mathcal{S}} \rinterp{S \mix \Gamma \seq \Delta} \\
+    \rinterp{\Gamma \seq \Delta} &=
+      \bigwedge \Gamma \seq \bigvee \Delta
+  \end{align*}
+  where the commutative \emph{mix} operator $\mix$ on solutions is defined by:
+  \begin{align*}
+    \Gamma \J \Delta \mix \Gamma' \seq \Delta' &=
+      \Gamma, \Gamma' \J \Delta, \Delta' \\
+    \Gamma \piq{\mathcal{S}} \Delta \mix \Gamma' \piq{\mathcal{S'}} \Delta' &=
+      \Gamma, \Gamma' \piq{\mathcal{S} \sep \mathcal{S'}} \Delta, \Delta' \\
+  \end{align*}
+\end{definition}
+
+This is the right approach for interpreting solutions with multiple conclusions,
+as will be demonstrated formally in \refsec{bubbles-soundness}.
+
+\section{Coloring bubbles}\labsec{colors}
+
+\begin{marginfigure}
+  $$
+  \R[\mathsf{{\limp}{+}c}]
+    {\Gamma, A \J B, \Delta}
+    {\Gamma \J A \limp B, \Delta}
+  $$
+  \caption{Classical multi-conclusion version of ${\limp}{+}$}
+  \label{wrong-imp-pos}
+\end{marginfigure}
+
+With our new symmetric interpretation, we can start generalizing the rules of
+\sys{BJ} to multiple conclusions. While for most rules one just has to replace
+single-conclusion (resp. no-conclusion) solutions with open (resp. closed) ones
+(more details will be given in the next section), the ${\limp}{+}$ rule stands
+out as particularly problematic. Indeed if we content ourselves with the natural
+generalization {\rnmsf{{\limp}{+}c}} of \reffig{wrong-imp-pos}, then we can
+easily build a proof of the excluded middle like in \reffig{lk-tnd}, and thus
+collapse to classical logic. This fact is well-known in the literature on
+multi-conclusion intuitionistic sequent calculi, and the solution is usually to
+discard the context of conclusions $\Delta$, as in the {\rnm{{\limp}R*i}} rule
+of \reffig{multi-imp-intro}. But this would make our rule both non-local and
+non-invertible.
+
+A better solution comes from the nested sequent systems of Fitting
+\sidecite{fitting-nested-2014} and \sidecite{clouston-annotation-free-2013},
+where sequents can appear as \emph{conclusions} of other sequents. In our
+chemical metaphor, this corresponds to having \emph{red bubbles}. Then the key
+idea is to allow hypotheses to flow into sequents that appear as
+conclusions\sidenote{This corresponds to the {\rnm{Lift}} rule of
+\cite{fitting-nested-2014} and {\rnm{pl_1}} rule of
+\cite{clouston-annotation-free-2013}.}, but \emph{not other conclusions}.
+Graphically, this means that only blue items can enter red bubbles, not red
+items: this is reminiscent of the eletromagnetic phenomemon of \emph{repulsion}
+between objects charged with the same polarity.
+
+\begin{figure*}
+  \input{figures/bubbles-grishin.tex}
+  \caption{Proof attempts for Grishin (a) and Grishin (b)}
+  \labfig{bubbles-grishin}
+\end{figure*}
+
+To illustrate why this works logically, let us consider the proof of the
+classical equivalence $ (A \limp B) \lor C \lequiv A \limp (B \lor C)$, that we
+already stumbled upon in the previous section. 
+
+
+\section{Symmetric calculus}\labsec{symmetric-calculus}
+
+\begin{figure*}
+  \input{figures/sequent-B.tex}
+  \caption{Sequent-style presentation of the symmetric bubble calculus \sys{B}}
+  \labfig{sequent-B}
+\end{figure*}
+
+\section{Soundness}\labsec{bubbles-soundness}
+
+\section{Completeness}\labsec{bubbles-completeness}
+
+\section{Invertible calculus}\labsec{invertible-calculus}
+
+\section{Decomposable calculus}\labsec{decomposable-calculus}
+
+\todo{IDEA: add the {\rnm{pl_2}} and {\rnm{pr_2}} rules of
+\cite{clouston-annotation-free-2013} into (a non-invertible version of) the
+calculus. Indeed, they allow taking red items outside of red bubbles: thus if
+the proof can be made outside with a smaller context, it is more general and
+immediately solves all subgoals, improving \emph{factorizability}.}

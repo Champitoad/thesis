@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=conc] (13) at (0, 2) {$B$};
+		\node [style=hypo] (14) at (0, -0.5) {$A \limp (B \lor C)$};
+		\node [style=conc] (15) at (1.75, 2) {$C$};
+		\node [style=hypo] (16) at (-1.5, 2) {$A$};
+		\node [style=none] (19) at (-0.75, 3) {};
+		\node [style=none] (20) at (-0.75, 1) {};
+		\node [style=none] (21) at (-0.75, 1.5) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=red bubble] (19.center)
+			 to [bend left=90, looseness=2.50] (20.center)
+			 to [bend left=90, looseness=2.50] cycle;
+		\draw [style=green arrow, bend left, looseness=0.75] (14) to (21.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

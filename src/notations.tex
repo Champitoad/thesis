@@ -47,7 +47,8 @@
 \newcommand{\sep}{\;\!;\!\;}
 
 \newcommand{\seq}{\Rightarrow}
-\newcommand{\limp}{\supset}
+% \newcommand{\limp}{\supset}
+\newcommand{\lsub}{\minus}
 \newcommand{\lequiv}{\Leftrightarrow}
 
 \newcommand{\mcirc}{\mathbin{⚬}}
@@ -71,6 +72,8 @@
 \newcommand{\fequiv}{\sdststile{}{}}
 \newcommand{\nturn}[1]{\lefteqn{\lapbox{1.88ex}{\raisebox{.38ex}{\scriptsize/}}}\mathbin{#1}}
 
+\newcommand{\semequiv}{\equiv}
+
 \newcommand{\bv}{\mathsf{bv}}
 \newcommand{\fv}{\mathsf{fv}}
 \renewcommand{\emptyset}{⌀}
@@ -91,11 +94,16 @@
 \newcommand{\piq}[1]{\mathbin{\langle #1 \rangle}}
 
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+            \node[shape=circle,draw,fill=white,inner sep=2pt] (char) {#1};}}
+\newcommand*\greencircled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,fill=solved,inner sep=2pt] (char) {#1};}}
 \newcommand{\bubble}[1]{\color{bubble}\circled{$#1$}}
+\newcommand{\bbubble}[1]{\color{bubble}\greencircled{$#1$}}
+\newcommand{\bsheet}[1]{\colorbox{solved}{#1}}
 
-\newcommand{\ainterp}[1]{\llbracket #1 \rrbracket^a}
-\newcommand{\sinterp}[1]{\llbracket #1 \rrbracket^s}
+\newcommand{\ainterp}[1]{\llfloor #1 \rrfloor}
+\newcommand{\rinterp}[1]{\llbracket #1 \rrbracket}
+\newcommand{\linterp}[1]{\rrbracket #1 \llbracket}
 
 \newcommand{\identity}{\textsc{$\mathbb{I}$dentity}}
 \newcommand{\flow}{\textsc{$\mathbb{F}$low}}
@@ -106,6 +114,10 @@
 \newcommand{\subsol}{\prec}
 
 \newcommand{\ldef}[2]{#1 \coloneq #2}
+
+\newcommand{\mix}{\,\mathbin{\cupdot}\,}
+\newcommand{\J}{\mathbin{\rhd}}
+\newcommand{\JB}{\mathbin{\RHD}}
 
 % Flowers
 

@@ -1,3 +1,5 @@
+% \usepackage{pst-node}
+% \usepackage{auto-pst-pdf}
 \usepackage{multirow}
 \usepackage{tabularx}
 \usepackage{makecell}
@@ -25,7 +27,8 @@
 % }
 % \usepackage{adjustbox}
 % \usepackage{pifont}
-% \usepackage{turnstile}
+\usepackage{turnstile}
+\usepackage[nointegrals]{wasysym}
 
 % TikZiT
 \usepackage{tikzit}
@@ -34,6 +37,8 @@
 \renewcommand{\tikzfig}[1]{
 \InputIfFileExists{./drawings/#1.tikz}{}{{\color{red}\colorbox{pink}{missing file : #1}}}
 }
+\newcommand{\stkfig}[2]{\scalebox{#1}{\tikzfig{#2}}}
+\tikzset{every picture/.style={scale=0.5,baseline=(current bounding box.center)}}
 
 
 \usepackage{minted}
@@ -44,6 +49,7 @@
 
 \usepackage{unicode-math}
 \setmathfont{Libertinus Math}
+\setmathfont{latinmodern-math.otf}[range=\multimap]
 % \setmathfont{LibertinusMath-Regular.otf}[range=\vdash]
 % \setmathfont{LibertinusMath-Regular.otf}[range=\nvdash]
 % \setmathfont{LibertinusMath-Regular.otf}[range=\vDash]
@@ -98,6 +104,7 @@
 \definecolor{conc}{HTML}{DC3545}
 \definecolor{dvar}{HTML}{45A15A}
 \definecolor{bubble}{HTML}{A0A0A0}
+\definecolor{solved}{HTML}{DEFFCF}
 
 % prftree
 \prflineextra=0em

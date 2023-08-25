@@ -1,0 +1,108 @@
+\begin{framed}
+\renewcommand{\arraystretch}{3}
+\begin{mathpar}
+\begin{array}{r@{\quad}l}
+\multicolumn{2}{c}{\identity} \\[1em]
+
+\R[\mathsf{i}{\downarrow}]
+    {\Gamma \piq{} \Delta}
+    {\Gamma, A \J A, \Delta}
+&
+\R[\mathsf{i}{\uparrow}]
+    {}
+    {\Gamma \J \Delta}
+\end{array}
+\and
+\begin{array}{r@{\quad}l}
+\multicolumn{2}{c}{\resource} \\[1em]
+
+\R[\mathsf{w}]
+    {\Gamma \piq{\mathcal{S}} \Delta}
+    {\Gamma, A \piq{\mathcal{S}} \Delta}
+&
+\R[\mathsf{c}]
+    {\Gamma, A, A \piq{\mathcal{S}} \Delta}
+    {\Gamma, A \piq{\mathcal{S}} \Delta} \\
+\end{array}
+\\
+\begin{array}{r}
+\multicolumn{1}{c}{\flow} \\[1em]
+
+\R[\mathsf{f{-}}]
+    {\Gamma \piq{\mathcal{S} \sep \Gamma', A \piq{\mathcal{S'}} \Delta'} \Delta}
+    {\Gamma, A \piq{\mathcal{S} \sep \Gamma' \piq{\mathcal{S'}} \Delta'} \Delta}
+\end{array}
+\and
+\begin{array}{r}
+\multicolumn{1}{c}{\popping} \\[1em]
+
+\R[\mathsf{p}]
+    {\Gamma \piq{\mathcal{S}} \Delta}
+    {\Gamma \piq{\mathcal{S} \sep \piq{}} \Delta}
+\end{array}
+\\
+\begin{array}{c@{\quad}c}
+\multicolumn{2}{c}{\heating} \\[1em]
+
+\R[\top{-}]
+    {\Gamma \piq{\mathcal{S}} \Delta}
+    {\Gamma, \top \piq{\mathcal{S}} \Delta}
+&
+\R[\top{+}]
+    {\Gamma \piq{\mathcal{S}} {}}
+    {\Gamma \piq{\mathcal{S}} \top}
+\\
+\R[\bot{-}]
+    {\Gamma \piq{\mathcal{S}} {}}
+    {\Gamma, \bot \piq{\mathcal{S}} \Delta}
+&\\
+\R[\land{-}]
+    {\Gamma, A, B \piq{\mathcal{S}} \Delta}
+    {\Gamma, A \land B \piq{\mathcal{S}} \Delta}
+&
+\R[\land{+}]
+    {\Gamma \piq{\mathcal{S} \sep {} \piq{} A \sep {} \piq{} B} {}}
+    {\Gamma \piq{\mathcal{S}} A \land B}
+\\
+\multirow{2}{*}{
+\R[\lor{-}]
+    {\Gamma \piq{\mathcal{S} \sep A \piq{} \Delta \sep B \piq{} \Delta} {}}
+    {\Gamma, A \lor B \piq{\mathcal{S}} \Delta}}
+&
+\R[\lor{+}_1]
+    {\Gamma \piq{\mathcal{S}} A}
+    {\Gamma \piq{\mathcal{S}} A \lor B}
+\\&
+\R[\lor{+}_2]
+    {\Gamma \piq{\mathcal{S}} B}
+    {\Gamma \piq{\mathcal{S}} A \lor B}
+\\
+\R[{\limp}{-}]
+    {\Gamma \piq{\mathcal{S} \sep {} \piq{} A \sep B \piq{} \Delta}}
+    {\Gamma, A \limp B \piq{\mathcal{S}} \Delta}
+&
+\R[{\limp}{+}]
+    {\Gamma, A \piq{\mathcal{S}} B}
+    {\Gamma \piq{\mathcal{S}} A \limp B}
+\\
+\R[\forall{-}]
+    {\Gamma, \subst{A}{t}{x} \piq{\mathcal{S}} \Delta}
+    {\Gamma, \forall x. A \piq{\mathcal{S}} \Delta}
+&
+\R[\forall{+}]
+    {\Gamma \piq{\mathcal{S}} A}
+    {\Gamma \piq{\mathcal{S}} \forall x. A}
+\\
+\R[\exists{-}]
+    {\Gamma, A \piq{\mathcal{S}} \Delta}
+    {\Gamma, \exists x. A \piq{\mathcal{S}} \Delta}
+&
+\R[\exists{+}]
+    {\Gamma \piq{\mathcal{S}} \subst{A}{t}{x}}
+    {\Gamma \piq{\mathcal{S}} \exists x. A}
+\end{array}
+\end{mathpar}
+
+In the {\rnm{\forall{+}}} and {\rnm{\exists{-}}} rules, $x$ is not free in
+$\Gamma$, $\Delta$ and $\mathcal{S}$.
+\end{framed}

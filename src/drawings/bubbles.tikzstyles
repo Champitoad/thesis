@@ -5,8 +5,8 @@
 
 % Node styles
 \tikzstyle{black text}=[fill=none, draw=none, shape=circle]
-\tikzstyle{blue text}=[fill=none, draw=none, shape=circle, text=hypo]
-\tikzstyle{red text}=[fill=none, draw=none, shape=circle, text=conc]
+\tikzstyle{hypo}=[fill=none, draw=none, text=hypo]
+\tikzstyle{conc}=[fill=none, draw=none, text=conc]
 \tikzstyle{orange text}=[fill=none, draw=none, shape=circle, text=dorange]
 
 % Edge styles
@@ -15,3 +15,4 @@
 \tikzstyle{green arrow}=[draw={rgb,255: red,0; green,195; blue,0}, ->]
 \tikzstyle{dashed orange arrow}=[draw={rgb,255: red,255; green,111; blue,0}, ->, dashed]
 \tikzstyle{orange line}=[draw={rgb,255: red,255; green,111; blue,0}, -]
+\tikzstyle{red bubble}=[-, color=conc, tikzit draw=red]
