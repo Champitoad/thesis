@@ -48,7 +48,7 @@
 
 \newcommand{\seq}{\Rightarrow}
 % \newcommand{\limp}{\supset}
-\newcommand{\lsub}{\minus}
+\newcommand{\lsub}{\subset}
 \newcommand{\lequiv}{\Leftrightarrow}
 
 \newcommand{\mcirc}{\mathbin{⚬}}
@@ -98,12 +98,15 @@
 \newcommand*\greencircled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,fill=solved,inner sep=2pt] (char) {#1};}}
 \newcommand{\bubble}[1]{\color{bubble}\circled{$#1$}}
+\newcommand{\cbubble}[1]{\color{conc}\circled{$#1$}}
+\newcommand{\hbubble}[1]{\color{hypo}\circled{$#1$}}
 \newcommand{\bbubble}[1]{\color{bubble}\greencircled{$#1$}}
 \newcommand{\bsheet}[1]{\colorbox{solved}{#1}}
 
 \newcommand{\ainterp}[1]{\llfloor #1 \rrfloor}
-\newcommand{\rinterp}[1]{\llbracket #1 \rrbracket}
-\newcommand{\linterp}[1]{\rrbracket #1 \llbracket}
+\newcommand{\sinterp}[1]{\llbracket #1 \rrbracket}
+\newcommand{\psinterp}[1]{\llbracket #1 \rrbracket^+}
+\newcommand{\nsinterp}[1]{\llbracket #1 \rrbracket^-}
 
 \newcommand{\identity}{\textsc{$\mathbb{I}$dentity}}
 \newcommand{\flow}{\textsc{$\mathbb{F}$low}}

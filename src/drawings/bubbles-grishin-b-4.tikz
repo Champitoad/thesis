@@ -1,25 +1,33 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=none] (3) at (0, 2.5) {};
-		\node [style=none] (4) at (0, -2.5) {};
-		\node [style=hypo] (7) at (-1.9, -0.575) {$A$};
-		\node [style=conc] (11) at (-0.975, -0.575) {$B$};
-		\node [style=conc] (12) at (1.55, -0.45) {$C$};
-		\node [style=hypo] (13) at (-1.425, 0.4) {$A \limp B$};
-		\node [style=hypo] (14) at (1.55, 0.45) {$C$};
-		\node [style=none] (15) at (-1.4, 1.325) {};
-		\node [style=none] (16) at (-1.4, -1.325) {};
-		\node [style=none] (17) at (1.55, 1.175) {};
-		\node [style=none] (18) at (1.55, -1.175) {};
+		\node [style=none] (3) at (-0.35, 3.025) {};
+		\node [style=none] (4) at (-0.35, -2.425) {};
+		\node [style=conc] (12) at (2.275, -0.125) {$C$};
+		\node [style=hypo] (14) at (2.3, 0.7) {$C$};
+		\node [style=none] (15) at (-1.35, 1.9) {};
+		\node [style=none] (16) at (-1.35, -1.25) {};
+		\node [style=none] (17) at (2.3, 1.25) {};
+		\node [style=none] (18) at (2.3, -0.625) {};
+		\node [style=hypo] (19) at (-2.55, -0.125) {$A$};
+		\node [style=conc] (20) at (-2.525, 0.7) {$A$};
+		\node [style=none] (21) at (-2.525, 1.25) {};
+		\node [style=none] (22) at (-2.525, -0.625) {};
+		\node [style=conc] (23) at (-0.4, -0.125) {$B$};
+		\node [style=hypo] (24) at (-0.375, 0.7) {$B$};
+		\node [style=none] (25) at (-0.375, 1.25) {};
+		\node [style=none] (26) at (-0.375, -0.625) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=red bubble] (4.center)
-			 to [bend right=90, looseness=2.25] (3.center)
-			 to [bend right=90, looseness=2.25] cycle;
-		\draw [style=grey line] (16.center)
-			 to [bend right=90, looseness=1.75] (15.center)
-			 to [bend right=90, looseness=1.75] cycle;
+			 to [bend right=90, looseness=2.50] (3.center)
+			 to [bend right=90, looseness=2.50] cycle;
+		\draw [style=grey line, in=0, out=0, looseness=2.50] (16.center) to (15.center);
+		\draw [style=grey line, in=180, out=-180, looseness=2.75] (15.center) to (16.center);
 		\draw [style=grey line, bend right=90, looseness=1.75] (18.center) to (17.center);
 		\draw [style=grey line, bend right=90, looseness=1.75] (17.center) to (18.center);
+		\draw [style=grey line, bend right=90, looseness=1.75] (22.center) to (21.center);
+		\draw [style=grey line, bend right=90, looseness=1.75] (21.center) to (22.center);
+		\draw [style=grey line, bend right=90, looseness=1.75] (26.center) to (25.center);
+		\draw [style=grey line, bend right=90, looseness=1.75] (25.center) to (26.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

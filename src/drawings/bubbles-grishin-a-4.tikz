@@ -1,7 +1,7 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
 		\node [style=conc] (13) at (-0.825, 0.625) {$B$};
-		\node [style=conc] (15) at (4.325, 0.15) {$C$};
+		\node [style=conc] (15) at (4.25, 0.15) {$C$};
 		\node [style=hypo] (16) at (-3.625, 0.675) {$A$};
 		\node [style=none] (19) at (-1.075, 2.925) {};
 		\node [style=none] (20) at (-1.075, -2.375) {};
@@ -16,7 +16,6 @@
 		\node [style=none] (29) at (0.125, -1.35) {};
 		\node [style=none] (30) at (-3.6, 1.275) {};
 		\node [style=none] (31) at (-3.6, -0.725) {};
-		\node [style=none] (34) at (2.875, 0.75) {};
 		\node [style=none] (35) at (1.725, 0.275) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
@@ -34,7 +33,5 @@
 			 to [bend left=90, looseness=2.50] cycle;
 		\draw [style=grey line, bend left=90, looseness=1.75] (30.center) to (31.center);
 		\draw [style=grey line, bend right=270, looseness=1.75] (31.center) to (30.center);
-		\draw [style=orange line, bend right=15, looseness=0.75] (15) to (34.center);
-		\draw [style=dashed orange arrow, bend left=330, looseness=0.75] (34.center) to (35.center);
 	\end{pgfonlayer}
 \end{tikzpicture}
