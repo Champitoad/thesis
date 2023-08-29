@@ -12,21 +12,22 @@ a fully \emph{iconic} approach to proof building. To that effect, we relax in
 requires a new distinction between \emph{closed} and \emph{open} solutions. This
 gives rise in \refsec{colors} to an extension of the syntax of solutions, where
 bubbles can themselves be \emph{polarized}. In \refsec{symmetric-calculus} we
-introduce a core \emph{symmetric bubble calculus} called ``system \sys{B}''. In
-\refsec{bubbles-soundness} we show that by adding or removing 4 inference rules
-to system \sys{B} that define the \emph{porosity} of bubbles, one gets 4 systems
-that capture respectively intuitionistic, dual-intuitionistic, bi-intuitionistic
-and classical logic. In \refsec{bubbles-completeness} we support this claim by
-showing that the systems are not only sound, but also complete with respect to
-standard sequent calculi. In \refsec{invertible-calculus} we present a fully
+introduce a core \emph{symmetric bubble calculus} for classical logic called
+``system \sys{B}''. In \refsec{bubbles-soundness} we prove the soundness of
+system \sys{B}, showing along the way that by removing selectively among 4
+inference rules that define the \emph{porosity} of polarized bubbles, one gets
+intuitionistic, dual-intuitionistic and bi-intuitionistic as fragments. In
+\refsec{bubbles-completeness} we support this claim by showing that the
+bi-intuitionistic fragment is not only sound, but also \emph{cut-free complete}
+with respect to the cut-free nested sequent calculus of Postniece
+\cite{postniece_deep_2009}. In \refsec{invertible-calculus} we present a fully
 invertible variant of system \sys{B}, inspired by ideas that will be developed
 in subsequent chapters. Despite the invertibility of introduction rules, it
 turns out that this variant does not satisfy the \emph{decomposability}
 property. We fix this defect in \refsec{decomposable-calculus} with yet another
 variant of the system, finally achieving full iconicity.
 
-\todo{Where should we mention cut-elimination as a future work? Or maybe it will
-follow from the completeness theorem.}
+\todo{Maybe talk about factorizability in the last system?}
 
 \todo{Mention that we only \emph{conjecture} soundness and completeness for
 quantifiers, and that when adding exclusion into the mix (rules
@@ -39,6 +40,10 @@ predicate logic (see \cite{crolard_subtractive_2001} and
 distinction between weak and strong bi-intuitionistic logic, following their
 claim that we are probably in wBIL since we are complete with respect to the
 system of Postniece.}
+
+\todo{ Future work: what are the logics associated to other subsets of the flow
+  rules, including rules not considered in system \sys{B} like flowing out of
+  gray bubbles?}
 
 \section{Non-determinism and iconicity}\labsec{non-determinism}
 
@@ -435,15 +440,16 @@ definition of solutions, which can now be open or closed:
   \begin{align*}
     S, T, U &\Coloneq \Gamma \J \Delta &
     \mathcal{S} &\Coloneq S_1 \sep \ldots \sep S_n \\
-    \iota &\Coloneq A \mid S &
-    \Gamma, \Delta &\Coloneq \iota_1, \ldots, \iota_n \\
+    I &\Coloneq A \mid S &
+    \Gamma, \Delta &\Coloneq I_1, \ldots, I_n \\
     \J, \JB &\Coloneq {\seq} \mid {\piq{\mathcal{S}}} &&
   \end{align*}
 \end{definition}
 
 Note that in the textual syntax, bubbles are identified with \emph{subsolutions}
 (\refdef{subsolution}), and their polarity is determined by their position
-relative to branching operators; that is, a bubble $S \subsol T$ is either:
+relative to branching operators; that is, for any solutions $S, T, U$ such that
+$T \subsol U$, $S$ is either:
 \begin{itemize}
   \item \emph{neutral} if $T = \Gamma \piq{\mathcal{S}} \Delta$ and $S \in
   \mathcal{S}$;
@@ -468,9 +474,9 @@ nested sequents for \sys{FILL} \cite{clouston-annotation-free-2013}.}:
     \nsinterp{\Gamma \piq{\mathcal{S}} \Delta} &=
       \bigvee_{S \in \mathcal{S}} \nsinterp{S \mix \Gamma \seq \Delta} \\
     \psinterp{\Gamma \seq \Delta} &=
-      \bigwedge_{\iota \in \Gamma} \nsinterp{\iota} \limp \bigvee_{\iota \in \Delta} \psinterp{\iota} &
+      \bigwedge_{I \in \Gamma} \nsinterp{I} \limp \bigvee_{I \in \Delta} \psinterp{I} &
     \nsinterp{\Gamma \seq \Delta} &=
-      \bigwedge_{\iota \in \Gamma} \nsinterp{\iota} \lsub \bigvee_{\iota \in \Delta} \psinterp{\iota}
+      \bigwedge_{I \in \Gamma} \nsinterp{I} \lsub \bigvee_{I \in \Delta} \psinterp{I}
   \end{align*}
 \end{definition}
 
@@ -484,9 +490,26 @@ bi-intuitionistic logic in the same system.
 
 \begin{figure*}
   \input{figures/sequent-B.tex}
-  \caption{Sequent-style presentation of the symmetric bubble calculus \sys{B}}
+  \caption{Sequent-style presentation of system \sys{B}}
   \labfig{sequent-B}
 \end{figure*}
+
+\begin{figure*}
+  \input{figures/graphical-B.tex}
+  \caption{Graphical presentation of system \sys{B}}
+  \labfig{graphical-B}
+\end{figure*}
+
+\todo{ Tradeoff between perfectly local rules, where many are restricted to
+  open solutions, and factorizing rules that are uniformly applicable to any
+  kind of solution, but are neither local nor linear (because they rely on
+  duplicating the abstract proof in all subgoals) }
+
+\todo{ Talk about flow rules for moving outside bubbles motivated by the need of
+a cut-free proof for Uustalu's formula, with the figure summarizing all flow
+rules, and slogan that "inward (resp. outward) paths cannot cross bubbles of the
+same (resp. a different) color". In classical logic colored bubbles do not block
+anything, and are thus useless. }
 
 \section{Soundness}\labsec{bubbles-soundness}
 
@@ -495,7 +518,7 @@ bi-intuitionistic logic in the same system.
 
 \section{Completeness}\labsec{bubbles-completeness}
 
-\todo{ Completeness proof by simulation of DBiInt from
+\todo{ Completeness proof by simulation of LBiInt from
 \cite{postniece_deep_2009}, and deduce from it completeness of intuitionistic,
 dual-intuitionistic and classical fragments + cut admissibility}
 

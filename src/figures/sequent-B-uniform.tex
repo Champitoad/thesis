@@ -1,12 +1,12 @@
 \begin{framed}
-\renewcommand{\arraystretch}{2}
+\renewcommand{\arraystretch}{3}
 \begin{mathpar}
 \begin{array}{r@{\quad}l}
 \multicolumn{2}{c}{\identity} \\[1em]
 
 \R[\mathsf{i}{\downarrow}]
     {\Gamma \piq{} \Delta}
-    {\Gamma, I \seq I, \Delta}
+    {\Gamma, I \J I, \Delta}
 &
 \R[\mathsf{i}{\uparrow}]
     {\Gamma \J \Delta \mix \piq{\seq I \sep I \seq}}
@@ -96,11 +96,11 @@
 } \\
 \R[\mathsf{p{-}}]
     {\Gamma \piq{} \Delta}
-    {\Gamma, (\piq{}) \seq \Delta}
+    {\Gamma, (\piq{}) \J \Delta}
 &
 \R[\mathsf{p{+}}]
     {\Gamma \piq{} \Delta}
-    {\Gamma \seq (\piq{}), \Delta}
+    {\Gamma \J (\piq{}), \Delta}
 \end{array}
 \\
 \begin{array}{c@{\quad}c}
@@ -112,35 +112,31 @@
 &
 \R[\top{+}]
     {\Gamma  \piq{} \Delta}
-    {\Gamma \seq \top, \Delta}
+    {\Gamma \J \top, \Delta}
 \\
 \R[\bot{-}]
     {\Gamma \piq{} \Delta}
-    {\Gamma, \bot \seq \Delta}
-&
-\R[\bot{+}]
-    {\Gamma \J \Delta}
-    {\Gamma \J \bot, \Delta}
-\\
+    {\Gamma, \bot \J \Delta}
+&\\
 \R[\land{-}]
     {\Gamma, A, B \J \Delta}
     {\Gamma, A \land B \J \Delta}
 &
 \R[\land{+}]
-    {\Gamma \piq{\seq A \sep \seq B {}} \Delta}
-    {\Gamma \seq A \land B, \Delta}
+    {\Gamma \J \Delta \mix \piq{\seq A \sep \seq B {}}}
+    {\Gamma \J A \land B, \Delta}
 \\
 \R[\lor{-}]
-    {\Gamma \piq{A \seq \sep B\seq} \Delta}
-    {\Gamma, A \lor B \seq \Delta}
+    {\Gamma \J \Delta \mix \piq{A \seq \sep B\seq}}
+    {\Gamma, A \lor B \J \Delta}
 &
 \R[\lor{+}]
     {\Gamma \J A, B, \Delta}
     {\Gamma \J A \lor B, \Delta}
 \\
 \R[{\limp}{-}]
-    {\Gamma \piq{\seq A \sep B\seq} \Delta}
-    {\Gamma, A \limp B \seq \Delta}
+    {\Gamma \J \Delta \mix \piq{\seq A \sep B\seq}}
+    {\Gamma, A \limp B \J \Delta}
 &
 \R[{\limp}{+}]
     {\Gamma \J (A \seq B), \Delta}
@@ -151,8 +147,8 @@
     {\Gamma, A \lsub B \J \Delta}
 &
 \R[{\lsub}{+}]
-    {\Gamma \piq{\seq A \sep B\seq} \Delta}
-    {\Gamma \seq A \lsub B, \Delta}
+    {\Gamma \J \Delta \mix \piq{\seq A \sep B\seq}}
+    {\Gamma \J A \lsub B, \Delta}
 \\
 \R[\forall{-}]
     {\Gamma, \subst{A}{t}{x} \J \Delta}

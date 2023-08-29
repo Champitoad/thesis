@@ -1,0 +1,214 @@
+\begin{framed}
+  % \renewcommand{\arraystretch}{2}
+  \begin{mathpar}
+  \begin{array}{r@{\quad}c@{\quad}ll}
+    \multicolumn{4}{c}{\identity} \\[2em]
+  
+     \hypo{I}~~~\conc{I}
+    &\step
+    &\bsheet{\phantom{\hypo{I}~~~\conc{I}}}
+    &\mathsf{i}{\downarrow} \\
+  
+     
+     \gAsheet{\phantom{\bubble{\conc{I}}~~~\bubble{\conc{\Delta}}}}
+    &\step
+    &\bsheet{\bubble{\conc{I}}~~~\bubble{\hypo{I}}}
+    &\mathsf{i}{\uparrow} \\
+  \end{array}
+  \and
+  \begin{array}{r@{\quad}c@{\quad}ll@{\qquad\qquad}r@{\quad}c@{\quad}ll}
+    \multicolumn{8}{c}{\resource} \\[2em]
+  
+     \gAsheet{\hypo{I}}
+    &\step
+    &\gAsheet{\phantom{\hypo{I}}}
+    &\mathsf{w{-}} &
+
+     \gAsheet{\conc{I}}
+    &\step
+    &\gAsheet{\phantom{\hypo{I}}}
+    &\mathsf{w{+}} \\
+  
+     \gAsheet{\hypo{I}}
+    &\step
+    &\gAsheet{\hypo{I~~~I}}
+    &\mathsf{c{-}} &
+
+     \gAsheet{\conc{I}}
+    &\step
+    &\gAsheet{\conc{I~~~I}}
+    &\mathsf{c{+}} \\
+  \end{array}
+  \vspace{2em}\\
+  \begin{array}{r@{\quad}c@{\quad}ll@{\qquad\qquad}r@{\quad}c@{\quad}ll}
+    \multicolumn{8}{c}{\flow} \\[2em]
+
+     \gAsheet{\hbbubble{\gBbubble{\color{black}S}}}
+    &\step
+    &\bsheet{\gAbubble{\hgBbubble{\color{black}S}}}
+    &\mathsf{s{-}} &
+
+     \gAsheet{\cbbubble{\gBbubble{\color{black}S}}}
+    &\step
+    &\bsheet{\gAbubble{\cgBbubble{\color{black}S}}}
+    &\mathsf{s{+}} \\
+  
+     \bsheet{\hypo{I}~~~\gBbubble{\color{black}S}}
+    &\step
+    &\bsheet{\gBbubble{\hypo{I}~~~S}}
+    &\mathsf{f{-}{\downarrow}} &
+
+     \bsheet{\conc{I}~~~\gBbubble{\color{black}S}}
+    &\step
+    &\bsheet{\gBbubble{\conc{I}~~~S}}
+    &\mathsf{f{+{\downarrow}}} \\
+
+     \gAsheet{\hypo{I}~~~\cgBbubble{\color{black}S}}
+    &\step
+    &\gAsheet{\cgBbubble{\hypo{I}~~~S}}
+    &\mathsf{f{-}{+}{\downarrow}} &
+
+     \gAsheet{\conc{I}~~~\hgBbubble{\color{black}S}}
+    &\step
+    &\gAsheet{\hgBbubble{\conc{I}~~~S}}
+    &\mathsf{f{+}{-}{\downarrow}} \\
+
+     \gAsheet{\hypo{I}~~~\hgBbubble{\color{black}S}}
+    &\step
+    &\gAsheet{\hgBbubble{\hypo{I}~~~S}}
+    &\mathsf{f{-}{-}{\downarrow}} &
+
+     \gAsheet{\conc{I}~~~\cgBbubble{\color{black}S}}
+    &\step
+    &\gAsheet{\cgBbubble{\conc{I}~~~S}}
+    &\mathsf{f{+}{+}{\downarrow}} \\
+
+     \gAsheet{\cgBbubble{\hypo{I}~~~S}}
+    &\step
+    &\gAsheet{\hypo{I}~~~\cgBbubble{\color{black}S}}
+    &\mathsf{f{-}{+}{\uparrow}} &
+
+     \gAsheet{\hgBbubble{\conc{I}~~~S}}
+    &\step
+    &\gAsheet{\conc{I}~~~\hgBbubble{\color{black}S}}
+    &\mathsf{f{+}{-}{\uparrow}} \\
+
+     \gAsheet{\hgBbubble{\hypo{I}~~~S}}
+    &\step
+    &\gAsheet{\hypo{I}~~~\hgBbubble{\color{black}S}}
+    &\mathsf{f{-}{-}{\uparrow}} &
+
+     \gAsheet{\cgBbubble{\conc{I}~~~S}}
+    &\step
+    &\gAsheet{\conc{I}~~~\cgBbubble{\color{black}S}}
+    &\mathsf{f{+}{+}{\uparrow}} \\
+  \end{array}
+  \and
+  \begin{array}{r@{\quad}c@{\quad}ll}
+    \multicolumn{4}{c}{\popping} \\[2em]
+
+     \bsheet{\bbubble{\phantom{S}}}
+    &\step
+    &\bsheet{\phantom{\bbubble{\phantom{S}}}}
+    &\mathsf{p} \\
+
+     \hbbubble{\phantom{S}}
+    &\step
+    &\bsheet{\phantom{\bbubble{\phantom{S}}}}
+    &\mathsf{p{-}} \\
+
+     \cbbubble{\phantom{S}}
+    &\step
+    &\bsheet{\phantom{\bbubble{\phantom{S}}}}
+    &\mathsf{p{+}} \\
+  \end{array}
+  \vspace{2em}
+  \\
+  \begin{array}{r@{\quad}c@{\quad}ll@{\qquad\qquad}r@{\quad}c@{\quad}ll}
+    \multicolumn{8}{c}{\heating} \\[2em]
+  
+     \gAsheet{\hypo{\top}}
+    &\step
+    &\gAsheet{\phantom{\hypo{\top}}}
+    &\mathsf{\top{-}}
+  
+    &\conc{\top}
+    &\step
+    &\bsheet{\phantom{\top}}
+    &\mathsf{\top{+}} \\
+  
+     \hypo{\bot}
+    &\step
+    &\bsheet{\phantom{\bot}}
+    &\mathsf{\bot{-}}
+
+    &\gAsheet{\conc{\bot}}
+    &\step
+    &\gAsheet{\phantom{\conc{\bot}}}
+    &\mathsf{\bot{+}} \\
+  
+     \gAsheet{\hypo{A \land B}}
+    &\step
+    &\gAsheet{\hypo{A}~~~\hypo{B}}
+    &\mathsf{\land{-}}
+  
+    &\conc{A \land B}
+    &\step
+    &\bsheet{\bubble{\conc{A}}~~~\bubble{\conc{B}}}
+    &\mathsf{\land{+}} \\
+  
+     \hypo{A \lor B}
+    &\step
+    &\bsheet{\bubble{\hypo{A}}~~~\bubble{\hypo{B}}}
+    &\mathsf{\lor{-}}
+
+    &\gAsheet{\conc{A \lor B}}
+    &\step
+    &\gAsheet{\conc{A}~~~\conc{B}}
+    &\mathsf{\lor{+}} \\
+  
+     \hypo{A \limp B}
+    &\step
+    &\bsheet{\bubble{\conc{A}}~~~\bubble{\hypo{B}}}
+    &\mathsf{{\limp}{-}}
+  
+    &\gAsheet{\conc{A \limp B}}
+    &\step
+    &\gAsheet{\cbubble{\hypo{A}~~~\conc{B}}}
+    &\mathsf{{\limp}{+}} \\
+  
+     \gAsheet{\hypo{A \lsub B}}
+    &\step
+    &\gAsheet{\hbubble{\hypo{A}~~~\conc{B}}}
+    &\mathsf{{\lsub}{-}}
+
+    &\conc{A \lsub B}
+    &\step
+    &\bsheet{\bubble{\conc{A}}~~~\bubble{\hypo{B}}}
+    &\mathsf{{\lsub}{+}} \\
+  
+     \gAsheet{\hypo{\forall x. A}}
+    &\step
+    &\gAsheet{\hypo{\subst{A}{t}{x}}}
+    &\mathsf{\forall{-}}
+  
+    &\gAsheet{\conc{\forall x. A}}
+    &\step
+    &\gAsheet{\conc{\subst{A}{y}{x}}}
+    &\mathsf{\forall{+}} \\
+  
+     \gAsheet{\hypo{\exists x. A}}
+    &\step
+    &\gAsheet{\hypo{\subst{A}{y}{x}}}
+    &\mathsf{\exists{-}}
+  
+    &\gAsheet{\conc{\exists x. A}}
+    &\step
+    &\gAsheet{\conc{\subst{A}{t}{x}}}
+    &\mathsf{\exists{+}} \\
+  \end{array}
+  \vspace{2em}
+  \end{mathpar}
+  In the {\rnm{\forall{+}}} and {\rnm{\exists{-}}} rules, $y$ is fresh.
+  \end{framed}
+  

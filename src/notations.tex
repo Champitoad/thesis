@@ -95,13 +95,33 @@
 
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,fill=white,inner sep=2pt] (char) {#1};}}
-\newcommand*\greencircled[1]{\tikz[baseline=(char.base)]{
+\newcommand*\bcircled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,fill=solved,inner sep=2pt] (char) {#1};}}
+\newcommand*\gAcircled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,fill=genA,inner sep=2pt] (char) {#1};}}
+\newcommand*\gBcircled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,fill=genB,inner sep=2pt] (char) {#1};}}
+
 \newcommand{\bubble}[1]{\color{bubble}\circled{$#1$}}
 \newcommand{\cbubble}[1]{\color{conc}\circled{$#1$}}
 \newcommand{\hbubble}[1]{\color{hypo}\circled{$#1$}}
-\newcommand{\bbubble}[1]{\color{bubble}\greencircled{$#1$}}
-\newcommand{\bsheet}[1]{\colorbox{solved}{#1}}
+
+\newcommand{\bbubble}[1]{\color{bubble}\bcircled{$#1$}}
+\newcommand{\hbbubble}[1]{\color{hypo}\bcircled{$#1$}}
+\newcommand{\cbbubble}[1]{\color{conc}\bcircled{$#1$}}
+
+\newcommand{\gAbubble}[1]{\color{bubble}\gAcircled{$#1$}}
+\newcommand{\ggAbubble}[1]{\color{black}\gAcircled{$#1$}}
+\newcommand{\hgAbubble}[1]{\color{hypo}\gAcircled{$#1$}}
+\newcommand{\cgAbubble}[1]{\color{conc}\gAcircled{$#1$}}
+
+\newcommand{\gBbubble}[1]{\color{bubble}\gBcircled{$#1$}}
+\newcommand{\hgBbubble}[1]{\color{hypo}\gBcircled{$#1$}}
+\newcommand{\cgBbubble}[1]{\color{conc}\gBcircled{$#1$}}
+
+\newcommand{\bsheet}[1]{\colorbox{solved}{$#1$}}
+\newcommand{\gAsheet}[1]{\colorbox{genA}{$#1$}}
+\newcommand{\gBsheet}[1]{\colorbox{genB}{$#1$}}
 
 \newcommand{\ainterp}[1]{\llfloor #1 \rrfloor}
 \newcommand{\sinterp}[1]{\llbracket #1 \rrbracket}
