@@ -46,6 +46,8 @@
 
 \newcommand{\sep}{\;\!;\!\;}
 
+\newcommand{\defeq}{\triangleq}
+
 \newcommand{\seq}{\Rightarrow}
 % \newcommand{\limp}{\supset}
 \newcommand{\lsub}{\subset}
@@ -59,6 +61,7 @@
 \newcommand{\hole}{\square}
 \newcommand{\cfill}[2]{#1\{#2\}}
 
+\newcommand{\lstep}{\rightharpoonup}
 \newcommand{\step}{\rightarrow}
 \newcommand{\steps}{\step^\ast}
 \newcommand{\notstep}{\nrightarrow}
@@ -72,7 +75,8 @@
 \newcommand{\fequiv}{\sdststile{}{}}
 \newcommand{\nturn}[1]{\lefteqn{\lapbox{1.88ex}{\raisebox{.38ex}{\scriptsize/}}}\mathbin{#1}}
 
-\newcommand{\semequiv}{\equiv}
+\newcommand{\sement}{\leq}
+\newcommand{\semequiv}{\simeq}
 
 \newcommand{\bv}{\mathsf{bv}}
 \newcommand{\fv}{\mathsf{fv}}
@@ -123,10 +127,10 @@
 \newcommand{\gAsheet}[1]{\colorbox{genA}{$#1$}}
 \newcommand{\gBsheet}[1]{\colorbox{genB}{$#1$}}
 
-\newcommand{\ainterp}[1]{\llfloor #1 \rrfloor}
-\newcommand{\sinterp}[1]{\llbracket #1 \rrbracket}
-\newcommand{\psinterp}[1]{\llbracket #1 \rrbracket^+}
-\newcommand{\nsinterp}[1]{\llbracket #1 \rrbracket^-}
+\newcommand{\aint}[1]{\left\llfloor #1 \right\rrfloor}
+\newcommand{\sint}[1]{\left\llbracket #1 \right\rrbracket}
+\newcommand{\psint}[1]{\left\llbracket #1 \right\rrbracket^+}
+\newcommand{\nsint}[1]{\left\llbracket #1 \right\rrbracket^-}
 
 \newcommand{\identity}{\textsc{$\mathbb{I}$dentity}}
 \newcommand{\flow}{\textsc{$\mathbb{F}$low}}
@@ -141,6 +145,16 @@
 \newcommand{\mix}{\,\mathbin{\cupdot}\,}
 \newcommand{\J}{\mathbin{\rhd}}
 \newcommand{\JB}{\mathbin{\RHD}}
+
+\newcommand{\ltop}{\top}
+\newcommand{\lbot}{\bot}
+\newcommand{\lmeet}{\land}
+\newcommand{\ljoin}{\lor}
+\newcommand{\lexp}{\limp}
+\newcommand{\lcoexp}{\lsub}
+
+\newcommand{\soldepth}[1]{\left|#1\right|}
+\newcommand{\soldual}[1]{\overline{#1}}
 
 % Flowers
 

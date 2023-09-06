@@ -4,15 +4,15 @@
   \begin{array}{r@{\quad}c@{\quad}ll}
     \multicolumn{4}{c}{\identity} \\[2em]
   
-     \hypo{I}~~~\conc{I}
+     \hypo{A}~~~\conc{A}
     &\step
-    &\bsheet{\phantom{\hypo{I}~~~\conc{I}}}
+    &\bsheet{\phantom{\hypo{A}~~~\conc{A}}}
     &\mathsf{i}{\downarrow} \\
   
      
-     \gAsheet{\phantom{\bubble{\conc{I}}~~~\bubble{\conc{\Delta}}}}
+     \phantom{\bubble{\conc{A}}~~~\bubble{\hypo{A}}}
     &\step
-    &\bsheet{\bubble{\conc{I}}~~~\bubble{\hypo{I}}}
+    &\bsheet{\bubble{\conc{A}}~~~\bubble{\hypo{A}}}
     &\mathsf{i}{\uparrow} \\
   \end{array}
   \and
@@ -73,15 +73,15 @@
     &\gAsheet{\hgBbubble{\conc{I}~~~S}}
     &\mathsf{f{+}{-}{\downarrow}} \\
 
-     \gAsheet{\hypo{I}~~~\hgBbubble{\color{black}S}}
+     \gAsheet{\hgBbubble{\hypo{I}~~~S}}
     &\step
-    &\gAsheet{\hgBbubble{\hypo{I}~~~S}}
-    &\mathsf{f{-}{-}{\downarrow}} &
+    &\gAsheet{\hypo{I}~~~\hgBbubble{\color{black}S}}
+    &\mathsf{f{-}{-}{\uparrow}} &
 
-     \gAsheet{\conc{I}~~~\cgBbubble{\color{black}S}}
+     \gAsheet{\cgBbubble{\conc{I}~~~S}}
     &\step
-    &\gAsheet{\cgBbubble{\conc{I}~~~S}}
-    &\mathsf{f{+}{+}{\downarrow}} \\
+    &\gAsheet{\conc{I}~~~\cgBbubble{\color{black}S}}
+    &\mathsf{f{+}{+}{\uparrow}} \\
 
      \gAsheet{\cgBbubble{\hypo{I}~~~S}}
     &\step
@@ -93,15 +93,15 @@
     &\gAsheet{\conc{I}~~~\hgBbubble{\color{black}S}}
     &\mathsf{f{+}{-}{\uparrow}} \\
 
-     \gAsheet{\hgBbubble{\hypo{I}~~~S}}
+     \gAsheet{\hypo{I}~~~\hgBbubble{\color{black}S}}
     &\step
-    &\gAsheet{\hypo{I}~~~\hgBbubble{\color{black}S}}
-    &\mathsf{f{-}{-}{\uparrow}} &
+    &\gAsheet{\hgBbubble{\hypo{I}~~~S}}
+    &\mathsf{f{-}{-}{\downarrow}} &
 
-     \gAsheet{\cgBbubble{\conc{I}~~~S}}
+     \gAsheet{\conc{I}~~~\cgBbubble{\color{black}S}}
     &\step
-    &\gAsheet{\conc{I}~~~\cgBbubble{\color{black}S}}
-    &\mathsf{f{+}{+}{\uparrow}} \\
+    &\gAsheet{\cgBbubble{\conc{I}~~~S}}
+    &\mathsf{f{+}{+}{\downarrow}} \\
   \end{array}
   \and
   \begin{array}{r@{\quad}c@{\quad}ll}

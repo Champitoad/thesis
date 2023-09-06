@@ -34,14 +34,13 @@
 \usepackage{tikzit}
 \input{drawings/bubbles.tikzstyles}
 \input{drawings/bubbles.tikzdefs}
-\renewcommand{\tikzfig}[1]{
-\begingroup
-\tikzset{every picture/.style={scale=0.5,baseline=(current bounding box.center)}}
-\InputIfFileExists{./drawings/#1.tikz}{}{{\color{red}\colorbox{pink}{missing
-file : #1}}}
-\endgroup
-}
-\newcommand{\stkfig}[2]{\scalebox{#1}{\tikzfig{#2}}}
+\renewcommand{\tikzfig}[3]{
+  \scalebox{#1}{
+    \begingroup
+      \tikzset{every picture/.style={scale=#2,baseline=(current bounding box.center)}}
+      \InputIfFileExists{./drawings/#3.tikz}{}{{\color{red}\colorbox{pink}{missingfile : #3}}}
+    \endgroup}}
+\newcommand{\stkfig}[2]{\tikzfig{#1}{0.5}{#2}}
 
 
 \usepackage{minted}

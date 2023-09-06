@@ -130,7 +130,7 @@ respectively the \emph{tree} structure of the proof, and the scope of hypotheses
 in it.
 
 \begin{figure}
-  \scalebox{1.5}{\tikzfig{bubbles-flow}}
+  \stkfig{1.5}{bubbles-flow}
   \caption{Context-scoping in bubbles as topological constraints}
   \labfig{bubbles-flow}
 \end{figure}
@@ -192,8 +192,8 @@ except that we add the \emph{conjunction} of all subgoals to the consequent:
 
 \begin{definition}[Asymmetric interpretation]\labdef{ainterp}
   The \emph{asymmetric interpretation} of a solution is defined recursively by:
-  $$\ainterp{\Gamma \piq{S_1 \sep \ldots \sep S_n} \Delta} = \bigwedge \Gamma
-    \limp \bigwedge \Delta \land \bigwedge_i{\ainterp{S_i}}$$
+  $$\aint{\Gamma \piq{S_1 \sep \ldots \sep S_n} \Delta} = \bigwedge \Gamma
+    \limp \bigwedge \Delta \land \bigwedge_i{\aint{S_i}}$$
 \end{definition}
 
 Note that we join formulas in $\Delta$ conjunctively: since we do not consider
@@ -269,12 +269,23 @@ context $U\hole$. That is:
 $$\vcenter{\R{S}{T}} \quad \text{should be read as} \quad
 \vcenter{\R{U\select{S}}{U\select{T}}} \quad \text{for all $U\hole$}$$
 
-\begin{definition}[\sys{BJ}-derivation]\labdef{BJ-deriv} A \emph{derivation}
-$\deriv{\mathcal{D}}{S}{T}$ in \sys{BJ} is a list $\mathcal{D}$ of (instances
-of) inference rules with premiss $T$ and conclusion $S$\sidenote[][-15cm]{The
-direction of the arrow is from conclusion to premiss, to stay consistent with
-our interactive proof building setting where inference rules are seen as
-goal-modifying actions.}.
+\begin{definition}[\sys{BJ}-step]\labdef{BJ-step}
+  We write $S \lstep T$ to denote the existence of a \sys{BJ}-rule instance
+  $\irule{r}{S}{T}$ in the empty context, i.e. $S$ and $T$ are respectively the
+  conclusion and premiss of the rule {\rnmsf{r}} in \reffig{sequent-BJ}, modulo
+  instantiation of meta-variables\sidenote[][-9.5cm]{The direction of the arrow
+  is from conclusion to premiss, to stay consistent with our interactive proof
+  building setting where inference rules are seen as goal-modifying actions.}.
+  Then $\lstep$ can be seen as a binary relation on solutions, whose contextual
+  closure described above is the \emph{step} relation $\step$: $S \step T$ if
+  and only if there exist $U\hole$, $S_0$ and $T_0$ such that $S =
+  U\select{S_0}$, $T = U\select{T_0}$ and $S_0 \lstep T_0$.
+\end{definition}
+
+\begin{definition}[\sys{BJ}-derivation]\labdef{BJ-deriv}
+
+  A \emph{derivation} $\deriv{\mathcal{D}}{S}{T}$ in \sys{BJ} is a list
+  $\mathcal{D}$ of \sys{BJ}-steps with premiss $T$ and conclusion $S$.
 \end{definition}
 
 \begin{definition}[\sys{BJ}-proof]\labdef{BJ-proof}
@@ -587,7 +598,8 @@ proof-theoretical and user-experience levels:
     makes it difficult. This results in proofs with a lot of duplicated
     arguments, since splitting goals systematically duplicates the context of
     hypotheses. Thus bubbles can be seen as a mechanism that favors by default a
-    style of proof with better factorization of subproofs.
+    style of proof with better factorization of
+    subproofs.\label{par:factorization}
 
   \item[\textbf{Navigation}] The tree structure of subgoals is immediately
     apparent in the proof state through the nesting of bubbles. Thus part of the

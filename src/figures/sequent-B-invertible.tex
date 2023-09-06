@@ -5,32 +5,8 @@
 \multicolumn{2}{c}{\identity} \\[1em]
 
 \R[\mathsf{i}{\downarrow}]
-    {\Gamma \piq{} \Delta}
-    {\Gamma, I \seq I, \Delta}
-&
-\R[\mathsf{i}{\uparrow}]
-    {\Gamma \J \Delta \mix \piq{\seq I \sep I \seq}}
-    {\Gamma \J \Delta}
-\end{array}
-\and
-\begin{array}{c@{\quad}c}
-\multicolumn{2}{c}{\resource} \\[1em]
-
-\R[\mathsf{w{-}}]
-    {\Gamma \J \Delta}
-    {\Gamma, I \J \Delta}
-&
-\R[\mathsf{w{+}}]
-    {\Gamma \J \Delta}
-    {\Gamma \J I, \Delta}
-\\
-\R[\mathsf{c{-}}]
-    {\Gamma, I, I \J \Delta}
-    {\Gamma, I \J \Delta}
-&
-\R[\mathsf{c{+}}]
-    {\Gamma \J I, I, \Delta}
-    {\Gamma \J I, \Delta}
+    {\piq{}}
+    {\Gamma, A \seq A, \Delta}
 \end{array}
 \\
 \begin{array}{c@{\quad}c}
@@ -45,43 +21,43 @@
     {\Gamma \J (\piq{\Gamma' \JB \Delta'}), \Delta}
 \\
 
-\R[\mathsf{f{-}{\downarrow}}]
+\R[\mathsf{cf{-}{\downarrow}}]
     {\Gamma \piq{\Gamma', I \JB \Delta', \mathcal{S}} \Delta}
     {\Gamma, I \piq{\Gamma' \JB \Delta', \mathcal{S}} \Delta}
 &
-\R[\mathsf{f{+}{\downarrow}}]
+\R[\mathsf{cf{+}{\downarrow}}]
     {\Gamma \piq{\mathcal{S} \sep \Gamma' \JB I, \Delta'} \Delta}
     {\Gamma \piq{\mathcal{S} \sep \Gamma' \JB \Delta'} I, \Delta}
 \\
-\R[\mathsf{f{-}{+}}{\downarrow}]
+\R[\mathsf{cf{-}{+}}{\downarrow}]
     {\Gamma \J (\Gamma', I \JB \Delta'), \Delta}
     {\Gamma, I \J (\Gamma' \JB \Delta'), \Delta}
 &
-\R[\mathsf{f{+}{-}}{\downarrow}]
+\R[\mathsf{cf{+}{-}}{\downarrow}]
     {\Gamma, (\Gamma' \JB I, \Delta') \J \Delta}
     {\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}
 \\
-\R[\mathsf{f{-}{-}{\downarrow}}]
+\R[\mathsf{cf{-}{-}{\downarrow}}]
     {\Gamma, (\Gamma', I \JB \Delta') \J \Delta}
     {\Gamma, I, (\Gamma' \JB \Delta') \J \Delta}
 &
-\R[\mathsf{f{+}{+}{\downarrow}}]
+\R[\mathsf{cf{+}{+}{\downarrow}}]
     {\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}
     {\Gamma \J (\Gamma' \JB \Delta'), I, \Delta}
 \\
-\R[\mathsf{f{-}{+}}{\uparrow}]
+\R[\mathsf{cf{-}{+}}{\uparrow}]
     {\Gamma, I \J (\Gamma' \JB \Delta'), \Delta}
     {\Gamma \J (\Gamma', I \JB \Delta'), \Delta}
 &
-\R[\mathsf{f{+}{-}}{\uparrow}]
+\R[\mathsf{cf{+}{-}}{\uparrow}]
     {\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}
     {\Gamma, (\Gamma' \JB I, \Delta') \J \Delta}
 \\
-\R[\mathsf{f{-}{-}{\uparrow}}]
+\R[\mathsf{cf{-}{-}{\uparrow}}]
     {\Gamma, I, (\Gamma' \JB \Delta') \J \Delta}
     {\Gamma, (\Gamma', I \JB \Delta') \J \Delta}
 &
-\R[\mathsf{f{+}{+}{\uparrow}}]
+\R[\mathsf{cf{+}{+}{\uparrow}}]
     {\Gamma \J (\Gamma' \JB \Delta'), I, \Delta}
     {\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}
 \end{array}
@@ -95,11 +71,11 @@
     {\Gamma \piq{\mathcal{S} \sep \piq{}} \Delta}
 } \\
 \R[\mathsf{p{-}}]
-    {\Gamma \piq{} \Delta}
+    {\piq{}}
     {\Gamma, (\piq{}) \seq \Delta}
 &
 \R[\mathsf{p{+}}]
-    {\Gamma \piq{} \Delta}
+    {\piq{}}
     {\Gamma \seq (\piq{}), \Delta}
 \end{array}
 \\

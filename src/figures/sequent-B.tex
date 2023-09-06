@@ -6,11 +6,11 @@
 
 \R[\mathsf{i}{\downarrow}]
     {\Gamma \piq{} \Delta}
-    {\Gamma, I \seq I, \Delta}
+    {\Gamma, A \seq A, \Delta}
 &
 \R[\mathsf{i}{\uparrow}]
-    {\Gamma \J \Delta \mix \piq{\seq I \sep I \seq}}
-    {\Gamma \J \Delta}
+    {\Gamma \piq{\seq A \sep A \seq} \Delta}
+    {\Gamma \seq \Delta}
 \end{array}
 \and
 \begin{array}{c@{\quad}c}
@@ -61,13 +61,13 @@
     {\Gamma, (\Gamma' \JB I, \Delta') \J \Delta}
     {\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}
 \\
-\R[\mathsf{f{-}{-}{\downarrow}}]
-    {\Gamma, (\Gamma', I \JB \Delta') \J \Delta}
+\R[\mathsf{f{-}{-}{\uparrow}}]
     {\Gamma, I, (\Gamma' \JB \Delta') \J \Delta}
+    {\Gamma, (\Gamma', I \JB \Delta') \J \Delta}
 &
-\R[\mathsf{f{+}{+}{\downarrow}}]
-    {\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}
+\R[\mathsf{f{+}{+}{\uparrow}}]
     {\Gamma \J (\Gamma' \JB \Delta'), I, \Delta}
+    {\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}
 \\
 \R[\mathsf{f{-}{+}}{\uparrow}]
     {\Gamma, I \J (\Gamma' \JB \Delta'), \Delta}
@@ -77,13 +77,13 @@
     {\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}
     {\Gamma, (\Gamma' \JB I, \Delta') \J \Delta}
 \\
-\R[\mathsf{f{-}{-}{\uparrow}}]
-    {\Gamma, I, (\Gamma' \JB \Delta') \J \Delta}
+\R[\mathsf{f{-}{-}{\downarrow}}]
     {\Gamma, (\Gamma', I \JB \Delta') \J \Delta}
+    {\Gamma, I, (\Gamma' \JB \Delta') \J \Delta}
 &
-\R[\mathsf{f{+}{+}{\uparrow}}]
-    {\Gamma \J (\Gamma' \JB \Delta'), I, \Delta}
+\R[\mathsf{f{+}{+}{\downarrow}}]
     {\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}
+    {\Gamma \J (\Gamma' \JB \Delta'), I, \Delta}
 \end{array}
 \and
 \begin{array}{cc}
@@ -159,16 +159,16 @@
     {\Gamma, \forall x. A \J \Delta}
 &
 \R[\forall{+}]
-    {\Gamma \J A}
-    {\Gamma \J \forall x. A}
+    {\Gamma \J A, \Delta}
+    {\Gamma \J \forall x. A, \Delta}
 \\
 \R[\exists{-}]
     {\Gamma, A \J \Delta}
     {\Gamma, \exists x. A \J \Delta}
 &
 \R[\exists{+}]
-    {\Gamma \J \subst{A}{t}{x}}
-    {\Gamma \J \exists x. A}
+    {\Gamma \J \subst{A}{t}{x}, \Delta}
+    {\Gamma \J \exists x. A, \Delta}
 \end{array}
 \end{mathpar}
 

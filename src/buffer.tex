@@ -1,11 +1,47 @@
 \documentclass{article}
-\usepackage[a4paper, margin=1cm]{geometry}
+\usepackage[a4paper, margin=3.5cm]{geometry}
+\usepackage{todo}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsthm}
 
 \input{config}
+
 \setmathfont{STIXTwoMath-Regular.otf}[range=\Coloneq]
+
+% Theorem environments
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{property}{Property}
+\newtheorem{proposition}{Proposition}
+\newtheorem{fact}{Fact}
+\newtheorem{remark}{Remark}
+\newtheorem{notation}{Notation}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{condition}{Condition}
+
+% kao macros
+
+\newcommand{\sidenote}{\footnote}
+
+\newcommand{\dolab}[2]{\label{#1:#2}}
+\newcommand{\doref}[3]{#1 \ref{#2:#3}}
+
+\newcommand{\labfig}[1]{\dolab{fig}{#1}}
+\newcommand{\labdef}[1]{\dolab{def}{#1}}
+\newcommand{\lablemma}[1]{\dolab{lemma}{#1}}
+
+\newcommand{\reffig}[1]{\doref{Figure}{fig}{#1}}
+\newcommand{\refdef}[1]{\doref{Definition}{def}{#1}}
+\newcommand{\reflemma}[1]{\doref{Lemma}{lemma}{#1}}
 
 \begin{document}
 
-\input{figures/graphical-B.tex}
+\input{sections/bubbles-soundness.tex}
+% \input{figures/sequent-B-invertible.tex}
+% \tikzfig{1}{1}{venn-algebras}
 
 \end{document}

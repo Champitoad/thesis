@@ -1,0 +1,371 @@
+\subsection{Heyting and Brouwer algebras}
+
+\begin{figure*}
+  \tikzfig{1}{0.83}{venn-algebras}
+  \caption{Relationship between the various algebras interpreting system \sys{B}}
+  \labfig{venn-algebras}
+\end{figure*}
+
+We are now going to prove the soundness of system \sys{B} with respect to
+various classes of \emph{algebras}. While the full system is classical and thus
+sound only in \emph{Boolean} algebras, most rules are sound in larger classes of
+algebras, namely: \emph{Heyting} algebras for intuitionistic logic,
+\emph{Brouwer} algebras for dual-intuitionistic logic, and
+\emph{Heyting-Brouwer} algebras for bi-intuitionistic logic. These 4 classes are
+all instances of \emph{bounded lattices}, and their relationship is summarized
+in the Venn diagram of \reffig{venn-algebras}.
+
+First we recall the definition of a bounded lattice:
+
+\begin{definition}[Bounded lattice]\labdef{bounded-lattice}
+  A \emph{bounded lattice} is a structure $(\mathcal{A}, \sement, \ltop, \lbot, \lmeet,
+  \ljoin)$ such that:
+  \begin{itemize}
+    \item $(\mathcal{A}, \sement)$ is a partial order, i.e. for every $a, b, c
+    \in \mathcal{A}$ we have:
+      \begin{itemize}
+        \item $a \sement a$;
+        \item if $a \sement b$ and $b \sement a$ then $a = b$;
+        \item if $a \sement b$ and $b \sement c$ then $a \sement c$.
+      \end{itemize}
+    \item $\lbot$ and $\ltop$ are respectively the smallest and greatest
+    elements of $(\mathcal{A}, \sement)$, i.e. for every $a \in \mathcal{A}$ we
+    have $\bot \sement a$ and $a \sement \ltop$;
+    \item For every pair of elements $a, b \in \mathcal{A}$, $a \ljoin b$ is
+    their join (least upper bound) and $a \lmeet b$ their meet (greatest lower
+    bound), that is:
+    \begin{itemize}
+      \item $a \sement a \ljoin b$, $b \sement a \ljoin b$ and $a \ljoin b \sement c$ for all $c \in \mathcal{A}$ s.t. $a \sement c$ and $b \sement c$;
+      \item $a \lmeet b \sement a$, $a \lmeet b \sement b$ and $c \sement a \lmeet b$ for all $c \in \mathcal{A}$ s.t. $c \sement a$ and $c \sement b$.
+    \end{itemize}
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  For lack of time, we only conjecture the soundness of rules for quantifiers:
+  they would make the semantics more involved, by requiring to consider
+  \emph{complete} lattices, i.e. with meets and joins for arbitrary sets rather
+  than just pairs\sidenote{see for instance section 4 of
+  \cite{forster_completeness_2021} for a concise treatment of the soundness and
+  completeness of intuitionistic and classical natural deduction for first-order
+  logic with respect to algebraic semantics.}.
+\end{remark}
+
+As the notation strongly suggests, the greatest and smallest elements $\top$ and
+$\bot$ will model respectively truth and falsity, while the meet $\lmeet$ and
+join $\ljoin$ will model conjunction and disjunction. In fact the conditions of
+\refdef{bounded-lattice} are very close to the rules of natural deduction for
+these connectives, by replacing the sequent operator $\seq$ with the partial
+order relation $\sement$. The same idea can be applied to the implication
+connective, and adding a corresponding \emph{exponential} operation $\lexp$
+indeed gives the definition of a Heyting algebra:
+
+\begin{definition}[Heyting algebra]
+  A \emph{Heyting algebra} is a structure $(\mathcal{A}, \sement, \ltop, \lbot,
+  \lmeet, \ljoin, \lexp)$ such that $(\mathcal{A}, \sement, \ltop, \lbot,
+  \lmeet, \ljoin)$ is a bounded lattice and for every pair $a, b \in
+  \mathcal{A}$, the \emph{exponential} $a \lexp b$ is the greatest element of
+  the set $\compr{c \in \mathcal{A}}{c \lmeet a \sement b}$. That is, $(a \lexp
+  b) \lmeet a \sement b$ and $c \sement a \lexp b$ for all $c \in \mathcal{A}$
+  s.t. $c \lmeet a \sement b$.
+\end{definition}
+
+By dualizing this definition, we get a \emph{co-exponential} operation $\lcoexp$
+that models the exclusion connective, and thus dual-intuitionistic logic in
+so-called Brouwer algebras:
+
+\begin{definition}[Brouwer algebra]
+  A \emph{Brouwer algebra} is a structure $(\mathcal{A}, \sement, \ltop, \lbot,
+  \lmeet, \ljoin, \lcoexp)$ such that $(\mathcal{A}, \sement, \ltop, \lbot,
+  \lmeet, \ljoin)$ is a bounded lattice and for every pair $a, b \in
+  \mathcal{A}$, the \emph{co-exponential} $a \lcoexp b$ is the smallest element
+  of the set $\compr{c \in \mathcal{A}}{b \sement a \ljoin c}$. That is, $b
+  \sement a \ljoin (b \lcoexp a)$ and $b \lcoexp a \sement c$ for all $c \in
+  \mathcal{A}$ s.t. $b \sement a \ljoin c$.
+\end{definition}
+
+Then we can model bi-intuitionistic logic, which comprises both implication and
+exclusion, by just taking pairs of a Heyting and a Brouwer algebra on the same
+bounded lattice:
+
+\begin{definition}[Heyting-Brouwer algebra]
+  A \emph{Heyting-Brouwer algebra} is a structure $(\mathcal{A}, \sement, \ltop,
+  \lbot, \lmeet, \ljoin, \lexp, \lcoexp)$ such that $(\mathcal{A}, \sement,
+  \ltop, \lbot, \lmeet, \ljoin, \lexp)$ is a Heyting algebra and $(\mathcal{A},
+  \sement, \ltop, \lbot, \lmeet, \ljoin, \lcoexp)$ is a Brouwer algebra.
+\end{definition}
+
+Finally, we recover classical logic by collapsing exponentials and
+co-exponentials to their classical definitions, giving a characterization of
+Boolean algebras:
+
+\begin{definition}\labdef{boolean-algebra}
+  A \emph{Boolean algebra} is a Heyting-Brouwer algebra $(\mathcal{A}, \sement,
+  \ltop, \lbot, \lmeet, \ljoin, \lexp, \lcoexp)$ such that for every $a, b \in
+  \mathcal{A}$, $a \lexp b = (\ltop \lcoexp a) \ljoin b$ and $a \lcoexp b = a
+  \lmeet (b \lexp \bot)$.
+\end{definition}
+
+\begin{remark}
+\refdef{boolean-algebra} can be shown equivalent to more
+usual definitions of Boolean algebras, that are based only on lattice operations
+and a primitive complement operation modelling negation; but including the proof
+here would lead us out of the scope of this chapter.
+% \todo{Proof in appendix?}
+\end{remark}
+
+In the rest of this chapter, we will freely assimilate formulas and their
+interpretation in the various algebras. Indeed, since we only consider the
+abstract classes of all algebras and never deal with a particular instance,
+they will stand in perfect bijection.
+
+\subsection{Local soundness}
+
+\begin{lemma}[Sharing]
+  $\psint{\Gamma \seq \Delta} \sement \psint{\Gamma \piq{\mathcal{S}} \Delta}$.
+\end{lemma}
+
+\begin{lemma}[Weakening]
+  $\psint{S} \sement \psint{S \mix (\seq I)}$ and $\psint{S} \sement \psint{S
+  \mix (\seq I)}$.
+\end{lemma}
+
+\begin{lemma}[Contraction]
+  $\psint{S \mix (\seq I, I)} \sement \psint{S \mix (\seq I)}$ and
+  $\psint{S \mix (I, I \seq)} \sement \psint{S \mix (I \seq)}$.
+\end{lemma}
+
+\begin{lemma}[Currying]
+  $\psint{\Gamma, I \J \Delta} \semequiv \nsint{I} \limp \psint{\Gamma \J
+  \Delta}$.
+\end{lemma}
+
+\begin{lemma}[Co-currying]
+  $\nsint{\Gamma \J I, \Delta} \semequiv \nsint{\Gamma \J \Delta} \lsub
+  \psint{I}$.
+\end{lemma}
+
+\begin{lemma}[Local soundness]\lablemma{bubbles-local-soundness}
+  
+  If $S \lstep T$ then $\psint{T \mix (\Gamma \seq \Delta)} \sement \psint{S
+  \mix (\Gamma \seq \Delta)}$.
+  % and $\nsint{S \mix (\Gamma \seq \Delta)} \sement
+  % \nsint{T \mix (\Gamma \seq \Delta)}$.
+\end{lemma}
+
+\subsection{Duality}
+
+\begin{definition}[Dual formula]\labdef{dual-formula}
+  The \emph{dual formula} $\soldual{A}$ of a formula $A$ is defined recursively
+  as follows:
+  \begin{align*}
+    \soldual{a} &= a &\\
+    \soldual{\top} &= \bot &
+    \soldual{\bot} &= \top \\
+    \soldual{A \land B} &= \soldual{A} \lor \soldual{B} &
+    \soldual{A \lor B} &= \soldual{A} \land \soldual{B} \\
+    \soldual{A \limp B} &= \soldual{B} \lsub \soldual{A} &
+    \soldual{A \lsub B} &= \soldual{B} \limp \soldual{A}
+  \end{align*}
+\end{definition}
+
+\begin{lemma}[Involutivity]\lablemma{involutivity}
+  $\soldual{\soldual{A}} = A$.
+\end{lemma}
+
+\begin{lemma}[Duality]\lablemma{duality}
+  In a Heyting-Brouwer algebra, if $A \sement B$ then $\soldual{B} \sement
+  \soldual{A}$.
+\end{lemma}
+
+\begin{definition}[Dual solution]\labdef{dual-solution}
+  The \emph{dual solution} $\soldual{S}$ of a solution $S$ is defined
+  recursively as follows:
+  \begin{align*}
+    \soldual{\Gamma \J \Delta} &= \soldual{\Delta} \mathbin{\soldual{\J}} \soldual{\Gamma} &
+    \soldual{S_1, \ldots, S_n} &= \soldual{S_1}, \ldots, \soldual{S_n} \\
+    \soldual{A} &= \soldual{A} &
+    \soldual{I_1, \ldots, I_n} &= \soldual{I_1}, \ldots, \soldual{I_n} \\
+    \soldual{\seq} &= {\seq} &
+    \soldual{\piq{\mathcal{S}}} &= \piq{\soldual{\mathcal{S}}}
+  \end{align*}
+  For solution contexts, the hole is self-dual: $\soldual{\hole} = \hole$. This
+  entails in particular that $\soldual{S}\select{\soldual{T}} =
+  \soldual{S\select{T}}$.
+\end{definition}
+
+Graphically, the dual of a solution $S$ is $S$ where the colors of items have
+been swapped --- i.e. blue items become red and red items become blue --- and
+formulas have been dualized (\refdef{dual-formula}).
+
+\begin{lemma}[Local rule duality]\lablemma{local-rule-duality}
+  If $S \lstep T$ then $\soldual{S} \lstep \soldual{T}$.
+\end{lemma}
+
+\begin{lemma}[Rule duality]\lablemma{rule-duality}
+  If $S \step T$ then $\soldual{S} \step \soldual{T}$.
+\end{lemma}
+\begin{proof}
+  % \todo{Copy blackboard proof}
+\end{proof}
+
+\begin{lemma}[Interpretation duality]\lablemma{int-duality}
+  $\soldual{\psint{S}} = \nsint{\soldual{S}}$ and $\soldual{\nsint{S}} =
+  \psint{\soldual{S}}$.
+\end{lemma}
+
+\begin{lemma}\lablemma{int-invert}
+  If $\psint{\soldual{S}} \sement \psint{\soldual{T}}$ then $\nsint{T} \sement
+  \nsint{S}$.
+\end{lemma}
+\begin{proof}
+  % \todo{Copy blackboard proof}
+\end{proof}
+
+\subsection{Contextual soundness}
+
+\begin{lemma}[Functoriality]\lablemma{bubbles-functoriality}
+  ~\\
+  \begin{itemize}
+    \item $\psint{I} \sement \psint{J}$ implies $\psint{(\seq I) \mix S} \sement
+    \psint{(\seq J) \mix S}$
+    \item $\nsint{I} \sement \nsint{J}$ implies $\nsint{(\seq I) \mix S} \sement
+    \nsint{(\seq J) \mix S}$
+    \item $\nsint{J} \sement \nsint{I}$ implies $\psint{(I \seq) \mix S} \sement
+    \psint{(J \seq) \mix S}$
+    \item $\psint{J} \sement \psint{I}$ implies $\nsint{(I
+    \seq) \mix S} \sement \nsint{(J \seq) \mix S}$
+  \end{itemize}
+\end{lemma}
+\begin{proof}
+  Let $S = \Gamma \J \Delta$. We proceed by induction on $\J$.
+  \begin{itemize}
+    \item $\J = {\seq}$:
+    $$
+    \begin{array}{rcll}
+      \psint{(\seq I) \mix S}
+      &=& \psint{\Gamma \seq I, \Delta} &\text{(\refdef{mixop})}\\
+      &=& \bigwedge_{K \in \Gamma}{\nsint{K}} \limp \psint{I} \lor \bigvee_{K \in \Delta}{\psint{K}} &\text{(\refdef{pol-sinterp})}\\
+      &\sement& \bigwedge_{K \in \Gamma}{\nsint{K}} \limp \psint{J} \lor \bigvee_{K \in \Delta}{\psint{K}} &\text{(Hypothesis)}\\
+      &=& \psint{\Gamma \seq J, \Delta} &\text{(\refdef{pol-sinterp})}\\
+      &=& \psint{(\seq J) \mix S} &\text{(\refdef{mixop})}
+    \end{array}
+    $$
+    $$
+    \begin{array}{rcll}
+      \psint{(I \seq) \mix S}
+      &=& \psint{\Gamma, I \seq \Delta} &\text{(\refdef{mixop})}\\
+      &=& \bigwedge_{K \in \Gamma}{\nsint{K}} \land \nsint{I} \limp \bigvee_{K \in \Delta}{\psint{K}} &\text{(\refdef{pol-sinterp})}\\
+      &\sement& \bigwedge_{K \in \Gamma}{\nsint{K}} \land \nsint{J} \limp \bigvee_{K \in \Delta}{\psint{K}} &\text{(Hypothesis)} \\
+        % &\begin{array}{rl}
+        %    &\text{Contravariant functoriality of $\_{\limp}$} \\
+        %   +&\text{Functoriality of $\_{\lor}$} \\
+        %   +&\text{Hypothesis}
+        % \end{array}\\
+      &=& \psint{\Gamma, J \seq \Delta} &\text{(\refdef{pol-sinterp})}\\
+      &=& \psint{(J \seq) \mix S} &\text{(\refdef{mixop})}
+    \end{array}
+    $$
+    \item $\J = {\piq{\mathcal{S}}}$:
+    % \todo{Finish proof}
+  \end{itemize}
+\end{proof}
+
+In order to ease reasoning by induction on solution contexts, we give a
+formulation equivalent to \refdef{solution-context} as a context-free grammar:
+\begin{fact}
+  Solution contexts $S\hole$ are generated by the following grammar:
+  $$
+    S\hole \Coloneq \hole \mid \Gamma \J S\hole, \Delta
+                          \mid \Gamma, S\hole \J \Delta
+                          \mid \Gamma \piq{\mathcal{S} \sep S\hole} \Delta
+  $$
+\end{fact}
+
+\begin{definition}
+The \emph{depth} of a solution context $S\hole$ is defined recursively as
+follows:
+\begin{align*}
+  \soldepth{\hole} &= 0 \\
+  \soldepth{\Gamma \J S\hole, \Delta} = \soldepth{\Gamma, S\hole \J \Delta} =
+  \soldepth{\Gamma \piq{\mathcal{S} \sep S\hole} \Delta} &= 1 + \soldepth{S\hole}
+\end{align*}
+\end{definition}
+
+\begin{lemma}[Contextual soundness]\lablemma{bubbles-ctx-soundness}
+
+  If $S \lstep T$ then $\psint{U\select{T} \mix (\Gamma \seq \Delta)} \sement
+  \psint{U\select{S} \mix (\Gamma \seq \Delta)}$.
+  % and $\nsint{S \mix (\Gamma \seq \Delta)} \sement
+  % \nsint{T \mix (\Gamma \seq \Delta)}$.
+\end{lemma}
+\begin{proof}
+  By recurrence on $\soldepth{U\hole}$.
+  \begin{itemize}
+    \item[\textbf{Base case}] Suppose $\soldepth{U\hole}$ = 0. Then $U\hole =
+    \hole$, and we conclude by local soundness
+    (\reflemma{bubbles-local-soundness}).
+
+    \item[\textbf{Positive case}] Suppose $\soldepth{U\hole} > 0$ and $U\hole =
+    \Gamma' \J U_0\hole, \Delta'$. Then by IH we have $\psint{U_0\select{T}}
+    \sement \psint{U_0\select{S}}$, and thus
+    $$
+    \begin{array}{rcll}
+      \psint{(\Gamma' \J U_0\select{T}, \Delta') \mix (\Gamma \seq \Delta)}
+      &=& \psint{(\seq U_0\select{T}) \mix (\Gamma, \Gamma' \J \Delta', \Delta)} &\text{(\refdef{mixop})}\\
+      &\sement& \psint{(\seq U_0\select{S}) \mix (\Gamma, \Gamma' \J \Delta', \Delta)} &\text{(\reflemma{bubbles-functoriality})}\\
+      &=& \psint{(\Gamma' \J U_0\select{S}, \Delta') \mix (\Gamma \seq \Delta)} &\text{(\refdef{mixop})}
+    \end{array}
+    $$
+
+    \item[\textbf{Negative case}] Suppose $\soldepth{U\hole} > 0$ and $U\hole =
+    \Gamma', U_0\hole \J \Delta'$. Then by \reflemma{local-rule-duality} we have
+    $\soldual{S} \lstep \soldual{T}$, and thus by IH
+    $\psint{\soldual{U_0}\select{\soldual{T}}} \sement
+    \psint{\soldual{U_0}\select{\soldual{S}}}$, or equivalently
+    $\psint{\soldual{U_0\select{T}}} \sement \psint{\soldual{U_0\select{S}}}$.
+    Then by \reflemma{int-invert} we get $\nsint{U_0\select{S}} \sement
+    \nsint{U_0\select{T}}$, and thus
+    $$
+    \begin{array}{rcll}
+      \psint{(\Gamma', U_0\select{T} \J \Delta') \mix (\Gamma \seq \Delta)}
+      &=& \psint{(U_0\select{T} \seq) \mix (\Gamma, \Gamma' \J \Delta', \Delta)} &\text{(\refdef{mixop})}\\
+      &\sement& \psint{(U_0\select{S} \seq) \mix (\Gamma, \Gamma' \J \Delta', \Delta)} &\text{(\reflemma{bubbles-functoriality})}\\
+      &=& \psint{(\Gamma', U_0\select{S} \J \Delta') \mix (\Gamma \seq \Delta)} &\text{(\refdef{mixop})}
+    \end{array}
+    $$
+
+    \item[\textbf{Neutral case}] Suppose $\soldepth{U\hole} > 0$ and $U\hole =
+    \Gamma \piq{\mathcal{S} \sep U_0\hole} \Delta$. Then by IH we have
+    $\psint{U_0\select{T} \mix (\Gamma \seq \Delta)} \sement
+    \psint{U_0\select{S} \mix (\Gamma \seq \Delta)}$, and thus
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma \piq{\mathcal{S} \sep U_0\select{T}} \Delta}
+      &=& \psint{\Gamma \piq{\mathcal{S}} \Delta} \land \psint{U_0\select{T} \mix (\Gamma \seq \Delta)} &\text{(\refdef{pol-sinterp})}\\
+      &\sement& \psint{\Gamma \piq{\mathcal{S}} \Delta} \land \psint{U_0\select{S} \mix (\Gamma \seq \Delta)} &\\
+      &=& \psint{\Gamma \piq{\mathcal{S} \sep U_0\select{S}} \Delta} &\text{(\refdef{pol-sinterp})}
+    \end{array}
+    $$
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}[Soundness]
+  If $S \step T$ then $\psint{T} \sement \psint{S}$.
+\end{theorem}
+\begin{proof}
+  By definition of $\step$, and then applying \reflemma{bubbles-ctx-soundness}
+  with $\Gamma = \Delta = \emptyset$.
+\end{proof}
+
+We also get for free soundness with respect to the negative interpretation,
+which we call \emph{co-soundness}:
+
+\begin{theorem}[Co-soundness]
+  If $S \step T$ then $\nsint{S} \sement \nsint{T}$.
+\end{theorem}
+\begin{proof}
+  By \reflemma{rule-duality} we have $\soldual{S} \step \soldual{T}$,
+  and thus by soundness $\psint{\soldual{T}} \sement \psint{\soldual{S}}$. Then
+  we can conclude by \reflemma{int-invert}.
+\end{proof}

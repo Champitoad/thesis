@@ -11,12 +11,15 @@ a fully \emph{iconic} approach to proof building. To that effect, we relax in
 \refsec{branching} the restriction to single-conclusion solutions, which
 requires a new distinction between \emph{closed} and \emph{open} solutions. This
 gives rise in \refsec{colors} to an extension of the syntax of solutions, where
-bubbles can themselves be \emph{polarized}. In \refsec{symmetric-calculus} we
-introduce a core \emph{symmetric bubble calculus} for classical logic called
-``system \sys{B}''. In \refsec{bubbles-soundness} we prove the soundness of
-system \sys{B}, showing along the way that by removing selectively among 4
-inference rules that define the \emph{porosity} of polarized bubbles, one gets
-intuitionistic, dual-intuitionistic and bi-intuitionistic as fragments. In
+bubbles can themselves be \emph{polarized}. In \refsec{design-props} we identify
+key properties that will guide the design of inference rules, some of which were
+already aimed for implicitly through the evolution of our concept of bubble. In
+\refsec{symmetric-calculus} we introduce a core \emph{symmetric bubble calculus}
+for classical logic called ``system \sys{B}''. Then in
+\refsec{bubbles-soundness} we prove the soundness of system \sys{B}, showing
+along the way that by removing selectively among 4 inference rules that define
+the \emph{porosity} of polarized bubbles, one gets intuitionistic,
+dual-intuitionistic and bi-intuitionistic logic as fragments. In
 \refsec{bubbles-completeness} we support this claim by showing that the
 bi-intuitionistic fragment is not only sound, but also \emph{cut-free complete}
 with respect to the cut-free nested sequent calculus of Postniece
@@ -96,16 +99,16 @@ notable property of sequent calculi with multiple conclusions is that their
 right introduction rule for $\lor$ is invertible.
 
 The main difficulty lies in the way one should interpret a multi-conclusion
-solution $S$ as a formula $\sinterp{S}$. If we just take the asymmetric
+solution $S$ as a formula $\sint{S}$. If we just take the asymmetric
 interpretation (\refdef{ainterp}) and group conclusions disjunctively instead of
 conjunctively, we get
 $$
-\sinterp{\Gamma \piq{\mathcal{S}} \Delta} =
-\bigwedge \Gamma \limp \bigvee \Delta \land \bigwedge_{S \in \mathcal{S}}{\sinterp{S}}
+\sint{\Gamma \piq{\mathcal{S}} \Delta} =
+\bigwedge \Gamma \limp \bigvee \Delta \land \bigwedge_{S \in \mathcal{S}}{\sint{S}}
 $$
 But this interpretation breaks on the 0-ary case when $\Delta$ is empty: instead
 of seeing $\Gamma \piq{\mathcal{S}}$ as a node of the proof tree with hypotheses
-$\Gamma$ and subgoals $\mathcal{S}$, it trivializes it to $\sinterp{\Gamma
+$\Gamma$ and subgoals $\mathcal{S}$, it trivializes it to $\sint{\Gamma
 \piq{\mathcal{S}}} = \bigwedge \Gamma \limp \bot$, i.e. a goal where one has to
 find a contradiction in $\Gamma$; which is obviously not what we have in mind.
 
@@ -137,17 +140,17 @@ because:
 \end{enumerate}
 But what does it mean precisely to share conclusions among subgoals? If we
 consider the two following solutions:
-$$
+\begin{equation}\label{eq:concdistr}
 \underbrace{\bubble{\hypo{A}~~~\conc{B}}~~~\bubble{\hypo{C}~~~\conc{D}}~~~\conc{E}}_{S} \qquad\qquad
 \underbrace{\bubble{\hypo{A}~~~\conc{B}~~~\conc{E}}~~~\bubble{\hypo{C}~~~\conc{D}~~~\conc{E}}}_{T}
-$$
-we would like to have $\sinterp{S} \semequiv \sinterp{T} \semequiv (A \limp B
+\end{equation}
+we would like to have $\sint{S} \semequiv \sint{T} \semequiv (A \limp B
 \lor E) \land (C \limp D \lor E)$. Since disjunction distributes over
 conjunction, a first naive try would give the following interpretation, where we
 just replaced $\land$ by $\lor$ compared to the previous attempt:
 $$
-\sinterp{\Gamma \piq{\mathcal{S}} \Delta} =
-\bigwedge{\Gamma} \limp \bigwedge_{S \in \mathcal{S}}{\sinterp{S}} \lor \bigvee \Delta
+\sint{\Gamma \piq{\mathcal{S}} \Delta} =
+\bigwedge{\Gamma} \limp \bigwedge_{S \in \mathcal{S}}{\sint{S}} \lor \bigvee \Delta
 $$
 But this immediately fails whenever $\mathcal{S} = \emptyset$, because it
 trivializes to $\bigwedge \Gamma \limp \top \lor \bigvee \Delta \semequiv \top$
@@ -160,7 +163,7 @@ terminology of Martin-Löf, we could say that we now have two distinct forms of
   \item \emph{closed} solutions $\Gamma \piq{\mathcal{S}} \Delta$ correspond
   to branching nodes in the proof tree, or to closed leaves when $\mathcal{S} =
   \emptyset$ (i.e. solved subgoals). Thus it becomes sensical to have
-  $\sinterp{\Gamma \piq{} \Delta} = \top$. In the asymmetric interpretation,
+  $\sint{\Gamma \piq{} \Delta} = \top$. In the asymmetric interpretation,
   closed solutions were encoded by solutions with no conclusions;
   \item \emph{open} solutions $\Gamma \seq \Delta$ correspond to open leaves
   in the proof tree (i.e. unsolved subgoals). In the asymmetric interpretation,
@@ -168,7 +171,7 @@ terminology of Martin-Löf, we could say that we now have two distinct forms of
 \end{itemize}
 Then we keep the last proposed interpretation for closed solutions, and
 interpret open solutions like usual sequents:
-$$\sinterp{\Gamma \seq \Delta} = \bigwedge{\Gamma} \limp \bigvee{\Delta}$$ To be
+$$\sint{\Gamma \seq \Delta} = \bigwedge{\Gamma} \limp \bigvee{\Delta}$$ To be
 able to abstract from the particular kind of solution at hand, we reframe the
 syntax of solutions with so-called \emph{branching} operators $\J$:
 \begin{align*}
@@ -180,8 +183,8 @@ solutions by painting their \emph{background} on the proof canvas in green, the
 intent being to suggest that they have already been solved. A pathological
 example is the distinction between the closed empty bubble
 $\bbubble{\phantom{a}}$ and the open empty bubble $\bubble{\phantom{a}}$, who
-are interpreted respectively by $\sinterp{\piq{\piq{}}} = \top$ and
-$\sinterp{\piq{\seq}} = \bot$.
+are interpreted respectively by $\sint{\piq{\piq{}}} = \top$ and
+$\sint{\piq{\seq}} = \bot$.
 
 Now coming back to our target example,
 % we must explicitly assign a status to each subsolution:
@@ -195,18 +198,18 @@ the interpretation still fails, because we associate two non-equivalent
 formulas to $S$ and $T$. To show this, let us try to derive the equivalence
 through some algebraic developments:
 \begin{align}
-  \sinterp{S} &= \top \limp ((A \limp B) \land (C \limp D)) \lor E \nonumber\\
+  \sint{S} &= \top \limp ((A \limp B) \land (C \limp D)) \lor E \nonumber\\
               &\semequiv ((A \limp B) \land (C \limp D)) \lor E \nonumber\\
               &\semequiv ((A \limp B) \lor E) \land ((C \limp D) \lor E) \nonumber\\
               &\semequiv (A \limp B \lor E) \land (C \limp D \lor E) \labeq{grishin}\\
               &\semequiv ((A \limp B) \land (C \limp D)) \lor E \nonumber\\
-  \sinterp{T} &= \top \limp ((A \limp B \lor E) \land (C \limp D \lor E)) \lor \bot \nonumber
+  \sint{T} &= \top \limp ((A \limp B \lor E) \land (C \limp D \lor E)) \lor \bot \nonumber
 \end{align}
 Wait, we did manage to prove it! The trick resides in \refeq{grishin}, which
 uses twice the equivalence $(A \limp B) \lor C \equiv A \limp (B \lor C)$. It
 turns out that this equivalence is true in classical logic, but \emph{not} in
-intuitionistic logic. More precisely, it is the implication $G \triangleq (A
-\limp (B \lor C)) \limp ((A \limp B) \lor C)$ which is not provable
+intuitionistic logic. More precisely, it is the implication $G \defeq (A \limp
+(B \lor C)) \limp ((A \limp B) \lor C)$ which is not provable
 intuitionistically, since it can easily be shown equivalent to the law of
 excluded middle\sidenote{This was already noticed in
 \cite{clouston-annotation-free-2013}, with the linear version $(A \multimap (B
@@ -227,9 +230,9 @@ following final definitions:
 \begin{definition}[Mix operator]\labdef{mixop}
   The commutative \emph{mix operator} $\mix$ on solutions is defined by:
   \begin{align*}
-    \Gamma \J \Delta \mix \Gamma' \seq \Delta' &=
+    (\Gamma \J \Delta) \mix (\Gamma' \seq \Delta') &=
       \Gamma, \Gamma' \J \Delta, \Delta' \\
-    \Gamma \piq{\mathcal{S}} \Delta \mix \Gamma' \piq{\mathcal{S'}} \Delta' &=
+    (\Gamma \piq{\mathcal{S}} \Delta) \mix (\Gamma' \piq{\mathcal{S'}} \Delta') &=
       \Gamma, \Gamma' \piq{\mathcal{S} \sep \mathcal{S'}} \Delta, \Delta' \\
   \end{align*}
 \end{definition}
@@ -237,9 +240,9 @@ following final definitions:
 \begin{definition}[Symmetric interpretation]\labdef{sinterp}
   The \emph{symmetric interpretation} of a solution is defined recursively by:
   \begin{align*}
-    \sinterp{\Gamma \piq{\mathcal{S}} \Delta} &=
-      \bigwedge_{S \in \mathcal{S}} \sinterp{S \mix \Gamma \seq \Delta} \\
-    \sinterp{\Gamma \seq \Delta} &=
+    \sint{\Gamma \piq{\mathcal{S}} \Delta} &=
+      \bigwedge_{S \in \mathcal{S}} \sint{S \mix (\Gamma \seq \Delta)} \\
+    \sint{\Gamma \seq \Delta} &=
       \bigwedge \Gamma \limp \bigvee \Delta
   \end{align*}
 \end{definition}
@@ -277,8 +280,8 @@ non-invertible.
 \begin{marginfigure}
   $$
   \begin{array}{rclr}
-    \hypo{A}~~~\cbubble{\color{black}S} &\step &\cbubble{\hypo{A}~~~\color{black}S} &\mathsf{f}{-}{+} \vspace{1em}\\
-    \conc{A}~~~\cbubble{\color{black}S} &\step &\cbubble{\conc{A}~~~\color{black}S} &\mathsf{f}{+}{+} \\
+    \hypo{A}~~~\cbubble{\color{black}S} &\step &\cbubble{\hypo{A}~~~\color{black}S} &\mathsf{f}{-}{+}{\downarrow} \vspace{1em}\\
+    \conc{A}~~~\cbubble{\color{black}S} &\step &\cbubble{\conc{A}~~~\color{black}S} &\mathsf{f}{+}{+}{\downarrow} \\
   \end{array}
   $$
   \caption{$\mathbb{F}$-rules for red bubbles}
@@ -351,8 +354,8 @@ view and consider more exotic beasts: the adequately named
 \begin{marginfigure}
   $$
   \begin{array}{rclr}
-    \conc{A}~~~\hbubble{\color{black}S} &\step &\hbubble{\conc{A}~~~\color{black}S} &\mathsf{f}{+}{-} \vspace{1em}\\
-    \hypo{A}~~~\hbubble{\color{black}S} &\step &\hbubble{\hypo{A}~~~\color{black}S} &\mathsf{f}{-}{-} \\
+    \conc{A}~~~\hbubble{\color{black}S} &\step &\hbubble{\conc{A}~~~\color{black}S} &\mathsf{f}{+}{-}{\downarrow} \vspace{1em}\\
+    \hypo{A}~~~\hbubble{\color{black}S} &\step &\hbubble{\hypo{A}~~~\color{black}S} &\mathsf{f}{-}{-}{\downarrow} \\
   \end{array}
   $$
   \caption{$\mathbb{F}$-rules for blue bubbles}
@@ -435,12 +438,12 @@ definition of solutions, which can now be open or closed:
 \begin{definition}[Solution]\labdef{pol-solution}
   
   A \emph{solution} is a multiset of ions and bubbles. Its \emph{status} is
-  either \emph{closed} or \emph{open}. Solutions $S$ can be represented
-  textually with the following syntax:
+  either \emph{closed} or \emph{open}, and open solutions cannot contain neutral
+  bubbles. Solutions $S$ can be represented textually with the following syntax:
   \begin{align*}
     S, T, U &\Coloneq \Gamma \J \Delta &
     \mathcal{S} &\Coloneq S_1 \sep \ldots \sep S_n \\
-    I &\Coloneq A \mid S &
+    I, J, K &\Coloneq A \mid S &
     \Gamma, \Delta &\Coloneq I_1, \ldots, I_n \\
     \J, \JB &\Coloneq {\seq} \mid {\piq{\mathcal{S}}} &&
   \end{align*}
@@ -464,27 +467,179 @@ nested sequents for \sys{FILL} \cite{clouston-annotation-free-2013}.}:
 
 \begin{definition}[Polarized symmetric interpretation]\labdef{pol-sinterp}
   The \emph{positive} and \emph{negative symmetric interpretations} of solutions
-  $\psinterp{\cdot}$ and $\nsinterp{\cdot}$ are defined by mutual recursion as
+  $\psint{\cdot}$ and $\nsint{\cdot}$ are defined by mutual recursion as
   follows:
   \begin{align*}
-    \psinterp{A} &= A &
-    \nsinterp{A} &= A \\
-    \psinterp{\Gamma \piq{\mathcal{S}} \Delta} &=
-      \bigwedge_{S \in \mathcal{S}} \psinterp{S \mix \Gamma \seq \Delta} &
-    \nsinterp{\Gamma \piq{\mathcal{S}} \Delta} &=
-      \bigvee_{S \in \mathcal{S}} \nsinterp{S \mix \Gamma \seq \Delta} \\
-    \psinterp{\Gamma \seq \Delta} &=
-      \bigwedge_{I \in \Gamma} \nsinterp{I} \limp \bigvee_{I \in \Delta} \psinterp{I} &
-    \nsinterp{\Gamma \seq \Delta} &=
-      \bigwedge_{I \in \Gamma} \nsinterp{I} \lsub \bigvee_{I \in \Delta} \psinterp{I}
+    \psint{A} &= A &
+    \nsint{A} &= A \\
+    \psint{\Gamma \piq{\mathcal{S}} \Delta} &=
+      \bigwedge_{S \in \mathcal{S}} \psint{S \mix \Gamma \seq \Delta} &
+    \nsint{\Gamma \piq{\mathcal{S}} \Delta} &=
+      \bigvee_{S \in \mathcal{S}} \nsint{S \mix \Gamma \seq \Delta} \\
+    \psint{\Gamma \seq \Delta} &=
+      \bigwedge_{I \in \Gamma} \nsint{I} \limp \bigvee_{I \in \Delta} \psint{I} &
+    \nsint{\Gamma \seq \Delta} &=
+      \bigwedge_{I \in \Gamma} \nsint{I} \lsub \bigvee_{I \in \Delta} \psint{I}
   \end{align*}
 \end{definition}
 
-One can easily check that the interpretation of a solution that does not contain
-any negative (resp. positive) bubble will not contain any occurrence of the
-exclusion (resp. implication) connective. This will be crucial later to
-represent proofs of both intuitionistic, dual-intuitionistic and
-bi-intuitionistic logic in the same system.
+One can easily check that the interpretation of a solution that has no negative
+(resp. positive) subsolution will not contain any occurrence of the exclusion
+(resp. implication) connective. This will be crucial later to represent proofs
+of both intuitionistic, dual-intuitionistic and bi-intuitionistic logic in the
+same system.
+
+\section{Designing for properties}\labsec{design-props}
+
+With our new syntax and interpretation of solutions at hand, we can design a new
+proof calculus including the rules previously discussed for manipulating
+polarized bubbles. The rich structure of solutions offers many possibilities in
+the precise formulation of rules, depending on the properties we expect from the
+calculus. We identified 6 of these properties, whose consequences range from
+aesthetic and theoretical considerations on paper, to concrete usability matters
+in a graphical proof-building interface. Let us summarize them in order of
+priorization relatively to the latter:
+\begin{description}
+  \item[Invertibility]
+    A rule is invertible when it could in principle be applied in the converse
+    direction, while staying logically sound\sidenote{The \textit{``in
+    principle''} part is important: more often than not, adding the converse of
+    a rule only brings unnecessary complexity in proof search, especially in a
+    user interface that aims for simplicity.}. In other words, it corresponds to
+    a logical \emph{equivalence}: when all rules in a (bubble) calculus are
+    invertible, we get that $S \step T$ implies $\sint{S} \semequiv
+    \sint{T}$. This entails in particular that a user can apply the rule
+    without fear of turning a provable goal into an unprovable
+    one\sidenote{Assuming that the calculus is \emph{complete}
+    (\refsec{bubbles-completeness}).}, eliminating an important source of
+    non-determinism in proof search: the need for
+    \emph{backtracking}\sidenote{See also \refsec{sfl-backtracking} for a
+    discussion on this matter.}.
+  \item[Decomposability]
+    We already mentioned this property in \refsec{non-determinism} as one of the
+    main motivations of this chapter: the ability to decompose all logical
+    connectives ``for free'', and thus reason solely on solutions that comprise
+    only bubbles and atomic formulas. As far as we know, it has never been
+    identified explicitly in the literature before, although it can loosely be
+    seen as an extension of the decomposition procedures of existing deep
+    inference systems\sidenote{One could argue that more ``semantic'' approaches
+    in proof theory have achieved connective-free explanations of proofs, like
+    strategies in game semantics or the combinatorial proofs of D. Hughes
+    \cite{heijltjes_intuitionistic_2019}. But this is more of a side effect than
+    a goal of these approaches, which intentionally abstract from the syntactic
+    process of building proofs. A notable exception is the Girardian line of
+    works starting from Ludics \cite{girard_locus_2001} and culminating in
+    Transcendental Syntax \cite{eng_exegesis_2023}, where both frameworks are
+    founded upon the syntactic mechanisms of proof search (focusing in sequent
+    calculus, and unification in the resolution algorithm of Robinson,
+    respectively). Here the aim to rid proofs of connectives is greatly
+    emphasized by Girard, but the focus is again on \emph{proofs} and not
+    \emph{proof states}. Also Girard embraces the full space of incomplete but
+    also \emph{incorrect} proofs, while we still want a framework where proofs
+    are correct by construction.}. One reason is that logical connectives are
+    widely considered as \emph{primitive} in the tradition of mathematical
+    logic: they \emph{are} the objects of the reasoning activity, rather than a
+    tool for representing and structuring arguments. Thus the idea of an
+    alternative does not even occur. But even if it does, it is not clear that
+    it would bring any interesting viewpoint on the problems usually studied in
+    proof theory. In our case, it was brought by a very concrete application:
+    making formal proofs accessible to a broader audience, by replacing symbolic
+    and linguistic means of representation by iconic and directly manipulable
+    ones.
+  \item[Factorizability]
+    We say that a proof calculus is \emph{factorizable} when it makes it easier
+    to avoid duplicating arguments in subproofs. In \refsec{bubbles-pba}, we
+    already remarked that the ability to share hypotheses between subgoals in
+    \sys{BJ} enables the factorization of \emph{forward} reasoning steps at any
+    stage of the proof construction. With our new symmetric interpretation of
+    multi-conclusion solutions, we will now be able to factorize \emph{backward}
+    reasoning steps as well, which was in fact the main motivation behind
+    Example \ref{eq:concdistr} in \refsec{branching}.
+  \item[Locality]
+    There does not seem to be a general consensus on what it means precisely for
+    an inference rule to be \emph{local}. This terminology has been employed by
+    various authors in proof theory, in ways that are often hard to compare. For
+    instance in \sidecite{negri_structural_2001}, sequent rules are said to be
+    local because the contexts of hypotheses involved in a rule are located in
+    the sequents of that rule, by opposition to natural deduction rules in their
+    labelled presentation where hypotheses are located in arbitrary distant
+    leaves of the derivation. In the setting of deep inference, local rules are
+    those that can be applied without ``inspection of expressions of arbitrary
+    size''\sidenote{Definition 2.1.1 in \cite{ESSLLI}. The same definition is
+    used in \cite{tiu_local_2006}.}. Finally in his Transcendental Syntax,
+    Girard evokes a related but more elusive notion, concerned with the
+    \emph{genericity} of logical objects involved in a rule\sidenote{See the
+    section \emph{Globality and locality in logical systems} in Chapter 6 of
+    Boris Eng's thesis \cite{eng_exegesis_2023}.}.
+    
+    Our conception of locality is related to all the previous ones, although it
+    is guided by the idea of direct manipulation of logical entities by humans,
+    rather than purely proof-theoretical considerations. For instance, \sys{BJ}
+    has some locality in the deep inference sense because all rules are
+    applicable in arbitrary contexts; but we relax the \emph{atomicity}
+    constraint that reduces $\mathbb{I}$-rules and $\mathbb{R}$-rules to their
+    atomic version, because it would be unnecessarily restrictive for the
+    purpose of building proofs manually. Still, we want to avoid as much as
+    possible referring to generic objects that are not directly related to the
+    manipulated data, in the spirit of Girard's locality. A typical example is
+    the elimination rule for disjunction in natural deduction, corresponding to
+    the {\rnmsf{{\lor}{-}}} rule of \sys{BJ} that involves an arbitrary
+    conclusion $\Delta$. The benefits of locality from a UX point of view have
+    already been discussed at the end of \refsec{bubbles-pba}.
+  \item[Linearity] 
+    We consider an inference rule to be \emph{linear} when it preserves the
+    number of atomic formulas in solutions. This is a strong requirement, which
+    for instance excludes the identity rules of \sys{BJ} since they can insert
+    or remove (even numbers of) atoms. Thus we cannot achieve full linearity in
+    that sense, but it is still interesting to maximize it. The first reason is
+    \emph{methodological}: by the words of its creator A. Guglielmi,
+    \textit{``[...] deep inference is obtained by applying some of the main
+    concepts behind linear logic to the formalisms, i.e., to the rules by which
+    proof systems are designed.''} \sidecite{DI}. The second reason is
+    \emph{computational}: it can enable a measure on solutions that is strictly
+    decreasing with the application of rules, avoiding infinite loops during
+    proof search as in the calculus \sys{LJT} of R. Dyckhoff
+    \cite{dyckhoff_contraction-free_1992}. The third reason is ergonomical: as
+    already remarked by the authors of the Proof-by-Pointing paradigm
+    \sidenote{Section 4.1 of \cite{PbP}.}, rules that systematically duplicate
+    formulas can quickly overload the goal with useless copies, making it harder
+    to read and navigate.
+  \item[Symmetry] 
+    In classical logic, both sequent calculi like \sys{LK} and deep inference
+    systems like CoS are known for their very rich \emph{symmetries}. In fact,
+    one of our ambitions with bubbles was to bring back the symmetry of
+    classical logic in a constructive setting, without resorting to linear
+    logic. This chapter stems in great part from our lack of satisfaction with
+    the asymmetry at work in the \sys{BJ} calculus, which looked quite
+    unnatural. Of course we will not be able to completely eliminate it, but it
+    will be distilled into the flow rules governing the \emph{porosity} of
+    bubbles that were hinted at in \refsec{colors}, rather than through the
+    arbitrary restriction of sequents to one conclusion\sidenote{Whether it is
+    enforced in the syntax of sequents themselves, or through restriction on
+    rules that manipulate conclusions like contraction or the introduction rule
+    for $\limp$.}. Our treatment of dual and bi-intuitionistic logic through
+    blue bubbles is also motivated by this quest for symmetry. It should be
+    noted that although we use naming conventions for rules that resemble those
+    of CoS (e.g. with the identity rules), we do not aim for a perfect symmetry
+    where one can get a complete calculus by simply taking the dual of each
+    rule\sidenote{In fact it is not even clear what would be the dual of a
+    solution, but the {\rnmsf{i{\downarrow}}} and {\rnmsf{i{\uparrow}}} rules
+    suggest that open and closed solutions may be dual to eachother.}. Thus we
+    will content ourselves with the hypothesis/conclusion symmetry coming from
+    sequent calculus. Interestingly, the calculus \sys{ISgq} of Tiu for
+    intuitionistic predicate logic does the opposite, by having a perfect dual
+    system \sys{cISgq} but no symmetries among its switch rules (the equivalent
+    of our flow rules) \cite{tiu_local_2006}.
+\end{description}
+
+In the next section we present a core calculus called ``system \sys{B}'' that
+maximizes \emph{symmetry}, \emph{linearity} and \emph{locality}. In our opinion
+this makes for a good proof-theoretical foundation, around which variant calculi
+with different tradeoffs can be designed. In \refsec{invertible-calculus} we
+introduce such a variant that focuses on \emph{invertibility} at the cost of
+\emph{linearity}, and in \refsec{decomposable-calculus} on a refinement of the
+latter that achieves \emph{decomposability} and \emph{factorizability}, losing
+some of its \emph{locality} and \emph{symmetry} along the way.
 
 \section{Symmetric calculus}\labsec{symmetric-calculus}
 
@@ -500,10 +655,10 @@ bi-intuitionistic logic in the same system.
   \labfig{graphical-B}
 \end{figure*}
 
-\todo{ Tradeoff between perfectly local rules, where many are restricted to
-  open solutions, and factorizing rules that are uniformly applicable to any
-  kind of solution, but are neither local nor linear (because they rely on
-  duplicating the abstract proof in all subgoals) }
+% \todo{ Tradeoff between perfectly local rules, where many are restricted to
+%   open solutions, and factorizing rules that are uniformly applicable to any
+%   kind of solution, but are neither local nor linear (because they rely on
+%   duplicating the abstract proof in all subgoals) }
 
 \todo{ Talk about flow rules for moving outside bubbles motivated by the need of
 a cut-free proof for Uustalu's formula, with the figure summarizing all flow
@@ -513,8 +668,7 @@ anything, and are thus useless. }
 
 \section{Soundness}\labsec{bubbles-soundness}
 
-\todo{ Soundness proof with respect to Heyting-Brouwer algebras, and deduce from
-  it soundness of intuitionistic, dual-intuitionistic and classical fragments.}
+\input{sections/bubbles-soundness.tex}
 
 \section{Completeness}\labsec{bubbles-completeness}
 
@@ -523,6 +677,8 @@ anything, and are thus useless. }
 dual-intuitionistic and classical fragments + cut admissibility}
 
 \section{Invertible calculus}\labsec{invertible-calculus}
+
+\todo{Iteration rules as a middle-ground in the linearity/invertibility tradeoff.}
 
 \section{Decomposable calculus}\labsec{decomposable-calculus}
 
