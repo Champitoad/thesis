@@ -169,21 +169,21 @@ they will stand in perfect bijection.
   \end{align*}
 \end{definition}
 
-\begin{lemma}[Involutivity]\lablemma{involutivity}
-  $\soldual{\soldual{A}} = A$.
-\end{lemma}
-
-\begin{lemma}[Duality]\lablemma{duality}
+\begin{fact}[Duality]\labfact{duality}
   In a Heyting-Brouwer algebra, if $A \sement B$ then $\soldual{B} \sement
   \soldual{A}$.
-\end{lemma}
+\end{fact}
+
+We omit the proof of \reffact{duality}, but this can easily be obtained from the
+soundness and completeness of a symmetric sequent calculus for bi-intuitionistic
+logic, see for instance Lemma 2 of \sidecite{restall_extending_1997}.
 
 \begin{definition}[Dual solution]\labdef{dual-solution}
   The \emph{dual solution} $\soldual{S}$ of a solution $S$ is defined
-  recursively as follows:
+  mutually recursively as follows:
   \begin{align*}
     \soldual{\Gamma \J \Delta} &= \soldual{\Delta} \mathbin{\soldual{\J}} \soldual{\Gamma} &
-    \soldual{S_1, \ldots, S_n} &= \soldual{S_1}, \ldots, \soldual{S_n} \\
+    \soldual{S_1 \sep \ldots \sep S_n} &= \soldual{S_1} \sep \ldots \sep \soldual{S_n} \\
     \soldual{A} &= \soldual{A} &
     \soldual{I_1, \ldots, I_n} &= \soldual{I_1}, \ldots, \soldual{I_n} \\
     \soldual{\seq} &= {\seq} &
@@ -198,49 +198,149 @@ Graphically, the dual of a solution $S$ is $S$ where the colors of items have
 been swapped --- i.e. blue items become red and red items become blue --- and
 formulas have been dualized (\refdef{dual-formula}).
 
+\begin{definition}
+  The \emph{depth} $\soldepth{I}$ of an item $I$ is defined recursively as
+  follows:
+  \begin{align*}
+    \soldepth{A} &= 0 \\
+    \soldepth{\Gamma \seq \Delta} &= 1 + \max_{J \in \Gamma \cup \Delta}{\soldepth{J}} \\
+    \soldepth{\Gamma \piq{\mathcal{S}} \Delta} &= 1 + \max_{J \in \Gamma \cup \mathcal{S} \cup \Delta}{\soldepth{J}}
+  \end{align*}
+\end{definition}
+
+\begin{lemma}[Involutivity]\lablemma{involutivity}
+  $\soldual{\soldual{I}} = I$.
+\end{lemma}
+\begin{proof}
+  By recurrence on $\soldepth{I}$.
+  \begin{itemize}
+    \item[\textbf{Formula}] Suppose $I = A$. Then we conclude by a
+    straightforward induction on $A$.
+    \item[\textbf{Open solution}] Suppose $I = \Gamma \seq \Delta$. Then by
+    definition we have $\soldual{\soldual{\Gamma \seq \Delta}} =
+    \soldual{\soldual{\Delta} \seq \soldual{\Gamma}} =
+    \soldual{\soldual{\Gamma}} \seq \soldual{\soldual{\Delta}}$, and we conclude
+    by IH.
+    \item[\textbf{Closed solution}] Suppose $I = \Gamma \piq{\mathcal{S}}
+    \Delta$. Then by definition we have $\soldual{\soldual{\Gamma
+    \piq{\mathcal{S}} \Delta}} = \soldual{\soldual{\Delta}
+    \piq{\soldual{\mathcal{S}}} \soldual{\Gamma}} =
+    \soldual{\soldual{\Gamma}} \piq{\soldual{\soldual{\mathcal{S}}}}
+    \soldual{\soldual{\Delta}}$, and we conclude by IH.
+  \end{itemize}
+\end{proof}
+
 \begin{lemma}[Local rule duality]\lablemma{local-rule-duality}
   If $S \lstep T$ then $\soldual{S} \lstep \soldual{T}$.
 \end{lemma}
+\begin{proof}
+  There is a bijection among the rules of system \sys{B}, that matches each rule
+  $\irule{r}{S}{T}$ to its dual $\irule{\soldual{r}}{\soldual{S}}{\soldual{T}}$.
+  By involutivity (\reflemma{involutivity}), this bijection is self-inverse:
+  $\soldual{\soldual{\mathsf{r}}} = \mathsf{r}$. It is most easily observed in
+  the graphical presentation of the rules (\reffig{graphical-B}), where looking
+  for the dual rule boils down to swapping red and blue (and mirroring logical
+  connectives). The mapping goes as follows:
+  \begin{mathpar}
+  \begin{array}{r@{\quad\leftrightarrow\quad}l}
+    \mathsf{i{\downarrow}} & \mathsf{i{\downarrow}} \\
+    \mathsf{i{\uparrow}} & \mathsf{i{\uparrow}} \\
+  \end{array}
+  \and
+  \begin{array}{r@{\quad\leftrightarrow\quad}l}
+    \mathsf{w{-}} & \mathsf{w{+}} \\
+    \mathsf{c{-}} & \mathsf{c{+}} \\
+  \end{array}
+  \\
+  \begin{array}{r@{\quad\leftrightarrow\quad}l}
+    \mathsf{s{-}} & \mathsf{s{+}} \\
+    \mathsf{f{-}} & \mathsf{f{+}} \\
+    \mathsf{f{-}{+}{\downarrow}} & \mathsf{f{+}{-}{\downarrow}} \\
+    \mathsf{f{-}{-}{\uparrow}} & \mathsf{f{+}{+}{\uparrow}} \\
+    \mathsf{f{-}{+}{\uparrow}} & \mathsf{f{+}{-}{\uparrow}} \\
+    \mathsf{f{-}{-}{\downarrow}} & \mathsf{f{+}{+}{\downarrow}} \\
+  \end{array}
+  \and
+  \begin{array}{r@{\quad\leftrightarrow\quad}l}
+    \mathsf{p} & \mathsf{p} \\
+    \mathsf{p{-}} & \mathsf{p{+}} \\
+  \end{array}
+  \\
+  \begin{array}{r@{\quad\leftrightarrow\quad}l}
+    \top{-} & \bot{+} \\
+    \bot{-} & \top{+} \\
+    \land{-} & \lor{+} \\
+    \lor{-} & \land{+} \\
+    {\limp}{-} & {\lsub}{+} \\
+    {\lsub}{-} & {\limp}{+} \\
+    \forall{-} & \exists{+} \\
+    \exists{-} & \forall{+} \\
+  \end{array}
+  \end{mathpar}
+  Notice that some rules are self-dual, namely the identity rules
+  {\rnmsf{i{\downarrow}}} and {\rnmsf{i{\uparrow}}}, and the popping rule
+  {\rnmsf{p}}.
+\end{proof}
 
 \begin{lemma}[Rule duality]\lablemma{rule-duality}
   If $S \step T$ then $\soldual{S} \step \soldual{T}$.
 \end{lemma}
 \begin{proof}
-  % \todo{Copy blackboard proof}
+  Let $U\hole$, $S_0$ and $T_0$ such that $S = U\select{S_0}$, $T =
+  U\select{T_0}$ and $S_0 \lstep T_0$. By \reflemma{local-rule-duality} we have
+  $\soldual{S_0} \lstep \soldual{T_0}$, and thus
+  $\soldual{U}\select{\soldual{S_0}} \step \soldual{U}\select{\soldual{T_0}}$,
+  or equivalently $\soldual{U\select{S_0}} \step \soldual{U\select{T_0}}$.
 \end{proof}
 
 \begin{lemma}[Interpretation duality]\lablemma{int-duality}
-  $\soldual{\psint{S}} = \nsint{\soldual{S}}$ and $\soldual{\nsint{S}} =
-  \psint{\soldual{S}}$.
+  $\soldual{\psint{I}} = \nsint{\soldual{I}}$ and $\soldual{\nsint{I}} =
+  \psint{\soldual{I}}$.
 \end{lemma}
+\begin{proof}
+  By a straightforward recurrence on $\soldepth{I}$.
+\end{proof}
 
 \begin{lemma}\lablemma{int-invert}
   If $\psint{\soldual{S}} \sement \psint{\soldual{T}}$ then $\nsint{T} \sement
   \nsint{S}$.
 \end{lemma}
 \begin{proof}
-  % \todo{Copy blackboard proof}
+  By duality (\reffact{duality}) we have $\soldual{\psint{\soldual{T}}} \sement
+  \soldual{\psint{\soldual{S}}}$, and then by \reflemma{int-duality}
+  $\nsint{\soldual{\soldual{T}}} \sement \nsint{\soldual{\soldual{S}}}$. We
+  conclude by involutivity (\reflemma{involutivity}).
 \end{proof}
 
 \subsection{Contextual soundness}
+
+\begin{definition}
+  The \emph{depth} $\bradepth{\J}$ of a branching operator $\J$ is defined
+  recursively as follows:
+  \begin{align*}
+    \bradepth{\seq} &= 0 \\
+    \bradepth{\piq{\mathcal{S}}} &= 1 + \max_{S \in \mathcal{S}}{\bradepth{S}}
+  \end{align*}
+\end{definition}
 
 \begin{lemma}[Functoriality]\lablemma{bubbles-functoriality}
   ~\\
   \begin{itemize}
     \item $\psint{I} \sement \psint{J}$ implies $\psint{(\seq I) \mix S} \sement
     \psint{(\seq J) \mix S}$
-    \item $\nsint{I} \sement \nsint{J}$ implies $\nsint{(\seq I) \mix S} \sement
-    \nsint{(\seq J) \mix S}$
+    % \item $\nsint{I} \sement \nsint{J}$ implies $\nsint{(\seq I) \mix S} \sement
+    % \nsint{(\seq J) \mix S}$
     \item $\nsint{J} \sement \nsint{I}$ implies $\psint{(I \seq) \mix S} \sement
     \psint{(J \seq) \mix S}$
-    \item $\psint{J} \sement \psint{I}$ implies $\nsint{(I
-    \seq) \mix S} \sement \nsint{(J \seq) \mix S}$
+    % \item $\psint{J} \sement \psint{I}$ implies $\nsint{(I
+    % \seq) \mix S} \sement \nsint{(J \seq) \mix S}$
   \end{itemize}
 \end{lemma}
 \begin{proof}
-  Let $S = \Gamma \J \Delta$. We proceed by induction on $\J$.
+  Let $S = \Gamma \J \Delta$. We proceed by recurrence on $\bradepth{\J}$.
   \begin{itemize}
-    \item $\J = {\seq}$:
+    \item[\textbf{Base case}] Suppose $\bradepth{\J} = 0$. Then $\J = {\seq}$,
+    and we have
     $$
     \begin{array}{rcll}
       \psint{(\seq I) \mix S}
@@ -266,8 +366,33 @@ formulas have been dualized (\refdef{dual-formula}).
       &=& \psint{(J \seq) \mix S} &\text{(\refdef{mixop})}
     \end{array}
     $$
-    \item $\J = {\piq{\mathcal{S}}}$:
-    % \todo{Finish proof}
+    \item[\textbf{Recursive case}] Suppose $\bradepth{\J} > 0$. Then $\J =
+    {\piq{\mathcal{S}}}$, and for all $S_0 = \Gamma_0 \JB \Delta_0 \in
+    \mathcal{S}$ we have that $\bradepth{\JB} < \bradepth{\J}$. Thus we have
+    $$
+    \begin{array}{rcll}
+      \psint{(\seq I) \mix S}
+      &=& \psint{\Gamma \piq{\mathcal{S}} I, \Delta} &\text{(\refdef{mixop})} \\
+      &=& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(\Gamma \seq I, \Delta) \mix S_0}} &\text{(\refdef{pol-sinterp})} \\
+      &=& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(\seq I) \mix ((\Gamma \seq \Delta) \mix S_0)}} &\text{(\refdef{mixop})} \\
+      &\sement& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(\seq J) \mix ((\Gamma \seq \Delta) \mix S_0)}} &\text{(IH)} \\
+      &=& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(\Gamma \seq J, \Delta) \mix S_0}} &\text{(\refdef{mixop})} \\
+      &=& \psint{\Gamma \piq{\mathcal{S}} J, \Delta} &\text{(\refdef{pol-sinterp})} \\
+      &=& \psint{(\seq J) \mix S} &\text{(\refdef{mixop})}
+    \end{array}
+    $$
+    $$
+    \begin{array}{rcll}
+      \psint{(I \seq) \mix S}
+      &=& \psint{\Gamma, I \piq{\mathcal{S}} \Delta} &\text{(\refdef{mixop})} \\
+      &=& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(\Gamma, I \seq \Delta) \mix S_0}} &\text{(\refdef{pol-sinterp})} \\
+      &=& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(I \seq) \mix ((\Gamma \seq \Delta) \mix S_0)}} &\text{(\refdef{mixop})} \\
+      &\sement& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(J \seq) \mix ((\Gamma \seq \Delta) \mix S_0)}} &\text{(IH)} \\
+      &=& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(\Gamma, J \seq \Delta) \mix S_0}} &\text{(\refdef{mixop})} \\
+      &=& \psint{\Gamma, J \piq{\mathcal{S}} \Delta} &\text{(\refdef{pol-sinterp})} \\
+      &=& \psint{(J \seq) \mix S} &\text{(\refdef{mixop})}
+    \end{array}
+    $$
   \end{itemize}
 \end{proof}
 
@@ -283,8 +408,8 @@ formulation equivalent to \refdef{solution-context} as a context-free grammar:
 \end{fact}
 
 \begin{definition}
-The \emph{depth} of a solution context $S\hole$ is defined recursively as
-follows:
+The \emph{depth} $\soldepth{S\hole}$ of a solution context $S\hole$ is defined
+recursively as follows:
 \begin{align*}
   \soldepth{\hole} &= 0 \\
   \soldepth{\Gamma \J S\hole, \Delta} = \soldepth{\Gamma, S\hole \J \Delta} =
@@ -305,7 +430,6 @@ follows:
     \item[\textbf{Base case}] Suppose $\soldepth{U\hole}$ = 0. Then $U\hole =
     \hole$, and we conclude by local soundness
     (\reflemma{bubbles-local-soundness}).
-
     \item[\textbf{Positive case}] Suppose $\soldepth{U\hole} > 0$ and $U\hole =
     \Gamma' \J U_0\hole, \Delta'$. Then by IH we have $\psint{U_0\select{T}}
     \sement \psint{U_0\select{S}}$, and thus

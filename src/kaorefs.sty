@@ -33,6 +33,7 @@
 \newcommand{\thmname}{}
 \newcommand{\propname}{}
 \newcommand{\lemmaname}{}
+\newcommand{\factname}{}
 \newcommand{\remarkname}{}
 \newcommand{\examplename}{}
 \newcommand{\exercisename}{}
@@ -73,6 +74,7 @@
   \renewcommand{\thmname}{Theorem}
   \renewcommand{\propname}{Proposition}
   \renewcommand{\lemmaname}{Lemma}
+  \renewcommand{\factname}{Fact}
   \renewcommand{\remarkname}{Remark}
   \renewcommand{\examplename}{Example}
   \renewcommand{\exercisename}{Exercise}
@@ -114,6 +116,7 @@
 \newcommand{\labassum}[1]{\label{assum:#1}}
 \newcommand{\labprop}[1]{\label{prop:#1}}
 \newcommand{\lablemma}[1]{\label{lemma:#1}}
+\newcommand{\labfact}[1]{\label{fact:#1}}
 \newcommand{\labremark}[1]{\label{remark:#1}}
 \newcommand{\labexample}[1]{\label{example:#1}}
 \newcommand{\labexercise}[1]{\label{exercise:#1}}
@@ -180,6 +183,9 @@
 
 \newcommand{\reflemma}[1]{\hyperref[lemma:#1]\lemmaname\xspace\ref{lemma:#1}}
 \newcommand{\vreflemma}[1]{\hyperref[lemma:#1]\lemmaname\xspace\vref{lemma:#1}}
+
+\newcommand{\reffact}[1]{\hyperref[fact:#1]\factname\xspace\ref{fact:#1}}
+\newcommand{\vreffact}[1]{\hyperref[fact:#1]\factname\xspace\vref{fact:#1}}
 
 \newcommand{\refremark}[1]{\hyperref[remark:#1]\remarkname\xspace\ref{remark:#1}}
 \newcommand{\vrefremark}[1]{\hyperref[remark:#1]\remarkname\xspace\vref{remark:#1}}

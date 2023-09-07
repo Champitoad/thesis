@@ -9,7 +9,14 @@
 
 \setmathfont{STIXTwoMath-Regular.otf}[range=\Coloneq]
 
+% Load the bibliography package
+
+\usepackage{kaobiblio}
+\addbibresource{main.bib} % Bibliography file
+
 % Theorem environments
+
+% \usepackage[framed=true]{kaotheorems}
 
 \newtheorem{definition}{Definition}
 \newtheorem{theorem}{Theorem}
@@ -23,9 +30,14 @@
 \newtheorem{conjecture}{Conjecture}
 \newtheorem{condition}{Condition}
 
+% Load the package for hyperreferences
+
+% \usepackage{kaorefs}
+
 % kao macros
 
-\newcommand{\sidenote}{\footnote}
+\renewcommand{\sidenote}{\footnote}
+\renewcommand{\sidecite}{\cite}
 
 \newcommand{\dolab}[2]{\label{#1:#2}}
 \newcommand{\doref}[3]{#1 \ref{#2:#3}}
@@ -33,15 +45,20 @@
 \newcommand{\labfig}[1]{\dolab{fig}{#1}}
 \newcommand{\labdef}[1]{\dolab{def}{#1}}
 \newcommand{\lablemma}[1]{\dolab{lemma}{#1}}
+\newcommand{\labfact}[1]{\dolab{fact}{#1}}
 
 \newcommand{\reffig}[1]{\doref{Figure}{fig}{#1}}
 \newcommand{\refdef}[1]{\doref{Definition}{def}{#1}}
 \newcommand{\reflemma}[1]{\doref{Lemma}{lemma}{#1}}
+\newcommand{\reffact}[1]{\doref{Fact}{fact}{#1}}
 
 \begin{document}
 
-\input{sections/bubbles-soundness.tex}
+\input{sections/bubbles-soundness.tex} 
 % \input{figures/sequent-B-invertible.tex}
 % \tikzfig{1}{1}{venn-algebras}
+
+\nocite{*}
+\printbibliography[heading=bibintoc, title=Bibliography, prenote=bibnote] % Add
 
 \end{document}
