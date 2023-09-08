@@ -119,39 +119,245 @@ interpretation in the various algebras. Indeed, since we only consider the
 abstract classes of all algebras and never deal with a particular instance,
 they will stand in perfect bijection.
 
+\begin{definition}[Semantic entailment]
+  We will write $A \sement_{\mathcall{X}} B$ (resp. $A \semequiv_{\mathcall{X}}
+  B$) to express that $A \sement B$ (resp. $A \sementX B$ and $B \sementX A$) in
+  every algebra of the class $\mathcall{X}$. More precisely, $\mathcall{X}$ can
+  be one of $\Heyting$, $\Brouwer$, $\HeytingBrouwer$ or $\Boolean$, which stand
+  respectively for Heyting, Brouwer, Heyting-Brouwer and Boolean algebras. We
+  will write $A \sement B$ (resp. $A \semequiv B$) as a shorthand for $A
+  \sementH B$ (resp. $A \semequiv_{\Heyting} B$).
+\end{definition}
+
 \subsection{Local soundness}
 
-\begin{lemma}[Sharing]
-  $\psint{\Gamma \seq \Delta} \sement \psint{\Gamma \piq{\mathcal{S}} \Delta}$.
-\end{lemma}
+\begin{definition}
+  The \emph{depth} $\bradepth{\J}$ of a branching operator $\J$ is defined
+  recursively as follows:
+  \begin{align*}
+    \bradepth{\seq} &= 0 \\
+    \bradepth{\piq{\mathcal{S}}} &= 1 + \max_{S \in \mathcal{S}}{\bradepth{S}}
+  \end{align*}
+\end{definition}
 
-\begin{lemma}[Weakening]
-  $\psint{S} \sement \psint{S \mix (\seq I)}$ and $\psint{S} \sement \psint{S
-  \mix (\seq I)}$.
-\end{lemma}
+% \begin{lemma}\lablemma{bubbles-multiweak}
+%   $\psint{\Gamma \seq \Delta} \sement \psint{\Gamma', \Gamma \seq \Delta, \Delta'}$.
+% \end{lemma}
+% \begin{proof}
+%   $$
+%   \begin{array}{rcll}
+%     \psint{\Gamma \seq \Delta}
+%     &=& \bigwedge_{I \in \Gamma}{\nsint{I}} \limp \bigvee_{J \in \Delta}{\psint{J}} & \\
+%     &\sement& \bigwedge_{I' \in \Gamma'}{\nsint{I'}} \wedge \bigwedge_{I \in \Gamma}{\nsint{I}} \limp \bigvee_{J \in \Delta}{\psint{J} \vee \bigvee_{J' \in \Delta'}{\psint{J'}}} &\text{(Weakening)} \\
+%     &=& \psint{\Gamma', \Gamma \seq \Delta, \Delta'} & \\
+%   \end{array}
+%   $$
+% \end{proof}
 
-\begin{lemma}[Contraction]
+% \begin{lemma}[Sharing]
+%   $\psint{\Gamma \seq \Delta} \sement \psint{\Gamma \piq{\mathcal{S}} \Delta}$.
+% \end{lemma}
+% \begin{proof}
+%   Let $\mathcal{S} = S_1 \sep \ldots \sep S_n$. We proceed by recurrence on
+%   $\bradepth{\piq{\mathcal{S}}}$.
+%   \begin{itemize}
+%     \item[\textbf{Base case}] Suppose $\bradepth{\piq{\mathcal{S}}} = 1$, and
+%     let $1 \leq i \leq n$. Then we know that $S_i = \Gamma_i \seq \Delta_i$, and
+%     by \reflemma{bubbles-multiweak} we get $\psint{\Gamma \seq \Delta} \sement
+%     \psint{S_i \mix (\Gamma \seq \Delta)}$. Thus we have
+%     $$
+%     \begin{array}{rcll}
+%       \psint{\Gamma \seq \Delta}
+%       &\sement& \bigwedge_{1 \leq i \leq n}{\psint{S_i \mix (\Gamma \seq \Delta)}} & \\
+%       &=& \psint{\Gamma \piq{\mathcal{S}} \Delta}
+%     \end{array}
+%     $$
+%     \item[\textbf{Recursive case}] Suppose $\bradepth{\piq{\mathcal{S}}} > 1$.
+
+%   \end{itemize}
+% \end{proof}
+
+\begin{lemma}[Weakening]\lablemma{bubbles-weakening}
+  $\psint{S} \sement \psint{S \mix (\Gamma \seq \Delta)}$.
+\end{lemma}
+\begin{proof}
+  Let $S = \Gamma' \J \Delta'$. We proceed by recurrence on $\bradepth{\J}$.
+  \begin{itemize}
+    \item[\textbf{Base case}]
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma' \seq \Delta'}
+      &=& \bigwedge_{I \in \Gamma}{\nsint{I}} \limp \bigvee_{J \in \Delta}{\psint{J}} & \\
+      &\sement& \bigwedge_{I' \in \Gamma'}{\nsint{I'}} \limp \bigvee_{J \in \Delta}{\psint{J} \vee \bigvee_{J' \in \Delta'}{\psint{J'}}} & \\
+      &\sement& \bigwedge_{I' \in \Gamma'}{\nsint{I'}} \wedge \bigwedge_{I \in \Gamma}{\nsint{I}} \limp \bigvee_{J \in \Delta}{\psint{J} \vee \bigvee_{J' \in \Delta'}{\psint{J'}}} & \\
+      &=& \psint{\Gamma', \Gamma \seq \Delta, \Delta'} & \\
+    \end{array}
+    $$
+    \item[\textbf{Recursive case}]
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma' \piq{\mathcal{S}} \Delta'}
+      &=& \bigwedge_{T \in \mathcal{S}}{\psint{T \mix (\Gamma' \seq \Delta')}} & \\
+      &\sement& \bigwedge_{T \in \mathcal{S}}{\psint{(T \mix (\Gamma' \seq \Delta')) \mix (\Gamma \seq \Delta)}} &\text{(IH)} \\
+      &=& \bigwedge_{T \in \mathcal{S}}{\psint{T \mix ((\Gamma' \seq \Delta') \mix (\Gamma \seq \Delta))}} & \\
+      &=& \bigwedge_{T \in \mathcal{S}}{\psint{T \mix (\Gamma', \Gamma \seq \Delta, \Delta')}} & \\
+      &=& \psint{\Gamma', \Gamma \piq{\mathcal{S}} \Delta, \Delta'} & \\
+    \end{array}
+    $$
+  \end{itemize}
+\end{proof}
+
+\begin{lemma}[Contraction]\lablemma{bubbles-contraction}
   $\psint{S \mix (\seq I, I)} \sement \psint{S \mix (\seq I)}$ and
   $\psint{S \mix (I, I \seq)} \sement \psint{S \mix (I \seq)}$.
 \end{lemma}
+\begin{proof}
+  Let $S = \Gamma \J \Delta$. We proceed by recurrence on $\bradepth{\J}$.
+  \begin{itemize}
+    \item[\textbf{Base case}]
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma \seq I, I, \Delta}
+      &=& \bigwedge_{J \in \Gamma}{\nsint{J}} \limp (\psint{I} \land \psint{I}) \vee \bigvee_{K \in \Delta}{\psint{K}} & \\
+      &\semequiv& \bigwedge_{J \in \Gamma}{\nsint{J}} \limp \psint{I} \vee \bigvee_{K \in \Delta}{\psint{K}} & \\
+      &=& \psint{\Gamma \seq I, \Delta} & \\
+    \end{array}
+    $$
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma, I, I \seq \Delta}
+      &=& \bigwedge_{J \in \Gamma}{\nsint{J}} \land (\nsint{I} \land \nsint{I}) \limp \bigvee_{K \in \Delta}{\psint{K}} & \\
+      &\semequiv& \bigwedge_{J \in \Gamma}{\nsint{J}} \land \nsint{I} \limp \bigvee_{K \in \Delta}{\psint{K}} & \\
+      &=& \psint{\Gamma, I \seq \Delta} & \\
+    \end{array}
+    $$
+    \item[\textbf{Recursive case}]
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma \piq{\mathcal{S}} I, I, \Delta}
+      &=& \bigwedge_{T \in \mathcal{S}}{\psint{T \mix (\Gamma \seq I, I, \Delta)}} & \\
+      &=& \bigwedge_{T \in \mathcal{S}}{\psint{(T \mix (\Gamma \seq \Delta)) \mix (\seq I, I)}} & \\
+      &=& \bigwedge_{T \in \mathcal{S}}{\psint{(T \mix (\Gamma \seq \Delta)) \mix (\seq I)}} &\text{(IH)} \\
+      &=& \bigwedge_{T \in \mathcal{S}}{\psint{T \mix (\Gamma \seq I, \Delta)}} & \\
+      &=& \psint{\Gamma \piq{\mathcal{S}} I, \Delta} & \\
+    \end{array}
+    $$
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma, I, I \piq{\mathcal{S}} \Delta}
+      &=& \bigwedge_{T \in \mathcal{S}}{\psint{T \mix (\Gamma, I, I \seq \Delta)}} & \\
+      &=& \bigwedge_{T \in \mathcal{S}}{\psint{(T \mix (\Gamma \seq \Delta)) \mix (I, I \seq)}} & \\
+      &=& \bigwedge_{T \in \mathcal{S}}{\psint{(T \mix (\Gamma \seq \Delta)) \mix (I \seq)}} &\text{(IH)} \\
+      &=& \bigwedge_{T \in \mathcal{S}}{\psint{T \mix (\Gamma, I \seq \Delta)}} & \\
+      &=& \psint{\Gamma, I \piq{\mathcal{S}} \Delta} & \\
+    \end{array}
+    $$
+  \end{itemize}
+\end{proof}
 
-\begin{lemma}[Currying]
+\begin{lemma}[Currying]\lablemma{bubbles-currying}
   $\psint{\Gamma, I \J \Delta} \semequiv \nsint{I} \limp \psint{\Gamma \J
   \Delta}$.
 \end{lemma}
 
-\begin{lemma}[Co-currying]
+\begin{lemma}[Co-currying]\lablemma{bubbles-cocurrying}
   $\nsint{\Gamma \J I, \Delta} \semequiv \nsint{\Gamma \J \Delta} \lsub
   \psint{I}$.
 \end{lemma}
 
+\begin{lemma}\lablemma{gencut}
+  $(A \lor B) \land (A \limp B) \semequiv B$.
+\end{lemma}
+
+\begin{lemma}[Mix]\lablemma{bubbles-mix}
+  $\psint{S} \land \psint{T} \sement \psint{S \mix T}$.
+\end{lemma}
+
+\begin{lemma}\lablemma{bubbles-piq}
+  $\psint{S \mix T} \sement \psint{S \mix \piq{T}}$.
+\end{lemma}
+
 \begin{lemma}[Local soundness]\lablemma{bubbles-local-soundness}
   
-  If $S \lstep T$ then $\psint{T \mix (\Gamma \seq \Delta)} \sement \psint{S
+  If $S \lstep T$ then $\psint{T \mix (\Gamma \seq \Delta)} \sementC \psint{S
   \mix (\Gamma \seq \Delta)}$.
   % and $\nsint{S \mix (\Gamma \seq \Delta)} \sement
   % \nsint{T \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
+\begin{proof}
+  By inspection of each rule of system \sys{B}.
+  \def\arraystretch{1.25}
+  \begin{itemize}
+    \item[\rnmsf{i{\downarrow}}]
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma \piq{} \Delta}
+      &=& \bigwedge_{U \in \emptyset}{\psint{U \mix (\Gamma \seq \Delta)}} &\\
+      &=& \top & \\
+      &\semequiv& \bigwedge_{I \in \Gamma}{\nsint{I}} \wedge A \limp A \lor \bigvee_{J \in \Delta}{\psint{J}} &\\
+      &=& \psint{\Gamma, A \seq A, \Delta}
+    \end{array}
+    $$
+    \item[\rnmsf{i{\uparrow}}]
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma \piq{\seq A \sep A \seq} \Delta}
+      &=& \psint{\Gamma \seq A, \Delta} \wedge \psint{\Gamma, A \seq \Delta} & \\
+      &=& (B \limp A \lor C) \land (B \land A \limp C) &
+        \left(
+        \begin{array}{l}
+          B \coloneq \bigwedge_{I \in \Gamma}{\nsint{I}} \\
+          C \coloneq \bigvee_{J \in \Delta}{\psint{J}} \\
+        \end{array}
+        \right)\\
+      &\semequiv& (B \limp A \lor C) \wedge (B \limp A \limp C) &\text{(Currying)}\\
+      &\semequiv& B \limp (A \lor C) \wedge (A \limp C) &\text{(Distributivity)}\\
+      &\semequiv& B \limp C &\text{(\reflemma{gencut})}\\
+      &=& \psint{\Gamma \seq \Delta} & \\
+    \end{array}
+    $$
+    \item[{\rnmsf{w{-}}}, {\rnmsf{w{+}}}] By \reflemma{bubbles-weakening}.
+    \item[{\rnmsf{c{-}}}, {\rnmsf{c{+}}}] By \reflemma{bubbles-contraction}.
+    \todo{ Soundness of popping rules for non-empty bubbles instead of bubble
+    swapping rules. Pro: invertible. Con: completeness might be harder to prove
+    (:.)}
+    % \item[{\rnmsf{s{-}}}, {\rnmsf{s{+}}}] We only write the proof for
+    % {\rnmsf{s{-}}}, the proof for {\rnmsf{s{+}}} is symmetric. We proceed by
+    % recurrence on $\bradepth{\J}$.
+    % \begin{itemize}
+    %   \item[\textbf{Base case}]
+    %   $$
+    %   \begin{array}{rcll}
+    %     \psint{\piq{S \seq} \mix \Gamma \seq \Delta}
+    %     &=& \psint{\Gamma \piq{S \seq} \Delta} & \\
+    %     &=& \psint{\Gamma, S \seq \Delta} & \\
+    %     &=& \bigwedge_{I \in \Gamma}{\nsint{I}} \wedge \nsint{S} \limp \bigvee_{K \in \Delta}{\psint{K}} & \\
+    %     &=& \bigwedge_{I \in \Gamma}{\nsint{I}} \wedge \nsint{\piq{S}} \limp \bigvee_{K \in \Delta}{\psint{K}} & \\
+    %     &=& \psint{\Gamma, (\piq{S}) \seq \Delta} & \\
+    %   \end{array}
+    %   $$
+    %   \item[\textbf{Recursive case}]
+    %   $$
+    %   \begin{array}{rcll}
+    %     \psint{\piq{S \seq} \mix \Gamma \piq{\mathcal{S}} \Delta}
+    %     &=& \psint{\Gamma \piq{\mathcal{S} \sep S \seq} \Delta} & \\
+    %     &=& \bigwedge_{T \in \mathcal{S}}{\psint{T \mix (\Gamma \seq \Delta)}} \land \psint{\Gamma, S \seq \Delta} & \\
+    %     &=& \bigwedge_{T \in \mathcal{S}}{\psint{T \mix (\Gamma \seq \Delta)}} \land \psint{(\Gamma \seq \Delta) \mix (S \seq)} & \\
+    %     &\semequiv& \bigwedge_{T \in \mathcal{S}}{\psint{T \mix (\Gamma \seq \Delta)}} \land \bigwedge_{T\in\mathcal{S}}{\psint{(\Gamma \seq \Delta) \mix (S \seq)}} & \\
+    %     &\sement& \bigwedge_{T \in \mathcal{S}}{\psint{T \mix (\Gamma \seq \Delta) \mix (\Gamma \seq \Delta) \mix (S \seq)}} &\text{(\reflemma{bubbles-mix})} \\
+    %     &\semequiv& \bigwedge_{T \in \mathcal{S}}{\psint{T \mix (\Gamma \seq \Delta) \mix (S \seq)}} &\text{(\reflemma{bubbles-contraction})} \\
+    %     &\sement& \bigwedge_{T \in \mathcal{S}}{\psint{T \mix (\Gamma \seq \Delta) \mix \piq{S \seq}}} &\text{(\reflemma{bubbles-piq})} \\
+    %     &=& \bigwedge_{T \in \mathcal{S}}{\psint{\piq{S \seq} \mix ((\Gamma \seq \Delta) \mix T)}} & \\
+    %     &=& \bigwedge_{(\Gamma' \JB \Delta') \in \mathcal{S}}{\psint{\piq{S \seq} \mix ((\Gamma \seq \Delta) \mix (\Gamma' \JB \Delta'))}} & \\
+    %     &=& \bigwedge_{(\Gamma' \JB \Delta') \in \mathcal{S}}{\psint{\piq{S \seq} \mix (\Gamma', \Gamma \JB \Delta, \Delta')}} & \\
+    %     &\sement& \bigwedge_{(\Gamma' \JB \Delta') \in \mathcal{S}}{\psint{\Gamma', \Gamma, (\piq{S}) \JB \Delta, \Delta'}} &\text{(IH)} \\
+    %     &=& \bigwedge_{(\Gamma' \JB \Delta') \in \mathcal{S}}{\psint{(\Gamma' \JB \Delta') \mix (\Gamma, (\piq{S}) \seq \Delta)}} & \\
+    %     &=& \psint{\Gamma, (\piq{S}) \piq{\mathcal{S}} \Delta} & \\
+    %   \end{array}
+    %   $$
+    \end{itemize}
+  \end{itemize}
+\end{proof}
 
 \subsection{Duality}
 
@@ -170,8 +376,13 @@ they will stand in perfect bijection.
 \end{definition}
 
 \begin{fact}[Duality]\labfact{duality}
-  In a Heyting-Brouwer algebra, if $A \sement B$ then $\soldual{B} \sement
-  \soldual{A}$.
+  ~\\\vspace{-1em}
+  \begin{enumerate}
+    \item $A \sementH B$ implies $\soldual{B} \sementB \soldual{A}$
+    \item $A \sementB B$ implies $\soldual{B} \sementH \soldual{A}$
+    \item $A \sementX B$ implies $\soldual{B} \sementX \soldual{A}$ when $\ACVar
+    \in \{\HeytingBrouwer, \Boolean\}$.
+  \end{enumerate}
 \end{fact}
 
 We omit the proof of \reffact{duality}, but this can easily be obtained from the
@@ -301,39 +512,30 @@ formulas have been dualized (\refdef{dual-formula}).
   By a straightforward recurrence on $\soldepth{I}$.
 \end{proof}
 
-\begin{lemma}\lablemma{int-invert}
-  If $\psint{\soldual{S}} \sement \psint{\soldual{T}}$ then $\nsint{T} \sement
-  \nsint{S}$.
+\begin{lemma}\lablemma{int-invert} $\psint{\soldual{S}} \sementX
+  \psint{\soldual{T}}$ implies $\nsint{T} \sementX \nsint{S}$ when $\ACVar \in
+  \{\HeytingBrouwer, \Boolean\}$.
 \end{lemma}
 \begin{proof}
-  By duality (\reffact{duality}) we have $\soldual{\psint{\soldual{T}}} \sement
+  By duality (\reffact{duality}) we have $\soldual{\psint{\soldual{T}}} \sementX
   \soldual{\psint{\soldual{S}}}$, and then by \reflemma{int-duality}
-  $\nsint{\soldual{\soldual{T}}} \sement \nsint{\soldual{\soldual{S}}}$. We
+  $\nsint{\soldual{\soldual{T}}} \sementX \nsint{\soldual{\soldual{S}}}$. We
   conclude by involutivity (\reflemma{involutivity}).
 \end{proof}
 
 \subsection{Contextual soundness}
 
-\begin{definition}
-  The \emph{depth} $\bradepth{\J}$ of a branching operator $\J$ is defined
-  recursively as follows:
-  \begin{align*}
-    \bradepth{\seq} &= 0 \\
-    \bradepth{\piq{\mathcal{S}}} &= 1 + \max_{S \in \mathcal{S}}{\bradepth{S}}
-  \end{align*}
-\end{definition}
-
 \begin{lemma}[Functoriality]\lablemma{bubbles-functoriality}
-  ~\\
+  ~\\\vspace{-1em}
   \begin{itemize}
-    \item $\psint{I} \sement \psint{J}$ implies $\psint{(\seq I) \mix S} \sement
+    \item $\psint{I} \sementX \psint{J}$ implies $\psint{(\seq I) \mix S} \sementX
     \psint{(\seq J) \mix S}$
-    % \item $\nsint{I} \sement \nsint{J}$ implies $\nsint{(\seq I) \mix S} \sement
+    % \item $\nsint{I} \sementX \nsint{J}$ implies $\nsint{(\seq I) \mix S} \sementX
     % \nsint{(\seq J) \mix S}$
-    \item $\nsint{J} \sement \nsint{I}$ implies $\psint{(I \seq) \mix S} \sement
-    \psint{(J \seq) \mix S}$
-    % \item $\psint{J} \sement \psint{I}$ implies $\nsint{(I
-    % \seq) \mix S} \sement \nsint{(J \seq) \mix S}$
+    \item $\nsint{J} \sementX \nsint{I}$ implies $\psint{(I \seq) \mix S}
+    \sementX \psint{(J \seq) \mix S}$
+    % \item $\psint{J} \sementX \psint{I}$ implies $\nsint{(I
+    % \seq) \mix S} \sementX \nsint{(J \seq) \mix S}$
   \end{itemize}
 \end{lemma}
 \begin{proof}
@@ -346,7 +548,7 @@ formulas have been dualized (\refdef{dual-formula}).
       \psint{(\seq I) \mix S}
       &=& \psint{\Gamma \seq I, \Delta} &\text{(\refdef{mixop})}\\
       &=& \bigwedge_{K \in \Gamma}{\nsint{K}} \limp \psint{I} \lor \bigvee_{K \in \Delta}{\psint{K}} &\text{(\refdef{pol-sinterp})}\\
-      &\sement& \bigwedge_{K \in \Gamma}{\nsint{K}} \limp \psint{J} \lor \bigvee_{K \in \Delta}{\psint{K}} &\text{(Hypothesis)}\\
+      &\sementX& \bigwedge_{K \in \Gamma}{\nsint{K}} \limp \psint{J} \lor \bigvee_{K \in \Delta}{\psint{K}} &\text{(Hypothesis)}\\
       &=& \psint{\Gamma \seq J, \Delta} &\text{(\refdef{pol-sinterp})}\\
       &=& \psint{(\seq J) \mix S} &\text{(\refdef{mixop})}
     \end{array}
@@ -356,7 +558,7 @@ formulas have been dualized (\refdef{dual-formula}).
       \psint{(I \seq) \mix S}
       &=& \psint{\Gamma, I \seq \Delta} &\text{(\refdef{mixop})}\\
       &=& \bigwedge_{K \in \Gamma}{\nsint{K}} \land \nsint{I} \limp \bigvee_{K \in \Delta}{\psint{K}} &\text{(\refdef{pol-sinterp})}\\
-      &\sement& \bigwedge_{K \in \Gamma}{\nsint{K}} \land \nsint{J} \limp \bigvee_{K \in \Delta}{\psint{K}} &\text{(Hypothesis)} \\
+      &\sementX& \bigwedge_{K \in \Gamma}{\nsint{K}} \land \nsint{J} \limp \bigvee_{K \in \Delta}{\psint{K}} &\text{(Hypothesis)} \\
         % &\begin{array}{rl}
         %    &\text{Contravariant functoriality of $\_{\limp}$} \\
         %   +&\text{Functoriality of $\_{\lor}$} \\
@@ -375,7 +577,7 @@ formulas have been dualized (\refdef{dual-formula}).
       &=& \psint{\Gamma \piq{\mathcal{S}} I, \Delta} &\text{(\refdef{mixop})} \\
       &=& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(\Gamma \seq I, \Delta) \mix S_0}} &\text{(\refdef{pol-sinterp})} \\
       &=& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(\seq I) \mix ((\Gamma \seq \Delta) \mix S_0)}} &\text{(\refdef{mixop})} \\
-      &\sement& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(\seq J) \mix ((\Gamma \seq \Delta) \mix S_0)}} &\text{(IH)} \\
+      &\sementX& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(\seq J) \mix ((\Gamma \seq \Delta) \mix S_0)}} &\text{(IH)} \\
       &=& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(\Gamma \seq J, \Delta) \mix S_0}} &\text{(\refdef{mixop})} \\
       &=& \psint{\Gamma \piq{\mathcal{S}} J, \Delta} &\text{(\refdef{pol-sinterp})} \\
       &=& \psint{(\seq J) \mix S} &\text{(\refdef{mixop})}
@@ -387,7 +589,7 @@ formulas have been dualized (\refdef{dual-formula}).
       &=& \psint{\Gamma, I \piq{\mathcal{S}} \Delta} &\text{(\refdef{mixop})} \\
       &=& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(\Gamma, I \seq \Delta) \mix S_0}} &\text{(\refdef{pol-sinterp})} \\
       &=& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(I \seq) \mix ((\Gamma \seq \Delta) \mix S_0)}} &\text{(\refdef{mixop})} \\
-      &\sement& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(J \seq) \mix ((\Gamma \seq \Delta) \mix S_0)}} &\text{(IH)} \\
+      &\sementX& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(J \seq) \mix ((\Gamma \seq \Delta) \mix S_0)}} &\text{(IH)} \\
       &=& \bigwedge_{S_0 \in \mathcal{S}}{\psint{(\Gamma, J \seq \Delta) \mix S_0}} &\text{(\refdef{mixop})} \\
       &=& \psint{\Gamma, J \piq{\mathcal{S}} \Delta} &\text{(\refdef{pol-sinterp})} \\
       &=& \psint{(J \seq) \mix S} &\text{(\refdef{mixop})}
@@ -419,7 +621,7 @@ recursively as follows:
 
 \begin{lemma}[Contextual soundness]\lablemma{bubbles-ctx-soundness}
 
-  If $S \lstep T$ then $\psint{U\select{T} \mix (\Gamma \seq \Delta)} \sement
+  If $S \lstep T$ then $\psint{U\select{T} \mix (\Gamma \seq \Delta)} \sementC
   \psint{U\select{S} \mix (\Gamma \seq \Delta)}$.
   % and $\nsint{S \mix (\Gamma \seq \Delta)} \sement
   % \nsint{T \mix (\Gamma \seq \Delta)}$.
@@ -432,12 +634,12 @@ recursively as follows:
     (\reflemma{bubbles-local-soundness}).
     \item[\textbf{Positive case}] Suppose $\soldepth{U\hole} > 0$ and $U\hole =
     \Gamma' \J U_0\hole, \Delta'$. Then by IH we have $\psint{U_0\select{T}}
-    \sement \psint{U_0\select{S}}$, and thus
+    \sementC \psint{U_0\select{S}}$, and thus
     $$
     \begin{array}{rcll}
       \psint{(\Gamma' \J U_0\select{T}, \Delta') \mix (\Gamma \seq \Delta)}
       &=& \psint{(\seq U_0\select{T}) \mix (\Gamma, \Gamma' \J \Delta', \Delta)} &\text{(\refdef{mixop})}\\
-      &\sement& \psint{(\seq U_0\select{S}) \mix (\Gamma, \Gamma' \J \Delta', \Delta)} &\text{(\reflemma{bubbles-functoriality})}\\
+      &\sementC& \psint{(\seq U_0\select{S}) \mix (\Gamma, \Gamma' \J \Delta', \Delta)} &\text{(\reflemma{bubbles-functoriality})}\\
       &=& \psint{(\Gamma' \J U_0\select{S}, \Delta') \mix (\Gamma \seq \Delta)} &\text{(\refdef{mixop})}
     \end{array}
     $$
@@ -445,29 +647,29 @@ recursively as follows:
     \item[\textbf{Negative case}] Suppose $\soldepth{U\hole} > 0$ and $U\hole =
     \Gamma', U_0\hole \J \Delta'$. Then by \reflemma{local-rule-duality} we have
     $\soldual{S} \lstep \soldual{T}$, and thus by IH
-    $\psint{\soldual{U_0}\select{\soldual{T}}} \sement
+    $\psint{\soldual{U_0}\select{\soldual{T}}} \sementC
     \psint{\soldual{U_0}\select{\soldual{S}}}$, or equivalently
-    $\psint{\soldual{U_0\select{T}}} \sement \psint{\soldual{U_0\select{S}}}$.
-    Then by \reflemma{int-invert} we get $\nsint{U_0\select{S}} \sement
+    $\psint{\soldual{U_0\select{T}}} \sementC \psint{\soldual{U_0\select{S}}}$.
+    Then by \reflemma{int-invert} we get $\nsint{U_0\select{S}} \sementC
     \nsint{U_0\select{T}}$, and thus
     $$
     \begin{array}{rcll}
       \psint{(\Gamma', U_0\select{T} \J \Delta') \mix (\Gamma \seq \Delta)}
       &=& \psint{(U_0\select{T} \seq) \mix (\Gamma, \Gamma' \J \Delta', \Delta)} &\text{(\refdef{mixop})}\\
-      &\sement& \psint{(U_0\select{S} \seq) \mix (\Gamma, \Gamma' \J \Delta', \Delta)} &\text{(\reflemma{bubbles-functoriality})}\\
+      &\sementC& \psint{(U_0\select{S} \seq) \mix (\Gamma, \Gamma' \J \Delta', \Delta)} &\text{(\reflemma{bubbles-functoriality})}\\
       &=& \psint{(\Gamma', U_0\select{S} \J \Delta') \mix (\Gamma \seq \Delta)} &\text{(\refdef{mixop})}
     \end{array}
     $$
 
     \item[\textbf{Neutral case}] Suppose $\soldepth{U\hole} > 0$ and $U\hole =
     \Gamma \piq{\mathcal{S} \sep U_0\hole} \Delta$. Then by IH we have
-    $\psint{U_0\select{T} \mix (\Gamma \seq \Delta)} \sement
+    $\psint{U_0\select{T} \mix (\Gamma \seq \Delta)} \sementC
     \psint{U_0\select{S} \mix (\Gamma \seq \Delta)}$, and thus
     $$
     \begin{array}{rcll}
       \psint{\Gamma \piq{\mathcal{S} \sep U_0\select{T}} \Delta}
       &=& \psint{\Gamma \piq{\mathcal{S}} \Delta} \land \psint{U_0\select{T} \mix (\Gamma \seq \Delta)} &\text{(\refdef{pol-sinterp})}\\
-      &\sement& \psint{\Gamma \piq{\mathcal{S}} \Delta} \land \psint{U_0\select{S} \mix (\Gamma \seq \Delta)} &\\
+      &\sementC& \psint{\Gamma \piq{\mathcal{S}} \Delta} \land \psint{U_0\select{S} \mix (\Gamma \seq \Delta)} &\\
       &=& \psint{\Gamma \piq{\mathcal{S} \sep U_0\select{S}} \Delta} &\text{(\refdef{pol-sinterp})}
     \end{array}
     $$
@@ -475,7 +677,7 @@ recursively as follows:
 \end{proof}
 
 \begin{theorem}[Soundness]
-  If $S \step T$ then $\psint{T} \sement \psint{S}$.
+  If $S \step T$ then $\psint{T} \sementC \psint{S}$.
 \end{theorem}
 \begin{proof}
   By definition of $\step$, and then applying \reflemma{bubbles-ctx-soundness}
@@ -486,10 +688,13 @@ We also get for free soundness with respect to the negative interpretation,
 which we call \emph{co-soundness}:
 
 \begin{theorem}[Co-soundness]
-  If $S \step T$ then $\nsint{S} \sement \nsint{T}$.
+  If $S \step T$ then $\nsint{S} \sementC \nsint{T}$.
 \end{theorem}
 \begin{proof}
   By \reflemma{rule-duality} we have $\soldual{S} \step \soldual{T}$,
-  and thus by soundness $\psint{\soldual{T}} \sement \psint{\soldual{S}}$. Then
+  and thus by soundness $\psint{\soldual{T}} \sementC \psint{\soldual{S}}$. Then
   we can conclude by \reflemma{int-invert}.
 \end{proof}
+
+\todo{Identify precisely the chain of dependence between lemmas that makes
+soundness classical. Normally it should just be because of local soundness. }
