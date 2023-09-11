@@ -5,104 +5,104 @@
 \multicolumn{2}{c}{\identity} \\[1em]
 
 \R[\mathsf{i}{\downarrow}]
-    {\Gamma \piq{\mathcal{S}} {}}
-    {\Gamma, A \piq{\mathcal{S}} A}
+    {\Gamma \piq{\cS} {}}
+    {\Gamma, A \piq{\cS} A}
 &
 \R[\mathsf{i}{\uparrow}]
-    {\Gamma \piq{\mathcal{S} \sep {} \piq{} A \sep A \piq{} \Delta} {}}
-    {\Gamma \piq{\mathcal{S}} \Delta} \\
+    {\Gamma \piq{\cS \sep {} \piq{} A \sep A \piq{} \Delta} {}}
+    {\Gamma \piq{\cS} \Delta} \\
 \end{array}
 \and
 \begin{array}{r@{\quad}l}
 \multicolumn{2}{c}{\resource} \\[1em]
 
 \R[\mathsf{w}]
-    {\Gamma \piq{\mathcal{S}} \Delta}
-    {\Gamma, A \piq{\mathcal{S}} \Delta}
+    {\Gamma \piq{\cS} \Delta}
+    {\Gamma, A \piq{\cS} \Delta}
 &
 \R[\mathsf{c}]
-    {\Gamma, A, A \piq{\mathcal{S}} \Delta}
-    {\Gamma, A \piq{\mathcal{S}} \Delta} \\
+    {\Gamma, A, A \piq{\cS} \Delta}
+    {\Gamma, A \piq{\cS} \Delta} \\
 \end{array}
 \\
 \begin{array}{r}
 \multicolumn{1}{c}{\flow} \\[1em]
 
 \R[\mathsf{f{-}}]
-    {\Gamma \piq{\mathcal{S} \sep \Gamma', A \piq{\mathcal{S'}} \Delta'} \Delta}
-    {\Gamma, A \piq{\mathcal{S} \sep \Gamma' \piq{\mathcal{S'}} \Delta'} \Delta}
+    {\Gamma \piq{\cS \sep \Gamma', A \piq{\mathcal{S'}} \Delta'} \Delta}
+    {\Gamma, A \piq{\cS \sep \Gamma' \piq{\mathcal{S'}} \Delta'} \Delta}
 \end{array}
 \and
 \begin{array}{r}
-\multicolumn{1}{c}{\popping} \\[1em]
+\multicolumn{1}{c}{\membrane} \\[1em]
 
 \R[\mathsf{p}]
-    {\Gamma \piq{\mathcal{S}} \Delta}
-    {\Gamma \piq{\mathcal{S} \sep \piq{}} \Delta}
+    {\Gamma \piq{\cS} \Delta}
+    {\Gamma \piq{\cS \sep \piq{}} \Delta}
 \end{array}
 \\
 \begin{array}{c@{\quad}c}
 \multicolumn{2}{c}{\heating} \\[1em]
 
 \R[\top{-}]
-    {\Gamma \piq{\mathcal{S}} \Delta}
-    {\Gamma, \top \piq{\mathcal{S}} \Delta}
+    {\Gamma \piq{\cS} \Delta}
+    {\Gamma, \top \piq{\cS} \Delta}
 &
 \R[\top{+}]
-    {\Gamma \piq{\mathcal{S}} {}}
-    {\Gamma \piq{\mathcal{S}} \top}
+    {\Gamma \piq{\cS} {}}
+    {\Gamma \piq{\cS} \top}
 \\
 \R[\bot{-}]
-    {\Gamma \piq{\mathcal{S}} {}}
-    {\Gamma, \bot \piq{\mathcal{S}} \Delta}
+    {\Gamma \piq{\cS} {}}
+    {\Gamma, \bot \piq{\cS} \Delta}
 &\\
 \R[\land{-}]
-    {\Gamma, A, B \piq{\mathcal{S}} \Delta}
-    {\Gamma, A \land B \piq{\mathcal{S}} \Delta}
+    {\Gamma, A, B \piq{\cS} \Delta}
+    {\Gamma, A \land B \piq{\cS} \Delta}
 &
 \R[\land{+}]
-    {\Gamma \piq{\mathcal{S} \sep {} \piq{} A \sep {} \piq{} B} {}}
-    {\Gamma \piq{\mathcal{S}} A \land B}
+    {\Gamma \piq{\cS \sep {} \piq{} A \sep {} \piq{} B} {}}
+    {\Gamma \piq{\cS} A \land B}
 \\
 \multirow{2}{*}{
 \R[\lor{-}]
-    {\Gamma \piq{\mathcal{S} \sep A \piq{} \Delta \sep B \piq{} \Delta} {}}
-    {\Gamma, A \lor B \piq{\mathcal{S}} \Delta}}
+    {\Gamma \piq{\cS \sep A \piq{} \Delta \sep B \piq{} \Delta} {}}
+    {\Gamma, A \lor B \piq{\cS} \Delta}}
 &
 \R[\lor{+}_1]
-    {\Gamma \piq{\mathcal{S}} A}
-    {\Gamma \piq{\mathcal{S}} A \lor B}
+    {\Gamma \piq{\cS} A}
+    {\Gamma \piq{\cS} A \lor B}
 \\&
 \R[\lor{+}_2]
-    {\Gamma \piq{\mathcal{S}} B}
-    {\Gamma \piq{\mathcal{S}} A \lor B}
+    {\Gamma \piq{\cS} B}
+    {\Gamma \piq{\cS} A \lor B}
 \\
 \R[{\limp}{-}]
-    {\Gamma \piq{\mathcal{S} \sep {} \piq{} A \sep B \piq{} \Delta}}
-    {\Gamma, A \limp B \piq{\mathcal{S}} \Delta}
+    {\Gamma \piq{\cS \sep {} \piq{} A \sep B \piq{} \Delta}}
+    {\Gamma, A \limp B \piq{\cS} \Delta}
 &
 \R[{\limp}{+}]
-    {\Gamma, A \piq{\mathcal{S}} B}
-    {\Gamma \piq{\mathcal{S}} A \limp B}
+    {\Gamma, A \piq{\cS} B}
+    {\Gamma \piq{\cS} A \limp B}
 \\
 \R[\forall{-}]
-    {\Gamma, \subst{A}{t}{x} \piq{\mathcal{S}} \Delta}
-    {\Gamma, \forall x. A \piq{\mathcal{S}} \Delta}
+    {\Gamma, \subst{A}{t}{x} \piq{\cS} \Delta}
+    {\Gamma, \forall x. A \piq{\cS} \Delta}
 &
 \R[\forall{+}]
-    {\Gamma \piq{\mathcal{S}} A}
-    {\Gamma \piq{\mathcal{S}} \forall x. A}
+    {\Gamma \piq{\cS} A}
+    {\Gamma \piq{\cS} \forall x. A}
 \\
 \R[\exists{-}]
-    {\Gamma, A \piq{\mathcal{S}} \Delta}
-    {\Gamma, \exists x. A \piq{\mathcal{S}} \Delta}
+    {\Gamma, A \piq{\cS} \Delta}
+    {\Gamma, \exists x. A \piq{\cS} \Delta}
 &
 \R[\exists{+}]
-    {\Gamma \piq{\mathcal{S}} \subst{A}{t}{x}}
-    {\Gamma \piq{\mathcal{S}} \exists x. A}
+    {\Gamma \piq{\cS} \subst{A}{t}{x}}
+    {\Gamma \piq{\cS} \exists x. A}
 \end{array}
 \end{mathpar}
 
 In the {\rnm{\forall{+}}} and {\rnm{\exists{-}}} rules, $x$ is not free in
-$\Gamma$, $\Delta$ and $\mathcal{S}$.
+$\Gamma$, $\Delta$ and $\cS$.
 \end{framed}

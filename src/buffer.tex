@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage[a4paper, margin=3.5cm]{geometry}
+\usepackage[a4paper, margin=2cm]{geometry}
 \usepackage{todo}
 \usepackage{hyperref}
 \usepackage{amsmath}
@@ -45,17 +45,21 @@
 \newcommand{\labfig}[1]{\dolab{fig}{#1}}
 \newcommand{\labdef}[1]{\dolab{def}{#1}}
 \newcommand{\lablemma}[1]{\dolab{lemma}{#1}}
+\newcommand{\labthm}[1]{\dolab{thm}{#1}}
 \newcommand{\labfact}[1]{\dolab{fact}{#1}}
+\newcommand{\labsec}[1]{\dolab{sec}{#1}}
 
 \newcommand{\reffig}[1]{\doref{Figure}{fig}{#1}}
 \newcommand{\refdef}[1]{\doref{Definition}{def}{#1}}
 \newcommand{\reflemma}[1]{\doref{Lemma}{lemma}{#1}}
+\newcommand{\refthm}[1]{\doref{Theorem}{theorem}{#1}}
 \newcommand{\reffact}[1]{\doref{Fact}{fact}{#1}}
+\newcommand{\refsec}[1]{\doref{Section}{sec}{#1}}
 
 \begin{document}
 
 \input{sections/bubbles-soundness.tex} 
-% \input{figures/sequent-B-invertible.tex}
+% \input{figures/sequent-B.tex}
 % \tikzfig{1}{1}{venn-algebras}
 
 \nocite{*}

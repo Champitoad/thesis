@@ -164,7 +164,7 @@ which gives the following mutually recursive definitions:
 \begin{definition}[Solution]\labdef{solution}
   A \emph{solution} $S$ is a multiset of ions and bubbles. It is
   \emph{single-conclusion} if it contains at most one positive ion. We will use
-  letters $\mathcal{S}, \mathcal{T}, \mathcal{U}$ to denote multisets of
+  letters $\cS, \mathcal{T}, \mathcal{U}$ to denote multisets of
   solutions.
 \end{definition}
 Note that in the above definitions, bubbles play a purely metaphorical role and
@@ -233,7 +233,7 @@ calculus for intuitionistic logic dubbed \sys{BJ}. It is divided in five groups:
   and contraction rules; and every rule of the form $\mcirc{-}$ (resp.) that
   is, the axiom and cut rules, the contraction and weakening rules, and
   introduction rules for logical connectives.
-  \item The {\flow} and {\popping} groups are new, and define the behavior of
+  \item The {\flow} and {\membrane} groups are new, and define the behavior of
   bubbles. More specifically, $\mathbb{F}$-rules characterize how information
   flows in solutions by specifying what kinds of objects can traverse bubbles,
   and in which direction. They play the same role as \emph{switch} rules in
@@ -242,12 +242,13 @@ calculus for intuitionistic logic dubbed \sys{BJ}. It is divided in five groups:
   there is only one $\mathbb{F}$-rule {\rnmsf{f{-}}} allowing hypotheses to flow
   inside bubbles.
   
-  As their name suggests, $\mathbb{P}$-rules allow to \emph{pop} empty bubbles,
-  which can be interpreted as the action of dismissing solved subgoals. In CoS
-  they would correspond to congruence rules handling the truth unit $\top$, and
-  in subformula linking to the unit rules (\reffig{DISL-U}). In the asymmetric
-  bubble calculus there is only one $\mathbb{P}$-rule {\rnmsf{p}} allowing to
-  pop any empty bubble.
+  As their name suggests, $\mathbb{M}$-rules handle the behavior of the
+  \emph{membrane} of bubbles, but independently from other items as opposed to
+  $\mathbb{F}$-rules. In the asymmetric bubble calculus there is only one
+  $\mathbb{M}$-rule {\rnmsf{p}} allowing to \emph{pop} any empty bubble, which
+  can be interpreted as the action of dismissing a solved subgoal. In CoS it
+  would correspond to congruence rules handling the truth unit $\top$, and in
+  subformula linking to the unit rules (\reffig{DISL-U}).
 \end{itemize}
 
 Now that we have rules for manipulating solutions, and since solutions can be
@@ -256,7 +257,7 @@ subsolutions of arbitrary depth:
 
 \begin{definition}[Solution context]\labdef{solution-context}
   % \emph{Solution contexts} are defined by the following grammar:
-  % $$S\hole \Coloneq \hole \mid \Gamma \piq{\mathcal{S} \sep S\hole \sep
+  % $$S\hole \Coloneq \hole \mid \Gamma \piq{\cS \sep S\hole \sep
   % \mathcal{T}} \Delta$$
   A \emph{solution context} $S\hole$ is a solution which contains exactly one
   occurrence of the special solution $\hole$ called the \emph{hole}. Given
@@ -356,7 +357,7 @@ answer might have been found with the proof system introduced in
 While the sequent-style presentation of \sys{BJ} clearly shows its filiation
 with sequent calculus, its syntax is quite heavy, and obscures an important
 property of the rules: they almost always preserve the contexts $\Gamma, \Delta$
-of formulas and $\mathcal{S}$ of bubbles. That is, the rules of \sys{BJ} are
+of formulas and $\cS$ of bubbles. That is, the rules of \sys{BJ} are
 \emph{local}. This enables a more economical and graphical presentation of the
 rules in \reffig{graphical-BJ}, where \sys{BJ} is seen as a multiset rewriting
 system just like the {\cham} thanks to \refdef{solution}. Instead of relying on
@@ -437,7 +438,7 @@ there are always at most two. More precisely, $\mathbb{H}$-rules correspond to
 the most basic DnD action between dual occurrences of a formula.
 
 As mentioned earlier when comparing \sys{BJ} to \sys{LJ}, the novelty here lies
-with $\mathbb{H}$-rules, $\mathbb{F}$-rules and $\mathbb{P}$-rules that deal
+with $\mathbb{H}$-rules, $\mathbb{F}$-rules and $\mathbb{M}$-rules that deal
 with \emph{bubbles}. Remember that the goal behind the idea of bubble calculus
 was precisely to provide a new way to manipulate subgoals through bubbles
 instead of tabs, which are more in line with the chemical metaphor. It is quite
@@ -493,11 +494,18 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     of {\rnmsf{f{-}}} followed by {\rnmsf{i{\downarrow}}} could be performed as
     a single DnD action, where the dragged hypothesis crosses successively the
     various bubbles in its way.
-  \item[\textbf{\popping}]
+  \item[\textbf{\membrane}]
     The {\rnmsf{p}} rule can be mapped very straightforwardly to the action of
     clicking on the area of an empty bubble, in order to pop it. It could also
     be entirely automated, by letting the proof engine eagerly pop empty bubbles
-    as soon as they appear in a solution.
+    as soon as they appear in a solution. Note that in this graphical setting,
+    the {\rnmsf{p}} rule can be understood as resulting from a process of
+    \emph{contraction}\sidenote{Not to be confused with the contraction rules
+    \rnmsf{c} and \rnmsf{w}.} of the membrane into a single point: if the bubble
+    contains some items $\Delta$, then this process fails because the membrane
+    gets stuck on the boundaries of $\Delta$. This is a topological way to check
+    the emptiness of a bubble, which has the benefit of being completely
+    \emph{local}, on top of being very clear visually.
   \item[\textbf{\resource}]
     % In Actema, hypotheses are displayed in blue items inside a reserved zone
     % holding the entire context, including also local variables and definitions

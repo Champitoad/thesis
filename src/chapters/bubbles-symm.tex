@@ -103,13 +103,13 @@ solution $S$ as a formula $\sint{S}$. If we just take the asymmetric
 interpretation (\refdef{ainterp}) and group conclusions disjunctively instead of
 conjunctively, we get
 $$
-\sint{\Gamma \piq{\mathcal{S}} \Delta} =
-\bigwedge \Gamma \limp \bigvee \Delta \land \bigwedge_{S \in \mathcal{S}}{\sint{S}}
+\sint{\Gamma \piq{\cS} \Delta} =
+\bigwedge \Gamma \limp \bigvee \Delta \land \bigwedge_{S \in \cS}{\sint{S}}
 $$
 But this interpretation breaks on the 0-ary case when $\Delta$ is empty: instead
-of seeing $\Gamma \piq{\mathcal{S}}$ as a node of the proof tree with hypotheses
-$\Gamma$ and subgoals $\mathcal{S}$, it trivializes it to $\sint{\Gamma
-\piq{\mathcal{S}}} = \bigwedge \Gamma \limp \bot$, i.e. a goal where one has to
+of seeing $\Gamma \piq{\cS}$ as a node of the proof tree with hypotheses
+$\Gamma$ and subgoals $\cS$, it trivializes it to $\sint{\Gamma
+\piq{\cS}} = \bigwedge \Gamma \limp \bot$, i.e. a goal where one has to
 find a contradiction in $\Gamma$; which is obviously not what we have in mind.
 
 \begin{marginfigure}
@@ -149,10 +149,10 @@ we would like to have $\sint{S} \semequiv \sint{T} \semequiv (A \limp B
 conjunction, a first naive try would give the following interpretation, where we
 just replaced $\land$ by $\lor$ compared to the previous attempt:
 $$
-\sint{\Gamma \piq{\mathcal{S}} \Delta} =
-\bigwedge{\Gamma} \limp \bigwedge_{S \in \mathcal{S}}{\sint{S}} \lor \bigvee \Delta
+\sint{\Gamma \piq{\cS} \Delta} =
+\bigwedge{\Gamma} \limp \bigwedge_{S \in \cS}{\sint{S}} \lor \bigvee \Delta
 $$
-But this immediately fails whenever $\mathcal{S} = \emptyset$, because it
+But this immediately fails whenever $\cS = \emptyset$, because it
 trivializes to $\bigwedge \Gamma \limp \top \lor \bigvee \Delta \semequiv \top$
 instead of $\bigwedge \Gamma \limp \bigvee \Delta$. The only way we found around
 this defect was to internalize \emph{syntactically} a distinction between two
@@ -160,8 +160,8 @@ kinds of solutions, by assigning them one of two \emph{statuses}\sidenote{In the
 terminology of Martin-Löf, we could say that we now have two distinct forms of
 \emph{judgment}.}:
 \begin{itemize}
-  \item \emph{closed} solutions $\Gamma \piq{\mathcal{S}} \Delta$ correspond
-  to branching nodes in the proof tree, or to closed leaves when $\mathcal{S} =
+  \item \emph{closed} solutions $\Gamma \piq{\cS} \Delta$ correspond
+  to branching nodes in the proof tree, or to closed leaves when $\cS =
   \emptyset$ (i.e. solved subgoals). Thus it becomes sensical to have
   $\sint{\Gamma \piq{} \Delta} = \top$. In the asymmetric interpretation,
   closed solutions were encoded by solutions with no conclusions;
@@ -176,7 +176,7 @@ able to abstract from the particular kind of solution at hand, we reframe the
 syntax of solutions with so-called \emph{branching} operators $\J$:
 \begin{align*}
   S, T, U &\Coloneq \Gamma \J \Delta \\
-  \J, \JB &\Coloneq {\seq} \mid \piq{\mathcal{S}}
+  \J, \JB &\Coloneq {\seq} \mid \piq{\cS}
 \end{align*}
 Graphically, closed solutions with no bubbles can be distinguished from open
 solutions by painting their \emph{background} on the proof canvas in green, the
@@ -232,16 +232,16 @@ following final definitions:
   \begin{align*}
     (\Gamma \J \Delta) \mix (\Gamma' \seq \Delta') &=
       \Gamma, \Gamma' \J \Delta, \Delta' \\
-    (\Gamma \piq{\mathcal{S}} \Delta) \mix (\Gamma' \piq{\mathcal{S'}} \Delta') &=
-      \Gamma, \Gamma' \piq{\mathcal{S} \sep \mathcal{S'}} \Delta, \Delta' \\
+    (\Gamma \piq{\cS} \Delta) \mix (\Gamma' \piq{\mathcal{S'}} \Delta') &=
+      \Gamma, \Gamma' \piq{\cS \sep \mathcal{S'}} \Delta, \Delta' \\
   \end{align*}
 \end{definition}
 
 \begin{definition}[Symmetric interpretation]\labdef{sinterp}
   The \emph{symmetric interpretation} of a solution is defined recursively by:
   \begin{align*}
-    \sint{\Gamma \piq{\mathcal{S}} \Delta} &=
-      \bigwedge_{S \in \mathcal{S}} \sint{S \mix (\Gamma \seq \Delta)} \\
+    \sint{\Gamma \piq{\cS} \Delta} &=
+      \bigwedge_{S \in \cS} \sint{S \mix (\Gamma \seq \Delta)} \\
     \sint{\Gamma \seq \Delta} &=
       \bigwedge \Gamma \limp \bigvee \Delta
   \end{align*}
@@ -442,10 +442,10 @@ definition of solutions, which can now be open or closed:
   bubbles. Solutions $S$ can be represented textually with the following syntax:
   \begin{align*}
     S, T, U &\Coloneq \Gamma \J \Delta &
-    \mathcal{S} &\Coloneq S_1 \sep \ldots \sep S_n \\
+    \cS &\Coloneq S_1 \sep \ldots \sep S_n \\
     I, J, K &\Coloneq A \mid S &
     \Gamma, \Delta &\Coloneq I_1, \ldots, I_n \\
-    \J, \JB &\Coloneq {\seq} \mid {\piq{\mathcal{S}}} &&
+    \J, \JB &\Coloneq {\seq} \mid {\piq{\cS}} &&
   \end{align*}
 \end{definition}
 
@@ -454,8 +454,8 @@ Note that in the textual syntax, bubbles are identified with \emph{subsolutions}
 relative to branching operators; that is, for any solutions $S, T, U$ such that
 $T \subsol U$, $S$ is either:
 \begin{itemize}
-  \item \emph{neutral} if $T = \Gamma \piq{\mathcal{S}} \Delta$ and $S \in
-  \mathcal{S}$;
+  \item \emph{neutral} if $T = \Gamma \piq{\cS} \Delta$ and $S \in
+  \cS$;
   \item \emph{positive} if $T = \Gamma \J \Delta$ and $S \in \Delta$;
   \item \emph{negative} if $T = \Gamma \J \Delta$ and $S \in \Gamma$.
 \end{itemize}
@@ -472,14 +472,16 @@ nested sequents for \sys{FILL} \cite{clouston-annotation-free-2013}.}:
   \begin{align*}
     \psint{A} &= A &
     \nsint{A} &= A \\
-    \psint{\Gamma \piq{\mathcal{S}} \Delta} &=
-      \bigwedge_{S \in \mathcal{S}} \psint{S \mix \Gamma \seq \Delta} &
-    \nsint{\Gamma \piq{\mathcal{S}} \Delta} &=
-      \bigvee_{S \in \mathcal{S}} \nsint{S \mix \Gamma \seq \Delta} \\
+    \psint{\Gamma \piq{\cS} \Delta} &=
+      \bigwedge_{S \in \cS} \psint{S \mix \Gamma \seq \Delta} &
+    \nsint{\Gamma \piq{\cS} \Delta} &=
+      \bigvee_{S \in \cS} \nsint{S \mix \Gamma \seq \Delta} \\
     \psint{\Gamma \seq \Delta} &=
-      \bigwedge_{I \in \Gamma} \nsint{I} \limp \bigvee_{I \in \Delta} \psint{I} &
+      \nsint{\Gamma} \limp \psint{\Delta} &
     \nsint{\Gamma \seq \Delta} &=
-      \bigwedge_{I \in \Gamma} \nsint{I} \lsub \bigvee_{I \in \Delta} \psint{I}
+      \nsint{\Gamma} \lsub \psint{\Delta} \\
+    \psint{\Gamma} &= \bigvee_{I \in \Gamma}{\psint{I}} &
+    \nsint{\Gamma} &= \bigwedge_{I \in \Gamma}{\nsint{I}}
   \end{align*}
 \end{definition}
 
@@ -600,10 +602,10 @@ priorization relatively to the latter:
     decreasing with the application of rules, avoiding infinite loops during
     proof search as in the calculus \sys{LJT} of R. Dyckhoff
     \cite{dyckhoff_contraction-free_1992}. The third reason is ergonomical: as
-    already remarked by the authors of the Proof-by-Pointing paradigm
-    \sidenote{Section 4.1 of \cite{PbP}.}, rules that systematically duplicate
-    formulas can quickly overload the goal with useless copies, making it harder
-    to read and navigate.
+    already remarked by the authors of the Proof-by-Pointing
+    paradigm\sidenote{Section 4.1 of \cite{PbP}.}, rules that systematically
+    duplicate formulas can quickly overload the goal with useless copies, making
+    it harder to read and navigate.
   \item[Symmetry] 
     In classical logic, both sequent calculi like \sys{LK} and deep inference
     systems like CoS are known for their very rich \emph{symmetries}. In fact,
@@ -660,11 +662,33 @@ some of its \emph{locality} and \emph{symmetry} along the way.
 %   kind of solution, but are neither local nor linear (because they rely on
 %   duplicating the abstract proof in all subgoals) }
 
-\todo{ Talk about flow rules for moving outside bubbles motivated by the need of
+TODO: Talk about flow rules for moving outside bubbles motivated by the need of
 a cut-free proof for Uustalu's formula, with the figure summarizing all flow
 rules, and slogan that "inward (resp. outward) paths cannot cross bubbles of the
 same (resp. a different) color". In classical logic colored bubbles do not block
-anything, and are thus useless. }
+anything, and are thus useless. Also motivated by cut admissibility are the
+$\mathbb{M}$-rules {\rnmsf{a{-}}} and {\rnmsf{a{+}}} of \emph{absorption}, which
+can be understood as resulting from a process of \emph{expansion} of membranes
+dual to the \emph{contraction} of popping rules: while contraction gets stuck on
+polarized items because they cannot cross neutral membranes outwards, expansion
+gets stuck on neutral items because they cannot cross neutral membranes
+inwards\sidenote{In fact, we could add (non-invertible) $\mathbb{F}$-rules to
+move neutral bubbles outside of any kind of bubble, which would correspond to a
+\emph{generalization} of subgoals. This is illustrated in the rules of
+\reffig{flow-neutral-bubbles}, where the subgoal $S$ is abstracted from the
+context of its previously parent subgoal $T$.}.
+
+\begin{marginfigure}
+  $$
+  \begin{array}{rclr}
+    \bubble{\bubble{\color{black}S}~~~\color{black}T} &\step &\bubble{\color{black}S}~~~\bubble{\color{black}T} &\mathsf{n{\uparrow}} \\
+    \hbubble{\bubble{\color{black}S}~~~\color{black}T} &\step &\bubble{\color{black}S}~~~\hbubble{\color{black}T} &\mathsf{n{-}{\uparrow}} \\
+    \cbubble{\bubble{\color{black}S}~~~\color{black}T} &\step &\bubble{\color{black}S}~~~\cbubble{\color{black}T} &\mathsf{n{+}{\uparrow}} \\
+  \end{array} 
+  $$
+  \caption{$\mathbb{F}$-rules for neutral bubbles}
+  \labfig{flow-neutral-bubbles}
+\end{marginfigure}
 
 \section{Soundness}\labsec{bubbles-soundness}
 
@@ -677,6 +701,28 @@ anything, and are thus useless. }
 dual-intuitionistic and classical fragments + cut admissibility}
 
 \section{Invertible calculus}\labsec{invertible-calculus}
+
+From the proof of \reflemma{bubbles-local-soundness}, we can identify which
+rules of system \sys{B} are invertible, and which are probably not. Indeed if
+the soundness of a rule only relies on a chain of equivalences, then it is
+necessarily invertible. On the contrary if it relies on an inequality, then it
+is probably not invertible\sidenote{To ensure that it is not invertible, we
+would need additionally to find a counter-model that invalidates the converse
+inequality.}.
+
+\begin{fact}[Invertibility of system \sys{B}]
+  All rules in the fragment $\mathbb{I} \cup \mathbb{R} \cup \mathbb{M} \cup
+  \{\rsf{\top{-}}, \rsf{\top{+}}, \rsf{\bot{-}}, \rsf{\bot{+}}, \rsf{\land{-}},
+  \rsf{\land{+}}, \rsf{\lor{-}}, \rsf{\lor{+}}, \rsf{{\limp}{+}},
+  \rsf{{\lsub}{-}}\}$ of system \sys{B} are invertible.
+\end{fact}
+
+Thus the only remaining rules of system \sys{B} that are (most probably) not
+invertible are all the $\mathbb{F}$-rules, as well as the $\mathbb{H}$-rules
+$\{\rsf{{\limp}{-}}, \rsf{{\lsub}{+}}\}$\sidenote{For quantifier rules, we
+conjecture that as in sequent calculus, the rules $\{\rsf{\forall{+}},
+\rsf{\exists{-}}\}$ are invertible, while the rules $\{\rsf{\forall{-}},
+\rsf{\exists{+}}\}$ are not.}.
 
 \todo{Iteration rules as a middle-ground in the linearity/invertibility tradeoff.}
 

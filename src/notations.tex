@@ -29,6 +29,7 @@
 }
 
 \newcommand{\rnmsf}[1]{\rnm{\mathsf{#1}}}
+\newcommand{\rsf}[1]{\text{\small$\mathsf{#1}$}}
 
 \newcommand{\assum}{\prfassumption}
 \newcommand{\summ}{\prfsummary}
@@ -64,6 +65,8 @@
 \newcommand{\lstep}{\rightharpoonup}
 \newcommand{\step}{\rightarrow}
 \newcommand{\steps}{\step^\ast}
+\newcommand{\lstepsys}[1]{\lstep_{#1}}
+\newcommand{\stepsys}[1]{\step_{#1}}
 \newcommand{\notstep}{\nrightarrow}
 \newcommand{\notsteps}{\nrightarrow^\ast}
 \newcommand{\nsteps}[1]{\step^{#1}}
@@ -136,7 +139,7 @@
 \newcommand{\flow}{\textsc{$\mathbb{F}$low}}
 \newcommand{\resource}{\textsc{$\mathbb{R}$esource}}
 \newcommand{\heating}{\textsc{$\mathbb{H}$eating}}
-\newcommand{\popping}{\textsc{$\mathbb{P}$opping}}
+\newcommand{\membrane}{\textsc{$\mathbb{M}$embrane}}
 
 \newcommand{\subsol}{\prec}
 
@@ -169,6 +172,17 @@
 \newcommand{\sementHB}{\sement_{\HeytingBrouwer}}
 \newcommand{\sementC}{\sement_{\Boolean}}
 \newcommand{\sementX}{\sement_{\ACVar}}
+\newcommand{\sysB}{\msys{B}}
+\newcommand{\sysBH}{\msys{B_{\!\Heyting}}}
+\newcommand{\sysBB}{\msys{B_{\!\Brouwer}}}
+\newcommand{\sysBHB}{\msys{B_{\!\HeytingBrouwer}}}
+
+\newcommand{\psintAnd}[3]{\bigwedge_{#1 \in #2}{\psint{#3}}}
+\newcommand{\psintAndMix}[4]{\psintAnd{#1}{#2}{#1 \mix (#3 \seq #4)}}
+\newcommand{\nsintOr}[3]{\bigvee_{#1 \in #2}{\psint{#3}}}
+\newcommand{\nsintOrMix}[4]{\nsintOr{#1}{#2}{#1 \mix (#3 \seq #4)}}
+
+\newcommand{\cS}{\mathcal{S}}
 
 % Flowers
 
@@ -235,7 +249,8 @@
 \newcommand{\efill}[2]{#1\left[#2\right]}
 \newcommand{\lint}[1]{\lfloor#1\rfloor}
 
-\DeclareRobustCommand{\sys}[1]{$\mathsf{#1}$}
+\DeclareRobustCommand{\msys}[1]{\mathsf{#1}}
+\DeclareRobustCommand{\sys}[1]{$\msys{#1}$}
 \newcommand{\pair}[2]{\left\langle #1, #2 \right\rangle}
 
 \newcommand{\ra}{\rightarrow}

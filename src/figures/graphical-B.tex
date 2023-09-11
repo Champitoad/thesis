@@ -43,15 +43,15 @@
   \begin{array}{r@{\quad}c@{\quad}ll@{\qquad\qquad}r@{\quad}c@{\quad}ll}
     \multicolumn{8}{c}{\flow} \\[2em]
 
-     \gAsheet{\hbbubble{\gBbubble{\color{black}S}}}
-    &\step
-    &\bsheet{\gAbubble{\hgBbubble{\color{black}S}}}
-    &\mathsf{s{-}} &
+    %  \gAsheet{\hbbubble{\gBbubble{\color{black}S}}}
+    % &\step
+    % &\bsheet{\gAbubble{\hgBbubble{\color{black}S}}}
+    % &\mathsf{s{-}} &
 
-     \gAsheet{\cbbubble{\gBbubble{\color{black}S}}}
-    &\step
-    &\bsheet{\gAbubble{\cgBbubble{\color{black}S}}}
-    &\mathsf{s{+}} \\
+    %  \gAsheet{\cbbubble{\gBbubble{\color{black}S}}}
+    % &\step
+    % &\bsheet{\gAbubble{\cgBbubble{\color{black}S}}}
+    % &\mathsf{s{+}} \\
   
      \bsheet{\hypo{I}~~~\gBbubble{\color{black}S}}
     &\step
@@ -105,7 +105,7 @@
   \end{array}
   \and
   \begin{array}{r@{\quad}c@{\quad}ll}
-    \multicolumn{4}{c}{\popping} \\[2em]
+    \multicolumn{4}{c}{\membrane} \\[2em]
 
      \bsheet{\bbubble{\phantom{S}}}
     &\step
@@ -121,6 +121,21 @@
     &\step
     &\bsheet{\phantom{\bbubble{\phantom{S}}}}
     &\mathsf{p{+}} \\
+
+     \bsheet{\bbubble{\gBbubble{\color{black}S}}}
+    &\step
+    &\bsheet{\gBbubble{\color{black}S}}
+    &\mathsf{a} \\
+
+     \gAsheet{\hbbubble{\gBbubble{\color{black}S}}}
+    &\step
+    &\gAsheet{\hgBbubble{\color{black}S}}
+    &\mathsf{a{-}} \\
+
+     \gAsheet{\cbbubble{\gBbubble{\color{black}S}}}
+    &\step
+    &\gAsheet{\cgBbubble{\color{black}S}}
+    &\mathsf{a{+}} \\
   \end{array}
   \vspace{2em}
   \\
