@@ -161,7 +161,7 @@ soundness and completeness of a symmetric sequent calculus for bi-intuitionistic
 logic, see for instance Lemma 2 of \sidecite{restall_extending_1997}.
 By recurrence on $\bradepth{\J}$.
 \begin{itemize}
-  \item[\textbf{Base case}]
+  \item[\bcase]
   $$
   \begin{array}{rcll}
     \psint{\Gamma \seq \Delta} \lor \psint{I}
@@ -170,7 +170,7 @@ By recurrence on $\bradepth{\J}$.
     &=& \psint{\Gamma \seq I, \Delta} & \\
   \end{array}
   $$
-  \item[\textbf{Recursive case}]
+  \item[\rcase]
   $$
   \begin{array}{rcll}
     \psint{\Gamma \piq{\cS} \Delta} \lor \psint{I}
@@ -339,8 +339,11 @@ formulas have been dualized (\refdef{dual-formula}).
 \begin{lemma}[Distributivity]\lablemma{distributivity}
   \begin{align*}
     A \land (B \lor C) &\semequiv_{\Lattice} (A \land B) \lor (A \land C) \\
+    A \lor (B \land C) &\semequiv_{\Lattice} (A \lor B) \land (A \lor C) \\
     A \limp B \land C &\semequiv (A \limp B) \land (A \limp C) \\
-    A \lor B \lsub C &\semequiv_{\Brouwer} (A \lsub B) \lor (A \lsub C)
+    A \lor B \limp C &\semequiv (A \limp B) \land (A \limp C) \\
+    A \lor B \lsub C &\semequiv_{\Brouwer} (A \lsub B) \lor (A \lsub C) \\
+    A \lsub B \land C &\semequiv_{\Brouwer} (A \lsub B) \lor (A \lsub C)
   \end{align*}
 \end{lemma}
 
@@ -354,7 +357,11 @@ formulas have been dualized (\refdef{dual-formula}).
 \end{lemma}
 
 \begin{lemma}\lablemma{gencut}
-  $(A \lor B) \land (A \limp B) \semequiv B$.
+  \begin{align*}
+  (A \lor B) \land (C \limp D) &\sement (A \limp C) \limp (B \lor D) \\
+  (A \lor B) \land (C \limp D) &\sementHB (A \lsub C) \lor (B \lor D) \\
+  (A \lor B) \land (A \limp B) &\semequiv B
+  \end{align*}
 \end{lemma}
 
 \begin{lemma}\lablemma{impsub}
@@ -391,7 +398,7 @@ formulas have been dualized (\refdef{dual-formula}).
 %   Let $\cS = S_1 \sep \ldots \sep S_n$. We proceed by recurrence on
 %   $\bradepth{\piq{\cS}}$.
 %   \begin{itemize}proof
-%     \item[\textbf{Base case}] Suppose $\bradepth{\piq{\cS}} = 1$, and
+%     \item[\bcase] Suppose $\bradepth{\piq{\cS}} = 1$, and
 %     let $1 \leq i \leq n$. Then we know that $S_i = \Gamma_i \seq \Delta_i$, and
 %     by \reflemma{bubbles-multiweak} we get $\psint{\Gamma \seq \Delta} \sement
 %     \psint{S_i \mix (\Gamma \seq \Delta)}$. Thus we have
@@ -402,7 +409,7 @@ formulas have been dualized (\refdef{dual-formula}).
 %       &=& \psint{\Gamma \piq{\cS} \Delta}
 %     \end{array}
 %     $$
-%     \item[\textbf{Recursive case}] Suppose $\bradepth{\piq{\cS}} > 1$.
+%     \item[\rcase] Suppose $\bradepth{\piq{\cS}} > 1$.
 
 %   \end{itemize}
 % \end{proof}
@@ -413,7 +420,7 @@ formulas have been dualized (\refdef{dual-formula}).
 \begin{proof}
   Let $S = \Gamma' \J \Delta'$. We proceed by recurrence on $\bradepth{\J}$.
   \begin{itemize}
-    \item[\textbf{Base case}]
+    \item[\bcase]
     $$
     \begin{array}{rcll}
       \psint{\Gamma' \seq \Delta'}
@@ -423,7 +430,7 @@ formulas have been dualized (\refdef{dual-formula}).
       &=& \psint{\Gamma', \Gamma \seq \Delta, \Delta'} & \\
     \end{array}
     $$
-    \item[\textbf{Recursive case}]
+    \item[\rcase]
     $$
     \begin{array}{rcll}
       \psint{\Gamma' \piq{\cS} \Delta'}
@@ -444,7 +451,7 @@ formulas have been dualized (\refdef{dual-formula}).
 \begin{proof}
   Let $S = \Gamma \J \Delta$. We proceed by recurrence on $\bradepth{\J}$.
   \begin{itemize}
-    \item[\textbf{Base case}]
+    \item[\bcase]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \seq I, I, \Delta}
@@ -461,7 +468,7 @@ formulas have been dualized (\refdef{dual-formula}).
       &=& \psint{\Gamma, I \seq \Delta} & \\
     \end{array}
     $$
-    \item[\textbf{Recursive case}]
+    \item[\rcase]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \piq{\cS} I, I, \Delta}
@@ -511,7 +518,7 @@ formulas have been dualized (\refdef{dual-formula}).
   $$
   We prove (\ref{eqn:weakdistrib-one}) by recurrence on $\bradepth{\J}$.
   \begin{itemize}
-    \item[\textbf{Base case}]
+    \item[\bcase]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \seq \Delta} \lor \psint{I}
@@ -520,7 +527,7 @@ formulas have been dualized (\refdef{dual-formula}).
       &=& \psint{\Gamma \seq I, \Delta} & \\
     \end{array}
     $$
-    \item[\textbf{Recursive case}]
+    \item[\rcase]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \piq{\cS} \Delta} \lor \psint{I}
@@ -547,7 +554,7 @@ formulas have been dualized (\refdef{dual-formula}).
   duality as in \reflemma{bubbles-weakdistrib}. We proceed by recurrence on
   $\bradepth{\J}$.
   \begin{itemize}
-    \item[\textbf{Base case}]
+    \item[\bcase]
     $$
     \begin{array}{rcll}
       \psint{\Gamma, I \seq \Delta}
@@ -557,7 +564,7 @@ formulas have been dualized (\refdef{dual-formula}).
       &=& \nsint{I} \limp \psint{\Gamma \seq \Delta} & \\
     \end{array}
     $$
-    \item[\textbf{Recursive case}]
+    \item[\rcase]
     $$
     \begin{array}{rcll}
       \psint{\Gamma, I \piq{\cS} \Delta}
@@ -631,7 +638,7 @@ formulas have been dualized (\refdef{dual-formula}).
     % {\rnmsf{s{-}}}, the proof for {\rnmsf{s{+}}} is symmetric. We proceed by
     % recurrence on $\bradepth{\J}$.
     % \begin{itemize}
-    %   \item[\textbf{Base case}]
+    %   \item[\bcase]
     %   $$
     %   \begin{array}{rcll}
     %     \psint{\piq{S \seq} \mix \Gamma \seq \Delta}
@@ -642,7 +649,7 @@ formulas have been dualized (\refdef{dual-formula}).
     %     &=& \psint{\Gamma, (\piq{S}) \seq \Delta} & \\
     %   \end{array}
     %   $$
-    %   \item[\textbf{Recursive case}]
+    %   \item[\rcase]
     %   $$
     %   \begin{array}{rcll}
     %     \psint{\piq{S \seq} \mix \Gamma \piq{\cS} \Delta}
@@ -684,7 +691,7 @@ formulas have been dualized (\refdef{dual-formula}).
     \psint{\Gamma, I \J (\Gamma' \JB \Delta'), \Delta}$ by recurrence on
     $\bradepth{\J}$.
     \begin{itemize}
-      \item[\textbf{Base case}]
+      \item[\bcase]
       $$
       \begin{array}{rcll}
         \psint{\Gamma \seq (\Gamma', I \JB \Delta'), \Delta}
@@ -695,7 +702,7 @@ formulas have been dualized (\refdef{dual-formula}).
         &=& \psint{\Gamma, I \seq (\Gamma' \JB \Delta'), \Delta} & \\
       \end{array}
       $$
-      \item[\textbf{Recursive case}]
+      \item[\rcase]
       $$
       \begin{array}{rcll}
         \psint{\Gamma \piq{\cS} (\Gamma', I \JB \Delta'), \Delta}
@@ -712,7 +719,7 @@ formulas have been dualized (\refdef{dual-formula}).
     \psint{\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}$ by recurrence on
     $\bradepth{\J}$.
     \begin{itemize}
-      \item[\textbf{Base case}]
+      \item[\bcase]
       $$
       \begin{array}{rcll}
         \psint{\Gamma, (\Gamma' \JB I, \Delta') \seq \Delta}
@@ -723,7 +730,7 @@ formulas have been dualized (\refdef{dual-formula}).
         &=& \psint{\Gamma, (\Gamma' \JB \Delta') \seq I, \Delta} & \\
       \end{array}
       $$
-      \item[\textbf{Recursive case}]
+      \item[\rcase]
       $$
       \begin{array}{rcll}
         \psint{\Gamma, (\Gamma' \JB I, \Delta') \piq{\cS} \Delta}
@@ -740,7 +747,7 @@ formulas have been dualized (\refdef{dual-formula}).
     \psint{\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}$ by recurrence on
     $\bradepth{\J}$.
     \begin{itemize}
-      \item[\textbf{Base case}]
+      \item[\bcase]
       $$
       \begin{array}{rcll}
         \psint{\Gamma \seq (\Gamma' \JB \Delta'), I, \Delta}
@@ -749,7 +756,7 @@ formulas have been dualized (\refdef{dual-formula}).
         &=& \psint{\Gamma \seq (\Gamma' \JB I, \Delta'), \Delta} & \\
       \end{array}
       $$
-      \item[\textbf{Recursive case}]
+      \item[\rcase]
       $$
       \begin{array}{rcll}
         \psint{\Gamma \piq{\cS} (\Gamma' \JB \Delta'), I, \Delta}
@@ -766,7 +773,7 @@ formulas have been dualized (\refdef{dual-formula}).
     \psint{\Gamma, (\Gamma', I \JB \Delta') \J \Delta}$ by recurrence on
     $\bradepth{\J}$.
     \begin{itemize}
-      \item[\textbf{Base case}]
+      \item[\bcase]
       $$
       \begin{array}{rcll}
         \psint{\Gamma, I, (\Gamma' \JB \Delta') \seq \Delta}
@@ -775,7 +782,7 @@ formulas have been dualized (\refdef{dual-formula}).
         &=& \psint{\Gamma, (\Gamma', I \JB \Delta') \seq \Delta} & \\
       \end{array}
       $$
-      \item[\textbf{Recursive case}]
+      \item[\rcase]
       $$
       \begin{array}{rcll}
         \psint{\Gamma, I, (\Gamma' \JB \Delta') \piq{\cS} \Delta}
@@ -842,7 +849,7 @@ formulas have been dualized (\refdef{dual-formula}).
     for \rsf{a{+}} is symmetric. We show that $\psint{\Gamma, S \J \Delta} =
     \psint{\Gamma, (\piq{S}) \J \Delta}$ by recurrence on $\bradepth{\J}$.
     \begin{itemize}
-      \item[\textbf{Base case}]
+      \item[\bcase]
         $$
         \begin{array}{rcll}
           \psint{\Gamma, S \seq \Delta}
@@ -851,20 +858,165 @@ formulas have been dualized (\refdef{dual-formula}).
           &=& \psint{\Gamma, (\piq{S}) \seq \Delta} & \\
         \end{array}
         $$
-      \item[\textbf{Recursive case}]
+      \item[\rcase]
         $$
         \begin{array}{rcll}
           \psint{\Gamma, S \piq{\cS} \Delta}
-          &=& \psintAndMix{(\Gamma' \JB \Delta')}{\cS}{\Gamma, S}{\Delta} & \\
-          &=& \psintAnd{(\Gamma' \JB \Delta')}{\cS}{\Gamma', \Gamma, S \JB \Delta, \Delta'} & \\
-          &=& \psintAnd{(\Gamma' \JB \Delta')}{\cS}{\Gamma', \Gamma, (\piq{S}) \JB \Delta, \Delta'} &\text{(IH)} \\
-          &=& \psintAnd{(\Gamma' \JB \Delta')}{\cS}{(\Gamma' \JB \Delta') \mix (\Gamma, (\piq{S}) \seq \Delta)} & \\
+          &=& \psintAndMix{T}{\cS}{\Gamma, S}{\Delta} & \\
+          &=& \psintAndMix{T}{\cS}{\Gamma, (\piq{S})}{\Delta} &\text{(IH)} \\
           &=& \psint{\Gamma, (\piq{S}) \piq{\cS} \Delta} & \\
         \end{array}
         $$
     \end{itemize}
     
-    \item[\rsf{\top{-}}]
+    \item[\rsf{\top{-}}, \rsf{\bot{+}}]
+    We only do the proof for \rsf{\top{-}}, the proof for \rsf{\bot{+}} is
+    symmetric. We show that $\psint{\Gamma \J \Delta} \semequiv \psint{\Gamma,
+    \top \J \Delta}$ by recurrence on $\bradepth{\J}$.
+    \begin{itemize}
+      \item[\bcase]
+      $$
+      \begin{array}{rcll}
+        \psint{\Gamma \seq \Delta}
+        &=& \nsint{\Gamma} \limp \psint{\Delta} & \\
+        &\semequiv& \nsint{\Gamma} \land \top \limp \psint{\Delta} & \\
+        &=& \psint{\Gamma, \top \seq \Delta}
+      \end{array}
+      $$
+      \item[\rcase]
+      $$
+      \begin{array}{rcll}
+        \psint{\Gamma \piq{\cS} \Delta}
+        &=& \psintAndMix{S}{\cS}{\Gamma}{\Delta} & \\
+        &\semequiv& \psintAndMix{S}{\cS}{\Gamma, \top}{\Delta} &\text{(IH)} \\
+        &=& \psint{\Gamma, \top \piq{\cS} \Delta} & \\
+      \end{array}
+      $$
+    \end{itemize}
+
+    \item[\rsf{\top{+}}]
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma \piq{} \Delta}
+      &=& \top & \\
+      &\semequiv& \nsint{\Gamma} \limp \top \lor \psint{\Delta} & \\
+      &=& \psint{\Gamma \seq \top, \Delta}
+    \end{array}
+    $$
+
+    \item[\rsf{\bot{-}}]
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma \piq{} \Delta}
+      &=& \top & \\
+      &\semequiv& \nsint{\Gamma} \land \bot \limp \psint{\Delta} & \\
+      &=& \psint{\Gamma, \bot \seq \Delta}
+    \end{array}
+    $$
+
+    \item[\rsf{\land{-}}, \rsf{\lor{+}}]
+    We only do the proof for \rsf{\land{-}}, the proof for \rsf{\lor{+}} is
+    symmetric. We show that $\psint{\Gamma, A, B \J \Delta} = \psint{\Gamma, A
+    \land B \J \Delta}$ by recurrence on $\bradepth{\J}$.
+    \begin{itemize}
+      \item[\bcase]
+      $$
+      \begin{array}{rcll}
+        \psint{\Gamma, A, B \seq \Delta}
+        &=& \nsint{\Gamma} \land A \land B \limp \psint{\Delta} & \\
+        &=& \psint{\Gamma, A \land B \seq \Delta}
+      \end{array}
+      $$
+      \item[\rcase]
+      $$
+      \begin{array}{rcll}
+        \psint{\Gamma, A, B \piq{\cS} \Delta}
+        &=& \psintAndMix{S}{\cS}{\Gamma, A, B}{\Delta} & \\
+        &=& \psintAndMix{S}{\cS}{\Gamma, A \land B}{\Delta} &\text{(IH)} \\
+        &=& \psint{\Gamma, A \land B \piq{\cS} \Delta} & \\
+      \end{array}
+      $$
+    \end{itemize}
+
+    \item[\rsf{\land{+}}]
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma \piq{\seq A \sep \seq B} \Delta}
+      &=& \psint{\Gamma \seq A, \Delta} \land \psint{\Gamma \seq B, \Delta} & \\
+      &=& \left(\nsint{\Gamma} \limp A \lor \psint{\Delta}\right) \land \left(\nsint{\Gamma} \limp B \lor \psint{\Delta}\right) & \\
+      &\semequiv& \nsint{\Gamma} \limp \left(A \lor \psint{\Delta}\right) \land \left(B \lor \psint{\Delta}\right) &\text{(\reflemma{distributivity})} \\
+      &\semequiv& \nsint{\Gamma} \limp \left(\psint{\Delta} \lor A\right) \land \left(\psint{\Delta} \lor B\right) &\text{(\reflemma{lattice-commutativity})} \\
+      &\semequiv& \nsint{\Gamma} \limp \psint{\Delta} \lor \left(A \land B\right) &\text{(\reflemma{distributivity})} \\
+      &\semequiv& \nsint{\Gamma} \limp \left(A \land B\right) \lor \psint{\Delta} &\text{(\reflemma{lattice-commutativity})} \\
+      &=& \psint{\Gamma \seq A \land B, \Delta} & \\
+    \end{array}
+    $$
+
+    \item[\rsf{\lor{-}}]
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma \piq{A \seq \sep B \seq} \Delta}
+      &=& \psint{\Gamma, A \seq \Delta} \land \psint{\Gamma, B \seq \Delta} & \\
+      &=& \left(\nsint{\Gamma} \land A \limp \psint{\Delta}\right) \land \left(\nsint{\Gamma} \land B \limp \psint{\Delta}\right) & \\
+      &\semequiv& \left(\nsint{\Gamma} \land A\right) \lor \left(\nsint{\Gamma} \land B\right) \limp \psint{\Delta} &\text{(\reflemma{distributivity})} \\
+      &\semequiv& \nsint{\Gamma} \land \left(A \lor B\right) \limp \psint{\Delta} &\text{(\reflemma{distributivity})} \\
+      &=& \psint{\Gamma, A \lor B \seq \Delta} & \\
+    \end{array}
+    $$
+
+    \item[\rsf{{\limp}{+}}, \rsf{{\lsub}{-}}]
+    We only do the proof for \rsf{{\limp}{+}}, the proof for \rsf{{\lsub}{-}} is
+    symmetric. We show that $\psint{\Gamma \J (A \seq B), \Delta} =
+    \psint{\Gamma \J A \limp B, \Delta}$ by recurrence on $\bradepth{\J}$.
+    \begin{itemize}
+      \item[\bcase]
+      $$
+      \begin{array}{rcll}
+        \psint{\Gamma \seq (A \seq B), \Delta}
+        &=& \nsint{\Gamma}\limp \psint{A \seq B} \lor \psint{\Delta} & \\
+        &=& \nsint{\Gamma}\limp (A \limp B) \lor \psint{\Delta} & \\
+        &=& \psint{\Gamma \seq A \limp B, \Delta}
+      \end{array}
+      $$
+      \item[\rcase]
+      $$
+      \begin{array}{rcll}
+        \psint{\Gamma \piq{\cS} (A \seq B), \Delta}
+        &=& \psintAndMix{S}{\cS}{\Gamma}{(A \seq B), \Delta} & \\
+        &=& \psintAndMix{S}{\cS}{\Gamma}{A \limp B, \Delta} &\text{(IH)} \\
+        &=& \psint{\Gamma \piq{\cS} A \limp B, \Delta} & \\
+      \end{array}
+      $$
+    \end{itemize}
+    
+    \item[\rsf{{\limp}{-}}]
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma \piq{\seq A \sep B \seq} \Delta}
+      &=& \psint{\Gamma \seq A, \Delta} \land \psint{\Gamma, B \seq \Delta} & \\
+      &=& \left(\nsint{\Gamma} \limp A \lor \psint{\Delta} \right) \land \left(\nsint{\Gamma} \land B \limp \psint{\Delta} \right) & \\
+      &\semequiv& \left(\nsint{\Gamma} \limp A \lor \psint{\Delta} \right) \land \left(\nsint{\Gamma} \limp B \limp \psint{\Delta} \right) &\text{(\reflemma{currying})} \\
+      &\semequiv& \nsint{\Gamma} \limp \left(A \lor \psint{\Delta} \right) \land \left(B \limp \psint{\Delta} \right) &\text{(\reflemma{distributivity})} \\
+      &\sement& \nsint{\Gamma} \limp (A \limp B) \limp \psint{\Delta} \lor \psint{\Delta} &\text{(\reflemma{gencut})} \\
+      &\semequiv& \nsint{\Gamma} \limp (A \limp B) \limp \psint{\Delta} &\text{(\reflemma{idempotency})} \\
+      &\semequiv& \nsint{\Gamma} \land (A \limp B) \limp \psint{\Delta} &\text{(\reflemma{currying})} \\
+      &=& \psint{\Gamma, A \limp B \seq \Delta} & \\
+    \end{array}
+    $$
+
+    \item[\rsf{{\lsub}{+}}]
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma \piq{\seq A \sep B \seq} \Delta}
+      &=& \psint{\Gamma \seq A, \Delta} \land \psint{\Gamma, B \seq \Delta} & \\
+      &=& \left(\nsint{\Gamma} \limp A \lor \psint{\Delta} \right) \land \left(\nsint{\Gamma} \land B \limp \psint{\Delta} \right) & \\
+      &\semequiv& \left(\nsint{\Gamma} \limp A \lor \psint{\Delta} \right) \land \left(\nsint{\Gamma} \limp B \limp \psint{\Delta} \right) &\text{(\reflemma{currying})} \\
+      &\semequiv& \nsint{\Gamma} \limp \left(A \lor \psint{\Delta} \right) \land \left(B \limp \psint{\Delta} \right) &\text{(\reflemma{distributivity})} \\
+      &\sement& \nsint{\Gamma} \limp (A \lsub B) \lor \psint{\Delta} \lor \psint{\Delta} &\text{(\reflemma{gencut})} \\
+      &\semequiv& \nsint{\Gamma} \limp (A \lsub B) \lor \psint{\Delta} &\text{(\reflemma{idempotency})} \\
+      &=& \psint{\Gamma \seq A \lsub B, \Delta} & \\
+    \end{array}
+    $$
   \end{itemize}
 \end{proof}
 
@@ -925,7 +1077,7 @@ The full situation is summarized in \reffig{venn-algebras}.
 \begin{proof}
   Let $S = \Gamma \J \Delta$. We proceed by recurrence on $\bradepth{\J}$.
   \begin{itemize}
-    \item[\textbf{Base case}] Suppose $\bradepth{\J} = 0$. Then $\J = {\seq}$,
+    \item[\bcase] Suppose $\bradepth{\J} = 0$. Then $\J = {\seq}$,
     and we have
     $$
     \begin{array}{rcll}
@@ -952,7 +1104,7 @@ The full situation is summarized in \reffig{venn-algebras}.
       &=& \psint{(J \seq) \mix S} &
     \end{array}
     $$
-    \item[\textbf{Recursive case}] Suppose $\bradepth{\J} > 0$. Then $\J =
+    \item[\rcase] Suppose $\bradepth{\J} > 0$. Then $\J =
     {\piq{\cS}}$, and for all $S_0 = \Gamma_0 \JB \Delta_0 \in
     \cS$ we have that $\bradepth{\JB} < \bradepth{\J}$. Thus we have
     $$
@@ -1013,7 +1165,7 @@ recursively as follows:
 \begin{proof}
   By recurrence on $\soldepth{U\hole}$.
   \begin{itemize}
-    \item[\textbf{Base case}] Suppose $\soldepth{U\hole}$ = 0. Then $U\hole =
+    \item[\bcase] Suppose $\soldepth{U\hole}$ = 0. Then $U\hole =
     \hole$, and we conclude by local soundness
     (\reflemma{bubbles-local-soundness}).
     \item[\textbf{Positive case}] Suppose $\soldepth{U\hole} > 0$ and $U\hole =
@@ -1099,12 +1251,13 @@ thus extend our soundness result to intuitionistic and bi-intuitionistic logic:
   algebras.
 
   For soundness in Heyting algebras, we know that the negative case will never
-  happen because formulas cannot contain exclusions. Thus we can again replace
-  \reflemma{bubbles-local-soundness} by Corollary \ref{cor:lsoundness}.
+  happen because formulas cannot contain exclusions. The other cases only depend
+  on \reflemma{bubbles-local-soundness}, thus we can again replace it by
+  Corollary \ref{cor:lsoundness}.
 \end{proof}
 
-Again in order to extend contextual soundness to dual-intuitionistic logic, we
-need to dualize lemmas to the negative interpretation:
+Once again in order to extend contextual soundness to dual-intuitionistic logic,
+we need to dualize lemmas to the negative interpretation:
 
 \begin{lemma}[Co-functoriality]\lablemma{bubbles-cofunctoriality}
   Let $\ACVar \in \{\Brouwer, \HeytingBrouwer, \Boolean\}$.
