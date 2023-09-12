@@ -42,13 +42,9 @@
     \endgroup}}
 \newcommand{\stkfig}[2]{\tikzfig{#1}{0.5}{#2}}
 
-
 \usepackage{minted}
-\usepackage{fontspec}
-\usepackage{newunicodechar}
-\newfontfamily{\mathsymbolfont}{LibertinusMath-Regular.otf}
-\newunicodechar{⊆}{{\mathsymbolfont\subseteq}}
 
+\usepackage{fontspec}
 \usepackage{unicode-math}
 \setmathfont{Libertinus Math}
 \setmathfont{latinmodern-math.otf}[range=\multimap]
@@ -60,6 +56,14 @@
 % \setmathfont{LibertinusMath-Regular.otf}[range=\nVdash]
 
 \DeclareMathAlphabet{\mathcall}{OMS}{cmsy}{m}{n}
+
+\newfontfamily{\subseteqfont}{LibertinusMath-Regular.otf}
+
+\newcommand{\trhd}{\symbol{"29D0}}
+
+\usepackage{newunicodechar}
+\newunicodechar{⊆}{{\subseteqfont\subseteq}}
+\newunicodechar{⧐}{\trhd}
 
 % Calligraphic font with \mathcb
 % \DeclareFontFamily{U}{BOONDOX-calo}{\skewchar\font=45 }
