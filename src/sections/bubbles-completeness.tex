@@ -19,8 +19,7 @@ task for future work.
   $$X, Y \Coloneq \emptyset \mid A \mid (X,Y) \mid X \dseq Y$$ The
   structural connective ``,'' (comma) is associative and commutative and
   $\emptyset$ is its unit. We always consider structures modulo these
-  equivalences. To reduce parentheses, we assume that ``,'' binds tighter than
-  $\dseq$. Thus, we write $X, Y \dseq Z$ to mean $(X, Y) \dseq Z$.
+  equivalences.
 \end{definition}
 
 \begin{definition}[Structure translation]
@@ -37,7 +36,7 @@ task for future work.
 Note that the translation $\dtrans{(-)}$ is clearly \emph{injective}: in fact
 structures are isomorphic to multisets of items that contain only \emph{open}
 subsolutions. Thus from now on, we will always apply the translation implicitly,
-and rely on meta-variables $X, Y, Z$ to distinguish structures from arbitrary
+and rely on meta-variables $X, Y$ to distinguish structures from arbitrary
 solutions when necessary.
 
 The rules of \sys{DBiInt} are given in \reffig{rules-dbiint}. Note that like
@@ -74,12 +73,228 @@ can be simulated inside system $\sysB$.
   \sys{DBiInt} using only rules in $\mathsf{F}$.
 \end{definition}
 
-\begin{lemma}[Simulation of \sys{DBiInt}]\lablemma{simulation-dbiint} If $X
-  \prov{\msys{DBiInt}} Y$ then $X \prov{\sysBHB \setminus
+\begin{lemma}[Simulation of \sys{DBiInt}]\lablemma{simulation-dbiint}
+  
+  If $X \prov{\msys{DBiInt}} Y$ then $X \prov{\sysBHB \setminus
   \{\rsf{i{\uparrow}}\}} Y$.
 \end{lemma}
 \begin{proof}
-  By induction on the derivation of $X \prov{\msys{DBiInt}} Y$.
+  By induction on the derivation of $X \prov{\msys{DBiInt}} Y$. We denote a
+  sequence of applications of a set of rules by a double inference line, and the
+  use of a derivation obtained by induction hypothesis by a dotted line.
+
+  \newcommand{\mt}{\qquad\mapsto\qquad}
+  \begin{align*}
+    \R[\rsf{id}]
+      {}
+      {X, A \seq A, Y}
+    &\mt
+    \R[\rsf{i{\downarrow}}]
+    {\prftree[r][d]{\rsf{w{-},w{+}}}
+    {\piq{}}
+    {X \piq{} Y}}
+    {X, A \seq A, Y}
+    \\\\
+    \R[\rsf{\seq_{L1}}]
+      {\summ[$\pi_1$]{X, A, (X', A \seq Y') \seq Y}}
+      {X, (X', A \seq Y') \seq Y}
+    &\mt
+    \R[\rsf{c{-}}]
+    {\R[\rsf{f{-}{-}{\uparrow}}]
+    {\prftree[r][dotted]{$\pi_1$}
+    {\piq{}}
+    {X, A, (X', A \seq Y') \seq Y}}
+    {X, (X', A, A \seq Y') \seq Y}}
+    {X, (X', A \seq Y') \seq Y}
+    \\\\
+    \R[\rsf{\seq_{R1}}]
+      {\summ[$\pi_1$]{X \seq  (X' \seq A, Y'), A, Y}}
+      {X \seq (X' \seq A, Y'), Y}
+    &\mt
+    \R[\rsf{c{+}}]
+    {\R[\rsf{f{+}{+}{\uparrow}}]
+    {\prftree[r][dotted]{$\pi_1$}
+    {\piq{}}
+    {X \seq (X' \seq A, Y'), A, Y}}
+    {X \seq (X' \seq A, A, Y'), Y}}
+    {X \seq (X' \seq A, Y'), Y}
+    \\\\
+    \R[\rsf{\seq_{L2}}]
+      {\summ[$\pi_1$]{X, A \seq (X', A \seq Y'), Y}}
+      {X, A \seq (X' \seq Y'), Y}
+    &\mt
+    \R[\rsf{c{-}}]
+    {\R[\rsf{f{-}{+}{\downarrow}}]
+    {\prftree[r][dotted]{$\pi_1$}
+    {\piq{}}
+    {X, A \seq (X', A \seq Y'), Y}}
+    {X, A, A \seq (X' \seq Y'), Y}}
+    {X, A \seq (X' \seq Y'), Y}
+    \\\\
+    \R[\rsf{\seq_{R2}}]
+      {X, (X' \seq A, Y') \seq A, Y}
+      {X, (X' \seq Y') \seq A, Y}
+    &\mt
+    \R[\rsf{c{+}}]
+    {\R[\rsf{f{+}{-}{\downarrow}}]
+    {\prftree[r][dotted]{$\pi_1$}
+    {\piq{}}
+    {X, (X' \seq A, Y') \seq A, Y}}
+    {X, (X' \seq Y') \seq A, A, Y}}
+    {X, (X' \seq Y') \seq A, Y}
+    \\\\
+    \R[\rsf{\bot_L}]
+      {}
+      {X, \bot \seq Y}
+    &\mt
+    \R[\rsf{\bot{-}}]
+    {\prftree[r][d]{\rsf{w{-},w{+}}}
+    {\piq{}}
+    {X \piq{} Y}}
+    {X, \bot \seq Y}
+    \\\\
+    \R[\rsf{\top_R}]
+      {}
+      {X \seq \top, Y}
+    &\mt
+    \R[\rsf{\top{+}}]
+    {\prftree[r][d]{\rsf{w{-},w{+}}}
+    {\piq{}}
+    {X \piq{} Y}}
+    {X \seq \top, Y}
+    \\\\
+    \R[\rsf{\land_L}]
+      {\summ[$\pi_1$]{X, A \land B, A, B \seq Y}}
+      {X, A \land B \seq Y}
+    &\mt
+    \R[\rsf{c{-}}]
+    {\R[\rsf{\land{-}}]
+    {\prftree[r][dotted]{$\pi_1$}
+    {\piq{}}
+    {X, A \land B, A, B \seq Y}}
+    {X, A \land B, A \land B \seq Y}}
+    {X, A \land B \seq Y}
+    \\\\
+    \R[\rsf{\lor_R}]
+      {\summ[$\pi_1$]{X \seq A, B, A \lor B, Y}}
+      {X \seq A \lor B, Y}
+    &\mt
+    \R[\rsf{c{+}}]
+    {\R[\rsf{\lor{+}}]
+    {\prftree[r][dotted]{$\pi_1$}
+    {\piq{}}
+    {X \seq A, B, A \lor B \seq Y}}
+    {X \seq A \lor B, A \lor B, Y}}
+    {X \seq A \lor B, Y}
+    \\\\
+    \R[\rsf{\land_R}]
+      {\summ[$\pi_1$]{X \seq A, A \land B, Y}}
+      {\summ[$\pi_2$]{X \seq B, A \land B, Y}}
+      {X \seq A \land B, Y}
+    &\mt
+    \R[\rsf{c{+}}]
+    {\R[\rsf{\land{+}}]
+    {\prftree[r][d]{\rsf{c{-},c{+}}}
+    {\prftree[r][d]{\rsf{f{-},f{+}}}
+    {\prftree[r][dotted]{$\pi_1$}
+    {\prftree[r][dotted]{$\pi_2$}
+    {\prftree[r][d]{\rsf{p}}
+    {\piq{}}
+    {\piq{\piq{} \sep \piq{}}}}
+    {\piq{\piq{} \sep X \seq B, A \land B, Y}}}
+    {\piq{X \seq A, A \land B, Y \sep X \seq B, A \land B, Y}}}
+    {X, X \piq{\seq A \sep \seq B} A \land B, A \land B, Y, Y}}
+    {X \piq{\seq A \sep \seq B} A \land B, Y}}
+    {X \seq A \land B, A \land B, Y}}
+    {X \seq A \land B, Y}
+    \\\\
+    \R[\rsf{\lor_L}]
+      {\summ[$\pi_1$]{X, A \lor B, A \seq Y}}
+      {\summ[$\pi_2$]{X, A \lor B, B \seq Y}}
+      {X, A \lor B \seq Y}
+    &\mt
+    \R[\rsf{c{-}}]
+    {\R[\rsf{\lor{-}}]
+    {\prftree[r][d]{\rsf{c{-},c{+}}}
+    {\prftree[r][d]{\rsf{f{-},f{+}}}
+    {\prftree[r][dotted]{$\pi_1$}
+    {\prftree[r][dotted]{$\pi_2$}
+    {\prftree[r][d]{\rsf{p}}
+    {\piq{}}
+    {\piq{\piq{} \sep \piq{}}}}
+    {\piq{\piq{} \sep X, A \lor B, B \seq Y}}}
+    {\piq{X, A \lor B, A \seq Y \sep X, A \lor B, B \seq Y}}}
+    {X, X, A \lor B, A \lor B \piq{A \seq \sep B \seq} Y, Y}}
+    {X, A \lor B \piq{A \seq \sep B \seq} Y}}
+    {X, A \lor B, A \lor B \seq Y}}
+    {X, A \lor B \seq Y}
+    \\\\
+    \R[\rsf{\limp_R}]
+      {\summ[$\pi_1$]{X \seq (A \seq B), A \limp B, Y}}
+      {X \seq A \limp B, Y}
+    &\mt
+    \R[\rsf{c{+}}]
+    {\R[\rsf{{\limp}{+}}]
+    {\prftree[r][dotted]{$\pi_1$}
+    {\piq{}}
+    {X \seq (A \seq B), A \limp B, Y}}
+    {X \seq A \limp B, A \limp B, Y}}
+    {X \seq A \limp B, Y}
+    \\\\
+    \R[\rsf{\lsub_L}]
+      {\summ[$\pi_1$]{X, A \lsub B, (A \seq B) \seq Y}}
+      {X, A \lsub B \seq Y}
+    &\mt
+    \R[\rsf{c{-}}]
+    {\R[\rsf{{\lsub}{-}}]
+    {\prftree[r][dotted]{$\pi_1$}
+    {\piq{}}
+    {X, A \lsub B, (A \seq B) \seq Y}}
+    {X, A \lsub B, A \lsub B \seq Y}}
+    {X, A \lsub B \seq Y}
+    \\\\
+    \R[\rsf{\limp_L}]
+      {\summ[$\pi_1$]{X, A \limp B \seq A, Y}}
+      {\summ[$\pi_2$]{X, A \limp B, B \seq Y}}
+      {X, A \limp B \seq Y}
+    &\mt
+    \R[\rsf{c{-}}]
+    {\R[\rsf{{\limp}{-}}]
+    {\prftree[r][d]{\rsf{c{-},c{+}}}
+    {\prftree[r][d]{\rsf{f{-},f{+}}}
+    {\prftree[r][dotted]{$\pi_1$}
+    {\prftree[r][dotted]{$\pi_2$}
+    {\prftree[r][d]{\rsf{p}}
+    {\piq{}}
+    {\piq{\piq{} \sep \piq{}}}}
+    {\piq{\piq{} \sep X, A \limp B, B \seq Y}}}
+    {\piq{X, A \limp B \seq A, Y \sep X, A \limp B, B \seq Y}}}
+    {X, X, A \limp B, A \limp B \piq{\seq A \sep B \seq} Y, Y}}
+    {X, A \limp B \piq{\seq A \sep B \seq} Y}}
+    {X, A \limp B, A \limp B \seq Y}}
+    {X, A \limp B \seq Y}
+    \\\\
+    \R[\rsf{\lsub_R}]
+      {\summ[$\pi_1$]{X \seq A, A \lsub B, Y}}
+      {\summ[$\pi_2$]{X, B \seq A \lsub B, Y}}
+      {X \seq A \lsub B, Y}
+    &\mt
+    \R[\rsf{c{+}}]
+    {\R[\rsf{{\lsub}{+}}]
+    {\prftree[r][d]{\rsf{c{-},c{+}}}
+    {\prftree[r][d]{\rsf{f{-},f{+}}}
+    {\prftree[r][dotted]{$\pi_1$}
+    {\prftree[r][dotted]{$\pi_2$}
+    {\prftree[r][d]{\rsf{p}}
+    {\piq{}}
+    {\piq{\piq{} \sep \piq{}}}}
+    {\piq{\piq{} \sep X, B \seq A \lsub B, Y}}}
+    {\piq{X \seq A, A \lsub B, Y \sep X, B \seq A \lsub B, Y}}}
+    {X, X \piq{\seq A \sep B \seq} A \lsub B, A \lsub B, Y, Y}}
+    {X \piq{\seq A \sep B \seq} A \lsub B, Y}}
+    {X \seq A \lsub B, A \lsub B, Y}}
+    {X \seq A \lsub B, Y}
+  \end{align*}
 \end{proof}
 
 \begin{fact}[Completeness of \sys{DBiInt}]\labfact{completeness-dbiint}
@@ -199,7 +414,7 @@ statement:
   can build the following derivation:
   $$
   \R[\rsf{i{\uparrow}}]
-  {\prftree[d]
+  {\prftree[dotted]
   {\R[\rsf{p}]
   {\R[\rsf{f{+}{\downarrow}}]
   {\prftree[r][d]{DNE}  

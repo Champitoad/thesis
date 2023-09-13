@@ -24,8 +24,8 @@
   {X, A \seq (X' \seq Y'), Y}
 &
 \R[\rsf{\seq_{R2}}]
-  {X, (X' \seq A, Y') \seq A, Y'}
-  {X, (X' \seq Y') \seq A, Y'}
+  {X, (X' \seq A, Y') \seq A, Y}
+  {X, (X' \seq Y') \seq A, Y}
 \end{array}
 \and
 \begin{array}{c@{\quad}c}
@@ -43,8 +43,8 @@
   {X, A \land B \seq Y}
 &
 \R[\rsf{\land_R}]
-  {X \seq A \land B, A, Y}
-  {X \seq A \land B, B, Y}
+  {X \seq A, A \land B, Y}
+  {X \seq B, A \land B, Y}
   {X \seq A \land B, Y}
 \\
 \R[\rsf{\lor_L}]
@@ -53,7 +53,7 @@
   {X, A \lor B \seq Y}
 &
 \R[\rsf{\lor_R}]
-  {X \seq A \lor B, A, B, Y}
+  {X \seq A, B, A \lor B, Y}
   {X \seq A \lor B, Y}
 \\
 \R[\rsf{\limp_L}]
@@ -62,7 +62,7 @@
   {X, A \limp B \seq Y}
 &
 \R[\rsf{\limp_R}]
-  {X \seq A \limp B, (A \seq B), Y}
+  {X \seq (A \seq B), A \limp B, Y}
   {X \seq A \limp B, Y}
 \\
 \R[\rsf{\lsub_L}]
@@ -70,7 +70,7 @@
   {X, A \lsub B \seq Y}
 &
 \R[\rsf{\lsub_R}]
-  {X \seq A \lsub B, A, Y}
+  {X \seq A, A \lsub B, Y}
   {X, B \seq A \lsub B, Y}
   {X \seq A \lsub B, Y}
 \end{array}
