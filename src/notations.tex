@@ -96,6 +96,8 @@
 \newcommand{\conc}[1]{{\color{conc} #1}}
 \newcommand{\dvar}[1]{{\color{dvar} #1}}
 
+\newcommand{\prov}[1]{\sststile{#1}{}}
+
 % Bubbles
 
 \newcommand{\cham}{\textsc{Cham}}
@@ -187,6 +189,9 @@
 
 \newcommand{\cS}{\mathcal{S}}
 
+\newcommand{\dseq}{\mathbin{\trhd}}
+\newcommand{\dtrans}[1]{\begingroup #1 \endgroup^{\scalebox{1.25}{$\bullet$}}}
+
 % Flowers
 
 \newcommand{\Nature}{\text{\ding{96}}}
@@ -252,7 +257,7 @@
 \newcommand{\efill}[2]{#1\left[#2\right]}
 \newcommand{\lint}[1]{\lfloor#1\rfloor}
 
-\DeclareRobustCommand{\msys}[1]{\mathsf{#1}}
+\DeclareRobustCommand{\msys}[1]{\begingroup \mathsf{#1} \endgroup}
 \DeclareRobustCommand{\sys}[1]{$\msys{#1}$}
 \newcommand{\pair}[2]{\left\langle #1, #2 \right\rangle}
 

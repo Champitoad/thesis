@@ -1,13 +1,12 @@
 \documentclass{article}
 \usepackage[a4paper, margin=3cm]{geometry}
-\usepackage{todo}
 \usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amsthm}
 
 \input{config}
 
-\setmathfont{STIXTwoMath-Regular.otf}[range={\Coloneq,"29D0}]
+\setmathfont{STIXTwoMath-Regular.otf}[range={\Coloneq,"29D0,"25CF}]
 
 % Load the bibliography package
 
@@ -36,6 +35,8 @@
 
 % kao macros
 
+\newcommand{\todo}[1]{\footnote{\textbf{TODO:} #1}}
+
 \newcommand{\sidenote}{\footnote}
 \renewcommand{\sidecite}{\cite}
 
@@ -56,9 +57,11 @@
 \newcommand{\reffact}[1]{\doref{Fact}{fact}{#1}}
 \newcommand{\refsec}[1]{\doref{Section}{sec}{#1}}
 
+\newenvironment{marginfigure}{\begin{figure}}{\end{figure}}
+
 \begin{document}
 
-\input{sections/bubbles-soundness.tex} 
+\input{sections/bubbles-completeness.tex} 
 % \input{figures/sequent-B.tex}
 % \tikzfig{1}{1}{venn-algebras}
 
