@@ -1,1 +1,78 @@
-TODO
+% \renewcommand{\seq}{\dseq}
+\begin{framed}
+\renewcommand{\arraystretch}{2}
+\begin{mathpar}
+\begin{array}{c}
+\text{\textsc{Identity}} \\[1em]
+\R[\rsf{id}]
+  {}
+  {X, A \seq A, Y}
+\end{array}
+\and
+\begin{array}{c@{\quad}c}
+\multicolumn{2}{c}{\textsc{Propagation}} \\[1em]
+\R[\rsf{\seq_{L1}}]
+  {X, A, (X', A \seq Y') \seq Y}
+  {X, (X', A \seq Y') \seq Y}
+&
+\R[\rsf{\seq_{R1}}]
+  {X \seq (X' \seq A, Y'), A, Y}
+  {X \seq (X' \seq A, Y'), Y}
+\\
+\R[\rsf{\seq_{L2}}]
+  {X, A \seq (X', A \seq Y'), Y}
+  {X, A \seq (X' \seq Y'), Y}
+&
+\R[\rsf{\seq_{R2}}]
+  {X, (X' \seq A, Y') \seq A, Y'}
+  {X, (X' \seq Y') \seq A, Y'}
+\end{array}
+\and
+\begin{array}{c@{\quad}c}
+\multicolumn{2}{c}{\text{\textsc{Logic}}} \\[1em]
+\R[\rsf{\bot_L}]
+  {}
+  {X, \bot \seq Y}
+&
+\R[\rsf{\top_R}]
+  {}
+  {X \seq \top, Y}
+\\
+\R[\rsf{\land_L}]
+  {X, A \land B, A, B \seq Y}
+  {X, A \land B \seq Y}
+&
+\R[\rsf{\land_R}]
+  {X \seq A \land B, A, Y}
+  {X \seq A \land B, B, Y}
+  {X \seq A \land B, Y}
+\\
+\R[\rsf{\lor_L}]
+  {X, A \lor B, A \seq Y}
+  {X, A \lor B, B \seq Y}
+  {X, A \lor B \seq Y}
+&
+\R[\rsf{\lor_R}]
+  {X \seq A \lor B, A, B, Y}
+  {X \seq A \lor B, Y}
+\\
+\R[\rsf{\limp_L}]
+  {X, A \limp B \seq A, Y}
+  {X, A \limp B, B \seq Y}
+  {X, A \limp B \seq Y}
+&
+\R[\rsf{\limp_R}]
+  {X \seq A \limp B, (A \seq B), Y}
+  {X \seq A \limp B, Y}
+\\
+\R[\rsf{\lsub_L}]
+  {X, A \lsub B, (A \seq B) \seq Y}
+  {X, A \lsub B \seq Y}
+&
+\R[\rsf{\lsub_R}]
+  {X \seq A \lsub B, A, Y}
+  {X, B \seq A \lsub B, Y}
+  {X \seq A \lsub B, Y}
+\end{array}
+\end{mathpar}
+\end{framed}
