@@ -15,7 +15,7 @@ algebras, namely: \emph{Heyting} algebras for intuitionistic logic,
 all instances of \emph{bounded lattices}, and their relationship is summarized
 in the Venn diagram of \reffig{venn-algebras}.
 
-First we recall the definition of a bounded lattice:
+First we recall the definitions of the various algebras:
 
 \begin{definition}[Bounded lattice]\labdef{bounded-lattice}
   A \emph{bounded lattice} is a structure $(\mathcal{A}, \sement, \ltop, \lbot, \lmeet,
@@ -132,6 +132,11 @@ they will stand in perfect bijection.
 
 \subsection{Duality}
 
+We now prove a number of lemmas that characterize \emph{duality} both
+semantically, typically between Heyting and Brouwer algebras, and syntactically
+in the rules of system $\sysB$. This will be useful later on to shorten some
+proofs.
+
 \begin{definition}[Dual formula]\labdef{dual-formula}
   The \emph{dual formula} $\soldual{A}$ of a formula $A$ is defined recursively
   as follows:
@@ -159,31 +164,7 @@ they will stand in perfect bijection.
 We omit the proof of \reffact{duality}, but this can easily be obtained from the
 soundness and completeness of a symmetric sequent calculus for bi-intuitionistic
 logic, see for instance Lemma 2 of \sidecite{restall_extending_1997}.
-By recurrence on $\bradepth{\J}$.
-\begin{itemize}
-  \item[\bcase]
-  $$
-  \begin{array}{rcll}
-    \psint{\Gamma \seq \Delta} \lor \psint{I}
-    &=& \left(\nsint{\Gamma} \limp \psint{\Delta}\right) \lor \psint{I} & \\
-    &\sement& \nsint{\Gamma} \limp \psint{\Delta} \lor \psint{I} &\text{(\reflemma{weakdistrib})} \\
-    &=& \psint{\Gamma \seq I, \Delta} & \\
-  \end{array}
-  $$
-  \item[\rcase]
-  $$
-  \begin{array}{rcll}
-    \psint{\Gamma \piq{\cS} \Delta} \lor \psint{I}
-    &=& \psintAndMix{(\Gamma' \JB \Delta')}{\cS}{\Gamma}{\Delta} \lor \psint{I} & \\
-    &=& \psintAnd{(\Gamma' \JB \Delta')}{\cS}{\Gamma, \Gamma' \JB \Delta', \Delta} \lor \psint{I} & \\
-    &\semequiv_{\Lattice}& \psintAnd{(\Gamma' \JB \Delta')}{\cS}{\Gamma, \Gamma' \JB \Delta', \Delta} \lor \psintAnd{(\Gamma' \JB \Delta')}{\cS}{I} &\text{(\reflemma{idempotency})} \\
-    &\semequiv_{\Lattice}& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\left(\psint{\Gamma, \Gamma' \JB \Delta', \Delta} \lor \psint{I}\right)} &\text{(\reflemma{distributivity})} \\
-    &\sement& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\left(\psint{\Gamma, \Gamma' \JB I, \Delta', \Delta} \right)} &\text{(IH)} \\
-    &=& \psintAndMix{(\Gamma' \JB \Delta')}{\cS}{\Gamma}{I, \Delta} & \\
-    &=& \psint{\Gamma \piq{\cS} I, \Delta} & \\
-  \end{array}
-  $$
-\end{itemize}
+
 \begin{definition}[Dual solution]\labdef{dual-solution}
   The \emph{dual solution} $\soldual{S}$ of a solution $S$ is defined
   mutually recursively as follows:
@@ -321,22 +302,26 @@ formulas have been dualized (\refdef{dual-formula}).
 
 \subsection{Local soundness}
 
-\begin{lemma}[Commutativity]\lablemma{lattice-commutativity}
+In the following we give a number of (in)equalities that hold in the various
+classes of algebras. They can easily be checked by building derivations in an
+adequate sequent calculus.
+
+\begin{fact}[Commutativity]\labfact{lattice-commutativity}
   $A \lor B \semequiv_{\Lattice} B \lor A$ and $A \land B \semequiv_{\Lattice} B \land A$.
-\end{lemma}
+\end{fact}
 
-\begin{lemma}[Idempotency]\lablemma{idempotency}
+\begin{fact}[Idempotency]\labfact{idempotency}
   $A \lor A \semequiv_{\Lattice} A$ and $A \land A \semequiv_{\Lattice} A$.
-\end{lemma}
+\end{fact}
 
-\begin{lemma}[Currying]\lablemma{currying}
+\begin{fact}[Currying]\labfact{currying}
   \begin{align*}
     A \limp (B \limp C) &\semequiv (A \land B) \limp C \\
     (A \lsub B) \lsub C &\semequiv_{\Brouwer} A \lsub (B \lor C)
   \end{align*}
-\end{lemma}
+\end{fact}
 
-\begin{lemma}[Distributivity]\lablemma{distributivity}
+\begin{fact}[Distributivity]\labfact{distributivity}
   \begin{align*}
     A \land (B \lor C) &\semequiv_{\Lattice} (A \land B) \lor (A \land C) \\
     A \lor (B \land C) &\semequiv_{\Lattice} (A \lor B) \land (A \lor C) \\
@@ -345,28 +330,31 @@ formulas have been dualized (\refdef{dual-formula}).
     A \lor B \lsub C &\semequiv_{\Brouwer} (A \lsub B) \lor (A \lsub C) \\
     A \lsub B \land C &\semequiv_{\Brouwer} (A \lsub B) \lor (A \lsub C)
   \end{align*}
-\end{lemma}
+\end{fact}
 
-\begin{lemma}[Weak distributivity]\lablemma{weakdistrib}
+\begin{fact}[Weak distributivity]\labfact{weakdistrib}
   \begin{align*}
     (A \limp B) \lor C &\sement A \limp (B \lor C) \\
     A \limp (B \lor C) &\sementC (A \limp B) \lor C \\
     (A \land B) \lsub C &\sementB A \land (B \lsub C) \\
     A \land (B \lsub C) &\sementC (A \land B) \lsub C
   \end{align*}
-\end{lemma}
+\end{fact}
 
-\begin{lemma}\lablemma{gencut}
+\begin{fact}\labfact{gencut}
   \begin{align*}
   (A \lor B) \land (C \limp D) &\sement (A \limp C) \limp (B \lor D) \\
   (A \lor B) \land (C \limp D) &\sementHB (A \lsub C) \lor (B \lor D) \\
   (A \lor B) \land (A \limp B) &\semequiv B
   \end{align*}
-\end{lemma}
+\end{fact}
 
-\begin{lemma}\lablemma{impsub}
+\begin{fact}\labfact{impsub}
   $(A \lsub B) \limp C \sementHB A \limp B \lor C$.
-\end{lemma}
+\end{fact}
+
+The following definition will be used pervasively to reason by induction on the
+tree structure induced by branching operators:
 
 \begin{definition}
   The \emph{depth} $\bradepth{\J}$ of a branching operator $\J$ is defined
@@ -414,34 +402,15 @@ formulas have been dualized (\refdef{dual-formula}).
 %   \end{itemize}
 % \end{proof}
 
+Now we can give a few lemmas that generalize some semantic (in)equalities to the
+interpretation of solutions with arbitrary branching operators. All detailed
+proofs are available in appendix (\refsec{app:bubbles-soundness}).
+
 \begin{lemma}[Generalized weakening]\lablemma{bubbles-weakening}
   $\psint{S} \sement \psint{S \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 \begin{proof}
-  Let $S = \Gamma' \J \Delta'$. We proceed by recurrence on $\bradepth{\J}$.
-  \begin{itemize}
-    \item[\bcase]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma' \seq \Delta'}
-      &=& \nsint{\Gamma} \limp \psint{\Delta} & \\
-      &\sement& \nsint{\Gamma} \limp \psint{\Delta} \lor \psint{\Delta'} & \\
-      &\sement& \nsint{\Gamma'} \wedge \nsint{\Gamma} \limp \psint{\Delta} \lor \psint{\Delta'} & \\
-      &=& \psint{\Gamma', \Gamma \seq \Delta, \Delta'} & \\
-    \end{array}
-    $$
-    \item[\rcase]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma' \piq{\cS} \Delta'}
-      &=& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma' \seq \Delta')}} & \\
-      &\sement& \bigwedge_{T \in \cS}{\psint{(T \mix (\Gamma' \seq \Delta')) \mix (\Gamma \seq \Delta)}} &\text{(IH)} \\
-      &=& \bigwedge_{T \in \cS}{\psint{T \mix ((\Gamma' \seq \Delta') \mix (\Gamma \seq \Delta))}} & \\
-      &=& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma', \Gamma \seq \Delta, \Delta')}} & \\
-      &=& \psint{\Gamma', \Gamma \piq{\cS} \Delta, \Delta'} & \\
-    \end{array}
-    $$
-  \end{itemize}
+  By recurrence on $\bradepth{\J}$, with $S = \Gamma' \J \Delta'$.
 \end{proof}
 
 \begin{lemma}[Generalized contraction]\lablemma{bubbles-contraction}
@@ -449,47 +418,7 @@ formulas have been dualized (\refdef{dual-formula}).
   $\psint{S \mix (I, I \seq)} \semequiv \psint{S \mix (I \seq)}$.
 \end{lemma}
 \begin{proof}
-  Let $S = \Gamma \J \Delta$. We proceed by recurrence on $\bradepth{\J}$.
-  \begin{itemize}
-    \item[\bcase]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \seq I, I, \Delta}
-      &=& \nsint{\Gamma} \limp (\psint{I} \land \psint{I}) \vee \psint{\Delta} & \\
-      &\semequiv& \nsint{\Gamma} \limp \psint{I} \vee \psint{\Delta} &\text{(\reflemma{idempotency})} \\
-      &=& \psint{\Gamma \seq I, \Delta} & \\
-    \end{array}
-    $$
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma, I, I \seq \Delta}
-      &=& \nsint{\Gamma} \land (\nsint{I} \land \nsint{I}) \limp \psint{\Delta} & \\
-      &\semequiv& \nsint{\Gamma} \land \nsint{I} \limp \psint{\Delta} &\text{(\reflemma{idempotency})} \\
-      &=& \psint{\Gamma, I \seq \Delta} & \\
-    \end{array}
-    $$
-    \item[\rcase]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{\cS} I, I, \Delta}
-      &=& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq I, I, \Delta)}} & \\
-      &=& \bigwedge_{T \in \cS}{\psint{(T \mix (\Gamma \seq \Delta)) \mix (\seq I, I)}} & \\
-      &=& \bigwedge_{T \in \cS}{\psint{(T \mix (\Gamma \seq \Delta)) \mix (\seq I)}} &\text{(IH)} \\
-      &=& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq I, \Delta)}} & \\
-      &=& \psint{\Gamma \piq{\cS} I, \Delta} & \\
-    \end{array}
-    $$
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma, I, I \piq{\cS} \Delta}
-      &=& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma, I, I \seq \Delta)}} & \\
-      &=& \bigwedge_{T \in \cS}{\psint{(T \mix (\Gamma \seq \Delta)) \mix (I, I \seq)}} & \\
-      &=& \bigwedge_{T \in \cS}{\psint{(T \mix (\Gamma \seq \Delta)) \mix (I \seq)}} &\text{(IH)} \\
-      &=& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma, I \seq \Delta)}} & \\
-      &=& \psint{\Gamma, I \piq{\cS} \Delta} & \\
-    \end{array}
-    $$
-  \end{itemize}
+  By recurrence on $\bradepth{\J}$, with $S = \Gamma \J \Delta$.
 \end{proof}
 
 \begin{lemma}[Generalized weak distributivity]\lablemma{bubbles-weakdistrib}
@@ -501,46 +430,12 @@ formulas have been dualized (\refdef{dual-formula}).
   \end{align}
 \end{lemma}
 \begin{proof}
-  We only prove (\ref{eqn:weakdistrib-one}): the proof of
+  (\ref{eqn:weakdistrib-one}) holds by recurrence on $\bradepth{\J}$, using the
+  corresponding inequality from \reflemma{weakdistrib}. The proof of
   (\ref{eqn:weakdistrib-two}) is the same, except that we use the converse
-  inequality of \reflemma{weakdistrib} that holds in Boolean algebras.
+  inequality of \reffact{weakdistrib} that holds in Boolean algebras.
   (\ref{eqn:weakdistrib-three}) and (\ref{eqn:weakdistrib-four}) hold by duality
-  from (\ref{eqn:weakdistrib-one}) and (\ref{eqn:weakdistrib-two}), i.e. for
-  (\ref{eqn:weakdistrib-three}) we have
-  $$
-  \def\arraystretch{2.5}
-  \begin{array}{rrcll}
-               & \psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{\Gamma}} \lor \psint{\soldual{I}} &\sement& \psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{I}, \soldual{\Gamma}} &\text{(\ref{eqn:weakdistrib-one})} \\
-    \text{iff} & \soldual{\psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{I}, \soldual{\Gamma}}} &\sementB& \soldual{\psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{\Gamma}} \lor \psint{\soldual{I}}} &\text{(\reffact{duality})} \\
-    \text{iff} & \nsint{\soldual{\soldual{\Gamma}}, \soldual{\soldual{I}} \mathbin{\soldual{\mathbin{\soldual{\J}}}} \soldual{\soldual{\Delta}}} &\sementB& \nsint{\soldual{\soldual{\Gamma}} \mathbin{\soldual{\mathbin{\soldual{\J}}}} \soldual{\soldual{\Delta}}} \land \nsint{\soldual{\soldual{I}}} &\text{(\reflemma{int-duality})} \\
-    \text{iff} & \nsint{\Gamma, I \mathbin{\J} \Delta} &\sementB& \nsint{\Gamma \mathbin{\J} \Delta} \land \nsint{I} &\text{(\reflemma{involutivity})} \\
-  \end{array}
-  $$
-  We prove (\ref{eqn:weakdistrib-one}) by recurrence on $\bradepth{\J}$.
-  \begin{itemize}
-    \item[\bcase]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \seq \Delta} \lor \psint{I}
-      &=& \left(\nsint{\Gamma} \limp \psint{\Delta}\right) \lor \psint{I} & \\
-      &\sement& \nsint{\Gamma} \limp \psint{\Delta} \lor \psint{I} &\text{(\reflemma{weakdistrib})} \\
-      &=& \psint{\Gamma \seq I, \Delta} & \\
-    \end{array}
-    $$
-    \item[\rcase]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{\cS} \Delta} \lor \psint{I}
-      &=& \psintAndMix{(\Gamma' \JB \Delta')}{\cS}{\Gamma}{\Delta} \lor \psint{I} & \\
-      &=& \psintAnd{(\Gamma' \JB \Delta')}{\cS}{\Gamma, \Gamma' \JB \Delta', \Delta} \lor \psint{I} & \\
-      &\semequiv_{\Lattice}& \psintAnd{(\Gamma' \JB \Delta')}{\cS}{\Gamma, \Gamma' \JB \Delta', \Delta} \lor \psintAnd{(\Gamma' \JB \Delta')}{\cS}{I} &\text{(\reflemma{idempotency})} \\
-      &\semequiv_{\Lattice}& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\left(\psint{\Gamma, \Gamma' \JB \Delta', \Delta} \lor \psint{I}\right)} &\text{(\reflemma{distributivity})} \\
-      &\sement& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\left(\psint{\Gamma, \Gamma' \JB I, \Delta', \Delta} \right)} &\text{(IH)} \\
-      &=& \psintAndMix{(\Gamma' \JB \Delta')}{\cS}{\Gamma}{I, \Delta} & \\
-      &=& \psint{\Gamma \piq{\cS} I, \Delta} & \\
-    \end{array}
-    $$
-  \end{itemize}
+  from (\ref{eqn:weakdistrib-one}) and (\ref{eqn:weakdistrib-two}).
 \end{proof}
 
 \begin{lemma}[Generalized currying]\lablemma{bubbles-currying}
@@ -550,33 +445,8 @@ formulas have been dualized (\refdef{dual-formula}).
   \end{align}
 \end{lemma}
 \begin{proof}
-  We only prove (\ref{eqn:currying-one}), as (\ref{eqn:currying-two}) holds by
-  duality as in \reflemma{bubbles-weakdistrib}. We proceed by recurrence on
-  $\bradepth{\J}$.
-  \begin{itemize}
-    \item[\bcase]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma, I \seq \Delta}
-      &=& \nsint{\Gamma} \land \nsint{I} \limp \psint{\Delta} & \\
-      &\semequiv& \nsint{I} \land \nsint{\Gamma} \limp \psint{\Delta} &\text{(\reflemma{lattice-commutativity})} \\
-      &\semequiv& \nsint{I} \limp \nsint{\Gamma} \limp \psint{\Delta} &\text{(\reflemma{currying})} \\
-      &=& \nsint{I} \limp \psint{\Gamma \seq \Delta} & \\
-    \end{array}
-    $$
-    \item[\rcase]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma, I \piq{\cS} \Delta}
-      &=& \psintAndMix{(\Gamma' \JB \Delta')}{\cS}{\Gamma, I}{\Delta} & \\
-      &=& \psintAnd{(\Gamma' \JB \Delta')}{\cS}{\Gamma', \Gamma, I \JB \Delta, \Delta'} & \\
-      &\semequiv& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\left(\nsint{I} \limp \psint{\Gamma', \Gamma \JB \Delta, \Delta'}\right)} &\text{(IH)} \\
-      &\semequiv& \nsint{I} \limp \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\psint{\Gamma', \Gamma \JB \Delta, \Delta'}} &\text{(\reflemma{distributivity})} \\
-      &=& \nsint{I} \limp \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\psint{(\Gamma' \JB \Delta') \mix (\Gamma \seq \Delta)}} & \\
-      &=& \nsint{I} \limp \psint{\Gamma \piq{\cS} \Delta} & \\
-    \end{array}
-    $$
-  \end{itemize}
+  (\ref{eqn:currying-one}) holds by recurrence on $\bradepth{\J}$, and
+  (\ref{eqn:currying-two}) by duality.
 \end{proof}
 
 % \begin{lemma}[Mix]\lablemma{bubbles-mix}
@@ -587,9 +457,16 @@ formulas have been dualized (\refdef{dual-formula}).
 %   $\psint{S \mix T} \sement \psint{S \mix \piq{T}}$.
 % \end{lemma}
 
+Lastly, we mention a technical property of rules that will be necessary for the
+final proof of soundness to go through:
+
 \begin{fact}[Top-level genericity]\labfact{bubbles-top-level}
   If $S \lstep T$, then $S \mix (\Gamma \seq \Delta) \lstep T \mix (\Gamma \seq \Delta)$.
 \end{fact}
+
+All the previous facts and lemmas can now be used to prove \emph{local
+soundness}, i.e. that the interpretation of each rule of system $\sysB$ maps to
+an (in)equality in some class of algebras:
 
 \begin{lemma}[Local soundness]\lablemma{bubbles-local-soundness}
   
@@ -599,430 +476,17 @@ formulas have been dualized (\refdef{dual-formula}).
   % \nsint{T \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 \begin{proof}
-  We show that $S \lstep T$ implies $\psint{T} \sementC \psint{S}$ by inspection
-  of each rule of system \sys{B}. That we can mix an arbitrary top-level context
-  $\Gamma \seq \Delta$ into $S$ and $T$ follows from \reffact{bubbles-top-level}.
-
-  \def\arraystretch{1.25}
-  \begin{itemize}
-    \item[\rnmsf{i{\downarrow}}]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{} \Delta}
-      &=& \bigwedge_{U \in \emptyset}{\psint{U \mix (\Gamma \seq \Delta)}} &\\
-      &=& \top & \\
-      &\semequiv& \nsint{\Gamma} \wedge A \limp A \lor \psint{\Delta} &\\
-      &=& \psint{\Gamma, A \seq A, \Delta}
-    \end{array}
-    $$
-    \item[\rnmsf{i{\uparrow}}]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{\seq A \sep A \seq} \Delta}
-      &=& \psint{\Gamma \seq A, \Delta} \wedge \psint{\Gamma, A \seq \Delta} & \\
-      &=& (\nsint{\Gamma} \limp A \lor \psint{\Delta}) \land (\nsint{\Gamma} \land A \limp \psint{\Delta}) & \\
-      &\semequiv& (\nsint{\Gamma} \limp A \lor \psint{\Delta}) \wedge (\nsint{\Gamma} \limp A \limp \psint{\Delta}) &\text{(\reflemma{currying})}\\
-      &\semequiv& \nsint{\Gamma} \limp (A \lor \psint{\Delta}) \wedge (A \limp \psint{\Delta}) &\text{(\reflemma{distributivity})}\\
-      &\semequiv& \nsint{\Gamma} \limp \psint{\Delta} &\text{(\reflemma{gencut})}\\
-      &=& \psint{\Gamma \seq \Delta} & \\
-    \end{array}
-    $$
-    \item[{\rnmsf{w{-}}}, {\rnmsf{w{+}}}] By \reflemma{bubbles-weakening}.
-    \item[{\rnmsf{c{-}}}, {\rnmsf{c{+}}}] By \reflemma{bubbles-contraction}.
-
-    % Soundness of membrane rules for non-empty bubbles instead of bubble
-    % swapping rules. Pro: invertible. Con: completeness might be harder to
-    % prove.
-
-    % \item[{\rnmsf{s{-}}}, {\rnmsf{s{+}}}] We only write the proof for
-    % {\rnmsf{s{-}}}, the proof for {\rnmsf{s{+}}} is symmetric. We proceed by
-    % recurrence on $\bradepth{\J}$.
-    % \begin{itemize}
-    %   \item[\bcase]
-    %   $$
-    %   \begin{array}{rcll}
-    %     \psint{\piq{S \seq} \mix \Gamma \seq \Delta}
-    %     &=& \psint{\Gamma \piq{S \seq} \Delta} & \\
-    %     &=& \psint{\Gamma, S \seq \Delta} & \\
-    %     &=& \nsint{\Gamma} \wedge \nsint{S} \limp \psint{\Delta} & \\
-    %     &=& \nsint{\Gamma} \wedge \nsint{\piq{S}} \limp \psint{\Delta} & \\
-    %     &=& \psint{\Gamma, (\piq{S}) \seq \Delta} & \\
-    %   \end{array}
-    %   $$
-    %   \item[\rcase]
-    %   $$
-    %   \begin{array}{rcll}
-    %     \psint{\piq{S \seq} \mix \Gamma \piq{\cS} \Delta}
-    %     &=& \psint{\Gamma \piq{\cS \sep S \seq} \Delta} & \\
-    %     &=& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq \Delta)}} \land \psint{\Gamma, S \seq \Delta} & \\
-    %     &=& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq \Delta)}} \land \psint{(\Gamma \seq \Delta) \mix (S \seq)} & \\
-    %     &\semequiv& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq \Delta)}} \land \bigwedge_{T\in\cS}{\psint{(\Gamma \seq \Delta) \mix (S \seq)}} & \\
-    %     &\sement& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq \Delta) \mix (\Gamma \seq \Delta) \mix (S \seq)}} &\text{(\reflemma{bubbles-mix})} \\
-    %     &\semequiv& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq \Delta) \mix (S \seq)}} &\text{(\reflemma{bubbles-contraction})} \\
-    %     &\sement& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq \Delta) \mix \piq{S \seq}}} &\text{(\reflemma{bubbles-piq})} \\
-    %     &=& \bigwedge_{T \in \cS}{\psint{\piq{S \seq} \mix ((\Gamma \seq \Delta) \mix T)}} & \\
-    %     &=& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\psint{\piq{S \seq} \mix ((\Gamma \seq \Delta) \mix (\Gamma' \JB \Delta'))}} & \\
-    %     &=& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\psint{\piq{S \seq} \mix (\Gamma', \Gamma \JB \Delta, \Delta')}} & \\
-    %     &\sement& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\psint{\Gamma', \Gamma, (\piq{S}) \JB \Delta, \Delta'}} &\text{(IH)} \\
-    %     &=& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\psint{(\Gamma' \JB \Delta') \mix (\Gamma, (\piq{S}) \seq \Delta)}} & \\
-    %     &=& \psint{\Gamma, (\piq{S}) \piq{\cS} \Delta} & \\
-    %   \end{array}
-    %   $$
-    % \end{itemize}
-
-    \item[{\rnmsf{f{-}{\downarrow}}}]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{\Gamma', I \JB \Delta' \sep \cS} \Delta}
-      &=& \psint{\Gamma, \Gamma', I \JB \Delta', \Delta} \land \bigwedge_{S \in \cS}{\psint{S \mix (\Gamma \seq \Delta)}} & \\
-      &=& \psint{\Gamma, I \piq{\Gamma' \JB \Delta' \sep \cS} \Delta} & \\
-    \end{array}
-    $$
-    \item[{\rnmsf{f{+}{\downarrow}}}]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{\cS \sep \Gamma' \JB I, \Delta'} \Delta}
-      &=& \bigwedge_{S \in \cS}{\psint{S \mix (\Gamma \seq \Delta)}} \land \psint{\Gamma, \Gamma' \JB I, \Delta', \Delta} & \\
-      &=& \psint{\Gamma \piq{\cS \sep \Gamma' \JB \Delta'} I, \Delta} & \\
-    \end{array}
-    $$
-    \item[{\rnmsf{f{-}{+}{\downarrow}}}]
-    We show that $\psint{\Gamma \J (\Gamma', I \JB \Delta'), \Delta} \sement
-    \psint{\Gamma, I \J (\Gamma' \JB \Delta'), \Delta}$ by recurrence on
-    $\bradepth{\J}$.
-    \begin{itemize}
-      \item[\bcase]
-      $$
-      \begin{array}{rcll}
-        \psint{\Gamma \seq (\Gamma', I \JB \Delta'), \Delta}
-        &=& \nsint{\Gamma} \limp \psint{\Gamma', I \JB \Delta'} \lor \psint{\Delta} & \\
-        &\semequiv& \nsint{\Gamma} \limp \left(\nsint{I} \limp \psint{\Gamma' \JB \Delta'}\right) \lor \psint{\Delta} &\text{(\reflemma{bubbles-currying})} \\
-        &\sement& \nsint{\Gamma} \limp \left(\nsint{I} \limp \psint{\Gamma' \JB \Delta'} \lor \psint{\Delta}\right) &\text{(\reflemma{weakdistrib})} \\
-        &\semequiv& \nsint{\Gamma} \land \nsint{I} \limp \psint{\Gamma' \JB \Delta'} \lor \psint{\Delta} &\text{(\reflemma{currying})} \\
-        &=& \psint{\Gamma, I \seq (\Gamma' \JB \Delta'), \Delta} & \\
-      \end{array}
-      $$
-      \item[\rcase]
-      $$
-      \begin{array}{rcll}
-        \psint{\Gamma \piq{\cS} (\Gamma', I \JB \Delta'), \Delta}
-        &=& \psintAndMix{(\Gamma'' \J \Delta'')}{\cS}{\Gamma}{(\Gamma', I \JB \Delta'), \Delta} & \\
-        &=& \psintAnd{(\Gamma'' \J \Delta'')}{\cS}{\Gamma'', \Gamma \J (\Gamma', I \JB \Delta'), \Delta, \Delta''} & \\
-        &\sement& \psintAnd{(\Gamma'' \J \Delta'')}{\cS}{\Gamma'', \Gamma, I \J (\Gamma' \JB \Delta'), \Delta, \Delta''} &\text{(IH)} \\
-        &=& \psintAndMix{(\Gamma'' \J \Delta'')}{\cS}{\Gamma, I}{(\Gamma' \JB \Delta'), \Delta} & \\
-        &=& \psint{\Gamma, I \piq{\cS} (\Gamma' \JB \Delta'), \Delta} & \\
-      \end{array}
-      $$
-    \end{itemize}
-    \item[{\rnmsf{f{+}{-}{\downarrow}}}]
-    We show that $\psint{\Gamma, (\Gamma' \JB I, \Delta') \J \Delta} \sementHB
-    \psint{\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}$ by recurrence on
-    $\bradepth{\J}$.
-    \begin{itemize}
-      \item[\bcase]
-      $$
-      \begin{array}{rcll}
-        \psint{\Gamma, (\Gamma' \JB I, \Delta') \seq \Delta}
-        &=& \nsint{\Gamma} \land \nsint{\Gamma' \JB I, \Delta'} \limp \psint{\Delta} & \\
-        &\semequiv_{\HeytingBrouwer}& \nsint{\Gamma} \land \left(\nsint{\Gamma' \JB \Delta'} \lsub \psint{I}\right) \limp \psint{\Delta} &\text{(\reflemma{bubbles-currying})} \\
-        &\sementHB& \left(\nsint{\Gamma} \land \nsint{\Gamma' \JB \Delta'} \lsub \psint{I}\right) \limp \psint{\Delta} &\text{(\reflemma{weakdistrib})} \\
-        &\sementHB& \nsint{\Gamma} \land \nsint{\Gamma' \JB \Delta'} \limp \psint{I} \lor \psint{\Delta} &\text{(\reflemma{impsub})} \\
-        &=& \psint{\Gamma, (\Gamma' \JB \Delta') \seq I, \Delta} & \\
-      \end{array}
-      $$
-      \item[\rcase]
-      $$
-      \begin{array}{rcll}
-        \psint{\Gamma, (\Gamma' \JB I, \Delta') \piq{\cS} \Delta}
-        &=& \psintAndMix{(\Gamma'' \J \Delta'')}{\cS}{\Gamma, (\Gamma' \JB I, \Delta')}{\Delta} & \\
-        &=& \psintAnd{(\Gamma'' \J \Delta'')}{\cS}{\Gamma'', \Gamma, (\Gamma' \JB I, \Delta') \J \Delta, \Delta''} & \\
-        &\sementHB& \psintAnd{(\Gamma'' \J \Delta'')}{\cS}{\Gamma'', \Gamma, (\Gamma' \JB \Delta') \J I, \Delta, \Delta''} &\text{(IH)} \\
-        &=& \psintAndMix{(\Gamma'' \J \Delta'')}{\cS}{\Gamma, (\Gamma' \JB \Delta')}{I, \Delta} & \\
-        &=& \psint{\Gamma, (\Gamma' \JB \Delta') \piq{\cS} I, \Delta} & \\
-      \end{array}
-      $$
-    \end{itemize}
-    \item[{\rnmsf{f{+}{+}{\uparrow}}}]
-    We show that $\psint{\Gamma \J (\Gamma' \JB \Delta'), I, \Delta} \sement
-    \psint{\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}$ by recurrence on
-    $\bradepth{\J}$.
-    \begin{itemize}
-      \item[\bcase]
-      $$
-      \begin{array}{rcll}
-        \psint{\Gamma \seq (\Gamma' \JB \Delta'), I, \Delta}
-        &=& \nsint{\Gamma} \limp \psint{\Gamma' \JB \Delta'} \lor \psint{I} \lor \psint{\Delta} & \\
-        &\sement& \nsint{\Gamma} \limp \psint{\Gamma' \JB I, \Delta'} \lor \psint{\Delta} &\text{(\reflemma{bubbles-weakdistrib})} \\
-        &=& \psint{\Gamma \seq (\Gamma' \JB I, \Delta'), \Delta} & \\
-      \end{array}
-      $$
-      \item[\rcase]
-      $$
-      \begin{array}{rcll}
-        \psint{\Gamma \piq{\cS} (\Gamma' \JB \Delta'), I, \Delta}
-        &=& \psintAndMix{(\Gamma'' \J \Delta'')}{\cS}{\Gamma}{(\Gamma' \JB \Delta'), I, \Delta} & \\
-        &=& \psintAnd{(\Gamma'' \J \Delta'')}{\cS}{\Gamma'', \Gamma \J (\Gamma' \JB \Delta'), I, \Delta, \Delta''} & \\
-        &\sement& \psintAnd{(\Gamma'' \J \Delta'')}{\cS}{\Gamma'', \Gamma \J (\Gamma' \JB I, \Delta'), \Delta, \Delta''} &\text{(IH)} \\
-        &=& \psintAndMix{(\Gamma'' \J \Delta'')}{\cS}{\Gamma}{(\Gamma' \JB I, \Delta'), \Delta} & \\
-        &=& \psint{\Gamma \piq{\cS} (\Gamma' \JB I, \Delta'), \Delta} & \\
-      \end{array}
-      $$
-    \end{itemize}
-    \item[{\rnmsf{f{-}{-}{\uparrow}}}]
-    We show that $\psint{\Gamma, I, (\Gamma' \JB \Delta') \J \Delta} \sementHB
-    \psint{\Gamma, (\Gamma', I \JB \Delta') \J \Delta}$ by recurrence on
-    $\bradepth{\J}$.
-    \begin{itemize}
-      \item[\bcase]
-      $$
-      \begin{array}{rcll}
-        \psint{\Gamma, I, (\Gamma' \JB \Delta') \seq \Delta}
-        &=& \nsint{\Gamma} \land \nsint{I} \land \nsint{\Gamma' \JB \Delta'} \limp \psint{\Delta} & \\
-        &\sementHB& \nsint{\Gamma} \land \nsint{\Gamma', I \JB \Delta'} \limp \psint{\Delta} &\text{(\reflemma{bubbles-weakdistrib})} \\
-        &=& \psint{\Gamma, (\Gamma', I \JB \Delta') \seq \Delta} & \\
-      \end{array}
-      $$
-      \item[\rcase]
-      $$
-      \begin{array}{rcll}
-        \psint{\Gamma, I, (\Gamma' \JB \Delta') \piq{\cS} \Delta}
-        &=& \psintAndMix{(\Gamma'' \J \Delta'')}{\cS}{\Gamma, I, (\Gamma' \JB \Delta')}{\Delta} & \\
-        &=& \psintAnd{(\Gamma'' \J \Delta'')}{\cS}{\Gamma'', \Gamma, I, (\Gamma' \JB \Delta') \J \Delta, \Delta''} & \\
-        &\sementHB& \psintAnd{(\Gamma'' \J \Delta'')}{\cS}{\Gamma'', \Gamma, (\Gamma', I \JB \Delta') \J \Delta, \Delta''} &\text{(IH)} \\
-        &=& \psintAndMix{(\Gamma'' \J \Delta'')}{\cS}{\Gamma, (\Gamma', I \JB \Delta')}{\Delta} & \\
-        &=& \psint{\Gamma, (\Gamma', I \JB \Delta') \piq{\cS} \Delta} & \\
-      \end{array}
-      $$
-    \end{itemize}
-
-    \item[{\rnmsf{f{-}{+}{\uparrow}}}, {\rnmsf{f{+}{-}{\uparrow}}}] Converse of
-    {\rnmsf{f{-}{+}{\downarrow}}} (resp. {\rnmsf{f{+}{-}{\downarrow}}}), using
-    the converse inequality of \reflemma{weakdistrib} which only holds in
-    Boolean algebras.
-
-    \item[{\rnmsf{f{+}{+}{\downarrow}}}, {\rnmsf{f{-}{-}{\downarrow}}}] Converse
-    of {\rnmsf{f{+}{+}{\uparrow}}} (resp. {\rnmsf{f{-}{-}{\uparrow}}}), using
-    the converse inequality of \reflemma{bubbles-weakdistrib} which only holds
-    in Boolean algebras.
-
-    \item[\rsf{p}]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{\cS} \Delta}
-      &=& \psintAndMix{S}{\cS}{\Gamma}{\Delta} \\
-      &\semequiv_{\Lattice}& \psintAndMix{S}{\cS}{\Gamma}{\Delta} \wedge \top \\
-      &=& \psintAndMix{S}{\cS}{\Gamma}{\Delta} \wedge \psint{\Gamma \piq{} \Delta} \\
-      &=& \psint{\Gamma \piq{\cS \sep \piq{}} \Delta} \\
-    \end{array}
-    $$
-
-    \item[\rsf{p{-}}]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{} \Delta}
-      &=& \top & \\
-      &\semequiv& \nsint{\Gamma} \wedge \bot \limp \psint{\Delta} & \\
-      &=& \psint{\Gamma, (\piq{}) \seq \Delta} & \\
-    \end{array}
-    $$
-
-    \item[\rsf{p{+}}]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{} \Delta}
-      &=& \top & \\
-      &\semequiv& \nsint{\Gamma} \limp \top \lor \psint{\Delta} & \\
-      &=& \psint{\Gamma \seq (\piq{}), \Delta} & \\
-    \end{array}
-    $$
-
-    \item[\rsf{a}]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{S} \Delta}
-      &=& \psint{\piq{S} \mix (\Gamma \seq \Delta)} & \\
-      &=& \psint{\Gamma \piq{\piq{S}} \Delta} & \\
-    \end{array}
-    $$
-
-    \item[\rsf{a{-}}, \rsf{a{+}}] We only do the proof for \rsf{a{-}}, the proof
-    for \rsf{a{+}} is symmetric. We show that $\psint{\Gamma, S \J \Delta} =
-    \psint{\Gamma, (\piq{S}) \J \Delta}$ by recurrence on $\bradepth{\J}$.
-    \begin{itemize}
-      \item[\bcase]
-        $$
-        \begin{array}{rcll}
-          \psint{\Gamma, S \seq \Delta}
-          &=& \nsint{\Gamma} \land \nsint{S} \limp \psint{\Delta} & \\
-          &=& \nsint{\Gamma} \land \nsint{\piq{S}} \limp \psint{\Delta} & \\
-          &=& \psint{\Gamma, (\piq{S}) \seq \Delta} & \\
-        \end{array}
-        $$
-      \item[\rcase]
-        $$
-        \begin{array}{rcll}
-          \psint{\Gamma, S \piq{\cS} \Delta}
-          &=& \psintAndMix{T}{\cS}{\Gamma, S}{\Delta} & \\
-          &=& \psintAndMix{T}{\cS}{\Gamma, (\piq{S})}{\Delta} &\text{(IH)} \\
-          &=& \psint{\Gamma, (\piq{S}) \piq{\cS} \Delta} & \\
-        \end{array}
-        $$
-    \end{itemize}
-    
-    \item[\rsf{\top{-}}, \rsf{\bot{+}}]
-    We only do the proof for \rsf{\top{-}}, the proof for \rsf{\bot{+}} is
-    symmetric. We show that $\psint{\Gamma \J \Delta} \semequiv \psint{\Gamma,
-    \top \J \Delta}$ by recurrence on $\bradepth{\J}$.
-    \begin{itemize}
-      \item[\bcase]
-      $$
-      \begin{array}{rcll}
-        \psint{\Gamma \seq \Delta}
-        &=& \nsint{\Gamma} \limp \psint{\Delta} & \\
-        &\semequiv& \nsint{\Gamma} \land \top \limp \psint{\Delta} & \\
-        &=& \psint{\Gamma, \top \seq \Delta}
-      \end{array}
-      $$
-      \item[\rcase]
-      $$
-      \begin{array}{rcll}
-        \psint{\Gamma \piq{\cS} \Delta}
-        &=& \psintAndMix{S}{\cS}{\Gamma}{\Delta} & \\
-        &\semequiv& \psintAndMix{S}{\cS}{\Gamma, \top}{\Delta} &\text{(IH)} \\
-        &=& \psint{\Gamma, \top \piq{\cS} \Delta} & \\
-      \end{array}
-      $$
-    \end{itemize}
-
-    \item[\rsf{\top{+}}]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{} \Delta}
-      &=& \top & \\
-      &\semequiv& \nsint{\Gamma} \limp \top \lor \psint{\Delta} & \\
-      &=& \psint{\Gamma \seq \top, \Delta}
-    \end{array}
-    $$
-
-    \item[\rsf{\bot{-}}]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{} \Delta}
-      &=& \top & \\
-      &\semequiv& \nsint{\Gamma} \land \bot \limp \psint{\Delta} & \\
-      &=& \psint{\Gamma, \bot \seq \Delta}
-    \end{array}
-    $$
-
-    \item[\rsf{\land{-}}, \rsf{\lor{+}}]
-    We only do the proof for \rsf{\land{-}}, the proof for \rsf{\lor{+}} is
-    symmetric. We show that $\psint{\Gamma, A, B \J \Delta} = \psint{\Gamma, A
-    \land B \J \Delta}$ by recurrence on $\bradepth{\J}$.
-    \begin{itemize}
-      \item[\bcase]
-      $$
-      \begin{array}{rcll}
-        \psint{\Gamma, A, B \seq \Delta}
-        &=& \nsint{\Gamma} \land A \land B \limp \psint{\Delta} & \\
-        &=& \psint{\Gamma, A \land B \seq \Delta}
-      \end{array}
-      $$
-      \item[\rcase]
-      $$
-      \begin{array}{rcll}
-        \psint{\Gamma, A, B \piq{\cS} \Delta}
-        &=& \psintAndMix{S}{\cS}{\Gamma, A, B}{\Delta} & \\
-        &=& \psintAndMix{S}{\cS}{\Gamma, A \land B}{\Delta} &\text{(IH)} \\
-        &=& \psint{\Gamma, A \land B \piq{\cS} \Delta} & \\
-      \end{array}
-      $$
-    \end{itemize}
-
-    \item[\rsf{\land{+}}]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{\seq A \sep \seq B} \Delta}
-      &=& \psint{\Gamma \seq A, \Delta} \land \psint{\Gamma \seq B, \Delta} & \\
-      &=& \left(\nsint{\Gamma} \limp A \lor \psint{\Delta}\right) \land \left(\nsint{\Gamma} \limp B \lor \psint{\Delta}\right) & \\
-      &\semequiv& \nsint{\Gamma} \limp \left(A \lor \psint{\Delta}\right) \land \left(B \lor \psint{\Delta}\right) &\text{(\reflemma{distributivity})} \\
-      &\semequiv& \nsint{\Gamma} \limp \left(\psint{\Delta} \lor A\right) \land \left(\psint{\Delta} \lor B\right) &\text{(\reflemma{lattice-commutativity})} \\
-      &\semequiv& \nsint{\Gamma} \limp \psint{\Delta} \lor \left(A \land B\right) &\text{(\reflemma{distributivity})} \\
-      &\semequiv& \nsint{\Gamma} \limp \left(A \land B\right) \lor \psint{\Delta} &\text{(\reflemma{lattice-commutativity})} \\
-      &=& \psint{\Gamma \seq A \land B, \Delta} & \\
-    \end{array}
-    $$
-
-    \item[\rsf{\lor{-}}]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{A \seq \sep B \seq} \Delta}
-      &=& \psint{\Gamma, A \seq \Delta} \land \psint{\Gamma, B \seq \Delta} & \\
-      &=& \left(\nsint{\Gamma} \land A \limp \psint{\Delta}\right) \land \left(\nsint{\Gamma} \land B \limp \psint{\Delta}\right) & \\
-      &\semequiv& \left(\nsint{\Gamma} \land A\right) \lor \left(\nsint{\Gamma} \land B\right) \limp \psint{\Delta} &\text{(\reflemma{distributivity})} \\
-      &\semequiv& \nsint{\Gamma} \land \left(A \lor B\right) \limp \psint{\Delta} &\text{(\reflemma{distributivity})} \\
-      &=& \psint{\Gamma, A \lor B \seq \Delta} & \\
-    \end{array}
-    $$
-
-    \item[\rsf{{\limp}{+}}, \rsf{{\lsub}{-}}]
-    We only do the proof for \rsf{{\limp}{+}}, the proof for \rsf{{\lsub}{-}} is
-    symmetric. We show that $\psint{\Gamma \J (A \seq B), \Delta} =
-    \psint{\Gamma \J A \limp B, \Delta}$ by recurrence on $\bradepth{\J}$.
-    \begin{itemize}
-      \item[\bcase]
-      $$
-      \begin{array}{rcll}
-        \psint{\Gamma \seq (A \seq B), \Delta}
-        &=& \nsint{\Gamma}\limp \psint{A \seq B} \lor \psint{\Delta} & \\
-        &=& \nsint{\Gamma}\limp (A \limp B) \lor \psint{\Delta} & \\
-        &=& \psint{\Gamma \seq A \limp B, \Delta}
-      \end{array}
-      $$
-      \item[\rcase]
-      $$
-      \begin{array}{rcll}
-        \psint{\Gamma \piq{\cS} (A \seq B), \Delta}
-        &=& \psintAndMix{S}{\cS}{\Gamma}{(A \seq B), \Delta} & \\
-        &=& \psintAndMix{S}{\cS}{\Gamma}{A \limp B, \Delta} &\text{(IH)} \\
-        &=& \psint{\Gamma \piq{\cS} A \limp B, \Delta} & \\
-      \end{array}
-      $$
-    \end{itemize}
-    
-    \item[\rsf{{\limp}{-}}]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{\seq A \sep B \seq} \Delta}
-      &=& \psint{\Gamma \seq A, \Delta} \land \psint{\Gamma, B \seq \Delta} & \\
-      &=& \left(\nsint{\Gamma} \limp A \lor \psint{\Delta} \right) \land \left(\nsint{\Gamma} \land B \limp \psint{\Delta} \right) & \\
-      &\semequiv& \left(\nsint{\Gamma} \limp A \lor \psint{\Delta} \right) \land \left(\nsint{\Gamma} \limp B \limp \psint{\Delta} \right) &\text{(\reflemma{currying})} \\
-      &\semequiv& \nsint{\Gamma} \limp \left(A \lor \psint{\Delta} \right) \land \left(B \limp \psint{\Delta} \right) &\text{(\reflemma{distributivity})} \\
-      &\sement& \nsint{\Gamma} \limp (A \limp B) \limp \psint{\Delta} \lor \psint{\Delta} &\text{(\reflemma{gencut})} \\
-      &\semequiv& \nsint{\Gamma} \limp (A \limp B) \limp \psint{\Delta} &\text{(\reflemma{idempotency})} \\
-      &\semequiv& \nsint{\Gamma} \land (A \limp B) \limp \psint{\Delta} &\text{(\reflemma{currying})} \\
-      &=& \psint{\Gamma, A \limp B \seq \Delta} & \\
-    \end{array}
-    $$
-
-    \item[\rsf{{\lsub}{+}}]
-    $$
-    \begin{array}{rcll}
-      \psint{\Gamma \piq{\seq A \sep B \seq} \Delta}
-      &=& \psint{\Gamma \seq A, \Delta} \land \psint{\Gamma, B \seq \Delta} & \\
-      &=& \left(\nsint{\Gamma} \limp A \lor \psint{\Delta} \right) \land \left(\nsint{\Gamma} \land B \limp \psint{\Delta} \right) & \\
-      &\semequiv& \left(\nsint{\Gamma} \limp A \lor \psint{\Delta} \right) \land \left(\nsint{\Gamma} \limp B \limp \psint{\Delta} \right) &\text{(\reflemma{currying})} \\
-      &\semequiv& \nsint{\Gamma} \limp \left(A \lor \psint{\Delta} \right) \land \left(B \limp \psint{\Delta} \right) &\text{(\reflemma{distributivity})} \\
-      &\sement& \nsint{\Gamma} \limp (A \lsub B) \lor \psint{\Delta} \lor \psint{\Delta} &\text{(\reflemma{gencut})} \\
-      &\semequiv& \nsint{\Gamma} \limp (A \lsub B) \lor \psint{\Delta} &\text{(\reflemma{idempotency})} \\
-      &=& \psint{\Gamma \seq A \lsub B, \Delta} & \\
-    \end{array}
-    $$
-  \end{itemize}
+  $S \lstep T$ implies $\psint{T} \sementC \psint{S}$, which is shown by
+  inspection of each rule of system \sys{B} (see \refsec{bubbles-soundness}).
+  That we can mix an arbitrary top-level context $\Gamma \seq \Delta$ into $S$
+  and $T$ follows from \reffact{bubbles-top-level}.
 \end{proof}
 
-From the proof of \reflemma{bubbles-local-soundness}, we can identify two
-fragments $\sysBH$ and $\sysBHB$ of system $\sysB$ that are sound with respect
-to Heyting and Heyting-Brouwer algebras:
+Since some rules only hold classically, the statement for the full system is
+relative to Boolean algebras. But from the detailed proof in
+\refsec{app:bubbles-soundness}, we can identify two fragments $\sysBH$ and
+$\sysBHB$ of system $\sysB$ that are sound with respect to Heyting and
+Heyting-Brouwer algebras:
 
 \begin{corollary}\label{cor:lsoundness}
   Let
