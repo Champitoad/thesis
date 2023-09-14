@@ -4,7 +4,7 @@
 
 \section{Soundness}\labsec{app:bubbles-soundness}
 
-\begin{lemma}[Generalized weakening]\lablemma{bubbles-weakening}
+\begin{lemma}[Generalized weakening]\lablemma{app:bubbles-weakening}
   $\psint{S} \sement \psint{S \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 \begin{proof}
@@ -34,7 +34,7 @@
   \end{itemize}
 \end{proof}
 
-\begin{lemma}[Generalized contraction]\lablemma{bubbles-contraction}
+\begin{lemma}[Generalized contraction]\lablemma{app:bubbles-contraction}
   $\psint{S \mix (\seq I, I)} \semequiv \psint{S \mix (\seq I)}$ and
   $\psint{S \mix (I, I \seq)} \semequiv \psint{S \mix (I \seq)}$.
 \end{lemma}
@@ -82,7 +82,7 @@
   \end{itemize}
 \end{proof}
 
-\begin{lemma}[Generalized weak distributivity]\lablemma{bubbles-weakdistrib}
+\begin{lemma}[Generalized weak distributivity]\lablemma{app:bubbles-weakdistrib}
   \begin{align}
     \psint{\Gamma \J \Delta} \lor \psint{I} &\sement \psint{\Gamma \J I, \Delta} \label{eqn:weakdistrib-one} \\
     \psint{\Gamma \J I, \Delta} &\sementC \psint{\Gamma \J \Delta} \lor \psint{I} \label{eqn:weakdistrib-two} \\
@@ -133,7 +133,7 @@
   \end{itemize}
 \end{proof}
 
-\begin{lemma}[Generalized currying]\lablemma{bubbles-currying}
+\begin{lemma}[Generalized currying]\lablemma{app:bubbles-currying}
   \begin{align}
     \psint{\Gamma, I \J \Delta} &\semequiv \nsint{I} \limp \psint{\Gamma \J \Delta} \label{eqn:currying-one} \\
     \nsint{\Gamma \J I, \Delta} &\semequiv_{\Brouwer} \nsint{\Gamma \J \Delta} \lsub \psint{I} \label{eqn:currying-two}
@@ -169,7 +169,7 @@
   \end{itemize}
 \end{proof}
 
-\begin{lemma}[Local soundness]\lablemma{bubbles-local-soundness}
+\begin{lemma}[Local soundness]\lablemma{app:bubbles-local-soundness}
   
   If $S \lstep T$ then $\psint{T \mix (\Gamma \seq \Delta)} \sementC \psint{S
   \mix (\Gamma \seq \Delta)}$.
@@ -598,7 +598,7 @@
 
 \section{Completeness}\labsec{app:bubbles-completeness}
 
-\begin{lemma}[Simulation of \sys{DBiInt}]\lablemma{simulation-dbiint}
+\begin{lemma}[Simulation of \sys{DBiInt}]\lablemma{app:simulation-dbiint}
   
   If $X \prov{\msys{DBiInt}} Y$ then $X \prov{\sysBHB \setminus
   \{\rsf{i{\uparrow}}\}} Y$.
