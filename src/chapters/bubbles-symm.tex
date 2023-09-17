@@ -2,12 +2,29 @@
 \chapter{Symmetric Bubble Calculi}
 \labch{bubbles-symm}
 
-\todo{Introductory paragraph}
+In this chapter, we explore to what extent the bubble calculus of
+\refch{bubbles} can be made more \emph{symmetric}, by relaxing the restriction
+that solutions must contain at most one conclusion. At a surface level, our
+approach is similar to that of Gentzen, who went from his single-conclusion
+sequent calculus \sys{LJ} to the multi-conclusion calculus \sys{LK}. Like him,
+we will uncover beautiful dualities that were hidden by the asymmetry of the
+initial calculus. But by sticking unwaveringly to intuitionism, we will be led
+to the exotic territory of \emph{bi-intuitionistic} logic, an intermediate logic
+that conservatively extends intuitionistic logic, but does not prove the law of
+excluded middle. An underlying thread of our investigation will be the quest for
+a \emph{fully iconic} proof system, where all logical connectives can be
+replaced by appropriate (new) kinds of bubbles. This will lead us to rediscover
+many principles already studied in the deep inference literature, with
+topological intuitions of the bubble metaphor shedding a new light on them. We
+will end up with two symmetric bubble calculi, each with their own tradeoffs on
+the properties satisfied by inference rules. In particular, their ability to
+\emph{factorize} both forward and backward proof steps might prove useful to
+build concise proofs, all through direct manipulation.
 
 The chapter is organized as follows: in \refsec{non-determinism} we motivate our
 quest for a system where all introduction rules for logical connectives are
-\emph{invertible}, in order to reduce non-determinism in proof search and enable
-a fully \emph{iconic} approach to proof building. To that effect, we relax in
+\emph{invertible}, to reduce non-determinism in proof search and enable a fully
+\emph{iconic} approach to proof building. To that effect, we relax in
 \refsec{branching} the restriction to single-conclusion solutions, which
 requires a new distinction between \emph{closed} and \emph{open} solutions. This
 gives rise in \refsec{colors} to an extension of the syntax of solutions, where
@@ -17,37 +34,39 @@ already aimed for implicitly through the evolution of our concept of bubble. In
 \refsec{symmetric-calculus} we introduce a core \emph{symmetric bubble calculus}
 for classical logic called ``system \sys{B}'', in reference to the symmetric
 system \sys{L} of Herbelin \sidecite[10em]{herbelin_duality_nodate}. Then in
-\refsec{bubbles-soundness} we prove the soundness of system \sys{B}, showing
-along the way that by removing selectively among 4 inference rules that define
-the \emph{porosity} of polarized bubbles, one gets intuitionistic,
+\refsec{bubbles-soundness} we prove the soundness of system \sys{B}, and show
+that by removing selectively among inference rules that define the
+\emph{porosity} of polarized bubbles, one gets intuitionistic,
 dual-intuitionistic and bi-intuitionistic logic as fragments. In
 \refsec{bubbles-completeness} we support this claim by showing that the
 bi-intuitionistic fragment is not only sound, but also \emph{cut-free complete}
 with respect to the cut-free nested sequent calculus \sys{DBiInt} of Postniece
-\cite{postniece_proof_2009}. In \refsec{invertible-calculus} we present a fully
-invertible variant of system \sys{B}, inspired by ideas that will be developed
-in subsequent chapters. Despite the invertibility of introduction rules, it
-turns out that this variant does not satisfy the \emph{decomposability}
-property. We fix this defect in \refsec{decomposable-calculus} with yet another
-variant of the system, finally achieving full iconicity.
+\cite{postniece_deep_2009}. Finally in \refsec{bubbles-invertible}, we introduce
+a fully invertible variant of system $\sysB$ that we conjecture to be complete,
+and present informally a canonical way to search for proofs in this system.
+Unfortunately, invertibility does not entail the full iconicity of the system,
+and we reflect on the fundamental reasons that might prevent any variant of
+system $\sysB$ from being fully iconic.
 
-\todo{Maybe talk about factorizability in the last system?}
+% In \refsec{invertible-calculus} we present a fully invertible variant of system
+% \sys{B}, whose completeness follows naturally from the proof of
+% \refsec{bubbles-completeness}. Despite the invertibility of introduction rules,
+% it turns out that this variant does not satisfy the \emph{decomposability}
+% property. We fix this defect in \refsec{decomposable-calculus} with another
+% variant of the system conjectured complete, finally achieving full iconicity.
 
-\todo{Mention that we only \emph{conjecture} soundness and completeness for
-quantifiers, and that when adding exclusion into the mix (rules
-{\rnmsf{f{+}{-}}} and {\rnmsf{f{-}{-}}}) we only get a conservative extension of
-constant-domain predicate logic, which is \emph{not} a conservative extension of
-predicate logic (see \cite{crolard_subtractive_2001} and
-\cite{aschieri_natural_2018})}
-
-\todo{Mention the recent result of \cite{gore_bi-intuitionistic_2020} about the
-distinction between weak and strong bi-intuitionistic logic, following their
-claim that we are probably in wBIL since we are complete with respect to the
-system of Postniece.}
-
-\todo{ Future work: what are the logics associated to other subsets of the flow
-  rules, including rules not considered in system \sys{B} like flowing out of
-  gray bubbles?}
+\begin{remark}
+  Although we include rules for quantifiers, in this thesis we only treat the
+soundness and completeness of bubble calculi for \emph{propositional} logic.
+Indeed quantifiers would make the algebraic semantics more involved when proving
+soundness, and during our literature review we found very few proof systems for
+bi-intuitionistic logic supporting them, at least none suitable for our
+syntactic completeness proof. More generally, bi-intuitionistic logic has
+received less attention in the first-order setting, probably because it is
+\emph{not} a conservative extension of intuitionistic predicate logic, but only
+of \emph{constant-domain} predicate logic (see \cite{crolard_subtractive_2001}
+and \cite{aschieri_natural_2018}).
+\end{remark}
 
 \section{Non-determinism and iconicity}\labsec{non-determinism}
 
@@ -70,12 +89,17 @@ proofs.
 
 In his thesis \cite{guenot_nested_2013}, Guenot introduced a specific kind of
 nested sequent system, where like in \sys{BJ} inference rules can be expressed
-as rewriting rules. An interesting feature of these systems is that all
-introduction rules for connectives are \emph{invertible}, which means that in
-proof search, formulas can be completely decomposed until atoms are reached
-before applying other rules. Non-determinism then arises in the choice of atoms
-that are to be connected in axioms, as well as the choice of sub-sequents to be
-duplicated for reuse.
+as rewriting rules. An interesting feature of these systems is that they satisfy
+a \emph{decomposability} property: all introduction rules for connectives are
+\emph{invertible}, and formulas can be completely decomposed with them until
+atoms are reached, before applying other rules. Thus introduction rules are
+\emph{admissible} in these systems, because every formula can be translated into
+an equivalent pure nested sequent with the same number of atoms\sidenote{As far
+as we know, the admissibility of introduction rules is not proved, let alone
+mentioned in \cite{guenot_nested_2013}. This is our own observation which lacks
+a proper formal proof, and is thus subject to caution.}. Non-determinism then
+arises in the choice of atoms that are to be connected in axioms, as well as the
+choice of sub-sequents to be duplicated for reuse.
 
 In our graphical setting, this would translate to an interface where all click
 actions are redundant. Although we already considered this possibility in
@@ -83,14 +107,17 @@ actions are redundant. Although we already considered this possibility in
 connectives} superfluous, since all other rules work purely on the structure of
 sequents. This means that all logical connectives could be replaced by
 metaphorical constructs like bubbles, which suggest \emph{physically} the
-possible transformations on the proof state. Unfortunately, the systems in
-\cite{guenot_nested_2013} only handle classical logic and the implicative
-fragment of intuitionistic logic. Thus began our quest for a nested sequent
-system in the style of Guenot capturing full intuitionistic logic\sidenote{Other
-nested sequent systems for full intuitionistic logic exist
-\cite{postniece_proof_2009}, \cite{fitting-nested-2014}, but they are based on
-tree-shaped proofs, and thus ignore the whole \emph{raison d'être} of our
-concept of bubble.}.
+possible transformations on the proof state. We call this property of a proof
+system \emph{iconicity}, following a terminology introduced by C. S. Peirce in
+his \emph{semiotics} \sidecite{noth_peircean_1999}, which he also applied to his
+diagrammatic proof system of \emph{existential graphs}
+\sidecite{10.7551/mitpress/3633.001.0001}. Unfortunately, the systems in
+\cite{guenot_nested_2013} only handle classical logic, and the implicative
+fragment of intuitionistic logic. Thus began our quest for a bubble calculus in
+the style of Guenot capturing full intuitionistic logic\sidenote{Other nested
+sequent systems for full intuitionistic logic exist (\cite{postniece_deep_2009},
+\cite{fitting-nested-2014}), but they are based on tree-shaped proofs, and thus
+ignore the whole \emph{raison d'être} of our concept of bubble.}.
 
 
 \section{Conclusions and branching}\labsec{branching}
@@ -283,10 +310,10 @@ non-invertible.
   $$
   \begin{array}{rclr}
     \hypo{A}~~~\cbubble{\color{black}S} &\step &\cbubble{\hypo{A}~~~\color{black}S} &\mathsf{f}{-}{+}{\downarrow} \vspace{1em}\\
-    \conc{A}~~~\cbubble{\color{black}S} &\step &\cbubble{\conc{A}~~~\color{black}S} &\mathsf{f}{+}{+}{\downarrow} \\
+    % \conc{A}~~~\cbubble{\color{black}S} &\step &\cbubble{\conc{A}~~~\color{black}S} &\mathsf{f}{+}{+}{\downarrow} \\
   \end{array}
   $$
-  \caption{$\mathbb{F}$-rules for red bubbles}
+  \caption{$\mathbb{F}$-rule for red bubbles}
   \labfig{flow-red-bubbles}
 \end{marginfigure}
 
@@ -349,7 +376,7 @@ of logical connectives.
 
 Now it is only natural to wonder: since bubbles can be colored in red, or
 charged positively, would it also make sense to have \emph{blue} bubbles charged
-\emph{negatively}? The answer is \emph{yes}, but we need to broader our logical
+\emph{negatively}? The answer is \emph{yes}, but we need to broaden our logical
 view and consider more exotic beasts: the adequately named
 \emph{dual-intuitionistic} logic, and \emph{bi-intuitionistic logic}.
 
@@ -357,10 +384,10 @@ view and consider more exotic beasts: the adequately named
   $$
   \begin{array}{rclr}
     \conc{A}~~~\hbubble{\color{black}S} &\step &\hbubble{\conc{A}~~~\color{black}S} &\mathsf{f}{+}{-}{\downarrow} \vspace{1em}\\
-    \hypo{A}~~~\hbubble{\color{black}S} &\step &\hbubble{\hypo{A}~~~\color{black}S} &\mathsf{f}{-}{-}{\downarrow} \\
+    % \hypo{A}~~~\hbubble{\color{black}S} &\step &\hbubble{\hypo{A}~~~\color{black}S} &\mathsf{f}{-}{-}{\downarrow} \\
   \end{array}
   $$
-  \caption{$\mathbb{F}$-rules for blue bubbles}
+  \caption{$\mathbb{F}$-rule for blue bubbles}
   \labfig{flow-blue-bubbles}
 \end{marginfigure}
 
@@ -468,7 +495,7 @@ nested sequents for \sys{FILL} \cite{clouston-annotation-free-2013}.}:
 
 \begin{definition}[Polarized symmetric interpretation]\labdef{pol-sinterp}
   The \emph{positive} and \emph{negative symmetric interpretations} of solutions
-  $\psint{\cdot}$ and $\nsint{\cdot}$ are defined by mutual recursion as
+  $\psint{-}$ and $\nsint{-}$ are defined by mutual recursion as
   follows:
   \begin{align*}
     \psint{A} &= A &
@@ -498,10 +525,10 @@ With our new syntax and interpretation of solutions at hand, we can design a new
 proof calculus including the rules previously discussed for manipulating
 polarized bubbles. The rich structure of solutions offers many possibilities in
 the precise formulation of rules, depending on the properties we expect from the
-calculus. We identified 6 of these properties, whose consequences range from
-aesthetic and theoretical considerations on paper, to concrete usability matters
-in a graphical proof-building interface. Let us summarize them in order of
-priorization relatively to the latter:
+calculus. We identified \emph{six} of these properties, whose consequences range
+from aesthetic and theoretical considerations on paper, to concrete usability
+matters in a graphical proof-building interface. Let us summarize them in order
+of priorization relatively to the latter:
 \begin{description}
   \item[Invertibility]
     A rule is invertible when it could in principle be applied in the converse
@@ -520,7 +547,7 @@ priorization relatively to the latter:
     discussion on this matter.}.
   \item[Decomposability]
     We already mentioned this property in \refsec{non-determinism} as one of the
-    main motivations of this chapter: the ability to decompose all logical
+    main motivations for this chapter: the ability to decompose all logical
     connectives ``for free'', and thus reason solely on solutions that comprise
     only bubbles and atomic formulas. As far as we know, it has never been
     identified explicitly in the literature before, although it can loosely be
@@ -625,71 +652,31 @@ priorization relatively to the latter:
     noted that although we use naming conventions for rules that resemble those
     of CoS (e.g. with the identity rules), we do not aim for a perfect symmetry
     where one can get a complete calculus by simply taking the dual of each
-    rule\sidenote{In fact it is not even clear what would be the dual of a
-    solution, but the {\rnmsf{i{\downarrow}}} and {\rnmsf{i{\uparrow}}} rules
-    suggest that open and closed solutions may be dual to eachother.}. Thus we
-    will content ourselves with the hypothesis/conclusion symmetry coming from
-    sequent calculus. Interestingly, the calculus \sys{ISgq} of Tiu for
-    intuitionistic predicate logic does the opposite, by having a perfect dual
-    system \sys{cISgq} but no symmetries among its switch rules (the equivalent
-    of our flow rules) \cite{tiu_local_2006}.
+    rule.
+    % \sidenote{In fact it is not even clear what would be the dual of a
+    % solution, but the {\rnmsf{i{\downarrow}}} and {\rnmsf{i{\uparrow}}} rules
+    % suggest that open and closed solutions may be dual to eachother.}
+    Thus we will content ourselves with the hypothesis/conclusion symmetry
+    coming from sequent calculus. Interestingly, the calculus \sys{ISgq} of Tiu
+    for intuitionistic predicate logic does the opposite, by having a perfect
+    dual system \sys{cISgq} but no symmetries among its switch rules (the
+    equivalent of our flow rules) \cite{tiu_local_2006}.
 \end{description}
 
 In the next section we present a core calculus called ``system \sys{B}'' that
 maximizes \emph{symmetry}, \emph{linearity} and \emph{locality}. In our opinion
 this makes for a good proof-theoretical foundation, around which variant calculi
-with different tradeoffs can be designed. In \refsec{invertible-calculus} we
-introduce such a variant that focuses on \emph{invertibility} at the cost of
-\emph{linearity}, and in \refsec{decomposable-calculus} on a refinement of the
-latter that achieves \emph{decomposability} and \emph{factorizability}, losing
-some of its \emph{locality} and \emph{symmetry} along the way.
+with different tradeoffs can be designed.
+
+% In \refsec{invertible-calculus} we introduce such a variant that focuses on
+% \emph{invertibility} at the cost of \emph{linearity}, and in
+% \refsec{decomposable-calculus} on a refinement of the latter that achieves
+% \emph{decomposability} and \emph{factorizability}, losing some of its
+% \emph{locality} and \emph{symmetry} along the way.
 
 \section{Symmetric calculus}\labsec{symmetric-calculus}
 
-\begin{figure*}
-  \input{figures/sequent-B.tex}
-  \caption{Sequent-style presentation of system \sys{B}}
-  \labfig{sequent-B}
-\end{figure*}
-
-\begin{figure*}
-  \input{figures/graphical-B.tex}
-  \caption{Graphical presentation of system \sys{B}}
-  \labfig{graphical-B}
-\end{figure*}
-
-% \todo{ Tradeoff between perfectly local rules, where many are restricted to
-%   open solutions, and factorizing rules that are uniformly applicable to any
-%   kind of solution, but are neither local nor linear (because they rely on
-%   duplicating the abstract proof in all subgoals) }
-
-TODO: Talk about flow rules for moving outside bubbles motivated by the need of
-a cut-free proof for Uustalu's formula, with the figure summarizing all flow
-rules, and slogan that "inward (resp. outward) paths cannot cross bubbles of the
-same (resp. a different) color". In classical logic colored bubbles do not block
-anything, and are thus useless. Also motivated by cut admissibility are the
-$\mathbb{M}$-rules {\rnmsf{a{-}}} and {\rnmsf{a{+}}} of \emph{absorption}, which
-can be understood as resulting from a process of \emph{expansion} of membranes
-dual to the \emph{contraction} of popping rules: while contraction gets stuck on
-polarized items because they cannot cross neutral membranes outwards, expansion
-gets stuck on neutral items because they cannot cross neutral membranes
-inwards\sidenote{In fact, we could add (non-invertible) $\mathbb{F}$-rules to
-move neutral bubbles outside of any kind of bubble, which would correspond to a
-\emph{generalization} of subgoals. This is illustrated in the rules of
-\reffig{flow-neutral-bubbles}, where the subgoal $S$ is abstracted from the
-context of its previously parent subgoal $T$.}.
-
-\begin{marginfigure}
-  $$
-  \begin{array}{rclr}
-    \bubble{\bubble{\color{black}S}~~~\color{black}T} &\step &\bubble{\color{black}S}~~~\bubble{\color{black}T} &\mathsf{n{\uparrow}} \\
-    \hbubble{\bubble{\color{black}S}~~~\color{black}T} &\step &\bubble{\color{black}S}~~~\hbubble{\color{black}T} &\mathsf{n{-}{\uparrow}} \\
-    \cbubble{\bubble{\color{black}S}~~~\color{black}T} &\step &\bubble{\color{black}S}~~~\cbubble{\color{black}T} &\mathsf{n{+}{\uparrow}} \\
-  \end{array} 
-  $$
-  \caption{$\mathbb{F}$-rules for neutral bubbles}
-  \labfig{flow-neutral-bubbles}
-\end{marginfigure}
+\input{sections/bubbles-symmetric-calculus}
 
 \section{Soundness}\labsec{bubbles-soundness}
 
@@ -701,36 +688,26 @@ context of its previously parent subgoal $T$.}.
 
 \section{Invertible calculus}\labsec{invertible-calculus}
 
-From the proof of \reflemma{bubbles-local-soundness}, we can identify which
-rules of system \sys{B} are invertible, and which are probably not. Indeed if
-the soundness of a rule only relies on a chain of equivalences, then it is
-necessarily invertible. On the contrary if it relies on an inequality, then it
-is probably not invertible\sidenote{To ensure that it is not invertible, we
-would need additionally to find a counter-model that invalidates the converse
-inequality.}.
+\input{sections/bubbles-invertible.tex}
 
-\begin{fact}[Invertibility of system \sys{B}]
-  All rules in the fragment $\mathbb{I} \cup \mathbb{R} \cup \mathbb{M} \cup
-  \{\rsf{\top{-}}, \rsf{\top{+}}, \rsf{\bot{-}}, \rsf{\bot{+}}, \rsf{\land{-}},
-  \rsf{\land{+}}, \rsf{\lor{-}}, \rsf{\lor{+}}, \rsf{{\limp}{+}},
-  \rsf{{\lsub}{-}}\}$ of system \sys{B} are invertible.
-\end{fact}
 
-Thus the only remaining rules of system \sys{B} that are (most probably) not
-invertible are all the $\mathbb{F}$-rules, as well as the $\mathbb{H}$-rules
-$\{\rsf{{\limp}{-}}, \rsf{{\lsub}{+}}\}$\sidenote{For quantifier rules, we
-conjecture that as in sequent calculus, the rules $\{\rsf{\forall{+}},
-\rsf{\exists{-}}\}$ are invertible, while the rules $\{\rsf{\forall{-}},
-\rsf{\exists{+}}\}$ are not.}.
+% \section{Decomposable calculus}\labsec{decomposable-calculus}
 
-\todo{Talk about the invertibility of \sys{DBiInt}}
+% \begin{figure*}
+%   \input{figures/sequent-B-dec.tex}
+%   \caption{Rules for the decomposable bubble calculus \sys{B_{dec}}}
+%   \labfig{sequent-B-dec}
+% \end{figure*}
 
-\todo{Iteration rules as a middle-ground in the linearity/invertibility tradeoff.}
+% \todo{Talk about factorizability}
 
-\section{Decomposable calculus}\labsec{decomposable-calculus}
+% \todo{ Tradeoff between perfectly local rules, where many are restricted to
+%   open solutions, and factorizing rules that are uniformly applicable to any
+%   kind of solution, but are neither local nor linear (because they rely on
+%   duplicating the abstract proof in all subgoals) }
 
-\todo{IDEA: add (duplicating variants of) the {\rnm{pl_2}} and {\rnm{pr_2}}
-rules of \cite{clouston-annotation-free-2013} into the calculus. Indeed, they
-allow taking red items outside of red bubbles: thus if the proof can be made
-outside with a smaller context, it is more general and immediately solves all
-subgoals, improving \emph{factorizability}.}
+% \todo{IDEA: add (duplicating variants of) the {\rnm{pl_2}} and {\rnm{pr_2}}
+% rules of \cite{clouston-annotation-free-2013} into the calculus. Indeed, they
+% allow taking red items outside of red bubbles: thus if the proof can be made
+% outside with a smaller context, it is more general and immediately solves all
+% subgoals, improving \emph{factorizability}.}

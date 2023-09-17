@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage[a4paper, margin=3cm]{geometry}
+\usepackage[a4paper, margin=2.5cm]{geometry}
 \usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -35,7 +35,7 @@
 
 % kao macros
 
-\newcommand{\todo}[1]{\footnote{\textbf{TODO:} #1}}
+\newcommand{\todo}[1]{\textbf{TODO:} #1}
 
 \newcommand{\sidenote}{\footnote}
 \renewcommand{\sidecite}{\cite}
@@ -49,6 +49,7 @@
 \newcommand{\labthm}[1]{\dolab{thm}{#1}}
 \newcommand{\labfact}[1]{\dolab{fact}{#1}}
 \newcommand{\labsec}[1]{\dolab{sec}{#1}}
+\newcommand{\labch}[1]{\dolab{ch}{#1}}
 
 \newcommand{\reffig}[1]{\doref{Figure}{fig}{#1}}
 \newcommand{\refdef}[1]{\doref{Definition}{def}{#1}}
@@ -56,14 +57,16 @@
 \newcommand{\refthm}[1]{\doref{Theorem}{thm}{#1}}
 \newcommand{\reffact}[1]{\doref{Fact}{fact}{#1}}
 \newcommand{\refsec}[1]{\doref{Section}{sec}{#1}}
+\newcommand{\refch}[1]{\doref{Chapter}{ch}{#1}}
 
 \newenvironment{marginfigure}{\begin{figure}}{\end{figure}}
 
 \begin{document}
 
-\input{sections/bubbles-soundness.tex} 
-% \input{figures/dbiint.tex}
-% \tikzfig{1}{1}{venn-algebras}
+\input{sections/bubbles-invertible.tex} 
+% \input{appendix/bubbles-symm.tex} 
+% \input{figures/bubbles-uustalu.tex}
+% \tikzfig{1}{0.5}{bubbles-porosity}
 
 \nocite{*}
 \printbibliography[heading=bibintoc, title=Bibliography, prenote=bibnote] % Add

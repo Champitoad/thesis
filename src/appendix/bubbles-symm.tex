@@ -84,29 +84,29 @@
 
 \begin{lemma}[Generalized weak distributivity]\lablemma{app:bubbles-weakdistrib}
   \begin{align}
-    \psint{\Gamma \J \Delta} \lor \psint{I} &\sement \psint{\Gamma \J I, \Delta} \label{eqn:weakdistrib-one} \\
-    \psint{\Gamma \J I, \Delta} &\sementC \psint{\Gamma \J \Delta} \lor \psint{I} \label{eqn:weakdistrib-two} \\
-    \nsint{\Gamma, I \J \Delta} &\sementB \nsint{I} \land \nsint{\Gamma \J \Delta} \label{eqn:weakdistrib-three} \\
-    \nsint{I} \land \nsint{\Gamma \J \Delta} &\sementC \nsint{\Gamma, I \J \Delta} \label{eqn:weakdistrib-four}
+    \psint{\Gamma \J \Delta} \lor \psint{I} &\sement \psint{\Gamma \J I, \Delta} \label{app:eqn:weakdistrib-one} \\
+    \psint{\Gamma \J I, \Delta} &\sementC \psint{\Gamma \J \Delta} \lor \psint{I} \label{app:eqn:weakdistrib-two} \\
+    \nsint{\Gamma, I \J \Delta} &\sementB \nsint{I} \land \nsint{\Gamma \J \Delta} \label{app:eqn:weakdistrib-three} \\
+    \nsint{I} \land \nsint{\Gamma \J \Delta} &\sementC \nsint{\Gamma, I \J \Delta} \label{app:eqn:weakdistrib-four}
   \end{align}
 \end{lemma}
 \begin{proof}
-  We only prove (\ref{eqn:weakdistrib-one}): the proof of
-  (\ref{eqn:weakdistrib-two}) is the same, except that we use the converse
+  We only prove (\ref{app:eqn:weakdistrib-one}): the proof of
+  (\ref{app:eqn:weakdistrib-two}) is the same, except that we use the converse
   inequality of \reffact{weakdistrib} that holds in Boolean algebras.
-  (\ref{eqn:weakdistrib-three}) and (\ref{eqn:weakdistrib-four}) hold by duality
-  from (\ref{eqn:weakdistrib-one}) and (\ref{eqn:weakdistrib-two}), i.e. for
-  (\ref{eqn:weakdistrib-three}) we have
+  (\ref{app:eqn:weakdistrib-three}) and (\ref{app:eqn:weakdistrib-four}) hold by duality
+  from (\ref{app:eqn:weakdistrib-one}) and (\ref{app:eqn:weakdistrib-two}), i.e. for
+  (\ref{app:eqn:weakdistrib-three}) we have
   $$
   \def\arraystretch{2.5}
   \begin{array}{rrcll}
-               & \psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{\Gamma}} \lor \psint{\soldual{I}} &\sement& \psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{I}, \soldual{\Gamma}} &\text{(\ref{eqn:weakdistrib-one})} \\
+               & \psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{\Gamma}} \lor \psint{\soldual{I}} &\sement& \psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{I}, \soldual{\Gamma}} &\text{(\ref{app:eqn:weakdistrib-one})} \\
     \text{iff} & \soldual{\psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{I}, \soldual{\Gamma}}} &\sementB& \soldual{\psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{\Gamma}} \lor \psint{\soldual{I}}} &\text{(\reffact{duality})} \\
     \text{iff} & \nsint{\soldual{\soldual{\Gamma}}, \soldual{\soldual{I}} \mathbin{\soldual{\mathbin{\soldual{\J}}}} \soldual{\soldual{\Delta}}} &\sementB& \nsint{\soldual{\soldual{\Gamma}} \mathbin{\soldual{\mathbin{\soldual{\J}}}} \soldual{\soldual{\Delta}}} \land \nsint{\soldual{\soldual{I}}} &\text{(\reflemma{int-duality})} \\
     \text{iff} & \nsint{\Gamma, I \mathbin{\J} \Delta} &\sementB& \nsint{\Gamma \mathbin{\J} \Delta} \land \nsint{I} &\text{(\reflemma{involutivity})} \\
   \end{array}
   $$
-  We prove (\ref{eqn:weakdistrib-one}) by recurrence on $\bradepth{\J}$.
+  We prove (\ref{app:eqn:weakdistrib-one}) by recurrence on $\bradepth{\J}$.
   \begin{itemize}
     \item[\bcase]
     $$
@@ -135,12 +135,12 @@
 
 \begin{lemma}[Generalized currying]\lablemma{app:bubbles-currying}
   \begin{align}
-    \psint{\Gamma, I \J \Delta} &\semequiv \nsint{I} \limp \psint{\Gamma \J \Delta} \label{eqn:currying-one} \\
-    \nsint{\Gamma \J I, \Delta} &\semequiv_{\Brouwer} \nsint{\Gamma \J \Delta} \lsub \psint{I} \label{eqn:currying-two}
+    \psint{\Gamma, I \J \Delta} &\semequiv \nsint{I} \limp \psint{\Gamma \J \Delta} \label{app:eqn:currying-one} \\
+    \nsint{\Gamma \J I, \Delta} &\semequiv_{\Brouwer} \nsint{\Gamma \J \Delta} \lsub \psint{I} \label{app:eqn:currying-two}
   \end{align}
 \end{lemma}
 \begin{proof}
-  We only prove (\ref{eqn:currying-one}), as (\ref{eqn:currying-two}) holds by
+  We only prove (\ref{app:eqn:currying-one}), as (\ref{app:eqn:currying-two}) holds by
   duality as in \reflemma{bubbles-weakdistrib}. We proceed by recurrence on
   $\bradepth{\J}$.
   \begin{itemize}
@@ -245,6 +245,16 @@
     %   \end{array}
     %   $$
     % \end{itemize}
+
+    \item[{\rnmsf{f{\uparrow}}}]
+    $$
+    \begin{array}{rcll}
+      \psint{\Gamma \piq{\cS \sep \Gamma' \piq{\cS'} \Delta' \sep S} \Delta}
+      &=& \psintAndMix{T}{\cS}{\Gamma}{\Delta} \land \psint{\Gamma, \Gamma' \piq{\cS'} \Delta', \Delta} \land \psint{S \mix (\Gamma \seq \Delta)} & \\
+      &\sement& \psintAndMix{T}{\cS}{\Gamma}{\Delta} \land \psint{\Gamma, \Gamma' \piq{\cS'} \Delta', \Delta} \land \psint{S \mix (\Gamma, \Gamma' \seq \Delta', \Delta)} &\text{(\reflemma{bubbles-weakening})} \\
+      &=& \psint{\Gamma \piq{\cS \sep \Gamma' \piq{\cS' \sep S} \Delta'} \Delta} & \\
+    \end{array}
+    $$
 
     \item[{\rnmsf{f{-}{\downarrow}}}]
     $$

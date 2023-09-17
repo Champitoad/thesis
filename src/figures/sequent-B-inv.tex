@@ -1,8 +1,9 @@
+\fontsize{10}{10.5}\selectfont
 \begin{framed}
 \renewcommand{\arraystretch}{2}
 \begin{mathpar}
-\begin{array}{r@{\quad}l}
-\multicolumn{2}{c}{\identity} \\[1em]
+\begin{array}{c}
+\identity \\[1em]
 
 \R[\mathsf{i}{\downarrow}]
     {\piq{}}
@@ -12,54 +13,54 @@
 \begin{array}{c@{\quad}c}
 \multicolumn{2}{c}{\flow} \\[1em]
 
-\R[\mathsf{s{-}}]
-    {\piq{(\Gamma' \JB \Delta') \seq} \mix \Gamma \J \Delta}
-    {\Gamma, (\piq{\Gamma' \JB \Delta'}) \J \Delta}
-&
-\R[\mathsf{s{+}}]
-    {\Gamma \J \Delta \mix \piq{\seq (\Gamma' \JB \Delta')}}
-    {\Gamma \J (\piq{\Gamma' \JB \Delta'}), \Delta}
-\\
+% \R[\mathsf{s{-}}]
+%     {\piq{S \seq} \mix \Gamma \J \Delta}
+%     {\Gamma, (\piq{S}) \J \Delta}
+% &
+% \R[\mathsf{s{+}}]
+%     {\Gamma \J \Delta \mix \piq{\seq S}}
+%     {\Gamma \J (\piq{S}), \Delta}
+% \\
 
-\R[\mathsf{cf{-}{\downarrow}}]
-    {\Gamma \piq{\Gamma', I \JB \Delta', \cS} \Delta}
-    {\Gamma, I \piq{\Gamma' \JB \Delta', \cS} \Delta}
+\R[\mathsf{f{-}{\downarrow}}]
+    {\Gamma, I \piq{\Gamma', I \JB \Delta' \sep \cS} \Delta}
+    {\Gamma, I \piq{\Gamma' \JB \Delta' \sep \cS} \Delta}
 &
-\R[\mathsf{cf{+}{\downarrow}}]
-    {\Gamma \piq{\cS \sep \Gamma' \JB I, \Delta'} \Delta}
+\R[\mathsf{f{+}{\downarrow}}]
+    {\Gamma \piq{\cS \sep \Gamma' \JB I, \Delta'} I, \Delta}
     {\Gamma \piq{\cS \sep \Gamma' \JB \Delta'} I, \Delta}
 \\
-\R[\mathsf{cf{-}{+}}{\downarrow}]
-    {\Gamma \J (\Gamma', I \JB \Delta'), \Delta}
+\R[\mathsf{f{-}{+}}{\downarrow}]
+    {\Gamma, I \J (\Gamma', I \JB \Delta'), \Delta}
     {\Gamma, I \J (\Gamma' \JB \Delta'), \Delta}
 &
-\R[\mathsf{cf{+}{-}}{\downarrow}]
-    {\Gamma, (\Gamma' \JB I, \Delta') \J \Delta}
+\R[\mathsf{f{+}{-}}{\downarrow}]
+    {\Gamma, (\Gamma' \JB I, \Delta') \J I, \Delta}
     {\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}
 \\
-\R[\mathsf{cf{-}{-}{\downarrow}}]
+\R[\mathsf{f{-}{-}{\uparrow}}]
+    {\Gamma, I, (\Gamma', I \JB \Delta') \J \Delta}
     {\Gamma, (\Gamma', I \JB \Delta') \J \Delta}
-    {\Gamma, I, (\Gamma' \JB \Delta') \J \Delta}
 &
-\R[\mathsf{cf{+}{+}{\downarrow}}]
+\R[\mathsf{f{+}{+}{\uparrow}}]
+    {\Gamma \J (\Gamma' \JB I, \Delta'), I, \Delta}
     {\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}
-    {\Gamma \J (\Gamma' \JB \Delta'), I, \Delta}
 \\
-\R[\mathsf{cf{-}{+}}{\uparrow}]
-    {\Gamma, I \J (\Gamma' \JB \Delta'), \Delta}
+\R[\mathsf{f{-}{+}}{\uparrow}]
+    {\Gamma, I \J (\Gamma', I \JB \Delta'), \Delta}
     {\Gamma \J (\Gamma', I \JB \Delta'), \Delta}
 &
-\R[\mathsf{cf{+}{-}}{\uparrow}]
-    {\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}
+\R[\mathsf{f{+}{-}}{\uparrow}]
+    {\Gamma, (\Gamma' \JB I, \Delta') \J I, \Delta}
     {\Gamma, (\Gamma' \JB I, \Delta') \J \Delta}
 \\
-\R[\mathsf{cf{-}{-}{\uparrow}}]
+\R[\mathsf{f{-}{-}{\downarrow}}]
+    {\Gamma, I, (\Gamma', I \JB \Delta') \J \Delta}
     {\Gamma, I, (\Gamma' \JB \Delta') \J \Delta}
-    {\Gamma, (\Gamma', I \JB \Delta') \J \Delta}
 &
-\R[\mathsf{cf{+}{+}{\uparrow}}]
+\R[\mathsf{f{+}{+}{\downarrow}}]
+    {\Gamma \J (\Gamma' \JB I, \Delta'), I, \Delta}
     {\Gamma \J (\Gamma' \JB \Delta'), I, \Delta}
-    {\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}
 \end{array}
 \and
 \begin{array}{cc}
@@ -77,6 +78,21 @@
 \R[\mathsf{p{+}}]
     {\piq{}}
     {\Gamma \seq (\piq{}), \Delta}
+\\
+
+\multicolumn{2}{c}{
+\R[\mathsf{a}]
+    {\Gamma \piq{S} \Delta}
+    {\Gamma \piq{\piq{S}} \Delta}
+} \\
+\R[\mathsf{a{-}}]
+    {\Gamma, S \J \Delta}
+    {\Gamma, (\piq{S}) \J \Delta}
+&
+\R[\mathsf{a{+}}]
+    {\Gamma \J S, \Delta}
+    {\Gamma \J (\piq{S}), \Delta}
+\\
 \end{array}
 \\
 \begin{array}{c@{\quad}c}
@@ -87,11 +103,11 @@
     {\Gamma, \top \J \Delta}
 &
 \R[\top{+}]
-    {\Gamma  \piq{} \Delta}
+    {\piq{}}
     {\Gamma \seq \top, \Delta}
 \\
 \R[\bot{-}]
-    {\Gamma \piq{} \Delta}
+    {\piq{}}
     {\Gamma, \bot \seq \Delta}
 &
 \R[\bot{+}]
@@ -115,7 +131,7 @@
     {\Gamma \J A \lor B, \Delta}
 \\
 \R[{\limp}{-}]
-    {\Gamma \piq{\seq A \sep B\seq} \Delta}
+    {\Gamma, A \limp B \piq{\seq A \sep B\seq} \Delta}
     {\Gamma, A \limp B \seq \Delta}
 &
 \R[{\limp}{+}]
@@ -127,7 +143,7 @@
     {\Gamma, A \lsub B \J \Delta}
 &
 \R[{\lsub}{+}]
-    {\Gamma \piq{\seq A \sep B\seq} \Delta}
+    {\Gamma \piq{\seq A \sep B\seq} A \lsub B, \Delta}
     {\Gamma \seq A \lsub B, \Delta}
 \\
 \R[\forall{-}]
@@ -135,16 +151,16 @@
     {\Gamma, \forall x. A \J \Delta}
 &
 \R[\forall{+}]
-    {\Gamma \J A}
-    {\Gamma \J \forall x. A}
+    {\Gamma \J A, \Delta}
+    {\Gamma \J \forall x. A, \Delta}
 \\
 \R[\exists{-}]
     {\Gamma, A \J \Delta}
     {\Gamma, \exists x. A \J \Delta}
 &
 \R[\exists{+}]
-    {\Gamma \J \subst{A}{t}{x}}
-    {\Gamma \J \exists x. A}
+    {\Gamma \J \subst{A}{t}{x}, \Delta}
+    {\Gamma \J \exists x. A, \Delta}
 \end{array}
 \end{mathpar}
 

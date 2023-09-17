@@ -1,0 +1,112 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (2) at (0, 1.875) {};
+		\node [style=none] (3) at (0, -1.875) {};
+		\node [style=none] (8) at (-0.65, 0.475) {};
+		\node [style=none] (9) at (-0.65, -0.525) {};
+		\node [style=none] (10) at (-0.65, -0.025) {$S$};
+		\node [style=none] (13) at (0, -2.3) {};
+		\node [style=none] (14) at (0, -6.05) {};
+		\node [style=none] (15) at (-0.65, -3.75) {};
+		\node [style=none] (16) at (-0.65, -4.75) {};
+		\node [style=none] (17) at (-0.65, -4.25) {$S$};
+		\node [style=conc] (19) at (0.625, -4.875) {$I$};
+		\node [style=none] (20) at (0, 6.05) {};
+		\node [style=none] (21) at (0, 2.3) {};
+		\node [style=none] (22) at (-0.65, 4.6) {};
+		\node [style=none] (23) at (-0.65, 3.6) {};
+		\node [style=none] (24) at (-0.65, 4.1) {$S$};
+		\node [style=none] (27) at (3, 0.475) {};
+		\node [style=none] (29) at (3, -0.025) {$S$};
+		\node [style=none] (33) at (-0.75, -1.225) {};
+		\node [style=none] (35) at (-0.75, -2.975) {};
+		\node [style=none] (36) at (-0.75, 2.95) {};
+		\node [style=conc] (37) at (-2.45, 2.075) {$I$};
+		\node [style=none] (38) at (-0.75, 1.2) {};
+		\node [style=none] (39) at (-1.175, -0.025) {};
+		\node [style=none] (40) at (-2.5, -0.025) {};
+		\node [style=none] (41) at (-1.175, -4.25) {};
+		\node [style=none] (43) at (-2.5, -4.25) {};
+		\node [style=none] (44) at (-1.975, -4.25) {};
+		\node [style=none] (45) at (-1.175, 4.1) {};
+		\node [style=none] (46) at (-2.5, 4.1) {};
+		\node [style=none] (47) at (-1.975, 4.1) {};
+		\node [style=none] (48) at (-1.25, -3.525) {};
+		\node [style=none] (49) at (-1.9, -3.65) {};
+		\node [style=hypo] (50) at (-2.45, -2.1) {$I$};
+		\node [style=none] (51) at (-1.25, 3.475) {};
+		\node [style=none] (52) at (-1.875, 3.575) {};
+		\node [style=none] (53) at (1.35, 3.95) {};
+		\node [style=none] (54) at (1.825, 3.525) {};
+		\node [style=none] (55) at (3, -0.525) {};
+		\node [style=none] (56) at (1.35, -3.95) {};
+		\node [style=none] (57) at (1.825, -3.525) {};
+		\node [style=none] (58) at (2.475, -0.025) {};
+		\node [style=none] (59) at (1.15, -0.025) {};
+		\node [style=none] (60) at (1.975, -0.025) {};
+		\node [style=none] (61) at (1.975, -5.725) {};
+		\node [style=hypo] (62) at (0.625, -3.625) {$I$};
+		\node [style=none] (63) at (1.65, -2.325) {};
+		\node [style=none] (64) at (1.15, -2.6) {};
+		\node [style=conc] (65) at (0.625, 3.475) {$I$};
+		\node [style=none] (66) at (1.65, 2.175) {};
+		\node [style=none] (67) at (1, 2.525) {};
+		\node [style=hypo] (68) at (0.625, 4.725) {$I$};
+		\node [style=none] (69) at (1.975, 5.575) {};
+		\node [style=conc] (71) at (0.625, -0.7) {$I$};
+		\node [style=none] (72) at (2.075, -1.475) {};
+		\node [style=none] (73) at (1.725, -0.975) {};
+		\node [style=hypo] (74) at (0.625, 0.55) {$I$};
+		\node [style=none] (75) at (2.075, 1.325) {};
+		\node [style=none] (76) at (1.775, 0.825) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=grey line] (3.center)
+			 to [bend left=270, looseness=1.75] (2.center)
+			 to [bend left=270, looseness=1.75] cycle;
+		\draw [style=grey line] (9.center)
+			 to [bend left=270, looseness=1.75] (8.center)
+			 to [bend left=270, looseness=1.75] cycle;
+		\draw [style=red bubble] (14.center)
+			 to [bend left=270, looseness=1.75] (13.center)
+			 to [bend left=270, looseness=1.75] cycle;
+		\draw [style=grey line, bend left=270, looseness=1.75] (16.center) to (15.center);
+		\draw [style=grey line, bend left=270, looseness=1.75] (15.center) to (16.center);
+		\draw [style=blue line] (20.center)
+			 to [bend left=270, looseness=1.75] (21.center)
+			 to [bend left=270, looseness=1.75] cycle;
+		\draw [style=grey line, bend left=270, looseness=1.75] (23.center) to (22.center);
+		\draw [style=grey line, bend left=270, looseness=1.75] (22.center) to (23.center);
+		\draw [style=green arrow, in=105, out=0] (37) to (38.center);
+		\draw [style=green arrow, in=-105, out=0] (37) to (36.center);
+		\draw [style=green arrow] (39.center) to (40.center);
+		\draw [style=orange line] (41.center) to (44.center);
+		\draw [style=dashed orange arrow] (44.center) to (43.center);
+		\draw [style=orange line] (45.center) to (47.center);
+		\draw [style=dashed orange arrow] (47.center) to (46.center);
+		\draw [style=purple line, in=180, out=-120] (37) to (49.center);
+		\draw [style=purple dotted arrow, in=-165, out=0, looseness=0.75] (49.center) to (48.center);
+		\draw [style=purple line, in=-180, out=120] (50) to (52.center);
+		\draw [style=purple dotted arrow, in=165, out=0, looseness=0.75] (52.center) to (51.center);
+		\draw [style=green arrow, in=105, out=0] (50) to (35.center);
+		\draw [style=green arrow, in=-105, out=0] (50) to (33.center);
+		\draw [style=orange line, in=-45, out=90, looseness=0.75] (27.center) to (54.center);
+		\draw [style=dashed orange arrow] (54.center) to (53.center);
+		\draw [style=orange line, in=45, out=-90, looseness=0.75] (55.center) to (57.center);
+		\draw [style=dashed orange arrow] (57.center) to (56.center);
+		\draw [style=grey line, bend left=270, looseness=1.75] (55.center) to (27.center);
+		\draw [style=grey line, bend left=270, looseness=1.75] (27.center) to (55.center);
+		\draw [style=orange line] (58.center) to (60.center);
+		\draw [style=dashed orange arrow] (60.center) to (59.center);
+		\draw [style=green arrow, bend left] (19) to (61.center);
+		\draw [style=purple line, bend left, looseness=0.75] (62) to (64.center);
+		\draw [style=purple dotted arrow, bend left=15, looseness=0.50] (64.center) to (63.center);
+		\draw [style=purple line, bend right, looseness=0.75] (65) to (67.center);
+		\draw [style=purple dotted arrow, bend right=15, looseness=0.50] (67.center) to (66.center);
+		\draw [style=green arrow, bend right] (68) to (69.center);
+		\draw [style=orange line, in=135, out=0, looseness=0.75] (71) to (73.center);
+		\draw [style=dashed orange arrow, bend left, looseness=0.50] (73.center) to (72.center);
+		\draw [style=orange line, in=-135, out=0, looseness=0.75] (74) to (76.center);
+		\draw [style=dashed orange arrow, bend right, looseness=0.50] (76.center) to (75.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

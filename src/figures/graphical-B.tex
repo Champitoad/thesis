@@ -1,3 +1,4 @@
+\fontsize{9.5}{10}\selectfont
 \begin{framed}
   % \renewcommand{\arraystretch}{2}
   \begin{mathpar}
@@ -52,6 +53,25 @@
     % &\step
     % &\bsheet{\gAbubble{\cgBbubble{\color{black}S}}}
     % &\mathsf{s{+}} \\
+
+    \multicolumn{8}{c}{
+      \begin{array}{r@{\quad}c@{\quad}ll}
+         \bsheet{\bbubble{\gBbubble{\color{black}T}~~~\color{black}S}}
+        &\step
+        &\bsheet{\gBbubble{\color{black}T}~~~\bbubble{\color{black}S}}
+        &\mathsf{f{\uparrow}}
+      \end{array}
+    } \\[3em]
+
+    %  \gAsheet{\hbbubble{\gBbubble{\color{black}S}~~~\color{black}T}}
+    % &\step
+    % &\bsheet{\gBbubble{\color{black}S}~~~\hbbubble{\color{black}T}}
+    % &\mathsf{n{-}{\uparrow}} &
+
+    %  \gAsheet{\cbbubble{\gBbubble{\color{black}S}~~~\color{black}T}}
+    % &\step
+    % &\bsheet{\gBbubble{\color{black}S}~~~\cbbubble{\color{black}T}}
+    % &\mathsf{n{+}{\uparrow}} \\
   
      \bsheet{\hypo{I}~~~\gBbubble{\color{black}S}}
     &\step
@@ -137,8 +157,7 @@
     &\gAsheet{\cgBbubble{\color{black}S}}
     &\mathsf{a{+}} \\
   \end{array}
-  \vspace{2em}
-  \\
+  \vspace{2em}\\
   \begin{array}{r@{\quad}c@{\quad}ll@{\qquad\qquad}r@{\quad}c@{\quad}ll}
     \multicolumn{8}{c}{\heating} \\[2em]
   

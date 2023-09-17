@@ -1,0 +1,139 @@
+An important thing to note, is that all the rules of \sys{DBiInt} are
+\emph{invertible}\sidenote{Lemma 5.2.4 in Postniece's thesis
+\cite{postniece_proof_2010}.}. Thus it follows immediately from
+\reflemma{simulation-dbiint} that one can just take the translation of the rules
+of \sys{DBiInt} in system $\sysB$, and get a complete, fully invertible
+calculus. But this would be a waste of the expressive power and nice properties
+of system $\sysB$, like linearity and locality.
+
+Instead, we will target precisely the non-invertible rules of system $\sysB$,
+and modify only those. From the proof of \reflemma{bubbles-local-soundness}, we
+can identify which rules of system \sys{B} are invertible, and which are
+probably not. Indeed if the soundness of a rule only relies on a chain of
+equivalences, then it is necessarily invertible. On the contrary if it relies on
+an inequality, then it is probably not invertible\sidenote{To ensure that it is
+not invertible, we would need additionally to find a counter-model that
+invalidates the converse inequality.}.
+
+\begin{fact}[Invertibility of system \sys{B}]
+  All rules in the fragment $\mathbb{I} \cup \{\rsf{w{-}},\rsf{w{+}}\} \cup
+  \mathbb{M} \cup \mathbb{H} \setminus \{\rsf{{\limp}{-}},\rsf{{\lsub}{+}}\}$ of
+  system \sys{B} are invertible.
+\end{fact}
+
+Thus the only remaining rules of system \sys{B} that are (most probably) not
+invertible are the weakening rules $\{\rsf{w{-}},\rsf{w{+}}\}$, all the
+$\mathbb{F}$-rules, and the $\mathbb{H}$-rules $\{\rsf{{\limp}{-}},
+\rsf{{\lsub}{+}}\}$ that \emph{apply} an implication/exclusion\sidenote{For
+quantifier rules, we conjecture that as in sequent calculus, the rules
+$\{\rsf{\forall{+}}, \rsf{\exists{-}}\}$ are invertible, while the rules
+$\{\rsf{\forall{-}}, \rsf{\exists{+}}\}$ are not.}. In \reffig{sequent-B-inv} we
+define the \sys{B_{inv}} calculus, which results from the following
+modifications to the previous rules:
+\begin{description}
+  \item[\textbf{Flow}]
+  As shown by the simulation of \reflemma{simulation-dbiint}, the
+  \emph{propagation} rules of \sys{DBiInt} combine an instance of
+  \emph{contraction} followed by the application of a flow rule on the
+  duplicated formula. Thus we can make all $\mathbb{F}$-rules of system $\sysB$
+  invertible by systematically duplicating the moved formula, although this
+  breaks \emph{linearity}.
+
+  A downside of propagation rules in the style of \sys{DBiInt}, is that they
+  create a lot of unnecessary copies of the moved formula $A$. Often, one will
+  want to move $A$ in a subgoal/supergoal at a distance $n$ in the proof tree,
+  with $n > 1$. Usually this would be performed by $n$ applications of
+  $\mathbb{F}$-rules, which by linearity indeed just move the formula. But with
+  propagation rules, $n$ copies of $A$ will be created, with one copy in each
+  subgoal met on the path to the destination.
+
+  To prevent this, one would need a way to copy formulas at an arbitrary
+  distance. This can be done with inference rules that are \emph{doubly} deep,
+  by encoding the path to the destination as a second solution context inside
+  the context where the rule is applied\sidenote{Such rules are sometimes called
+  \emph{super-switch} rules in the deep inference literature, see for instance
+  Chapter 8, Section 2.1 of \cite{guenot_nested_2013}.}. It turns out to be hard
+  to express in bubbles, because this requires a syntactic way to describe
+  contexts that correspond to valid flow paths of arbitrary length\sidenote{This
+  problem is solved trivially in the flower calculus (\refch{flowers}), by using
+  so-called \emph{pollination} rules.}. But in principle it should be feasible,
+  and would enable a more comfortable usa in a Proof-by-Action setting.
+
+  Note also that we removed the \rsf{f{\uparrow}} rule of \reffig{sequent-B}.
+  Indeed even after turning it into a propagation rule, the moved copy of the
+  duplicated subgoal $S$ cannot be weakened because it lives in a neutral
+  bubble. Thus the rule stays non-invertible, and cannot be included in
+  \sys{B_{inv}}. Fortunately, we showed that it is admissible in
+  \refthm{bubbles:cut-admissibility}, so this is not problematic.
+  
+  \item[\textbf{Weakening}]
+  Here we follow a standard technique in sequent calculus, that merges the
+  weakening rule in all \emph{terminal} rules of the calculus (i.e. rules with
+  no premisses). In bubble calculi, the notion of premiss is captured by neutral
+  bubbles; thus we incorporate weakenings in all rules that solve subgoals by
+  closing solutions with no neutral bubbles. Those are the rules
+  $\{\rsf{i{\downarrow}},\rsf{p{-}},\rsf{p{+}},\rsf{\bot{-},\rsf{\top{+}}}\}$.
+
+  \item[\textbf{Implication/Exclusion}]
+  The last source of non-invertibility is the $\mathbb{H}$-rules
+  \rsf{{\limp}{-}} and \rsf{{\lsub}{+}}, that respectively allow to use an
+  implication hypothesis, and prove an exclusion conclusion. Here we can just
+  duplicate the implication/exclusion formula, as in the introduction rules of
+  \sys{DBiInt}. Also like in \sys{DBiInt}, we removed the contraction rules
+  \rsf{c{-}} and \rsf{c{+}}, which are now merged with these two rules as well
+  as the $\mathbb{F}$-rules. Although contraction rules are invertible, they
+  induce a lot of complexity in proof search, because it is hard to predict the
+  (occurrences of) formulas that need to be duplicated. Thus it is preferable to
+  design a calculus where they are admissible. But unlike what is done in
+  \sys{DBiInt}, we did not incorporate contractions in other $\mathbb{H}$-rules.
+  Thus we cannot simulate exactly all the introduction rules of \sys{DBiInt} in
+  \sys{B_{inv}}.
+
+\end{description}
+
+These modifications only change superficially the proof of soundness, and thus
+we do not redo it. As for completeness, we would need to prove that the
+contraction rules are admissible, in order to solve the aforementioned problem
+of simulating \sys{DBiInt}'s introduction rules:
+
+\begin{lemma}[Admissibility of contraction]\lablemma{admissibility-contraction}
+  % If $\prov{\sys{B_{inv}} \cup \{\rsf{c{-}},\rsf{c{+}}\}} S$, then
+  % $\prov{\sys{B_{inv}}} S$.
+  ~\\\vspace{-1em}
+  \begin{itemize}
+    \item If $\prov{\msys{B_{inv}}} S\select{\Gamma, A, A \J \Delta}$, then
+    $\prov{\msys{B_{inv}}} S\select{\Gamma, A \J \Delta}$.
+    \item If $\prov{\msys{B_{inv}}} S\select{\Gamma \J A, A, \Delta}$, then
+    $\prov{\msys{B_{inv}}} S\select{\Gamma \J A, \Delta}$.
+  \end{itemize}
+\end{lemma}
+
+Note that it is sufficient to prove admissibility of contraction on formulas,
+rather than on arbitrary items. Indeed we only need it to simulate the
+introduction rules of \sys{DBiInt}, which always duplicate formulas. For now we
+only conjecture completeness of \sys{B_{inv}}, since it not clear what method
+should be used to prove \reflemma{admissibility-contraction}. In her thesis
+\cite{postniece_proof_2010} (Lemma 5.2.3), Postniece does a proof by recurrence
+on the depth of the derivation, relying on the fact that all introduction rules
+of \sys{DBiInt} preserve the principal formula; but this is precisely what we
+are trying to avoid with our version of the rules. Of course, if we either give
+up on this constraint or include contraction rules in \sys{B_{inv}}, then we
+immediately get our desired result: \sys{B_{inv}} is a fully invertible
+calculus, where the same fragments as system $\sysB$ capture intuitionistic,
+dual-intuitionistic, bi-intuitionistic and classical logic.
+
+\todo{discuss the standard proof-search procedure in (the intuitionistic
+fragment of) \sys{B_{inv}}}
+
+\todo{discuss the failure of full iconicity caused by the implicit contraction
+in \rsf{{\limp}{-}}, and why this might not be solvable if we stick to the
+symmetric bi-intuitionistic setting (because one needs a native way to represent
+negative implications, which is done both in Guenot's system and the
+flower calculus by breaking the symmetry and interpreting negative sequents as
+implications rather than exclusions)}
+
+\begin{figure*}
+  \input{figures/sequent-B-inv.tex}
+  \caption{Rules for the invertible bubble calculus \sys{B_{inv}}}
+  \labfig{sequent-B-inv}
+\end{figure*}
