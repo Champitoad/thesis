@@ -1,6 +1,8 @@
+\subsection{Modifying rules}
+
 An important thing to note, is that all the rules of \sys{DBiInt} are
 \emph{invertible}\sidenote{Lemma 5.2.4 in Postniece's thesis
-\cite{postniece_proof_2010}.}. Thus it follows immediately from
+  \cite{postniece_proof_2010}.}. Thus it follows immediately from
 \reflemma{simulation-dbiint} that one can just take the translation of the rules
 of \sys{DBiInt} in system $\sysB$, and get a complete, fully invertible
 calculus. But this would be a waste of the expressive power and nice properties
@@ -12,12 +14,12 @@ can identify which rules of system \sys{B} are invertible, and which are
 probably not. Indeed if the soundness of a rule only relies on a chain of
 equivalences, then it is necessarily invertible. On the contrary if it relies on
 an inequality, then it is probably not invertible\sidenote{To ensure that it is
-not invertible, we would need additionally to find a counter-model that
-invalidates the converse inequality.}.
+  not invertible, we would need additionally to find a counter-model that
+  invalidates the converse inequality.}.
 
 \begin{fact}[Invertibility of system \sys{B}]
-  All rules in the fragment $\mathbb{I} \cup \{\rsf{w{-}},\rsf{w{+}}\} \cup
-  \mathbb{M} \cup \mathbb{H} \setminus \{\rsf{{\limp}{-}},\rsf{{\lsub}{+}}\}$ of
+  All rules in the fragment $\mathbb{I} \cup \{\rsf{c{-}},\rsf{c{+}}\} \cup
+    \mathbb{M} \cup \mathbb{H} \setminus \{\rsf{{\limp}{-}},\rsf{{\lsub}{+}}\}$ of
   system \sys{B} are invertible.
 \end{fact}
 
@@ -27,69 +29,82 @@ $\mathbb{F}$-rules, and the $\mathbb{H}$-rules $\{\rsf{{\limp}{-}},
 \rsf{{\lsub}{+}}\}$ that \emph{apply} an implication/exclusion\sidenote{For
 quantifier rules, we conjecture that as in sequent calculus, the rules
 $\{\rsf{\forall{+}}, \rsf{\exists{-}}\}$ are invertible, while the rules
-$\{\rsf{\forall{-}}, \rsf{\exists{+}}\}$ are not.}. In \reffig{sequent-B-inv} we
-define the \sys{B_{inv}} calculus, which results from the following
-modifications to the previous rules:
+$\{\rsf{\forall{-}}, \rsf{\exists{+}}\}$ are not. And as in sequent calculus,
+this can be remedied by systematically duplicating the instantiated formula.}.
+In \reffig{sequent-B-inv} we define the \sys{B_{inv}} calculus, which results
+from the following modifications to the previous rules:
 \begin{description}
-  \item[\textbf{Flow}]
-  As shown by the simulation of \reflemma{simulation-dbiint}, the
-  \emph{propagation} rules of \sys{DBiInt} combine an instance of
-  \emph{contraction} followed by the application of a flow rule on the
-  duplicated formula. Thus we can make all $\mathbb{F}$-rules of system $\sysB$
-  invertible by systematically duplicating the moved formula, although this
-  breaks \emph{linearity}.
-
-  A downside of propagation rules in the style of \sys{DBiInt}, is that they
-  create a lot of unnecessary copies of the moved formula $A$. Often, one will
-  want to move $A$ in a subgoal/supergoal at a distance $n$ in the proof tree,
-  with $n > 1$. Usually this would be performed by $n$ applications of
-  $\mathbb{F}$-rules, which by linearity indeed just move the formula. But with
-  propagation rules, $n$ copies of $A$ will be created, with one copy in each
-  subgoal met on the path to the destination.
-
-  To prevent this, one would need a way to copy formulas at an arbitrary
-  distance. This can be done with inference rules that are \emph{doubly} deep,
-  by encoding the path to the destination as a second solution context inside
-  the context where the rule is applied\sidenote{Such rules are sometimes called
-  \emph{super-switch} rules in the deep inference literature, see for instance
-  Chapter 8, Section 2.1 of \cite{guenot_nested_2013}.}. It turns out to be hard
-  to express in bubbles, because this requires a syntactic way to describe
-  contexts that correspond to valid flow paths of arbitrary length\sidenote{This
-  problem is solved trivially in the flower calculus (\refch{flowers}), by using
-  so-called \emph{pollination} rules.}. But in principle it should be feasible,
-  and would enable a more comfortable usa in a Proof-by-Action setting.
-
-  Note also that we removed the \rsf{f{\uparrow}} rule of \reffig{sequent-B}.
-  Indeed even after turning it into a propagation rule, the moved copy of the
-  duplicated subgoal $S$ cannot be weakened because it lives in a neutral
-  bubble. Thus the rule stays non-invertible, and cannot be included in
-  \sys{B_{inv}}. Fortunately, we showed that it is admissible in
-  \refthm{bubbles:cut-admissibility}, so this is not problematic.
-  
   \item[\textbf{Weakening}]
-  Here we follow a standard technique in sequent calculus, that merges the
-  weakening rule in all \emph{terminal} rules of the calculus (i.e. rules with
-  no premisses). In bubble calculi, the notion of premiss is captured by neutral
-  bubbles; thus we incorporate weakenings in all rules that solve subgoals by
-  closing solutions with no neutral bubbles. Those are the rules
-  $\{\rsf{i{\downarrow}},\rsf{p{-}},\rsf{p{+}},\rsf{\bot{-},\rsf{\top{+}}}\}$.
+    Here we follow a standard technique in sequent calculus, that merges the
+    weakening rule in all \emph{terminal} rules of the calculus (i.e. rules with
+    no premisses). In bubble calculi, the notion of premiss is captured by neutral
+    bubbles; thus we incorporate weakenings in all rules that solve subgoals by
+    closing solutions with no neutral bubbles. Those are the rules
+    $\{\rsf{i{\downarrow}},\rsf{p{-}},\rsf{p{+}},\rsf{\bot{-},\rsf{\top{+}}}\}$.
+
+  \item[\textbf{Flow}]
+    As shown by the simulation of \reflemma{simulation-dbiint}, the
+    \emph{propagation} rules of \sys{DBiInt} combine an instance of
+    \emph{contraction} followed by the application of a flow rule on the
+    duplicated formula. Thus we can make all $\mathbb{F}$-rules of system $\sysB$
+    invertible by systematically duplicating the moved formula, although this
+    breaks \emph{linearity}.
+
+    A downside of propagation rules in the style of \sys{DBiInt}, is that they
+    create a lot of unnecessary copies of the moved formula $A$. Often, one will
+    want to move $A$ in a subgoal/supergoal at a distance $n$ in the proof tree,
+    with $n > 1$. Usually this would be performed by $n$ applications of
+    $\mathbb{F}$-rules, which by linearity indeed just move the formula. But with
+    propagation rules, $n$ copies of $A$ will be created, with one copy in each
+    subgoal met on the path to the destination.
+
+    To prevent this, one would need a way to copy formulas at an arbitrary
+    distance. This can be done with inference rules that are \emph{doubly} deep,
+    by encoding the path to the destination as a second solution context inside
+    the context where the rule is applied\sidenote{Such rules are sometimes called
+      \emph{super-switch} rules in the deep inference literature, see for instance
+      Chapter 8, Section 2.1 of \cite{guenot_nested_2013}.}. It turns out to be hard
+    to express in bubbles, because this requires a syntactic way to describe
+    contexts that correspond to valid flow paths of arbitrary length\sidenote{This
+      problem is solved trivially in the flower calculus (\refch{flowers}), by using
+      so-called \emph{pollination} rules.}. But in principle it should be feasible,
+    and would enable a more comfortable use in a Proof-by-Action setting.
+
+    Note also that we removed the \rsf{f{\uparrow}} rule of \reffig{sequent-B}.
+    Indeed even after turning it into a propagation rule, the moved copy of the
+    duplicated subgoal $S$ cannot be weakened because it lives in a neutral
+    bubble. Thus the rule stays non-invertible, and cannot be included in
+    \sys{B_{inv}}. Fortunately, we showed that it is admissible in
+    \refthm{bubbles:cut-admissibility}, so this is not problematic.
 
   \item[\textbf{Implication/Exclusion}]
-  The last source of non-invertibility is the $\mathbb{H}$-rules
-  \rsf{{\limp}{-}} and \rsf{{\lsub}{+}}, that respectively allow to use an
-  implication hypothesis, and prove an exclusion conclusion. Here we can just
-  duplicate the implication/exclusion formula, as in the introduction rules of
-  \sys{DBiInt}. Also like in \sys{DBiInt}, we removed the contraction rules
-  \rsf{c{-}} and \rsf{c{+}}, which are now merged with these two rules as well
-  as the $\mathbb{F}$-rules. Although contraction rules are invertible, they
-  induce a lot of complexity in proof search, because it is hard to predict the
-  (occurrences of) formulas that need to be duplicated. Thus it is preferable to
-  design a calculus where they are admissible. But unlike what is done in
-  \sys{DBiInt}, we did not incorporate contractions in other $\mathbb{H}$-rules.
-  Thus we cannot simulate exactly all the introduction rules of \sys{DBiInt} in
-  \sys{B_{inv}}.
+    The last source of non-invertibility is the $\mathbb{H}$-rules
+    \rsf{{\limp}{-}} and \rsf{{\lsub}{+}}, that respectively allow to use an
+    implication hypothesis, and prove an exclusion conclusion.
+    % This problem is has been known in the sequent calculus literature at least
+    % since \sidecite{nikolai1952vorob}, and a solution is proposed in
+    % \sidecite{dyckhoff_contraction-free_1992} by splitting the rule
+    % \rsf{{\limp}{-}} into  
+    Here we can just duplicate the implication/exclusion formula, as in the
+    introduction rules of \sys{DBiInt}. Also like in \sys{DBiInt}, we removed the
+    contraction rules \rsf{c{-}} and \rsf{c{+}}, which are now merged with these
+    two rules as well as the $\mathbb{F}$-rules. Although contraction rules are
+    invertible, they induce a lot of complexity in proof search, because it is
+    hard to predict the (occurrences of) formulas that need to be duplicated. Thus
+    it is preferable to design a calculus where they are admissible. But unlike
+    what is done in \sys{DBiInt}, we did not incorporate contractions in other
+    $\mathbb{H}$-rules. Thus we cannot simulate exactly all the introduction rules
+    of \sys{DBiInt} in \sys{B_{inv}}.
 
 \end{description}
+
+\begin{remark}
+  We also changed the \rsf{\bot{-}} and \rsf{\top{+}} rules, so that they create
+  polarized, closed empty solutions. This makes them both local, and generic
+  with respect to the status of the ambient solution. The previous version can
+  then be simulated by combination with the popping rules \rsf{p{-}} and
+  \rsf{p{+}}.
+\end{remark}
 
 These modifications only change superficially the proof of soundness, and thus
 we do not redo it. As for completeness, we would need to prove that the
@@ -102,9 +117,9 @@ of simulating \sys{DBiInt}'s introduction rules:
   ~\\\vspace{-1em}
   \begin{itemize}
     \item If $\prov{\msys{B_{inv}}} S\select{\Gamma, A, A \J \Delta}$, then
-    $\prov{\msys{B_{inv}}} S\select{\Gamma, A \J \Delta}$.
+          $\prov{\msys{B_{inv}}} S\select{\Gamma, A \J \Delta}$.
     \item If $\prov{\msys{B_{inv}}} S\select{\Gamma \J A, A, \Delta}$, then
-    $\prov{\msys{B_{inv}}} S\select{\Gamma \J A, \Delta}$.
+          $\prov{\msys{B_{inv}}} S\select{\Gamma \J A, \Delta}$.
   \end{itemize}
 \end{lemma}
 
@@ -122,18 +137,163 @@ immediately get our desired result: \sys{B_{inv}} is a fully invertible
 calculus, where the same fragments as system $\sysB$ capture intuitionistic,
 dual-intuitionistic, bi-intuitionistic and classical logic.
 
-\todo{discuss the standard proof-search procedure in (the intuitionistic
-fragment of) \sys{B_{inv}}}
-
-\todo{discuss the failure of full iconicity caused by the implicit contraction
-in \rsf{{\limp}{-}}, and why this might not be solvable if we stick to the
-symmetric bi-intuitionistic setting (because one needs a native way to represent
-negative implications, which is done both in Guenot's system and the
-flower calculus by breaking the symmetry and interpreting negative sequents as
-implications rather than exclusions)}
-
 \begin{figure*}
   \input{figures/sequent-B-inv.tex}
   \caption{Rules for the invertible bubble calculus \sys{B_{inv}}}
   \labfig{sequent-B-inv}
 \end{figure*}
+
+\subsection{Semi-automated proof search}
+
+In the intuitionistic (propositional) fragment of \sys{B_{inv}}, a canonical way
+to search for a proof of a formula $A$ consists in the following $5$
+\emph{phases}, applied successively in a loop until the empty closed solution is
+reached:
+\begin{description}
+  \item[\textbf{Decomposition}] Decompose $A$ by applying recursively
+    $\mathbb{H}$-rules, until either atoms, negative implications
+    $\hypo{\limp}$, negative disjunctions $\hypo{\lor}$, or positive
+    conjunctions $\conc{\land}$ are reached. Indeed since the \rsf{{\limp}{-}}
+    rule duplicates the implication, it cannot be used to decompose it.
+    
+    As for the \rsf{\lor{-}} and \rsf{\land{+}} rules, they can only be applied
+    when the formula is in an \emph{open} solution. A first option is to let the
+    system automatically distribute them in all open subsolutions that are
+    reachable, so that it can keep decomposing them. But this might create an
+    explosion in the number of created subgoals. Another option is to let the
+    user manually decompose them. We believe this second option is preferable,
+    if one wants to keep control over the proof search process. Indeed, it is
+    only natural that the user should be able to choose which \emph{cases} to
+    consider when building a proof.
+
+  \item[\textbf{Absorption}] Apply the absorption rules
+    $\{\rsf{a},\rsf{a{-}},\rsf{a{+}}\}$ wherever possible. This will prevent
+    atoms from being unnecessarily stuck on neutral membranes in the next phase.
+    This phase can also be trivially automated.
+
+  \item[\textbf{Linking}] Try to bring together every pair of dual atoms, so
+    that they annihilate each other in an instance of the \rsf{i{\downarrow}}
+    rule. This is reminiscent of our \emph{drag-and-drop} actions of
+    \refch{pba}. In a touch-based GUI, rather than dragging a complex formula
+    onto another complex formula, one could \emph{pinch} together the two atoms:
+    if there is no $\mathbb{F}$-law stucking one of the atoms on some membrane
+    (orange arrows in \reffig{bubbles-porosity}), then the pinch succeeds, by
+    closing the subsolution at the location where it ends with
+    \rsf{i{\downarrow}}. Thus the user can choose the subgoal to solve by
+    controlling the destination of the pinch, which can be seen as a more
+    symmetric and powerful version of DnD actions. Generally though, one will
+    want to apply the following \emph{rule of thumb}\sidenote{Pun intended.}:
+    \begin{fact}[Rule of thumb]
+      When linking a pair of dual atoms, follow these steps:
+      \begin{enumerate}
+        \item put your \emph{thumb} on the \emph{outermost} atom, and your
+              \emph{index} on the \emph{innermost} atom;
+        \item try to bring your index to your thumb;
+        \item if you get stuck on a membrane, try to bring your thumb to your
+              index;
+        \item if you again get stuck, then give up on this pair.
+      \end{enumerate}
+    \end{fact}
+    The point of this heuristic, is that it should maximize the
+    \emph{factorization} of the proof: when it succeeds, it will solve the subgoal
+    that is located closest to the root of the proof tree, maximizing the size of
+    the pruned branch, and thus the number of subgoals solved in one go. It can
+    also be used to completely automate this phase.
+
+  \item[\textbf{Popping}] Pop every closed empty bubble in the goal with the
+  rules $\{\rsf{p},\rsf{p{-}},\rsf{p{+}}\}$. This phase can also be trivially
+  automated.
+
+  \item[\textbf{Application}] When there are no more pairs of dual atoms, or all
+    the remaining pairs have been given up (last step of the rule of thumb), let
+    $S$ be the current goal, and
+    $$\imps{S} \defeq \compr{(S_0\hole, A, B, \J, \Delta)}{S = S_0\select{\Gamma,
+          A \limp B \J \Delta} \text{ for some $\Gamma$}}$$
+
+    If $\imps{S} = \emptyset$, then $S$ should not be provable, and we can stop
+    the proof search procedure. Otherwise for each $(S_0\hole, A, B, \J, \Delta)
+    \in \imps{S}$, we might need to apply the \rsf{{\limp}{-}} rule on $\hypo{A
+    \limp B}$, either directly in $S_0\hole$ if $\J = {\seq}$ and $\max_{I \in
+    \Delta}{\soldepth{I}} = 0$ (\refdef{item-depth}), otherwise in some subgoal
+    $T\select{U} \in \J \cup \Delta$. This is where the proof needs
+    \emph{insight}, because it is not clear if the antecedant $A$ will be
+    provable with the context available in $S_0\hole$ or in one of the $T\hole$,
+    or if the hypothesis $B$ is even needed at all.
+
+    A first possibility is to let the user rely on her intuition, by choosing
+    manually a specific subsolution in $\imps{S}$ to apply the \rsf{{\limp}{-}}
+    rule upon. Additionally, she might need to determine a subgoal $T\select{U}$
+    in which $A$ is provable, and first duplicate $\hypo{A\limp B}$ in $T\hole$
+    before applying \rsf{{\limp}{-}}. This will always be possible with the
+    $\mathbb{F}$-rules \rsf{f{-}{\downarrow}} and \rsf{f{-}{+}{\downarrow}}.
+    Ideally, she would also pick the most general $T\hole$ to factorize the
+    proof, by minimizing its depth $\soldepth{T\hole}$ (\refdef{solctx-depth}).
+
+    A second possibility is to duplicate eagerly every $\hypo{A \limp B}$ of
+    $\imps{S}$ in every open subsolutions of $S$ where it can be so, and then
+    apply \rsf{{\limp}{-}} on all the newly created copies. To avoid an
+    explosion of the size of $S$, the system should mark all the copies as
+    \emph{used}, so that during the next \textbf{Application} phases, all the
+    already \emph{used} copies are ignored, and only the original occurrence of
+    $\hypo{A \limp B}$ is considered.
+
+    Then we can restart the procedure, by applying the \textbf{Decomposition}
+    phase to every copy of $A$ and $B$.
+\end{description}
+
+\begin{remark}
+  By adopting $\mathbb{H}$-rules in the style of \sys{DBiInt}'s introduction
+  rules, we would make the \textbf{Decomposition} phase, and thus the whole
+  procedure inoperable, since the \textbf{Linking} phase depends crucially on it.
+  Allowing contraction rules would also jeopardize the (conjectured) completeness
+  of the procedure, because contractions might be needed at unpredictable moments,
+  and on unpredictable formulas.
+\end{remark}
+
+A strength of our proof search procedure, compared to the state-of-the-art in
+other formalisms, is that most of its automation preserves the \emph{size}
+(number of atoms) and the \emph{structure} of the goal:
+\begin{itemize}
+  \item In the \textbf{Decomposition} phase, if we opt out of the automatic
+  distribution of negative $\hypo{\lor}$ and positive $\conc{\land}$, then the
+  system will only apply $\mathbb{H}$-rules that split logical connectives, and
+  create a \emph{partition} of the atoms of the goal by enclosing them in
+  bubbles. Thus the size of the goal is kept intact, and the structure modified
+  but in a controlled, local way.
+
+  \item In the \textbf{Absorption} phase, we simply merge some membranes
+  together, preserving both the size and the structure of the goal.
+
+  \item In the \textbf{Linking} phase, the particular way in which we use
+  $\mathbb{F}$-rules ensures that we keep the exact same number of atoms.
+  Indeed, if we assume as discussed earlier that we have ``super-flow'' rules
+  that copy at a distance, then either:
+  \begin{enumerate}
+    \item the link is successful, and the two created copies of atoms are
+  immediately destroyed by the \rsf{i{\downarrow}} rule; or
+    \item the link fails, but then we can instantly ``undo'' it. Or rather, one
+  should consider that rules are applied only when the link is successful.
+  \end{enumerate}
+  The structure of the goal also stays unchanged.
+
+  \item In the \textbf{Popping} phase, entire branches of the goal are pruned
+  out, decreasing the size of the goal.
+\end{itemize}
+
+Then only the automation of the \textbf{Application} phase (and part of the
+\textbf{Decomposition} phase) is susceptible of both significantly increasing
+the size of the goal, and altering its global structure. But as is the case for
+every phase, the user can easily opt out of this automation, and do the
+reasoning manually when it is necessary to keep the goal understandable by
+humans. Typically in an educational setting, it should be quite instructive to
+have the ability to perform \textbf{Decomposition} and \textbf{Linking} by hand
+(literally).
+
+\subsection{Failure of full iconicity}
+
+\todo{discuss the failure of full iconicity caused by the implicit contraction
+  in \rsf{{\limp}{-}}, and why this might not be solvable if we stick to the
+  symmetric bi-intuitionistic setting (because one needs a native way to represent
+  negative implications, which is done both in Guenot's system and the
+  flower calculus by breaking the symmetry and interpreting negative sequents as
+  implications rather than exclusions)}

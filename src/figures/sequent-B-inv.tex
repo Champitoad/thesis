@@ -103,12 +103,12 @@
     {\Gamma, \top \J \Delta}
 &
 \R[\top{+}]
-    {\piq{}}
-    {\Gamma \seq \top, \Delta}
+    {\Gamma \J (\piq{}), \Delta}
+    {\Gamma \J \top, \Delta}
 \\
 \R[\bot{-}]
-    {\piq{}}
-    {\Gamma, \bot \seq \Delta}
+    {\Gamma, (\piq{}) \J \Delta}
+    {\Gamma, \bot \J \Delta}
 &
 \R[\bot{+}]
     {\Gamma \J \Delta}
@@ -147,7 +147,7 @@
     {\Gamma \seq A \lsub B, \Delta}
 \\
 \R[\forall{-}]
-    {\Gamma, \subst{A}{t}{x} \J \Delta}
+    {\Gamma, \forall x. A, \subst{A}{t}{x} \J \Delta}
     {\Gamma, \forall x. A \J \Delta}
 &
 \R[\forall{+}]
@@ -159,7 +159,7 @@
     {\Gamma, \exists x. A \J \Delta}
 &
 \R[\exists{+}]
-    {\Gamma \J \subst{A}{t}{x}, \Delta}
+    {\Gamma \J \subst{A}{t}{x}, \exists x. A, \Delta}
     {\Gamma \J \exists x. A, \Delta}
 \end{array}
 \end{mathpar}
