@@ -14,7 +14,7 @@
 \usepackage{prftree}
 \usepackage{cmll}
 % \usepackage{float}
-% \usepackage{framed}
+\usepackage{framed}
 \usepackage{tikz-cd}
 % \usepackage{graphicx}
 % \usepackage[inline]{enumitem}
@@ -26,9 +26,13 @@
 %   urlcolor=cyan,
 % }
 % \usepackage{adjustbox}
-% \usepackage{pifont}
+\usepackage{pifont}
 \usepackage{turnstile}
 \usepackage[nointegrals]{wasysym}
+
+% Epigraphs for inspirational quotes
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{0.6\textwidth}
 
 % TikZiT
 \usepackage{tikzit}
@@ -59,6 +63,7 @@
 
 \newfontfamily{\subseteqfont}{LibertinusMath-Regular.otf}
 
+\newcommand{\csup}{\symbol{"2AD0}}
 \newcommand{\trhd}{\symbol{"29D0}}
 \newcommand{\blackcirc}{\symbol{"25CF}}
 
@@ -66,6 +71,7 @@
 \newunicodechar{⊆}{{\subseteqfont\subseteq}}
 \newunicodechar{⧐}{\trhd}
 \newunicodechar{●}{\blackcirc}
+\newunicodechar{⫐}{\csup}
 
 % Calligraphic font with \mathcb
 % \DeclareFontFamily{U}{BOONDOX-calo}{\skewchar\font=45 }
@@ -93,7 +99,6 @@
 %%% Package config
 
 % enumitem
-\usepackage{enumitem}
 \setlist[description]{itemsep=0.5em}
 \setlist[itemize]{align=left}
 

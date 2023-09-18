@@ -63,7 +63,7 @@
 \DeclareRobustCommand{\sys}[1]{$\mathsf{#1}$}
 
 \newcommand{\hole}{\square}
-\newcommand{\cfill}[2]{#1\{#2\}}
+\newcommand{\cfill}[2]{#1\select{#2}}
 
 \newcommand{\lstep}{\rightharpoonup}
 \newcommand{\step}{\rightarrow}
@@ -230,6 +230,8 @@
 \newcommand{\update}[3]{#1 |_{#2} #3}
 \newcommand{\idsubst}{\mathsf{1}}
 \newcommand{\cstsubst}[1]{\overline{#1}}
+
+\newcommand{\tvec}[1]{\vec{\mathbf{#1}}}
 
 % Kripke
 
