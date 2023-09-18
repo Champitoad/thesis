@@ -75,8 +75,9 @@ comparing them to those of the \sys{BJ} calculus:
   guarantees its \emph{locality}: if the conclusion was $\Gamma, A \piq{\cS} A,
   \Delta$, then the distributive semantics would entail that all subgoals in
   $\cS$ must be solved at once, despite the fact that they are not directly
-  related to $A$. Note that if we were to give up on locality we could opt for
-  this variant, which gives better \emph{factorizability}. As for the
+  related to $A$\sidenote{If we were to give up on locality, we could opt for
+  this variant, which gives better \emph{factorizability}. In fact we will
+  precisely do that in \refsec{invertible-calculus}.}. As for the
   \rsf{i{\uparrow}} rule, restricting to open solutions makes the rule
   \emph{invertible}, without sacrificing locality. This will in fact be the case
   of all rules that create multiple subgoals.

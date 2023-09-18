@@ -1,0 +1,20 @@
+$$
+\begin{array}{r@{\quad\mapsto\quad}l@{\vspace{0.75em}}}
+  \hypo{\top} & \hbubble{\phantom{\top}} \\
+  \hypo{\bot} & \hbbubble{\phantom{\bot}} \\
+  \hypo{A \land B} & \hbubble{\hypo{A}~~~\hypo{B}} \\
+  \hypo{A \lor B} & \hbbubble{\bubble{\hypo{A}}~~~\bubble{\hypo{B}}} \\
+  \hypo{A \limp B} & ? \\
+  \hypo{A \lsub B} & \hbubble{\hypo{A}~~~\conc{B}} \\
+\end{array}
+$$
+$$
+\begin{array}{r@{\quad\mapsto\quad}l@{\vspace{0.75em}}}
+  \conc{\top} & \cbbubble{\phantom{\top}} \\
+  \conc{\bot} & \cbubble{\phantom{\bot}} \\
+  \conc{A \land B} & \cbbubble{\bubble{\conc{A}}~~~\bubble{\conc{B}}} \\
+  \conc{A \lor B} & \cbubble{\conc{A}~~~\conc{B}} \\
+  \conc{A \limp B} & \cbubble{\hypo{A}~~~\conc{B}} \\
+  \conc{A \lsub B} & ?
+\end{array}
+$$

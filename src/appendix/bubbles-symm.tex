@@ -608,17 +608,19 @@
 
 \section{Completeness}\labsec{app:bubbles-completeness}
 
+In the following proofs, we will denote a sequence of applications of a set of
+rules by a double inference line, and the use of a derivation obtained by
+induction hypothesis by a dotted line.
+
+\newcommand{\mt}{\qquad\mapsto\qquad}
+
 \begin{lemma}[Simulation of \sys{DBiInt}]\lablemma{app:simulation-dbiint}
   
   If $X \prov{\msys{DBiInt}} Y$ then $X \prov{\sysBHB \setminus
   \{\rsf{i{\uparrow}}\}} Y$.
 \end{lemma}
 \begin{proof}
-  By induction on the derivation of $X \prov{\msys{DBiInt}} Y$. We denote a
-  sequence of applications of a set of rules by a double inference line, and the
-  use of a derivation obtained by induction hypothesis by a dotted line.
-
-  \newcommand{\mt}{\qquad\mapsto\qquad}
+  By induction on the derivation of $X \prov{\msys{DBiInt}} Y$. 
   \begin{align*}
     \R[\rsf{id}]
       {}
@@ -829,5 +831,122 @@
     {X \piq{\seq A \sep B \seq} A \lsub B, Y}}
     {X \seq A \lsub B, A \lsub B, Y}}
     {X \seq A \lsub B, Y}
+  \end{align*}
+\end{proof}
+
+\begin{lemma}[Simulation of \sys{G3cp}]
+  If $\Gamma \prov{\msys{G3cp}} \Delta$, then $\Gamma \prov{\sysBH \cup
+  \{\rsf{f{+}{+}}\} \setminus \{\rsf{i{\uparrow}}\}} \Delta$.
+\end{lemma}
+\begin{proof}
+  By induction on the \sys{G3cp} derivation.
+
+  \begin{align*}
+    \R[]
+      {}
+      {a, \Gamma \seq \Delta, a}
+    &\mt
+    \R[\rsf{i{\downarrow}}]
+    {\prftree[r][d]{\rsf{w{-},w{+}}}
+    {\piq{}}
+    {\Gamma \piq{} \Delta}}
+    {a, \Gamma \seq \Delta, a}
+    \\\\
+    \R[]
+      {}
+      {\bot, \Gamma \seq \Delta}
+    &\mt
+    \R[\rsf{\bot{-}}]
+    {\prftree[r][d]{\rsf{w{-},w{+}}}
+    {\piq{}}
+    {\Gamma \piq{} \Delta}}
+    {\bot, \Gamma \seq \Delta}
+    \\\\
+    \R[L\land]
+    {\summ[$\pi_1$]{A, B, \Gamma \seq \Delta}}
+    {A \land B, \Gamma \seq \Delta}
+    &\mt
+    \R[\rsf{\land{-}}]
+    {\prftree[r][dotted]{$\pi_1$}
+    {\piq{}}
+    {A, B, \Gamma \seq \Delta}}
+    {A \land B, \Gamma \seq \Delta}
+    \\\\
+    \R[R\lor]
+    {\summ[$\pi_1$]{\Gamma \seq \Delta, A, B}}
+    {\Gamma \seq \Delta, A \lor B}
+    &\mt
+    \R[\rsf{\lor{+}}]
+    {\prftree[r][dotted]{$\pi_1$}
+    {\piq{}}
+    {\Gamma \seq \Delta, A, B}}
+    {\Gamma \seq \Delta, A \lor B}
+    \\\\
+    \R[R\land]
+      {\summ[$\pi_1$]{\Gamma \seq \Delta, A}}
+      {\summ[$\pi_2$]{\Gamma \seq \Delta, B}}
+      {\Gamma \seq \Delta, A \land B}
+    &\mt
+    \R[\rsf{\land{+}}]
+    {\prftree[r][d]{\rsf{c{-}},\rsf{c{+}}}
+    {\prftree[r][d]{\rsf{f{-}},\rsf{f{+}}}
+    {\prftree[r][dotted]{$\pi_1, \pi_2$}
+    {\prftree[r][d]{\rsf{p}}
+    {\piq{}}
+    {\piq{\piq{} \sep \piq{}}}}
+    {\piq{\Gamma \seq \Delta, A \sep \Gamma \seq \Delta, B}}}
+    {\Gamma, \Gamma \piq{\seq A \sep \seq B} \Delta, \Delta}}
+    {\Gamma \piq{\seq A \sep \seq B} \Delta}}
+    {\Gamma \seq \Delta, A \land B}
+    \\\\
+    \R[L\lor]
+      {\summ[$\pi_1$]{A, \Gamma \seq \Delta}}
+      {\summ[$\pi_2$]{B, \Gamma \seq \Delta}}
+      {A \lor B, \Gamma \seq \Delta}
+    &\mt
+    \R[\rsf{\lor{-}}]
+    {\prftree[r][d]{\rsf{c{-}},\rsf{c{+}}}
+    {\prftree[r][d]{\rsf{f{-}},\rsf{f{+}}}
+    {\prftree[r][dotted]{$\pi_1, \pi_2$}
+    {\prftree[r][d]{\rsf{p}}
+    {\piq{}}
+    {\piq{\piq{} \sep \piq{}}}}
+    {\piq{A, \Gamma \seq \Delta \sep B, \Gamma \seq \Delta}}}
+    {\Gamma, \Gamma \piq{A \seq \sep B \seq} \Delta, \Delta}}
+    {\Gamma \piq{A \seq \sep B \seq} \Delta}}
+    {A \lor B, \Gamma \seq \Delta}
+    \\\\
+    \R[L{\limp}]
+      {\summ[$\pi_1$]{\Gamma \seq \Delta, A}}
+      {\summ[$\pi_2$]{B, \Gamma \seq \Delta}}
+      {A \limp B, \Gamma \seq \Delta}
+    &\mt
+    \R[\rsf{{\limp}{-}}]
+    {\prftree[r][d]{\rsf{c{-}},\rsf{c{+}}}
+    {\prftree[r][d]{\rsf{f{-}},\rsf{f{+}}}
+    {\prftree[r][dotted]{$\pi_1, \pi_2$}
+    {\prftree[r][d]{\rsf{p}}
+    {\piq{}}
+    {\piq{\piq{} \sep \piq{}}}}
+    {\piq{\Gamma \seq \Delta, A \sep B, \Gamma \seq \Delta}}}
+    {\Gamma, \Gamma \piq{\seq A \sep B \seq} \Delta, \Delta}}
+    {\Gamma \piq{\seq A \sep B \seq} \Delta}}
+    {A \limp B, \Gamma \seq \Delta}
+    \\\\
+    \R[R{\limp}]
+      {\summ[$\pi_1$]{A, \Gamma \seq \Delta, B}}
+      {\Gamma \seq \Delta, A \limp B}
+    &\mt
+    \R[\rsf{{\limp}{+}}]
+    {\prftree[r][d]{\rsf{f{-}{+}{\downarrow}}}
+    {\prftree[r][d]{\rsf{f{+}{+}{\downarrow}}}
+    {\prftree[r][dotted]{$\pi_1$}
+    {\R[\rsf{p{+}}]
+    {\piq{}}
+    {\seq (\piq{})}}
+    {\seq (A, \Gamma \seq \Delta, B)}}
+    {\seq \Delta, (A, \Gamma \seq B)}}
+    {\Gamma \seq \Delta, (A \seq B)}}
+    {\Gamma \seq \Delta, A \limp B}
   \end{align*}
 \end{proof}

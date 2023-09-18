@@ -84,7 +84,7 @@ can be simulated inside system $\sysB$.
 \end{proof}
 
 Assuming that the consequence relation of the Kripke semantics used by Postniece
-to prove the completeness of \sys{DBiInt} coincide with the order relation of
+to prove the completeness of \sys{DBiInt} coincides with the order relation of
 Heyting-Brouwer algebras, we get the following fact:
 
 \begin{fact}[Completeness of \sys{DBiInt}]\labfact{completeness-dbiint}
@@ -240,10 +240,17 @@ bi-intuitionistic logic like the one of Rauszer
 \sidecite{rauszer_formalization_1974} are not \emph{cut-free} complete; and in
 our literature review, \sys{DBiInt} was the cut-free system closest in its
 syntax and rules to system $\sysB$. But for classical logic we do not have this
-limitation, and thus it should be straightforward to simulate directly a
-cut-free sequent calculus such as \sys{LK}.\todo{Do the proof in appendix,
-should be quick}
+limitation, and thus it is straightforward to simulate directly a cut-free
+sequent calculus such as \sys{G3cp} \sidecite{negri_structural_2001}:
 
+\begin{lemma}[Simulation of \sys{G3cp}]
+  If $\Gamma \prov{\msys{G3cp}} \Delta$, then $\Gamma \prov{\sysBH \cup
+  \{\rsf{f{+}{+}}\} \setminus \{\rsf{i{\uparrow}}\}} \Delta$.
+\end{lemma}
+\begin{proof}
+  By induction on the \sys{G3cp} derivation, see
+  \refsec{app:bubbles-completeness} for the detailed proof.
+\end{proof}
 
 Lastly, let us mention a recent result of Goré and Shillito
 \cite{gore_bi-intuitionistic_2020}, where they uncover a distinction between a
