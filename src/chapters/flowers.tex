@@ -17,11 +17,11 @@ We introduce the \emph{flower calculus}, a novel proof system for intuitionistic
 predicate logic based on syntactic objects called \emph{flowers}. We start by
 explaining how flowers stem from considerations in graphical logic, and more
 specifically from a constructivization of the \emph{existential graphs}
-(thereafter ``EGs'') of C. S. Peirce proposed by A. Oostra
+(thereafter ``EG'') of C. S. Peirce proposed by A. Oostra
 \sidecite[12.5em]{oostra_graficos_2010}. Then we present our inductive syntax
 for flowers, reminiscent at the same time of the nested sequents of deep
 inference proof theory, and the geometric formulas of categorical logic. A
-salient feature of our calculus inherited from EGs, is that it is \emph{fully
+salient feature of our calculus inherited from EG, is that it is \emph{fully
 iconic}: it dispenses completely with the traditional notion of symbolic
 formula, operating instead as a rewriting system on flowers containing only
 atomic predicates. We also propose a notion of proof geared towards analyticity
@@ -34,25 +34,24 @@ and completeness proofs with respect to Kripke semantics, in the spirit of the
 kernel of rules targetted by completeness is fully invertible, a desirable
 property in both automated and interactive proof search.
 
-The chapter is organized as follows: in \refsec{EGs}, we give a brief
-presentation of the original diagrammatic system \sys{Alpha} of EGs for
-classical propositional logic, together with a reformulation as a rewriting
-system on arbitrary (finite) trees. In \refsec{Flowers}, we explain how to
-obtain the intuitionistic variant of EGs put forth by A. Oostra
-\cite{oostra_graficos_2010} through a subtle topological distinction added to
-the graphical representation, which reflects in the inductive syntax. In
-\refsec{Quantification}, we illustrate quickly the original mechanism of
-\emph{lines of identity} used by Peirce to handle quantifiers and equality in
-his \sys{Beta} system, and show how to recast it in a more traditional syntax
-based on binders and variables. In \refsec{Calculus}, we introduce the full set
-of inference rules of the flower calculus as well as our notion of proof, and
-prove a few syntactic properties, including a deduction theorem. In
-\refsec{Semantics}, we give a direct Kripke semantics to flowers, avoiding the
-need for translations to and from traditional formulas. In \refsec{Soundness},
-we show that the rules of the flower calculus are valid with respect to our
-Kripke semantics, and in \refsec{Completeness} we identify a complete fragment
-of the system where all rules are \emph{invertible}. This entails the
-admissibility of the rest of the rules, and as a consequence the
+The chapter is organized as follows: in \refsec{EG}, we give a brief
+presentation of the original diagrammatic system \sys{Alpha} of EG for classical
+propositional logic, together with a reformulation as a rewriting system on
+arbitrary (finite) trees. In \refsec{Flowers}, we explain how to obtain the
+intuitionistic variant of EG put forth by A. Oostra \cite{oostra_graficos_2010}
+through a subtle topological distinction added to the graphical representation,
+which reflects in the inductive syntax. In \refsec{Quantification}, we
+illustrate quickly the original mechanism of \emph{lines of identity} used by
+Peirce to handle quantifiers and equality in his \sys{Beta} system, and show how
+to recast it in a more traditional syntax based on binders and variables. In
+\refsec{Calculus}, we introduce the full set of inference rules of the flower
+calculus as well as our notion of proof, and prove a few syntactic properties,
+including a deduction theorem. In \refsec{Semantics}, we give a direct Kripke
+semantics to flowers, avoiding the need for translations to and from formulas.
+In \refsec{Soundness}, we show that the rules of the flower calculus are valid
+with respect to our Kripke semantics, and in \refsec{Completeness} we identify a
+complete fragment of the system where all rules are \emph{invertible}. This
+entails the admissibility of the rest of the rules, and as a consequence the
 \emph{analyticity} of the system. We exploit these properties in
 \refsec{flowers-search} by describing an algorithm for fully automated proof
 search in the propositional fragment, that we conjecture to be complete. Then in
@@ -136,7 +135,7 @@ negative role when it is iterated, or a positive role when it is deiterated}
 
 % We introduce a closely related structure for goals, but inspired instead by an
 % early invention in the history of graphical logic: the \emph{existential graphs}
-% of C. S. Peirce \sidecite{Roberts+1973} (thereafter written ``EGs'').
+% of C. S. Peirce \sidecite{Roberts+1973} (thereafter written ``EG'').
 % We noticed that our structure could be drawn and manipulated metaphorically in
 % the form of nested \emph{flowers}, and thus decided to name \emph{flower
 % calculus} the proof system that we built around it. Our focus in this work will
@@ -170,46 +169,83 @@ negative role when it is iterated, or a positive role when it is deiterated}
 \todo{Make all usages of notations consistent with \reftab{letters}}
 
 
-\section{Existential graphs}\labsec{EGs}
+\section{Existential graphs}\labsec{EG}
 
 \todo{ give a brief presentation of the original diagrammatic system \sys{Alpha}
-of EGs for classical propositional logic, together with a reformulation as a
+of EG for classical propositional logic, together with a reformulation as a
 rewriting system on arbitrary (finite) trees.}
 
 Peirce is famous for his contributions to symbolic logic, including among others
 his eponymous law for classical logic, and his pioneering work on the algebra of
 relations and quantification \sidecite{peirce_algebra_1885}. But far less
 widespread are his achievements in the realm of graphical logic, or \emph{iconic
-logic} as he called it. He dedicated a large chunk of his life investigating
-diagrammatic systems, starting in 1882 with the \emph{entitative graphs} and
-culminating with the \emph{existential graphs}, which he developed from 1896
-until his death in 1914 \sidecite{Roberts+1973}. Interestingly, Peirce perceived
-EGs as his \textit{``chef d'oeuvre''}, and that they \textit{``ought to be the
-logic of the future''}\sidenote{Both citations are sourced in page 11 of
-\cite{Roberts+1973}}.
+logic} as Shin calls it \sidecite{10.7551/mitpress/3633.001.0001}. He dedicated
+a large chunk of his life investigating diagrammatic systems, starting in 1882
+with the \emph{entitative graphs} and culminating with the \emph{existential
+graphs}, which he developed from 1896 until his death in 1914
+\sidecite{Roberts+1973}. Interestingly, Peirce perceived EG as his
+\textit{``chef d'oeuvre''}, and that they \textit{``ought to be the logic of the
+future''}\sidenote{Both citations are sourced in page 11 of
+\cite{Roberts+1973}.}.
 
 Recent works have started to realize this vision: for example Sowa based his
-conceptual graphs for computerized knowledge representation on EGs
+conceptual graphs for computerized knowledge representation on EG
 \sidecite{sowa_conceptual_1976}, Brady, Trimble
 \sidecite{brady_categorical_2000}\sidecite{brady_string_nodate} and Haydon,
 Sobociński \sidecite{pietarinen_compositional_2020} proposed various
-reconstructions of EGs through the lens of \emph{topology} and \emph{category
+reconstructions of EG through the lens of \emph{topology} and \emph{category
 theory}, and Melliès and Zeilberger \sidecite{mellies_bifibrational_2016}
 refined this interpretation by making connections with \emph{linear
 logic}\sidenote{We also know through private communication that N. Haydon is
 actively working on more explicit links between linear logic and the original
-formulation of EGs by Peirce.}\sidecite{girard-linear-1987}. The full story has
-yet to be told, but we hope that this work will constitute one more step towards
+formulation of EG by Peirce.}\sidecite{girard-linear-1987}. The full story has
+yet to be told, but we hope that our work will constitute one more step towards
 the vision Peirce had in mind.
 
 \subsection{\sys{Alpha} graphs}
+
+Peirce designed in total three systems of EG, which he called respectively
+\sys{Alpha}, \sys{Beta} and \sys{Gamma}. They were invented chronologically in
+that order, which also captures their relationship in terms of complexity:
+\sys{Alpha} is the foundation on which the other systems are built, and can
+today be understood as a diagrammatic calculus for classical
+\emph{propositional} logic. As we will see in \refsec{Quantification},
+\sys{Beta} corresponds to a variable-free representation of \emph{predicate}
+logic without function symbols, and with primitive support for \emph{equality}.
+The last system \sys{Gamma} is more experimental, with various unfinished
+features that have been interpreted as attempts to capture \emph{modal}
+\sidecite{zeman_graphical_1964} and \emph{higher-order} logics\sidenote{A less
+known fact is that at the end of his life, Peirce pushed his experimentations
+beyond the scope of \emph{logic} in the contemporary sense of the word (it was
+already the case for modal logic at his time), with so-called \emph{tinctured
+existential graphs} (Chapter 6 in \cite{Roberts+1973}). Roughly, the idea was to
+represent a variety of \emph{modes of expression} with different background
+shades on the canvas where sentences are scribed, not unlike our graphical
+depiction of the \emph{status} of solutions in \reffig{graphical-B}. In addition
+to the usual act of asserting the truth of a proposition, one could for instance
+express a \emph{subjective} or \emph{objective} possibility, or signify an
+interrogative or imperative mood, all by using different colors. For print in
+publications, he would in fact use \emph{heraldic tinctures} instead of colors,
+hence the ``tinctured'' qualificative. The precise meaning and purpose of
+tinctured EG remains elusive to this day, and might constitute the most esoteric
+part of his work. We see a possible connection with the type-theoretical concept
+of \emph{judgment}, which was rehabilitated by Martin-Löf from the philosophy of
+Kant \cite{Martin-Lof1996-MAROTM-7}, who was of great influence on Peirce's own
+philosophy \cite{sep-peirce}.}.
+
+The most fundamental concept of \sys{Alpha}, is that of the \emph{sheet of
+assertion}. It is the space where statements are scribed by the reasoner,
+typically a sheet of paper or a blackboard. In a proof assistant, this would
+either be the buffer of a text editor holding the theory the user is developing,
+or the proof view displaying goals to be proved, depending on who the reasoner
+is (the user or the computer, respectively).
 
 \subsection{As a rewriting system}
 
 
 \section{Intuitionistic logic}\labsec{Flowers}
 
-\todo{ explain how to obtain the intuitionistic variant of EGs put forth by A.
+\todo{ explain how to obtain the intuitionistic variant of EG put forth by A.
 Oostra \cite{oostra_graficos_2010} through a subtle topological distinction
 added to the graphical representation, which reflects in the inductive syntax. A
 harmless modification to the way of drawing the intuitionistic graphs then
@@ -257,7 +293,7 @@ and a first-order signature $\Sigma$.
   \end{itemize}
 \end{definition}
 
-\begin{definition}[Flowers]\label{def:flowers}
+\begin{definition}[Flowers]\labdef{flowers}
   The sets of \emph{flowers} $\flowers$ and \emph{gardens} $\gardens$ are
   defined mutually inductively as follows:
   \begin{itemize}
@@ -281,7 +317,7 @@ where $\gamma$ is the \emph{pistil}, and the $\delta_i$ are called
 \emph{petals}. We write $\fset{i}{n}{E_i}$ to denote a finite (multi)set of
 size $n$ with elements $E_i$ indexed by $1 \leq i \leq n$. We also omit
 writing the empty (multi)set, accounting for it with blank space as is done in
-sequent notation or in Peirce's EGs; in particular, $\garden{{}}{{}}$ stands for
+sequent notation or in Peirce's EG; in particular, $\garden{{}}{{}}$ stands for
 the empty garden $\garden{\emptyset}{\emptyset}$, $\flower{\gamma}{{}}$ for the
 flower with no petals $\flower{\gamma}{\emptyset}$, and
 $\flower{\gamma}{\garden{{}}{{}}}$ for the flower with one empty petal.
@@ -297,6 +333,9 @@ $$\left(\flower{\left(\garden{\{x_1, x_2\}}{\{\phi_1,
 \left(\garden{\{y_2\}}{\Phi}\right)\}}\right)$$ where constructed finite
 (multi)sets are delimited with $\{\}$, and constructed flowers/gardens are
 delimited with $()$.
+
+\todo{ Introduce convention that $\garden{{}}{\Phi}$ is shortened into $\Phi$,
+and apply it everywhere to save some space and improve readability. }
 
 \begin{remark}
   In some places the choice of letter for meta-variables will be important to
@@ -327,7 +366,7 @@ delimited with $()$.
   \labtab{letters}
 \end{marginfigure}
 
-\begin{definition}[Free variables]\label{def:fv}
+\begin{definition}[Free variables]\labdef{fv}
   The sets of \emph{free variables} $\fv(-)$ of a term, flower or garden are
   defined mutually inductively as follows:
   \begin{align*}
@@ -416,9 +455,9 @@ theorem.}
 \begin{definition}[Parity]
   The \emph{parity} $\parity{\Phi\hole}$ of a context $\Phi\hole$ is defined inductively by:
   \begin{align*}
-    \parity{\Phi, \hole} &= 0 \\
-    \parity{\Phi, (\flower{\garden{\mathbf{x}}{Y}}{\Delta})} &= \parity{Y} + 1 \\
-    \parity{\Phi, (\flower{\gamma}{\garden{\mathbf{x}}{Y} \sep \Delta})} &= \parity{Y}
+    \parity{\Psi, \hole} &= 0 \\
+    \parity{\Psi, (\flower{\garden{\mathbf{x}}{\Phi\hole}}{\Delta})} &= \parity{\Phi\hole} + 1 \\
+    \parity{\Psi, (\flower{\gamma}{\garden{\mathbf{x}}{\Phi\hole} \sep \Delta})} &= \parity{\Phi\hole}
   \end{align*}
 \end{definition}
 
@@ -430,12 +469,12 @@ theorem.}
 
 \begin{definition}[Hypothesis]
   We say that a flower $\phi$ is a \emph{hypothesis} of a context $\Phi\hole$, written
-  $\chyp{\phi}{\Phi\hole}$, when there exist a bouquet $\Phi$ with $\phi \in \Phi$ and
-  contexts $Y$ and $Z$ such that either:
+  $\chyp{\phi}{\Phi\hole}$, when there exist a bouquet $\Psi$ with $\phi \in \Psi$ and
+  contexts $\Xi\hole$ and $\Xi_0\hole$ such that either:
   \begin{itemize}
-    \item $\Phi\hole = \cfill{Y}{\Phi, Z}$;
+    \item $\Phi\hole = \cfill{\Xi}{\Psi, \Xi_0\hole}$;
     \item $\Phi\hole =
-    \cfill{Y}{\flower{\garden{\mathbf{x}}{\Phi}}{\garden{\mathbf{y}}{Z}
+    \cfill{\Xi}{\flower{\garden{\mathbf{x}}{\Psi}}{\garden{\mathbf{y}}{\Xi_0\hole}
     \sep \Delta}}$ for some $\mathbf{x}, \mathbf{y}, \Delta$.
   \end{itemize}
   A bouquet $\Psi$ is said to be \emph{available} in $\Phi\hole$, written
@@ -456,7 +495,7 @@ for any flower $\phi$, the two following conditions hold:
 % all $x \in \dom(\sigma)$.
 
 The central device studied in this work, the \emph{flower calculus}, can be
-described as a \emph{rewrite system} on bouquets. That is, one has a finite
+described as a \emph{rewriting system} on bouquets. That is, one has a finite
 number of rewrite rules which are families (schemas) of pairs of bouquets, and
 these can be applied and composed in a directed way to derive new bouquets.
 Intuitively, a rewriting step $\Phi \rightarrow \Psi$ should be understood as an
@@ -567,10 +606,10 @@ of $\Phi$, and hopefully simpler to prove.
 
 \todo{Graphical version of \reffig{flower-calculus}}
 
-To emphasize this viewpoint, the calculus is presented in figure
+To emphasize this viewpoint, the calculus is presented in
 \reffig{flower-calculus} as a set of unary \emph{inference rules}: when read
 \emph{top-down}, they correspond to usual inferences from premiss to conclusion,
-and will be justified by the soundness theorem of section \refsec{Soundness}.
+and will be justified by the soundness theorem of \refsec{Soundness}.
 % This gives them a \emph{static}, \emph{a posteriori} meaning, since this is
 % typically how you would check the validity of an established inference
 % \emph{after the fact}.
@@ -601,42 +640,62 @@ simplify a goal.
   A \emph{proof} of a bouquet $\Phi$ is a derivation $\Phi \steps \emptyset$.
 \end{definition}
 
-In Peircean terms, the empty bouquet is the blank \emph{sheet of assertion},
-which symbolizes \emph{absolute truth}. Then in our proof construction paradigm,
-proving a bouquet amounts to erasing it completely from the sheet of assertion,
-thus reducing it to absolute truth.
+In Peircean terms, the empty bouquet is the blank sheet of assertion, which can
+be interpreted as the symbol of \emph{absolute truth}\sidenote{To be more
+precise, it represents literally the \emph{absence} of any assertion. Peirce had
+an \emph{externalist} conception of truth, where the assertions made by the
+\process{Graphist}, i.e. the person scribing on the sheet, refer to the world
+\emph{outside} of the sheet. By not scribing anything, the \process{Graphist}
+thus refrains from asserting anything about the world, only assuming implicit
+truths. This is illustrated by the following quote from \cite{Roberts+1973},
+reminiscent of an interaction between a proof assistant (the \process{Graphist})
+and her user (\process{the Interpreter}): \textit{``One of the parties, called
+the Graphist, is responsible for scribing the original graphs at the beginning
+of the investigation or discussion; the other, called the Interpreter, draws
+inferences from these graphs by changing them in accordance with the permissions
+of the system. The [...] sheet, before anything is scribed on it, represents
+whatever is taken for granted at the outset by the Graphist and
+Interpreter.''}.}. Then in our proof construction paradigm, proving a bouquet
+amounts to erasing it completely from the sheet of assertion, thus reducing it
+to absolute truth.
 
 Now if we want to speak about \emph{relative} truth $\Psi \vdash \Phi$, i.e.
 $\Phi$ is true under the assumption that $\Psi$ is, it turns out that the notion
-of syntactic derivability $\Phi \steps \Psi$ is too weak. Indeed as we will see
-in section \refsec{Soundness}, all rules of the flower calculus are
-\emph{invertible}. A consequence is that derivability is only able to relate
-logically equivalent bouquets --- in fact not even all of them --- which
-prevents the applicability of the \emph{deduction theorem}
-\ref{thm:deduction}\sidenote{This problem does not arise in the EGs of Peirce,
-because of the powerful but non-invertible rules of \emph{insertion} and
-\emph{deletion}.}.
+of natural derivability $\Phi \steps_{\Nature} \Psi$ is too weak. Indeed as we
+will see in \refsec{Soundness} and \refsec{Completeness}, the natural rules of
+the flower calculus are both \emph{invertible} and \emph{complete} for
+provability. A consequence of invertibility is that natural derivability is only
+able to relate logically equivalent bouquets --- in fact not even all of them
+--- which prevents the applicability of the \emph{deduction theorem}
+\refthm{deduction}. That is, as soon as $\flower{\Psi}{\Phi}$ is provable but
+the converse $\flower{\Phi}{\Psi}$ is not, it will necessarily follow that $\Phi
+\not\steps_{\Nature} \Psi$. This problem does not arise if we consider full
+derivability $\Phi \steps \Psi$, because of the powerful but non-invertible
+cultural rules \rsf{grow} and \rsf{crop}, which correspond respectively to the
+\emph{insertion} and \emph{erasure} rules of Peirce's EG. These rules are also
+included in the intuitionistic EG system of Minghui and Pietarinen
+\sidecite{minghui_graphical_2019}, and thus the authors are able to prove a
+deduction theorem for their derivability relation.
 
 A trivial way to circumvent this is to define directly $\Psi \vdash \Phi$ as
-$\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}} \steps \emptyset$. In fact this is
-closer to what one would find in sequent calculus, where hypothetical proofs are
-closed derivations of hypothetical sequents, not open derivations. The
+$\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}} \steps \emptyset$. In fact this
+is closer to what one would find in sequent calculus, where hypothetical proofs
+are closed derivations of hypothetical sequents, not open derivations. The
 difference is that sequents capture only the implicative structure of logic,
 while flowers capture the full structure of first-order intuitionistic logic.
 This allows for a nice generalization of the notion of hypothetical provability,
-which will be useful in the completeness proof of section
-\refsec{Completeness}. 
+which will be useful in the completeness proof of \refsec{Completeness}. 
 
 \begin{definition}[Hypothetical provability]
   Given two bouquets $\Phi, \Psi$, we say that $\Phi$ is \emph{hypothetically
   provable} from $\Psi$ in a fragment $\mathsf{R}$ of rules, written $\Psi
   \vdash_{\mathsf{R}} \Phi$, if for every context $\Xi\hole$ such that
   $\chyp{\Psi}{\Xi\hole}$, $\cfill{\Xi}{\Phi} \steps_{\mathsf{R}}
-  \cfill{\Xi}{\phantom{\Phi}}$. We write $\Phi \vdash \Psi$ to denote hypothetical provability
-  in the full flower calculus.
+  \cfill{\Xi}{\phantom{\Phi}}$. We write $\Psi \vdash \Phi$ to denote
+  hypothetical provability in the full flower calculus.
 \end{definition}
 
-\begin{lemma}[Reflexivity]\label{thm:reflexivity}
+\begin{lemma}[Reflexivity]\lablemma{reflexivity}
   For any bouquet $\Phi$, $\Phi \vdash \Phi$.
 \end{lemma}
 \begin{proof}
@@ -671,13 +730,13 @@ calculus, although it will still be useful in this work to make meta-theoretical
 proofs slightly shorter. For now we allow the {\rnmsf{fence}} rule, which makes
 the deduction theorem trivial:
 
-\begin{theorem}[Deduction]\label{thm:deduction}
+\begin{theorem}[Deduction]\labthm{deduction}
   For any pair $\Phi, \Psi$ of bouquets, $\Psi \vdash \Phi$ if and only if
   $\vdash \flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}$.
 \end{theorem}
 \begin{proof}
   Let $\Xi\hole$ be some context. If $\Psi \vdash \Phi$, then in particular
-  $\cfill{Y}{\Phi} \steps \cfill{Y}{\phantom{\Phi}}$ for $\Xi'\hole :=
+  $\cfill{\Xi'}{\Phi} \steps \cfill{\Xi'}{\phantom{\Phi}}$ for $\Xi'\hole :=
   \cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{\square}}}$. Thus we have:
   $$
   \cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}} \steps
@@ -729,7 +788,7 @@ strong completeness theorem.}
 
 \begin{definition}[$w$-evaluation]
   Given a Kripke structure $\mathcal{K}$ and a world $w$ in $\mathcal{K}$, a
-  \emph{$w$-evaluation} is a function $e : \mathcal{V} \to M_w$.
+  \emph{$w$-evaluation} is a function $e : \vars \to M_w$.
   % We write $e : \mathbf{x} \to M_w$ if $e(x) = \ast$ for every $x \not\in
   % \mathbf{x}$ and some distinguished element $\ast \in M_w$.
   The interpretation map of $M_w$ is extended to terms with respect to any
@@ -741,7 +800,7 @@ strong completeness theorem.}
   \end{align*}
 \end{definition}
 
-\begin{definition}[Forcing]\label{def:forcing}
+\begin{definition}[Forcing]\labdef{forcing}
 
   Given some Kripke structure $\mathcal{K}$, the \emph{forcing} relation
   $\eforces{w}{\phi}{e}$ between a world $w$, a flower $\phi$ and a
@@ -761,7 +820,7 @@ strong completeness theorem.}
   $e$.
 \end{definition}
 
-\begin{lemma}\label{thm:closed-forcing}
+\begin{lemma}\lablemma{closed-forcing}
   
   For any closed flower $\phi \in \closed{\flowers}$ and $w$-evaluations $e,
   e'$, if $\eforces{w}{\phi}{e}$ then $\eforces{w}{\phi}{e'}$.
@@ -801,44 +860,44 @@ our Kripke semantics.}
 \todo{ show that a restricted, invertible fragment of the flower calculus is
 complete with respect to our Kripke semantics. Combined with soundness, this
 gives us for free the admissibility of all the other rules, in particular the
-ones corresponding to the \emph{insertion} and \emph{deletion} rules of Peirce's
-EGs. A corollary is that the flower calculus is \emph{analytic}, in a sense very
+ones corresponding to the \emph{insertion} and \emph{erasure} rules of Peirce's
+EG. A corollary is that the flower calculus is \emph{analytic}, in a sense very
 close to that coined by Gentzen.}
 
 \todo{Reference to \cite{hutchison_semantic_2005}}
 
 \subsection{Theories}
 
-\begin{definition}[Theory]\label{def:theory} 
+\begin{definition}[Theory]\labdef{theory} 
   
-  Any set $T \subseteq \flowers$ of flowers is called a \emph{theory}. In
+  Any set $\tT \subseteq \flowers$ of flowers is called a \emph{theory}. In
   particular, a bouquet can be regarded as a finite theory, by forgetting the
   number of repetitions of its elements. We say that a bouquet $\Phi$ is
-  \emph{provable from} a theory $T$, written $T \vdash \Phi$, if there exists a
-  bouquet $\Psi \subseteq T$ such that $\Psi \vdash \Phi$. Given a Kripke
+  \emph{provable from} a theory $\tT$, written $\tT \vdash \Phi$, if there exists a
+  bouquet $\Psi \subseteq \tT$ such that $\Psi \vdash \Phi$. Given a Kripke
   structure $\mathcal{K}$, a world $w$ in $\mathcal{K}$ and a $w$-evaluation
-  $e$, we say that $T$ is \emph{forced} by $w$ under $e$, written
-  $\eforces{w}{T}{e}$, if $\eforces{w}{\phi}{e}$ for all $\phi \in T$. Then
-  $\Phi$ is a \emph{consequence} of $T$, written $T \vDash_{\mathcal{K}} \Phi$,
-  if $\eforces{w}{T}{e}$ implies $\eforces{w}{\Phi}{e}$ for every world $w$ in
+  $e$, we say that $\tT$ is \emph{forced} by $w$ under $e$, written
+  $\eforces{w}{\tT}{e}$, if $\eforces{w}{\phi}{e}$ for all $\phi \in \tT$. Then
+  $\Phi$ is a \emph{consequence} of $\tT$, written $\tT \vDash_{\mathcal{K}} \Phi$,
+  if $\eforces{w}{\tT}{e}$ implies $\eforces{w}{\Phi}{e}$ for every world $w$ in
   $\mathcal{K}$ and $w$-evaluation $e$.
 \end{definition}
 
-\begin{lemma}[Weakening]\label{thm:weakening}
-  If $T \subseteq T'$ and $T \vdash \phi$, then $T' \vdash \phi$.
+\begin{lemma}[Weakening]\lablemma{weakening}
+  If $\tT \subseteq \tT'$ and $\tT \vdash \phi$, then $\tT' \vdash \phi$.
 \end{lemma}
 \begin{proof}
   This follows immediately from our definition of provability from a theory
-  \ref{def:theory}.
+  (\refdef{theory}).
 \end{proof}
 
 \begin{definition}[$\psi$-consistency]
-  A theory $T$ is \emph{$\psi$-consistent} when $T \nvdash_\Nature \psi$.
+  A theory $\tT$ is \emph{$\psi$-consistent} when $\tT \nvdash_\Nature \psi$.
 \end{definition}
 
 \begin{definition}[$\psi$-completeness]
-  A theory $T$ is \emph{$\psi$-complete} when for all $\phi \in \flowers$,
-  either $T, \phi \vdash_\Nature \psi$ or $\phi \in T$.
+  A theory $\tT$ is \emph{$\psi$-complete} when for all $\phi \in \flowers$,
+  either $\tT, \phi \vdash_\Nature \psi$ or $\phi \in \tT$.
 \end{definition}
 
 % \begin{definition}[$\psi$-Henkin]
@@ -854,55 +913,56 @@ close to that coined by Gentzen.}
 
 In the following, we suppose some enumeration $(\phi_n)_{n \in \nats}$ of
 $\flowers$, which should be definable constructively given the
-inductive nature of flowers \ref{def:flowers}.
+inductive nature of flowers (\refdef{flowers}).
 
-Let $\psi \in \flowers$, and $T$ a $\psi$-consistent theory. We now
+Let $\psi \in \flowers$, and $\tT$ a $\psi$-consistent theory. We now
 define a \emph{completion} procedure which constructs an extension
-$\completion{T} \supseteq T$ with the property that $\completion{T}$ is
+$\completion{\tT} \supseteq \tT$ with the property that $\completion{\tT}$ is
 $\psi$-consistent and $\psi$-complete.
 
 \begin{definition}[$n$-completion]
-  The \emph{$n$-completion} $\ncompletion{T}{n}$ of $T$ is defined recursively
+  The \emph{$n$-completion} $\ncompletion{\tT}{n}$ of $\tT$ is defined recursively
   as follows:
   \begin{align*}
-    \ncompletion{T}{0} &= T \\
-    \ncompletion{T}{n+1} &=
+    \ncompletion{\tT}{0} &= \tT \\
+    \ncompletion{\tT}{n+1} &=
     \begin{cases}
-      \ncompletion{T}{n} \cup \phi_n &\text{if $\ncompletion{T}{n} \cup \phi_n$ is $\psi$-consistent} \\
-      \ncompletion{T}{n} &\text{otherwise}
+      \ncompletion{\tT}{n} \cup \phi_n &\text{if $\ncompletion{\tT}{n} \cup \phi_n$ is $\psi$-consistent} \\
+      \ncompletion{\tT}{n} &\text{otherwise}
     \end{cases}
   \end{align*}
 \end{definition}
 
 \begin{definition}[Completion]
-  The \emph{completion} $\completion{T}$ of $T$ is the denumerable union of all
+  The \emph{completion} $\completion{\tT}$ of $\tT$ is the denumerable union of all
   $n$-completions:
-  $$\completion{T} = \bigcup_{n \in \nats}{\ncompletion{T}{n}}$$
+  $$\completion{\tT} = \bigcup_{n \in \nats}{\ncompletion{\tT}{n}}$$
 \end{definition}
 
-\begin{lemma}\label{thm:completion-consistent}
-  $\completion{T}$ is $\psi$-consistent.
+\begin{lemma}\lablemma{completion-consistent}
+  $\completion{\tT}$ is $\psi$-consistent.
 \end{lemma}
 \begin{proof}
-  It is immediate by recurrence on $n$ that $\ncompletion{T}{n}$ is
-  $\psi$-consistent. Then suppose that $\completion{T} \vdash_\Nature \psi$, that is
-  there is some bouquet $\Phi \subseteq \completion{T}$ such that $\Phi \vdash_\Nature
-  \psi$. For each $\phi \in \Phi$, there is some rank $n$ such that $\phi \in
-  \ncompletion{T}{n}$. Let $m$ be the greatest such rank. Then $\Phi \subseteq
-  \ncompletion{T}{m}$, and thus by weakening \ref{thm:weakening} $\Phi \nvdash_\Nature
-  \psi$. Contradiction.
+  It is immediate by recurrence on $n$ that $\ncompletion{\tT}{n}$ is
+  $\psi$-consistent. Then suppose that $\completion{\tT} \vdash_\Nature \psi$,
+  that is there is some bouquet $\Phi \subseteq \completion{\tT}$ such that $\Phi
+  \vdash_\Nature \psi$. For each $\phi \in \Phi$, there is some rank $n$ such
+  that $\phi \in \ncompletion{\tT}{n}$. Let $m$ be the greatest such rank. Then
+  $\Phi \subseteq \ncompletion{\tT}{m}$, and thus by weakening
+  (\reflemma{weakening}) $\Phi \nvdash_\Nature \psi$. Contradiction.
 \end{proof}
 
 
-\begin{lemma}\label{thm:completion-complete}
-  $\completion{T}$ is $\psi$-complete.
+\begin{lemma}\lablemma{completion-complete}
+  $\completion{\tT}$ is $\psi$-complete.
 \end{lemma}
 \begin{proof}
-  Suppose that there is some $\phi$ such that $\completion{T}, \phi \nvdash_\Nature
-  \psi$ and $\phi \not\in \completion{T}$, and let $\phi = \phi_n$. Then
-  $\completion{T} \cup \phi_n$ is $\psi$-consistent, and thus by weakening
-  \ref{thm:weakening} so is $\ncompletion{T}{n} \cup \phi_n$. This entails that
-  $\phi_n \in \ncompletion{T}{n+1} \subseteq \completion{T}$. Contradiction.
+  Suppose that there is some $\phi$ such that $\completion{\tT}, \phi
+  \nvdash_\Nature \psi$ and $\phi \not\in \completion{\tT}$, and let $\phi =
+  \phi_n$. Then $\completion{\tT} \cup \phi_n$ is $\psi$-consistent, and thus by
+  weakening (\reflemma{weakening}) so is $\ncompletion{\tT}{n} \cup \phi_n$. This
+  entails that $\phi_n \in \ncompletion{\tT}{n+1} \subseteq \completion{\tT}$.
+  Contradiction.
 \end{proof}
 
 \subsection{Adequacy}
@@ -911,17 +971,17 @@ We now define the so-called \emph{universal Kripke structure} $\rewolF{\psi}$
 relative to a flower $\psi$, which will satisfy the property that $\Phi
 \vDash_{\rewolF{\psi}} \Psi$ implies $\Phi \vDash \Psi$ for any $\psi$.
 
-\begin{definition}[Universal Kripke structure]\label{def:kcanon}
+\begin{definition}[Universal Kripke structure]\labdef{kcanon}
   Let $\psi \in \flowers$. The \emph{universal Kripke structure}
   $\rewolF{\psi}$ has:
   \begin{itemize}
     \item The set of $\psi$-consistent and $\psi$-complete theories as its worlds;
     \item Set inclusion as its accessibility relation;
-    \item For each world $T$, a first-order structure whose domain is the set of
+    \item For each world $\tT$, a first-order structure whose domain is the set of
     terms $\terms$, and whose interpretation map is given by:
       \begin{itemize}
         \item $\interp{f}(\tvec{t}) = f(\tvec{t})$
-        \item $\interp{p} = \compr{\tvec{t}}{p(\tvec{t}) \in T}$
+        \item $\interp{p} = \compr{\tvec{t}}{p(\tvec{t}) \in \tT}$
       \end{itemize}
   \end{itemize}
   One can easily check that the monotonicity conditions of Kripke structures
@@ -929,173 +989,178 @@ relative to a flower $\psi$, which will satisfy the property that $\Phi
 \end{definition}
 
 % \newcommand{\ids}{\update{\idsubst}{\mathbf{x}}{\sigma}}
-\begin{proposition}\label{thm:inv-elem-flower}
+\begin{proposition}\labprop{inv-elem-flower}
   
-  Let $\psi \in \flowers$, $T$ some $\psi$-consistent and $\psi$-complete
+  Let $\psi \in \flowers$, $\tT$ some $\psi$-consistent and $\psi$-complete
   theory, and $\phi = \flower{\garden{\mathbf{x}}{\Phi}}{\Delta}$ with $\Delta
   = \fset{i}{n}{\delta_i} = \fset{i}{n}{\garden{\mathbf{x}_i}{\Phi_i}}$ such
-  that $\phi \in T$. Then for every substitution $\sigma : \mathbf{x} \to
-  \terms$, either $\sigma(\Phi_i) \subseteq T$ for some $1 \leq i \leq n$, or $T
+  that $\phi \in \tT$. Then for every substitution $\sigma : \mathbf{x} \to
+  \terms$, either $\sigma(\Phi_i) \subseteq \tT$ for some $1 \leq i \leq n$, or $\tT
   \nvdash_\Nature \sigma(\Phi)$.
 \end{proposition}
 \begin{proof}
-  Suppose the contrary, i.e. there is a substitution $\sigma$ such that $T
-  \vdash_\Nature \sigma(\Phi)$ and for all $1 \leq i \leq n$, there is some $\phi_i \in
-  \Phi_i$ such that $\sigma(\phi_i) \not\in T$. Thus by $\psi$-completeness of
-  $T$, we get $T, \sigma(\phi_i) \vdash_\Nature \psi$. So there are $\Psi \subseteq T$
-  and $\Psi_i \subseteq T \cup \sigma(\phi_i)$ such that $\Psi \vdash_\Nature
-  \sigma(\Phi)$ and $\Psi_i \vdash_\Nature \psi$. Now it cannot be the case that $\Psi_i
-  \subseteq T$, otherwise by weakening and $\psi$-consistency of $T$ we would
-  have $\Psi_i \nvdash_\Nature \psi$. So there must exist $\Psi_i' \subseteq T$ such
-  that $\Psi_i = \Psi_i' \cup \sigma(\phi_i)$. Let $\Xi = \bigcup_{i =
-  1}^{n}{\Psi_i'}$. Again by weakening and $\psi$-consistency of $T$, we get
-  $\Psi, \Xi, \phi \nvdash_\Nature \psi$. Now we derive a contradiction by showing
-  $\Psi, \Xi, \phi \vdash_\Nature \psi$. Let $X$ be a context such that $\chyp{\Psi,
-  \Xi, \phi}{X}$. Then $\cfill{X}{\psi} \steps_\Nature \cfill{X}{\phantom{\Phi}}$ with the following
-  derivation:
+  Suppose the contrary, i.e. there is a substitution $\sigma$ such that $\tT
+  \vdash_\Nature \sigma(\Phi)$ and for all $1 \leq i \leq n$, there is some
+  \Hyp{$\phi_i \in \Phi_i$}~{\HOne} such that $\sigma(\phi_i) \not\in \tT$. Thus
+  by $\psi$-completeness of $\tT$, we get $\tT, \sigma(\phi_i) \vdash_\Nature
+  \psi$. So there are $\Psi \subseteq \tT$ and $\Psi_i \subseteq \tT \cup
+  \sigma(\phi_i)$ such that \Hyp{$\Psi \vdash_\Nature \sigma(\Phi)$}~{\HTwo} and
+  \Hyp{$\Psi_i \vdash_\Nature \psi$}~{\HThree}. Now it cannot be the case that
+  $\Psi_i \subseteq \tT$, otherwise by weakening and $\psi$-consistency of $\tT$
+  we would have $\Psi_i \nvdash_\Nature \psi$. So there must exist $\Psi_i'
+  \subseteq \tT$ such that \Hyp{$\Psi_i = \Psi_i' \cup
+  \sigma(\phi_i)$}~{\HFour}. Again by weakening and $\psi$-consistency of $\tT$,
+  we get $\Psi, \bigcup_{i = 1}^{n}{\Psi_i'}, \phi \nvdash_\Nature \psi$. Now we
+  derive a contradiction by showing $\Psi, \bigcup_{i = 1}^{n}{\Psi_i'}, \phi
+  \vdash_\Nature \psi$. Let $\Xi$ be a context such that \Hyp{$\chyp{\Psi,
+  \bigcup_{i = 1}^{n}{\Psi_i'}, \phi}{\Xi}$}~{\HFive}. Then $\cfill{\Xi}{\psi}
+  \steps_\Nature \cfill{\Xi}{\phantom{\Phi}}$ with the following derivation:
   $$
-  \begin{array}{rll}
-    \cfill{X}{\psi}
-    &\step_{\mathsf{fence}} &\cfill{X}{\flower{\garden{{}}{\phantom{\Phi}}}{\garden{{}}{\psi}}} \\
-    &\step_{\mathsf{poll{\uparrow}}} &\cfill{X}{\flower{\garden{{}}{\phi}}{\garden{{}}{\psi}}} \\
-    &\step_{\mathsf{ipis}} &\cfill{X}{\flower{\garden{{}}{(\flower{\garden{}{\sigma(\Phi)}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} \\
-    &\step_{\mathsf{poll{\downarrow}}} &\cfill{X}{\flower{\garden{{}}{(\flower{\garden{}{\phantom{\Phi}}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} \\
-    &\step_{\mathsf{srep}} &\cfill{X}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\sigma(\delta_i)}{\garden{{}}{\psi}}}}}} \\
-    &= &\cfill{X}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\mathbf{x}_i}{\sigma(\Phi_i)}}{\garden{{}}{\psi}}}}}} \\
-    &\nsteps{n}_{\mathsf{poll}{\downarrow}} &\cfill{X}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\mathbf{x}_i}{\sigma(\Phi_i)}}{\garden{{}}{\phantom{\Phi}}}}}}} \\
-    &\nsteps{n}_{\mathsf{epet}} &\cfill{X}{\flower{\garden{{}}{\phi}}{\garden{{}}{\phantom{\Phi}}}} \\
-    &\step_{\mathsf{epet}} &\cfill{X}{\phantom{\Phi}}
-    % &\steps_{\mathsf{ipis}} &\cfill{X}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\psi}}), (\flower{\garden{\mathbf{x}_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
+  \begin{array}{rlll}
+    \cfill{\Xi}{\psi}
+    &\step_{\mathsf{fence}} &\cfill{\Xi}{\flower{\garden{{}}{{}}}{\garden{{}}{\psi}}} & \\
+    &\step_{\mathsf{poll{\uparrow}}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\psi}}} &\text{(\HFive)} \\
+    &\step_{\mathsf{ipis}} &\cfill{\Xi}{\flower{\garden{{}}{(\flower{\garden{}{\sigma(\Phi)}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} & \\
+    &\step_{\mathsf{poll{\downarrow}}} &\cfill{\Xi}{\flower{\garden{{}}{(\flower{\garden{}{{}}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} &\text{(\HTwo, \HFive)} \\
+    &\step_{\mathsf{srep}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\sigma(\delta_i)}{\garden{{}}{\psi}}}}}} & \\
+    &= &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\mathbf{x}_i}{\sigma(\Phi_i)}}{\garden{{}}{\psi}}}}}} & \\
+    &\nsteps{n}_{\mathsf{poll}{\downarrow}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\mathbf{x}_i}{\sigma(\Phi_i)}}{\garden{{}}{{}}}}}}} &\text{(\HOne, \HThree, \HFour, \HFive)} \\
+    &\nsteps{n}_{\mathsf{epet}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{{}}}} & \\
+    &\step_{\mathsf{epet}} &\cfill{\Xi}{\phantom{\Phi}} &
+    % &\steps_{\mathsf{ipis}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\psi}}), (\flower{\garden{\mathbf{x}_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
     % && \qquad\quad~~\, (\flower{\garden{{}}{\sigma_n \circ \sigma(\Phi_n)}}{\garden{{}}{\psi}}), (\flower{\garden{\mathbf{x}_n}{\sigma(\Phi_n)}}{\garden{{}}{\psi}})}}} \\
-    % &\steps_{\mathsf{poll{\downarrow}}} &\cfill{X}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\phantom{\Phi}}}), (\flower{\garden{\mathbf{x}_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
+    % &\steps_{\mathsf{poll{\downarrow}}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\phantom{\Phi}}}), (\flower{\garden{\mathbf{x}_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
     % && \qquad\quad~~\, (\flower{\garden{{}}{\sigma_n \circ \sigma(\Phi_n)}}{\garden{{}}{{}}}), (\flower{\garden{\mathbf{x}_n}{\sigma(\Phi_n)}}{\garden{{}}{\psi}})}}} \\
   \end{array}
   $$
 \end{proof}
 
-\begin{proposition}\label{thm:inv-deriv-flower}
+\begin{proposition}\labprop{inv-deriv-flower}
   
-  Let $\psi \in \flowers$, $T$ some $\psi$-consistent and $\psi$-complete
+  Let $\psi \in \flowers$, $\tT$ some $\psi$-consistent and $\psi$-complete
   theory, and $\phi = \flower{\garden{\mathbf{x}}{\Phi}}{\Delta}$ with $\Delta
   = \fset{i}{n}{\delta_i} = \fset{i}{n}{\garden{\mathbf{x}_i}{\Phi_i}}$ such
-  that $T \nvdash_\Nature \phi$. Then for every $1 \leq i \leq n$ and substitution
-  $\sigma : \mathcal{X_i} \to \terms$, there is some $\phi_i \in \Phi_i$ such
-  that $T, \Phi \nvdash_\Nature \sigma(\phi_i)$.
+  that $\tT \nvdash_\Nature \phi$. Then for every $1 \leq i \leq n$ and substitution
+  $\sigma : \mathbf{x_i} \to \terms$, there is some $\phi_i \in \Phi_i$ such
+  that $\tT, \Phi \nvdash_\Nature \sigma(\phi_i)$.
 \end{proposition}
 \begin{proof}
   Suppose the contrary, i.e. there are some $1 \leq i \leq n$ and $\sigma :
-  \mathbf{x}_i \to \terms$ such that $T, \Phi \vdash_\Nature \sigma(\Phi_i)$. Therefore
-  there must exist $\Psi \subseteq T$ and $\Phi_0 \subseteq \Phi$ such that
-  $\Psi, \Phi_0 \vdash_\Nature \sigma(\Phi_i)$. By hypothesis, for every $\Xi \subseteq
-  T$ there is a context $X$ such that $\chyp{\Xi}{X}$ and $\cfill{X}{\phi}
-  \notsteps_\Nature \cfill{X}{\phantom{\Phi}}$. We now derive a contradiction by showing $\cfill{X}{\phi}
-  \steps_\Nature \cfill{X}{\phantom{\Phi}}$ for all $X$ such that $\chyp{\Psi}{X}$:
+  \mathbf{x}_i \to \terms$ such that $\tT, \Phi \vdash_\Nature \sigma(\Phi_i)$.
+  Therefore there must exist $\Psi \subseteq \tT$ and \Hyp{$\Phi_0 \subseteq
+  \Phi$}~{\HOne} such that \Hyp{$\Psi, \Phi_0 \vdash_\Nature
+  \sigma(\Phi_i)$}~{\HTwo}. By hypothesis, for every $\Phi' \subseteq \tT$ there
+  is a context $\Xi$ such that $\chyp{\Phi'}{\Xi}$ and $\cfill{\Xi}{\phi}
+  \notsteps_\Nature \cfill{\Xi}{\phantom{\Phi}}$. We now derive a contradiction
+  by showing $\cfill{\Xi}{\phi} \steps_\Nature \cfill{\Xi}{\phantom{\Phi}}$ for
+  all $\Xi$ such that \Hyp{$\chyp{\Psi}{\Xi}$}~{\HThree}:
   $$
-  \begin{array}{rll}
-    \cfill{X}{\phi}
-    &\step_{\mathsf{ipet}} &\cfill{X}{\flower{\garden{\mathbf{x}}{\Phi}}{\garden{{}}{\sigma(\Phi_i)} \sep \Delta}} \\
-    &\step_{\mathsf{poll}{\downarrow}} &\cfill{X}{\flower{\garden{\mathbf{x}}{\Phi}}{\garden{{}}{\phantom{\Phi}} \sep \Delta}} \\
-    &\step_{\mathsf{epet}} &\cfill{X}{\phantom{\Phi}}
+  \begin{array}{rlll}
+    \cfill{\Xi}{\phi}
+    &\step_{\mathsf{ipet}} &\cfill{\Xi}{\flower{\garden{\mathbf{x}}{\Phi}}{\garden{{}}{\sigma(\Phi_i)} \sep \Delta}} & \\
+    &\step_{\mathsf{poll}{\downarrow}} &\cfill{\Xi}{\flower{\garden{\mathbf{x}}{\Phi}}{\garden{{}}{{}} \sep \Delta}} &\text{(\HOne, \HTwo, \HThree)} \\
+    &\step_{\mathsf{epet}} &\cfill{\Xi}{\phantom{\Phi}} &
   \end{array}
   $$
 \end{proof}
 
-\begin{lemma}[Adequacy]\label{thm:adequacy}
+\begin{lemma}[Adequacy]\lablemma{adequacy}
 
-  Let $\phi, \psi \in \flowers$, $T$ a $\psi$-consistent and $\psi$-complete
+  Let $\phi, \psi \in \flowers$, $\tT$ a $\psi$-consistent and $\psi$-complete
   theory, and $\sigma$ a subtitution such that $\fv(\sigma(x)) \cap \bv(\phi) =
   \emptyset$ for any variable $x$. Then
   \begin{enumerate*}
-    \item $\sigma(\phi) \in T$ implies $\eforces{T}{\phi}{\sigma}$, and
-    \item $T \nvdash_\Nature \sigma(\phi)$ implies $\neforces{T}{\phi}{\sigma}$
+    \item $\sigma(\phi) \in \tT$ implies $\eforces{\tT}{\phi}{\sigma}$, and
+    \item $\tT \nvdash_\Nature \sigma(\phi)$ implies $\neforces{\tT}{\phi}{\sigma}$
   \end{enumerate*}.
 \end{lemma}
 \begin{proof}
   By induction on $\phi$.
   \begin{itemize}
-    \item $\phi = p(\tvec{t})$.
+    \item Suppose $\phi = p(\tvec{t})$.
     \begin{enumerate}
-      \item By definition of forcing \ref{def:forcing} and $\rewolF{\psi}$
-      \ref{def:kcanon}, $\eforces{T}{p(\tvec{t})}{\sigma}$ precisely when
-      $\sigma(p(\tvec{t})) \in T$.
-      \item Suppose that $\eforces{T}{\phi}{\sigma}$, that is $\sigma(\phi) \in
-      T$. Then by weakening, we get $\sigma(\phi) \nvdash_\Nature \sigma(\phi)$. But
-      this is impossible by reflexivity of $\vdash$ \ref{thm:reflexivity}.
+      \item By definition of forcing (\refdef{forcing}) and $\rewolF{\psi}$
+      (\refdef{kcanon}), $\eforces{\tT}{p(\tvec{t})}{\sigma}$ precisely when
+      $\sigma(p(\tvec{t})) \in \tT$.
+      \item Suppose that $\eforces{\tT}{\phi}{\sigma}$, that is $\sigma(\phi) \in
+      \tT$. Then by weakening, we get $\sigma(\phi) \nvdash_\Nature \sigma(\phi)$.
+      But this is impossible by reflexivity of $\vdash$
+      (\reflemma{reflexivity}).
     \end{enumerate}
-    \item $\phi =
-    \flower{\garden{\mathbf{x}}{\Phi}}{\fset{i}{n}{\garden{\mathcal{X_i}}{\Phi_i}}}$.
+    \item Suppose $\phi =
+    \flower{\garden{\mathbf{x}}{\Phi}}{\fset{i}{n}{\garden{\mathbf{x_i}}{\Phi_i}}}$.
     \begin{enumerate}
-      \item Let $U \supseteq T$ be a $\psi$-consistent and $\psi$-complete
+      \item Let $\tU \supseteq \tT$ be a $\psi$-consistent and $\psi$-complete
       theory. Obviously $\sigma(\phi) =
       \flower{\garden{\mathbf{x}}{\restr{\sigma}{\mathbf{x}}(\Phi)}}{\fset{i}{n}{\garden{\mathbf{x}_i}{\restr{\sigma}{\mathbf{x}
-      \cup \mathbf{x}_i}(\Phi_i)}}} \in U$, and thus by proposition
-      \ref{thm:inv-elem-flower}, for every substitution $\tau$, either $
+      \cup \mathbf{x}_i}(\Phi_i)}}} \in \tU$, and thus by
+      \refprop{inv-elem-flower}, for every substitution $\tau$, either $
       \update{}{\mathbf{x}}{\tau} \circ \restr{\sigma}{\mathbf{x} \cup
       \mathbf{x}_i}(\Phi_i) =
       \update{\update{\sigma}{\mathbf{x}}{\tau}}{\mathbf{x}_i}{}(\Phi_i)
-      \subseteq U$ for some $1 \leq i \leq n$, or $U \nvdash_\Nature \update{}{\mathbf{x}}{\tau} \circ
-      \restr{\sigma}{\mathbf{x}}(\Phi) =
+      \subseteq \tU$ for some $1 \leq i \leq n$, or $\tU \nvdash_\Nature
+      \update{}{\mathbf{x}}{\tau} \circ \restr{\sigma}{\mathbf{x}}(\Phi) =
       \update{\sigma}{\mathbf{x}}{\tau}(\Phi)$. In the first case, we get
-      $\eforces{U}{\Phi_i}{\update{\update{\sigma}{\mathbf{x}}{\tau}}{\mathbf{x}_i}{}}$
+      $\eforces{\tU}{\Phi_i}{\update{\update{\sigma}{\mathbf{x}}{\tau}}{\mathbf{x}_i}{}}$
       by induction hypothesis. In the second case, we get
-      $\neforces{U}{\Phi}{\restr{\sigma}{\mathbf{x}}\tau}$ by induction
+      $\neforces{\tU}{\Phi}{\restr{\sigma}{\mathbf{x}}\tau}$ by induction
       hypothesis. In other words,
-      $\eforces{U}{\Phi}{\restr{\sigma}{\mathbf{x}}\tau}$ implies
-      $\eforces{U}{\Phi_i}{\update{\update{\sigma}{\mathbf{x}}{\tau}}{\mathbf{x}_i}{}}$,
-      that is $\eforces{T}{\phi}{\sigma}$.
-      \item By proposition \ref{thm:inv-deriv-flower}, for every $1 \leq i \leq
-      n$ and substitution $\tau$, there is some $\phi_i \in \Phi_i$ such that
-      $T, \restr{\sigma}{\mathbf{x}}(\Phi) \nvdash_\Nature
+      $\eforces{\tU}{\Phi}{\restr{\sigma}{\mathbf{x}}\tau}$ implies
+      $\eforces{\tU}{\Phi_i}{\update{\update{\sigma}{\mathbf{x}}{\tau}}{\mathbf{x}_i}{}}$,
+      that is $\eforces{\tT}{\phi}{\sigma}$.
+      \item By \refprop{inv-deriv-flower}, for every $1 \leq i \leq n$ and
+      substitution $\tau$, there is some $\phi_i \in \Phi_i$ such that $\tT,
+      \restr{\sigma}{\mathbf{x}}(\Phi) \nvdash_\Nature
       \update{}{\mathbf{x}_i}{\tau} \circ \restr{\sigma}{\mathbf{x} \cup
       \mathbf{x}_i}(\phi_i) =
       \update{\update{\sigma}{\mathbf{x}}{}}{\mathbf{x}_i}{\tau}(\phi_i)$. By
-      the completion procedure, we get a theory $U = \completion{T \cup
-      \restr{\sigma}{\mathbf{x}}(\Phi)} \supseteq T \cup
+      the completion procedure, we get a theory $\tU = \completion{\tT \cup
+      \restr{\sigma}{\mathbf{x}}(\Phi)} \supseteq \tT \cup
       \restr{\sigma}{\mathbf{x}}(\Phi)$ which is both
       $\update{\update{\sigma}{\mathbf{x}}{}}{\mathbf{x}_i}{\tau}(\phi_i)$-consistent
       and
       $\update{\update{\sigma}{\mathbf{x}}{}}{\mathbf{x}_i}{\tau}(\phi_i)$-complete.
       Then by induction hypothesis,
-      $\eforces{U}{\Phi}{\update{\sigma}{\mathbf{x}}{}}$ since
-      $\update{\sigma}{\mathbf{x}}{}(\Phi) \subseteq U$, and
-      $\neforces{U}{\phi_i}{\update{\update{\sigma}{\mathbf{x}}{}}{\mathbf{x}_i}{\tau}}$
-      since $U$ is
+      $\eforces{\tU}{\Phi}{\update{\sigma}{\mathbf{x}}{}}$ since
+      $\update{\sigma}{\mathbf{x}}{}(\Phi) \subseteq \tU$, and
+      $\neforces{\tU}{\phi_i}{\update{\update{\sigma}{\mathbf{x}}{}}{\mathbf{x}_i}{\tau}}$
+      since $\tU$ is
       $\update{\update{\sigma}{\mathbf{x}}{}}{\mathbf{x}_i}{\tau}(\phi_i)$-consistent,
-      that is $\neforces{T}{\phi}{\sigma}$.
+      that is $\neforces{\tT}{\phi}{\sigma}$.
     \end{enumerate}
   \end{itemize}
 \end{proof}
 
-\begin{lemma}\label{thm:completeness-contra}
+\begin{lemma}\lablemma{completeness-contra}
   
-  Let $\psi \in \closed{\flowers}$ and $T$ be a $\psi$-consistent closed theory,
-  that is every $\phi \in T$ is closed. Then $T \nvDash \psi$.
+  Let $\psi \in \closed{\flowers}$ and $\tT$ be a $\psi$-consistent closed theory,
+  that is every $\phi \in \tT$ is closed. Then $\tT \nvDash \psi$.
 \end{lemma}
 \begin{proof}
-  We show $T \nvDash_{\rewolF{\psi}} \psi$, and more specifically that there is
-  some substitution $\sigma$ such that $\eforces{\completion{T}}{T}{\sigma}$ but
-  $\neforces{\completion{T}}{\psi}{\sigma}$. Let $\sigma \triangleq
+  We show $\tT \nvDash_{\rewolF{\psi}} \psi$, and more specifically that there is
+  some substitution $\sigma$ such that $\eforces{\completion{\tT}}{\tT}{\sigma}$ but
+  $\neforces{\completion{\tT}}{\psi}{\sigma}$. Let $\sigma \triangleq
   \update{}{\bv(\psi)}{\cstsubst{z}}$ for some fresh variable $z \not\in
   \bv(\psi)$, where $\cstsubst{z}$ is the constant substitution that always maps
   to $z$.
   \begin{itemize}
-    \item Let $\phi \in T$, and $\tau = \update{}{\bv(\phi)}{\cstsubst{z'}}$ for
+    \item Let $\phi \in \tT$, and $\tau = \update{}{\bv(\phi)}{\cstsubst{z'}}$ for
     some fresh variable $z' \not\in \bv(\phi)$. It is obviously the case that
     $\tau(\phi) = \phi$ since $\phi$ is closed, and $\fv(\tau(x)) \cap \bv(\phi)
-    = \emptyset$ for any variable $x$. Then $\phi \in \completion{T}$, thus by
-    $\psi$-consistency \ref{thm:completion-consistent} and $\psi$-completeness
-    \ref{thm:completion-complete} of the completion one can apply the adequacy
-    lemma \ref{thm:adequacy} to get $\eforces{\completion{T}}{\phi}{\tau}$.
-    Hence $\eforces{\completion{T}}{\phi}{\sigma}$ by lemma
-    \ref{thm:closed-forcing}.
+    = \emptyset$ for any variable $x$. Then $\phi \in \completion{\tT}$, thus by
+    $\psi$-consistency (\reflemma{completion-consistent}) and
+    $\psi$-completeness (\reflemma{completion-complete}) of the completion, one
+    can apply adequacy (\reflemma{adequacy}) to get
+    $\eforces{\completion{\tT}}{\phi}{\tau}$. Hence
+    $\eforces{\completion{\tT}}{\phi}{\sigma}$ by \reflemma{closed-forcing}.
     \item By the same argument for $\tau$ transposed to $\sigma$, we can apply
-    the adequacy lemma \ref{thm:adequacy} to get
-    $\neforces{\completion{T}}{\psi}{\sigma}$.
+    adequacy (\reflemma{adequacy}) to get
+    $\neforces{\completion{\tT}}{\psi}{\sigma}$.
   \end{itemize}
 \end{proof}
 
-We get completeness as a direct corollary of lemma
-\ref{thm:completeness-contra}, in the case where $T = \emptyset$:
+We get completeness as a direct corollary of \reflemma{completeness-contra}, in
+the case where $\tT = \emptyset$:
 
 \begin{theorem}[Completeness]
   For any closed flower $\phi$, $\vDash \phi$ implies $\vdash_\Nature \phi$.
@@ -1137,7 +1202,7 @@ future works and applications that we envision.}
   \sidecite{andreoli_logic_1992}.
 \end{itemize}
 
-It should be noted that Peirce did not think of EGs as a calculus that could aid
+It should be noted that Peirce did not think of EG as a calculus that could aid
 in performing reasoning \emph{per se}, but rather as a tool for analysing the
 finer structure of logical endeavor\sidenote{Citing \cite{Roberts+1973} pp.
 110-111: \textit{``[...] the purpose which the system was designed to fulfill
@@ -1146,9 +1211,9 @@ one may be examined by itself'' (Ms 455, p. 2). The aim was not to facilitate
 reasoning, but to facilitate the study of reasoning.''}}.
 
 \todo{ explain how we depart from this conception, i.e. by focusing on iteration
-(and more generally invertible) rules instead of insertion/deletion rules (which
+(and more generally invertible) rules instead of insertion/erasure rules (which
 are even shown to be admissible!), and replacing lines of identity by the more
 complex apparatus of substitution. Which explains why we believe \emph{the
-opposite}, that EGs \emph{can} form the basis for an ergonomic calculus.}
+opposite}, that EG \emph{can} form the basis for an ergonomic calculus.}
 
 \subsection{Future works}
