@@ -198,8 +198,8 @@ theory}, and Melliès and Zeilberger \sidecite{mellies_bifibrational_2016}
 refined the interpretation of Brady and Trimble by making further connections
 with \emph{linear logic}\sidenote{We also know through private communication
 that N. Haydon is actively working on more explicit links between linear logic
-and the original formulation of EG by Peirce.}\sidecite{girard-linear-1987}. The
-full story has yet to be told, but we hope that our work will constitute one
+and the original formulation of EG by Peirce.} \sidecite{girard-linear-1987}.
+The full story has yet to be told, but we hope that our work will constitute one
 more step towards the vision Peirce had in mind.
 
 \subsection{\sys{Alpha} graphs}
@@ -217,7 +217,7 @@ features that have been interpreted as attempts to capture \emph{modal}
 \sidecite{zeman_graphical_1964} and \emph{higher-order} logics\sidenote{A less
 known fact is that at the end of his life, Peirce pushed his experimentations
 beyond the scope of \emph{logic} in the contemporary sense of the word (it was
-already the case for modal logic at his time), with so-called \emph{tinctured
+already the case for modal logic in his time), with so-called \emph{tinctured
 existential graphs} (Chapter 6 in \cite{Roberts+1973}). Roughly, the idea was to
 represent a variety of \emph{modes of expression} with different background
 shades on the canvas where sentences are scribed, not unlike our graphical
@@ -276,7 +276,7 @@ $$\text{\emph{Any portion of $\SA$ is a graph.}}$$
 Asserting the truth of the negation $\neg P$ of a proposition $P$, amounts to
 \emph{denying} the truth of $P$. Using the original notation of Peirce, this is
 done in EG by \emph{enclosing} $P$ in a closed curve like so:
-$$\pcut{P}$$
+$$\ppcut{P}$$
 Peirce called such curves \emph{cuts}\sidenote{Not to be confused with the name
 given to instances of the \emph{cut rule} in sequent calculus. Although there is
 a connection, since in \sys{LK}, one occurrence of the cut formula in the
@@ -304,32 +304,33 @@ falsehood $\bot \defeq \neg\top$, classical disjunction $A \lor B \defeq
 resemblance with the translation of formulas as solutions in
 \reffig{bubbles-native}, in particular for negative disjunctions.}:
 \begin{mathpar}
-  \pcut{\phantom{A}}
+  \ppcut{\phantom{A}}
   \and
-  \pcut{\pcut{A}~~~\pcut{B}}
+  \ppcut{\ppcut{A}~~~\ppcut{B}}
   \and
-  \pcut{A~~~\pcut{B}}
+  \ppcut{A~~~\ppcut{B}}
 \end{mathpar}
 Thus one can easily encode any propositional formula into a classically
-% equivalent graph. Conversely, one can translate a graph into a classically
-% equivalent formula, as has been shown for instance in
-% \sidecite{10.7551/mitpress/3633.001.0001}. In fact, there are usually many
-% possible formula readings of a given graph: this is because juxtaposition of
-% graphs is a \emph{variadic} operation, as opposed to conjunction of formulas
-% which is \emph{binary}. Also, because of the topological nature of $\SA$,
-% juxtaposition is naturally \emph{associative} and \emph{commutative}: the
-% locations of two juxtaposed graphs do not matter, as long as they live in the
-% same area delimited by cuts. Hence, graphs can be seen as an
-% associative-commutative normal form for propositional formulas built from atoms
-% with $\{\land,\neg\}$\sidenote{In a first version of EG called \emph{entitative
-% graphs}, Peirce used juxtaposition to denote \emph{disjunction} instead of
-% conjunction. Although $\{\lor,\lneg\}$ is also functionally complete, Peirce
-% quickly grew unsatisfied with these entitative graphs, stating that EG formed
-% ``a far preferable system on the whole''. I find it interesting that more
-% contemporary works in logic have also made the choice to take conjunction and
-% negation as their primitive operations, like the tensorial logic of Melliès
-% \cite{mellies_micrological_2017}, or the realizability constructions for linear
-% logic in Girard's transcendental syntax \cite{eng_stellar_2020}.}.
+equivalent graph. Conversely, one can translate a graph into a classically
+equivalent formula, as has been shown for instance in
+\sidecite{10.7551/mitpress/3633.001.0001}. In fact, there are usually many
+possible formula readings of a given graph: this is because juxtaposition of
+graphs is a \emph{variadic} operation, as opposed to conjunction of formulas
+which is \emph{binary}. Also, because of the topological nature of $\SA$,
+juxtaposition is naturally \emph{associative} and \emph{commutative}: the
+locations of two juxtaposed graphs do not matter, as long as they live in the
+same area delimited by cuts. Hence, graphs can be seen as an
+associative-commutative normal form for propositional formulas built from atoms
+with $\{\land,\neg\}$\sidenote{In a first version of EG called \emph{entitative
+graphs}, Peirce used juxtaposition to denote \emph{disjunction} instead of
+conjunction. Although $\{\lor,\neg\}$ is also functionally complete, Peirce
+quickly grew unsatisfied with these entitative graphs, stating that EG formed
+``a far preferable system on the whole'' (Ms 280, pp. 21-22). I find it
+interesting that more contemporary works in logic have also made the choice to
+take conjunction and negation as their primitive operations, like the tensorial
+logic of Melliès \cite{mellies_micrological_2017}, or the realizability
+constructions for linear logic in Girard's transcendental syntax
+\cite{eng_stellar_2020}.}.
 
 \subsection{Illative transformations}
 
@@ -339,20 +340,175 @@ rules are implemented by what Peirce called \emph{illative transformations} on
 graphs. In modern terminology, they correspond to \emph{rewriting} rules that
 can be applied to any subgraph/portion of $\SA$. By measuring the depth of a
 subgraph as the number of cuts in which it is enclosed, we thus have that the
-rules of EG are applicable in contexts of arbitrary depth. This makes EG
+rules of EG are applicable on subgraphs of arbitrary depth. This makes EG
 deserving of the title of \emph{deep} inference system.
 
-Quite surprisingly, Peirce showed that one only needs $4$ rules to get a
-\emph{strongly complete} system, in the sense that if the truth of a graph $G$
+\begin{marginfigure}
+  $$\npcut{A~~~\ppcut{\npcut{B}~~~C}}$$
+  \caption{Peirce's notation for emphasizing negative areas}
+  \labfig{peirce-neg-areas}
+\end{marginfigure}
+
+\begin{marginfigure}
+  $$\ncut{A~~~\pcut{\ncut{B}~~~C}}$$
+  \caption{Our notation for emphasizing negative areas}
+  \labfig{our-neg-areas}
+\end{marginfigure}
+
+Before introducing the rules, let us make a small change in the way we depict
+the graphs. The idea is that we want to visualize more clearly the
+\emph{polarity} of any subgraph $G$, understood as the \emph{parity} of the
+number of cuts (negations) enclosing $G$. In one of his unpublished manuscripts
+(Ms 514), Peirce did this by \emph{shading} negative areas --- those enclosed in
+an odd number of cuts --- in gray, as illustrated in \reffig{peirce-neg-areas}
+\sidecite{sowa_peirces_2011}. Unconstrained by hand-drawing, we will adopt an
+even more iconic notation, where negative areas are \emph{literally} drawn like
+a negative in photography, by inverting white and black. Thus the example of
+\reffig{peirce-neg-areas} will be drawn as in \reffig{our-neg-areas}. A nice
+advantage of both Peirce's and our notation, is that it removes the need to
+count manually the number of cuts starting from the top-level of $\SA$: the
+information is immediately apparent in the subgraph, and thus completely
+\emph{local}\sidenote{A similar device is used in the deep inference system
+\sys{ISp} of Tiu \cite{tiu_local_2006}, where the polarities of substructures
+are attached to them as explicit labels.}.
+
+\begin{remark}
+  Whereas in bubble calculi the concept of polarity was understood as a property
+  of \emph{objects} --- i.e. utterances of propositions --- by assigning them
+  opposite colors (blue and red), the previous notations for EG suggest that it
+  is instead a property of the \emph{space} in which objects reside. This is
+  more natural from the point of view of \emph{game semantics}: for instance in
+  a game of chess, the two players can easily exchange their roles by switching
+  places or rotating the board by 180°, rather than by repainting painstakingly
+  each piece in the opposite color.
+\end{remark}
+
+Quite surprisingly, Peirce showed that one only needs $5$ inference rules to get
+a \emph{strongly complete} system, in the sense that if the truth of a graph $G$
 entails the truth of another graph $H$, then $G$ can always be rewritten into
-$H$ by applying only instances of these $4$ rules\sidenote{Of course Peirce did
-not show completeness formally in the sense of modern model theory, although
-Sowa argues in \cite{sowa_peirces_2011} (Section 4) that he had started to
-develop his own model theory equivalent to Tarski's (but closer to the
-\emph{game-theoretical semantics} of Hintikka \cite[Hintikka1973-HINLLA]). One
+$H$ by applying exclusively instances of these $5$ rules\sidenote{Of course
+Peirce did not show completeness formally in the sense of modern model theory,
+although Sowa argues in \cite{sowa_peirces_2011} (Section 4) that he had started
+to develop his own model theory equivalent to Tarski's (but closer to the
+\emph{game-theoretical semantics} of Hintikka \cite{Hintikka1973-HINLLA}). One
 can find a modern categorical treatment of completeness with respect to Boolean
 algebras, based on a rigorous formalization of the geometry and algebra of EG,
-in \cite{brady_categorical_2000}.}. The rules go as follows:
+in \cite{brady_categorical_2000}.}. A nice way to understand the rules of EG is
+as \emph{edition principles}, like the most basic actions one executes
+pervasively when editing text on a computer\sidenote{Even though computers did
+not exist yet in Peirce's time! In fact, Martin Irvine argues in
+\cite{irvine_semiotics_2022} that Peirce anticipated many developments in
+computer science and information technologies, such as the use of electrical
+switches to compute boolean functions, whose invention is usually attributed to
+Claude Shannon.}. The first two rules are the most powerful and mysterious of
+EG, and can be applied in areas of any polarity:
+\begin{itemize}
+  \item[\textbf{Iteration} \textit{(Copy \& Paste)}]
+    A graph $G$ may be duplicated at any depth inside of a juxtaposed graph $H$.
+    Using our notation for holed contexts from previous chapters, this can be
+    represented schematically like so:
+    \begin{mathpar}
+      G~~~H\select{\phantom{G}} ~~~\step~~~ G~~~H\select{G}
+      \and
+      \nsheet{G~~~H\select{\phantom{G}} ~~~\step~~~ G~~~H\select{G}}
+    \end{mathpar}
+    In particular, $H$ can be taken to be any empty portion of $\SA$ in the same
+    area as $G$, giving that $G ~\step~ G~G$.
+  \item[\textbf{Deiteration} \textit{(Factorization)}]
+    Formally, this is the converse of \rsf{Iteration}:
+    \begin{mathpar}
+      G~~~H\select{G} ~~~\step~~~ G~~~H\select{\phantom{G}}
+      \and
+      \nsheet{G~~~H\select{G} ~~~\step~~~ G~~~H\select{\phantom{G}}}
+    \end{mathpar}
+    Its interpretation as an edit action is a bit trickier, but it can be
+    understood as a form of \emph{sharing} of information. Indeed, it roughly
+    says that a subgraph $G$ can be erased if it already occurs ``higher'' on
+    $\SA$. Also this does precisely the opposite of copy-pasting, which is known
+    in software engineering as \emph{factorization}\sidenote{This is closely
+    related to the kind of factorization at work in bubble calculi. In
+    particular, the fact that the factorizing occurence is higher and usually
+    outside of a cut is very reminiscent of the \emph{outward} flow rules of
+    system $\sysB$ (those whose name ends with $\uparrow$ in
+    \reffig{sequent-B}); and the deduplicating effect makes \rsf{Deiteration}
+    even closer to the variant of the same rules in \sys{B_{inv}}
+    (\reffig{sequent-B-inv}).}.
+\end{itemize}
+The applicability of the next two rules depends on the polarity of the
+subgraph's area:
+\begin{itemize}
+  \item[\textbf{Insertion}]
+    Any graph $G$ may be inserted in a negative area:
+    $$\nsheet{~~~\step~~~ G}$$
+    This is akin to a \emph{weakening} rule, stating that if a proposition is
+    known to be true, one might add (useless) hypotheses at will. The closest
+    equivalent we found in the deep inference literature is indeed the weakening
+    rule \rsf{wl{\downarrow}} of \sys{ISp} in \sidecite{tiu_local_2006}.
+  \item[\textbf{Erasure} \textit{(Deletion)}]
+    Any graph $G$ occurring in a positive area may be erased:
+    $$G ~~~\step~~~$$
+    This is exactly the dual of \rsf{Insertion}, stating that if a proposition
+    is known to be true, then one might as well refrain from asserting it. It is
+    strongly related to the cut rule of sequent calculus, as will be
+    demonstrated shortly.
+\end{itemize}
+The last rule is more of a \emph{space management} principle that works as an
+\emph{isotopy}, i.e. a bidirectional topological deformation:
+\begin{itemize}
+  \item[\textbf{Double-cut}]
+    A \emph{double-cut} may be inserted or erased around any graph $G$:
+    \begin{mathpar}
+      \ncut{\pcut{G}} ~~~\leftrightarrow~~~ G
+      \and
+      \nsheet{\pcut{\ncut{G}} ~~~\leftrightarrow~~~ G}
+    \end{mathpar}
+    The bidirectional arrow $\leftrightarrow$ expresses that the rule can be
+    applied in both directions\sidenote{We could have merged \rsf{Iteration} and
+    \rsf{Deiteration} in this way, but chose to follow the original presentation
+    of the rules by Peirce instead, as exposed in \cite{Roberts+1973}.}.
+    Logically, this corresponds to the classical equivalence $\neg\neg A
+    \semequiv A$, where in particular the erasure direction $\neg\neg A \limp A$
+    is not true intuitionistically. Topollogically, the double-cut forms a
+    \emph{ring}, that separates $G$ from the rest of $\SA$ while preserving its
+    polarity. Then the two directions of the rules can be understood as the
+    following dual \emph{homotopies}:
+    \begin{itemize}
+      \item[\textbf{Contraction}] The ring is created by cutting $\SA$ around
+      $G$, and then \emph{contracting} the inner area where $G$ resides on
+      itself. This effectively ``pulls apart'' $G$ from the rest of the sheet,
+      leaving apparent in the empty space of the ring whatever lies behind
+      $\SA$. Peirce thought of positive and negative areas as being the
+      \emph{recto} and \emph{verso} of $\SA$, respectively. Thus in the positive
+      version of the rule (on the left), the ring would represent negative empty
+      space on the verso of $\SA$ (which does indeed lie behind $\SA$).
+      \item[\textbf{Expansion}] The ring is erased by \emph{expanding} the inner
+      area where $G$ resides towards the outer border of the ring. Unfolding the
+      metaphor to its conclusion, the inner area is then ``glued back'' to the
+      rest of $\SA$\sidenote{This is reminiscent of the \emph{absorption} rules
+      $\{\rsf{a},\rsf{a{-},\rsf{a{+}}}\}$ of system $\sysB$, as is very clear in
+      their graphical presentation (\reffig{graphical-B}).}.
+    \end{itemize}
+\end{itemize}
+A remarkable feat of Peirce's rules, on which he insisted very much, is that
+they are only expressed in terms of \emph{insertions} and \emph{omissions} of
+graphs on $\SA$. He thought that those were the \emph{smallest} steps in which
+reasoning could be dissected, making his system extremely appropriate for
+\emph{analytical} purposes\sidenote{See Section 7.11 of \cite{Roberts+1973}}. We
+already considered this question of decomposing logical inferences into their
+most elementary editing operations, when reflecting on the graphical
+presentation of \sys{BJ} at the end of \refsec{bubbles-graphical-rules}. In this
+setting, the most basic insertions and omissions we could find were not
+logically \emph{sound}, whereas in EG they are. This is quite promising, and
+prompts us to reevalute our conception of \emph{atomicity} in logical reasoning.
+
+An instructive case can be found in the derivation of Peirce's law with the
+rules of EG, an example of which is given in \reffig{peirce-law-eg}.
+
+\todo{ Compare sequent and EG derivations of Peirce's law, where the latter
+exposes more steps. }
+
+\todo{ Then compare sequent and EG derivations of the example on p. 111 of
+\cite{Roberts+1973}. }
 
 \subsection{As a rewriting system}
 
@@ -976,7 +1132,10 @@ ones corresponding to the \emph{insertion} and \emph{erasure} rules of Peirce's
 EG. A corollary is that the flower calculus is \emph{analytic}, in a sense very
 close to that coined by Gentzen.}
 
-\todo{Reference to \cite{hutchison_semantic_2005}}
+\todo{Reference literature on semantic cut-elimination (Completeness folder in
+Zotero), with special props to Olivier Hermant \cite{hutchison_semantic_2005}
+who gave us the main structure for the various definitions and lemmas exposed in
+this section.}
 
 \subsection{Theories}
 

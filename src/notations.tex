@@ -124,6 +124,10 @@
 \newcommand*\gBcircled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,fill=genB,inner sep=2pt] (char) {#1};}}
 
+\newcommand*\fillcircled[2]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,fill=#1,inner sep=2pt] (char) {#2};}}
+
+
 \newcommand{\bubble}[1]{\color{bubble}\circled{$#1$}}
 \newcommand{\cbubble}[1]{\color{conc}\circled{$#1$}}
 \newcommand{\hbubble}[1]{\color{hypo}\circled{$#1$}}
@@ -209,7 +213,12 @@
 % Flowers
 
 \newcommand{\SA}{\textsc{SA}}
-\newcommand{\pcut}[1]{\color{black}\circled{$#1$}}
+\newcommand{\psheet}[1]{\color{black}{#1}}
+\newcommand{\nsheet}[1]{\color{white}\colorbox{black}{$#1$}}
+\newcommand{\pcut}[1]{\color{white}\fillcircled{white}{\color{black}$#1$}}
+\newcommand{\ncut}[1]{\color{black}\fillcircled{black}{\color{white}$#1$}}
+\newcommand{\ppcut}[1]{\color{black}\circled{$#1$}}
+\newcommand{\npcut}[1]{\color{black}\fillcircled{npcut}{$#1$}}
 
 \newcommand{\Nature}{\text{\ding{96}}}
 \newcommand{\Culture}{\text{\ding{34}}}
