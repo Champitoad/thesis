@@ -448,9 +448,9 @@ subgraph's area:
     Any graph $G$ occurring in a positive area may be erased:
     $$G ~~~\step~~~$$
     This is exactly the dual of \rsf{Insertion}, stating that if a proposition
-    is known to be true, then one might as well refrain from asserting it. It is
-    strongly related to the cut rule of sequent calculus, as will be
-    demonstrated shortly.
+    is known to be true, then one might as well refrain from asserting it.
+    % It is strongly related to the cut rule of sequent calculus, as will be
+    % demonstrated shortly.
 \end{itemize}
 The last rule is more of a \emph{space management} principle that works as an
 \emph{isotopy}, i.e. a bidirectional topological deformation:
@@ -480,7 +480,7 @@ The last rule is more of a \emph{space management} principle that works as an
       $\SA$. Peirce thought of positive and negative areas as being the
       \emph{recto} and \emph{verso} of $\SA$, respectively. Thus in the positive
       version of the rule (on the left), the ring would represent negative empty
-      space on the verso of $\SA$ (which does indeed lie behind $\SA$).
+      space on the verso of $\SA$.
       \item[\textbf{Expansion}] The ring is erased by \emph{expanding} the inner
       area where $G$ resides towards the outer border of the ring. Unfolding the
       metaphor to its conclusion, the inner area is then ``glued back'' to the
@@ -493,26 +493,64 @@ A remarkable feat of Peirce's rules, on which he insisted very much, is that
 they are only expressed in terms of \emph{insertions} and \emph{omissions} of
 graphs on $\SA$. He thought that those were the \emph{smallest} steps in which
 reasoning could be dissected, making his system extremely appropriate for
-\emph{analytical} purposes\sidenote{See Section 7.11 of \cite{Roberts+1973}.}. We
-already considered this question of decomposing logical inferences into their
-most elementary editing operations, when reflecting on the graphical
-presentation of \sys{BJ} at the end of \refsec{bubbles-graphical-rules}. In this
-setting, the most basic insertions and omissions we could find were not
-logically \emph{sound}, whereas in EG they are. This is quite promising, and
-prompts us to reevalute our conception of \emph{atomicity} in logical reasoning.
+\emph{analytical} purposes\sidenote{See Section 7.11 of \cite{Roberts+1973}.}.
+We already considered this question of decomposing logical inferences into their
+most elementary operations, when reflecting on the graphical presentation of
+\sys{BJ} at the end of \refsec{bubbles-graphical-rules}. In this setting, the
+most basic insertions and omissions we could find were not logically
+\emph{sound}, whereas in EG they are. This is quite promising, and prompts us to
+reevalute our conception of \emph{atomicity} in logical reasoning.
 
-An instructive case can be found in the derivation of Peirce's law with the
-rules of EG, an example of which is given in \reffig{peirce-law-eg}.
+\reffig{peirce-law-eg} shows a derivation of Peirce's law with the rules of EG.
+Note that the direction of arrows has been reversed compared to the above
+presentation: as usual, we prefer to read rules from conclusion to premiss,
+starting from the goal to prove --- here the graph associated to the formula
+$((P \limp Q) \limp P) \limp P$ --- that we reduce to the empty goal,
+represented by the empty $\SA$. Also, the reader unfamiliar with EG might find
+it hard to convince herself that all the steps followed in the derivation are
+\emph{sound} logically. For lack of space, we will not provide a general proof
+of soundness for the rules, which requires a bit of work (especially in the case
+of \rsf{Iteration} and \rsf{Deiteration}). We suggest the reader to either:
+\begin{enumerate*}
+  \item build a \emph{syntactic} intuition by practicing the rules with various
+  tautologies of propositional logic;
+  \item read up the existing literature on the subject, for instance in Appendix
+  4 of \cite{Roberts+1973};
+  \item wait for the proof of soundness of our flower calculus with respect to
+  Kripke semantics in \refsec{Soundness}.
+\end{enumerate*}
 
-\todo{ Compare sequent and EG derivations of Peirce's law, where the latter
-exposes more steps. }
+\todo{Draw proof of Peirce's law}
 
-\todo{ Then compare sequent and EG derivations of the example on p. 111 of
-\cite{Roberts+1973}, where the latter exposes a lot less steps. Thus, which
-should be considered more atomic? We will not fret too much over this question,
-our goal in the end being to hide trivial reasoning steps from the user. We will
-see in \refsec{flowers-prover} that this is not incompatible with the analytic
-aspect of EG. }
+Lastly, let us give an example of how to \emph{simulate} a rule from natural
+deduction in EG. Rather than reducing the graph associated to a formula to the
+empty $\SA$, we want to reduce the graph associated to the conclusion of the
+rule into the graph associated to its premisses. \reffig{eg-seq-cut} shows how
+to proceed in the case of the elimination rule for $\limp$, or \emph{modus
+ponens}. A crucial step is the use of the \rsf{Erasure} rule, which allows to
+create a positive occurrence of $A$ out of thin air. This is the main source of
+non-analyticity in EG, in the sense of the \emph{subformula property} of
+Gentzen. We will show in \refsec{Completeness} that the equivalent of
+\rsf{Erasure} in our flower calculus is admissible. This derivation also makes
+clear that it is the positive $A$ that justifies the negative one with the
+\rsf{Deiteration} rule, and not the other way around. Indeed, the presence of
+the cut around the negative $A$ makes it deeper than the positive $A$ on $\SA$,
+preventing the \rsf{Deiteration} rule from being applicable in the other
+direction. This is a manifestation of the inherent dissymmetry in \emph{proof
+substitution}: the erasure of the negative $A$ can be interpreted as the
+operation $\subst{\pi_A}{\pi_B}{x}$, which substitutes every occurrence of the
+associated hypothesis $x$ in the proof $\pi_B$ of $B$ by the proof $\pi_A$ of
+the positive $A$. We elaborate further on this computational aspect of EG in
+\refsec{flowers-curryhoward}.
+
+\todo{Draw simulation of modus ponens $A \land (A \limp B) \limp B$}
+
+% \todo{ Then compare sequent and EG derivations of the example on p. 111 of
+% \cite{Roberts+1973}, where the latter exposes a lot less steps. Thus, which
+% should be considered more atomic? We will not fret too much over this question,
+% our goal in the end being to hide trivial reasoning steps from the user. We will
+% see in \refsec{flowers-prover} that this is not incompatible with the analytic
+% aspect of EG. }
 
 \subsection{As a rewriting system}
 
@@ -1003,27 +1041,27 @@ proofs slightly shorter. For now we allow the {\rnmsf{fence}} rule, which makes
 the deduction theorem trivial:
 
 \begin{theorem}[Deduction]\labthm{deduction}
-  For any pair $\Phi, \Psi$ of bouquets, $\Psi \vdash \Phi$ if and only if
-  $\vdash \flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}$.
+  For any pair $\Phi, \Psi$ of bouquets, $\Psi \vdash_{\Nature} \Phi$ if and only if
+  $\vdash_{\Nature} \flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}$.
 \end{theorem}
 \begin{proof}
-  Let $\Xi\hole$ be some context. If $\Psi \vdash \Phi$, then in particular
-  $\cfill{\Xi'}{\Phi} \steps \cfill{\Xi'}{\phantom{\Phi}}$ for $\Xi'\hole :=
+  Let $\Xi\hole$ be some context. If $\Psi \vdash_{\Nature} \Phi$, then in particular
+  $\cfill{\Xi'}{\Phi} \steps_{\Nature} \cfill{\Xi'}{\phantom{\Phi}}$ for $\Xi'\hole :=
   \cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{\square}}}$. Thus we have:
   $$
-  \cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}} \steps
+  \cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}} \steps_{\Nature}
   \cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{}}} \step_{\mathsf{epet}}
   \cfill{\Xi}{\phantom{\Phi}}
   $$
   In the other direction, let $\Xi$ be some context such that
-  $\chyp{\Psi}{\Xi\hole}$. If $\vdash
+  $\chyp{\Psi}{\Xi\hole}$. If $\vdash_{\Nature}
   \flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}$, then in particular
-  $\cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}} \steps
+  $\cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}} \steps_{\Nature}
   \cfill{\Xi}{\phantom{\Phi}}$. Thus we have:
   $$
   \cfill{\Xi}{\Phi} \step_{\mathsf{fence}}
   \cfill{\Xi}{\flower{\garden{{}}{{}}}{\garden{{}}{\Phi}}} \step_{\mathsf{poll{\uparrow}}}
-  \cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}} \steps
+  \cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}} \steps_{\Nature}
   \cfill{\Xi}{\phantom{\Phi}}
   $$
 \end{proof}
@@ -1505,3 +1543,9 @@ complex apparatus of substitution. Which explains why we believe \emph{the
 opposite}, that EG \emph{can} form the basis for an ergonomic calculus.}
 
 \subsection{Future works}
+
+\begin{itemize}
+  \item Strong deduction theorem for derivability in the full flower calculus.
+  Combined with our completeness result (of the natural fragment, and a forciori
+  of the full system), this would give strong completeness of the full system.
+\end{itemize}
