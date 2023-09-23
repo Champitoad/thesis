@@ -81,6 +81,7 @@
 \newcommand{\notstep}{\nrightarrow}
 \newcommand{\notsteps}{\nrightarrow^\ast}
 \newcommand{\nsteps}[1]{\step^{#1}}
+\newcommand{\xstep}[1]{\xrightarrow{#1}}
 \newcommand{\deriv}[3]{#1 : #2 \steps #3}
 \newcommand{\irule}[3]{#1 : #2 \rightarrow #3}
 \newcommand{\rrule}[3]{#2 \rightarrow_{#1} #3}
@@ -213,12 +214,17 @@
 % Flowers
 
 \newcommand{\SA}{\textsc{SA}}
-\newcommand{\psheet}[1]{\color{black}{#1}}
-\newcommand{\nsheet}[1]{\color{white}\colorbox{black}{$#1$}}
-\newcommand{\pcut}[1]{\color{white}\fillcircled{white}{\color{black}$#1$}}
-\newcommand{\ncut}[1]{\color{black}\fillcircled{black}{\color{white}$#1$}}
-\newcommand{\ppcut}[1]{\color{black}\circled{$#1$}}
-\newcommand{\npcut}[1]{\color{black}\fillcircled{npcut}{$#1$}}
+
+\newcommand{\psheet}[1]{\color{pbg}{#1}}
+\newcommand{\nsheet}[1]{\color{nfg}\colorbox{nbg}{$#1$}}
+\newcommand{\pcut}[1]{\color{pfg}\fillcircled{pbg}{\color{pfg}$#1$}}
+\newcommand{\ncut}[1]{\color{nfg}\fillcircled{nbg}{\color{nfg}$#1$}}
+
+\newcommand{\opcut}[1]{\color{white}\fillcircled{white}{\color{black}$#1$}}
+\newcommand{\oncut}[1]{\color{black}\fillcircled{black}{\color{white}$#1$}}
+
+\newcommand{\anodes}{\mathbf{N}}
+\newcommand{\agraphs}{\mathbf{G}}
 
 \newcommand{\Nature}{\text{\ding{96}}}
 \newcommand{\Culture}{\text{\ding{34}}}
@@ -231,7 +237,7 @@
 
 \newcommand{\interp}[1]{\llbracket #1 \rrbracket}
 
-\newcommand{\chyp}[2]{#1 \prec #2}
+\newcommand{\chyp}[2]{#1 \precdot #2}
 
 \newcommand{\parity}[1]{\mathsf{par}(#1)}
 

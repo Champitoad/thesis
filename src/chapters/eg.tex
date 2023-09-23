@@ -2,6 +2,535 @@
 \chapter{Existential Graphs}
 \labch{eg}
 
-\section{Classical}
+C. S. Peirce is famous for his contributions to symbolic logic, including among
+others his eponymous law for classical logic, and his pioneering work on the
+algebra of relations and quantification \cite{peirce_algebra_1885}. But far less
+widespread are his achievements in the realm of graphical logic, or \emph{iconic
+logic} as Shin calls it \cite{10.7551/mitpress/3633.001.0001}. He dedicated a
+large chunk of his life investigating diagrammatic systems, starting in 1882
+with the \emph{entitative graphs} and culminating with the \emph{existential
+graphs}, which he developed from 1896 until his death in 1914
+\cite{Roberts+1973}. Interestingly, Peirce perceived existential graphs
+(thereafter ``EG'') as his \textit{``chef d'oeuvre''}, and that they
+\textit{``ought to be the logic of the future''}\sidenote[][3em]{Both citations
+are sourced in page 11 of \cite{Roberts+1973}.}.
 
-\section{Intuitionistic}
+Recent works have started to realize this vision: for example Sowa based his
+conceptual graphs for computerized knowledge representation on EG
+\cite{sowa_conceptual_1976}, Brady, Trimble
+\cite{brady_categorical_2000}\cite{brady_string_nodate} and Haydon, Sobociński
+\cite{pietarinen_compositional_2020} proposed various reconstructions of EG
+through the lens of \emph{topology} and \emph{category theory}, and Melliès and
+Zeilberger \cite{mellies_bifibrational_2016} refined the interpretation of Brady
+and Trimble by making further connections with \emph{linear
+logic}\cite{girard-linear-1987}. The full story has yet to be told, but we hope
+that our work will constitute one more step towards the vision Peirce had in
+mind.
+
+In this chapter, we propose a self-contained exposition of EG, that tries at the
+same time to be faithful to the original presentation of the systems by Peirce,
+and more modern in some aspects of their formalization. The goal will be to
+familiarize the reader with the unique approach to proofs inherent to EG, which
+can be difficult to relate to more standard frameworks like Hilbert and Gentzen
+proof systems, and even deep inference proof systems like the calculus of
+structures. This shall prove useful to get a good understanding of the
+historical and technical foundations behind our \emph{flower calculus}, to be
+introduced in \refch{flowers}.
+
+The chapter is organized as follows: we start in \refsec{alpha} by presenting
+the diagrammatic syntax of the system \sys{Alpha} of EG for classical
+propositional logic. In \refsec{illative}, we introduce the inference rules of
+\sys{Alpha} for manipulating existential graphs, called \emph{illative
+transformations} by Peirce. In \refsec{multisets}, we give an equivalent
+formulation of the syntax and rules of \sys{Alpha} as a \emph{multiset}
+rewriting system. In \refsec{eg-soundness}, we take advantage of our
+reformulation to give a simpler proof of soundness for \sys{Alpha} that what can
+be found in the literature. In \refsec{eg-completeness} we give a novel
+syntactic proof of completeness for \sys{Alpha} by simulation of a calculus of
+structures. In \refsec{beta}, we illustrate the original mechanism of
+\emph{lines of identity} used by Peirce to handle quantifiers and equality in
+his \sys{Beta} system. We end in \refsec{gardens} by showing how to recast lines
+of identity in a more traditional binder-based syntax.
+
+% \todo{IDEA (where should we put it?): \emph{superposition of polarities} in
+% existential graphs. While a cut in bubble calculi is the insertion of \emph{two}
+% occurrences of the same formula with \emph{distinct} polarities, the insertion
+% rule only introduces \emph{one} occurrence of the formula, which plays either a
+% negative role when it is iterated, or a positive role when it is deiterated}
+
+
+\section{\sys{Alpha} graphs}\labsec{alpha}
+
+Peirce designed in total three systems of EG, which he called respectively
+\sys{Alpha}, \sys{Beta} and \sys{Gamma}. They were invented chronologically in
+that order, which also captures their relationship in terms of complexity:
+\sys{Alpha} is the foundation on which the other systems are built, and can
+today be understood as a diagrammatic calculus for classical
+\emph{propositional} logic. As we will see in \refsec{Quantification},
+\sys{Beta} corresponds to a variable-free representation of \emph{predicate}
+logic without function symbols, and with primitive support for \emph{equality}.
+The last system \sys{Gamma} is more experimental, with various unfinished
+features that have been interpreted as attempts to capture \emph{modal}
+\sidecite{zeman_graphical_1964} and \emph{higher-order} logics\sidenote{A less
+known fact is that at the end of his life, Peirce pushed his experimentations
+beyond the scope of \emph{logic} in the contemporary sense of the word (it was
+already the case for modal logic in his time), with so-called \emph{tinctured
+existential graphs} (Chapter 6 in \cite{Roberts+1973}). Roughly, the idea was to
+represent a variety of \emph{modes of expression} with different background
+shades on the canvas where sentences are scribed, not unlike our graphical
+depiction of the \emph{status} of solutions in \reffig{graphical-B}. In addition
+to the usual act of asserting the truth of a proposition, one could for instance
+express a \emph{subjective} or \emph{objective} possibility, or signify an
+interrogative or imperative mood, all by using different colors. For print in
+publications, he would in fact use \emph{heraldic tinctures} instead of colors,
+hence the ``tinctured'' qualificative. The precise meaning and purpose of
+tinctured EG remains elusive to this day, and might constitute the most esoteric
+part of his work. We see a possible connection with the type-theoretical concept
+of \emph{judgment}, which was rehabilitated by Martin-Löf from the philosophy of
+Kant \cite{Martin-Lof1996-MAROTM-7}, who was of great influence on Peirce's own
+philosophy \cite{sep-peirce}.}.
+
+The most fundamental concept of \sys{Alpha} is the \emph{sheet of assertion},
+denoted by $\SA$ thereafter. It is the space where statements are scribed by the
+reasoner, typically a sheet of paper or a blackboard. In a proof assistant, this
+would either be the buffer of a text editor holding the theory the user is
+developing, or the proof view displaying goals to be proved, depending on who
+the reasoner is (the user or the computer, respectively). This last analogy
+suggests an important property of $\SA$: it must offer a \emph{virtually
+infinite} amount of space, so that one can perform as much reasoning as needed.
+Just like a Turing machine has an infinite tape, so that one can perform as much
+computation as needed.
+
+As its name indicates, scribing a statement on $\SA$ amounts to \emph{asserting
+its truth}. Thus very naturally, the empty $\SA$ where nothing is scribed will
+denote vacuous truth, traditionally symbolized by the formula
+$\top$\sidenote{Peirce had an \emph{externalist} conception of truth, where the
+assertions made by the \process{Graphist}, i.e. the person scribing on $\SA$,
+refer to the world \emph{outside} of the sheet (the universe of discourse). By
+not scribing anything, the \process{Graphist} thus refrains from asserting
+anything about the world, only assuming implicit truths. This is illustrated by
+the following quote from \cite{Roberts+1973}, reminiscent of an interaction
+between a proof assistant (the \process{Graphist}) and her user (\process{the
+Interpreter}): \textit{``One of the parties, called the Graphist, is responsible
+for scribing the original graphs at the beginning of the investigation or
+discussion; the other, called the Interpreter, draws inferences from these
+graphs by changing them in accordance with the permissions of the system. The
+[...] sheet, before anything is scribed on it, represents whatever is taken for
+granted at the outset by the Graphist and Interpreter.''}.}.
+
+As we know from natural deduction, asserting the truth of the conjunction $P
+\land Q$ of two propositions $P$ and $Q$, amounts to asserting the truth of $P$
+and the truth of $Q$. In \sys{Alpha}, there is no need to introduce the symbolic
+connective $\land$, since one can just write both $P$ and $Q$ at distinct
+locations on $\SA$:
+$$P~~~Q$$
+More generally, one might consider any two portions $G$ and $H$ of $\SA$, and
+interpret their \emph{juxtaposition} $G~H$ as signifying that we assert the
+truth of their conjunction. This leads us to formulate the first fundamental
+principle of \sys{Alpha}:
+$$\text{\emph{Any portion of $\SA$ is a graph.}}$$
+In particular, the entire $\SA$ itself is a graph.
+
+Asserting the truth of the negation $\neg P$ of a proposition $P$, amounts to
+\emph{denying} the truth of $P$. Using the original notation of Peirce, this is
+done in \sys{Alpha} by \emph{enclosing} $P$ in a closed curve like so:
+$$\pcut{P}$$
+Peirce called such curves \emph{cuts}\sidenote{Not to be confused with the name
+given to instances of the \emph{cut rule} in sequent calculus. Although there is
+a connection, since in \sys{LK}, one occurrence of the cut formula in the
+premisses of the rule is negated.}, because they ought to be seen as literal
+cuts in the paper sheet that embodies $\SA$. Note that they do not need to be
+circles: all that matters is that $P$ is in a separate area from the rest of
+$\SA$. This is precisely the content of the \emph{Jordan curve theorem} in
+topology, and thus we can take cuts to be arbitrary Jordan curves. This entails
+in particular that cuts cannot intersect each other, but can be freely nested
+inside each other. Then as for juxtaposition, one can replace $P$ by any graph
+$G$, i.e. any portion of $\SA$, as long as the cut does not intersect other cuts
+in $G$.
+
+With just these two \emph{icons}, juxtaposition and cuts, one can therefore
+assert the truth of any proposition made up of conjunctions and negations, and
+built from atomic propositions. Importantly, the only symbols needed for doing
+so are the letters $P, Q, R\ldots$ denoting atomic propositions.
+
+Now, it is well-known that $\{\land,\neg\}$ is \emph{functionally complete},
+meaning that any boolean truth function can be expressed as the composition of
+boolean conjunctions and negations. In particular, the symbolic definitions of
+falsehood $\bot \defeq \neg\top$, classical disjunction $A \lor B \defeq
+\neg(\neg A \land \neg B)$ and classical implication $A \limp B \defeq \neg (A
+\land \neg B)$ can be expressed by the following three graphs\sidenote{Note the
+resemblance with the translation of formulas as solutions in
+\reffig{bubbles-native}, in particular for negative disjunctions.}:
+\begin{mathpar}
+  \pcut{\phantom{A}}
+  \and
+  \pcut{\pcut{A}~~~\pcut{B}}
+  \and
+  \pcut{A~~~\pcut{B}}
+\end{mathpar}
+Thus one can easily encode any propositional formula into a classically
+equivalent graph. Conversely, one can translate a graph into a classically
+equivalent formula, as has been shown for instance in
+\sidecite{10.7551/mitpress/3633.001.0001}. In fact, there are usually many
+possible formula readings of a given graph: this is because juxtaposition of
+graphs is a \emph{variadic} operation, as opposed to conjunction of formulas
+which is \emph{binary}. Also, because of the topological nature of $\SA$,
+juxtaposition is naturally \emph{associative} and \emph{commutative}: the
+locations of two juxtaposed graphs do not matter, as long as they live in the
+same area delimited by cuts. This property is called the \emph{isotropy} of
+$\SA$ in \cite{minghui_graphical_2019}. Hence, graphs can be seen as an
+associative-commutative normal form for propositional formulas built from atoms
+with $\{\land,\neg\}$\sidenote{In a first version of EG called \emph{entitative
+graphs}, Peirce used juxtaposition to denote \emph{disjunction} instead of
+conjunction. Although $\{\lor,\neg\}$ is also functionally complete, Peirce
+quickly grew unsatisfied with these entitative graphs, stating that EG formed
+``a far preferable system on the whole'' (Ms 280, pp. 21-22). I find it
+interesting that more contemporary works in logic have also made the choice to
+take conjunction and negation as their primitive operations, like the tensorial
+logic of Melliès \cite{mellies_micrological_2017}, or the realizability
+constructions for linear logic in Girard's transcendental syntax
+\cite{eng_stellar_2020}.}.
+
+\section{Illative transformations}\labsec{illative}
+
+In order to have a proof system, one needs a collection of \emph{inference
+rules} for deducing true statements from other true statements. In \sys{Alpha},
+inference rules are implemented by what Peirce called \emph{illative
+transformations} on graphs. In modern terminology, they correspond to
+\emph{rewriting} rules that can be applied to any subgraph/portion of $\SA$. By
+measuring the depth of a subgraph as the number of cuts in which it is enclosed,
+we thus have that the rules of \sys{Alpha} are applicable on subgraphs of
+arbitrary depth. This makes \sys{Alpha} deserving of the title of \emph{deep}
+inference system.
+
+\begin{marginfigure}
+  $$\ncut{P~~~\pcut{\ncut{Q}~~~R}}$$
+  \caption{Peirce's notation for emphasizing negative areas}
+  \labfig{peirce-neg-areas}
+\end{marginfigure}
+
+\begin{marginfigure}
+  $$\oncut{P~~~\opcut{\oncut{Q}~~~R}}$$
+  \caption{Drawing negative areas literally in negative}
+  \labfig{our-neg-areas}
+\end{marginfigure}
+
+Before introducing the rules, let us make a small change in the way we depict
+the graphs. The idea is that we want to visualize more clearly the
+\emph{polarity} of any subgraph $G$, understood as the \emph{parity} of the
+number of cuts (negations) enclosing $G$. In one of his unpublished manuscripts
+(Ms 514), Peirce did this by \emph{shading} negative areas --- those enclosed in
+an odd number of cuts --- in gray, as illustrated in \reffig{peirce-neg-areas}
+\sidecite{sowa_peirces_2011}. Unconstrained by hand-drawing, one could adopt an
+even more iconic notation, where negative areas are \emph{literally} drawn like
+a negative in photography, by inverting white and black. The example of
+\reffig{peirce-neg-areas} would then be drawn as in \reffig{our-neg-areas}.
+However in this thesis, we will stick to Peirce's notation, which is both less
+straining for the eyes by being less contrasted, and more economical in ink for
+print. A nice advantage of these notations is that they remove the need to count
+manually the number of cuts starting from the top-level of $\SA$: the
+information is immediately apparent in the subgraph, and thus completely
+\emph{local}\sidenote{A similar device is used in the deep inference system
+\sys{ISp} of Tiu \cite{tiu_local_2006}, where the polarities of substructures
+are attached to them as explicit labels.}.
+
+\begin{remark}\labremark{eg-polarity}
+  Whereas in bubble calculi the concept of polarity was understood as a property
+  of \emph{objects} --- i.e. utterances of propositions --- by assigning them
+  opposite colors (blue and red), the previous notations for graphs suggest that
+  it is instead a property of the \emph{space} in which objects reside. This is
+  more natural from the point of view of \emph{game semantics}: for instance in
+  a game of chess, the two players can easily exchange their roles by switching
+  places or rotating the board by 180°, rather than by repainting laboriously
+  each piece in the opposite color.
+\end{remark}
+
+Quite surprisingly, Peirce showed that one only needs $5$ inference rules to get
+a \emph{strongly complete} system, in the sense that if the truth of a graph $G$
+entails the truth of another graph $H$, then $G$ can always be rewritten into
+$H$ by applying exclusively instances of these $5$ rules\sidenote{Of course
+Peirce did not show completeness formally in the sense of modern model theory,
+although Sowa argues in \cite{sowa_peirces_2011} (Section 4) that he had started
+to develop his own model theory equivalent to Tarski's (but closer to the
+\emph{game-theoretical semantics} of Hintikka \cite{Hintikka1973-HINLLA}).
+% One can find a modern categorical treatment of completeness with respect to
+% Boolean algebras, based on a rigorous formalization of the geometry and algebra
+% of \sys{Alpha}, in \cite{brady_categorical_2000}.
+}. A nice way to understand the rules of \sys{Alpha} is as \emph{edition
+principles}, like the most basic actions one executes pervasively when editing
+text on a computer\sidenote{Even though computers did not exist yet in Peirce's
+time! In fact, Martin Irvine argues in \cite{irvine_semiotics_2022} that Peirce
+anticipated many developments in computer science and information technologies,
+such as the use of electrical switches to compute boolean functions, whose
+invention is usually attributed to Claude Shannon.}. The first two rules are the
+most powerful and mysterious in all systems of EG, and can be applied in areas
+of any polarity:
+\begin{itemize}
+  \item[\textbf{Iteration} \textit{(Copy \& Paste)}]
+    A graph $G$ may be duplicated at any depth inside of a juxtaposed graph $H$.
+    Using our notation for holed contexts from previous chapters, this can be
+    represented schematically like so:
+    \begin{mathpar}
+      G~~~H\select{\phantom{G}} ~~~\step~~~ G~~~H\select{G}
+      \and
+      \nsheet{G~~~H\select{\phantom{G}} ~~~\step~~~ G~~~H\select{G}}
+    \end{mathpar}
+    In particular, $H$ can be taken to be any empty portion of $\SA$ in the same
+    area as $G$, giving that $G ~\step~ G~G$.
+  \item[\textbf{Deiteration} \textit{(Factorization)}]
+    Formally, this is the converse of \rsf{Iteration}:
+    \begin{mathpar}
+      G~~~H\select{G} ~~~\step~~~ G~~~H\select{\phantom{G}}
+      \and
+      \nsheet{G~~~H\select{G} ~~~\step~~~ G~~~H\select{\phantom{G}}}
+    \end{mathpar}
+    Its interpretation as an edition principle is a bit trickier, but it can be
+    understood as a form of \emph{sharing} of information. Indeed, it roughly
+    says that a subgraph $G$ can be erased if it already occurs ``higher'' on
+    $\SA$. Also this does precisely the opposite of copy-pasting, which is known
+    in software engineering as \emph{factorization}\sidenote{This is closely
+    related to the kind of factorization at work in bubble calculi. In
+    particular, the fact that the factorizing occurence is higher and usually
+    outside of a cut is very reminiscent of the \emph{outward} flow rules of
+    system $\sysB$ (those whose name ends with $\uparrow$ in
+    \reffig{sequent-B}); and the deduplicating effect makes \rsf{Deiteration}
+    even closer to the variant of the same rules in \sys{B_{inv}}
+    (\reffig{sequent-B-inv}).}.
+\end{itemize}
+The applicability of the next two rules depends on the polarity of the
+subgraph's area:
+\begin{itemize}
+  \item[\textbf{Insertion}]
+    Any graph $G$ may be inserted in a negative area:
+    $$\nsheet{~~~\step~~~ G}$$
+    This is akin to a \emph{weakening} rule, stating that if a proposition is
+    known to be true, one might add (useless) hypotheses at will. The closest
+    equivalent we found in the deep inference literature is indeed the weakening
+    rule \rsf{wl{\downarrow}} of \sys{ISp} in \sidecite{tiu_local_2006}.
+  \item[\textbf{Erasure} \textit{(Deletion)}]
+    Any graph $G$ occurring in a positive area may be erased:
+    $$G ~~~\step~~~$$
+    This is exactly the dual of \rsf{Insertion}, stating that if a proposition
+    is known to be true, then one might as well refrain from asserting it.
+    % It is strongly related to the cut rule of sequent calculus, as will be
+    % demonstrated shortly.
+\end{itemize}
+The last rule is more of a \emph{space management} principle that works as an
+\emph{isotopy}, i.e. a bidirectional topological deformation:
+\begin{itemize}
+  \item[\textbf{Double-cut}]
+    A \emph{double-cut} may be inserted or erased around any graph $G$:
+    \begin{mathpar}
+      \ncut{\pcut{G}} ~~~\leftrightarrow~~~ G
+      \and
+      \nsheet{\pcut{\ncut{G}} ~~~\leftrightarrow~~~ G}
+    \end{mathpar}
+    The bidirectional arrow $\leftrightarrow$ expresses that the rule can be
+    applied in both directions\sidenote{We could have merged \rsf{Iteration} and
+    \rsf{Deiteration} in this way, but chose to follow the original presentation
+    of the rules by Peirce instead, as exposed in \cite{Roberts+1973}.}.
+    Logically, this corresponds to the classical equivalence $\neg\neg A
+    \semequiv A$, where in particular the erasure direction $\neg\neg A \limp A$
+    is not true intuitionistically. Topollogically, the double-cut forms a
+    \emph{ring}, that separates $G$ from the rest of $\SA$ while preserving its
+    polarity. Then the two directions of the rules can be understood as the
+    following dual \emph{homotopies}:
+    \begin{itemize}
+      \item[\textbf{Contraction}] The ring is created by cutting $\SA$ around
+      $G$, and then \emph{contracting} the inner area where $G$ resides on
+      itself. This effectively ``pulls apart'' $G$ from the rest of the sheet,
+      leaving apparent in the empty space of the ring whatever lies behind
+      $\SA$. Peirce thought of positive and negative areas as being the
+      \emph{recto} and \emph{verso} of $\SA$, respectively. Thus in the positive
+      version of the rule (on the left), the ring would represent negative empty
+      space on the verso of $\SA$.
+      \item[\textbf{Expansion}] The ring is erased by \emph{expanding} the inner
+      area where $G$ resides towards the outer border of the ring. Unfolding the
+      metaphor to its conclusion, the inner area is then ``glued back'' to the
+      rest of $\SA$\sidenote{This is reminiscent of the \emph{absorption} rules
+      $\{\rsf{a},\rsf{a{-},\rsf{a{+}}}\}$ of system $\sysB$, as is very clear in
+      their graphical presentation (\reffig{graphical-B}).}.
+    \end{itemize}
+\end{itemize}
+A remarkable feat of Peirce's rules, on which he insisted very much, is that
+they are only expressed in terms of \emph{insertions} and \emph{omissions} of
+graphs on $\SA$. He thought that those were the \emph{smallest} steps in which
+reasoning could be dissected, making his system extremely appropriate for
+\emph{analytical} purposes\sidenote{See Section 7.11 of \cite{Roberts+1973}.}.
+We already considered this question of decomposing logical inferences into their
+most elementary operations, when reflecting on the graphical presentation of
+\sys{BJ} at the end of \refsec{bubbles-graphical-rules}. In this setting, the
+most basic insertions and omissions we could find were not logically
+\emph{sound}, whereas in \sys{Alpha} they are. This is quite promising, and
+prompts us to reevalute our conception of \emph{atomicity} in logical reasoning.
+
+\begin{marginfigure}
+  \input{figures/eg-peirce-law.tex}
+  \caption{A derivation of Peirce's law in \sys{Alpha}}
+  \labfig{eg-peirce-law}
+\end{marginfigure}
+
+\reffig{eg-peirce-law} shows a derivation of Peirce's law with the rules of
+\sys{Alpha}. Note that the direction of arrows has been reversed compared to the
+above presentation: as usual, we prefer to read rules from conclusion to
+premiss, starting from the goal to prove --- here the graph associated to the
+formula $((P \limp Q) \limp P) \limp P$ --- that we reduce to the empty goal,
+represented by the empty $\SA$. Also, the reader unfamiliar with EG might find
+it hard to convince herself that all the steps followed in the derivation are
+\emph{sound} logically. We suggest her to either build a \emph{syntactic}
+intuition for the rules by praticing them on various tautologies of
+propositional logic, or to wait until we give a formal \emph{semantic} proof of
+soundness in \refsec{eg-soundness}.
+
+% For lack of space, we will not provide a general proof of soundness for
+% \sys{Alpha}, which requires a bit of work (especially in the case of
+% \rsf{Iteration} and \rsf{Deiteration}). We suggest the reader to either:
+% \begin{enumerate*}
+%   \item build a \emph{syntactic} intuition by practicing the rules with various
+%   tautologies of propositional logic;
+%   \item read up the existing literature on the subject, for instance in Appendix
+%   4 of \cite{Roberts+1973};
+%   \item wait for the proof of soundness of our flower calculus with respect to
+%   Kripke semantics in \refsec{Soundness}.
+% \end{enumerate*}
+
+% \todo{ Then compare sequent and EG derivations of the example on p. 111 of
+% \cite{Roberts+1973}, where the latter exposes a lot less steps. Thus, which
+% should be considered more atomic? We will not fret too much over this question,
+% our goal in the end being to hide trivial reasoning steps from the user. We will
+% see in \refsec{flowers-prover} that this is not incompatible with the analytic
+% aspect of EG. }
+
+\section{Graphs as multisets}\labsec{multisets}
+
+As noted by various authors\sidenote{See for instance the Tree Existential
+Graphs of Roberts and Pronovost \cite{roberts_existential_1992}, or Section 2.2
+in \cite{brady_categorical_2000}.}, the nesting of cuts on $\SA$ induces a
+\emph{tree} structure on graphs: each cut constitutes a node, whose children are
+either leaves corresponding to atomic propositions residing in the area of the
+cut, or nodes corresponding to nested cuts. Empty cuts have no children, and
+thus also form leaves of the tree. Then $\SA$ may be seen either as a forest of
+atoms and cuts, or as a rooted tree whose root represents $\SA$, and is
+distinguished from cut nodes. This can be captured by the following grammar:
+\begin{mathpar}
+  \SA \Coloneq G 
+  \and
+  G, H, K \Coloneq g_1, \ldots, g_n
+  \and
+  g, h, k \Coloneq P \mid [G]
+\end{mathpar}
+
+\begin{example}
+The graph of \reffig{peirce-neg-areas} may be written as either one of the
+following expressions:
+\begin{mathpar}
+
+  [P, [[Q], R]] \and
+  [P, [R, [Q]]] \and
+  [[[Q], R], P] \and
+  [[R, [Q]], P]
+\end{mathpar}
+\end{example}
+
+To abstract from the specific order in which nodes are sequenced in this
+notation, and thus represent faithfully the isotropy of $\SA$, we define
+$\alpha$-graphs as (recursive) \emph{finite multisets}:
+
+\begin{definition}[$\alpha$-graph]\labdef{alpha-graph} 
+  
+  The sets of \emph{$\alpha$-nodes} $\anodes$ and \emph{$\alpha$-graphs}
+  $\agraphs$ are defined mutually inductively as follows:
+  \begin{itemize}
+    \item \textbf{(Atom)} If $P$ is an atomic proposition, then $P \in \anodes$;
+    \item \textbf{(Graph)} If $G \subset \anodes$ is a finite multiset, then $G
+    \in \agraphs$;
+    \item \textbf{(Cut)} If $G \in \agraphs$, then $[G] \in \anodes$.
+  \end{itemize}
+  % An \emph{$\alpha$-graph} is a multiset of atomic propositions and
+  % $\alpha$-graphs.
+\end{definition}
+% Note that with this definition, the distinction between $\SA$ and cuts is
+% implicitly captured by whether a multiset belongs to another multiset (cut), or
+% is at the ``top-level'' ($\SA$). We could also have followed the approach used
+% for the solutions of bubble calculi (\refdef{solution}), by identifying cuts
+% (bubbles) as a separate construct defined mutually recursively with
+% $\alpha$-graphs (solutions).
+
+Note the similarity with the definitions of bubbles (cuts) and solutions
+(graphs) (\refdef{solution}). The main difference between $\alpha$-graphs and
+solutions, is that in the former formulas are restricted to atoms, and they are
+not \emph{polarized} (see \refremark{eg-polarity}).
+
+The $5$ rules of \sys{Alpha} can now be formalized as multiset rewriting rules
+on $\alpha$-graphs. But first, we need a notion of \emph{context} in which rules
+apply:
+
+\begin{definition}[$\alpha$-graph context]
+  An \emph{$\alpha$-graph context} $G\hole$ is an $\alpha$-graph which contains
+  exactly one occurrence of the special graph $\hole$ called the \emph{hole}.
+  The hole can always be \emph{filled} (substituted) with any other graph $H$ or
+  context $K\hole$, producing a new graph $\cfill{G}{H}$ or context
+  $\cfill{G}{K\hole}$. In particular, filling with the empty graph $\emptyset$
+  will yield a graph $\cfill{G}{\phantom{G}}$, which is just $G\hole$ with its
+  hole removed.
+\end{definition}
+
+Then we can determine the polarity of a context by counting recursively the
+number of cuts enclosing its hole:
+
+\begin{definition}[Parity]
+  The \emph{parity} $\parity{G\hole}$ of a context $G\hole$ is defined
+  inductively by:
+  \begin{align*}
+    \parity{H, \hole} &= 0 \\
+    \parity{H, [G\hole]} &= \parity{G\hole} + 1
+  \end{align*}
+\end{definition}
+
+\begin{definition}[Polarity]
+  We say that a context $G\hole$ is \emph{positive} if $\parity{G\hole}$ is
+  even, and \emph{negative} otherwise. We denote positive and negative contexts
+  respectively by $G^+\hole$ and $G^-\hole$.
+\end{definition}
+
+The inductive version of the rules of \sys{Alpha} is given in \reffig{alpha}, as
+a set of unary inference rules on $\alpha$-graphs: when read \emph{top-down},
+they correspond to usual inferences from premiss to conclusion, as we first
+introduced them in \refsec{illative}.
+% This gives them a \emph{static}, \emph{a posteriori} meaning, since this is
+% typically how you would check the validity of an established inference
+% \emph{after the fact}.
+But as already mentioned there, we will rather emphasize their \emph{bottom-up}
+reading: then they express the different ways in which one may choose to
+simplify a goal.
+
+\begin{definition}[Derivation]
+  We write $G \step H$ to indicate a rewrite \emph{step} in \sys{Alpha}, that is
+  an instance of some rule from \reffig{alpha} with $H$ as premiss and $G$ as
+  conclusion. A \emph{derivation} $G \nsteps{n} H$ is a sequence of rewrite
+  steps $G_0 \step G_1 \ldots \step G_n$ with $G_0 = G$, $G_n = H$ and $n \geq
+  0$. Generally the length $n$ of the derivation does not matter, and we just
+  write $G \steps H$.
+\end{definition}
+
+\begin{definition}[Proof]\labdef{eg-proof}
+  A \emph{proof} of an $\alpha$-graph $G$ is a derivation $G \steps \emptyset$.
+\end{definition}
+
+\begin{figure}
+  \input{figures/alpha.tex}
+  \caption{Inductive presentation of the rules of \sys{Alpha}}
+  \labfig{alpha}
+\end{figure}
+
+
+\section{Soundness}\labsec{eg-soundness}
+
+
+\section{Completeness}\labsec{eg-completeness}
+
+
+\section{\sys{Beta} graphs}\labsec{beta}
+
+
+\section{Gardens}\labsec{gardens}

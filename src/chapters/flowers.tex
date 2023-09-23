@@ -16,37 +16,30 @@ student said: "Of course not!". Which student was right, and why?
 We introduce the \emph{flower calculus}, a novel proof system for intuitionistic
 predicate logic based on syntactic objects called \emph{flowers}. We start by
 explaining how flowers stem from considerations in graphical logic, and more
-specifically from a constructivization of the \emph{existential graphs}
-(thereafter ``EG'') of C. S. Peirce proposed by A. Oostra
-\sidecite[12.5em]{oostra_graficos_2010}. Then we present our inductive syntax
-for flowers, reminiscent at the same time of the nested sequents of deep
-inference proof theory, and the geometric formulas of categorical logic. A
-salient feature of our calculus inherited from EG, is that it is \emph{fully
-iconic}: it dispenses completely with the traditional notion of symbolic
-formula, operating instead as a rewriting system on flowers containing only
-atomic predicates. We also propose a notion of proof geared towards analyticity
-results à la Gentzen, suggesting new rules absent from other works on
-existential graphs. This allows us to prove admissibility theorems for many
-structural rules, including Peirce's erasure rule which is a variant of
+specifically from a constructivization of the \emph{existential graphs} of C. S.
+Peirce proposed by A. Oostra \sidecite[12.5em]{oostra_graficos_2010}. Then we
+present our inductive syntax for flowers, reminiscent at the same time of the
+nested sequents of deep inference proof theory, and the geometric formulas of
+categorical logic. A salient feature of our calculus inherited from EG, is that
+it is \emph{fully iconic}: it dispenses completely with the traditional notion
+of symbolic formula, operating instead as a rewriting system on flowers
+containing only atomic predicates. We also propose a notion of proof geared
+towards analyticity results à la Gentzen, suggesting new rules absent from other
+works on existential graphs. This allows us to prove admissibility theorems for
+many structural rules, including Peirce's erasure rule which is a variant of
 Gentzen's cut rule. These results are obtained as a consequence of our soundness
 and completeness proofs with respect to Kripke semantics, in the spirit of the
 \emph{normalization-by-evaluation} technique \sidecite{NbE}. Furthermore, the
 kernel of rules targetted by completeness is fully invertible, a desirable
 property in both automated and interactive proof search.
 
-The chapter is organized as follows: in \refsec{EG}, we give a brief
-presentation of the original diagrammatic system \sys{Alpha} of EG for classical
-propositional logic, together with a reformulation as a rewriting system on
-arbitrary (finite) trees. In \refsec{Flowers}, we explain how to obtain the
-intuitionistic variant of EG put forth by A. Oostra \cite{oostra_graficos_2010}
-through a subtle topological distinction in the graphical representation, which
-can be illustrated metaphorically by drawing the graphs as \emph{flowers}. In
-\refsec{Quantification}, we explain quickly the original mechanism of
-\emph{lines of identity} used by Peirce to handle quantifiers and equality in
-his \sys{Beta} system, and show how to recast it in a more traditional syntax
-based on binders and variables. In \refsec{Calculus}, we introduce the full set
-of inference rules of the flower calculus as well as our notion of proof, and
-prove a few syntactic properties, including a deduction theorem. In
+The chapter is organized as follows: in \refsec{Flowers}, we explain how to
+obtain the intuitionistic variant of EG put forth by A. Oostra
+\cite{oostra_graficos_2010} through a subtle topological distinction in the
+graphical representation, which can be illustrated metaphorically by drawing the
+graphs as \emph{flowers}. In \refsec{Calculus}, we introduce the full set of
+inference rules of the flower calculus as well as our notion of proof, and prove
+a few syntactic properties, including a deduction theorem. In
 \refsec{Semantics}, we give a direct Kripke semantics to flowers, avoiding the
 need for translations to and from formulas. In \refsec{Soundness}, we show that
 the rules of the flower calculus are valid with respect to our Kripke semantics,
@@ -64,12 +57,6 @@ manipulating them are identified respectively with \emph{normal} and
 \emph{neutral} terms of the $\lambda$-calculus. We conclude in
 \refsec{Conclusion} by a comparison with some related works, and a discussion of
 future works and applications that we envision.
-
-\todo{IDEA (where should we put it?): \emph{superposition of polarities} in
-existential graphs. While a cut in bubble calculi is the insertion of \emph{two}
-occurrences of the same formula with \emph{distinct} polarities, the insertion
-rule only introduces \emph{one} occurrence of the formula, which plays either a
-negative role when it is iterated, or a positive role when it is deiterated}
 
 % \section{Introduction}
 
@@ -144,424 +131,11 @@ negative role when it is iterated, or a positive role when it is deiterated}
 % calculus could be used as a foundation for a graphical theorem proving
 % interface, and leave a more systematic proposal for future work.
 
-\subsection*{TODO}
-
-\begin{description}
-  \item[Explanatory prose] The remaining content of this draft is essentially a
-  terse, self-contained definition of the flower calculus, together with a
-  relatively detailed proof of completeness. Already written sections will
-  benefit from additional text explaining and motivating various definitions,
-  lemmas and theorems.
-  
-  \item[Graphical exposition] The first three sections, which shall expose the
-  origins and graphical intuitions behind the flower calculus, remain to be
-  written. The `Syntax' section is only temporary, and will ultimately be
-  merged/scattered throughout these first three sections.
-
-  \item[Soundness] We have a detailed proof of soundness on paper, which still
-  remains to be typeset in \LaTeX.
-  
-  \item[Conclusion] The conclusion section also remains to be written. Precise
-  related works and lines of future research have not been chosen yet, although
-  we have a good pool of candidates.
-\end{description}
 
 \todo{Make all usages of notations consistent with \reftab{letters}}
 
 
-\section{Existential graphs}\labsec{EG}
-
-\todo{ give a brief presentation of the original diagrammatic system \sys{Alpha}
-of EG for classical propositional logic, together with a reformulation as a
-rewriting system on arbitrary (finite) trees.}
-
-Peirce is famous for his contributions to symbolic logic, including among others
-his eponymous law for classical logic, and his pioneering work on the algebra of
-relations and quantification \sidecite{peirce_algebra_1885}. But far less
-widespread are his achievements in the realm of graphical logic, or \emph{iconic
-logic} as Shin calls it \sidecite{10.7551/mitpress/3633.001.0001}. He dedicated
-a large chunk of his life investigating diagrammatic systems, starting in 1882
-with the \emph{entitative graphs} and culminating with the \emph{existential
-graphs}, which he developed from 1896 until his death in 1914
-\sidecite{Roberts+1973}. Interestingly, Peirce perceived EG as his
-\textit{``chef d'oeuvre''}, and that they \textit{``ought to be the logic of the
-future''}\sidenote{Both citations are sourced in page 11 of
-\cite{Roberts+1973}.}.
-
-Recent works have started to realize this vision: for example Sowa based his
-conceptual graphs for computerized knowledge representation on EG
-\sidecite{sowa_conceptual_1976}, Brady, Trimble
-\sidecite{brady_categorical_2000}\sidecite{brady_string_nodate} and Haydon,
-Sobociński \sidecite{pietarinen_compositional_2020} proposed various
-reconstructions of EG through the lens of \emph{topology} and \emph{category
-theory}, and Melliès and Zeilberger \sidecite{mellies_bifibrational_2016}
-refined the interpretation of Brady and Trimble by making further connections
-with \emph{linear logic}\sidenote{We also know through private communication
-that N. Haydon is actively working on more explicit links between linear logic
-and the original formulation of EG by Peirce.} \sidecite{girard-linear-1987}.
-The full story has yet to be told, but we hope that our work will constitute one
-more step towards the vision Peirce had in mind.
-
-\subsection{\sys{Alpha} graphs}
-
-Peirce designed in total three systems of EG, which he called respectively
-\sys{Alpha}, \sys{Beta} and \sys{Gamma}. They were invented chronologically in
-that order, which also captures their relationship in terms of complexity:
-\sys{Alpha} is the foundation on which the other systems are built, and can
-today be understood as a diagrammatic calculus for classical
-\emph{propositional} logic. As we will see in \refsec{Quantification},
-\sys{Beta} corresponds to a variable-free representation of \emph{predicate}
-logic without function symbols, and with primitive support for \emph{equality}.
-The last system \sys{Gamma} is more experimental, with various unfinished
-features that have been interpreted as attempts to capture \emph{modal}
-\sidecite{zeman_graphical_1964} and \emph{higher-order} logics\sidenote{A less
-known fact is that at the end of his life, Peirce pushed his experimentations
-beyond the scope of \emph{logic} in the contemporary sense of the word (it was
-already the case for modal logic in his time), with so-called \emph{tinctured
-existential graphs} (Chapter 6 in \cite{Roberts+1973}). Roughly, the idea was to
-represent a variety of \emph{modes of expression} with different background
-shades on the canvas where sentences are scribed, not unlike our graphical
-depiction of the \emph{status} of solutions in \reffig{graphical-B}. In addition
-to the usual act of asserting the truth of a proposition, one could for instance
-express a \emph{subjective} or \emph{objective} possibility, or signify an
-interrogative or imperative mood, all by using different colors. For print in
-publications, he would in fact use \emph{heraldic tinctures} instead of colors,
-hence the ``tinctured'' qualificative. The precise meaning and purpose of
-tinctured EG remains elusive to this day, and might constitute the most esoteric
-part of his work. We see a possible connection with the type-theoretical concept
-of \emph{judgment}, which was rehabilitated by Martin-Löf from the philosophy of
-Kant \cite{Martin-Lof1996-MAROTM-7}, who was of great influence on Peirce's own
-philosophy \cite{sep-peirce}.}.
-
-The most fundamental concept of \sys{Alpha} is the \emph{sheet of assertion},
-denoted by $\SA$ thereafter. It is the space where statements are scribed by the
-reasoner, typically a sheet of paper or a blackboard. In a proof assistant, this
-would either be the buffer of a text editor holding the theory the user is
-developing, or the proof view displaying goals to be proved, depending on who
-the reasoner is (the user or the computer, respectively). This last analogy
-suggests an important property of $\SA$: it must offer a \emph{virtually
-infinite} amount of space, so that one can perform as much reasoning as needed.
-Just like a Turing machine has an infinite tape, so that one can perform as much
-computation as needed.
-
-As its name indicates, scribing a statement on $\SA$ amounts to \emph{asserting
-its truth}. Thus very naturally, the empty $\SA$ where nothing is scribed will
-denote vacuous truth, traditionally symbolized by the formula
-$\top$\sidenote{Peirce had an \emph{externalist} conception of truth, where the
-assertions made by the \process{Graphist}, i.e. the person scribing on $\SA$,
-refer to the world \emph{outside} of the sheet (the universe of discourse). By
-not scribing anything, the \process{Graphist} thus refrains from asserting
-anything about the world, only assuming implicit truths. This is illustrated by
-the following quote from \cite{Roberts+1973}, reminiscent of an interaction
-between a proof assistant (the \process{Graphist}) and her user (\process{the
-Interpreter}): \textit{``One of the parties, called the Graphist, is responsible
-for scribing the original graphs at the beginning of the investigation or
-discussion; the other, called the Interpreter, draws inferences from these
-graphs by changing them in accordance with the permissions of the system. The
-[...] sheet, before anything is scribed on it, represents whatever is taken for
-granted at the outset by the Graphist and Interpreter.''}.}.
-
-As we know from natural deduction, asserting the truth of the conjunction $P
-\land Q$ of two propositions $P$ and $Q$, amounts to asserting the truth of $P$
-and the truth of $Q$. In EG, there is no need to introduce the symbolic
-connective $\land$, since one can just write both $P$ and $Q$ at distinct
-locations of $\SA$:
-$$P~~~Q$$
-More generally, one might consider any two portions $G$ and $H$ of $\SA$, and
-interpret their \emph{juxtaposition} $G~H$ as signifying that we assert the
-truth of their conjunction. This leads us to formulate the first fundamental
-principle of EG:
-$$\text{\emph{Any portion of $\SA$ is a graph.}}$$
-
-Asserting the truth of the negation $\neg P$ of a proposition $P$, amounts to
-\emph{denying} the truth of $P$. Using the original notation of Peirce, this is
-done in EG by \emph{enclosing} $P$ in a closed curve like so:
-$$\ppcut{P}$$
-Peirce called such curves \emph{cuts}\sidenote{Not to be confused with the name
-given to instances of the \emph{cut rule} in sequent calculus. Although there is
-a connection, since in \sys{LK}, one occurrence of the cut formula in the
-premisses of the rule is negated.}, because they ought to be seen as literal
-cuts in the paper sheet that embodies $\SA$. Note that they do not need to be
-circles: all that matters is that $P$ is in a separate area from the rest of
-$\SA$. This is precisely the content of the \emph{Jordan curve theorem} in
-topology, and thus we can take cuts to be arbitrary Jordan curves. This entails
-in particular that cuts cannot intersect each other, but can be freely nested
-inside each other. Then as for juxtaposition, one can replace $P$ by any graph
-$G$, i.e. any portion of $\SA$, as long as the cut does not intersect other cuts
-in $G$.
-
-With just these two \emph{icons}, juxtaposition and cuts, one can therefore
-assert the truth of any proposition made up of conjunctions and negations, and
-built from atomic propositions. Importantly, the only symbols needed for doing
-so are the letters $P, Q, R\ldots$ denoting atomic propositions.
-
-Now, it is well-known that $\{\land,\neg\}$ is \emph{functionally complete},
-meaning that any boolean truth function can be expressed as the composition of
-boolean conjunctions and negations. In particular, the symbolic definitions of
-falsehood $\bot \defeq \neg\top$, classical disjunction $A \lor B \defeq
-\neg(\neg A \land \neg B)$ and classical implication $A \limp B \defeq \neg (A
-\land \neg B)$ can be expressed by the following three graphs\sidenote{Note the
-resemblance with the translation of formulas as solutions in
-\reffig{bubbles-native}, in particular for negative disjunctions.}:
-\begin{mathpar}
-  \ppcut{\phantom{A}}
-  \and
-  \ppcut{\ppcut{A}~~~\ppcut{B}}
-  \and
-  \ppcut{A~~~\ppcut{B}}
-\end{mathpar}
-Thus one can easily encode any propositional formula into a classically
-equivalent graph. Conversely, one can translate a graph into a classically
-equivalent formula, as has been shown for instance in
-\sidecite{10.7551/mitpress/3633.001.0001}. In fact, there are usually many
-possible formula readings of a given graph: this is because juxtaposition of
-graphs is a \emph{variadic} operation, as opposed to conjunction of formulas
-which is \emph{binary}. Also, because of the topological nature of $\SA$,
-juxtaposition is naturally \emph{associative} and \emph{commutative}: the
-locations of two juxtaposed graphs do not matter, as long as they live in the
-same area delimited by cuts. Hence, graphs can be seen as an
-associative-commutative normal form for propositional formulas built from atoms
-with $\{\land,\neg\}$\sidenote{In a first version of EG called \emph{entitative
-graphs}, Peirce used juxtaposition to denote \emph{disjunction} instead of
-conjunction. Although $\{\lor,\neg\}$ is also functionally complete, Peirce
-quickly grew unsatisfied with these entitative graphs, stating that EG formed
-``a far preferable system on the whole'' (Ms 280, pp. 21-22). I find it
-interesting that more contemporary works in logic have also made the choice to
-take conjunction and negation as their primitive operations, like the tensorial
-logic of Melliès \cite{mellies_micrological_2017}, or the realizability
-constructions for linear logic in Girard's transcendental syntax
-\cite{eng_stellar_2020}.}.
-
-\subsection{Illative transformations}
-
-In order to have a proof system, one needs a collection of \emph{inference
-rules} for deducing true statements from other true statements. In EG, inference
-rules are implemented by what Peirce called \emph{illative transformations} on
-graphs. In modern terminology, they correspond to \emph{rewriting} rules that
-can be applied to any subgraph/portion of $\SA$. By measuring the depth of a
-subgraph as the number of cuts in which it is enclosed, we thus have that the
-rules of EG are applicable on subgraphs of arbitrary depth. This makes EG
-deserving of the title of \emph{deep} inference system.
-
-\begin{marginfigure}
-  $$\npcut{A~~~\ppcut{\npcut{B}~~~C}}$$
-  \caption{Peirce's notation for emphasizing negative areas}
-  \labfig{peirce-neg-areas}
-\end{marginfigure}
-
-\begin{marginfigure}
-  $$\ncut{A~~~\pcut{\ncut{B}~~~C}}$$
-  \caption{Our notation for emphasizing negative areas}
-  \labfig{our-neg-areas}
-\end{marginfigure}
-
-Before introducing the rules, let us make a small change in the way we depict
-the graphs. The idea is that we want to visualize more clearly the
-\emph{polarity} of any subgraph $G$, understood as the \emph{parity} of the
-number of cuts (negations) enclosing $G$. In one of his unpublished manuscripts
-(Ms 514), Peirce did this by \emph{shading} negative areas --- those enclosed in
-an odd number of cuts --- in gray, as illustrated in \reffig{peirce-neg-areas}
-\sidecite{sowa_peirces_2011}. Unconstrained by hand-drawing, we will adopt an
-even more iconic notation, where negative areas are \emph{literally} drawn like
-a negative in photography, by inverting white and black. Thus the example of
-\reffig{peirce-neg-areas} will be drawn as in \reffig{our-neg-areas}. A nice
-advantage of both Peirce's and our notation, is that it removes the need to
-count manually the number of cuts starting from the top-level of $\SA$: the
-information is immediately apparent in the subgraph, and thus completely
-\emph{local}\sidenote{A similar device is used in the deep inference system
-\sys{ISp} of Tiu \cite{tiu_local_2006}, where the polarities of substructures
-are attached to them as explicit labels.}.
-
-\begin{remark}
-  Whereas in bubble calculi the concept of polarity was understood as a property
-  of \emph{objects} --- i.e. utterances of propositions --- by assigning them
-  opposite colors (blue and red), the previous notations for EG suggest that it
-  is instead a property of the \emph{space} in which objects reside. This is
-  more natural from the point of view of \emph{game semantics}: for instance in
-  a game of chess, the two players can easily exchange their roles by switching
-  places or rotating the board by 180°, rather than by repainting painstakingly
-  each piece in the opposite color.
-\end{remark}
-
-Quite surprisingly, Peirce showed that one only needs $5$ inference rules to get
-a \emph{strongly complete} system, in the sense that if the truth of a graph $G$
-entails the truth of another graph $H$, then $G$ can always be rewritten into
-$H$ by applying exclusively instances of these $5$ rules\sidenote{Of course
-Peirce did not show completeness formally in the sense of modern model theory,
-although Sowa argues in \cite{sowa_peirces_2011} (Section 4) that he had started
-to develop his own model theory equivalent to Tarski's (but closer to the
-\emph{game-theoretical semantics} of Hintikka \cite{Hintikka1973-HINLLA}). One
-can find a modern categorical treatment of completeness with respect to Boolean
-algebras, based on a rigorous formalization of the geometry and algebra of EG,
-in \cite{brady_categorical_2000}.}. A nice way to understand the rules of EG is
-as \emph{edition principles}, like the most basic actions one executes
-pervasively when editing text on a computer\sidenote{Even though computers did
-not exist yet in Peirce's time! In fact, Martin Irvine argues in
-\cite{irvine_semiotics_2022} that Peirce anticipated many developments in
-computer science and information technologies, such as the use of electrical
-switches to compute boolean functions, whose invention is usually attributed to
-Claude Shannon.}. The first two rules are the most powerful and mysterious of
-EG, and can be applied in areas of any polarity:
-\begin{itemize}
-  \item[\textbf{Iteration} \textit{(Copy \& Paste)}]
-    A graph $G$ may be duplicated at any depth inside of a juxtaposed graph $H$.
-    Using our notation for holed contexts from previous chapters, this can be
-    represented schematically like so:
-    \begin{mathpar}
-      G~~~H\select{\phantom{G}} ~~~\step~~~ G~~~H\select{G}
-      \and
-      \nsheet{G~~~H\select{\phantom{G}} ~~~\step~~~ G~~~H\select{G}}
-    \end{mathpar}
-    In particular, $H$ can be taken to be any empty portion of $\SA$ in the same
-    area as $G$, giving that $G ~\step~ G~G$.
-  \item[\textbf{Deiteration} \textit{(Factorization)}]
-    Formally, this is the converse of \rsf{Iteration}:
-    \begin{mathpar}
-      G~~~H\select{G} ~~~\step~~~ G~~~H\select{\phantom{G}}
-      \and
-      \nsheet{G~~~H\select{G} ~~~\step~~~ G~~~H\select{\phantom{G}}}
-    \end{mathpar}
-    Its interpretation as an edit action is a bit trickier, but it can be
-    understood as a form of \emph{sharing} of information. Indeed, it roughly
-    says that a subgraph $G$ can be erased if it already occurs ``higher'' on
-    $\SA$. Also this does precisely the opposite of copy-pasting, which is known
-    in software engineering as \emph{factorization}\sidenote{This is closely
-    related to the kind of factorization at work in bubble calculi. In
-    particular, the fact that the factorizing occurence is higher and usually
-    outside of a cut is very reminiscent of the \emph{outward} flow rules of
-    system $\sysB$ (those whose name ends with $\uparrow$ in
-    \reffig{sequent-B}); and the deduplicating effect makes \rsf{Deiteration}
-    even closer to the variant of the same rules in \sys{B_{inv}}
-    (\reffig{sequent-B-inv}).}.
-\end{itemize}
-The applicability of the next two rules depends on the polarity of the
-subgraph's area:
-\begin{itemize}
-  \item[\textbf{Insertion}]
-    Any graph $G$ may be inserted in a negative area:
-    $$\nsheet{~~~\step~~~ G}$$
-    This is akin to a \emph{weakening} rule, stating that if a proposition is
-    known to be true, one might add (useless) hypotheses at will. The closest
-    equivalent we found in the deep inference literature is indeed the weakening
-    rule \rsf{wl{\downarrow}} of \sys{ISp} in \sidecite{tiu_local_2006}.
-  \item[\textbf{Erasure} \textit{(Deletion)}]
-    Any graph $G$ occurring in a positive area may be erased:
-    $$G ~~~\step~~~$$
-    This is exactly the dual of \rsf{Insertion}, stating that if a proposition
-    is known to be true, then one might as well refrain from asserting it.
-    % It is strongly related to the cut rule of sequent calculus, as will be
-    % demonstrated shortly.
-\end{itemize}
-The last rule is more of a \emph{space management} principle that works as an
-\emph{isotopy}, i.e. a bidirectional topological deformation:
-\begin{itemize}
-  \item[\textbf{Double-cut}]
-    A \emph{double-cut} may be inserted or erased around any graph $G$:
-    \begin{mathpar}
-      \ncut{\pcut{G}} ~~~\leftrightarrow~~~ G
-      \and
-      \nsheet{\pcut{\ncut{G}} ~~~\leftrightarrow~~~ G}
-    \end{mathpar}
-    The bidirectional arrow $\leftrightarrow$ expresses that the rule can be
-    applied in both directions\sidenote{We could have merged \rsf{Iteration} and
-    \rsf{Deiteration} in this way, but chose to follow the original presentation
-    of the rules by Peirce instead, as exposed in \cite{Roberts+1973}.}.
-    Logically, this corresponds to the classical equivalence $\neg\neg A
-    \semequiv A$, where in particular the erasure direction $\neg\neg A \limp A$
-    is not true intuitionistically. Topollogically, the double-cut forms a
-    \emph{ring}, that separates $G$ from the rest of $\SA$ while preserving its
-    polarity. Then the two directions of the rules can be understood as the
-    following dual \emph{homotopies}:
-    \begin{itemize}
-      \item[\textbf{Contraction}] The ring is created by cutting $\SA$ around
-      $G$, and then \emph{contracting} the inner area where $G$ resides on
-      itself. This effectively ``pulls apart'' $G$ from the rest of the sheet,
-      leaving apparent in the empty space of the ring whatever lies behind
-      $\SA$. Peirce thought of positive and negative areas as being the
-      \emph{recto} and \emph{verso} of $\SA$, respectively. Thus in the positive
-      version of the rule (on the left), the ring would represent negative empty
-      space on the verso of $\SA$.
-      \item[\textbf{Expansion}] The ring is erased by \emph{expanding} the inner
-      area where $G$ resides towards the outer border of the ring. Unfolding the
-      metaphor to its conclusion, the inner area is then ``glued back'' to the
-      rest of $\SA$\sidenote{This is reminiscent of the \emph{absorption} rules
-      $\{\rsf{a},\rsf{a{-},\rsf{a{+}}}\}$ of system $\sysB$, as is very clear in
-      their graphical presentation (\reffig{graphical-B}).}.
-    \end{itemize}
-\end{itemize}
-A remarkable feat of Peirce's rules, on which he insisted very much, is that
-they are only expressed in terms of \emph{insertions} and \emph{omissions} of
-graphs on $\SA$. He thought that those were the \emph{smallest} steps in which
-reasoning could be dissected, making his system extremely appropriate for
-\emph{analytical} purposes\sidenote{See Section 7.11 of \cite{Roberts+1973}.}.
-We already considered this question of decomposing logical inferences into their
-most elementary operations, when reflecting on the graphical presentation of
-\sys{BJ} at the end of \refsec{bubbles-graphical-rules}. In this setting, the
-most basic insertions and omissions we could find were not logically
-\emph{sound}, whereas in EG they are. This is quite promising, and prompts us to
-reevalute our conception of \emph{atomicity} in logical reasoning.
-
-\reffig{peirce-law-eg} shows a derivation of Peirce's law with the rules of EG.
-Note that the direction of arrows has been reversed compared to the above
-presentation: as usual, we prefer to read rules from conclusion to premiss,
-starting from the goal to prove --- here the graph associated to the formula
-$((P \limp Q) \limp P) \limp P$ --- that we reduce to the empty goal,
-represented by the empty $\SA$. Also, the reader unfamiliar with EG might find
-it hard to convince herself that all the steps followed in the derivation are
-\emph{sound} logically. For lack of space, we will not provide a general proof
-of soundness for the rules, which requires a bit of work (especially in the case
-of \rsf{Iteration} and \rsf{Deiteration}). We suggest the reader to either:
-\begin{enumerate*}
-  \item build a \emph{syntactic} intuition by practicing the rules with various
-  tautologies of propositional logic;
-  \item read up the existing literature on the subject, for instance in Appendix
-  4 of \cite{Roberts+1973};
-  \item wait for the proof of soundness of our flower calculus with respect to
-  Kripke semantics in \refsec{Soundness}.
-\end{enumerate*}
-
-\todo{Draw proof of Peirce's law}
-
-Lastly, let us give an example of how to \emph{simulate} a rule from natural
-deduction in EG. Rather than reducing the graph associated to a formula to the
-empty $\SA$, we want to reduce the graph associated to the conclusion of the
-rule into the graph associated to its premisses. \reffig{eg-seq-cut} shows how
-to proceed in the case of the elimination rule for $\limp$, or \emph{modus
-ponens}. A crucial step is the use of the \rsf{Erasure} rule, which allows to
-create a positive occurrence of $A$ out of thin air. This is the main source of
-non-analyticity in EG, in the sense of the \emph{subformula property} of
-Gentzen. We will show in \refsec{Completeness} that the equivalent of
-\rsf{Erasure} in our flower calculus is admissible. This derivation also makes
-clear that it is the positive $A$ that justifies the negative one with the
-\rsf{Deiteration} rule, and not the other way around. Indeed, the presence of
-the cut around the negative $A$ makes it deeper than the positive $A$ on $\SA$,
-preventing the \rsf{Deiteration} rule from being applicable in the other
-direction. This is a manifestation of the inherent dissymmetry in \emph{proof
-substitution}: the erasure of the negative $A$ can be interpreted as the
-operation $\subst{\pi_A}{\pi_B}{x}$, which substitutes every occurrence of the
-associated hypothesis $x$ in the proof $\pi_B$ of $B$ by the proof $\pi_A$ of
-the positive $A$. We elaborate further on this computational aspect of EG in
-\refsec{flowers-curryhoward}.
-
-\todo{Draw simulation of modus ponens $A \land (A \limp B) \limp B$}
-
-% \todo{ Then compare sequent and EG derivations of the example on p. 111 of
-% \cite{Roberts+1973}, where the latter exposes a lot less steps. Thus, which
-% should be considered more atomic? We will not fret too much over this question,
-% our goal in the end being to hide trivial reasoning steps from the user. We will
-% see in \refsec{flowers-prover} that this is not incompatible with the analytic
-% aspect of EG. }
-
-\subsection{As a rewriting system}
-
-\todo{Mention the Tree Existential Graphs (TEG) of \cite{Roberts+1973}, but that
-we could not find any associated publication, and that it might have stayed a
-WIP. Brady and Trimble also propose to see an alpha graph as a rooted tree, but
-they choose to work with a more abstract combinatorial description based on the
-operation of \emph{substitution} of a graph at a given point.}
-
-
-\section{Intuitionistic logic}\labsec{Flowers}
+\section{Intuitionistic existential graphs}\labsec{Flowers}
 
 \todo{ explain how to obtain the intuitionistic variant of EG put forth by A.
 Oostra \cite{oostra_graficos_2010} through a subtle topological distinction
@@ -577,20 +151,6 @@ justifies the metaphorical terminology of our calculus.}
 duplicate/merge identical petals. But it is not \emph{deep} (``Cualquier lazo
 puede iterarse adherido \emph{al mismo corte}'', p. 46 of
 \cite{oostra_graficos_2010}), and thus seems a bit arbitrary.}
-
-
-\section{Quantification}\labsec{Quantification}
-
-\todo{ illustrate quickly the original mechanism of \emph{lines of identity}
-used by Peirce to handle quantifiers and equality in his \sys{Beta} system, and
-show how to recast it in a more traditional binder-based syntax. Although some
-interesting low-level proof dynamics are lost, it greatly simplifies both the
-inductive formulation, and the graphical representation when the proof state
-gets larger.}
-
-\subsection{Lines of identity}
-
-\subsection{Gardens}
 
 \section*{Syntax}
 
@@ -765,14 +325,14 @@ as well as our notion of proof, both motivated by analyticity concerns. We also
 prove a few useful syntactic properties of our system, including a deduction
 theorem.}
 
-\begin{definition}[Context]
-  A \emph{context} $\Phi\hole$ is a bouquet such that there is a unique flower
-  $\phi \in \Phi\hole$ which contains exactly 1 distinguished 0-ary atom $\hole$
-  called the \emph{hole} of $\Phi\hole$. This hole can always be \emph{filled}
-  (substituted) with any other bouquet $\Psi$ or context $\Xi\hole$, producing a
-  new bouquet $\cfill{\Phi}{\Psi}$ or context $\cfill{\Phi}{\Xi\hole}$. In
-  particular, filling with the empty bouquet will yield a bouquet
-  $\cfill{\Phi}{\phantom{\Phi}}$, which is just $\Phi\hole$ with its hole removed.
+\begin{definition}[Bouquet context]
+  A \emph{bouquet context} $\Phi\hole$ is a bouquet which contains exactly one
+  occurrence of the special bouquet $\hole$ called the \emph{hole}. The hole can
+  always be \emph{filled} (substituted) with any other bouquet $\Psi$ or context
+  $\Xi\hole$, producing a new bouquet $\cfill{\Phi}{\Psi}$ or context
+  $\cfill{\Phi}{\Xi\hole}$. In particular, filling with the empty bouquet will
+  yield a bouquet $\cfill{\Phi}{\phantom{\Phi}}$, which is just $\Phi\hole$ with
+  its hole removed.
 \end{definition}
 
 \begin{definition}[Parity]
@@ -827,102 +387,7 @@ prove, I transform it into a new goal $\Psi$ which is a sufficient justification
 of $\Phi$, and hopefully simpler to prove.
 
 \begin{figure*}
-  \begin{framed}
-  {\textsc{Nature} $\Nature$}
-  \vspace{1.5em}
-  \begin{mathpar}
-    \R[\textsf{poll}{\downarrow}]
-      {\cfill{\Xi}{\phantom{\Phi}}}
-      {\cfill{\Xi}{\Phi}}
-    \and
-    \R[\textsf{poll}{\uparrow}]
-      {\cfill{\Xi}{\Phi}}
-      {\cfill{\Xi}{\phantom{\Phi}}}
-    % \R[\textsf{wpol}\downarrow]
-    %   {\Psi, \cfill{\Xi}{\phantom{\Phi}}}
-    %   {\Psi, \cfill{\Xi}{\Psi}}
-    % \and
-    % \R[\textsf{wpol}\uparrow]
-    %   {\Psi, \cfill{\Xi}{\Psi}}
-    %   {\Psi, \cfill{\Xi}{\phantom{\Phi}}}
-    % \\
-    % \R[\textsf{spol}\downarrow]
-    %   {\garden{\mathbf{x}}{\Phi, \Psi} \csup \cfill{\Xi}{\phantom{\Phi}} \sep \Delta}
-    %   {\garden{\mathbf{x}}{\Phi, \Psi} \csup \cfill{\Xi}{\Psi} \sep \Delta}
-    % \and
-    % \R[\textsf{spol}\uparrow]
-    %   {\garden{\mathbf{x}}{\Phi, \Psi} \csup \cfill{\Xi}{\Psi} \sep \Delta}
-    %   {\garden{\mathbf{x}}{\Phi, \Psi} \csup \cfill{\Xi}{\phantom{\Phi}} \sep \Delta}
-    \\\\
-    % \R[\textsf{epis}\downarrow\textsf{pis}]
-    %   {\flower{\garden{\mathbf{x}, \mathbf{y}}{\Psi, \Phi}}{\Delta}}
-    %   {\flower{\garden{\mathbf{x}}{(\flower{\garden{{}}{{}}}{\garden{\mathbf{y}}{\Psi}}),
-    %   \Phi}}{\Delta}}
-    % \and
-    % \R[\textsf{epis}\downarrow\textsf{pet}]
-    %   {\flower{\gamma}{\garden{\mathbf{x}, \mathbf{y}}{\Psi, \Phi} \sep \Delta}}
-    %   {\flower{\gamma}{\garden{\mathbf{x}}{(\flower{\garden{{}}{{}}}{\garden{\mathbf{y}}{\Psi}}), \Phi}
-    %   \sep \Delta}}
-    % \and
-    \R[\textsf{fence}]
-      {\flower{\garden{{}}{{}}}{\garden{{}}{\Phi}}}
-      {\Phi}
-    \\\\
-    \R[\textsf{epet}]
-      {}
-      {\flower{\gamma}{\garden{{}}{{}} \sep \Delta}}
-    \and
-    \R[\textsf{srep}]
-      {\flower{\garden{\mathbf{x}}{\Phi}}{\garden{{}}{\fset{i}{n}{\flower{\gamma_i}{\Delta}}}}}
-      {\flower{\garden{\mathbf{x}}{\Phi, (\flower{\garden{{}}{{}}}{\fset{i}{n}{\gamma_i}})}}{\Delta}}
-    \\\\
-    \R[\textsf{ipis}]
-      {(\flower{\garden{\mathbf{x}}{\sigma(\Phi)}}{\sigma(\Delta)}), (\flower{\garden{\mathbf{x}, \mathbf{y}}{\Phi}}{\Delta})}
-      {\flower{\garden{\mathbf{x}, \mathbf{y}}{\Phi}}{\Delta}}
-    \and
-    \R[\textsf{ipet}]
-      {\flower{\gamma}{\garden{\mathbf{x}}{\sigma(\Phi)} \sep \garden{\mathbf{x}, \mathbf{y}}{\Phi} \sep \Delta}}
-      {\flower{\gamma}{\garden{\mathbf{x}, \mathbf{y}}{\Phi} \sep \Delta}}
-  \end{mathpar}
-
-  \vspace{3em}
-
-  {\textsc{Culture} $\Culture$}
-  \vspace{1.5em}
-  \begin{mathpar}
-    \R[\textsf{grow}]
-      {\cfill{\Xi^+}{\Phi}}
-      {\cfill{\Xi^+}{\phantom{\Phi}}}
-    \and
-    \R[\textsf{crop}]
-      {\cfill{\Xi^-}{\phantom{\Phi}}}
-      {\cfill{\Xi^-}{\Phi}}
-    \\\\
-    \R[\textsf{pull}]
-      {\cfill{\Xi^+}{\flower{\gamma}{\Delta}}}
-      {\cfill{\Xi^+}{\flower{\gamma}{\delta \sep \Delta}}}
-    \and
-    \R[\textsf{glue}]
-      {\cfill{\Xi^-}{\flower{\gamma}{\delta \sep \Delta}}}
-      {\cfill{\Xi^-}{\flower{\gamma}{\Delta}}}
-    \\\\
-    \R[\textsf{apis}]
-      {\cfill{\Xi^+}{\flower{\garden{\mathbf{x}, \mathbf{y}}{\Phi}}{\Delta}}}
-      {\cfill{\Xi^+}{\flower{\garden{\mathbf{x}}{\sigma(\Phi)}}{\sigma(\Delta)}}}
-    \and
-    \R[\textsf{apet}]
-      {\cfill{\Xi^-}{\flower{\gamma}{\garden{\mathbf{x}, \mathbf{y}}{\Phi} \sep \Delta}}}
-      {\cfill{\Xi^-}{\flower{\gamma}{\garden{\mathbf{x}}{\sigma(\Phi)} \sep \Delta}}}
-  \end{mathpar}
-
-  \vspace{3em}
-
-  In the rules \rnmsf{poll{\downarrow}} and \rnmsf{poll{\uparrow}}, we assume that
-  $\chyp{\Phi}{\Xi\hole}$.
-  
-  In the rules \rnmsf{ipis}, \rnmsf{ipet}, \rnmsf{apis}, \rnmsf{apet}, we assume
-  some substitution $\sigma : \mathbf{y} \to \terms$.
-  \end{framed}
+  \input{figures/flower-calculus.tex}
   \caption{Rules of the flower calculus}
   \labfig{flower-calculus}
 \end{figure*}
@@ -959,12 +424,12 @@ simplify a goal.
 
 \todo{Use the $\lstep$ notation for local steps}
 
-\begin{definition}[Proof]
+\begin{definition}[Proof]\labdef{flowers-proof}
   A \emph{proof} of a bouquet $\Phi$ is a derivation $\Phi \steps \emptyset$.
 \end{definition}
 
 In Peircean terms, the empty bouquet is the blank sheet of assertion, which as
-we have seen in \refsec{EG} can be interpreted as the symbol of \emph{absolute
+we have seen in \refsec{alpha} can be interpreted as the symbol of \emph{absolute
 truth}. Then in our proof construction paradigm, proving a bouquet amounts to
 erasing it completely from the sheet of assertion, thus reducing it to absolute
 truth.
@@ -1501,6 +966,33 @@ the invertible bubble calculus of \refsec{invertible-calculus}.}
 \todo{ briefly sketch some ideas for a Curry-Howard correspondence, where
 flowers and actions for manipulating them are identified respectively with
 \emph{normal} and \emph{neutral} terms of the $\lambda$-calculus. }
+
+\todo{Write simulation of modus ponens $A \land (A \limp B) \limp B$}
+
+Let us give an example of how to \emph{simulate} a rule from natural deduction
+in the flower calculus. Rather than reducing the bouquet associated to a formula
+to the empty bouquet, we want to reduce the bouquet associated to the conclusion
+of the rule into the bouquet associated to its premisses. \reffig{flowers-mp}
+shows how to proceed in the case of the elimination rule for $\limp$, or
+\emph{modus ponens}. A crucial step is the use of the \rsf{grow} rule, which
+allows to create a positive occurrence of $A$ out of thin air. This is the main
+source of non-analyticity in the flower calculus, in the sense of the
+\emph{subformula property} of Gentzen. Although we showed in
+\refsec{Completeness} that the \rsf{grow} rule is admissible, it was for the
+relation of \emph{provability} (\refdef{flowers-proof}). Here to simulate modus
+ponens we rely on \emph{derivability}, and thus need this rule.
+
+The derivation of \reffig{flowers-mp} also makes clear that it is the positive
+$A$ that justifies the negative one with the \rsf{poll{\uparrow}} rule, and not
+the other way around. Indeed, the presence of the pistil around the negative $A$
+makes it deeper than the positive $A$, preventing the \rsf{poll{\uparrow}} rule
+from being applicable in the other direction. This is a manifestation of the
+inherent dissymmetry in \emph{proof substitution}: the erasure of the negative
+$A$ can be interpreted as the operation $\subst{\pi_B}{\pi_A}{x}$, which
+substitutes every occurrence of the associated hypothesis $x$ in the proof
+$\pi_B$ of $B$ by the proof $\pi_A$ of the positive $A$.
+
+\todo{ Elaborate further on this computational aspect of EG. }
 
 
 \section{Conclusion}\labsec{Conclusion}

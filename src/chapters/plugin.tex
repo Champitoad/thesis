@@ -112,17 +112,16 @@ requires the use of a unification algorithm (see \refsec{validity}).
 Usually, integrated development environments for Coq live in an independent
 process, and exchange data with Coq through a high-level communication protocol:
 either the command line interface provided by \texttt{coqtop}, Coq's default XML
-protocol, or its improved superset SerAPI \sidecite{gallegoarias:hal_01384408}. In
-particular, SerAPI emerged from the development of jsCoq
+protocol, or its improved superset SerAPI \sidecite{gallegoarias:hal_01384408}.
+In particular, SerAPI emerged from the development of jsCoq
 \sidecite{Gallego_Arias_2017}, an IDE that runs entirely in web browsers by
 embedding a version of Coq compiled with js\_of\_ocaml. Since Actema is also
 web-based and uses js\_of\_ocaml, our first idea was essentially to fork jsCoq
-and replace its interface by that of Actema. However as noted by E. J. G.
-Arias\sidenote{In private communication.}, the SerAPI protocol --- and in fact
-all the other protocols turn out to be too high-level for our purpose. Typically
-we need to (partially) translate Coq goals into iFOL goals, which can be done
-much more easily with a direct access to Coq's low-level API for manipulating
-kernel terms.
+and replace its interface by that of Actema. However as noted by E. J. G. Arias,
+the SerAPI protocol --- and in fact all the other protocols turn out to be too
+high-level for our purpose. Typically we need to (partially) translate Coq goals
+into iFOL goals, which can be done much more easily with a direct access to
+Coq's low-level API for manipulating kernel terms.
 % We also heavily rely on unification to interactively suggest valid
 % actions on subterms of the goal, and none of the protocols implement unification
 % queries.
@@ -681,12 +680,11 @@ can in principle reuse the notation system already implemented within Coq. The
 using their assigned notations. The problem is that these methods only return
 \emph{strings}, but in order to manipulate terms interactively in Actema we also
 need access to \emph{trees} mapping their subterm structure to the
-pretty-printed string. At the time of writing there is no support for the latter
-as far as we know, but we learned that it is planned through private
-communication with the Coq development team. The same problem was met by the
-developers of the ProofWidgets framework in Lean, and they had to modify the
-pretty-printer of Lean upstream\sidenote{Section 4.1 of
-\cite{ayers_graphical_2021}.}.
+pretty-printed string. At the time of writing there is no support for the
+latter, but the Coq development team informed us that they plan to add it. The
+same problem was met by the developers of the ProofWidgets framework in Lean,
+and they had to modify the pretty-printer of Lean upstream\sidenote{Section 4.1
+of \cite{ayers_graphical_2021}.}.
 
 Once one has support for custom notations displayed in an HTML page, it is
 tempting to also allow for arbitrary HTML/JS code, instead of just textual
