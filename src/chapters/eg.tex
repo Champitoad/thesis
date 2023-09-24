@@ -438,10 +438,11 @@ $\alpha$-graphs as (recursive) \emph{finite multisets}:
 
 \begin{definition}[$\alpha$-graph]\labdef{alpha-graph} 
   
-  The sets of \emph{$\alpha$-nodes} $\anodes$ and \emph{$\alpha$-graphs}
-  $\agraphs$ are defined mutually inductively as follows:
+  Given a denumerable set of atomic propositions $\atoms$, the sets of
+  \emph{$\alpha$-nodes} $\anodes$ and \emph{$\alpha$-graphs} $\agraphs$ are
+  defined mutually inductively as follows:
   \begin{itemize}
-    \item \textbf{(Atom)} If $P$ is an atomic proposition, then $P \in \anodes$;
+    \item \textbf{(Atom)} If $P \in \atoms$, then $P \in \anodes$;
     \item \textbf{(Graph)} If $G \subset \anodes$ is a finite multiset, then $G
     \in \agraphs$;
     \item \textbf{(Cut)} If $G \in \agraphs$, then $[G] \in \anodes$.
@@ -475,16 +476,22 @@ apply:
   hole removed.
 \end{definition}
 
-Then we can determine the polarity of a context by counting recursively the
-number of cuts enclosing its hole:
+Then to reason by induction on contexts, we need to define formally how to
+measure their \emph{depth}. It turns out the only way to increase the depth of
+an $\alpha$-graph is to insert \emph{cuts}, and thus the depth of a context
+coincides with its \emph{parity}, i.e. the number of cuts enclosing its hole:
 
-\begin{definition}[Parity]
-  The \emph{parity} $\parity{G\hole}$ of a context $G\hole$ is defined
-  inductively by:
+\begin{definition}[Depth]
+  The \emph{depth} of a context $G\hole$ is defined recursively by
   \begin{align*}
-    \parity{H, \hole} &= 0 \\
-    \parity{H, [G\hole]} &= \parity{G\hole} + 1
+    \gdepth{H, \hole} &= 0 \\
+    \gdepth{H, [G\hole]} &= \gdepth{G\hole} + 1
   \end{align*}
+\end{definition}
+
+\begin{definition}[Parity]\labdef{eg-parity}
+  The \emph{parity} of a context $G\hole$ is defined by $\parity{G\hole} =
+  \gdepth{G\hole}$.
 \end{definition}
 
 \begin{definition}[Polarity]
@@ -526,6 +533,157 @@ simplify a goal.
 
 \section{Soundness}\labsec{eg-soundness}
 
+We are now going to prove formally the \emph{soundness} of each rule of
+\sys{Alpha}, by showing that if $G \step H$ and $H$ is \emph{true}, then so is
+$G$. In classical propositional logic, one can easily evaluate the truth of any
+formula $A$, given a truth-valuation $v : \atoms \to \{0,1\}$ for the atoms of
+$A$. The same applies to $\alpha$-graphs:
+
+\begin{definition}[$\alpha$-graph evaluation]
+
+  Given a valuation $v : \atoms \to \{0,1\}$ and a graph $G$, the
+  \emph{evaluation} $v(G)$ of G is defined by mutual recursion as follows:
+  \begin{align*}
+    v(G) &= \begin{cases}
+      1 &\text{if $G = \emptyset$} \\
+      \min_{g \in G}{v(g)} &\text{otherwise}
+    \end{cases} \\
+    v([G]) &= 1 - v(G)
+  \end{align*}
+\end{definition}
+
+This follows the standard way to evaluate conjunctions and negations.
+
+To factorize the proof of soundness, we first prove a few lemmas for the
+\emph{invertible} rules of \sys{Alpha}, that is those who satisfy $v(G) = v(H)$
+for every valuation $v$ if $G \step H$.
+
+\begin{lemma}[Iteration]\lablemma{eg-snd-iter}
+  For every graph $G$, context $H\hole$ and valuation $v$, we have
+  $$v\left(G, H\select{\phantom{G}}\right) = v\left(G, H\select{G}\right)$$
+\end{lemma}
+\begin{proof}
+  By recurrence on $\gdepth{H\hole}$.
+
+  \def\arraystretch{1.5}
+  \begin{itemize}
+    \item[\bcase]
+      Suppose $H\hole = H', \hole$. Then we have
+      $$
+      \begin{array}{rcll}
+        v(G, H')
+        &=& \min_{g \in G \cup H'}{v(g)} & \\
+        &=& \min_{g \in G \cup H' \cup G}{v(g)} & \\
+        &=& v(G, H', G) & \\
+      \end{array}
+      $$
+    \item[\rcase]
+      Suppose $H = H', [H_0\hole]$. Then we have
+      $$
+      \begin{array}{rcll}
+        v\left(G, H', \left[H_0\select{\phantom{G}}\right]\right)
+        &=& \min\left(v(H'), v\left(G, \left[H_0\select{\phantom{G}}\right]\right)\right) & \\
+        &=& \min\left(v(H'), v\left(G, \left[H_0\select{G}\right]\right)\right) &\text{(IH)} \\
+        &=& v\left(G, H', \left[H_0\select{G}\right]\right) & \\
+      \end{array}
+      $$
+  \end{itemize}
+\end{proof}
+
+\begin{lemma}[Double-cut]\lablemma{eg-doublecut}
+  For every graph $G$ and valuation $v$, we have
+  $$v([[G]]) = v(G)$$
+\end{lemma}
+\begin{proof}
+  $$
+  v([[G]]) = 1 - (1 - v(G)) = \begin{cases}
+    1 - (1 - 0) = 0 &\text{if $v(G) = 0$} \\
+    1 - (1 - 1) = 1 &\text{if $v(G) = 1$}
+  \end{cases}
+  $$
+  In both cases we have $v([[G]]) = v(G)$.
+\end{proof}
+
+Since all rules apply in an arbitrary deep context $K\hole$, we will benefit
+from the following \emph{functoriality} lemmas:
+
+\begin{lemma}\lablemma{minleq}
+  For every $a, b, c \in \{0,1\}$, $a \leq b$ implies $\min(a, c) \leq \min(b,
+  c)$.
+\end{lemma}
+\begin{proof}
+  If $a \leq c$ and $b \leq c$, then $\min(a, c) = a \leq b = \min(b, c)$.
+  Otherwise either $a > c$ or $b > c$. In both cases it follows that $c = 0$,
+  and thus $\min(a, c) = \min(b, c) = 0$.
+\end{proof}
+
+\begin{lemma}[Variance]\lablemma{eg-variance}
+  
+  For every context $K\hole$, graphs $G, H$ and valuation $v$ such that $v(G)
+  \leq v(H)$, we have:
+  \begin{enumerate}
+    \item $v\left(K\select{G}\right) \leq v\left(K\select{H}\right)$ if $K\hole$
+    is positive;
+    \item $v\left(K\select{H}\right) \leq v\left(K\select{G}\right)$ if $K\hole$
+    is negative.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  By recurrence on $\gdepth{K\hole}$.
+
+  \def\arraystretch{1.5}
+  \begin{itemize}
+    \item[\bcase~($\gdepth{K\hole} = 0$)]\sbr
+      \begin{enumerate}
+        \item Suppose $K\hole = K', \hole$. Then we have
+        $$
+        \begin{array}{rcll}
+          v(K', G)
+          &=& \min(v(K'), v(G)) & \\
+          &\leq& \min(v(K'), v(H)) &\text{(Hypothesis + \reflemma{minleq})} \\
+          &=& v(K', H) &
+        \end{array}
+        $$
+
+        \item We have $\gdepth{K\hole} > 0$ since $K\hole$ is negative.
+        Contradiction.
+      \end{enumerate}
+    \item[\rcase~($\gdepth{K\hole} > 0$)]\sbr
+      \begin{enumerate}
+        \item Suppose $K\hole = K', \left[K_0^-\hole\right]$. Then by IH we have
+        $v\left(K_0^-\select{H}\right) \leq v\left(K_0^-\select{G}\right)$, and thus
+        $1 - v\left(K_0^-\select{G}\right) \leq 1 - v\left(K_0^-\select{H}\right)$. Therefore
+        $$
+        \begin{array}{rcll}
+          v\left(K', \left[K_0^-\select{G}\right]\right)
+          &=& \min\left(v\left(K'\right), 1 - v\left(K_0^-\select{G}\right)\right) & \\
+          &\leq& \min\left(v\left(K'\right), 1 - v\left(K_0^-\select{H}\right)\right) &\text{(\reflemma{minleq})} \\
+          &=& v\left(K', \left[K_0^-\select{H}\right]\right) &
+        \end{array}
+        $$
+
+        \item Suppose $K\hole = K', \left[K_0^+\hole\right]$. Then by IH we have
+        $v\left(K_0^+\select{G}\right) \leq v\left(K_0^+\select{H}\right)$, and thus
+        $1 - v\left(K_0^+\select{H}\right) \leq 1 - v\left(K_0^+\select{G}\right)$. Therefore
+        $$
+        \begin{array}{rcll}
+          v\left(K', \left[K_0^+\select{H}\right]\right)
+          &=& \min\left(v\left(K'\right), 1 - v\left(K_0^+\select{H}\right)\right) & \\
+          &\leq& \min\left(v\left(K'\right), 1 - v\left(K_0^+\select{G}\right)\right) &\text{(\reflemma{minleq})} \\
+          &=& v\left(K', \left[K_0^+\select{G}\right]\right) &
+        \end{array}
+        $$
+      \end{enumerate}
+  \end{itemize}
+\end{proof}
+
+\begin{corollary}[Functoriality]\lablemma{eg-functoriality}
+  If $v(G) = v(H)$ then $v\left(K\select{G}\right) = v\left(K\select{H}\right)$.
+\end{corollary}
+
+\begin{theorem}[Soundness of \sys{Alpha}]
+  If $G \step H$, then $v(H) \leq v(G)$ for every valuation $v$.
+\end{theorem}
 
 \section{Completeness}\labsec{eg-completeness}
 

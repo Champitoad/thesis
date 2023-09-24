@@ -4,11 +4,8 @@
 % \tikzstyle{NAME}=[PROPERTY LIST]
 
 % Node styles
-% \tikzstyle{neg text}=[fill=none, draw=none, text=white]
-\tikzstyle{neg text}=[fill=none, draw=none, text=nfg]
+\tikzstyle{neg text}=[fill=none, draw=none, text=nfg, tikzit fill={rgb,255: red,191; green,191; blue,191}, tikzit draw={rgb,255: red,191; green,191; blue,191}]
 
 % Edge styles
-% \tikzstyle{pos area}=[-, fill=white, draw=white]
-% \tikzstyle{neg area}=[-, fill=black, draw=black]
-\tikzstyle{pos area}=[-, fill=pbg, draw=black]
-\tikzstyle{neg area}=[-, fill=nbg, draw=black]
+\tikzstyle{pos area}=[-, fill=pbg, draw=black, tikzit fill=white, tikzit draw=black]
+\tikzstyle{neg area}=[-, fill=nbg, draw=black, tikzit fill={rgb,255: red,191; green,191; blue,191}, tikzit draw=black]

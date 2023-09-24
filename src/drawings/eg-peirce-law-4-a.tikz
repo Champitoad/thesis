@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (13) at (-4.75, 0) {};
+		\node [style=none] (14) at (4.3, 0) {};
+		\node [style=none] (0) at (-3, 0) {};
+		\node [style=none] (11) at (-4.25, 0) {};
+		\node [style=none] (12) at (1.9, 0) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=neg area] (13.center)
+			 to [bend left=90] (14.center)
+			 to [bend left=90] cycle;
+		\draw [style=pos area] (11.center)
+			 to [bend left=90] (12.center)
+			 to [bend left=90] cycle;
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -38,6 +38,12 @@
 % ---------- Notations ----------
 % -------------------------------
 
+% Small line break
+\newcommand{\sbr}{~\\\vspace{-1em}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
 \newcommand{\HOne}{\color{hypnum}\ding{172}}
 \newcommand{\HTwo}{\color{hypnum}\ding{173}}
 \newcommand{\HThree}{\color{hypnum}\ding{174}}
@@ -211,7 +217,7 @@
 
 \newcommand{\imps}[1]{\mathrm{imp}(#1)}
 
-% Flowers
+% Existential Graphs
 
 \newcommand{\SA}{\textsc{SA}}
 
@@ -223,8 +229,14 @@
 \newcommand{\opcut}[1]{\color{white}\fillcircled{white}{\color{black}$#1$}}
 \newcommand{\oncut}[1]{\color{black}\fillcircled{black}{\color{white}$#1$}}
 
+\newcommand{\atoms}{\mathcal{A}}
+
 \newcommand{\anodes}{\mathbf{N}}
 \newcommand{\agraphs}{\mathbf{G}}
+
+\newcommand{\gdepth}[1]{\left|#1\right|}
+
+% Flowers
 
 \newcommand{\Nature}{\text{\ding{96}}}
 \newcommand{\Culture}{\text{\ding{34}}}
