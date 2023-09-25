@@ -10,8 +10,8 @@
 		\node [style=none] (18) at (1.55, 0) {};
 		\node [style=none] (15) at (2.3, 0) {};
 		\node [style=none] (16) at (3.8, 0) {};
-		\node [style=none] (4) at (3.05, 0) {$P$};
-		\node [style=neg text] (3) at (0.8, 0) {$P$};
+		\node [style=none] (4) at (3.05, 0) {$a$};
+		\node [style=neg text] (3) at (0.8, 0) {$a$};
 		\node [style=none] (19) at (-4.2, 0) {};
 		\node [style=none] (20) at (-2.7, 0) {};
 	\end{pgfonlayer}

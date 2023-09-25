@@ -46,11 +46,12 @@ formulation of the syntax and rules of \sys{Alpha} as a \emph{multiset}
 rewriting system. In \refsec{eg-soundness}, we take advantage of our
 reformulation to give a simpler proof of soundness for \sys{Alpha} that what can
 be found in the literature. In \refsec{eg-completeness} we give a novel
-syntactic proof of completeness for \sys{Alpha} by simulation of a calculus of
-structures. In \refsec{beta}, we illustrate the original mechanism of
-\emph{lines of identity} used by Peirce to handle quantifiers and equality in
-his \sys{Beta} system. We end in \refsec{gardens} by showing how to recast lines
-of identity in a more traditional binder-based syntax.
+syntactic proof of completeness for \sys{Alpha}, by simulating the calculus of
+structures \sys{SKS} of Brünnler and Tiu \cite{brunnler_local_2001}. In
+\refsec{beta}, we illustrate the original mechanism of \emph{lines of identity}
+used by Peirce to handle quantifiers and equality in his \sys{Beta} system. We
+end in \refsec{gardens} by showing how to recast lines of identity in a more
+traditional binder-based syntax.
 
 % \todo{IDEA (where should we put it?): \emph{superposition of polarities} in
 % existential graphs. While a cut in bubble calculi is the insertion of \emph{two}
@@ -104,26 +105,30 @@ computation as needed.
 As its name indicates, scribing a statement on $\SA$ amounts to \emph{asserting
 its truth}. Thus very naturally, the empty $\SA$ where nothing is scribed will
 denote vacuous truth, traditionally symbolized by the formula
-$\top$\sidenote{Peirce had an \emph{externalist} conception of truth, where the
-assertions made by the \process{Graphist}, i.e. the person scribing on $\SA$,
-refer to the world \emph{outside} of the sheet (the universe of discourse). By
-not scribing anything, the \process{Graphist} thus refrains from asserting
-anything about the world, only assuming implicit truths. This is illustrated by
-the following quote from \cite{Roberts+1973}, reminiscent of an interaction
-between a proof assistant (the \process{Graphist}) and her user (\process{the
-Interpreter}): \textit{``One of the parties, called the Graphist, is responsible
-for scribing the original graphs at the beginning of the investigation or
-discussion; the other, called the Interpreter, draws inferences from these
-graphs by changing them in accordance with the permissions of the system. The
-[...] sheet, before anything is scribed on it, represents whatever is taken for
-granted at the outset by the Graphist and Interpreter.''}.}.
+$\top$.
 
-As we know from natural deduction, asserting the truth of the conjunction $P
-\land Q$ of two propositions $P$ and $Q$, amounts to asserting the truth of $P$
-and the truth of $Q$. In \sys{Alpha}, there is no need to introduce the symbolic
-connective $\land$, since one can just write both $P$ and $Q$ at distinct
-locations on $\SA$:
-$$P~~~Q$$
+\begin{remark}
+  Peirce had an \emph{externalist} conception of truth, where the assertions
+made by the \process{Graphist}, i.e. the person scribing on $\SA$, refer to the
+world \emph{outside} of the sheet (the universe of discourse). By not scribing
+anything, the \process{Graphist} thus refrains from asserting anything about the
+world, only assuming implicit truths. This is illustrated by the following quote
+from \cite{Roberts+1973}, reminiscent of an interaction between a proof
+assistant (the \process{Graphist}) and her user (\process{the Interpreter}):
+\textit{``One of the parties, called the Graphist, is responsible for scribing
+the original graphs at the beginning of the investigation or discussion; the
+other, called the Interpreter, draws inferences from these graphs by changing
+them in accordance with the permissions of the system. The [...] sheet, before
+anything is scribed on it, represents whatever is taken for granted at the
+outset by the Graphist and Interpreter''}.
+\end{remark}
+
+As we know from natural deduction, asserting the truth of the conjunction $a
+\land b$ of two propositions $a$ and $b$, amounts to asserting \emph{both} the
+truth of $a$ and the truth of $b$. In \sys{Alpha}, there is no need to introduce
+the symbolic connective $\land$, since one can just write both $a$ and $b$ at
+distinct locations on $\SA$:
+$$a~~~b$$
 More generally, one might consider any two portions $G$ and $H$ of $\SA$, and
 interpret their \emph{juxtaposition} $G~H$ as signifying that we assert the
 truth of their conjunction. This leads us to formulate the first fundamental
@@ -131,27 +136,28 @@ principle of \sys{Alpha}:
 $$\text{\emph{Any portion of $\SA$ is a graph.}}$$
 In particular, the entire $\SA$ itself is a graph.
 
-Asserting the truth of the negation $\neg P$ of a proposition $P$, amounts to
-\emph{denying} the truth of $P$. Using the original notation of Peirce, this is
-done in \sys{Alpha} by \emph{enclosing} $P$ in a closed curve like so:
-$$\pcut{P}$$
+Asserting the truth of the negation $\neg a$ of a proposition $a$, amounts to
+\emph{denying} the truth of $a$. Using the original notation of Peirce, this is
+done in \sys{Alpha} by \emph{enclosing} $a$ in a closed curve like so:
+$$\pcut{a}$$
 Peirce called such curves \emph{cuts}\sidenote{Not to be confused with the name
 given to instances of the \emph{cut rule} in sequent calculus. Although there is
 a connection, since in \sys{LK}, one occurrence of the cut formula in the
 premisses of the rule is negated.}, because they ought to be seen as literal
 cuts in the paper sheet that embodies $\SA$. Note that they do not need to be
-circles: all that matters is that $P$ is in a separate area from the rest of
+circles: all that matters is that $a$ is in a separate area from the rest of
 $\SA$. This is precisely the content of the \emph{Jordan curve theorem} in
 topology, and thus we can take cuts to be arbitrary Jordan curves. This entails
 in particular that cuts cannot intersect each other, but can be freely nested
-inside each other. Then as for juxtaposition, one can replace $P$ by any graph
+inside each other. Then as for juxtaposition, one can replace $a$ by any graph
 $G$, i.e. any portion of $\SA$, as long as the cut does not intersect other cuts
 in $G$.
 
 With just these two \emph{icons}, juxtaposition and cuts, one can therefore
 assert the truth of any proposition made up of conjunctions and negations, and
 built from atomic propositions. Importantly, the only symbols needed for doing
-so are the letters $P, Q, R\ldots$ denoting atomic propositions.
+so are letters $a, b, c\ldots$ denoting atomic propositions, that is ``pure''
+symbols that do not have any logical meaning associated to them.
 
 Now, it is well-known that $\{\land,\neg\}$ is \emph{functionally complete},
 meaning that any boolean truth function can be expressed as the composition of
@@ -180,16 +186,20 @@ locations of two juxtaposed graphs do not matter, as long as they live in the
 same area delimited by cuts. This property is called the \emph{isotropy} of
 $\SA$ in \cite{minghui_graphical_2019}. Hence, graphs can be seen as an
 associative-commutative normal form for propositional formulas built from atoms
-with $\{\land,\neg\}$\sidenote{In a first version of EG called \emph{entitative
-graphs}, Peirce used juxtaposition to denote \emph{disjunction} instead of
-conjunction. Although $\{\lor,\neg\}$ is also functionally complete, Peirce
-quickly grew unsatisfied with these entitative graphs, stating that EG formed
-``a far preferable system on the whole'' (Ms 280, pp. 21-22). I find it
-interesting that more contemporary works in logic have also made the choice to
-take conjunction and negation as their primitive operations, like the tensorial
-logic of Melliès \cite{mellies_micrological_2017}, or the realizability
-constructions for linear logic in Girard's transcendental syntax
-\cite{eng_stellar_2020}.}.
+with $\{\land,\neg\}$.
+
+\begin{remark}\labremark{eg-entitative}
+  
+  In a first version of EG called \emph{entitative graphs}, Peirce used
+  juxtaposition to denote \emph{disjunction} instead of conjunction. Although
+  $\{\lor,\neg\}$ is also functionally complete, Peirce quickly grew unsatisfied
+  with these entitative graphs, stating that EG formed ``a far preferable system
+  on the whole'' (Ms 280, pp. 21-22). I find it interesting that more
+  contemporary works in logic have also made the choice to take conjunction and
+  negation as their primitive operations, like the tensorial logic of Melliès
+  \cite{mellies_micrological_2017}, or the realizability constructions for
+  linear logic in Girard's transcendental syntax \cite{eng_stellar_2020}.
+\end{remark}
 
 \section{Illative transformations}\labsec{illative}
 
@@ -204,13 +214,13 @@ arbitrary depth. This makes \sys{Alpha} deserving of the title of \emph{deep}
 inference system.
 
 \begin{marginfigure}
-  $$\ncut{P~~~\pcut{\ncut{Q}~~~R}}$$
+  $$\ncut{a~~~\pcut{\ncut{b}~~~c}}$$
   \caption{Peirce's notation for emphasizing negative areas}
   \labfig{peirce-neg-areas}
 \end{marginfigure}
 
 \begin{marginfigure}
-  $$\oncut{P~~~\opcut{\oncut{Q}~~~R}}$$
+  $$\oncut{a~~~\opcut{\oncut{b}~~~c}}$$
   \caption{Drawing negative areas literally in negative}
   \labfig{our-neg-areas}
 \end{marginfigure}
@@ -245,10 +255,10 @@ are attached to them as explicit labels.}.
   each piece in the opposite color.
 \end{remark}
 
-Quite surprisingly, Peirce showed that one only needs $5$ inference rules to get
+Quite surprisingly, Peirce showed that one only needs 5 inference rules to get
 a \emph{strongly complete} system, in the sense that if the truth of a graph $G$
 entails the truth of another graph $H$, then $G$ can always be rewritten into
-$H$ by applying exclusively instances of these $5$ rules\sidenote{Of course
+$H$ by applying exclusively instances of these 5 rules\sidenote{Of course
 Peirce did not show completeness formally in the sense of modern model theory,
 although Sowa argues in \cite{sowa_peirces_2011} (Section 4) that he had started
 to develop his own model theory equivalent to Tarski's (but closer to the
@@ -374,7 +384,7 @@ prompts us to reevalute our conception of \emph{atomicity} in logical reasoning.
 \sys{Alpha}. Note that the direction of arrows has been reversed compared to the
 above presentation: as usual, we prefer to read rules from conclusion to
 premiss, starting from the goal to prove --- here the graph associated to the
-formula $((P \limp Q) \limp P) \limp P$ --- that we reduce to the empty goal,
+formula $((a \limp b) \limp a) \limp a$ --- that we reduce to the empty goal,
 represented by the empty $\SA$. Also, the reader unfamiliar with EG might find
 it hard to convince herself that all the steps followed in the derivation are
 \emph{sound} logically. We suggest her to either build a \emph{syntactic}
@@ -417,7 +427,7 @@ distinguished from cut nodes. This can be captured by the following grammar:
   \and
   G, H, K \Coloneq g_1, \ldots, g_n
   \and
-  g, h, k \Coloneq P \mid [G]
+  g, h, k \Coloneq a \mid [G]
 \end{mathpar}
 
 \begin{example}
@@ -425,10 +435,10 @@ The graph of \reffig{peirce-neg-areas} may be written as either one of the
 following expressions:
 \begin{mathpar}
 
-  [P, [[Q], R]] \and
-  [P, [R, [Q]]] \and
-  [[[Q], R], P] \and
-  [[R, [Q]], P]
+  [a, [[b], c]] \and
+  [a, [c, [b]]] \and
+  [[[b], c], a] \and
+  [[c, [b]], a]
 \end{mathpar}
 \end{example}
 
@@ -442,7 +452,7 @@ $\alpha$-graphs as (recursive) \emph{finite multisets}:
   \emph{$\alpha$-nodes} $\anodes$ and \emph{$\alpha$-graphs} $\agraphs$ are
   defined mutually inductively as follows:
   \begin{itemize}
-    \item \textbf{(Atom)} If $P \in \atoms$, then $P \in \anodes$;
+    \item \textbf{(Atom)} If $a \in \atoms$, then $a \in \anodes$;
     \item \textbf{(Graph)} If $G \subset \anodes$ is a finite multiset, then $G
     \in \agraphs$;
     \item \textbf{(Cut)} If $G \in \agraphs$, then $[G] \in \anodes$.
@@ -462,7 +472,7 @@ Note the similarity with the definitions of bubbles (cuts) and solutions
 solutions, is that in the former formulas are restricted to atoms, and they are
 not \emph{polarized} (see \refremark{eg-polarity}).
 
-The $5$ rules of \sys{Alpha} can now be formalized as multiset rewriting rules
+The 5 rules of \sys{Alpha} can now be formalized as multiset rewriting rules
 on $\alpha$-graphs. But first, we need a notion of \emph{context} in which rules
 apply:
 
@@ -558,7 +568,7 @@ To factorize the proof of soundness, we first prove a few lemmas for the
 \emph{invertible} rules of \sys{Alpha}, that is those who satisfy $v(G) = v(H)$
 for every valuation $v$ if $G \step H$.
 
-\begin{lemma}[Iteration]\lablemma{eg-snd-iter}
+\begin{lemma}[Iteration]\lablemma{eg-iteration}
   For every graph $G$, context $H\hole$ and valuation $v$, we have
   $$v\left(G, H\select{\phantom{G}}\right) = v\left(G, H\select{G}\right)$$
 \end{lemma}
@@ -607,15 +617,15 @@ for every valuation $v$ if $G \step H$.
 Since all rules apply in an arbitrary deep context $K\hole$, we will benefit
 from the following \emph{functoriality} lemmas:
 
-\begin{lemma}\lablemma{minleq}
-  For every $a, b, c \in \{0,1\}$, $a \leq b$ implies $\min(a, c) \leq \min(b,
-  c)$.
-\end{lemma}
-\begin{proof}
-  If $a \leq c$ and $b \leq c$, then $\min(a, c) = a \leq b = \min(b, c)$.
-  Otherwise either $a > c$ or $b > c$. In both cases it follows that $c = 0$,
-  and thus $\min(a, c) = \min(b, c) = 0$.
-\end{proof}
+% \begin{lemma}\lablemma{minleq}
+%   For every $a, b, c \in \{0,1\}$, $a \leq b$ implies $\min(a, c) \leq \min(b,
+%   c)$.
+% \end{lemma}
+% \begin{proof}
+%   If $a \leq c$ and $b \leq c$, then $\min(a, c) = a \leq b = \min(b, c)$.
+%   Otherwise either $a > c$ or $b > c$. In both cases it follows that $c = 0$,
+%   and thus $\min(a, c) = \min(b, c) = 0$.
+% \end{proof}
 
 \begin{lemma}[Variance]\lablemma{eg-variance}
   
@@ -640,7 +650,7 @@ from the following \emph{functoriality} lemmas:
         \begin{array}{rcll}
           v(K', G)
           &=& \min(v(K'), v(G)) & \\
-          &\leq& \min(v(K'), v(H)) &\text{(Hypothesis + \reflemma{minleq})} \\
+          &\leq& \min(v(K'), v(H)) &\text{(Hypothesis)} \\
           &=& v(K', H) &
         \end{array}
         $$
@@ -657,7 +667,7 @@ from the following \emph{functoriality} lemmas:
         \begin{array}{rcll}
           v\left(K', \left[K_0^-\select{G}\right]\right)
           &=& \min\left(v\left(K'\right), 1 - v\left(K_0^-\select{G}\right)\right) & \\
-          &\leq& \min\left(v\left(K'\right), 1 - v\left(K_0^-\select{H}\right)\right) &\text{(\reflemma{minleq})} \\
+          &\leq& \min\left(v\left(K'\right), 1 - v\left(K_0^-\select{H}\right)\right) & \\
           &=& v\left(K', \left[K_0^-\select{H}\right]\right) &
         \end{array}
         $$
@@ -669,7 +679,7 @@ from the following \emph{functoriality} lemmas:
         \begin{array}{rcll}
           v\left(K', \left[K_0^+\select{H}\right]\right)
           &=& \min\left(v\left(K'\right), 1 - v\left(K_0^+\select{H}\right)\right) & \\
-          &\leq& \min\left(v\left(K'\right), 1 - v\left(K_0^+\select{G}\right)\right) &\text{(\reflemma{minleq})} \\
+          &\leq& \min\left(v\left(K'\right), 1 - v\left(K_0^+\select{G}\right)\right) & \\
           &=& v\left(K', \left[K_0^+\select{G}\right]\right) &
         \end{array}
         $$
@@ -677,15 +687,195 @@ from the following \emph{functoriality} lemmas:
   \end{itemize}
 \end{proof}
 
-\begin{corollary}[Functoriality]\lablemma{eg-functoriality}
+\begin{corollary}[Functoriality]\label{cor:eg-functoriality}
   If $v(G) = v(H)$ then $v\left(K\select{G}\right) = v\left(K\select{H}\right)$.
 \end{corollary}
 
-\begin{theorem}[Soundness of \sys{Alpha}]
+\begin{theorem}[Soundness]
   If $G \step H$, then $v(H) \leq v(G)$ for every valuation $v$.
 \end{theorem}
+\begin{proof}
+  By inspection of each rule.
+  \begin{itemize}
+    \item[\rsf{Iter}, \rsf{Deit}] We have $v\left(K\select{G,
+    H\select{\phantom{G}}}\right) = v\left(K\select{G, H\select{G}}\right)$ by
+    \reflemma{eg-iteration} and functoriality.
+
+    \item[\rsf{Dcut{\downarrow}}, \rsf{Dcut{\uparrow}}] We have
+    $v\left(K\select{G}\right) = v\left(K\select{[[G]]}\right)$ by
+    \reflemma{eg-doublecut} and functoriality.
+
+    \item[\rsf{Ins}, \rsf{Era}] This follows from the fact that $v(G) \leq 1 =
+    v(\emptyset)$ and \reflemma{eg-variance}.
+  \end{itemize}
+\end{proof}
 
 \section{Completeness}\labsec{eg-completeness}
+
+To show the completeness of \sys{Alpha}, it is standard in the literature on EG
+to simulate an existing proof system for classical propositional logic, that is
+itself known to be complete. For instance in \cite{Roberts+1973}, completeness
+is shown by simulating the Hilbert-style system \sys{P} of Church, which only
+comprises 3 axioms for the (functionally complete) fragment $\{\limp, \neg\}$.
+We propose in this section the first proof (that we know of) by simulation of a
+\emph{deep inference} system, more specifically the calculus of structures
+\sys{SKS} first introduced in \sidecite{brunnler_local_2001}. This should
+provide a good overview of the similarities and differences between the two
+systems, and in particular of how they exemplify two distinct approaches to
+\emph{symmetry} in a deep inference setting.
+
+As the name indicates, the objects manipulated by inference rules in calculi of
+structures are so-called \emph{structures}. In the case of \sys{SKS}, they
+correspond to formulas in \emph{negation normal form} built from atoms and units
+$\{\top, \bot\}$, i.e. where connectives are restricted to the fragment
+$\{\land, \lor\}$, and negation is pushed to atoms by relying on De Morgan's
+laws.
+
+\begin{definition}[Structure]
+  The \emph{structures} $S, T, U$ of \sys{SKS} are generated by the following
+  grammar:
+  $$S, T, U \Coloneq a \mid \dmdual{a} \mid \top \mid \bot \mid S \land T \mid S
+  \lor T$$
+\end{definition}
+
+\begin{definition}[Depth]
+  The \emph{depth} $\gdepth{S}$ of a structure context $S\hole$ is defined
+  recursively as follows:
+  \begin{align*}
+    \gdepth{\hole} &= 0 \\
+    \gdepth{S\hole \land T} = \gdepth{T \land S\hole} = \gdepth{S\hole \lor T} = \gdepth{T \lor S\hole} &= \gdepth{S\hole} + 1
+  \end{align*}
+\end{definition}
+
+\begin{definition}[De Morgan dual]
+  The \emph{De Morgan dual} of a structure $S$ is defined recursively as
+  follows:
+  \begin{align*}
+    \dmdual{a} &= \dmdual{a} & \dmdual{\dmdual{a}} &= a \\
+    \dmdual{\top} &= \bot & \dmdual{\bot} &= \top \\
+    \dmdual{S \land T} &= \dmdual{S} \lor \dmdual{T} & \dmdual{S \lor T} &= \dmdual{S} \land \dmdual{T}
+  \end{align*}
+\end{definition}
+
+It is customary in CoS to further quotient the set of structures with additional
+equations between them, which account for various algebraic properties of
+connectives such as associativity, commutativity and unitality. Here we will
+rely instead on the formulation of \sys{SKS} given by Tubella and Straßburger in
+\cite{tubella:hal-02390267}, where all equations are incorporated in the system
+as explicit rules.
+
+\begin{figure*}
+  \input{figures/sks.tex}
+  \caption{Inference rules of \sys{SKS}}
+  \labfig{sks}
+\end{figure*}
+
+The full set of rules of \sys{SKS} is given in \reffig{sks}. All rules are
+implicitly applicable in any \emph{context} $S\hole$ of arbitrary depth, with
+the usual notion of context as a structure with a hole.
+
+\begin{remark}\labremark{sks-ctx-pol}
+  Contexts for structures are always \emph{positive}, since negation is pushed
+down to atoms. This is the opposite situation from that of \sys{Alpha}, where
+negation is the \emph{only} construct that can increase the depth of a graph.
+This explains why some rules in \sys{Alpha} need explicit indications for the
+polarity of the context in which they apply.
+\end{remark}
+
+The rules of \sys{SKS} satisfy two notable properties:
+\begin{description}
+  \item[Symmetry] 
+    Every rule \rsf{r} has a \emph{dual} rule \rsf{\dmdual{r}}: $U\select{S}
+    \xstep{\rsf{r}} U\select{T}$ if and only if $U\select{\dmdual{T}}
+    \xstep{\rsf{\dmdual{r}}} U\select{\dmdual{S}}$. For rules whose name ends
+    with $\downarrow$, the dual is the rule with the same name ending with
+    $\uparrow$. This corresponds to all rules except the \emph{switch} rule
+    \rsf{s} and the \emph{medial} rule \rsf{m} which are self-dual, i.e.
+    $\dmdual{\rsf{s}} = \rsf{s}$ and $\dmdual{\rsf{m}} = \rsf{m}$. In
+    \sys{Alpha}, duality is captured in the \emph{polarity} of contexts rather
+    than through De Morgan's laws:
+    
+    \begin{fact}[Duality]\labfact{eg-duality}
+      $K^+\select{G} \xstep{\rsf{r}} K^+\select{H}$
+      if and only if $K^-\select{H} \xstep{\rsf{\dmdual{r}}} K^-\select{G}$, where
+      \begin{align*}
+        \dmdual{\rsf{Iter}} &= \rsf{Deit} & \dmdual{\rsf{Deit}} &= \rsf{Iter} \\
+        \dmdual{\rsf{Ins}} &= \rsf{Era} & \dmdual{\rsf{Era}} &= \rsf{Ins} \\
+        \dmdual{\rsf{Dcut{\downarrow}}} &= \rsf{Dcut{\uparrow}} & \dmdual{\rsf{Dcut{\uparrow}}} &= \rsf{Dcut{\downarrow}}
+      \end{align*}
+    \end{fact}
+
+    \begin{remark}\labremark{eg-intuitionism}
+      
+    The notion of polarity of a context also exists in intuitionistic logic, and
+    is in fact used in the same way to obtain dual rules in the intuitionistic
+    calculus of structures \sys{SISa} of Tiu \cite{tiu_local_2006}. This
+    constitutes one more argument in favor of the view defended by Minghui and
+    Pietarinen in \sidecite{minghui_graphical_2019}, that Peirce had a
+    \emph{pre-intuitionistic} conception of negation. It also echoes our
+    observation in \refremark{eg-entitative}, that the choice of negation and
+    conjunction as primitives is to be connected with the eminently constructive
+    works of Girard and Melliès, in particular the non-involutive tensorial
+    negation of the latter. The issue of finding seeds of intuitionism in
+    Peirce's work will be discussed more in depth in \refsec{Flowers}.
+    \end{remark}
+
+  \item[Locality]
+    Every rule is \emph{local}, in the sense that it does not require the
+    inspection of expressions of arbitrary size (Definition 2.1.1 in
+    \cite{tubella:hal-02390267}). This is almost the opposite in \sys{Alpha}: to
+    the exception of the rules of double-cut (which are best seen as structural
+    equations like those of CoS), all rules depend heavily on the creation,
+    duplication or erasure of subgraphs of arbitrary size. This is exemplified
+    by the derivation of Peirce's law in \reffig{eg-peirce-law}, where not a
+    single rule is instantiated on atoms. In fact it is quite hard to see how to
+    build a derivation of Peirce's law that performs only local transformations.
+    
+    In light of this, it becomes surprising that we \emph{will} be able to
+    simulate \sys{SKS} in \sys{Alpha}. Indeed, it means that there is a set
+    \sys{Alpha_{SKS}} of perfectly local rules on graphs, corresponding to the
+    translation of the rules of \sys{SKS}, and which is entirely derivable in
+    \sys{Alpha}. Thus by restricting oneself to the rules of \sys{Alpha_{SKS}}
+    (and forgetting that they are derived through non-local transformations),
+    one gets a fully local subsystem of \sys{Alpha}!
+\end{description}
+
+To formulate the simulation, we need to translate the structures of \sys{SKS}
+into equivalent $\alpha$-graphs. This is easily done by exploiting the
+functional completeness of $\{\land, \neg\}$ (see \refsec{alpha}):
+
+\begin{definition}[Structure translation]
+  The \emph{translation} $\strans{S}$ of a structure $S$ as an $\alpha$-graph is
+  defined recursively as follows:
+  \begin{align*}
+    \strans{a} &= a & \strans{\dmdual{a}} &= [a] \\
+    \strans{\top} &= \emptyset & \strans{\bot} &= [] \\
+    \strans{(S \land T)} &= \strans{S}, \strans{T} & \strans{(S \lor T)} &= [[\strans{S}], [\strans{T}]]
+  \end{align*}
+\end{definition}
+
+As per \refremark{sks-ctx-pol}, the translation of a structure context (where
+the hole is translated as itself) will always be positive:
+
+\begin{fact}\labfact{strans-pos}
+  For every context $S\hole$, $\strans{S\hole}$ is positive.
+\end{fact}
+\begin{proof}
+  By a straightforward recurrence on $\gdepth{S\hole}$.
+\end{proof}
+
+It is easy to show that a structure and its translation as a graph are
+semantically equivalent, i.e. $v(S) = v(\strans{S})$ for any valuation $v$. Thus
+to get the completeness of \sys{Alpha}, it is sufficient to simulate the
+translation of each rule of \sys{SKS}:
+
+\begin{theorem}[Completeness]
+  If $U\select{S} \step U\select{T}$, then $\strans{U}\select{\strans{S}} \steps
+  \strans{U}\select{\strans{T}}$.
+\end{theorem}
+\begin{proof}
+  By inspection of each rule of \sys{SKS}.
+\end{proof}
 
 
 \section{\sys{Beta} graphs}\labsec{beta}

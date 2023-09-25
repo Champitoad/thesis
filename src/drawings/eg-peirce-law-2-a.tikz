@@ -9,8 +9,8 @@
 		\node [style=none] (18) at (1.55, 0) {};
 		\node [style=none] (15) at (2.3, 0) {};
 		\node [style=none] (16) at (3.8, 0) {};
-		\node [style=none] (4) at (3.05, 0) {$P$};
-		\node [style=neg text] (3) at (0.8, 0) {$P$};
+		\node [style=none] (4) at (3.05, 0) {$a$};
+		\node [style=neg text] (3) at (0.8, 0) {$a$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=neg area] (13.center)
