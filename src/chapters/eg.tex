@@ -1078,8 +1078,8 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
       {S \lor (T \lor U)}
       {(S \lor T) \lor U}
     &
-    \R[\rsf{Dcut{\ua}}]
-    {\R[\rsf{Dcut{\da}}]
+    \R[\rsf{Dcut{\da}}]
+    {\R[\rsf{Dcut{\ua}}]
     {[[S],[[[T],[U]]]]}
     {[[S],\dcut{[T],[U]}]}}
     {[[[\dcut{[S],[T]}]],[U]]}
@@ -1177,15 +1177,23 @@ insertion also never appears in the simulation of \sys{\dmdual{KS}}, while
   \xsteps{\msys{Alpha}\setminus\{\rsf{Ins},\rsf{Dcut{\da}}\}} G$.
 \end{corollary}
 
-Thanks to \reffact{eg-duality}, it can easily be shown that \sys{Alpha}
-satisfies a strong \emph{contraposition} property: $G \steps H$ if and only if
-$[H] \steps [G]$. However, the \emph{only if} direction depends crucially on
-\rsf{Dcut{\da}}: indeed, from $[H] \steps [G]$ one gets $[[G]] \steps [[H]]$
-through the \emph{if} direction, and then $G \xstep{\rsf{Dcut{\ua}}} [[G]]
-\steps [[H]] \xstep{\rsf{Dcut{\da}}} H$. When taking $H = \emptyset$, this
-property tells us that in \sys{Alpha}, provability coincides with refutability.
+We speculate that this dissymmetry is another manifestation of the
+\emph{pre-intuitionistic}, or constructive nature of EG.
 
-\todo{Find a conclusion to this argument that supports the pre-intuitionistic viewpoint on EG.}
+% Thanks to \reffact{eg-duality}, it can easily be shown that \sys{Alpha}
+% satisfies a strong \emph{contraposition} property: $G \steps H$ if and only if
+% $[H] \steps [G]$. However, the \emph{only if} direction depends crucially on
+% \rsf{Dcut{\da}}: indeed, from $[H] \steps [G]$ one gets $[[G]] \steps [[H]]$
+% through the \emph{if} direction, and then $G \xstep{\rsf{Dcut{\ua}}} [[G]]
+% \steps [[H]] \xstep{\rsf{Dcut{\da}}} H$.
+
+% When taking $H = \emptyset$, this property tells us that in \sys{Alpha},
+% provability coincides with refutability. Now thanks to Corollary
+% \ref{cor:adm-era}, we know that provability in $\msys{Alpha} \setminus
+% \{\rsf{Era}\}$ coincides with provability in \sys{Alpha}, and thus with
+% refutability in \sys{Alpha}, which thanks to Corollary \ref{cor:adm-ins}
+% coincides with refutability in
+% $\msys{Alpha}\setminus\{\rsf{Ins},\rsf{Dcut{\da}}\}$. Hence provability
 
 
 \section{\sys{Beta} graphs}\labsec{beta}
