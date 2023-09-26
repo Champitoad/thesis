@@ -181,7 +181,7 @@
 
   \def\arraystretch{1.25}
   \begin{itemize}
-    \item[\rnmsf{i{\downarrow}}]
+    \item[\rnmsf{i{\da}}]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \piq{} \Delta}
@@ -191,7 +191,7 @@
       &=& \psint{\Gamma, A \seq A, \Delta}
     \end{array}
     $$
-    \item[\rnmsf{i{\uparrow}}]
+    \item[\rnmsf{i{\ua}}]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \piq{\seq A \sep A \seq} \Delta}
@@ -246,7 +246,7 @@
     %   $$
     % \end{itemize}
 
-    \item[{\rnmsf{f{\uparrow}}}]
+    \item[{\rnmsf{f{\ua}}}]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \piq{\cS \sep \Gamma' \piq{\cS'} \Delta' \sep S} \Delta}
@@ -256,7 +256,7 @@
     \end{array}
     $$
 
-    \item[{\rnmsf{f{-}{\downarrow}}}]
+    \item[{\rnmsf{f{-}{\da}}}]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \piq{\Gamma', I \JB \Delta' \sep \cS} \Delta}
@@ -264,7 +264,7 @@
       &=& \psint{\Gamma, I \piq{\Gamma' \JB \Delta' \sep \cS} \Delta} & \\
     \end{array}
     $$
-    \item[{\rnmsf{f{+}{\downarrow}}}]
+    \item[{\rnmsf{f{+}{\da}}}]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \piq{\cS \sep \Gamma' \JB I, \Delta'} \Delta}
@@ -272,7 +272,7 @@
       &=& \psint{\Gamma \piq{\cS \sep \Gamma' \JB \Delta'} I, \Delta} & \\
     \end{array}
     $$
-    \item[{\rnmsf{f{-}{+}{\downarrow}}}]
+    \item[{\rnmsf{f{-}{+}{\da}}}]
     We show that $\psint{\Gamma \J (\Gamma', I \JB \Delta'), \Delta} \sement
     \psint{\Gamma, I \J (\Gamma' \JB \Delta'), \Delta}$ by recurrence on
     $\bradepth{\J}$.
@@ -300,7 +300,7 @@
       \end{array}
       $$
     \end{itemize}
-    \item[{\rnmsf{f{+}{-}{\downarrow}}}]
+    \item[{\rnmsf{f{+}{-}{\da}}}]
     We show that $\psint{\Gamma, (\Gamma' \JB I, \Delta') \J \Delta} \sementHB
     \psint{\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}$ by recurrence on
     $\bradepth{\J}$.
@@ -328,7 +328,7 @@
       \end{array}
       $$
     \end{itemize}
-    \item[{\rnmsf{f{+}{+}{\uparrow}}}]
+    \item[{\rnmsf{f{+}{+}{\ua}}}]
     We show that $\psint{\Gamma \J (\Gamma' \JB \Delta'), I, \Delta} \sement
     \psint{\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}$ by recurrence on
     $\bradepth{\J}$.
@@ -354,7 +354,7 @@
       \end{array}
       $$
     \end{itemize}
-    \item[{\rnmsf{f{-}{-}{\uparrow}}}]
+    \item[{\rnmsf{f{-}{-}{\ua}}}]
     We show that $\psint{\Gamma, I, (\Gamma' \JB \Delta') \J \Delta} \sementHB
     \psint{\Gamma, (\Gamma', I \JB \Delta') \J \Delta}$ by recurrence on
     $\bradepth{\J}$.
@@ -381,13 +381,13 @@
       $$
     \end{itemize}
 
-    \item[{\rnmsf{f{-}{+}{\uparrow}}}, {\rnmsf{f{+}{-}{\uparrow}}}] Converse of
-    {\rnmsf{f{-}{+}{\downarrow}}} (resp. {\rnmsf{f{+}{-}{\downarrow}}}), using
+    \item[{\rnmsf{f{-}{+}{\ua}}}, {\rnmsf{f{+}{-}{\ua}}}] Converse of
+    {\rnmsf{f{-}{+}{\da}}} (resp. {\rnmsf{f{+}{-}{\da}}}), using
     the converse inequality of \reffact{weakdistrib} which only holds in
     Boolean algebras.
 
-    \item[{\rnmsf{f{+}{+}{\downarrow}}}, {\rnmsf{f{-}{-}{\downarrow}}}] Converse
-    of {\rnmsf{f{+}{+}{\uparrow}}} (resp. {\rnmsf{f{-}{-}{\uparrow}}}), using
+    \item[{\rnmsf{f{+}{+}{\da}}}, {\rnmsf{f{-}{-}{\da}}}] Converse
+    of {\rnmsf{f{+}{+}{\ua}}} (resp. {\rnmsf{f{-}{-}{\ua}}}), using
     the converse inequality of \reflemma{bubbles-weakdistrib} which only holds
     in Boolean algebras.
 
@@ -612,12 +612,10 @@ In the following proofs, we will denote a sequence of applications of a set of
 rules by a double inference line, and the use of a derivation obtained by
 induction hypothesis by a dotted line.
 
-\newcommand{\mt}{\qquad\mapsto\qquad}
-
 \begin{lemma}[Simulation of \sys{DBiInt}]\lablemma{app:simulation-dbiint}
   
   If $X \prov{\msys{DBiInt}} Y$ then $X \prov{\sysBHB \setminus
-  \{\rsf{i{\uparrow}}\}} Y$.
+  \{\rsf{i{\ua}}\}} Y$.
 \end{lemma}
 \begin{proof}
   By induction on the derivation of $X \prov{\msys{DBiInt}} Y$. 
@@ -626,7 +624,7 @@ induction hypothesis by a dotted line.
       {}
       {X, A \seq A, Y}
     &\mt
-    \R[\rsf{i{\downarrow}}]
+    \R[\rsf{i{\da}}]
     {\prftree[r][d]{\rsf{w{-},w{+}}}
     {\piq{}}
     {X \piq{} Y}}
@@ -637,7 +635,7 @@ induction hypothesis by a dotted line.
       {X, (X', A \seq Y') \seq Y}
     &\mt
     \R[\rsf{c{-}}]
-    {\R[\rsf{f{-}{-}{\uparrow}}]
+    {\R[\rsf{f{-}{-}{\ua}}]
     {\prftree[r][dotted]{$\pi_1$}
     {\piq{}}
     {X, A, (X', A \seq Y') \seq Y}}
@@ -649,7 +647,7 @@ induction hypothesis by a dotted line.
       {X \seq (X' \seq A, Y'), Y}
     &\mt
     \R[\rsf{c{+}}]
-    {\R[\rsf{f{+}{+}{\uparrow}}]
+    {\R[\rsf{f{+}{+}{\ua}}]
     {\prftree[r][dotted]{$\pi_1$}
     {\piq{}}
     {X \seq (X' \seq A, Y'), A, Y}}
@@ -661,7 +659,7 @@ induction hypothesis by a dotted line.
       {X, A \seq (X' \seq Y'), Y}
     &\mt
     \R[\rsf{c{-}}]
-    {\R[\rsf{f{-}{+}{\downarrow}}]
+    {\R[\rsf{f{-}{+}{\da}}]
     {\prftree[r][dotted]{$\pi_1$}
     {\piq{}}
     {X, A \seq (X', A \seq Y'), Y}}
@@ -673,7 +671,7 @@ induction hypothesis by a dotted line.
       {X, (X' \seq Y') \seq A, Y}
     &\mt
     \R[\rsf{c{+}}]
-    {\R[\rsf{f{+}{-}{\downarrow}}]
+    {\R[\rsf{f{+}{-}{\da}}]
     {\prftree[r][dotted]{$\pi_1$}
     {\piq{}}
     {X, (X' \seq A, Y') \seq A, Y}}
@@ -836,7 +834,7 @@ induction hypothesis by a dotted line.
 
 \begin{lemma}[Simulation of \sys{G3cp}]
   If $\Gamma \prov{\msys{G3cp}} \Delta$, then $\Gamma \prov{\sysBH \cup
-  \{\rsf{f{+}{+}}\} \setminus \{\rsf{i{\uparrow}}\}} \Delta$.
+  \{\rsf{f{+}{+}}\} \setminus \{\rsf{i{\ua}}\}} \Delta$.
 \end{lemma}
 \begin{proof}
   By induction on the \sys{G3cp} derivation.
@@ -846,7 +844,7 @@ induction hypothesis by a dotted line.
       {}
       {a, \Gamma \seq \Delta, a}
     &\mt
-    \R[\rsf{i{\downarrow}}]
+    \R[\rsf{i{\da}}]
     {\prftree[r][d]{\rsf{w{-},w{+}}}
     {\piq{}}
     {\Gamma \piq{} \Delta}}
@@ -938,8 +936,8 @@ induction hypothesis by a dotted line.
       {\Gamma \seq \Delta, A \limp B}
     &\mt
     \R[\rsf{{\limp}{+}}]
-    {\prftree[r][d]{\rsf{f{-}{+}{\downarrow}}}
-    {\prftree[r][d]{\rsf{f{+}{+}{\downarrow}}}
+    {\prftree[r][d]{\rsf{f{-}{+}{\da}}}
+    {\prftree[r][d]{\rsf{f{+}{+}{\da}}}
     {\prftree[r][dotted]{$\pi_1$}
     {\R[\rsf{p{+}}]
     {\piq{}}

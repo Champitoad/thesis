@@ -35,7 +35,7 @@ $$
         \begin{array}{@{}c@{}}
           \hypo{B}~~~\conc{C} \\
           \hypo{A \lor B \limp C}
-        \end{array}} &\mathsf{{i}{\downarrow}} \\
+        \end{array}} &\mathsf{{i}{\da}} \\
   \step &\bubble{
       \begin{array}{@{}c@{}}
         \hypo{A} \\
@@ -63,7 +63,7 @@ $$
         \begin{array}{@{}c@{}}
           \hypo{B}~~~\conc{C} \\
           \hypo{A \lor B \limp C}
-        \end{array}} &\mathsf{i{\downarrow}} \\
+        \end{array}} &\mathsf{i{\da}} \\
 \end{array}
 &
 \begin{array}[t]{rlr}
@@ -90,7 +90,7 @@ $$
         \begin{array}{@{}c@{}}
           \hypo{B} \\
           {\bubble{\conc{A \lor B}}}~~~\bubble{\select{\hypo{C}~~~\conc{C}}}
-        \end{array}} &\mathsf{i{\downarrow}} \\
+        \end{array}} &\mathsf{i{\da}} \\
   \step &
       ~~~\bubble{
         \begin{array}{@{}c@{}}
@@ -102,7 +102,7 @@ $$
   \step &
       ~~~\bubble{\select{\hypo{B}~~~{\bubble{\conc{B}}}}} &\mathsf{f{-}} \\
   \step &
-      ~~~\bubble{{\bubble{\select{\hypo{B}~~~\conc{B}}}}} &\mathsf{i{\downarrow}} \\
+      ~~~\bubble{{\bubble{\select{\hypo{B}~~~\conc{B}}}}} &\mathsf{i{\da}} \\
   \step &
       ~~~\bubble{{\select{\bubble{\phantom{\hypo{B}~~~\conc{B}}}}}} &\mathsf{p} \\
   \step &

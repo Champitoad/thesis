@@ -44,6 +44,8 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 
+\newcommand{\mt}{\qquad\mapsto\qquad}
+
 \newcommand{\HOne}{\color{hypnum}\ding{172}}
 \newcommand{\HTwo}{\color{hypnum}\ding{173}}
 \newcommand{\HThree}{\color{hypnum}\ding{174}}
@@ -66,6 +68,9 @@
 
 \newcommand{\defeq}{\triangleq}
 
+\newcommand{\da}{\downarrow}
+\newcommand{\ua}{\uparrow}
+
 \newcommand{\seq}{\Rightarrow}
 % \newcommand{\limp}{\supset}
 \newcommand{\lsub}{\subset}
@@ -82,12 +87,19 @@
 \newcommand{\lstep}{\rightharpoonup}
 \newcommand{\step}{\rightarrow}
 \newcommand{\steps}{\step^\ast}
+\newcommand{\nsteps}[1]{\step^{#1}}
+
 \newcommand{\lstepsys}[1]{\lstep_{#1}}
 \newcommand{\stepsys}[1]{\step_{#1}}
+\newcommand{\stepssys}[1]{\steps_{#1}}
+
 \newcommand{\notstep}{\nrightarrow}
 \newcommand{\notsteps}{\nrightarrow^\ast}
-\newcommand{\nsteps}[1]{\step^{#1}}
+
+\newcommand{\xlstep}[1]{\xrightharpoonup{#1}}
 \newcommand{\xstep}[1]{\xrightarrow{#1}}
+\newcommand{\xsteps}[1]{\xrightarrow{#1}\!\!\raisebox{3pt}[3pt]{\small$\ast$}~}
+
 \newcommand{\deriv}[3]{#1 : #2 \steps #3}
 \newcommand{\irule}[3]{#1 : #2 \rightarrow #3}
 \newcommand{\rrule}[3]{#2 \rightarrow_{#1} #3}
@@ -237,6 +249,11 @@
 \newcommand{\gdepth}[1]{\left|#1\right|}
 
 \newcommand{\strans}[1]{\begingroup #1 \endgroup^{\scalebox{1.25}{$\bullet$}}}
+
+\newcommand{\itsrc}[1]{\begingroup\setlength{\fboxrule}{0.8pt}\setlength{\fboxsep}{2pt}\color{itsrc}\fbox{\color{black}$#1$}\endgroup}
+\newcommand{\itdst}[1]{\colorbox{itdst}{$#1$}}
+\newcommand{\ins}[1]{\colorbox{ins}{$#1$}}
+\newcommand{\dcut}[1]{\colorbox{dcut}{$#1$}}
 
 % Flowers
 

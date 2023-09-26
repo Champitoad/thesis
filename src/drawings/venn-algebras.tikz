@@ -13,7 +13,7 @@
 		\begin{array}{c}
 			\text{\textbf{Heyting}} \\
 			\text{\footnotesize(Intuitionistic)} \\
-			\{\mathsf{f}{-}{+}{\downarrow}, \mathsf{f}{+}{+}{\uparrow}\}
+			\{\mathsf{f}{-}{+}{\da}, \mathsf{f}{+}{+}{\ua}\}
 		\end{array}
      $};
 		\node [style=none] (13) at (0, 0.425) {$
@@ -26,14 +26,14 @@
 		\begin{array}{c}
 			\text{\textbf{Brouwer}} \\
 			\text{\footnotesize(Dual-Intuitionistic)} \\
-			\{\mathsf{f}{+}{-}{\downarrow}, \mathsf{f}{-}{-}{\uparrow}\}
+			\{\mathsf{f}{+}{-}{\da}, \mathsf{f}{-}{-}{\ua}\}
 		\end{array}
      $};
 		\node [style=none] (15) at (0.025, -3.075) {$
 		\begin{array}{c}
 			\text{\textbf{Boolean}} \\
 			\text{\footnotesize(Classical)} \\
-			\{\mathsf{f}{-}{+}{\uparrow}, \mathsf{f}{+}{+}{\downarrow}, \mathsf{f}{+}{-}{\uparrow}, \mathsf{f}{-}{-}{\downarrow}\}
+			\{\mathsf{f}{-}{+}{\ua}, \mathsf{f}{+}{+}{\da}, \mathsf{f}{+}{-}{\ua}, \mathsf{f}{-}{-}{\da}\}
 		\end{array}
      $};
 	\end{pgfonlayer}

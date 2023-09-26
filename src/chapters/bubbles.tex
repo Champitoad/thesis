@@ -229,7 +229,7 @@ calculus for intuitionistic logic dubbed \sys{BJ}. It is divided in five groups:
   \item The {\identity}, {\resource} and {\heating} groups correspond
   respectively to the identity, structural and logical rules of sequent
   calculus, following the terminology of \sidecite{girard:hal-01322183}. More
-  precisely, rules {\rnmsf{i{\downarrow}}} and {\rnmsf{i{\uparrow}}} correspond
+  precisely, rules {\rnmsf{i{\da}}} and {\rnmsf{i{\ua}}} correspond
   to the axiom and cut rules; rules {\rnmsf{w}} and {\rnmsf{c}} to the weakening
   and contraction rules; and every rule of the form $\mcirc{-}$ (resp.) that
   is, the axiom and cut rules, the contraction and weakening rules, and
@@ -370,13 +370,13 @@ subsolution:
   denotes multiset inclusion. 
 \end{definition}
 
-Then a multiset rewriting rule $\rrule{\mathsf{r}}{S}{T}$ can be applied in a
+Then a multiset rewriting rule $\rrule{r}{S}{T}$ can be applied in a
 solution $U$ whenever $S \subsol U$, by replacing one occurrence of $S$ by $T$
 inside $U$. The notions of derivation (\refdef{BJ-deriv}) and proof
 (\refdef{BJ-proof}) stay unchanged, by observing that the rewriting rule
-$\rrule{\mathsf{r}}{S}{T}$ from $S$ to $T$ and the inference rule
-$\irule{\mathsf{r}}{S}{T}$ with premiss $T$ and conclusion $S$ denote the same
-rule $\mathsf{r}$.
+$\rrule{r}{S}{T}$ from $S$ to $T$ and the inference rule
+$\irule{r}{S}{T}$ with premiss $T$ and conclusion $S$ denote the same
+rule $r$.
 
 \todo{Add definition of multiset inclusion somewhere?}
 
@@ -392,7 +392,7 @@ example highlights the greater locality of the rewriting approach, by indicating
 more precisely which parts of the proof state are changed by the rules. But it
 still over-approximates the modifications that really need to be performed to
 carry the transformations. Indeed, by only exposing the data of a redex $S$ and
-a reddendum $T$, a rewriting rule $\rrule{\mathsf{r}}{S}{T}$ can only be
+a reddendum $T$, a rewriting rule $\rrule{r}{S}{T}$ can only be
 interpreted as the deletion of $S$ followed by the insertion $T$. Taking for
 instance the {\rnmsf{{\limp}{-}}} rule in \reffig{graphical-BJ}, one can
 describe its graphical behavior more finely as resulting from the following
@@ -434,7 +434,7 @@ might have been reminded of the Proof-by-Action paradigm as introduced in
 \refch{pba}, by seeing redexes as the items involved in a graphical action ---
 there are always at most two. More precisely, $\mathbb{H}$-rules correspond to
 \emph{click} actions on blue ({\rnm{\mcirc{-}}} rules) or red items
-({\rnm{\mcirc{+}}} rules), and the {\rnmsf{i{\downarrow}}} rule corresponds to
+({\rnm{\mcirc{+}}} rules), and the {\rnmsf{i{\da}}} rule corresponds to
 the most basic DnD action between dual occurrences of a formula.
 
 As mentioned earlier when comparing \sys{BJ} to \sys{LJ}, the novelty here lies
@@ -491,7 +491,7 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     This of course would provide a level of interactivity unseen before in a
     proving interface, making it very discoverable and playful. It also combines
     nicely with DnD actions in general: for instance a sequence of applications
-    of {\rnmsf{f{-}}} followed by {\rnmsf{i{\downarrow}}} could be performed as
+    of {\rnmsf{f{-}}} followed by {\rnmsf{i{\da}}} could be performed as
     a single DnD action, where the dragged hypothesis crosses successively the
     various bubbles in its way.
   \item[\textbf{\membrane}]
@@ -529,7 +529,7 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     {\rnmsf{w}}, it could be available as a contextual action when selecting
     blue items.
   \item[\textbf{\identity}]
-    Although the {\rnmsf{i{\downarrow}}} rule only corresponds to the base case
+    Although the {\rnmsf{i{\da}}} rule only corresponds to the base case
     of DnD actions, it would be easy to integrate their full SFL semantics
     directly in \sys{BJ}. Indeed our SFL rules (\reffig{DISL}) are already
     expressed as rewriting rules, just like the graphical rules of \sys{BJ}
@@ -541,13 +541,13 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     which adds the cut formula $A$ (input by the user in a dialog box) as a new
     hypothesis in the current goal, and as the conclusion in a new subgoal (see
     \refsec{newitems}). Since subgoals are now reified as bubbles, the
-    {\rnmsf{i{\uparrow}}} rule could be mapped instead to a contextual action
+    {\rnmsf{i{\ua}}} rule could be mapped instead to a contextual action
     available on any red item $\conc{\Delta}$, which would have the effect of
     spawning a bubble around it with a blue item $\hypo{A}$, and another bubble
     nearby it with a red item $\conc{A}$.
 
-    % Finally, an analog to the cut rule {\rnmsf{i{\uparrow}}} is the rule
-    % {\rnmsf{d\uparrow}} for adding new definitions (\reffig{bubbles-vars}).
+    % Finally, an analog to the cut rule {\rnmsf{i{\ua}}} is the rule
+    % {\rnmsf{d\ua}} for adding new definitions (\reffig{bubbles-vars}).
     % Their similarity is more striking in a logical framework like Martin-Löf
     % type theory, where mathematical objects and propositions are expressed in
     % the same language. In Actema it is handled with a separate \textsf{+expr}
@@ -586,8 +586,8 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     %   the alternative formulation of \reffig{bubbles-vars}. This way all the
     %   rules of \sys{BJ} become \emph{analytic}: if $S \step T$, then every
     %   subterm occurring in $T$ also occurs in $S$\sidenote{The only exceptions
-    %   are the {\rnmsf{i{\downarrow}}} rule which will be shown to be admissible
-    %   in \refsec{bubbles-completeness}, and the {\rnmsf{d{\uparrow}}} rule of
+    %   are the {\rnmsf{i{\da}}} rule which will be shown to be admissible
+    %   in \refsec{bubbles-completeness}, and the {\rnmsf{d{\ua}}} rule of
     %   \reffig{bubbles-vars}.}.
     % \end{itemize}
 \end{description}

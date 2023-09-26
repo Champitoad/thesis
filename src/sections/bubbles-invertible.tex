@@ -46,7 +46,7 @@ from the following modifications to the previous rules:
     no premisses). In bubble calculi, the notion of premiss is captured by
     neutral bubbles; thus we incorporate weakenings in all rules that solve
     subgoals by closing solutions with no neutral bubbles. Those are the rules
-    $\{\rsf{i{\downarrow}},\rsf{p{-}},\rsf{p{+}}\}$, which for the occasion have
+    $\{\rsf{i{\da}},\rsf{p{-}},\rsf{p{+}}\}$, which for the occasion have
     also been generalized to arbitrary solutions. Indeed in system $\sysB$ we
     restricted them to open solutions to make them \emph{local}, but here the
     weakenings break locality anyway, and the general version improves
@@ -81,7 +81,7 @@ from the following modifications to the previous rules:
     principle it should be feasible, and would enable a more comfortable use in
     a Proof-by-Action setting.
 
-    Note also that we removed the \rsf{f{\uparrow}} rule of \reffig{sequent-B}.
+    Note also that we removed the \rsf{f{\ua}} rule of \reffig{sequent-B}.
     Indeed even after turning it into a propagation rule, the moved copy of the
     duplicated subgoal $S$ cannot be weakened because it lives in a neutral
     bubble. Thus the rule stays non-invertible, and cannot be included in
@@ -178,14 +178,14 @@ reached:
     This phase can also be trivially automated.
 
   \item[\textbf{Linking}] Try to bring together every pair of dual atoms, so
-    that they annihilate each other in an instance of the \rsf{i{\downarrow}}
+    that they annihilate each other in an instance of the \rsf{i{\da}}
     rule. This is reminiscent of our \emph{drag-and-drop} actions of
     \refch{pba}. In a touch-based GUI, rather than dragging a complex formula
     onto another complex formula, one could \emph{pinch} together the two atoms:
     if there is no $\mathbb{F}$-law stucking one of the atoms on some membrane
     (orange arrows in \reffig{bubbles-porosity}), then the pinch succeeds, by
     closing the subsolution at the location where it ends with
-    \rsf{i{\downarrow}}. Thus the user can choose the subgoal to solve by
+    \rsf{i{\da}}. Thus the user can choose the subgoal to solve by
     controlling the destination of the pinch, which can be seen as a more
     symmetric and powerful version of DnD actions. Generally though, one will
     want to apply the following \emph{rule of thumb} (pun intended):
@@ -231,7 +231,7 @@ reached:
     rule upon. Additionally, she might need to determine a subgoal $T\select{U}$
     in which $A$ is provable, and first duplicate $\hypo{A\limp B}$ in $T\hole$
     before applying \rsf{{\limp}{-}}. This will always be possible with the
-    $\mathbb{F}$-rules \rsf{f{-}{\downarrow}} and \rsf{f{-}{+}{\downarrow}}.
+    $\mathbb{F}$-rules \rsf{f{-}{\da}} and \rsf{f{-}{+}{\da}}.
     Ideally, she would also pick the most general $T\hole$ to factorize the
     proof, by minimizing its depth $\soldepth{T\hole}$ (\refdef{solctx-depth}).
 
@@ -276,7 +276,7 @@ other formalisms, is that most of its automation preserves the \emph{size}
   at a distance, then either:
   \begin{enumerate}
     \item the link is successful, and the two created copies of atoms are
-  immediately destroyed by the \rsf{i{\downarrow}} rule. Then the solved
+  immediately destroyed by the \rsf{i{\da}} rule. Then the solved
   subsolution is entirely pruned out, decreasing the size of the goal; or
     \item the link fails, but then we can instantly ``undo'' it. Or rather, one
   should consider that rules are applied only when the link is successful.

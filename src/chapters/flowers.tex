@@ -409,7 +409,7 @@ simplify a goal.
 \begin{definition}[Derivation]
   Given a set of rules $\mathsf{R}$, we write $\Phi \step_{\mathsf{R}} \Psi$ to
   indicate a rewrite \emph{step} in $\mathsf{R}$, that is an instance of some
-  $\mathsf{r} \in \mathsf{R}$ with $\Psi$ as premiss and $\Phi$ as conclusion.
+  $r \in \mathsf{R}$ with $\Psi$ as premiss and $\Phi$ as conclusion.
   The rules of the flower calculus are divided into two sets: the \emph{natural}
   rules $\Nature$, and the \emph{cultural} rules $\Culture$. We just write $\Phi
   \step \Psi$ to mean $\Phi \step_{\Nature\cup\Culture} \Psi$. A
@@ -477,7 +477,7 @@ which will be useful in the completeness proof of \refsec{Completeness}.
   For any context $\Xi\hole$ such that $\chyp{\Phi}{\Xi\hole}$, one has the following
   derivation:
   $$
-  \cfill{\Xi}{\Phi} \step_{\mathsf{poll{\downarrow}}}
+  \cfill{\Xi}{\Phi} \step_{\mathsf{poll{\da}}}
   \cfill{\Xi}{\phantom{\Phi}}
   $$
 \end{proof}
@@ -489,8 +489,8 @@ in these settings it is characterized as the existence of a proof for a
 of derivations, here we have the stronger requirement that there exist proofs
 for a \emph{class} of judgments $\cfill{\Xi}{\Phi}$, whose hypothetical shape
 comes from the condition that $\chyp{\Psi}{\Xi\hole}$. In practice, the
-pollination rules $\{\text{\rnmsf{poll{\downarrow}}},
-\text{\rnmsf{poll{\uparrow}}}\}$ and the {\rnmsf{fence}} rule make this equivalent
+pollination rules $\{\text{\rnmsf{poll{\da}}},
+\text{\rnmsf{poll{\ua}}}\}$ and the {\rnmsf{fence}} rule make this equivalent
 to the existence of a proof for $\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}$. But
 we conjecture that the {\rnmsf{fence}} rule might be admissible modulo the
 addition of the following distributivity rule:
@@ -525,7 +525,7 @@ the deduction theorem trivial:
   \cfill{\Xi}{\phantom{\Phi}}$. Thus we have:
   $$
   \cfill{\Xi}{\Phi} \step_{\mathsf{fence}}
-  \cfill{\Xi}{\flower{\garden{{}}{{}}}{\garden{{}}{\Phi}}} \step_{\mathsf{poll{\uparrow}}}
+  \cfill{\Xi}{\flower{\garden{{}}{{}}}{\garden{{}}{\Phi}}} \step_{\mathsf{poll{\ua}}}
   \cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}} \steps_{\Nature}
   \cfill{\Xi}{\phantom{\Phi}}
   $$
@@ -797,17 +797,17 @@ relative to a flower $\psi$, which will satisfy the property that $\Phi
   \begin{array}{rlll}
     \cfill{\Xi}{\psi}
     &\step_{\mathsf{fence}} &\cfill{\Xi}{\flower{\garden{{}}{{}}}{\garden{{}}{\psi}}} & \\
-    &\step_{\mathsf{poll{\uparrow}}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\psi}}} &\text{(\HFive)} \\
+    &\step_{\mathsf{poll{\ua}}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\psi}}} &\text{(\HFive)} \\
     &\step_{\mathsf{ipis}} &\cfill{\Xi}{\flower{\garden{{}}{(\flower{\garden{}{\sigma(\Phi)}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} & \\
-    &\step_{\mathsf{poll{\downarrow}}} &\cfill{\Xi}{\flower{\garden{{}}{(\flower{\garden{}{{}}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} &\text{(\HTwo, \HFive)} \\
+    &\step_{\mathsf{poll{\da}}} &\cfill{\Xi}{\flower{\garden{{}}{(\flower{\garden{}{{}}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} &\text{(\HTwo, \HFive)} \\
     &\step_{\mathsf{srep}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\sigma(\delta_i)}{\garden{{}}{\psi}}}}}} & \\
     &= &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\mathbf{x}_i}{\sigma(\Phi_i)}}{\garden{{}}{\psi}}}}}} & \\
-    &\nsteps{n}_{\mathsf{poll}{\downarrow}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\mathbf{x}_i}{\sigma(\Phi_i)}}{\garden{{}}{{}}}}}}} &\text{(\HOne, \HThree, \HFour, \HFive)} \\
+    &\nsteps{n}_{\mathsf{poll}{\da}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\mathbf{x}_i}{\sigma(\Phi_i)}}{\garden{{}}{{}}}}}}} &\text{(\HOne, \HThree, \HFour, \HFive)} \\
     &\nsteps{n}_{\mathsf{epet}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{{}}}} & \\
     &\step_{\mathsf{epet}} &\cfill{\Xi}{\phantom{\Phi}} &
     % &\steps_{\mathsf{ipis}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\psi}}), (\flower{\garden{\mathbf{x}_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
     % && \qquad\quad~~\, (\flower{\garden{{}}{\sigma_n \circ \sigma(\Phi_n)}}{\garden{{}}{\psi}}), (\flower{\garden{\mathbf{x}_n}{\sigma(\Phi_n)}}{\garden{{}}{\psi}})}}} \\
-    % &\steps_{\mathsf{poll{\downarrow}}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\phantom{\Phi}}}), (\flower{\garden{\mathbf{x}_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
+    % &\steps_{\mathsf{poll{\da}}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\phantom{\Phi}}}), (\flower{\garden{\mathbf{x}_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
     % && \qquad\quad~~\, (\flower{\garden{{}}{\sigma_n \circ \sigma(\Phi_n)}}{\garden{{}}{{}}}), (\flower{\garden{\mathbf{x}_n}{\sigma(\Phi_n)}}{\garden{{}}{\psi}})}}} \\
   \end{array}
   $$
@@ -836,7 +836,7 @@ relative to a flower $\psi$, which will satisfy the property that $\Phi
   \begin{array}{rlll}
     \cfill{\Xi}{\phi}
     &\step_{\mathsf{ipet}} &\cfill{\Xi}{\flower{\garden{\mathbf{x}}{\Phi}}{\garden{{}}{\sigma(\Phi_i)} \sep \Delta}} & \\
-    &\step_{\mathsf{poll}{\downarrow}} &\cfill{\Xi}{\flower{\garden{\mathbf{x}}{\Phi}}{\garden{{}}{{}} \sep \Delta}} &\text{(\HOne, \HTwo, \HThree)} \\
+    &\step_{\mathsf{poll}{\da}} &\cfill{\Xi}{\flower{\garden{\mathbf{x}}{\Phi}}{\garden{{}}{{}} \sep \Delta}} &\text{(\HOne, \HTwo, \HThree)} \\
     &\step_{\mathsf{epet}} &\cfill{\Xi}{\phantom{\Phi}} &
   \end{array}
   $$
@@ -983,9 +983,9 @@ relation of \emph{provability} (\refdef{flowers-proof}). Here to simulate modus
 ponens we rely on \emph{derivability}, and thus need this rule.
 
 The derivation of \reffig{flowers-mp} also makes clear that it is the positive
-$A$ that justifies the negative one with the \rsf{poll{\uparrow}} rule, and not
+$A$ that justifies the negative one with the \rsf{poll{\ua}} rule, and not
 the other way around. Indeed, the presence of the pistil around the negative $A$
-makes it deeper than the positive $A$, preventing the \rsf{poll{\uparrow}} rule
+makes it deeper than the positive $A$, preventing the \rsf{poll{\ua}} rule
 from being applicable in the other direction. This is a manifestation of the
 inherent dissymmetry in \emph{proof substitution}: the erasure of the negative
 $A$ can be interpreted as the operation $\subst{\pi_B}{\pi_A}{x}$, which

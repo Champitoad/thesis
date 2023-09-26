@@ -223,14 +223,14 @@ formulas have been dualized (\refdef{dual-formula}).
   There is a bijection among the rules of system \sys{B}, that matches each rule
   $\irule{r}{S}{T}$ to its dual $\irule{\soldual{r}}{\soldual{S}}{\soldual{T}}$.
   By involutivity (\reflemma{involutivity}), this bijection is self-inverse:
-  $\soldual{\soldual{\mathsf{r}}} = \mathsf{r}$. It is most easily observed in
+  $\soldual{\soldual{r}} = r$. It is most easily observed in
   the graphical presentation of the rules (\reffig{graphical-B}), where looking
   for the dual rule boils down to swapping red and blue (and mirroring logical
   connectives). The mapping goes as follows:
   \begin{mathpar}
   \begin{array}{r@{\quad\leftrightarrow\quad}l}
-    \mathsf{i{\downarrow}} & \mathsf{i{\downarrow}} \\
-    \mathsf{i{\uparrow}} & \mathsf{i{\uparrow}} \\
+    \mathsf{i{\da}} & \mathsf{i{\da}} \\
+    \mathsf{i{\ua}} & \mathsf{i{\ua}} \\
   \end{array}
   \and
   \begin{array}{r@{\quad\leftrightarrow\quad}l}
@@ -240,10 +240,10 @@ formulas have been dualized (\refdef{dual-formula}).
   \\
   \begin{array}{r@{\quad\leftrightarrow\quad}l}
     \mathsf{f{-}} & \mathsf{f{+}} \\
-    \mathsf{f{-}{+}{\downarrow}} & \mathsf{f{+}{-}{\downarrow}} \\
-    \mathsf{f{-}{-}{\uparrow}} & \mathsf{f{+}{+}{\uparrow}} \\
-    \mathsf{f{-}{+}{\uparrow}} & \mathsf{f{+}{-}{\uparrow}} \\
-    \mathsf{f{-}{-}{\downarrow}} & \mathsf{f{+}{+}{\downarrow}} \\
+    \mathsf{f{-}{+}{\da}} & \mathsf{f{+}{-}{\da}} \\
+    \mathsf{f{-}{-}{\ua}} & \mathsf{f{+}{+}{\ua}} \\
+    \mathsf{f{-}{+}{\ua}} & \mathsf{f{+}{-}{\ua}} \\
+    \mathsf{f{-}{-}{\da}} & \mathsf{f{+}{+}{\da}} \\
   \end{array}
   \and
   \begin{array}{r@{\quad\leftrightarrow\quad}l}
@@ -265,7 +265,7 @@ formulas have been dualized (\refdef{dual-formula}).
   \end{array}
   \end{mathpar}
   Notice that some rules are self-dual, namely the identity rules
-  {\rnmsf{i{\downarrow}}} and {\rnmsf{i{\uparrow}}}, and the membrane rules
+  {\rnmsf{i{\da}}} and {\rnmsf{i{\ua}}}, and the membrane rules
   {\rnmsf{p}} and {\rnmsf{a}}.
 \end{proof}
 
@@ -490,8 +490,8 @@ Heyting-Brouwer algebras:
 \begin{corollary}\label{cor:lsoundness}
   Let
   \begin{align*}
-    \sysBHB &\defeq \sysB \setminus \{\rsf{f{-}{+}{\uparrow}}, \rsf{f{+}{+}{\downarrow}}, \rsf{f{+}{-}{\uparrow}}, \rsf{f{-}{-}{\downarrow}}\} \\
-    \sysBH &\defeq \sysBHB \setminus \{\rsf{f{+}{-}{\downarrow}, \rsf{f{-}{-}{\uparrow}, \rsf{{\lsub}{-}}, \rsf{{\lsub}{+}}}}\}
+    \sysBHB &\defeq \sysB \setminus \{\rsf{f{-}{+}{\ua}}, \rsf{f{+}{+}{\da}}, \rsf{f{+}{-}{\ua}}, \rsf{f{-}{-}{\da}}\} \\
+    \sysBH &\defeq \sysBHB \setminus \{\rsf{f{+}{-}{\da}, \rsf{f{-}{-}{\ua}, \rsf{{\lsub}{-}}, \rsf{{\lsub}{+}}}}\}
   \end{align*}
   Then we have:
   \begin{itemize}
@@ -514,8 +514,8 @@ main lemma, and assume that its proof will go through mechanically:
 
 Then from the (assumed) proof of \reflemma{bubbles-local-cosoundness} we get:
 \begin{corollary}\label{cor:lcosoundness}
-  Let $\sysBB \defeq \sysBHB \setminus \{\rsf{f{-}{+}{\downarrow}},
-  \rsf{f{+}{+}{\uparrow}}, \rsf{{\limp}{-}}, \rsf{{\limp}{+}}\}$. Then $S
+  Let $\sysBB \defeq \sysBHB \setminus \{\rsf{f{-}{+}{\da}},
+  \rsf{f{+}{+}{\ua}}, \rsf{{\limp}{-}}, \rsf{{\limp}{+}}\}$. Then $S
   \lstepsys{\sysBB} T$ implies $\nsint{S} \sementB \nsint{T}$.
 \end{corollary}
 

@@ -7,7 +7,7 @@ proves that \sys{LBiInt} is sound and complete with respect to the Kripke
 semantics of bi-intuitionistic logic. Importantly, the cut rule is shown to be
 \emph{admissible} in both systems, through a syntactic process of
 cut-elimination in \sys{LBiInt}. We will rely on this result to obtain
-admissibility of the cut rule \rsf{i{\uparrow}} in $\sysBHB$, and by extension
+admissibility of the cut rule \rsf{i{\ua}} in $\sysBHB$, and by extension
 in $\sysB$, $\sysBH$ and $\sysBB$. It might be interesting to have our own
 internal cut-elimination procedure for system $\sysB$, notably to unveil its
 computational content in the spirit of the Curry-Howard correspondence. But this
@@ -76,7 +76,7 @@ can be simulated inside system $\sysB$.
 \begin{lemma}[Simulation of \sys{DBiInt}]\lablemma{simulation-dbiint}
   
   If $X \prov{\msys{DBiInt}} Y$ then $X \prov{\sysBHB \setminus
-  \{\rsf{i{\uparrow}}\}} Y$.
+  \{\rsf{i{\ua}}\}} Y$.
 \end{lemma}
 \begin{proof}
   By induction on the derivation of $X \prov{\msys{DBiInt}} Y$. The detailed
@@ -95,7 +95,7 @@ Combined with the simulation of \sys{DBiInt} from \reflemma{simulation-dbiint},
 this gives us the \emph{cut-free} completeness of $\sysBHB$:
 
 \begin{theorem}[Cut-free completeness]\labthm{bubbles-completeness}
-  If $A \sementHB B$ then $A \prov{\sysBHB \setminus \{\rsf{i{\uparrow}}\}} B$.
+  If $A \sementHB B$ then $A \prov{\sysBHB \setminus \{\rsf{i{\ua}}\}} B$.
 \end{theorem}
 % \begin{proof}
 %   This follows immediately from \reffact{completeness-dbiint} and
@@ -103,30 +103,30 @@ this gives us the \emph{cut-free} completeness of $\sysBHB$:
 % \end{proof}
 
 In fact there are other rules of $\sysBHB$ that were not used in the simulation,
-namely the $\mathbb{F}$-rule \rsf{f{\uparrow}}, and all $\mathbb{M}$-rules other
+namely the $\mathbb{F}$-rule \rsf{f{\ua}}, and all $\mathbb{M}$-rules other
 than \rsf{p}. Combined with the soundness of $\sysBHB$ (Corollary
 \ref{cor:soundness}), this gives us the following \emph{admissibility} theorem:
 
 \begin{theorem}[Admissibility]\labthm{bubbles:cut-admissibility}
 
   If $\prov{\sysBHB} A$ then $\prov{\sysBHB \setminus
-  \{\rsf{i{\uparrow}},\rsf{f{\uparrow}},\rsf{p{-}},\rsf{p{+}},\rsf{a},\rsf{a{-}},\rsf{a{+}}\}}
+  \{\rsf{i{\ua}},\rsf{f{\ua}},\rsf{p{-}},\rsf{p{+}},\rsf{a},\rsf{a{-}},\rsf{a{+}}\}}
   A$.
 \end{theorem}
 
 Although these rules are admissible, they do not seem to be derivable from other
 rules. We believe that they might help in making proofs more \emph{compact} by
 improving \emph{factorizability}, just like the cut rule does.
-% We also conjecture that they become necessary (except \rsf{i{\uparrow}}) if one
+% We also conjecture that they become necessary (except \rsf{i{\ua}}) if one
 % wants to show the completeness of $\sysBHB$ without any $\mathbb{H}$-rule ---
 % and thus the admissibility of \emph{logical connectives}. But this has yet to be
 % demonstrated.
 
 As in sequent calculus, every rule of system $\sysB$ other than
-\rsf{i{\uparrow}} satisfies the \emph{subformula property}:
+\rsf{i{\ua}} satisfies the \emph{subformula property}:
 
 \begin{fact}[Subformula property]\label{cor:subformula-property}
-  If $S \step_{\sysB \setminus \{\rsf{i{\uparrow}}\}} T$ and $A \subsol T$ then
+  If $S \step_{\sysB \setminus \{\rsf{i{\ua}}\}} T$ and $A \subsol T$ then
   $A \subsol S$.
 \end{fact}
 
@@ -161,13 +161,13 @@ argument can be made for dual-intuitionistic logic, and thus we obtain
   \sbr
   \begin{itemize}
     \item If $A \sementH B$ then $A \prov{\sysBH \setminus
-    \{\rsf{i{\uparrow}}\}} B$.
+    \{\rsf{i{\ua}}\}} B$.
     \item If $A \sementB B$ then $A \prov{\sysBB \setminus
-    \{\rsf{i{\uparrow}}\}} B$.
+    \{\rsf{i{\ua}}\}} B$.
   \end{itemize}
 \end{corollary}
 
-% Note that $\{\rsf{f{+}{-}{\downarrow}}, \rsf{f{-}{-}{\uparrow}},
+% Note that $\{\rsf{f{+}{-}{\da}}, \rsf{f{-}{-}{\ua}},
 % \rsf{{\lsub}{-}}, \rsf{{\lsub}{+}}\}$ are the only rules of $\sysBHB$ that
 % involve negative solutions and/or exclusions.
 
@@ -178,9 +178,9 @@ argument can be made for dual-intuitionistic logic, and thus we obtain
   {\R[{\bot}{+}]
   {\R[{\bot}{-}]
   {\R[\rsf{p}]
-  {\R[\rsf{f{+}{\downarrow}}]
-  {\R[\rsf{f{+}{+}{\downarrow}}]
-  {\R[\rsf{i{\downarrow}}]
+  {\R[\rsf{f{+}{\da}}]
+  {\R[\rsf{f{+}{+}{\da}}]
+  {\R[\rsf{i{\da}}]
   {\R[\rsf{p}{+}]
   {\R[\rsf{p}]
   {{} \piq{}}
@@ -206,21 +206,21 @@ classical logic into intuitionistic logic tells us that $\neg \neg A$ is
 provable in $\sysBH$ (and a fortiori in $\sysB$) if $A$ is a theorem of
 classical logic. Combining the two previous facts, we obtain the classical
 completeness of system $\sysB$. In fact the proof of DNE only relies on the use
-of the \rsf{f{+}{+}{\downarrow}} rule, so we can make the following stronger
+of the \rsf{f{+}{+}{\da}} rule, so we can make the following stronger
 statement:
 
 \begin{corollary}[Classical completeness]\label{cor:bubbles-completeness-classical}
   If $A$ is a theorem of classical logic, then $\prov{\sysBH \cup
-  \{\rsf{f{+}{+}{\downarrow}}\}} A$.
+  \{\rsf{f{+}{+}{\da}}\}} A$.
 \end{corollary}
 \begin{proof}
   By the double-negation embedding, we have $\prov{\sysBH} \neg \neg A$. Then we
   can build the following derivation:
   $$
-  \R[\rsf{i{\uparrow}}]
+  \R[\rsf{i{\ua}}]
   {\prftree[dotted]
   {\R[\rsf{p}]
-  {\R[\rsf{f{+}{\downarrow}}]
+  {\R[\rsf{f{+}{\da}}]
   {\prftree[r][d]{DNE}  
   {\R[\rsf{p}]
   {{} \piq{}}
@@ -233,7 +233,7 @@ statement:
   $$
 \end{proof}
 
-Alas this argument makes use of the \rsf{i{\uparrow}} rule. Note however that
+Alas this argument makes use of the \rsf{i{\ua}} rule. Note however that
 the reason we chose to prove completeness of $\sysBHB$ by simulating a rather
 exotic system like \sys{DBiInt}, was that standard sequent calculi for
 bi-intuitionistic logic like the one of Rauszer
@@ -245,7 +245,7 @@ sequent calculus such as \sys{G3cp} \sidecite{negri_structural_2001}:
 
 \begin{lemma}[Simulation of \sys{G3cp}]
   If $\Gamma \prov{\msys{G3cp}} \Delta$, then $\Gamma \prov{\sysBH \cup
-  \{\rsf{f{+}{+}}\} \setminus \{\rsf{i{\uparrow}}\}} \Delta$.
+  \{\rsf{f{+}{+}}\} \setminus \{\rsf{i{\ua}}\}} \Delta$.
 \end{lemma}
 \begin{proof}
   By induction on the \sys{G3cp} derivation, see

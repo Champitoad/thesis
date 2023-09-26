@@ -1,0 +1,102 @@
+\setchapterpreamble[u]{\margintoc}
+\chapter{Existential Graphs}
+\labch{app:eg}
+
+\section{Completeness}\labsec{app:eg-completeness}
+
+\begin{theorem}[Completeness]
+  If $U\select{S} \step U\select{T}$, then $\strans{U}\select{\strans{S}} \steps
+  \strans{U}\select{\strans{T}}$.
+\end{theorem}
+\begin{proof}
+  We show that $\strans{S} \steps \strans{T}$ by simulating each rule of
+  \reffig{sks}. The closure with $\strans{U\hole}$ follows from
+  \reffact{strans-pos} and \reflemma{eg-posclos}. To make the notation lighter,
+  we implicitly apply the translation $\strans{(-)}$ on substructures.
+  
+  For the switch rule \rsf{s}, we give two dual derivations: reading them
+  bottom-up, the first uses the rules \rsf{Deit} and \rsf{Ins} to move $U$
+  \emph{into} the cuts enclosing $T$, while the second uses the rules \rsf{Era}
+  and \rsf{Iter} to move $S$ \emph{out of} the cuts of $T$.
+
+  $$
+  \begin{array}{r@{\mt}l@{\qquad\qquad}r@{\mt}l@{\vspace{2em}}}
+    \R[\rsf{i{\da}}]
+      {\top}
+      {a \lor \dmdual{a}}
+    &
+    \R[\rsf{Dcut{\da}}]
+    {\R[\rsf{Iter}]
+    {\R[\rsf{Ins}]
+    {\R[\rsf{Dcut{\da}}]
+    {}
+    {[[]]}}
+    {[[], a]}}
+    {[[a], a]}}
+    {[[a], [[a]]]}
+    &
+    \R[\rsf{ai{\ua}}]
+      {a \land \dmdual{a}}
+      {\bot}
+    &
+    \R[\rsf{Era}]
+    {\R[\rsf{Deit}]
+    {a, [a]}
+    {a, []}}
+    {[]}
+    \\
+    \R[\rsf{s}]
+      {S \land (T \lor U)}
+      {(S \land T) \lor U}
+    &
+    \R[\rsf{Dcut{\ua}}]
+    {\R[\rsf{Deit}]
+    {\R[\rsf{Ins}]
+    {\R[\rsf{Dcut{\da}}]
+    {S, [[T], [U]]}
+    {[[S, [[T], [U]]]]}}
+    {[[S, [[T], [U]]], [U]]}}
+    {[[S, [[T]]], [U]]}}
+    {[[S, T], [U]]}
+    &
+    \R[\rsf{s}]
+      {S \land (T \lor U)}
+      {(S \land T) \lor U}
+    &
+    \R[\rsf{Era}]
+    {\R[\rsf{Iter}]
+    {S, [[T], [U]]}
+    {S, [[S, T], [U]]}}
+    {[[S, T], [U]]}
+    \\
+    \R[\rsf{aw{\da}}]
+      {\bot}
+      {a}
+    &
+    \R[\rsf{Dcut{\ua}}]
+    {\R[\rsf{Ins}]
+    {[]}
+    {[[a]]}}
+    {a}
+    &
+    \R[\rsf{aw{\ua}}]
+      {a}
+      {\top}
+    &
+    \R[\rsf{Era}]
+    {a}
+    {}
+    \\
+    \R[\rsf{ac{\da}}]
+      {a \lor a}
+      {a}
+    &
+    &
+    \R[\rsf{ac{\ua}}]
+      {a}
+      {a \land a}
+    &
+    \\
+  \end{array}
+  $$
+\end{proof}
