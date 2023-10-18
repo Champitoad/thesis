@@ -24,10 +24,9 @@ conceptual graphs for computerized knowledge representation on EG
 \cite{pietarinen_compositional_2020} proposed various reconstructions of EG
 through the lens of \emph{topology} and \emph{category theory}, and Melliès and
 Zeilberger \cite{mellies_bifibrational_2016} refined the interpretation of Brady
-and Trimble by making further connections with \emph{linear
-logic}\cite{girard-linear-1987}. The full story has yet to be told, but we hope
-that our work will constitute one more step towards the vision Peirce had in
-mind.
+and Trimble by making further connections with \emph{linear logic}
+\cite{girard-linear-1987}. The full story has yet to be told, but we hope that
+our work will constitute one more step towards the vision Peirce had in mind.
 
 In this chapter, we propose a self-contained exposition of EG, that tries at the
 same time to be faithful to the original presentation of the systems by Peirce,
@@ -45,18 +44,22 @@ propositional logic. In \refsec{illative}, we introduce the inference rules of
 \sys{Alpha} for manipulating existential graphs, called \emph{illative
 transformations} by Peirce. In \refsec{multisets}, we give an equivalent
 formulation of the syntax and rules of \sys{Alpha} as a \emph{multiset}
-rewriting system. In \refsec{eg-soundness}, we take advantage of our
-reformulation to give a simpler proof of soundness for \sys{Alpha} that what can
-be found in the literature, based on a direct truth-evaluation of graphs. In
-\refsec{eg-completeness} we give a novel syntactic proof of completeness for
-\sys{Alpha}, by simulating the calculus of structures \sys{SKS} of Brünnler and
-Tiu \cite{brunnler_local_2001}. In this way, \sys{Alpha} is shown to have
-subsystems that inherit the \emph{locality} property of \sys{SKS}, and where the
-erasure and insertion rules are respectively admissible for \emph{provability}
-and \emph{refutability}. In \refsec{beta}, we illustrate the original mechanism
-of \emph{lines of identity} used by Peirce to handle quantifiers and equality in
-his \sys{Beta} system. We end in \refsec{gardens} by showing how to recast lines
-of identity in a more traditional binder-based syntax.
+rewriting system. In \refsec{atomicity}, we formalize a variant of the iteration
+principle described by Peirce in \sidecite{peirce_prolegomena_1906} that
+eliminates the need for the double-cut principle, and discuss how it was
+motivated by Peirce's quest for \emph{illative atomicity}. In
+\refsec{eg-soundness}, we take advantage of our reformulation to give a simple
+proof of soundness for \sys{Alpha}, based on a direct truth-evaluation of
+graphs. In \refsec{eg-completeness} we give a novel syntactic proof of
+completeness for \sys{Alpha}, by simulating the calculus of structures \sys{SKS}
+of Brünnler and Tiu \cite{brunnler_local_2001}. In this way, \sys{Alpha} is
+shown to have subsystems that inherit the \emph{locality} property of \sys{SKS},
+and where the deletion and insertion rules are respectively admissible for
+\emph{provability} and \emph{refutability}, making \sys{Alpha} \emph{analytic}.
+In \refsec{beta}, we illustrate the original mechanism of \emph{lines of
+identity} used by Peirce to handle quantifiers and equality in his \sys{Beta}
+system. We end in \refsec{gardens} by showing how to recast lines of identity in
+a more traditional binder-based syntax.
 
 % \todo{IDEA (where should we put it?): \emph{superposition of polarities} in
 % existential graphs. While a cut in bubble calculi is the insertion of \emph{two}
@@ -79,21 +82,21 @@ The last system \sys{Gamma} is more experimental, with various unfinished
 features that have been interpreted as attempts to capture \emph{modal}
 \sidecite{zeman_graphical_1964} and \emph{higher-order} logics\sidenote{A less
 known fact is that at the end of his life, Peirce pushed his experimentations
-beyond the scope of \emph{logic} in the contemporary sense of the word (it was
-already the case for modal logic in his time), with so-called \emph{tinctured
-existential graphs} (Chapter 6 in \cite{Roberts+1973}). Roughly, the idea was to
-represent a variety of \emph{modes of expression} with different background
-shades on the canvas where sentences are scribed, not unlike our graphical
-depiction of the \emph{status} of solutions in \reffig{graphical-B}. In addition
-to the usual act of asserting the truth of a proposition, one could for instance
-express a \emph{subjective} or \emph{objective} possibility, or signify an
-interrogative or imperative mood, all by using different colors. For print in
-publications, he would in fact use \emph{heraldic tinctures} instead of colors,
-hence the ``tinctured'' qualificative. The precise meaning and purpose of
-tinctured EG remains elusive to this day, and might constitute the most esoteric
-part of his work. We see a possible connection with the type-theoretical concept
-of \emph{judgment}, which was rehabilitated by Martin-Löf from the philosophy of
-Kant \cite{Martin-Lof1996-MAROTM-7}, who was of great influence on Peirce's own
+beyond the scope of \emph{logic} in the contemporary sense of the word, with
+so-called \emph{tinctured existential graphs} (Chapter 6 in
+\cite{Roberts+1973}). Roughly, the idea was to represent a variety of
+\emph{modes of expression} with different background shades on the canvas where
+sentences are scribed, not unlike our graphical depiction of the \emph{status}
+of solutions in \reffig{graphical-B}. In addition to the usual act of asserting
+the truth of a proposition, one could for instance express a \emph{subjective}
+or \emph{objective} possibility, or signify an interrogative or imperative mood,
+all by using different colors. For print in publications, he would in fact use
+\emph{heraldic tinctures} instead of colors, hence the ``tinctured''
+qualificative. The precise meaning and purpose of tinctured EG remains elusive
+to this day, and might constitute the most esoteric part of his work. We see a
+possible connection with the type-theoretical concept of \emph{judgment}, which
+was rehabilitated by Martin-Löf from the philosophy of Kant
+\cite{Martin-Lof1996-MAROTM-7}, who was of great influence on Peirce's own
 philosophy \cite{sep-peirce}.}.
 
 The most fundamental concept of \sys{Alpha} is the \emph{sheet of assertion},
@@ -105,7 +108,8 @@ the reasoner is (the user or the computer, respectively). This last analogy
 suggests an important property of $\SA$: it must offer a \emph{virtually
 infinite} amount of space, so that one can perform as much reasoning as needed.
 Just like a Turing machine has an infinite tape, so that one can perform as much
-computation as needed.
+computation as needed. In symbolic logic, this is captured by the fact that
+formulas, although usually finite, can have an unbounded size.
 
 As its name indicates, scribing a statement on $\SA$ amounts to \emph{asserting
 its truth}. Thus very naturally, the empty $\SA$ where nothing is scribed will
@@ -117,15 +121,15 @@ $\top$.
 made by the \process{Graphist}, i.e. the person scribing on $\SA$, refer to the
 world \emph{outside} of the sheet (the universe of discourse). By not scribing
 anything, the \process{Graphist} thus refrains from asserting anything about the
-world, only assuming implicit truths. This is illustrated by the following quote
-from \cite{Roberts+1973}, reminiscent of an interaction between a proof
-assistant (the \process{Graphist}) and her user (\process{the Interpreter}):
-\textit{``One of the parties, called the Graphist, is responsible for scribing
-the original graphs at the beginning of the investigation or discussion; the
-other, called the Interpreter, draws inferences from these graphs by changing
-them in accordance with the permissions of the system. The [...] sheet, before
-anything is scribed on it, represents whatever is taken for granted at the
-outset by the Graphist and Interpreter''}.
+world, only assuming implicit truths. This is illustrated by the following
+quote, reminiscent of an interaction between a proof assistant (the
+\process{Graphist}) and its user (\process{the Interpreter})
+\cite[p.~92]{Roberts+1973}: \textit{``One of the parties, called the Graphist,
+is responsible for scribing the original graphs at the beginning of the
+investigation or discussion; the other, called the Interpreter, draws inferences
+from these graphs by changing them in accordance with the permissions of the
+system. The [...] sheet, before anything is scribed on it, represents whatever
+is taken for granted at the outset by the Graphist and Interpreter''}.
 \end{remark}
 
 As we know from natural deduction, asserting the truth of the conjunction $a
@@ -260,10 +264,10 @@ are attached to them as explicit labels.}.
   each piece in the opposite color.
 \end{remark}
 
-Quite surprisingly, Peirce showed that one only needs 5 inference rules to get
+Quite surprisingly, Peirce showed that one only needs five inference rules to get
 a \emph{strongly complete} system, in the sense that if the truth of a graph $G$
 entails the truth of another graph $H$, then $G$ can always be rewritten into
-$H$ by applying exclusively instances of these 5 rules\sidenote{Of course
+$H$ by applying exclusively instances of these five rules\sidenote{Of course
 Peirce did not show completeness formally in the sense of modern model theory,
 although Sowa argues in \cite{sowa_peirces_2011} (Section 4) that he had started
 to develop his own model theory equivalent to Tarski's (but closer to the
@@ -290,8 +294,18 @@ of any polarity:
       \and
       \nsheet{G~~~H\select{\phantom{G}} ~~~\step~~~ G~~~H\select{G}}
     \end{mathpar}
-    In particular, $H$ can be taken to be any empty portion of $\SA$ in the same
-    area as $G$, giving that $G ~\step~ G~G$.
+    % In particular, $H$ can be taken to be any empty portion of $\SA$ in the same
+    % area as $G$, giving that $G ~\step~ G~G$.
+    It can be seen as a deep generalization of the \emph{identity} axiom of
+    sequent calculus, where the top-level occurrence of $G$ justifies the
+    occurrence inside $H\hole$\sidenote{This might also be related to the notion
+    of \emph{justified move} in game semantics, where the nesting of cuts in the
+    context $H\hole$ corresponds to a sequence of alternating moves between
+    Player and Opponent.}. Note that while in the identity axiom, the justifying
+    (resp. justified) occurrence must be a negative hypothesis (resp. a positive
+    conclusion), the \rsf{Iteration} rule also allows the opposite relationship
+    of a positive conclusion justifying a negative hypothesis, thus also
+    subsuming one aspect of the \emph{cut} rule of sequent calculus.
   \item[\textbf{Deiteration} \textit{(Factorization)}]
     Formally, this is the converse of \rsf{Iteration}:
     \begin{mathpar}
@@ -311,6 +325,10 @@ of any polarity:
     \reffig{sequent-B}); and the deduplicating effect makes \rsf{Deiteration}
     even closer to the variant of the same rules in \sys{B_{inv}}
     (\reffig{sequent-B-inv}).}.
+    
+    Compared to sequent calculus, it can be seen as a deep generalization of the
+    \emph{contraction} rule, the base case where $H\hole = \hole$ giving $G~G
+    ~\step~ G$.
 \end{itemize}
 The applicability of the next two rules depends on the polarity of the
 subgraph's area:
@@ -322,11 +340,16 @@ subgraph's area:
     known to be true, one might add (useless) hypotheses at will. The closest
     equivalent we found in the deep inference literature is indeed the weakening
     rule \rsf{wl{\da}} of \sys{ISp} in \sidecite{tiu_local_2006}.
-  \item[\textbf{Erasure} \textit{(Deletion)}]
+  \item[\textbf{Deletion}]
     Any graph $G$ occurring in a positive area may be erased:
     $$G ~~~\step~~~$$
+    
     This is exactly the dual of \rsf{Insertion}, stating that if a proposition
-    is known to be true, then one might as well refrain from asserting it.
+    is known to be true, then one might as well refrain from asserting it. It is
+    the only \emph{non-analytical} rule of the system when reading rules from
+    conclusion to premiss, since $G$ does not already appear in the right-hand
+    side. It is thus strongly related to the \emph{cut} rule of sequent
+    calculus, which it can simulate together with the \rsf{Deiteration} rule.
     % It is strongly related to the cut rule of sequent calculus, as will be
     % demonstrated shortly.
 \end{itemize}
@@ -341,11 +364,12 @@ The last rule is more of a \emph{space management} principle that works as an
       \nsheet{\pcut{\ncut{G}} ~~~\leftrightarrow~~~ G}
     \end{mathpar}
     The bidirectional arrow $\leftrightarrow$ expresses that the rule can be
-    applied in both directions\sidenote{We could have merged \rsf{Iteration} and
-    \rsf{Deiteration} in this way, but chose to follow the original presentation
-    of the rules by Peirce instead, as exposed in \cite{Roberts+1973}.}.
+    applied in both directions.
+    % \sidenote{We could have merged \rsf{Iteration} and \rsf{Deiteration} in this
+    % way, but chose to follow the original presentation of the rules by Peirce
+    % instead, as exposed in \cite{Roberts+1973}.}
     Logically, this corresponds to the classical equivalence $\neg\neg A
-    \semequiv A$, where in particular the erasure direction $\neg\neg A \limp A$
+    \semequiv A$, where in particular the deletion direction $\neg\neg A \limp A$
     is not true intuitionistically. Topollogically, the double-cut forms a
     \emph{ring}, that separates $G$ from the rest of $\SA$ while preserving its
     polarity. Then the two directions of the rules can be understood as the
@@ -367,23 +391,6 @@ The last rule is more of a \emph{space management} principle that works as an
       their graphical presentation (\reffig{graphical-B}).}.
     \end{itemize}
 \end{itemize}
-A remarkable feat of Peirce's rules, on which he insisted very much, is that
-they are only expressed in terms of \emph{insertions} and \emph{omissions} of
-graphs on $\SA$. He thought that those were the \emph{smallest} steps in which
-reasoning could be dissected, making his system extremely appropriate for
-\emph{analytical} purposes\sidenote{See Section 7.11 of \cite{Roberts+1973}.}.
-We already considered this question of decomposing logical inferences into their
-most elementary operations, when reflecting on the graphical presentation of
-\sys{BJ} at the end of \refsec{bubbles-graphical-rules}. In this setting, the
-most basic insertions and omissions we could find were not logically
-\emph{sound}, whereas in \sys{Alpha} they are. This is quite promising, and
-prompts us to reevalute our conception of \emph{atomicity} in logical reasoning.
-
-\begin{marginfigure}
-  \input{figures/eg-peirce-law.tex}
-  \caption{A derivation of Peirce's law in \sys{Alpha}}
-  \labfig{eg-peirce-law}
-\end{marginfigure}
 
 \reffig{eg-peirce-law} shows a derivation of Peirce's law with the rules of
 \sys{Alpha}. Note that the direction of arrows has been reversed compared to the
@@ -392,10 +399,16 @@ premiss, starting from the goal to prove --- here the graph associated to the
 formula $((a \limp b) \limp a) \limp a$ --- that we reduce to the empty goal,
 represented by the empty $\SA$. Also, the reader unfamiliar with EG might find
 it hard to convince herself that all the steps followed in the derivation are
-\emph{sound} logically. We suggest her to either build a \emph{syntactic}
-intuition for the rules by praticing them on various tautologies of
-propositional logic, or to wait until we give a formal \emph{semantic} proof of
-soundness in \refsec{eg-soundness}.
+sound logically. We suggest her to either build a \emph{syntactic} intuition for
+the rules by practicing them on various tautologies of propositional logic, or
+to wait until we give a formal \emph{semantic} proof of soundness in
+\refsec{eg-soundness}.
+
+\begin{marginfigure}
+  \input{figures/eg-peirce-law.tex}
+  \caption{A derivation of Peirce's law in \sys{Alpha}}
+  \labfig{eg-peirce-law}
+\end{marginfigure}
 
 % For lack of space, we will not provide a general proof of soundness for
 % \sys{Alpha}, which requires a bit of work (especially in the case of
@@ -457,14 +470,22 @@ $\alpha$-graphs as (recursive) \emph{finite multisets}:
   \emph{$\alpha$-nodes} $\anodes$ and \emph{$\alpha$-graphs} $\agraphs$ are
   defined mutually inductively as follows:
   \begin{itemize}
-    \item \textbf{(Atom)} If $a \in \atoms$, then $a \in \anodes$;
-    \item \textbf{(Graph)} If $G \subset \anodes$ is a finite multiset, then $G
+    \item \textbf{(Spot)} If $a \in \atoms$, then $a \in \anodes$;
+    \item \textbf{(Area)} If $G \subset \anodes$ is a finite multiset, then $G
     \in \agraphs$;
-    \item \textbf{(Cut)} If $G \in \agraphs$, then $[G] \in \anodes$.
+    \item \textbf{(Enclosure)} If $G \in \agraphs$, then $[G] \in \anodes$.
   \end{itemize}
   % An \emph{$\alpha$-graph} is a multiset of atomic propositions and
   % $\alpha$-graphs.
 \end{definition}
+The terminology written in parentheses is the one used by Peirce to denote the
+same concepts in his \emph{Prolegomena to an Apology for Pragmaticism}
+\sidecite{peirce_prolegomena_1906}. Note the similarity with the definitions of
+bubbles (enclosures) and solutions (areas) (\refdef{solution}). The main
+difference between $\alpha$-graphs and solutions, is that in the former formulas
+(ions) are restricted to atoms (spots), and they are not \emph{polarized} (see
+\refremark{eg-polarity}).
+
 % Note that with this definition, the distinction between $\SA$ and cuts is
 % implicitly captured by whether a multiset belongs to another multiset (cut), or
 % is at the ``top-level'' ($\SA$). We could also have followed the approach used
@@ -472,12 +493,7 @@ $\alpha$-graphs as (recursive) \emph{finite multisets}:
 % (bubbles) as a separate construct defined mutually recursively with
 % $\alpha$-graphs (solutions).
 
-Note the similarity with the definitions of bubbles (cuts) and solutions
-(graphs) (\refdef{solution}). The main difference between $\alpha$-graphs and
-solutions, is that in the former formulas are restricted to atoms, and they are
-not \emph{polarized} (see \refremark{eg-polarity}).
-
-The 5 rules of \sys{Alpha} can now be formalized as multiset rewriting rules
+The five rules of \sys{Alpha} can now be formalized as multiset rewriting rules
 on $\alpha$-graphs. But first, we need a notion of \emph{context} in which rules
 apply:
 
@@ -545,6 +561,102 @@ simplify a goal.
   \labfig{alpha}
 \end{figure}
 
+\section{Illative atomicity}\labsec{atomicity}
+
+A remarkable feat of Peirce's rules, on which he insisted very much, is that
+they are only expressed in terms of \emph{insertions} and \emph{omissions} of
+graphs on $\SA$. He thought that those were the \emph{smallest} steps in which
+reasoning could be dissected, making his system extremely appropriate for
+\emph{analytical} purposes\sidenote{See Section 7.11 of \cite{Roberts+1973}.}.
+We already considered this question of decomposing logical inferences into their
+most elementary operations, when reflecting on the graphical presentation of
+\sys{BJ} at the end of \refsec{bubbles-graphical-rules}. In this setting, the
+most basic insertions and omissions we could find were not logically
+\emph{sound}, whereas in \sys{Alpha} they are. This is quite promising, and
+prompts us to reevalute our conception of \emph{illative atomicity}, understood
+precisely as the definition of what it means for an inference step to be (the
+most) \emph{elementary}. Note that this should be distinguished from the notion
+of \emph{analyticity}, as popularized by Gentzen with the \emph{subformula
+property} in sequent calculus: the latter is concerned with the analysis of
+\emph{statements} into their constituents through inference rules, while here we
+are interested in the analysis of the inference rules themselves\sidenote{We
+will give a positive answer to the question of analyticity in \sys{Alpha} at the
+end of \refsec{eg-completeness}}. This is a philosophically debatable question,
+because inference rules are usually posited as axioms in a deductive system, and
+are thus by definition the smallest constituents of proofs. The only other
+logician we know of who attempted to give a non-trivial account of illative
+atomicity is J.-Y. Girard. In fact it can be argued that it is the principal
+motivation behind most of his works starting from linear logic, which became
+explicit in ludics with his slogan ``From the rules of logic to the logic of
+rules'' \cite{girard_locus_2001}.
+
+There is an intriguing remark by Peirce in \cite{peirce_prolegomena_1906} about
+the atomicity of the rules presented thus far, that seems to have gone unnoticed
+in the literature on EG. On pp.~536--537, Peirce argues that the rule of
+double-cut ``cannot be assumed as an undeduced Permission'' --- i.e. a primitive
+rule of the system, because the area inside the inner cut becomes identified
+with the area outside the outer cut when the double cut is removed, which ``is
+not strictly an Insertion or a Deletion''. Another way to view this, is that it
+is the only \emph{linear} rule of the system, in the sense that the premiss and
+conclusion have the same number of atoms. Contrast this with linear logic, which
+instead takes linearity as the criterion for atomicity in reasoning, as
+exemplified by the linear decomposition of implication $A \limp B \defeq \oc A
+\multimap B$. This might be the consequence of its opposite treatment of
+\emph{negation}: while in EG it is the only primitive constructor of the system
+--- remember that the only way to increase the depth of a graph is with a cut,
+in LL negation is the only defined notion through De Morgan dualities. Thus EG
+are closer (at least syntactically) to \emph{type theories}, which also take a
+negative operation (the arrow or dependent product type) as their sole primitive
+construct. This will be made more explicit in \refsec{flowers-curryhoward}.
+
+Peirce then suggests a ``more scientific way'', where the rule of
+\rsf{Double{-}cut} is subsumed by a restricted variant of the rules of
+\rsf{Iteration} and \rsf{Deiteration}. His description of this ``more
+scientific'' (de)iteration principle is based on a relation of \emph{local
+justification} (our terminology) between two areas of a graph, that captures the
+fact that the deeper occurrence of $G$ in the \rsf{Iteration} and
+\rsf{Deiteration} rules (\refsec{illative}) is justified by the other occurrence
+by virtue of their respective \emph{locations}. Later in the text, Peirce
+emphasizes the importance of this locative aspect of argumentation
+\cite[pp.~544-545]{peirce_prolegomena_1906}:
+
+\begin{quote}
+  [...] when an Argument is brought before us, there is brought to our notice a
+process whereby the Premisses bring forth the Conclusion, not informing the
+Interpreter of its Truth, but appealing to him to assent thereto. This Process
+of Transformation, which is evidently the kernel of the matter, is no more built
+out of Propositions than a motion is built out of position.
+\end{quote}
+
+Once again, game-theoretical ideas (\refremark{eg-polarity}) are apparent in
+this excerpt: the concept of Truth is not primitive, but rather a side effect of
+the interaction between an Interpreter (Opponent) being lead to agree with the
+Graphist (Player), whenever the latter performs a transformation on the graph
+under discussion. The soundness of such a transformation guarantees that this
+will work for \emph{any} Interpreter/Opponent, leading to what is known as a
+\emph{winning strategy} in game semantics. Then since illative transformations
+only consist of Insertions and Deletions, whose validity depends solely on the
+positions where they occur in the graph, it ensues that the components of an
+argumentation can be reduced to ``motions'' (moves) that relate pure locations.
+It is then interesting to notice that the quest for illative atomicity, who led
+Peirce to discover these interactive and locative aspects of logic, also led
+Girard to identify these properties as fundamental, in his recent works on
+ludics \cite{girard_locus_2001} and transcendental syntax
+\cite{eng_exegesis_2023}. Both authors also shared the ambition to develop a
+comprehensive philosophical foundation for logic, as part of a more general
+theory of \emph{meaning}: for Peirce it was his \emph{semeiotic}, stemming from
+his overarching doctrine of \emph{pragmaticism} \cite{sep-peirce}; for Girard it
+was the theory of programming languages and their semantics.
+
+Let us now go back to the modified (de)iteration principle proposed by Peirce.
+With out formalization of graphs as multisets, we can give a more rigorous
+formulation than the original natural language description given by
+Peirce\sidenote{Although we limit ourselves to propositional logic in
+\sys{Alpha}, while in \cite{peirce_prolegomena_1906} Peirce also accounts for
+the lines of identity of \sys{Beta} handling predicate logic, to be introduced
+in \refsec{beta}.}.
+
+\todo{Mention that we will not use the general iteration principle}
 
 \section{Soundness}\labsec{eg-soundness}
 
@@ -710,7 +822,7 @@ from the following \emph{functoriality} lemmas:
     $v\left(K\select{G}\right) = v\left(K\select{[[G]]}\right)$ by
     \reflemma{eg-doublecut} and functoriality.
 
-    \item[\rsf{Ins}, \rsf{Era}] This follows from the fact that $v(G) \leq 1 =
+    \item[\rsf{Ins}, \rsf{Del}] This follows from the fact that $v(G) \leq 1 =
     v(\emptyset)$ and \reflemma{eg-variance}.
   \end{itemize}
 \end{proof}
@@ -742,15 +854,6 @@ laws.
   \mid S \lor T$$
 \end{definition}
 
-\begin{definition}[Depth]
-  The \emph{depth} $\gdepth{S}$ of a structure context $S\hole$ is defined
-  recursively as follows:
-  \begin{align*}
-    \gdepth{\hole} &= 0 \\
-    \gdepth{S\hole \land T} = \gdepth{T \land S\hole} = \gdepth{S\hole \lor T} = \gdepth{T \lor S\hole} &= \gdepth{S\hole} + 1
-  \end{align*}
-\end{definition}
-
 \begin{definition}[De Morgan dual]
   The \emph{De Morgan dual} of a structure $S$ is defined recursively as
   follows:
@@ -778,6 +881,15 @@ The full set of rules of \sys{SKS} is given in \reffig{sks}. All rules are
 implicitly applicable in any \emph{context} $W\hole$ of arbitrary depth, with
 the usual notion of context as a structure with a hole.
 
+\begin{definition}[Depth]
+  The \emph{depth} $\gdepth{S}$ of a structure context $S\hole$ is defined
+  recursively as follows:
+  \begin{align*}
+    \gdepth{\hole} &= 0 \\
+    \gdepth{S\hole \land T} = \gdepth{T \land S\hole} = \gdepth{S\hole \lor T} = \gdepth{T \lor S\hole} &= \gdepth{S\hole} + 1
+  \end{align*}
+\end{definition}
+
 \begin{remark}\labremark{sks-ctx-pol}
   Contexts for structures are always \emph{positive}, since negation is pushed
 down to atoms. This is the opposite situation from that of \sys{Alpha}, where
@@ -804,18 +916,19 @@ The rules of \sys{SKS} satisfy two notable properties:
       if and only if $K^-\select{H} \xstep{\rsf{\dmdual{r}}} K^-\select{G}$, where
       \begin{align*}
         \dmdual{\rsf{Iter}} &= \rsf{Deit} & \dmdual{\rsf{Deit}} &= \rsf{Iter} \\
-        \dmdual{\rsf{Ins}} &= \rsf{Era} & \dmdual{\rsf{Era}} &= \rsf{Ins} \\
+        \dmdual{\rsf{Ins}} &= \rsf{Del} & \dmdual{\rsf{Del}} &= \rsf{Ins} \\
         \dmdual{\rsf{Dcut{\da}}} &= \rsf{Dcut{\ua}} & \dmdual{\rsf{Dcut{\ua}}} &= \rsf{Dcut{\da}}
       \end{align*}
     \end{fact}
 
     \begin{remark}\labremark{eg-intuitionism}
       
-    The notion of polarity of a context also exists in intuitionistic logic, and
-    is in fact used in the same way to obtain dual rules in the intuitionistic
-    calculus of structures \sys{SISa} of Tiu \cite{tiu_local_2006}. This
-    constitutes one more argument in favor of the view defended by Minghui and
-    Pietarinen in \sidecite{minghui_graphical_2019}, that Peirce had a
+    Contrary to De Morgan duality, the notion of polarity of a context also
+    exists in intuitionistic logic, and is in fact used in the same way to
+    obtain dual rules in the intuitionistic calculus of structures \sys{SISa} of
+    Tiu \cite{tiu_local_2006}. This constitutes one more argument in favor of
+    the view defended by Minghui and Pietarinen in
+    \sidecite{minghui_graphical_2019}, that Peirce had a
     \emph{pre-intuitionistic} conception of negation. It also echoes our
     observation in \refremark{eg-entitative}, that the choice of negation and
     conjunction as primitives is to be connected with the eminently constructive
@@ -830,7 +943,7 @@ The rules of \sys{SKS} satisfy two notable properties:
     \cite{tubella:hal-02390267}). This is almost the opposite in \sys{Alpha}: to
     the exception of the rules of double-cut (which are best seen as a
     structural equivalence like those of CoS), all rules depend heavily on the
-    creation, duplication or erasure of subgraphs of arbitrary size. This is
+    creation, duplication or deletion of subgraphs of arbitrary size. This is
     exemplified by the derivation of Peirce's law in \reffig{eg-peirce-law},
     where not a single rule is instantiated on atoms. In fact it is quite hard
     to see how to build a derivation of Peirce's law that performs only local
@@ -908,7 +1021,7 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
     occurrence is squared in \itsrc{\text{blue}}. In the \rsf{Iter} (resp.
     \rsf{Deit}) rule, the erased (resp. space for the inserted) copy is
     highlighted in \itdst{\text{blue}}.
-    \item[Insertion/Erasure] In the rule \rsf{Ins} (resp. \rsf{Era}), the erased
+    \item[Insertion/Deletion] In the rule \rsf{Ins} (resp. \rsf{Del}), the erased
     (resp. space for the inserted) subgraph is highlighted in \ins{\text{red}}.
     \item[Double-cut] In the rule \rsf{Dcut{\da}} (resp.
     \rsf{Dcut{\ua}}), the space around which the double-cut is erased
@@ -937,7 +1050,7 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
       {a \land \dmdual{a}}
       {\bot}
     &
-    \R[\rsf{Era}]
+    \R[\rsf{Del}]
     {\R[\rsf{Deit}]
     {a, [a]}
     {\itsrc{a}, [\itdst{\phantom{a}}]}}
@@ -965,7 +1078,7 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
       {a}
       {\top}
     &
-    \R[\rsf{Era}]
+    \R[\rsf{Del}]
     {a}
     {\ins{\phantom{a}}}
     \\
@@ -1010,7 +1123,7 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
   
   For the switch rule \rsf{s}, we give two dual derivations: the first uses the
   rules \rsf{Deit} and \rsf{Ins} to move $U$ \emph{into} the cuts enclosing $T$,
-  while the second uses the rules \rsf{Era} and \rsf{Iter} to move $S$ \emph{out
+  while the second uses the rules \rsf{Del} and \rsf{Iter} to move $S$ \emph{out
   of} the cuts of $T$.
 
   \begin{mathpar}
@@ -1024,7 +1137,7 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
     {[[S, [[T]\itdst{\phantom{[U]}}]], \itsrc{[U]}]}}
     {[[S, \dcut{T}], [U]]}
     \and
-    \R[\rsf{Era}]
+    \R[\rsf{Del}]
     {\R[\rsf{Iter}]
     {S, [[T], [U]]}
     {\itsrc{S}, [[\itdst{S}, T], [U]]}}
@@ -1051,10 +1164,10 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
     {[[S,[[T],[V]]],[U\itdst{\phantom{[[T],[V]]}}]],\itsrc{[[T],[V]]}}}
     {[[S\itdst{\phantom{[[T],[V]]}}],[U]],\itsrc{[[T],[V]]}}
     \and
-    \R[\rsf{Era}]
-    {\R[\rsf{Era}]
-    {\R[\rsf{Era}]
-    {\R[\rsf{Era}]
+    \R[\rsf{Del}]
+    {\R[\rsf{Del}]
+    {\R[\rsf{Del}]
+    {\R[\rsf{Del}]
     {\R[\rsf{Iter}]
     {[[S,T],[U,V]]}
     {\itsrc{[[S,T],[U,V]]},\itdst{[[S,T],[U,V]]}}}
@@ -1156,13 +1269,13 @@ has the shape $\strans{S} \xstep{r_1} \ldots \xstep{r_n} \strans{T}$, then the
 simulation of $\dmdual{T} \xstep{\dmdual{r}} \dmdual{S}$ has the shape
 $\strans{\dmdual{T}} \xstep{\dmdual{r_n}} \ldots \xstep{\dmdual{r_1}}
 \strans{\dmdual{S}}$ (see \reffact{eg-duality}). An important consequence is
-that the erasure rule \rsf{Era} is never used in the simulation of \sys{KS}, if
+that the deletion rule \rsf{Del} is never used in the simulation of \sys{KS}, if
 one chooses the appropriate derivation among the two provided for the switch and
-medial rules \rsf{s} and \rsf{m}. Thus erasure is admissible in \sys{Alpha}, a
+medial rules \rsf{s} and \rsf{m}. Thus deletion is admissible in \sys{Alpha}, a
 result that seems to be novel in the literature on EG.
 
-\begin{corollary}[Admissibility of Erasure]\label{cor:adm-era}
-  If $G \steps \emptyset$, then $G \xsteps{\msys{Alpha}\setminus\{\rsf{Era}\}}
+\begin{corollary}[Admissibility of Deletion]\label{cor:adm-era}
+  If $G \steps \emptyset$, then $G \xsteps{\msys{Alpha}\setminus\{\rsf{Del}\}}
   \emptyset$.
 \end{corollary}
 
@@ -1187,7 +1300,7 @@ insertion also never appears in the simulation of \sys{\dmdual{KS}}, while
 % When taking $H = \emptyset$, this property tells us that in \sys{Alpha},
 % provability coincides with refutability. Now thanks to Corollary
 % \ref{cor:adm-era}, we know that provability in $\msys{Alpha} \setminus
-% \{\rsf{Era}\}$ coincides with provability in \sys{Alpha}, and thus with
+% \{\rsf{Del}\}$ coincides with provability in \sys{Alpha}, and thus with
 % refutability in \sys{Alpha}, which thanks to Corollary \ref{cor:adm-ins}
 % coincides with refutability in
 % $\msys{Alpha}\setminus\{\rsf{Ins},\rsf{Dcut{\da}}\}$. Hence provability
@@ -1197,5 +1310,45 @@ insertion also never appears in the simulation of \sys{\dmdual{KS}}, while
 
 
 
-
 \section{Gardens}\labsec{gardens}
+
+Peirce already had the idea to use variables instead of lines of identity, which
+he called \emph{Selectives}, in order to avoid the ambiguity of lines of
+identity crossing cuts \cite[p.~531]{peirce_prolegomena_1906}:
+
+\begin{quote}
+A Ligature crossing a Cut is to be interpreted as unchanged in meaning by
+erasing the part that crosses to the Cut and attaching to the two Loose Ends so
+produced two Instances of a Proper Name nowhere else used; such a Proper name
+(for which a capital letter will serve) being termed a \emph{Selective}.
+\end{quote}
+
+He further remarks on the next page:
+\begin{quote}
+  In order to avoid the intersection of Lines of Identity, either a Selective
+may be employed, or a \emph{Bridge}, which is imagined to be a bit of paper
+ribbon.
+\end{quote}
+
+Thus he already identified the problem of readability stemming from having too
+many lines or ``cables'' crossing eachother, a well-known concern in the design
+of graphical programming languages\todo{Find reference}. This is to be opposed
+to critics of the syntax of EG such as Quine, who invented a notation similar to
+the lines of identity, and deemed it ``too cumbersome for practical
+use''\todo{Find reference}. Also, the other proposed solution of having
+so-called \emph{Bridges} is quite interesting, in that it makes the syntax of EG
+\emph{three-dimensional}, in order to preserve the continuity of lines.
+
+\todo{ Use the following citation to explain how lines of identity are to be
+  interpreted as quantifiers, where the term ``endoporeutic'', etymologically
+  meaning ``from the outside to the inside'', refers to the relevance of the
+  \emph{order} among quantifiers as to their meaning. }
+  (\cite{peirce_prolegomena_1906}, p. 531):
+
+\begin{quote}
+  In the interpretation of Selectives it is often necessary to observe the rule
+which holds throughout the System, that the Interpretation of Existential Graphs
+must be \emph{endoporeutic}, that is, the application of a Graph on the Area of
+a Cut will depend on the predetermination of the application of that which is on
+the Place of the Cut.
+\end{quote}

@@ -145,6 +145,36 @@ justifies the metaphorical terminology of our calculus.}
 
 \subsection{The n-ary scroll}
 
+\textbf{TODO:} Mention that Peirce had a topological intuition of currying, as
+witnessed by the passage in page 535 of \cite{peirce_prolegomena_1906}:
+\begin{quote}
+Now, Reader, if you will just take pencil and paper and scribe the scroll
+expressing that if $A$ be true, then it is true that if $B$ be true $C$ and $D$
+are true, and compare this with Fig. 5, which amounts to the same thing in
+meaning, you will see that scroll walls with a void between them collapse even
+when they belong to different scrolls [...]
+\end{quote}
+Then he goes on to notice:
+\begin{quote}
+[...] and you will further see that a scroll is really nothing but one oval
+within another. Since a Conditional de inesse (unlike other conditionals) only
+asserts that either the antecedent is false or the consequent is true [...]
+\end{quote}
+The latter shows the classical view of Peirce on EG, who interprets the scroll
+as signifying the \textit{conditional de inesse}, also called nowadays
+\emph{material implication}. It is interesting that he comes to this conclusion
+by a topological argument, noting that the ``collapsing of walls'' between the
+two scrolls follows from the scroll beeing composed of two nested ovals. If we
+reject this interpretation by requiring that the Fence (the inner oval) stays
+glued to the Wall (the outer oval), then one cannot derive currying through the
+topological rule of double-cut, precisely because the system only permits to
+collapse a Wall and a Fence continuously joined in the same scroll. Fear not
+however, as one can still derive the currying and uncurrying laws in this
+intuitionistic setting, but through the addional use of insertion/deletion and
+(de)iteration rules, as depicted in \reffig{eg-currying}. Still, we find that
+Peirce's insight on the topological explanation of currying in the classical
+setting is noteworthy.
+
 \subsection{Flowers}
 
 \todo{Mention Oostra's extended (de)iteration rule, that allows to
@@ -993,6 +1023,9 @@ substitutes every occurrence of the associated hypothesis $x$ in the proof
 $\pi_B$ of $B$ by the proof $\pi_A$ of the positive $A$.
 
 \todo{ Elaborate further on this computational aspect of EG. }
+
+\todo{ Investigate the ``scientific'' iteration rule of Peirce as a means to
+avoid the need for a computational interpretation of the \rsf{fence} rule. }
 
 
 \section{Conclusion}\labsec{Conclusion}

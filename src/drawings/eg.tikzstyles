@@ -9,3 +9,4 @@
 % Edge styles
 \tikzstyle{pos area}=[-, fill=pbg, draw=black, tikzit fill=white, tikzit draw=black]
 \tikzstyle{neg area}=[-, fill=nbg, draw=black, tikzit fill={rgb,255: red,191; green,191; blue,191}, tikzit draw=black]
+\tikzstyle{pistil}=[-, tikzit fill={rgb,255: red,255; green,243; blue,68}, tikzit draw=black, fill=pistil, draw=black]
