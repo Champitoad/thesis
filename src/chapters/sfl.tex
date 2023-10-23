@@ -233,7 +233,7 @@ The restrictions on polarities are captured formally by the following condition:
 %   \begin{enumerate}
 %     \item $B\select{A}\in \Gamma$;\label{clause:hyp}
 %     \item $D\select{A'} \begin{cases}
-%       \equiv C & \text{if $\link$ is $\back$} \\
+%       \syneq C & \text{if $\link$ is $\back$} \\
 %       \in \Gamma & \text{if $\link$ is $\forw$}
 %       \end{cases}$\label{clause:concl}
 %     \item $\inv(B\hole)$ has the same (resp. opposite) parity as $\inv(D\hole)$
@@ -247,12 +247,12 @@ The restrictions on polarities are captured formally by the following condition:
 %   either $B\select{\select{t} = u}\in \Gamma$, then
 %   \begin{enumerate}
 %     \item $D\select{t'} \begin{cases}
-%       \equiv C & \text{if $\link$ is $\back$} \\
+%       \syneq C & \text{if $\link$ is $\back$} \\
 %       \in \Gamma & \text{if $\link$ is $\forw$}
 %       \end{cases}$
 %     \item $B\hole$ is positive
 %   \end{enumerate}
-%   or $B\select{\select{t} = u} \equiv C$, $\link$ is $\back$ and
+%   or $B\select{\select{t} = u} \syneq C$, $\link$ is $\back$ and
 %   \begin{enumerate}
 %     \item $D\select{t'} \in \Gamma$;
 %     \item $B\hole$ is negative.
@@ -336,7 +336,7 @@ $A\hole$ is either $C^+\select{\exists x. B\hole}$ or
 $D^-\select{\forall x. B\hole}$ (resp. $D^-\select{\exists x. B\hole}$
 or $C^+\select{\forall x. B\hole}$).
 
-For instance, if $A\hole \equiv \forall x. \exists y. (B \land ((\exists x'.
+For instance, if $A\hole \syneq \forall x. \exists y. (B \land ((\exists x'.
 \forall y'. \hole) \limp \forall z. C))$, then we have:
 \begin{mathpar}
   \lvar(A\hole) = [x, y, x', y'] \and
@@ -378,7 +378,7 @@ For instance, if $A\hole \equiv \forall x. \exists y. (B \land ((\exists x'.
 
 \begin{definition}[Unifiable variables]\label{def:uvars}
   The set $\uvars(\mathcal{L})$ of {\em unifiable variables} of a linkage
-  $\mathcal{L} \equiv B\select{A}\link C\select{A'}$ is:
+  $\mathcal{L} \syneq B\select{A}\link C\select{A'}$ is:
   \begin{itemize}
   \item $\lvarn(B\hole)\cup\lvarp(C\hole)$ if $\link$ is $\back$, and
   \item $\lvarn(B\hole)\cup\lvarn(C\hole)$ if $\link$ is $\forw$.
@@ -390,14 +390,14 @@ do not go into details:
  
 \begin{definition}[Substitution]
   A \emph{substitution} is a mapping from variables to terms such that $\{x ~|~
-  \sigma(x)\not\equiv x\}$ is finite; we call this set the {\em domain} of $\sigma$.
+  \sigma(x)\not\syneq x\}$ is finite; we call this set the {\em domain} of $\sigma$.
 
-  When $\sigma(x)\equiv x$ we say that $x$ is  {\em not instantiated} by
+  When $\sigma(x)\syneq x$ we say that $x$ is  {\em not instantiated} by
   $\sigma$.
   
   %% A mapping $\sigma$ from variables to terms is a substitution of
-  %% domain $l$ when $\forall x\notin l, \sigma(x)\equivx$. When
-  %% $\sigma(x)\equivx$, we also say that $x$ is
+  %% domain $l$ when $\forall x\notin l, \sigma(x)\syneqx$. When
+  %% $\sigma(x)\syneqx$, we also say that $x$ is
   
   Given a proposition $A$ and a substitution $\sigma$, we write
   $\sigma(A)$ for the \emph{application} of $\sigma$ to $A$ in the usual way.
@@ -407,7 +407,7 @@ do not go into details:
 
 \begin{definition}[Unification] Given two propositions $A$ and $A'$ and a list of variables
   $l$, we say that a substitution $\sigma$ \emph{unifies} $A$ and $A'$ over $l$
-  when $\sigma(A)\equiv\sigma(A')$ and the domain of $\sigma$ is a subset of $l$. 
+  when $\sigma(A)\syneq\sigma(A')$ and the domain of $\sigma$ is a subset of $l$. 
 
   If such a substitution exists, we say that $A$ and $A'$ are \emph{unifiable}
   over $l$.
@@ -951,12 +951,12 @@ one can always apply a rule until one reaches an interaction rule on the
 selected subterms. In other words, it is possible to find at least one rule
 which preserves Conditions \ref{cond:pol} and \ref{cond:unif} on linkages:
 
-\begin{lemma}[Valid Progress]\label{thm:vprogress} If a linkage $\mathcal{L} \equiv
+\begin{lemma}[Valid Progress]\label{thm:vprogress} If a linkage $\mathcal{L} \syneq
   C\select{A} \link C'\select{A'}$ (resp. $C\select{t} \link C'\select{t'}$) is
   valid, then either:
   \begin{enumerate}
-    \item $\mathcal{L} \equiv \select{A} \back \select{A}$ (resp. $C\hole \in \{\hole
-    = u, u = \hole\}$ for some $u$ and $t \equiv t'$);
+    \item $\mathcal{L} \syneq \select{A} \back \select{A}$ (resp. $C\hole \in \{\hole
+    = u, u = \hole\}$ for some $u$ and $t \syneq t'$);
     % \item $\mathcal{L} \in \{
     %     \select{A}\back \select{A},\,
     %     \select{t} = u \back C\select{t},\,
@@ -967,7 +967,7 @@ which preserves Conditions \ref{cond:pol} and \ref{cond:unif} on linkages:
     \item or $\mathcal{L} \step E\select{\mathcal{L'}}$ for some $E\hole,
       \mathcal{L'}$ with $\mathcal{L'}$ valid.
       % and
-      % $$\mathcal{L'} \equiv D\select{\sigma(A)} \link' D'\select{\sigma(A')}$$ (resp.
+      % $$\mathcal{L'} \syneq D\select{\sigma(A)} \link' D'\select{\sigma(A')}$$ (resp.
       % $D\select{\sigma(t)} \link' D'\select{\sigma(t')}$) for some $D\hole,
       % D'\hole$, linking operator $\link'$ and unifying substitution $\sigma$.
   \end{enumerate}
@@ -986,20 +986,20 @@ fundamentally difficult, but understandably verbose. The two main points are:
   \mathsf{R\exists s}, \mathsf{F\exists s}\}$}).
 \end{itemize}
 \begin{proof}
-  Let $\mathcal{L} \equiv B\select{A} \link C\select{A'}$ be a valid linkage.\\
+  Let $\mathcal{L} \syneq B\select{A} \link C\select{A'}$ be a valid linkage.\\
   \begin{enumerate}
     \setlength{\itemsep}{1em}
-    \item Suppose $B\hole \equiv C\hole \equiv \square$. By
+    \item Suppose $B\hole \syneq C\hole \syneq \square$. By
     Condition~\ref{cond:pol}, we know that a forward linkage cannot verify
     $(\inv(B\square), \inv(C\square)) = (0,0)$, thus $\mathcal{L}$ must be a
     backward linkage. Also $\lvar(B\square)$ and $\lvar(C\square)$ are empty,
     hence by Condition~\ref{cond:unif} $A$ and $A'$ are unified by an empty
-    substitution, which entails that $A \equiv A'$. Therefore we are in the
-    first case where $\mathcal{L} \equiv \select{A} \back \select{A}$.
+    substitution, which entails that $A \syneq A'$. Therefore we are in the
+    first case where $\mathcal{L} \syneq \select{A} \back \select{A}$.
 
     \item Otherwise, either $B\hole$ or $C\hole$ is non-empty. In the following,
     we show that we can always apply a rewrite rule that produces a new, valid
-    linkage $\mathcal{L'} \equiv B' \link' C'$.
+    linkage $\mathcal{L'} \syneq B' \link' C'$.
     
     Let $\sigma$ and $\lvar$ be respectively the substitution and interleaving
     of the quantified variables of $B\square$ and $C\square$ given by Condition
@@ -1066,7 +1066,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
             $B\square$, that is $B\square$ without the head quantifier binding
             $x$. \\
 
-            First we can assert that $\subst{B_0\select{A}}{\sigma(x)}{x} \equiv
+            First we can assert that $\subst{B_0\select{A}}{\sigma(x)}{x} \syneq
             \subst{B_0}{\sigma(x)}{x}\select{\subst{A}{\sigma(x)}{x}}$. Indeed,
             Clause \ref{clause:deps} of Condition \ref{cond:unif} guarantees
             that for any free variable $y$ of $\sigma(x)$, $y \not\in
@@ -1080,10 +1080,10 @@ fundamentally difficult, but understandably verbose. The two main points are:
             So we know that the selected formula on the left of $\mathcal{L'}$
             is $\subst{A}{\sigma(x)}{x}$, while it is still $A'$ on the right.
             Thus it only remains to show that
-            $$\subst{A}{\sigma(x)}{x}[\sigma \setminus x] \equiv A'[\sigma
+            $$\subst{A}{\sigma(x)}{x}[\sigma \setminus x] \syneq A'[\sigma
             \setminus x].$$ On the left we have by definition that
-            $\subst{A}{\sigma(x)}{x}[\sigma \setminus x] \equiv A[\sigma]$, and
-            on the right we have $A'[\sigma \setminus x] \equiv A'[\sigma]$
+            $\subst{A}{\sigma(x)}{x}[\sigma \setminus x] \syneq A[\sigma]$, and
+            on the right we have $A'[\sigma \setminus x] \syneq A'[\sigma]$
             because $x$ cannot occur in $A'$ since it is bound in $B_0\square$
             (here we rely on the Barendregt convention).
 
@@ -1285,15 +1285,15 @@ The general scheme for choosing a rule to apply to a redex $C\select{A} \link
 D\select{B}$ is the following\sidenote{A less deterministic version of this
 scheme is already present implicitly in the proof of Lemma \ref{thm:vprogress}.}:
 \begin{enumerate}
-  \item If $C\hole \equiv D\hole \equiv \hole$, we just apply the {\rnmsf{id}} rule
-  (assuming $A \equiv B$ by Lemma \ref{thm:vprogress}).
+  \item If $C\hole \syneq D\hole \syneq \hole$, we just apply the {\rnmsf{id}} rule
+  (assuming $A \syneq B$ by Lemma \ref{thm:vprogress}).
   \item If only one context is non-empty, say $C\hole$, we look at its head
   connective as well as the side where its hole resides:
   \begin{itemize}
-    \item either $C\hole \equiv C_0\hole \mcirc E$ for some binary connective
+    \item either $C\hole \syneq C_0\hole \mcirc E$ for some binary connective
     $\mcirc$, and we choose the rule {\rnmsf{L\mcirc_1}} (resp.
     {\rnmsf{F\mcirc_1}}) if $\link = \back$ (resp. $\link = \forw$);
-    \item or $C\hole \equiv E \mcirc C_0\hole$ and we choose the rule
+    \item or $C\hole \syneq E \mcirc C_0\hole$ and we choose the rule
     {\rnmsf{L\mcirc_2}} (resp. {\rnmsf{F\mcirc_2}}) if $\link = \back$ (resp.
     $\link = \forw$).
   \end{itemize}
@@ -1473,10 +1473,10 @@ are necessary to ensure soundness, as reviewed in \refsec{soundness}. A backward
 linkage in a sequent $\Gamma, D\select{A} \seq E\select{B}$ would be encoded by
 the instance
 $$C^+\select{D\select{A} \limp E\select{B}} \step C^+\select{D\select{A} \back
-E\select{B}}$$ of {\rnmsf{B}} where $C^+\hole \equiv \bigwedge Γ \limp \hole$, while
+E\select{B}}$$ of {\rnmsf{B}} where $C^+\hole \syneq \bigwedge Γ \limp \hole$, while
 a forward linkage in a sequent $\Gamma, D\select{A}, E\select{B} \seq F$ would
 be encoded by the instance $$C^-\select{D\select{A} \land E\select{B}} \step
-C^-\select{D\select{A} \forw E\select{B}}$$ of {\rnmsf{F}} where $C^-\hole \equiv
+C^-\select{D\select{A} \forw E\select{B}}$$ of {\rnmsf{F}} where $C^-\hole \syneq
 \bigwedge \Gamma \wedge \hole \limp F$.
 
 \begin{marginfigure}
