@@ -44,22 +44,22 @@ propositional logic. In \refsec{illative}, we introduce the inference rules of
 \sys{Alpha} for manipulating existential graphs, called \emph{illative
 transformations} by Peirce. In \refsec{multisets}, we give an equivalent
 formulation of the syntax and rules of \sys{Alpha} as a \emph{multiset}
-rewriting system. In \refsec{atomicity}, we formalize a variant of the iteration
-principle described by Peirce in \sidecite{peirce_prolegomena_1906} that
-eliminates the need for the double-cut principle, and discuss how it was
-motivated by Peirce's quest for \emph{illative atomicity}. In
-\refsec{eg-soundness}, we take advantage of our reformulation to give a simple
-proof of soundness for \sys{Alpha}, based on a direct truth-evaluation of
-graphs. In \refsec{eg-completeness} we give a novel syntactic proof of
-completeness for \sys{Alpha}, by simulating the calculus of structures \sys{SKS}
-of Brünnler and Tiu \cite{brunnler_local_2001}. In this way, \sys{Alpha} is
-shown to have subsystems that inherit the \emph{locality} property of \sys{SKS},
-and where the deletion and insertion rules are respectively admissible for
-\emph{provability} and \emph{refutability}, making \sys{Alpha} \emph{analytic}.
-In \refsec{beta}, we illustrate the original mechanism of \emph{lines of
-identity} used by Peirce to handle quantifiers and equality in his \sys{Beta}
-system. We end in \refsec{gardens} by showing how to recast lines of identity in
-a more traditional binder-based syntax.
+rewriting system. In \refsec{atomicity}, we formalize a variant of the
+(de)iteration principle described by Peirce in
+\sidecite{peirce_prolegomena_1906} that eliminates the need for the double-cut
+principle, and discuss how it was motivated by Peirce's quest for \emph{illative
+atomicity}. In \refsec{eg-soundness}, we take advantage of our reformulation to
+give a simple proof of soundness for \sys{Alpha}, based on a direct
+truth-evaluation of graphs. In \refsec{eg-completeness} we give a novel
+syntactic proof of completeness for \sys{Alpha}, by simulating the calculus of
+structures \sys{SKS} of Brünnler and Tiu \cite{brunnler_local_2001}. In this
+way, \sys{Alpha} is shown to have subsystems that inherit the \emph{locality}
+property of \sys{SKS}, and where the deletion and insertion rules are
+respectively admissible for \emph{provability} and \emph{refutability}, making
+\sys{Alpha} \emph{analytic}. In \refsec{beta}, we illustrate the original
+mechanism of \emph{lines of identity} used by Peirce to handle quantifiers and
+equality in his \sys{Beta} system. We end in \refsec{gardens} by showing how to
+recast lines of identity in a more traditional binder-based syntax.
 
 % \todo{IDEA (where should we put it?): \emph{superposition of polarities} in
 % existential graphs. While a cut in bubble calculi is the insertion of \emph{two}
@@ -93,11 +93,11 @@ or \emph{objective} possibility, or signify an interrogative or imperative mood,
 all by using different colors. For print in publications, he would in fact use
 \emph{heraldic tinctures} instead of colors, hence the ``tinctured''
 qualificative. The precise meaning and purpose of tinctured EG remains elusive
-to this day, and might constitute the most esoteric part of his work. We see a
-possible connection with the type-theoretical concept of \emph{judgment}, which
-was rehabilitated by Martin-Löf from the philosophy of Kant
-\cite{Martin-Lof1996-MAROTM-7}, who was of great influence on Peirce's own
-philosophy \cite{sep-peirce}.}.
+to this day, and might constitute the most esoteric part of his work.}.
+% We see a possible connection with the type-theoretical concept of
+% \emph{judgment}, which was rehabilitated by Martin-Löf from the philosophy of
+% Kant \cite{Martin-Lof1996-MAROTM-7}, who was of great influence on Peirce's own
+% philosophy \cite{sep-peirce}.}.
 
 The most fundamental concept of \sys{Alpha} is the \emph{sheet of assertion},
 denoted by $\SA$ thereafter. It is the space where statements are scribed by the
@@ -116,21 +116,21 @@ its truth}. Thus very naturally, the empty $\SA$ where nothing is scribed will
 denote vacuous truth, traditionally symbolized by the formula
 $\top$.
 
-\begin{remark}
-  Peirce had an \emph{externalist} conception of truth, where the assertions
-made by the \process{Graphist}, i.e. the person scribing on $\SA$, refer to the
-world \emph{outside} of the sheet (the universe of discourse). By not scribing
-anything, the \process{Graphist} thus refrains from asserting anything about the
-world, only assuming implicit truths. This is illustrated by the following
-quote, reminiscent of an interaction between a proof assistant (the
-\process{Graphist}) and its user (\process{the Interpreter})
-\cite[p.~92]{Roberts+1973}: \textit{``One of the parties, called the Graphist,
-is responsible for scribing the original graphs at the beginning of the
-investigation or discussion; the other, called the Interpreter, draws inferences
-from these graphs by changing them in accordance with the permissions of the
-system. The [...] sheet, before anything is scribed on it, represents whatever
-is taken for granted at the outset by the Graphist and Interpreter''}.
-\end{remark}
+% \begin{remark}
+%   Peirce had an \emph{externalist} conception of truth, where the assertions
+% made by the \process{Graphist}, i.e. the person scribing on $\SA$, refer to the
+% world \emph{outside} of the sheet (the universe of discourse). By not scribing
+% anything, the \process{Graphist} thus refrains from asserting anything about the
+% world, only assuming implicit truths. This is illustrated by the following
+% quote, reminiscent of an interaction between a proof assistant (the
+% \process{Graphist}) and its user (\process{the Interpreter})
+% \cite[p.~92]{Roberts+1973}: \textit{``One of the parties, called the Graphist,
+% is responsible for scribing the original graphs at the beginning of the
+% investigation or discussion; the other, called the Interpreter, draws inferences
+% from these graphs by changing them in accordance with the permissions of the
+% system. The [...] sheet, before anything is scribed on it, represents whatever
+% is taken for granted at the outset by the Graphist and Interpreter''}.
+% \end{remark}
 
 As we know from natural deduction, asserting the truth of the conjunction $a
 \land b$ of two propositions $a$ and $b$, amounts to asserting \emph{both} the
@@ -148,19 +148,18 @@ In particular, the entire $\SA$ itself is a graph.
 Asserting the truth of the negation $\neg a$ of a proposition $a$, amounts to
 \emph{denying} the truth of $a$. Using the original notation of Peirce, this is
 done in \sys{Alpha} by \emph{enclosing} $a$ in a closed curve like so:
-$$\pcut{a}$$
-Peirce called such curves \emph{cuts}\sidenote{Not to be confused with the name
-given to instances of the \emph{cut rule} in sequent calculus. Although there is
-a connection, since in \sys{LK}, one occurrence of the cut formula in the
-premisses of the rule is negated.}, because they ought to be seen as literal
-cuts in the paper sheet that embodies $\SA$. Note that they do not need to be
-circles: all that matters is that $a$ is in a separate area from the rest of
-$\SA$. This is precisely the content of the \emph{Jordan curve theorem} in
-topology, and thus we can take cuts to be arbitrary Jordan curves. This entails
-in particular that cuts cannot intersect each other, but can be freely nested
-inside each other. Then as for juxtaposition, one can replace $a$ by any graph
-$G$, i.e. any portion of $\SA$, as long as the cut does not intersect other cuts
-in $G$.
+$$\pcut{a}$$ Peirce called such curves \emph{cuts}\sidenote{Not to be confused
+with the name given to instances of the \emph{cut rule} in sequent calculus.
+Although there is a connection, since in the one-sided version of \sys{LK}, one
+occurrence of the cut formula in the premisses of the rule is negated.}, because
+they ought to be seen as literal cuts in the paper sheet that embodies $\SA$.
+Note that they do not need to be circles: all that matters is that $a$ is in a
+separate area from the rest of $\SA$. This is precisely the content of the
+\emph{Jordan curve theorem} in topology, and thus we can take cuts to be
+arbitrary Jordan curves. This entails in particular that cuts cannot intersect
+each other, but can be freely nested inside each other. Then as for
+juxtaposition, one can replace $a$ by any graph $G$, i.e. any portion of $\SA$,
+as long as the cut does not intersect other cuts in $G$.
 
 With just these two \emph{icons}, juxtaposition and cuts, one can therefore
 assert the truth of any proposition made up of conjunctions and negations, and
@@ -304,8 +303,8 @@ of any polarity:
     Player and Opponent.}. Note that while in the identity axiom, the justifying
     (resp. justified) occurrence must be a negative hypothesis (resp. a positive
     conclusion), the \rsf{Iteration} rule also allows the opposite relationship
-    of a positive conclusion justifying a negative hypothesis, thus also
-    subsuming one aspect of the \emph{cut} rule of sequent calculus.
+    of a conclusion justifying a hypothesis, thus also exhibiting one aspect of
+    the \emph{cut} rule of sequent calculus.
   \item[\textbf{Deiteration} \textit{(Factorization)}]
     Formally, this is the converse of \rsf{Iteration}:
     \begin{mathpar}
@@ -567,21 +566,21 @@ A remarkable feat of Peirce's rules, on which he insisted very much, is that
 they are only expressed in terms of \emph{insertions} and \emph{omissions} of
 graphs on $\SA$. He thought that those were the \emph{smallest} steps in which
 reasoning could be dissected, making his system extremely appropriate for
-\emph{analytical} purposes\sidenote{See Section 7.11 of \cite{Roberts+1973}.}.
-We already considered this question of decomposing logical inferences into their
-most elementary operations, when reflecting on the graphical presentation of
-\sys{BJ} at the end of \refsec{bubbles-graphical-rules}. In this setting, the
-most basic insertions and omissions we could find were not logically
-\emph{sound}, whereas in \sys{Alpha} they are. This is quite promising, and
-prompts us to reevalute our conception of \emph{illative atomicity}, understood
-precisely as the definition of what it means for an inference step to be (the
-most) \emph{elementary}. Note that this should be distinguished from the notion
-of \emph{analyticity}, as popularized by Gentzen with the \emph{subformula
+\emph{analytical} purposes \cite[Section~7.11]{Roberts+1973}. We already
+considered this question of decomposing logical inferences into their most
+elementary operations, when reflecting on the graphical presentation of \sys{BJ}
+at the end of \refsec{bubbles-graphical-rules}. In this setting, the most basic
+insertions and omissions we could find were not logically \emph{sound}, whereas
+in \sys{Alpha} they are. This is quite promising, and prompts us to reevalute
+our conception of \emph{illative atomicity}, understood precisely as the
+definition of what it means for an inference step to be (the most)
+\emph{elementary}. Note that this should be distinguished from the notion of
+\emph{analyticity}, as popularized by Gentzen with the \emph{subformula
 property} in sequent calculus: the latter is concerned with the analysis of
 \emph{statements} into their constituents through inference rules, while here we
 are interested in the analysis of the inference rules themselves\sidenote{We
 will give a positive answer to the question of analyticity in \sys{Alpha} at the
-end of \refsec{eg-completeness}}. This is a philosophically debatable question,
+end of \refsec{eg-completeness}.}. This is a philosophically debatable question,
 because inference rules are usually posited as axioms in a deductive system, and
 are thus by definition the smallest constituents of proofs. The only other
 logician we know of who attempted to give a non-trivial account of illative
@@ -592,32 +591,33 @@ rules'' \cite{girard_locus_2001}.
 
 There is an intriguing remark by Peirce in \cite{peirce_prolegomena_1906} about
 the atomicity of the rules presented thus far, that seems to have gone unnoticed
-in the literature on EG. On pp.~536--537, Peirce argues that the rule of
-double-cut ``cannot be assumed as an undeduced Permission'' --- i.e. a primitive
-rule of the system, because the area inside the inner cut becomes identified
-with the area outside the outer cut when the double cut is removed, which ``is
-not strictly an Insertion or a Deletion''. Another way to view this, is that it
-is the only \emph{linear} rule of the system, in the sense that the premiss and
-conclusion have the same number of atoms. Contrast this with linear logic, which
-instead takes linearity as the criterion for atomicity in reasoning, as
-exemplified by the linear decomposition of implication $A \limp B \defeq \oc A
-\multimap B$. This might be the consequence of its opposite treatment of
-\emph{negation}: while in EG it is the only primitive constructor of the system
---- remember that the only way to increase the depth of a graph is with a cut,
-in LL negation is the only defined notion through De Morgan dualities. Thus EG
-are closer (at least syntactically) to \emph{type theories}, which also take a
-negative operation (the arrow or dependent product type) as their sole primitive
-construct. This will be made more explicit in \refsec{flowers-curryhoward}.
+in the literature on EG. On pp.~536--537, Peirce argues that the principle of
+\rsf{Double{-}cut} ``cannot be assumed as an undeduced Permission'' --- i.e. a
+primitive rule of the system, because the area inside the inner cut becomes
+identified with the area outside the outer cut when the double cut is removed,
+which ``is not strictly an Insertion or a Deletion''. Another way to view this,
+is that it is the only \emph{linear} rule of the system, in the sense that the
+premiss and conclusion contain exactly the same atomic graphs. Contrast this
+with linear logic, which instead takes linearity as the criterion for illative
+atomicity, as exemplified by the linear decomposition of implication $A \limp B
+\defeq \oc A \multimap B$. This might be the consequence of an opposite
+treatment given to \emph{negation}: while in EG it is the only primitive
+constructor of the system --- remember that the only way to increase the depth
+of a graph is with a cut, in LL negation is the only defined notion through De
+Morgan dualities. Thus EG are closer (at least syntactically) to \emph{type
+theories}, which also take a negative operation (the arrow or dependent product
+type) as their sole primitive construct. This will be made more explicit in
+\refsec{flowers-curryhoward}.
 
-Peirce then suggests a ``more scientific way'', where the rule of
-\rsf{Double{-}cut} is subsumed by a restricted variant of the rules of
+Peirce then suggests a ``more scientific way'', where the principle of
+\rsf{Double{-}cut} is subsumed by a restricted variant of the principle of
 \rsf{Iteration} and \rsf{Deiteration}. His description of this ``more
 scientific'' (de)iteration principle is based on a relation of \emph{local
 justification} (our terminology) between two areas of a graph, that captures the
-fact that the deeper occurrence of $G$ in the \rsf{Iteration} and
-\rsf{Deiteration} rules (\refsec{illative}) is justified by the other occurrence
-by virtue of their respective \emph{locations}. Later in the text, Peirce
-emphasizes the importance of this locative aspect of argumentation
+fact that the deeper occurrence of $G$ in the \rsf{Iter} and \rsf{Deit} rules
+(\reffig{alpha}) is justified by the other occurrence by virtue of their
+respective \emph{locations}. Later in the text, Peirce emphasizes the importance
+of this locative aspect of argumentation
 \cite[pp.~544-545]{peirce_prolegomena_1906}:
 
 \begin{quote}
@@ -628,35 +628,134 @@ of Transformation, which is evidently the kernel of the matter, is no more built
 out of Propositions than a motion is built out of position.
 \end{quote}
 
-Once again, game-theoretical ideas (\refremark{eg-polarity}) are apparent in
-this excerpt: the concept of Truth is not primitive, but rather a side effect of
-the interaction between an Interpreter (Opponent) being lead to agree with the
-Graphist (Player), whenever the latter performs a transformation on the graph
-under discussion. The soundness of such a transformation guarantees that this
-will work for \emph{any} Interpreter/Opponent, leading to what is known as a
-\emph{winning strategy} in game semantics. Then since illative transformations
-only consist of Insertions and Deletions, whose validity depends solely on the
-positions where they occur in the graph, it ensues that the components of an
-argumentation can be reduced to ``motions'' (moves) that relate pure locations.
+Once again, game-theoretical ideas and the concept of space
+(\refremark{eg-polarity}) are prominent in this excerpt: Truth is not primitive,
+but rather a side effect of the interaction between an Interpreter (Opponent)
+being lead to agree with the Graphist (Player), whenever the latter performs a
+transformation on the graph under discussion. The soundness of such a
+transformation guarantees that this will work for \emph{any}
+Interpreter/Opponent, leading to what is known as a \emph{winning strategy} in
+game semantics. Since illative transformations only consist of Insertions and
+Deletions, whose validity depends solely on the positions where they occur in
+the graph, it ensues that the components of an argumentation can be reduced to
+``motions'' (moves) that relate pure locations.
+
 It is then interesting to notice that the quest for illative atomicity, who led
 Peirce to discover these interactive and locative aspects of logic, also led
 Girard to identify these properties as fundamental, in his recent works on
 ludics \cite{girard_locus_2001} and transcendental syntax
-\cite{eng_exegesis_2023}. Both authors also shared the ambition to develop a
-comprehensive philosophical foundation for logic, as part of a more general
-theory of \emph{meaning}: for Peirce it was his \emph{semeiotic}, stemming from
-his overarching doctrine of \emph{pragmaticism} \cite{sep-peirce}; for Girard it
-was the theory of programming languages and their semantics.
+\cite{eng_exegesis_2023}. We tend to share the vision put forth by Boris Eng in
+his thesis \cite[\S 24.4]{eng_exegesis_2023}, that logic is mostly about
+\emph{space} and the \emph{shape} of objects, while \emph{time} and
+\emph{dynamics} pertain more to the realm of computation. In this view, Peirce's
+systems of EG are a logico-computational complex where each aspect can clearly
+be identified: the Process of Illative Transformation is an interactive
+computation among the Graphist and Interpreter, whose logical nature is
+determined by the spatial constraints of the Permissions, that are expressible
+thanks to the topology induced by cuts on $\SA$\sidenote{Both Peirce and Girard
+also shared the ambition to develop a comprehensive philosophical foundation for
+logic, as part of a more general theory of \emph{meaning}: for Peirce it was his
+\emph{semeiotic}, stemming from his overarching doctrine of \emph{pragmaticism}
+\cite{sep-peirce}; for Girard it was the theory of programming languages and
+their semantics.}.
 
 Let us now go back to the modified (de)iteration principle proposed by Peirce.
-With out formalization of graphs as multisets, we can give a more rigorous
+With our formalization of graphs as multisets, we can give a more rigorous
 formulation than the original natural language description given by
 Peirce\sidenote{Although we limit ourselves to propositional logic in
 \sys{Alpha}, while in \cite{peirce_prolegomena_1906} Peirce also accounts for
 the lines of identity of \sys{Beta} handling predicate logic, to be introduced
-in \refsec{beta}.}.
+in \refsec{beta}.}. In this setting, a location in a graph is represented by the
+hole of a context, thus the relation of local justification between two areas is
+defined on contexts:
 
-\todo{Mention that we will not use the general iteration principle}
+\begin{marginfigure}
+  \input{figures/eg-local-justification.tex}
+  \caption{Graphical representation of the four conditions of local
+  justification}
+  \labfig{eg-local-justification}
+\end{marginfigure}
+
+\begin{definition}[Local justification]\labdef{eg-local-justification}
+
+  Given two contexts $G\hole$ and $H\hole$, we say that $H\hole$ is
+  \emph{locally justified} by $G\hole$, written $G\hole \ljustif H\hole$, if and
+  only if one of the following conditions holds for some $K\hole$, $G_0\hole$,
+  $H_0\hole$ such that $G\hole = \cfill{K}{G_0\hole}$ and $H\hole =
+  \cfill{K}{H_0\hole}$:
+  \begin{enumerate}
+    \item $G_0\hole = H_0\hole = K_0, \hole$ for some $K_0$;
+    \item $G_0\hole = K_0, [K_1], \hole$ and $H_0\hole = K_0, [K_1, \hole]$ for
+    some $K_0, K_1$;
+    \item $G_0\hole = K_0, [K_1, [K_2]], \hole$ and $H_0\hole = K_0, [K_1, [K_2,
+    \hole]]$ for some $K_0, K_1, K_2$.
+    \item $G_0\hole = K_0, [[K_1, \hole]]$ and $H_0\hole = K_0, \hole, [[K_1]]$
+    for some $K_0, K_1$.
+  \end{enumerate}
+\end{definition}
+
+\begin{figure}
+  \input{figures/alpha-a.tex}
+  \caption{The illatively atomic system \sys{Alpha^a}}
+  \labfig{eg-atomic-alpha}
+\end{figure}
+
+These four conditions are exactly the formal counterpart of those given by
+Peirce in \cite{peirce_prolegomena_1906}. They might be more easily understood
+by looking at their graphical representation in \reffig{eg-local-justification}:
+the red and blue dots denote respectively the locations of the holes in the
+justified context $H\hole$ and justifying context $G\hole$, as suggested by the
+arrow between them. In particular, it becomes clear that it is Condition 4 that
+will account for the principle of \rsf{Double{-}cut}. Then the new rules of
+iteration \rsf{Iter{+}}, \rsf{Iter{-}} and deiteration \rsf{Deit{+}},
+\rsf{Deit{-}} are given in the so-called \emph{atomic} variant \sys{Alpha^a} of
+\sys{Alpha} in \reffig{eg-atomic-alpha}, which now only comprises rules that
+truly are insertions and omissions of \emph{arbitrary} graphs\sidenote{The
+terminology ``atomic'' might be a bit confusing: here we think of
+\emph{illative} atomicity in Peirce's sense, not the fact that the graphs
+manipulated by rules are atomic, which might be termed \emph{structural}
+atomicity. There seems to be a symmetric tradeoff when comparing EG to CoS: in
+the former, one maximizes illative atomicity by minimizing linearity and
+structural atomicity; while in the latter, one maximizes structural atomicity
+and linearity by minimizing illative atomicity. This will become explicit in
+\refsec{eg-completeness}, when simulating the calculus of structures \sys{SKS}
+in \sys{Alpha}.}. The atomic (de)iteration rules are a restriction of the
+original ones in two respects:
+\begin{description}
+  \item[Locality] Following \refdef{eg-local-justification}, the depth of the
+  justified context $H_T\hole$ can be at most $2$ in the atomic rules, while it
+  is unbounded in the original rules. This does not hinder their expressivity
+  however: global (de)iterations can be simulated by successive applications of
+  local ones, by erasing intermediate copies with the \rsf{Ins} and \rsf{Del}
+  rules. This is because the \emph{global justification} relation $\gjustif$
+  associated with the original rules coincides with the transitive closure of
+  the local relation $\ljustif$, modulo the 4\textsuperscript{th} condition for
+  double-cuts\sidenote{Our notation for justification relations actually comes
+  from \cite{minghui_graphical_2019}, where the authors define the same notion
+  informally for an intuitionistic variant of EG.}.
+  \item[Polarity] In the atomic iteration (resp. deiteration) rules, the
+  justified context must be positive (resp. negative), while it can have an
+  arbitrary polarity in the original rules. This is expressed by splitting each
+  of the latter into two rules, one where the outer context $K\hole$ is positive
+  ($\rsf{Iter{+}},\rsf{Deit{+}}$), and one where it is negative
+  ($\rsf{Iter{-}},\rsf{Deit{-}}$). Again, this does not alter their deductive
+  power: every iteration (resp. deiteration) in a negative (resp. positive)
+  context can be trivially performed by an instance of the \rsf{Ins} (resp.
+  \rsf{Del}) rule. Thus atomic (de)iteration rules eliminate a redundancy of
+  \sys{Alpha}, where many insertions/omissions could be interpreted as instances
+  of either \rsf{Iter/Deit} or \rsf{Ins/Del}. They also eliminate the
+  possibility for a conclusion to justify a hypothesis, as remarked at the end
+  of \refsec{illative} when commenting on the principle of \rsf{Iteration},
+  making them closer to the rules of sequent calculus\sidenote{We will see
+  however in \refsec{flowers-curryhoward} that the more general (de)iteration
+  rules are still relevant from a computational point of view.}.
+\end{description}
+
+In the rest of this chapter, we settle on the more standard system \sys{Alpha},
+and leave a more detailed and rigorous study of \sys{Alpha^a} for future work.
+But the above informal arguments should convince the reader that there is little
+doubt that \sys{Alpha^a} is both sound and complete if and only if \sys{Alpha}
+is, which is the object of the following two sections.
 
 \section{Soundness}\labsec{eg-soundness}
 
@@ -1181,8 +1280,9 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
   \emph{associativity}, $\sigma$ for \emph{commutativity}, and $\mathsf{f}$ and
   $\mathsf{t}$ for unitality. Note that all rules involving $\land$ and $\top$
   are trivially simulated by the isotropy of $\SA$. Simulating the other rules
-  only requires the double-cut rules, substantiating our claim that the latter
-  should be seen as a structural equivalence, rather than \textit{bona fide}
+  only requires the double-cut rules, substantiating our claim (based on
+  Peirce's own view, see \refsec{atomic}) that the latter should be seen as
+  expressing a structural equivalence, rather than as \textit{bona fide}
   inference rules.
 
   $$
@@ -1288,6 +1388,28 @@ insertion also never appears in the simulation of \sys{\dmdual{KS}}, while
 \begin{corollary}[Co-admissibility of Insertion]\label{cor:adm-ins}
   If $[] \steps G$, then $[]
   \xsteps{\msys{Alpha}\setminus\{\rsf{Ins},\rsf{Dcut{\da}}\}} G$.
+\end{corollary}
+
+Corollary \ref{cor:adm-era} is what allows us to conclude that \sys{Alpha} is an
+\emph{analytic} system, in a sense very close to that of Gentzen. Because we do
+not have a notion of logical connective nor tree-shaped derivations, we must
+reduce the subformula property to \emph{atomic} graphs. Then it is easy to see
+that all rules of \sys{Alpha} except \rsf{Del} satisfy this property:
+
+\begin{definition}[Subgraph]
+  A graph $G$ is a \emph{subgraph} of a graph $H$, written $G \subsol H$, if
+  there exists a context $K\hole$ such that $H = K\select{G}$.
+\end{definition}
+
+\begin{fact}
+  If $G \xstep{\msys{Alpha} \setminus \{\mathsf{Del}\}} H$ and $a \subsol H$,
+  then $a \subsol G$.
+\end{fact}
+
+\begin{corollary}[Analyticity]
+  If $G$ is provable in \sys{Alpha}, then it has a proof $G \step G_1 \step
+  \ldots \step G_n \step \emptyset$ where for all $i$ and $a$ such that $a
+  \subsol G_i$, $a \subsol G$.
 \end{corollary}
 
 % Thanks to \reffact{eg-duality}, it can easily be shown that \sys{Alpha}

@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (8) at (-1, 0) {};
+		\node [style=none] (9) at (3.25, 0) {};
+		\node [style=none] (6) at (-0.5, 0) {};
+		\node [style=none] (7) at (2.75, 0) {};
+		\node [style=none] (0) at (0.5, 2.25) {$K_0$};
+		\node [style=source] (1) at (0.5, 0) {};
+		\node [style=target] (2) at (-2, 0) {};
+		\node [style=neg text] (5) at (1.75, 0) {$K_1$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=neg area] (9.center)
+			 to [bend right=270] (8.center)
+			 to [bend left=90] cycle;
+		\draw [style=pos area] (7.center)
+			 to [bend right=90] (6.center)
+			 to [bend right=90] cycle;
+		\draw [style=new edge style 0, bend right=60] (1) to (2);
+	\end{pgfonlayer}
+\end{tikzpicture}

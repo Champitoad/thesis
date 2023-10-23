@@ -1269,10 +1269,12 @@ Interestingly, an answer is provided by {\em focusing}. It has been noticed by
 Andreoli~\sidecite{andreoli1992} that, in bottom-up proof search, one should
 apply the invertible logical rules first since they preserve provability. In our
 framework, this translates into first applying the invertible rewrite rules (the
-ones marked by a *)\sidenote{Hopefully at some point, detailed proofs of
-non-invertibility for intuitionistic/classical logic based on counter-models
-will be provided in annex.}. In the case of the example above, this means
-performing \rnmsf{L\lor_1} first, which leads to the following behavior:
+ones marked by a *).
+% \sidenote{Hopefully at some point, detailed proofs of
+% non-invertibility for intuitionistic/classical logic based on counter-models
+% will be provided in annex.}.
+In the case of the example above, this means performing \rnmsf{L\lor_1} first,
+which leads to the following behavior:
 $$\select{A}\lor B \back B\lor\select{A}\steps B\limp B\lor A.$$
 This is indeed the ``right'' choice, since applying \rnmsf{R\lor_2} first would
 lead to a dead-end\sidenote{Interestingly in this case it creates a dead-end
@@ -1281,7 +1283,7 @@ $$\select{A}\lor B \back B\lor\select{A}\steps B\lor(B\limp A).$$
 
 The general scheme for choosing a rule to apply to a redex $C\select{A} \link
 D\select{B}$ is the following\sidenote{A less deterministic version of this
-scheme is already present implicitly in the proof of Lemma \ref{thm:vprogress}}:
+scheme is already present implicitly in the proof of Lemma \ref{thm:vprogress}.}:
 \begin{enumerate}
   \item If $C\hole \equiv D\hole \equiv \hole$, we just apply the {\rnmsf{id}} rule
   (assuming $A \equiv B$ by Lemma \ref{thm:vprogress}).

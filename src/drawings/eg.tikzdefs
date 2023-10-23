@@ -1,5 +1,8 @@
 \usepackage{xcolor}
 
+\definecolor{hypo}{HTML}{007BFF}
+\definecolor{conc}{HTML}{DC3545}
+\definecolor{dorange}{HTML}{FF6F00}
 \definecolor{npcut}{HTML}{DFDFDE}
 \definecolor{pbg}{HTML}{FFFFFF}
 \definecolor{nbg}{HTML}{DFDFDE}

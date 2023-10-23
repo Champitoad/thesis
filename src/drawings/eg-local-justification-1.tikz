@@ -1,0 +1,10 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, 1.75) {$K_0$};
+		\node [style=source] (1) at (-1, 0) {};
+		\node [style=target] (2) at (1, 0) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=new edge style 0, bend left=60] (1) to (2);
+	\end{pgfonlayer}
+\end{tikzpicture}
