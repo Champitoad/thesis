@@ -1375,8 +1375,10 @@ medial rules \rsf{s} and \rsf{m}. Thus deletion is admissible in \sys{Alpha}, a
 result that seems to be novel in the literature on EG.
 
 \begin{corollary}[Admissibility of Deletion]\label{cor:adm-era}
-  If $G \steps \emptyset$, then $G \xsteps{\msys{Alpha}\setminus\{\rsf{Del}\}}
-  \emptyset$.
+  $$
+  \text{If $G \steps \emptyset$, then $G \xsteps{\msys{Alpha}\setminus\{\rsf{Del}\}}
+  \emptyset$.}
+  $$
 \end{corollary}
 
 Dually, the insertion rule \rsf{Ins} is never used in the simulation of
@@ -1386,8 +1388,10 @@ insertion also never appears in the simulation of \sys{\dmdual{KS}}, while
 \rsf{Dcut{\ua}} is used multiple times in the simulation of \sys{KS}:
 
 \begin{corollary}[Co-admissibility of Insertion]\label{cor:adm-ins}
-  If $[] \steps G$, then $[]
-  \xsteps{\msys{Alpha}\setminus\{\rsf{Ins},\rsf{Dcut{\da}}\}} G$.
+  $$
+  \text{If $[] \steps G$, then $[]
+  \xsteps{\msys{Alpha}\setminus\{\rsf{Ins},\rsf{Dcut{\da}}\}} G$.}
+  $$
 \end{corollary}
 
 Corollary \ref{cor:adm-era} is what allows us to conclude that \sys{Alpha} is an
@@ -1430,7 +1434,25 @@ that all rules of \sys{Alpha} except \rsf{Del} satisfy this property:
 
 \section{\sys{Beta} graphs}\labsec{beta}
 
+Before working on EG, Peirce had already developed a deep understanding of the
+logic of relations of arbitrary arity, inventing the notions of variables and
+quantifiers 30 years before the standard Russell-Whitehead syntax for predicate
+logic appeared in 1910 \cite{sep-peirce}. This all stemmed from his extensive
+study of \emph{relation algebras}, first investigated by De Morgan in 1860.
+However in his system \sys{Beta} of EG, Peirce gives a very different account of
+the logic of relations, both in the graphical representation of relational
+statements, and the illative transformations that govern them. In the following,
+we illustrate informally the principles of \sys{Beta}, and how they are able to
+capture what is identified nowadays in symbolic logic as \emph{purely
+relational} first-order theories (that is, without constant nor function
+symbols) with a primitive equality predicate.
 
+In the propositional system \sys{Alpha}, atomic graphs represent sentences that
+can be asserted or denied (or equivalently, assigned a truth value), but they do
+not exhibit any internal structure syntactically: they might as well be depicted
+just as (distinguished) points on $\SA$. As most logicians of his time, Peirce
+inherited directly from the Aristotelian structure of \emph{predication}, where
+statement always relate a \emph{subject} to a \emph{predicate}. 
 
 \section{Gardens}\labsec{gardens}
 
@@ -1452,6 +1474,13 @@ may be employed, or a \emph{Bridge}, which is imagined to be a bit of paper
 ribbon.
 \end{quote}
 
+\begin{marginfigure}
+  \includegraphics{bridge.png}
+  \caption{A depiction of Peirce's Bridge for lines of identity}
+  \footnotesize Source:\hspace{3pt}\url{https://commons.wikimedia.org/wiki/File:4CT_Inadequacy_Explanation.svg}
+  \labfig{eg-bridge}
+\end{marginfigure}
+
 Thus he already identified the problem of readability stemming from having too
 many lines or ``cables'' crossing eachother, a well-known concern in the design
 of graphical programming languages\todo{Find reference}. This is to be opposed
@@ -1459,7 +1488,20 @@ to critics of the syntax of EG such as Quine, who invented a notation similar to
 the lines of identity, and deemed it ``too cumbersome for practical
 use''\todo{Find reference}. Also, the other proposed solution of having
 so-called \emph{Bridges} is quite interesting, in that it makes the syntax of EG
-\emph{three-dimensional}, in order to preserve the continuity of lines.
+\emph{three-dimensional}, in order to preserve the continuity of lines. A nice
+illustration of the bridge is given in \reffig{eg-bridge}\sidenote{We found this
+picture in the Wikipedia article on the \emph{four color theorem}
+\cite{noauthor_four_2023}, which is no coincidence: according to Burch
+\cite{sep-peirce}, \textit{``Peirce began to research the four-color map
+conjecture, to work on the graphical mathematics of de Morgan's associate A. B.
+Kempe, and to develop extensive connections between logic, algebra, and
+topology, especially topological graph theory. Ultimately these researches bore
+fruit in his existential graphs [...]''}. The Wikipedia article on Alfred Kempe
+also mentions the following, to be connected with our multiset formalization of
+EG \cite{noauthor_alfred_2023}: \textit{``Kempe (1886) revealed a rather marked
+philosophical bent, and much influenced Charles Sanders Peirce. Kempe also
+discovered what are now called multisets, although this fact was not noted until
+long after his death.''}}.
 
 \todo{ Use the following citation to explain how lines of identity are to be
   interpreted as quantifiers, where the term ``endoporeutic'', etymologically
