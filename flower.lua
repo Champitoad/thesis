@@ -28,10 +28,10 @@ function M.one(f)
   local flower = {
     center = f.center or "0,0",
     angle = f.angle or 0.0,
-    petal_size = f.petal_size or (f.pistil.size or 1) * 3,
+    petal_size = f.petal_size or (pistil.size or 1) * 3,
     petal_color = f.petal_color,
     pistil = {
-      color = pistil.color or "white",
+      color = pistil.color or "yellow",
       size = pistil.size or 1.0,
     },
     petals = f.petals or {},
