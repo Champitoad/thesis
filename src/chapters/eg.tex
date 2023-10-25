@@ -17,6 +17,18 @@ graphs}, which he developed from 1896 until his death in 1914
 \textit{``ought to be the logic of the future''}\sidenote[][3em]{Both citations
 are sourced in page 11 of \cite{Roberts+1973}.}.
 
+\begin{tikzpicture}
+  \directlua{
+    dofile("../flower.lua").one({
+      petals = {
+        {name="Alpha", color="blue"},
+        {},
+        {}
+      }
+    })
+  }
+\end{tikzpicture}
+
 Recent works have started to realize this vision: for example Sowa based his
 conceptual graphs for computerized knowledge representation on EG
 \cite{sowa_conceptual_1976}, Brady, Trimble
