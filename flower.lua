@@ -31,7 +31,7 @@ function M.one(f)
     petal_size = f.petal_size or (pistil.size or 1) * 3,
     petal_color = f.petal_color,
     pistil = {
-      color = pistil.color or "yellow",
+      color = pistil.color or "pistil",
       size = pistil.size or 1.0,
     },
     petals = f.petals or {},

@@ -17,18 +17,6 @@ graphs}, which he developed from 1896 until his death in 1914
 \textit{``ought to be the logic of the future''}\sidenote[][3em]{Both citations
 are sourced in page 11 of \cite{Roberts+1973}.}.
 
-\begin{tikzpicture}
-  \directlua{
-    dofile("flower.lua").one({
-      petals = {
-        {name="petal1"},
-        {},
-        {}
-      }
-    })
-  }
-\end{tikzpicture}
-
 Recent works have started to realize this vision: for example Sowa based his
 conceptual graphs for computerized knowledge representation on EG
 \cite{sowa_conceptual_1976}, Brady, Trimble
@@ -1459,12 +1447,231 @@ capture what is identified nowadays in symbolic logic as \emph{purely
 relational} first-order theories (that is, without constant nor function
 symbols) with a primitive equality predicate.
 
-In the propositional system \sys{Alpha}, atomic graphs represent sentences that
-can be asserted or denied (or equivalently, assigned a truth value), but they do
-not exhibit any internal structure syntactically: they might as well be depicted
-just as (distinguished) points on $\SA$. As most logicians of his time, Peirce
-inherited directly from the Aristotelian structure of \emph{predication}, where
-statement always relate a \emph{subject} to a \emph{predicate}. 
+\subsection{Syntax}
+
+\paragraph{Predication} In the propositional system \sys{Alpha}, atomic graphs
+represent sentences that can be asserted or denied (or equivalently, assigned a
+truth value), but they do not exhibit any internal structure syntactically: they
+might as well be depicted just as (distinguished) points on $\SA$. As most
+logicians of his time, Peirce was directly influenced by the \emph{term logic}
+of Aristotle, where assertions are decomposed into a \emph{subject} to which
+applies some \emph{predicate}. However, while Aristotle's notion of predicate
+has a metaphysical flavor, Peirce's notion is purely grammatical. For instance,
+Aristotle rejected the sentence ``The person sitting down is Socrates'' as a
+genuine predication, because Socrates is an \emph{individual}, and in his view
+predicates could only be so-called \emph{universals} like ``humans'' or
+``mortals'' \sidecite{smith_aristotles_2022}.
+
+\paragraph{Spots} In \sys{Beta} there is no such restriction, and the above
+sentence can be represented by the following graph:
+\begin{equation}
+  \tikzfig{1}{0.5}{sitting-socrates} \label{eq:sitting-socrates}
+\end{equation}
+Here both ``The person sitting down'' and ``Socrates'' are modelled as unary
+predicates. The little diamonds, called \emph{hooks} by Peirce, represent
+placeholders for the argument (subject) of each predicate, and the data of a
+predicate together with its hook is called a \emph{spot}\sidenote{The use of
+diamonds to depict hooks is our own addition, Peirce never drew them
+explicitly.}.
+
+\paragraph{Lines of Identity} Then to assert that there exists an individual who
+is both the person sitting down and Socrates, we connect the two hooks with a
+so-called \emph{line of identity} (LoI hereafter). In Peirce's view, each point
+in a LoI denotes an individual of the universe represented by $\SA$. Since
+scribing anything on $\SA$ means asserting its truth in the universe, then it
+suffices to reduce the truth of an individual to its existence, in order to
+interpret the marking of LoI as having existential force. This is actually the
+origin of the ``existential'' qualificative in the denomination ``existential
+graph''. Note that no information is given but the individual's existence: in
+particular, two distinct points on $\SA$ might or might not denote two distinct
+individuals, just as with usual variables. It is the \emph{continuity} of a LoI
+that signifies, in an iconic way, the identity of every point/individual
+constituting, and connected by the line. Hence the following graph
+$$\tikzfig{1}{0.5}{sitting-socrates-disconnected}$$
+expresses that both the person sitting down and Socrates exist, but we do not
+know whether they are the same individual or not.
+
+\paragraph{First-order logic} ``The person sitting down is Socrates'' might be
+equivalently expressed in a first-order language as the formula
+\begin{equation}
+  \exists x. \mathsf{PersonSittingDown}(x) \wedge \mathsf{Socrates}(x) \label{eq:sitting-socrates-fo}
+\end{equation}
+Hooks can then be seen as encoding the concept of \emph{arity} associated with a
+predicate symbol, and LoI the concept of \emph{existential quantification} over
+a single \emph{variable} $x$, where the two occurrences of $x$ correspond to the
+two extremities of the line connected to the hooks. As in \sys{Alpha}, the
+conjunctive aspect of the sentence is accounted for by the fact that the two
+spots are juxtaposed in the same area on $\SA$.
+
+Now if one considers a first-order theory with a predicate symbol $=$ satisfying
+the usual axioms for equality, then our sentence can alternatively be expressed
+by the following formula:
+$$\exists x. \exists y. \mathsf{PersonSittingDown}(x) \wedge
+\mathsf{Socrates}(y) \wedge x = y$$
+In Peirce's original notation, there is no way to distinguish between these two
+formulations, and they would both be represented by the first graph above.
+However in \sidecite{pietarinen_compositional_2020}, in order to have a rigorous
+interpretation of the syntax of \sys{Beta} in category theory, the authors
+propose to analyze LoI into essentially three distinct icons, from which every
+LoI can be reconstructed:
+
+\begin{description}
+  \item[Binder] As we have seen, one function of LoI is to \emph{quantify} over
+  individuals. For now we have only considered LoI located at the top-level of
+  $\SA$, i.e. in a \emph{positive} area, where they are given \emph{existential}
+  force. If we were to negate the graph (\ref{eq:sitting-socrates}) by enclosing
+  it in a cut, we would get a graph expressing the negation of formula
+  (\ref{eq:sitting-socrates-fo}), which by De Morgan duality is equivalent to
+  $$\forall x. \neg \mathsf{PersonSittingDown}(x) \vee \neg
+  \mathsf{Socrates}(x)$$
+  
+  \begin{figure}
+    \begin{center}
+    \tikzfig{1.25}{0.5}{eg-forall}
+    \end{center}
+    \caption{Universal quantification $\forall x. P(x)$ in \sys{Beta}}
+    \labfig{eg-forall}
+  \end{figure}
+  
+  More generally, it is well-known that in classical logic, \emph{universal}
+  quantification can be defined symbolically by $\forall x. P(x) \defeq \neg
+  \exists x. \neg P(x)$, and hence that any formula in the usual language of FOL
+  has a classically equivalent formula in the fragment $\{\neg, \land,
+  \exists\}$. This is precisely how Peirce expresses universal quantification in
+  \sys{Beta}, as illustrated for a unary predicate $P$ by the graph
+  \ref{eq:eg-forall} of (\reffig{eg-forall}). But in order to interpret
+  correctly graph (\ref{eq:eg-forall}), one needs to adopt what Peirce calls an
+  \emph{endoporeutic}\sidenote{From the greek \emph{endon} (`within') and
+  \emph{poros} (`passage, pore') \cite{endoporeutic}, literally ``that lets
+  through within''. This physically-flavored terminology is disturbingly
+  reminiscent of the intuition we developed within our own bubble calculus and
+  illustrated in \reffig{bubbles-flow} and \reffig{bubbles-porosity}, as we were
+  not aware of the existence of EG at the time!} reading of EG, where they are
+  inspected starting from the top-level of $\SA$, and then descending
+  (recursively) into their various cuts. In particular, the location of a LoI
+  should be identified with its \emph{outermost} end, as illustrated in graph
+  \ref{eq:eg-forall-out}; if we were to associate it instead with e.g. its
+  innermost end as in graph (\ref{eq:eg-forall-in}), then we would swap the
+  positions of $\exists$ and $\neg$ in the associated statement, giving the
+  non-equivalent formula $\neg \neg \exists x. P(x)$.
+
+  From these observations, we get that the type of quantification performed by a
+  LoI is fully captured by its location: existential in a positive area,
+  universal in a negative area. This leads us to split the syntax of LoI into
+  two components: so-called \emph{binders} that encode \emph{quantifiers} as
+  distinguished heavy dots on $\SA$ like those of
+  \reffig{eg-forall}\sidenote{Peirce liked to insist that LoI should be drawn as
+  \emph{heavy} lines, to distinguish them from the normal lines used to depict
+  cuts.}; and \emph{wires} that connect binders to the hooks of predicates,
+  encoding the \emph{identity} between multiple occurrences of the same
+  variable.
+  
+  \begin{remark}\labremark{eg-forall-type-theory}
+   
+  \end{remark}
+
+  \item[Teridentity] 
+  
+  \item[Wire]
+\end{description}
+
+LoI (or their decomposition into the above constructs) constitute the only icons
+introduced in \sys{Beta} compared to \sys{Alpha}. We will see shortly that they
+are sufficiently powerful to express and combine all features of first-order
+logic in an elegant and intuitive way, particulary so at the \emph{illative}
+level.
+
+\paragraph{Iconic atomicity}
+The fact that Peirce took LoI to be a primitive, unanalyzed icon can be seen as
+a consequence (or a cause?) of his view that only \emph{closed} sentences should
+be considered. Indeed in an early exposition of EG (Ms 493), he proposed a way
+to show, if necessary, that ``a complete assertion is not intended''
+\cite[p.~49]{Roberts+1973}. That is, he devised a syntax equivalent in purpose
+to that of \emph{free variables} in predicate calculus. Our analysis into wires
+that connect hooks, binders and teridentities allows this, and more generally
+makes the syntax of graphs closer to predicate calculus. But in later
+expositions, Peirce always required every hook to be filled with a LoI, that is
+every variable to be quantified.
+
+\begin{marginfigure}
+  \begin{center}
+  \tikzfig{1.25}{0.5}{wire-teridentity}
+  \end{center}
+  \caption{Building a two-ended wire from two teridentities}
+  \labfig{wire-teridentity}
+\end{marginfigure}
+
+Now, it is unclear which of those presentations is the more ``analytic'' or
+primitive, when restricting oneself to closed (or in Peirce's terminology,
+complete) assertions. Indeed, consider that we give the force of quantification
+to wires, as Peirce does with LoI: then one can replace every binder by a
+dangling wire, rendering binders useless in the syntax. Also since empty hooks
+and teridentities are forbidden, they will always be filled with wires. Then
+couldn't we just reduce the full syntax of LoI to wires? A remarkable insight of
+Peirce, is that one cannot build the concept of teridentity from two-ended
+wires, but that the converse \emph{is} possible, as illustrated in
+\reffig{wire-teridentity}. This is most clearly (and speculatively) understood
+by seeing LoI as made out of \emph{pipes} rather than wires. Indeed, just gluing
+one extremity of a two-ended pipe $\mathtt{P}$ to the exterior of another pipe
+$\mathtt{Q}$ will not make $\mathtt{P}$ and $\mathtt{Q}$ communicate; and there
+is no reason to interpret the joining, or (infinitesimally) close juxtaposition
+of two lines on $\SA$ at one point, as doing more than the gluing of two
+pipes\sidenote{If one wants to keep the wire metaphor, joining two LoI can be
+interpreted as just putting in contact two wires. Then electrical current can
+flow from one wire to the other, but the problem resides elsewhere, at the
+\emph{illative} level: indeed nothing prevents us from separating back the two
+wires, or connecting two initially disjoint wires. But in a negative (resp.
+positive) context, the former (resp. latter) action corresponds to forgetting a
+possibly necessary equality hypothesis between two variables (resp. identifying
+two possibly distinct individuals), which is not valid logically speaking.}. One
+solution would be to first drill a hole in $\mathtt{Q}$, before glueing
+$\mathtt{P}$ on it. Another is to have \emph{branching} pipes as the basic
+building blocks for our plumbing, i.e. teridentities. This is how we interpret
+and justify metaphorically the following enigmatic quote from Peirce
+\cite[p.~116]{Roberts+1973}:
+
+\begin{quote}
+  Teridentity is not mere identity. It is identity and identity, but this `and'
+is a distinct concept [from that denoted by the juxtaposition of graphs on
+$\SA$], and is precisely that of teridentity.
+\end{quote}
+
+Then every LoI can be built out of teridentities, which Peirce expressed like
+so\sidenote{A very similar metaphor is brought up by Girard in
+\cite{girard:hal-01322183}, where the fact that a variable can have infinitely
+many occurrences is identified with the possibility of \emph{splitting} an
+electrical cable indefinitely into subcables. He explains that this is because a
+cable is just a bundle of smaller wires, akin to the microscopic points of
+teridentity of Peirce.} \cite[p.~117]{Roberts+1973}:
+
+\begin{quote}
+  Every line of identity ought to be considered as bristling with microscopic
+points of teridentity; so that
+$\tikz{\draw (0,0) -- (2,0);}$
+when magnified shall be seen to be
+$\tikz{\draw (0,0) -- (2,0);
+       \draw[decorate,decoration=zigzag] (0.1,0) -- (1.9,0);}$.
+\end{quote}
+
+\paragraph{N-ary relations}
+
+\todo{ Illustrate n-ary relations, and the directionality of hooks, with the
+  Factorio example}
+  
+\subsection{Rules}
+
+\begin{remark}
+In the original \sys{Beta} system, Peirce enforces the usual model-theoretic
+assumption that the universe of discourse must be non-empty --- i.e. contain at
+least one individual, through an \emph{axiom} permitting to ``scribe a heavy dot
+or unattached line on $\SA$'' \cite[p.~47]{Roberts+1973}. In fact together with
+the axiom allowing to assert the blank $\SA$, which was implicit in our notion
+of proof for \sys{Alpha} (\refdef{eg-proof}), this constitutes the only axiom in
+all systems of EG. This is yet another striking similarity with Girard's
+philosophy, who attempted to get rid of axioms in logic starting with ludics ---
+although in many of his writings, he actively criticizes the non-empty model
+assumption.
+\end{remark}
 
 \section{Gardens}\labsec{gardens}
 

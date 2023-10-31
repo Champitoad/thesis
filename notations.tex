@@ -260,6 +260,26 @@
 \newcommand{\ljustif}{\mathbin{\succeq_0}}
 \newcommand{\gjustif}{\mathbin{\succeq}}
 
+\newcommand{\westhook}[2]{
+  \node[anchor=east,shape=diamond,draw,fill=white,inner sep=1pt] (#1) at (#2.west) {}
+}
+\newcommand{\easthook}[2]{
+  \node[anchor=west,shape=diamond,draw,fill=white,inner sep=1pt] (#1) at (#2.east) {}
+}
+
+\newcommand{\terid}[2]{
+\node[isosceles triangle,draw,minimum size=5pt,inner sep=0pt,fill=black] (#1) at (#2) {};
+\draw (#1.left corner) ..controls (#1.left corner) and ($(#1.left corner) + (0,0.55)$).. ($(#1.left corner) + (-1,+0.5)$);
+\draw (#1.right corner) ..controls (#1.right corner) and ($(#1.right corner) - (0,0.55)$).. ($(#1.right corner) + (-1,-0.5)$);
+\draw ($(#1.apex) - (0.1,0)$) -- ($(#1.apex) + (1,0)$);
+}
+\newcommand{\coterid}[2]{
+\node[isosceles triangle,draw,minimum size=5pt,inner sep=0pt,fill=black,rotate=180] (#1) at (#2) {};
+\draw (#1.left corner) ..controls (#1.left corner) and ($(#1.left corner) - (0,0.55)$).. ($(#1.left corner) + (+1,-0.5)$);
+\draw (#1.right corner) ..controls (#1.right corner) and ($(#1.right corner) + (0,0.55)$).. ($(#1.right corner) + (+1,+0.5)$);
+\draw ($(#1.apex) + (0.1,0)$)-- ($(#1.apex) - (1,0)$);
+}
+
 % Flowers
 
 \newcommand{\Nature}{\text{\ding{96}}}
@@ -276,6 +296,8 @@
 \newcommand{\chyp}[2]{#1 \lessdot #2}
 
 \newcommand{\parity}[1]{\mathsf{par}(#1)}
+
+\newcommand{\DrawFlowers}[1]{\directlua{dofile("flower.lua").many({#1})}}
 
 % First-order
 

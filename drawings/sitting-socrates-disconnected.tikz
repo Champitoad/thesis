@@ -1,0 +1,8 @@
+\begin{tikzpicture}
+  \node (person) at (-4, 0) {The person sitting down};
+  \node (socrates) at (+4, 0) {Socrates};
+  \westhook{h1}{socrates};
+  \easthook{h2}{person};
+  \draw (h2.east) -- (+0.75, 0);
+  \draw (+1.75, 0) -- (h1.west);
+\end{tikzpicture}
