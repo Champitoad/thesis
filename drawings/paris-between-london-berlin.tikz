@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+  \node (between) at (0,0) {between};
+  \westhook{bw}{between};
+  \northeasthook{bne}{between};
+  \southeasthook{bse}{between};
+
+  \node (paris) at (-5,0) {Paris};
+  \easthook{Pe}{paris};
+
+  \node (london) at (5,1) {London};
+  \westhook{Lw}{london};
+
+  \node (berlin) at (5,-1) {Berlin};
+  \westhook{Bw}{berlin};
+
+  \draw (bw.west) -- (Pe.east);
+  \draw (bne.east) -- (Lw.west);
+  \draw (bse.east) -- (Bw.west);
+\end{tikzpicture}

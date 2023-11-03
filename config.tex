@@ -46,12 +46,14 @@
 \input{drawings/eg.tikzstyles}
 % \input{drawings/bubbles.tikzdefs}
 % \input{drawings/eg.tikzdefs}
-\renewcommand{\tikzfig}[3]{
+\newcommand{\tikzscale}[3]{
   \scalebox{#1}{
     \begingroup
       \tikzset{every picture/.style={scale=#2,baseline=(current bounding box.center)}}
-      \InputIfFileExists{./drawings/#3.tikz}{}{{\color{red}\colorbox{pink}{missingfile : #3}}}
+      #3
     \endgroup}}
+\renewcommand{\tikzfig}[3]{
+  \tikzscale{#1}{#2}{\InputIfFileExists{./drawings/#3.tikz}{}{{\color{red}\colorbox{pink}{missingfile : #3}}}}}
 \newcommand{\stkfig}[2]{\tikzfig{#1}{0.5}{#2}}
 
 \usepackage{minted}

@@ -1,0 +1,8 @@
+\begin{tikzpicture}
+
+\terid{T}{0,0};
+\binder{x}{T-in-top}
+\binder{y}{T-in-bot}
+\binder{z}{T-out}
+
+\end{tikzpicture}

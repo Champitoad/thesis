@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+
+\terid{T}{-2,0}
+\binder{x}{T-in-top}
+\binder{y}{T-in-bot}
+\coterid{U}{T-out}
+
+\node[anchor=west] (person) at (U-out-top) {The person sitting down};
+\node[anchor=west] (socrates) at (U-out-bot) {Socrates};
+\westhook{h1}{socrates};
+\westhook{h2}{person};
+
+\end{tikzpicture}

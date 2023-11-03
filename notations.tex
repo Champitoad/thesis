@@ -266,18 +266,52 @@
 \newcommand{\easthook}[2]{
   \node[anchor=west,shape=diamond,draw,fill=white,inner sep=1pt] (#1) at (#2.east) {}
 }
+\newcommand{\northhook}[2]{
+  \node[anchor=south,shape=diamond,draw,fill=white,inner sep=1pt] (#1) at (#2.north) {}
+}
+\newcommand{\southhook}[2]{
+  \node[anchor=north,shape=diamond,draw,fill=white,inner sep=1pt] (#1) at (#2.south) {}
+}
+\newcommand{\northeasthook}[2]{
+  \node[anchor=south west,shape=diamond,draw,fill=white,inner sep=1pt] (#1) at (#2.north east) {}
+}
+\newcommand{\northwesthook}[2]{
+  \node[anchor=south east,shape=diamond,draw,fill=white,inner sep=1pt] (#1) at (#2.north west) {}
+}
+\newcommand{\southeasthook}[2]{
+  \node[anchor=north west,shape=diamond,draw,fill=white,inner sep=1pt] (#1) at (#2.south east) {}
+}
+\newcommand{\southwesthook}[2]{
+  \node[anchor=north east,shape=diamond,draw,fill=white,inner sep=1pt] (#1) at (#2.south west) {}
+}
 
-\newcommand{\terid}[2]{
+\newcommand{\ter}[2]{
 \node[isosceles triangle,draw,minimum size=5pt,inner sep=0pt,fill=black] (#1) at (#2) {};
-\draw (#1.left corner) ..controls (#1.left corner) and ($(#1.left corner) + (0,0.55)$).. ($(#1.left corner) + (-1,+0.5)$);
-\draw (#1.right corner) ..controls (#1.right corner) and ($(#1.right corner) - (0,0.55)$).. ($(#1.right corner) + (-1,-0.5)$);
-\draw ($(#1.apex) - (0.1,0)$) -- ($(#1.apex) + (1,0)$);
+}
+\newcommand{\coter}[2]{
+\node[isosceles triangle,draw,minimum size=5pt,inner sep=0pt,fill=black,rotate=180] (#1) at (#2) {};
+}
+\newcommand{\terid}[2]{
+\ter{#1}{#2}
+\node[inner sep=0] (#1-in-top) at ($(#1.left corner) + (-1,+0.5)$) {};
+\node[inner sep=0] (#1-in-bot) at ($(#1.right corner) + (-1,-0.5)$) {};
+\node[inner sep=0] (#1-out) at ($(#1.apex) + (1,0)$) {};
+\draw (#1.left corner) ..controls (#1.left corner) and ($(#1.left corner) + (0,0.55)$).. (#1-in-top);
+\draw (#1.right corner) ..controls (#1.right corner) and ($(#1.right corner) - (0,0.55)$).. (#1-in-bot);
+\draw ($(#1.apex) - (0.1,0)$) -- (#1-out);
 }
 \newcommand{\coterid}[2]{
-\node[isosceles triangle,draw,minimum size=5pt,inner sep=0pt,fill=black,rotate=180] (#1) at (#2) {};
-\draw (#1.left corner) ..controls (#1.left corner) and ($(#1.left corner) - (0,0.55)$).. ($(#1.left corner) + (+1,-0.5)$);
-\draw (#1.right corner) ..controls (#1.right corner) and ($(#1.right corner) + (0,0.55)$).. ($(#1.right corner) + (+1,+0.5)$);
-\draw ($(#1.apex) + (0.1,0)$)-- ($(#1.apex) - (1,0)$);
+\coter{#1}{#2}
+\node[inner sep=0] (#1-out-top) at ($(#1.left corner) + (+1,-0.5)$) {};
+\node[inner sep=0] (#1-out-bot) at ($(#1.right corner) + (+1,+0.5)$) {};
+\node[inner sep=0] (#1-in) at ($(#1.apex) - (1,0)$) {};
+\draw (#1.left corner) ..controls (#1.left corner) and ($(#1.left corner) - (0,0.55)$).. (#1-out-top);
+\draw (#1.right corner) ..controls (#1.right corner) and ($(#1.right corner) + (0,0.55)$).. (#1-out-bot);
+\draw ($(#1.apex) + (0.1,0)$) -- (#1-in);
+}
+
+\newcommand{\binder}[2]{
+  \node[draw,circle,fill=black,inner sep=0,minimum size=3pt] (#1) at (#2) {};
 }
 
 % Flowers

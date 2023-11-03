@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (2) at (-3, 0) {};
+		\node [style=none] (3) at (3, 0) {};
+		\node [style=none] (4) at (-0.5, 0) {};
+		\node [style=none] (5) at (2.25, 0) {};
+		\node [style=neg text] (6) at (1.125, 0) {$P$};
+		\westhook{h}{6};
+		\binder{b}{-1.6,0};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=neg area] (3.center)
+			 to [bend right=90] (2.center)
+			 to [bend right=90] cycle;
+		\draw [style=pos area] (5.center)
+			 to [bend right=90, looseness=1.25] (4.center)
+			 to [bend right=90, looseness=1.25] cycle;
+		\draw (-1.6,0) -- (h.west);
+	\end{pgfonlayer}
+\end{tikzpicture}

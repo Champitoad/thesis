@@ -7,10 +7,9 @@
 \tikzstyle{neg text}=[fill=none, draw=none, text=nfg, tikzit fill={rgb,255: red,191; green,191; blue,191}, tikzit draw={rgb,255: red,191; green,191; blue,191}]
 \tikzstyle{source}=[fill=hypo, draw=none, shape=circle, tikzit fill={rgb,255: red,0; green,123; blue,255}, minimum size=4pt, inner sep=0pt]
 \tikzstyle{target}=[fill=conc, draw=none, shape=circle, tikzit fill={rgb,255: red,236; green,26; blue,26}, minimum size=4pt, inner sep=0pt]
-\tikzstyle{new style 0}=[fill=white, shape=rectangle]
 
 % Edge styles
 \tikzstyle{pos area}=[-, fill=pbg, draw=black, tikzit fill=white, tikzit draw=black]
 \tikzstyle{neg area}=[-, fill=nbg, draw=black, tikzit fill={rgb,255: red,191; green,191; blue,191}, tikzit draw=black]
 \tikzstyle{pistil}=[-, tikzit fill={rgb,255: red,255; green,243; blue,68}, tikzit draw=black, fill=pistil, draw=black]
-\tikzstyle{new edge style 0}=[draw={rgb,255: red,0; green,210; blue,0}, ->]
+\tikzstyle{justif}=[draw={rgb,255: red,0; green,210; blue,0}, ->]
