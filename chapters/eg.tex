@@ -1731,13 +1731,15 @@ A remarkable fact about \sys{Beta} is that it does not need any new illative
 principle compared to \sys{Alpha}. Rather, it simply generalizes those of
 \sys{Alpha} to account for LoI\sidenote{Thus in a sense, the first-order
 individuals denoted by LoI behave in the exact same way as the propositions
-denoted by the graphs of \sys{Alpha}. This can be interpreted as a hint of
-\emph{ontological monism}, that begins to identify the two levels of
-propositions and individuals enforced in the language of predicate logic, and
-inherited from Aristotle's conception of predication. Independently, Girard has
-recently been pushing the idea further in his transcendental syntax programme,
-by proposing to see individuals as particular kinds of \emph{linear}
-propositions (see \cite[\S~84.3]{eng_exegesis_2023}).}.
+denoted by the graphs of \sys{Alpha}. This can be interpreted as a manifestation
+of his \emph{psycho-physical monism} \cite{sep-peirce}, that blurs the
+distinction between the psychological level of propositions (concepts) and the
+physical level of individuals (objects) enforced in the language of predicate
+logic, and inherited from Aristotle's conception of predication. Independently,
+Girard has recently been pushing the idea further in his transcendental syntax
+programme, by proposing to see individuals as particular kinds of \emph{linear}
+propositions (see \cite[\S 84.3]{eng_exegesis_2023}). And what is more linear
+than a line?}.
 
 \begin{description}
   \item[Iteration/Deiteration] When a spot is iterated, every hook of the new
@@ -1746,7 +1748,7 @@ propositions (see \cite[\S~84.3]{eng_exegesis_2023}).}.
   retracted to the corresponding hook of the original copy. This applies in
   particular to any binder seen as a unary spot, which allows to extend (resp.
   retract) any LoI inside (resp. outside) a cut:
-  $$\tikzfig{1}{0.5}{eg-iter-loi-left} ~~~\step~~~ \tikzfig{1}{0.5}{eg-iter-loi-right}$$
+  $$\tikzfig{1}{0.5}{eg-iter-loi-left} ~~~\leftrightarrow~~~ \tikzfig{1}{0.5}{eg-iter-loi-right}$$
 
   \item[Insertion/Deletion] Every pair of binders residing in the same negative
   area can be connected and replaced by a wire (\rsf{Insertion}):
@@ -1759,9 +1761,9 @@ propositions (see \cite[\S~84.3]{eng_exegesis_2023}).}.
   respectively the operations of \emph{anti-unification} and \emph{unification}
   on two variables. That is, adding a wire between two disconnected binders $x$
   and $y$ is equivalent in purpose to substituting $x$ for $y$ (or $y$ for $x$)
-  in every spot/predicate connected by a LoI to either $y$ (resp. $x$); while
-  severing a wire connected to a binder $z$ in two parts capped by binders $x$
-  and $y$ amounts to partitioning the set of spots connected to $z$ in two sets
+  in every spot/predicate connected by a LoI to $y$ (resp. $x$); while severing
+  a wire connected to a binder $z$ in two parts capped by binders $x$ and $y$
+  amounts to partitioning the set of spots connected to $z$ in two sets
   $\{P_i\}$ and $\{Q_j\}$, and substituting $x$ for $z$ in every $P_i$, and $y$
   for $z$ in every $Q_j$. Unification and anti-unification are the heart of many
   (semi-)decision procedures implemented in automated and interactive theorem
@@ -1796,11 +1798,12 @@ in \sys{Beta}, by reducing the graph associated to the formula
     \exists z. \socrates(z) \land \mortal(z) \label{eq:socrates-mortal-fo}
   \end{array}
 \end{equation}
-to the empty $\SA$. Note that in many steps, we add or remove some teridentities
-and binders without further justification: these correspond to splits, merges
-and rewirings of LoI, and a more rigorous set of equations describing these
-operations can be found in \cite[Section 3: ``The algebra of lines of
-identity'']{pietarinen_compositional_2020}.
+to the empty $\SA$. Again, we inverse the direction of arrows in inference
+steps, to follow the proof search reading of rules. Note that in many steps, we
+add or remove some teridentities and binders without further justification:
+these correspond to splits, merges and rewirings of LoI, and a more rigorous set
+of equations describing these operations can be found in \cite[Section 3: ``The
+algebra of lines of identity'']{pietarinen_compositional_2020}.
 
 The essence of the syllogism lies in the instantiation of the universally
 quantified variable $y$ by $x$ in formula (\ref{eq:socrates-mortal-fo}),
@@ -1823,10 +1826,10 @@ reasoning: be it at the level of \emph{statements}, with the complex circuits
 resulting from the composition of LoI; or at the level of \emph{proofs}, with a
 decomposition of such a simple syllogism into 8 distinct inferential steps.
 While this is satisfying from the standpoint of meta-logical investigation
-originally pursued by Peirce, it seems to be too cumbersome to form the basis
-for a practical theorem proving interface, where the user would perform illative
-transformations through direct manipulation of graphs. In the words of Peirce
-himself \cite[p.~544]{peirce_prolegomena_1906}:
+originally pursued by Peirce, this syntax seems to be too cumbersome to form the
+basis for a practical theorem proving interface, where the user would perform
+illative transformations through direct manipulation of graphs. In the words of
+Peirce himself \cite[p.~544]{peirce_prolegomena_1906}:
 \begin{quote}
   There are a number of deduced liberties of transformation, by which even much
   more complicated inferences than a syllogism can be performed at a stroke. For
@@ -1837,7 +1840,8 @@ himself \cite[p.~544]{peirce_prolegomena_1906}:
 \paragraph{Variables}
 
 \begin{marginfigure}
-  \tikzfig{1}{0.5}{eg-socrates-mortal-var}
+  \hspace{-3em}
+  \tikzfig{0.8}{0.5}{eg-socrates-mortal-var}
   \caption{Using variables in EG}
   \labfig{eg-socrates-mortal-var}
 \end{marginfigure}
@@ -1852,12 +1856,14 @@ simple:
   \item Keep only the binder occurring in the outermost area of $\SA$, and give
   it a fresh name $x$;
   \item Replace the $m$ wires connected to the hooks by $m$ occurrences of $x$;
+  \item Erase all remaining wires and teridentities.
 \end{enumerate}
-Thus for instance, the second graph in \reffig{eg-socrates-mortal} would be
-represented by the graph of \reffig{eg-socrates-mortal-var}. In fact, Peirce
-already had the idea to use variables instead of LoI, which he called
-\emph{Selectives}, in order to avoid the ambiguity of lines of identity crossing
-cuts \cite[p.~531]{peirce_prolegomena_1906}:
+Thus for instance, both the first and second graphs in
+\reffig{eg-socrates-mortal} would be represented by the graph of
+\reffig{eg-socrates-mortal-var}. In fact, Peirce already had the idea to use
+variables instead of LoI, which he called \emph{Selectives}, in order to avoid
+the ambiguity of lines of identity crossing cuts
+\cite[p.~531]{peirce_prolegomena_1906}:
 \begin{quote}
 A Ligature crossing a Cut is to be interpreted as unchanged in meaning by
 erasing the part that crosses to the Cut and attaching to the two Loose Ends so
@@ -1865,11 +1871,10 @@ produced two Instances of a Proper Name nowhere else used; such a Proper name
 (for which a capital letter will serve) being termed a \emph{Selective}.
 \end{quote}
 Thus he already identified the problem of readability stemming from having too
-many lines or ``cables'' crossing eachother, a well-known concern in the design
-of graphical programming languages\todo{Find reference}. This is to be opposed
-to critics of the syntax of EG such as Quine, who invented a notation similar to
-the lines of identity, and deemed it ``too cumbersome for practical
-use''\todo{Find reference}.
+many wires crossing eachother, a well-known concern in the design of graphical
+programming languages. This is to be opposed to critics of the syntax of EG such
+as Quine, who invented a notation similar to the lines of identity, and deemed
+it ``too cumbersome for practical use'' \cite[p.~125]{Roberts+1973}.
 
 \paragraph{Bridges} 
 
@@ -1889,9 +1894,9 @@ ribbon.
 This proposed alternative solution of having so-called \emph{Bridges} is quite
 interesting, in that it makes the syntax of EG \emph{three-dimensional}, in
 order to preserve the continuity of lines. A nice illustration of the bridge is
-given in \reffig{eg-bridge}. We found this picture in the Wikipedia article on
-the \emph{four color theorem} \cite{noauthor_four_2023}, which is no
-coincidence: according to Burch \cite{sep-peirce}:
+given in \reffig{eg-bridge}. We found this picture in the Wikipedia article of
+the \emph{four color theorem} \cite{noauthor_four_2023}, which is no coincidence
+according to Burch \cite{sep-peirce}:
 \begin{quote}
   Peirce began to research the four-color map conjecture, to work on the
 graphical mathematics of de Morgan's associate A. B. Kempe, and to develop
@@ -1910,8 +1915,120 @@ Charles Sanders Peirce. Kempe also discovered what are now called multisets,
 although this fact was not noted until long after his death.
 \end{quote}
 In fact, we can also give a multiset formalization of the syntax of graphs in
-\sys{Beta}, based on the previous idea of replacing teridentities by variables.
+\sys{Beta} extending that of \refsec{multisets}, and based on the previous idea
+of replacing teridentities by variables. Every area will now be equipped with a
+set of binders, in addition to the multiset of nodes (i.e. atoms and cuts).
+Anticipating our flower metaphor of \refch{flowers}, we call sets of binders
+\emph{sprinklers}, which can be imagined as watering spots on their hooks by
+sending water through the (now invisible) LoI, seen as hoses. Naturally, the
+pair formed by a sprinkler and a multiset of nodes is called a \emph{garden}.
 
-\todo{Give the definition and some example}
+\begin{definition}[$\beta$-graph]\labdef{beta-graph} 
+  
+  Given a denumerable set of variables $\vars$ and a denumerable set of
+  predicate symbols $\psymbs$ together with their arities $\arity : \psymbs \to
+  \nats$, the sets of \emph{$\beta$-nodes} $\bnodes$, \emph{$\beta$-gardens}
+  $\bgardens$ and \emph{$\beta$-graphs} $\bgraphs$ are defined mutually
+  inductively as follows:
+  \begin{itemize}
+    \item \textbf{(Spot)} If $p \in \psymbs$ with $\arity(p) = n$, then $p(x_1,
+    \ldots, x_n) \in \bnodes$;
+    \item \textbf{(Graph)} If $G \subset \bnodes$ is a finite multiset, then $G
+    \in \bgraphs$.
+    \item \textbf{(Garden)} If $\mathbf{x} \subset \vars$ is a finite set and $G
+    \subset \bnodes$ a finite multiset, then $\garden{\mathbf{x}}{G} \in
+    \bgardens$;
+    \item \textbf{(Enclosure)} If $\gamma \in \bgardens$, then $[\gamma] \in \bnodes$.
+  \end{itemize}
+  % An \emph{$\alpha$-graph} is a multiset of atomic propositions and
+  % $\alpha$-graphs.
+\end{definition}
 
-\todo{What about the illative transformations?}
+\begin{example}
+  The graph of \reffig{eg-socrates-mortal-var} can be written in textual
+  notation as the following expression:
+  $$
+  \begin{align}
+    [&x \cdot \socrates(x),\human(x), \\
+     &[y \cdot \human(y),[{} \cdot \mortal(y)]], \\
+     &[z \cdot \socrates(z),\mortal(z)]]
+  \end{align}
+  $$
+  Note that the `$\cdot$' operator for constructing gardens has lower precedence
+  than the `$,$' operator for juxtaposition of graphs. Thus the expression $x
+  \cdot \socrates(x),\human(x)$ is to be read as $x \cdot
+  (\socrates(x),\human(x))$, and not $(x \cdot \socrates(x)),\human(x)$ (which
+  would be syntactically incorrect anyway).
+\end{example}
+
+\paragraph{Inference rules}
+
+\begin{figure}
+  \input{figures/beta.tex}
+  \caption{Inductive presentation of the rules of \sys{Beta}}
+  \labfig{beta}
+\end{figure}
+
+\begin{marginfigure}
+  \input{figures/eg-socrates-mortal-garden.tex}
+  \caption{A proof in the inductive syntax of \sys{Beta}}
+  \labfig{eg-socrates-mortal-garden}
+\end{marginfigure}
+
+As already mentioned earlier, the garden syntax for $\beta$-graphs quotients the
+LoI syntax: the first \rsf{Deiteration} step in \reffig{eg-socrates-mortal}
+cannot be performed in the garden syntax, because its premiss and conclusion are
+represented by the same graph. In fact, both \rsf{Iteration} and
+\rsf{Deiteration} are automatically handled by the notion of \emph{scope} for
+binders, that results from the endoporeutic reading of graphs. Then it only
+remains to account for \rsf{Insertion} and \rsf{Deletion} on LoI, which is done
+by capturing our intuition relating these principles to \emph{unification} in
+the rules \rsf{Unif{\da}} and \rsf{Unif{\ua}} of \reffig{beta},
+respectively. Thus the inductive version of \sys{Beta} is obtained by simply
+adding these two rules to those of \sys{Alpha} introduced in \reffig{alpha}.
+
+\reffig{eg-socrates-mortal-garden} gives a derivation of Aristotle's syllogism
+in this system. Even though we do not apply the \rsf{Deit} rule anymore compared
+to the graphical proof of \reffig{eg-socrates-mortal}, we need two additional
+instances of \rsf{Unif{\ua}} on $z$ and $x$, that would correspond to two
+instances of \rsf{Del} on the associated LoI.
+
+\begin{remark}
+  As in \sys{Alpha}, $\beta$-graphs $G, H, K$ and their one-holed contexts
+  $G\hole, H\hole, K\hole$ are multisets of $\beta$-nodes. But now they do not
+  correspond anymore to \emph{areas} in the graphical notation, which are
+  instead captured by gardens $\gamma, \delta, \chi$. In particular, this
+  entails a subtle difference from Peirce's formulation of \sys{Beta}: because
+  rules apply to graphs and not gardens, one cannot have binders at the
+  top-level of $\SA$, they must be enclosed in at least one cut. Thus to be able
+  to reason on (the garden version of) the graph (\ref{eq:sitting-socrates}), we
+  must first enclose it in a double-cut, giving the graph
+  $$[\garden{{}}{[\garden{x}{\mathsf{TheSittingPerson}(x),\mathsf{Socrates}(x)}]}]$$
+  While this choice might seem confusing, it makes the formulation of rules more
+  uniform with that of \sys{Alpha}, and will ease the transition to the flower
+  calculus in \refch{flowers}.
+\end{remark}
+
+Note that the rules \rsf{Unif{\da}} and \rsf{Unif{\ua}} rely on the usual notion
+of capture-avoiding substitution:
+
+\begin{definition}[$\beta$-graph substitution]
+  The \emph{capture-avoiding substitution} of a variable $y$ for a variable $x$
+  in a $\beta$-graph $G$, written $\subst{G}{y}{x}$, is defined by mutual
+  recursion as follows:
+  \begin{align*}
+    \subst{p(x_1,\ldots,x_n)}{y}{x} &= p(z_1, \ldots, z_n) \text{ with } z_i = \begin{cases}
+      y &\text{if $x_i = x$} \\
+      x_i &\text{otherwise}
+    \end{cases} \\
+    \subst{g_1, \ldots, g_n}{y}{x} &= \subst{g_1}{y}{x}, \ldots, \subst{g_n}{y}{x} \\
+    \subst{(\garden{\mathbf{z}}{G})}{y}{x} &= \begin{cases}
+      \garden{\mathbf{z}}{\subst{G}{y}{x}} &\text{if $x \not\in \mathbf{z}$} \\
+      \garden{\mathbf{z}}{G} &\text{otherwise}
+    \end{cases} \\
+    \subst{[\gamma]}{y}{x} &= [\subst{\gamma}{y}{x}]
+  \end{align*}
+\end{definition}
+
+Also, this system supports free variables, and there is no need to forbid them
+like Peirce did in his original LoI-based syntax.
