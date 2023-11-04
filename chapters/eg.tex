@@ -1590,10 +1590,7 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
   \emph{heavy} lines, to distinguish them from the normal lines used to depict
   cuts.}; and two-ended \emph{wires} that connect binders to the hooks of
   predicates, encoding the \emph{identity} between a bound variable $x$ and an
-  occurrence of $x$. Then for a graph to be well-formed, the wires connected to
-  any of its binders must never extend \emph{outside} of the binder's area, in
-  order to preserve our interpretation of LoI as being located at their
-  outermost end.
+  occurrence of $x$.
   
   \begin{marginfigure}
     \begin{center}
@@ -1715,11 +1712,10 @@ $\SA$], and is precisely that of teridentity.
 \end{quote}
 
 Then every LoI can be built out of teridentities, which Peirce expressed like
-so\sidenote{This is again reminiscent of Girard's metaphor, where the fact that
-a cable is just a ``bundle of very small wires'' corresponds to the
-decomposition of LoI into microscopic points of teridentities.}
-\cite[p.~117]{Roberts+1973}:
-
+so \cite[p.~117]{Roberts+1973}:
+% \sidenote{This is again reminiscent of Girard's metaphor, where the fact that
+% a cable is just a ``bundle of very small wires'' corresponds to the
+% decomposition of LoI into microscopic points of teridentities.}
 \begin{quote}
   Every line of identity ought to be considered as bristling with microscopic
 points of teridentity; so that
@@ -1733,7 +1729,15 @@ $\tikz{\draw (0,0) -- (2,0);
 
 A remarkable fact about \sys{Beta} is that it does not need any new illative
 principle compared to \sys{Alpha}. Rather, it simply generalizes those of
-\sys{Alpha} to account for LoI:
+\sys{Alpha} to account for LoI\sidenote{Thus in a sense, the first-order
+individuals denoted by LoI behave in the exact same way as the propositions
+denoted by the graphs of \sys{Alpha}. This can be interpreted as a hint of
+\emph{ontological monism}, that begins to identify the two levels of
+propositions and individuals enforced in the language of predicate logic, and
+inherited from Aristotle's conception of predication. Independently, Girard has
+recently been pushing the idea further in his transcendental syntax programme,
+by proposing to see individuals as particular kinds of \emph{linear}
+propositions (see \cite[\S~84.3]{eng_exegesis_2023}).}.
 
 \begin{description}
   \item[Iteration/Deiteration] When a spot is iterated, every hook of the new
@@ -1755,7 +1759,7 @@ principle compared to \sys{Alpha}. Rather, it simply generalizes those of
   respectively the operations of \emph{anti-unification} and \emph{unification}
   on two variables. That is, adding a wire between two disconnected binders $x$
   and $y$ is equivalent in purpose to substituting $x$ for $y$ (or $y$ for $x$)
-  in every spot/predicate connected by a LoI to either $x$ or $y$; while
+  in every spot/predicate connected by a LoI to either $y$ (resp. $x$); while
   severing a wire connected to a binder $z$ in two parts capped by binders $x$
   and $y$ amounts to partitioning the set of spots connected to $z$ in two sets
   $\{P_i\}$ and $\{Q_j\}$, and substituting $x$ for $z$ in every $P_i$, and $y$
@@ -1772,17 +1776,14 @@ assumption that the universe of discourse must be non-empty --- i.e. contain at
 least one individual, through an \emph{axiom} permitting to ``scribe a heavy dot
 or unattached line on $\SA$'' \cite[p.~47]{Roberts+1973}. In fact together with
 the axiom allowing to assert the blank $\SA$, which was implicit in our notion
-of proof for \sys{Alpha} (\refdef{eg-proof}), this constitutes the only axiom in
-all systems of EG. This is yet another striking similarity with Girard's
-philosophy, who attempted to get rid of axioms in logic starting with ludics ---
-although in many of his writings, he actively criticizes the non-empty model
-assumption.
+of proof for \sys{Alpha} (\refdef{eg-proof}), these are the only axiom in all
+systems of EG. This is yet another striking similarity with Girard's philosophy,
+who attempted to get rid of axioms in logic starting with ludics --- although in
+many of his writings, he actively criticizes the non-empty model assumption.
 \end{remark}
 
 \begin{figure*}
-  \begin{center}
-  \tikzfig{1}{0.5}{eg-socrates-mortal}
-  \end{center}
+  \input{figures/eg-socrates-mortal.tex}
   \caption{A proof of a famous syllogism in \sys{Beta}}
   \labfig{eg-socrates-mortal}
 \end{figure*}
@@ -1790,45 +1791,87 @@ assumption.
 \reffig{eg-socrates-mortal} gives a proof of the famous syllogism from Aristotle
 in \sys{Beta}, by reducing the graph associated to the formula
 \begin{equation}
-  \forall x. \socrates(x) \land \human(x) \land (\forall y. \human(y) \limp
-\mortal(y)) \limp \exists z. \socrates(z) \land \mortal(z) \label{eq:socrates-mortal-fo}
+  \begin{array}{l}
+    \forall x. \socrates(x) \land \human(x) \land (\forall y. \human(y) \limp \mortal(y)) \limp \\
+    \exists z. \socrates(z) \land \mortal(z) \label{eq:socrates-mortal-fo}
+  \end{array}
 \end{equation}
-to the empty $\SA$. Note that in many steps, we add or remove some teridentities and
-binders without further justification: these correspond to splits, merges and
-rewirings of LoI, and a more rigorous set of equations describing these
-operations can be found in Section 3 (``The algebra of lines of identity'') of
-\cite{pietarinen_compositional_2020}.
+to the empty $\SA$. Note that in many steps, we add or remove some teridentities
+and binders without further justification: these correspond to splits, merges
+and rewirings of LoI, and a more rigorous set of equations describing these
+operations can be found in \cite[Section 3: ``The algebra of lines of
+identity'']{pietarinen_compositional_2020}.
 
 The essence of the syllogism lies in the instantiation of the universally
 quantified variable $y$ by $x$ in formula (\ref{eq:socrates-mortal-fo}),
 captured by the \rsf{Deletion} step in \reffig{eg-socrates-mortal}. Thus
 contrary to \sys{Alpha}, it seems that \rsf{Deletion} is not admissible in
-\sys{Beta} anymore. In pure first-order logic (i.e. in finite theories), because
-of the \emph{subterm property}\todo{Find reference}, this should not break
-analyticity: indeed we should only need \rsf{Deletion} on LoI, which connects
-already existing binders. However one still needs to find out the binders
-that must be connected, which we conjecture to be a major factor in the
-undecidability of first-order logic.
+\sys{Beta} anymore. Because of the \emph{subterm property} of first-order logic
+\sidecite{DBLP:books/el/RV01/DegtyarevV01}, this should not break analyticity:
+indeed we should only need \rsf{Deletion} on LoI, which connects already
+existing binders. However one still needs to find out the binders that must be
+connected, which we conjecture to be a major factor in the undecidability of
+first-order logic.
 
 \section{Gardens}\labsec{gardens}
 
-Peirce already had the idea to use variables instead of lines of identity, which
-he called \emph{Selectives}, in order to avoid the ambiguity of lines of
-identity crossing cuts \cite[p.~531]{peirce_prolegomena_1906}:
+\paragraph{Ergonomy of LoI}
 
+Overall, the example of \reffig{eg-socrates-mortal} demonstrates how \sys{Beta}
+is particularly well-suited to analyze the fine structure of relational
+reasoning: be it at the level of \emph{statements}, with the complex circuits
+resulting from the composition of LoI; or at the level of \emph{proofs}, with a
+decomposition of such a simple syllogism into 8 distinct inferential steps.
+While this is satisfying from the standpoint of meta-logical investigation
+originally pursued by Peirce, it seems to be too cumbersome to form the basis
+for a practical theorem proving interface, where the user would perform illative
+transformations through direct manipulation of graphs. In the words of Peirce
+himself \cite[p.~544]{peirce_prolegomena_1906}:
+\begin{quote}
+  There are a number of deduced liberties of transformation, by which even much
+  more complicated inferences than a syllogism can be performed at a stroke. For
+  that sort of problem, however, which consists in drawing a conclusion or
+  assuring oneself of its correctness, this System is not particularly adapted.
+\end{quote}
+
+\paragraph{Variables}
+
+\begin{marginfigure}
+  \tikzfig{1}{0.5}{eg-socrates-mortal-var}
+  \caption{Using variables in EG}
+  \labfig{eg-socrates-mortal-var}
+\end{marginfigure}
+
+Still, the complexity of \sys{Beta} from a UX perspective stems mostly from the
+tedious management of LoI. Our analysis into binders and teridentities gives us
+a hint towards the solution: since we now have binders, why not just replace
+the complex circuits of teridentities by \emph{variables}? The process is
+simple:
+\begin{enumerate}
+  \item Take any complex LoI connected to $n$ binders and $m$ hooks;
+  \item Keep only the binder occurring in the outermost area of $\SA$, and give
+  it a fresh name $x$;
+  \item Replace the $m$ wires connected to the hooks by $m$ occurrences of $x$;
+\end{enumerate}
+Thus for instance, the second graph in \reffig{eg-socrates-mortal} would be
+represented by the graph of \reffig{eg-socrates-mortal-var}. In fact, Peirce
+already had the idea to use variables instead of LoI, which he called
+\emph{Selectives}, in order to avoid the ambiguity of lines of identity crossing
+cuts \cite[p.~531]{peirce_prolegomena_1906}:
 \begin{quote}
 A Ligature crossing a Cut is to be interpreted as unchanged in meaning by
 erasing the part that crosses to the Cut and attaching to the two Loose Ends so
 produced two Instances of a Proper Name nowhere else used; such a Proper name
 (for which a capital letter will serve) being termed a \emph{Selective}.
 \end{quote}
+Thus he already identified the problem of readability stemming from having too
+many lines or ``cables'' crossing eachother, a well-known concern in the design
+of graphical programming languages\todo{Find reference}. This is to be opposed
+to critics of the syntax of EG such as Quine, who invented a notation similar to
+the lines of identity, and deemed it ``too cumbersome for practical
+use''\todo{Find reference}.
 
-He further remarks on the next page:
-\begin{quote}
-  In order to avoid the intersection of Lines of Identity, either a Selective
-may be employed, or a \emph{Bridge}, which is imagined to be a bit of paper
-ribbon.
-\end{quote}
+\paragraph{Bridges} 
 
 \begin{marginfigure}
   \includegraphics{bridge.png}
@@ -1837,24 +1880,38 @@ ribbon.
   \labfig{eg-bridge}
 \end{marginfigure}
 
-Thus he already identified the problem of readability stemming from having too
-many lines or ``cables'' crossing eachother, a well-known concern in the design
-of graphical programming languages\todo{Find reference}. This is to be opposed
-to critics of the syntax of EG such as Quine, who invented a notation similar to
-the lines of identity, and deemed it ``too cumbersome for practical
-use''\todo{Find reference}. Also, the other proposed solution of having
-so-called \emph{Bridges} is quite interesting, in that it makes the syntax of EG
-\emph{three-dimensional}, in order to preserve the continuity of lines. A nice
-illustration of the bridge is given in \reffig{eg-bridge}\sidenote{We found this
-picture in the Wikipedia article on the \emph{four color theorem}
-\cite{noauthor_four_2023}, which is no coincidence: according to Burch
-\cite{sep-peirce}, \textit{``Peirce began to research the four-color map
-conjecture, to work on the graphical mathematics of de Morgan's associate A. B.
-Kempe, and to develop extensive connections between logic, algebra, and
-topology, especially topological graph theory. Ultimately these researches bore
-fruit in his existential graphs [...]''}. The Wikipedia article on Alfred Kempe
-also mentions the following, to be connected with our multiset formalization of
-EG \cite{noauthor_alfred_2023}: \textit{``Kempe (1886) revealed a rather marked
-philosophical bent, and much influenced Charles Sanders Peirce. Kempe also
-discovered what are now called multisets, although this fact was not noted until
-long after his death.''}}.
+After introducing Selectives, Peirce further remarks on the next page:
+\begin{quote}
+  In order to avoid the intersection of Lines of Identity, either a Selective
+may be employed, or a \emph{Bridge}, which is imagined to be a bit of paper
+ribbon.
+\end{quote}
+This proposed alternative solution of having so-called \emph{Bridges} is quite
+interesting, in that it makes the syntax of EG \emph{three-dimensional}, in
+order to preserve the continuity of lines. A nice illustration of the bridge is
+given in \reffig{eg-bridge}. We found this picture in the Wikipedia article on
+the \emph{four color theorem} \cite{noauthor_four_2023}, which is no
+coincidence: according to Burch \cite{sep-peirce}:
+\begin{quote}
+  Peirce began to research the four-color map conjecture, to work on the
+graphical mathematics of de Morgan's associate A. B. Kempe, and to develop
+extensive connections between logic, algebra, and topology, especially
+topological graph theory. Ultimately these researches bore fruit in his
+existential graphs [...]
+\end{quote}
+
+\paragraph{Multisets}
+
+The Wikipedia article on Alfred Kempe also mentions the following interesting
+fact \cite{noauthor_alfred_2023}:
+\begin{quote}
+  Kempe (1886) revealed a rather marked philosophical bent, and much influenced
+Charles Sanders Peirce. Kempe also discovered what are now called multisets,
+although this fact was not noted until long after his death.
+\end{quote}
+In fact, we can also give a multiset formalization of the syntax of graphs in
+\sys{Beta}, based on the previous idea of replacing teridentities by variables.
+
+\todo{Give the definition and some example}
+
+\todo{What about the illative transformations?}

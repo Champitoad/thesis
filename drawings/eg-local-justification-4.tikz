@@ -16,6 +16,6 @@
 		\draw [style=pos area] (7.center)
 			 to [bend right=90] (6.center)
 			 to [bend right=90] cycle;
-		\draw [style=new edge style 0, bend right=60] (1) to (2);
+		\draw [style=justif, bend right=60] (1) to (2);
 	\end{pgfonlayer}
 \end{tikzpicture}

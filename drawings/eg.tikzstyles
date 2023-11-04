@@ -7,9 +7,14 @@
 \tikzstyle{neg text}=[fill=none, draw=none, text=nfg, tikzit fill={rgb,255: red,191; green,191; blue,191}, tikzit draw={rgb,255: red,191; green,191; blue,191}]
 \tikzstyle{source}=[fill=hypo, draw=none, shape=circle, tikzit fill={rgb,255: red,0; green,123; blue,255}, minimum size=4pt, inner sep=0pt]
 \tikzstyle{target}=[fill=conc, draw=none, shape=circle, tikzit fill={rgb,255: red,236; green,26; blue,26}, minimum size=4pt, inner sep=0pt]
+\tikzstyle{westhook}=[fill=white, draw=black, shape=diamond, tikzit shape=circle, anchor=west, inner sep=1pt]
+\tikzstyle{westpred}=[fill=none, draw=none, shape=circle, anchor=west]
+\tikzstyle{binder}=[fill=black, draw=black, shape=circle, inner sep=0pt, minimum size=3pt]
 
 % Edge styles
 \tikzstyle{pos area}=[-, fill=pbg, draw=black, tikzit fill=white, tikzit draw=black]
 \tikzstyle{neg area}=[-, fill=nbg, draw=black, tikzit fill={rgb,255: red,191; green,191; blue,191}, tikzit draw=black]
 \tikzstyle{pistil}=[-, tikzit fill={rgb,255: red,255; green,243; blue,68}, tikzit draw=black, fill=pistil, draw=black]
 \tikzstyle{justif}=[draw={rgb,255: red,0; green,210; blue,0}, ->]
+\tikzstyle{teridentity}=[-, fill=black]
+\tikzstyle{wire}=[-]

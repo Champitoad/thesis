@@ -1,0 +1,52 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (51) at (1.825, 2.975) {};
+		\node [style=none] (52) at (1.825, -7.4) {};
+		\node [style=none] (49) at (-2.075, -3.925) {};
+		\node [style=none] (50) at (5.7, -3.925) {};
+		\node [style=none] (38) at (0.475, -3.725) {};
+		\node [style=none] (39) at (-0.025, -3.925) {};
+		\node [style=none] (40) at (0.475, -4.175) {};
+		\node [style=none] (41) at (1.475, -3.225) {};
+		\node [style=none] (42) at (1.475, -4.625) {};
+		\node [style=none] (43) at (-1.025, -3.925) {};
+		\node [style=westhook] (44) at (1.475, -4.625) {};
+		\node [style=westhook] (45) at (1.475, -3.225) {};
+		\node [style=westpred] (46) at (1.725, -3.225) {$\socrates$};
+		\node [style=westpred] (47) at (1.725, -4.625) {$\mortal$};
+		\node [style=binder] (48) at (-1.025, -3.925) {};
+		\node [style=none] (55) at (0.45, 0.775) {};
+		\node [style=none] (56) at (-0.05, 0.575) {};
+		\node [style=none] (57) at (0.45, 0.325) {};
+		\node [style=none] (58) at (1.45, 1.275) {};
+		\node [style=none] (59) at (1.45, -0.125) {};
+		\node [style=none] (60) at (-1.05, 0.575) {};
+		\node [style=westhook] (61) at (1.45, -0.125) {};
+		\node [style=westhook] (62) at (1.45, 1.275) {};
+		\node [style=westpred] (63) at (1.7, 1.275) {$\socrates$};
+		\node [style=westpred] (64) at (1.7, -0.125) {$\mortal$};
+		\node [style=binder] (65) at (-1.05, 0.575) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=neg area] (52.center)
+			 to [bend left=90, looseness=1.75] (51.center)
+			 to [bend left=90, looseness=1.75] cycle;
+		\draw [style=pos area] (50.center)
+			 to [bend left=90, looseness=1.20] (49.center)
+			 to [bend left=90, looseness=1.20] cycle;
+		\draw [style=teridentity] (38.center)
+			 to (40.center)
+			 to (39.center)
+			 to cycle;
+		\draw [style=teridentity] (39.center) to (43.center);
+		\draw [bend right] (41.center) to (38.center);
+		\draw [style=wire, bend right] (40.center) to (42.center);
+		\draw [style=teridentity] (55.center)
+			 to (57.center)
+			 to (56.center)
+			 to cycle;
+		\draw [style=teridentity] (56.center) to (60.center);
+		\draw [bend right] (58.center) to (55.center);
+		\draw [style=wire, bend right] (57.center) to (59.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
