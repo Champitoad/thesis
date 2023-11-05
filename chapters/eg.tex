@@ -32,7 +32,7 @@ graphs}, which he developed from 1896 until his death in 1914
 \cite{Roberts+1973}. Interestingly, Peirce perceived existential graphs
 (thereafter ``EG'') as his \textit{``chef d'oeuvre''}, and that they
 \textit{``ought to be the logic of the future''}\sidenote[][3em]{Both citations
-are sourced in page 11 of \cite{Roberts+1973}.}.
+are sourced in \cite[p.~11]{Roberts+1973}.}.
 
 Recent works have started to realize this vision: for example Sowa based his
 conceptual graphs for computerized knowledge representation on EG
@@ -92,11 +92,11 @@ Peirce designed in total three systems of EG, which he called respectively
 that order, which also captures their relationship in terms of complexity:
 \sys{Alpha} is the foundation on which the other systems are built, and can
 today be understood as a diagrammatic calculus for classical
-\emph{propositional} logic. As we will see in \refsec{Quantification},
-\sys{Beta} corresponds to a variable-free representation of \emph{predicate}
-logic without function symbols, and with primitive support for \emph{equality}.
-The last system \sys{Gamma} is more experimental, with various unfinished
-features that have been interpreted as attempts to capture \emph{modal}
+\emph{propositional} logic. As we will see in \refsec{beta}, \sys{Beta}
+corresponds to a variable-free representation of \emph{predicate} logic without
+function symbols, and with primitive support for \emph{equality}. The last
+system \sys{Gamma} is more experimental, with various unfinished features that
+have been interpreted as attempts to capture \emph{modal}
 \sidecite{zeman_graphical_1964} and \emph{higher-order} logics\sidenote{A less
 known fact is that at the end of his life, Peirce pushed his experimentations
 beyond the scope of \emph{logic} in the contemporary sense of the word, with
@@ -362,7 +362,7 @@ subgraph's area:
     
     This is exactly the dual of \rsf{Insertion}, stating that if a proposition
     is known to be true, then one might as well refrain from asserting it. It is
-    the only \emph{non-analytical} rule of the system when reading rules from
+    the only \emph{non-analytic} rule of the system when reading rules from
     conclusion to premiss, since $G$ does not already appear in the right-hand
     side. It is thus strongly related to the \emph{cut} rule of sequent
     calculus, which it can simulate together with the \rsf{Deiteration} rule.
@@ -730,13 +730,13 @@ truly are insertions and omissions of \emph{arbitrary} graphs\sidenote{The
 terminology ``atomic'' might be a bit confusing: here we think of
 \emph{illative} atomicity in Peirce's sense, not the fact that the graphs
 manipulated by rules are atomic, which might be termed \emph{structural}
-atomicity. There seems to be a symmetric tradeoff when comparing EG to CoS: in
-the former, one maximizes illative atomicity by minimizing linearity and
-structural atomicity; while in the latter, one maximizes structural atomicity
-and linearity by minimizing illative atomicity. This will become explicit in
-\refsec{eg-completeness}, when simulating the calculus of structures \sys{SKS}
-in \sys{Alpha}.}. The atomic (de)iteration rules are a restriction of the
-original ones in two respects:
+atomicity. There seems to be a symmetric tradeoff when comparing EG to the
+calculus of structures: in the former, one maximizes illative atomicity by
+minimizing linearity and structural atomicity; while in the latter, one
+maximizes structural atomicity and linearity by minimizing illative atomicity.
+This will become explicit in \refsec{eg-completeness}, when simulating the
+calculus of structures \sys{SKS} in \sys{Alpha}.}. The atomic (de)iteration
+rules are a restriction of the original ones in two respects:
 \begin{description}
   \item[Locality] Following \refdef{eg-local-justification}, the depth of the
   justified context $H_T\hole$ can be at most $2$ in the atomic rules, while it
@@ -1676,7 +1676,7 @@ every variable to be quantified.
   \labfig{wire-teridentity}
 \end{marginfigure}
 
-Now, it is unclear which of those presentations is the more ``analytic'' or
+Now, it is unclear which of those presentations is the more ``analytical'' or
 primitive, when restricting oneself to closed (or in Peirce's terminology,
 complete) assertions. Indeed, consider that we give the force of quantification
 to wires, as Peirce does with LoI: then one can replace every binder by a
@@ -1698,7 +1698,9 @@ flow from one wire to the other, but the problem resides elsewhere, at the
 wires, or connecting two initially disjoint wires. But in a negative (resp.
 positive) context, the former (resp. latter) action corresponds to forgetting a
 possibly necessary equality hypothesis between two variables (resp. identifying
-two possibly distinct individuals), which is not valid logically speaking.}. One
+two possibly distinct individuals), which is not valid logically speaking. To
+prevent this, one needs to do more than just put the two wires in contact with
+eachother (juxtaposition), i.e. solder them together (teridentity).}. One
 solution would be to first drill a hole in $\mathtt{Q}$, before glueing
 $\mathtt{P}$ on it. Another is to have \emph{branching} pipes as the basic
 building blocks for our plumbing, i.e. teridentities. This is how we interpret
@@ -1732,7 +1734,7 @@ principle compared to \sys{Alpha}. Rather, it simply generalizes those of
 \sys{Alpha} to account for LoI\sidenote{Thus in a sense, the first-order
 individuals denoted by LoI behave in the exact same way as the propositions
 denoted by the graphs of \sys{Alpha}. This can be interpreted as a manifestation
-of his \emph{psycho-physical monism} \cite{sep-peirce}, that blurs the
+of Peirce's \emph{psycho-physical monism} \cite{sep-peirce}, that blurs the
 distinction between the psychological level of propositions (concepts) and the
 physical level of individuals (objects) enforced in the language of predicate
 logic, and inherited from Aristotle's conception of predication. Independently,
@@ -1752,23 +1754,26 @@ than a line?}.
 
   \item[Insertion/Deletion] Every pair of binders residing in the same negative
   area can be connected and replaced by a wire (\rsf{Insertion}):
-  $$\nsheet{\tikzfig{1}{0.5}{eg-delins-loi-right}~~~\step~~~\tikzfig{1}{0.5}{eg-delins-loi-left}}$$
+  $$\nsheet{\tikzfig{1}{0.5}{eg-delins-loi-left}~~~\step~~~\tikzfig{1}{0.5}{eg-delins-loi-right}}$$
   Dually, every wire in a positive area can be severed in two, capping off the
   newly created ends with two binders (\rsf{Deletion}):
-  $$\tikzfig{1}{0.5}{eg-delins-loi-left}~~~\step~~~\tikzfig{1}{0.5}{eg-delins-loi-right}$$
+  $$\tikzfig{1}{0.5}{eg-delins-loi-right}~~~\step~~~\tikzfig{1}{0.5}{eg-delins-loi-left}$$
   By reading the rules from right to left --- i.e. in \emph{proof search} mode,
   \rsf{Insertion} and \rsf{Deletion} on LoI can be understood as capturing
   respectively the operations of \emph{anti-unification} and \emph{unification}
-  on two variables. That is, adding a wire between two disconnected binders $x$
-  and $y$ is equivalent in purpose to substituting $x$ for $y$ (or $y$ for $x$)
-  in every spot/predicate connected by a LoI to $y$ (resp. $x$); while severing
-  a wire connected to a binder $z$ in two parts capped by binders $x$ and $y$
-  amounts to partitioning the set of spots connected to $z$ in two sets
-  $\{P_i\}$ and $\{Q_j\}$, and substituting $x$ for $z$ in every $P_i$, and $y$
-  for $z$ in every $Q_j$. Unification and anti-unification are the heart of many
-  (semi-)decision procedures implemented in automated and interactive theorem
-  provers; thus it is remarkable that they constitute core illative principles
-  of \sys{Beta}.
+  on two variables. That is:
+  \begin{itemize}
+    \item[\textbf{Unification}] adding a wire between two disconnected binders $x$
+  and $y$ is equivalent in purpose to substituting $x$ for $y$ (resp. $y$ for
+  $x$) in every spot/predicate connected by a LoI to $y$ (resp. $x$);
+    \item[\textbf{Anti-unification}] while severing a wire connected to a binder
+  $z$ in two parts capped by binders $x$ and $y$ amounts to partitioning the set
+  of spots connected to $z$ in two sets $\{P_i\}$ and $\{Q_j\}$, and
+  substituting $x$ for $z$ in every $P_i$, and $y$ for $z$ in every $Q_j$.
+  \end{itemize}
+  Unification and anti-unification are the heart of many (semi-)decision
+  procedures implemented in automated and interactive theorem provers; thus it
+  is remarkable that they constitute a core illative principle of \sys{Beta}.
 
 \end{description}
 
@@ -1798,11 +1803,11 @@ in \sys{Beta}, by reducing the graph associated to the formula
     \exists z. \socrates(z) \land \mortal(z) \label{eq:socrates-mortal-fo}
   \end{array}
 \end{equation}
-to the empty $\SA$. Again, we inverse the direction of arrows in inference
-steps, to follow the proof search reading of rules. Note that in many steps, we
-add or remove some teridentities and binders without further justification:
-these correspond to splits, merges and rewirings of LoI, and a more rigorous set
-of equations describing these operations can be found in \cite[Section 3: ``The
+to the empty $\SA$. Again, we invert the direction of arrows in inference steps,
+to follow the proof search reading of rules. Note that in many steps, we add or
+remove some teridentities and binders without further justification: these
+correspond to splits, merges and rewirings of LoI, and a more rigorous set of
+equations describing these operations can be found in \cite[Section 3: ``The
 algebra of lines of identity'']{pietarinen_compositional_2020}.
 
 The essence of the syllogism lies in the instantiation of the universally
@@ -1860,9 +1865,9 @@ simple:
 \end{enumerate}
 Thus for instance, both the first and second graphs in
 \reffig{eg-socrates-mortal} would be represented by the graph of
-\reffig{eg-socrates-mortal-var}. In fact, Peirce already had the idea to use
-variables instead of LoI, which he called \emph{Selectives}, in order to avoid
-the ambiguity of lines of identity crossing cuts
+\reffig{eg-socrates-mortal-var}. In fact, Peirce already had the idea to use a
+name-based syntactic device similar to variables, which he called
+\emph{Selectives}, in order to avoid the ambiguity of LoI crossing cuts
 \cite[p.~531]{peirce_prolegomena_1906}:
 \begin{quote}
 A Ligature crossing a Cut is to be interpreted as unchanged in meaning by
@@ -1873,8 +1878,8 @@ produced two Instances of a Proper Name nowhere else used; such a Proper name
 Thus he already identified the problem of readability stemming from having too
 many wires crossing eachother, a well-known concern in the design of graphical
 programming languages. This is to be opposed to critics of the syntax of EG such
-as Quine, who invented a notation similar to the lines of identity, and deemed
-it ``too cumbersome for practical use'' \cite[p.~125]{Roberts+1973}.
+as Quine, who devised a notation similar to LoI, and deemed it ``too cumbersome
+for practical use'' \cite[p.~125]{Roberts+1973}.
 
 \paragraph{Bridges} 
 
@@ -1912,7 +1917,8 @@ fact \cite{noauthor_alfred_2023}:
 \begin{quote}
   Kempe (1886) revealed a rather marked philosophical bent, and much influenced
 Charles Sanders Peirce. Kempe also discovered what are now called multisets,
-although this fact was not noted until long after his death.
+although this fact was not noted until long after his death
+\sidecite{kempe_i_1997}\sidecite{kempe-search}.
 \end{quote}
 In fact, we can also give a multiset formalization of the syntax of graphs in
 \sys{Beta} extending that of \refsec{multisets}, and based on the previous idea
@@ -1975,7 +1981,7 @@ pair formed by a sprinkler and a multiset of nodes is called a \emph{garden}.
   \labfig{eg-socrates-mortal-garden}
 \end{marginfigure}
 
-As already mentioned earlier, the garden syntax for $\beta$-graphs quotients the
+As already suggested earlier, the garden syntax for $\beta$-graphs quotients the
 LoI syntax: the first \rsf{Deiteration} step in \reffig{eg-socrates-mortal}
 cannot be performed in the garden syntax, because its premiss and conclusion are
 represented by the same graph. In fact, both \rsf{Iteration} and
@@ -1983,9 +1989,9 @@ represented by the same graph. In fact, both \rsf{Iteration} and
 binders, that results from the endoporeutic reading of graphs. Then it only
 remains to account for \rsf{Insertion} and \rsf{Deletion} on LoI, which is done
 by capturing our intuition relating these principles to \emph{unification} in
-the rules \rsf{Unif{\da}} and \rsf{Unif{\ua}} of \reffig{beta},
-respectively. Thus the inductive version of \sys{Beta} is obtained by simply
-adding these two rules to those of \sys{Alpha} introduced in \reffig{alpha}.
+the rules \rsf{Unif{\da}} and \rsf{Unif{\ua}} of \reffig{beta}, respectively.
+Thus the inductive version of \sys{Beta} is obtained by simply adding these two
+rules to those of \sys{Alpha} introduced in \reffig{alpha}.
 
 \reffig{eg-socrates-mortal-garden} gives a derivation of Aristotle's syllogism
 in this system. Even though we do not apply the \rsf{Deit} rule anymore compared
