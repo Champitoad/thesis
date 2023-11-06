@@ -7,8 +7,8 @@ blue, and all three colors were represented. A statistician once visited the
 garden and made the observation that whatever three flowers you picked, at least
 one of them was bound to be red. A second statistician visited the garden and
 made the observation that whatever three flowers you picked, at least one was
-bound to be yellow. Two logic students heard about this and got into an ar-
-gument. The first student said: "It therefore follows that whatever three
+bound to be yellow. Two logic students heard about this and got into an
+argument. The first student said: "It therefore follows that whatever three
 flowers you pick, at least one is bound to be blue, doesn't it?" The second
 student said: "Of course not!". Which student was right, and why?
 }{\textbf{Raymond Smullyan}, \textit{The Flower Garden}, 1985}
@@ -16,47 +16,47 @@ student said: "Of course not!". Which student was right, and why?
 We introduce the \emph{flower calculus}, a novel proof system for intuitionistic
 predicate logic based on syntactic objects called \emph{flowers}. We start by
 explaining how flowers stem from considerations in graphical logic, and more
-specifically from a constructivization of the \emph{existential graphs} of C. S.
-Peirce proposed by A. Oostra \sidecite[12.5em]{oostra_graficos_2010}. Then we
-present our inductive syntax for flowers, reminiscent at the same time of the
+specifically from an intuitionistic variant of the \emph{existential graphs} of
+C. S. Peirce proposed by A. Oostra \sidecite[12.5em]{oostra_graficos_2010}. Then
+we present our inductive syntax for flowers, reminiscent at the same time of the
 nested sequents of deep inference proof theory, and the geometric formulas of
 categorical logic. A salient feature of our calculus inherited from EG, is that
 it is \emph{fully iconic}: it dispenses completely with the traditional notion
 of symbolic formula, operating instead as a rewriting system on flowers
 containing only atomic predicates. We also propose a notion of proof geared
 towards analyticity results à la Gentzen, suggesting new rules absent from other
-works on existential graphs. This allows us to prove admissibility theorems for
-many structural rules, including Peirce's erasure rule which is a variant of
-Gentzen's cut rule. These results are obtained as a consequence of our soundness
-and completeness proofs with respect to Kripke semantics, in the spirit of the
+works on intuitionistic EG. This allows us to prove admissibility theorems for
+many rules, including Peirce's deletion rule which is a variant of Gentzen's cut
+rule. These results are obtained as a consequence of our soundness and
+completeness proofs with respect to Kripke semantics, in the spirit of the
 \emph{normalization-by-evaluation} technique \sidecite{NbE}. Furthermore, the
 kernel of rules targetted by completeness is fully invertible, a desirable
 property in both automated and interactive proof search.
 
 The chapter is organized as follows: in \refsec{Flowers}, we explain how to
-obtain the intuitionistic variant of EG put forth by A. Oostra
-\cite{oostra_graficos_2010} through a subtle topological distinction in the
-graphical representation, which can be illustrated metaphorically by drawing the
-graphs as \emph{flowers}. In \refsec{Calculus}, we introduce the full set of
-inference rules of the flower calculus as well as our notion of proof, and prove
-a few syntactic properties, including a deduction theorem. In
-\refsec{Semantics}, we give a direct Kripke semantics to flowers, avoiding the
-need for translations to and from formulas. In \refsec{Soundness}, we show that
-the rules of the flower calculus are valid with respect to our Kripke semantics,
-and in \refsec{Completeness} we identify a complete fragment of the system where
-all rules are \emph{invertible}. This entails the admissibility of the rest of
-the rules, and as a consequence the \emph{analyticity} of the system. We exploit
-these properties in \refsec{flowers-search} by describing an algorithm for fully
-automated proof search in the propositional fragment, that we conjecture to be
-complete. Then in \refsec{flowers-prover} we give an overview of the Flower
-Prover, a prototype of GUI in the Proof-by-Action paradigm whose actions map
-directly to the rules of the flower calculus, and which integrates nicely with
-our search procedure. In \refsec{flowers-curryhoward}, we briefly sketch some
-ideas for a Curry-Howard correspondence, where flowers and actions for
-manipulating them are identified respectively with \emph{normal} and
-\emph{neutral} terms of the $\lambda$-calculus. We conclude in
-\refsec{Conclusion} by a comparison with some related works, and a discussion of
-future works and applications that we envision.
+obtain the syntax of intuitionistic EG put forth by Oostra through a subtle
+topological distinction in their graphical representation, which can be
+illustrated metaphorically by drawing them as \emph{flowers}. In
+\refsec{Calculus}, we introduce the full set of inference rules of the flower
+calculus as well as our notion of proof, and prove a few syntactic properties,
+including a deduction theorem. In \refsec{Semantics}, we give a direct Kripke
+semantics to flowers, avoiding the need for translations to and from formulas.
+In \refsec{Soundness}, we show that the rules of the flower calculus are valid
+with respect to our Kripke semantics, and in \refsec{Completeness} we identify a
+complete fragment of the system where all rules are \emph{invertible}. This
+entails the admissibility of all rules outside of this fragment, and as a
+consequence the \emph{analyticity} of the system. We exploit these properties in
+\refsec{flowers-search} by describing an algorithm for fully automated proof
+search in the propositional fragment, that we conjecture to be complete. Then in
+\refsec{flowers-prover} we give an overview of the Flower Prover, a prototype of
+GUI in the Proof-by-Action paradigm whose actions map directly to the rules of
+the flower calculus, and which integrates nicely with our search procedure. In
+\refsec{flowers-curryhoward}, we briefly sketch some ideas for a Curry-Howard
+correspondence, where flowers and actions for manipulating them are identified
+respectively with \emph{normal} and \emph{neutral} terms of the
+$\lambda$-calculus. We conclude in \refsec{Conclusion} by a comparison with some
+related works, and a discussion of future works and applications that we
+envision.
 
 % \section{Introduction}
 

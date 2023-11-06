@@ -87,6 +87,8 @@ recast lines of identity in a more traditional binder-based syntax.
 
 \section{\sys{Alpha} graphs}\labsec{alpha}
 
+\paragraph{Existential Graphs}
+
 Peirce designed in total three systems of EG, which he called respectively
 \sys{Alpha}, \sys{Beta} and \sys{Gamma}. They were invented chronologically in
 that order, which also captures their relationship in terms of complexity:
@@ -115,6 +117,8 @@ to this day, and might constitute the most esoteric part of his work.}.
 % \emph{judgment}, which was rehabilitated by Martin-Löf from the philosophy of
 % Kant \cite{Martin-Lof1996-MAROTM-7}, who was of great influence on Peirce's own
 % philosophy \cite{sep-peirce}.}.
+
+\paragraph{Sheet of Assertions}
 
 The most fundamental concept of \sys{Alpha} is the \emph{sheet of assertion},
 denoted by $\SA$ thereafter. It is the space where statements are scribed by the
@@ -149,6 +153,8 @@ $\top$.
 % is taken for granted at the outset by the Graphist and Interpreter''}.
 % \end{remark}
 
+\paragraph{Juxtaposition}
+
 As we know from natural deduction, asserting the truth of the conjunction $a
 \land b$ of two propositions $a$ and $b$, amounts to asserting \emph{both} the
 truth of $a$ and the truth of $b$. In \sys{Alpha}, there is no need to introduce
@@ -157,10 +163,12 @@ distinct locations on $\SA$:
 $$a~~~b$$
 More generally, one might consider any two portions $G$ and $H$ of $\SA$, and
 interpret their \emph{juxtaposition} $G~H$ as signifying that we assert the
-truth of their conjunction. This leads us to formulate the first fundamental
-principle of \sys{Alpha}:
-$$\text{\emph{Any portion of $\SA$ is a graph.}}$$
-In particular, the entire $\SA$ itself is a graph.
+truth of their conjunction.
+% This leads us to formulate the first fundamental principle of \sys{Alpha}:
+% $$\text{\emph{Any portion of $\SA$ is a graph.}}$$
+% In particular, the entire $\SA$ itself is a graph.
+
+\paragraph{Cuts}
 
 Asserting the truth of the negation $\neg a$ of a proposition $a$, amounts to
 \emph{denying} the truth of $a$. Using the original notation of Peirce, this is
@@ -177,6 +185,8 @@ arbitrary Jordan curves. This entails in particular that cuts cannot intersect
 each other, but can be freely nested inside each other. Then as for
 juxtaposition, one can replace $a$ by any graph $G$, i.e. any portion of $\SA$,
 as long as the cut does not intersect other cuts in $G$.
+
+\paragraph{Relationship with formulas}
 
 With just these two \emph{icons}, juxtaposition and cuts, one can therefore
 assert the truth of any proposition made up of conjunctions and negations, and
@@ -228,6 +238,8 @@ with $\{\land,\neg\}$.
 
 \section{Illative transformations}\labsec{illative}
 
+\paragraph{Deep inference}
+
 In order to have a proof system, one needs a collection of \emph{inference
 rules} for deducing true statements from other true statements. In \sys{Alpha},
 inference rules are implemented by what Peirce called \emph{illative
@@ -249,6 +261,8 @@ inference system.
   \caption{Drawing negative areas literally in negative}
   \labfig{our-neg-areas}
 \end{marginfigure}
+
+\paragraph{Polarity}
 
 Before introducing the rules, let us make a small change in the way we depict
 the graphs. The idea is that we want to visualize more clearly the
@@ -279,6 +293,8 @@ are attached to them as explicit labels.}.
   places or rotating the board by 180°, rather than by repainting laboriously
   each piece in the opposite color.
 \end{remark}
+
+\paragraph{Inference rules}
 
 Quite surprisingly, Peirce showed that one only needs five inference rules to get
 a \emph{strongly complete} system, in the sense that if the truth of a graph $G$
@@ -578,6 +594,8 @@ simplify a goal.
 
 \section{Illative atomicity}\labsec{atomicity}
 
+\paragraph{Insertions and Omissions}
+
 A remarkable feat of Peirce's rules, on which he insisted very much, is that
 they are only expressed in terms of \emph{insertions} and \emph{omissions} of
 graphs on $\SA$. He thought that those were the \emph{smallest} steps in which
@@ -590,13 +608,15 @@ insertions and omissions we could find were not logically \emph{sound}, whereas
 in \sys{Alpha} they are. This is quite promising, and prompts us to reevalute
 our conception of \emph{illative atomicity}, understood precisely as the
 definition of what it means for an inference step to be (the most)
-\emph{elementary}. Note that this should be distinguished from the notion of
-\emph{analyticity}, as popularized by Gentzen with the \emph{subformula
-property} in sequent calculus: the latter is concerned with the analysis of
-\emph{statements} into their constituents through inference rules, while here we
-are interested in the analysis of the inference rules themselves\sidenote{We
-will give a positive answer to the question of analyticity in \sys{Alpha} at the
-end of \refsec{eg-completeness}.}. This is a philosophically debatable question,
+\emph{elementary}.
+
+Note that this should be distinguished from the notion of \emph{analyticity}, as
+popularized by Gentzen with the \emph{subformula property} in sequent calculus:
+the latter is concerned with the analysis of \emph{statements} into their
+constituents through inference rules, while here we are interested in the
+analysis of the inference rules themselves\sidenote{We will give a positive
+answer to the question of analyticity in \sys{Alpha} at the end of
+\refsec{eg-completeness}.}. This is a philosophically debatable question,
 because inference rules are usually posited as axioms in a deductive system, and
 are thus by definition the smallest constituents of proofs. The only other
 logician we know of who attempted to give a non-trivial account of illative
@@ -604,6 +624,8 @@ atomicity is J.-Y. Girard. In fact it can be argued that it is the principal
 motivation behind most of his works starting from linear logic, which became
 explicit in ludics with his slogan ``From the rules of logic to the logic of
 rules'' \cite{girard_locus_2001}.
+
+\paragraph{Linearity}
 
 There is an intriguing remark by Peirce in \cite{peirce_prolegomena_1906} about
 the atomicity of the rules presented thus far, that seems to have gone unnoticed
@@ -624,6 +646,8 @@ Morgan dualities. Thus EG are closer (at least syntactically) to \emph{type
 theories}, which also take a negative operation (the arrow or dependent product
 type) as their sole primitive construct. This will be made more explicit in
 \refsec{flowers-curryhoward}.
+
+\paragraph{Interactivity and Locativity}
 
 Peirce then suggests a ``more scientific way'', where the principle of
 \rsf{Double{-}cut} is subsumed by a restricted variant of the principle of
@@ -674,6 +698,8 @@ logic, as part of a more general theory of \emph{meaning}: for Peirce it was his
 \emph{semeiotic}, stemming from his overarching doctrine of \emph{pragmaticism}
 \cite{sep-peirce}; for Girard it was the theory of programming languages and
 their semantics.}.
+
+\paragraph{The more scientific way}
 
 Let us now go back to the modified (de)iteration principle proposed by Peirce.
 With our formalization of graphs as multisets, we can give a more rigorous
@@ -1920,14 +1946,15 @@ Charles Sanders Peirce. Kempe also discovered what are now called multisets,
 although this fact was not noted until long after his death
 \sidecite{kempe_i_1997}\sidecite{kempe-search}.
 \end{quote}
-In fact, we can also give a multiset formalization of the syntax of graphs in
-\sys{Beta} extending that of \refsec{multisets}, and based on the previous idea
-of replacing teridentities by variables. Every area will now be equipped with a
-set of binders, in addition to the multiset of nodes (i.e. atoms and cuts).
-Anticipating our flower metaphor of \refch{flowers}, we call sets of binders
-\emph{sprinklers}, which can be imagined as watering spots on their hooks by
-sending water through the (now invisible) LoI, seen as hoses. Naturally, the
-pair formed by a sprinkler and a multiset of nodes is called a \emph{garden}.
+As it turns out, we can also give a multiset formalization of the syntax of
+graphs in \sys{Beta} extending that of \refsec{multisets}, and based on the
+previous idea of replacing teridentities by variables. Every area will now be
+equipped with a set of binders, in addition to the multiset of nodes (i.e. atoms
+and cuts). Anticipating our flower metaphor of \refch{flowers}, we call sets of
+binders \emph{sprinklers}, which can be imagined as watering spots on their
+hooks by sending water through the (now invisible) LoI, seen as hoses.
+Naturally, the pair formed by a sprinkler and a multiset of nodes is called a
+\emph{garden}.
 
 \begin{definition}[$\beta$-graph]\labdef{beta-graph} 
   
@@ -1953,13 +1980,11 @@ pair formed by a sprinkler and a multiset of nodes is called a \emph{garden}.
 \begin{example}
   The graph of \reffig{eg-socrates-mortal-var} can be written in textual
   notation as the following expression:
-  $$
-  \begin{align}
+  \begin{align*}
     [&x \cdot \socrates(x),\human(x), \\
      &[y \cdot \human(y),[{} \cdot \mortal(y)]], \\
      &[z \cdot \socrates(z),\mortal(z)]]
-  \end{align}
-  $$
+  \end{align*}
   Note that the `$\cdot$' operator for constructing gardens has lower precedence
   than the `$,$' operator for juxtaposition of graphs. Thus the expression $x
   \cdot \socrates(x),\human(x)$ is to be read as $x \cdot

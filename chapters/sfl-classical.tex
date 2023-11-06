@@ -237,8 +237,8 @@ total size of the sequent decreases strictly after each rule application.
 When dealing with quantifiers, the situation is not so simple: if one wants
 invertible introduction rules, it is necessary to duplicate the quantified
 formula being instantiated, which can be seen as the root cause of
-undecidability in predicate logic as noted by Girard\sidenote{Section 3.3.2 of
-The Blind Spot \cite{girard:hal-01322183}.}. This is already what happens in
+undecidability in predicate logic as noted by
+Girard\cite[Section~3.3.2]{girard:hal-01322183}. This is already what happens in
 Actema for the universal quantifier: dropping a term $t$ on a blue item $\forall
 x. A$ will produce a new hypothesis $\subst{A}{t}{x}$, while keeping the
 original $\forall x. A$ item. This corresponds to the invertible left
