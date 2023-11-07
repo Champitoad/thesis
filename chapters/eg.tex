@@ -600,19 +600,31 @@ A remarkable feat of Peirce's rules, on which he insisted very much, is that
 they are only expressed in terms of \emph{insertions} and \emph{omissions} of
 graphs on $\SA$. He thought that those were the \emph{smallest} steps in which
 reasoning could be dissected, making his system extremely appropriate for
-\emph{analytical} purposes \cite[Section~7.11]{Roberts+1973}. We already
-considered this question of decomposing logical inferences into their most
-elementary operations, when reflecting on the graphical presentation of \sys{BJ}
-at the end of \refsec{bubbles-graphical-rules}. In this setting, the most basic
-insertions and omissions we could find were not logically \emph{sound}, whereas
-in \sys{Alpha} they are. This is quite promising, and prompts us to reevalute
-our conception of \emph{illative atomicity}, understood precisely as the
-definition of what it means for an inference step to be (the most)
-\emph{elementary}.
+\emph{analytical} purposes. This is summarized in the following excerpt
+\cite[p.~533]{peirce_prolegomena_1906}:
+
+\begin{quote}
+  In the first place, the most perfectly analytical system of representing
+propositions must enable us to separate illative transformations into
+indecomposable parts. Hence, an illative transformation from any proposition, A,
+to any other, B, must in such a system consist in first transforming A into AB,
+followed by the transformation of AB into B. For an omission and an insertion
+appear to be indecomposable transformations and the only indecomposable
+transformations.
+\end{quote}
+
+We already considered this question of decomposing logical inferences into their
+most elementary operations, when reflecting on the graphical presentation of
+\sys{BJ} at the end of \refsec{bubbles-graphical-rules}. In this setting, the
+most basic insertions and omissions we could find were not logically
+\emph{sound}, whereas in \sys{Alpha} they are. This is quite promising, and
+prompts us to reevalute our conception of \emph{illative atomicity}, understood
+precisely as the definition of what it means for an inference step to be (the
+most) \emph{elementary}.
 
 Note that this should be distinguished from the notion of \emph{analyticity}, as
 popularized by Gentzen with the \emph{subformula property} in sequent calculus:
-the latter is concerned with the analysis of \emph{statements} into their
+the latter is concerned with the analysis of \emph{propositions} into their
 constituents through inference rules, while here we are interested in the
 analysis of the inference rules themselves\sidenote{We will give a positive
 answer to the question of analyticity in \sys{Alpha} at the end of
@@ -627,25 +639,25 @@ rules'' \cite{girard_locus_2001}.
 
 \paragraph{Linearity}
 
-There is an intriguing remark by Peirce in \cite{peirce_prolegomena_1906} about
-the atomicity of the rules presented thus far, that seems to have gone unnoticed
-in the literature on EG. On pp.~536--537, Peirce argues that the principle of
-\rsf{Double{-}cut} ``cannot be assumed as an undeduced Permission'' --- i.e. a
-primitive rule of the system, because the area inside the inner cut becomes
-identified with the area outside the outer cut when the double cut is removed,
-which ``is not strictly an Insertion or a Deletion''. Another way to view this,
-is that it is the only \emph{linear} rule of the system, in the sense that the
-premiss and conclusion contain exactly the same atomic graphs. Contrast this
-with linear logic, which instead takes linearity as the criterion for illative
-atomicity, as exemplified by the linear decomposition of implication $A \limp B
-\defeq \oc A \multimap B$. This might be the consequence of an opposite
-treatment given to \emph{negation}: while in EG it is the only primitive
-constructor of the system --- remember that the only way to increase the depth
-of a graph is with a cut, in LL negation is the only defined notion through De
-Morgan dualities. Thus EG are closer (at least syntactically) to \emph{type
-theories}, which also take a negative operation (the arrow or dependent product
-type) as their sole primitive construct. This will be made more explicit in
-\refsec{flowers-curryhoward}.
+There is an intriguing remark by Peirce in
+\cite[pp.~536--537]{peirce_prolegomena_1906} about the atomicity of the rules
+presented thus far, that seems to have gone unnoticed in the literature on EG.
+Indeed, Peirce argues that the principle of \rsf{Double{-}cut} ``cannot be
+assumed as an undeduced Permission'' --- i.e. a primitive rule of the system,
+because the area inside the inner cut becomes identified with the area outside
+the outer cut when the double cut is removed, which ``is not strictly an
+Insertion or a Deletion''. Another way to view this, is that it is the only
+\emph{linear} rule of the system, in the sense that the premiss and conclusion
+contain exactly the same atomic graphs. Contrast this with linear logic, which
+instead takes linearity as the criterion for illative atomicity, as exemplified
+by the linear decomposition of implication $A \limp B \defeq \oc A \multimap B$.
+This might be the consequence of an opposite treatment given to \emph{negation}:
+while in EG it is the only primitive constructor of the system --- remember that
+the only way to increase the depth of a graph is with a cut, in LL negation is
+the only defined notion through De Morgan dualities. Thus EG are closer (at
+least syntactically) to \emph{type theories}, which also take a negative
+operation (the arrow or dependent product type) as their sole primitive
+construct. This will be made more explicit in \refsec{flowers-curryhoward}.
 
 \paragraph{Interactivity and Locativity}
 
