@@ -34,7 +34,7 @@ kernel of rules targetted by completeness is fully invertible, a desirable
 property in both automated and interactive proof search.
 
 The chapter is organized as follows: in \refsec{Flowers}, we explain how to
-obtain the syntax of intuitionistic EG put forth by Oostra through a subtle
+obtain the intuitionistic syntax of EG put forth by Oostra through a subtle
 topological distinction in their graphical representation, which can be
 illustrated metaphorically by drawing them as \emph{flowers}. In
 \refsec{Calculus}, we introduce the full set of inference rules of the flower
@@ -137,50 +137,190 @@ envision.
 
 \section{Intuitionistic existential graphs}\labsec{Flowers}
 
-\todo{ explain how to obtain the intuitionistic variant of EG put forth by A.
-Oostra \cite{oostra_graficos_2010} through a subtle topological distinction
-added to the graphical representation, which reflects in the inductive syntax. A
-harmless modification to the way of drawing the intuitionistic graphs then
-justifies the metaphorical terminology of our calculus.}
+\paragraph{The Scroll}
 
-\subsection{The n-ary scroll}
+In \refsec{alpha}, we presented the syntax of existential graphs (EG) as
+stemming from two fundamental icons: the \emph{sheet of assertions} ($\SA$),
+with its ability to represent the conjunction of assertions through
+\emph{juxtaposition}, and \emph{cuts} in $\SA$ that signify the denial or
+negation of assertions. However as noted in \refremark{eg-entitative}, the first
+interpretation of juxtaposition proposed by Peirce was that of
+\emph{disjunction}, in his system of \emph{entitative graphs}. According to him,
+the illative transformations of EG are a necessary consequence of the
+\emph{conjunctive} interpretation of juxtaposition, as witnessed by the
+following excerpt \cite[p.~533]{peirce_prolegomena_1906}:
 
-\textbf{TODO:} Mention that Peirce had a topological intuition of currying, as
-witnessed by the passage in page 535 of \cite{peirce_prolegomena_1906}:
+\begin{quote}
+If you carefully examine the above conventions, you will find that they are
+simply the development, and excepting in their insignificant details, the
+inevitable result of the development of the one convention that if any Graph, A,
+asserts one state of things to be real and if another graph, B, asserts the same
+of another state of things, then AB, which results from setting both A and B
+upon the sheet, shall assert that both states of things are real.
+\end{quote}
+
+He goes on to notice:
+
+\begin{quote}
+   This was not the case with my first system of Graphs, described in Vol. VII
+of The Monist, which I now call Entitative Graphs. But I was forced to this
+principle by a series of considerations which ultimately arrayed themselves into
+an exact logical deduction of all the features of Existential Graphs.
+\end{quote}
+
+Thus the conjunctive reading of juxtaposition itself stemmed from ``a series of
+considerations'' that ``forced'' Peirce to adopt it. While in this article he
+does not give the full ``exact logical deduction of all the features of
+Existential Graphs'', he exposes in some details the initial and determining
+insight that kickstarted the whole development: the discovery of the icon called
+the \emph{scroll}. Again, I will let Peirce speak for
+himself \cite[pp.~533--534]{peirce_prolegomena_1906}:
+
+\begin{quote}
+  Accordingly, since logic has primarily in view argument, and since the
+conclusiveness of an argument can never be weakened by adding to the premisses
+or by subtracting from the conclusion, I thought I ought to take the general
+form of argument as the basal form of composition of signs in my
+diagrammatization; and this necessarily took the form of a ``scroll'', that is
+[...] a curved line without contrary flexure and returning into itself after
+once crossing itself, and thus forming an outer and an inner ``close''.
+\end{quote}
+
+\reffig{scroll} shows our own drawing of the scroll as it appears in
+\cite[Fig.~5.]{peirce_prolegomena_1906}. Peirce defines its intended meaning
+like so \cite[p.~534--535]{peirce_prolegomena_1906}:
+
+\begin{quote}
+  I shall call the outer boundary the Wall; and the inner, the Fence. In the
+outer I scribed the Antecedent, in the inner the Consequent, of a Conditional
+Proposition de inesse. [...][Thus the meaning of \reffig{scroll} is] that if
+both A and B are true, then both C and D are true. [...] a Conditional de inesse
+(unlike other conditionals) only asserts that either the antecedent is false or
+the consequent is true. 
+\end{quote}
+
+This shows the classical view of Peirce on EG, who interprets the scroll as
+signifying the \textit{conditional de inesse} --- also called nowadays
+\emph{material implication}, and defined here in its disjunctive form, expressed
+symbolically by $A \limp B \defeq \neg A \lor B$.
+
+\paragraph{Empty Antecedant}
+
+A first principle that Peirce derives from the scroll is the following
+\cite[p.~534]{peirce_prolegomena_1906}:
+
+\begin{quote}
+  [...] any insertion being permitted in the outer close, and any omission from
+the inner close. By applying the former clause of this rule to
+[\reffig{empty-antecedant}], we see that this scroll with the outer close void,
+justifies the assertion that if no matter what be true, C is in any case true;
+so that the two walls of the scroll, when nothing is between them, fall
+together, collapse, disappear, and leave only the contents of the inner close
+standing, asserted, in the open field.
+\end{quote}
+
+This first form of ``collapsing of walls'' is called the \emph{Rule of Empty
+Antecedant} in \cite{minghui_graphical_2019}, and is illustrated in
+\reffig{empty-antecedant}. Symbolically, it corresponds to the equivalence $\top
+\limp A \semequiv A$. The reader might be tempted to see the ``former clause''
+that permits any insertion in the outer close as a special case of the Insertion
+principle of \sys{Alpha} (\refsec{alpha}). However, we stress again that Peirce
+first identified this rule as a feature of the scroll, seen as the diagrammatic
+embodiment of the ``general form of argument'' mentioned in a previous excerpt.
+The principle of Insertion only followed as a subsequent generalization,
+stemming from the analysis of the scroll into two nested cuts
+\cite[p.~535]{peirce_prolegomena_1906}:
+
+\begin{quote}
+  [...] and you will further see that a scroll is really nothing but one oval
+within another.
+\end{quote}
+
+\begin{remark}
+  It is interesting to note that the rule of Empty Antecedant is not seen as
+  primitive by Peirce, but as a consequence of a \emph{dynamic potential} of the
+  scroll: namely, the ability to insert anything in the outer close, at will.
+  This is another manifestation of Peirce's concern for the question of
+  \emph{illative atomicity}, and is to be related to the elimination of the
+  Double-cut rule discussed in \refsec{atomicity}.
+\end{remark}
+
+\paragraph{Currying}
+
+Peirce was aware of the phenomenon of \emph{currying}, usually expressed
+symbolically by the equivalence $A \limp B \limp C \semequiv A \land B \limp C$,
+as witnessed by the following passage \cite[p.~535]{peirce_prolegomena_1906}:
 \begin{quote}
 Now, Reader, if you will just take pencil and paper and scribe the scroll
 expressing that if $A$ be true, then it is true that if $B$ be true $C$ and $D$
-are true, and compare this with Fig. 5, which amounts to the same thing in
-meaning, you will see that scroll walls with a void between them collapse even
-when they belong to different scrolls [...]
+are true [\reffig{scroll-curried}], and compare this with [\reffig{scroll}],
+which amounts to the same thing in meaning, you will see that scroll walls with
+a void between them collapse even when they belong to different scrolls.
 \end{quote}
-Then he goes on to notice:
-\begin{quote}
-[...] and you will further see that a scroll is really nothing but one oval
-within another. Since a Conditional de inesse (unlike other conditionals) only
-asserts that either the antecedent is false or the consequent is true [...]
-\end{quote}
-The latter shows the classical view of Peirce on EG, who interprets the scroll
-as signifying the \textit{conditional de inesse}, also called nowadays
-\emph{material implication}. It is interesting that he comes to this conclusion
-by a topological argument, noting that the ``collapsing of walls'' between the
-two scrolls follows from the scroll beeing composed of two nested ovals. If we
-reject this interpretation by requiring that the Fence (the inner oval) stays
-glued to the Wall (the outer oval), then one cannot derive currying through the
-topological rule of double-cut, precisely because the system only permits to
-collapse a Wall and a Fence continuously joined in the same scroll. Fear not
-however, as one can still derive the currying and uncurrying laws in this
-intuitionistic setting, but through the addional use of insertion/deletion and
-(de)iteration rules, as depicted in \reffig{eg-currying}. Still, we find that
-Peirce's insight on the topological explanation of currying in the classical
-setting is noteworthy.
+It is remarkable that he comes to this conclusion by a topological argument,
+noting that this second form of ``collapsing of walls'', now involving two
+different scrolls, follows from the scroll beeing composed of two nested cuts.
+If we reject this interpretation by requiring that the Fence (the inner oval)
+stays glued to the Wall (the outer oval), then one cannot derive currying
+through the rule of double-cut, precisely because the system only permits to
+collapse a Wall and a Fence continuously joined in the same scroll, by the
+weaker rule of Empty Antecedant. Fear not however, as one can still derive the
+currying and uncurrying laws in this intuitionistic setting, but through the
+addional use of insertion/deletion and (de)iteration rules, as depicted in
+\reffig{eg-currying}. But we find that Peirce's insight on the topological
+explanation of currying in the classical setting remains noteworthy.
 
-\subsection{Flowers}
+\paragraph{The n-ary scroll}
 
-\todo{Mention Oostra's extended (de)iteration rule, that allows to
-duplicate/merge identical petals. But it is not \emph{deep} (``Cualquier lazo
-puede iterarse adherido \emph{al mismo corte}'', p. 46 of
-\cite{oostra_graficos_2010}), and thus seems a bit arbitrary.}
+In \sidecite{oostra_graficos_2010}, A. Oostra proposes to take the above remark
+seriously, by reifying scrolls as a primitive icon of EG (``\emph{rizos}'' in
+Spanish), that exist alongside the usual cuts (``\emph{cortes}''), and are
+distinguished from them. In fact he goes further than this, and proposes to
+generalize the scroll into an $n$-ary construction called the \emph{curl}
+(``\emph{bucle}''), where $n$ is the number of inner closes, called \emph{loops}
+(``\emph{lazos}''). \reffig{four-loops} shows an example of curl with $5$ loops.
+In \cite{minghui_graphical_2019}, the curl is simply called \emph{$n$-ary
+scroll}, and is analyzed into the outer area (that enclosed by the Wall) called
+the \emph{outloop}, and the inner areas (those enclosed by the $n$ Fences, i.e.
+the loops of Oostra) called the \emph{inloops}. Then the cuts and scrolls of
+Peirce are special cases of $n$-ary scrolls, respectively with $n = 0$ and $n =
+1$.
+
+\begin{remark}
+  Any $n$-ary scroll can be drawn by a \emph{continuous} movement of the pen,
+  producing a self-intersecting curve as described by Peirce in
+  \cite{peirce_prolegomena_1906}. This might be related to other manifestations
+  of the notion continuity in the semantics of intuitionistic logic, such as the
+  well-known Stone-Tarski interpretation of statements as topological spaces
+  \cite{stone_topological_1938}, and the interpretation of proofs as continuous
+  maps in the \emph{denotational semantics} of D. Scott
+  \cite{10.5555/218742.218744}. Before the advent of Oostra's intuitionistic EG,
+  Zalamea gave a detailed analysis of Peirce's philosophy of the
+  \emph{continuum}, how it relates to modern developments in mathematics, and
+  how it is embodied in existential graphs \cite{zalamea_peirces_2003}.
+\end{remark}
+
+Like the unary scroll, the $n$-ary scroll is to be read as an implication whose
+antecedant is the content of the outloop, and consequent the content of the
+inloops. The generalization then consists in taking the \emph{disjunction} of
+the contents of all inloops. Thus the $5$-ary scroll of \reffig{four-loops} is
+to be read as the formula $a \limp b \lor c \lor d \lor e \lor f$; and the
+$0$-ary scroll obtained by removing all inloops from the latter as $a \limp
+\bot$, since a $0$-ary disjunction is naturally evaluated to its neutral element
+$\bot$. This coincides with the intuitionistic reading of negation $\neg A
+\defeq A \limp \bot$, and is thus consistent with the interpretation of cuts as
+negations.
+
+\todo{ Include the figure from my slides distinguishing the interpretations of
+  the same graphs modulo the attachment of the inloops to the outer loop.}
+  
+\paragraph{Geometric formulas}
+
+\todo{ Give the general interpretation in propositional logic, then predicate
+  logic, and relate it to geometric formulas (need to find reference from Sonia
+  Marin). }
+
+\paragraph{Flowers}
 
 \section*{Syntax}
 
@@ -992,7 +1132,6 @@ calculus. We also explain how the user can opt in and out of various levels of
 automation based on our search procedure, similarly to what was described for
 the invertible bubble calculus of \refsec{invertible-calculus}.}
 
-
 \section{Towards a Curry-Howard correspondence}\labsec{flowers-curryhoward}
 
 \todo{ briefly sketch some ideas for a Curry-Howard correspondence, where
@@ -1023,32 +1162,41 @@ inherent dissymmetry in \emph{proof substitution}: the erasure of the negative
 $A$ can be interpreted as the operation $\subst{\pi_B}{\pi_A}{x}$, which
 substitutes every occurrence of the associated hypothesis $x$ in the proof
 $\pi_B$ of $B$ by the proof $\pi_A$ of the positive $A$.
-
 \todo{ Elaborate further on this computational aspect of EG. }
-
 \todo{ Investigate the ``scientific'' iteration rule of Peirce as a means to
 avoid the need for a computational interpretation of the \rsf{fence} rule. }
 
 
 \section{Conclusion}\labsec{Conclusion}
 
-\todo{ conclude by a comparison with some related works, and a discussion of
-future works and applications that we envision.}
-
 \subsection{Related works}
 
 \begin{description}
-  \item[Focusing proof search]
+  \item[Intuitionistic EG]
+    \textbf{TODO:} Mention Oostra's extended (de)iteration rule, that allows to
+    duplicate/merge identical petals. But it is not \emph{deep} (``Cualquier
+    lazo puede iterarse adherido \emph{al mismo corte}'', p. 46 of
+    \cite{oostra_graficos_2010}), and thus seems a bit arbitrary. More
+    generally, Oostra tries to stay close to the original system \sys{Alpha}
+    motivated by illative atomicity concerns, by having all rules expressed in
+    terms of insertions and omissions; while we rather focus on having an
+    invertible and analytic calculus (natural fragment), that is well-suited as
+    the basis for a semi-automated theorem proving interface. For instance, the
+    proof of $(A \lor B) \land (A \limp C) \land (B \limp C) \limp C$ in our
+    system is much shorter than in Oostra's, thanks to the powerful \rsf{srep}
+    rule. }
+  \item[Proof search]~\\
     \begin{itemize}
       \item Iteration/Pollination rule = Absorption rule of focused sequent
-        calculus \sidecite{andreoli_logic_1992}.
-      \item Geometric formulas and synthetic rules (Sonia Marin)
+        calculus \sidecite{andreoli1992}.
+      \item Coherent formulas and synthetic rules \sidecite{marin_axioms_2022}
+      \item Good properties of coherent logic for semi-automated proof search
+        \sidecite{bezem_automating_2005}
     \end{itemize}
-  \item[Normal forms of formulas]
+  \item[Normal forms of formulas]~\\
     \begin{itemize}
-      \item Geometric formulas (again)
       \item The exponential normal form of Ilik based on Tarski's highschool
-  identities \sidecite{nannestad_intuitionistic_2019}. Notice the opposite
+  identities \sidecite{brock-nannestad_intuitionistic_2019}. Notice the opposite
   tradeoff compared to the flower calculus: fully \emph{non}-invertible, but
   linear rules (and both are applicable deeply). The authors also noticed the
   connection with geometric formulas and deep inference.
@@ -1063,7 +1211,7 @@ was ``to enable us to separate reasoning into its smallest steps so that each
 one may be examined by itself'' (Ms 455, p. 2). The aim was not to facilitate
 reasoning, but to facilitate the study of reasoning.''}}.
 
-\todo{ explain how we depart from this conception, i.e. by focusing on iteration
+\textbf{TODO:} explain how we depart from this conception, i.e. by focusing on iteration
 (and more generally invertible) rules instead of insertion/erasure rules (which
 are even shown to be admissible!), and replacing lines of identity by the more
 complex apparatus of substitution. Which explains why we believe \emph{the
