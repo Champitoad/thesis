@@ -1,0 +1,25 @@
+\begin{tikzpicture}
+\coordinate (pis1) at (0,0);
+\DrawFlowers{{
+    center = "pis1",
+    pistil = { size = 1.5 },
+    petal_size = 6,
+    petals = { {}, { name = "pet1" }, {}, { name = "pet2" } },
+}}
+\node at (pet2) {$y_2~~~~\Phi$};
+\node at (pis1) {$
+  \begin{array}{cc}
+    x_1 & x_2 \\
+    \phi_1 & \phi_2
+  \end{array}
+$};
+\node at ($(pet1) + (0,1.5)$) {$y_1~~\psi$};
+\coordinate (pis2) at ($(pet1) - (0.5,0.5)$);
+\DrawFlowers{{
+    center = "pis2",
+    pistil = { size = 0.75 },
+    petals = { {}, {}, {}, { name = "pet3" } },
+}}
+\node at (pis2) {$\gamma$};
+\node at (pet3) {$\Delta$};
+\end{tikzpicture}

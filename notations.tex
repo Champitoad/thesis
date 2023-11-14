@@ -38,6 +38,14 @@
 % ---------- Notations ----------
 % -------------------------------
 
+% \xleftrightarrow without mathtools
+\makeatletter
+\newcommand\xleftrightarrow[2][]{%
+  \ext@arrow 9999{\longleftrightarrowfill@}{#1}{#2}}
+\newcommand\longleftrightarrowfill@{%
+  \arrowfill@\leftarrow\relbar\rightarrow}
+\makeatother
+
 % Small line break
 \newcommand{\sbr}{~\\\vspace{-1em}}
 
@@ -100,6 +108,7 @@
 
 \newcommand{\xlstep}[1]{\xrightharpoonup{#1}}
 \newcommand{\xstep}[1]{\xrightarrow{#1}}
+\newcommand{\xinvstep}[1]{\xleftrightarrow{#1}}
 \newcommand{\xsteps}[1]{\xrightarrow{#1}\!\!\raisebox{3pt}[3pt]{\small$\ast$}~}
 
 \newcommand{\deriv}[3]{#1 : #2 \steps #3}
@@ -330,7 +339,7 @@
 
 \newcommand{\interp}[1]{\llbracket #1 \rrbracket}
 
-\newcommand{\chyp}[2]{#1 \lessdot #2}
+\newcommand{\chyp}[2]{#1 \succ #2}
 
 \newcommand{\parity}[1]{\mathsf{par}(#1)}
 
@@ -348,7 +357,7 @@
 
 \newcommand{\closed}[1]{\underline{#1}}
 \newcommand{\restr}[2]{#1 |_{#2}}
-\newcommand{\update}[3]{#1 |_{#2} #3}
+\newcommand{\update}[3]{#1 \mathbin{|_{#2}} #3}
 \newcommand{\idsubst}{\mathsf{1}}
 \newcommand{\cstsubst}[1]{\overline{#1}}
 

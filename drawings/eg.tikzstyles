@@ -10,6 +10,7 @@
 \tikzstyle{westhook}=[fill=white, draw=black, shape=diamond, tikzit shape=circle, anchor=west, inner sep=1pt]
 \tikzstyle{westpred}=[fill=none, draw=none, shape=circle, anchor=west]
 \tikzstyle{binder}=[fill=black, draw=black, shape=circle, inner sep=0pt, minimum size=3pt]
+\tikzstyle{scroll anchor}=[fill={rgb,255: red,255; green,111; blue,0}, draw={rgb,255: red,255; green,111; blue,0}, shape=circle, inner sep=0pt, minimum size=3pt]
 
 % Edge styles
 \tikzstyle{pos area}=[-, fill=pbg, draw=black, tikzit fill=white, tikzit draw=black]

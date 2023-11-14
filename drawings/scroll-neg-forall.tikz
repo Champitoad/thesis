@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (10) at (2.5, 0) {};
+		\node [style=none] (9) at (-2.5, 0) {};
+		\node [style=none] (2) at (-2, 0) {};
+		\node [style=none] (3) at (2, 0) {};
+		\node [style=none] (4) at (-0.25, 0) {};
+		\node [style=none] (5) at (2, 0) {};
+		\node [style=none] (6) at (-1.1, 0) {$x$};
+		\node [style=none] (7) at (0.925, 0) {$p(x)$};
+		\node [style=scroll anchor] (8) at (2, 0) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=neg area] (10.center)
+			 to [bend right=90, looseness=1.25] (9.center)
+			 to [bend right=90, looseness=1.25] cycle;
+		\draw [style=pos area] (3.center)
+			 to [bend right=90, looseness=1.25] (2.center)
+			 to [bend right=90, looseness=1.25] cycle;
+		\draw [style=neg area] (5.center)
+			 to [bend right=90, looseness=1.25] (4.center)
+			 to [bend right=90, looseness=1.25] cycle;
+	\end{pgfonlayer}
+\end{tikzpicture}

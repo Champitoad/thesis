@@ -19,44 +19,49 @@ explaining how flowers stem from considerations in graphical logic, and more
 specifically from an intuitionistic variant of the \emph{existential graphs} of
 C. S. Peirce proposed by A. Oostra \sidecite[12.5em]{oostra_graficos_2010}. Then
 we present our inductive syntax for flowers, reminiscent at the same time of the
-nested sequents of deep inference proof theory, and the geometric formulas of
-categorical logic. A salient feature of our calculus inherited from EG, is that
-it is \emph{fully iconic}: it dispenses completely with the traditional notion
-of symbolic formula, operating instead as a rewriting system on flowers
-containing only atomic predicates. We also propose a notion of proof geared
-towards analyticity results à la Gentzen, suggesting new rules absent from other
-works on intuitionistic EG. This allows us to prove admissibility theorems for
-many rules, including Peirce's deletion rule which is a variant of Gentzen's cut
-rule. These results are obtained as a consequence of our soundness and
-completeness proofs with respect to Kripke semantics, in the spirit of the
+nested sequents of deep inference proof theory, and the geometric/coherent
+formulas of categorical logic. A salient feature of our calculus inherited from
+EG, is that it is \emph{fully iconic}: it dispenses completely with the
+traditional notion of symbolic formula, operating instead as a rewriting system
+on flowers containing only atomic predicates. We also propose a notion of proof
+geared towards analyticity results à la Gentzen, suggesting new rules absent
+from other works on intuitionistic EG. This allows us to prove admissibility
+theorems for many rules, including Peirce's deletion rule which is a variant of
+Gentzen's cut rule. These results are obtained as a consequence of our soundness
+and completeness proofs with respect to Kripke semantics, in the spirit of the
 \emph{normalization-by-evaluation} technique \sidecite{NbE}. Furthermore, the
 kernel of rules targetted by completeness is fully invertible, a desirable
-property in both automated and interactive proof search.
+property in both automated and interactive proof search. This is illustrated by
+our implementation of the Flower Prover, an early prototype of GUI for ITP that
+uses the rules of the flower calculus both for direct manipulation of flowers in
+its frontend, and automated simplification of goals in its backend.
 
-The chapter is organized as follows: in \refsec{Flowers}, we explain how to
-obtain the intuitionistic syntax of EG put forth by Oostra through a subtle
-topological distinction in their graphical representation, which can be
-illustrated metaphorically by drawing them as \emph{flowers}. In
+The chapter is organized as follows: in \refsec{IEG}, we retrace the origin of
+Oostra's syntax for intuitionistic EG (hereafter ``IEG'') as a natural
+generalization of the \emph{scroll}, an icon for implication introduced by
+Peirce that inspired the very creation of EG. In \refsec{Flowers}, we explain
+how flowers are really just a fun and metaphorical way to draw IEG, and proceed
+to give them an inductive, multiset-based syntax as in \refsec{multisets}. In
 \refsec{Calculus}, we introduce the full set of inference rules of the flower
 calculus as well as our notion of proof, and prove a few syntactic properties,
 including a deduction theorem. In \refsec{Semantics}, we give a direct Kripke
 semantics to flowers, avoiding the need for translations to and from formulas.
 In \refsec{Soundness}, we show that the rules of the flower calculus are valid
 with respect to our Kripke semantics, and in \refsec{Completeness} we identify a
-complete fragment of the system where all rules are \emph{invertible}. This
-entails the admissibility of all rules outside of this fragment, and as a
-consequence the \emph{analyticity} of the system. We exploit these properties in
-\refsec{flowers-search} by describing an algorithm for fully automated proof
-search in the propositional fragment, that we conjecture to be complete. Then in
-\refsec{flowers-prover} we give an overview of the Flower Prover, a prototype of
-GUI in the Proof-by-Action paradigm whose actions map directly to the rules of
-the flower calculus, and which integrates nicely with our search procedure. In
-\refsec{flowers-curryhoward}, we briefly sketch some ideas for a Curry-Howard
-correspondence, where flowers and actions for manipulating them are identified
-respectively with \emph{normal} and \emph{neutral} terms of the
-$\lambda$-calculus. We conclude in \refsec{Conclusion} by a comparison with some
-related works, and a discussion of future works and applications that we
-envision.
+complete fragment of the system where all rules are both \emph{analytic} and
+\emph{invertible}. This entails the admissibility of all rules outside of this
+fragment, and as a consequence the analyticity of the system. We exploit these
+properties in \refsec{flowers-search} by describing an algorithm for fully
+automated proof search in the propositional fragment, that we conjecture to be
+complete. Then in \refsec{flowers-prover} we give an overview of the Flower
+Prover, a prototype of GUI in the Proof-by-Action paradigm whose actions map
+directly to the rules of the flower calculus, and which integrates nicely with
+our search procedure. In \refsec{flowers-curryhoward}, we briefly sketch some
+ideas for a Curry-Howard correspondence, where flowers and actions for
+manipulating them are identified respectively with \emph{normal} and
+\emph{neutral} terms of the $\lambda$-calculus. We conclude in
+\refsec{Conclusion} by a comparison with some related works, and a discussion of
+future works and applications that we envision.
 
 % \section{Introduction}
 
@@ -135,7 +140,7 @@ envision.
 \todo{Make all usages of notations consistent with \reftab{letters}}
 
 
-\section{Intuitionistic existential graphs}\labsec{Flowers}
+\section{Intuitionistic existential graphs}\labsec{IEG}
 
 \paragraph{The Scroll}
 
@@ -186,9 +191,15 @@ diagrammatization; and this necessarily took the form of a ``scroll'', that is
 once crossing itself, and thus forming an outer and an inner ``close''.
 \end{quote}
 
-\reffig{scroll} shows our own drawing of the scroll as it appears in
-\cite[Fig.~5.]{peirce_prolegomena_1906}. Peirce defines its intended meaning
-like so \cite[p.~534--535]{peirce_prolegomena_1906}:
+\begin{marginfigure}
+  \includegraphics{scroll.png}
+  \caption{Peirce's scroll}
+  \labfig{scroll}
+\end{marginfigure}
+
+\reffig{scroll} shows Peirce's drawing of the scroll as it appears in
+\cite[Fig.~5]{peirce_prolegomena_1906}. He defines its intended meaning like so
+\cite[p.~534--535]{peirce_prolegomena_1906}:
 
 \begin{quote}
   I shall call the outer boundary the Wall; and the inner, the Fence. In the
@@ -209,7 +220,13 @@ Peirce based his most fundamental icon on implication: according to Lewis
 giving it a distinguished symbol, and studying extensively the algebraic laws
 that govern it (including Peirce's law).
 
-\paragraph{Empty Antecedant}
+\paragraph{Blank Antecedant}
+
+\begin{marginfigure}
+  \includegraphics{empty-antecedant.png}
+  \caption{Peirce's scroll with a blank antecedant}
+  \labfig{empty-antecedant}
+\end{marginfigure}
 
 A first principle that Peirce derives from the scroll is the following
 \cite[p.~534]{peirce_prolegomena_1906}:
@@ -224,25 +241,38 @@ together, collapse, disappear, and leave only the contents of the inner close
 standing, asserted, in the open field.
 \end{quote}
 
-This first form of ``collapsing of walls'' is called the \emph{Rule of Empty
-Antecedant} in \cite{minghui_graphical_2019}, and is illustrated in
-\reffig{empty-antecedant}. Symbolically, it corresponds to the equivalence $\top
-\limp A \semequiv A$. The reader might be tempted to see the ``former clause''
-that permits any insertion in the outer close as a special case of the Insertion
-principle of \sys{Alpha} (\refsec{alpha}). However, we stress again that Peirce
-first identified this rule as a feature of the scroll, seen as the diagrammatic
-embodiment of the ``general form of argument'' mentioned in a previous excerpt.
-The principle of Insertion only followed as a subsequent generalization,
-stemming from the analysis of the scroll into two nested cuts
-\cite[p.~535]{peirce_prolegomena_1906}:
+This first form of ``collapsing of walls'' is called the \emph{Rule of Blank
+Antecedant} in \cite{minghui_graphical_2019}, and corresponds symbolically to
+the equivalence $\top \limp A \semequiv A$. The reader might be tempted to see
+the ``former clause'' that permits any insertion in the outer close as a special
+case of the Insertion principle of \sys{Alpha} (\refsec{alpha}). However, we
+stress again that Peirce first identified this clause as a feature of the
+scroll, seen as the diagrammatic embodiment of the ``general form of argument''
+mentioned in a previous excerpt. The principle of Insertion only followed as a
+subsequent generalization, stemming from the analysis of the scroll into two
+nested cuts \cite[p.~535]{peirce_prolegomena_1906}:
 
 \begin{quote}
   [...] and you will further see that a scroll is really nothing but one oval
 within another.
 \end{quote}
 
+\begin{marginfigure}
+  $$
+  \!\!\!\!\stkfig{1}{scroll-empty-antecedant}
+  \!\!\!\!\xinvstep{\rsf{BA}}~~~~
+  G
+  $$
+  \caption{The rule of Blank Antecedant}
+  \labfig{rule-empty-antecedant}
+\end{marginfigure}
+
+To emphasize this point, we will from now on depict scrolls as two nested cuts
+joined at a single point highlighted in orange, as illustrated in
+\reffig{rule-empty-antecedant}.
+
 \begin{remark}
-  It is interesting to note that the rule of Empty Antecedant is not seen as
+  It is interesting to note that the rule of Blank Antecedant is not seen as
   primitive by Peirce, but as a consequence of a \emph{dynamic potential} of the
   scroll: namely, the ability to insert anything in the outer close, at will.
   This is another manifestation of Peirce's concern for the question of
@@ -252,9 +282,27 @@ within another.
 
 \paragraph{Currying}
 
-Peirce was aware of the phenomenon of \emph{currying}, usually expressed
-symbolically by the equivalence $A \limp B \limp C \semequiv A \land B \limp C$,
-as witnessed by the following passage \cite[p.~535]{peirce_prolegomena_1906}:
+\begin{marginfigure}[-10em]
+  ~~~\stkfig{0.8}{scroll-curried}
+  \caption{Currying as scroll nesting}
+  \labfig{scroll-curried}
+\end{marginfigure}
+
+\begin{marginfigure}[0em]
+  \input{figures/eg-currying.tex}
+  \caption{Intuitionistic proof of currying}
+  \labfig{eg-currying}
+\end{marginfigure}
+
+\begin{marginfigure}[27em]
+  \input{figures/eg-uncurrying.tex}
+  \caption{Intuitionistic proof of uncurrying}
+  \labfig{eg-uncurrying}
+\end{marginfigure}
+
+Peirce was aware of the phenomenon of \emph{currying}, expressed symbolically by
+the equivalence $A \limp B \limp C \semequiv A \land B \limp C$, as witnessed by
+the following passage \cite[p.~535]{peirce_prolegomena_1906}:
 \begin{quote}
 Now, Reader, if you will just take pencil and paper and scribe the scroll
 expressing that if $A$ be true, then it is true that if $B$ be true $C$ and $D$
@@ -269,67 +317,269 @@ If we reject this interpretation by requiring that the Fence (the inner oval)
 stays glued to the Wall (the outer oval), then one cannot derive currying
 through the rule of double-cut, precisely because the system only permits to
 collapse a Wall and a Fence continuously joined in the same scroll, by the
-weaker rule of Empty Antecedant. Fear not however, as one can still derive the
+weaker rule of Blank Antecedant. Fear not however, as one can still derive the
 currying and uncurrying laws in this intuitionistic setting, but through the
-addional use of insertion/deletion and (de)iteration rules, as depicted in
-\reffig{eg-currying}. Yet we find that Peirce's insight on the topological
-explanation of currying in the classical setting remains noteworthy.
-
-\paragraph{The n-ary scroll}
-
-In \sidecite{oostra_graficos_2010}, A. Oostra proposes to take the above remark
-seriously, by reifying scrolls as a primitive icon of EG (``\emph{rizos}'' in
-Spanish), that exists alongside the usual cuts (``\emph{cortes}''), and are
-distinguished from them. In fact he goes further than this, and proposes to
-generalize the scroll into an $n$-ary construction called the \emph{curl}
-(``\emph{bucle}''), where $n$ is the number of inner closes, called \emph{loops}
-(``\emph{lazos}''). \reffig{four-loops} shows an example of curl with $5$ loops.
-In \cite{minghui_graphical_2019}, the curl is simply called \emph{$n$-ary
-scroll}, and is analyzed into the outer area (that enclosed by the Wall) called
-the \emph{outloop}, and the inner areas (those enclosed by the $n$ Fences, i.e.
-the loops of Oostra) called the \emph{inloops}. Then the cuts and scrolls of
-Peirce are special cases of $n$-ary scrolls, respectively with $n = 0$ and $n =
-1$.
+additional use of the insertion and deiteration rules, as depicted in
+\reffig{eg-currying} and \reffig{eg-uncurrying}. Yet we find that Peirce's insight
+on the topological explanation of currying in the classical setting remains
+noteworthy.
 
 \begin{remark}
-  Any $n$-ary scroll can be drawn by a \emph{continuous} movement of the pen,
-  producing a self-intersecting curve as described by Peirce in
-  \cite{peirce_prolegomena_1906}. This might be related to other manifestations
-  of the notion of continuity in the semantics of intuitionistic logic, such as
-  the well-known Stone-Tarski interpretation of formulas as topological spaces
-  \cite{stone_topological_1938}, and the interpretation of proofs as continuous
-  maps in the \emph{denotational semantics} of D. Scott
-  \cite{10.5555/218742.218744}. Before the advent of Oostra's intuitionistic EG,
-  Zalamea gave a detailed analysis of Peirce's philosophy of the
-  \emph{continuum}, how it relates to modern developments in mathematics, and
-  how it is embodied in existential graphs \cite{zalamea_peirces_2003}.
+Note that in \reffig{eg-currying} and \reffig{eg-uncurrying}, we give
+\emph{direct} proofs that rewrite the premiss of the argument into its
+conclusion, rather than \emph{goal-directed} proofs (\refdef{eg-proof}) that
+rewrite a goal into the empty $\SA$, as we usually did in \refch{eg}. Direct
+proofs are closer to Peirce's usage of the illative transformations --- and thus
+to what can be found in most of the literature on EG, and have the advantage of
+being more economical in space by leaving the goal implicit. One can easily go
+from a direct proof to a goal-directed one as shown by the \emph{deduction
+theorem} of Sowa \cite[Section 6]{sowa_peirces_2011}, which also applies
+in the intuitionistic setting by substituting the rule of Double-cut with the
+rule of Blank Antecedant.
 \end{remark}
+
+\paragraph{The $n$-ary scroll}
+
+In \cite{oostra_graficos_2010}, A. Oostra proposes to take the above remark
+seriously, by reifying the scroll as a primitive icon of EG (``\emph{rizo}'' in
+Spanish), that exists alongside the cut (``\emph{corte}''), and is distinguished
+from it. In fact he goes further than this, and proposes to generalize both the
+cut and the scroll into an $n$-ary construction called the \emph{curl}
+(``\emph{bucle}''), where $n$ is the number of inner closes, called \emph{loops}
+(``\emph{lazos}''). \reffig{five-loops} shows an example of curl with five
+loops\sidenote[][1em]{Admittedly, it looks more like a slice view of a
+\emph{pistol cylinder} than a curl.}. In \cite{minghui_graphical_2019}, the curl
+is simply called \emph{$n$-ary scroll}, and is analyzed into the outer area
+(that enclosed by the Wall) called the \emph{outloop}, and the inner areas
+(those enclosed by the $n$ Fences, i.e. the loops of Oostra) called the
+\emph{inloops}. Then cuts and scrolls are indeed special cases of $n$-ary
+scrolls, respectively with $n = 0$ and $n = 1$.
+
+\begin{marginfigure}
+  \stkfig{1}{five-loops}
+  \caption{A curl with five loops}
+  \labfig{five-loops}
+\end{marginfigure}
 
 Like the unary scroll, the $n$-ary scroll is to be read as an implication whose
 antecedant is the content of the outloop, and consequent the content of the
 inloops. The generalization then consists in taking the \emph{disjunction} of
-the contents of all inloops. Thus the $5$-ary scroll of \reffig{four-loops} is
-to be read as the formula $a \limp b \lor c \lor d \lor e \lor f$; and the
-$0$-ary scroll obtained by removing all inloops from the latter as $a \limp
-\bot$, since a $0$-ary disjunction is naturally evaluated to its neutral element
-$\bot$. This coincides with the intuitionistic reading of negation $\neg A
-\defeq A \limp \bot$, and is thus consistent with the interpretation of cuts as
-negations.
+the contents of all inloops: this reflects nicely the etymological meaning of
+the word ``disjunction'', since the inloops enclose \emph{disjoint} areas of the
+outloop to which they are attached. Then the $5$-ary scroll of
+\reffig{five-loops} is read as the formula $a \limp b \lor c \lor d \lor e \lor
+f$; and the $0$-ary scroll obtained by removing all inloops from the latter as
+$a \limp \bot$, since a $0$-ary disjunction is naturally evaluated to its
+neutral element $\bot$. This coincides with the intuitionistic reading of
+negation $\neg A \defeq A \limp \bot$, and is thus consistent with the
+interpretation of cuts as negations.
 
-\todo{ Include the figure from my slides distinguishing the interpretations of
-  the same graphs modulo the attachment of the inloops to the outer loop.}
+\paragraph{Continuity}
+
+\begin{marginfigure}
+  \input{figures/eg-disj-imp.tex}
+  \caption{Continuity, disjunction and implication in IEG}
+  \labfig{eg-disj-imp}
+\end{marginfigure}
+
+With this interpretation of the $n$-ary scroll, the \sys{Alpha} encodings of
+disjunction and implication as nested cuts are no longer valid, because they are
+not intuitionistically equivalent to the associated binary and unary scrolls.
+This is illustrated in \reffig{eg-disj-imp}, where the closeness in meaning is
+reflected iconically (but not symbolically) in the fact that the graphs only
+differ in the \emph{continuity} (or lack thereof) between inloops and their
+outloop. Indeed, contrary to nested cuts, any $n$-ary scroll can be drawn by a
+\emph{continuous} movement of the pen, producing a self-intersecting curve as
+described by Peirce in \cite{peirce_prolegomena_1906}. This might be related to
+other manifestations of the notion of continuity in the semantics of
+intuitionistic logic, such as the well-known Stone-Tarski interpretation of
+formulas as topological spaces \cite{stone_topological_1938}, and the
+interpretation of proofs as continuous maps in the \emph{denotational semantics}
+of Dana Scott \sidecite{10.5555/218742.218744}. Before the advent of Oostra's
+IEG, Zalamea gave a detailed analysis of Peirce's philosophy of
+the \emph{continuum}, how it relates to modern developments in mathematics, and
+how it is embodied in existential graphs \cite{zalamea_peirces_2003}. Actually
+according to Oostra \sidecite[][p.~162]{oostra_advances_2022}, ``the
+possibility of developing intuitionistic existential graphs was first suggested
+by Zalamea in the 1990s \cite{zalamea_ieg_1}\cite{zalamea_ieg_2}''.
+
+\paragraph{Coherent formulas}
+
+\begin{marginfigure}
+  $$
+  \!\!\!\!
+  \!\!\!\!
+  \!\!\!\!
+  \begin{array}{c}
+    \tikzfig{0.85}{0.85}{curl-geom} \vspace{1.5em}\\
+    \forall \mathbf{x}. \left(\bigwedge G \limp \bigvee_{j = 1}^{n}\exists \mathbf{x_j}. \bigwedge H_j\right)
+  \end{array}
+  $$
+  \caption{Formula interpretation of the $n$-ary scroll}
+  \labfig{curl-geom}
+\end{marginfigure}
+
+More generally, a $n$-ary scroll with atoms $G = a_1, \ldots, a_m$ in its outloop and
+$\Delta = \begin{pmatrix}
+  a_{1,1} & \ldots & a_{1,p_1} \\
+  \vdots & \ddots & \vdots \\
+  a_{n,1} & \ldots & a_{1,p_n}
+\end{pmatrix}$
+in its inloops, where each row $H_j$ in $\Delta$ encodes an inloop, can be
+interpreted as the formula
+$$\bigwedge_{i = 1}^{m}{a_i} \limp \bigvee_{j = 1}^{n}\bigwedge_{k = 1}^{p_n}{a_{j,k}}$$
+If one adds \emph{binders} to the mix (see \refsec{gardens}) by having $\gamma =
+\garden{\mathbf{x}}{G}$ as outloop, and
+$\Xi = \begin{pmatrix}
+  \mathbf{x_1} \\
+  \vdots \\
+  \mathbf{x_n}
+\end{pmatrix} \cdot \Delta$ as inloops, then the interpretation is extended into
+the formula
+$$\forall \mathbf{x}. \left(\bigwedge_{i = 1}^{m}{a_i} \limp \bigvee_{j = 1}^{n}\exists \mathbf{x_j}. \bigwedge_{k = 1}^{p_n}{a_{j,k}}\right)$$
+as depicted in \reffig{curl-geom}. Typically, the particular case where $\gamma
+= \garden{x}{\emptyset}$ and $\Xi = (\emptyset) \cdot (p(x))$ encodes the graph
+$$\stkfig{1}{scroll-forall}$$
+expressing the universal quantification $\forall x. p(x)$, and the case where
+$\gamma = \garden{\emptyset}{\emptyset}$ and $\Xi = (x) \cdot (p(x))$ the graph
+$$\stkfig{1}{scroll-exists}$$
+expressing the existential quantification $\exists x. p(x)$. The interpretation
+is invariant under polarity, meaning that for instance the graphs
+$$\stkfig{1}{scroll-neg-forall} \text{   and   } \stkfig{1}{scroll-neg-exists}$$
+obtained by enclosing the previous graphs in a cut are interpreted with the same
+quantifiers, as the formulas $\neg \forall x. p(x)$ and $\neg \exists x. p(x)$.
+In \sys{Beta}, we would have exploited the classical equivalences $\neg \forall
+x. A \semequiv \exists x. \neg A$ and $\neg \exists x. A \semequiv \forall x.
+\neg A$ (justified by the double-cut principle) in order to interpret them as
+$\exists x. \neg p(x)$ and $\forall x. \neg p(x)$, emphasizing the idea that
+positive and negative binders encode respectively $\exists$ and $\forall$. But
+this is not possible anymore with the intuitionistic interpretation of $n$-ary
+scrolls, where the $\exists/\forall$ duality is replaced by the inloop/outloop
+distinction. In fact, we are tempted to further qualify this distinction of
+\emph{adjunction}, following a classical result of Lawvere in the context of
+categorical logic \sidecite{lawvere_quantifiers_sheaves}.
+
+Lawvere is also known for some contributions to the study of \emph{geometric
+logic} \sidecite{lawvere_geometric}, a subset of the formulas of FOL first
+discovered by Skolem \sidecite{skolem_geometric} that is capable of expressing
+many mathematical theories, and has close connections to \emph{topos theory}.
+Quite remarkably, the interpretation of $n$-ary scrolls coincides exactly with
+the class of \emph{coherent formulas}, which are the formulas of geometric logic
+where infinitary disjunctions are restricted to finitary ones. There is a
+difference however: the full syntax of IEG allows for arbitrary \emph{nestings}
+of $n$-ary scrolls inside eachother, i.e. the multisets $G$ and $H_j$ in
+\reffig{curl-geom} can contain $n$-ary scrolls in addition to atoms; while
+coherent formulas are restricted to atoms.
+
+Coherent formulas have some nice proof-theoretical properties, which might also
+apply to IEG to some extent. We only mention two important ones:
+\begin{description}
+  \item[Completeness] Every first-order theory has a coherent conservative
+  extension, making coherent formulas (and thus non-nested $n$-ary scrolls) in
+  principle as expressive as arbitrary first-order formulas
+  \sidecite{negri_geometric}.
   
-\paragraph{Geometric formulas}
+  \item[Automation] Coherent formulas benefit from faster proof-search
+  procedures compared to arbitrary formulas, making automation more tractable
+  computationally. They also allow the direct encoding of many reasoning
+  problems, thanks to their use of the full set of connectives and quantifiers
+  of FOL; and avoiding complex encodings (as can be found e.g. in SMT solvers)
+  is crucial in \emph{interactive} theorem proving, where the user and the
+  computer manipulate the same formulas in goals
+  \sidecite{bezem_automating_2005}. This has been exploited already in some
+  domain-specific theorem provers, like the Larus prover that automatically
+  generates illustrated proofs in geometry\sidenote{Incidentally, projective
+  geometry was one of the motivating applications that led Skolem to identify
+  the class of coherent formulas \cite{bezem_automating_2005}.}
+  \sidecite{narboux_larus}.
+  
+  \begin{remark}
+  Thus with IEG, one becomes able to reason \emph{geometrically} on geometric
+  formulas that speak about geometry: another beautiful incarnation of the
+  reflexivity at work in Peirce's iconic logic.
+  \end{remark}
+\end{description}
 
-\todo{ Give the general interpretation in propositional logic, then predicate
-  logic, and relate it to geometric formulas (need to find reference from Sonia
-  Marin). }
+\section{Flowers}\labsec{Flowers}
 
-\paragraph{Flowers}
+\paragraph{Blooming}
 
-\section*{Syntax}
+As we have seen, the ($n$-ary) scroll is a powerful icon, because it captures
+the distinction between classical and intuitionistic logic as being a matter of
+\emph{continuity} between the space of inputs/hypotheses (outloop) and the
+spaces of outputs/conclusions (inloops), reflecting an intuition discovered much
+later in the denotational semantics of the $\lambda$-calculus. However as a
+diagrammatic component to be operated upon through direct manipulation, it has
+one notable flaw, also shared with the classical cut-based syntax: it quickly
+induces heavy nestings of curves in the plane, making even a simple graph like
+that of \reffig{scroll-curried} hard to read for an untrained eye.
 
-\todo{What should be done with this section?}
+\begin{marginfigure}
+  $$
+  \tikzfig{1}{0.4}{scroll-inside-out}
+  $$
+  \caption{Turning a $5$-ary scroll inside-out}
+  \labfig{scroll-inside-out}
+\end{marginfigure}
+
+Before devising an alternative syntax, one should ask: what are the essential
+features of the scroll that we want to preserve? Following the previous
+observations, we identified two of them:
+\begin{itemize}
+  \item[\textbf{Continuity}] the scroll is a self-intersecting continuous curve,
+  which can be drawn in one stroke of the pen;
+  \item[\textbf{Polarity}] this curve delineates two kinds of areas: inloops that have
+  the same polarity as the area on which the scroll is scribed, and the outloop
+  which has the opposite polarity.
+\end{itemize}
+
+Fortunately, these two properties are preserved when turning inloops
+\emph{inside-out}, as illustrated in \reffig{scroll-inside-out}. This might be
+because the very process of turning inside-out can be seen as a continuous
+movement in three-dimensional space, where the inloops are rotated around their
+intersection points with the outloop. In this way, we have effectively divided
+the amount of curve-nesting in scrolls by two. And as an added bonus, the new
+icon is reminiscent of a \emph{flower}, as if it had bloomed from its curled
+bud; or as if the pistol from \reffig{five-loops} had transformed into a
+\emph{pistil}, and its bullet chambers into \emph{petals}\sidenote{As the saying
+goes: make love, not war.}.
+
+\begin{marginfigure}
+  $$
+  \!\!\!\!
+  \!\!\!\!
+  \!\!\!\!
+  \!\!\!\!
+  \stkfig{0.65}{flowers}
+  $$
+  \vspace{-3em}
+  \caption{Nested flowers}
+  \labfig{flowers}
+\end{marginfigure}
+
+From that point onwards, we decided to fully embrace the flower metaphor: first
+in our drawing style as witnessed in \reffig{flowers}, but also in our syntactic
+terminology, to be introduced in the next pages. Negative outloops are now drawn
+as \emph{yellow} pistils for a more colorful experience, and inloops as
+transparent petals, i.e. of the same color as the area on which they are
+scribed. We also drop the requirement that petals should intersect their pistil
+at a single point, for purely aesthetic reasons.
+
+\paragraph{Multisets}
+
+As we did for classical EG in \refsec{multisets} and \refsec{gardens}, we are
+now going to distill the syntactic essence of flowers into an inductive,
+(multi)set-based data structure. This will allow for a more compact textual
+notation, that is better suited to proof-theoretical study.
+
+In \refsec{beta}, we explained how the graphs of \sys{Beta} allow to represent
+purely relational statements, without function symbols. Since functions are just
+deterministic relations, one can in principle formalize any first-order theory
+in this syntax\sidenote{Conversely, every relation can be faithfully encoded as
+its characteristic function, which is the basis for the formalization of
+mathematics in \emph{type theories}.}. However it is much more convenient to
+have a dedicated syntax for functions, and we will thus introduce them as is
+usually done in predicate calculus.
 
 \begin{definition}[First-order signature]
   A \emph{first-order signature} is a triplet $\mathcal{\Sigma} = (
@@ -372,28 +622,35 @@ Any finite set $\mathbf{x} \subset \vars$ of variables is called a
 x_n}{\phi_1, \ldots, \phi_m}$, where the $x_i$ are called \emph{binders}; and
 non-atomic flowers as $\flower{\gamma}{\delta_1 \sep \ldots \sep \delta_n}$,
 where $\gamma$ is the \emph{pistil}, and the $\delta_i$ are called
-\emph{petals}. We write $\fset{i}{n}{E_i}$ to denote a finite (multi)set of
-size $n$ with elements $E_i$ indexed by $1 \leq i \leq n$. We also omit
-writing the empty (multi)set, accounting for it with blank space as is done in
-sequent notation or in Peirce's EG; in particular, $\garden{{}}{{}}$ stands for
-the empty garden $\garden{\emptyset}{\emptyset}$, $\flower{\gamma}{{}}$ for the
-flower with no petals $\flower{\gamma}{\emptyset}$, and
-$\flower{\gamma}{\garden{{}}{{}}}$ for the flower with one empty petal.
+\emph{petals}. We write $\fset{i}{n}{E_i}$ to denote a finite (multi)set of size
+$n$ with elements $E_i$ indexed by $1 \leq i \leq n$. We also omit writing the
+empty (multi)set, accounting for it with blank space as is done in sequent
+notation\sidenote{Seen as sequents, the nesting of flowers might be related to
+the nesting of judgments in the category of judgments used in the definition of
+some recent categorical semantics of type theory \cite{huang2023synthetic}.} or
+in EG; in particular, $\garden{{}}{{}}$ stands for the empty garden
+$\garden{\emptyset}{\emptyset}$, $\flower{\gamma}{{}}$ for the flower with no
+petals $\flower{\gamma}{\emptyset}$, and $\flower{\gamma}{\garden{{}}{{}}}$ for
+the flower with one empty petal.
 
 Note that the order of precedence of operators is
 $\mathop{,} < \garden{{}}{{}} < \mathop{;} < \mathop{\flower{}{}}$
 so that for instance, the string
 $$\flower{\garden{x_1, x_2}{\phi_1, \phi_2}}{\garden{y_1}{\psi, (\flower{\gamma}{\Delta})} \sep \garden{y_2}{\Phi}}$$
 is parsed as the flower
-$$\left(\flower{\left(\garden{\{x_1, x_2\}}{\{\phi_1,
-\phi_2\}}\right)}{\{\left(\garden{\{y_1\}}{\{\psi,
-\left(\flower{\gamma}{\Delta}\right)\}}\right) \sep
-\left(\garden{\{y_2\}}{\Phi}\right)\}}\right)$$ where constructed finite
-(multi)sets are delimited with $\{\}$, and constructed flowers/gardens are
-delimited with $()$.
+% $$\left(\flower{\left(\garden{\{x_1, x_2\}}{\{\phi_1,
+% \phi_2\}}\right)}{\{\left(\garden{\{y_1\}}{\{\psi,
+% \left(\flower{\gamma}{\Delta}\right)\}}\right) \sep
+% \left(\garden{\{y_2\}}{\Phi}\right)\}}\right)$$ where constructed finite
+% (multi)sets are delimited with $\{\}$, and constructed flowers/gardens are
+% delimited with $()$.
+\vspace{-6em}
+$$\stkfig{1}{parsed-flower}$$
+\vspace{-6em}
 
-\todo{ Introduce convention that $\garden{{}}{\Phi}$ is shortened into $\Phi$,
-and apply it everywhere to save some space and improve readability. }
+Also to improve readability, we will most of the time omit the garden dot
+`$\cdot$' when the sprinkler is empty, writing $\Phi$ instead of
+$\garden{{}}{\Phi}$.
 
 \begin{remark}
   In some places the choice of letter for meta-variables will be important to
@@ -424,9 +681,12 @@ and apply it everywhere to save some space and improve readability. }
   \labtab{letters}
 \end{marginfigure}
 
+We now proceed with routine definitions for handling variables and substitutions
+of terms in flowers.
+
 \begin{definition}[Free variables]\labdef{fv}
   The sets of \emph{free variables} $\fv(-)$ of a term, flower or garden are
-  defined mutually inductively as follows:
+  defined mutually recursively as follows:
   \begin{align*}
     \fv(x) &= \{x\} \\
     \fv(f(\tvec{t})) &= \bigcup_{t \in \tvec{t}}{\fv(t)} \\
@@ -439,6 +699,14 @@ and apply it everywhere to save some space and improve readability. }
   respectively by $\closed{\terms}$, $\closed{\flowers}$ and $\closed{\gardens}$.
 \end{definition}
 
+\begin{remark}\labremark{flower-scope}
+Note that the scope of a binder located in a pistil extends both to the pistil
+\emph{and} to all its attached petals, whereas for a binder located in a petal
+it is limited to said petal. This is reflected in the above definition of free
+variables for (non-atomic) flowers, and is visually explained by the nesting of
+curves in an $n$-ary scroll.
+\end{remark}
+
 \begin{definition}[Bound variables]
   % The set of \emph{bound variables} $\bv(\Phi\hole)$ of a context $\Phi\hole$ is defined
   % inductively as follows:
@@ -447,100 +715,13 @@ and apply it everywhere to save some space and improve readability. }
   %   \bv(\Psi, (\flower{\garden{\mathbf{x}}{X}}{\Delta})) &= \mathbf{x} \cup \bv(X) \\
   %   \bv(\Psi, (\flower{\garden{\mathbf{x}}{\Phi}}{\garden{\mathbf{y}}{X} \sep \Delta})) &= \mathbf{x} \cup \mathbf{y} \cup \bv(X)
   % \end{align*}
-  The set of bound variables $\bv(\phi)$ (resp. $\bv(\gamma)$) of a
-  flower $\phi$ (resp. garden $\gamma$) is defined by mutual induction as
-  follows:
+  The set of bound variables $\bv(\phi)$ (resp. $\bv(\gamma)$) of a flower
+  $\phi$ (resp. garden $\gamma$) is defined mutually recursively as follows:
   \begin{align*}
     \bv(p(\tvec{t})) &= \emptyset \\
     \bv(\garden{\mathbf{x}}{\Phi}) &= \mathbf{x} \cup \bigcup_{\phi \in \Phi}{\bv(\phi)} \\
     \bv(\flower{\gamma}{\Delta}) &= \bv(\gamma) \cup \bigcup_{\delta \in \Delta}{\bv(\delta)}
   \end{align*}
-\end{definition}
-
-\begin{definition}[Function update]
-  Let $A, B$ be two sets, $f, g : A \to B$ two functions and $R \subseteq A$
-  some subset of their domain. The \emph{update} of $f$ on $R$ with $g$ is the
-  function defined by:
-  $$
-  \update{f}{R}{g}(x) =
-  \begin{cases}
-    g(x) &\text{if $x \in R$} \\
-    f(x) &\text{otherwise}
-  \end{cases}
-  $$
-  $\update{-}{-}{-}$ is obviously associative, that is
-  $\update{f}{R}{(\update{g}{S}{h})} = \update{(\update{f}{R}{g})}{S}{h}$. Also
-  if $f$ or $g$ is the identity function $\idsubst$ we omit writing it, i.e.
-  $\update{f}{R}{} = \update{f}{R}{\idsubst}$ and $\update{}{R}{g} =
-  \update{\idsubst}{R}{g}$.
-\end{definition}
-
-\begin{definition}[Substitution]
-  A \emph{substitution} is a function $\sigma : \vars \to \terms$ with a finite
-  \emph{support} $\dom(\sigma) = \compr{x}{\sigma(x) \not= x}$. By abuse of
-  notation, we will write $\sigma : \mathbf{x} \to \terms$ to denote a
-  substitution $\sigma$ whose support is $\mathbf{x}$.
-  The domain of substitutions is extended to terms, flowers and gardens
-  inductively as follows:
-  \begin{align*}
-    \sigma(f(\tvec{t})) &= f(\sigma(\tvec{t})) \\
-    \sigma(p(\tvec{t})) &= p(\sigma(\tvec{t})) \\
-    \sigma(\garden{\mathbf{x}}{\Phi}) &=
-      \garden{\mathbf{x}}{\restr{\sigma}{\mathbf{x}}(\Phi)} \\
-    \sigma(\flower{\garden{\mathbf{x}}{\Phi}}{\Delta}) &=
-      \flower{\sigma(\garden{\mathbf{x}}{\Phi})}{\restr{\sigma}{\mathbf{x}}(\Delta)}
-  \end{align*}
-\end{definition}
-
-\begin{remark}
-  Seen as sequents, the nesting of flowers might be related to the nesting of judgments in the category of judgments used in the definition of some recent categorical semantics of type theory \cite{huang2023synthetic}.
-\end{remark}
-
-
-\section{Calculus}\labsec{Calculus}
-
-\todo{ introduce formally the full set of inference rules of the flower calculus
-as well as our notion of proof, both motivated by analyticity concerns. We also
-prove a few useful syntactic properties of our system, including a deduction
-theorem.}
-
-\begin{definition}[Bouquet context]
-  A \emph{bouquet context} $\Phi\hole$ is a bouquet which contains exactly one
-  occurrence of the special bouquet $\hole$ called the \emph{hole}. The hole can
-  always be \emph{filled} (substituted) with any other bouquet $\Psi$ or context
-  $\Xi\hole$, producing a new bouquet $\cfill{\Phi}{\Psi}$ or context
-  $\cfill{\Phi}{\Xi\hole}$. In particular, filling with the empty bouquet will
-  yield a bouquet $\cfill{\Phi}{\phantom{\Phi}}$, which is just $\Phi\hole$ with
-  its hole removed.
-\end{definition}
-
-\begin{definition}[Parity]
-  The \emph{parity} $\parity{\Phi\hole}$ of a context $\Phi\hole$ is defined inductively by:
-  \begin{align*}
-    \parity{\Psi, \hole} &= 0 \\
-    \parity{\Psi, (\flower{\garden{\mathbf{x}}{\Phi\hole}}{\Delta})} &= \parity{\Phi\hole} + 1 \\
-    \parity{\Psi, (\flower{\gamma}{\garden{\mathbf{x}}{\Phi\hole} \sep \Delta})} &= \parity{\Phi\hole}
-  \end{align*}
-\end{definition}
-
-\begin{definition}[Polarity]
-  We say that a context $\Phi\hole$ is \emph{positive} if $\parity{\Phi\hole}$ is even, and
-  \emph{negative} otherwise. We denote positive and negative contexts
-  respectively by $\Phi^+\hole$ and $\Phi^-\hole$.
-\end{definition}
-
-\begin{definition}[Hypothesis]
-  We say that a flower $\phi$ is a \emph{hypothesis} of a context $\Phi\hole$, written
-  $\chyp{\phi}{\Phi\hole}$, when there exist a bouquet $\Psi$ with $\phi \in \Psi$ and
-  contexts $\Xi\hole$ and $\Xi_0\hole$ such that either:
-  \begin{itemize}
-    \item $\Phi\hole = \cfill{\Xi}{\Psi, \Xi_0\hole}$;
-    \item $\Phi\hole =
-    \cfill{\Xi}{\flower{\garden{\mathbf{x}}{\Psi}}{\garden{\mathbf{y}}{\Xi_0\hole}
-    \sep \Delta}}$ for some $\mathbf{x}, \mathbf{y}, \Delta$.
-  \end{itemize}
-  A bouquet $\Psi$ is said to be \emph{available} in $\Phi\hole$, written
-  $\chyp{\Psi}{\Phi\hole}$, if $\chyp{\psi}{\Phi\hole}$ for all $\psi \in \Psi$.
 \end{definition}
 
 To avoid reasoning about $\alpha$-equivalence, we adopt in this work the
@@ -556,14 +737,128 @@ for any flower $\phi$, the two following conditions hold:
 % \emph{non-circular} substitutions $\sigma$ where $x \not\in \fv(\sigma(x))$ for
 % all $x \in \dom(\sigma)$.
 
-The central device studied in this work, the \emph{flower calculus}, can be
-described as a \emph{rewriting system} on bouquets. That is, one has a finite
-number of rewrite rules which are families (schemas) of pairs of bouquets, and
-these can be applied and composed in a directed way to derive new bouquets.
-Intuitively, a rewriting step $\Phi \rightarrow \Psi$ should be understood as an
-act of \emph{backward inference}: starting from the goal $\Phi$ that I want to
-prove, I transform it into a new goal $\Psi$ which is a sufficient justification
-of $\Phi$, and hopefully simpler to prove.
+To define substitutions, we introduce a general notion of \emph{function
+update}, which will be useful for the semantic evaluation of flowers in
+\refsec{Semantics}.
+
+\begin{definition}[Function update]
+  Let $A, B$ be two sets, $f, g : A \to B$ two functions and $R \subseteq A$
+  some subset of their domain. The \emph{update} of $f$ on $R$ with $g$ is the
+  function defined by:
+  $$
+  (\update{f}{R}{g})(x) =
+  \begin{cases}
+    g(x) &\text{if $x \in R$} \\
+    f(x) &\text{otherwise}
+  \end{cases}
+  $$
+  $\update{-}{-}{-}$ is obviously associative, that is
+  $\update{f}{R}{(\update{g}{S}{h})} = \update{(\update{f}{R}{g})}{S}{h}$. Also
+  if $f$ or $g$ is the identity function $\idsubst$ we omit writing it, i.e.
+  $\update{f}{R}{{}} = \update{f}{R}{\idsubst}$ and $\update{{}}{R}{g} =
+  \update{\idsubst}{R}{g}$.
+\end{definition}
+
+\begin{definition}[Substitution]
+  A \emph{substitution} is a function $\sigma : \vars \to \terms$ with a finite
+  \emph{support} $\dom(\sigma) = \compr{x}{\sigma(x) \not= x}$. By abuse of
+  notation, we will write $\sigma : \mathbf{x} \to \terms$ to denote a
+  substitution $\sigma$ whose support is $\mathbf{x}$. The domain of
+  substitutions is extended to terms, flowers and gardens mutually recursively
+  as follows:
+  \begin{align*}
+    \sigma(f(x_1, \ldots, x_n)) &= f(\sigma(x_1), \ldots, \sigma(x_n)) \\
+    \sigma(p(\tvec{t})) &= p(\sigma(\tvec{t})) \\
+    \sigma(\garden{\mathbf{x}}{\Phi}) &=
+      \garden{\mathbf{x}}{\restr{\sigma}{\mathbf{x}}(\Phi)} \\
+    \sigma(\flower{\garden{\mathbf{x}}{\Phi}}{\Delta}) &=
+      \flower{\sigma(\garden{\mathbf{x}}{\Phi})}{\restr{\sigma}{\mathbf{x}}(\Delta)}
+  \end{align*}
+\end{definition}
+
+\section{Calculus}\labsec{Calculus}
+
+\paragraph{Contexts}
+
+Equipped with an inductive syntax, we can now express formally the inference
+rules of our flower calculus, just as we did for \sys{Alpha}
+(\refsec{multisets}) and \sys{Beta} (\refsec{gardens}). There, graphs and their
+contexts were defined as multisets of nodes, which have now turned into bouquets
+of flowers:
+
+\begin{definition}[Bouquet context]
+  A \emph{bouquet context} $\Phi\hole$ is a bouquet which contains exactly one
+  occurrence of the special flower $\hole$ called the \emph{hole}. The hole can
+  always be \emph{filled} (substituted) with any other bouquet $\Psi$ or context
+  $\Xi\hole$, producing a new bouquet $\cfill{\Phi}{\Psi}$ or context
+  $\cfill{\Phi}{\Xi\hole}$. In particular, filling with the empty bouquet will
+  yield a bouquet $\cfill{\Phi}{\phantom{\Phi}}$, which is just $\Phi\hole$ with
+  its hole removed.
+\end{definition}
+
+\begin{definition}[Parity]
+  The \emph{parity} $\parity{\Phi\hole}$ of a context $\Phi\hole$ is defined
+  mutually recursively by:
+  \begin{align*}
+    \parity{\Psi, \hole} &= 0 \\
+    \parity{\Psi, (\flower{\garden{\mathbf{x}}{\Phi\hole}}{\Delta})} &= \parity{\Phi\hole} + 1 \\
+    \parity{\Psi, (\flower{\gamma}{\garden{\mathbf{x}}{\Phi\hole} \sep \Delta})} &= \parity{\Phi\hole}
+  \end{align*}
+\end{definition}
+
+\begin{definition}[Polarity]
+  We say that a context $\Phi\hole$ is \emph{positive} if $\parity{\Phi\hole}$ is even, and
+  \emph{negative} otherwise. We denote positive and negative contexts
+  respectively by $\Phi^+\hole$ and $\Phi^-\hole$.
+\end{definition}
+
+\paragraph{Pollination}
+
+In order to formulate the equivalent of the (de)iteration rules of EG for
+flowers, we introduce a \emph{pollination} relation that captures the
+availability of a flower in a given context, akin to the \emph{justification}
+relation of \refsec{atomicity}:
+
+\begin{definition}[Pollination]\labdef{pollination}
+  We say that a flower $\phi$ can be \emph{pollinated} in a context $\Phi\hole$,
+  written $\chyp{\phi}{\Phi\hole}$, when there exist a bouquet $\Psi$ with $\phi
+  \in \Psi$ and contexts $\Xi\hole$ and $\Xi_0\hole$ such that either:
+  \begin{itemize}
+    \item (\textbf{Cross-pollination})~ $\Phi\hole = \cfill{\Xi}{\Psi,
+    \Xi_0\hole}$;
+    \item (\textbf{Self-pollination})~ $\Phi\hole =
+    \cfill{\Xi}{\flower{\garden{\mathbf{x}}{\Psi}}{\garden{\mathbf{y}}{\Xi_0\hole}
+    \sep \Delta}}$ for some $\mathbf{x}, \mathbf{y}, \Delta$.
+  \end{itemize}
+  A bouquet $\Psi$ can be pollinated in $\Phi\hole$, written
+  $\chyp{\Psi}{\Phi\hole}$, if $\chyp{\psi}{\Phi\hole}$ for all $\psi \in \Psi$.
+\end{definition}
+
+\begin{marginfigure}
+  $$\tikzfig{1}{0.5}{pollination}$$
+  \caption{Pollination in flowers}
+  \labfig{pollination}
+\end{marginfigure}
+
+We now employ the metaphor of \emph{pollination} to speak about (de)iteration in
+flowers. This is illustrated in \reffig{pollination}, where the blue dot marks
+the location of the justifying/pollinating occurrence of $\phi$, and the red
+dots all the areas that it (locally) justifies/pollinates, and thus where $\phi$
+can be (de)iterated\sidenote{\reffig{pollination} summarizes visually the flow
+of information in flowers, just like \reffig{eg-local-justification} summarized
+the flow of information in EG, and \reffig{bubbles-porosity} in bubbles. From a
+UI point of view, all these figures can be understood as kind of
+``cheatsheets'', that indicate with arrows the allowed drag-and-drop moves for
+importing a statement (the source of the DnD) into a new context (the
+destination of the DnD).}. We distinguish two cases of \emph{cross}-pollination
+and \emph{self}-pollination, as botanists do when describing the reproduction of
+flowers. This distinction does not exist in classical EG, because pistils and
+petals are both identified as instances of cuts. If we were to replace binders
+by LoI (lines of identity, see \refsec{beta}), then the pollination relation
+would also prescribe in which areas LoI can be extended/iterated, providing an
+explanation for the scope of binders (\refremark{flower-scope}).
+
+\paragraph{Rules}
 
 \begin{figure*}
   \input{figures/flower-calculus.tex}
@@ -571,76 +866,158 @@ of $\Phi$, and hopefully simpler to prove.
   \labfig{flower-calculus}
 \end{figure*}
 
-\todo{Graphical version of \reffig{flower-calculus}}
+\begin{figure*}
+  \input{figures/flower-calculus-graphical.tex}
+  \caption{Graphical presentation of the flower calculus}
+  \labfig{flower-calculus-graphical}
+\end{figure*}
 
-To emphasize this viewpoint, the calculus is presented in
-\reffig{flower-calculus} as a set of unary \emph{inference rules}: when read
-\emph{top-down}, they correspond to usual inferences from premiss to conclusion,
-and will be justified by the soundness theorem of \refsec{Soundness}.
+As has become standard in this thesis, we define the flower calculus as a
+\emph{rewriting system} on bouquets, presented in \reffig{flower-calculus} as a
+set of unary deep inference rules: when read \emph{top-down}, they correspond to
+usual inferences from premiss to conclusion, and will be justified by the
+soundness theorem of \refsec{Soundness}.
 % This gives them a \emph{static}, \emph{a posteriori} meaning, since this is
 % typically how you would check the validity of an established inference
 % \emph{after the fact}.
 But the more interesting direction, and the one around which the calculus has
 been designed, is when you read the rules \emph{bottom-up}: then they are indeed
 rewrite rules, telling you the different ways in which you can choose to
-simplify a goal.
+simplify a goal. This is how the \emph{graphical} version of the rules is
+presented in \reffig{flower-calculus-graphical}.
 
-\todo{Flower version of \reffig{eg-local-justification} (see photo)}
+Let us now describe the rules in more detail, starting with the fragment that is
+a direct adaptation of the rules of \sys{Beta} (\reffig{beta}):
+
+\begin{description}
+  \item[Blank Antecedant (\rsf{epis})]
+    It allows to enclose any bouquet in a petal attached to an
+    \textsf{(e)}mpty \textsf{(pis)}til. This is one
+    direction of the rule \rsf{BA} of (\reffig{rule-empty-antecedant}), which is
+    a weaker, intuitionistic version of the classical rule \rsf{Dcut{\ua}} of
+    \sys{Alpha} and \sys{Beta}. The other direction is actually unnecessary for
+    completeness, which might be related to the co-admissibility of
+    \rsf{Dcut{\da}} in \sys{Alpha} (Corollary \ref{cor:adm-ins}).
+
+  \item[(De)iteration (\rsf{poll{\da}}, \rsf{poll{\ua}})]
+    Renamed \emph{\textsf{(poll)}ination} rules, they correspond to the rules
+    \rsf{Iter} and \rsf{Deit} of \sys{Alpha} and \sys{Beta}, but reformulated
+    with the pollination relation (\refdef{pollination}).
+
+  \item[Insertion/Deletion (\rsf{grow}, \rsf{crop}, \rsf{pull}, \rsf{glue})]
+    They correspond to the rules \rsf{Ins} and \rsf{Del} of \sys{Alpha} and
+    \sys{Beta}, but have doubled in number to account for the syntactic
+    distinction between pistils and petals. More precisely, rules \rsf{grow} and
+    \rsf{crop} allow to insert and delete entire flowers, while rules \rsf{pull}
+    and \rsf{glue} deal with petals.
+    
+  \item[Unification (\rsf{ipis}, \rsf{ipet}, \rsf{apis}, \rsf{apet})]
+    Rules \rsf{ipis} and \rsf{ipet} allow to \textsf{(i)}nstantiate a sprinkler
+    located respectively in a \textsf{(pis)}til ($\forall$) and a
+    \textsf{(pet)}al ($\exists$) with an arbitrary substitution, while rules
+    \rsf{apis} and \rsf{apet} do the opposite operation of
+    \textsf{(a)}bstracting a set of terms by introducing a sprinkler. They
+    correspond respectively to a generalization of the rules \rsf{Unif{\ua}} and
+    \rsf{Unif{\da}} of \sys{Beta}, where the variable substitution $\{z/y\}$
+    becomes an arbitrary substitution $\sigma$. Once again, we have twice the
+    amount of rules to account for the pistil/petal distinction, which is not
+    surprising since in the LoI syntax of EG, they are special cases of
+    Insertion/Deletion. Note that for the instantiation rules
+    \rsf{ipis}/\rsf{ipet} to be invertible, we duplicate the whole flower/petal
+    where the sprinkler occurs, mirroring what is done in multi-conclusion
+    sequent calculi (see \reffig{multi-inst}).
+\end{description}
+
+The last two rules handle the behavior of disjunctive and absurd statements,
+i.e. flowers with respectively $n \geq 2$ and $n = 0$ petals, and are closer to
+sequent-style introduction/elimination rules:
+
+\begin{description}
+  \item[Disjunction Introduction (\rsf{epet})]
+    It allows to erase any flower with an \textsf{(e)}mpty \textsf{(pet)}al.
+    According to Oostra \cite[p.~109]{oostra_advances_2022}, Peirce already
+    identified \rsf{epet} as a component of his decision procedure for \sys{Alpha}
+    (it is simply called ``Operation 1'' in \cite{oostra_advances_2022}). This is
+    no coincidence, since we precisely came up with this rule when trying to
+    design a decision procedure for flowers.
+
+  \item[Disjunction/Falsity Elimination (\rsf{srep})]
+    It corresponds to a $n$-ary generalization of the left introduction rule for
+    disjunction in sequent calculus, the $0$-ary case capturing falsity
+    elimination (\textit{ex falso quodlibet}). The binary case is also used in
+    the IEG system of \cite{minghui_graphical_2019}, together with its converse.
+    The name \rsf{srep} is short for \textsf{(s)}elf-\textsf{(rep)}roduction,
+    which is more clearly visualized in the graphical version of the rule in
+    \reffig{flower-calculus-graphical}. Through the Curry-Howard correspondence,
+    it can be related to the \emph{pattern-matching generator} found in modern
+    editors of some functional programming languages, such as the Hazel
+    structure editor \sidecite{yuan-live-2023}, and the Agda proof assistant.
+\end{description}
+
+\paragraph{Proofs}
+
+Our notions of derivation and proof are essentially the same as the ones given
+for EG in \refsec{multisets}, except that we distinguish from the outset between
+two kinds of derivations, stemming from our partitioning of the rules into two
+sets: the \emph{natural} rules denoted by $\Nature$, and the \emph{cultural}
+rules denoted by $\Culture$. In particular, every natural rule in $\Nature$ is
+both \emph{analytic} (i.e. every atom in the premiss already appears in the
+conclusion) and \emph{invertible} (this will be shown in \refsec{Soundness});
+and we will prove in \refsec{Completeness} that the entire cultural fragment
+$\Culture$ is \emph{admissible}.
 
 \begin{definition}[Derivation]
   Given a set of rules $\mathsf{R}$, we write $\Phi \step_{\mathsf{R}} \Psi$ to
-  indicate a rewrite \emph{step} in $\mathsf{R}$, that is an instance of some
-  $r \in \mathsf{R}$ with $\Psi$ as premiss and $\Phi$ as conclusion.
-  The rules of the flower calculus are divided into two sets: the \emph{natural}
-  rules $\Nature$, and the \emph{cultural} rules $\Culture$. We just write $\Phi
-  \step \Psi$ to mean $\Phi \step_{\Nature\cup\Culture} \Psi$. A
+  indicate a rewrite \emph{step} in $\mathsf{R}$, that is an instance of some $r
+  \in \mathsf{R}$ with $\Psi$ as premiss and $\Phi$ as conclusion. We just write
+  $\Phi \step \Psi$ to mean $\Phi \step_{\Nature\cup\Culture} \Psi$. A
   \emph{derivation} $\Phi \nsteps{n}_{\mathsf{R}} \Psi$ is a sequence of rewrite
   steps $\Phi_0 \step_{\mathsf{R}} \Phi_1 \ldots \step_{\mathsf{R}} \Phi_n$ with
   $\Phi_0 = \Phi$, $\Phi_n = \Psi$ and $n \geq 0$. Generally the length $n$ of
   the derivation does not matter, and we just write $\Phi \steps_R \Psi$.
   Finally, natural derivations are closed under arbitrary contexts: for every
   context $\Xi\hole$, $\Phi \step_\Nature \Psi$ implies $\cfill{\Xi}{\Phi}
-  \step_\Nature \cfill{\Xi}{\Psi}$.
+  \step_\Nature \cfill{\Xi}{\Psi}$. We write $\Phi \lstep_{\Nature} \Psi$ to
+  denote a \emph{local} natural step, i.e. a direct instance of a natural rule
+  in the empty context.
 \end{definition}
-
-\todo{Use the $\lstep$ notation for local steps}
 
 \begin{definition}[Proof]\labdef{flowers-proof}
   A \emph{proof} of a bouquet $\Phi$ is a derivation $\Phi \steps \emptyset$.
 \end{definition}
 
 In Peircean terms, the empty bouquet is the blank sheet of assertion, which as
-we have seen in \refsec{alpha} can be interpreted as the symbol of \emph{absolute
+we have seen in \refsec{alpha} can be interpreted as the icon of \emph{absolute
 truth}. Then in our proof construction paradigm, proving a bouquet amounts to
 erasing it completely from the sheet of assertion, thus reducing it to absolute
 truth.
 
 Now if we want to speak about \emph{relative} truth $\Psi \vdash \Phi$, i.e.
 $\Phi$ is true under the assumption that $\Psi$ is, it turns out that the notion
-of natural derivability $\Phi \steps_{\Nature} \Psi$ is too weak. Indeed as we
-will see in \refsec{Soundness} and \refsec{Completeness}, the natural rules of
-the flower calculus are both \emph{invertible} and \emph{complete} for
-provability. A consequence of invertibility is that natural derivability is only
-able to relate logically equivalent bouquets --- in fact not even all of them
---- which prevents the applicability of the \emph{deduction theorem}
-\refthm{deduction}. That is, as soon as $\flower{\Psi}{\Phi}$ is provable but
-the converse $\flower{\Phi}{\Psi}$ is not, it will necessarily follow that $\Phi
-\not\steps_{\Nature} \Psi$. This problem does not arise if we consider full
-derivability $\Phi \steps \Psi$, because of the powerful but non-invertible
-cultural rules \rsf{grow} and \rsf{crop}, which correspond respectively to the
-\emph{insertion} and \emph{erasure} rules of Peirce's EG. These rules are also
-included in the intuitionistic EG system of Minghui and Pietarinen
-\sidecite{minghui_graphical_2019}, and thus the authors are able to prove a
-deduction theorem for their derivability relation.
+of natural derivability $\Phi \steps_{\Nature} \Psi$ is too weak. Indeed as
+already mentioned, the natural rules of the flower calculus are both
+\emph{invertible} and \emph{complete} for provability. A consequence of
+invertibility is that natural derivability is only able to relate logically
+equivalent bouquets --- in fact not even all of them --- which prevents the
+applicability of the \emph{deduction theorem} (\refthm{deduction}). That is, as
+soon as $\flower{\Psi}{\Phi}$ is provable but the converse $\flower{\Phi}{\Psi}$
+is not, it will necessarily follow that $\Phi \not\steps_{\Nature} \Psi$. This
+problem does not arise if we consider full derivability $\Phi \steps \Psi$,
+because of the powerful but non-invertible cultural rules \rsf{grow} and
+\rsf{crop}, which correspond respectively to the \emph{insertion} and
+\emph{erasure} rules of EG. These rules are also included in the IEG system of
+Minghui and Pietarinen \sidecite{minghui_graphical_2019}, and thus the authors
+are able to prove a deduction theorem for their derivability relation.
 
 A trivial way to circumvent this is to define directly $\Psi \vdash \Phi$ as
-$\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}} \steps \emptyset$. In fact this
-is closer to what one would find in sequent calculus, where hypothetical proofs
-are closed derivations of hypothetical sequents, not open derivations. The
-difference is that sequents capture only the implicative structure of logic,
-while flowers capture the full structure of first-order intuitionistic logic.
-This allows for a nice generalization of the notion of hypothetical provability,
-which will be useful in the completeness proof of \refsec{Completeness}. 
+$\flower{\Psi}{\Phi} \steps \emptyset$. In fact this is closer to what one would
+find in sequent calculus, where hypothetical proofs are closed derivations of
+hypothetical sequents, not open derivations. The difference is that sequents
+capture only the first-order\sidenote{As opposed to \emph{higher-order}, i.e.
+negatively nested implications.} implicative structure of logic, while flowers
+capture the full structure of intuitionistic predicate logic. This allows for a
+nice generalization of the notion of hypothetical provability, which will be
+useful in the completeness proof of \refsec{Completeness}. 
 
 \begin{definition}[Hypothetical provability]
   Given two bouquets $\Phi, \Psi$, we say that $\Phi$ is \emph{hypothetically
@@ -663,6 +1040,16 @@ which will be useful in the completeness proof of \refsec{Completeness}.
   $$
 \end{proof}
 
+\begin{marginfigure}
+  $$
+  \R[\rsf{crep}]
+    {\flower{\gamma}{\fset{i}{n}{\garden{\mathbf{x_i}}{\Phi_i, \Psi}}}}
+    {(\flower{\gamma}{\fset{i}{n}{\garden{\mathbf{x_i}}{\Phi_i}}}), \Psi}
+  $$
+  \caption{Cross-reproduction rule}
+  \labfig{cross-reproduction}
+\end{marginfigure}
+
 There is a subtle but important shift here with respect to the standard notions
 of hypothetical provability, as found in Gentzen systems or type theories: while
 in these settings it is characterized as the existence of a proof for a
@@ -670,44 +1057,42 @@ in these settings it is characterized as the existence of a proof for a
 of derivations, here we have the stronger requirement that there exist proofs
 for a \emph{class} of judgments $\cfill{\Xi}{\Phi}$, whose hypothetical shape
 comes from the condition that $\chyp{\Psi}{\Xi\hole}$. In practice, the
-pollination rules $\{\text{\rnmsf{poll{\da}}},
-\text{\rnmsf{poll{\ua}}}\}$ and the {\rnmsf{fence}} rule make this equivalent
-to the existence of a proof for $\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}$. But
-we conjecture that the {\rnmsf{fence}} rule might be admissible modulo the
-addition of the following distributivity rule:
-$$
-\R[\textsf{wrep}]
-  {\flower{\gamma}{\fset{i}{n}{\garden{\mathbf{x_i}}{\Phi_i, \Psi}}}}
-  {(\flower{\gamma}{\fset{i}{n}{\garden{\mathbf{x_i}}{\Phi_i}}}), \Psi}
-$$
+pollination rules $\{\text{\rnmsf{poll{\da}}}, \text{\rnmsf{poll{\ua}}}\}$ and
+the {\rnmsf{epis}} rule make this equivalent to the existence of a proof for
+$\flower{\Psi}{\Phi}$. But we conjecture that the {\rnmsf{epis}} rule might be
+admissible modulo the addition of the distributivity rule \rsf{crep}\sidenote{\rsf{crep}
+stands for \textsf{c}ross-\textsf{rep}roduction, mirroring the distinction
+between cross-pollination and self-pollination, but with respect to the
+self-reproduction rule \rsf{srep}.} of \reffig{cross-reproduction}.
+
 Thus our stronger notion of hypothetical provability makes more sense in the
-variant $\Nature \setminus \{\rsf{fence}\} \cup \{\rsf{wrep}\}$ of the flower
+variant $\Nature \setminus \{\rsf{epis}\} \cup \{\rsf{crep}\}$ of the flower
 calculus, although it will still be useful in this work to make meta-theoretical
-proofs slightly shorter. For now we allow the {\rnmsf{fence}} rule, which makes
+proofs slightly shorter. For now we allow the {\rnmsf{epis}} rule, which renders
 the deduction theorem trivial:
 
 \begin{theorem}[Deduction]\labthm{deduction}
   For any pair $\Phi, \Psi$ of bouquets, $\Psi \vdash_{\Nature} \Phi$ if and only if
-  $\vdash_{\Nature} \flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}$.
+  $\vdash_{\Nature} \flower{\Psi}{\Phi}$.
 \end{theorem}
 \begin{proof}
   Let $\Xi\hole$ be some context. If $\Psi \vdash_{\Nature} \Phi$, then in particular
   $\cfill{\Xi'}{\Phi} \steps_{\Nature} \cfill{\Xi'}{\phantom{\Phi}}$ for $\Xi'\hole :=
-  \cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{\square}}}$. Thus we have:
+  \cfill{\Xi}{\flower{\Psi}{\square}}$. Thus we have:
   $$
-  \cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}} \steps_{\Nature}
-  \cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{}}} \step_{\mathsf{epet}}
+  \cfill{\Xi}{\flower{\Psi}{\Phi}} \steps_{\Nature}
+  \cfill{\Xi}{\flower{\Psi}{\garden{{}}{{}}}} \step_{\mathsf{epet}}
   \cfill{\Xi}{\phantom{\Phi}}
   $$
   In the other direction, let $\Xi$ be some context such that
   $\chyp{\Psi}{\Xi\hole}$. If $\vdash_{\Nature}
-  \flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}$, then in particular
-  $\cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}} \steps_{\Nature}
+  \flower{\Psi}{\Phi}$, then in particular
+  $\cfill{\Xi}{\flower{\Psi}{\Phi}} \steps_{\Nature}
   \cfill{\Xi}{\phantom{\Phi}}$. Thus we have:
   $$
-  \cfill{\Xi}{\Phi} \step_{\mathsf{fence}}
-  \cfill{\Xi}{\flower{\garden{{}}{{}}}{\garden{{}}{\Phi}}} \step_{\mathsf{poll{\ua}}}
-  \cfill{\Xi}{\flower{\garden{{}}{\Psi}}{\garden{{}}{\Phi}}} \steps_{\Nature}
+  \cfill{\Xi}{\Phi} \step_{\mathsf{epis}}
+  \cfill{\Xi}{\flower{{}}{\Phi}} \step_{\mathsf{poll{\ua}}}
+  \cfill{\Xi}{\flower{\Psi}{\Phi}} \steps_{\Nature}
   \cfill{\Xi}{\phantom{\Phi}}
   $$
 \end{proof}
@@ -977,7 +1362,7 @@ relative to a flower $\psi$, which will satisfy the property that $\Phi
   $$
   \begin{array}{rlll}
     \cfill{\Xi}{\psi}
-    &\step_{\mathsf{fence}} &\cfill{\Xi}{\flower{\garden{{}}{{}}}{\garden{{}}{\psi}}} & \\
+    &\step_{\mathsf{epis}} &\cfill{\Xi}{\flower{\garden{{}}{{}}}{\garden{{}}{\psi}}} & \\
     &\step_{\mathsf{poll{\ua}}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\psi}}} &\text{(\HFive)} \\
     &\step_{\mathsf{ipis}} &\cfill{\Xi}{\flower{\garden{{}}{(\flower{\garden{}{\sigma(\Phi)}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} & \\
     &\step_{\mathsf{poll{\da}}} &\cfill{\Xi}{\flower{\garden{{}}{(\flower{\garden{}{{}}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} &\text{(\HTwo, \HFive)} \\
@@ -1173,7 +1558,7 @@ substitutes every occurrence of the associated hypothesis $x$ in the proof
 $\pi_B$ of $B$ by the proof $\pi_A$ of the positive $A$.
 \todo{ Elaborate further on this computational aspect of EG. }
 \todo{ Investigate the ``scientific'' iteration rule of Peirce as a means to
-avoid the need for a computational interpretation of the \rsf{fence} rule. }
+avoid the need for a computational interpretation of the \rsf{epis} rule. }
 
 
 \section{Conclusion}\labsec{Conclusion}
@@ -1201,7 +1586,7 @@ avoid the need for a computational interpretation of the \rsf{fence} rule. }
       \item Coherent formulas and synthetic rules \sidecite{marin_axioms_2022}
       \item Good properties of coherent logic for semi-automated proof search
         \sidecite{bezem_automating_2005}
-      \item Link with the \texttt{Box} data structure of Ayers \sidecite{ayers_2021}
+      \item Link with the \texttt{Box} data structure of Ayers \sidecite{ayers_thesis}
     \end{itemize}
   \item[Normal forms of formulas]~\\
     \begin{itemize}

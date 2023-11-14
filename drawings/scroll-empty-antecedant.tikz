@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (2) at (0, 2.75) {};
+		\node [style=none] (3) at (0, -3) {};
+		\node [style=none] (4) at (0, 0) {};
+		\node [style=scroll anchor] (5) at (0, -3) {};
+		\node [style=none] (6) at (0, -1.55) {$G$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=neg area] (3.center)
+			 to [bend right=270, looseness=1.50] (2.center)
+			 to [bend right=270, looseness=1.50] cycle;
+		\draw [style=pos area] (5.center)
+			 to [bend right=270, looseness=1.50] (4.center)
+			 to [bend right=270, looseness=1.50] cycle;
+	\end{pgfonlayer}
+\end{tikzpicture}

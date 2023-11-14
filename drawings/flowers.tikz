@@ -1,0 +1,103 @@
+\begin{tikzpicture}
+\coordinate (f) at (0,0);
+\DrawFlowers{
+  {
+    center = "f",
+    pistil = {
+      size = 2.3,
+    },
+    petals = {
+      { name = "p1" },
+      { name = "p2" },
+      { name = "p3" },
+      { name = "p4" },
+      { name = "p5" },
+    },
+  },
+  {
+    center = "f",
+    pistil = {
+      size = 0.6,
+      color = "white",
+    },
+    petals = {
+      { name = "g1" },
+      { name = "g2" },
+      { name = "g3" },
+      { name = "g4" },
+      { name = "g5" },
+      { name = "g6" },
+    },
+  },
+  {
+    center = "$(p1) - (0.5,0)$",
+    pistil = {
+      size = 0.6,
+    },
+    petals = {
+      {},
+      {},
+      {},
+      { name = "b1" },
+    },
+  },
+  {
+    center = "p2",
+    pistil = {
+      size = 0.6,
+    },
+    petals = {
+      {},
+      { name = "c1" },
+      {},
+      { name = "c2" },
+    },
+  },
+  {
+    center = "p3",
+    pistil = {
+      size = 0.6,
+    },
+    petals = {
+      { name = "d1" },
+      {},
+      { name = "d2" },
+      {},
+      { name = "d3" },
+      {},
+    },
+  },
+  {
+    center = "p4",
+    angle = 0.25 * math.pi,
+    pistil = {
+      size = 0.6,
+    },
+    petals = {
+      { name = "e1" },
+      { name = "e2" },
+      { name = "e3" },
+      { name = "e4" },
+    },
+  },
+  {
+    center = "p5",
+    pistil = {
+      size = 0.6,
+    },
+    petals = {
+      { name = "f1" },
+      { name = "f2" },
+      { name = "f3" },
+      { name = "f4" },
+      { name = "f5" },
+    },
+  },
+  { center = "g1", pistil = { size = 0.3, color = "white" } },
+  { center = "g2", pistil = { size = 0.3, color = "white" } },
+  { center = "g3", pistil = { size = 0.3, color = "white" } },
+  { center = "g4", pistil = { size = 0.3, color = "white" } },
+  { center = "g5", pistil = { size = 0.3, color = "white" } },
+  { center = "g6", pistil = { size = 0.3, color = "white" } },
+}
+\end{tikzpicture}
