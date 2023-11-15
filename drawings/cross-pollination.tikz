@@ -1,0 +1,22 @@
+\begin{tikzpicture}
+  \DrawFlowers{
+    {
+      angle = 0.25 * math.pi,
+      petals = { {name="p1"}, {name="p2"}, {name="p3"}, {name="p4"} }
+    }
+  }
+  \node[source] (src) at (0,5) {};
+  \node[target] (tgt) at (0,3.5) {};
+  \node[target] (tgt0) at (0,0) {};
+  \node[target] (tgt1) at (p1) {};
+  \node[target] (tgt2) at (p2) {};
+  \node[target] (tgt3) at (p3) {};
+  \node[target] (tgt4) at (p4) {};
+  
+  \draw[style=justif] (src) to[bend left=40] (tgt);
+  \draw[style=justif] (src) to[bend right=20] (tgt0);
+  \draw[style=justif] (src) to[bend right] (tgt1);
+  \draw[style=justif] (src) to[bend right=80] (tgt2);
+  \draw[style=justif] (src) to[bend left=80] (tgt3);
+  \draw[style=justif] (src) to[bend left] (tgt4);
+\end{tikzpicture}

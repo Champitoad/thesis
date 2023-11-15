@@ -347,13 +347,11 @@ from it. In fact he goes further than this, and proposes to generalize both the
 cut and the scroll into an $n$-ary construction called the \emph{curl}
 (``\emph{bucle}''), where $n$ is the number of inner closes, called \emph{loops}
 (``\emph{lazos}''). \reffig{five-loops} shows an example of curl with five
-loops\sidenote[][1em]{Admittedly, it looks more like a slice view of a
-\emph{pistol cylinder} than a curl.}. In \cite{minghui_graphical_2019}, the curl
-is simply called \emph{$n$-ary scroll}, and is analyzed into the outer area
-(that enclosed by the Wall) called the \emph{outloop}, and the inner areas
-(those enclosed by the $n$ Fences, i.e. the loops of Oostra) called the
-\emph{inloops}. Then cuts and scrolls are indeed special cases of $n$-ary
-scrolls, respectively with $n = 0$ and $n = 1$.
+loops. In \cite{minghui_graphical_2019}, the curl is simply called \emph{$n$-ary
+scroll}, and is analyzed into the outer area (that enclosed by the Wall) called
+the \emph{outloop}, and the inner areas (those enclosed by the $n$ Fences, i.e.
+the loops of Oostra) called the \emph{inloops}. Then cuts and scrolls are indeed
+special cases of $n$-ary scrolls, respectively with $n = 0$ and $n = 1$.
 
 \begin{marginfigure}
   \stkfig{1}{five-loops}
@@ -835,7 +833,17 @@ relation of \refsec{atomicity}:
 \end{definition}
 
 \begin{marginfigure}
-  $$\tikzfig{1}{0.5}{pollination}$$
+  $$
+  \!\!\!\!
+  \!\!\!\!
+  \!\!\!\!
+  \begin{array}{c}
+    \tikzfig{1}{0.5}{cross-pollination} \vspace{-2em} \\
+    \text{\textit{Cross-pollination}} \vspace{-1em} \\
+    \tikzfig{1}{0.5}{self-pollination} \vspace{-2em} \\
+    \text{\textit{Self-pollination}}
+  \end{array}
+  $$
   \caption{Pollination in flowers}
   \labfig{pollination}
 \end{marginfigure}
@@ -1098,7 +1106,7 @@ the deduction theorem trivial:
 \end{proof}
 
 
-\section{Kripke Semantics}\labsec{Semantics}
+\section{Kripke semantics}\labsec{Semantics}
 
 \todo{ give a direct Kripke semantics to flowers, avoiding the need for
 translations to and from traditional formulas. This will be crucial to get a

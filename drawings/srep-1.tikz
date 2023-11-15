@@ -1,0 +1,32 @@
+\begin{tikzpicture}
+\clip (-4,-4) rectangle (4,4.1);
+\coordinate (c) at (0,0);
+\DrawFlowers{
+{
+  center = "c",
+  pistil = { size = 2 },
+  petal_size = 4,
+  petals = { {name="d1"}, {name="d2"}, {name="d3"}, {name="d4"}, {name="d5"} }
+},
+{
+  center = "c",
+  pistil = { size = 0.4, color = "white" },
+  petals = { {name="g1"}, {name="g2"}, {name="g3"}, {name="g4"}, {name="g5"} }
+},
+}
+\node at (d1) {$\delta_1$};
+\node at (d2) {$\delta_2$};
+\node at (d3) {$\delta_3$};
+\node at (d4) {$\delta_{n-1}$};
+\node at (d5) {$\delta_{n}$};
+\node at (0,-1.5) {$\mathbf{x}~~\Phi$};
+\node at (0,-1.15) {$\ldots$};
+\node at (0,-3.75) {$\ldots$};
+\node at (g1) {$\gamma_1$};
+\node at (g2) {$\gamma_2$};
+\node at (g3) {$\gamma_3$};
+\node at (g4) {$\gamma_{m-1}$};
+\node at (g5) {$\gamma_{m}$};
+% \draw [help lines, step=1] (current bounding box.south west) grid (current bounding box.north east);
+% \draw [help lines] (current bounding box.south west) rectangle (current bounding box.north east);
+\end{tikzpicture}

@@ -1,0 +1,85 @@
+
+\begin{tikzpicture}
+\clip (-4.5,-10.5) rectangle (4.5,1);
+\coordinate (c1) at (0,-3.5);
+\coordinate (c2) at (-2.25,-5.5);
+\coordinate (c3) at (-1.5,-8);
+\coordinate (c4) at (1.5,-8);
+\coordinate (c5) at (2.25,-5.5);
+\DrawFlowers{
+  {
+    pistil = { size = 0.6 },
+    petal_size = 10,
+    petals = { {}, {}, {name="pet"}, {} },
+  },
+  {
+    center = "c1",
+    pistil = { size = 0.4 },
+    petal_size = 1.15,
+    petals = { {name="f1p1"},{name="f1p2"},{name="f1p3"},{name="f1p4"},{name="f1p5"} }
+  },
+  {
+    center = "c2",
+    pistil = { size = 0.4 },
+    petal_size = 1.15,
+    petals = { {name="f2p1"},{name="f2p2"},{name="f2p3"},{name="f2p4"},{name="f2p5"} }
+  },
+  {
+    center = "c3",
+    pistil = { size = 0.4 },
+    petal_size = 1.15,
+    petals = { {name="f3p1"},{name="f3p2"},{name="f3p3"},{name="f3p4"},{name="f3p5"} }
+  },
+  {
+    center = "c4",
+    pistil = { size = 0.4 },
+    petal_size = 1.15,
+    petals = { {name="f4p1"},{name="f4p2"},{name="f4p3"},{name="f4p4"},{name="f4p5"} }
+  },
+  {
+    center = "c5",
+    pistil = { size = 0.4 },
+    petal_size = 1.15,
+    petals = { {name="f5p1"},{name="f5p2"},{name="f5p3"},{name="f5p4"},{name="f5p5"} }
+  },
+}
+\node at (0,0) {$\mathbf{x}~~\Phi$};
+\node at (c1) {$\gamma_1$};
+\node at (c2) {$\gamma_2$};
+\node at (c3) {$\gamma_3$};
+\node at (c4) {$\gamma_{m-1}$};
+\node at (c5) {$\gamma_m$};
+\node at (0,-8) {$\ldots$};
+\node at ($(c1) - (0, 1.15)$) {$\ldots$};
+\node at ($(c2) - (0, 1.15)$) {$\ldots$};
+\node at ($(c3) - (0, 1.15)$) {$\ldots$};
+\node at ($(c4) - (0, 1.15)$) {$\ldots$};
+\node at ($(c5) - (0, 1.15)$) {$\ldots$};
+\node at (f1p1) {$\delta_1$};
+\node at (f1p2) {$\delta_2$};
+\node at (f1p3) {$\delta_3$};
+\node at (f1p4) {$\delta_{n-1}$};
+\node at (f1p5) {$\delta_n$};
+\node at (f2p1) {$\delta_1$};
+\node at (f2p2) {$\delta_2$};
+\node at (f2p3) {$\delta_3$};
+\node at (f2p4) {$\delta_{n-1}$};
+\node at (f2p5) {$\delta_n$};
+\node at (f3p1) {$\delta_1$};
+\node at (f3p2) {$\delta_2$};
+\node at (f3p3) {$\delta_3$};
+\node at (f3p4) {$\delta_{n-1}$};
+\node at (f3p5) {$\delta_n$};
+\node at (f4p1) {$\delta_1$};
+\node at (f4p2) {$\delta_2$};
+\node at (f4p3) {$\delta_3$};
+\node at (f4p4) {$\delta_{n-1}$};
+\node at (f4p5) {$\delta_n$};
+\node at (f5p1) {$\delta_1$};
+\node at (f5p2) {$\delta_2$};
+\node at (f5p3) {$\delta_3$};
+\node at (f5p4) {$\delta_{n-1}$};
+\node at (f5p5) {$\delta_n$};
+% \draw [help lines, step=1] (current bounding box.south west) grid (current bounding box.north east);
+% \draw [help lines] (current bounding box.south west) rectangle (current bounding box.north east);
+\end{tikzpicture}
