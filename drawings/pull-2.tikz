@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+\clip (-1.5,-1.5) rectangle (1.5,1.6);
+\DrawFlowers{{
+    pistil = { size = 0.5 },
+    petals = { {}, {name="d1"}, {name="d2"}, {name="d3"}, {name="d4"} }
+}}
+\node at (d1) {$\delta_{i+1}$};
+\node at (d2) {$\delta_{n}$};
+\node at (d3) {$\delta_{1}$};
+\node at (d4) {$\delta_{i}$};
+\node at (0,0) {$\gamma$};
+\node[rotate=20] at (-1.35,-0.45) {$\vdots$};
+\node[rotate=-20] at (1.35,-0.45) {$\vdots$};
+\end{tikzpicture}

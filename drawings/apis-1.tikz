@@ -1,0 +1,25 @@
+\begin{tikzpicture}
+\clip (-2,-2) rectangle (2,2);
+\coordinate (c1) at (0,0);
+\coordinate (c2) at (4,0);
+\DrawFlowers{
+  {
+    center = "c1",
+    pistil = { size = 0.6 },
+    petals = { {name="d1"}, {name="d2"}, {name="d3"}, {name="d4"}, {name="d5"} }
+  },
+}
+\node at (d1) {$\sigma(\delta_1)$};
+\node at (d2) {$\sigma(\delta_2)$};
+\node at (d3) {$\sigma(\delta_3)$};
+\node at (d4) {$\sigma(\delta_{n-1})$};
+\node at (d5) {$\sigma(\delta_{n})$};
+\node at (c1) {$
+  \begin{array}{c}
+    \mathbf{x}\\
+    \sigma(\Phi)
+  \end{array}
+$};
+% \draw [help lines, step=1] (current bounding box.south west) grid (current bounding box.north east);
+% \draw [help lines] (current bounding box.south west) rectangle (current bounding box.north east);
+\end{tikzpicture}

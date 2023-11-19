@@ -1,0 +1,43 @@
+\begin{tikzpicture}
+\clip (-2,-2) rectangle (6,2);
+\coordinate (c1) at (0,0);
+\coordinate (c2) at (4,0);
+\DrawFlowers{
+  {
+    center = "c1",
+    pistil = { size = 0.6 },
+    petals = { {name="d1"}, {name="d2"}, {name="d3"}, {name="d4"}, {name="d5"} }
+  },
+  {
+    center = "c2",
+    pistil = { size = 0.6 },
+    petals = { {name="e1"}, {name="e2"}, {name="e3"}, {name="e4"}, {name="e5"} }
+  },
+}
+\node at (d1) {$\sigma(\delta_1)$};
+\node at (d2) {$\sigma(\delta_2)$};
+\node at (d3) {$\sigma(\delta_3)$};
+\node at (d4) {$\sigma(\delta_{n-1})$};
+\node at (d5) {$\sigma(\delta_{n})$};
+\node at (c1) {$
+  \begin{array}{c}
+    \mathbf{x}\\
+    \sigma(\Phi)
+  \end{array}
+$};
+\node at ($(c1) - (0,1.7)$) {$\ldots$};
+\node at (e1) {$\delta_1$};
+\node at (e2) {$\delta_2$};
+\node at (e3) {$\delta_3$};
+\node at (e4) {$\delta_{n-1}$};
+\node at (e5) {$\delta_{n}$};
+\node at (c2) {$
+  \begin{array}{c}
+    \mathbf{x}~\mathbf{y} \\
+    \Phi
+  \end{array}
+$};
+\node at ($(c2) - (0,1.7)$) {$\ldots$};
+% \draw [help lines, step=1] (current bounding box.south west) grid (current bounding box.north east);
+% \draw [help lines] (current bounding box.south west) rectangle (current bounding box.north east);
+\end{tikzpicture}

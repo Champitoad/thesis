@@ -1,0 +1,31 @@
+\begin{tikzpicture}
+\clip (-2,-1.8) rectangle (2,1.9);
+\coordinate (c) at (0,0);
+\DrawFlowers{{
+  angle = -1/6 * math.pi,
+  center = "c",
+  pistil = { size = 0.6 },
+  petals = { {name="d1"}, {name="d"}, {name="d2"}, {name="d3"}, {name="d4"}, {name="d5"} }
+}}
+\node at (d1) {$
+  \begin{array}{c}
+    \,\mathbf{x}~\mathbf{y} \\
+    \!\!\!\Phi
+  \end{array}
+$};
+\node at (d) {$
+  \begin{array}{c}
+    \!\mathbf{x} \\
+    \,\,\,\sigma(\Phi)
+  \end{array}
+$};
+\node at (d2) {$\delta_{i+1}$};
+\node at (d3) {$\delta_n$};
+\node at (d4) {$\delta_{1}$};
+\node at (d5) {$\delta_{i}$};
+\node at (c) {$\gamma$};
+\node[rotate=30] at (-1.45,-0.85) {$\vdots$};
+\node[rotate=-30] at (1.45,-0.85) {$\vdots$};
+% \draw [help lines, step=1] (current bounding box.south west) grid (current bounding box.north east);
+% \draw [help lines] (current bounding box.south west) rectangle (current bounding box.north east);
+\end{tikzpicture}  

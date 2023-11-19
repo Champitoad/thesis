@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+\clip (-1.5,-1.5) rectangle (1.5,1.6);
+\coordinate (c) at (0,0);
+\DrawFlowers{{
+  center = "c",
+  pistil = { size = 0.5 },
+  petals = { {name="d1"}, {name="d2"}, {name="d3"}, {name="d4"}, {name="d5"} }
+}}
+\node at (d1) {$\delta_1$};
+\node at (d2) {$\delta_2$};
+\node at (d3) {$\delta_3$};
+\node at (d4) {$\delta_{n-1}$};
+\node at (d5) {$\delta_{n}$};
+\node at (c) {$\gamma$};
+\node at ($(c) - (0,1.4)$) {$\ldots$};
+% \draw [help lines, step=1] (current bounding box.south west) grid (current bounding box.north east);
+% \draw [help lines] (current bounding box.south west) rectangle (current bounding box.north east);
+\end{tikzpicture}

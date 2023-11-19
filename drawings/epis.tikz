@@ -1,0 +1,8 @@
+\begin{tikzpicture}
+  \DrawFlowers{{
+    angle = 0.29 * math.pi,
+    pistil = { size = 0.5 },
+    petals = { {}, {}, {}, {name="pet"}, {} }
+  }}
+  \node at (pet) {$\Phi$};
+\end{tikzpicture}

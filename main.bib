@@ -865,7 +865,7 @@
 }
 
 @misc{CoqELPI,
-  author  = {{Enrico Tassi}},
+  author  = {Tassi, Enrico},
   title   = {Coq-Elpi GitHub repository},
   url     = {https://github.com/LPCIC/coq-elpi},
   year    = {2023},
@@ -2172,4 +2172,96 @@ The (elementary) theory of topoi is the basis for the study of continuously vari
 	year = {2023},
 	pages = {609--635},
 	file = {Yuan et al. - 2023 - Live Pattern Matching with Typed Holes.pdf:/home/pablo/Zotero/storage/D8ACDL85/Yuan et al. - 2023 - Live Pattern Matching with Typed Holes.pdf:application/pdf},
+}
+
+@misc{girard_parallel,
+  author       = {Girard, Jean-Yves},
+  howpublished = {Online self-publication},
+  title        = {Schrödinger's cut III},
+  subtitle     = {Les univers parallèles},
+  year         = {2022},
+  month        = {{December}},
+  url          = {https://girard.perso.math.cnrs.fr/chat3.pdf},
+  urldate      = {2023-11-16},
+}
+
+@inproceedings{10.1145/3497775.3503690,
+  author    = {Frumin, Dan},
+  title     = {Semantic Cut Elimination for the Logic of Bunched Implications, Formalized in Coq},
+  year      = {2022},
+  isbn      = {9781450391825},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3497775.3503690},
+  doi       = {10.1145/3497775.3503690},
+  abstract  = {The logic of bunched implications (BI) is a substructural logic that forms the backbone of separation logic, the much studied logic for reasoning about heap-manipulating programs. Although the proof theory and metatheory of BI are mathematically involved, the formalization of important metatheoretical results is still incipient. In this paper we present a self-contained formalized, in the Coq proof assistant, proof of a central metatheoretical property of BI: cut elimination for its sequent calculus. The presented proof is semantic, in the sense that is obtained by interpreting sequents in a particular “universal” model. This results in a more modular and elegant proof than a standard Gentzen-style cut elimination argument, which can be subtle and error-prone in manual proofs for BI. In particular, our semantic approach avoids unnecessary inversions on proof derivations, or the uses of cut reductions and the multi-cut rule. Besides modular, our approach is also robust: we demonstrate how our method scales, with minor modifications, to (i) an extension of BI with an arbitrary set of simple structural rules, and (ii) an extension with an S4-like □ modality.},
+  booktitle = {Proceedings of the 11th ACM SIGPLAN International Conference on Certified Programs and Proofs},
+  pages     = {291–306},
+  numpages  = {16},
+  keywords  = {interactive theorem proving, substructural logics, bunched implications, Coq, cut elimination},
+  location  = {Philadelphia, PA, USA},
+  series    = {CPP 2022}
+}
+
+@article{OKADA2002471,
+  title    = {A uniform semantic proof for cut-elimination and completeness of various first and higher order logics},
+  journal  = {Theoretical Computer Science},
+  volume   = {281},
+  number   = {1},
+  pages    = {471-498},
+  year     = {2002},
+  note     = {Selected Papers in honour of Maurice Nivat},
+  issn     = {0304-3975},
+  doi      = {https://doi.org/10.1016/S0304-3975(02)00024-5},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0304397502000245},
+  author   = {Mitsuhiro Okada},
+  abstract = {We present a natural generalization of Girard's (first order) phase semantics of linear logic (Theoret. Comput. Sci. 50 (1987)) to intuitionistic and higher-order phase semantics. Then we show that this semantic framework allows us to derive a uniform semantic proof of the (first order and) higher order cut-elimination theorem (as well as a (first order and) higher order phase-semantic completeness theorem) for various different logical systems at the same time. Our semantic proof works for various different logical systems uniformly in a strong sense (without any change of the argument of proof): it works for both first order and higher order versions and for linear, substructural, and standard logics uniformly, and for both their intuitionistic and classical versions uniformly.}
+}
+
+@inproceedings{10.1007/978-3-642-02261-6_17,
+  author    = {Herbelin, Hugo
+               and Lee, Gyesik},
+  editor    = {Ono, Hiroakira
+               and Kanazawa, Makoto
+               and de Queiroz, Ruy},
+  title     = {Forcing-Based Cut-Elimination for Gentzen-Style Intuitionistic Sequent Calculus},
+  booktitle = {Logic, Language, Information and Computation},
+  year      = {2009},
+  publisher = {Springer Berlin Heidelberg},
+  address   = {Berlin, Heidelberg},
+  pages     = {209--217},
+  abstract  = {We give a simple intuitionistic completeness proof of Kripke semantics with constant domain for intuitionistic logic with implication and universal quantification. We use a cut-free intuitionistic sequent calculus as formal system and by combining soundness with completeness, we obtain an executable cut-elimination procedure. The proof, which has been formalised in the Coq proof assistant, easily extends to the case of the absurdity connective using Kripke models with exploding nodes.},
+  isbn      = {978-3-642-02261-6}
+}
+
+@phdthesis{ilik:tel-00529021,
+  TITLE = {{Constructive Completeness Proofs and Delimited Control}},
+  AUTHOR = {Ilik, Danko},
+  URL = {https://pastel.hal.science/tel-00529021},
+  SCHOOL = {{Ecole Polytechnique X}},
+  YEAR = {2010},
+  MONTH = Oct,
+  KEYWORDS = {completeness proofs ; normalization by evaluation ; delimited control operators ; preuves de compl{\'e}tude ; normalisation par {\'e}valuation ; op{\'e}rateurs de contr{\^o}le d{\'e}limites},
+  TYPE = {Theses},
+  PDF = {https://pastel.hal.science/tel-00529021/file/thesis-danko-ilik.pdf},
+  HAL_ID = {tel-00529021},
+  HAL_VERSION = {v1},
+}
+
+@article{Sterling2022,
+  author = "Jonathan Sterling",
+  title = "{First Steps in Synthetic Tait Computability: The Objective Metatheory of Cubical Type Theory}",
+  year = "2022",
+  month = "4",
+  url = "https://kilthub.cmu.edu/articles/thesis/First_Steps_in_Synthetic_Tait_Computability_The_Objective_Metatheory_of_Cubical_Type_Theory/19632681",
+  doi = "10.1184/R1/19632681.v1"
+}
+
+@misc{flowers-metatheory,
+  author  = {Donato, Pablo},
+  title   = {flowers-metatheory},
+  url     = {https://github.com/Champitoad/flowers-metatheory},
+  year    = {2022},
+  month   = {{November}},
+  urldate = {2023-11-16}
 }

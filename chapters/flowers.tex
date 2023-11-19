@@ -17,24 +17,24 @@ We introduce the \emph{flower calculus}, a novel proof system for intuitionistic
 predicate logic based on syntactic objects called \emph{flowers}. We start by
 explaining how flowers stem from considerations in graphical logic, and more
 specifically from an intuitionistic variant of the \emph{existential graphs} of
-C. S. Peirce proposed by A. Oostra \sidecite[12.5em]{oostra_graficos_2010}. Then
-we present our inductive syntax for flowers, reminiscent at the same time of the
-nested sequents of deep inference proof theory, and the geometric/coherent
-formulas of categorical logic. A salient feature of our calculus inherited from
-EG, is that it is \emph{fully iconic}: it dispenses completely with the
-traditional notion of symbolic formula, operating instead as a rewriting system
-on flowers containing only atomic predicates. We also propose a notion of proof
-geared towards analyticity results à la Gentzen, suggesting new rules absent
-from other works on intuitionistic EG. This allows us to prove admissibility
-theorems for many rules, including Peirce's deletion rule which is a variant of
-Gentzen's cut rule. These results are obtained as a consequence of our soundness
-and completeness proofs with respect to Kripke semantics, in the spirit of the
-\emph{normalization-by-evaluation} technique \sidecite{NbE}. Furthermore, the
-kernel of rules targetted by completeness is fully invertible, a desirable
-property in both automated and interactive proof search. This is illustrated by
-our implementation of the Flower Prover, an early prototype of GUI for ITP that
-uses the rules of the flower calculus both for direct manipulation of flowers in
-its frontend, and automated simplification of goals in its backend.
+C. S. Peirce proposed by A. Oostra. Then we present our inductive syntax for
+flowers, reminiscent at the same time of the nested sequents of deep inference
+proof theory, and the geometric/coherent formulas of categorical logic. A
+salient feature of our calculus inherited from EG, is that it is \emph{fully
+iconic}: it dispenses completely with the traditional notion of symbolic
+formula, operating instead as a rewriting system on flowers containing only
+atomic predicates. We also propose a notion of proof geared towards analyticity
+results à la Gentzen, suggesting new rules absent from other works on
+intuitionistic EG. This allows us to prove admissibility theorems for many
+rules, including Peirce's deletion rule which is a variant of Gentzen's cut
+rule. These results are obtained as a consequence of our soundness and
+completeness proofs with respect to Kripke semantics, in the spirit of the
+\emph{normalization-by-evaluation} technique. Furthermore, the kernel of rules
+targetted by completeness is fully invertible, a desirable property in both
+automated and interactive proof search. This is illustrated by our
+implementation of the Flower Prover, an early prototype of GUI for ITP that uses
+the rules of the flower calculus both for direct manipulation of flowers in its
+frontend, and automated simplification of goals in its backend.
 
 The chapter is organized as follows: in \refsec{IEG}, we retrace the origin of
 Oostra's syntax for intuitionistic EG (hereafter ``IEG'') as a natural
@@ -153,7 +153,7 @@ interpretation of juxtaposition proposed by Peirce was that of
 \emph{disjunction}, in his system of \emph{entitative graphs}. According to him,
 the illative transformations of EG are a necessary consequence of the
 \emph{conjunctive} interpretation of juxtaposition, as witnessed by the
-following excerpt \cite[p.~533]{peirce_prolegomena_1906}:
+following excerpt \sidecite[p.~533]{peirce_prolegomena_1906}:
 
 \begin{quote}
 If you carefully examine the above conventions, you will find that they are
@@ -679,6 +679,18 @@ $\garden{{}}{\Phi}$.
   \labtab{letters}
 \end{marginfigure}
 
+As usual, we introduce a \emph{depth} measure that will allow us to reason
+inductively on the structure of flowers:
+\begin{definition}[Depth]
+  The \emph{depth} $\soldepth{-}$ of a flower or garden is defined mutually
+  recursively as follows:
+  \begin{align*}
+    \soldepth{p(\tvec{t})} &= 0 \\
+    \soldepth{\garden{\mathbf{x}}{\Phi}} &= \max_{\phi \in \Phi}{\soldepth{\phi}} \\
+    \soldepth{\flower{\gamma}{\Delta}} &= 1 + \max(\soldepth{\gamma}, \max_{\delta \in \Delta}{\soldepth{\delta}})
+  \end{align*}
+\end{definition}
+
 We now proceed with routine definitions for handling variables and substitutions
 of terms in flowers.
 
@@ -794,6 +806,19 @@ of flowers:
   its hole removed.
 \end{definition}
 
+\begin{definition}[Depth]
+  The \emph{depth} $\soldepth{\Phi\hole}$ of a bouquet context $\Phi\hole$ is
+  defined mutually recursively as follows:
+  \begin{align*}
+    \soldepth{\Psi, \hole} &= 0 \\
+    \soldepth{\Psi, \flower{\garden{\mathbf{x}}{\Phi\hole}}{\Delta}} &= 1 + \max(\soldepth{\Phi\hole}, \soldepth{\Delta}) \\
+    \soldepth{\Psi, \flower{\gamma}{\garden{\mathbf{x}}{\Phi\hole} \sep \Delta}} &= 1 + \max(\soldepth{\Phi\hole}, \soldepth{\Delta})
+  \end{align*}
+\end{definition}
+
+Contrarily to EG (\refdef{eg-parity}), the parity of a context does not coincide
+with its depth, since petals increase depth but preserve polarity:
+
 \begin{definition}[Parity]
   The \emph{parity} $\parity{\Phi\hole}$ of a context $\Phi\hole$ is defined
   mutually recursively by:
@@ -868,18 +893,6 @@ explanation for the scope of binders (\refremark{flower-scope}).
 
 \paragraph{Rules}
 
-\begin{figure*}
-  \input{figures/flower-calculus.tex}
-  \caption{Rules of the flower calculus}
-  \labfig{flower-calculus}
-\end{figure*}
-
-\begin{figure*}
-  \input{figures/flower-calculus-graphical.tex}
-  \caption{Graphical presentation of the flower calculus}
-  \labfig{flower-calculus-graphical}
-\end{figure*}
-
 As has become standard in this thesis, we define the flower calculus as a
 \emph{rewriting system} on bouquets, presented in \reffig{flower-calculus} as a
 set of unary deep inference rules: when read \emph{top-down}, they correspond to
@@ -892,7 +905,12 @@ But the more interesting direction, and the one around which the calculus has
 been designed, is when you read the rules \emph{bottom-up}: then they are indeed
 rewrite rules, telling you the different ways in which you can choose to
 simplify a goal. This is how the \emph{graphical} version of the rules is
-presented in \reffig{flower-calculus-graphical}.
+presented in \reffig{natural-graphical} and \reffig{cultural-graphical}. Note
+that in the graphical presentation, the rules
+$\{\rsf{poll{\da}},\rsf{poll{\ua}},\rsf{grow},\rsf{crop}\}$ (resp.
+$\{\rsf{pull},\rsf{glue}\}$) manipulate a single flower (resp. petal) instead of
+an arbitrary bouquet $\Phi$ (resp. corolla $\Gamma$); but it is easy to see that
+these two variants are interderivable.
 
 Let us now describe the rules in more detail, starting with the fragment that is
 a direct adaptation of the rules of \sys{Beta} (\reffig{beta}):
@@ -944,10 +962,11 @@ sequent-style introduction/elimination rules:
   \item[Disjunction Introduction (\rsf{epet})]
     It allows to erase any flower with an \textsf{(e)}mpty \textsf{(pet)}al.
     According to Oostra \cite[p.~109]{oostra_advances_2022}, Peirce already
-    identified \rsf{epet} as a component of his decision procedure for \sys{Alpha}
-    (it is simply called ``Operation 1'' in \cite{oostra_advances_2022}). This is
-    no coincidence, since we precisely came up with this rule when trying to
-    design a decision procedure for flowers.
+    identified \rsf{epet} as a component of his decision procedure for
+    \sys{Alpha} (it is simply called ``Operation 1'' in
+    \cite{oostra_advances_2022}). This is no coincidence, since we precisely
+    came up with this rule when trying to design a decision procedure for
+    flowers (see \refsec{flowers-search}).
 
   \item[Disjunction/Falsity Elimination (\rsf{srep})]
     It corresponds to a $n$-ary generalization of the left introduction rule for
@@ -956,11 +975,17 @@ sequent-style introduction/elimination rules:
     the IEG system of \cite{minghui_graphical_2019}, together with its converse.
     The name \rsf{srep} is short for \textsf{(s)}elf-\textsf{(rep)}roduction,
     which is more clearly visualized in the graphical version of the rule in
-    \reffig{flower-calculus-graphical}. Through the Curry-Howard correspondence,
-    it can be related to the \emph{pattern-matching generator} found in modern
-    editors of some functional programming languages, such as the Hazel
-    structure editor \sidecite{yuan-live-2023}, and the Agda proof assistant.
+    \reffig{natural-graphical}. Through the Curry-Howard correspondence, it can
+    be related to the \emph{pattern-matching generator} found in modern editors
+    of some functional programming languages, such as the Hazel structure editor
+    and the Agda proof assistant \sidecite{yuan-live-2023}.
 \end{description}
+
+\begin{figure*}[h!]
+  \input{figures/flower-calculus.tex}
+  \caption{Rules of the flower calculus}
+  \labfig{flower-calculus}
+\end{figure*}
 
 \paragraph{Proofs}
 
@@ -968,11 +993,11 @@ Our notions of derivation and proof are essentially the same as the ones given
 for EG in \refsec{multisets}, except that we distinguish from the outset between
 two kinds of derivations, stemming from our partitioning of the rules into two
 sets: the \emph{natural} rules denoted by $\Nature$, and the \emph{cultural}
-rules denoted by $\Culture$. In particular, every natural rule in $\Nature$ is
-both \emph{analytic} (i.e. every atom in the premiss already appears in the
+rules denoted by $\Culture$. In particular, every $\Nature$-rule is both
+\emph{analytic} (i.e. every atom in the premiss already appears in the
 conclusion) and \emph{invertible} (this will be shown in \refsec{Soundness});
-and we will prove in \refsec{Completeness} that the entire cultural fragment
-$\Culture$ is \emph{admissible}.
+and we will prove in \refsec{Completeness} that all $\Culture$-rules
+\emph{admissible}.
 
 \begin{definition}[Derivation]
   Given a set of rules $\mathsf{R}$, we write $\Phi \step_{\mathsf{R}} \Psi$ to
@@ -1021,8 +1046,8 @@ A trivial way to circumvent this is to define directly $\Psi \vdash \Phi$ as
 $\flower{\Psi}{\Phi} \steps \emptyset$. In fact this is closer to what one would
 find in sequent calculus, where hypothetical proofs are closed derivations of
 hypothetical sequents, not open derivations. The difference is that sequents
-capture only the first-order\sidenote{As opposed to \emph{higher-order}, i.e.
-negatively nested implications.} implicative structure of logic, while flowers
+capture only the first-order implicative structure of logic\sidenote{As opposed
+to \emph{higher-order}, i.e. negatively nested implications.}, while flowers
 capture the full structure of intuitionistic predicate logic. This allows for a
 nice generalization of the notion of hypothetical provability, which will be
 useful in the completeness proof of \refsec{Completeness}. 
@@ -1037,7 +1062,7 @@ useful in the completeness proof of \refsec{Completeness}.
 \end{definition}
 
 \begin{lemma}[Reflexivity]\lablemma{reflexivity}
-  For any bouquet $\Phi$, $\Phi \vdash \Phi$.
+  For any bouquet $\Phi$, $\Phi \vdash_{\Nature} \Phi$.
 \end{lemma}
 \begin{proof}
   For any context $\Xi\hole$ such that $\chyp{\Phi}{\Xi\hole}$, one has the following
@@ -1105,12 +1130,107 @@ the deduction theorem trivial:
   $$
 \end{proof}
 
+\begin{figure*}[h!]
+  \input{figures/natural-graphical.tex}
+  \caption{Graphical presentation of the natural rules}
+  \labfig{natural-graphical}
+\end{figure*}
+
+\begin{figure*}[h!]
+  \input{figures/cultural-graphical.tex}
+  \caption{Graphical presentation of the cultural rules}
+  \labfig{cultural-graphical}
+\end{figure*}
 
 \section{Kripke semantics}\labsec{Semantics}
 
-\todo{ give a direct Kripke semantics to flowers, avoiding the need for
-translations to and from traditional formulas. This will be crucial to get a
-strong completeness theorem.}
+In \refsec{bubbles-soundness}, in order to prove the soundness of system
+\sys{B}, we gave a bi-intuitionistic (resp. classical) semantics to bubbles in
+Heyting-Brouwer (resp. Boolean) algebras, and in \refsec{eg-soundness} we
+interpreted $\alpha$-graphs with simple boolean truth values. For flowers, we
+use a third kind of models that is standard in the literature on intuitionistic
+logic: Kripke structures. Our goal is not to fill as many pages as possible by
+introducing new definitions in each chapter, but rather to find the simplest
+semantics for our purposes with the specific proof system at hand. In the case
+of the flower calculus, there are a few reasons that led us to the choice of
+Kripke structures, detailed hereafter by order of importance:
+\begin{itemize}
+  \item[\textbf{Generalization of EG}]
+    As mentioned in \refsec{IEG}, the syntax of intuitionistic EG (and thus of
+    flowers) subsumes that of Peirce's classical EG, by seeing the cut as a
+    $0$-ary scroll (or a flower with no petals). Similarly, it is well-known
+    that Kripke structures enable a natural generalization of truth valuations,
+    where classical valuations are those limited to ``unary'' structures with a
+    single possible world\sidenote{It is tempting to draw a parallel between
+    \emph{possible worlds} and the \emph{petals} of flowers, where the
+    accessibility relation $\access$ between worlds might be reflected to some
+    extent in the pollination relation illustrated in \reffig{pollination} (or
+    more accurately, in a justification relation between contexts in the style
+    of \refdef{eg-local-justification}). In particular, transitivity of
+    $\access$ could correspond to the possibility of cross-pollinating a petal
+    by first cross-pollinating the pistil to which it is attached, and then
+    performing self-pollination. An analogy between possible worlds and
+    intuitionistic disjunction is also proposed by Girard in
+    \cite{girard_parallel}, although as usual he demonstrates his (free)
+    criticism towards Kripke semantics.}.
+  
+  \item[\textbf{Quantifiers}]
+    It is easy to accomodate quantifiers in Kripke structures, by interpreting
+    terms as individuals in the domains of the structure's worlds. In contrast,
+    extensions of algebraic semantics that account for quantifiers like polyadic
+    and cylindric algebras are more involved, and less studied in the
+    literature.
+  
+  \item[\textbf{Cut-free completeness}]
+    Rather than just completeness, we are interested more specifically in the
+    completeness of the natural fragment $\Nature$ of the flower calculus, where
+    all rules are \emph{analytic}. In Gentzen systems, this corresponds to the
+    well-known questions of \emph{proof normalization} (natural deduction) and
+    \emph{cut admissibility} (sequent calculus). Gentzen originally proved cut
+    admissibility through a syntactic procedure of \emph{cut-elimination}, which
+    is very hard to transpose in our deep inference setting, especially since
+    there is no known internal cut-elimination procedure in the (sparse)
+    literature on deep inference systems for intuitionistic logic. In fact, the
+    requirement that the procedure be \emph{internal} is useful when studying
+    the computational content of proofs, but too strong for our logical study of
+    analyticity. Thus our first attempt was to devise an \emph{external}
+    syntactic procedure, based on the simulation of a cut-free sequent calculus
+    as in \sidecite{tiu_local_2006}; and we do have a working, verified
+    implementation of this procedure in Coq \cite{flowers-metatheory}. However,
+    we realized \textit{a posteriori} that this only proves a weak form of
+    completeness, in the sense that we only guarantee that a true flower is
+    provable if it is the direct translation of a symbolic formula. But formulas
+    are based on binary connectives and unary quantifiers, and are thus less
+    expressive syntactically than flowers and their $n$-ary constructs.
+
+    To palliate this limitation, we turned to a more \emph{semantic} (and not
+    so-well known) strand of analyticity proofs, which nowadays tends to be
+    labelled \emph{normalization-by-evaluation} \sidecite{NbE}. The idea is to
+    prove completeness of the analytic fragment of the proof system with respect
+    to some semantic models (in our case, $\vDash A$ implies $\vdash_{\Nature}
+    A$), and then compose with the soundness of the full system with respect to
+    the same models ($\vdash A$ implies $\vDash A$), giving the desired
+    admissibility result ($\vdash A$ implies $\vdash_{\Nature} A$). And in the
+    case of intuitionistic logics, the models used are most of the time Kripke
+    structures\sidenote{We know of two exceptions: the first is the (complex)
+    uniform completeness proof for various logics proposed by Okada
+    \cite{OKADA2002471} and based on \emph{phase spaces}, which are the closest
+    one can get to a truth-based (or Tarskian) semantics for \emph{linear logic}
+    \cite{girard-linear-1987}. The second is the recent completeness proof of
+    Frumin for the logic of Bunched Implications (BI)
+    \cite{10.1145/3497775.3503690}, a cousin of linear logic at the heart of
+    \emph{separation logic}, which is a very popular framework in contemporary
+    deductive program verification. It is based on so-called \emph{BI algebras},
+    a kind of Heyting algebra with additional structure for the linear part of
+    the logic. We should also mention the recent normalization proof for cubical
+    type theory given by Sterling in his thesis \cite{Sterling2022}, based on a
+    categorical and topos-theoretic generalization of Kripke structures.}
+    \sidecite{hutchison_semantic_2005}\sidecite{10.1007/978-3-642-02261-6_17}\sidecite{ilik:tel-00529021}.
+    
+\end{itemize}
+
+We now recall the standard definitions, starting with the interpretation of
+constants in \emph{first-order structures}:
 
 \begin{definition}[First-order structure]
   A \emph{first-order structure} is a pair $( M, \interp{\cdot} )$
@@ -1121,7 +1241,7 @@ strong completeness theorem.}
 \end{definition}
 
 \begin{definition}[Kripke structure]
-  A \emph{Kripke Structure} is a triplet $\mathcal{K} = ( W, \access,
+  A \emph{Kripke structure} is a triplet $\mathcal{K} = ( W, \access,
   (M_w)_{w \in W} )$, where $W$ is the set of \emph{worlds}, $\access$ is
   a pre-order on $W$ called \emph{accessibility}, and $(M_w)_{w \in W}$ is a
   family of first-order structures indexed by $W$. Furthermore, we require the
@@ -1134,6 +1254,10 @@ strong completeness theorem.}
       \interp{p}_{w'}$.
   \end{itemize}
 \end{definition}
+
+Then we need a way to interpret arbitrary terms with free variables in any given
+world $w$ of a Kripke structure, which is done through the concept of
+\emph{$w$-evaluation}:
 
 \begin{definition}[$w$-evaluation]
   Given a Kripke structure $\mathcal{K}$ and a world $w$ in $\mathcal{K}$, a
@@ -1149,25 +1273,37 @@ strong completeness theorem.}
   \end{align*}
 \end{definition}
 
+The crux of Kripke semantics is the \emph{forcing} relation, that captures the
+truth-conditions of statements in Kripke structures. While it is usually defined
+on formulas, here we adapt the definition to flowers, which in our opinion makes
+it simpler and more uniform since flowers can be seen as built from essentially
+one big constructor:
+
 \begin{definition}[Forcing]\labdef{forcing}
 
   Given some Kripke structure $\mathcal{K}$, the \emph{forcing} relation
   $\eforces{w}{\phi}{e}$ between a world $w$, a flower $\phi$ and a
   $w$-evaluation $e$ is defined by induction on $\phi$ as follows:
   \begin{itemize}
-    \item $\eforces{w}{p(\tvec{t})}{e}$ iff $\interp{\tvec{t}}_e \in \interp{p}_w$;
-    \item
+    \item[\textbf{(Atom)}]
+    $\eforces{w}{p(\tvec{t})}{e}$ iff $\interp{\tvec{t}}_e \in \interp{p}_w$;
+      
+    \item[\textbf{(Flower)}]
     $\eforces{w}{\flower{\garden{\mathbf{x}}{\Phi}}{\fset{i}{n}{\garden{\mathbf{x}_i}{\Phi_i}}}}{e}$ iff for every $w' \geq
     w$ and every $w'$-evaluation $e'$, if
     $\eforces{w'}{\Phi}{\update{e}{\mathbf{x}}{e'}} $ then there is some $1
     \leq i \leq n$ and $w'$-evaluation $e''$ such that
     $\eforces{w'}{\Phi_i}{\update{\update{e}{\mathbf{x}}{e'}}{\mathbf{x}_i}{e''}}$;
-    \item $\eforces{w}{\Phi}{e}$ iff $\eforces{w}{\phi}{e}$ for every $\phi \in
+
+    \item[\textbf{(Bouquet)}]
+    $\eforces{w}{\Phi}{e}$ iff $\eforces{w}{\phi}{e}$ for every $\phi \in
     \Phi$.
   \end{itemize}
   We write $w \forces \Phi$ if $\eforces{w}{\Phi}{e}$ for every $w$-evaluation
   $e$.
 \end{definition}
+
+This trivial lemma will be useful later in the completeness proof:
 
 \begin{lemma}\lablemma{closed-forcing}
   
@@ -1175,7 +1311,7 @@ strong completeness theorem.}
   e'$, if $\eforces{w}{\phi}{e}$ then $\eforces{w}{\phi}{e'}$.
 \end{lemma}
 \begin{proof}
-  By a straightforward induction on $\phi$.
+  By a straightforward recurrence on $\soldepth{\phi}$.
 \end{proof}
 
 % \begin{corollary}[Closed forcing]
@@ -1183,6 +1319,10 @@ strong completeness theorem.}
 %   For any closed flower $\phi \in \closed{\flowers}$, $w \forces \phi$ iff
 %   $\eforces{w}{\phi}{e}$ for some $w$-evaluation $e$.
 % \end{corollary}
+
+Lastly, we define the notion of \emph{semantic entailment} $\Phi \vDash \Psi$ on
+bouquets, mirroring the syntactic entailment $\Phi \vdash \Psi$ of the last
+section:
 
 \begin{definition}[Semantic entailment]
   Let $\mathcal{K}$ be a Kripke structure, and $\Phi, \Psi$ some bouquets. We
@@ -1196,12 +1336,17 @@ strong completeness theorem.}
 
 \section{Soundness}\labsec{Soundness}
 
-\todo{ show that all the rules of the flower calculus are valid with respect to
-our Kripke semantics.}
-
 \begin{lemma}[Natural soundness]
-  If $\Phi \step_\Nature \Psi$, then $\Phi \sequiv \Psi$.
+  If $\Phi \lstep_\Nature \Psi$, then $\Phi \vDash \Psi$ and $\Psi \vDash \Phi$.
 \end{lemma}
+\begin{proof}
+  By inspection of every $\Nature$-rule.
+  
+  \begin{itemize}
+    \item[\rsf{poll{\da}}]
+    \item[\rsf{poll{\ua}}]
+  \end{itemize}
+\end{proof}
 
 
 \section{Completeness}\labsec{Completeness}
