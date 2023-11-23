@@ -43,7 +43,7 @@
     petals = { {name="f5p1"},{name="f5p2"},{name="f5p3"},{name="f5p4"},{name="f5p5"} }
   },
 }
-\node at (0,0) {$\mathbf{x}~~\Phi$};
+\node at (0,0) {$\bx~~\Phi$};
 \node at (c1) {$\gamma_1$};
 \node at (c2) {$\gamma_2$};
 \node at (c3) {$\gamma_3$};

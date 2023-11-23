@@ -13,7 +13,7 @@
 \node at (d5) {$\delta_{n}$};
 \node at (c) {$
   \begin{array}{c}
-    \mathbf{x}~\mathbf{y} \\
+    \bx~\by \\
     \Phi
   \end{array}
 $};

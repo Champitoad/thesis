@@ -8,7 +8,7 @@
   }}
   \node at (d1) {$
     \begin{array}{c}
-      \mathbf{x} \\
+      \bx \\
       \sigma(\Phi)
     \end{array}
   $};

@@ -21,7 +21,7 @@
 \node at (d5) {$\sigma(\delta_{n})$};
 \node at (c1) {$
   \begin{array}{c}
-    \mathbf{x}\\
+    \bx\\
     \sigma(\Phi)
   \end{array}
 $};
@@ -33,7 +33,7 @@ $};
 \node at (e5) {$\delta_{n}$};
 \node at (c2) {$
   \begin{array}{c}
-    \mathbf{x}~\mathbf{y} \\
+    \bx~\by \\
     \Phi
   \end{array}
 $};

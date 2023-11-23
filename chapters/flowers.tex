@@ -410,7 +410,7 @@ by Zalamea in the 1990s \cite{zalamea_ieg_1}\cite{zalamea_ieg_2}''.
   \!\!\!\!
   \begin{array}{c}
     \tikzfig{0.85}{0.85}{curl-geom} \vspace{1.5em}\\
-    \forall \mathbf{x}. \left(\bigwedge G \limp \bigvee_{j = 1}^{n}\exists \mathbf{x_j}. \bigwedge H_j\right)
+    \forall \bx. \left(\bigwedge G \limp \bigvee_{j = 1}^{n}\exists \bx_j. \bigwedge H_j\right)
   \end{array}
   $$
   \caption{Formula interpretation of the $n$-ary scroll}
@@ -427,14 +427,14 @@ in its inloops, where each row $H_j$ in $\Delta$ encodes an inloop, can be
 interpreted as the formula
 $$\bigwedge_{i = 1}^{m}{a_i} \limp \bigvee_{j = 1}^{n}\bigwedge_{k = 1}^{p_n}{a_{j,k}}$$
 If one adds \emph{binders} to the mix (see \refsec{gardens}) by having $\gamma =
-\garden{\mathbf{x}}{G}$ as outloop, and
+\garden{\bx}{G}$ as outloop, and
 $\Xi = \begin{pmatrix}
-  \mathbf{x_1} \\
+  \bx_1 \\
   \vdots \\
-  \mathbf{x_n}
+  \bx_n
 \end{pmatrix} \cdot \Delta$ as inloops, then the interpretation is extended into
 the formula
-$$\forall \mathbf{x}. \left(\bigwedge_{i = 1}^{m}{a_i} \limp \bigvee_{j = 1}^{n}\exists \mathbf{x_j}. \bigwedge_{k = 1}^{p_n}{a_{j,k}}\right)$$
+$$\forall \bx. \left(\bigwedge_{i = 1}^{m}{a_i} \limp \bigvee_{j = 1}^{n}\exists \bx_j. \bigwedge_{k = 1}^{p_n}{a_{j,k}}\right)$$
 as depicted in \reffig{curl-geom}. Typically, the particular case where $\gamma
 = \garden{x}{\emptyset}$ and $\Xi = (\emptyset) \cdot (p(x))$ encodes the graph
 $$\stkfig{1}{scroll-forall}$$
@@ -605,15 +605,15 @@ and a first-order signature $\Sigma$.
   \begin{itemize}
     \item{\textbf{(Atom)}} If $p \in \psymbs$ and $\tvec{t} \in
     \terms^{\arity(p)}$, then $p(\tvec{t}) \in \flowers$;
-    \item{\textbf{(Garden)}} If $\mathbf{x} \subset \vars$ is a finite set and $\Phi
-    \subset \flowers$ a finite multiset, then $\garden{\mathbf{x}}{\Phi} \in
+    \item{\textbf{(Garden)}} If $\bx \subset \vars$ is a finite set and $\Phi
+    \subset \flowers$ a finite multiset, then $\garden{\bx}{\Phi} \in
     \gardens$;
     \item{\textbf{(Flower)}} If $\gamma \in \gardens$ and $\Delta \subset \gardens$
     is a finite multiset, then $\flower{\gamma}{\Delta} \in \flowers$.
   \end{itemize}
 \end{definition}
 
-Any finite set $\mathbf{x} \subset \vars$ of variables is called a
+Any finite set $\bx \subset \vars$ of variables is called a
 \emph{sprinkler}, finite multiset $\Phi \subset \flowers$ of flowers a
 \emph{bouquet}, and finite multiset $\Gamma \subset \gardens$ of gardens a
 \emph{corolla}. We will often write gardens as $\garden{x_1, \ldots,
@@ -666,7 +666,7 @@ $\garden{{}}{\Phi}$.
     Terms ($\terms$) & $t, u, v$ \\
     Flowers ($\flowers$) & $\phi, \psi, \xi$ \\
     Gardens ($\gardens$) & $\gamma, \delta$ \\
-    Sprinklers & $\mathbf{x}, \mathbf{y}, \mathbf{z}$ \\
+    Sprinklers & $\bx, \by, \bz$ \\
     Term vectors & $\tvec{t}, \tvec{u}, \tvec{v}$ \\
     Substitutions & $\sigma, \tau$ \\
     Bouquets & $\Phi, \Psi, \Xi$ \\
@@ -686,7 +686,7 @@ inductively on the structure of flowers:
   recursively as follows:
   \begin{align*}
     \soldepth{p(\tvec{t})} &= 0 \\
-    \soldepth{\garden{\mathbf{x}}{\Phi}} &= \max_{\phi \in \Phi}{\soldepth{\phi}} \\
+    \soldepth{\garden{\bx}{\Phi}} &= \max_{\phi \in \Phi}{\soldepth{\phi}} \\
     \soldepth{\flower{\gamma}{\Delta}} &= 1 + \max(\soldepth{\gamma}, \max_{\delta \in \Delta}{\soldepth{\delta}})
   \end{align*}
 \end{definition}
@@ -701,8 +701,8 @@ of terms in flowers.
     \fv(x) &= \{x\} \\
     \fv(f(\tvec{t})) &= \bigcup_{t \in \tvec{t}}{\fv(t)} \\
     \fv(p(\tvec{t})) &= \bigcup_{t \in \tvec{t}}{\fv(t)} \\
-    \fv(\garden{\mathbf{x}}{\Phi}) &= \bigcup_{\phi \in \Phi}{\fv(\phi)} \setminus \mathbf{x} \\
-    \fv(\flower{\garden{\mathbf{x}}{\Phi}}{\Delta}) &= \fv(\garden{\mathbf{x}}{\Phi}) \cup \bigcup_{\garden{\mathbf{y}}{\Psi} \in \Delta}{\fv(\garden{\mathbf{x}, \mathbf{y}}{\Psi})}
+    \fv(\garden{\bx}{\Phi}) &= \bigcup_{\phi \in \Phi}{\fv(\phi)} \setminus \bx \\
+    \fv(\flower{\garden{\bx}{\Phi}}{\Delta}) &= \fv(\garden{\bx}{\Phi}) \cup \bigcup_{\garden{\by}{\Psi} \in \Delta}{\fv(\garden{\bx, \by}{\Psi})}
   \end{align*}
   We say that a term, flower or garden is \emph{closed} when its set of free
   variables is empty. The sets of closed terms, flowers and gardens are denoted
@@ -722,14 +722,14 @@ curves in an $n$-ary scroll.
   % inductively as follows:
   % \begin{align*}
   %   \bv(\Psi, \hole) &= \emptyset \\
-  %   \bv(\Psi, (\flower{\garden{\mathbf{x}}{X}}{\Delta})) &= \mathbf{x} \cup \bv(X) \\
-  %   \bv(\Psi, (\flower{\garden{\mathbf{x}}{\Phi}}{\garden{\mathbf{y}}{X} \sep \Delta})) &= \mathbf{x} \cup \mathbf{y} \cup \bv(X)
+  %   \bv(\Psi, (\flower{\garden{\bx}{X}}{\Delta})) &= \bx \cup \bv(X) \\
+  %   \bv(\Psi, (\flower{\garden{\bx}{\Phi}}{\garden{\by}{X} \sep \Delta})) &= \bx \cup \by \cup \bv(X)
   % \end{align*}
   The set of bound variables $\bv(\phi)$ (resp. $\bv(\gamma)$) of a flower
   $\phi$ (resp. garden $\gamma$) is defined mutually recursively as follows:
   \begin{align*}
     \bv(p(\tvec{t})) &= \emptyset \\
-    \bv(\garden{\mathbf{x}}{\Phi}) &= \mathbf{x} \cup \bigcup_{\phi \in \Phi}{\bv(\phi)} \\
+    \bv(\garden{\bx}{\Phi}) &= \bx \cup \bigcup_{\phi \in \Phi}{\bv(\phi)} \\
     \bv(\flower{\gamma}{\Delta}) &= \bv(\gamma) \cup \bigcup_{\delta \in \Delta}{\bv(\delta)}
   \end{align*}
 \end{definition}
@@ -762,28 +762,46 @@ update}, which will be useful for the semantic evaluation of flowers in
     f(x) &\text{otherwise}
   \end{cases}
   $$
-  $\update{-}{-}{-}$ is obviously associative, that is
-  $\update{f}{R}{(\update{g}{S}{h})} = \update{(\update{f}{R}{g})}{S}{h}$. Also
+  $\update{-}{-}{-}$ is left-associative, that is
+  $\update{f}{R}{\update{g}{S}{h}} = \update{(\update{f}{R}{g})}{S}{h}$. Also
   if $f$ or $g$ is the identity function $\idsubst$ we omit writing it, i.e.
   $\update{f}{R}{{}} = \update{f}{R}{\idsubst}$ and $\update{{}}{R}{g} =
   \update{\idsubst}{R}{g}$.
 \end{definition}
 
+\begin{fact}[Associativity]\labfact{update-assoc}
+  $\update{\update{f}{R}{g}}{S}{h} = \update{f}{R \cup S}{(\update{g}{S}{h})}$.
+\end{fact}
+
+\begin{fact}[Commutativity]\labfact{update-comm}
+  If $R \cap S = \emptyset$ then $f \upd{R} g \upd{S} h = f \upd{S} h \upd{R}
+  g$.
+\end{fact}
+
+\begin{fact}[Agreement]\labfact{update-agree}
+  If $f(x) = g(x)$ for all $x \in R$ then $h \upd{R} f = h \upd{R} g$.
+\end{fact}
+
 \begin{definition}[Substitution]
   A \emph{substitution} is a function $\sigma : \vars \to \terms$ with a finite
   \emph{support} $\dom(\sigma) = \compr{x}{\sigma(x) \not= x}$. By abuse of
-  notation, we will write $\sigma : \mathbf{x} \to \terms$ to denote a
-  substitution $\sigma$ whose support is $\mathbf{x}$. The domain of
-  substitutions is extended to terms, flowers and gardens mutually recursively
-  as follows:
-  \begin{align*}
-    \sigma(f(x_1, \ldots, x_n)) &= f(\sigma(x_1), \ldots, \sigma(x_n)) \\
-    \sigma(p(\tvec{t})) &= p(\sigma(\tvec{t})) \\
-    \sigma(\garden{\mathbf{x}}{\Phi}) &=
-      \garden{\mathbf{x}}{\restr{\sigma}{\mathbf{x}}(\Phi)} \\
-    \sigma(\flower{\garden{\mathbf{x}}{\Phi}}{\Delta}) &=
-      \flower{\sigma(\garden{\mathbf{x}}{\Phi})}{\restr{\sigma}{\mathbf{x}}(\Delta)}
-  \end{align*}
+  notation, we will write $\sigma : \bx \to \terms$ to denote a
+  substitution $\sigma$ whose support is $\bx$.
+\end{definition}
+
+\begin{definition}[Capture-avoiding substitution]
+  We say that a substitution $\sigma : \bx \to \terms$ is
+  \emph{capture-avoiding} in a bouquet $\Xi$ if for every flower $\phi \in \Xi$
+  one of the following holds:
+  \begin{itemize}
+    \item $\phi = p(\tvec{t})$;
+    \item $\phi =
+    \flower{\garden{\by}{\Phi}}{\fset{i}{n}{\garden{\bz_i}{\Psi_i}}}$,
+    $\fv(\sigma(x)) \cap \left(\by \cup \bigcup_{i =
+    1}^{n}{\bz_i}\right) = \emptyset$ for every $x \in \bx$, and
+    $\sigma$ is capture-avoiding in $\Phi \cup \bigcup_{i = 1}^{n}{\Psi_i}$;
+    \item $\bx \cap \fv(\phi) = \emptyset$.
+  \end{itemize}
 \end{definition}
 
 \section{Calculus}\labsec{Calculus}
@@ -808,11 +826,11 @@ of flowers:
 
 \begin{definition}[Depth]
   The \emph{depth} $\soldepth{\Phi\hole}$ of a bouquet context $\Phi\hole$ is
-  defined mutually recursively as follows:
+  defined recursively as follows:
   \begin{align*}
     \soldepth{\Psi, \hole} &= 0 \\
-    \soldepth{\Psi, \flower{\garden{\mathbf{x}}{\Phi\hole}}{\Delta}} &= 1 + \max(\soldepth{\Phi\hole}, \soldepth{\Delta}) \\
-    \soldepth{\Psi, \flower{\gamma}{\garden{\mathbf{x}}{\Phi\hole} \sep \Delta}} &= 1 + \max(\soldepth{\Phi\hole}, \soldepth{\Delta})
+    \soldepth{\Psi, (\flower{\garden{\bx}{\Phi\hole}}{\Delta})} &= 1 + \soldepth{\Phi\hole} \\
+    \soldepth{\Psi, (\flower{\gamma}{\garden{\bx}{\Phi\hole} \sep \Delta})} &= 1 + \soldepth{\Phi\hole}
   \end{align*}
 \end{definition}
 
@@ -821,11 +839,11 @@ with its depth, since petals increase depth but preserve polarity:
 
 \begin{definition}[Parity]
   The \emph{parity} $\parity{\Phi\hole}$ of a context $\Phi\hole$ is defined
-  mutually recursively by:
+  recursively by:
   \begin{align*}
     \parity{\Psi, \hole} &= 0 \\
-    \parity{\Psi, (\flower{\garden{\mathbf{x}}{\Phi\hole}}{\Delta})} &= \parity{\Phi\hole} + 1 \\
-    \parity{\Psi, (\flower{\gamma}{\garden{\mathbf{x}}{\Phi\hole} \sep \Delta})} &= \parity{\Phi\hole}
+    \parity{\Psi, (\flower{\garden{\bx}{\Phi\hole}}{\Delta})} &= \parity{\Phi\hole} + 1 \\
+    \parity{\Psi, (\flower{\gamma}{\garden{\bx}{\Phi\hole} \sep \Delta})} &= \parity{\Phi\hole}
   \end{align*}
 \end{definition}
 
@@ -850,8 +868,8 @@ relation of \refsec{atomicity}:
     \item (\textbf{Cross-pollination})~ $\Phi\hole = \cfill{\Xi}{\Psi,
     \Xi_0\hole}$;
     \item (\textbf{Self-pollination})~ $\Phi\hole =
-    \cfill{\Xi}{\flower{\garden{\mathbf{x}}{\Psi}}{\garden{\mathbf{y}}{\Xi_0\hole}
-    \sep \Delta}}$ for some $\mathbf{x}, \mathbf{y}, \Delta$.
+    \cfill{\Xi}{\flower{\garden{\bx}{\Psi}}{\garden{\by}{\Xi_0\hole}
+    \sep \Delta}}$ for some $\bx, \by, \Delta$.
   \end{itemize}
   A bouquet $\Psi$ can be pollinated in $\Phi\hole$, written
   $\chyp{\Psi}{\Phi\hole}$, if $\chyp{\psi}{\Phi\hole}$ for all $\psi \in \Psi$.
@@ -905,12 +923,12 @@ But the more interesting direction, and the one around which the calculus has
 been designed, is when you read the rules \emph{bottom-up}: then they are indeed
 rewrite rules, telling you the different ways in which you can choose to
 simplify a goal. This is how the \emph{graphical} version of the rules is
-presented in \reffig{natural-graphical} and \reffig{cultural-graphical}. Note
-that in the graphical presentation, the rules
-$\{\rsf{poll{\da}},\rsf{poll{\ua}},\rsf{grow},\rsf{crop}\}$ (resp.
-$\{\rsf{pull},\rsf{glue}\}$) manipulate a single flower (resp. petal) instead of
-an arbitrary bouquet $\Phi$ (resp. corolla $\Gamma$); but it is easy to see that
-these two variants are interderivable.
+presented in \reffig{natural-graphical} and \reffig{cultural-graphical}.
+% Note that in the graphical presentation, the rules
+% $\{\rsf{poll{\da}},\rsf{poll{\ua}},\rsf{grow},\rsf{crop}\}$ (resp.
+% $\{\rsf{pull},\rsf{glue}\}$) manipulate a single flower (resp. petal) instead of
+% an arbitrary bouquet $\Phi$ (resp. corolla $\Gamma$); but it is easy to see that
+% these two variants are interderivable.
 
 Let us now describe the rules in more detail, starting with the fragment that is
 a direct adaptation of the rules of \sys{Beta} (\reffig{beta}):
@@ -928,14 +946,26 @@ a direct adaptation of the rules of \sys{Beta} (\reffig{beta}):
   \item[(De)iteration (\rsf{poll{\da}}, \rsf{poll{\ua}})]
     Renamed \emph{\textsf{(poll)}ination} rules, they correspond to the rules
     \rsf{Iter} and \rsf{Deit} of \sys{Alpha} and \sys{Beta}, but reformulated
-    with the pollination relation (\refdef{pollination}).
+    with the pollination relation (\refdef{pollination}). In fact in their
+    textual presentation of \reffig{flower-calculus}, they are more general than
+    (de)iteration rules, because \refdef{pollination} allows the pollinating
+    bouquet $\Phi$ to be \emph{scattered} in the context $\Xi\hole$, i.e. its
+    flowers need not be located in the same area. On the contrary in the
+    graphical presentation of \reffig{natural-graphical}, they are less general
+    since only one flower can be pollinated at a time, rather than an entire
+    bouquet of flowers residing in the same area. But it is easy to see that all
+    these variants are equivalent in deductive power, since the pollination of a
+    bouquet (however scattered) can always be simulated by the successive
+    pollinations of each of its flowers.
 
   \item[Insertion/Deletion (\rsf{grow}, \rsf{crop}, \rsf{pull}, \rsf{glue})]
     They correspond to the rules \rsf{Ins} and \rsf{Del} of \sys{Alpha} and
     \sys{Beta}, but have doubled in number to account for the syntactic
     distinction between pistils and petals. More precisely, rules \rsf{grow} and
     \rsf{crop} allow to insert and delete entire flowers, while rules \rsf{pull}
-    and \rsf{glue} deal with petals.
+    and \rsf{glue} deal with petals. As for pollination rules, manipulating
+    single flowers/petals (graphical version) or entire bouquets/corollas
+    (textual version) does not change the deductive power of the rules.
     
   \item[Unification (\rsf{ipis}, \rsf{ipet}, \rsf{apis}, \rsf{apet})]
     Rules \rsf{ipis} and \rsf{ipet} allow to \textsf{(i)}nstantiate a sprinkler
@@ -954,9 +984,9 @@ a direct adaptation of the rules of \sys{Beta} (\reffig{beta}):
     sequent calculi (see \reffig{multi-inst}).
 \end{description}
 
-The last two rules handle the behavior of disjunctive and absurd statements,
-i.e. flowers with respectively $n \geq 2$ and $n = 0$ petals, and are closer to
-sequent-style introduction/elimination rules:
+The last two rules mainly handle the behavior of disjunctive and absurd
+statements, i.e. flowers with respectively $n \geq 2$ and $n = 0$ petals, and
+are closer to sequent-style introduction/elimination rules:
 
 \begin{description}
   \item[Disjunction Introduction (\rsf{epet})]
@@ -1076,8 +1106,8 @@ useful in the completeness proof of \refsec{Completeness}.
 \begin{marginfigure}
   $$
   \R[\rsf{crep}]
-    {\flower{\gamma}{\fset{i}{n}{\garden{\mathbf{x_i}}{\Phi_i, \Psi}}}}
-    {(\flower{\gamma}{\fset{i}{n}{\garden{\mathbf{x_i}}{\Phi_i}}}), \Psi}
+    {\flower{\gamma}{\fset{i}{n}{\garden{\bx_i}{\Phi_i, \Psi}}}}
+    {(\flower{\gamma}{\fset{i}{n}{\garden{\bx_i}{\Phi_i}}}), \Psi}
   $$
   \caption{Cross-reproduction rule}
   \labfig{cross-reproduction}
@@ -1190,15 +1220,15 @@ Kripke structures, detailed hereafter by order of importance:
     admissibility through a syntactic procedure of \emph{cut-elimination}, which
     is very hard to transpose in our deep inference setting, especially since
     there is no known internal cut-elimination procedure in the (sparse)
-    literature on deep inference systems for intuitionistic logic. In fact, the
-    requirement that the procedure be \emph{internal} is useful when studying
-    the computational content of proofs, but too strong for our logical study of
-    analyticity. Thus our first attempt was to devise an \emph{external}
-    syntactic procedure, based on the simulation of a cut-free sequent calculus
-    as in \sidecite{tiu_local_2006}; and we do have a working, verified
-    implementation of this procedure in Coq \cite{flowers-metatheory}. However,
-    we realized \textit{a posteriori} that this only proves a weak form of
-    completeness, in the sense that we only guarantee that a true flower is
+    literature on deep inference systems for full intuitionistic logic. In fact,
+    the requirement that the procedure be \emph{internal} is useful when
+    studying the computational content of proofs, but too strong for our logical
+    study of analyticity. Thus our first attempt was to devise an
+    \emph{external} syntactic procedure, based on the simulation of a cut-free
+    sequent calculus as in \sidecite{tiu_local_2006}; and we do have a working,
+    verified implementation of this procedure in Coq \cite{flowers-metatheory}.
+    However, we realized \textit{a posteriori} that this only proves a weak form
+    of completeness, in the sense that we only guarantee that a true flower is
     provable if it is the direct translation of a symbolic formula. But formulas
     are based on binary connectives and unary quantifiers, and are thus less
     expressive syntactically than flowers and their $n$-ary constructs.
@@ -1207,24 +1237,25 @@ Kripke structures, detailed hereafter by order of importance:
     so-well known) strand of analyticity proofs, which nowadays tends to be
     labelled \emph{normalization-by-evaluation} \sidecite{NbE}. The idea is to
     prove completeness of the analytic fragment of the proof system with respect
-    to some semantic models (in our case, $\vDash A$ implies $\vdash_{\Nature}
-    A$), and then compose with the soundness of the full system with respect to
-    the same models ($\vdash A$ implies $\vDash A$), giving the desired
-    admissibility result ($\vdash A$ implies $\vdash_{\Nature} A$). And in the
-    case of intuitionistic logics, the models used are most of the time Kripke
-    structures\sidenote{We know of two exceptions: the first is the (complex)
-    uniform completeness proof for various logics proposed by Okada
-    \cite{OKADA2002471} and based on \emph{phase spaces}, which are the closest
-    one can get to a truth-based (or Tarskian) semantics for \emph{linear logic}
-    \cite{girard-linear-1987}. The second is the recent completeness proof of
-    Frumin for the logic of Bunched Implications (BI)
-    \cite{10.1145/3497775.3503690}, a cousin of linear logic at the heart of
-    \emph{separation logic}, which is a very popular framework in contemporary
-    deductive program verification. It is based on so-called \emph{BI algebras},
-    a kind of Heyting algebra with additional structure for the linear part of
-    the logic. We should also mention the recent normalization proof for cubical
-    type theory given by Sterling in his thesis \cite{Sterling2022}, based on a
-    categorical and topos-theoretic generalization of Kripke structures.}
+    to some semantic models (in our case, $\vDash \phi$ implies
+    $\vdash_{\Nature} \phi$), and then compose with the soundness of the full
+    system with respect to the same models ($\vdash \phi$ implies $\vDash
+    \phi$), giving the desired admissibility result ($\vdash \phi$ implies
+    $\vdash_{\Nature} \phi$). And in the case of intuitionistic logics, the
+    models used are most of the time Kripke structures\sidenote{We know of two
+    exceptions: the first is the (complex) uniform completeness proof for
+    various logics proposed by Okada \cite{OKADA2002471} and based on
+    \emph{phase spaces}, which are the closest one can get to a truth-based (or
+    Tarskian) semantics for \emph{linear logic} \cite{girard-linear-1987}. The
+    second is the recent completeness proof of Frumin for the logic of Bunched
+    Implications (BI) \cite{10.1145/3497775.3503690}, a cousin of linear logic
+    at the heart of \emph{separation logic}, which is a very popular framework
+    in contemporary deductive program verification. It is based on so-called
+    \emph{BI algebras}, a kind of Heyting algebra with additional structure for
+    the linear part of the logic. We should also mention the recent
+    normalization proof for cubical type theory given by Sterling in his thesis
+    \cite{Sterling2022}, based on a categorical and topos-theoretic
+    generalization of Kripke structures.}
     \sidecite{hutchison_semantic_2005}\sidecite{10.1007/978-3-642-02261-6_17}\sidecite{ilik:tel-00529021}.
     
 \end{itemize}
@@ -1262,13 +1293,14 @@ world $w$ of a Kripke structure, which is done through the concept of
 \begin{definition}[$w$-evaluation]
   Given a Kripke structure $\mathcal{K}$ and a world $w$ in $\mathcal{K}$, a
   \emph{$w$-evaluation} is a function $e : \vars \to M_w$.
-  % We write $e : \mathbf{x} \to M_w$ if $e(x) = \ast$ for every $x \not\in
-  % \mathbf{x}$ and some distinguished element $\ast \in M_w$.
-  The interpretation map of $M_w$ is extended to terms with respect to any
-  evaluation $e$ as follows:
+  % We write $e : \bx \to M_w$ if $e(x) = \ast$ for every $x \not\in
+  % \bx$ and some distinguished element $\ast \in M_w$.
+  The interpretation map of $M_w$ is extended to terms and substitutions with
+  respect to any evaluation $e$ as follows:
   \begin{align*}
   \interp{x}_e &= e(x) \\
-  \interp{f(\tvec{t})}_e &= \interp{f}_w(\interp{\tvec{t}}_e)
+  \interp{f(\tvec{t})}_e &= \interp{f}_w(\interp{\tvec{t}}_e) \\
+  \interp{\sigma}_e(x) &= \interp{\sigma(x)}_e
   % \interp{p(t_1, \ldots, t_n)}_e &~\text{iff}~ (\interp{t_1}_e, \ldots, \interp{t_n}_e) \in \interp{p}_w \\
   \end{align*}
 \end{definition}
@@ -1289,21 +1321,28 @@ one big constructor:
     $\eforces{w}{p(\tvec{t})}{e}$ iff $\interp{\tvec{t}}_e \in \interp{p}_w$;
       
     \item[\textbf{(Flower)}]
-    $\eforces{w}{\flower{\garden{\mathbf{x}}{\Phi}}{\fset{i}{n}{\garden{\mathbf{x}_i}{\Phi_i}}}}{e}$ iff for every $w' \geq
+    $\eforces{w}{\flower{\garden{\bx}{\Phi}}{\fset{i}{n}{\garden{\bx_i}{\Phi_i}}}}{e}$ iff for every $w' \geq
     w$ and every $w'$-evaluation $e'$, if
-    $\eforces{w'}{\Phi}{\update{e}{\mathbf{x}}{e'}} $ then there is some $1
+    $\eforces{w'}{\Phi}{\update{e}{\bx}{e'}} $ then there is some $1
     \leq i \leq n$ and $w'$-evaluation $e''$ such that
-    $\eforces{w'}{\Phi_i}{\update{\update{e}{\mathbf{x}}{e'}}{\mathbf{x}_i}{e''}}$;
-
+    $\eforces{w'}{\Phi_i}{\update{\update{e}{\bx}{e'}}{\bx_i}{e''}}$.
+    
     \item[\textbf{(Bouquet)}]
-    $\eforces{w}{\Phi}{e}$ iff $\eforces{w}{\phi}{e}$ for every $\phi \in
-    \Phi$.
+    $\eforces{w}{\Phi}{e}$ iff $\eforces{w}{\phi}{e}$ for every $\phi \in \Phi$.
   \end{itemize}
-  We write $w \forces \Phi$ if $\eforces{w}{\Phi}{e}$ for every $w$-evaluation
-  $e$.
+  % , and $w \forces \Phi$ if $\eforces{w}{\Phi}{e}$ for every
+  % $w$-evaluation $e$.
 \end{definition}
 
-This trivial lemma will be useful later in the completeness proof:
+The following lemmas will be useful later in the soundness and completeness
+proofs:
+
+\begin{lemma}[Monotonicity]\lablemma{access-mono}
+  If $w \access w'$ and $\eforces{w}{\phi}{e}$ then $\eforces{w'}{\phi}{e}$.
+\end{lemma}
+\begin{proof}
+  By a straightforward recurrence on $\soldepth{\phi}$.
+\end{proof}
 
 \begin{lemma}\lablemma{closed-forcing}
   
@@ -1320,31 +1359,350 @@ This trivial lemma will be useful later in the completeness proof:
 %   $\eforces{w}{\phi}{e}$ for some $w$-evaluation $e$.
 % \end{corollary}
 
+\begin{marginfigure}
+  \begin{align*}
+    \text{Substitution } &\hvrefl{e} : \vars \to \terms \\
+    \text{Evaluation } &e : \vars \to M_w
+    % \text{Substitution } &\sigma : \vars \to \terms \\
+    % \text{Evaluation } &\hvrefl{\sigma} : \vars \to M_w
+  \end{align*}
+  \caption{The syntax-semantics mirror}
+  \labfig{syn-sem-mirror}
+\end{marginfigure}
+
+\begin{lemma}[Mirroring]\lablemma{mirroring} 
+  
+  $\eforces{w}{\sigma(\phi)}{e}$ iff
+  $\eforces{w}{\phi}{\update{e}{\bx}{\interp{\sigma}_e}}$ for $\sigma : \bx \to
+  \terms$ capture-avoiding in $\phi$ and $\bx \cap \bv(\phi) = \emptyset$.
+\end{lemma}
+\begin{proof}
+  By recurrence on $\soldepth{\phi}$.
+  \begin{itemize}
+    \item[\textbf{(Base case)}]
+    \newcommand{\esigma}{\update{e}{\bx}{\interp{\sigma}_e}} Suppose
+    $\phi = p(\tvec{t})$. We show that $\interp{\sigma(\tvec{t})}_e \in
+    \interp{p}_w$ iff $\interp{\tvec{t}}_{\esigma} \in \interp{p}_w$ by proving
+    that $\interp{t}_{\esigma} = \interp{\sigma(t)}_e$ for any term $t$ by
+    recurrence on $\soldepth{t}$.
+    \begin{itemize}
+      \item If $t = x$, then either:
+      \begin{itemize}
+        \item $x \in \bx$, and $\interp{x}_{\esigma} = \interp{\sigma}_e(x) = \interp{\sigma(x)}_e$; or
+        \item $x \not\in \bx$, and $\interp{x}_{\esigma} = e(x) = \interp{x}_e = \interp{\sigma(x)}_e$.
+      \end{itemize}
+      \item If $t = f(\tvec{t})$, then
+        $$
+        \begin{array}{rcll}
+          \interp{f(\tvec{t})}_{\esigma}
+          &=& \interp{f}_w\left(\interp{\tvec{t}}_{\esigma}\right) &\\
+          &=& \interp{f}_w\left(\interp{\sigma(\tvec{t})}_e\right) &\text{(IH)}\\
+          &=& \interp{f(\sigma(\tvec{t}))}_e &\\
+          &=& \interp{\sigma(f(\tvec{t}))}_e &
+        \end{array}
+        $$
+    \end{itemize}
+
+    \item[\textbf{(Recursive case)}]
+    Suppose $\phi =
+    \flower{\garden{\by}{\Phi}}{\fset{i}{n}{\garden{\bz_i}{\Psi_i}}}$. We show
+    that
+    $\eforces{w}{\flower{\garden{\by}{\sigma(\Phi)}}{\fset{i}{n}{\garden{\bz_i}{\sigma(\Psi_i)}}}}{e}$
+    implies
+    $\eforces{w}{\flower{\garden{\by}{\Phi}}{\fset{i}{n}{\garden{\bz_i}{\Psi_i}}}}{\update{e}{\bx}{\interp{\sigma}}_e}$,
+    the argument working in both directions. Let $w' \geq w$ and $e'$ a
+    $w'$-evaluation such that
+    $\eforces{w'}{\Phi}{\update{e}{\bx}{\update{\interp{\sigma}_e}{\by}{e'}}}$.
+    Since $\sigma$ is capture-avoiding in $\phi$, we know that $\fv(\sigma(x))
+    \cap \by = \emptyset$, and thus $\interp{\sigma}_e(x) =
+    \interp{\sigma(x)}_{e} = \interp{\sigma(x)}_{e \upd{\by} e'} =
+    \interp{\sigma}_{e \upd{\by} e'}(x)$ for any $x \in \bx$. Hence by
+    \reffact{update-agree}
+    $\eforces{w'}{\Phi}{\update{e}{\bx}{\update{\interp{\sigma}_{\update{e}{\by}{e'}}}{\by}{e'}}}$,
+    and since by hypothesis $\bx \cap \by = \emptyset$ we obtain
+    $\eforces{w'}{\Phi}{\update{e}{\by}{\update{e'}{\bx}{\interp{\sigma}_{\update{e}{\by}{e'}}}}}$
+    by \reffact{update-comm}. Then by IH we get
+    $\eforces{w'}{\sigma(\Phi)}{\update{e}{\by}{e'}}$, and thus by hypothesis
+    $\eforces{w'}{\sigma(\Psi_i)}{\update{e}{\by}{\update{e'}{\bz_i}{e''}}}$ for
+    some $1 \leq i \leq n$ and $w'$-evaluation $e''$. Again by IH we get
+    $\eforces{w'}{\Psi_i}{\update{e}{\by}{\update{e'}{\bz_i}{\update{e''}{\bx}{\interp{\sigma}_{\update{e}{\by}{\update{e'}{\bz_i}{e''}}}}}}}$,
+    and since $\sigma$ is capture-avoiding in $\phi$ we have $\fv(\sigma(x))
+    \cap \bz_i = \emptyset$ for any $x \in \bx$, and thus
+    $\eforces{w'}{\Psi_i}{\update{e}{\by}{\update{e'}{\bz_i}{\update{e''}{\bx}{\interp{\sigma}_{e}}}}}$
+    by \reffact{update-agree}. Finally by hypothesis $\bx \cap \bz_i =
+    \emptyset$, thus we can conclude that
+    $\eforces{w'}{\Psi_i}{\update{e}{\bx}{\update{\interp{\sigma}_{e}}{\by}{\update{e'}{\bz_i}{e''}}}}$
+    by \reffact{update-comm}.
+  \end{itemize}
+\end{proof}
+
 Lastly, we define the notion of \emph{semantic entailment} $\Phi \vDash \Psi$ on
 bouquets, mirroring the syntactic entailment $\Phi \vdash \Psi$ of the last
 section:
 
 \begin{definition}[Semantic entailment]
   Let $\mathcal{K}$ be a Kripke structure, and $\Phi, \Psi$ some bouquets. We
-  say that $\Phi$ \emph{entails} $\Psi$ in $\mathcal{K}$, written $\Phi
-  \vDash_{\mathcal{K}} \Psi$, when $\eforces{w}{\Phi}{e}$ implies
+  say that $\Phi$ \emph{semantically entails} $\Psi$ in $\mathcal{K}$, written
+  $\Phi \vDash_{\mathcal{K}} \Psi$, when $\eforces{w}{\Phi}{e}$ implies
   $\eforces{w}{\Psi}{e}$ for every world $w \in W$ and $w$-evaluation $e$. This
   entailment is \emph{valid} if it holds for any Kripke structure $\mathcal{K}$,
-  and in that case we simply write $\Phi \vDash \Psi$.
+  and in that case we simply write $\Phi \vDash \Psi$. We say that $\Phi$ is
+  \emph{semantically equivalent} to $\Psi$, written $\Phi \kequiv \Psi$, when
+  $\Phi \kentails \Psi$ and $\Psi \kentails \Phi$.
 \end{definition}
+
+\begin{fact}[Reflexivity]\labfact{kentails-refl}
+  $\Phi \kentails \Phi$.
+\end{fact}
+
+\begin{fact}[Transitivity]\labfact{kentails-trans}
+  If $\Phi \kentails \Psi$ and $\Psi \kentails \Xi$, then $\Phi \kentails \Xi$.
+\end{fact}
 
 
 \section{Soundness}\labsec{Soundness}
 
-\begin{lemma}[Natural soundness]
-  If $\Phi \lstep_\Nature \Psi$, then $\Phi \vDash \Psi$ and $\Psi \vDash \Phi$.
+\begin{lemma}[Functoriality]\lablemma{flowers-functoriality} If $\Phi \kentails
+  \Psi$, then for any $\Xi\hole$ either $\Xi\select{\Phi} \kentails
+  \Xi\select{\Psi}$ if $\Xi\hole$ is positive, or $\Xi\select{\Psi} \kentails
+  \Xi\select{\Phi}$ if $\Xi\hole$ is negative.
 \end{lemma}
 \begin{proof}
-  By inspection of every $\Nature$-rule.
+  By recurrence on $\soldepth{\Xi\hole}$.
+\end{proof}
+
+\begin{lemma}[Weakening]\lablemma{flowers-weakening}
+  $\Xi^-\select{\phantom{\Phi}} \kentails \Xi^-\select{\Phi}$.
+\end{lemma}
+\begin{proof}
+  It is trivial that $\Phi \kentails \emptyset$, and thus we can conclude by
+  \reflemma{flowers-functoriality}.
+\end{proof}
+
+\begin{lemma}[Cross-pollination]\lablemma{flowers-cross-pollination}
+  $\Phi, \Xi\select{\Phi} \kequiv \Phi, \Xi\select{\phantom{\Phi}}$.
+\end{lemma}
+\begin{proof}
+  Let $w \in W$ a world in some Kripke structure $\mathcal{K}$, and $e$ a
+  $w$-evaluation. We show that $\eforces{w}{\Phi, \Xi\select{\Phi}}{e}$ iff
+  $\eforces{w}{\Phi, \Xi{\select{\phantom{\Phi}}}}{e}$ by recurrence on
+  $\soldepth{\Xi\hole}$.
+  \begin{itemize}
+    \item[\textbf{(Base case)}]
+      Suppose $\Xi\hole = \Xi', \hole$. Then we trivially have
+      $\eforces{w}{\Phi, \Xi', \Phi}{e}$ iff $\eforces{w}{\Phi, \Xi'}{e}$ by
+      \refdef{forcing}.
+    \item[\textbf{(Recursive case)}]
+      We distinguish two cases:
+      \begin{itemize}
+        \item[\textbf{(Pistil)}]
+          \newcommand{\FillXi}[1]{\Xi', (\flower{\garden{\bx}{#1}}{\Delta})}
+          \newcommand{\rFillXi}[1]{\flower{\garden{\bx}{#1}}{\Delta}}
+
+          \newcommand{\fillXi}[1]{\FillXi{\Xi_0\select{#1}}}
+          \newcommand{\rfillXi}[1]{\rFillXi{\Xi_0\select{#1}}}
+          \newcommand{\ffillXi}[1]{\Xi\select{#1}}
+
+          Suppose $\Xi\hole = \FillXi{\Xi_0\hole}$.
+          \begin{enumerate}
+            \item Suppose $\eforces{w}{\Phi, \ffillXi{\Phi}}{e}$. Then
+            $\eforces{w}{\Phi}{e}$, $\eforces{w}{\Xi'}{e}$ and
+            $\eforces{w}{\rfillXi{\Phi}}{e}$. Thus it remains to show that
+            $\eforces{w}{\rfillXi{\phantom{\Phi}}}{e}$. Let $w' \geq w$ and $e'$
+            a $w'$-evaluation such that
+            $\eforces{w'}{\Xi_0\select{\phantom{\Phi}}}{\update{e}{\bx}{e'}}$.
+            By IH we have $\Phi, \Xi_0\select{\phantom{\Phi}} \kentails \Phi,
+            \Xi_0\select{\Phi}$, and thus by \reflemma{flowers-functoriality}
+            $\rFillXi{\Phi, \Xi_0\select{\Phi}} \kentails \rFillXi{\Phi,
+            \Xi_0\select{\phantom{\Phi}}}$. By \reflemma{flowers-weakening} we
+            have $\eforces{w}{\rFillXi{\Phi, \Xi_0\select{\Phi}}}{e}$, and thus
+            $\eforces{w}{\rFillXi{\Phi, \Xi_0\select{\phantom{\Phi}}}}{e}$. Then
+            since
+            $\eforces{w'}{\Xi_0\select{\phantom{\Phi}}}{\update{e}{\bx}{e'}}$,
+            and since by \reflemma{access-mono} (and the fact that $\bx
+            \cap \fv(\Phi) = \emptyset$) we have
+            $\eforces{w'}{\Phi}{\update{e}{\bx}{e'}}$, we can conclude
+            that there are some $\garden{\by}{\Psi} \in \Delta$ and
+            $w'$-evaluation $e''$ such that
+            $\eforces{w'}{\Psi}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
+
+            % \item Suppose $w \forces \Phi, (\fillXi{\phantom{\Phi}})$. Then $w
+            % \forces \Phi$ and $w \forces \fillXi{\phantom{\Phi}}$. Thus it
+            % remains to show that $w \forces \fillXi{\Phi}$. Let $w' \geq w$ and
+            % $e$ a $w'$-evaluation such that
+            % $\eforces{w'}{\Xi_0\select{\Phi}}{e}$. By IH we have $\Phi,
+            % \Xi_0\select{\Phi} \kentails \Phi, \Xi_0\select{\phantom{\Phi}}$,
+            % and thus by \reflemma{flowers-functoriality} $\FillXi{\Phi,
+            % \Xi_0\select{\phantom{\Phi}}} \kentails \FillXi{\Phi,
+            % \Xi_0\select{\Phi}}$. By \reflemma{flowers-weakening} we have $w
+            % \forces \FillXi{\Phi, \Xi_0\select{\phantom{\Phi}}}$, and thus $w
+            % \forces \FillXi{\Phi, \Xi_0\select{\Phi}}$. Then since
+            % $\eforces{w'}{\Xi_0\select{\Phi}}{e}$, and since by
+            % \reflemma{access-mono} we have $\eforces{w'}{\Phi}{e}$, we can
+            % conclude that $\eforces{w'}{\Delta}{e}$.
+            \item $\Phi, \ffillXi{\phantom{\Phi}} \kentails \Phi, \ffillXi{\Phi}$
+            holds by the same argument in the other direction.
+          \end{enumerate}
+
+        \item[\textbf{(Petal)}]
+          \renewcommand{\FillXi}[1]{\Xi', (\flower{\garden{\bx}{\Psi}}{\garden{\by}{#1}
+          \sep \Delta})}
+          \renewcommand{\rFillXi}[1]{\flower{\garden{\bx}{\Psi}}{\garden{\by}{#1}
+          \sep \Delta}}
+
+          Suppose $\Xi\hole = \FillXi{\Xi_0\hole}$.
+          \begin{enumerate}
+            \item Suppose $\eforces{x}{\Phi, \ffillXi{\Phi}}{e}$. Then
+            $\eforces{w}{\Phi}{e}$, $\eforces{w}{\Xi'}{e}$ and
+            $\eforces{w}{\rfillXi{\Phi}}{e}$. Thus it remains to show that
+            $\eforces{w}{\rfillXi{\phantom{\Phi}}}{e}$. Let $w' \geq w$ and $e'$
+            a $w'$-evaluation such that
+            $\eforces{w'}{\Psi}{\update{e}{\bx}{e'}}$. Then we can deduce
+            that there exists a $w'$-evaluation $e''$ such that either:
+            \begin{itemize}
+              \item
+              $\eforces{w'}{\Psi'}{\update{e}{\bx}{\update{e'}{\mathbf{y'}}{e''}}}$
+              for some $\garden{\mathbf{y'}}{\Psi'} \in \Delta$, and we conclude
+              immediately;
+              \item
+              or
+              $\eforces{w'}{\Xi_0\select{\Phi}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
+              By \reflemma{access-mono} (and the fact that $\bx \cap
+              \fv(\Phi) = \emptyset$ and $\by \cap \fv(\Phi) =
+              \emptyset$) we have
+              $\eforces{w'}{\Phi}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$,
+              and thus $\eforces{w'}{\Phi,
+              \Xi_0\select{\Phi}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
+              Then by IH we have $\eforces{w'}{\Phi,
+              \Xi_0\select{\phantom{\Phi}}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$,
+              and thus we can conclude in particular that $\eforces{w'}{
+              \Xi_0\select{\phantom{\Phi}}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
+            \end{itemize}
+
+            \item $\Phi, \ffillXi{\phantom{\Phi}} \kentails \Phi,
+            \ffillXi{\Phi}$ holds by the same argument in the other direction.
+          \end{enumerate}
+      \end{itemize}
+  \end{itemize}
+\end{proof}
+
+\begin{lemma}[Pollination]\lablemma{flowers-pollination}
+  
+  If $\chyp{\Phi}{\Xi\hole}$, then $\Xi\select{\Phi} \kequiv
+  \Xi\select{\phantom{\Phi}}$.
+\end{lemma}
+\begin{proof}
+  We show that $\chyp{\phi}{\Xi\hole}$ implies $\Xi\select{\phi} \kequiv
+  \Xi\select{\phantom{\phi}}$ for any flower $\phi$ and context $\Xi\hole$: then
+  assuming that $\Phi = \phi_1, \ldots, \phi_n$, we get
+  $$\underbrace{\Xi\select{\phi_1, \ldots, \phi_n} \kequiv \Xi\select{\phi_2,
+  \ldots, \phi_n} \kequiv \ldots \kequiv \Xi\select{\phantom{\phi}}}_{\text{$n$
+  times}}$$ and conclude by \reffact{kentails-trans}.
+  
+  By \refdef{pollination}, there are a bouquet $\Psi$ and two contexts $\Xi',
+  \Xi_0\hole$ such that one of the two following cases holds:
+  \begin{itemize}
+    \item[\textbf{(Cross-pollination)}] $\Xi\hole = \Xi'\select{\Psi, \phi,
+    \Xi_0\hole}$. Then $\phi, \Xi_0\select{\phi} \kequiv \phi,
+    \Xi_0\select{\phantom\phi}$ by \reflemma{flowers-cross-pollination}, and we
+    conclude by \reflemma{flowers-functoriality}.
+    \item[\textbf{(Self-pollination)}] $\Xi\hole =
+    \Xi'\select{\flower{\garden{\bx}{\Psi,
+    \phi}}{\garden{\by}{\Xi_0\hole} \sep \Delta}}$ for some
+    $\bx,\by,\Delta$. Let $w \in W$ a world in some Kripke
+    structure $\mathcal{K}$ and $e$ a $w$-evaluation. We show that
+    $\eforces{w}{\flower{\garden{\bx}{\Psi,
+    \phi}}{\garden{\by}{\Xi_0\select{\phi} \sep \Delta}}}{e}$ iff
+    $\eforces{w}{\flower{\garden{\bx}{\Psi,
+    \phi}}{\garden{\by}{\Xi_0\select{\phantom{\phi}} \sep \Delta}}}{e}$,
+    and conclude by \reflemma{flowers-functoriality}.
+    \begin{enumerate}
+      \item Suppose that $\eforces{w}{\flower{\garden{\bx}{\Psi,
+      \phi}}{\garden{\by}{\Xi_0\select{\phi} \sep \Delta}}}{e}$, and let
+      $w' \geq w$ and $e'$ a $w'$-evaluation such that $\eforces{w'}{\Psi,
+      \phi}{\update{e}{\bx}{e'}}$. Then we can deduce that there exists a
+      $w'$-evaluation $e''$ such that either:
+      \begin{itemize}
+        \item
+        $\eforces{w'}{\Psi'}{\update{e}{\bx}{\update{e'}{\mathbf{y'}}{e''}}}$
+        for some $\garden{\mathbf{y'}}{\Psi'} \in \Delta$, and we conclude
+        immediately;
+        \item
+        or
+        $\eforces{w'}{\Xi_0\select{\phi}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
+        Since $\fv(\phi) \cap \by = \emptyset$ we have
+        $\eforces{w'}{\phi}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$,
+        and thus $\eforces{w'}{\phi,
+        \Xi_0\select{\phi}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
+        Then by \reflemma{flowers-cross-pollination} we have $\eforces{w'}{\phi,
+        \Xi_0\select{\phantom{\phi}}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$,
+        and thus we can conclude in particular that
+        $\eforces{w'}{\Xi_0\select{\phantom{\phi}}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
+    \end{enumerate}
+    \item $\flower{\garden{\bx}{\Psi,
+    \phi}}{\garden{\by}{\Xi_0\select{\phantom{\phi}} \sep \Delta}}
+    \kentails \flower{\garden{\bx}{\Psi,
+    \phi}}{\garden{\by}{\Xi_0\select{\phi}} \sep \Delta}$ holds by the same
+    argument in the other direction.
+  \end{itemize}
+\end{proof}
+
+\begin{lemma}[Natural soundness]\lablemma{flowers-natural-soundness}
+  If $\Phi \lstep_\Nature \Psi$, then $\Phi \kequiv \Psi$.
+\end{lemma}
+\begin{proof}
+  Let $w \in W$ a world in some Kripke structure $\mathcal{K}$, $w' \geq w$, $e$
+  a $w$-evaluation and $e'$ a $w'$-evaluation. We proceed by inspection of every
+  $\Nature$-rule.
   
   \begin{itemize}
-    \item[\rsf{poll{\da}}]
-    \item[\rsf{poll{\ua}}]
+    \item[\rsf{poll{\da}}, \rsf{poll{\ua}}]
+      By \reflemma{flowers-pollination}.
+    
+    \item[\rsf{epis}] 
+    \begin{enumerate}
+      \item Suppose that $\eforces{w}{\Phi}{e}$. Then by \reflemma{access-mono}
+      we have $\eforces{w'}{\Phi}{e}$, and thus we can conclude for instance with
+    $\eforces{w'}{\Phi}{\update{e}{\emptyset}{\update{e'}{\emptyset}{e}}}$.
+      \item Suppose that $\eforces{w}{\flower{{}}{\Phi}}{e}$. Then since we
+      trivially have $w \geq w$ and
+      $\eforces{w}{\emptyset}{\update{e}{\emptyset}{e}}$, we get that
+      $\eforces{w}{\Phi}{\update{e}{\emptyset}{\update{e}{\emptyset}{e''}}}$
+      for some $w$-evaluation $e''$, and thus $\eforces{w}{\Phi}{e}$.
+    \end{enumerate}
+
+    \item[\rsf{epet}]
+      Let $\gamma = \garden{\bx}{\Phi}$. We trivially have that
+      $\eforces{w'}{\emptyset}{\update{e}{\bx}{\update{e'}{\emptyset}{e}}}$,
+      and thus can conclude.
+
+    \item[\rsf{ipis}]
+      We trivially have $\flower{\garden{\bx,\by}{\Phi}}{\Delta} \kentails
+      \flower{\garden{\bx,\by}{\Phi}}{\Delta}$ by \reffact{kentails-refl}. Thus
+      it remains to show that $ \flower{\garden{\bx, \by}{\Phi}}{\Delta}
+      \kentails \flower{\garden{\bx}{\sigma(\Phi)}}{\sigma(\Delta)}$. Suppose
+      that $\eforces{w}{\flower{\garden{\bx,\by}{\Phi}}{\Delta}}{e}$ and
+      $\eforces{w'}{\sigma(\Phi)}{\update{e}{\bx}{e'}}$. Therefore
+      $\eforces{w'}{\Phi}{\update{e}{\bx}{\update{e'}{\by}{\interp{\sigma}_{\update{e}{\bx}{e'}}}}}$
+      by \reflemma{mirroring}, and thus $\eforces{w'}{\Phi}{\update{e}{\bx \cup
+      \by}{(\update{e'}{\by}{\interp{\sigma}_{\update{e}{\bx}{e'}}})}}$ by
+      \reffact{update-assoc}. Then by hypothesis, there must be some
+      $\garden{\bz}{\Psi} \in \Delta$ and $w'$-evaluation $e''$ such that
+      $\eforces{w'}{\Psi}{e \upd{\bx \cup \by} (e' \upd{\by} \interp{\sigma}_{e
+      \upd{\bx} e'}) \upd{\bz} e''}$, and thus $\eforces{w'}{\Psi}{e \upd{\bx}
+      e' \upd{\by} \interp{\sigma}_{e \upd{\bx} e'} \upd{\bz} e''}$. Since
+      $\sigma$ is capture-avoiding in $\flower{\Phi}{\Delta}$, we know that for
+      any $x \in \by$ we have $\fv(\sigma(x)) \cap \bz = \emptyset$, and thus
+      $\interp{\sigma(x)}_{e \upd{\bx} e' \upd{\bz} e''} = \interp{\sigma(x)}_{e
+      \upd{\bx} e'}$. Hence by \reffact{update-agree} and \reffact{update-comm}
+      we get $\eforces{w'}{\Psi}{e \upd{\bx} e' \upd{\bz} e'' \upd{\by}
+      \interp{\sigma}_{e \upd{\bx} e' \upd{\bz} e''}}$, and by
+      \reflemma{mirroring} we conclude that $\eforces{w'}{\sigma(\Psi)}{e
+      \upd{\bx} e' \upd{\bz} e''}$.
+
+    \item[\rsf{ipet}]
+
+    \item[\rsf{srep}]
   \end{itemize}
 \end{proof}
 
@@ -1399,10 +1757,10 @@ this section.}
 
 % \begin{definition}[$\psi$-Henkin]
 %   A theory $T$ is \emph{$\psi$-Henkin} when for all $\phi =
-%   \flower{\garden{\mathbf{x}}{\Phi}}{\garden{\mathbf{x}_1}{\Phi_1} \sep \ldots
-%   \sep \garden{\mathbf{x}_n}{\Phi_n}} \in T$ and $\sigma : \mathbf{x} \to
+%   \flower{\garden{\bx}{\Phi}}{\garden{\bx_1}{\Phi_1} \sep \ldots
+%   \sep \garden{\bx_n}{\Phi_n}} \in T$ and $\sigma : \bx \to
 %   \closed{\terms}$, if $T, \sigma(\Phi) \nvdash \psi$ then there are some $1
-%   \leq i \leq n$ and $\sigma_i : \mathbf{x}_i \to \closed{\terms}$ such that
+%   \leq i \leq n$ and $\sigma_i : \bx_i \to \closed{\terms}$ such that
 %   $\sigma_i \circ \sigma(\Phi_i) \subseteq T$.
 % \end{definition}
 
@@ -1485,13 +1843,13 @@ relative to a flower $\psi$, which will satisfy the property that $\Phi
   hold for $\rewolF{\psi}$.
 \end{definition}
 
-% \newcommand{\ids}{\update{\idsubst}{\mathbf{x}}{\sigma}}
+% \newcommand{\ids}{\update{\idsubst}{\bx}{\sigma}}
 \begin{proposition}\labprop{inv-elem-flower}
   
   Let $\psi \in \flowers$, $\tT$ some $\psi$-consistent and $\psi$-complete
-  theory, and $\phi = \flower{\garden{\mathbf{x}}{\Phi}}{\Delta}$ with $\Delta
-  = \fset{i}{n}{\delta_i} = \fset{i}{n}{\garden{\mathbf{x}_i}{\Phi_i}}$ such
-  that $\phi \in \tT$. Then for every substitution $\sigma : \mathbf{x} \to
+  theory, and $\phi = \flower{\garden{\bx}{\Phi}}{\Delta}$ with $\Delta
+  = \fset{i}{n}{\delta_i} = \fset{i}{n}{\garden{\bx_i}{\Phi_i}}$ such
+  that $\phi \in \tT$. Then for every substitution $\sigma : \bx \to
   \terms$, either $\sigma(\Phi_i) \subseteq \tT$ for some $1 \leq i \leq n$, or $\tT
   \nvdash_\Nature \sigma(\Phi)$.
 \end{proposition}
@@ -1520,14 +1878,14 @@ relative to a flower $\psi$, which will satisfy the property that $\Phi
     &\step_{\mathsf{ipis}} &\cfill{\Xi}{\flower{\garden{{}}{(\flower{\garden{}{\sigma(\Phi)}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} & \\
     &\step_{\mathsf{poll{\da}}} &\cfill{\Xi}{\flower{\garden{{}}{(\flower{\garden{}{{}}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} &\text{(\HTwo, \HFive)} \\
     &\step_{\mathsf{srep}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\sigma(\delta_i)}{\garden{{}}{\psi}}}}}} & \\
-    &= &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\mathbf{x}_i}{\sigma(\Phi_i)}}{\garden{{}}{\psi}}}}}} & \\
-    &\nsteps{n}_{\mathsf{poll}{\da}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\mathbf{x}_i}{\sigma(\Phi_i)}}{\garden{{}}{{}}}}}}} &\text{(\HOne, \HThree, \HFour, \HFive)} \\
+    &= &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\bx_i}{\sigma(\Phi_i)}}{\garden{{}}{\psi}}}}}} & \\
+    &\nsteps{n}_{\mathsf{poll}{\da}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\bx_i}{\sigma(\Phi_i)}}{\garden{{}}{{}}}}}}} &\text{(\HOne, \HThree, \HFour, \HFive)} \\
     &\nsteps{n}_{\mathsf{epet}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{{}}}} & \\
     &\step_{\mathsf{epet}} &\cfill{\Xi}{\phantom{\Phi}} &
-    % &\steps_{\mathsf{ipis}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\psi}}), (\flower{\garden{\mathbf{x}_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
-    % && \qquad\quad~~\, (\flower{\garden{{}}{\sigma_n \circ \sigma(\Phi_n)}}{\garden{{}}{\psi}}), (\flower{\garden{\mathbf{x}_n}{\sigma(\Phi_n)}}{\garden{{}}{\psi}})}}} \\
-    % &\steps_{\mathsf{poll{\da}}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\phantom{\Phi}}}), (\flower{\garden{\mathbf{x}_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
-    % && \qquad\quad~~\, (\flower{\garden{{}}{\sigma_n \circ \sigma(\Phi_n)}}{\garden{{}}{{}}}), (\flower{\garden{\mathbf{x}_n}{\sigma(\Phi_n)}}{\garden{{}}{\psi}})}}} \\
+    % &\steps_{\mathsf{ipis}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\psi}}), (\flower{\garden{\bx_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
+    % && \qquad\quad~~\, (\flower{\garden{{}}{\sigma_n \circ \sigma(\Phi_n)}}{\garden{{}}{\psi}}), (\flower{\garden{\bx_n}{\sigma(\Phi_n)}}{\garden{{}}{\psi}})}}} \\
+    % &\steps_{\mathsf{poll{\da}}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\phantom{\Phi}}}), (\flower{\garden{\bx_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
+    % && \qquad\quad~~\, (\flower{\garden{{}}{\sigma_n \circ \sigma(\Phi_n)}}{\garden{{}}{{}}}), (\flower{\garden{\bx_n}{\sigma(\Phi_n)}}{\garden{{}}{\psi}})}}} \\
   \end{array}
   $$
 \end{proof}
@@ -1535,15 +1893,15 @@ relative to a flower $\psi$, which will satisfy the property that $\Phi
 \begin{proposition}\labprop{inv-deriv-flower}
   
   Let $\psi \in \flowers$, $\tT$ some $\psi$-consistent and $\psi$-complete
-  theory, and $\phi = \flower{\garden{\mathbf{x}}{\Phi}}{\Delta}$ with $\Delta
-  = \fset{i}{n}{\delta_i} = \fset{i}{n}{\garden{\mathbf{x}_i}{\Phi_i}}$ such
+  theory, and $\phi = \flower{\garden{\bx}{\Phi}}{\Delta}$ with $\Delta
+  = \fset{i}{n}{\delta_i} = \fset{i}{n}{\garden{\bx_i}{\Phi_i}}$ such
   that $\tT \nvdash_\Nature \phi$. Then for every $1 \leq i \leq n$ and substitution
-  $\sigma : \mathbf{x_i} \to \terms$, there is some $\phi_i \in \Phi_i$ such
+  $\sigma : \bx_i \to \terms$, there is some $\phi_i \in \Phi_i$ such
   that $\tT, \Phi \nvdash_\Nature \sigma(\phi_i)$.
 \end{proposition}
 \begin{proof}
   Suppose the contrary, i.e. there are some $1 \leq i \leq n$ and $\sigma :
-  \mathbf{x}_i \to \terms$ such that $\tT, \Phi \vdash_\Nature \sigma(\Phi_i)$.
+  \bx_i \to \terms$ such that $\tT, \Phi \vdash_\Nature \sigma(\Phi_i)$.
   Therefore there must exist $\Psi \subseteq \tT$ and \Hyp{$\Phi_0 \subseteq
   \Phi$}~{\HOne} such that \Hyp{$\Psi, \Phi_0 \vdash_\Nature
   \sigma(\Phi_i)$}~{\HTwo}. By hypothesis, for every $\Phi' \subseteq \tT$ there
@@ -1554,8 +1912,8 @@ relative to a flower $\psi$, which will satisfy the property that $\Phi
   $$
   \begin{array}{rlll}
     \cfill{\Xi}{\phi}
-    &\step_{\mathsf{ipet}} &\cfill{\Xi}{\flower{\garden{\mathbf{x}}{\Phi}}{\garden{{}}{\sigma(\Phi_i)} \sep \Delta}} & \\
-    &\step_{\mathsf{poll}{\da}} &\cfill{\Xi}{\flower{\garden{\mathbf{x}}{\Phi}}{\garden{{}}{{}} \sep \Delta}} &\text{(\HOne, \HTwo, \HThree)} \\
+    &\step_{\mathsf{ipet}} &\cfill{\Xi}{\flower{\garden{\bx}{\Phi}}{\garden{{}}{\sigma(\Phi_i)} \sep \Delta}} & \\
+    &\step_{\mathsf{poll}{\da}} &\cfill{\Xi}{\flower{\garden{\bx}{\Phi}}{\garden{{}}{{}} \sep \Delta}} &\text{(\HOne, \HTwo, \HThree)} \\
     &\step_{\mathsf{epet}} &\cfill{\Xi}{\phantom{\Phi}} &
   \end{array}
   $$
@@ -1585,44 +1943,44 @@ relative to a flower $\psi$, which will satisfy the property that $\Phi
       (\reflemma{reflexivity}).
     \end{enumerate}
     \item Suppose $\phi =
-    \flower{\garden{\mathbf{x}}{\Phi}}{\fset{i}{n}{\garden{\mathbf{x_i}}{\Phi_i}}}$.
+    \flower{\garden{\bx}{\Phi}}{\fset{i}{n}{\garden{\bx_i}{\Phi_i}}}$.
     \begin{enumerate}
       \item Let $\tU \supseteq \tT$ be a $\psi$-consistent and $\psi$-complete
       theory. Obviously $\sigma(\phi) =
-      \flower{\garden{\mathbf{x}}{\restr{\sigma}{\mathbf{x}}(\Phi)}}{\fset{i}{n}{\garden{\mathbf{x}_i}{\restr{\sigma}{\mathbf{x}
-      \cup \mathbf{x}_i}(\Phi_i)}}} \in \tU$, and thus by
+      \flower{\garden{\bx}{\restr{\sigma}{\bx}(\Phi)}}{\fset{i}{n}{\garden{\bx_i}{\restr{\sigma}{\bx
+      \cup \bx_i}(\Phi_i)}}} \in \tU$, and thus by
       \refprop{inv-elem-flower}, for every substitution $\tau$, either $
-      \update{}{\mathbf{x}}{\tau} \circ \restr{\sigma}{\mathbf{x} \cup
-      \mathbf{x}_i}(\Phi_i) =
-      \update{\update{\sigma}{\mathbf{x}}{\tau}}{\mathbf{x}_i}{}(\Phi_i)
+      \update{}{\bx}{\tau} \circ \restr{\sigma}{\bx \cup
+      \bx_i}(\Phi_i) =
+      \update{\update{\sigma}{\bx}{\tau}}{\bx_i}{}(\Phi_i)
       \subseteq \tU$ for some $1 \leq i \leq n$, or $\tU \nvdash_\Nature
-      \update{}{\mathbf{x}}{\tau} \circ \restr{\sigma}{\mathbf{x}}(\Phi) =
-      \update{\sigma}{\mathbf{x}}{\tau}(\Phi)$. In the first case, we get
-      $\eforces{\tU}{\Phi_i}{\update{\update{\sigma}{\mathbf{x}}{\tau}}{\mathbf{x}_i}{}}$
+      \update{}{\bx}{\tau} \circ \restr{\sigma}{\bx}(\Phi) =
+      \update{\sigma}{\bx}{\tau}(\Phi)$. In the first case, we get
+      $\eforces{\tU}{\Phi_i}{\update{\update{\sigma}{\bx}{\tau}}{\bx_i}{}}$
       by induction hypothesis. In the second case, we get
-      $\neforces{\tU}{\Phi}{\restr{\sigma}{\mathbf{x}}\tau}$ by induction
+      $\neforces{\tU}{\Phi}{\restr{\sigma}{\bx}\tau}$ by induction
       hypothesis. In other words,
-      $\eforces{\tU}{\Phi}{\restr{\sigma}{\mathbf{x}}\tau}$ implies
-      $\eforces{\tU}{\Phi_i}{\update{\update{\sigma}{\mathbf{x}}{\tau}}{\mathbf{x}_i}{}}$,
+      $\eforces{\tU}{\Phi}{\restr{\sigma}{\bx}\tau}$ implies
+      $\eforces{\tU}{\Phi_i}{\update{\update{\sigma}{\bx}{\tau}}{\bx_i}{}}$,
       that is $\eforces{\tT}{\phi}{\sigma}$.
       \item By \refprop{inv-deriv-flower}, for every $1 \leq i \leq n$ and
       substitution $\tau$, there is some $\phi_i \in \Phi_i$ such that $\tT,
-      \restr{\sigma}{\mathbf{x}}(\Phi) \nvdash_\Nature
-      \update{}{\mathbf{x}_i}{\tau} \circ \restr{\sigma}{\mathbf{x} \cup
-      \mathbf{x}_i}(\phi_i) =
-      \update{\update{\sigma}{\mathbf{x}}{}}{\mathbf{x}_i}{\tau}(\phi_i)$. By
+      \restr{\sigma}{\bx}(\Phi) \nvdash_\Nature
+      \update{}{\bx_i}{\tau} \circ \restr{\sigma}{\bx \cup
+      \bx_i}(\phi_i) =
+      \update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}(\phi_i)$. By
       the completion procedure, we get a theory $\tU = \completion{\tT \cup
-      \restr{\sigma}{\mathbf{x}}(\Phi)} \supseteq \tT \cup
-      \restr{\sigma}{\mathbf{x}}(\Phi)$ which is both
-      $\update{\update{\sigma}{\mathbf{x}}{}}{\mathbf{x}_i}{\tau}(\phi_i)$-consistent
+      \restr{\sigma}{\bx}(\Phi)} \supseteq \tT \cup
+      \restr{\sigma}{\bx}(\Phi)$ which is both
+      $\update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}(\phi_i)$-consistent
       and
-      $\update{\update{\sigma}{\mathbf{x}}{}}{\mathbf{x}_i}{\tau}(\phi_i)$-complete.
+      $\update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}(\phi_i)$-complete.
       Then by induction hypothesis,
-      $\eforces{\tU}{\Phi}{\update{\sigma}{\mathbf{x}}{}}$ since
-      $\update{\sigma}{\mathbf{x}}{}(\Phi) \subseteq \tU$, and
-      $\neforces{\tU}{\phi_i}{\update{\update{\sigma}{\mathbf{x}}{}}{\mathbf{x}_i}{\tau}}$
+      $\eforces{\tU}{\Phi}{\update{\sigma}{\bx}{}}$ since
+      $\update{\sigma}{\bx}{}(\Phi) \subseteq \tU$, and
+      $\neforces{\tU}{\phi_i}{\update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}}$
       since $\tU$ is
-      $\update{\update{\sigma}{\mathbf{x}}{}}{\mathbf{x}_i}{\tau}(\phi_i)$-consistent,
+      $\update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}(\phi_i)$-consistent,
       that is $\neforces{\tT}{\phi}{\sigma}$.
     \end{enumerate}
   \end{itemize}
@@ -1634,9 +1992,10 @@ relative to a flower $\psi$, which will satisfy the property that $\Phi
   that is every $\phi \in \tT$ is closed. Then $\tT \nvDash \psi$.
 \end{lemma}
 \begin{proof}
-  We show $\tT \nvDash_{\rewolF{\psi}} \psi$, and more specifically that there is
-  some substitution $\sigma$ such that $\eforces{\completion{\tT}}{\tT}{\sigma}$ but
-  $\neforces{\completion{\tT}}{\psi}{\sigma}$. Let $\sigma \triangleq
+  We show $\tT \nvDash_{\rewolF{\psi}} \psi$, and more specifically that there
+  is some substitution $\sigma$ such that
+  $\eforces{\completion{\tT}}{\tT}{\sigma}$ but
+  $\neforces{\completion{\tT}}{\psi}{\sigma}$. Let $\sigma =
   \update{}{\bv(\psi)}{\cstsubst{z}}$ for some fresh variable $z \not\in
   \bv(\psi)$, where $\cstsubst{z}$ is the constant substitution that always maps
   to $z$.

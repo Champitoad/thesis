@@ -16,7 +16,7 @@
 \node at (d5) {$\sigma(\delta_{n})$};
 \node at (c1) {$
   \begin{array}{c}
-    \mathbf{x}\\
+    \bx\\
     \sigma(\Phi)
   \end{array}
 $};

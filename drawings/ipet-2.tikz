@@ -9,13 +9,13 @@
 }}
 \node at (d1) {$
   \begin{array}{c}
-    \,\mathbf{x}~\mathbf{y} \\
+    \,\bx~\by \\
     \!\!\!\Phi
   \end{array}
 $};
 \node at (d) {$
   \begin{array}{c}
-    \!\mathbf{x} \\
+    \!\bx \\
     \,\,\,\sigma(\Phi)
   \end{array}
 $};

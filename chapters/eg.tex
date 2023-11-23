@@ -1979,8 +1979,8 @@ Naturally, the pair formed by a sprinkler and a multiset of nodes is called a
     \ldots, x_n) \in \bnodes$;
     \item \textbf{(Graph)} If $G \subset \bnodes$ is a finite multiset, then $G
     \in \bgraphs$.
-    \item \textbf{(Garden)} If $\mathbf{x} \subset \vars$ is a finite set and $G
-    \subset \bnodes$ a finite multiset, then $\garden{\mathbf{x}}{G} \in
+    \item \textbf{(Garden)} If $\bx \subset \vars$ is a finite set and $G
+    \subset \bnodes$ a finite multiset, then $\garden{\bx}{G} \in
     \bgardens$;
     \item \textbf{(Enclosure)} If $\gamma \in \bgardens$, then $[\gamma] \in \bnodes$.
   \end{itemize}
@@ -2064,9 +2064,9 @@ of capture-avoiding substitution:
       x_i &\text{otherwise}
     \end{cases} \\
     \subst{g_1, \ldots, g_n}{y}{x} &= \subst{g_1}{y}{x}, \ldots, \subst{g_n}{y}{x} \\
-    \subst{(\garden{\mathbf{z}}{G})}{y}{x} &= \begin{cases}
-      \garden{\mathbf{z}}{\subst{G}{y}{x}} &\text{if $x \not\in \mathbf{z}$} \\
-      \garden{\mathbf{z}}{G} &\text{otherwise}
+    \subst{(\garden{\bz}{G})}{y}{x} &= \begin{cases}
+      \garden{\bz}{\subst{G}{y}{x}} &\text{if $x \not\in \bz$} \\
+      \garden{\bz}{G} &\text{otherwise}
     \end{cases} \\
     \subst{[\gamma]}{y}{x} &= [\subst{\gamma}{y}{x}]
   \end{align*}

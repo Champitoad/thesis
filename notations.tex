@@ -73,6 +73,7 @@
 
 % Vertical reflection in math mode
 \newcommand{\vrefl}[1]{\text{\raisebox{\depth}{\scalebox{-1}[-1]{$#1$}}}}
+\newcommand{\hvrefl}[1]{\text{\raisebox{\depth}{\scalebox{1}[-1]{$#1$}}}}
 
 \newcommand{\sep}{\;\!;\!\;}
 
@@ -347,6 +348,10 @@
 
 \newcommand{\pissheet}[1]{\colorbox{pistil}{$#1$}}
 
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+
 % First-order
 
 \newcommand{\vars}{\mathcal{V}}
@@ -359,7 +364,8 @@
 
 \newcommand{\closed}[1]{\underline{#1}}
 \newcommand{\restr}[2]{#1 |_{#2}}
-\newcommand{\update}[3]{#1 \mathbin{|_{#2}} #3}
+\newcommand{\upd}[1]{\mathbin{|_{#1}}}
+\newcommand{\update}[3]{#1 \upd{#2} #3}
 \newcommand{\idsubst}{\mathsf{1}}
 \newcommand{\cstsubst}[1]{\overline{#1}}
 
@@ -368,6 +374,9 @@
 % Kripke
 
 \newcommand{\rewolF}[1]{\text{\ding{95}}(#1)}
+
+\newcommand{\kentails}{\vDash}
+\newcommand{\kequiv}{\mathop{\vrefl{{\vDash}}{\vDash}}}
 
 \newcommand{\forces}{\,\Vdash\,}
 \newcommand{\nforces}{\,\nVdash\,}
@@ -378,7 +387,6 @@
 \newcommand{\completion}[1]{\mathsf{Com}(#1)}
 \newcommand{\ncompletion}[2]{\mathsf{Com}^{#2}(#1)}
 
-\newcommand{\sequiv}{\mathop{\vrefl{{\vDash}}{\vDash}}}
 
 \newcommand{\tT}{\mathcall{T}}
 \newcommand{\tU}{\mathcall{U}}
