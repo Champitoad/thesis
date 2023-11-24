@@ -153,7 +153,7 @@ interpretation of juxtaposition proposed by Peirce was that of
 \emph{disjunction}, in his system of \emph{entitative graphs}. According to him,
 the illative transformations of EG are a necessary consequence of the
 \emph{conjunctive} interpretation of juxtaposition, as witnessed by the
-following excerpt \sidecite[p.~533]{peirce_prolegomena_1906}:
+following excerpt \sidecite[][p.~533]{peirce_prolegomena_1906}:
 
 \begin{quote}
 If you carefully examine the above conventions, you will find that they are
@@ -785,8 +785,18 @@ update}, which will be useful for the semantic evaluation of flowers in
 \begin{definition}[Substitution]
   A \emph{substitution} is a function $\sigma : \vars \to \terms$ with a finite
   \emph{support} $\dom(\sigma) = \compr{x}{\sigma(x) \not= x}$. By abuse of
-  notation, we will write $\sigma : \bx \to \terms$ to denote a
-  substitution $\sigma$ whose support is $\bx$.
+  notation, we will write $\sigma : \bx \to \terms$ to denote a substitution
+  $\sigma$ whose support is $\bx$. The domain of substitutions is extended to
+  terms, flowers and gardens mutually recursively as follows:
+  \begin{align*}
+    \sigma(f(x_1, \ldots, x_n)) &= f(\sigma(x_1), \ldots, \sigma(x_n)) \\
+    \sigma(p(\tvec{t})) &= p(\sigma(\tvec{t})) \\
+    \sigma(\garden{\mathbf{x}}{\Phi}) &=
+      \garden{\mathbf{x}}{\restr{\sigma}{\mathbf{x}}(\Phi)} \\
+    \sigma(\flower{\garden{\mathbf{x}}{\Phi}}{\Delta}) &=
+      \flower{\sigma(\garden{\mathbf{x}}{\Phi})}{\restr{\sigma}{\mathbf{x}}(\Delta)}
+  \end{align*}
+
 \end{definition}
 
 \begin{definition}[Capture-avoiding substitution]
@@ -1026,7 +1036,7 @@ sets: the \emph{natural} rules denoted by $\Nature$, and the \emph{cultural}
 rules denoted by $\Culture$. In particular, every $\Nature$-rule is both
 \emph{analytic} (i.e. every atom in the premiss already appears in the
 conclusion) and \emph{invertible} (this will be shown in \refsec{Soundness});
-and we will prove in \refsec{Completeness} that all $\Culture$-rules
+and we will prove in \refsec{Completeness} that all $\Culture$-rules are
 \emph{admissible}.
 
 \begin{definition}[Derivation]
@@ -1103,16 +1113,6 @@ useful in the completeness proof of \refsec{Completeness}.
   $$
 \end{proof}
 
-\begin{marginfigure}
-  $$
-  \R[\rsf{crep}]
-    {\flower{\gamma}{\fset{i}{n}{\garden{\bx_i}{\Phi_i, \Psi}}}}
-    {(\flower{\gamma}{\fset{i}{n}{\garden{\bx_i}{\Phi_i}}}), \Psi}
-  $$
-  \caption{Cross-reproduction rule}
-  \labfig{cross-reproduction}
-\end{marginfigure}
-
 There is a subtle but important shift here with respect to the standard notions
 of hypothetical provability, as found in Gentzen systems or type theories: while
 in these settings it is characterized as the existence of a proof for a
@@ -1127,6 +1127,16 @@ admissible modulo the addition of the distributivity rule \rsf{crep}\sidenote{\r
 stands for \textsf{c}ross-\textsf{rep}roduction, mirroring the distinction
 between cross-pollination and self-pollination, but with respect to the
 self-reproduction rule \rsf{srep}.} of \reffig{cross-reproduction}.
+
+\begin{marginfigure}
+  $$
+  \R[\rsf{crep}]
+    {\flower{\gamma}{\fset{i}{n}{\garden{\bx_i}{\Phi_i, \Psi}}}}
+    {(\flower{\gamma}{\fset{i}{n}{\garden{\bx_i}{\Phi_i}}}), \Psi}
+  $$
+  \caption{Cross-reproduction rule}
+  \labfig{cross-reproduction}
+\end{marginfigure}
 
 Thus our stronger notion of hypothetical provability makes more sense in the
 variant $\Nature \setminus \{\rsf{epis}\} \cup \{\rsf{crep}\}$ of the flower
@@ -1462,6 +1472,13 @@ section:
 
 \section{Soundness}\labsec{Soundness}
 
+We now show that every rule of the flower calculus is \emph{sound} with respect
+to our Kripke semantics for flowers. We start with the pervasive
+\emph{functoriality} lemma at the basis of every deep inference
+system\sidenote{Other instances in this thesis are Lemma \ref{prop:cov},
+\reflemma{bubbles-functoriality}, \reflemma{bubbles-cofunctoriality}, and
+Corollary \ref{cor:eg-functoriality}.}:
+
 \begin{lemma}[Functoriality]\lablemma{flowers-functoriality} If $\Phi \kentails
   \Psi$, then for any $\Xi\hole$ either $\Xi\select{\Phi} \kentails
   \Xi\select{\Psi}$ if $\Xi\hole$ is positive, or $\Xi\select{\Psi} \kentails
@@ -1471,19 +1488,39 @@ section:
   By recurrence on $\soldepth{\Xi\hole}$.
 \end{proof}
 
+Weakening lemmas are also standard in proof theory and type theory. Here they
+are purely semantic, but they will participate in the admissibility of the
+weakening rules $\{\rsf{grow},\rsf{crop},\rsf{pull},\rsf{glue}\}$:
+
 \begin{lemma}[Weakening]\lablemma{flowers-weakening}
-  $\Xi^-\select{\phantom{\Phi}} \kentails \Xi^-\select{\Phi}$.
+  $\Phi \kentails \emptyset$.
 \end{lemma}
 \begin{proof}
-  It is trivial that $\Phi \kentails \emptyset$, and thus we can conclude by
-  \reflemma{flowers-functoriality}.
+  Trivial by \refdef{forcing}.
 \end{proof}
+
+\begin{lemma}[Co-weakening]\lablemma{flowers-coweakening}
+  $\flower{\gamma}{\Delta} \kentails \flower{\gamma}{\Gamma \sep \Delta}$.
+\end{lemma}
+\begin{proof}
+  Let $\gamma = \garden{\bx}{\Phi}$, $w$ a world in some Kripke structure
+  $\mathcal{K}$, $w' \geq w$, $e$ a $w$-evaluation and $e'$ a $w'$-evaluation
+  such that $\eforces{w}{\flower{\gamma}{\Delta}}{e}$ and $\eforces{w'}{\Phi}{e
+  \upd{\bx} e'}$. Then by hypothesis there must exist some $\garden{\by}{\Psi}
+  \in \Delta$ and $w'$-evaluation $e''$ such that $\eforces{w'}{\Psi}{e
+  \upd{\bx} e' \upd{\by} e''}$, and thus we can conclude.
+\end{proof}
+
+The less obvious rules in terms of soundness are the \emph{pollination} rules
+$\{\rsf{poll{\da}},\rsf{poll{\ua}}\}$, because of the arbitrary context $\Xi$
+and reliance on the pollination relation. The following lemma can be compared to
+\reflemma{eg-iteration} for the (de)iteration rules in EG:
 
 \begin{lemma}[Cross-pollination]\lablemma{flowers-cross-pollination}
   $\Phi, \Xi\select{\Phi} \kequiv \Phi, \Xi\select{\phantom{\Phi}}$.
 \end{lemma}
 \begin{proof}
-  Let $w \in W$ a world in some Kripke structure $\mathcal{K}$, and $e$ a
+  Let $w$ a world in some Kripke structure $\mathcal{K}$, and $e$ a
   $w$-evaluation. We show that $\eforces{w}{\Phi, \Xi\select{\Phi}}{e}$ iff
   $\eforces{w}{\Phi, \Xi{\select{\phantom{\Phi}}}}{e}$ by recurrence on
   $\soldepth{\Xi\hole}$.
@@ -1514,16 +1551,16 @@ section:
             By IH we have $\Phi, \Xi_0\select{\phantom{\Phi}} \kentails \Phi,
             \Xi_0\select{\Phi}$, and thus by \reflemma{flowers-functoriality}
             $\rFillXi{\Phi, \Xi_0\select{\Phi}} \kentails \rFillXi{\Phi,
-            \Xi_0\select{\phantom{\Phi}}}$. By \reflemma{flowers-weakening} we
-            have $\eforces{w}{\rFillXi{\Phi, \Xi_0\select{\Phi}}}{e}$, and thus
-            $\eforces{w}{\rFillXi{\Phi, \Xi_0\select{\phantom{\Phi}}}}{e}$. Then
-            since
+            \Xi_0\select{\phantom{\Phi}}}$. By \reflemma{flowers-weakening} and
+            \reflemma{flowers-functoriality} we have $\eforces{w}{\rFillXi{\Phi,
+            \Xi_0\select{\Phi}}}{e}$, and thus $\eforces{w}{\rFillXi{\Phi,
+            \Xi_0\select{\phantom{\Phi}}}}{e}$. Then since
             $\eforces{w'}{\Xi_0\select{\phantom{\Phi}}}{\update{e}{\bx}{e'}}$,
-            and since by \reflemma{access-mono} (and the fact that $\bx
-            \cap \fv(\Phi) = \emptyset$) we have
-            $\eforces{w'}{\Phi}{\update{e}{\bx}{e'}}$, we can conclude
-            that there are some $\garden{\by}{\Psi} \in \Delta$ and
-            $w'$-evaluation $e''$ such that
+            and since by \reflemma{access-mono} (and the fact that $\bx \cap
+            \fv(\Phi) = \emptyset$) we have
+            $\eforces{w'}{\Phi}{\update{e}{\bx}{e'}}$, we can conclude that
+            there are some $\garden{\by}{\Psi} \in \Delta$ and $w'$-evaluation
+            $e''$ such that
             $\eforces{w'}{\Psi}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
 
             % \item Suppose $w \forces \Phi, (\fillXi{\phantom{\Phi}})$. Then $w
@@ -1586,6 +1623,8 @@ section:
   \end{itemize}
 \end{proof}
 
+Then we also need to account for \emph{self-pollination}:
+
 \begin{lemma}[Pollination]\lablemma{flowers-pollination}
   
   If $\chyp{\Phi}{\Xi\hole}$, then $\Xi\select{\Phi} \kequiv
@@ -1609,7 +1648,7 @@ section:
     \item[\textbf{(Self-pollination)}] $\Xi\hole =
     \Xi'\select{\flower{\garden{\bx}{\Psi,
     \phi}}{\garden{\by}{\Xi_0\hole} \sep \Delta}}$ for some
-    $\bx,\by,\Delta$. Let $w \in W$ a world in some Kripke
+    $\bx,\by,\Delta$. Let $w$ a world in some Kripke
     structure $\mathcal{K}$ and $e$ a $w$-evaluation. We show that
     $\eforces{w}{\flower{\garden{\bx}{\Psi,
     \phi}}{\garden{\by}{\Xi_0\select{\phi} \sep \Delta}}}{e}$ iff
@@ -1638,28 +1677,96 @@ section:
         \Xi_0\select{\phantom{\phi}}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$,
         and thus we can conclude in particular that
         $\eforces{w'}{\Xi_0\select{\phantom{\phi}}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
-    \end{enumerate}
+      \end{itemize}
     \item $\flower{\garden{\bx}{\Psi,
     \phi}}{\garden{\by}{\Xi_0\select{\phantom{\phi}} \sep \Delta}}
     \kentails \flower{\garden{\bx}{\Psi,
     \phi}}{\garden{\by}{\Xi_0\select{\phi}} \sep \Delta}$ holds by the same
     argument in the other direction.
+    \end{enumerate}
   \end{itemize}
 \end{proof}
 
-\begin{lemma}[Natural soundness]\lablemma{flowers-natural-soundness}
+Proving the soundness of rules involving binders (\rsf{ipis}, \rsf{ipet},
+\rsf{apis}, \rsf{apet}) is also quite tedious, which can be understood as
+stemming from the fact that substitutions simulate the complex dynamics of the
+lines of identity of EG in a \emph{global} rather than local way. In particular,
+one needs to be careful about the scope of bound variables, which in EG would be
+handled locally with (de)iteration rules.
+
+\begin{lemma}[Universal instantiation]\lablemma{flowers-univ-inst}
+  
+  If $\sigma : \by \to \terms$ is capture-avoiding in $\flower{\Phi}{\Delta}$,
+  then $\flower{\garden{\bx, \by}{\Phi}}{\Delta} \kentails
+  \flower{\garden{\bx}{\sigma(\Phi)}}{\sigma(\Delta)}$.
+\end{lemma}
+\begin{proof}
+  Let $w$ a world in some Kripke structure $\mathcal{K}$, $w' \geq w$, $e$
+  a $w$-evaluation and $e'$ a $w'$-evaluation such that
+  $\eforces{w}{\flower{\garden{\bx,\by}{\Phi}}{\Delta}}{e}$ and
+  $\eforces{w'}{\sigma(\Phi)}{\update{e}{\bx}{e'}}$. Therefore
+  $\eforces{w'}{\Phi}{\update{e}{\bx}{\update{e'}{\by}{\interp{\sigma}_{\update{e}{\bx}{e'}}}}}$
+  by \reflemma{mirroring}, and thus $\eforces{w'}{\Phi}{\update{e}{\bx \cup
+  \by}{(\update{e'}{\by}{\interp{\sigma}_{\update{e}{\bx}{e'}}})}}$ by
+  \reffact{update-assoc}. Then by hypothesis, there must be some
+  $\garden{\bz}{\Psi} \in \Delta$ and $w'$-evaluation $e''$ such that
+  $\eforces{w'}{\Psi}{e \upd{\bx \cup \by} (e' \upd{\by} \interp{\sigma}_{e
+  \upd{\bx} e'}) \upd{\bz} e''}$, and thus $\eforces{w'}{\Psi}{e \upd{\bx} e'
+  \upd{\by} \interp{\sigma}_{e \upd{\bx} e'} \upd{\bz} e''}$. Since $\sigma$ is
+  capture-avoiding in $\flower{\Phi}{\Delta}$, we know that for any $x \in \by$
+  we have $\fv(\sigma(x)) \cap \bz = \emptyset$, and thus $\interp{\sigma(x)}_{e
+  \upd{\bx} e' \upd{\bz} e''} = \interp{\sigma(x)}_{e \upd{\bx} e'}$. Hence by
+  \reffact{update-agree} and \reffact{update-comm} we get $\eforces{w'}{\Psi}{e
+  \upd{\bx} e' \upd{\bz} e'' \upd{\by} \interp{\sigma}_{e \upd{\bx} e' \upd{\bz}
+  e''}}$, and by \reflemma{mirroring} we conclude that
+  $\eforces{w'}{\sigma(\Psi)}{e \upd{\bx} e' \upd{\bz} e''}$.
+\end{proof}
+
+\begin{lemma}[Existential instantiation]\lablemma{flowers-ex-inst}
+  
+  If $\sigma : \by \to \terms$ is capture-avoiding in $\Phi$, then
+  $\flower{\gamma}{\garden{\bx}{\sigma(\Phi)} \sep \Delta} \kentails
+  \flower{\gamma}{\garden{\bx,\by}{\Phi} \sep \Delta}$.
+\end{lemma}
+\begin{proof}
+  Let $\gamma = \garden{\bz}{\Xi}$, and $w$ a world in some Kripke
+  structure $\mathcal{K}$, $w' \geq w$, $e$ a $w$-evaluation and $e'$ a
+  $w'$-evaluation such that
+  $\eforces{w}{\flower{\gamma}{\garden{\bx}{\sigma(\Phi)} \sep \Delta}}{e}$ and
+  $\eforces{w'}{\Xi}{\update{e}{\bz}{e'}}$. Then by hypothesis, there must be
+  some $w'$-evaluation $e''$ such that either:
+  \begin{itemize}
+    \item
+    $\eforces{w'}{\Xi'}{\update{e}{\bz}{\update{e'}{\bz'}{e''}}}$ for some
+    $\garden{\bz'}{\Xi'} \in \Delta$, and we conclude immediately;
+    \item
+    or $\eforces{w'}{\sigma(\Phi)}{\update{e}{\bz}{\update{e'}{\bx}{e''}}}$.
+    Then by \reflemma{mirroring} we have
+    $\eforces{w'}{\Phi}{\update{e}{\bz}{\update{e'}{\bx}{e'' \upd{\by}
+    \interp{\sigma}_{\update{e}{\bz}{\update{e'}{\bx}{e''}}}}}}$, and thus we
+    can conclude with $\eforces{w'}{\Phi}{\update{e}{\bz}{\update{e'}{\bx \cup
+    \by}{(e'' \upd{\by}
+    \interp{\sigma}_{\update{e}{\bz}{\update{e'}{\bx}{e''}}})}}}$ by
+    \reffact{update-agree}.
+  \end{itemize}
+\end{proof}
+
+We are now equipped with enough lemmas to prove the soundness of each rule,
+starting with the \emph{local} version of natural rules:
+
+\begin{lemma}[Local soundness]\lablemma{flowers-local-soundness}
   If $\Phi \lstep_\Nature \Psi$, then $\Phi \kequiv \Psi$.
 \end{lemma}
 \begin{proof}
-  Let $w \in W$ a world in some Kripke structure $\mathcal{K}$, $w' \geq w$, $e$
+  Let $w$ a world in some Kripke structure $\mathcal{K}$, $w' \geq w$, $e$
   a $w$-evaluation and $e'$ a $w'$-evaluation. We proceed by inspection of every
   $\Nature$-rule.
   
   \begin{itemize}
-    \item[\rsf{poll{\da}}, \rsf{poll{\ua}}]
+    \item(\rsf{poll{\da}}, \rsf{poll{\ua}})
       By \reflemma{flowers-pollination}.
     
-    \item[\rsf{epis}] 
+    \item(\rsf{epis})\sbr
     \begin{enumerate}
       \item Suppose that $\eforces{w}{\Phi}{e}$. Then by \reflemma{access-mono}
       we have $\eforces{w'}{\Phi}{e}$, and thus we can conclude for instance with
@@ -1671,41 +1778,121 @@ section:
       for some $w$-evaluation $e''$, and thus $\eforces{w}{\Phi}{e}$.
     \end{enumerate}
 
-    \item[\rsf{epet}]
+    \item(\rsf{epet})
       Let $\gamma = \garden{\bx}{\Phi}$. We trivially have that
       $\eforces{w'}{\emptyset}{\update{e}{\bx}{\update{e'}{\emptyset}{e}}}$,
       and thus can conclude.
 
-    \item[\rsf{ipis}]
-      We trivially have $\flower{\garden{\bx,\by}{\Phi}}{\Delta} \kentails
-      \flower{\garden{\bx,\by}{\Phi}}{\Delta}$ by \reffact{kentails-refl}. Thus
-      it remains to show that $ \flower{\garden{\bx, \by}{\Phi}}{\Delta}
-      \kentails \flower{\garden{\bx}{\sigma(\Phi)}}{\sigma(\Delta)}$. Suppose
-      that $\eforces{w}{\flower{\garden{\bx,\by}{\Phi}}{\Delta}}{e}$ and
-      $\eforces{w'}{\sigma(\Phi)}{\update{e}{\bx}{e'}}$. Therefore
-      $\eforces{w'}{\Phi}{\update{e}{\bx}{\update{e'}{\by}{\interp{\sigma}_{\update{e}{\bx}{e'}}}}}$
-      by \reflemma{mirroring}, and thus $\eforces{w'}{\Phi}{\update{e}{\bx \cup
-      \by}{(\update{e'}{\by}{\interp{\sigma}_{\update{e}{\bx}{e'}}})}}$ by
-      \reffact{update-assoc}. Then by hypothesis, there must be some
-      $\garden{\bz}{\Psi} \in \Delta$ and $w'$-evaluation $e''$ such that
-      $\eforces{w'}{\Psi}{e \upd{\bx \cup \by} (e' \upd{\by} \interp{\sigma}_{e
-      \upd{\bx} e'}) \upd{\bz} e''}$, and thus $\eforces{w'}{\Psi}{e \upd{\bx}
-      e' \upd{\by} \interp{\sigma}_{e \upd{\bx} e'} \upd{\bz} e''}$. Since
-      $\sigma$ is capture-avoiding in $\flower{\Phi}{\Delta}$, we know that for
-      any $x \in \by$ we have $\fv(\sigma(x)) \cap \bz = \emptyset$, and thus
-      $\interp{\sigma(x)}_{e \upd{\bx} e' \upd{\bz} e''} = \interp{\sigma(x)}_{e
-      \upd{\bx} e'}$. Hence by \reffact{update-agree} and \reffact{update-comm}
-      we get $\eforces{w'}{\Psi}{e \upd{\bx} e' \upd{\bz} e'' \upd{\by}
-      \interp{\sigma}_{e \upd{\bx} e' \upd{\bz} e''}}$, and by
-      \reflemma{mirroring} we conclude that $\eforces{w'}{\sigma(\Psi)}{e
-      \upd{\bx} e' \upd{\bz} e''}$.
+    \item(\rsf{ipis}) We trivially have $\flower{\garden{\bx,\by}{\Phi}}{\Delta}
+      \kentails \flower{\garden{\bx,\by}{\Phi}}{\Delta}$ by
+      \reffact{kentails-refl}, and thus we can conclude by
+      \reflemma{flowers-univ-inst}.
 
-    \item[\rsf{ipet}]
+    \item(\rsf{ipet}) The first direction is trivial by
+      \reflemma{flowers-coweakening}. In the other direction, let $\gamma =
+      \garden{\bz}{\Xi}$, and suppose that
+      $\eforces{w}{\flower{\gamma}{\garden{\bx}{\sigma(\Phi)} \sep
+      \garden{\bx,\by}{\Phi} \sep \Delta}}{e}$ and $\eforces{w'}{\Xi}{e
+      \upd{\bz} e'}$. Then there must be some $w'$-evaluation $e''$ such that
+      either:
+      \begin{itemize}
+        \item $\eforces{w'}{\Xi'}{\update{e}{\bz}{\update{e'}{\bz'}{e''}}}$ for
+        some $\garden{\bz'}{\Xi'} \in \Delta$, and we conclude immediately;
+        \item $\eforces{w'}{\Phi}{e \upd{\bz} e' \upd{\bx \cup \by} e''}$, and
+        we also conclude immediately;
+        \item or $\eforces{w'}{\sigma(\Phi)}{e \upd{\bz} e' \upd{\bx} e''}$, and
+        we conclude with the same argument as in the proof of
+        \reflemma{flowers-ex-inst}.
+      \end{itemize}
+      
+    \item(\rsf{srep})
+      Let $\gamma_i = \garden{\by_i}{\Psi_i}$ for $1 \leq i \leq n$.
+      \begin{enumerate}
+        \item Suppose that
+        $\eforces{w}{\flower{\garden{\bx}{\Phi,(\flower{}{\fset{i}{n}{\gamma_i}})}}{\Delta}}{e}$
+        and $\eforces{w'}{\Phi}{e \upd{\bx} e'}$. We show that
+        $\eforces{w'}{\flower{\gamma_i}{\Delta}}{e \upd{\bx} e'}$ for all $1
+        \leq i \leq n$, i.e. for every $w'' \geq w'$ and $w''$-evaluation $e''$,
+        $\eforces{w''}{\Psi_i}{e \upd{\bx} e' \upd{\by_i} e''}$ implies that
+        there is some $\garden{\bz}{\Xi} \in \Delta$ and $w''$-evaluation $e'''$
+        such that $\eforces{w''}{\Xi}{e \upd{\bx} e' \upd{\by_i} e'' \upd{\bz}
+        e'''}$. By assumption, \reflemma{access-mono} and the fact that
+        $\fv(\Phi) \cap \by_i = \emptyset$, we have $\eforces{w''}{\Phi}{e
+        \upd{x} e' \upd{\by_i} e''}$. Also since $\eforces{w''}{\Psi_i}{e
+        \upd{\bx} e' \upd{\by_i} e''}$ we immediately get
+        $\eforces{w''}{\flower{}{\fset{i}{n}{\gamma_i}}}{e \upd{\bx} e'}$, and
+        thus $\eforces{w''}{\flower{}{\fset{i}{n}{\gamma_i}}}{e \upd{\bx} e'
+        \upd{\by_i} e''}$ since $\fv(\flower{}{\fset{i}{n}{\gamma_i}}) \cap
+        \by_i = \emptyset$. Thus by \reffact{update-assoc} we have
+        $\eforces{w''}{\Phi,(\flower{}{\fset{i}{n}{\gamma_i}})}{e \upd{\bx \cup
+        \by_i} (e' \upd{\by_i} e'')}$, and by hypothesis (and the fact that $w''
+        \geq w$ by transitivity) we obtain that $\eforces{w''}{\Xi}{e \upd{\bx
+        \cup \by_i} (e' \upd{\by_i} e'') \upd{\bz} e'''}$ for some
+        $\garden{\bz}{\Xi} \in \Delta$ and $w''$-evaluation $e'''$. Then we
+        conclude again by \reffact{update-assoc}.
 
-    \item[\rsf{srep}]
+        \item Suppose that
+        $\eforces{w}{\flower{\garden{\bx}{\Phi}}{{\fset{i}{n}{\flower{\gamma_i}{\Delta}}}}}{e}$
+        and $\eforces{w'}{\Phi,(\flower{}{\fset{i}{n}{\gamma_i}})}{e \upd{\bx}
+        e'}$. Then there must be some $1 \leq i \leq n$ and $w'$-evaluation
+        $e''$ such that $\eforces{w'}{\Psi_i}{e \upd{\bx} e' \upd{\by_i} e''}$,
+        and for all $1 \leq j \leq n$ we know that
+        $\eforces{w'}{\flower{\gamma_j}{\Delta}}{e \upd{\bx} e'}$. Thus since
+        $w' \leq w'$ by reflexivity, there must be some $\garden{\bz}{\Xi} \in
+        \Delta$ and $w'$-evaluation $e'''$ such that $\eforces{w'}{\Xi}{e
+        \upd{\bx} e' \upd{\by_i} e'' \upd{\bz} e'''}$, and we can conclude with
+        $\eforces{w'}{\Xi}{e \upd{\bx} e' \upd{\by_i \cup \bz} (e'' \upd{\bz}
+        e''')}$ by \reffact{update-assoc}.
+      \end{enumerate} 
   \end{itemize}
 \end{proof}
 
+Then the soundness of the contextual closure of natural rules follows
+immediately from functoriality:
+
+\begin{lemma}[Natural soundness]\lablemma{flowers-natural-soundness}
+  If $\Phi \step_{\Nature} \Psi$ then $\Phi \kequiv \Psi$.
+\end{lemma}
+\begin{proof}
+  By \reflemma{flowers-local-soundness} and \reflemma{flowers-functoriality}.
+\end{proof}
+
+The soundness of cultural rules is straightforward with the previous lemmas:
+
+\begin{lemma}[Cultural soundness]\lablemma{flowers-cultural-soundness}
+  If $\Phi \step_{\Culture} \Psi$ then $\Psi \kentails \Phi$.
+\end{lemma}
+\begin{proof}
+  By inspection of every $\Culture$-rule.
+  \begin{itemize}
+    \item[(\rsf{grow}, \rsf{crop})] By \reflemma{flowers-weakening} and
+    \reflemma{flowers-functoriality}.
+    
+    \item[(\rsf{pull}, \rsf{glue})] By \reflemma{flowers-coweakening} and
+    \reflemma{flowers-functoriality}.
+    
+    \item[(\rsf{apis})] By \reflemma{flowers-univ-inst} and \reflemma{flowers-functoriality}.
+
+    \item[(\rsf{apet})] By \reflemma{flowers-ex-inst} and \reflemma{flowers-functoriality}.
+  \end{itemize}
+\end{proof}
+
+Thus we can conclude this section with our main soundness theorem, stating that
+every derivation in the flower calculus is sound:
+
+\begin{theorem}[Soundness]\label{cor:flowers-soundness}
+  If $\Phi \steps \Psi$ then $\Psi \kentails \Phi$.
+\end{theorem}
+\begin{proof}
+  By \reflemma{flowers-natural-soundness}, \reflemma{flowers-cultural-soundness}
+  and \reffact{kentails-refl}, \reffact{kentails-trans}.
+\end{proof}
+
+In particular, every provable flower is ``true'':
+
+\begin{corollary}
+  If $\vdash \Phi$ then $\kentails \Phi$.
+\end{corollary}
 
 \section{Completeness}\labsec{Completeness}
 
