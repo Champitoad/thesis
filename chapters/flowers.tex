@@ -782,6 +782,10 @@ update}, which will be useful for the semantic evaluation of flowers in
   If $f(x) = g(x)$ for all $x \in R$ then $h \upd{R} f = h \upd{R} g$.
 \end{fact}
 
+\begin{fact}[Idempotency]\labfact{update-idempot}
+  $f \upd{R} f = f$.
+\end{fact}
+
 \begin{definition}[Substitution]
   A \emph{substitution} is a function $\sigma : \vars \to \terms$ with a finite
   \emph{support} $\dom(\sigma) = \compr{x}{\sigma(x) \not= x}$. By abuse of
@@ -1149,9 +1153,9 @@ the deduction theorem trivial:
   $\vdash_{\Nature} \flower{\Psi}{\Phi}$.
 \end{theorem}
 \begin{proof}
-  Let $\Xi\hole$ be some context. If $\Psi \vdash_{\Nature} \Phi$, then in particular
-  $\cfill{\Xi'}{\Phi} \steps_{\Nature} \cfill{\Xi'}{\phantom{\Phi}}$ for $\Xi'\hole :=
-  \cfill{\Xi}{\flower{\Psi}{\square}}$. Thus we have:
+  Let $\Xi\hole$ be some context. If $\Psi \vdash_{\Nature} \Phi$, then in
+  particular $\cfill{\Xi'}{\Phi} \steps_{\Nature} \cfill{\Xi'}{\phantom{\Phi}}$
+  for $\Xi'\hole \coloneq \cfill{\Xi}{\flower{\Psi}{\square}}$. Thus we have:
   $$
   \cfill{\Xi}{\flower{\Psi}{\Phi}} \steps_{\Nature}
   \cfill{\Xi}{\flower{\Psi}{\garden{{}}{{}}}} \step_{\mathsf{epet}}
@@ -1473,7 +1477,8 @@ section:
 \section{Soundness}\labsec{Soundness}
 
 We now show that every rule of the flower calculus is \emph{sound} with respect
-to our Kripke semantics for flowers. We start with the pervasive
+to our Kripke semantics for flowers, and thus that $\vdash \phi$ implies
+$\kentails \phi$ for every $\phi$. We start with the pervasive
 \emph{functoriality} lemma at the basis of every deep inference
 system\sidenote{Other instances in this thesis are Lemma \ref{prop:cov},
 \reflemma{bubbles-functoriality}, \reflemma{bubbles-cofunctoriality}, and
@@ -1752,7 +1757,9 @@ handled locally with (de)iteration rules.
 \end{proof}
 
 We are now equipped with enough lemmas to prove the soundness of each rule,
-starting with the \emph{local} version of natural rules:
+starting with the \emph{local} version of natural rules. In fact we are able to
+prove more: that every $\Nature$-rule is \emph{invertible}, i.e. its conclusion
+entails its premiss.
 
 \begin{lemma}[Local soundness]\lablemma{flowers-local-soundness}
   If $\Phi \lstep_\Nature \Psi$, then $\Phi \kequiv \Psi$.
@@ -1877,12 +1884,11 @@ The soundness of cultural rules is straightforward with the previous lemmas:
   \end{itemize}
 \end{proof}
 
-Thus we can conclude this section with our main soundness theorem, stating that
-every derivation in the flower calculus is sound:
+Then it follows that every derivation in the flower calculus is sound:
 
-\begin{theorem}[Soundness]\label{cor:flowers-soundness}
+\begin{lemma}
   If $\Phi \steps \Psi$ then $\Psi \kentails \Phi$.
-\end{theorem}
+\end{lemma}
 \begin{proof}
   By \reflemma{flowers-natural-soundness}, \reflemma{flowers-cultural-soundness}
   and \reffact{kentails-refl}, \reffact{kentails-trans}.
@@ -1890,25 +1896,43 @@ every derivation in the flower calculus is sound:
 
 In particular, every provable flower is ``true'':
 
-\begin{corollary}
-  If $\vdash \Phi$ then $\kentails \Phi$.
-\end{corollary}
+\begin{theorem}[Soundness]\labthm{flowers-soundness}
+  If $\vdash \phi$ then $\kentails \phi$.
+\end{theorem}
 
 \section{Completeness}\labsec{Completeness}
 
-\todo{ show that a restricted, invertible fragment of the flower calculus is
-complete with respect to our Kripke semantics. Combined with soundness, this
-gives us for free the admissibility of all the other rules, in particular the
-ones corresponding to the \emph{insertion} and \emph{erasure} rules of Peirce's
-EG. A corollary is that the flower calculus is \emph{analytic}, in a sense very
-close to that coined by Gentzen.}
+In this section, we give a direct completeness proof for the natural fragment
+$\Nature$ of the flower calculus: every true flower $\phi$ is naturally
+provable, i.e. $\kentails \phi$ implies $\vdash_{\Nature} \phi$. Since this
+fragment is analytic, we cannot adapt directly most of the completeness proofs
+for standard proof systems that can be found in the literature. Indeed, most of
+them exploit the transitivity of syntactic entailment $\vdash$, and more
+precisely the fact that it is easily shown syntactically with the help of a
+non-analytic principle for composing proofs: in Hilbert systems it is the rule
+of \emph{modus ponens}, in sequent calculi the \emph{cut} rule, and in natural
+deduction the \emph{substitution} theorem.
 
-\todo{Reference literature on semantic cut-elimination (Completeness folder in
-Zotero), with special props to Olivier Hermant \cite{hutchison_semantic_2005}
-who gave us the main structure for the various definitions and lemmas exposed in
-this section.}
+Fortunately as mentioned in \refsec{Semantics}, a few people have noticed that
+with Kripke semantics, it is not too difficult to find completeness proofs that
+do not rely on the assumption of transitivity for $\vdash$, thus allowing for a
+\emph{semantic} proof of cut-elimination
+\cite{10.1007/978-3-642-02261-6_17}\cite{ilik:tel-00529021}\cite{hutchison_semantic_2005}.
+Here we propose an adaptation of this technique to our flower calculus, based on
+a completeness proof for cut-free sequent calculus given by Hermant in
+\sidecite{hutchison_semantic_2005}, which is itself close to the original
+completeness proof of Gödel with respect to classical Tarski models. Quite
+remarkably, the overall structure of the argument is the same, even though both
+the forcing relation on flowers and the rules of the flower calculus differ
+significantly from the forcing relation on formulas and sequent calculus rules.
+A novelty of our proof is that it dispenses completely with the need for
+\emph{Henkin witnesses}, thus avoiding some technicalities involving among
+others the manipulation of an infinite hierarchy of first-order languages.
 
 \subsection{Theories}
+
+First we need to generalize our notions of syntactic and semantic entailment to
+possibly \emph{infinite} sets of flowers, so-called \emph{theories}:
 
 \begin{definition}[Theory]\labdef{theory} 
   
@@ -1933,6 +1957,9 @@ this section.}
   (\refdef{theory}).
 \end{proof}
 
+The following notions our crucial to define the \emph{completion} procedure at
+the heart of any Gödel-style completeness proof:
+
 \begin{definition}[$\psi$-consistency]
   A theory $\tT$ is \emph{$\psi$-consistent} when $\tT \nvdash_\Nature \psi$.
 \end{definition}
@@ -1941,6 +1968,15 @@ this section.}
   A theory $\tT$ is \emph{$\psi$-complete} when for all $\phi \in \flowers$,
   either $\tT, \phi \vdash_\Nature \psi$ or $\phi \in \tT$.
 \end{definition}
+
+Intuitively, a theory $\tT$ is $\psi$-consistent when one cannot deduce $\psi$
+from it, and $\psi$-complete when it \emph{decides} any formula $\phi$
+relatively to $\psi$. This is better understood by considering the special case
+where $\psi = \flower{{}}{{}}$ is the \emph{absurd} flower: then consistency
+means that one cannot derive any contradiction from $\tT$; and completeness that
+$\tT$ either \emph{refutes} $\phi$ syntactically with a proof of $\flower{\Phi,
+\phi}{(\flower{}{})}$ for some $\Phi \subseteq \tT$, or already \emph{validates}
+it ``semantically'', i.e. without the need for a proof since $\phi \in \tT$.
 
 % \begin{definition}[$\psi$-Henkin]
 %   A theory $T$ is \emph{$\psi$-Henkin} when for all $\phi =
@@ -1957,10 +1993,10 @@ In the following, we suppose some enumeration $(\phi_n)_{n \in \nats}$ of
 $\flowers$, which should be definable constructively given the
 inductive nature of flowers (\refdef{flowers}).
 
-Let $\psi \in \flowers$, and $\tT$ a $\psi$-consistent theory. We now
-define a \emph{completion} procedure which constructs an extension
-$\completion{\tT} \supseteq \tT$ with the property that $\completion{\tT}$ is
-$\psi$-consistent and $\psi$-complete.
+Let $\psi \in \flowers$, and $\tT$ a $\psi$-consistent theory. We now define the
+completion procedure, which constructs an extension $\completion{\tT} \supseteq
+\tT$ with the property that $\completion{\tT}$ is $\psi$-consistent and
+$\psi$-complete.
 
 \begin{definition}[$n$-completion]
   The \emph{$n$-completion} $\ncompletion{\tT}{n}$ of $\tT$ is defined recursively
@@ -2009,29 +2045,21 @@ $\psi$-consistent and $\psi$-complete.
 
 \subsection{Adequacy}
 
-We now define the so-called \emph{universal Kripke structure} $\rewolF{\psi}$
-relative to a flower $\psi$, which will satisfy the property that $\Phi
-\vDash_{\rewolF{\psi}} \Psi$ implies $\Phi \vDash \Psi$ for any $\psi$.
+The following two propositions constitute the central argument that allows the
+completeness proof to go through despite the analyticity of $\Nature$-rules.
+They are a direct adaptation of \cite[Proposition 7]{hutchison_semantic_2005},
+which Hermant identifies as ``an important property of any $A$-consistent,
+$A$-complete theory, [...] that it enjoys some form of the subformula
+property''.
 
-\begin{definition}[Universal Kripke structure]\labdef{kcanon}
-  Let $\psi \in \flowers$. The \emph{universal Kripke structure}
-  $\rewolF{\psi}$ has:
-  \begin{itemize}
-    \item The set of $\psi$-consistent and $\psi$-complete theories as its worlds;
-    \item Set inclusion as its accessibility relation;
-    \item For each world $\tT$, a first-order structure whose domain is the set of
-    terms $\terms$, and whose interpretation map is given by:
-      \begin{itemize}
-        \item $\interp{f}(\tvec{t}) = f(\tvec{t})$
-        \item $\interp{p} = \compr{\tvec{t}}{p(\tvec{t}) \in \tT}$
-      \end{itemize}
-  \end{itemize}
-  One can easily check that the monotonicity conditions of Kripke structures
-  hold for $\rewolF{\psi}$.
-\end{definition}
+Roughly, the first proposition captures the (intuitionistic) truth-conditions
+that make a flower \emph{valid} (i.e. true in every model) by modelling them on
+material implication, just like Peirce would do with his scroll (see
+\refsec{IEG}): $\phi$ is true if the content $\Phi_i$ of one of its petals
+(consequents) is, or if the content $\Phi$ of its pistil (antecedant) is not.
 
 % \newcommand{\ids}{\update{\idsubst}{\bx}{\sigma}}
-\begin{proposition}\labprop{inv-elem-flower}
+\begin{proposition}[Analytic truth]\labprop{inv-elem-flower}
   
   Let $\psi \in \flowers$, $\tT$ some $\psi$-consistent and $\psi$-complete
   theory, and $\phi = \flower{\garden{\bx}{\Phi}}{\Delta}$ with $\Delta
@@ -2077,7 +2105,12 @@ relative to a flower $\psi$, which will satisfy the property that $\Phi
   $$
 \end{proof}
 
-\begin{proposition}\labprop{inv-deriv-flower}
+Dually, the second proposition captures the grounds on which a flower can be
+deemed \emph{invalid} (i.e. false in at least one model): $\phi$ is not true if
+assuming that its pistil $\Phi$ is true is not sufficient to conclude that one
+of its petals $\Phi_i$ is.
+
+\begin{proposition}[Analytic refutation]\labprop{inv-deriv-flower}
   
   Let $\psi \in \flowers$, $\tT$ some $\psi$-consistent and $\psi$-complete
   theory, and $\phi = \flower{\garden{\bx}{\Phi}}{\Delta}$ with $\Delta
@@ -2105,6 +2138,50 @@ relative to a flower $\psi$, which will satisfy the property that $\Phi
   \end{array}
   $$
 \end{proof}
+
+\begin{remark}
+Note that both \refprop{inv-elem-flower} and \refprop{inv-deriv-flower} are
+proved indirectly by contradiction, but that the contradiction is obtained by
+exhibiting a concrete derivation, exploiting respectively the universal
+instantiation of pistils with the \rsf{ipis} rule, and the existential
+instantiation of petals with the \rsf{ipet} rule. Thus there seems to be some
+constructive content to these proofs, despite their use of a classical reasoning
+principle. Also, this is the only place in the completeness proof where we build
+derivations, and all $\Nature$-rules (and only them) seem to be required to
+conclude.
+\end{remark}
+
+Lastly, we define the so-called \emph{universal Kripke structure}
+$\rewolF{\psi}$ relative to a flower $\psi$:
+% , which satisfies the property that $\Phi
+% \vDash_{\rewolF{\psi}} \Psi$ implies $\Phi \vDash \Psi$ for any
+% $\psi$\sidenote{We do not prove this property here, but this is a standard
+% result in the literature, and the fact that we work on flowers instead of
+% formulas should not have any significance.}.
+
+\begin{definition}[Universal Kripke structure]\labdef{kcanon}
+  Let $\psi \in \flowers$. The \emph{universal Kripke structure}
+  $\rewolF{\psi}$ has:
+  \begin{itemize}
+    \item The set of $\psi$-consistent and $\psi$-complete theories as its worlds;
+    \item Set inclusion as its accessibility relation;
+    \item For each world $\tT$, a first-order structure whose domain is the set of
+    terms $\terms$, and whose interpretation map is given by:
+      \begin{itemize}
+        \item $\interp{f}(\tvec{t}) = f(\tvec{t})$
+        \item $\interp{p} = \compr{\tvec{t}}{p(\tvec{t}) \in \tT}$
+      \end{itemize}
+  \end{itemize}
+  One can easily check that the monotonicity conditions of Kripke structures
+  hold for $\rewolF{\psi}$.
+\end{definition}
+
+% From now on, we always assume the ambient Kripke structure to be
+% $\rewolF(\psi)$, and will freely confuse $\kentails$ with
+% $\kentails_{\rewolF(\psi)}$ since they are equivalent.
+
+We are now equipped to prove the main \emph{adequacy} lemma, which relates
+forcing in $\rewolF{\psi}$ with $\psi$-consistency and $\psi$-completeness:
 
 \begin{lemma}[Adequacy]\lablemma{adequacy}
 
@@ -2202,13 +2279,21 @@ relative to a flower $\psi$, which will satisfy the property that $\Phi
   \end{itemize}
 \end{proof}
 
-We get completeness as a direct corollary of \reflemma{completeness-contra}, in
-the case where $\tT = \emptyset$:
+We get completeness as the direct (and classical) contraposition of
+\reflemma{completeness-contra}, in the case where $\tT = \emptyset$:
 
 \begin{theorem}[Completeness]
-  For any closed flower $\phi$, $\vDash \phi$ implies $\vdash_\Nature \phi$.
+  $\vDash \phi$ implies $\vdash_\Nature \phi$.
 \end{theorem}
-
+% \begin{proof}
+%   If $\phi$ is closed, then we can immediately conclude by
+%   \reflemma{completeness-contra}. Otherwise we know that $\eforces{w}{\phi}{e}$
+%   for every world $w$ and $w$-evaluation $e$, and thus that $\eforces{w}{\phi}{e
+%   \upd{\fv(\phi)} e}$ by \reffact{update-idempot}, which means that we also have
+%   $\eforces{w}{\psi}{e}$ where $\psi \coloneq
+%   \flower{\garden{\fv(\phi)}{}}{\phi}$ is closed. Thus by
+%   \reflemma{completeness-contra} we have $\psi \steps_{\Nature} \emptyset$
+% \end{proof}
 
 \section{Automated proof search}\labsec{flowers-search}
 
