@@ -695,18 +695,21 @@ We now proceed with routine definitions for handling variables and substitutions
 of terms in flowers.
 
 \begin{definition}[Free variables]\labdef{fv}
-  The sets of \emph{free variables} $\fv(-)$ of a term, flower or garden are
-  defined mutually recursively as follows:
+  
+  The sets of \emph{free variables} $\fv(-)$ of a term, flower, bouquet or
+  garden are defined mutually recursively as follows:
   \begin{align*}
-    \fv(x) &= \{x\} \\
-    \fv(f(\tvec{t})) &= \bigcup_{t \in \tvec{t}}{\fv(t)} \\
-    \fv(p(\tvec{t})) &= \bigcup_{t \in \tvec{t}}{\fv(t)} \\
-    \fv(\garden{\bx}{\Phi}) &= \bigcup_{\phi \in \Phi}{\fv(\phi)} \setminus \bx \\
+    \fv(x) &= \{x\} &
+    \fv(\Phi) &= \bigcup_{\phi \in \Phi}{\fv(\phi)} \\
+    \fv(f(\tvec{t})) &= \bigcup_{t \in \tvec{t}}{\fv(t)} &
+    \fv(\garden{\bx}{\Phi}) &= \fv(\Phi) \setminus \bx \\
+    \fv(p(\tvec{t})) &= \bigcup_{t \in \tvec{t}}{\fv(t)} &
     \fv(\flower{\garden{\bx}{\Phi}}{\Delta}) &= \fv(\garden{\bx}{\Phi}) \cup \bigcup_{\garden{\by}{\Psi} \in \Delta}{\fv(\garden{\bx, \by}{\Psi})}
   \end{align*}
-  We say that a term, flower or garden is \emph{closed} when its set of free
-  variables is empty. The sets of closed terms, flowers and gardens are denoted
-  respectively by $\closed{\terms}$, $\closed{\flowers}$ and $\closed{\gardens}$.
+  We say that a term, flower, bouquet or garden is \emph{closed} when its set of
+  free variables is empty. The sets of closed terms, flowers and gardens are
+  denoted respectively by $\closed{\terms}$, $\closed{\flowers}$ and
+  $\closed{\gardens}$.
 \end{definition}
 
 \begin{remark}\labremark{flower-scope}
@@ -725,11 +728,12 @@ curves in an $n$-ary scroll.
   %   \bv(\Psi, (\flower{\garden{\bx}{X}}{\Delta})) &= \bx \cup \bv(X) \\
   %   \bv(\Psi, (\flower{\garden{\bx}{\Phi}}{\garden{\by}{X} \sep \Delta})) &= \bx \cup \by \cup \bv(X)
   % \end{align*}
-  The set of bound variables $\bv(\phi)$ (resp. $\bv(\gamma)$) of a flower
-  $\phi$ (resp. garden $\gamma$) is defined mutually recursively as follows:
+  The sets of bound variables $\bv(-)$ of a flower, bouquet or garden are
+  defined mutually recursively as follows:
   \begin{align*}
-    \bv(p(\tvec{t})) &= \emptyset \\
-    \bv(\garden{\bx}{\Phi}) &= \bx \cup \bigcup_{\phi \in \Phi}{\bv(\phi)} \\
+    \bv(p(\tvec{t})) &= \emptyset &
+    \bv(\garden{\bx}{\Phi}) &= \bx \cup \bv(\Phi) \\
+    \bv(\Phi) &= \bigcup_{\phi \in \Phi}{\bv(\phi)} &
     \bv(\flower{\gamma}{\Delta}) &= \bv(\gamma) \cup \bigcup_{\delta \in \Delta}{\bv(\delta)}
   \end{align*}
 \end{definition}
@@ -737,11 +741,11 @@ curves in an $n$-ary scroll.
 To avoid reasoning about $\alpha$-equivalence, we adopt in this work the
 so-called \emph{Barendregt convention} that all variable binders are distinct,
 both among themselves and from eventual free variables. Formally, we assume that
-for any flower $\phi$, the two following conditions hold:
+for any bouquet $\Phi$, the two following conditions hold:
 \begin{enumerate}
-  \item computing $\bv(\phi)$ as a multiset gives the same result as computing
+  \item computing $\bv(\Phi)$ as a multiset gives the same result as computing
   it as a set;
-  \item $\bv(\phi) \cap \fv(\phi) = \emptyset$.
+  \item $\bv(\Phi) \cap \fv(\Phi) = \emptyset$.
 \end{enumerate} 
 % To preserve this convention, in this paper we will only consider
 % \emph{non-circular} substitutions $\sigma$ where $x \not\in \fv(\sigma(x))$ for
@@ -791,31 +795,35 @@ update}, which will be useful for the semantic evaluation of flowers in
   \emph{support} $\dom(\sigma) = \compr{x}{\sigma(x) \not= x}$. By abuse of
   notation, we will write $\sigma : \bx \to \terms$ to denote a substitution
   $\sigma$ whose support is $\bx$. The domain of substitutions is extended to
-  terms, flowers and gardens mutually recursively as follows:
+  terms, flowers, bouquets and gardens mutually recursively as follows:
   \begin{align*}
-    \sigma(f(x_1, \ldots, x_n)) &= f(\sigma(x_1), \ldots, \sigma(x_n)) \\
-    \sigma(p(\tvec{t})) &= p(\sigma(\tvec{t})) \\
+    \sigma(f(t_1, \ldots, t_n)) &= f(\sigma(t_1), \ldots, \sigma(t_n)) \\
+    \sigma(p(t_1, \ldots, t_n)) &= p(\sigma(t_1), \ldots, \sigma(t_n)) \\
+    \sigma(\phi_1, \ldots, \phi_n) &= \sigma(\phi_1), \ldots, \sigma(\phi_n) \\
     \sigma(\garden{\mathbf{x}}{\Phi}) &=
       \garden{\mathbf{x}}{\restr{\sigma}{\mathbf{x}}(\Phi)} \\
-    \sigma(\flower{\garden{\mathbf{x}}{\Phi}}{\Delta}) &=
-      \flower{\sigma(\garden{\mathbf{x}}{\Phi})}{\restr{\sigma}{\mathbf{x}}(\Delta)}
+    \sigma(\flower{\garden{\mathbf{x}}{\Phi}}{\delta_1 \sep \ldots \sep \delta_n}) &=
+      \flower{\sigma(\garden{\mathbf{x}}{\Phi})}{\restr{\sigma}{\mathbf{x}}(\delta_1) \sep \ldots \sep \restr{\sigma}{\mathbf{x}}(\delta_n)}
   \end{align*}
 
 \end{definition}
 
 \begin{definition}[Capture-avoiding substitution]
   We say that a substitution $\sigma : \bx \to \terms$ is
-  \emph{capture-avoiding} in a bouquet $\Xi$ if for every flower $\phi \in \Xi$
-  one of the following holds:
-  \begin{itemize}
-    \item $\phi = p(\tvec{t})$;
-    \item $\phi =
-    \flower{\garden{\by}{\Phi}}{\fset{i}{n}{\garden{\bz_i}{\Psi_i}}}$,
-    $\fv(\sigma(x)) \cap \left(\by \cup \bigcup_{i =
-    1}^{n}{\bz_i}\right) = \emptyset$ for every $x \in \bx$, and
-    $\sigma$ is capture-avoiding in $\Phi \cup \bigcup_{i = 1}^{n}{\Psi_i}$;
-    \item $\bx \cap \fv(\phi) = \emptyset$.
-  \end{itemize}
+  \emph{capture-avoiding} in a bouquet $\Phi$ if $\fv(\sigma(x)) \cap \bv(\Phi)
+  = \emptyset$ for every $x \in \bx$.
+  % $\fv(\sigma(x)) \cap \bv(\phi) = \emptyset$ for every $x \in
+  % \bx$, or $\bx \cap \fv(\phi) = \emptyset$.
+  % \begin{itemize}
+  %   \item $\phi = p(\tvec{t})$;
+  %   \item $\phi =
+  %   \flower{\garden{\by}{\Phi}}{\fset{i}{n}{\garden{\bz_i}{\Psi_i}}}$,
+  %   $\fv(\sigma(x)) \cap \left(\by \cup \bigcup_{i = 1}^{n}{\bz_i}\right) =
+  %   \emptyset$ for every $x \in \bx \cap \left(\fv(\Phi) \cup \bigcup_{i =
+  %   1}^{n}{\fv(\Psi_i)}\right)$, and $\sigma$ is capture-avoiding in $\Phi \cup
+  %   \bigcup_{i = 1}^{n}{\Psi_i}$.
+  %   % \item $\bx \cap \fv(\phi) = \emptyset$.
+  % \end{itemize}
 \end{definition}
 
 \section{Calculus}\labsec{Calculus}
@@ -1329,7 +1337,7 @@ one big constructor:
 
   Given some Kripke structure $\mathcal{K}$, the \emph{forcing} relation
   $\eforces{w}{\phi}{e}$ between a world $w$, a flower $\phi$ and a
-  $w$-evaluation $e$ is defined by induction on $\phi$ as follows:
+  $w$-evaluation $e$ is defined by recurrence on $\soldepth{\phi}$ as follows:
   \begin{itemize}
     \item[\textbf{(Atom)}]
     $\eforces{w}{p(\tvec{t})}{e}$ iff $\interp{\tvec{t}}_e \in \interp{p}_w$;
@@ -1348,8 +1356,7 @@ one big constructor:
   % $w$-evaluation $e$.
 \end{definition}
 
-The following lemmas will be useful later in the soundness and completeness
-proofs:
+The following lemmas will be useful for the soundness proof of the next section:
 
 \begin{lemma}[Monotonicity]\lablemma{access-mono}
   If $w \access w'$ and $\eforces{w}{\phi}{e}$ then $\eforces{w'}{\phi}{e}$.
@@ -1358,14 +1365,14 @@ proofs:
   By a straightforward recurrence on $\soldepth{\phi}$.
 \end{proof}
 
-\begin{lemma}\lablemma{closed-forcing}
+% \begin{lemma}\lablemma{closed-forcing}
   
-  For any closed flower $\phi \in \closed{\flowers}$ and $w$-evaluations $e,
-  e'$, if $\eforces{w}{\phi}{e}$ then $\eforces{w}{\phi}{e'}$.
-\end{lemma}
-\begin{proof}
-  By a straightforward recurrence on $\soldepth{\phi}$.
-\end{proof}
+%   For any closed flower $\phi \in \closed{\flowers}$ and $w$-evaluations $e,
+%   e'$, if $\eforces{w}{\phi}{e}$ then $\eforces{w}{\phi}{e'}$.
+% \end{lemma}
+% \begin{proof}
+%   By a straightforward recurrence on $\soldepth{\phi}$.
+% \end{proof}
 
 % \begin{corollary}[Closed forcing]
   
@@ -2186,25 +2193,26 @@ forcing in $\rewolF{\psi}$ with $\psi$-consistency and $\psi$-completeness:
 \begin{lemma}[Adequacy]\lablemma{adequacy}
 
   Let $\phi, \psi \in \flowers$, $\tT$ a $\psi$-consistent and $\psi$-complete
-  theory, and $\sigma$ a subtitution such that $\fv(\sigma(x)) \cap \bv(\phi) =
-  \emptyset$ for any variable $x$. Then
+  theory, and $\sigma$ a subtitution.
+  % such that $\fv(\sigma(x)) \cap \bv(\phi) = \emptyset$ for any variable $x$.
+  Then
   \begin{enumerate*}
     \item $\sigma(\phi) \in \tT$ implies $\eforces{\tT}{\phi}{\sigma}$, and
     \item $\tT \nvdash_\Nature \sigma(\phi)$ implies $\neforces{\tT}{\phi}{\sigma}$
   \end{enumerate*}.
 \end{lemma}
 \begin{proof}
-  By induction on $\phi$.
+  By recurrence on $\soldepth{\phi}$.
   \begin{itemize}
     \item Suppose $\phi = p(\tvec{t})$.
     \begin{enumerate}
       \item By definition of forcing (\refdef{forcing}) and $\rewolF{\psi}$
       (\refdef{kcanon}), $\eforces{\tT}{p(\tvec{t})}{\sigma}$ precisely when
       $\sigma(p(\tvec{t})) \in \tT$.
-      \item Suppose that $\eforces{\tT}{\phi}{\sigma}$, that is $\sigma(\phi) \in
-      \tT$. Then by weakening, we get $\sigma(\phi) \nvdash_\Nature \sigma(\phi)$.
-      But this is impossible by reflexivity of $\vdash$
-      (\reflemma{reflexivity}).
+      \item Suppose that $\eforces{\tT}{\phi}{\sigma}$, that is $\sigma(\phi)
+      \in \tT$. Then by weakening (\reflemma{weakening}), we get $\sigma(\phi)
+      \nvdash_\Nature \sigma(\phi)$. But this is impossible by reflexivity of
+      $\vdash$ (\reflemma{reflexivity}).
     \end{enumerate}
     \item Suppose $\phi =
     \flower{\garden{\bx}{\Phi}}{\fset{i}{n}{\garden{\bx_i}{\Phi_i}}}$.
@@ -2212,70 +2220,56 @@ forcing in $\rewolF{\psi}$ with $\psi$-consistency and $\psi$-completeness:
       \item Let $\tU \supseteq \tT$ be a $\psi$-consistent and $\psi$-complete
       theory. Obviously $\sigma(\phi) =
       \flower{\garden{\bx}{\restr{\sigma}{\bx}(\Phi)}}{\fset{i}{n}{\garden{\bx_i}{\restr{\sigma}{\bx
-      \cup \bx_i}(\Phi_i)}}} \in \tU$, and thus by
-      \refprop{inv-elem-flower}, for every substitution $\tau$, either $
-      \update{}{\bx}{\tau} \circ \restr{\sigma}{\bx \cup
-      \bx_i}(\Phi_i) =
-      \update{\update{\sigma}{\bx}{\tau}}{\bx_i}{}(\Phi_i)
-      \subseteq \tU$ for some $1 \leq i \leq n$, or $\tU \nvdash_\Nature
-      \update{}{\bx}{\tau} \circ \restr{\sigma}{\bx}(\Phi) =
-      \update{\sigma}{\bx}{\tau}(\Phi)$. In the first case, we get
-      $\eforces{\tU}{\Phi_i}{\update{\update{\sigma}{\bx}{\tau}}{\bx_i}{}}$
-      by induction hypothesis. In the second case, we get
-      $\neforces{\tU}{\Phi}{\restr{\sigma}{\bx}\tau}$ by induction
-      hypothesis. In other words,
+      \cup \bx_i}(\Phi_i)}}} \in \tU$, and thus by \refprop{inv-elem-flower},
+      for every substitution $\tau$, either $ \update{}{\bx}{\tau} \circ
+      \restr{\sigma}{\bx \cup \bx_i}(\Phi_i) =
+      \update{\update{\sigma}{\bx}{\tau}}{\bx_i}{}(\Phi_i) \subseteq \tU$ for
+      some $1 \leq i \leq n$, or $\tU \nvdash_\Nature \update{}{\bx}{\tau} \circ
+      \restr{\sigma}{\bx}(\Phi) = \update{\sigma}{\bx}{\tau}(\Phi)$. In the
+      first case, we get
+      $\eforces{\tU}{\Phi_i}{\update{\update{\sigma}{\bx}{\tau}}{\bx_i}{}}$ by
+      IH. In the second case, we get
+      $\neforces{\tU}{\Phi}{\restr{\sigma}{\bx}\tau}$ by IH. In other words,
       $\eforces{\tU}{\Phi}{\restr{\sigma}{\bx}\tau}$ implies
       $\eforces{\tU}{\Phi_i}{\update{\update{\sigma}{\bx}{\tau}}{\bx_i}{}}$,
       that is $\eforces{\tT}{\phi}{\sigma}$.
       \item By \refprop{inv-deriv-flower}, for every $1 \leq i \leq n$ and
       substitution $\tau$, there is some $\phi_i \in \Phi_i$ such that $\tT,
-      \restr{\sigma}{\bx}(\Phi) \nvdash_\Nature
-      \update{}{\bx_i}{\tau} \circ \restr{\sigma}{\bx \cup
-      \bx_i}(\phi_i) =
-      \update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}(\phi_i)$. By
-      the completion procedure, we get a theory $\tU = \completion{\tT \cup
-      \restr{\sigma}{\bx}(\Phi)} \supseteq \tT \cup
-      \restr{\sigma}{\bx}(\Phi)$ which is both
-      $\update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}(\phi_i)$-consistent
-      and
-      $\update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}(\phi_i)$-complete.
-      Then by induction hypothesis,
-      $\eforces{\tU}{\Phi}{\update{\sigma}{\bx}{}}$ since
+      \restr{\sigma}{\bx}(\Phi) \nvdash_\Nature \update{}{\bx_i}{\tau} \circ
+      \restr{\sigma}{\bx \cup \bx_i}(\phi_i) =
+      \update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}(\phi_i)$. By the completion
+      procedure, we get a theory $\tU = \completion{\tT \cup
+      \restr{\sigma}{\bx}(\Phi)} \supseteq \tT \cup \restr{\sigma}{\bx}(\Phi)$
+      which is both
+      $\update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}(\phi_i)$-consistent and
+      $\update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}(\phi_i)$-complete. Then by
+      IH, $\eforces{\tU}{\Phi}{\update{\sigma}{\bx}{}}$ since
       $\update{\sigma}{\bx}{}(\Phi) \subseteq \tU$, and
       $\neforces{\tU}{\phi_i}{\update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}}$
       since $\tU$ is
-      $\update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}(\phi_i)$-consistent,
-      that is $\neforces{\tT}{\phi}{\sigma}$.
+      $\update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}(\phi_i)$-consistent, that is
+      $\neforces{\tT}{\phi}{\sigma}$.
     \end{enumerate}
   \end{itemize}
 \end{proof}
 
 \begin{lemma}\lablemma{completeness-contra}
   
-  Let $\psi \in \closed{\flowers}$ and $\tT$ be a $\psi$-consistent closed theory,
-  that is every $\phi \in \tT$ is closed. Then $\tT \nvDash \psi$.
+  Let $\psi \in \flowers$ and $\tT$ be a $\psi$-consistent theory. Then $\tT
+  \nvDash \psi$.
 \end{lemma}
 \begin{proof}
-  We show $\tT \nvDash_{\rewolF{\psi}} \psi$, and more specifically that there
-  is some substitution $\sigma$ such that
-  $\eforces{\completion{\tT}}{\tT}{\sigma}$ but
-  $\neforces{\completion{\tT}}{\psi}{\sigma}$. Let $\sigma =
-  \update{}{\bv(\psi)}{\cstsubst{z}}$ for some fresh variable $z \not\in
-  \bv(\psi)$, where $\cstsubst{z}$ is the constant substitution that always maps
-  to $z$.
+  We show $\tT \nvDash_{\rewolF{\psi}} \psi$, and more specifically that
+  $\eforces{\completion{\tT}}{\tT}{\idsubst}$ but
+  $\neforces{\completion{\tT}}{\psi}{\idsubst}$.
   \begin{itemize}
-    \item Let $\phi \in \tT$, and $\tau = \update{}{\bv(\phi)}{\cstsubst{z'}}$ for
-    some fresh variable $z' \not\in \bv(\phi)$. It is obviously the case that
-    $\tau(\phi) = \phi$ since $\phi$ is closed, and $\fv(\tau(x)) \cap \bv(\phi)
-    = \emptyset$ for any variable $x$. Then $\phi \in \completion{\tT}$, thus by
-    $\psi$-consistency (\reflemma{completion-consistent}) and
+    \item Let $\phi \in \tT$. Then $\idsubst(\phi) = \phi \in \completion{\tT}$,
+    thus by $\psi$-consistency (\reflemma{completion-consistent}) and
     $\psi$-completeness (\reflemma{completion-complete}) of the completion, one
     can apply adequacy (\reflemma{adequacy}) to get
-    $\eforces{\completion{\tT}}{\phi}{\tau}$. Hence
-    $\eforces{\completion{\tT}}{\phi}{\sigma}$ by \reflemma{closed-forcing}.
-    \item By the same argument for $\tau$ transposed to $\sigma$, we can apply
-    adequacy (\reflemma{adequacy}) to get
-    $\neforces{\completion{\tT}}{\psi}{\sigma}$.
+    $\eforces{\completion{\tT}}{\phi}{\idsubst}$.
+    \item Similarly, we can apply adequacy (\reflemma{adequacy}) to get
+    $\neforces{\completion{\tT}}{\psi}{\idsubst}$.
   \end{itemize}
 \end{proof}
 
