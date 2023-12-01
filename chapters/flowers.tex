@@ -52,14 +52,12 @@ complete fragment of the system where all rules are both \emph{analytic} and
 \emph{invertible}. This entails the admissibility of all rules outside of this
 fragment, and as a consequence the analyticity of the system. We exploit these
 properties in \refsec{flowers-search} by describing an algorithm for fully
-automated proof search in the propositional fragment, that we conjecture to be
-complete. Then in \refsec{flowers-prover} we give an overview of the Flower
-Prover, a prototype of GUI in the Proof-by-Action paradigm whose actions map
-directly to the rules of the flower calculus, and which integrates nicely with
-our search procedure. In \refsec{flowers-curryhoward}, we briefly sketch some
-ideas for a Curry-Howard correspondence, where flowers and actions for
-manipulating them are identified respectively with \emph{normal} and
-\emph{neutral} terms of the $\lambda$-calculus. We conclude in
+automated proof search in the propositional fragment; unfortunately the current
+version of the algorithm seems to be neither sound (it does not terminate on
+some goals) nor complete. Then in \refsec{flowers-prover} we give an overview of
+the Flower Prover, a prototype of GUI in the Proof-by-Action paradigm whose
+actions map directly to the rules of the flower calculus, and which integrates
+nicely with (a restricted version of) our search procedure. We conclude in
 \refsec{Conclusion} by a comparison with some related works, and a discussion of
 future works and applications that we envision.
 
@@ -707,9 +705,9 @@ of terms in flowers.
     \fv(\flower{\garden{\bx}{\Phi}}{\Delta}) &= \fv(\garden{\bx}{\Phi}) \cup \bigcup_{\garden{\by}{\Psi} \in \Delta}{\fv(\garden{\bx, \by}{\Psi})}
   \end{align*}
   We say that a term, flower, bouquet or garden is \emph{closed} when its set of
-  free variables is empty. The sets of closed terms, flowers and gardens are
-  denoted respectively by $\closed{\terms}$, $\closed{\flowers}$ and
-  $\closed{\gardens}$.
+  free variables is empty.
+  % The sets of closed terms, flowers and gardens are denoted respectively by
+  % $\closed{\terms}$, $\closed{\flowers}$ and $\closed{\gardens}$.
 \end{definition}
 
 \begin{remark}\labremark{flower-scope}
@@ -836,14 +834,15 @@ rules of our flower calculus, just as we did for \sys{Alpha}
 contexts were defined as multisets of nodes, which have now turned into bouquets
 of flowers:
 
-\begin{definition}[Bouquet context]
+\begin{definition}[Context]
   A \emph{bouquet context} $\Phi\hole$ is a bouquet which contains exactly one
   occurrence of the special flower $\hole$ called the \emph{hole}. The hole can
   always be \emph{filled} (substituted) with any other bouquet $\Psi$ or context
   $\Xi\hole$, producing a new bouquet $\cfill{\Phi}{\Psi}$ or context
   $\cfill{\Phi}{\Xi\hole}$. In particular, filling with the empty bouquet will
   yield a bouquet $\cfill{\Phi}{\phantom{\Phi}}$, which is just $\Phi\hole$ with
-  its hole removed.
+  its hole removed. A \emph{flower context} $\phi\hole$ is a bouquet context of
+  size $1$.
 \end{definition}
 
 \begin{definition}[Depth]
@@ -882,10 +881,10 @@ flowers, we introduce a \emph{pollination} relation that captures the
 availability of a flower in a given context, akin to the \emph{justification}
 relation of \refsec{atomicity}:
 
-\begin{definition}[Pollination]\labdef{pollination}
-  We say that a flower $\phi$ can be \emph{pollinated} in a context $\Phi\hole$,
-  written $\chyp{\phi}{\Phi\hole}$, when there exist a bouquet $\Psi$ with $\phi
-  \in \Psi$ and contexts $\Xi\hole$ and $\Xi_0\hole$ such that either:
+\begin{definition}[Pollination]\labdef{pollination} We say that a flower $\phi$
+  can be \emph{pollinated} in a context $\Phi\hole$, written
+  $\chyp{\phi}{\Phi\hole}$, when there exists a bouquet $\Psi$ with $\phi \in
+  \Psi$ and contexts $\Xi\hole$ and $\Xi_0\hole$ such that either:
   \begin{itemize}
     \item (\textbf{Cross-pollination})~ $\Phi\hole = \cfill{\Xi}{\Psi,
     \Xi_0\hole}$;
@@ -926,7 +925,12 @@ importing a statement (the source of the DnD) into a new context (the
 destination of the DnD).}. We distinguish two cases of \emph{cross}-pollination
 and \emph{self}-pollination, as botanists do when describing the reproduction of
 flowers. This distinction does not exist in classical EG, because pistils and
-petals are both identified as instances of cuts. If we were to replace binders
+petals are both identified as instances of cuts\sidenote{The same phenomenon is
+at work in \emph{subformula linking} (\refch{sfl}): self-pollination and
+cross-pollination correspond respectively to the \emph{backward} $\back$ and
+\emph{forward} $\forw$ linking operators, which are collapsed into a single
+interaction operator $\ast$ in the original formulation of subformula linking
+for classical linear logic \cite{Chaudhuri2013}.}. If we were to replace binders
 by LoI (lines of identity, see \refsec{beta}), then the pollination relation
 would also prescribe in which areas LoI can be extended/iterated, providing an
 explanation for the scope of binders (\refremark{flower-scope}).
@@ -1032,6 +1036,64 @@ are closer to sequent-style introduction/elimination rules:
     of some functional programming languages, such as the Hazel structure editor
     and the Agda proof assistant \sidecite{yuan-live-2023}.
 \end{description}
+
+\begin{table}
+  \vspace{-1em}
+  $$
+  \newcommand{\nhsp}{\!}
+  \def\arraystretch{1.5}
+  \begin{array}{|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    \multicolumn{2}{|c|}{\text{\textbf{Connective}}} &
+    \top & \land & \bot & \neg & \limp & \lor & \forall & \exists \\
+    \hhline{|==|=|=|=|=|=|=|=|=|}
+    \multicolumn{2}{|c|}{\text{\textbf{Corolla}}} &
+    \geq & = & < & < & = & > & = & = \\
+    \hline
+    % \multicolumn{2}{|c|}{\text{\textbf{Depth}}} &
+    % < & < & = & - & - & - & - & - \\
+    % \hline
+    \multirow{2}{*}{\text{\textbf{Bouquets}}}
+    % & \text{\small\textbf{Top-level}} &
+    % < & > & = & = & = & = & = & = \\
+    % \cline{2-10}
+    & \text{\small\textbf{Pistil}} &
+    - & < & < & = & \leq & < & < & < \\
+    \cline{2-10}
+    & \text{\small\textbf{Petals}} &
+    < & > & - & - & = & = & = & = \\
+    \hline
+    \multirow{2}{*}{\text{\textbf{Sprinklers}}}
+    & \text{\small\textbf{Pistil}} &
+    - & < & < & < & < & < & \geq & < \\
+    \cline{2-10}
+    & \text{\small\textbf{Petals}} &
+    < & < & - & - & < & < & < & \geq \\
+    \hline
+  \end{array}
+  $$
+  \caption{Fragments of intuitionistic logic as cardinality constraints on flowers}
+  \labtab{flowers-fragments}
+\end{table}
+
+The rules of the flower calculus have an interesting property: they are mostly
+\emph{arity-agnostic}, i.e. they work uniformly on flowers, bouquets and gardens
+with any number of petals, flowers and binders. In particular, this means that
+the same rules can be used to capture provability in almost any \emph{fragment}
+of intuitionistic predicate logic, understood as any subset $\mathfrak{F}
+\subset \flowers$ of the set of all flowers\sidenote{The only exception seems to
+be the rule (\rsf{ipis}) (resp. \rsf{ipet}), whose duplication of flowers (resp.
+petals) prevents $\forall$ from being expressible (i.e. provable) without
+$\land$ (resp. $\lor$). This can be fixed by simply removing the duplication, at
+the cost of making the rule non-invertible.}. \reftab{flowers-fragments} shows
+how all the usual symbolic connectives can be expressed by \emph{cardinality}
+constraints on set-based syntactic constructs: $<$, $\leq$, $=$, $\geq$, $>$
+correspond respectively to a cardinality smaller, smaller or equal, equal,
+greater or equal, and greater than $1$; and $-$ denotes the absence of
+constraint. These constraints are then taken \emph{conjunctively} for a single
+connective (column-wise); and they can be freely mixed \emph{disjunctively}
+(row-wise), in order to capture any fragment corresponding to a subset of
+connectives.
 
 \begin{figure*}[h!]
   \input{figures/flower-calculus.tex}
@@ -1248,9 +1310,10 @@ Kripke structures, detailed hereafter by order of importance:
     study of analyticity. Thus our first attempt was to devise an
     \emph{external} syntactic procedure, based on the simulation of a cut-free
     sequent calculus as in \sidecite{tiu_local_2006}; and we do have a working,
-    verified implementation of this procedure in Coq \cite{flowers-metatheory}.
-    However, we realized \textit{a posteriori} that this only proves a weak form
-    of completeness, in the sense that we only guarantee that a true flower is
+    verified implementation of this procedure in Coq (see
+    \cite{flowers-metatheory} and \refsec{app:flowers-coq}). However, we
+    realized \textit{a posteriori} that this only proves a weak form of
+    completeness, in the sense that we only guarantee that a true flower is
     provable if it is the direct translation of a symbolic formula. But formulas
     are based on binary connectives and unary quantifiers, and are thus less
     expressive syntactically than flowers and their $n$-ary constructs.
@@ -2276,7 +2339,7 @@ forcing in $\rewolF{\psi}$ with $\psi$-consistency and $\psi$-completeness:
 We get completeness as the direct (and classical) contraposition of
 \reflemma{completeness-contra}, in the case where $\tT = \emptyset$:
 
-\begin{theorem}[Completeness]
+\begin{theorem}[Completeness]\labthm{flowers-completeness}
   $\vDash \phi$ implies $\vdash_\Nature \phi$.
 \end{theorem}
 % \begin{proof}
@@ -2291,10 +2354,118 @@ We get completeness as the direct (and classical) contraposition of
 
 \section{Automated proof search}\labsec{flowers-search}
 
-\todo{ describe an algorithm for fully automated proof search in the
-propositional fragment of the flower calculus, exploiting both its analyticity
-and invertibility. The procedure is conjectured to be complete for provability.}
+The completeness of $\Nature$-rules (\refthm{flowers-completeness}) suggests
+that some efficient proof search procedure might be devised for the flower
+calculus, and even a complete one for the propositional fragment where every
+sprinkler is empty\sidenote{It is well-known that provability in intuitionistic
+propositional logic is decidable, at least since Statman
+\cite{statman1979intuitionistic}.}. Indeed in sequent calculi, analyticity (the
+subformula property) greatly reduces the search space when looking for a proof
+of a given sequent, and one might expect the same to apply in the natural
+fragment $\Nature$ of the flower calculus. Also, the invertibility of
+$\Nature$-rules implies that the procedure will not need to perform
+\emph{backtracking}, a great source of non-determinism in proof
+search\sidenote{See also \refsec{sfl-backtracking} for a discussion on this
+topic.}, and particularly so in intuitionistic logic\sidenote{The only fully
+invertible proof system for intuitionistic (predicate) logic that we know of is
+the sequent calculus \sys{G3IntQ} from Lyon's thesis \cite{lyon_refining_2021}
+(we thank Lutz Stra{\ss}burger for pointing that to us). However as many systems
+for modal logics, \sys{G3IntQ} needs to incorporate semantical notions like the
+worlds and accessibility relation of Kripke structures into the syntax of
+sequents in order to satisfy cut-elimination, and thus support efficient proof
+search.}.
 
+However, there is another great source of non-determinism that does not arise in
+Gentzen systems, but is inherent to any deep inference formalism: it is
+precisely the fact that rules can be applied in contexts of \emph{arbitrary}
+depth, thus inducing a number of choices that is exponential in the latter.
+Kahramanogullari has proposed some attempts to tame this problem in
+\sidecite{kahramanogullari_reducing_2006} and \sidecite{lmcs:1089}, and our
+approach bears some similarities to his. In particular, we propose in the
+following a (sketch of a) proof search algorithm for the propositional flower
+calculus, whose core rests on an implicit \emph{interaction} relation between
+atoms which is a restriction of the pollination relation (\refdef{pollination}),
+and is close to the \emph{structural} relation of Kahramanogullari\sidenote{This
+restriction is also suspiciously similar to the ``more scientific'' presentation
+of (de)iteration rules intuited by Peirce in \cite{peirce_prolegomena_1906}, and
+that we formalized in the system \sys{Alpha^a} of \reffig{eg-atomic-alpha}.}
+\cite[Definition~2.13]{lmcs:1089}. This is captured by the following graph
+structure on bouquets, that we call a \emph{vehicle}:
+
+% In the rest of this section, we assume that every sprinkler is empty, and thus
+% freely identify gardens and bouquets.
+
+\begin{definition}[Vehicle]\labdef{vehicle}
+  
+  The \emph{vehicle} of a bouquet $\Phi$ is the graph $\vehicle{\Phi}$ defined
+  as follows:
+  \begin{itemize}
+    \item If $\Phi = \Psi\select{a}$ with $a$ an atomic flower, then the pair
+    $(\Psi\hole, a)$ is a vertex of $\vehicle{\Phi}$;
+    \item There is an oriented edge from $(\Psi\hole, a)$ to $(\Psi'\hole, a')$
+    iff the following conditions hold:
+    \begin{itemize}
+      \item[\textbf{(Identity)}] $a = a'$;
+      \item[\textbf{(Polarity)}] $\Psi\hole$ is negative and $\Psi'\hole$ is
+      positive;
+      \item[\textbf{(Interaction)}] there exists $\Xi\hole, \Psi_0\hole,
+      \Psi'_0\hole$ such that either:
+      \begin{itemize}
+        \item[\textbf{(Cross-pollination)}] $\Xi\hole$ is negative, and
+        \begin{align*}
+          \Psi\hole &= \Xi\select{\Psi_0\hole, \Psi'_0\select{a'}} \\
+          \text{and}\quad \Psi'\hole &= \Xi\select{\Psi_0\select{a}, \Psi'_0\hole}
+        \end{align*}
+        \item[\textbf{(Self-pollination)}] $\Xi\hole$ is positive, and either:
+        \begin{itemize}
+          \item[\textbf{(Pistil)}] there are some $\Phi_0, \Delta$ such that
+          \begin{align*}
+            \Psi\hole &= \Xi\select{\flower{\Phi_0, \hole}{\Psi'_0\select{a'} \sep \Delta}} \\
+            \text{and}\quad \Psi'\hole &= \Xi\select{\flower{\Phi_0, a}{\Psi'_0\hole \sep \Delta}}
+          \end{align*}
+          \item[\textbf{(Petal)}] there is some $\Delta$ such that
+          \begin{align*}
+            \Psi\hole &= \Xi\select{\flower{\Psi'_0\select{a'}}{\Psi_0\hole \sep \Delta}} \\
+            \text{and}\quad \Psi'\hole &= \Xi\select{\flower{\Psi'_0\hole}{\Psi_0\select{a} \sep \Delta}}
+          \end{align*}
+        \end{itemize}
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{definition}
+
+The vehicle of any bouquet $\Phi$ can easily by computed, by noticing that the
+context $\Xi\hole$ is simply the \emph{least common ancestor} of the atoms
+$\Psi\select{a}$ and $\Psi'\select{a'}$ in the tree representation of $\Phi$,
+which we write $\lca{\Psi\hole}{\Psi'\hole}$. This forms the basis for the first
+\emph{phase} of our algorithm, called accordingly the \emph{pollination} phase:
+
+\begin{algorithm}[H]
+  \DontPrintSemicolon
+  \LinesNumberedHidden
+  \KwData{A bouquet $\Phi$}
+  \KwResult{A new bouquet $\Phi'$}
+  \BlankLine
+
+  \ForEach{edge $(\Psi\hole, a) \to (\Psi'\hole, a') \in \vehicle{\Phi}$}{
+    $\phi\hole \longleftarrow $ the direct child flower context of $\lca{\Psi\hole}{\Psi'\hole}$ where $a$ occurs\;
+    $\phi'\hole \longleftarrow $ the direct child flower context of $\lca{\Psi\hole}{\Psi'\hole}$ where $a'$ occurs\;
+    $\Xi\hole \longleftarrow \Psi'\hole$\;
+    \If{$\phi\hole \not= \hole$}{
+      \nl append a copy of $\phi'\select{a'}$ to the bouquet located by $\Psi\hole$\;\label{copy}
+      $\Xi\hole \longleftarrow \Psi\select{\phi'\hole}$\;
+    }
+    \nl remove $a'$ from $\Xi\hole$\;\label{remove}
+  }
+
+  \caption{Pollination\label{phase-pollination}}
+\end{algorithm}
+
+While this might not be obvious at first glance, the two steps of the algorithm
+that modify the input bouquet $\Phi$ are logically \emph{sound}: indeed, the
+\texttt{copy} operation on line \ref{copy} corresponds to an instance of the
+\rsf{poll{\ua}} rule, while the \texttt{remove} operation on line \ref{remove}
+corresponds to an instance of the \rsf{poll{\da}} rule.
 
 \section{The Flower Prover}\labsec{flowers-prover}
 
@@ -2304,39 +2475,35 @@ calculus. We also explain how the user can opt in and out of various levels of
 automation based on our search procedure, similarly to what was described for
 the invertible bubble calculus of \refsec{invertible-calculus}.}
 
-\section{Towards a Curry-Howard correspondence}\labsec{flowers-curryhoward}
+% \section{Towards a Curry-Howard correspondence}\labsec{flowers-curryhoward}
 
-\todo{ briefly sketch some ideas for a Curry-Howard correspondence, where
-flowers and actions for manipulating them are identified respectively with
-\emph{normal} and \emph{neutral} terms of the $\lambda$-calculus. }
+% \todo{Write simulation of modus ponens $A \land (A \limp B) \limp B$}
 
-\todo{Write simulation of modus ponens $A \land (A \limp B) \limp B$}
+% Let us give an example of how to \emph{simulate} a rule from natural deduction
+% in the flower calculus. Rather than reducing the bouquet associated to a formula
+% to the empty bouquet, we want to reduce the bouquet associated to the conclusion
+% of the rule into the bouquet associated to its premisses. \reffig{flowers-mp}
+% shows how to proceed in the case of the elimination rule for $\limp$, or
+% \emph{modus ponens}. A crucial step is the use of the \rsf{grow} rule, which
+% allows to create a positive occurrence of $A$ out of thin air. This is the main
+% source of non-analyticity in the flower calculus, in the sense of the
+% \emph{subformula property} of Gentzen. Although we showed in
+% \refsec{Completeness} that the \rsf{grow} rule is admissible, it was for the
+% relation of \emph{provability} (\refdef{flowers-proof}). Here to simulate modus
+% ponens we rely on \emph{derivability}, and thus need this rule.
 
-Let us give an example of how to \emph{simulate} a rule from natural deduction
-in the flower calculus. Rather than reducing the bouquet associated to a formula
-to the empty bouquet, we want to reduce the bouquet associated to the conclusion
-of the rule into the bouquet associated to its premisses. \reffig{flowers-mp}
-shows how to proceed in the case of the elimination rule for $\limp$, or
-\emph{modus ponens}. A crucial step is the use of the \rsf{grow} rule, which
-allows to create a positive occurrence of $A$ out of thin air. This is the main
-source of non-analyticity in the flower calculus, in the sense of the
-\emph{subformula property} of Gentzen. Although we showed in
-\refsec{Completeness} that the \rsf{grow} rule is admissible, it was for the
-relation of \emph{provability} (\refdef{flowers-proof}). Here to simulate modus
-ponens we rely on \emph{derivability}, and thus need this rule.
-
-The derivation of \reffig{flowers-mp} also makes clear that it is the positive
-$A$ that justifies the negative one with the \rsf{poll{\ua}} rule, and not
-the other way around. Indeed, the presence of the pistil around the negative $A$
-makes it deeper than the positive $A$, preventing the \rsf{poll{\ua}} rule
-from being applicable in the other direction. This is a manifestation of the
-inherent dissymmetry in \emph{proof substitution}: the erasure of the negative
-$A$ can be interpreted as the operation $\subst{\pi_B}{\pi_A}{x}$, which
-substitutes every occurrence of the associated hypothesis $x$ in the proof
-$\pi_B$ of $B$ by the proof $\pi_A$ of the positive $A$.
-\todo{ Elaborate further on this computational aspect of EG. }
-\todo{ Investigate the ``scientific'' iteration rule of Peirce as a means to
-avoid the need for a computational interpretation of the \rsf{epis} rule. }
+% The derivation of \reffig{flowers-mp} also makes clear that it is the positive
+% $A$ that justifies the negative one with the \rsf{poll{\ua}} rule, and not
+% the other way around. Indeed, the presence of the pistil around the negative $A$
+% makes it deeper than the positive $A$, preventing the \rsf{poll{\ua}} rule
+% from being applicable in the other direction. This is a manifestation of the
+% inherent dissymmetry in \emph{proof substitution}: the erasure of the negative
+% $A$ can be interpreted as the operation $\subst{\pi_B}{\pi_A}{x}$, which
+% substitutes every occurrence of the associated hypothesis $x$ in the proof
+% $\pi_B$ of $B$ by the proof $\pi_A$ of the positive $A$.
+% \todo{ Elaborate further on this computational aspect of EG. }
+% \todo{ Investigate the ``scientific'' iteration rule of Peirce as a means to
+% avoid the need for a computational interpretation of the \rsf{epis} rule. }
 
 
 \section{Conclusion}\labsec{Conclusion}
@@ -2345,18 +2512,17 @@ avoid the need for a computational interpretation of the \rsf{epis} rule. }
 
 \begin{description}
   \item[Intuitionistic EG]
-    \textbf{TODO:} Mention Oostra's extended (de)iteration rule, that allows to
-    duplicate/merge identical petals. But it is not \emph{deep} (``Cualquier
-    lazo puede iterarse adherido \emph{al mismo corte}'', p. 46 of
-    \cite{oostra_graficos_2010}), and thus seems a bit arbitrary. More
+    Mention Oostra's extended (de)iteration rule, that allows to duplicate/merge
+    identical petals attached to the same pistil. But it is not \emph{deep}
+    (``Cualquier lazo puede iterarse adherido \emph{al mismo corte}''
+    \cite[p.~46]{oostra_graficos_2010}), and thus seems a bit arbitrary. More
     generally, Oostra tries to stay close to the original system \sys{Alpha}
     motivated by illative atomicity concerns, by having all rules expressed in
     terms of insertions and omissions; while we rather focus on having an
     invertible and analytic calculus (natural fragment), that is well-suited as
     the basis for a semi-automated theorem proving interface. For instance, the
     proof of $(A \lor B) \land (A \limp C) \land (B \limp C) \limp C$ in our
-    system is much shorter than in Oostra's, thanks to the powerful \rsf{srep}
-    rule. }
+    system is shorter than in Oostra's, thanks to the powerful \rsf{srep} rule.
   \item[Proof search]~\\
     \begin{itemize}
       \item Iteration/Pollination rule = Absorption rule of focused sequent
@@ -2365,6 +2531,29 @@ avoid the need for a computational interpretation of the \rsf{epis} rule. }
       \item Good properties of coherent logic for semi-automated proof search
         \sidecite{bezem_automating_2005}
       \item Link with the \texttt{Box} data structure of Ayers \sidecite{ayers_thesis}
+      \item Our notion of \emph{vehicle} (\refdef{vehicle}) takes its
+      terminology from Girard, who started giving this name to the set of axiom
+      links of a proof structure in his transcendental syntax
+      \sidecite{girard_2017}. But the idea of connecting dual occurrences of
+      atoms, and thus forming a graph with an associated adjacency matrix whose
+      structure can be exploited in proof search, really dates back to the
+      \emph{connection method} developed independently by Bibel and Andrews in
+      the 1970s \sidecite{Bibel:2009}. Otten and Kreitz have adapted the
+      connection method to intuitionistic logic
+      \sidecite{10.1007/3-540-59338-1_32}, stating that it is especially
+      well-suited in an interactive theorem proving environment. Thus it might
+      be instructive to learn from their algorithm to fix ours.
+      \item We have not discussed the rationale behind our notion of
+      analyticity, be it historical or formal arguments explaining its origins,
+      motivations and consequences. In a recent article
+      \sidecite{bruscoli_analyticity_2019}, Bruscoli and Guglielmo propose such
+      a detailed discussion around a precise and generic definition of
+      analyticity for deep inference proof systems (especially the calculus of
+      structures), which at a glance seems to encompass our own definition. It
+      would be interesting to study more deeply their work, and related parts of
+      the deep inference literature concerned with analyticity and its
+      applications to efficient proof search procedures
+      \sidecite{kahramanogullari_reducing_2006}\sidecite{lmcs:1089}\sidecite{10.1145/2003476.2003501}\sidecite{chaudhuri:hal-00772420}\sidecite{10.1007/978-3-662-49630-5_23}.
     \end{itemize}
   \item[Normal forms of formulas]~\\
     \begin{itemize}
@@ -2376,24 +2565,79 @@ avoid the need for a computational interpretation of the \rsf{epis} rule. }
     \end{itemize} 
 \end{description}
 
-It should be noted that Peirce did not think of EG as a calculus that could aid
-in performing reasoning \emph{per se}, but rather as a tool for analysing the
-finer structure of logical endeavor\sidenote{Citing \cite{Roberts+1973} pp.
-110-111: \textit{``[...] the purpose which the system was designed to fulfill
-was ``to enable us to separate reasoning into its smallest steps so that each
-one may be examined by itself'' (Ms 455, p. 2). The aim was not to facilitate
-reasoning, but to facilitate the study of reasoning.''}}.
+\subsection{Future works}
+
+\begin{description}
+  \item[Strong deduction theorem] Strong deduction theorem for derivability in
+  the full flower calculus. Combined with our completeness result (of the
+  natural fragment, and a forciori of the full system), this would give strong
+  completeness of the full system.
+
+  \item[Automated proof search] Fix proof search procedure, extend it to
+  quantifiers (thus losing completeness), and compare it to existing search
+  procedures for EG (in particular the original one from Peirce described by
+  Oostra in \cite{oostra_advances_2022}).
+
+  \item[Flower Prover] Implement the navigation mode in the Flower Prover, and
+  design GUI mechanisms that support relational reasoning with sprinklers, based
+  on the rules \rsf{ipis}, \rsf{ipet} and \rsf{apis}, \rsf{apet}.
+
+  \item[Subformula linking] The proof search procedures designed in this thesis,
+  whether for bubble calculi (\refsec{invertible-calculus}) or the flower
+  calculus (\refsec{flowers-search}), rest on the fundamental observation
+  pioneered by the subformula linking methodology of Chaudhuri
+  \sidecite{Chaudhuri2013}, that the construction of proofs in deep inference
+  systems can be driven efficiently and incrementally by the connection of dual
+  atoms. With its pollination rules, the flower calculus allows for a
+  particularly elegant implementation of subformula linking that abstracts away
+  from the syntactic bureaucracy of symbolic connectives, as witnessed by the
+  pollination phase of our search procedure. In \refsec{invertible-calculus}, we
+  sketched some ideas that blur the frontier between automated and interactive
+  proof search, with the so-called \emph{rule of thumb}. This integration of
+  automated and interactive aspects is also at work in the Flower Prover, and it
+  would be interesting to investigate further how to incorporate our
+  drag-and-drop proof tactic (\refch{pba}), but also other symbolic manipulation
+  techniques introduced in the first part of this thesis, into the iconic
+  framework of the Flower Prover.
+
+  \item[Curry-Howard] We have begun to sketch some ideas for a Curry-Howard
+correspondence, where flowers and actions for manipulating them are identified
+respectively with \emph{normal} and \emph{neutral} terms of the simply-typed
+$\lambda$-calculus. But the syntax is not stable yet, and it is unclear what
+would be the computational counterpart of flowers with $n \not= 1$ petals. In
+particular for disjunctive flowers ($n > 1$), it seems that we are closer to a
+notion of non-deterministic or parallel computation, than to the usual branching
+computation of sum types. If our intuition is right, then the fact that flowers
+correspond to (normal) $\lambda$-term would embody syntactically a recent motto
+from Miquel stemming from his study of the foundations of forcing and
+realizability in implicative algebras, where ``elements can be seen both as
+truth values and as (generalized) realizers, thus \textbf{blurring the frontier
+between proofs and types}''\sidenote{Another recent, related incarnation of this
+phenomenon is the correspondence uncovered by Haydon between a linear version of
+EG already appearing in Peirce's writings, and the proof nets of Girard for
+linear logic \cite{haydon_eg_pn}.} \cite{miquel_implicative_2020}. Or as he put
+it in a recent talk \cite{miquel_implicative_topos_2022}, we get the ultimate
+Curry-Howard identification:
+$$
+\text{\textbf{Realizer}} = \text{\textbf{Program}} = \text{\textbf{Formula}} = \text{\textbf{Type}}
+$$
+\end{description}
+
+\subsection{Theory vs. Practice}
+
+Finally, it should be noted that Peirce did not think of EG as a calculus that
+could aid in performing reasoning \emph{per se}, but rather as a tool for
+analysing the finer structure of logical endeavor
+\cite[pp.~110-111]{Roberts+1973}:
+\begin{quote}
+  [...] the purpose which the system was designed to fulfill was ``to enable us
+to separate reasoning into its smallest steps so that each one may be examined
+by itself'' (Ms 455, p.2). The aim was not to facilitate reasoning, but to
+facilitate the study of reasoning.
+\end{quote}
 
 \textbf{TODO:} explain how we depart from this conception, i.e. by focusing on iteration
 (and more generally invertible) rules instead of insertion/erasure rules (which
 are even shown to be admissible!), and replacing lines of identity by the more
 complex apparatus of substitution. Which explains why we believe \emph{the
-opposite}, that EG \emph{can} form the basis for an ergonomic calculus.}
-
-\subsection{Future works}
-
-\begin{itemize}
-  \item Strong deduction theorem for derivability in the full flower calculus.
-  Combined with our completeness result (of the natural fragment, and a forciori
-  of the full system), this would give strong completeness of the full system.
-\end{itemize}
+opposite}, that EG \emph{can} form the basis for an ergonomic calculus.

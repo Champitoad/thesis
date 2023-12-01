@@ -111,9 +111,11 @@ removed. One way to do this is to maximize the proportion of inference rules
 that are \emph{invertible}, meaning that their premisses always follow from
 their conclusion. Indeed when looking at rules as tactics (see \refsec{itps}),
 it means that they will always reduce a provable goal to provable subgoals, and
-thus can never induce a backtracking point. The {\rnm{\lor R}} rule is an
-example of invertible rule, and in \sys{LK} it can replace the other,
-non-invertible rules {\rnm{\lor R_1}} and {\rnm{\lor R_2}}.
+thus can never induce a backtracking point\sidenote{Except of course if the user
+deems the subgoal too complex to prove in its current form, and explicitly wants
+to backtrack to shape it differently.}. The {\rnm{\lor R}} rule is an example of
+invertible rule, and in \sys{LK} it can replace the other, non-invertible rules
+{\rnm{\lor R_1}} and {\rnm{\lor R_2}}.
 
 But {\rnm{\lor R}} requires multi-conclusion sequents, and Gentzen restricted
 their use to classical logic. It turns out that logicians after Gentzen have

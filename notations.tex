@@ -38,6 +38,15 @@
 % ---------- Notations ----------
 % -------------------------------
 
+% Thick table lines
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+\newcolumntype{"}{@{\hskip\tabcolsep\vrule width 1pt\hskip\tabcolsep}}
+\makeatother
+
 % \xleftrightarrow without mathtools
 \makeatletter
 \newcommand\xleftrightarrow[2][]{%
@@ -352,6 +361,9 @@
 \newcommand{\by}{\mathbf{y}}
 \newcommand{\bz}{\mathbf{z}}
 
+\newcommand{\vehicle}[1]{\mathcall{V}(#1)}
+\newcommand{\lca}[2]{\mathsf{lca}(#1,#2)}
+
 % First-order
 
 \newcommand{\vars}{\mathcal{V}}
@@ -390,7 +402,6 @@
 
 \newcommand{\tT}{\mathcall{T}}
 \newcommand{\tU}{\mathcall{U}}
-\newcommand{\tV}{\mathcall{V}}
 
 % Actema
 
