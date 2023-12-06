@@ -149,7 +149,7 @@ immediately get our desired result: \sys{B_{inv}} is a fully invertible
 calculus, where the same fragments as system $\sysB$ capture intuitionistic,
 dual-intuitionistic, bi-intuitionistic and classical logic.
 
-\subsection{Semi-automated proof search}
+\subsection{Semi-automated proof search}\labsubsec{bubbles-search}
 
 In the intuitionistic (propositional) fragment of \sys{B_{inv}}, a canonical way
 to search for a proof of a formula $A$ consists in the following $5$
@@ -208,7 +208,8 @@ reached:
 
   \item[\textbf{Popping}] Pop every closed empty bubble in the goal with the
   rules $\{\rsf{p},\rsf{p{-}},\rsf{p{+}}\}$. This phase can also be trivially
-  automated.
+  automated, and corresponds to the unit elimination phase in subformula linking
+  (\refsec{action}).
 
   \item[\textbf{Application}] When there are no more pairs of dual atoms, or all
     the remaining pairs have been given up (last step of the rule of thumb), let

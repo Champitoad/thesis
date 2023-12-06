@@ -536,9 +536,9 @@ movement in three-dimensional space, where the inloops are rotated around their
 intersection points with the outloop. In this way, we have effectively divided
 the amount of curve-nesting in scrolls by two. And as an added bonus, the new
 icon is reminiscent of a \emph{flower}, as if it had bloomed from its curled
-bud; or as if the pistol from \reffig{five-loops} had transformed into a
-\emph{pistil}, and its bullet chambers into \emph{petals}\sidenote{As the saying
-goes: make love, not war.}.
+bud; or as if the pistol cylinder from \reffig{five-loops} had transformed into
+a \emph{pistil}, and its bullet chambers into \emph{petals}\sidenote{As the
+saying goes: make love, not war.}.
 
 \begin{marginfigure}
   $$
@@ -1084,16 +1084,17 @@ of intuitionistic predicate logic, understood as any subset $\mathfrak{F}
 \subset \flowers$ of the set of all flowers\sidenote{The only exception seems to
 be the rule (\rsf{ipis}) (resp. \rsf{ipet}), whose duplication of flowers (resp.
 petals) prevents $\forall$ from being expressible (i.e. provable) without
-$\land$ (resp. $\lor$). This can be fixed by simply removing the duplication, at
-the cost of making the rule non-invertible.}. \reftab{flowers-fragments} shows
-how all the usual symbolic connectives can be expressed by \emph{cardinality}
-constraints on set-based syntactic constructs: $<$, $\leq$, $=$, $\geq$, $>$
-correspond respectively to a cardinality smaller, smaller or equal, equal,
-greater or equal, and greater than $1$; and $-$ denotes the absence of
-constraint. These constraints are then taken \emph{conjunctively} for a single
-connective (column-wise); and they can be freely mixed \emph{disjunctively}
-(row-wise), in order to capture any fragment corresponding to a subset of
-connectives.
+$\land$ (resp. $\lor$). This can be fixed by simply removing the duplication and
+polarizing the context of application as for the rule \rsf{apis} (resp.
+\rsf{apet}), at the cost of making the rule non-invertible.}.
+\reftab{flowers-fragments} shows how all the usual symbolic connectives can be
+expressed by \emph{cardinality} constraints on set-based syntactic constructs:
+$<$, $\leq$, $=$, $\geq$, $>$ correspond respectively to a cardinality smaller,
+smaller or equal, equal, greater or equal, and greater than $1$; and $-$ denotes
+the absence of constraint. These constraints are then taken \emph{conjunctively}
+for a single connective (column-wise); and they can be freely mixed
+\emph{disjunctively} (row-wise), in order to capture any fragment corresponding
+to a subset of connectives.
 
 \begin{figure*}[h!]
   \input{figures/flower-calculus.tex}
@@ -2354,6 +2355,8 @@ We get completeness as the direct (and classical) contraposition of
 
 \section{Automated proof search}\labsec{flowers-search}
 
+\paragraph{Analyticity and invertibility}
+
 The completeness of $\Nature$-rules (\refthm{flowers-completeness}) suggests
 that some efficient proof search procedure might be devised for the flower
 calculus, and even a complete one for the propositional fragment where every
@@ -2375,6 +2378,8 @@ worlds and accessibility relation of Kripke structures into the syntax of
 sequents in order to satisfy cut-elimination, and thus support efficient proof
 search.}.
 
+\paragraph{Depth and interaction}
+
 However, there is another great source of non-determinism that does not arise in
 Gentzen systems, but is inherent to any deep inference formalism: it is
 precisely the fact that rules can be applied in contexts of \emph{arbitrary}
@@ -2383,70 +2388,148 @@ Kahramanogullari has proposed some attempts to tame this problem in
 \sidecite{kahramanogullari_reducing_2006} and \sidecite{lmcs:1089}, and our
 approach bears some similarities to his. In particular, we propose in the
 following a (sketch of a) proof search algorithm for the propositional flower
-calculus, whose core rests on an implicit \emph{interaction} relation between
-atoms which is a restriction of the pollination relation (\refdef{pollination}),
-and is close to the \emph{structural} relation of Kahramanogullari\sidenote{This
-restriction is also suspiciously similar to the ``more scientific'' presentation
-of (de)iteration rules intuited by Peirce in \cite{peirce_prolegomena_1906}, and
-that we formalized in the system \sys{Alpha^a} of \reffig{eg-atomic-alpha}.}
-\cite[Definition~2.13]{lmcs:1089}. This is captured by the following graph
-structure on bouquets, that we call a \emph{vehicle}:
+calculus, whose core rests on an \emph{interaction} relation between contexts
+which is a generalization of the pollination relation (\refdef{pollination}),
+and is close to the \emph{structural} relation of Kahramanogullari
+\cite[Definition~2.13]{lmcs:1089}.
 
-% In the rest of this section, we assume that every sprinkler is empty, and thus
-% freely identify gardens and bouquets.
+% \sidenote{This restriction is also suspiciously similar to the ``more
+% scientific'' presentation of (de)iteration rules intuited by Peirce in
+% \cite{peirce_prolegomena_1906}, and that we formalized in the system
+% \sys{Alpha^a} of \reffig{eg-atomic-alpha}.} \cite[Definition~2.13]{lmcs:1089}.
 
-\begin{definition}[Vehicle]\labdef{vehicle}
+\begin{definition}[Interaction]\labdef{interaction}
   
-  The \emph{vehicle} of a bouquet $\Phi$ is the graph $\vehicle{\Phi}$ defined
-  as follows:
+  Let $\Phi\hole, \Psi\hole$ be two contexts. We say that $\Phi\hole$ can
+  \emph{interact} with $\Psi\hole$ when there exist contexts $\Xi\hole,
+  \Phi_0\hole, \Psi_0\hole$ such that either:
   \begin{itemize}
-    \item If $\Phi = \Psi\select{a}$ with $a$ an atomic flower, then the pair
-    $(\Psi\hole, a)$ is a vertex of $\vehicle{\Phi}$;
-    \item There is an oriented edge from $(\Psi\hole, a)$ to $(\Psi'\hole, a')$
-    iff the following conditions hold:
-    \begin{itemize}
-      \item[\textbf{(Identity)}] $a = a'$;
-      \item[\textbf{(Polarity)}] $\Psi\hole$ is negative and $\Psi'\hole$ is
-      positive;
-      \item[\textbf{(Interaction)}] there exists $\Xi\hole, \Psi_0\hole,
-      \Psi'_0\hole$ such that either:
-      \begin{itemize}
-        \item[\textbf{(Cross-pollination)}] $\Xi\hole$ is negative, and
-        \begin{align*}
-          \Psi\hole &= \Xi\select{\Psi_0\hole, \Psi'_0\select{a'}} \\
-          \text{and}\quad \Psi'\hole &= \Xi\select{\Psi_0\select{a}, \Psi'_0\hole}
-        \end{align*}
-        \item[\textbf{(Self-pollination)}] $\Xi\hole$ is positive, and either:
-        \begin{itemize}
-          \item[\textbf{(Pistil)}] there are some $\Phi_0, \Delta$ such that
-          \begin{align*}
-            \Psi\hole &= \Xi\select{\flower{\Phi_0, \hole}{\Psi'_0\select{a'} \sep \Delta}} \\
-            \text{and}\quad \Psi'\hole &= \Xi\select{\flower{\Phi_0, a}{\Psi'_0\hole \sep \Delta}}
-          \end{align*}
-          \item[\textbf{(Petal)}] there is some $\Delta$ such that
-          \begin{align*}
-            \Psi\hole &= \Xi\select{\flower{\Psi'_0\select{a'}}{\Psi_0\hole \sep \Delta}} \\
-            \text{and}\quad \Psi'\hole &= \Xi\select{\flower{\Psi'_0\hole}{\Psi_0\select{a} \sep \Delta}}
-          \end{align*}
-        \end{itemize}
-      \end{itemize}
-    \end{itemize}
+    \item \textbf{(Cross-interaction)}
+    \begin{align*}
+      \Phi\hole &= \Xi\select{\Phi_0\hole, \Psi_0\select{\emptyset}} \\
+      \text{and}\quad \Psi\hole &= \Xi\select{\Phi_0\select{\emptyset}, \Psi_0\hole}
+    \end{align*}
+    and we write $\Phi\hole \cinter \Psi\hole$;
+    \item \textbf{(Self-interaction)} there is some $\Delta$ such that
+    \begin{align*}
+      \Phi\hole &= \Xi\select{\flower{\Phi_0\hole}{\Psi_0\select{\emptyset} \sep \Delta}} \\
+      \text{and}\quad \Psi\hole &= \Xi\select{\flower{\Phi_0\select{\emptyset}}{\Psi_0\hole \sep \Delta}}
+    \end{align*}
+    and we write $\Phi\hole \sinter \Psi\hole$.
+  \end{itemize}
+  It is clear that $\cinter$ is a symmetric relation, while $\sinter$ is not.
+  Also, we write $\cinterpos$ and $\sinterpos$ (resp. $\cinterneg$ and
+  $\sinterneg$) to further specify when $\Xi\hole$ is positive (resp. negative).
+\end{definition}
+
+\begin{definition}[Occurrence]\labdef{occurrence}
+  
+  An \emph{occurrence} is a pair $(\Phi\hole, \phi)$ of a flower $\phi$ and a
+  context $\Phi\hole$. It is said to be \emph{atomic} if $\phi$ is an atom.
+\end{definition}
+
+\begin{definition}[Justification]\labdef{justification}
+  
+  A \emph{justification} is an oriented pair of atomic occurrences $(\Phi\hole,
+  a) \justi (\Psi\hole, b)$.
+\end{definition}
+
+\begin{definition}[Argument]\labdef{argument}
+  
+  An \emph{argument} is a finite set $\mathfrak{A}$ of justifications. Every
+  argument $\mathfrak{A}$ can be seen as the set of edges of a directed graph,
+  whose vertices are the occurrences appearing in the justifications of
+  $\mathfrak{A}$. Conversely, every directed graph on a set of occurrences can
+  be seen as an argument, whose justifications are the edges of the graph.
+\end{definition}
+
+\begin{definition}[Vehicle and Anchor]\labdef{vehicle} Let $\Phi$ a bouquet, and
+  $\atomoccs{\Phi} = \compr{(\Psi\hole, a)}{\Phi = \Psi\select{a}}$ its set of
+  atomic occurrences.
+  
+  The \emph{vehicle} of $\Phi$ is the argument $\vehicle{\Phi} \subseteq
+  \atomoccs{\Phi} \times \atomoccs{\Phi}$ such that $(\Psi\hole, a) \justi
+  (\Psi'\hole, a') \in \vehicle{\Phi}$ iff the following conditions hold:
+  \begin{itemize}
+    \item[\textbf{(Identity)}] $a = a'$;
+    \item[\textbf{(Polarity)}] $\Psi\hole$ is negative and $\Psi'\hole$ is
+    positive;
+    \item[\textbf{(Interaction)}] either $\Psi\hole \cinterneg \Psi'\hole$,
+    $\Psi\hole \sinterpos \Psi'\hole$ and $\Psi\hole = \hole$, or $\Psi'\hole
+    \sinterpos \Psi\hole$.
+  \end{itemize}
+
+  Dually, the \emph{anchor} of $\Phi$ is the argument $\anchor{\Phi} \subseteq
+  \atomoccs{\Phi} \times \atomoccs{\Phi}$ such that $(\Psi\hole, a) \justi
+  (\Psi'\hole, a') \in \anchor{\Phi}$ iff the following conditions hold:
+  \begin{itemize}
+    \item[\textbf{(Polarity)}] $\Psi\hole$ is positive and $\Psi'\hole$ is
+    negative;
+    \item[\textbf{(Interaction)}] $\Psi\hole \sinterneg \Psi'\hole$ and
+    $\Psi\hole = \hole$.
   \end{itemize}
 \end{definition}
+
+% This is captured by the following graph structure on bouquets, that we call a
+% \emph{vehicle}:
+
+% \begin{definition}[Vehicle]\labdef{vehicle}
+  
+%   The \emph{vehicle} of a bouquet $\Phi$ is the graph $\vehicle{\Phi}$ defined
+%   as follows:
+%   \begin{itemize}
+%     \item If $\Phi = \Psi\select{a}$ with $a$ an atomic flower, then the pair
+%     $(\Psi\hole, a)$ is a vertex of $\vehicle{\Phi}$;
+%     \item There is an oriented edge from $(\Psi\hole, a)$ to $(\Psi'\hole, a')$
+%     iff the following conditions hold:
+%     \begin{itemize}
+%       \item[\textbf{(Identity)}] $a = a'$;
+%       \item[\textbf{(Polarity)}] $\Psi\hole$ is negative and $\Psi'\hole$ is
+%       positive;
+%       \item[\textbf{(Interaction)}] there exists $\Xi\hole, \Psi_0\hole,
+%       \Psi'_0\hole$ such that either:
+%       \begin{itemize}
+%         \item[\textbf{(Cross-pollination)}] $\Xi\hole$ is negative, and
+%         \begin{align*}
+%           \Psi\hole &= \Xi\select{\Psi_0\hole, \Psi'_0\select{a'}} \\
+%           \text{and}\quad \Psi'\hole &= \Xi\select{\Psi_0\select{a}, \Psi'_0\hole}
+%         \end{align*}
+%         \item[\textbf{(Self-pollination)}] $\Xi\hole$ is positive, and either:
+%         \begin{itemize}
+%           \item[\textbf{(Pistil)}] there are some $\Phi_0, \Delta$ such that
+%           \begin{align*}
+%             \Psi\hole &= \Xi\select{\flower{\Phi_0, \hole}{\Psi'_0\select{a'} \sep \Delta}} \\
+%             \text{and}\quad \Psi'\hole &= \Xi\select{\flower{\Phi_0, a}{\Psi'_0\hole \sep \Delta}}
+%           \end{align*}
+%           \item[\textbf{(Petal)}] there is some $\Delta$ such that
+%           \begin{align*}
+%             \Psi\hole &= \Xi\select{\flower{\Psi'_0\select{a'}}{\Psi_0\hole \sep \Delta}} \\
+%             \text{and}\quad \Psi'\hole &= \Xi\select{\flower{\Psi'_0\hole}{\Psi_0\select{a} \sep \Delta}}
+%           \end{align*}
+%         \end{itemize}
+%       \end{itemize}
+%     \end{itemize}
+%   \end{itemize}
+% \end{definition}
+
+\paragraph{Pollination}
 
 The vehicle of any bouquet $\Phi$ can easily by computed, by noticing that the
 context $\Xi\hole$ is simply the \emph{least common ancestor} of the atoms
 $\Psi\select{a}$ and $\Psi'\select{a'}$ in the tree representation of $\Phi$,
 which we write $\lca{\Psi\hole}{\Psi'\hole}$. This forms the basis for the first
 \emph{phase} of our algorithm, called accordingly the \emph{pollination}
-phase\sidenote{It corresponds roughly to the \emph{application} phase for system
-\sys{B} described in \refsec{invertible-calculus}.}:
+phase\sidenote{It corresponds roughly to a combination of the \emph{application}
+and \emph{linking} phases of the proof search algorithm for \sys{B_{inv}}
+described in \refsubsec{bubbles-search}.}. It is best described by the
+following \emph{imperative} procedure, that modifies in-place
+the goal represented by the input bouquet $\Phi$:
 
-\begin{algorithm}[H]
-  \DontPrintSemicolon
-  \LinesNumberedHidden
-  \KwData{A bouquet $\Phi$}
-  \KwResult{A new bouquet $\Phi'$}
+\DontPrintSemicolon
+% \LinesNumberedHidden
+
+\begin{procedure}[H]
+  \caption{pollination($\Phi$)\labproc{phase-pollination}}
   \BlankLine
 
   \ForEach{edge $(\Psi\hole, a) \to (\Psi'\hole, a') \in \vehicle{\Phi}$}{
@@ -2454,20 +2537,172 @@ phase\sidenote{It corresponds roughly to the \emph{application} phase for system
     $\phi'\hole \longleftarrow $ the direct child flower context of $\lca{\Psi\hole}{\Psi'\hole}$ where $a'$ occurs\;
     $\Xi\hole \longleftarrow \Psi'\hole$\;
     \If{$\phi\hole \not= \hole$}{
-      \nl append a copy of $\phi'\select{a'}$ to the bouquet located by $\Psi\hole$\;\label{copy}
+      \ShowLn append a deep copy of $\phi'\select{a'}$ to the bouquet located by $\Psi\hole$\;\label{copy}
       $\Xi\hole \longleftarrow \Psi\select{\phi'\hole}$\;
     }
-    \nl remove $a'$ from $\Xi\hole$\;\label{remove}
+    \ShowLn remove $a'$ from $\Xi\hole$\;\label{remove}
   }
+\end{procedure}
 
-  \caption{Pollination\label{phase-pollination}}
+While this might not be obvious at first glance, the two steps of the
+\refproc{phase-pollination} procedure that modify $\Phi$ are logically
+\emph{sound}: indeed, the \texttt{copy} operation on line \ref{copy} corresponds
+to an instance of the \rsf{poll{\ua}} rule, while the \texttt{remove} operation
+on line \ref{remove} corresponds to an instance of the \rsf{poll{\da}} rule.
+
+\paragraph{Reproduction}
+
+The second phase of our algorithm is the \emph{reproduction} phase. As its name
+suggests, it consists in repeatedly applying the reproduction rule \rsf{srep} on
+the current goal, until there is no more context in which it is
+applicable\sidenote{In the algorithm of \refsubsec{bubbles-search}, this
+corresponds to the part of the \emph{decomposition} phase that treats negative
+$\lor$ formulas.}. In fact even if the invertibility of \rsf{srep} makes it
+sound in contexts of any polarity, we restrict its application to \emph{strictly
+positive} contexts, i.e. contexts $\Xi\hole$ such that $\parity{\Xi\hole} = 0$.
+Indeed as mentioned in \refsec{Calculus}, it has been designed as a
+generalization of the left introduction rules for $\bot$ and $\lor$ in sequent
+calculus, which like every sequent calculus rule work in the (strictly positive)
+empty context. Thus we conjecture that this restriction should not impact
+completeness. The reproduction phase can be computed by the following tail
+recursive procedure:
+
+\begin{procedure}[H]
+  \caption{reproduction($\Phi$)\labproc{phase-reproduction}}
+  \BlankLine
+
+  \ForEach{$\phi = (\flower{\Psi}{\Delta}) \in \Phi$}{
+    \If{there is at least one flower $\psi = (\flower{}{\fset{i}{n}{\gamma_i}}) \in \Psi$}{
+      remove $\psi$ from $\Psi$\;
+      remove every petal from $\phi$\;
+      append the petal $\fset{i}{n}{\flower{\gamma_i}{\Delta}}$ to $\phi$\;
+      \reproduction{$\phi$}\;
+    }\Else{
+      \ForEach{$\Xi \in \Delta$}{
+        \reproduction{$\Xi$}\;
+      }
+    }
+  }
 \end{algorithm}
 
-While this might not be obvious at first glance, the two steps of the algorithm
-that modify the input bouquet $\Phi$ are logically \emph{sound}: indeed, the
-\texttt{copy} operation on line \ref{copy} corresponds to an instance of the
-\rsf{poll{\ua}} rule, while the \texttt{remove} operation on line \ref{remove}
-corresponds to an instance of the \rsf{poll{\da}} rule.
+\paragraph{Decomposition}
+
+The third and last phase of our proof search algorithm, called
+\emph{decomposition}, is also the most trivial: it simply consists in applying
+the \rsf{epet} rule in every applicable context in the goal, which amounts to
+erasing every flower with an empty petal\sidenote{It corresponds to the
+\emph{popping} phase of bubbles in \refsubsec{bubbles-search}, not the
+decomposition phase: here the term ``decomposition'' refers metaphorically to
+the biological process that applies to organic matter, not to the analysis of
+formulas into their components.}. Unlike the reproduction phase, it cannot be
+computed directly by a tail recursive procedure, because erasing flowers in the
+petals of a flower $\phi$ might make one of the petals of $\phi$ itself empty.
+One option is to iterate a tail recursive procedure until a fixpoint is reached,
+meaning that there are no more flowers with an empty petal. We give instead a
+more efficient, but non-tail recursive solution:
+
+\begin{procedure}[H]
+  \caption{decomposition($\Phi$)\labproc{phase-decomposition}}
+  \BlankLine
+
+  \ForEach{$\phi = (\flower{\Psi}{\Delta}) \in \Phi$}{
+    \If{$\emptyset \in \Delta$}{
+      remove $\phi$ from $\Phi$\;
+    }\Else{
+      $\mathtt{has\_empty\_petal} \longleftarrow \mathtt{false}$\;
+      \ForEach{$\Xi \in \Delta$}{
+        \decomposition{$\Xi$}\;
+        \If{$\Xi = \emptyset$}{    
+          $\mathtt{has\_empty\_petal} \longleftarrow \mathtt{true}$\;
+          \Break\;
+        }
+      }
+      \If{$\mathtt{has\_empty\_petal}$}{
+        remove $\phi$ from $\Phi$\;
+      }
+      \Else{
+        \decomposition{$\Psi$}\;
+      }
+    }
+  }
+\end{procedure}
+
+\paragraph{Cycle of life}
+
+We can now put together the three phases to form a so-called \emph{lifecycle}:
+
+\begin{procedure}[H]
+  \caption{lifecycle($\Phi$)\labproc{lifecycle}}
+  \BlankLine
+
+  \pollination{$\Phi$}\;
+  \reproduction{$\Phi$}\;
+  \decomposition{$\Phi$}\;
+\end{procedure}
+
+Note that the specific order in which phases are sequenced does not matter.
+Indeed the final algorithm, that we call the \refproc{life} procedure, is simply
+the fixpoint of the \refproc{lifecycle} procedure:
+
+\begin{procedure}[H]
+  \caption{life($\Phi$)\labproc{life}}
+  \BlankLine
+
+  $\Phi' \longleftarrow $ deep copy of $\Phi$\;
+  \lifecycle{$\Phi'$}\;
+  \While{$\Phi \not= \Phi'$}{
+    $\Phi \longleftarrow $ deep copy of $\Phi'$\;
+    \lifecycle{$\Phi'$}\;
+  }
+\end{procedure}
+
+\begin{figure*}
+  \begin{mathpar}
+    \begin{array}{rl}
+    &(\flower{a}{(\flower{(\flower{a}{b\sep})}{b\sep})\sep})
+    \\[1em]\hline\\
+    \xstep{\mathtt{P}} &(\flower{a}{(\flower{(\flower{}{b\sep})}{b\sep})\sep})\\
+    \xstep{\mathtt{R}} &(\flower{a}{(\flower{}{(\flower{b}{b\sep})\sep})\sep})\\
+    \xstep{\mathtt{D}} &(\flower{a}{(\flower{}{(\flower{b}{b\sep})\sep})\sep})
+    \\[1em]\hline\\
+    \xstep{\mathtt{P}} &(\flower{a}{(\flower{}{(\flower{b}{\sep})\sep})\sep})\\
+    \xstep{\mathtt{R}} &(\flower{a}{(\flower{}{(\flower{b}{\sep})\sep})\sep})\\
+    \xstep{\mathtt{D}} &(\flower{a}{(\flower{}{\sep})\sep})
+    \\[1em]\hline\\
+    \xstep{\mathtt{P}} &(\flower{a}{(\flower{}{\sep})\sep})\\
+    \xstep{\mathtt{R}} &(\flower{a}{(\flower{}{\sep})\sep})\\
+    \xstep{\mathtt{D}} &(\flower{a}{\sep})
+    \\[1em]\hline\\
+    \xstep{\mathtt{P}} &(\flower{a}{\sep})\\
+    \xstep{\mathtt{R}} &(\flower{a}{\sep})\\
+    \xstep{\mathtt{D}} &
+    \end{array}
+    \and
+    \begin{array}{rl}
+    &(\flower{(\flower{}{a\sep b\sep})}{(\flower{}{b\sep a\sep})\sep})
+    \\[1em]\hline\\
+    \xstep{\mathtt{P}} &(\flower{(\flower{}{a\sep b\sep})}{(\flower{}{b\sep a\sep})\sep})\\
+    \xstep{\mathtt{R}} &(\flower{}{(\flower{a}{(\flower{}{b\sep a\sep})\sep}), (\flower{b}{(\flower{}{b\sep a\sep})\sep})\sep})\\
+    \xstep{\mathtt{D}} &(\flower{}{(\flower{a}{(\flower{}{b\sep a\sep})\sep}), (\flower{b}{(\flower{}{b\sep a\sep})\sep})\sep})
+    \\[1em]\hline\\
+    \xstep{\mathtt{P}} &(\flower{}{(\flower{a}{(\flower{}{b\sep \sep})\sep}), (\flower{b}{(\flower{}{\sep a\sep})\sep})\sep})\\
+    \xstep{\mathtt{R}} &(\flower{}{(\flower{a}{(\flower{}{b\sep \sep})\sep}), (\flower{b}{(\flower{}{\sep a\sep})\sep})\sep})\\
+    \xstep{\mathtt{D}} &(\flower{}{(\flower{a}{\sep}), (\flower{b}{\sep})\sep})
+    \\[1em]\hline\\
+    \xstep{\mathtt{P}} &(\flower{}{(\flower{a}{\sep}), (\flower{b}{\sep})\sep})\\
+    \xstep{\mathtt{R}} &(\flower{}{(\flower{a}{\sep}), (\flower{b}{\sep})\sep})\\
+    \xstep{\mathtt{D}} &(\flower{}{\sep})
+    \\[1em]\hline\\
+    \xstep{\mathtt{P}} &(\flower{}{\sep})\\
+    \xstep{\mathtt{R}} &(\flower{}{\sep})\\
+    \xstep{\mathtt{D}} &
+    \end{array}
+  \end{mathpar}
+  \caption{Life traces for modus ponens (left) and identity expansion of disjunction (right)}
+  \labfig{lifetrace-modus-ponens}
+\end{figure*}
+
+\paragraph{Failure of life}
 
 \section{The Flower Prover}\labsec{flowers-prover}
 
@@ -2475,7 +2710,7 @@ corresponds to an instance of the \rsf{poll{\da}} rule.
 Proof-by-Action paradigm whose actions map directly to the rules of the flower
 calculus. We also explain how the user can opt in and out of various levels of
 automation based on our search procedure, similarly to what was described for
-the invertible bubble calculus of \refsec{invertible-calculus}.}
+the invertible bubble calculus in \refsubsec{bubbles-search}.}
 
 % \section{Towards a Curry-Howard correspondence}\labsec{flowers-curryhoward}
 
@@ -2535,14 +2770,15 @@ the invertible bubble calculus of \refsec{invertible-calculus}.}
       \item Link with the \texttt{Box} data structure of Ayers \sidecite{ayers_thesis}
       \item Our notion of \emph{vehicle} (\refdef{vehicle}) takes its
       terminology from Girard, who started giving this name to the set of axiom
-      links of a proof structure in his transcendental syntax
-      \sidecite{girard_2017}. But the idea of connecting dual occurrences of
-      atoms, and thus forming a graph with an associated adjacency matrix whose
-      structure can be exploited in proof search, really dates back to the
-      \emph{connection method} developed independently by Bibel and Andrews in
-      the 1970s \sidecite{Bibel:2009}. Otten and Kreitz have adapted the
-      connection method to intuitionistic logic
-      \sidecite{10.1007/3-540-59338-1_32}, stating that it is especially
+      links of a proof structure in his transcendental syntax\sidenote{Also, it
+      conveys nicely the idea that the vehicle is the fundamental structure that
+      \emph{drives} the proof search algorithm.} \sidecite{girard_2017}. But the
+      idea of connecting dual occurrences of atoms, and thus forming a graph
+      with an associated adjacency matrix whose structure can be exploited in
+      proof search, really dates back to the \emph{connection method} developed
+      independently by Bibel and Andrews in the 1970s \sidecite{Bibel:2009}.
+      Otten and Kreitz have adapted the connection method to intuitionistic
+      logic \sidecite{10.1007/3-540-59338-1_32}, stating that it is especially
       well-suited in an interactive theorem proving environment. Thus it might
       be instructive to learn from their algorithm to fix ours.
       \item We have not discussed the rationale behind our notion of
@@ -2585,22 +2821,21 @@ the invertible bubble calculus of \refsec{invertible-calculus}.}
   on the rules \rsf{ipis}, \rsf{ipet} and \rsf{apis}, \rsf{apet}.
 
   \item[Subformula linking] The proof search procedures designed in this thesis,
-  whether for bubble calculi (\refsec{invertible-calculus}) or the flower
-  calculus (\refsec{flowers-search}), rest on the fundamental observation
-  pioneered by the subformula linking methodology of Chaudhuri
-  \sidecite{Chaudhuri2013}, that the construction of proofs in deep inference
-  systems can be driven efficiently and incrementally by the connection of dual
-  atoms. With its pollination rules, the flower calculus allows for a
-  particularly elegant implementation of subformula linking that abstracts away
-  from the syntactic bureaucracy of symbolic connectives, as witnessed by the
-  pollination phase of our search procedure. In \refsec{invertible-calculus}, we
-  sketched some ideas that blur the frontier between automated and interactive
-  proof search, with the so-called \emph{rule of thumb}. This integration of
-  automated and interactive aspects is also at work in the Flower Prover, and it
-  would be interesting to investigate further how to incorporate our
-  drag-and-drop proof tactic (\refch{pba}), but also other symbolic manipulation
-  techniques introduced in the first part of this thesis, into the iconic
-  framework of the Flower Prover.
+  whether for bubble calculi (\refsubsec{bubbles-search}) or the flower calculus
+  (\refsec{flowers-search}), rest on the fundamental observation pioneered by
+  the subformula linking methodology of Chaudhuri \sidecite{Chaudhuri2013}, that
+  the construction of proofs in deep inference systems can be driven efficiently
+  and incrementally by the connection of dual atoms. With its pollination rules,
+  the flower calculus allows for a particularly elegant implementation of
+  subformula linking that abstracts away from the syntactic bureaucracy of
+  symbolic connectives, as witnessed by the pollination phase of our search
+  procedure. In \refsubsec{bubbles-search}, we sketched some ideas that blur the
+  frontier between automated and interactive proof search, with the so-called
+  \emph{rule of thumb}. This integration of automated and interactive aspects is
+  also at work in the Flower Prover, and it would be interesting to investigate
+  further how to incorporate our drag-and-drop proof tactic (\refch{pba}), but
+  also other symbolic manipulation techniques introduced in the first part of
+  this thesis, into the iconic framework of the Flower Prover.
 
   \item[Curry-Howard] We have begun to sketch some ideas for a Curry-Howard
 correspondence, where flowers and actions for manipulating them are identified

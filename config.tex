@@ -32,6 +32,7 @@
 % \usepackage{extarrows}
 \usepackage{bm}
 \usepackage{hhline}
+\usepackage{stackengine}
 
 \usetikzlibrary{calc}
 \usetikzlibrary{decorations.pathmorphing,decorations.pathreplacing,decorations.shapes}
@@ -110,6 +111,12 @@
 % \newtheorem{condition}{Condition}
 
 %%% Package config
+
+% algorithm2e
+\SetKw{Break}{break}
+\SetKw{Continue}{continue}
+\newcommand{\labproc}[1]{\label{proc:#1}}
+\newcommand{\refproc}[1]{\texttt{\ref{proc:#1}}}
 
 % enumitem
 \setlist[description]{itemsep=0.5em}

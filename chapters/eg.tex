@@ -1894,28 +1894,34 @@ the complex circuits of teridentities by \emph{variables}? The process is
 simple:
 \begin{enumerate}
   \item Take any complex LoI connected to $n$ binders and $m$ hooks;
-  \item Keep only the binder occurring in the outermost area of $\SA$, and give
-  it a fresh name $x$;
+  \item Among the $n$ binders, choose one that occurs in the outermost area of
+  $\SA$, and give it a fresh name $x$;
   \item Replace the $m$ wires connected to the hooks by $m$ occurrences of $x$;
   \item Erase all remaining wires and teridentities.
 \end{enumerate}
 Thus for instance, both the first and second graphs in
 \reffig{eg-socrates-mortal} would be represented by the graph of
 \reffig{eg-socrates-mortal-var}. In fact, Peirce already had the idea to use a
-name-based syntactic device similar to variables, which he called
-\emph{Selectives}, in order to avoid the ambiguity of LoI crossing cuts
-\cite[p.~531]{peirce_prolegomena_1906}:
+name-based syntactic device similar to, and arguably more primitive than
+variables, which he called \emph{selectives}, in order to avoid the ambiguity of
+LoI crossing cuts \cite[p.~531]{peirce_prolegomena_1906}:
 \begin{quote}
 A Ligature crossing a Cut is to be interpreted as unchanged in meaning by
 erasing the part that crosses to the Cut and attaching to the two Loose Ends so
 produced two Instances of a Proper Name nowhere else used; such a Proper name
 (for which a capital letter will serve) being termed a \emph{Selective}.
 \end{quote}
-Thus he already identified the problem of readability stemming from having too
-many wires crossing eachother, a well-known concern in the design of graphical
-programming languages. This is to be opposed to critics of the syntax of EG such
-as Quine, who devised a notation similar to LoI, and deemed it ``too cumbersome
-for practical use'' \cite[p.~125]{Roberts+1973}.
+The idea of connecting two locations by marking them with the same symbol is
+quite natural, and is implemented for instance in \emph{footnotes} --- or in
+this thesis, sidenotes --- with the help of \emph{numbers} rather than capital
+letters. Footnotes are a good example, because contrary to variables, they share
+with selectives a \emph{linearity} property, that exactly \emph{two} occurrences
+of the symbol must be present. This is necessary to simulate accurately a
+two-ended wire, and it is not surprising that the same device has been used
+recently (under the name of \emph{ports}) to give an algebraic syntax to
+\emph{interaction nets} \sidecite{10.1007/978-3-642-40184-8_15}, a model of
+computation inspired by \emph{linear} logic and its graphical, string-diagram
+like syntax of \emph{proof nets} \cite{girard-linear-1987}.
 
 \paragraph{Bridges} 
 
@@ -1932,11 +1938,16 @@ After introducing Selectives, Peirce further remarks on the next page:
 may be employed, or a \emph{Bridge}, which is imagined to be a bit of paper
 ribbon.
 \end{quote}
-This proposed alternative solution of having so-called \emph{Bridges} is quite
-interesting, in that it makes the syntax of EG \emph{three-dimensional}, in
-order to preserve the continuity of lines. A nice illustration of the bridge is
-given in \reffig{eg-bridge}. We found this picture in the Wikipedia article of
-the \emph{four color theorem} \cite{noauthor_four_2023}, which is no coincidence
+Thus he already identified the problem of readability stemming from having too
+many wires crossing eachother, a well-known concern in the design of graphical
+programming languages\sidenote{This is to be opposed to critics of the syntax of
+EG such as Quine, who devised a notation similar to LoI, and deemed it ``too
+cumbersome for practical use'' \cite[p.~125]{Roberts+1973}.}. The proposed
+alternative solution of having so-called \emph{Bridges} is quite interesting, in
+that it makes the syntax of EG \emph{three-dimensional}, in order to preserve
+the continuity of lines. A nice illustration of the bridge is given in
+\reffig{eg-bridge}. We found this picture in the Wikipedia article of the
+\emph{four color theorem} \cite{noauthor_four_2023}, which is no coincidence
 according to Burch \cite{sep-peirce}:
 \begin{quote}
   Peirce began to research the four-color map conjecture, to work on the
@@ -1999,7 +2010,7 @@ Naturally, the pair formed by a sprinkler and a multiset of nodes is called a
   than the `$,$' operator for juxtaposition of graphs. Thus the expression $x
   \cdot \socrates(x),\human(x)$ is to be read as $x \cdot
   (\socrates(x),\human(x))$, and not $(x \cdot \socrates(x)),\human(x)$ (which
-  would be syntactically incorrect anyway).
+  would be ill-typed anyway).
 \end{example}
 
 \paragraph{Inference rules}
