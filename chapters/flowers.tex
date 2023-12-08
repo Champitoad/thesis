@@ -53,9 +53,9 @@ complete fragment of the system where all rules are both \emph{analytic} and
 fragment, and as a consequence the analyticity of the system. We exploit these
 properties in \refsec{flowers-search} by describing an algorithm for fully
 automated proof search in the propositional fragment; unfortunately the current
-version of the algorithm seems to be neither sound (it does not terminate on
-some goals) nor complete. Then in \refsec{flowers-prover} we give an overview of
-the Flower Prover, a prototype of GUI in the Proof-by-Action paradigm whose
+version of the algorithm is neither sound (it seems like it does not terminate
+on some goals) nor complete. Then in \refsec{flowers-prover} we give an overview
+of the Flower Prover, a prototype of GUI in the Proof-by-Action paradigm whose
 actions map directly to the rules of the flower calculus, and which integrates
 nicely with (a restricted version of) our search procedure. We conclude in
 \refsec{Conclusion} by a comparison with some related works, and a discussion of
@@ -2422,17 +2422,40 @@ and is close to the \emph{structural} relation of Kahramanogullari
   $\sinterneg$) to further specify when $\Xi\hole$ is positive (resp. negative).
 \end{definition}
 
+\paragraph{Causality}
+
+Our algorithm will be driven by the search for dual occurrences of atoms, a
+recurring idea in this thesis.
+
 \begin{definition}[Occurrence]\labdef{occurrence}
   
   An \emph{occurrence} is a pair $(\Phi\hole, \phi)$ of a flower $\phi$ and a
   context $\Phi\hole$. It is said to be \emph{atomic} if $\phi$ is an atom.
 \end{definition}
 
+Then, two atomic occurrences can interact when their contexts can. In the
+(linear) classical setting of \cite{lmcs:1089}, there is no preferred direction
+in the information flow between two interacting atoms, which can be seen as the
+essence of the (linear) law of excluded middle $A \parr A^\bot$. However in our
+intuitionistic setting, implication forces a direction from premisses to
+conclusions, which is reflected in our distinction between the symmetric
+cross-interaction relation $\cinter$, and the asymmetric self-interaction
+relation $\sinter$\sidenote{Arguably, the linear heart of this phenomenon can be
+studied in the logic \sys{BV}, which adds to the commutative connective $\parr$
+a non-commutative or \emph{sequential} operator $\triangleright$. Interestingly,
+\sys{BV} is the logic that motivated the whole development of the deep inference
+methodology by Guglielmi \cite{Guglielmi1999ACO}, because it could not be
+accurately expressed in shallow Gentzen formalisms.}. In turn, the asymmetry of
+$\sinter$ will impose a causality on atoms, where one atom can potentially be
+\emph{justified} by the other:
+
 \begin{definition}[Justification]\labdef{justification}
   
-  A \emph{justification} is an oriented pair of atomic occurrences $(\Phi\hole,
-  a) \justi (\Psi\hole, b)$.
+  A \emph{justification} is an oriented pair of atomic occurrences $\mathfrak{a}
+  = (\Phi\hole, a) \justi (\Psi\hole, b)$.
 \end{definition}
+
+One can then naturally aggregate justifications into \emph{arguments}:
 
 \begin{definition}[Argument]\labdef{argument}
   
@@ -2442,6 +2465,8 @@ and is close to the \emph{structural} relation of Kahramanogullari
   $\mathfrak{A}$. Conversely, every directed graph on a set of occurrences can
   be seen as an argument, whose justifications are the edges of the graph.
 \end{definition}
+
+We identify two essential arguments inherent to any bouquet:
 
 \begin{definition}[Vehicle and Anchor]\labdef{vehicle} Let $\Phi$ a bouquet, and
   $\atomoccs{\Phi} = \compr{(\Psi\hole, a)}{\Phi = \Psi\select{a}}$ its set of
@@ -2465,9 +2490,26 @@ and is close to the \emph{structural} relation of Kahramanogullari
   \begin{itemize}
     \item[\textbf{(Polarity)}] $\Psi\hole$ is positive and $\Psi'\hole$ is
     negative;
-    \item[\textbf{(Interaction)}] $\Psi\hole \sinterneg \Psi'\hole$ and
-    $\Psi\hole = \hole$.
+    \item[\textbf{(Interaction)}] $\Psi\hole \sinterneg \Psi'\hole$.
   \end{itemize}
+\end{definition}
+
+Intuitively, the vehicle of a bouquet $\Phi$ is the set of possible
+justifications that \emph{can} be performed by the prover/player, whose goal is
+to justify every positive atom; while the anchor is the set of justifications
+that \emph{must} be provided on demand by the environment/opponent, whose task
+is to justify every negative atom. The reason that we identify this structure,
+is that we want crucially to avoid \emph{cycles} in our justification attempts
+during proof search. These may arise in the dialogical interaction between the
+prover and its environment of hypotheses, when justifications of the former are
+composed with those of the latter. Formally, this interaction is expressed by
+the \emph{union} of arguments:
+
+\begin{definition}[Compatibility]
+  Given a justification $\mathfrak{a}$ and an argument $\mathfrak{A}$, we say
+  that $\mathfrak{a}$ is \emph{compatible} with $\mathfrak{A}$, written
+  $\mathfrak{a} \compat \mathfrak{A}$, when there is no cycle in $\mathfrak{A}
+  \cup \{\mathfrak{a}\}$.
 \end{definition}
 
 % This is captured by the following graph structure on bouquets, that we call a
@@ -2514,33 +2556,42 @@ and is close to the \emph{structural} relation of Kahramanogullari
 
 \paragraph{Pollination}
 
-The vehicle of any bouquet $\Phi$ can easily by computed, by noticing that the
-context $\Xi\hole$ is simply the \emph{least common ancestor} of the atoms
-$\Psi\select{a}$ and $\Psi'\select{a'}$ in the tree representation of $\Phi$,
-which we write $\lca{\Psi\hole}{\Psi'\hole}$. This forms the basis for the first
-\emph{phase} of our algorithm, called accordingly the \emph{pollination}
-phase\sidenote{It corresponds roughly to a combination of the \emph{application}
-and \emph{linking} phases of the proof search algorithm for \sys{B_{inv}}
-described in \refsubsec{bubbles-search}.}. It is best described by the
-following \emph{imperative} procedure, that modifies in-place
-the goal represented by the input bouquet $\Phi$:
+The vehicle and anchor of any bouquet $\Phi$ can easily by computed, by noticing
+that the context $\Xi\hole$ in \refdef{interaction} is simply the \emph{least
+common ancestor} of the atoms $\Psi\select{a}$ and $\Psi'\select{a'}$ in the
+tree representation of $\Phi$, which we write $\lca{\Psi\hole}{\Psi'\hole}$.
+This forms the basis for the first \emph{phase} of our algorithm, that we call
+the \emph{pollination} phase\sidenote{It corresponds roughly to a combination of
+the \emph{application} and \emph{linking} phases of the proof search algorithm
+for \sys{B_{inv}} described in \refsubsec{bubbles-search}.}. Roughly, the idea
+is that given a goal $\Phi$, we want to perform eagerly every justification
+$\mathfrak{a}$ in the vehicle $\vehicle{\Phi}$, on the condition that it is
+compatible with the anchor $\anchor{\Phi}$ and all justifications $\mathfrak{H}$
+of the previous phases. It turns out that every such justification can be
+implemented by an instance of the \rsf{poll{\da}} rule, sometimes preceded by an
+instance of the \rsf{poll{\ua}} rule. This is best described by the following
+\emph{imperative} procedure, that takes as input and modifies in-place both the
+goal $\Phi$, and the history $\mathfrak{H}$ of justifications performed so far:
 
 \DontPrintSemicolon
 % \LinesNumberedHidden
 
 \begin{procedure}[H]
-  \caption{pollination($\Phi$)\labproc{phase-pollination}}
+  \caption{pollination($\Phi, \mathfrak{H}$)\labproc{phase-pollination}}
   \BlankLine
 
-  \ForEach{edge $(\Psi\hole, a) \to (\Psi'\hole, a') \in \vehicle{\Phi}$}{
-    $\phi\hole \longleftarrow $ the direct child flower context of $\lca{\Psi\hole}{\Psi'\hole}$ where $a$ occurs\;
-    $\phi'\hole \longleftarrow $ the direct child flower context of $\lca{\Psi\hole}{\Psi'\hole}$ where $a'$ occurs\;
-    $\Xi\hole \longleftarrow \Psi'\hole$\;
-    \If{$\phi\hole \not= \hole$}{
-      \ShowLn append a deep copy of $\phi'\select{a'}$ to the bouquet located by $\Psi\hole$\;\label{copy}
-      $\Xi\hole \longleftarrow \Psi\select{\phi'\hole}$\;
+  \ForEach{$\mathfrak{a} = (\Psi\hole, a) \justi (\Psi'\hole, a') \in \vehicle{\Phi} \setminus \mathfrak{H}$}{
+    \If{$\mathfrak{a} \compat \anchor{\Phi} \cup \mathfrak{H}$}{
+      $\phi\hole \longleftarrow $ the direct child flower context of $\lca{\Psi\hole}{\Psi'\hole}$ where $a$ occurs\;
+      $\phi'\hole \longleftarrow $ the direct child flower context of $\lca{\Psi\hole}{\Psi'\hole}$ where $a'$ occurs\;
+      $\Xi\hole \longleftarrow \Psi'\hole$\;
+      \If{$\phi\hole \not= \hole$}{
+        \ShowLn append a deep copy of $\phi'\select{a'}$ to the bouquet located by $\Psi\hole$\;\label{copy}
+        $\Xi\hole \longleftarrow \Psi\select{\phi'\hole}$\;
+      }
+      \ShowLn remove $a'$ from $\Xi\hole$\;\label{remove}
+      add $\mathfrak{a}$ to $\mathfrak{H}$\;
     }
-    \ShowLn remove $a'$ from $\Xi\hole$\;\label{remove}
   }
 \end{procedure}
 
@@ -2557,14 +2608,7 @@ suggests, it consists in repeatedly applying the reproduction rule \rsf{srep} on
 the current goal, until there is no more context in which it is
 applicable\sidenote{In the algorithm of \refsubsec{bubbles-search}, this
 corresponds to the part of the \emph{decomposition} phase that treats negative
-$\lor$ formulas.}. In fact even if the invertibility of \rsf{srep} makes it
-sound in contexts of any polarity, we restrict its application to \emph{strictly
-positive} contexts, i.e. contexts $\Xi\hole$ such that $\parity{\Xi\hole} = 0$.
-Indeed as mentioned in \refsec{Calculus}, it has been designed as a
-generalization of the left introduction rules for $\bot$ and $\lor$ in sequent
-calculus, which like every sequent calculus rule work in the (strictly positive)
-empty context. Thus we conjecture that this restriction should not impact
-completeness. The reproduction phase can be computed by the following tail
+$\lor$ formulas.}. The reproduction phase can be computed by the following tail
 recursive procedure:
 
 \begin{procedure}[H]
@@ -2629,20 +2673,33 @@ more efficient, but non-tail recursive solution:
 
 \paragraph{Cycle of life}
 
-We can now put together the three phases to form a so-called \emph{lifecycle}:
+We can now put together the three phases to form a so-called \emph{lifecycle}.
+We decompose this in two steps:
+\begin{enumerate}
+  \item first we perform one pollination phase;
+  \item then we cycle reproduction and decomposition phases until a fixpoint is
+  reached.
+\end{enumerate}
 
 \begin{procedure}[H]
   \caption{lifecycle($\Phi$)\labproc{lifecycle}}
   \BlankLine
 
   \pollination{$\Phi$}\;
-  \reproduction{$\Phi$}\;
-  \decomposition{$\Phi$}\;
+
+  $\Phi' \longleftarrow $ deep copy of $\Phi$\;
+  \reproduction{$\Phi'$}\;
+  \decomposition{$\Phi'$}\;
+  \While{$\Phi \not= \Phi'$}{
+    $\Phi \longleftarrow $ deep copy of $\Phi'$\;
+    \reproduction{$\Phi'$}\;
+    \decomposition{$\Phi'$}\;
+  }
 \end{procedure}
 
-Note that the specific order in which phases are sequenced does not matter.
-Indeed the final algorithm, that we call the \refproc{life} procedure, is simply
-the fixpoint of the \refproc{lifecycle} procedure:
+Note that the specific order in which phases are sequenced does not matter. The
+final algorithm, that we call the \refproc{life} procedure, is then the fixpoint
+of the \refproc{lifecycle} procedure:
 
 \begin{procedure}[H]
   \caption{life($\Phi$)\labproc{life}}
@@ -2662,47 +2719,44 @@ the fixpoint of the \refproc{lifecycle} procedure:
     &(\flower{a}{(\flower{(\flower{a}{b\sep})}{b\sep})\sep})
     \\[1em]\hline\\
     \xstep{\mathtt{P}} &(\flower{a}{(\flower{(\flower{}{b\sep})}{b\sep})\sep})\\
-    \xstep{\mathtt{R}} &(\flower{a}{(\flower{}{(\flower{b}{b\sep})\sep})\sep})\\
-    \xstep{\mathtt{D}} &(\flower{a}{(\flower{}{(\flower{b}{b\sep})\sep})\sep})
+    \xstep{\mathtt{RD}} &(\flower{a}{(\flower{}{(\flower{b}{b\sep})\sep})\sep})
     \\[1em]\hline\\
     \xstep{\mathtt{P}} &(\flower{a}{(\flower{}{(\flower{b}{\sep})\sep})\sep})\\
-    \xstep{\mathtt{R}} &(\flower{a}{(\flower{}{(\flower{b}{\sep})\sep})\sep})\\
-    \xstep{\mathtt{D}} &(\flower{a}{(\flower{}{\sep})\sep})
-    \\[1em]\hline\\
-    \xstep{\mathtt{P}} &(\flower{a}{(\flower{}{\sep})\sep})\\
-    \xstep{\mathtt{R}} &(\flower{a}{(\flower{}{\sep})\sep})\\
-    \xstep{\mathtt{D}} &(\flower{a}{\sep})
-    \\[1em]\hline\\
-    \xstep{\mathtt{P}} &(\flower{a}{\sep})\\
-    \xstep{\mathtt{R}} &(\flower{a}{\sep})\\
-    \xstep{\mathtt{D}} &
+    \xstep{\mathtt{RD}} &
     \end{array}
     \and
     \begin{array}{rl}
     &(\flower{(\flower{}{a\sep b\sep})}{(\flower{}{b\sep a\sep})\sep})
     \\[1em]\hline\\
     \xstep{\mathtt{P}} &(\flower{(\flower{}{a\sep b\sep})}{(\flower{}{b\sep a\sep})\sep})\\
-    \xstep{\mathtt{R}} &(\flower{}{(\flower{a}{(\flower{}{b\sep a\sep})\sep}), (\flower{b}{(\flower{}{b\sep a\sep})\sep})\sep})\\
-    \xstep{\mathtt{D}} &(\flower{}{(\flower{a}{(\flower{}{b\sep a\sep})\sep}), (\flower{b}{(\flower{}{b\sep a\sep})\sep})\sep})
+    \xstep{\mathtt{RD}} &(\flower{}{(\flower{a}{(\flower{}{b\sep a\sep})\sep}), (\flower{b}{(\flower{}{b\sep a\sep})\sep})\sep})
     \\[1em]\hline\\
     \xstep{\mathtt{P}} &(\flower{}{(\flower{a}{(\flower{}{b\sep \sep})\sep}), (\flower{b}{(\flower{}{\sep a\sep})\sep})\sep})\\
-    \xstep{\mathtt{R}} &(\flower{}{(\flower{a}{(\flower{}{b\sep \sep})\sep}), (\flower{b}{(\flower{}{\sep a\sep})\sep})\sep})\\
-    \xstep{\mathtt{D}} &(\flower{}{(\flower{a}{\sep}), (\flower{b}{\sep})\sep})
-    \\[1em]\hline\\
-    \xstep{\mathtt{P}} &(\flower{}{(\flower{a}{\sep}), (\flower{b}{\sep})\sep})\\
-    \xstep{\mathtt{R}} &(\flower{}{(\flower{a}{\sep}), (\flower{b}{\sep})\sep})\\
-    \xstep{\mathtt{D}} &(\flower{}{\sep})
-    \\[1em]\hline\\
-    \xstep{\mathtt{P}} &(\flower{}{\sep})\\
-    \xstep{\mathtt{R}} &(\flower{}{\sep})\\
-    \xstep{\mathtt{D}} &
+    \xstep{\mathtt{RD}} &
     \end{array}
   \end{mathpar}
   \caption{Life traces for modus ponens (left) and identity expansion of disjunction (right)}
-  \labfig{lifetrace-modus-ponens}
+  \labfig{lifetrace}
 \end{figure*}
 
-\paragraph{Failure of life}
+\reffig{lifetrace} shows the \emph{traces} obtained by executing the algorithm
+on two simple tautologies. Lifecycles are separated by horizontal lines, while
+an arrow with superscript $\mathtt{P}$ (resp. $\mathtt{RD}$) indicates a
+pollination (resp. reproduction/decomposition) phase.
+
+\paragraph{Implementation}
+
+We have implemented the \refproc{life} procedure in the OCaml programming
+language \cite{flower-auto}. In fact, we refined the design of the algorithm
+iteratively, by testing it on a set of 62 tautologies taken from the logic
+course in Edukera \cite{edukera} (see \reffig{app:flowers-edukera}). Since those
+are expressed with symbolic formulas, we rely on a straightforward translation
+of formulas into flowers, following the interpretation of \reffig{curl-geom}.
+Out of these, 55 were proved by the algorithm, and of 
+
+\paragraph{Non-termination}
+
+\paragraph{Incompleteness}
 
 \section{The Flower Prover}\labsec{flowers-prover}
 

@@ -80,7 +80,8 @@
 
 \newcommand{\nats}{\mathbb{N}}
 
-% Vertical reflection in math mode
+% Vertical and horizontal reflection in math mode
+\newcommand{\hrefl}[1]{\text{\raisebox{\depth}{\scalebox{-1}[1]{$#1$}}}}
 \newcommand{\vrefl}[1]{\text{\raisebox{\depth}{\scalebox{-1}[-1]{$#1$}}}}
 \newcommand{\hvrefl}[1]{\text{\raisebox{\depth}{\scalebox{1}[-1]{$#1$}}}}
 
@@ -369,10 +370,11 @@
 \newcommand{\cinter}{\mathbin{\bowtie}}
 \newcommand{\cinterpos}{\mathbin{\stackon[1pt]{$\cinter$}{$\scriptstyle +$}}}
 \newcommand{\cinterneg}{\mathbin{\stackon[1pt]{$\cinter$}{$\scriptstyle -$}}}
-\newcommand{\sinter}{\mathbin{\rtimes}}
+\newcommand{\sinter}{\mathbin{\hrefl{\propto}}}
 \newcommand{\sinterpos}{\mathbin{\stackon[1pt]{$\sinter$}{$\scriptstyle +$}}}
 \newcommand{\sinterneg}{\mathbin{\stackon[1pt]{$\sinter$}{$\scriptstyle -$}}}
 \newcommand{\justi}{\mathbin{\hookrightarrow}}
+\newcommand{\compat}{\mathbin{\da}}
 
 % First-order
 
