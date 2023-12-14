@@ -4,3 +4,4 @@ build
 src/output-buffer/**
 _minted*
 .vscode/
+*.fls

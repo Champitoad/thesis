@@ -1,8 +1,11 @@
 \begin{tikzpicture}
+  \clip (-0.6,-0.75) rectangle (1.6,0.75);
   \DrawFlowers{{
     angle = 0.29 * math.pi,
     pistil = { size = 0.5 },
     petals = { {}, {}, {}, {name="pet"}, {} }
   }}
   \node at (pet) {$\Phi$};
+% \draw [help lines, step=1] (current bounding box.south west) grid (current bounding box.north east);
+% \draw [help lines] (current bounding box.south west) rectangle (current bounding box.north east);
 \end{tikzpicture}

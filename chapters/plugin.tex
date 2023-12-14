@@ -574,10 +574,11 @@ consistency of the logic, well-known in the literature on type theory.}. Thus we
 need to have recourse to a \emph{meta-programming} language in order to inspect
 the structure of Coq goals. Here we use the standard {\ltac} language, which
 provides powerful constructs for pattern-matching on goals\sidenote{A downside
-of {\ltac} is that it is an \emph{untyped} language, which makes it hard to
-debug and maintain. One might consider a cleaner implementation with more recent
-alternatives in the Coq ecosystem, like the successor to {\ltac} Ltac2
-\cite{Ltac2}, or the MetaCoq project \cite{MetaCoq}.}.
+of {\ltac} is that it is an \emph{untyped} language, whose programs are
+notoriously hard to debug and maintain. One might consider a cleaner
+implementation with more recent alternatives in the Coq ecosystem, like the
+successor to {\ltac} Ltac2 \cite{Ltac2}, or the MetaCoq project
+\cite{MetaCoq}.}.
 
 The most complex tactics are those implementing backward and forward DnD
 actions, called respectively \texttt{backward} and \texttt{forward}. They rely
@@ -612,6 +613,22 @@ that \texttt{reflect} is the inverse of \texttt{reify}.
 %   \mathtt{reflect}(q) \limp \mathtt{reflect}(\mathtt{f3}(p, q, T))$$
 % \end{theorem}
 
+\begin{remark}
+  There exist a few other approaches to the computer implementation of deep
+  inference systems. Ozan Kahramanoğulları has pioneered the field, by
+  implementing various calculi of structures inside frameworks like Maude
+  \cite{kahramanogullari_maude_2008} and Tom
+  \cite{kahramanogullari_implementing_2005}, that are dedicated to the
+  specification of rewriting systems. For an integration within modern proof
+  assistants, we only know of Chaudhuri's recent work
+  \sidecite{chaudhuri_certifying_2022} that explores different techniques in
+  addition to reflection, like \emph{combinators} and some more powerful usages
+  of \emph{metaprogramming}. He also provides an effective implementation of the
+  techniques in his \sys{Profint} tool \cite{DBLP:conf/cade/Chaudhuri21}, that
+  allows to export subformula linking derivations built with \sys{Profint}'s GUI
+  as proof scripts directly executable in various proof assistants (Coq, Lean,
+  Isabelle/HOL).
+\end{remark}
 
 \section{Future works}\labsec{pluginfuture}
 
@@ -744,14 +761,14 @@ written; updating it after slight changes to the statement of its theorem;
 etc\sidenote{Not very surprisingly, those activities are commonly found in the
 context of \emph{programming} environments. Thus one might get insight by
 cross-pollinating ideas from both domains, in the spirit of the Curry-Howard
-correspondence (which also underlies the design of Coq).}. One might even argue
-that thinking about the best way to \emph{represent} a proof leads to more
-fundamental questions, that have been much debated both in proof theory and the
-history and philosophy of mathematics: what is the essence of a proof, seen as a
-meta-mathematical object \sidecite{strasburger-problem-2019}? What are the roles
-played by informal and formal proofs, both in the teaching of mathematics, and
-the social and scientific practice of mathematicians
-\cite{bartzia_proof_nodate}?
+correspondence (which also underlies the design of Coq).}\sidenote{One might
+even argue that thinking about the best way to \emph{represent} a proof leads to
+more fundamental questions, that have been much debated both in proof theory and
+the history and philosophy of mathematics: what is the essence of a proof, seen
+as a meta-mathematical object \cite{strasburger-problem-2019}? What are the
+roles played by informal and formal proofs, both in the teaching of mathematics,
+and the social and scientific practice of mathematicians
+\cite{bartzia_proof_nodate}?}.
 
 In the literature and community of people designing proof assistants, these
 various problematics are generally regrouped under the term of \emph{proof

@@ -1,0 +1,21 @@
+\begin{mathpar}
+  \begin{array}{rl}
+  &(\flower{a}{(\flower{(\flower{a}{b})}{b})})
+  \\[1em]\hline\\
+  \xstep{\mathtt{P}} &(\flower{a}{(\flower{(\flower{}{b})}{b})})\\
+  \xstep{\mathtt{RD}} &(\flower{a}{(\flower{}{(\flower{b}{b})})})
+  \\[1em]\hline\\
+  \xstep{\mathtt{P}} &(\flower{a}{(\flower{}{(\flower{b}{\garden{}{}})})})\\
+  \xstep{\mathtt{RD}} &
+  \end{array}
+  \and
+  \begin{array}{rl}
+  &(\flower{(\flower{}{a\sep b})}{(\flower{}{b\sep a})})
+  \\[1em]\hline\\
+  \xstep{\mathtt{P}} &(\flower{(\flower{}{a\sep b})}{(\flower{}{b\sep a})})\\
+  \xstep{\mathtt{RD}} &(\flower{}{(\flower{a}{(\flower{}{b\sep a})}), (\flower{b}{(\flower{}{b\sep a})})})
+  \\[1em]\hline\\
+  \xstep{\mathtt{P}} &(\flower{}{(\flower{a}{(\flower{}{b\sep \garden{}{}})}), (\flower{b}{(\flower{}{\garden{}{}\sep a})})})\\
+  \xstep{\mathtt{RD}} &
+  \end{array}
+\end{mathpar}
