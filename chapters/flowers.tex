@@ -1382,10 +1382,9 @@ Kripke structures, detailed hereafter by order of importance:
     study of analyticity. Thus our first attempt was to devise an
     \emph{external} syntactic procedure, based on the simulation of a cut-free
     sequent calculus as in \sidecite{tiu_local_2006}; and we do have a working,
-    verified implementation of this procedure in Coq (see
-    \cite{flowers-metatheory} and \refsec{app:flowers-coq}). However, we
-    realized \textit{a posteriori} that this only proves a weak form of
-    completeness, in the sense that we only guarantee that a true flower is
+    verified implementation of this procedure in Coq \cite{flowers-metatheory}.
+    However, we realized \textit{a posteriori} that this only proves a weak form
+    of completeness, in the sense that we only guarantee that a true flower is
     provable if it is the direct translation of a symbolic formula. But formulas
     are based on binary connectives and unary quantifiers, and are thus less
     expressive syntactically than flowers and their $n$-ary constructs.
@@ -2837,7 +2836,7 @@ We have implemented the \refproc{life} procedure in the OCaml programming
 language \cite{flower-auto}. In fact, we refined the design of the algorithm
 iteratively, by testing it on a set of 62 tautologies taken from Edukera's logic
 course \cite{edukera} (the full set is available in
-\reffig{app:flowers-edukera}). Since those are expressed with symbolic formulas,
+\reffig{flowers-edukera}). Since those are expressed with symbolic formulas,
 we rely on a straightforward translation of formulas into (bouquets of) flowers,
 given in \reffig{flowers-formulas}. Out of the 62 tautologies, 53 were proved by
 the algorithm, and among the 9 unproved tautologies, only the 2 formulas
@@ -2903,6 +2902,12 @@ of RAM to find a proof of the following formula (problem \texttt{SYJ107+1004}):
   \land ~&(b1 \limp ((b2 \lor a2) \lor b2))) \land (b2 \limp ((b3 \lor a3) \lor b3))) \land a4)\\
   \limp ~&(a \lor ((b \land a1) \lor ((b1 \land a2) \lor ((b2 \land a3) \lor (b3 \land a4))))))
 \end{align*}
+
+\begin{figure*}
+  \input{figures/flowers-edukera.tex}
+  \caption{Testing dataset of tautologies from Edukera}
+  \labfig{flowers-edukera}
+\end{figure*}
 
 \section{The Flower Prover}\labsec{flowers-prover}
 
