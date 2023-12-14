@@ -135,9 +135,6 @@ envision.
 % interface, and leave a more systematic proposal for future work.
 
 
-\todo{Make all usages of notations consistent with \reftab{letters}}
-
-
 \section{Intuitionistic existential graphs}\labsec{IEG}
 
 \paragraph{The Scroll}
@@ -2926,13 +2923,24 @@ of GUI in the Proof-by-Action paradigm based on the direct manipulation of
 flowers, that builds upon the various concepts, rules and metatheory of the
 previous sections.
 
+\begin{remark}
+Currently, the Flower Prover only handles propositional flowers with empty
+sprinklers.
+\end{remark}
+
 \paragraph{Implementation}
 
 The prototype is implemented in Elm \sidecite{10.1145/2491956.2462161}, a modern
 functional reactive programming language that is particularly well-suited for
 building GUI that are based on complex compositional data-structures like
 flowers. It also natively compiles to HTML and JavaScript, making it easy to run
-and test the interface on any device equipped with a web browser.
+and test the interface on any device equipped with a web browser. The source
+code is available on GitHub \cite{flower-prover}, and the interface is currently
+hosted online as a simple HTML
+page\sidenote{\url{https://www.lix.polytechnique.fr/Labo/Pablo.DONATO/flowerprover/}}.
+The reader is invited to try out the Flower Prover in her own browser, although
+we will try to give self-contained explanations illustrated through various
+screenshots.
 
 \paragraph{Originality}
 
@@ -2968,6 +2976,189 @@ Flower Prover is highly original in mainly two respects:
   reinvention of our means of interaction with formal proofs, that is more in
   phase with contemporary usages of digital devices.
 \end{itemize}
+
+\begin{figure*}
+  \includegraphics[width=0.7\textwidth]{flower-prover-proof-mode}
+  \hspace{1em}
+  \includegraphics[width=0.7\textwidth]{flower-prover-edit-mode}
+  \caption{Proof mode (left) and Edit mode (right) of the Flower Prover}
+  \labfig{flowers-prover-modes}
+\end{figure*}
+
+\paragraph{Modal interface}
+
+The Flower Prover is organized in two main \emph{modes} of interaction,
+providing different sets of available actions to the user\sidenote{Another
+example of modal interface is the popular text editor \texttt{vim}, with its
+\emph{normal} mode for high-level manipulation of text through commands and
+macros, and its \emph{edit} mode for low-level insertion and deletion of
+characters.}:
+\begin{itemize}
+  \item[\textbf{Proof mode}] \todo{TODO}
+  \item[\textbf{Edit mode}] \todo{TODO}
+\end{itemize}
+At any point during a proof, the user can switch between the two modes by
+clicking on the corresponding button in the \emph{mode selection bar}, located
+at the bottom of the screen (\reffig{flowers-prover-modes}): the proof and edit
+modes are mapped respectively to the left button with a checkmark icon, and the
+middle button with a pencil icon.
+
+\paragraph{Proof mode}
+
+\todo{Describe every action}
+\todo{Example of proof trace with screenshots}
+
+\paragraph{Edit mode}
+
+\todo{Describe every action}
+
+\paragraph{Navigation mode}
+
+The reader might have noticed that there is a third, right button with a
+navigation icon in the mode selection bar. It can be used to enter
+\emph{navigation mode}, the last mode of interaction that we intend to implement
+in the future. The idea is that on real-life goals, both the size and level of
+nesting of flowers will quickly render the interface unusable, both for
+reading/understanding the content and structure of goals, and manipulating them
+through pointing.
+
+The purpose of the navigation mode is then to enable the user to \emph{focus} on
+a specific subgoal, by simply clicking on the corresponding nested flower. This
+would make the subgoal take up the whole screen, hiding the outer context from
+view. Dually, it should also be possible to unfocus a previously focused subgoal
+--- e.g. by clicking again, so that the full tree structure of the goal can be
+freely navigated.
+
+This way of navigating tree structures represented as nested areas is typical of
+\emph{zoomable user interfaces} or ZUI, a strand of GUI that has been developed
+by many pioneers in the field of human-computer interaction such as Ivan
+Sutherland in its Sketchpad system \sidecite{10.1145/800265.810742}, and Alan
+Kay in its Smalltalk system \sidecite{goldberg_smalltalk-72_1976}.
+
+\paragraph{Automation}
+
+\todo{ Describe our current automation as a simple fixpoint applying all the
+  applicable actions according to a set of rules. Thus the user could tune the
+  level of automation by customizing the set of rules.}
+
+\todo{ Possibility to apply automation systematically after each action, or
+  manually by clicking on a button.}
+
+\todo{ Proof trace for the same goal as before, but with default automation
+  turned on.}
+
+\todo{ Idea of reducing a proof to a set of DnD pollinations + Case reasoning
+with \rsf{srep}. }
+
+\paragraph{Theories and goals}
+
+In the so-called ``proof view'' or ``goal view'' of modern proof assistants like
+Coq and Lean, there is no distinction between local and global contexts: a
+subgoal will inherit automatically every hypothesis from its parent subgoals,
+which are flattened into a big unstructured list. To recreate this distinction
+and reduce the size of goals to a manageable level, the only interface mechanism
+offered to the user is to exit interactive proof mode, and outsource chunks of
+the local context as additional global lemmas and definitions in the current
+theory file.
+
+Thus the user has to juggle between two different interfaces that manipulate two
+distinct data structures: a traditional text editor for modifying
+\emph{theories}, and an IDE for writing and executing proof scripts that modify
+\emph{goals}, themselves visualized in a separate proof view. This results in a
+duplication of means to achieve essentially the same things: for instance,
+reordering two lemmas will require to cut and paste one of them in the theory
+file, while reordering two hypotheses will require the use of a dedicated
+\texttt{move} tactic. Other examples can be found for renaming definitions,
+applying lemmas, constructing functions, etc.
+
+Crucially, the two interfaces cannot communicate straightforwardly with
+eachother. In fact, communication is completely one-way: the user can only
+invoke definitions and lemmas from the theory in her proof script, by referring
+to their names.
+
+\paragraph{Statements and proofs}
+
+Our above example targets imperative tactic languages, but the argument equally
+applies to more declarative languages like Isar in Isabelle: the point is that
+the \emph{proof} language, be it imperative or declarative, is separated both
+conceptually and through its available means of interaction from the language of
+\emph{statements} used to build theories. And this separation between proofs and
+statements is a natural one that is hard to question, since it is rooted in what
+is arguably the most important inspiration of formal logic, and also the form in
+which informal mathematics present themselves: \emph{natural language}. Indeed,
+symbolic formulas reproduce the grammatical structure of sentences expressing
+logical propositions, and proofs reproduce the inferential structure of
+arguments built from sequences of sentences.
+
+\paragraph{Diagrams}
+
+However, there is an increasing number of areas in mathematics --- the most
+prominent one being category theory --- where the heart of a proof lies in the
+dynamical construction of a \emph{diagram} capturing the structure of interest
+in given mathematical objects. The natural language proof text is often just a
+mean to explicit the meaning or intuition behind the diagrammatic manipulations,
+or simply a retranscription of the commentary that the mathematician would give
+when unfolding the construction on a blackboard. If one views logic as one
+particular type of mathematical reasoning --- albeit one that is omnipresent in
+all branches of mathematics, then it is only natural to expect that some
+diagrammatic system should exist for it, that can express in the most natural
+way most (if not all) logical arguments. This is the \emph{iconicity} thesis of
+Peirce, and what we are aiming for with the Flower Prover.
+
+\paragraph{Context navigation}
+
+After this little conceptual \textit{aparté}, let us come back to the problem of
+managing contexts in proofs. In the Flower Prover, the \emph{local} context is
+naturally represented as \emph{everything that is displayed on-screen}. This
+includes hypotheses that are available from pistils at various levels, but also
+potentially alternative goals (adjacent petals) and further subgoals (positively
+nested flowers). Then rather than being segregated in a separate interface (the
+text buffer of the theory), the \emph{global} context is simply the
+\emph{entire} goal. In fact, there is no reason anymore to make a terminological
+distinction between goals and theories: a goal is just a theory that has yet to
+be justified, which can itself be identified with a partial proof (or a ``proof
+term with holes'' in type theory)\sidenote{We will come back to this idea of
+merging proofs and statements in the same data structure in the conclusion, when
+discussing \emph{development calculi}. Note however that it is already at the
+heart of \emph{dependent} type theory, where terms can freely occur inside
+types.}.
+
+It would still be useful to be able to aggregate automatically the set of all
+lemmas and definitions (i.e. hypotheses) available in a focused subgoal
+$\Phi\select{\phi}$, so that the user does not need to navigate up and down the
+goal tree all the time. This can be done with the help of the pollination
+relation (\refdef{pollination}), by taking the union $\Psi =
+\compr{\psi}{\chyp{\psi}{\Phi\hole}}$.
+
+In terms of UI, we could then add a ``shelf'' displayed in all interaction
+modes, that exposes the global context $\Psi$ of the current focus $\Phi\hole$.
+We anticipate only two kinds of interaction with the shelf:
+\begin{itemize}
+  \item[\textbf{Pollination}] \todo{TODO}
+  \item[\textbf{Jump to definition}] \todo{TODO}
+\end{itemize}
+
+Since the shelf might contain \emph{a lot} of hypotheses, it will be important
+to provide efficient ways to \emph{filter} or \emph{search} through its content.
+We imagine three main ways to do so:
+\begin{itemize}
+  \item[\textbf{By name}] the user can type the \emph{name} of a hypothesis in a
+  search bar. This implies that flowers have the ability to be named by the
+  user.
+  \item[\textbf{By structure}] the user can specify a \emph{pattern} that must
+  be satisfied by all hypotheses in the shelf. A pattern is just a flower that
+  contains pattern variables, which can match any flower. Thus patterns might be
+  built with the same tools offered in Edit mode.
+  \item[\textbf{By selection}] the user can select subterms of the goal, and
+  then ask the system to display only hypotheses that can \emph{interact} with
+  these subterms. Here we imagine something along the lines of what we did for
+  Actema (\refsec{funcs}).
+\end{itemize}
+
+\begin{remark}
+  The first two types of filtering are already available in most proof
+  assistants, i.e. the \texttt{Search} command of Coq.
+\end{remark}
 
 % \section{Towards a Curry-Howard correspondence}\labsec{flowers-curryhoward}
 
