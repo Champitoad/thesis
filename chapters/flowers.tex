@@ -1123,9 +1123,9 @@ two kinds of derivations, stemming from our partitioning of the rules into two
 sets: the \emph{natural} rules denoted by $\Nature$, and the \emph{cultural}
 rules denoted by $\Culture$. In particular, every $\Nature$-rule is both
 \emph{analytic} (i.e. every atom in the premiss already appears in the
-conclusion) and \emph{invertible} (this will be shown in \refsec{Soundness});
-and we will prove in \refsec{Completeness} that all $\Culture$-rules are
-\emph{admissible}.
+conclusion) and \emph{invertible} (this will be shown in \refsec{Soundness}); on
+the contrary, all $\Culture$-rules are \emph{non-invertible}, and they will be
+shown to be \emph{admissible} in \refsec{Completeness}.
 
 \begin{definition}[Derivation]
   Given a set of rules $\mathsf{R}$, we write $\Phi \step_{\mathsf{R}} \Psi$ to
@@ -2911,10 +2911,10 @@ of RAM to find a proof of the following formula (problem \texttt{SYJ107+1004}):
 \paragraph{Proof-by-Action}
 
 While having a complete and efficient proof search procedure is a nice
-desideratum, our focus in this thesis is not so much on full automation ---
-which is not possible anyway as soon as we leave the propositional fragment, but
-rather on automation that integrates well with, and even improves the experience
-of building proofs \emph{interactively}. More specifically, the paradigm of
+desideratum, our focus in this thesis is not on full automation --- which is not
+possible anyway as soon as we leave the propositional fragment, but rather on
+automation that integrates well with, and even improves the experience of
+building proofs \emph{interactively}. More specifically, the paradigm of
 interaction we are interested in is that of \emph{direct manipulation} in a GUI.
 This was our initial motivation for studying the graphical formalism of EG, and
 we always kept this objective in mind when developing the flower calculus. In
@@ -2977,63 +2977,219 @@ Flower Prover is highly original in mainly two respects:
   phase with contemporary usages of digital devices.
 \end{itemize}
 
+\subsection{Interaction principles}
+
 \begin{figure*}
   \includegraphics[width=0.7\textwidth]{flower-prover-proof-mode}
   \hspace{1em}
   \includegraphics[width=0.7\textwidth]{flower-prover-edit-mode}
-  \caption{Proof mode (left) and Edit mode (right) of the Flower Prover}
+  \caption{\Proof mode (left) and \Edit mode (right) of the Flower Prover}
   \labfig{flowers-prover-modes}
 \end{figure*}
 
 \paragraph{Modal interface}
 
 The Flower Prover is organized in two main \emph{modes} of interaction,
-providing different sets of available actions to the user\sidenote{Another
-example of modal interface is the popular text editor \texttt{vim}, with its
-\emph{normal} mode for high-level manipulation of text through commands and
-macros, and its \emph{edit} mode for low-level insertion and deletion of
-characters.}:
+providing different sets of direct manipulation actions on the
+goal\sidenote{Another example of modal interface is the popular text editor
+\texttt{vim}, with its \emph{normal} mode for high-level manipulation of text
+through commands and macros, and its \emph{edit} mode for low-level insertion
+and deletion of characters.}:
 \begin{itemize}
-  \item[\textbf{Proof mode}] \todo{TODO}
-  \item[\textbf{Edit mode}] \todo{TODO}
+  \item[\textbf{\Proof mode}] this is the main mode, where goals can be proved by
+  reducing them to the empty bouquet $\emptyset$. It corresponds in purpose to
+  the interactive proof mode of modern proof assistants like Coq, Lean and
+  Isabelle, and to the interactive proof view of Actema.
+  % Indeed, every action in this mode is performed by direct manipulation of
+  % flowers through pointing interactions: either clicking on empty areas/gardens,
+  % or dragging and dropping flowers into gardens.
+  As will be detailed shortly, there is almost a one-to-one correspondence
+  between \Proof actions, and the $\Nature$-rules of the flower calculus.
+  \item[\textbf{\Edit mode}] in this mode, the user can construct arbitrary
+  flowers by clicking on buttons and filling text fields, or modify the goal by
+  clicking and dragging flowers around. It corresponds in purpose to the text
+  editor used for writing theories in the \emph{vernacular} language of a proof
+  assistant\sidenote{The term ``vernacular'' was used for the first time in the
+  context of proof assistants by the founder of the field, N. G. de Bruijn
+  \cite{de_bruijn_mathematical_1994}.}. \Edit actions implement exactly the
+  $\Culture$-rules of the flower calculus.
 \end{itemize}
-At any point during a proof, the user can switch between the two modes by
-clicking on the corresponding button in the \emph{mode selection bar}, located
-at the bottom of the screen (\reffig{flowers-prover-modes}): the proof and edit
-modes are mapped respectively to the left button with a checkmark icon, and the
-middle button with a pencil icon.
 
-\paragraph{Proof mode}
+\begin{remark}
+  A nice analogy for these two modes can be found in the video game
+  \emph{Minecraft}: the \emph{survival} mode, where the player has to gather and
+  craft resources to survive, corresponds to the \Proof mode, where the user has
+  to combine and justify existing statements with the analytic $\Nature$-rules;
+  while the \emph{creative} mode, where the player can build and destroy
+  anything instantly with unlimited resources, corresponds to the \Edit mode,
+  where the user can insert or delete arbitrary flowers with the (synthetic?)
+  $\Culture$-rules.
+\end{remark}
 
-\todo{Describe every action}
-\todo{Example of proof trace with screenshots}
+\reffig{flowers-prover-modes} shows side-by-side the same goal representing the
+flower $\flower{(\flower{a}{c}),(\flower{b}{c})}{(\flower{(\flower{}{a \sep
+b})}{c})}$, but viewed through the two different modes. At any point during a
+proof, the user can switch between the two modes by clicking on the
+corresponding button in the \emph{mode selection bar}, located at the bottom of
+the screen: \Proof and \Edit modes are mapped respectively to the left button with
+a checkmark icon, and the middle button with a pencil icon.
 
-\paragraph{Edit mode}
+It is also possible to \emph{undo/redo} any action, whichever mode it was done
+in, by clicking on the corresponding buttons located on the bottom-right corner
+of the screen. This is implemented by a simple stack recording the entire state
+of the application, that is updated every time the user performs an action, and
+popped/pushed when the user clicks on the undo/redo buttons. Since the
+application state includes the current interaction mode, undoing/redoing an
+action will automatically switch to the mode in which the action was performed.
 
-\todo{Describe every action}
+\paragraph{\Proof actions}
 
-\paragraph{Navigation mode}
+\begin{table*}[h]
+  \input{figures/flowers-actions.tex}
+  \caption{Graphical actions of the Flower Prover}
+  \labfig{flowers-actions}
+\end{table*}
 
-The reader might have noticed that there is a third, right button with a
-navigation icon in the mode selection bar. It can be used to enter
-\emph{navigation mode}, the last mode of interaction that we intend to implement
+\begin{figure*}[h]
+  \input{figures/flowers-prover-anim.tex}
+  \caption{A sequence of \Proof actions in the Flower Prover}
+  \labfig{flowers-prover-anim}
+\end{figure*}
+
+\reftab{flowers-proof-actions} shows the precise mapping of \Proof actions to
+$\Nature$-rules, together with the associated gestures for triggering them; and \reffig{flowers-prover-anim} shows a sequence of screenshots of the
+Flower Prover, capturing the execution of a sequence of \Proof actions reducing
+the subgoal $\flower{(\flower{}{a \sep b})}{c}$ to $\flower{b}{c}$. A few
+comments are in order:
+
+\begin{itemize}
+  \item[\textbf{Pollination}] The most central actions are those implementing
+  the pollination rules \rsf{poll{\da}} and \rsf{poll{\ua}}, called respectively
+  \action{Justify} and \action{Import}. In fact, they are \emph{less} general
+  than those rules: one can only \action{Justify} flowers that are \emph{atomic}
+  by clicking on them, and \action{Import} \emph{non-atomic} flowers by dragging
+  and dropping them at the desired location. We conjecture that these
+  restrictions do not jeopardize the completeness of $\Nature$-rules, and
+  correspond to the process of $\eta$-expansion in $\lambda$-calculus.
+  
+  \item[\textbf{Suggestions}]
+  
+  The fourth screenshot in \reffig{flowers-prover-anim} shows the flower $\phi
+  \deq \flower{a}{c}$ being dragged in the process of an \action{Import} action.
+  If you look closely, you will notice that there are many areas whose border is
+  highlighted with dashed yellow lines: these correspond to all contexts
+  $\Xi\hole$ where $\phi$ can be imported, i.e. such that
+  $\chyp{\phi}{\Xi\hole}$. This is a first form of \emph{suggestion} in the
+  Flower Prover, indicating available valid actions to the user through visual
+  feedback\sidenote{A similar mechanism is implemented in Actema, where subterms
+  that are possible drop targets for DnD actions are also highlighted (see
+  \refsec{validity}).}.
+
+  In fact, every \Proof action has an associated visual cue, guiding interactive
+  proof search by suggesting to the user areas of the goal where she might want
+  to focus her attention. Since every action other than \action{Import} is
+  performed by a \emph{click} gesture, the area that is highlighted corresponds
+  precisely to the area that can be clicked for triggering the action: either a
+  green box enclosing the justifiable atom for \action{Justify} actions, an
+  orange box covering the empty pistil for \action{EFQ}, \action{Case} and
+  \action{Unlock} actions, or a green box covering the empty petal for
+  \action{QED} actions.
+  
+  \item[\textbf{Fencing}] We have already mentioned that we suspect that the
+  \rsf{epis} rule might be admissible. However if it is not, one needs a
+  corresponding graphical action in \Proof mode. While it is currently not
+  implemented, we plan to add a \emph{selection} mechanism that allows the user
+  to select a set of flowers in the goal. Then, we could add a \action{Fence}
+  action, whose effect is to enclose the selected flowers in a petal attached to
+  an empty pistil. This action could be mapped to a dedicated button in the
+  toolbar that is visible only in \Proof mode, and enabled only when the
+  selected flowers are juxtaposed in the same garden.
+\end{itemize}
+
+Since every \Proof action implements a $\Nature$-rule, it is guaranteed to be
+\emph{invertible}: the user never needs to undo a \Proof action in order to
+complete a proof, because it always preserves the provability of the goal. Of
+course it might still be desirable to do so in specific cases, such as
+\action{Import} actions that may create unneeded copies of flowers\sidenote{In
+this specific case, one might want to relax the atomic restriction on
+\action{Justify} actions, in order to avoid the recourse to \action{Undo}
+actions, which can only be performed at the top of the history stack.}.
+
+\paragraph{\Edit actions}
+
+\reftab{flowers-edit-actions} shows the precise mapping of \Edit actions to
+$\Culture$-rules, together with the associated gestures for triggering them.
+Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
+\emph{delete} arbitrary flowers in the goal:
+\begin{itemize}
+  \item[\textbf{Insertion}] The main interface mechanism that is currently
+  implemented is the \texttt{Add} button: since the \rsf{grow} rule allows to
+  insert any flower in a positive bouquet (i.e. add a new subgoal, just like the
+  cut rule in sequent calculus), we expose buttons in all the corresponding
+  areas (blue ``+'' buttons in \reffig{flowers-prover-modes}), that can be
+  clicked to insert a new flower precisely at the location of the button. There
+  are two usage scenarios:
+  \begin{itemize}
+    \item if the user wants to insert an atomic flower, she can enter the name
+    of the atom in a text field placed above the button. Clicking on the button
+    will then insert an occurrence of this atom accordingly;
+    \item if the user wants to insert a non-atomic flower, she can leave the
+    text field empty. Clicking on the button will then insert an empty flower
+    with a single petal.
+  \end{itemize}
+  In both cases, the inserted flower is marked internally by the Flower Prover
+  with a \texttt{grown} tag: this means that as long as the user does not leave
+  \Edit mode, she can perform arbitrary insertions and deletions inside of the
+  grown flower, disregarding any polarity constraint.
+  
+  Dually, the \rsf{glue} rule is implemented by exposing \texttt{Add} buttons in
+  all negative corollas: those have the effect of growing a new empty petal,
+  that can be further edited through arbitrary insertions and deletions.
+
+  Grown flowers/petals are distinguished visually by having their border painted
+  in blue. Leaving \Edit mode then has the effect of \emph{committing} every
+  \Edit action, i.e. removing every \texttt{grown} tag in the entire goal. This
+  mechanism enables an incremental, step-by-step construction of flowers, that
+  is still sound logically with respect to $\Culture$-rules.
+
+  \item[\textbf{Deletion}] Deleting flowers and petals is a more straightforward
+  process: one just has to click on the corresponding area, which is highlighted
+  in red. To avoid overlap, the area of a flower is identified with that of its
+  pistil. Thus areas subject to deletion are negative atoms and flowers
+  (\rsf{crop} rule), positive petals (\rsf{pull} rule), as well as any area
+  marked as \texttt{grown}.
+\end{itemize}
+
+Since every \Edit action implements a $\Culture$-rule, it is guaranteed to be
+\emph{non-invertible}: the user might need to undo an \Edit action in order to
+complete a proof, because it may break the provability of the goal.
+
+\paragraph{\Navigation mode}
+
+The reader might have noticed that there is a third button with a navigation
+icon on the right of the mode selection bar. It can be used to enter
+\emph{\Navigation mode}, the last mode of interaction that we intend to implement
 in the future. The idea is that on real-life goals, both the size and level of
 nesting of flowers will quickly render the interface unusable, both for
 reading/understanding the content and structure of goals, and manipulating them
 through pointing.
 
-The purpose of the navigation mode is then to enable the user to \emph{focus} on
+The purpose of the \Navigation mode is then to enable the user to \emph{focus} on
 a specific subgoal, by simply clicking on the corresponding nested flower. This
 would make the subgoal take up the whole screen, hiding the outer context from
 view. Dually, it should also be possible to unfocus a previously focused subgoal
---- e.g. by clicking again, so that the full tree structure of the goal can be
-freely navigated.
+--- e.g. by clicking again on it, so that the full tree structure of the goal
+can be freely navigated. Proof-theoretically, the \Navigation mode implements the
+\emph{functoriality} of rules, i.e. the fact that they can be applied in
+contexts of \emph{arbitrary} depth.
 
+\begin{remark}
 This way of navigating tree structures represented as nested areas is typical of
 \emph{zoomable user interfaces} or ZUI, a strand of GUI that has been developed
 by many pioneers in the field of human-computer interaction such as Ivan
 Sutherland in its Sketchpad system \sidecite{10.1145/800265.810742}, and Alan
 Kay in its Smalltalk system \sidecite{goldberg_smalltalk-72_1976}.
+\end{remark}
 
 \paragraph{Automation}
 
@@ -3049,6 +3205,8 @@ Kay in its Smalltalk system \sidecite{goldberg_smalltalk-72_1976}.
 
 \todo{ Idea of reducing a proof to a set of DnD pollinations + Case reasoning
 with \rsf{srep}. }
+
+\subsection{Towards a unified workflow}
 
 \paragraph{Theories and goals}
 
@@ -3069,26 +3227,39 @@ duplication of means to achieve essentially the same things: for instance,
 reordering two lemmas will require to cut and paste one of them in the theory
 file, while reordering two hypotheses will require the use of a dedicated
 \texttt{move} tactic. Other examples can be found for renaming definitions,
-applying lemmas, constructing functions, etc.
+applying lemmas, constructing functions, etc. Crucially, the two interfaces
+cannot communicate straightforwardly with eachother. In fact, communication is
+completely one-way: the user can only invoke definitions and lemmas of the
+theory from her proof script, by referring to their names.
 
-Crucially, the two interfaces cannot communicate straightforwardly with
-eachother. In fact, communication is completely one-way: the user can only
-invoke definitions and lemmas from the theory in her proof script, by referring
-to their names.
+The Flower Prover can theoretically solve this divide, because it works on a
+single data structure: flowers represent \emph{at the same time} the current
+goal to be proved in \Proof mode, and the theories that are being built in \Edit
+mode. Thus there are still two distinct modes/interfaces, but they work in
+unison on the same data. The only (major) current limitation, is that we do not
+have any way to \emph{save} proved lemmas for later reuse, because proving a
+flower amounts to \emph{erasing} it from the current goal. In a sense, theories
+built in \Edit mode are only \emph{transient}: they live in \emph{working}
+memory, and are disposed of as soon as they become justified in \Proof mode;
+while we would like them to be \emph{persistent}, recorded in \emph{long-term}
+memory along with their justifications (which would stay hidden from the user by
+default). We will discuss in \refsec{Conclusion} some research directions that
+we envision to achieve the latter. 
 
 \paragraph{Statements and proofs}
 
-Our above example targets imperative tactic languages, but the argument equally
-applies to more declarative languages like Isar in Isabelle: the point is that
-the \emph{proof} language, be it imperative or declarative, is separated both
-conceptually and through its available means of interaction from the language of
-\emph{statements} used to build theories. And this separation between proofs and
-statements is a natural one that is hard to question, since it is rooted in what
-is arguably the most important inspiration of formal logic, and also the form in
-which informal mathematics present themselves: \emph{natural language}. Indeed,
-symbolic formulas reproduce the grammatical structure of sentences expressing
-logical propositions, and proofs reproduce the inferential structure of
-arguments built from sequences of sentences.
+Our above example of ``redundant'' manipulations targets imperative tactic
+languages, but the argument equally applies to more declarative languages like
+Isar in Isabelle: the point is that the \emph{proof} language, be it imperative
+or declarative, is separated both conceptually and through its available means
+of interaction from the language of \emph{statements} used to build theories.
+And this separation between proofs and statements is a natural one that is hard
+to question, since it is rooted in what is arguably the most important
+inspiration of formal logic, and also the form in which informal mathematics
+present themselves: \emph{natural language}. Indeed, symbolic formulas reproduce
+the grammatical structure of sentences expressing logical propositions, and
+formal proofs reproduce the inferential structure of arguments built from
+sequences of sentences.
 
 \paragraph{Diagrams}
 
@@ -3126,13 +3297,13 @@ occur inside types.}.
 It would still be useful to be able to aggregate automatically the set of all
 lemmas and definitions (i.e. hypotheses) available in a focused subgoal
 $\Phi\select{\phi}$, so that the user does not need to navigate up and down the
-goal tree all the time. This can be done with the help of the pollination
-relation (\refdef{pollination}), by taking the union $\Psi =
+goal/proof tree all the time. This can be done with the help of the pollination
+relation (\refdef{pollination}), by taking the union $\Psi \deq
 \compr{\psi}{\chyp{\psi}{\Phi\hole}}$.
 
-In terms of UI, we could then add a ``shelf'' displayed in all interaction
-modes, that exposes the global context $\Psi$ of the current focus $\Phi\hole$.
-We anticipate only two kinds of interaction with the shelf:
+In terms of UI, we could then add a so-called \emph{shelf} displayed in all
+interaction modes, that exposes the global context $\Psi$ of the current focus
+$\Phi\hole$. We anticipate only two kinds of interaction with the shelf:
 \begin{itemize}
   \item[\textbf{Pollination}] \todo{TODO}
   \item[\textbf{Jump to definition}] \todo{TODO}
@@ -3140,7 +3311,7 @@ We anticipate only two kinds of interaction with the shelf:
 
 Since the shelf might contain \emph{a lot} of hypotheses, it will be important
 to provide efficient ways to \emph{filter} or \emph{search} through its content.
-We imagine three main ways to do so:
+We imagine three main ways of doing so:
 \begin{itemize}
   \item[\textbf{By name}] the user can type the \emph{name} of a hypothesis in a
   search bar. This implies that flowers have the ability to be named by the
@@ -3148,11 +3319,11 @@ We imagine three main ways to do so:
   \item[\textbf{By structure}] the user can specify a \emph{pattern} that must
   be satisfied by all hypotheses in the shelf. A pattern is just a flower that
   contains pattern variables, which can match any flower. Thus patterns might be
-  built with the same tools offered in Edit mode.
+  built with the same tools offered in \Edit mode.
   \item[\textbf{By selection}] the user can select subterms of the goal, and
   then ask the system to display only hypotheses that can \emph{interact} with
   these subterms. Here we imagine something along the lines of what we did for
-  Actema (\refsec{funcs}).
+  Actema (see \refsec{funcs}).
 \end{itemize}
 
 \begin{remark}
@@ -3364,6 +3535,21 @@ reduces the pratical interest of the whole endeavor, since the \rsf{crep} rule
 does not look particularly well-suited to either automated or interactive
 theorem proving.
 
+Another line of research would concern properties of \emph{locality}, in the
+sense coined by the deep inference community with systems like \sys{SKS} (see
+\refsec{eg-completeness}). As mentioned in \refsec{flowers-prover}, we
+conjecture that the \rsf{poll{\da}} and \rsf{poll{\ua}} rules can be restricted
+respectively to atomic and non-atomic flowers.
+
+Lastly, it would be interesting to exhibit an \emph{internal}, syntactic
+procedure for eliminating cultural $\Culture$-rules in proofs, just like Gentzen
+showed cut-elimination in sequent calculus\sidenote{A sort of
+\emph{cult}-elimination, if you would like.}. In this work we preferred a more
+semantic approach, because it was simpler and at the right level of abstraction
+for our needs. We might be able to take some inspiration from the
+cut-elimination proofs of deep inference proof systems like the calculus of
+structures, which are indeed notoriously involved.
+
 \paragraph{Automated proof search}
 
 We shall investigate the current sources of non-termination and incompleteness
@@ -3376,12 +3562,6 @@ heuristics for handling sprinklers, thus losing completeness.
 Another direction of research would consist in comparing our algorithm to
 existing search procedures for EG, in particular one that was originally
 developed by Peirce, and described by Oostra in \sidecite{oostra_advances_2022}.
-
-\paragraph{Flower Prover}
-
-Implement the navigation mode in the Flower Prover, and
-design GUI mechanisms that support relational reasoning with sprinklers, based
-on the rules \rsf{ipis}, \rsf{ipet} and \rsf{apis}, \rsf{apet}.
 
 \paragraph{Curry Howard}
 
@@ -3467,6 +3647,20 @@ possibility to have \emph{negative} occurrences of sequents. Combined with the
 dependently-typed \texttt{Box}es of Ayers mentioned earlier (which cannot be
 nested negatively), this should provide great insights for the powerful,
 dependently-typed version of the flower calculus that we seek for.
+
+\paragraph{Flower Prover}
+
+\begin{itemize}
+  \item[\textbf{\Navigation mode}]
+  \item[\textbf{Sprinklers}] GUI mechanisms that support first-order relational
+reasoning with sprinklers, based on the rules \rsf{ipis}, \rsf{ipet} and
+\rsf{apis}, \rsf{apet}.
+  \item[\textbf{Selection}]
+  \item[\textbf{Enclosure} (\rsf{epis} rule)]
+  \item[\textbf{Shelf}]
+  \item[\textbf{Proof terms}]
+\end{itemize}
+
 
 \subsection{Theory vs. Practice}
 

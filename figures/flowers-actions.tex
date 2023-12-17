@@ -1,0 +1,37 @@
+\def\arraystretch{1.5}
+
+
+% \hspace{-8em}
+\subfloat[\Proof actions\labtab{flowers-proof-actions}]{
+% \hspace{-0.1\textwidth}
+\begin{tabular}{|c|C{5em}|C{11em}|}
+\hline
+\textbf{Action} & \textbf{Gesture} & \textbf{$\Nature$-rule} \\ \hline
+\action{Justify} & Click on $a$ & $$\R[\rsf{poll{\da}}]{\Xi\select{\phantom{a}}}{\Xi\select{a}}$$ \\ \hline
+\action{Import} & DnD of $\phi$ into $\Xi\hole$ & $$\prftree[l][r]{\rsf{poll{\ua}}}{$\phi$ non-atomic}{\Xi\select{\phi}}{\Xi\select{\phantom{\phi}}}$$ \\ \hline
+\action{QED} & Click on empty petal & $$\R[\rsf{epet}]{}{\flower{\gamma}{\garden{}{} \sep \Delta}}$$ \\ \hline
+\action{EFQ} & Click on empty pistil &
+$$
+\R[\rsf{srep}]
+{\R[\rsf{epet}]
+{}
+{\flower{\Phi}{\cdot}}}
+{\flower{\Phi, (\flower{\garden{}{}}{})}{\Delta}}
+$$
+\\ \hline
+\action{Case} & Click on empty pistil & $$\prftree[l][r]{\rsf{srep}}{$n \geq 2$}{\flower{\Phi}{\fset{i}{n}{\flower{\gamma_i}{\Delta}}}}{\flower{\Phi, (\flower{\garden{}{}}{\fset{i}{n}{\gamma_i}})}{\Delta}}$$ \\ \hline
+\action{Unlock} & Click on empty pistil & $$\R[\rsf{epis{\da}}]{\flower{\Phi, \Psi}{\Delta}}{\flower{\Phi, (\flower{\garden{}{}}{\Psi})}{\Delta}}$$ \\ \hline
+\end{tabular}
+}
+\subfloat[\Edit actions\labtab{flowers-edit-actions}]{
+\begin{tabular}{|c|C{7em}|C{7em}|}
+\hline
+\textbf{Action} & \textbf{Gesture} & \textbf{$\Culture$-rule} \\ \hline
+\action{Grow} & \texttt{Add} button in positive bouquet & $$\R[\rsf{grow}]{\Xi^+\select{\flower{}{\garden{}{}}}}{\Xi^+\select{\phantom{\flower{}{\garden{}{}}}}}$$ \\ \hline
+\action{Glue} & \texttt{Add} button in negative corolla & $$\R[\rsf{glue}]{\Xi^-\select{\flower{\gamma}{\garden{}{} \sep \Delta}}}{\Xi^-\select{\flower{\gamma}{\Delta}}}$$ \\ \hline
+\action{Insert} & \texttt{Add} button in grown bouquet/corolla & \rsf{grow/glue} \\ \hline
+\action{Delete} & Click on grown flower/petal & \rsf{grow/glue} \\ \hline
+\action{Crop} & Click on negative flower & $$\R[\rsf{crop}]{\Xi^-\select{\phantom{\phi}}}{\Xi^-\select{\phi}}$$ \\ \hline
+\action{Pull} & Click on positive petal & $$\R[\rsf{pull}]{\Xi^+\select{\flower{\gamma}{\Delta}}}{\Xi^+\select{\flower{\gamma}{\delta \sep \Delta}}}$$ \\ \hline
+\end{tabular}
+}
