@@ -3132,7 +3132,7 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
   \begin{itemize}
     \item if the user wants to insert an atomic flower, she can enter the name
     of the atom in a text field placed above the button. Clicking on the button
-    will then insert an occurrence of this atom accordingly;
+    will then insert an occurrence of this atom;
     \item if the user wants to insert a non-atomic flower, she can leave the
     text field empty. Clicking on the button will then insert an empty flower
     with a single petal.
@@ -3140,7 +3140,8 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
   In both cases, the inserted flower is marked internally by the Flower Prover
   with a \texttt{grown} tag: this means that as long as the user does not leave
   \Edit mode, she can perform arbitrary insertions and deletions inside of the
-  grown flower, disregarding any polarity constraint.
+  grown flower, disregarding any polarity constraint normally imposed by
+  $\Culture$-rules.
   
   Dually, the \rsf{glue} rule is implemented by exposing \texttt{Add} buttons in
   all negative corollas: those have the effect of growing a new empty petal,
@@ -3188,23 +3189,42 @@ This way of navigating tree structures represented as nested areas is typical of
 \emph{zoomable user interfaces} or ZUI, a strand of GUI that has been developed
 by many pioneers in the field of human-computer interaction such as Ivan
 Sutherland in its Sketchpad system \sidecite{10.1145/800265.810742}, and Alan
-Kay in its Smalltalk system \sidecite{goldberg_smalltalk-72_1976}.
+Kay in its Smalltalk system \sidecite[4em]{goldberg_smalltalk-72_1976}.
 \end{remark}
 
 \paragraph{Automation}
 
-\todo{ Describe our current automation as a simple fixpoint applying all the
-  applicable actions according to a set of rules. Thus the user could tune the
-  level of automation by customizing the set of rules.}
+The last feature of the Flower Prover that we have implemented is the
+\action{Auto} \Proof action. It is similar in purpose to the \texttt{auto}
+tactic of Coq, that tries to simplify the goal by performing a limited form of
+automation. The \action{Auto} action is mapped to a dedicated button in the
+bottom-left corner of the screen, which is only enabled in \Proof mode
+(\reffig{flowers-prover-modes}).
 
-\todo{ Possibility to apply automation systematically after each action, or
-  manually by clicking on a button.}
+The idea is quite simple: since all click actions available to the user are
+pre-computed by highlighting the corresponding areas, there can only be a finite
+number of them. So why not try to apply them all automatically? Applying a click
+action might generate new ones in the resulting goal, so we have to perform this
+until a fixpoint is reached. This is very much like the \emph{reproduction} and
+\emph{decomposition} phases from the \refproc{life} procedure of
+\refsec{flowers-search}, except that we also apply the \rsf{poll{\da}} rule
+(\action{Justify} actions) wherever possible. The only \Proof action that is not
+considered is the only DnD action, \action{Import}. This is not surprising,
+since it corresponds to the \rsf{poll{\ua}} rule, which is the main source of
+complexity in the \emph{pollination} phase of the \refproc{life} procedure,
+because of its ability to duplicate flowers of arbitrary size.
 
-\todo{ Proof trace for the same goal as before, but with default automation
-  turned on.}
+In fact, one could fine-tune the level of automation by considering only a
+\emph{subset} of all types of click actions. This is already what we do by
+default, by leaving the application of \action{Case} actions to the user. This
+is motivated by the fact that the latter can induce an explosion in the size of
+the goal. One could even leave the configuration of automated action types to
+the user with a dedicated interface. This could include an additional option for
+executing \action{Auto} systematically after every (other) \Proof action,
+removing the need to click multiple times on the \action{Auto} button. In this
+setting, any proof in the Flower Prover would be reduced to a sequence of
+\action{Import} and \action{Case} actions.
 
-\todo{ Idea of reducing a proof to a set of DnD pollinations + Case reasoning
-with \rsf{srep}. }
 
 \subsection{Towards a unified workflow}
 
@@ -3303,10 +3323,13 @@ relation (\refdef{pollination}), by taking the union $\Psi \deq
 
 In terms of UI, we could then add a so-called \emph{shelf} displayed in all
 interaction modes, that exposes the global context $\Psi$ of the current focus
-$\Phi\hole$. We anticipate only two kinds of interaction with the shelf:
+$\Phi\hole$. We anticipate only two kinds of interaction with any flower $\phi$
+in the shelf:
 \begin{itemize}
-  \item[\textbf{Pollination}] \todo{TODO}
-  \item[\textbf{Jump to definition}] \todo{TODO}
+  \item[\textbf{Pollination}] the user can perform an \action{Import} action by
+  dragging $\phi$;
+  \item[\textbf{Jump to definition}] the user can focus on the subgoal where
+  $\phi$ originates by clicking on $\phi$.
 \end{itemize}
 
 Since the shelf might contain \emph{a lot} of hypotheses, it will be important
@@ -3539,7 +3562,16 @@ Another line of research would concern properties of \emph{locality}, in the
 sense coined by the deep inference community with systems like \sys{SKS} (see
 \refsec{eg-completeness}). As mentioned in \refsec{flowers-prover}, we
 conjecture that the \rsf{poll{\da}} and \rsf{poll{\ua}} rules can be restricted
-respectively to atomic and non-atomic flowers.
+respectively to atomic and non-atomic flowers. But this is less satisfying than
+in the calculus of structures, where one component of \rsf{poll{\ua}}, the
+duplicating \emph{contraction} rule, can be restricted to atomic formulas. This
+probably comes from the fact that \rsf{poll{\ua}} also serves the purpose of
+\emph{moving} flowers deeper, as witnessed by the DnD \action{Import} action of
+the Flower Prover: in the calculus of structures, this role is fulfilled by
+\emph{switch} rules, which cannot be restricted to atomic structures. The only
+solution might be to \emph{simulate} a local calculus of structures for
+intuitionistic logic, like the system \sys{ISp} of Tiu
+\sidecite{tiu_local_2006}.
 
 Lastly, it would be interesting to exhibit an \emph{internal}, syntactic
 procedure for eliminating cultural $\Culture$-rules in proofs, just like Gentzen
@@ -3547,8 +3579,8 @@ showed cut-elimination in sequent calculus\sidenote{A sort of
 \emph{cult}-elimination, if you would like.}. In this work we preferred a more
 semantic approach, because it was simpler and at the right level of abstraction
 for our needs. We might be able to take some inspiration from the
-cut-elimination proofs of deep inference proof systems like the calculus of
-structures, which are indeed notoriously involved.
+cut-elimination proofs of calculi of structures, which are indeed notoriously
+involved.
 
 \paragraph{Automated proof search}
 
@@ -3650,17 +3682,20 @@ dependently-typed version of the flower calculus that we seek for.
 
 \paragraph{Flower Prover}
 
-\begin{itemize}
-  \item[\textbf{\Navigation mode}]
-  \item[\textbf{Sprinklers}] GUI mechanisms that support first-order relational
-reasoning with sprinklers, based on the rules \rsf{ipis}, \rsf{ipet} and
-\rsf{apis}, \rsf{apet}.
-  \item[\textbf{Selection}]
-  \item[\textbf{Enclosure} (\rsf{epis} rule)]
-  \item[\textbf{Shelf}]
-  \item[\textbf{Proof terms}]
-\end{itemize}
+We have already described many features in \refsec{flowers-prover} that we
+intend to implement in the future. This includes the \Navigation mode, the
+ability to \emph{select} flowers, the \action{Fence} \Proof action, and the
+\emph{shelf} mechanism.
 
+The next step would be to support first-order reasoning by adding sprinklers and
+first-order terms, and devising graphical actions for the rules $\{\rsf{ipis},
+\rsf{ipet}\}$ in \Proof mode, and $\{\rsf{apis}, \rsf{apet}\}$ in \Edit mode.
+
+Last but not least, we want to provide a way to \emph{save} proved lemmas along
+with their proof, so that they can be reused and read statically. This will be
+crucial for \emph{proof evolution} (see \refsubsec{proof-evolution}), and will
+probably rely on the computational, dependently-typed version of the flower
+calculus sketched above, where proof terms can appear inside flowers.
 
 \subsection{Theory vs. Practice}
 
