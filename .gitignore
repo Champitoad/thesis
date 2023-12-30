@@ -5,3 +5,6 @@ src/output-buffer/**
 _minted*
 .vscode/
 *.fls
+flowers.pdf
+**/*.bak
+plan-intro.md

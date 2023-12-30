@@ -3057,17 +3057,18 @@ action will automatically switch to the mode in which the action was performed.
 \end{figure*}
 
 \reftab{flowers-proof-actions} shows the precise mapping of \Proof actions to
-$\Nature$-rules, together with the associated gestures for triggering them; and \reffig{flowers-prover-anim} shows a sequence of screenshots of the
-Flower Prover, capturing the execution of a sequence of \Proof actions reducing
-the subgoal $\flower{(\flower{}{a \sep b})}{c}$ to $\flower{b}{c}$. A few
-comments are in order:
+$\Nature$-rules, together with the associated gestures for triggering them; and
+\reffig{flowers-prover-anim} shows a sequence of screenshots of the Flower
+Prover, capturing the execution of a sequence of \Proof actions reducing the
+subgoal $\flower{(\flower{}{a \sep b})}{c}$ to $\flower{b}{c}$. A few comments
+are in order:
 
 \begin{itemize}
   \item[\textbf{Pollination}] The most central actions are those implementing
   the pollination rules \rsf{poll{\da}} and \rsf{poll{\ua}}, called respectively
-  \action{Justify} and \action{Import}. In fact, they are \emph{less} general
-  than those rules: one can only \action{Justify} flowers that are \emph{atomic}
-  by clicking on them, and \action{Import} \emph{non-atomic} flowers by dragging
+  \Action{Justify} and \Action{Import}. In fact, they are \emph{less} general
+  than those rules: one can only \Action{Justify} flowers that are \emph{atomic}
+  by clicking on them, and \Action{Import} \emph{non-atomic} flowers by dragging
   and dropping them at the desired location. We conjecture that these
   restrictions do not jeopardize the completeness of $\Nature$-rules, and
   correspond to the process of $\eta$-expansion in $\lambda$-calculus.
@@ -3075,7 +3076,7 @@ comments are in order:
   \item[\textbf{Suggestions}]
   
   The fourth screenshot in \reffig{flowers-prover-anim} shows the flower $\phi
-  \deq \flower{a}{c}$ being dragged in the process of an \action{Import} action.
+  \deq \flower{a}{c}$ being dragged in the process of an \Action{Import} action.
   If you look closely, you will notice that there are many areas whose border is
   highlighted with dashed yellow lines: these correspond to all contexts
   $\Xi\hole$ where $\phi$ can be imported, i.e. such that
@@ -3087,19 +3088,19 @@ comments are in order:
 
   In fact, every \Proof action has an associated visual cue, guiding interactive
   proof search by suggesting to the user areas of the goal where she might want
-  to focus her attention. Since every action other than \action{Import} is
+  to focus her attention. Since every action other than \Action{Import} is
   performed by a \emph{click} gesture, the area that is highlighted corresponds
   precisely to the area that can be clicked for triggering the action: either a
-  green box enclosing the justifiable atom for \action{Justify} actions, an
-  orange box covering the empty pistil for \action{EFQ}, \action{Case} and
-  \action{Unlock} actions, or a green box covering the empty petal for
-  \action{QED} actions.
+  green box enclosing the justifiable atom for \Action{Justify} actions, an
+  orange box covering the empty pistil for \Action{EFQ}, \Action{Case} and
+  \Action{Unlock} actions, or a green box covering the empty petal for
+  \Action{QED} actions.
   
   \item[\textbf{Fencing}] We have already mentioned that we suspect that the
   \rsf{epis} rule might be admissible. However if it is not, one needs a
   corresponding graphical action in \Proof mode. While it is currently not
   implemented, we plan to add a \emph{selection} mechanism that allows the user
-  to select a set of flowers in the goal. Then, we could add a \action{Fence}
+  to select a set of flowers in the goal. Then, we could add a \Action{Fence}
   action, whose effect is to enclose the selected flowers in a petal attached to
   an empty pistil. This action could be mapped to a dedicated button in the
   toolbar that is visible only in \Proof mode, and enabled only when the
@@ -3110,9 +3111,9 @@ Since every \Proof action implements a $\Nature$-rule, it is guaranteed to be
 \emph{invertible}: the user never needs to undo a \Proof action in order to
 complete a proof, because it always preserves the provability of the goal. Of
 course it might still be desirable to do so in specific cases, such as
-\action{Import} actions that may create unneeded copies of flowers\sidenote{In
+\Action{Import} actions that may create unneeded copies of flowers\sidenote{In
 this specific case, one might want to relax the atomic restriction on
-\action{Justify} actions, in order to avoid the recourse to \action{Undo}
+\Action{Justify} actions, in order to avoid the recourse to \Action{Undo}
 actions, which can only be performed at the top of the history stack.}.
 
 \paragraph{\Edit actions}
@@ -3195,9 +3196,9 @@ Kay in its Smalltalk system \sidecite[4em]{goldberg_smalltalk-72_1976}.
 \paragraph{Automation}
 
 The last feature of the Flower Prover that we have implemented is the
-\action{Auto} \Proof action. It is similar in purpose to the \texttt{auto}
+\Action{Auto} \Proof action. It is similar in purpose to the \texttt{auto}
 tactic of Coq, that tries to simplify the goal by performing a limited form of
-automation. The \action{Auto} action is mapped to a dedicated button in the
+automation. The \Action{Auto} action is mapped to a dedicated button in the
 bottom-left corner of the screen, which is only enabled in \Proof mode
 (\reffig{flowers-prover-modes}).
 
@@ -3208,22 +3209,22 @@ action might generate new ones in the resulting goal, so we have to perform this
 until a fixpoint is reached. This is very much like the \emph{reproduction} and
 \emph{decomposition} phases from the \refproc{life} procedure of
 \refsec{flowers-search}, except that we also apply the \rsf{poll{\da}} rule
-(\action{Justify} actions) wherever possible. The only \Proof action that is not
-considered is the only DnD action, \action{Import}. This is not surprising,
+(\Action{Justify} actions) wherever possible. The only \Proof action that is not
+considered is the only DnD action, \Action{Import}. This is not surprising,
 since it corresponds to the \rsf{poll{\ua}} rule, which is the main source of
 complexity in the \emph{pollination} phase of the \refproc{life} procedure,
 because of its ability to duplicate flowers of arbitrary size.
 
 In fact, one could fine-tune the level of automation by considering only a
 \emph{subset} of all types of click actions. This is already what we do by
-default, by leaving the application of \action{Case} actions to the user. This
+default, by leaving the application of \Action{Case} actions to the user. This
 is motivated by the fact that the latter can induce an explosion in the size of
 the goal. One could even leave the configuration of automated action types to
 the user with a dedicated interface. This could include an additional option for
-executing \action{Auto} systematically after every (other) \Proof action,
-removing the need to click multiple times on the \action{Auto} button. In this
+executing \Action{Auto} systematically after every (other) \Proof action,
+removing the need to click multiple times on the \Action{Auto} button. In this
 setting, any proof in the Flower Prover would be reduced to a sequence of
-\action{Import} and \action{Case} actions.
+\Action{Import} and \Action{Case} actions.
 
 
 \subsection{Towards a unified workflow}
@@ -3326,7 +3327,7 @@ interaction modes, that exposes the global context $\Psi$ of the current focus
 $\Phi\hole$. We anticipate only two kinds of interaction with any flower $\phi$
 in the shelf:
 \begin{itemize}
-  \item[\textbf{Pollination}] the user can perform an \action{Import} action by
+  \item[\textbf{Pollination}] the user can perform an \Action{Import} action by
   dragging $\phi$;
   \item[\textbf{Jump to definition}] the user can focus on the subgoal where
   $\phi$ originates by clicking on $\phi$.
@@ -3566,7 +3567,7 @@ respectively to atomic and non-atomic flowers. But this is less satisfying than
 in the calculus of structures, where one component of \rsf{poll{\ua}}, the
 duplicating \emph{contraction} rule, can be restricted to atomic formulas. This
 probably comes from the fact that \rsf{poll{\ua}} also serves the purpose of
-\emph{moving} flowers deeper, as witnessed by the DnD \action{Import} action of
+\emph{moving} flowers deeper, as witnessed by the DnD \Action{Import} action of
 the Flower Prover: in the calculus of structures, this role is fulfilled by
 \emph{switch} rules, which cannot be restricted to atomic structures. The only
 solution might be to \emph{simulate} a local calculus of structures for
@@ -3684,7 +3685,7 @@ dependently-typed version of the flower calculus that we seek for.
 
 We have already described many features in \refsec{flowers-prover} that we
 intend to implement in the future. This includes the \Navigation mode, the
-ability to \emph{select} flowers, the \action{Fence} \Proof action, and the
+ability to \emph{select} flowers, the \Action{Fence} \Proof action, and the
 \emph{shelf} mechanism.
 
 The next step would be to support first-order reasoning by adding sprinklers and

@@ -1,186 +1,313 @@
-\setchapterpreamble[u]{\margintoc}
+% \setchapterpreamble[u]{\margintoc}
 \chapter{Introduction}
 \labch{intro}
 
-\section{Interactive theorem provers}\labsec{itps}
+% \paragraph{Formal manipulations}
 
-\todo{ Explain the concept of tactic, and how it relates to traditional
-  inference rules when read bottom-up.}
+Proof assistants --- also called \emph{interactive theorem provers} --- are
+software systems that allow to both create, and check the correctness of
+mathematical proofs. They are based on the idea that mathematical knowledge can
+be represented unambiguously inside \emph{proof formalisms}, where the truth of
+a statement can be reduced to the mechanical application of symbolic
+manipulation rules. For instance, consider the equation
+$$4x + 6x = (12 - 2)x$$ 
+While any mathematician would immediately recognize it as true, a middle school
+student learning algebra would have to carry manually some computations to
+convince herself (and her teacher) of its validity. A first step might consist
+in applying the distributivity of multiplication over addition on the left-hand
+side of the equation, yielding the new equation
+$$(4 + 6)x = (12 - 2)x$$
+Then, computing the sum on the left-hand side and the difference on the
+right-hand side gives the final equation
+$$10x = 10x$$
+which is trivially true. This is a very simple example, but it already shows the
+two main aspects of proof formalisms: on the one hand, they allow to represent
+mathematical statements in a formal language, here that of equations between
+linear univariate polynomials; and on the other hand, they allow to manipulate
+this representation in order to prove the statements, here through term
+rewriting rules that transform a valid equation into another valid equation.
 
-\section{Proof theory}
+Algebra lends itself particularly well to formalization, as it is arguably the
+very study of the rules governing symbolic manipulations in mathematics. It also
+heavily relies on computations, which explains why it was the target of the
+first, and to this day most popular application of computers to mathematics:
+computer algebra systems.
 
-\section{This thesis}
+However in this thesis, we are interested in improving the usability of proof
+assistants, which have a much broader scope than computer algebra systems: their
+ambition is to enable the formalization on computers of virtually \emph{any}
+kind of mathematics. Ultimately, the dream is to provide a platform that helps
+humans in creating \emph{new} mathematics: both novel solutions and proofs to
+existing problems, and brand new theories involving new types of mathematical
+objects. This seemingly disproportionate ambition is not entirely utopic: it is
+based on the great discoveries of 19\textsuperscript{th} and
+20\textsuperscript{th} century mathematicians and logicians, in the broad
+research area now known as \emph{mathematical logic}.
 
-In this thesis, we are concerned mainly with the question of providing a
-\emph{direct-manipulation} interface for building formal proofs
-\emph{dynamically} and \emph{incrementally}. To this effect, we explore new ways
-to represent and interact with the \emph{proof state}, that is the mental state
-in which a human finds herself when searching for, or unrolling the steps of a
-proof. Following the LCF tradition of proof assistants
-\cite{doi:10.1098/rsta.1984.0067}, we assume that the underlying data modelling
-this mental state consists at its core of a set of \emph{conclusions} waiting
-for evidence, each having their own set of \emph{hypotheses} or
-\emph{assumptions}.
+\subsection{Mathematical logic}
 
-Another important data is the \emph{arguments} used for already justified
-conclusions. Typically one might want a \emph{static} representation of
-arguments, to ease reviewing, modification or reuse of a proof at a later time.
-These activities are generally regrouped under the term of \emph{proof
-evolution}. Until the very last chapter, we will not consider the question of
-having such a static representation. Our hope is that once we find an adequate
-representation for the proof state geared towards \emph{dynamic} manipulation,
-the sole data of the \emph{transitions} between states through a set of
-canonical \emph{proof actions} will be enough to reconstruct both a
-machine-readable formal proof object, and a human-readable proof text.
+\paragraph{Universal language}
 
-\section{Traditional approach}
+At the dawn of the 20\textsuperscript{th} century, some mathematicians started
+to realize that it might be possible to formalize not only specific branches of
+mathematics like algebra with its own specific language, but the \emph{whole} of
+mathematics in a single, universal language. This idea was first intuited by
+Leibniz with his dream of a \textit{characteristica universalis}, an ideal
+language in which all propositions --- mathematical propositions, but also
+scientific propositions about the real world, and even metaphysical propositions
+--- could be expressed and understood unambiguously by every human. Also,
+Leibniz introduced the concept of a \textit{calculus ratiocinator}, a systematic
+method for determining the truth of any proposition expressed in the
+\textit{characteristica universalis}, providing a definitive and objective way
+to settle any argument through simple calculations\sidenote{Leibniz himself
+might have been inspired by his predecessor Galileo, who famously declared that
+``the universe [...] is written in the language of mathematics''
+\cite{assayer}.}.
 
-In a sense, our methodology for designing proving interfaces goes in the
-opposite direction compared to traditional approaches.
+\paragraph{Predicate logic and set theory}
 
-Indeed, one usually starts with a canonical static representation of partial
-proofs\sidenote{e.g. $λ$-terms with meta-variables in dependently-typed proof
-assistants like Coq, Lean and Agda, or a trusted base of tactics in simply-typed
-proof assistants like HOL.}, and then builds user-facing abstractions on top of
-it. These include proof languages which can be more or less
-declarative\sidenote{A very declarative proof language would be that of the
-Mizar proof assistant, while a more imperative approach can be found in tactic
-languages, such as Ltac in the Coq proof assistant. There are also intermediate
-solutions, like the Isar proof language implemented in the Isabelle/Isar system,
-which is both declarative and executable interactively.}, but also extensible
-notation and macro systems \cite{ullrich_beyond_2022} for concise,
-human-readable representations of mathematical objects. Ultimately, all these
-abstractions are compiled to low-level proof objects in the kernel language, a
-process called \emph{elaboration}.
+The possibility of a universal language for mathematics really became credible
+at the dusk of the 19\textsuperscript{th} century, thanks to the works of
+logicians like Boole \sidecite{Boole1854-BOOTLO-4}, Peirce
+\sidecite{peirce_algebra_1885} and Frege \sidecite{Frege1999-FRELUL} on one
+hand, and mathematicians like Cantor and Dedekind on the other hand
+\sidecite{07557982-f50c-352d-bd73-3e2bc6403d4f}. The first laid the groundwork
+for a formal account of deduction that greatly improved on Aristotle's
+syllogistic, by inventing notations and rules that can express reasoning about
+not only \emph{properties} of individuals, but also \emph{relations} between
+them. The second invented \emph{set theory}, which provided the first setting
+where a general notion of \emph{function} or mapping could be rigorously
+defined, a notion that became increasingly central in modern mathematics.
 
-Our point is that the initial choice of kernel language can influence the design
-of higher-level abstractions, either unconsciously or consciously: typically,
-one will want to stay close to the kernel representation in order to mitigate
-the complexity of the elaboration process, since it could impact negatively the
-speed and memory usage of the system. This is especially true of abstractions
-used in structuring the purely logical, non-domain specific parts of proofs,
-since those occur in virtually every development. This can be observed at two
-different levels:
+\paragraph{Foundations}
+
+This formed the basis for a unification of many branches of mathematics on the
+same \emph{foundation}: it was realized that with enough effort, every
+mathematical structure could be encoded with the sets of Cantor, and all the
+laws governing sets could be expressed with a finite number of \emph{axioms}
+expressed in \emph{predicate} logic, i.e. the language and calculus of relations
+devised by the 19\textsuperscript{th} century logicians. This crystallized into
+two famous axiomatic systems for set theory: the \textit{Principia Mathematica}
+of Russell and Whitehead \sidecite{russell25}; and Zermelo-Fraenkel set theory
+(\sys{ZF}, or \sys{ZFC} with the axiom of choice), which is the most popular
+system nowadays because of its greater simplicity.
+
+\subsection{Proof theory}
+
+\paragraph{Truth and proofs}
+
+An axiomatic system specifies the formal language in which statements about
+mathematical objects are expressed, as well as a collection of such statements
+--- the axioms --- that are taken to be true from the outset, without further
+justification. In fact, one does not even need to speak about \emph{truth} to
+define the system: although it can be a guiding intuition when designing the
+system, the fact that axioms denote true properties of abstract objects in some
+``mathematical universe'' is a particular philosophical stance (platonism),
+which has nothing to do with concrete reasoning on the formal representation.
+
+Traditionally, the branch of mathematical logic that tries to model the
+``semantic'' content of axioms is called \emph{model theory}. In this thesis, we
+are concerned with the construction of formal proofs that derive the
+consequences of axioms by pure ``syntactic'' manipulation, through the
+application of so-called \emph{inference rules}. Accordingly, the branch of
+mathematical logic studying this activity is called \emph{proof theory}. We will
+still do a bit of model theory in a few places (\refsec{bubbles-soundness},
+\refsec{Completeness}), but only as a means to justify the properties of our
+syntax. Thus to avoid any unnecessary philosophical commitment, we will only
+consider axioms of a given system as ordinary \emph{assumptions} that can be
+used in the course of reasoning, without according any particular status with
+regard to their truth. This is very much in line with the \emph{formalist}
+school of thought in philosophy of mathematics, represented by the great
+mathematician and main instigator of proof theory David Hilbert.
+
+\begin{framed}
+\begin{quote}
+The real focus throughout this thesis will be on the \emph{inference rules} used
+to build (correct) proofs from axioms/assumptions. Those form the theoretical
+basis for both the \emph{interactive creation}, and the \emph{automatic
+checking} of formal proofs in proof assistants.
+\end{quote}
+\end{framed}
+
+\paragraph{Axiomatic systems} 
+
+In the very beginnings of proof theory in the 1920s, under the influence of
+Hilbert, the axiomatic method was predominant, and thus proof systems of this
+era --- now called Hilbert systems --- featured very few inference rules. Almost
+all logical reasoning principles were encoded as \emph{axiom schemas} involving
+generic \emph{propositional variables}. For instance, the famous \emph{law of
+excluded middle}, that expresses that every proposition is either true or false,
+is expressed formally by the schema
+$$A \lor \neg A$$
+where $\lor$ and $\neg$ are symbols denoting the logical connectives of
+\emph{disjunction} and \emph{negation}, and $A$ is a propositional variable that
+can be substituted with any concrete formula built from \emph{atomic
+propositions} and other logical connectives. An atomic proposition is typically
+a property of a mathematical object, that does not involve any logical
+connective. An example of instance of this schema would be the proposition ``$n$
+is prime or $n$ is not prime'' with $n$ some natural number, which can be
+written formally as
+$$\mathrm{prime}(n) \lor \neg\mathrm{prime}(n)$$
+Another related principle is the \emph{law of non-contradiction}, which states
+that no proposition can be both true and false at the same time. It is expressed
+by the schema
+$$\neg (A \land \neg A)$$
+where $\land$ is the symbol denoting \emph{conjunction}.
+
+\paragraph{Inference rules}
+
+In Hilbert systems, the only inference rule is that of \emph{modus ponens},
+which is expressed formally by the following figure:
+$$\R[\rsf{mp}]{A}{A \limp B}{B}$$
+It can be read from top to bottom as follows: for any propositions $A$ and $B$,
+if we have a proof of $A$ and a proof of $A \limp B$, i.e. a proof that $A$
+implies $B$, then we can immediately derive a proof of $B$ by virtue of the
+rule, here designated by the abbreviated name \rsf{mp}. This reading of the rule
+corresponds to a form of \emph{forward} reasoning: starting from the known
+\emph{premises} that $A$ and $A \limp B$ each have a proof, the rule indicates
+that we are allowed to deduce as a \emph{conclusion} that $B$ has a proof.
+Conversely, one can also have a bottom-up reading of the rule: to build a proof
+of any proposition $B$, one way to proceed is to come up with another
+proposition $A$ such that both $A$ and $A \limp B$ are provable. This reading
+corresponds to a form of \emph{backward} reasoning: we start from the conclusion
+$B$ that we want to reach, also called the \emph{goal}, and try to find
+\emph{subgoals} $A$ and $A \limp B$ that are provable, and hopefully simpler to
+prove; then the rule guarantees that proving these subgoals is \emph{sufficient}
+to ensure the truth of the original goal.
+
+Forward reasoning is typically the way in which mathematicians write (informal)
+proofs on paper, i.e. for the \emph{presentation} of their proofs to other
+mathematicians. Indeed, it is more natural for humans to follow an argument by
+starting from its premises, because the latter will always contain all the
+information required to deduce the conclusion, the argument only serving as a
+means to explicate how this information is combined. On the other hand, backward
+reasoning is more natural during the \emph{construction} phase of a proof,
+because the information required to reach the conclusion (e.g. the proposition
+$A$ in the \rsf{mp} rule) is not yet known.
+
+\paragraph{Gentzen systems}
+
+\paragraph{Deep inference}
+
+\subsection{Proof assistants}
+
+\paragraph{Statement languages}
+
 \begin{itemize}
-  \item the level of \emph{statements}, where specific constructors (typically
-  logical connectives) need a specific interface, and are not always treated
-  uniformly\todo{example of various tactics for the "same" action (intro/elim)
-  but with differing syntax (\texttt{intros} vs. \texttt{split}, \texttt{apply}
-  vs. \texttt{destruct}...), and of their shortcomings (\texttt{apply} only
-  works with $∀$ and $\limp$)};
-  \item the level of \emph{inference rules}, which are usually modelled after
-  standard proof formalisms such as natural deduction and sequent
-  calculus\sidenote{this is especially true for dependently-typed proof
-  assistants, where the correspondance with natural deduction is immediate
-  through the Curry-Howard isomorphism.}, and where many pervasive commands for
-  manipulating the proof state map directly to these rules\sidenote{This applies
-  again mostly to dependently-typed systems: Agda is a pathological example, in
-  that one writes directly proof terms which are identified with the proof state.
-  More to the point are Coq, Lean and HOL, which share similar sets of
-  primitives modelled after the \emph{introduction/elimination} rule duality.
-  Declarative proof language like Isar seem to make an explicit effort to
-  avoid this schema, by following a higher-level approach based on forward
-  rather than backward reasoning, which is closer to mathematical practice.}. 
+  \item[\textbf{Mathematical notations}]
+  \item[\textbf{Logical primitives}]
 \end{itemize}
 
-This focus on the formal, low-level proof object is likely rooted in the
-historical origins of proof assistants, with projects such as Automath, Mizar
-and LCF\todo{add citations}. Retrospectively, they shared a common conceptual
-framework which was the direct consequence of two scientific and technological
-developments:
-\begin{itemize}
-  \item the advent of mathematical logic and proof theory at the dawn of the
-  20\textsuperscript{th} century, motivated by a foundational crisis concerning
-  first the unity of various branches of mathematics, and then the very notion
-  of mathematical \emph{truth} following the discovery of Russell's paradox;
-  \item the invention and democratization of computers, and more specifically of
-  \emph{programming languages} as their principal means of interaction with
-  humans.
-\end{itemize}
-
-However, programming languages are known to incur a great learning curve on
-users unfamiliar with programming and algorithmic thinking. Even without the
-algorithmic aspect, which is usually absent from proof languages, the use of a
-formal language with a rigid syntax is problematic for most users at the
-learning stage. And the foundational nature of standard proof formalisms, on
-which most proof languages are based, only accentuates this fact by exposing
-low-level primitives which do not capture the way mathematicians build and think
-about proofs. Indeed, those were designed to solve foundational
-questions\sidenote{For instance, Gentzen invented natural deduction, and later
-sequent calculus in order to obtain finitist proofs of soundness
-for basic systems of arithmetic, through his well-known \textit{Haupstatz} or
-\emph{cut-elimination} theorem.} rather than model the way mathematicians
-effectively reason.
-
-\section{Modern interfaces}
-
-We argue that this historical influence has created a \emph{blind spot} for a
-more modern approach to proving interfaces. Nowadays, the vast majority of
-interactions between humans and computers happen through \emph{graphical user
-interfaces}, which have proved to make software systems a lot more intuitive and
-accessible to people without any specific training or education. This is likely
-one of the important roadblocks towards a wider adoption of proof assistants by
-researchers and students in mathematics, but also in other domains where formal
-logical thinking could be applied such as the modelling and verification of
-computer systems, or even legal systems.
-
-\section{Existing solutions to overcome poor proof languages}
+\paragraph{Proof languages}
 
 \begin{itemize}
-  \item Maximizing \emph{custom automation} with a rich domain-specific language
-  for implementing proof search procedure (Ltac). Works well in the domain of
-  program verification, where one can rely on both the rich inductive structure
-  of object programs, and the programming expertise of the user. But less suited
-  to the structure of standard mathematics, which are built around the rich
-  logical interleaving of theorems and definitions, rather than complex
-  inductive definitions. Or more sociologically, does not resemble the actual
-  practice of mathematicians on paper, and is unusable by non-programmers, which
-  constitute a large portion of potential users in both research and education.
-  \item More \emph{declarative} proof languages, agnostic to the underlying
-  logic (Isar). Solves most of the previously mentioned flaws, but is still very
-  verbose and sensitive to syntax errors, and does not tackle the question of a
-  more guided interface, which could improve both the learning curve and the
-  speed of the proof building process.
+  \item[\textbf{Imperative}]
+  \item[\textbf{Declarative}]
 \end{itemize}
 
-\section{Roadmap}
+\paragraph{Intuitionistic type theory}
 
-In this thesis, we start our exploration in the design of proof-building
-interfaces with graphical interaction principles inspired by standard approaches
-to logic and proof theory: statements are represented by symbolic formulas made
-from the usual logical connectives, and inference rules are in direct
-correspondance, or simulate closely the flow of argumentation found in Gentzen's
-sequent calculus.
+\subsection{This thesis}
 
-Then we gradually stray away from tradition, the first step being the adoption
-of a more flexible approach to argumentation as offered by the \emph{deep
-inference} paradigm. This allows us to build proofs through \emph{drag-and-drop}
-actions with the \emph{subformula linking} technique of K. Chaudhuri, and even
-to imagine a nested and metaphorical representation of \emph{subgoals} with our
-own \emph{bubble calculus}. But there are still some defects in these systems,
-which confine the reasoner to weird habits that restrict their freedom.
+\paragraph{Direct manipulation}
 
-Finally we fully embrace the idea of manipulating directly iconic subgoals
-instead of symbolic formulas, by reviving an old system from the genius and
-avant-gardist logician C. S. Peirce: the \emph{existential graphs}. We add a
-layer of playfulness and intuitionism by devising the \emph{flower calculus}, a
-fun and alternative way to draw and manipulate the graphs as flowers connected
-by sprinklers in nested gardens. But more importantly, the flower calculus
-exhibits the latent \emph{analyticity} of Peirce's graphs, thus linking them
-with the systems of Gentzen despite a very different approach to the
-representation and use of statements. This allows us to design a new kind of
-direct manipulation interface that merges very tightly two concepts/structures,
-which have always been segregated ontologically: formulas and proofs. Hopefully,
-this foundation will enable new ways to build and maintain formal proofs, that
-are less buraucratic and more enjoyable to humans.
+\paragraph{Graphical deep inference}
 
-\todo{Explain the concept of iconicity somewhere}
+\paragraph{Iconic manipulations}
 
-\section{How to read this thesis}
+The dominant paradigm for proof formalisms is \emph{linguistic} in nature:
+mathematical objects and assertions about them are represented in a formal
+language of propositions, also called \emph{formulas}, understood as a (usually
+infinite) set of strings of symbols.
 
-\todo{ Introduce a special format for long digressions in sidenotes, so that the
-reader can safely ignore them. }
+Contrary to a common misconception from researchers in logic, Leibniz did not
+conceive of his \textit{characteristica universalis} as a symbolic language, but
+rather as an \emph{iconic} one \cite[Chpt.~3]{logique_leibniz}:
+\begin{quote}
+    The true ``real characteristic'' [...] would express the composition of
+    concepts by the combination of signs representing their simple elements,
+    such that the correspondence between composite ideas and their symbols would
+    be natural and no longer conventional. [...] This shows that the real
+    characteristic was for him an ideography, that is, a system of signs that
+    directly represent things (or, rather, ideas) and not words.
+\end{quote}
+This is to be compared to Frege's \textit{Begriffsschrift}, a graphical,
+two-dimensional language and calculus of ``pure thought'', whose name has
+repeatedly been translated as \emph{ideography}
+\sidecite{Frege1952-FRETFT}\sidecite{Frege1999-FRELUL}.
 
-\todo{ Advise the reader to read with a PDF reader that supports color,
-  hyperlink jumping and hyperlink preview. We tend to cross-reference a lot
-  ideas from different chapters. }
+\paragraph{Contributions}
+
+\subsection{Related works}
+
+\paragraph{Window inference}
+
+Other researchers have stressed the importance of being able to reason
+\emph{deep} inside formulas, in order to provide intuitive proof steps. The
+first and biggest line of research supporting this idea is probably that of
+\emph{window inference}, which started in 1993 with the seminal article of P.J.
+Robinson and J. Staples \sidecite{robinson-formalizing-1993}, and slowly became
+out of fashion during the 2000s. This is well expressed in the following quote
+from one of its main contributors, Serge Autexier
+\sidecite[][p.~184--187]{autexier_phd}:
+
+\begin{quote}
+We believe it is an essential feature of a calculus for intuitive reasoning to
+support the transformation of parts of a formula without actually being forced
+to decompose the formula. In that respect the inference rules of Schütte's proof
+theory are a clear contribution. [...] One motivation for the development of the
+CORE proof theory was to overcome the need for formula decomposition as enforced
+by sequent and natural deduction calculi in order to support an intuitive
+reasoning style.
+\end{quote}
+
+Thus we are not the first to attempt to design new proof-theoretical frameworks
+based on deep inference principles, with the explicit objective of supporting a
+more intuitive reasoning style in interactive theorem provers\sidenote{Note that
+during most of the time when window inference was developed, the terminology of
+``deep inference'' had not been introduced yet. Indeed, the first article on the
+subject appeared in 1999 \cite{Guglielmi1999ACO}, with very different
+motivations in mind: namely, the development of a proof-theoretical approach
+unifying concurrent and sequential computation, resulting in the calculus of
+structures for the logic \sys{BV}. But some proof systems based on deep
+inference principles already existed and inspired researchers in window
+inference, as witnessed by the reference to Schütte's proof theory
+\cite{schutte_proof_1977} in the above quote.}. However, we believe our approach
+is unique in that it emphasizes two aspects:
+\begin{itemize}
+  \item the use of \emph{direct manipulation} on goals to perform proof steps
+  (although some pointing interactions were already at work in window
+  inference-based systems);
+  \item in the second part of this thesis, the use of \emph{iconic}
+  representations for the proof state, that stray away from traditional symbolic
+  formulas.
+\end{itemize}
+
+\paragraph{Ayers' thesis}
+
+More recently, Ayers described in his thesis a new tool for producing verifiable
+and explainable (formal) proofs, including both theoretical discussions of novel
+concepts and designs for components of proof assistants, and practical
+implementations of software evaluated through user studies
+\sidecite{ayers_thesis}. Notable contributions from our point of view are:
+\begin{itemize}
+  \item his \texttt{Box} development calculus, which introduces a unified
+\texttt{Box} data structure representing at the same time goals and partial
+proofs, with the aim to offer more ``human-like'' interfaces for both the
+\emph{construction} and the \emph{presentation} of proofs;
+  \item and his \texttt{ProofWidgets} framework, that allows to extend the Lean
+proof assistant with new interactive and domain-specific notations for
+mathematical objects, thus offering a form of \emph{end-user} programming.
+\end{itemize}
+The \texttt{Box} data structure easily lends itself to visualisation in a
+two-dimensional graphical notation, while \texttt{ProofWidgets} promises great
+capabilities for proofs by both direct and iconic manipulations.
+
+However, the work of Ayers focuses mainly on designing a general framework that
+can integrate modern interfaces for proofs in the Lean proof assistant, while we
+focus on exploring various proof calculi that provide the foundations for such
+interfaces at the purely logical level, mostly independently of any particular
+proof assistant. Thus we believe that our work is quite complementary with that
+of Ayers: it puts emphasis on different aspects, while sharing a common vision
+for the future of proof assistants, where modern graphical interfaces play a
+crucial role in improving the interaction between the user and the computer.
