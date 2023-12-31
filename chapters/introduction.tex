@@ -68,9 +68,9 @@ might have been inspired by his predecessor Galileo, who famously declared that
 
 The possibility of a universal language for mathematics really became credible
 at the dusk of the 19\textsuperscript{th} century, thanks to the works of
-logicians like Boole \sidecite{Boole1854-BOOTLO-4}, Peirce
-\sidecite{peirce_algebra_1885} and Frege \sidecite{Frege1999-FRELUL} on one
-hand, and mathematicians like Cantor and Dedekind on the other hand
+logicians like Boole \sidecite{Boole1854-BOOTLO-4}, Frege \sidecite{frege79} and
+Peirce \sidecite{peirce_algebra_1885} on one hand, and mathematicians like
+Cantor and Dedekind on the other hand
 \sidecite{07557982-f50c-352d-bd73-3e2bc6403d4f}. The first laid the groundwork
 for a formal account of deduction that greatly improved on Aristotle's
 syllogistic, by inventing notations and rules that can express reasoning about
@@ -86,11 +86,11 @@ same \emph{foundation}: it was realized that with enough effort, every
 mathematical structure could be encoded with the sets of Cantor, and all the
 laws governing sets could be expressed with a finite number of \emph{axioms}
 expressed in \emph{predicate} logic, i.e. the language and calculus of relations
-devised by the 19\textsuperscript{th} century logicians. This crystallized into
-two famous axiomatic systems for set theory: the \textit{Principia Mathematica}
-of Russell and Whitehead \sidecite{russell25}; and Zermelo-Fraenkel set theory
+devised by 19\textsuperscript{th} century logicians. This crystallized into two
+famous axiomatic systems for set theory: the \textit{Principia Mathematica} of
+Russell and Whitehead \sidecite{russell25}; and Zermelo-Fraenkel set theory
 (\sys{ZF}, or \sys{ZFC} with the axiom of choice), which is the most popular
-system nowadays because of its greater simplicity.
+foundation nowadays because of its greater simplicity.
 
 \subsection{Proof theory}
 
@@ -158,14 +158,13 @@ where $\land$ is the symbol denoting \emph{conjunction}.
 
 In Hilbert systems, the only inference rule is that of \emph{modus ponens},
 which is expressed formally by the following figure:
-$$\R[\rsf{mp}]{A}{A \limp B}{B}$$
-It can be read from top to bottom as follows: for any propositions $A$ and $B$,
-if we have a proof of $A$ and a proof of $A \limp B$, i.e. a proof that $A$
-implies $B$, then we can immediately derive a proof of $B$ by virtue of the
-rule, here designated by the abbreviated name \rsf{mp}. This reading of the rule
-corresponds to a form of \emph{forward} reasoning: starting from the known
-\emph{premises} that $A$ and $A \limp B$ each have a proof, the rule indicates
-that we are allowed to deduce as a \emph{conclusion} that $B$ has a proof.
+$$\R[\rsf{mp}]{A}{A \limp B}{B}$$ It can be read from top to bottom as follows:
+for any propositions $A$ and $B$, if we have a proof of $A$ and a proof of $A
+\limp B$, i.e. a proof that $A$ implies $B$, then we can immediately derive a
+proof of $B$ by virtue of the rule, here designated by the abbreviated name
+\rsf{mp}. This reading of the rule corresponds to a form of \emph{forward}
+reasoning: starting from the known \emph{premises} that $A$ and $A \limp B$ are
+true, it \emph{necessarily} follows that the \emph{conclusion} $B$ is true.
 Conversely, one can also have a bottom-up reading of the rule: to build a proof
 of any proposition $B$, one way to proceed is to come up with another
 proposition $A$ such that both $A$ and $A \limp B$ are provable. This reading
@@ -185,9 +184,58 @@ reasoning is more natural during the \emph{construction} phase of a proof,
 because the information required to reach the conclusion (e.g. the proposition
 $A$ in the \rsf{mp} rule) is not yet known.
 
-\paragraph{Gentzen systems}
+\paragraph{Natural deduction}
+
+Axiomatic systems can be quite concise, in that many logics can be expressed in
+them with a small number of axioms. In return, they produce very long and
+verbose formal proofs that are hard for humans to follow, and almost impossible
+to come up with in most cases. In a series of seminars started in 1926, the
+Polish logician Łukasiewicz became one of the first to advocate for a more
+\emph{natural} approach in proof theory, that models more closely the way
+mathematicians actually reason \sidecite{Jaskowski1934-JAKOTR-4}. A few years
+later, in a dissertation delivered to the faculty of mathematical sciences of
+the University of Göttingen \sidecite{gentzen_untersuchungen_1935}, the German
+logician Gerhard Gentzen proposed independently his famous calculus of
+\emph{natural deduction}.
+
+This formalism follows the opposite approach to Hilbert systems: it features as
+few axioms as possible, favoring the use of \emph{inference rules} to model the
+forms of reasoning found in mathematical practice. Those are divided in two
+categories: \emph{introduction} rules \emph{define} the meaning of logical
+connectives, by prescribing how to prove complex formulas from proofs of their
+components. Dually, \emph{elimination rules} explain how to \emph{use} complex
+formulas, by giving a canonical way to derive new conclusions from them. The
+most simple example can be found in the rules for the conjunction connective
+$\land$, written as follows:
+\begin{mathpar}
+  \R[\rsf{\land i}]
+  {A}{B}
+  {A \land B}
+  \and
+  \R[\rsf{\land e_1}]
+    {A \land B}{A}
+  \and
+  \R[\rsf{\land e_2}]
+    {A \land B}{B}
+\end{mathpar}
+The introduction rule \rsf{\land i} allows to build a proof of $A \land B$ by
+combining a proof of $A$ and a proof of $B$, while the elimination rules
+\rsf{\land e_1} and \rsf{\land e_2} allow to derive proofs of $A$ and $B$ from a
+proof of $A \land B$. The complete set of natural deduction rules for other
+connectives in intuitionistic logic is given in \reffig{calculi-NJ}.
+
+\paragraph{Sequent calculus}
+
+
 
 \paragraph{Deep inference}
+
+The calculus of structures, as a rewriting system, is closer to the equational
+reasoning that mathematicians are accustomed to in algebra. The main difference
+is that most rules can only be applied in a \emph{single} direction, because the
+premiss and conclusion are not \emph{equivalent}. A better analogy would be with
+the substitutional rules that are sometimes used to reason about
+\emph{inequalities}.
 
 \subsection{Proof assistants}
 
