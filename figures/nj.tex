@@ -1,0 +1,67 @@
+  \begin{framed}
+  \begin{mathpar}
+  \R[\rsf{\bot e}]
+  {\bot}
+  {A}
+  \and
+  \prftree[r][l]{\rsf{{\limp}i}}{\small[\prfref<HA>]}
+  {\summ
+    {\Gamma, \prfboundedassumption<HA>{A}}
+    {B}}
+  {A \limp B}    
+  \and
+  \R[\rsf{{\limp}e}]
+  {A}
+  {A \limp B}
+  {B}
+  \\
+  \R[\rsf{\land i}]
+  {A}{B}
+  {A \land B}}
+  \and
+  \R[\rsf{\land e_1}]
+  {A \land B}
+  {A}
+  \and
+  \R[\rsf{\land e_2}]
+  {A \land B}
+  {B}
+  \\
+  \R[\rsf{\lor i_1}]
+  {A}
+  {A \lor B}
+  \and
+  \R[\rsf{\lor i_2}]
+  {B}
+  {A \lor B}
+  \and
+  \prftree[r][l]{\rsf{\lor e}}{\small[\prfref<HA>,\prfref<HB>]}
+  {A \lor B}
+  {\summ
+    {\Gamma, \prfboundedassumption<HA>{A}}
+    {C}}
+  {\summ
+    {\Delta, \prfboundedassumption<HB>{B}}
+    {C}}
+  {C}
+  \\
+  \R[\rsf{\forall i}]
+  {\summ{\Gamma}{A}}
+  {\forall x. A}
+  \and
+  \R[\rsf{\forall e}]
+  {\forall x. A}
+  {\subst{A}{t}{x}}
+  \and
+  \R[\rsf{\exists i}]
+  {\subst{A}{t}{x}}
+  {\exists x. A}
+  \and
+  \R[\rsf{\exists e}]
+  {\exists x. A}
+  {\summ{\Gamma, A}{C}}
+  {C}
+  \end{mathpar}
+  In the rules \rsf{\forall i} and \rsf{\exists e}, $x$ must not occur free in
+  $\Gamma$ and $C$.
+  \end{framed}

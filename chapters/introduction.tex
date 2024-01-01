@@ -44,7 +44,7 @@ based on the great discoveries of 19\textsuperscript{th} and
 20\textsuperscript{th} century mathematicians and logicians, in the broad
 research area now known as \emph{mathematical logic}.
 
-\subsection{Mathematical logic}
+\section{Mathematical logic}
 
 \paragraph{Universal language}
 
@@ -92,7 +92,7 @@ Russell and Whitehead \sidecite{russell25}; and Zermelo-Fraenkel set theory
 (\sys{ZF}, or \sys{ZFC} with the axiom of choice), which is the most popular
 foundation nowadays because of its greater simplicity.
 
-\subsection{Proof theory}
+\section{Proof theory}
 
 \paragraph{Truth and proofs}
 
@@ -132,12 +132,12 @@ checking} of formal proofs in proof assistants.
 \paragraph{Axiomatic systems} 
 
 In the very beginnings of proof theory in the 1920s, under the influence of
-Hilbert, the axiomatic method was predominant, and thus proof systems of this
-era --- now called Hilbert systems --- featured very few inference rules. Almost
-all logical reasoning principles were encoded as \emph{axiom schemas} involving
-generic \emph{propositional variables}. For instance, the famous \emph{law of
-excluded middle}, that expresses that every proposition is either true or false,
-is expressed formally by the schema
+Hilbert (himself inspired by Frege), the axiomatic method was predominant, and
+thus proof systems of this era --- now called Hilbert systems --- featured very
+few inference rules. Almost all logical reasoning principles were encoded as
+\emph{axiom schemas} involving generic \emph{propositional variables}. For
+instance, the famous \emph{law of excluded middle}, that expresses that every
+proposition is either true or false, is expressed formally by the schema
 $$A \lor \neg A$$
 where $\lor$ and $\neg$ are symbols denoting the logical connectives of
 \emph{disjunction} and \emph{negation}, and $A$ is a propositional variable that
@@ -153,6 +153,50 @@ that no proposition can be both true and false at the same time. It is expressed
 by the schema
 $$\neg (A \land \neg A)$$
 where $\land$ is the symbol denoting \emph{conjunction}.
+
+\paragraph{Intuitionistic logic}
+
+One motivating factor in the development of a new foundation for mathematics
+was the discovery of strange theorems that defy intuition, like the existence of
+the Weierstrass function which is continuous everywhere but differentiable
+nowhere \sidecite{weirstrass_function}, or the Banach-Tarski paradox which
+asserts that a ball can be decomposed and reassembled into two exact copies of
+itself \sidecite{banach_sur_1924}. Some mathematicians like Brouwer and Weyl
+rejected the truth of such theorems, on the basis that their proofs rely on
+reasoning principles that are not \emph{constructive}; in particular, they allow
+to prove the existence of objects without ever constructing them explicitly,
+thus providing weak --- if not dubious evidence for their conclusion. This
+marked the birth of \emph{constructivism} in philosophy of mathematics, whose
+most famous incarnation is Brouwer's \emph{intuitionism}.
+
+The original intuitionism of Brouwer was strongly opposed to any attempt at
+formalizing mathematics, standing against both Frege and Russell's logicism that
+saw mathematics as a mere branch of logic, and Hilbert's formalism that reduced
+mathematics to a game of symbol manipulation. However, this did not prevent
+Heyting, one of Brouwer's students, from developing an axiomatic system in the
+style of Hilbert and Frege, in an attempt to capture formally the objections of
+Brouwer towards \emph{classical} logic --- i.e. the logic developed by 19th
+century logicians that was at the heart of the new set-theoretical foundations.
+Heyting's system captures what is now called \emph{intuitionistic logic}, which
+can be succinctly summarized as being exactly classical logic, but
+\emph{without} the law of excluded middle. Thus intuitionistic logic is a
+generalization of classical logic, where propositions cannot be assigned a truth
+value \emph{a priori}: they are only considered true if they can be proved with
+\emph{direct}, constructive evidence.
+
+To this day, there is no consensus among mathematicians as to which logic ---
+intuitionistic or classical --- is the right one to found mathematics upon.
+Since intuitionistic logic is more restrictive than classical logic, some
+fundamental theorems of classical mathematics do not hold anymore, requiring in
+the worst cases to recreate entire branches of mathematics from scratch, like in
+\emph{constructive analysis}. This explains why a large majority of
+mathematicians still work in classical logic, and are often even unaware of the
+existence of constructive mathematics. To account for this diversity, we will in
+this thesis design proof systems that support both classical and intuitionistic
+reasoning. Because every theorem of intuitionistic logic is also a theorem of
+classical logic (but not the converse), we will always focus first on the
+intutionistic ``kernel'' of our systems, designing the classical part as an
+extension of the former.
 
 \paragraph{Inference rules}
 
@@ -198,34 +242,59 @@ the University of Göttingen \sidecite{gentzen_untersuchungen_1935}, the German
 logician Gerhard Gentzen proposed independently his famous calculus of
 \emph{natural deduction}.
 
+\begin{figure*}
+  \input{figures/nj.tex}
+  \caption{Natural deduction calculus \sys{NJ} for intuitionistic logic}
+  \labfig{calculi-NJ}
+\end{figure*}
+
+\begin{marginfigure}
+  $$
+  \prftree[r][l]{\rsf{ip}}{\small[\prfref<HA>]}
+  {\summ
+    {\Gamma, \prfboundedassumption<HA>{\neg A}}
+    {\bot}}
+  {A}    
+  $$
+  \caption{Rule of indirect proof in natural deduction}
+  \labfig{NK-ip}
+\end{marginfigure}
+
 This formalism follows the opposite approach to Hilbert systems: it features as
 few axioms as possible, favoring the use of \emph{inference rules} to model the
 forms of reasoning found in mathematical practice. Those are divided in two
 categories: \emph{introduction} rules \emph{define} the meaning of logical
 connectives, by prescribing how to prove complex formulas from proofs of their
 components. Dually, \emph{elimination rules} explain how to \emph{use} complex
-formulas, by giving a canonical way to derive new conclusions from them. The
-most simple example can be found in the rules for the conjunction connective
-$\land$, written as follows:
-\begin{mathpar}
-  \R[\rsf{\land i}]
-  {A}{B}
-  {A \land B}
-  \and
-  \R[\rsf{\land e_1}]
-    {A \land B}{A}
-  \and
-  \R[\rsf{\land e_2}]
-    {A \land B}{B}
-\end{mathpar}
-The introduction rule \rsf{\land i} allows to build a proof of $A \land B$ by
-combining a proof of $A$ and a proof of $B$, while the elimination rules
+formulas, by giving a canonical way to derive new conclusions from them.
+\reffig{calculi-NJ} shows the complete set of natural deduction rules for all
+connectives and quantifiers in intuitionistic logic, that was introduced by
+Gentzen under the name \sys{NJ}\sidenote{Gentzen simultaneously introduced a
+natural deduction calculus named \sys{NK} for classical logic, which is just
+\sys{NJ} with an additional rule modelling the principle of \emph{indirect
+proof} --- i.e. showing $A$ by deriving a contradiction from its negation $\neg
+A$ (see \reffig{NK-ip}).} \sidecite{gentzen_untersuchungen_1935}. The most
+simple example can be found in the rules for the conjunction connective $\land$:
+the introduction rule \rsf{\land i} allows to build a proof of $A \land B$ by
+combining a proof of $A$ and a proof of $B$; while the elimination rules
 \rsf{\land e_1} and \rsf{\land e_2} allow to derive proofs of $A$ and $B$ from a
-proof of $A \land B$. The complete set of natural deduction rules for other
-connectives in intuitionistic logic is given in \reffig{calculi-NJ}.
+proof of $A \land B$.
+
+\begin{remark}
+  Note that the rules for negation $\neg$ are not present in
+  \reffig{calculi-NJ}: indeed, it is customary in intuitionistic logic to define
+  negation by $\neg A \defeq A \limp \bot$, identifying the negation of any
+  proposition $A$ with its implying of a contradiction. Thus the rules for
+  negation are subsumed by those for implication $\limp$ and absurdity $\bot$.
+\end{remark}
 
 \paragraph{Sequent calculus}
 
+Gentzen's work was aimed at a resolution of \emph{Hilbert's program}, whose goal
+was to ground the trust in the foundations of (classical) mathematics --- at the
+time riddled with inconsistencies such as Russell's paradox --- by proving the
+\emph{consistency} of Peano's axioms of arithmetic, i.e. that no contradiction
+can be derived from them.
 
 
 \paragraph{Deep inference}
@@ -234,10 +303,9 @@ The calculus of structures, as a rewriting system, is closer to the equational
 reasoning that mathematicians are accustomed to in algebra. The main difference
 is that most rules can only be applied in a \emph{single} direction, because the
 premiss and conclusion are not \emph{equivalent}. A better analogy would be with
-the substitutional rules that are sometimes used to reason about
-\emph{inequalities}.
+the substitutional rules that are sometimes used to solve \emph{inequations}.
 
-\subsection{Proof assistants}
+\section{Proof assistants}
 
 \paragraph{Statement languages}
 
@@ -255,7 +323,7 @@ the substitutional rules that are sometimes used to reason about
 
 \paragraph{Intuitionistic type theory}
 
-\subsection{This thesis}
+\section{This thesis}
 
 \paragraph{Direct manipulation}
 
@@ -286,7 +354,7 @@ repeatedly been translated as \emph{ideography}
 
 \paragraph{Contributions}
 
-\subsection{Related works}
+\section{Related works}
 
 \paragraph{Window inference}
 
