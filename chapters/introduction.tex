@@ -132,12 +132,12 @@ theory}.
 \paragraph{Axiomatic systems} 
 
 In the very beginnings of proof theory in the 1920s, under the influence of
-Hilbert (himself inspired by Frege), the axiomatic method was predominant, and
-thus proof systems of this era --- now called Hilbert systems --- featured very
-few inference rules. Almost all logical reasoning principles were encoded as
-\emph{axiom schemas} involving generic \emph{propositional variables}. For
-instance, the famous \emph{law of excluded middle}, that expresses that every
-proposition is either true or false, is expressed formally by the schema
+Hilbert, the axiomatic method was predominant, and thus proof systems of this
+era --- now called Hilbert systems --- featured very few inference rules. Almost
+all logical reasoning principles were encoded as \emph{axiom schemas} involving
+generic \emph{propositional variables}. For instance, the famous \emph{law of
+excluded middle}, that expresses that every proposition is either true or false,
+is expressed formally by the schema
 $$A \lor \neg A$$
 where $\lor$ and $\neg$ are symbols denoting the logical connectives of
 \emph{disjunction} and \emph{negation}, and $A$ is a propositional variable that
@@ -235,12 +235,12 @@ $A$ in the \rsf{mp} rule) is not yet known.
 
 \paragraph{Natural deduction}
 
-Axiomatic systems can be quite concise, in that many logics can be expressed in
-them with a small number of axioms. In return, they produce very long and
-verbose formal proofs that are hard for humans to follow, and almost impossible
-to come up with in most cases. In a series of seminars started in 1926, the
-Polish logician Łukasiewicz became one of the first to advocate for a more
-\emph{natural} approach in proof theory, that models more closely the way
+Axiomatic systems can be relatively concise, in that many logics can be
+expressed in them with a small number of axioms. In return, they produce very
+long and verbose formal proofs that are hard for humans to follow, and almost
+impossible to come up with in most cases. In a series of seminars started in
+1926, the Polish logician Łukasiewicz became one of the first to advocate for a
+more \emph{natural} approach in proof theory, that models more closely the way
 mathematicians actually reason \sidecite{Jaskowski1934-JAKOTR-4}. A few years
 later, in a dissertation delivered to the faculty of mathematical sciences of
 the University of Göttingen \sidecite{gentzen_untersuchungen_1935}, the German
@@ -597,12 +597,28 @@ Type theories constitute the logical foundation for the \emph{kernel} of proof
 assistants, i.e. the part of the system that is responsible for checking formal
 proofs expressed in a \emph{concise}, \emph{machine-oriented} format. But after
 Automath, it became clear that this was not enough to make proof assistants a
-viable alternative to paper proofs: \todo{cite De Bruijn on the factor of work
-compared to informal proofs}.
+viable alternative to paper proofs: in
+\sidecite{7a66996d195e4eba8c3fe5dc5bab8fc5}, De Bruijn estimates that it takes a
+factor of 20 to translate a paper proof into a formalized proof in Automath.
+This factor has been estimated to be reductible to 4 in the Mizar proof
+assistant \sidecite{debruijn_factor}, thanks to the design of high-level
+\emph{languages} for representing mathematical statements and proofs, on top of
+the core logical theory (a typed set theory in FOL, in the case of Mizar). In
+particular, any proof assistant must provide the following features in its
+statement language:
 
 \begin{itemize}
-  \item[\textbf{Mathematical notations}]
-  \item[\textbf{Logical primitives}]
+  \item[\textbf{Logical primitives}] Naturally, one needs a way to write
+  propositions formed with logical connectives and quantifiers. This is usually
+  done in symbolic form, either with a custom ASCII notation, or with Unicode
+  characters corresponding to the standard symbols in more modern proof
+  assistants. 
+  \item[\textbf{Mathematical notations}] In addition to the logical primitives,
+  one needs to be able to express mathematical objects and operations in the
+  domain of interest, e.g. numbers and arithmetic operators. Contrary to the
+  logical language that can be hardcoded once and for all in the proof
+  assistant, the mathematical language needs to be \emph{extensible} by the
+  user, so that new notations can be added for new mathematical objects.
 \end{itemize}
 
 \begin{emphpar}
@@ -626,6 +642,14 @@ context of functional programming, see \cite{omar-filling-2021}.}
   \item[\textbf{Imperative}]
   \item[\textbf{Declarative}]
 \end{itemize}
+
+\begin{remark}
+  In some rare cases, an additional \emph{natural language} layer is added on
+  top of the proof language, in order to be as close as possible to informal
+  proofs. With the recent development of large language models like GPT, such
+  natural language translations are becoming more and more convincing (see e.g.
+  Massot's work in Lean \cite{LeanIPAM}).
+\end{remark}
 
 \paragraph{Intuitionistic type theory}
 
@@ -659,6 +683,15 @@ repeatedly been translated as \emph{ideography}
 \sidecite{Frege1952-FRETFT}\sidecite{Frege1999-FRELUL}.
 
 \paragraph{Contributions}
+
+\paragraph{How to read}
+
+\todo{ Introduce a special format for long digressions in sidenotes, so that the
+reader can safely ignore them. }
+
+\todo{ Advise the reader to read with a PDF reader that supports color,
+  hyperlink jumping and hyperlink preview. We tend to cross-reference a lot
+  ideas from different chapters. }
 
 \section{Related works}
 
