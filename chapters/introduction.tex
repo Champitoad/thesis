@@ -4,12 +4,12 @@
 
 % \paragraph{Formal manipulations}
 
-Proof assistants --- also called \emph{interactive theorem provers} --- are
-software systems that allow to both create, and check the correctness of
-mathematical proofs. They are based on the idea that mathematical knowledge can
-be represented unambiguously inside \emph{proof formalisms}, where the truth of
-a statement can be reduced to the mechanical application of symbolic
-manipulation rules. For instance, consider the equation
+Proof assistants --- also called \emph{interactive theorem provers} (``ITP'' for
+short) --- are software systems that allow to both create, and check the
+correctness of mathematical proofs. They are based on the idea that mathematical
+knowledge can be represented unambiguously inside \emph{proof formalisms}, where
+the truth of a statement can be reduced to the mechanical application of
+symbolic manipulation rules. For instance, consider the equation
 $$4x + 6x = (12 - 2)x$$ 
 While any mathematician would immediately recognize it as true, a middle school
 student learning algebra would have to carry manually some computations to
@@ -608,15 +608,17 @@ compared to informal proofs}.
 \begin{emphpar}
   In this thesis, we focus on designing novel interfaces for manipulating
   \emph{logical primitives}, because they are found universally in all types of
-  mathematical reasoning. Thus we leave aside the question of how to provide
-  domain-specific interfaces for particular branches of mathematics, which is
-  nonetheless as much important. The latter has been tackled extensively in
-  Ayers' thesis \sidecite{ayers_thesis}, and more specifically in his framework
-  ProofWidgets for user-extensible, interactive graphical notations in the Lean
-  proof assistant\sidenote{For another related work that tackles this problem in
-  the context of functional programming, see \cite{omar-filling-2021}.}
-  \sidecite{ayers_graphical_2021}.
+  mathematical reasoning. 
 \end{emphpar}
+
+Thus we leave aside the question of how to provide domain-specific interfaces
+for particular branches of mathematics, which is nonetheless as much
+important. The latter has been tackled extensively in Ayers' thesis
+\sidecite{ayers_thesis}, and more specifically in his framework ProofWidgets
+for user-extensible, interactive graphical notations in the Lean proof
+assistant\sidenote{For another related work that tackles this problem in the
+context of functional programming, see \cite{omar-filling-2021}.}
+\sidecite{ayers_graphical_2021}.
 
 \paragraph{Proof languages}
 
@@ -681,16 +683,16 @@ by sequent and natural deduction calculi in order to support an intuitive
 reasoning style.
 \end{quote}
 
-Thus we are not the first to attempt to design new proof-theoretical frameworks
-based on deep inference principles, with the explicit objective of supporting a
-more intuitive reasoning style in interactive theorem provers\sidenote{Note that
-during most of the time period when window inference was developed, the
-terminology of ``deep inference'' had not been introduced yet. Indeed, the first
-article on the subject appeared in 1999 \cite{Guglielmi1999ACO}, with very
-different motivations in mind: namely, the development of a proof-theoretical
-approach unifying concurrent and sequential computation, resulting in the
-calculus of structures for the logic \sys{BV}. But some proof systems based on
-deep inference principles already existed and inspired researchers in window
+Thus we are not the first to attempt to design new proof systems based on deep
+inference principles, with the explicit objective of supporting a more intuitive
+reasoning style in interactive theorem provers\sidenote{Note that during most of
+the time period when window inference was developed, the terminology of ``deep
+inference'' had not been introduced yet. Indeed, the first article on the
+subject appeared in 1999 \cite{Guglielmi1999ACO}, with very different
+motivations in mind: namely, the development of a proof-theoretical approach
+unifying concurrent and sequential computation, resulting in the calculus of
+structures for the logic \sys{BV}. But some proof systems based on deep
+inference principles already existed and inspired researchers in window
 inference, as witnessed by the reference to Schütte's proof theory in the above
 quote.}. However, we believe our approach is unique in that it emphasizes two
 aspects:
