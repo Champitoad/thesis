@@ -142,8 +142,8 @@ write $\Gamma,A \seq C$ for a sequent where $A$ is among the hypotheses.
 We use and do not recall the usual definitions of terms and propositions in
 first order logic. We assume a first order language (function and predicate
 symbols) is given. Provability is defined over sequents $\Gamma\seq C$ by the
-usual logical rules of natural deduction (\sys{NJ}) and/or sequent calculus
-(\sys{LJ}), as defined in \refch{proof-theory}.
+usual logical rules of natural deduction (\reffig{calculi-NJ}) and/or sequent
+calculus (\reffig{calculi-LJ}).
 
 Equality is treated in a common way: $=$ is a binary
 predicate symbol written in the usual infix notation, together with the
@@ -206,7 +206,7 @@ by {\em moving} them. Each item can be positioned freely on a so-called
 
 Finally, note that each goal is displayed on a tab.
 
-\subsection{Two Kinds of Actions}
+\subsection{Two kinds of actions}
 In this example, there are two possible actions.
 
 \begin{itemize}
@@ -229,7 +229,7 @@ hypothesis $\human(\socrates)$ (resp. the new blue fact
 $\mortal(\socrates)$) with the identical red conclusion.
 
 
-\subsection{Modelling the Mechanism}
+\subsection{Modelling the mechanism}
 
 A backward step involves a hypothesis, here $\forall x.\-\human(x)
 \allowbreak\limp \mortal(x)$ and the conclusion, here $\mortal(\socrates)$.
@@ -404,16 +404,11 @@ tool like GeoGebra to construct geometrical figures \sidecite{gg2}, or a
 categorical diagram editor like YADE\todo{add citation/link to Ambroise Lafont's
 work}.
 
-We will not explore the design of such features in this thesis, since we focus
-on finding a universal interface for logical reasoning rather than
-domain-specific interfaces for particular types of mathematical reasoning. The
-latter has been tackled extensively in Ayers thesis \cite{ayers_thesis}, and
-more specifically in his framework ProofWidgets for user-extensible graphical
-notations in Lean\sidenote{For another related work that tackles this problem in
-the context of functional programming, see \cite{omar-filling-2021}.}
-\cite{ayers_thesis}. Note however that it is a necessary feature if one wants to
-achieve a fully graphical theorem proving environment which is accessible to
-non-expert users.
+% We will not explore the design of such features in this thesis, since we focus
+% on finding a universal interface for logical reasoning rather than
+% domain-specific interfaces for particular types of mathematical reasoning.  Note
+% however that it is a necessary feature if one wants to achieve a fully graphical
+% theorem proving environment which is accessible to non-expert users.
 
 \section{A simple example involving equality}\labsec{equality}
 

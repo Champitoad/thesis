@@ -38,6 +38,13 @@
 % ---------- Notations ----------
 % -------------------------------
 
+% Emphasized paragraph
+\newenvironment*{emphpar}{
+\begin{framed}
+\begin{quote}}{
+\end{quote}
+\end{framed}}
+
 % Thick table lines
 \makeatletter
 \newcommand{\thickhline}{%
@@ -476,3 +483,7 @@
 
 % \newcommand{\suc}[1]{#1\!\oplus\! 1}
 \newcommand{\suc}[1]{S(#1)}
+
+% Type theory
+
+\newcommand{\Prop}{\mathsf{Prop}}

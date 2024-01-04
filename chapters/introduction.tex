@@ -1,4 +1,4 @@
-% \setchapterpreamble[u]{\margintoc}
+\setchapterpreamble[u]{\margintoc}
 \chapter{Introduction}
 \labch{intro}
 
@@ -92,7 +92,7 @@ Russell and Whitehead \sidecite{russell25}; and Zermelo-Fraenkel set theory
 (\sys{ZF}, or \sys{ZFC} with the axiom of choice), which is the most popular
 foundation nowadays because of its greater simplicity.
 
-\section{Proof theory}
+\section{Structural proof theory}
 
 \paragraph{Truth and proofs}
 
@@ -120,14 +120,14 @@ regard to their truth. This is very much in line with the \emph{formalist}
 school of thought in philosophy of mathematics, represented by the great
 mathematician and main instigator of proof theory David Hilbert.
 
-\begin{framed}
-\begin{quote}
+\begin{emphpar}
 The real focus throughout this thesis will be on the \emph{inference rules} used
 to build (correct) proofs from axioms/assumptions. Those form the theoretical
 basis for both the \emph{interactive creation}, and the \emph{automatic
-checking} of formal proofs in proof assistants.
-\end{quote}
-\end{framed}
+checking} of formal proofs in proof assistants. The branch of proof theory
+concerned with the study of inference rules is called \emph{structural proof
+theory}.
+\end{emphpar}
 
 \paragraph{Axiomatic systems} 
 
@@ -156,18 +156,23 @@ where $\land$ is the symbol denoting \emph{conjunction}.
 
 \paragraph{Intuitionistic logic}
 
-One motivating factor in the development of a new foundation for mathematics
-was the discovery of strange theorems that defy intuition, like the existence of
-the Weierstrass function which is continuous everywhere but differentiable
+One motivating factor in the development of a new foundation for mathematics was
+the discovery of strange theorems that defy intuition, like the existence of the
+Weierstra{\ss} function which is continuous everywhere but differentiable
 nowhere \sidecite{weirstrass_function}, or the Banach-Tarski paradox which
 asserts that a ball can be decomposed and reassembled into two exact copies of
 itself \sidecite{banach_sur_1924}. Some mathematicians like Brouwer and Weyl
 rejected the truth of such theorems, on the basis that their proofs rely on
-reasoning principles that are not \emph{constructive}; in particular, they allow
-to prove the existence of objects without ever constructing them explicitly,
-thus providing weak --- if not dubious evidence for their conclusion. This
-marked the birth of \emph{constructivism} in philosophy of mathematics, whose
-most famous incarnation is Brouwer's \emph{intuitionism}.
+reasoning principles that are not \emph{constructive}\sidenote{This is true for
+the Banach-Tarski paradox, which relies crucially on non-constructive
+definitions of the concepts of partitions and equivalence classes \cite{175699}.
+But for the Weierstra{\ss} function, it is possible to give it a constructive
+definition with some efforts \cite{439047}.}. In particular, these principles
+allow to prove the existence of objects satisfying certain properties without
+ever providing a \emph{witness}, i.e. a concrete object that satisfies the
+properties in question. This marked the birth of \emph{constructivism} in
+philosophy of mathematics, whose most famous incarnation is Brouwer's
+\emph{intuitionism}.
 
 The original intuitionism of Brouwer was strongly opposed to any attempt at
 formalizing mathematics, standing against both Frege and Russell's logicism that
@@ -191,11 +196,11 @@ fundamental theorems of classical mathematics do not hold anymore, requiring in
 the worst cases to recreate entire branches of mathematics from scratch, like in
 \emph{constructive analysis}. This explains why a large majority of
 mathematicians still work in classical logic, and are often even unaware of the
-existence of constructive mathematics. To account for this diversity, we will in
-this thesis design proof systems that support both classical and intuitionistic
+existence of constructive mathematics. To account for this diversity, in this
+thesis we design proof systems that support both classical and intuitionistic
 reasoning. Because every theorem of intuitionistic logic is also a theorem of
 classical logic (but not the converse), we will always focus first on the
-intutionistic ``kernel'' of our systems, designing the classical part as an
+intuitionistic ``kernel'' of our systems, designing the classical part as an
 extension of the former.
 
 \paragraph{Inference rules}
@@ -219,7 +224,7 @@ prove; then the rule guarantees that proving these subgoals is \emph{sufficient}
 to ensure the truth of the original goal.
 
 Forward reasoning is typically the way in which mathematicians write (informal)
-proofs on paper, i.e. for the \emph{presentation} of their proofs to other
+proofs on paper, for the \emph{presentation} of their proofs to other
 mathematicians. Indeed, it is more natural for humans to follow an argument by
 starting from its premises, because the latter will always contain all the
 information required to deduce the conclusion, the argument only serving as a
@@ -241,12 +246,6 @@ later, in a dissertation delivered to the faculty of mathematical sciences of
 the University of Göttingen \sidecite{gentzen_untersuchungen_1935}, the German
 logician Gerhard Gentzen proposed independently his famous calculus of
 \emph{natural deduction}.
-
-\begin{figure*}
-  \input{figures/nj.tex}
-  \caption{Natural deduction calculus \sys{NJ} for intuitionistic logic}
-  \labfig{calculi-NJ}
-\end{figure*}
 
 \begin{marginfigure}
   $$
@@ -272,13 +271,15 @@ connectives and quantifiers in intuitionistic logic, that was introduced by
 Gentzen under the name \sys{NJ}\sidenote{Gentzen simultaneously introduced a
 natural deduction calculus named \sys{NK} for classical logic, which is just
 \sys{NJ} with an additional rule modelling the principle of \emph{indirect
-proof} --- i.e. showing $A$ by deriving a contradiction from its negation $\neg
-A$ (see \reffig{NK-ip}).} \sidecite{gentzen_untersuchungen_1935}. The most
-simple example can be found in the rules for the conjunction connective $\land$:
-the introduction rule \rsf{\land i} allows to build a proof of $A \land B$ by
-combining a proof of $A$ and a proof of $B$; while the elimination rules
-\rsf{\land e_1} and \rsf{\land e_2} allow to derive proofs of $A$ and $B$ from a
-proof of $A \land B$.
+proof} --- i.e. the possibility to prove any proposition $A$ by deriving a
+contradiction from its negation $\neg A$ (\reffig{NK-ip}). Indeed, this
+principle can be shown to be strictly equivalent to the law of excluded middle,
+in the sense that the former is (intuitionistically) provable if and only if the
+latter is.} \cite{gentzen_untersuchungen_1935}. The most simple example can be
+found in the rules for the conjunction connective $\land$: the introduction rule
+\rsf{\land i} allows to build a proof of $A \land B$ by combining a proof of $A$
+and a proof of $B$; while the elimination rules \rsf{\land e_1} and \rsf{\land
+e_2} allow to derive proofs of $A$ and $B$ from a proof of $A \land B$.
 
 \begin{remark}
   Note that the rules for negation $\neg$ are not present in
@@ -288,31 +289,334 @@ proof of $A \land B$.
   negation are subsumed by those for implication $\limp$ and absurdity $\bot$.
 \end{remark}
 
+\begin{figure*}
+  \input{figures/nj.tex}
+  \caption{Natural deduction calculus \sys{NJ} for intuitionistic logic}
+  \labfig{calculi-NJ}
+\end{figure*}
+
+\begin{figure*}
+  \input{figures/lj.tex}
+  \caption{Sequent calculus \sys{LJ} for intuitionistic logic}
+  \labfig{calculi-LJ}
+\end{figure*}
+
 \paragraph{Sequent calculus}
 
-Gentzen's work was aimed at a resolution of \emph{Hilbert's program}, whose goal
-was to ground the trust in the foundations of (classical) mathematics --- at the
-time riddled with inconsistencies such as Russell's paradox --- by proving the
-\emph{consistency} of Peano's axioms of arithmetic, i.e. that no contradiction
-can be derived from them.
+In addition to the constructivists' objections, some doubts were raised by the
+discovery of fatal flaws in early attempts at defining foundational axiomatic
+systems, the most famous one being the \emph{antinomy} of Russell's paradox
+caused by the unrestricted axiom of comprehension in naive set theory. In order
+to restore an absolute trust in the foundations of (classical) mathematics,
+Hilbert proposed in the early 1920s to prove \emph{mathematically} the
+consistency of the axiomatic system for arithmetic introduced in 1889 by
+Peano\sidenote{A more involved axiomatic system was proposed one year earlier by
+Dedekind \cite{dedekind_nat}. Less known is that Peirce had already published in
+1881 an equivalent axiomatization of natural numbers \cite{peirce_logic_1881}.},
+i.e. that no contradiction can be derived from Peano's axioms. Indeed, he
+believed that every mathematical truth could be derived from the principles of
+arithmetic, thus reducing the problem of the consistency of mathematics to that
+of arithmetic. Moreover, Hilbert's program was to be carried by \emph{finitist}
+means, without resorting to any reasoning principle involving infinite
+collections --- which were at the heart of the controversy started by
+constructivists. This was the initial impulse for developing proof theory, since
+it provided a mathematical definition of ``mathematical proofs'' as
+\emph{finite} sequences of symbols satisfying certain properties.
 
+Gentzen's work on natural deduction was an integral part of this program, as an
+attempt to render the \emph{metamathematics} of proof theory more structured and
+elegant. However, he could not devise any argument for consistency in this
+framework, and thus set out to devise a new formalism that would be a
+reformulation of natural deduction with better mathematical properties, such as
+\emph{symmetries}. This gave us \emph{sequent calculus}, which is widely
+regarded as the cornerstone for most developments in proof theory to this day.
+
+Sequent calculus is based on the observation that some rules in natural
+deduction depend crucially on the use of \emph{hypotheses} that appear
+``higher'' or earlier in the proof. The prototypical example is the introduction
+rule \rsf{{\limp}i} for implication: in order to prove $A \limp B$, it suffices
+to prove $B$ under the assumption that $A$ is true. Then the assumption $A$ is
+\emph{discharged} by the rule (bracket notation in \reffig{calculi-NJ}), meaning
+that the conclusion $A \limp B$ holds \emph{unconditionally}, without the
+assumption. In sequent calculus, this relation of provability of a conclusion
+$C$ under a collection of assumptions/hypotheses $\Gamma$ is captured by the
+expression $\Gamma \seq C$, called a \emph{sequent}. The introduction rule
+\rsf{{\limp}i} is then expressed by the so-called \emph{right introduction} rule
+\rsf{{\limp}R} (\reffig{calculi-LJ}), which keeps track of the full
+\emph{context} of hypotheses by having sequents as premiss and conclusion,
+instead of just formulas. Right introduction rules for other connectives are
+also obtained straightforwardly from the corresponding introduction rules in
+natural deduction, by simply making the contexts of hypotheses $\Gamma$ and
+$\Delta$ always explicit.
+
+Following the original presentation of Gentzen, contexts are taken to be
+\emph{lists} of formulas (``sequenz'' in German), i.e. ordered collections where
+repetitions are allowed. Still, we really want to see them as \emph{sets} of
+formulas, since it is implicit in mathematical practice that \begin{enumerate*}
+\item the order in which hypotheses are listed does not matter, and \item
+hypotheses may be used more than once in a proof. \end{enumerate*} These two
+conventions are respectively captured by the \emph{structural rules} \rsf{ex} of
+\emph{exchange} and \rsf{ctr} of \emph{contraction} in \reffig{calculi-LJ}. A
+third structural rule, \rsf{wkn} for \emph{weakening}, accounts for the presence
+of unused assumptions in some proofs, by allowing to introduce hypotheses at
+will (with a top-down reading of rules).
+
+The main difference of sequent calculus compared to natural deduction lies in
+its splitting of elimination rules in two parts: \emph{left introduction} rules,
+and the \emph{cut} rule. As their name indicates, left introduction rules serve
+a purpose symmetric to right introduction rules: while the latter define how to
+introduce a connective in the conclusion of a sequent, the former define how to
+introduce a connective in one of its hypotheses. Then, the only way to
+\emph{use} such an hypothesis $A$ is through the \rsf{cut} rule, which erases
+$A$ from the context in the conclusion of the rule, by justifying it with the
+proof of $A$ given as premiss. The \rsf{cut} rule can also be seen as a
+generalization of the \textit{modus ponens} rule of Hilbert systems, replacing
+the logical connective $\limp$ of implication by the ``structural connective''
+$\seq$ of sequents. The remaining \emph{axiom} rule \rsf{ax} is the only axiom
+of sequent calculus, and is in a sense dual to the \rsf{cut} rule: while the
+latter allows to justify a hypothesis by an identical conclusion, the \rsf{ax}
+rule allows to justify a conclusion by an identical hypothesis.
+
+Both the \rsf{cut} and \rsf{ax} rules seem completely trivial. Yet surprisingly,
+Gentzen managed to prove a powerful result called alternatively
+\textit{Haupstatz}, fundamental theorem (of proof theory), or
+\emph{cut-elimination}: every provable formula in sequent calculus has a
+\emph{cut-free} proof, i.e. a proof that does not make use of the \rsf{cut}
+rule. Intuitively, it can be understood as a formal justification of the
+possibility to \emph{inline} proofs of lemmas, by seeing an instance of
+\rsf{cut} on $A$ as a way to invoke the lemma $A$ without duplicating its proof.
+Moreover, Gentzen's proof of the Haupstatz is itself constructive: it describes
+an \emph{algorithm} for transforming every sequent calculus proof into a
+cut-free one. Thus the \rsf{cut} rule is said to be \emph{admissible}, since any
+provable sequent can be proved without it.
+
+An important consequence of cut-elimination, which was the original motivation
+of Gentzen, is the consistency of the logic (intuitionistic predicate logic in
+the case of \sys{LJ}). This stems from the fact that all rules apart from the
+\rsf{cut} rule satisfy the \emph{subformula property}: every formula appearing
+in the premisses is a subformula of some formula in the conclusion. Thus there
+cannot exist a proof of the absurd sequent $\seq \bot$, since the only formula
+that is a subformula of $\bot$ is $\bot$ itself, and there is no rule instance
+with $\seq \bot$ as conclusion that only contains $\bot$ in its premisses. The
+subformula property is the first occurrence of the concept of \emph{analyticity}
+in proof theory, and can be seen as a technical realization of the philosophical
+notion of analyticity first applied to propositions by Kant, and later to proofs
+in mathematics by Bolzano \sidecite{bolzano}.
+
+Unfortunately, the proof of cut-elimination for the sequent calculus
+incorporating Peano's axioms, found by Gentzen a few years after proving
+cut-elimination for \sys{LJ} \sidecite{gentzen_widerspruchsfreiheit_1936}, is
+not finitist: it makes use of a transfinite induction up to the ordinal
+$\epsilon_0$. But the very ideas of cut-elimination and analyticity will have
+far-reaching applications in proof theory and beyond, including many of the
+results presented in this thesis.
 
 \paragraph{Deep inference}
 
+Many years after Gentzen's seminal work, at the advent of the
+21\textsuperscript{th} century, Alessio Guglielmi introduced a new methodology
+for designing proof formalisms called \emph{deep inference}
+\sidecite{Guglielmi1999ACO}. The idea was to overcome some limitations of
+Gentzen formalisms while preserving their good properties, by allowing inference
+rules to be applied \emph{anywhere} inside formulas, instead of only at the
+top-level of sequents\sidenote{In fact, Schütte had already proposed a deep
+inference system as early as 1977 \cite{schutte_proof_1977}, but the idea did
+not generate much interest at the time.}. The first deep inference system was
+the \emph{calculus of structures} (``CoS'' for short), which can be succintly
+described as a \emph{rewriting system} on formulas. For instance, the following
+\emph{switch} rule, when read bottom-up (i.e. in backward mode), indicates that
+the formula $A \lor (B \land C)$ may be rewritten into $(A \lor B) \land C$:
+$$\R[\rsf{s}]{S\select{(A \lor B) \land C}}{S\select{A \lor (B \land C)}}$$
+Importantly, the rule can be applied in any \emph{context} $S\hole$. A context
+$S\hole$ is simply a formula containing a single occurrence of a special
+subformula $\hole$ called its \emph{hole}, which can be \emph{filled} (i.e.
+substituted) with any formula $A$ to give a new formula $S\select{A}$. This
+notion of context serves two purposes:
+\begin{itemize}
+  \item it formalizes the ability of rewriting rules to be applied at an
+  arbitrary \emph{depth} inside expressions, while retaining all the information
+  available in the surrounding context;
+  \item it generalizes the contexts $\Gamma, \Delta$ of sequent calculus, by
+  giving them the full structure of formulas instead of just flat lists of
+  formulas. Indeed, a sequent $\Gamma \seq C$ can be interpreted as the formula
+  $\bigwedge \Gamma \limp C$, where $\bigwedge \Gamma$ denotes the conjunction
+  of all the formulas in $\Gamma$.
+\end{itemize}
+Then, a proof of a formula $A$ in the calculus of structures is not a
+\emph{tree} of rule instances as in natural deduction and sequent calculus, but
+a \emph{sequence} of rewritings $A \steps \top$ that reduces $A$ to the
+trivially true goal $\top$.
+
 The calculus of structures, as a rewriting system, is closer to the equational
 reasoning that mathematicians are accustomed to in algebra. The main difference
-is that most rules can only be applied in a \emph{single} direction, because the
-premiss and conclusion are not \emph{equivalent}. A better analogy would be with
-the substitutional rules that are sometimes used to solve \emph{inequations}.
+is that most rules (including the switch rule \rsf{s}) can only be applied in a
+\emph{single} direction, because the premiss and conclusion are not
+\emph{equivalent}. A better analogy would be with the substitutional rules that
+are sometimes used to solve \emph{inequations} between numbers.
+
+\begin{emphpar}
+\emph{All} the proof formalisms explored in this thesis will be deep inference
+rewriting systems in the style of the calculus of structures.
+\end{emphpar}
 
 \section{Proof assistants}
 
+Proof assistants are a direct application of proof theory, exploiting the
+ability of programming languages to represent and manipulate arbitrary data
+structures to give a concrete implementation of proof formalisms. Crucially,
+they open the possibility to \emph{automate} the construction and verification
+of formal proofs, by acting on two fronts:
+\begin{itemize}
+  \item on the \textbf{human} side, the design of \emph{high-level interfaces}
+  for representing and manipulating statements and proofs can bridge the gap
+  between the low-level and very detailed proofs of formal logic, and the
+  informal proofs of mathematicians;
+  \item on the \textbf{machine} side, the design of \emph{algorithms} that both
+  find proofs of given statements and ensure their correctness can (to some
+  extent) relieve mathematicians from the burdens of proof writing and proof
+  checking.
+\end{itemize}
+Thus the advent of computers gave a new purpose to proof theory, going beyond
+its foundational role with the hope to support and change the everyday practice
+of mathematicians.
+
+\begin{emphpar}
+In this thesis, we are concerned mostly with the \emph{human} side of the
+equation: our aim is to improve the ways in which the user can communicate her
+intent to the proof assistant, and conversely the ways in which the proof
+assistant can communicate its results, but also provide suggestions to the user
+on how to solve problems.
+\end{emphpar}
+
+\paragraph{Type theory}
+
+The ancestor to all proof assistants was the Automath project, initiated by
+Nicolaas Govert De Bruijn as soon as 1967. Citing Geuvers
+\sidecite{geuvers_proof_2009}:
+\begin{quote}
+[One] aim of the project was to develop a mathematical language in which all of
+mathematics can be expressed accurately, in the sense that linguistic
+correctness implies mathematical correctness. This language should be computer
+checkable and it should be helpful in improving the reliability of mathematical
+results.
+\end{quote}
+Thus the design of Automath was focused on the automatic \emph{verification} of
+proofs through \emph{linguistic} means. It introduced many fundamental ideas
+that are still at work in modern proof assistants, the most prominent being the
+use of a \emph{type theory} to encode formal proofs.
+
+Contrary to predicate logic in traditional proof theory, type theories break the
+syntactic hierarchy imposed upon mathematical objects, propositions and proofs,
+by giving them a uniform representation as so-called \emph{terms} that can be
+assigned a \emph{type}. The fact that a term $t$ has type $T$ is usually denoted
+by the expression $t : T$, which has come to be called a \emph{typing judgment}
+after Martin-Löf. For instance, the judgment $3 : \nats$ states that the term
+$3$ has the type $\nats$ of natural numbers, and $1 + 1 = 2 : \Prop$ states that
+the term $1 + 1 = 2$ has the type $\Prop$ of propositions.
+
+\paragraph{First-order vs. higher-order}
+
+Almost all type theories are \emph{higher-order}: they give a first-class status
+to functions and predicates, by allowing them to take other functions and
+predicates as arguments. This is because they are based on the
+\emph{$\lambda$-calculus} of Alonzo Church
+\sidecite{15897363-af72-3dac-82e6-fde144ad66c0}, an intensional theory of
+higher-order functions that is now considered to be the first functional
+programming language in history. For instance in \emph{simply-typed}
+$\lambda$-calculus \sidecite{e4d9a073-5bba-3a5b-90d3-81832cd433e5}, one may type
+the \emph{sum operator} over infinite sequences of natural numbers with the
+judgment $\lambda u. \sum_{n \in \nats}{u~n} : (\nats \to \nats) \to \nats$,
+where $\lambda u. \sum_{n \in \nats}{u~n}$ is a \emph{$\lambda$-term} encoding
+the higher-order function that takes any such sequence represented as a function
+$u : \nats \to \nats$, and returns the sum of each of its value encoded as the
+\emph{function application} $u~n$.
+
+By contrast, the predicate logic developed in the 19\textsuperscript{th} century
+and studied in traditional proof theory is \emph{first-order}: functions and
+predicates can only take so-called \emph{first-order individuals} as arguments,
+which usually model ``non-functional'' mathematical objects like numbers and
+sets.
+
+\begin{emphpar}
+In this thesis, we exclusively study proof formalisms for \emph{first-order}
+predicate logic (``FOL'' hereafter).
+\end{emphpar}
+
+We identified a few reasons for working in FOL:
+\begin{itemize}
+  \item it is a standard and well-understood setting that has received a lot of
+  attention, allowing us to exploit various existing works from the structural
+  proof theory literature, and even from some overlooked theories of
+  19\textsuperscript{th} century logicians;
+  \item by contrast, type theory is a quite recent subject\sidenote{Almost 100
+  years younger than FOL if we ignore Russell's theory of types (1902), that was
+  based on a set theory encoded in FOL.}, which explains why there is still a
+  great diversity of type theories that differ in subtle and often incompatible
+  ways;
+  \item FOL is a common kernel of virtually every type theory, making our work
+  direcly applicable to all present and future proof assistants;
+  \item it is also a simpler setting, that is powerful enough to study the
+  essential features of logical reasoning, without the idiosyncracies of type
+  theories aimed at capturing the full complexity of mathematics.
+\end{itemize}
+
+\paragraph{Curry-Howard correspondence}
+
+De Bruijn came up with the revolutionary idea that propositions could themselves
+be seen as types, by having judgments such as $t : 1 + 1 = 2$ where $t$ is a
+\emph{proof term} representing a proof of the proposition $1 + 1 = 2$. This
+\emph{propositions-as-types} principle was rediscovered independently by Howard
+in 1978 \sidecite{Howard1980-HOWTFN-2}, and developed further into a
+\emph{proofs-as-programs} correspondence --- also called Curry-Howard
+correspondence or isomorphism --- where $\lambda$-terms in the simply-typed
+$\lambda$-calculus are put in one-to-one correspondence with proofs in the
+implicational fragment of the natural deduction system \sys{NJ} of
+Gentzen\sidenote{In fact, Curry had already noticed in 1958 a similar connection
+between the types of combinators in his \emph{combinatory logic}, and the axioms
+of Hilbert systems for implication \cite{Curry1959-CURCLV} --- hence the mention
+of Curry.} (\reffig{calculi-NJ}).
+
+Thus the core of type theory is \emph{intuitionistic} in nature, and the
+Curry-Howard correspondence has fostered many fruitful interactions between
+computer science, logic and constructive mathematics, with proof assistants
+acting as a crucial tool and source of investigations. One influential
+development in this direction has been the \emph{intuitionistic type theory} of
+Martin-Löf, which formed the basis for the implementation of many proof
+assistants like NuPrl, Alf, and most recently Agda \cite{geuvers_proof_2009}. A
+system closely related to intuitionistic type theory, the \emph{Calculus of
+Inductive Constructions} (\sys{CoIC}), is also implemented in two leading proof
+assistants: Coq \sidecite{the_coq_development_team_2022_7313584} and Lean
+\sidecite{10.1007/978-3-030-79876-5_37}. Following the proofs-as-programs
+correspondence, these systems support the creation of both proofs and programs
+that manipulate and compute mathematical objects, by compiling everything down
+to typed terms.
+
 \paragraph{Statement languages}
+
+Type theories constitute the logical foundation for the \emph{kernel} of proof
+assistants, i.e. the part of the system that is responsible for checking formal
+proofs expressed in a \emph{concise}, \emph{machine-oriented} format. But after
+Automath, it became clear that this was not enough to make proof assistants a
+viable alternative to paper proofs: \todo{cite De Bruijn on the factor of work
+compared to informal proofs}.
 
 \begin{itemize}
   \item[\textbf{Mathematical notations}]
   \item[\textbf{Logical primitives}]
 \end{itemize}
+
+\begin{emphpar}
+  In this thesis, we focus on designing novel interfaces for manipulating
+  \emph{logical primitives}, because they are found universally in all types of
+  mathematical reasoning. Thus we leave aside the question of how to provide
+  domain-specific interfaces for particular branches of mathematics, which is
+  nonetheless as much important. The latter has been tackled extensively in
+  Ayers' thesis \sidecite{ayers_thesis}, and more specifically in his framework
+  ProofWidgets for user-extensible, interactive graphical notations in the Lean
+  proof assistant\sidenote{For another related work that tackles this problem in
+  the context of functional programming, see \cite{omar-filling-2021}.}
+  \sidecite{ayers_graphical_2021}.
+\end{emphpar}
 
 \paragraph{Proof languages}
 
@@ -323,8 +627,8 @@ the substitutional rules that are sometimes used to solve \emph{inequations}.
 
 \paragraph{Intuitionistic type theory}
 
-\section{This thesis}
 
+\section{This thesis}
 \paragraph{Direct manipulation}
 
 \paragraph{Graphical deep inference}
@@ -336,9 +640,9 @@ mathematical objects and assertions about them are represented in a formal
 language of propositions, also called \emph{formulas}, understood as a (usually
 infinite) set of strings of symbols.
 
-Contrary to a common misconception from researchers in logic, Leibniz did not
-conceive of his \textit{characteristica universalis} as a symbolic language, but
-rather as an \emph{iconic} one \cite[Chpt.~3]{logique_leibniz}:
+Contrary to a common misconception among logicians, Leibniz did not conceive of
+his \textit{characteristica universalis} as a symbolic language, but rather as
+an \emph{iconic} one \cite[Chpt.~3]{logique_leibniz}:
 \begin{quote}
     The true ``real characteristic'' [...] would express the composition of
     concepts by the combination of signs representing their simple elements,
@@ -380,16 +684,16 @@ reasoning style.
 Thus we are not the first to attempt to design new proof-theoretical frameworks
 based on deep inference principles, with the explicit objective of supporting a
 more intuitive reasoning style in interactive theorem provers\sidenote{Note that
-during most of the time when window inference was developed, the terminology of
-``deep inference'' had not been introduced yet. Indeed, the first article on the
-subject appeared in 1999 \cite{Guglielmi1999ACO}, with very different
-motivations in mind: namely, the development of a proof-theoretical approach
-unifying concurrent and sequential computation, resulting in the calculus of
-structures for the logic \sys{BV}. But some proof systems based on deep
-inference principles already existed and inspired researchers in window
-inference, as witnessed by the reference to Schütte's proof theory
-\cite{schutte_proof_1977} in the above quote.}. However, we believe our approach
-is unique in that it emphasizes two aspects:
+during most of the time period when window inference was developed, the
+terminology of ``deep inference'' had not been introduced yet. Indeed, the first
+article on the subject appeared in 1999 \cite{Guglielmi1999ACO}, with very
+different motivations in mind: namely, the development of a proof-theoretical
+approach unifying concurrent and sequential computation, resulting in the
+calculus of structures for the logic \sys{BV}. But some proof systems based on
+deep inference principles already existed and inspired researchers in window
+inference, as witnessed by the reference to Schütte's proof theory in the above
+quote.}. However, we believe our approach is unique in that it emphasizes two
+aspects:
 \begin{itemize}
   \item the use of \emph{direct manipulation} on goals to perform proof steps
   (although some pointing interactions were already at work in window
@@ -417,7 +721,7 @@ mathematical objects, thus offering a form of \emph{end-user} programming.
 \end{itemize}
 The \texttt{Box} data structure easily lends itself to visualisation in a
 two-dimensional graphical notation, while \texttt{ProofWidgets} promises great
-capabilities for proofs by both direct and iconic manipulations.
+capabilities for proofs by both direct and iconic manipulation.
 
 However, the work of Ayers focuses mainly on designing a general framework that
 can integrate modern interfaces for proofs in the Lean proof assistant, while we
