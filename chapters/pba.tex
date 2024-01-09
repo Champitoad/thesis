@@ -167,7 +167,7 @@ convention, that bound and free variables are distinct and that a
 variable is bound at most once.
 
 Extending this work to simple extensions of FOL, like multi-sorted predicate
-calculus is straightforward (and actually done in the Actema prototype).  Some
+calculus is straightforward (and actually done in the Actema prototype). Some
 interesting points may show up when considering how to apply this work to more
 complex formalisms like type theories. We will not explore these questions here.
 
@@ -475,7 +475,7 @@ necessary: because a drag-and-drop involves subterms of the items involved, one
 can often directly use (resp. act on) the part of the hypothesis (resp.
 conclusion) which is of interest.
 
-\subsection{Conjunction and Disjunction}
+\subsection{Conjunction and disjunction}
 The conjunction is an easy to explain case. A hypothesis of the form
 $A\land B$ can be used directly both as evidence for $A$ and as evidence
 for $B$. This is modeled by the rules \rnmsf{L\land_1} and
@@ -728,7 +728,7 @@ Q(y)  ~\/~\steps
 ~\/~\exists x.Q(x)
 $$
 
-\subsection{Dependency between Variables}\labsec{acyclicity}
+\subsection{Dependency between variables}\labsec{acyclicity}
 Some more advanced examples yield simultaneous instantiations of
 existentially and universally quantified variables. In such cases, the
 system needs to check some dependency conditions. For instance, the
@@ -765,7 +765,7 @@ variables\sidenote{We will come back to this in \refsec{linkages}. Also notice
 that this example requires to use full (first-order) unification, not only
 matching.}. The system thus refuses this action.
 
-\subsection{Conditional Rewriting}
+\subsection{Conditional rewriting}
 The example given in \refsec{equality}, although very simple,
 already combines the rules for equality and for quantifiers. When also
 using implication, one obtains naturally some form of conditional
@@ -952,18 +952,17 @@ $$
 \end{figure}
 \pagelayout{margin} % Restore margins
 
-\section{Related works}\labsec{pbao-rw}
+\section{Related works}\labsec{pba-rw}
 
-\subsection*{Window Inference}
+\paragraph{Window inference}
 
 We have already mentioned Proof-by-Pointing, which was part of the CtCoq and
 Pcoq efforts \sidecite{amerkad-mathematics-2001} to design a graphical user
 interface for the Coq proof assistant. Another contemporary line of work was the
-one based on \emph{window inference}, initially pioneered by P.J. Robinson and
-J. Staples. In \sidecite{robinson-formalizing-1993}, window inference is
-described as a general proof-theoretical framework, which aims to accomodate for
-the pervasive use of \emph{equivalence transformations} throughout mathematics
-and computer science.
+one based on \emph{window inference}, also mentioned in \refsec{intro-rw}. In
+\sidecite{robinson-formalizing-1993}, window inference is described as a general
+proof-theoretical framework, which aims to accomodate for the pervasive use of
+\emph{equivalence transformations} throughout mathematics and computer science.
 
 % In \cite{robinson-formalizing-1993}, they describe it as a new kind
 % of proof-theoretic framework, which aims to accomodate for the pervasive use of
@@ -988,7 +987,7 @@ window by replacing the old subexpression by the new one, without modifying the
 surrounding context.
 
 This process is quite reminiscent of the rewriting produced by our DnD
-actions.  One key difference is that window inference rules can be
+actions. One key difference is that window inference rules can be
 applied stepwise, while we choose to hide the sequence of rules that
 justifies a DnD. The window inference approach gives to the user a
 precise control of the transformations to be performed and thus could
@@ -1006,7 +1005,7 @@ inspire interesting extensions of our work.
 % from being implemented in the same interface.
 
 
-\subsection*{Other Gestural Proof Systems}
+\paragraph{Other gestural proof systems}
 
 There are other proof systems which include drag-and-drop features. Two of them
 are the KeY Prover \sidecite{ahrendt-using-2016} and TAS
@@ -1028,7 +1027,8 @@ two levels:
 \begin{enumerate}
   \item the proof state, which is a structured proof text in the style of
   Isar~\sidecite{isar};
-  \item the proof commands, which can only be performed through choices in textual menus.
+  \item the proof commands, which can only be performed through choices in
+  textual menus.
 \end{enumerate}
 
 % The latter can be useful to integrate specific actions which do not fit
@@ -1046,7 +1046,7 @@ two levels:
 % PbP to a single selection.
 
 
-\subsection*{Explicit Proof Objects}
+\paragraph{Explicit proof objects}
 
 Finally let us mention various recent implementations proposing various ways to
 construct proofs graphically: Building Blocks~\sidecite{buildingblocks}, the

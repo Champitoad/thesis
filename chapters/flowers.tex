@@ -2965,7 +2965,7 @@ Flower Prover is highly original in mainly two respects:
   on mobile devices like phones and tablets\sidenote{This is not the case
   currently for Actema (\refch{pba}), which does not provide a vertical layout,
   and has poor support for touch interactions. While the former issue could be
-  solved easily, the latter is somehow inherent to the symbolic nature of
+  solved easily, the latter is somehow inherent to the textual nature of
   formulas: in scenarios where one needs to refer to a specific subterm, it is
   difficult to design a touch-based selection mechanism that is as precise and
   straightforward as a mouse-based one.}, which are becoming increasingly
@@ -2990,8 +2990,8 @@ Flower Prover is highly original in mainly two respects:
 \paragraph{Modal interface}
 
 The Flower Prover is organized in two main \emph{modes} of interaction,
-providing different sets of direct manipulation actions on the
-goal\sidenote{Another example of modal interface is the popular text editor
+providing different sets of direct manipulation actions on
+goals\sidenote{Another example of modal interface is the popular text editor
 \texttt{vim}, with its \emph{normal} mode for high-level manipulation of text
 through commands and macros, and its \emph{edit} mode for low-level insertion
 and deletion of characters.}:
@@ -3005,6 +3005,7 @@ and deletion of characters.}:
   % or dragging and dropping flowers into gardens.
   As will be detailed shortly, there is almost a one-to-one correspondence
   between \Proof actions, and the $\Nature$-rules of the flower calculus.
+  
   \item[\textbf{\Edit mode}] in this mode, the user can construct arbitrary
   flowers by clicking on buttons and filling text fields, or modify the goal by
   clicking and dragging flowers around. It corresponds in purpose to the text
@@ -3091,7 +3092,7 @@ are in order:
   to focus her attention. Since every action other than \Action{Import} is
   performed by a \emph{click} gesture, the area that is highlighted corresponds
   precisely to the area that can be clicked for triggering the action: either a
-  green box enclosing the justifiable atom for \Action{Justify} actions, an
+  green box enclosing the justifiable atom for \Action{Justify}@ actions, an
   orange box covering the empty pistil for \Action{EFQ}, \Action{Case} and
   \Action{Unlock} actions, or a green box covering the empty petal for
   \Action{QED} actions.
@@ -3189,8 +3190,8 @@ contexts of \emph{arbitrary} depth.
 This way of navigating tree structures represented as nested areas is typical of
 \emph{zoomable user interfaces} or ZUI, a strand of GUI that has been developed
 by many pioneers in the field of human-computer interaction such as Ivan
-Sutherland in its Sketchpad system \sidecite{10.1145/800265.810742}, and Alan
-Kay in its Smalltalk system \sidecite[4em]{goldberg_smalltalk-72_1976}.
+Sutherland in his Sketchpad system \sidecite{10.1145/800265.810742}, and Alan
+Kay in his Smalltalk system \sidecite[4em]{goldberg_smalltalk-72_1976}.
 \end{remark}
 
 \paragraph{Automation}
@@ -3223,11 +3224,11 @@ the goal. One could even leave the configuration of automated action types to
 the user with a dedicated interface. This could include an additional option for
 executing \Action{Auto} systematically after every (other) \Proof action,
 removing the need to click multiple times on the \Action{Auto} button. In this
-setting, any proof in the Flower Prover would be reduced to a sequence of
+setting, any proof in the Flower Prover could be reduced to a sequence of
 \Action{Import} and \Action{Case} actions.
 
 
-\subsection{Towards a unified workflow}
+\subsection{Towards a unified workflow}\labsubsec{flowers-unified}
 
 \paragraph{Theories and goals}
 
@@ -3282,21 +3283,6 @@ the grammatical structure of sentences expressing logical propositions, and
 formal proofs reproduce the inferential structure of arguments built from
 sequences of sentences.
 
-\paragraph{Diagrams}
-
-However, there is an increasing number of areas in mathematics --- the most
-prominent one being category theory --- where the heart of a proof lies in the
-dynamical construction of a \emph{diagram} capturing the structure of interest
-in given mathematical objects. The natural language proof text is often just a
-mean to explicit the meaning or intuition behind the diagrammatic manipulations,
-or simply a retranscription of the commentary that the mathematician would give
-when unfolding the construction on a blackboard. If one views logic as one
-particular type of mathematical reasoning --- albeit one that is omnipresent in
-all branches of mathematics, then it is only natural to expect that some
-diagrammatic system should exist for it, that can express in the most natural
-way most (if not all) logical arguments. This is the \emph{iconicity} thesis of
-Peirce, and what we are aiming for with the Flower Prover.
-
 \paragraph{Context navigation}
 
 After this little conceptual \textit{aparté}, let us come back to the problem of
@@ -3311,9 +3297,11 @@ distinction between goals and theories: a goal is just a theory that has yet to
 be justified, which can itself be identified with a partial proof (or a ``proof
 term with holes'' in type-theoretical parlance)\sidenote{We will come back to
 this idea of merging proofs and statements in the same data structure in the
-conclusion, when discussing \emph{development calculi}. Note however that it is
-already at the heart of \emph{dependent} type theory, where terms can freely
-occur inside types.}.
+conclusion, when discussing \emph{development calculi} and the
+\emph{Curry-Howard correspondence}. Note however that it is already at work in
+\emph{dependent} type theory, where proof terms can freely occur inside types.
+This is exemplified in the Agda proof assistant, where all manipulations are
+done directly on the partial proof/program text.}.
 
 It would still be useful to be able to aggregate automatically the set of all
 lemmas and definitions (i.e. hypotheses) available in a focused subgoal
@@ -3327,10 +3315,10 @@ interaction modes, that exposes the global context $\Psi$ of the current focus
 $\Phi\hole$. We anticipate only two kinds of interaction with any flower $\phi$
 in the shelf:
 \begin{itemize}
-  \item[\textbf{Pollination}] the user can perform an \Action{Import} action by
-  dragging $\phi$;
-  \item[\textbf{Jump to definition}] the user can focus on the subgoal where
-  $\phi$ originates by clicking on $\phi$.
+  \item[\textbf{Pollination} (in \Proof mode)] the user can perform an
+  \Action{Import} action by dragging $\phi$;
+  \item[\textbf{Jump to definition} (in \Navigation mode)] the user can focus on
+  the subgoal where $\phi$ originates by clicking on $\phi$.
 \end{itemize}
 
 Since the shelf might contain \emph{a lot} of hypotheses, it will be important
@@ -3596,15 +3584,15 @@ Another direction of research would consist in comparing our algorithm to
 existing search procedures for EG, in particular one that was originally
 developed by Peirce, and described by Oostra in \sidecite{oostra_advances_2022}.
 
-\paragraph{Curry Howard}
+\paragraph{Curry-Howard}
 
 We have begun to sketch some ideas for a Curry-Howard correspondence, where
-flowers and actions (rules) for justifying them are identified respectively with
-\emph{normal} and \emph{neutral} terms of the simply-typed $\lambda$-calculus.
-For instance, the computational counterpart of the rule \rsf{poll{\da}} in
-pistils would be a kind of \emph{function application} expressed by the
-following \rsf{app} rule, which is highly reminiscent of the instantiation rule
-\rsf{ipis}:
+flowers and \Proof actions for justifying them ($\Nature$-rules) are identified
+respectively with \emph{normal} and \emph{neutral} terms of the simply-typed
+$\lambda$-calculus. For instance, the computational counterpart of the rule
+\rsf{poll{\da}} in pistils would be a kind of \emph{function application}
+expressed by the following \rsf{app} rule, which is highly reminiscent of the
+instantiation rule \rsf{ipis}:
 $$
 \R[\rsf{app}]
   {\Xi\select{t~u : (\flower{\subst{\Phi}{u}{x}}{\subst{\Delta}{u}{x}})}}
@@ -3703,11 +3691,11 @@ calculus sketched above, where proof terms can appear inside flowers.
 Finally, it should be noted that Peirce did not think of EG as a calculus that
 could aid in performing reasoning \emph{per se}, but rather as a tool for
 analysing the finer structure of logical endeavor
-\cite[pp.~110-111]{Roberts+1973}:
+\cite[pp.~110--111]{Roberts+1973}:
 \begin{quote}
   [...] the purpose which the system was designed to fulfill was ``to enable us
 to separate reasoning into its smallest steps so that each one may be examined
-by itself'' (Ms 455, p.2). The aim was not to facilitate reasoning, but to
+by itself'' (Ms 455, p.~2). The aim was not to facilitate reasoning, but to
 facilitate the study of reasoning.
 \end{quote}
 
