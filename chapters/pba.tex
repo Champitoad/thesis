@@ -3,10 +3,10 @@
 \chapter{Proof-by-Action}
 \labch{pba}
 
-\begin{kaobox}[frametitle=Note]
-  Most of the content in this chapter has been previously published in
-  \cite{10.1145/3497775.3503692}.
-\end{kaobox}
+% \begin{kaobox}[frametitle=Note]
+%   Most of the content in this chapter has been previously published in
+%   \cite{10.1145/3497775.3503692}.
+% \end{kaobox}
 
 % \section{What is a sequent?}
 
@@ -72,7 +72,7 @@ proof-theoretical foundations for the semantics of DnD actions
 will be investigated more thoroughly in \refch{sfl}.
 % , although the most important meta-theoretical
 % properties will be exposed here with outlines of their proofs.
-More advanced features of the proof-by-action paradigm that go beyond the core
+More advanced features of the Proof-by-Action paradigm that go beyond the core
 logic are illustrated in \refch{advanced}, and \refch{plugin} explains how it
 can be integrated in a mainstream proof assistant.
 
@@ -92,7 +92,7 @@ The chapter is organized as follows. \refsec{setting} briefly outlines its
 logical setting. \refsec{aristote} describes the basic features of a graphical
 proof interface based on our principles, and illustrates them with a famous
 syllogism from Aristotle. \refsec{clicks} shows how it can integrate
-proof-by-pointing capabilities through click actions. \refsec{newitems} shows
+Proof-by-Pointing capabilities through click actions. \refsec{newitems} shows
 very briefly how one can add new formulas and objects to the current goal. The
 last two sections explain, through further examples, how drag-and-drop actions
 work; first for so-called \emph{rewrite} actions involving equalities, then for
@@ -179,10 +179,10 @@ complex formalisms like type theories. We will not explore these questions here.
 \section{A first example}\labsec{aristote}
 
 \subsection{Layout}
-One advantage of the proof-by-action paradigm, is that it allows a very lean
-visual layout of the proof state. There is no need to name hypotheses. In the
-prototype we also dispense with a text buffer, since proofs are solely built
-through graphical actions.
+One advantage of the PbA paradigm, is that it allows a very lean visual layout
+of the proof state. There is no need to name hypotheses. In the prototype we
+also dispense with a text buffer, since proofs are solely built through
+graphical actions.
 
 
 \reffig{aristote} shows the layout of the system using the
@@ -370,13 +370,12 @@ given in \reftab{click-rules}. A few remarks are in order:
 
 
 It is possible to associate some more complex effects to click actions performed
-on locations deeper under connectives. This is the essence of proof-by-pointing,
+on locations deeper under connectives. This is the essence of Proof-by-Pointing,
 and~\sidecite{PbP} provides ample description. Since we here focus more on
 drag-and-drop actions, we do not detail further more advanced PbP features.
 However we stress that these features are essentially compatible with what we
 describe in this work. In fact the version of Actema presented in \refch{plugin}
-provides an implementation of proof-by-pointing available as a contextual menu
-action.
+provides an implementation of PbP available as a contextual menu action.
 
 
 \section{Adding new items}\labsec{newitems}
@@ -882,11 +881,11 @@ $$
           {A \forw B}& \mathsf{Fcomm}\\
     \end{array}
     \end{mathpar}
+    ~\\[1em]
+    In the rules $\{\mathsf{L \forall s}, \mathsf{L \exists s}, \mathsf{R \forall
+    s}, \mathsf{R \exists s}, \mathsf{F \forall s}, \mathsf{F \exists s}\}$, $x$
+    is not free in $A$.
   \end{framed}
-  ~\\[1em]
-  In the rules $\{\mathsf{L \forall s}, \mathsf{L \exists s}, \mathsf{R \forall
-  s}, \mathsf{R \exists s}, \mathsf{F \forall s}, \mathsf{F \exists s}\}$, $x$
-  is not free in $A$.
   \caption{Linking rules}
   \labfig{DISL}
 \end{figure}

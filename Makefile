@@ -1,7 +1,7 @@
 all: build
 
 build:
-	latexmk -pdf index -jobname=build/index -pdflatex=lualatex -shell-escape -interaction=nonstopmode
+	latexmk -pdf index -jobname=build/index -pdflatex=lualatex -shell-escape
 
 watch:
 	latexmk -pdf index -jobname=build/index -pdflatex=lualatex -shell-escape -interaction=nonstopmode -pvc

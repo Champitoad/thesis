@@ -47,7 +47,9 @@ based on the great discoveries of 19\textsuperscript{th} and
 20\textsuperscript{th} century mathematicians and logicians, in the broad
 research area now known as \emph{mathematical logic}.
 
-\section{Structural proof theory}
+\section{Proof theory}
+
+\subsection{Mathematical logic}
 
 \paragraph{Universal language}
 
@@ -202,6 +204,8 @@ reasoning. Because every theorem of intuitionistic logic is also a theorem of
 classical logic (but not the converse), we will always focus first on the
 intuitionistic ``kernel'' of our systems, designing the classical part as an
 extension of the former.
+
+\subsection{Structural proof theory}
 
 \paragraph{Inference rules}
 
@@ -492,6 +496,8 @@ assistant can communicate its results, but also provide suggestions to the user
 on how to solve problems.
 \end{emphpar}
 
+\subsection{Logical frameworks}
+
 \paragraph{Type theory}
 
 The ancestor to all proof assistants was the Automath project, initiated by
@@ -595,6 +601,8 @@ assistants: Coq \sidecite{the_coq_development_team_2022_7313584} and Lean
 correspondence, these systems support the creation of both proofs and programs
 that manipulate and compute mathematical objects, by compiling everything down
 to typed terms.
+
+\subsection{Interfaces}
 
 \paragraph{Elaboration}
 
@@ -726,6 +734,8 @@ Patrick Massot's work in Lean \cite{LeanIPAM}).
 
 \section{This thesis}
 
+\subsection{Research goals}
+
 \paragraph{Interoperability}
 
 Existing proof assistants can (almost) never \emph{interoperate}: a proof or
@@ -801,8 +811,9 @@ The idea was to synthesize complex tactics from the simple act of
 \emph{pointing} at specific locations inside expressions occurring in the goal,
 typically with a mouse cursor. More recently \sidecite{Chaudhuri2013}, Kaustuv
 Chaudhuri proposed a variation on this idea termed ``subformula linking'' or
-``Proof-by-Linking'' (``PbL'' for short), where instead of selecting expressions
-in isolation, one can \emph{link} two of them together to make them interact.
+``Proof-by-Linking'' (``SFL'' and ``PbL'' for short), where instead of selecting
+expressions in isolation, one can \emph{link} two of them together to make them
+interact.
 
 In both cases, the expressions considered were logical formulas, and the
 associated actions chains of inferences in FOL. Importantly, both paradigms rely
@@ -817,7 +828,7 @@ assumed equation $t = u$. But coming up with such patterns is a lot slower than
 directly \emph{pointing} at the locations of interest onscreen.}. While the
 semantics of PbP actions is still based on the \emph{shallow} inference rules of
 sequent calculus, PbL fully embraces the deep inference paradigm by relying on
-rewriting rules in the style of the calculus of structures.
+CoS-style rewriting rules.
 
 \begin{emphpar}
   All the works presented in this thesis can be seen as a direct continuation of
@@ -878,15 +889,15 @@ two-dimensional language and calculus of ``pure thought'', whose name has
 repeatedly been translated as \emph{ideography}
 \sidecite{Frege1952-FRETFT}\sidecite{Frege1999-FRELUL}.
 
-Following the seminal work of Charles Sanders Peirce in \emph{semiotics} ---
-i.e. the systematic study of sign processes and the communication of meaning, we
-define an iconic language as one whose signs are mainly \emph{icons}, i.e. signs
-that \emph{resemble} or share qualities with the objects they denote. This is to
-be contrasted with symbolic languages, where as outlined in the above quote,
-most signs are just \emph{symbols}, i.e. signs that \emph{conventionally} denote
-their objects. In his systematic usage of \emph{triads} of concepts, Peirce
-actually identified a third kind of sign, \emph{indexes}
-\sidecite{atkin_peirces_2023}:
+Following the seminal work of Charles Sanders Peirce in
+\emph{semiotics}\sidenote{Semiotics is the systematic study of sign processes
+and the communication of meaning.}, we define an iconic language as one whose
+signs are mainly \emph{icons}, i.e. signs that \emph{resemble} or share
+qualities with the objects they denote. This is to be contrasted with symbolic
+languages, where as outlined in the above quote, most signs are just
+\emph{symbols}, i.e. signs that \emph{conventionally} denote their objects. In
+his systematic usage of \emph{triads} of concepts, Peirce actually identified a
+third kind of sign, \emph{indexes} \sidecite{atkin_peirces_2023}:
 \begin{quote}
   if the constraints of successful signification require that the sign reflect
   qualitative features of the object, then the sign is an icon. If the
@@ -921,8 +932,8 @@ to expect that some diagrammatic system should exist for it, that can express in
 the most natural way most (if not all) logical arguments. This is the
 \emph{iconicity} thesis of Peirce, which motivated his inquiry into what is
 arguably the first diagrammatic proof system in history: the \emph{existential
-graphs}. This will be the subject of \refch{eg}, and the basis for our latests
-developments in \refch{flowers}.
+graphs}. This will be the subject of \refch{eg}, and the basis for the
+development of a \emph{metaphorical} proof system in \refch{flowers}.
 
 \begin{emphpar}
   Our second main working hypothesis, exploited in the second part of this
@@ -931,16 +942,186 @@ developments in \refch{flowers}.
   design of intuitive proof building interfaces.
 \end{emphpar}
 
-\paragraph{Contributions}
+\subsection{Contributions}
 
-\paragraph{How to read}
+This thesis proposes a number of contributions towards the research goals
+highlighted above.
+
+\paragraph{Symbolic manipulations}
+  
+In the first part of this thesis, we substantiate the PbA paradigm in the
+context of traditional representations of goals, by presenting a number of
+techniques based on the direct manipulation of \emph{symbolic} formulas in
+sequents.
+
+We start in \refch{pba} with an introduction to PbP and PbL, by describing how
+to reason with logical connectives, quantifiers and equality through
+\emph{click} and \emph{drag-and-drop} (DnD) actions in a prototype of GUI called
+Actema. In particular, DnD actions can be seen as a graphical generalization of
+both the \texttt{apply} and \texttt{rewrite} tactics of imperative proof
+languages.
+
+In \refch{sfl}, we ground the semantics of DnD actions in deep inference proof
+theory, by designing a variant of the subformula linking CoS of Chaudhuri
+introduced in \cite{Chaudhuri2013} for intuitionistic FOL with equality. Our
+approach differs mainly from Chaudhuri's through our notion of \emph{valid
+linkage}, which filters out \emph{non-productive} DnD actions by restricting
+them to \emph{unifiable} subformulas.
+
+In \refch{advanced}, we present a number of more advanced techniques in the PbA
+paradigm, that handle practical kinds of reasoning found in mathematical
+practice such as the use of \emph{definitions}, reasoning by \emph{induction},
+and the \emph{simplification} of subterms through automatic computation. This is
+illustrated through a few case studies of basic logical and mathematical
+problems.
+
+In \refch{sfl-classical}, we investigate an extension of PbA to sequents with
+\emph{multiple} alternative conclusions, as opposed to the
+\emph{single}-conclusion sequents found in the interface of almost every ITP. We
+argue that the use of direct manipulation greatly facilitates the handling of
+multiple conclusions, and introduce a so-called \emph{parallel} linking operator
+to model reasoning in classical logic that involves the interaction of two
+conclusions.
+
+Lastly in \refch{plugin}, we present the architecture, interaction protocols and
+elaboration/compilation strategy implemented in \texttt{coq-actema}, a plugin
+that integrates the Actema web app as an interactive proof view in Coq. We also
+discuss its current shortcomings and future directions for improvement, in
+particular concerning the question of \emph{proof evolution}.
+
+\paragraph{Iconic manipulations}
+  
+In the second part of this thesis, we explore a series of deep inference proof
+systems that give more structure to the notion of logical goal. These systems
+share the ability to represent goals in two alternative ways: either textually
+through a standard inductive syntax, or graphically through a metaphorical
+notation well-suited to direct manipulation. The first can be used as a machine
+representation in the backend of an ITP, and the latter as the substrate for
+GUIs in the frontend.
+
+In the first two chapters, we introduce a family of systems called \emph{bubble
+calculi}. They are an extension of the theory of \emph{nested sequents} first
+introduced by Brünnler \sidecite{brunnler_deep_2009}, that we reframe as local
+rewriting systems with a graphical and topological interpretation. Bubble
+calculi enable an efficient sharing of contexts between subgoals, making them
+well-suited to the factorization of both forward and backward reasoning steps in
+proofs.
+
+\refch{bubbles} presents the \emph{asymmetric} bubble calculus \sys{BJ} for
+intuitionistic logic, modelled after the \emph{asymmetric} sequents of the
+intuitionistic sequent calculus \sys{LJ} of Gentzen (\reffig{calculi-LJ}). It
+introduces the metaphor of \emph{bubbles} as a way to iconically represent the
+separation and sharing of contexts between different subgoals.
+
+\refch{bubbles-symm} refines \sys{BJ} into a more general and symmetric calculus
+for classical logic called system \sys{B}, where bubbles can be \emph{polarized}
+in addition to formulas. Intuitionistic, dual-intuitionistic and
+bi-intuitionistic logic can be recovered as fragments of system \sys{B}, by
+forbidding certain inference rules that characterize the \emph{porosity} of
+bubbles.
+
+In the last two chapters, we study two systems based on the \emph{existential
+graphs} (``EG'' hereafter) of Peirce, that allow us to achieve \emph{full
+iconicity}: every logical construction has an associated icon, and thus there is
+no use anymore for the connectives and quantifiers of symbolic formulas.
+Hopefully, this shall reduce a first barrier in the learning of formal logic,
+which lies in the \emph{arbitrary} correspondence between formulas and their
+semantics.
+
+In \refch{eg}, we give a complete review of the original EG systems of Peirce
+for propositional and first-order classical logic, which have been consistently
+neglected in the proof theory literature\sidenote{This might be explained by the
+fact that EGs have been invented at the end of the 19\textsuperscript{th}
+century, \emph{before} the birth of proof theory as a discipline in the 1920s
+under the impulse of Hilbert.}. We propose in particular a novel inductive
+characterization of the syntax of EGs, as well as the first identification of an
+\emph{analytic} fragment of the system for propositional logic that is complete
+for provability.
+
+Finally in \refch{flowers}, we introduce the \emph{flower calculus}, an
+intuitionistic variant of EGs where statements are represented metaphorically as
+\emph{flowers}. We identify a so-called \emph{natural} fragment of the system
+where every rule is both analytic and invertible, and a \emph{cultural} fragment
+where every rule is non-invertible. We prove that the cultural fragment is
+admissible thanks to a completeness proof of the natural fragment with respect
+to Kripke semantics. We exploit these meta-theoretical results to design the
+Flower Prover, a prototype of GUI in the PbA paradigm that aims to unify the
+concepts of \emph{goal} and \emph{theory} in a \emph{modal interface}: goals
+correspond to flowers manipulated with natural rules in \Proof mode; while
+theories correspond to the same flowers manipulated with cultural rules in \Edit
+mode. The Flower Prover is also the first \emph{mobile-friendly} interface for
+ITPs that we know of.
+
+\begin{kaobox}[frametitle=Note]
+Most of the content of \refch{pba} and \refch{sfl} has been previously published
+in \cite{10.1145/3497775.3503692}, and the \texttt{coq-actema} system described
+in \refch{plugin} is under active development by us and Benjamin Werner. All
+other chapters present completely original and personal work.
+\end{kaobox}
+
+\subsection{How to read}
+
+The ordering of chapters in this thesis is mostly \emph{chronological},
+reflecting the order in which the ideas were developed. For readers interested
+in all of the contributions, we thus advise to read all chapters in order.
+
+Still, the investigations into iconic manipulations in the second part started
+as an offshoot of those on symbolic manipulations in the first part, and were
+carried mostly in parallel. Although we sometimes reference ideas from chapters
+in the first part, the second part can thus be read mostly independently from
+the first one.
+
+\begin{emphpar}
+  In all cases, the reader should start with \refch{pba}, which gives a taste of
+  the PbA paradigm explored in all other chapters.
+\end{emphpar}
+
+\reffig{chapter-deps} shows the precise graph of dependencies between chapters.
+There are four independent paths that can be followed:
+\begin{itemize}
+  \item[\textbf{The applied road (\ding{175} $\to$ \ding{177})}] If
+  you want to see to what extent the PbA paradigm can currently be applied for
+  practical theorem proving in real proof assistants, this is the right path for
+  you.
+
+  \item[\textbf{Proof theory of SFL (\ding{174} $\to$ \ding{176})}]
+  This path is for readers only interested in the proof theory of subformula
+  linking, which is the foundation for the semantics of DnD actions on symbolic
+  formulas.
+
+  \item[\textbf{Bubble calculi (\ding{178} $\to$ \ding{179})}]
+  This path is for readers only interested in the proof theory and potential
+  applications of bubble calculi.
+  
+  \item[\textbf{Flower calculus (\ding{180} $\to$ \ding{181})}] This path is for
+  readers only interested in the proof theory of the flower calculus, and its
+  applications to automated and interactive theorem proving.
+\end{itemize}
+
+A last option is to read only \refch{eg}, skipping even \refch{pba}. This might
+be of interest to people looking for an introduction to the existential graphs
+of Peirce.
+
+\begin{remark}
+  Some parts of this document make a heavy, \emph{semantic} use of colors.
+  Although all important concepts still have a textual, color-independent
+  presentation, it is recommended to print this document with a decent amount of
+  color levels.
+  
+  Also, we tend to cross-reference many ideas from different chapters with the
+  help of \emph{hyperlinks}. We thus recommend the usage of a PDF reader that
+  supports at least hyperlink \emph{jumping}, and if possible hyperlink
+  \emph{preview} for a more comfortable reading experience.
+\end{remark}
+
+\begin{figure*}
+  \stkfig{1}{chapter-deps}
+  \caption{Dependency graph between chapters}
+  \labfig{chapter-deps}
+\end{figure*}
 
 \todo{ Introduce a special format for long digressions in sidenotes, so that the
 reader can safely ignore them. }
-
-\todo{ Advise the reader to read with a PDF reader that supports color,
-  hyperlink jumping and hyperlink preview. We tend to cross-reference a lot
-  ideas from different chapters. }
 
 \section{Related works}\labsec{intro-rw}
 

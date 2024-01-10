@@ -32,9 +32,9 @@ completeness proofs with respect to Kripke semantics, in the spirit of the
 \emph{normalization-by-evaluation} technique. Furthermore, the kernel of rules
 targetted by completeness is fully invertible, a desirable property in both
 automated and interactive proof search. This is illustrated by our
-implementation of the Flower Prover, an early prototype of GUI for ITP that uses
-the rules of the flower calculus both for direct manipulation of flowers in its
-frontend, and automated simplification of goals in its backend.
+implementation of the Flower Prover, an early prototype of GUI for ITPs that
+uses the rules of the flower calculus both for direct manipulation of flowers in
+its frontend, and automated simplification of goals in its backend.
 
 The chapter is organized as follows: in \refsec{IEG}, we retrace the origin of
 Oostra's syntax for intuitionistic EG (hereafter ``IEG'') as a natural
@@ -874,10 +874,11 @@ flowers, we introduce a \emph{pollination} relation that captures the
 availability of a flower in a given context, akin to the \emph{justification}
 relation of \refsec{atomicity}:
 
-\begin{definition}[Pollination]\labdef{pollination} We say that a flower $\phi$
-  can be \emph{pollinated} in a context $\Phi\hole$, written
-  $\chyp{\phi}{\Phi\hole}$, when there exists a bouquet $\Psi$ with $\phi \in
-  \Psi$ and contexts $\Xi\hole$ and $\Xi_0\hole$ such that either:
+\begin{definition}[Pollination]\labdef{pollination}
+  
+  We say that a flower $\phi$ can be \emph{pollinated} in a context $\Phi\hole$,
+  written $\chyp{\phi}{\Phi\hole}$, when there exists a bouquet $\Psi$ with
+  $\phi \in \Psi$ and contexts $\Xi\hole$ and $\Xi_0\hole$ such that either:
   \begin{itemize}
     \item (\textbf{Cross-pollination})~ $\Phi\hole = \cfill{\Xi}{\Psi,
     \Xi_0\hole}$;
@@ -2708,7 +2709,7 @@ recursive procedure:
       }
     }
   }
-\end{algorithm}
+\end{procedure}
 
 \paragraph{Decomposition}
 
@@ -3323,7 +3324,9 @@ in the shelf:
 
 Since the shelf might contain \emph{a lot} of hypotheses, it will be important
 to provide efficient ways to \emph{filter} or \emph{search} through its content.
-We imagine three main ways of doing so:
+We imagine three main ways of doing so\sidenote{The first two types of filtering
+are already available in most proof assistants, e.g. the \texttt{Search} command
+of Coq.}:
 \begin{itemize}
   \item[\textbf{By name}] the user can type the \emph{name} of a hypothesis in a
   search bar. This implies that flowers have the ability to be named by the
@@ -3337,11 +3340,6 @@ We imagine three main ways of doing so:
   these subterms. Here we imagine something along the lines of what we did for
   Actema (see \refsec{funcs}).
 \end{itemize}
-
-\begin{remark}
-  The first two types of filtering are already available in most proof
-  assistants, i.e. the \texttt{Search} command of Coq.
-\end{remark}
 
 % \section{Towards a Curry-Howard correspondence}\labsec{flowers-curryhoward}
 

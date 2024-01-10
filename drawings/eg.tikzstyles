@@ -11,6 +11,11 @@
 \tikzstyle{westpred}=[fill=none, draw=none, shape=circle, anchor=west]
 \tikzstyle{binder}=[fill=black, draw=black, shape=circle, inner sep=0pt, minimum size=3pt]
 \tikzstyle{scroll anchor}=[fill={rgb,255: red,255; green,111; blue,0}, draw={rgb,255: red,255; green,111; blue,0}, shape=circle, inner sep=0pt, minimum size=3pt]
+\tikzstyle{southbox}=[fill=none, draw=black, shape=rectangle, anchor=south]
+\tikzstyle{northbox}=[fill=none, draw=black, shape=rectangle, anchor=north]
+\tikzstyle{eastbox}=[fill=none, draw=black, shape=rectangle, anchor=east]
+\tikzstyle{westbox}=[fill=none, draw=black, shape=rectangle, anchor=west]
+\tikzstyle{box}=[fill=none, draw=black, shape=rectangle]
 
 % Edge styles
 \tikzstyle{pos area}=[-, fill=pbg, draw=black, tikzit fill=white, tikzit draw=black]
@@ -19,3 +24,4 @@
 \tikzstyle{justif}=[draw={rgb,255: red,0; green,210; blue,0}, ->]
 \tikzstyle{teridentity}=[-, fill=black]
 \tikzstyle{wire}=[-]
+\tikzstyle{black arrow}=[->]

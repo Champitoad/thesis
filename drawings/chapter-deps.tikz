@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+\clip (-16,3.5) rectangle (15,-12);
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=box] (0) at (0, 2) {\ding{173} Proof-by-Action};
+		\node [style=box] (1) at (-5, -2) {\ding{174} Subformula Linking};
+		\node [style=box] (2) at (5, -2) {\ding{175} Proof-by-Action in Practice};
+		\node [style=box] (3) at (-7, -4.5) {\ding{176} Parallel Conclusions and Classical Logic};
+		\node [style=box] (4) at (7, -4.5) {\ding{177} Integration in a Proof Assistant};
+		\node [style=box] (5) at (-6, -8.5) {\ding{178} Asymmetric Bubble Calculus};
+		\node [style=box] (6) at (6, -8.5) {\ding{179} Symmetric Bubble Calculi};
+		\node [style=box] (7) at (-5, -11) {\ding{180} Existential Graphs};
+		\node [style=box] (8) at (5, -11) {\ding{181} Flower Calculus};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=black arrow] (3) to (1);
+		\draw [style=black arrow] (1) to (0);
+		\draw [style=black arrow] (2) to (0);
+		\draw [style=black arrow] (4) to (2);
+		\draw [style=black arrow] (6) to (5);
+		\draw [style=black arrow] (8) to (7);
+		\draw [style=black arrow, in=15, out=0, looseness=2.00] (8) to (0);
+		\draw [style=black arrow, in=165, out=180, looseness=2.00] (5) to (0);
+% \draw [help lines, step=1] (current bounding box.south west) grid (current bounding box.north east);
+% \draw [help lines] (current bounding box.south west) rectangle (current bounding box.north east);
+	\end{pgfonlayer}
+\end{tikzpicture}
