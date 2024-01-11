@@ -2822,6 +2822,7 @@ decision procedure is immediate: if $\Phi = \emptyset$ after executing
     \dtrans{(A \land B)} & \dtrans{A}, \dtrans{B} \\
     \dtrans{(A \lor B)} & \flower{}{\dtrans{A} \sep \dtrans{B}} \\
     \dtrans{(A \limp B)} & \flower{\dtrans{A}}{\dtrans{B}} \\
+    \dtrans{(\neg A)} & \flower{\dtrans{A}}{} \\
     \dtrans{(\forall x. A)} & \flower{\garden{x}{{}}}{\dtrans{A}} \\
     \dtrans{(\exists x. A)} & \flower{}{\garden{x}{\dtrans{A}}}
   \end{array}
@@ -2867,7 +2868,7 @@ which is then provable by the algorithm as shown in \reffig{dneg-traces}.
 Encouraged by these positive results, we attempted to validate the algorithm on
 a more challenging dataset: the ILTP problem library for intuitionistic logic,
 version 1.1.2 \sidecite{raths_iltp_2007}. Unfortunately, it turns out that
-neither the basic \refproc{life} procedure not its extension are able to prove
+neither the basic \refproc{life} procedure nor its extension are able to prove
 the following theorem of intuitionistic logic (problem \texttt{SYJ106+1}):
 $$(((\neg (t \limp r) \limp p) \land s) \limp (\neg ((p \limp q) \land (t \limp
 r)) \limp (\neg \neg p \land (s \land s))))$$
@@ -2933,7 +2934,7 @@ sprinklers.
 
 The prototype is implemented in Elm \sidecite{10.1145/2491956.2462161}, a modern
 functional reactive programming language that is particularly well-suited for
-building GUI that are based on complex compositional data-structures like
+building GUIs that are based on complex compositional data-structures like
 flowers. It also natively compiles to HTML and JavaScript, making it easy to run
 and test the interface on any device equipped with a web browser. The source
 code is available on GitHub \cite{flower-prover}, and the interface is currently
