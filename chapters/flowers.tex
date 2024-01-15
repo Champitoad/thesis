@@ -1909,10 +1909,10 @@ entails its premiss.
   $\Nature$-rule.
   
   \begin{itemize}
-    \item(\rsf{poll{\da}}, \rsf{poll{\ua}})
+    \item[\textbf{(\rsf{poll{\da}}, \rsf{poll{\ua}})}]
       By \reflemma{flowers-pollination}.
     
-    \item(\rsf{epis})\sbr
+    \item[\textbf{(\rsf{epis})}]\sbr
     \begin{enumerate}
       \item Suppose that $\eforces{w}{\Phi}{e}$. Then by \reflemma{access-mono}
       we have $\eforces{w'}{\Phi}{e}$, and thus we can conclude for instance with
@@ -1924,17 +1924,17 @@ entails its premiss.
       for some $w$-evaluation $e''$, and thus $\eforces{w}{\Phi}{e}$.
     \end{enumerate}
 
-    \item(\rsf{epet})
+    \item[\textbf{(\rsf{epet})}]
       Let $\gamma = \garden{\bx}{\Phi}$. We trivially have that
       $\eforces{w'}{\emptyset}{\update{e}{\bx}{\update{e'}{\emptyset}{e}}}$,
       and thus can conclude.
 
-    \item(\rsf{ipis}) We trivially have $\flower{\garden{\bx,\by}{\Phi}}{\Delta}
+    \item[\textbf{(\rsf{ipis})}] We trivially have $\flower{\garden{\bx,\by}{\Phi}}{\Delta}
       \kentails \flower{\garden{\bx,\by}{\Phi}}{\Delta}$ by
       \reffact{kentails-refl}, and thus we can conclude by
       \reflemma{flowers-univ-inst}.
 
-    \item(\rsf{ipet}) The first direction is trivial by
+    \item[\textbf{(\rsf{ipet})}] The first direction is trivial by
       \reflemma{flowers-coweakening}. In the other direction, let $\gamma =
       \garden{\bz}{\Xi}$, and suppose that
       $\eforces{w}{\flower{\gamma}{\garden{\bx}{\sigma(\Phi)} \sep
@@ -1951,7 +1951,7 @@ entails its premiss.
         \reflemma{flowers-ex-inst}.
       \end{itemize}
       
-    \item(\rsf{srep})
+    \item[\textbf{(\rsf{srep})}]
       Let $\gamma_i = \garden{\by_i}{\Psi_i}$ for $1 \leq i \leq n$.
       \begin{enumerate}
         \item Suppose that

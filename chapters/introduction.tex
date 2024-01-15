@@ -682,8 +682,8 @@ the question of how to efficiently write \emph{proofs} of these propositions.
 There have been broadly two approaches in the design of high-level proof
 languages:
 
-\begin{itemize}
-  \item[\textbf{Imperative}] proof languages, like imperative programming
+\begin{description}[labelsep=0pt]
+  \item[Imperative~]proof languages, like imperative programming
   languages, offer a set of \emph{commands} or instructions than can be given to
   the computer, in order to modify some state stored in memory. The latter is
   called the \emph{proof state}, and corresponds to the \emph{partial} proof
@@ -723,7 +723,7 @@ languages:
   Coq and Lean are examples of state-of-the-art proof assistants in the
   imperative paradigm.
   
-  \item[\textbf{Declarative}] proof languages follow a different approach, by
+  \item[Declarative~]proof languages follow a different approach, by
   aiming to provide an \emph{explicit}, \emph{self-contained} description of the
   proof. Although a goal view is still available to guide the user during the
   proof construction process, the finished proof must be readable
@@ -738,7 +738,7 @@ languages:
   
   Agda, Mizar and Isabelle (with its Isar proof language \sidecite{isar}) are
   examples of state-of-the-art proof assistants in the declarative paradigm.
-\end{itemize}
+\end{description}
 
 \begin{emphpar}
   In this thesis, we focus mostly on exploring new modalities of interaction in
@@ -1078,12 +1078,12 @@ as the substrate for GUIs in the frontend.
   \emph{mobile-friendly} interface for ITPs that we know of.
 \end{description}
 
-\begin{kaobox}[frametitle=Note]
+\begin{kaonote}
 Most of the content of \refch{pba} and \refch{sfl} has been previously published
 in \cite{10.1145/3497775.3503692}, and the \texttt{coq-actema} system described
 in \refch{plugin} is under active development by us and Benjamin Werner. All
 other chapters present completely original and personal work.
-\end{kaobox}
+\end{kaonote}
 
 \subsection{How to read}
 
@@ -1127,6 +1127,14 @@ There are four independent paths that can be followed:
 A last option is to read only \refch{eg}, skipping even \refch{pba}. This might
 be of interest to people looking for an introduction to the existential graphs
 of Peirce.
+
+\begin{digression}
+  Sometimes we will develop ideas loosely related to the main text in
+  \emph{digressions}. These will appear in the margin in boxes such as the
+  current one, and they can be safely ignored --- at least on a first reading.
+  We distinguish them from normal side notes, which are usually shorter and more
+  relevant to the matter at hand.
+\end{digression}
 
 \begin{remark}
   Some parts of this document make a heavy, \emph{semantic} use of colors.

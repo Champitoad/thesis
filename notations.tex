@@ -45,6 +45,15 @@
 \end{quote}
 \end{framed}}
 
+% Long digression in the margin
+\NewEnviron{digression}{
+  \marginnote{
+    \begin{kaodigression}
+      \BODY
+    \end{kaodigression}
+  }
+}
+
 % Thick table lines
 \makeatletter
 \newcommand{\thickhline}{%

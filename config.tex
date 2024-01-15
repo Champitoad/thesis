@@ -34,6 +34,7 @@
 \usepackage{hhline}
 \usepackage{stackengine}
 \usepackage{subfig}
+\usepackage{environ}
 
 \usetikzlibrary{calc}
 \usetikzlibrary{decorations.pathmorphing,decorations.pathreplacing,decorations.shapes}
@@ -120,8 +121,9 @@
 \newcommand{\refproc}[1]{\texttt{\ref{proc:#1}}}
 
 % enumitem
-\setlist[description]{itemsep=0.5em}
-\setlist[itemize]{align=left}
+\setlist[description]{itemsep=0.5em,leftmargin=0.9em}
+\setlist[itemize]{align=left,leftmargin=*,labelsep=0.9em}
+\setlist[enumerate]{align=left,leftmargin=*,labelsep=0.9em}
 
 % tabularx
 \newcolumntype{O}[1]{>{\setlength\hsize{#1\hsize}}c}
