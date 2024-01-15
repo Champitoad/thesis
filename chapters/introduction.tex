@@ -56,18 +56,18 @@ research area now known as \emph{mathematical logic}.
 At the dawn of the 20\textsuperscript{th} century, some mathematicians started
 to realize that it might be possible to formalize not only specific branches of
 mathematics like algebra with its own specific language, but the \emph{whole} of
-mathematics in a single, universal language. This idea was first intuited by
-Leibniz with his dream of a \textit{characteristica universalis}, an ideal
-language in which all propositions --- mathematical propositions, but also
-scientific propositions about the real world, and even metaphysical propositions
---- could be expressed and understood unambiguously by every human. Also,
-Leibniz introduced the concept of a \textit{calculus ratiocinator}, a systematic
-method for determining the truth of any proposition expressed in the
-\textit{characteristica universalis}, providing a definitive and objective way
-to settle any argument through simple calculations\sidenote{Leibniz himself
-might have been inspired by his predecessor Galileo, who famously declared that
-``the universe [...] is written in the language of mathematics''
-\cite{assayer}.}.
+mathematics in a single, universal language. This idea was first intuited in the
+17\textsuperscript{th} century by Leibniz with his dream of a
+\textit{characteristica universalis}, an ideal language in which all
+propositions --- mathematical propositions, but also scientific propositions
+about the real world, and even metaphysical propositions --- could be expressed
+and understood unambiguously by every human. Also, Leibniz introduced the
+concept of a \textit{calculus ratiocinator}, a systematic method for determining
+the truth of any proposition expressed in the \textit{characteristica
+universalis}, providing a definitive and objective way to settle any argument
+through simple calculations\sidenote{Leibniz himself might have been inspired by
+his predecessor Galileo, who famously declared that ``the universe [...] is
+written in the language of mathematics'' \cite{assayer}.}.
 
 \paragraph{Predicate logic and set theory}
 
@@ -146,9 +146,9 @@ where $\lor$ and $\neg$ are symbols denoting the logical connectives of
 can be substituted with any concrete formula built from \emph{atomic
 propositions} and other logical connectives. An atomic proposition is typically
 a property of a mathematical object, that does not involve any logical
-connective. An example of instance of this schema would be the proposition ``$n$
-is prime or $n$ is not prime'' with $n$ some natural number, which can be
-written formally as
+connective. An example of \emph{instance} of this schema would be the
+proposition ``$n$ is prime or $n$ is not prime'' with $n$ some natural number,
+which can be written formally as
 $$\mathrm{prime}(n) \lor \neg\mathrm{prime}(n)$$
 Another related principle is the \emph{law of non-contradiction}, which states
 that no proposition can be both true and false at the same time. It is expressed
@@ -198,26 +198,34 @@ fundamental theorems of classical mathematics do not hold anymore, requiring in
 the worst cases to recreate entire branches of mathematics from scratch, like in
 \emph{constructive analysis}. This explains why a large majority of
 mathematicians still work in classical logic, and are often even unaware of the
-existence of constructive mathematics. To account for this diversity, in this
-thesis we design proof systems that support both classical and intuitionistic
-reasoning. Because every theorem of intuitionistic logic is also a theorem of
-classical logic (but not the converse), we will always focus first on the
-intuitionistic ``kernel'' of our systems, designing the classical part as an
-extension of the former.
+existence of constructive mathematics.
+
+\begin{emphpar}
+To account for this diversity, in this thesis we design proof systems that
+support \emph{both} classical and intuitionistic reasoning. Because every
+theorem of intuitionistic logic is also a theorem of classical logic (but not
+the converse), we will always focus first on the intuitionistic ``kernel'' of
+our systems, designing the classical part as an extension of the former.
+\end{emphpar}
 
 \subsection{Structural proof theory}
 
 \paragraph{Inference rules}
 
 In Hilbert systems, the only inference rule is that of \emph{modus ponens},
-which is expressed formally by the following figure:
-$$\R[\rsf{mp}]{A}{A \limp B}{B}$$ It can be read from top to bottom as follows:
-for any propositions $A$ and $B$, if we have a proof of $A$ and a proof of $A
-\limp B$, i.e. a proof that $A$ implies $B$, then we can immediately derive a
-proof of $B$ by virtue of the rule, here designated by the abbreviated name
-\rsf{mp}. This reading of the rule corresponds to a form of \emph{forward}
-reasoning: starting from the known \emph{premises} that $A$ and $A \limp B$ are
-true, it \emph{necessarily} follows that the \emph{conclusion} $B$ is true.
+which is expressed formally with the following figure:
+$$\R[\rsf{mp}]{A}{A \limp B}{B}$$
+
+Like axioms, it is a \emph{schema} that involves generic propositional variables
+$A$ and $B$, which may be \emph{instantiated} with arbitrary formulas. It can be
+read from top to bottom as follows: for any propositions $A$ and $B$, if we have
+a proof of $A$ and a proof of $A \limp B$, i.e. a proof that $A$ implies $B$,
+then we can immediately derive a proof of $B$ by virtue of the rule, here
+designated by the abbreviated name \rsf{mp}.This reading of the rule
+corresponds to a form of \emph{forward} reasoning: starting from the known
+\emph{premises} that $A$ and $A \limp B$ are true, it \emph{necessarily} follows
+that the \emph{conclusion} $B$ is true.
+
 Conversely, one can also have a bottom-up reading of the rule: to build a proof
 of any proposition $B$, one way to proceed is to come up with another
 proposition $A$ such that both $A$ and $A \limp B$ are provable. This reading
@@ -293,6 +301,15 @@ e_2} allow to derive proofs of $A$ and $B$ from a proof of $A \land B$.
   negation are subsumed by those for implication $\limp$ and absurdity $\bot$.
 \end{remark}
 
+\todo{Margin figure for proof of PNC in NJ}
+
+Many logical reasoning principles that were \emph{axiomatized} in Hilbert
+systems can be \emph{derived} in natural deduction. For example, \reffig{PNC-NJ}
+shows a proof of the principle of non-contradiction, built by \emph{composing}
+instances of rules from \reffig{calculi-NJ}. The composition of a rule instance
+\rsf{r1} with another rule instance \rsf{r2} simply consists in using the
+conclusion of \rsf{r1} as one of the premisses of \rsf{r2}.
+
 \begin{figure*}
   \input{figures/nj.tex}
   \caption{Natural deduction calculus \sys{NJ} for intuitionistic logic}
@@ -334,6 +351,10 @@ framework, and thus set out to devise a new formalism that would be a
 reformulation of natural deduction with better mathematical properties, such as
 \emph{symmetries}. This gave us \emph{sequent calculus}, which is widely
 regarded as the cornerstone for most developments in proof theory to this day.
+Gentzen introduced simultaneously \emph{two} sequent calculi: one for classical
+logic called \sys{LK}, and one for intuitionistic logic called \sys{LJ}. Here we
+focus on the intuitionistic system \sys{LJ}, whose rules are shown in
+\reffig{calculi-LJ}.
 
 Sequent calculus is based on the observation that some rules in natural
 deduction depend crucially on the use of \emph{hypotheses} that appear
@@ -346,12 +367,11 @@ assumption. In sequent calculus, this relation of provability of a conclusion
 $C$ under a collection of assumptions/hypotheses $\Gamma$ is captured by the
 expression $\Gamma \seq C$, called a \emph{sequent}. The introduction rule
 \rsf{{\limp}i} is then expressed by the so-called \emph{right introduction} rule
-\rsf{{\limp}R} (\reffig{calculi-LJ}), which keeps track of the full
-\emph{context} of hypotheses by having sequents as premiss and conclusion,
-instead of just formulas. Right introduction rules for other connectives are
-also obtained straightforwardly from the corresponding introduction rules in
-natural deduction, by simply making the contexts of hypotheses $\Gamma$ and
-$\Delta$ always explicit.
+\rsf{{\limp}R}, which keeps track of the full \emph{context} of hypotheses by
+having sequents as premiss and conclusion, instead of just formulas. Right
+introduction rules for other connectives are also obtained straightforwardly
+from the corresponding introduction rules in natural deduction, by simply making
+the contexts of hypotheses $\Gamma$ and $\Delta$ always explicit.
 
 Following the original presentation of Gentzen, contexts are taken to be
 \emph{lists} of formulas (``sequenz'' in German), i.e. ordered collections where
@@ -364,6 +384,8 @@ conventions are respectively captured by the \emph{structural rules} \rsf{ex} of
 third structural rule, \rsf{wkn} for \emph{weakening}, accounts for the presence
 of unused assumptions in some proofs, by allowing to introduce hypotheses at
 will (with a top-down reading of rules).
+
+\todo{Margin figure for proof of PNC in LJ}
 
 The main difference of sequent calculus compared to natural deduction lies in
 its splitting of elimination rules in two parts: \emph{left introduction} rules,
@@ -379,7 +401,8 @@ the logical connective $\limp$ of implication by the ``structural connective''
 $\seq$ of sequents. The remaining \emph{axiom} rule \rsf{ax} is the only axiom
 of sequent calculus, and is in a sense dual to the \rsf{cut} rule: while the
 latter allows to justify a hypothesis by an identical conclusion, the \rsf{ax}
-rule allows to justify a conclusion by an identical hypothesis.
+rule allows to justify a conclusion by an identical hypothesis. \reffig{PNC-LJ}
+shows a proof of the principle of non-contradiction in \sys{LJ}.
 
 Both the \rsf{cut} and \rsf{ax} rules seem completely trivial. Yet surprisingly,
 Gentzen managed to prove a powerful result called alternatively
@@ -999,58 +1022,60 @@ notation well-suited to direct manipulation. The first can be used as a machine
 representation in the backend of an ITP, and the latter as the substrate for
 GUIs in the frontend.
 
-In the first two chapters, we introduce a family of systems called \emph{bubble
-calculi}. They are an extension of the theory of \emph{nested sequents} first
-introduced by Brünnler \sidecite{brunnler_deep_2009}, that we reframe as local
-rewriting systems with a graphical and topological interpretation. Bubble
-calculi enable an efficient sharing of contexts between subgoals, making them
-well-suited to the factorization of both forward and backward reasoning steps in
-proofs.
+\begin{description}
+  \item[Bubble calculi] In the first two chapters, we introduce a family of
+  systems called \emph{bubble calculi}. They are an extension of the theory of
+  \emph{nested sequents} first introduced by Brünnler
+  \sidecite{brunnler_deep_2009}, that we reframe as local rewriting systems with
+  a graphical and topological interpretation. Bubble calculi enable an efficient
+  sharing of contexts between subgoals, making them well-suited to the
+  factorization of both forward and backward reasoning steps in proofs.
 
-\refch{bubbles} presents the \emph{asymmetric} bubble calculus \sys{BJ} for
-intuitionistic logic, modelled after the \emph{asymmetric} sequents of the
-intuitionistic sequent calculus \sys{LJ} of Gentzen (\reffig{calculi-LJ}). It
-introduces the metaphor of \emph{bubbles} as a way to iconically represent the
-separation and sharing of contexts between different subgoals.
+  \refch{bubbles} presents the \emph{asymmetric} bubble calculus \sys{BJ} for
+  intuitionistic logic, modelled after the \emph{asymmetric} sequents of the
+  intuitionistic sequent calculus \sys{LJ} of Gentzen (\reffig{calculi-LJ}). It
+  introduces the metaphor of \emph{bubbles} as a way to iconically represent the
+  separation and sharing of contexts between different subgoals.
 
-\refch{bubbles-symm} refines \sys{BJ} into a more general and symmetric calculus
-for classical logic called system \sys{B}, where bubbles can be \emph{polarized}
-in addition to formulas. Intuitionistic, dual-intuitionistic and
-bi-intuitionistic logic can be recovered as fragments of system \sys{B}, by
-forbidding certain inference rules that characterize the \emph{porosity} of
-bubbles.
+  \refch{bubbles-symm} refines \sys{BJ} into a more general and symmetric
+  calculus for classical logic called system \sys{B}, where bubbles can be
+  \emph{polarized} in addition to formulas. Intuitionistic, dual-intuitionistic
+  and bi-intuitionistic logic can be recovered as fragments of system \sys{B},
+  by forbidding certain inference rules that characterize the \emph{porosity} of
+  bubbles.
+  
+  \item[Existential graphs] In the last two chapters, we study two systems based
+  on the \emph{existential graphs} (``EG'' hereafter) of Peirce, that allow us to
+  achieve \emph{full iconicity}: every logical construction has an associated
+  icon, and thus there is no use anymore for the connectives and quantifiers of
+  symbolic formulas. Hopefully, this shall remove a first barrier in the learning
+  of formal logic, which lies in the \emph{arbitrary} correspondence between
+  symbols and their meaning.
 
-In the last two chapters, we study two systems based on the \emph{existential
-graphs} (``EG'' hereafter) of Peirce, that allow us to achieve \emph{full
-iconicity}: every logical construction has an associated icon, and thus there is
-no use anymore for the connectives and quantifiers of symbolic formulas.
-Hopefully, this shall reduce a first barrier in the learning of formal logic,
-which lies in the \emph{arbitrary} correspondence between formulas and their
-semantics.
+  In \refch{eg}, we give a complete review of the original EG systems of Peirce
+  for propositional and first-order classical logic, which have been
+  consistently neglected in the proof theory literature\sidenote{One reason
+  might be that EGs have been invented at the end of the 19\textsuperscript{th}
+  century, \emph{before} the birth of proof theory as a discipline in the 1920s
+  under the impulse of Hilbert.}. We propose in particular a novel inductive
+  characterization of the syntax of EGs, as well as the first identification of
+  an \emph{analytic} fragment of the system for propositional logic that is
+  complete for provability.
 
-In \refch{eg}, we give a complete review of the original EG systems of Peirce
-for propositional and first-order classical logic, which have been consistently
-neglected in the proof theory literature\sidenote{This might be explained by the
-fact that EGs have been invented at the end of the 19\textsuperscript{th}
-century, \emph{before} the birth of proof theory as a discipline in the 1920s
-under the impulse of Hilbert.}. We propose in particular a novel inductive
-characterization of the syntax of EGs, as well as the first identification of an
-\emph{analytic} fragment of the system for propositional logic that is complete
-for provability.
-
-Finally in \refch{flowers}, we introduce the \emph{flower calculus}, an
-intuitionistic variant of EGs where statements are represented metaphorically as
-\emph{flowers}. We identify a so-called \emph{natural} fragment of the system
-where every rule is both analytic and invertible, and a \emph{cultural} fragment
-where every rule is non-invertible. We prove that the cultural fragment is
-admissible thanks to a completeness proof of the natural fragment with respect
-to Kripke semantics. We exploit these meta-theoretical results to design the
-Flower Prover, a prototype of GUI in the PbA paradigm that aims to unify the
-concepts of \emph{goal} and \emph{theory} in a \emph{modal interface}: goals
-correspond to flowers manipulated with natural rules in \Proof mode; while
-theories correspond to the same flowers manipulated with cultural rules in \Edit
-mode. The Flower Prover is also the first \emph{mobile-friendly} interface for
-ITPs that we know of.
+  Finally in \refch{flowers}, we introduce the \emph{flower calculus}, an
+  intuitionistic variant of EGs where statements are represented metaphorically
+  as \emph{flowers}. We identify a so-called \emph{natural} fragment of the
+  system where every rule is both analytic and invertible, and a \emph{cultural}
+  fragment where every rule is non-invertible. We prove that the cultural
+  fragment is admissible thanks to a completeness proof of the natural fragment
+  with respect to Kripke semantics. We exploit these meta-theoretical results to
+  design the Flower Prover, a prototype of GUI in the PbA paradigm that aims to
+  unify the concepts of \emph{goal} and \emph{theory} in a \emph{modal
+  interface}: goals correspond to flowers manipulated with natural rules in
+  \Proof mode; while theories correspond to the same flowers manipulated with
+  cultural rules in \Edit mode. The Flower Prover is also the first
+  \emph{mobile-friendly} interface for ITPs that we know of.
+\end{description}
 
 \begin{kaobox}[frametitle=Note]
 Most of the content of \refch{pba} and \refch{sfl} has been previously published
@@ -1120,8 +1145,6 @@ of Peirce.
   \labfig{chapter-deps}
 \end{figure*}
 
-\todo{ Introduce a special format for long digressions in sidenotes, so that the
-reader can safely ignore them. }
 
 \section{Related works}\labsec{intro-rw}
 
