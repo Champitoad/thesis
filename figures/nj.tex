@@ -4,9 +4,9 @@
   {\bot}
   {A}
   \and
-  \prftree[r][l]{\rsf{{\limp}i}}{\small[\prfref<HA>]}
+  \prftree[r][l]{\rsf{{\limp}i}}{\small[\prfref<H1>]}
   {\summ
-    {\Gamma, \prfboundedassumption<HA>{A}}
+    {\Gamma, \prfboundedassumption<H1>{A}}
     {B}}
   {A \limp B}    
   \and
@@ -35,13 +35,13 @@
   {B}
   {A \lor B}
   \and
-  \prftree[r][l]{\rsf{\lor e}}{\small[\prfref<HA>,\prfref<HB>]}
+  \prftree[r][l]{\rsf{\lor e}}{\small[\prfref<H1>,\prfref<H2>]}
   {A \lor B}
   {\summ
-    {\Gamma, \prfboundedassumption<HA>{A}}
+    {\Gamma, \prfboundedassumption<H1>{A}}
     {C}}
   {\summ
-    {\Delta, \prfboundedassumption<HB>{B}}
+    {\Delta, \prfboundedassumption<H2>{B}}
     {C}}
   {C}
   \\

@@ -20,7 +20,24 @@
 \addbibresource{main.bib} % Bibliography file
 
 % Load mathematical packages for theorems and related environments
-\usepackage[framed=true]{kaotheorems}
+\definecolor{bgdefinition}{HTML}{f9f9df}
+\definecolor{bgtheorem}{HTML}{fce3d7}
+\definecolor{bglemma}{HTML}{e1efe3}
+\colorlet{bgremark}{Yellow!20}
+\colorlet{bgexample}{SpringGreen!30}
+\colorlet{bgexercise}{Goldenrod!30}
+\usepackage[
+	framed=true,
+	definitionbackground=bgdefinition,
+	theorembackground=bgtheorem,
+	lemmabackground=bglemma,
+	corollarybackground=bglemma,
+	propositionbackground=bglemma,
+	factbackground=bglemma,
+	remarkbackground=bgremark,
+	examplebackground=bgexample,
+	exercisebackground=bgexercise,
+]{kaotheorems}
 
 % Load the package for hyperreferences
 \usepackage{kaorefs}

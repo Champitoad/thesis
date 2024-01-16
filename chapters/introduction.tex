@@ -259,18 +259,6 @@ the University of Göttingen \sidecite{gentzen_untersuchungen_1935}, the German
 logician Gerhard Gentzen proposed independently his famous calculus of
 \emph{natural deduction}.
 
-\begin{marginfigure}
-  $$
-  \prftree[r][l]{\rsf{ip}}{\small[\prfref<HA>]}
-  {\summ
-    {\Gamma, \prfboundedassumption<HA>{\neg A}}
-    {\bot}}
-  {A}    
-  $$
-  \caption{Rule of indirect proof in natural deduction}
-  \labfig{NK-ip}
-\end{marginfigure}
-
 This formalism follows the opposite approach to Hilbert systems: it features as
 few axioms as possible, favoring the use of \emph{inference rules} to model the
 forms of reasoning found in mathematical practice. Those are divided in two
@@ -293,6 +281,24 @@ found in the rules for the conjunction connective $\land$: the introduction rule
 and a proof of $B$; while the elimination rules \rsf{\land e_1} and \rsf{\land
 e_2} allow to derive proofs of $A$ and $B$ from a proof of $A \land B$.
 
+\begin{figure*}
+  \input{figures/nj.tex}
+  \caption{Natural deduction calculus \sys{NJ} for intuitionistic logic}
+  \labfig{calculi-NJ}
+\end{figure*}
+
+\begin{marginfigure}
+  $$
+  \prftree[r][l]{\rsf{ip}}{\small[\prfref<H1>]}
+  {\summ
+    {\Gamma, \prfboundedassumption<H1>{\neg A}}
+    {\bot}}
+  {A}    
+  $$
+  \caption{Rule of indirect proof in natural deduction}
+  \labfig{NK-ip}
+\end{marginfigure}
+
 \begin{remark}
   Note that the rules for negation $\neg$ are not present in
   \reffig{calculi-NJ}: indeed, it is customary in intuitionistic logic to define
@@ -301,20 +307,29 @@ e_2} allow to derive proofs of $A$ and $B$ from a proof of $A \land B$.
   negation are subsumed by those for implication $\limp$ and absurdity $\bot$.
 \end{remark}
 
-\todo{Margin figure for proof of PNC in NJ}
+\begin{marginfigure}
+  $$
+  \prftree[r][l]{\rsf{{\limp}i}}{\small[\prfref<H1>]}
+    {\R[\rsf{{\limp}e}]
+      {\R[\rsf{\land e_1}]
+        {\prfboundedassumption<H1>{A \land \neg A}}
+        {A}}
+      {\R[\rsf{\land e_2}]
+        {\prfboundedassumption<H1>{A \land \neg A}}
+        {\neg A}}
+      {\bot}}
+    {\neg (A \land \neg A)}
+  $$
+  \caption{Proof of the principle of non-contradiction in natural deduction}
+  \labfig{PNC-NJ}
+\end{marginfigure}
 
-Many logical reasoning principles that were \emph{axiomatized} in Hilbert
-systems can be \emph{derived} in natural deduction. For example, \reffig{PNC-NJ}
-shows a proof of the principle of non-contradiction, built by \emph{composing}
-instances of rules from \reffig{calculi-NJ}. The composition of a rule instance
-\rsf{r1} with another rule instance \rsf{r2} simply consists in using the
-conclusion of \rsf{r1} as one of the premisses of \rsf{r2}.
-
-\begin{figure*}
-  \input{figures/nj.tex}
-  \caption{Natural deduction calculus \sys{NJ} for intuitionistic logic}
-  \labfig{calculi-NJ}
-\end{figure*}
+All logical reasoning principles that were \emph{axiomatized} in Hilbert systems
+can be \emph{derived} in natural deduction. For example, \reffig{PNC-NJ} shows a
+proof of the principle of non-contradiction, built by \emph{composing} instances
+of rules from \reffig{calculi-NJ}. The composition of a rule instance \rsf{r1}
+with another rule instance \rsf{r2} simply consists in using the conclusion of
+\rsf{r1} as one of the premisses of \rsf{r2}.
 
 \begin{figure*}
   \input{figures/lj.tex}
@@ -376,16 +391,38 @@ the contexts of hypotheses $\Gamma$ and $\Delta$ always explicit.
 Following the original presentation of Gentzen, contexts are taken to be
 \emph{lists} of formulas (``sequenz'' in German), i.e. ordered collections where
 repetitions are allowed. Still, we really want to see them as \emph{sets} of
-formulas, since it is implicit in mathematical practice that \begin{enumerate*}
-\item the order in which hypotheses are listed does not matter, and \item
-hypotheses may be used more than once in a proof. \end{enumerate*} These two
-conventions are respectively captured by the \emph{structural rules} \rsf{ex} of
-\emph{exchange} and \rsf{ctr} of \emph{contraction} in \reffig{calculi-LJ}. A
-third structural rule, \rsf{wkn} for \emph{weakening}, accounts for the presence
-of unused assumptions in some proofs, by allowing to introduce hypotheses at
-will (with a top-down reading of rules).
+formulas, since it is implicit in mathematical practice that:
+\begin{enumerate}
+\item the \emph{order} in which hypotheses are listed does not matter, and
+\item hypotheses may be used \emph{more than once} in a proof (as in
+\reffig{PNC-NJ}).
+\end{enumerate}
+These two conventions are respectively captured by the \emph{structural rules}
+\rsf{ex} of \emph{exchange} and \rsf{ctr} of \emph{contraction} in
+\reffig{calculi-LJ}. A third structural rule, \rsf{wkn} for \emph{weakening},
+accounts for the presence of unused assumptions in some proofs, by allowing to
+introduce hypotheses at will (with a top-down reading of rules).
 
-\todo{Margin figure for proof of PNC in LJ}
+\begin{marginfigure}
+  $$
+  \R[\rsf{{\limp} R}]
+  {\R[\rsf{ctr}]
+  {\R[\rsf{\land L_1}]
+  {\R[\rsf{\land L_2}]
+  {\R[\rsf{{\limp} L}]
+    {\R[\rsf{ax}]
+    {A \seq A}}
+    {\R[\rsf{ax}]
+    {\bot \seq \bot}}
+    {A, \neg A \seq \bot}}
+  {A, A \land \neg A \seq \bot}}
+  {A \land \neg A, A \land \neg A \seq \bot}}
+  {A \land \neg A \seq \bot}}
+  {\seq \neg (A \land \neg A)}
+  $$
+  \caption{Proof of the law of non-contradiction in sequent calculus}
+  \labfig{PNC-LJ}
+\end{marginfigure}
 
 The main difference of sequent calculus compared to natural deduction lies in
 its splitting of elimination rules in two parts: \emph{left introduction} rules,
@@ -406,7 +443,7 @@ shows a proof of the principle of non-contradiction in \sys{LJ}.
 
 Both the \rsf{cut} and \rsf{ax} rules seem completely trivial. Yet surprisingly,
 Gentzen managed to prove a powerful result called alternatively
-\textit{Haupstatz}, fundamental theorem (of proof theory), or
+\textit{Haupstatz}, \emph{fundamental theorem} (of proof theory), or
 \emph{cut-elimination}: every provable formula in sequent calculus has a
 \emph{cut-free} proof, i.e. a proof that does not make use of the \rsf{cut}
 rule. Intuitively, it can be understood as a formal justification of the
@@ -771,6 +808,8 @@ between their input (high-level) and output (low-level) languages, or in some
 cases by translations to and from more universal languages (see e.g.
 \sidecite{proofcert}\sidecite{dedukti}).
 
+\paragraph{Universal user interface}
+
 The interoperability problem can also potentially be approached from the
 \emph{front-end}. Many kinds of logical manipulations such as discharging
 assumptions, instantiating quantifiers, and composing lemmas, are conceptually
@@ -791,7 +830,7 @@ computing devices to a much wider audience, by allowing users to interact with
 them in an intuitive way that resembles interactions with physical objects in
 the real world. According to Shneiderman, this contrasts with the
 \emph{command-line} paradigm, where users need to memorize a complex command
-language that often varies from one application to another in the same problem
+language that often varies from one software to another within the \emph{same}
 domain. This induces an unnecessary cognitive burden for newcomers, especially
 those unfamiliar with textual interfaces, which constitute the majority of users
 of computing devices nowadays; to the point that the hurdle is too great to
@@ -1087,6 +1126,8 @@ other chapters present completely original and personal work.
 
 \subsection{How to read}
 
+\paragraph{Reading order}
+
 The ordering of chapters in this thesis is mostly \emph{chronological},
 reflecting the order in which the ideas were developed. For readers interested
 in all of the contributions, we thus advise to read all chapters in order.
@@ -1128,31 +1169,36 @@ A last option is to read only \refch{eg}, skipping even \refch{pba}. This might
 be of interest to people looking for an introduction to the existential graphs
 of Peirce.
 
-\begin{digression}
-  Sometimes we will develop ideas loosely related to the main text in
-  \emph{digressions}. These will appear in the margin in boxes such as the
-  current one, and they can be safely ignored --- at least on a first reading.
-  We distinguish them from normal side notes, which are usually shorter and more
-  relevant to the matter at hand.
-\end{digression}
-
-\begin{remark}
-  Some parts of this document make a heavy, \emph{semantic} use of colors.
-  Although all important concepts still have a textual, color-independent
-  presentation, it is recommended to print this document with a decent amount of
-  color levels.
-  
-  Also, we tend to cross-reference many ideas from different chapters with the
-  help of \emph{hyperlinks}. We thus recommend the usage of a PDF reader that
-  supports at least hyperlink \emph{jumping}, and if possible hyperlink
-  \emph{preview} for a more comfortable reading experience.
-\end{remark}
-
 \begin{figure*}
   \stkfig{1}{chapter-deps}
   \caption{Dependency graph between chapters}
   \labfig{chapter-deps}
 \end{figure*}
+
+\begin{digression}
+  We will sometimes develop ideas loosely related to the main text in
+  \emph{digression} boxes such as this one: at least on a first reading, they
+  can be safely ignored. We distinguish them from normal side notes, which are
+  usually shorter and more relevant to the matter at hand.
+\end{digression}
+
+\paragraph{Color}
+
+Some parts of this document make a heavy, \emph{semantic} use of colors.
+Although all important concepts still have a textual, color-independent
+presentation, it is recommended to print this document with a decent amount of
+color levels.
+
+\paragraph{Hyperlinks}
+  
+We tend to cross-reference many ideas from different chapters with the help of
+\emph{hyperlinks}. In particular, we use the \texttt{knowledge} package from
+Thomas Colcombet to hyperlink occurrences of concepts to the place where they
+are introduced. We thus recommend the usage of a PDF reader that supports at
+least hyperlink \emph{jumping}, and if possible hyperlink \emph{preview} for a
+more comfortable reading experience.
+
+\todo{Hyperlink the \texttt{knowledge} package}
 
 
 \section{Related works}\labsec{intro-rw}
@@ -1180,16 +1226,19 @@ reasoning style.
 
 Thus we are not the first to attempt to design new proof systems based on deep
 inference principles, with the explicit objective of supporting a more intuitive
-reasoning style in ITPs\sidenote{Note that during most of the time period when
-window inference was developed, the terminology of ``deep inference'' had not
-been introduced yet. Indeed, the first article on the subject appeared in 1999
-\cite{Guglielmi1999ACO}, with very different motivations in mind: namely, the
-development of a proof-theoretical approach unifying concurrent and sequential
-computation, resulting in the calculus of structures for the logic \sys{BV}. But
-some proof systems based on deep inference principles already existed and
-inspired researchers in window inference, as witnessed by the reference to
-Schütte's proof theory in the above quote.}. However, we believe our approach is
-unique in that it emphasizes two aspects:
+reasoning style in ITPs.
+\begin{digression}
+  Note that during most of the time period when window inference was developed,
+the terminology of ``deep inference'' had not been introduced yet. Indeed, the
+first article on the subject appeared in 1999 \cite{Guglielmi1999ACO}, with very
+different motivations in mind: namely, the development of a proof-theoretical
+approach unifying concurrent and sequential computation, resulting in the
+calculus of structures for the logic \sys{BV}. But some proof systems based on
+deep inference principles already existed and inspired researchers in window
+inference, as witnessed by the reference to Schütte's proof theory in the above
+quote.
+\end{digression}
+However, we believe our approach is unique in that it emphasizes two aspects:
 \begin{itemize}
   \item the use of \emph{direct manipulation} on goals to perform proof steps
   (although some pointing interactions were already at work in window
