@@ -542,7 +542,8 @@ apply:
 Then to reason by induction on contexts, we need to define formally how to
 measure their \emph{depth}. It turns out the only way to increase the depth of
 an $\alpha$-graph is to insert \emph{cuts}, and thus the depth of a context
-coincides with its \emph{parity}, i.e. the number of cuts enclosing its hole:
+coincides with its number of \emph{inversions}, i.e. the number of cuts
+enclosing its hole:
 
 \begin{definition}[Depth]
   The \emph{depth} of a context $G\hole$ is defined recursively by
@@ -552,13 +553,14 @@ coincides with its \emph{parity}, i.e. the number of cuts enclosing its hole:
   \end{align*}
 \end{definition}
 
-\begin{definition}[Parity]\labdef{eg-parity}
-  The \emph{parity} of a context $G\hole$ is defined by $\parity{G\hole} =
-  \gdepth{G\hole}$.
+\begin{definition}[Inversions]\labdef{eg-inv}
+
+  The number of \emph{inversions} of a context $G\hole$ is defined by
+  $\inv{G\hole} = \gdepth{G\hole}$.
 \end{definition}
 
 \begin{definition}[Polarity]
-  We say that a context $G\hole$ is \emph{positive} if $\parity{G\hole}$ is
+  We say that a context $G\hole$ is \emph{positive} if $\inv{G\hole}$ is
   even, and \emph{negative} otherwise. We denote positive and negative contexts
   respectively by $G^+\hole$ and $G^-\hole$.
 \end{definition}
@@ -1149,9 +1151,9 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
   Since all rules of \sys{Alpha} apply in a context of unbounded depth, we know
   that there are some graphs $G_0, H_0$ and context $K'\hole$ such that $G =
   K'\select{G_0}$ and $H = K'\select{H_0}$. Then either $K'\hole$ is positive,
-  and $\parity{K^+\select{K'\hole}} = \parity{K^+\hole} + \parity{K'\hole}$ is
+  and $\inv{K^+\select{K'\hole}} = \inv{K^+\hole} + \inv{K'\hole}$ is
   even since it is the sum of two even numbers; or $K'\hole$ is negative, and
-  $\parity{K^+\select{K'\hole}}$ is odd since it is the sum of an even and an
+  $\inv{K^+\select{K'\hole}}$ is odd since it is the sum of an even and an
   odd number. In both cases $K^+\select{K'\hole}$ has the same polarity as
   $K'\hole$, and thus the same rule can be applied.
 \end{proof}

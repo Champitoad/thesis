@@ -848,21 +848,21 @@ of flowers:
   \end{align*}
 \end{definition}
 
-Contrarily to EG (\refdef{eg-parity}), the parity of a context does not coincide
-with its depth, since petals increase depth but preserve polarity:
+Contrarily to EG (\refdef{eg-inv}), the number of inversions of a context does
+not coincide with its depth, since petals increase depth but preserve polarity:
 
-\begin{definition}[Parity]
-  The \emph{parity} $\parity{\Phi\hole}$ of a context $\Phi\hole$ is defined
-  recursively by:
+\begin{definition}[Inversions]
+  The number of \emph{inversions} $\inv{\Phi\hole}$ of a context $\Phi\hole$ is
+  defined recursively by:
   \begin{align*}
-    \parity{\Psi, \hole} &= 0 \\
-    \parity{\Psi, (\flower{\garden{\bx}{\Phi\hole}}{\Delta})} &= \parity{\Phi\hole} + 1 \\
-    \parity{\Psi, (\flower{\gamma}{\garden{\bx}{\Phi\hole} \sep \Delta})} &= \parity{\Phi\hole}
+    \inv{\Psi, \hole} &= 0 \\
+    \inv{\Psi, (\flower{\garden{\bx}{\Phi\hole}}{\Delta})} &= \inv{\Phi\hole} + 1 \\
+    \inv{\Psi, (\flower{\gamma}{\garden{\bx}{\Phi\hole} \sep \Delta})} &= \inv{\Phi\hole}
   \end{align*}
 \end{definition}
 
 \begin{definition}[Polarity]
-  We say that a context $\Phi\hole$ is \emph{positive} if $\parity{\Phi\hole}$ is even, and
+  We say that a context $\Phi\hole$ is \emph{positive} if $\inv{\Phi\hole}$ is even, and
   \emph{negative} otherwise. We denote positive and negative contexts
   respectively by $\Phi^+\hole$ and $\Phi^-\hole$.
 \end{definition}
@@ -1154,9 +1154,9 @@ for EG:
   In the case of a natural step $\Phi \step_{\Nature} \Psi$, this is immediate
   by definition. Otherwise we have a cultural step $\Xi'\select{\Phi_0}
   \step_{\Culture} \Xi'\select{\Psi_0}$. Then either $\Xi'\hole$ is positive,
-  and $\parity{\Xi^+\select{\Xi'\hole}} = \parity{\Xi^+\hole} +
-  \parity{\Xi'\hole}$ is even since it is the sum of two even numbers; or
-  $\Xi'\hole$ is negative, and $\parity{\Xi^+\select{\Xi'\hole}}$ is odd since
+  and $\inv{\Xi^+\select{\Xi'\hole}} = \inv{\Xi^+\hole} +
+  \inv{\Xi'\hole}$ is even since it is the sum of two even numbers; or
+  $\Xi'\hole$ is negative, and $\inv{\Xi^+\select{\Xi'\hole}}$ is odd since
   it is the sum of an even and an odd number. In both cases
   $\Xi^+\select{\Xi'\hole}$ has the same polarity as $\Xi'\hole$, and thus the
   same rule can be applied.
