@@ -29,8 +29,8 @@ Like most rewriting systems on terms (that is, tree-shaped data), the rewrite
 rules of \reffig{DISL} and \reffig{DISL-U} apply at any depth inside formulas.
 However logically, the shape of the \emph{context} in which this rewriting
 occurs can provide important information, either to ensure soundness of the
-performed transformation (\refsec{soundness}, \refsec{dnd-completeness}), or 
-to understand the status of quantified variables (\refsec{identity}).
+performed transformation (\refsec{soundness}, \refsec{dnd-completeness}), or to
+understand the status of quantified variables (\refsubsec{identity}).
 
 As is standard in term rewriting, our notion of context will correspond to that
 of a (formula) tree with a distinguished leaf called its \emph{hole}.
@@ -69,15 +69,15 @@ $A\select{B}$ for the path $(A\hole, B)$.
   written $\inv(A\hole)$, is the number of subterms of $A\hole$
   which are of the form $C\hole\limp D$; that is the number of
   times the hole is on the left-hand side of an implication.
-  \end{definition}
-\noindent  For instance:
+  For instance:
   $$
-\begin{array}{rcl}
-    \inv(D\land \hole)&=& 0\\
-    \inv((D\land \hole)\limp E)&=&1\\
-    \inv((\hole\limp C)\limp D) &=& 2
-\end{array}
-$$
+  \begin{array}{rcl}
+      \inv(D\land \hole)&=& 0\\
+      \inv((D\land \hole)\limp E)&=&1\\
+      \inv((\hole\limp C)\limp D) &=& 2
+  \end{array}
+  $$
+\end{definition}
 
 \begin{definition}[Polarity of a context]\label{def:polarity}
 We will write $A^+\hole$ to specify that a context is {\em positive},
@@ -95,7 +95,7 @@ the two items together with the selection, since the intent is to \emph{link}
 the subterms to make them interact in some way.
 
 \begin{remark}
-In this thesis we only consider linkages between two subterms, but as noted in
+In this thesis we only consider linkages between two subterms. But as noted in
 \refsec{equality}, rewriting is an example of action that can benefit from
 allowing multiple selections\sidenote{A restricted kind of multi-occurrence
 rewrite is already available in the standalone version of Actema: one needs to
@@ -222,7 +222,7 @@ interface that makes this methodology more intuitive and discoverable is the
 main goal of this work, and (valid) DnD actions seem to be a good candidate as a
 core principle for such a methodology.
 
-\subsection{Polarity}\labsec{polarity}
+\subsection{Polarity}\labsubsec{polarity}
 
 The restrictions on polarities are captured formally by the following condition:
 
@@ -270,29 +270,37 @@ The restrictions on polarities are captured formally by the following condition:
   
   The following must be true for a logical linkage
   $B\select{A}\link D\select{A'}$ to be valid:
+
   \begin{enumerate}
     \item the parity of $\inv(B\hole)$ is:
+
       \begin{enumerate}
-        \item the same as $\inv(D\hole)$ if $\link = \back$
-        \item the opposite of $\inv(D\hole)$ if $\link = \forw$
+        \item the same as $\inv(D\hole)$ if $\link = \back$;
+        \item the opposite of $\inv(D\hole)$ if $\link = \forw$;
       \end{enumerate}\label{clause:opposite}
-    \item if $\link$ is $\back$ and $\inv(D\hole) = 0$, then $\inv(B\hole) =
+
+    \item if $\link = \back$ and $\inv(D\hole) = 0$, then $\inv(B\hole) =
     0$\label{clause:intuit}.
   \end{enumerate}
 
   The following must be true for a rewrite linkage $B\select{t} @ D\select{t'}$
   to be valid:
+
   \begin{enumerate}
     \item if $B\hole$ holds the equality, then it must be:
+
       \begin{enumerate}
         \item positive if $\link = \back$;
         \item positive if $\link = \forw$;
       \end{enumerate}
+
     \item if $D\hole$ holds the equality, then it must be:
+
       \begin{enumerate} 
         \item negative if $\link = \back$;
         \item positive if $\link = \forw$.
       \end{enumerate}
+
   \end{enumerate}
 \end{condition}
 
@@ -310,7 +318,7 @@ example in \refch{sfl-classical}, but for now we can just remark that there is
 no way to handle it with the rules of \reffig{DISL} because we lack a rule for
 redexes of the form $B\select{A} \limp C \back D\select{A'}$.
 
-\subsection{Identity}\labsec{identity}
+\subsection{Identity}\labsubsec{identity}
 
 A context binds variables in the selected proposition. These variables
 will be unifiable or not depending upon: (1) the nature of the quantifier
@@ -666,9 +674,9 @@ First some remarks can be made about the rewrite rules of \reffig{DISL}:
   \textsf{Fcomm}.}.
 \end{itemize}
 
-As for the rules of \reffig{DISL-U}, they are both terminating
-\emph{and} confluent. Indeed they define a function that eliminates redundant
-occurrences of the units $\top$ and $\bot$.
+As for the rules of \reffig{DISL-U}, they are both terminating \emph{and}
+confluent. Indeed, they define a function that eliminates redundant occurrences
+of the units $\top$ and $\bot$.
 
 Here is a high-level overview of the complete procedure followed to generate a
 proof step:
@@ -693,7 +701,7 @@ proof step:
 \item \textbf{Linking:} the system then chooses a rewriting start\-ing from the
   linkage. Thanks to \refthm{productivity}, this re\-writing always ends with a
   proposition of the form $D\select{\sigma(A) \back \sigma(A')}$ $$\text{(resp.
-  $D\select{\select{\sigma(t)} = u \link C_0\select{\sigma(t')}}$);}$$
+  $D\select{\select{\sigma(t)} = u \link C_0\select{\sigma(t')}}$)}$$
   \label{step:linking}
 \item \textbf{Interaction:} thus one can apply the {\rnmsf{id}} rule (resp. an equality rule in
 $\{\mathsf{L\!\!=\!\!_1}, \mathsf{L\!\!=\!\!_2}, \mathsf{F\!\!=\!\!_1},
@@ -987,8 +995,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
 \end{itemize}
 \begin{proof}
   Let $\mathcal{L} \syneq B\select{A} \link C\select{A'}$ be a valid linkage.\\
-  \begin{enumerate}
-    \setlength{\itemsep}{1em}
+  \begin{enumerate}[itemsep=0.8em]
     \item Suppose $B\hole \syneq C\hole \syneq \square$. By
     Condition~\ref{cond:pol}, we know that a forward linkage cannot verify
     $(\inv(B\square), \inv(C\square)) = (0,0)$, thus $\mathcal{L}$ must be a
@@ -1018,8 +1025,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
           that the switch rule is applicable. Now we show that $\mathcal{L'}$ is
           valid:
 
-          \begin{enumerate}
-            \setlength{\itemsep}{0.8em}
+          \begin{enumerate}[itemsep=0.4em]
             \renewcommand{\labelenumii}{\theenumii}
             \renewcommand{\theenumii}{\arabic{enumii}.}
 
@@ -1044,8 +1050,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
           $\sigma(x)$ as witness. Again one might need to apply \rnmsf{Fcomm}
           first. Then we check the validity of $\mathcal{L'}$:
 
-          \begin{enumerate}
-            \setlength{\itemsep}{0.8em}
+          \begin{enumerate}[itemsep=0.4em]
             \renewcommand{\labelenumii}{\theenumii}
             \renewcommand{\theenumii}{\arabic{enumii}.}
             
@@ -1057,7 +1062,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
             $x$ is instantiated by $\sigma$, that $\uvars(\mathcal{L'}) =
             \uvars(\mathcal{L}) \setminus \{x\}$. Then we take as unifier
             $\sigma$ where the binding for $x$ is removed, written $\sigma
-            \setminus x$.\\
+            \setminus x$.
 
             Now we need to make sure that $\sigma \setminus x$ is indeed a
             unifier for the selected formulas. We consider only the case where
@@ -1102,8 +1107,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
       the direct subcontext where $A$ or $A'$ occurs, or the {\rnmsf{Fcomm}}
       rule. Again we check the conditions of Definition \ref{def:valid-linkage}:
       
-      \begin{enumerate}
-        \setlength{\itemsep}{0.8em}
+      \begin{enumerate}[itemsep=0.4em]
         \renewcommand{\labelenumii}{\theenumii}
         \renewcommand{\theenumii}{\arabic{enumii}.}
             
