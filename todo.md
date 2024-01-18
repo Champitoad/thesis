@@ -1,3 +1,3 @@
-- Turn long sidenotes into digressions
 - Check errors with Grammarly
 - Use the `knowledge` package (including for inference rules)
+- Turn long sidenotes into digressions
