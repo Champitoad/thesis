@@ -114,6 +114,35 @@
 
 %%% Package config
 
+% mdframed
+\mdfdefinestyle{emphparstyle}{
+	nobreak=true,
+	skipabove=1.5\topskip,
+	skipbelow=0pt,
+	rightmargin=0pt,
+	leftmargin=0pt,
+	innertopmargin=1.25em,
+	innerbottommargin=1.25em,
+	innerrightmargin=2em,
+	innerleftmargin=2em,
+	topline=true,
+	bottomline=true,
+	rightline=true,
+	leftline=true,
+	linewidth=0.5pt,
+	%roundcorner=0pt,
+	%font={},
+	%frametitlefont={},
+	frametitlerule=false,
+	linecolor=black,
+	%backgroundcolor=LightBlue,
+	fontcolor=black,
+	%frametitlebackgroundcolor=LightBlue,
+}
+\newmdenv[
+	style=emphparstyle,
+]{emphpar}
+
 % algorithm2e
 \SetKw{Break}{break}
 \SetKw{Continue}{continue}
@@ -122,8 +151,8 @@
 
 % enumitem
 \setlist[description]{itemsep=0.5em,leftmargin=0.9em}
-\setlist[itemize]{align=left,leftmargin=*,labelsep=0.9em}
-\setlist[enumerate]{align=left,leftmargin=*,labelsep=0.9em}
+\setlist[itemize]{itemsep=-0.5\parskip,align=left,leftmargin=*,labelsep=0.9em}
+\setlist[enumerate]{itemsep=-0.5\parskip,align=left,leftmargin=*,labelsep=0.9em}
 
 % tabularx
 \newcolumntype{O}[1]{>{\setlength\hsize{#1\hsize}}c}
