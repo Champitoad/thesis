@@ -982,12 +982,12 @@
         {}%
 		% Set the style for subsection entries
         \etocsetstyle{mtocsubsection}%
-        {\parindent 0pt \parskip 0pt \parfillskip 0pt \RaggedRight}%
-        {\leftskip \margintocnumwidth \rightskip \margintocpagenumwidth}%
-        {\makebox[0pt][r]{\makebox[\margintocnumwidth][l]{\etocnumber}}\etocname\nobreak\leaders\hbox{\hbox to 1.5ex {\hss.\hss}}\hfill\rlap{\makebox[\margintocpagenumwidth][r]{\etocpage}}\par}%
-        {\parskip 2.5pt}%
+		{\parindent 0pt \parskip 0pt \parfillskip 0pt \RaggedRight}%
+		{\leftskip \margintocnumwidth \rightskip \margintocpagenumwidth}%
+		{\makebox[0pt][r]{\makebox[\margintocnumwidth][l]{\mdseries\etocnumber}}{\mdseries\etocname\nobreak\leaders\hbox{\hbox to 1.5ex {\hss.\hss}}\hfill\rlap{\makebox[\margintocpagenumwidth][r]{\mdseries\etocpage}}}\par}%
+		{\parskip 2.5pt}%
 		% Set the global style of the toc
-        \etocsettocstyle{\usekomafont{section}\small}{}%
+		\etocsettocstyle{\usekomafont{section}\small}{}%
 		\etocsetnexttocdepth{\themargintocdepth}%
         % Print the table of contents in the margin
         \marginnote[#1]{\localtableofcontents}%
@@ -1191,7 +1191,10 @@
 ]{kaobox}
 
 \colorlet{bgnote}{RoyalBlue!15}
-\colorlet{bgdigression}{CarnationPink!15}
+\colorlet{bgdigression}{Peach!25}
+% \colorlet{bgdigression}{Apricot!35}
+% \colorlet{bgdigression}{CarnationPink!15}
+% \colorlet{bgdigression}{Mulberry!15}
 
 \newmdenv[
 	style=kaoboxstyle,
