@@ -1567,12 +1567,6 @@ would play the same role as the rules of \reffig{DISL-U}. Thus adding this rule
 does not correspond morally to modelling a click action, nor to a modification
 of the semantics of DnD actions as for release rules.
 
-\todo{ It seems that the question of admissibility of the release rules is very
-  similar to the question of admissibility of the {\rnmsf{fence}} rule in the
-  flower calculus. Both serve the same purpose of enabling a local simulation of
-  sequent calculus rules, but do not appear in real proofs because of the
-  arbitrary deep/global power of link formation/iteration rules. }
-
 Then we simply rely on the completeness of sequent calculus by performing a
 proof by simulation. There are many variants of sequent calculi for
 intuitionistic first-order logic described in the literature. In our case the
@@ -1870,7 +1864,31 @@ admissibility theorem from \cite{negri_structural_2001}.
 
 \section{Related works}\labsec{sfl-rw}
 
-\paragraph{Canonical Proofs}
+\paragraph{Subformula linking under quantifiers}
+
+Very recently, Mulder and Krebbers \sidecite{mulder_unification_2024} proposed
+an improvement over both our method of subformula linking implemented in Actema,
+and the method of Chaudhuri implemented in the \sys{Profint} prototype
+\sidecite{DBLP:conf/cade/Chaudhuri21}. Like us, they perform \textit{a priori}
+unification on the linked subformulas to determine appropriate substitutions for
+instantiating quantifiers and rule out unwanted links. But their method improves
+upon ours by being able to link subformulas with non-trivial quantifier
+instantiation, such as the following linkage that currently fails in
+Actema\todo{Try to understand precisely why it fails, and if this invalidates
+the productivity theorem.}:
+$$(\forall x. P(x) \limp \exists y. \select{Q(x,y)}) \back \exists y. \exists z.
+\select{Q(f(z),y)}$$
+Because of the intended application of their method to \emph{automated} theorem
+proving in the Iris framework for program verification in Coq
+\sidecite{jung_iris_2018}, it is for now limited to \emph{backward} linkages.
+They provide a detailed formalization in Coq that relates their method with
+that of Actema and \sys{Profint}, based on \emph{linking judgments} of the form
+$H \curlywedge [O]\VDash G$ that have a derivation precisely when $H \back G
+\steps O$\sidenote{Contrary to our usage in this chapter, they use the
+terminology ``linkage'' to denote derivations of these linking judgments, rather
+than paths to selected subformulas.}.
+
+\paragraph{Canonical proofs}
 
 The idea of reducing a proof to a collection of links between its dual formulas
 is not new, and can be traced back to the \emph{matings} of Andrews
@@ -1941,7 +1959,7 @@ derivations.
 % corresponds to a particular kind of action, which justifies any occurrence of
 % proposition given another known, unifiable proposition.
 
-\paragraph{Tangible Functional Programming}
+\paragraph{Tangible functional programming}
 
 We noticed an interesting connection with the work of Conal Elliott on
 tangible functional programming \sidecite{elliott-tangible}. His concept

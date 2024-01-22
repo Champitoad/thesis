@@ -19,27 +19,30 @@ to an Apology for Pragmaticism}, 1906}
 
 C. S. Peirce is famous for his contributions to symbolic logic, including among
 others his eponymous law for classical logic, and his pioneering work on the
-algebra of relations and quantification \cite{peirce_algebra_1885}. But far less
-widespread are his achievements in the realm of graphical logic, or \emph{iconic
-logic} as Shin calls it \cite{10.7551/mitpress/3633.001.0001}. He dedicated a
-large chunk of his life investigating diagrammatic systems, starting in 1882
-with the \emph{entitative graphs} and culminating with the \emph{existential
-graphs}, which he developed from 1896 until his death in 1914
-\cite{Roberts+1973}. Interestingly, Peirce perceived existential graphs
+algebra of relations and quantification \sidecite{peirce_algebra_1885}. But far
+less widespread are his achievements in the realm of graphical logic, or
+\emph{iconic logic} as Shin calls it \sidecite{10.7551/mitpress/3633.001.0001}.
+He dedicated a large chunk of his life investigating diagrammatic systems,
+starting in 1882 with the \emph{entitative graphs} and culminating with the
+\emph{existential graphs}, which he developed from 1896 until his death in 1914
+\sidecite{Roberts+1973}. Interestingly, Peirce perceived existential graphs
 (thereafter ``EG'') as his \textit{``chef d'oeuvre''}, and that they
-\textit{``ought to be the logic of the future''}\sidenote[][3em]{Both citations
-are sourced in \cite[p.~11]{Roberts+1973}.}.
+\textit{``ought to be the logic of the future''}\sidenote{Both citations are
+sourced in \cite[p.~11]{Roberts+1973}.}.
 
 Recent works have started to realize this vision: for example Sowa based his
 conceptual graphs for computerized knowledge representation on EG
-\cite{sowa_conceptual_1976}, Brady, Trimble
-\cite{brady_categorical_2000}\cite{brady_string_nodate} and Haydon, Sobociński
-\cite{pietarinen_compositional_2020} proposed various reconstructions of EG
-through the lens of \emph{topology} and \emph{category theory}, and Melliès and
-Zeilberger \cite{mellies_bifibrational_2016} refined the interpretation of Brady
-and Trimble by making further connections with \emph{linear logic}
-\cite{girard-linear-1987}. The full story has yet to be told, but we hope that
-our work will constitute one more step towards the vision Peirce had in mind.
+\sidecite{sowa_conceptual_1976}; Brady, Trimble
+\sidecite{brady_categorical_2000}\sidecite{brady_string_nodate} and Haydon,
+Sobociński \sidecite{pietarinen_compositional_2020} proposed various
+reconstructions of EG through the lens of \emph{topology} and \emph{category
+theory}; lastly, Melliès, Zeilberger \sidecite{mellies_bifibrational_2016} and
+Bonchi, Di Giorgio \sidecite{bonchi_diagrammatic_2024} refined respectively the
+interpretations of \cite{brady_string_nodate} and
+\cite{pietarinen_compositional_2020} by making further connections with
+\emph{linear logic} \sidecite{girard-linear-1987} and \emph{linear
+bicategories}. The full story has yet to be told, but we hope that our work will
+constitute one more step towards the vision Peirce had in mind.
 
 In this chapter, we propose a self-contained exposition of EG, that tries at the
 same time to be faithful to the original presentation of the systems by Peirce,
@@ -63,10 +66,10 @@ rewriting system. In \refsec{atomicity}, we formalize a variant of the
 principle, and discuss how it was motivated by Peirce's quest for \emph{illative
 atomicity}. In \refsec{eg-soundness}, we take advantage of our reformulation to
 give a simple proof of soundness for \sys{Alpha}, based on a direct
-truth-evaluation of graphs. In \refsec{eg-completeness} we give a novel
-syntactic proof of completeness for \sys{Alpha}, by simulating the calculus of
-structures \sys{SKS} of Brünnler and Tiu \cite{brunnler_local_2001}. In this
-way, \sys{Alpha} is shown to have subsystems that inherit the \emph{locality}
+truth-evaluation of graphs. In \refsec{eg-completeness} we give a syntactic
+proof of completeness for \sys{Alpha}, by simulating the calculus of structures
+\sys{SKS} of Brünnler and Tiu \sidecite{brunnler_local_2001}. In this way,
+\sys{Alpha} is shown to have subsystems that inherit the \emph{locality}
 property of \sys{SKS}, and where the deletion and insertion rules are
 respectively admissible for \emph{provability} and \emph{refutability}, making
 \sys{Alpha} \emph{analytic}. In \refsec{beta}, we illustrate the original
@@ -98,21 +101,20 @@ have been interpreted as attempts to capture \emph{modal}
 \sidecite{zeman_graphical_1964} and \emph{higher-order} logics.
 
 \begin{digression}
-A less known fact is that at the end of his life, Peirce pushed his
-experimentations beyond the scope of \emph{logic} in the contemporary sense of
-the word, with so-called \emph{tinctured existential graphs} (Chapter 6 in
-\cite{Roberts+1973}). Roughly, the idea was to represent a variety of
-\emph{modes of expression} with different background shades on the canvas where
-sentences are scribed, not unlike our graphical depiction of the \emph{status}
-of solutions in \reffig{graphical-B}, or the color codes used for the various
-kinds of text boxes in this document. In addition to the usual act of asserting
-the truth of a proposition, one could for instance express a \emph{subjective}
-or \emph{objective} possibility, or signify an interrogative or imperative mood,
-all by using different colors. For print in publications, he would in fact use
-\emph{heraldic tinctures} instead of colors, hence the ``tinctured''
-qualificative. The precise rules, meaning and purpose of tinctured EG remain
-elusive to this day, and might constitute the most esoteric part of Peirce's
-work.
+At the end of his life, Peirce pushed his experimentations beyond the scope of
+\emph{logic} in the contemporary sense of the word, with so-called
+\emph{tinctured existential graphs} (Chapter 6 in \cite{Roberts+1973}). Roughly,
+the idea was to represent a variety of \emph{modes of expression} with different
+background shades on the canvas where sentences are scribed, not unlike our
+graphical depiction of the \emph{status} of solutions in \reffig{graphical-B},
+or the color codes used for the various kinds of text boxes in this document. In
+addition to the usual act of asserting the truth of a proposition, one could for
+instance express a \emph{subjective} or \emph{objective} possibility, or signify
+an interrogative or imperative mood, all by using different colors. For print in
+publications, he would in fact use \emph{heraldic tinctures} instead of colors,
+hence the ``tinctured'' qualificative. The precise rules, meaning and purpose of
+tinctured EG remain elusive to this day, and might constitute the most esoteric
+part of Peirce's work.
 \end{digression}
 % We see a possible connection with the type-theoretical concept of
 % \emph{judgment}, which was rehabilitated by Martin-Löf from the philosophy of
@@ -556,11 +558,11 @@ enclosing its hole:
 \begin{definition}[Inversions]\labdef{eg-inv}
 
   The number of \emph{inversions} of a context $G\hole$ is defined by
-  $\inv{G\hole} = \gdepth{G\hole}$.
+  $\inv(G\hole) = \gdepth{G\hole}$.
 \end{definition}
 
 \begin{definition}[Polarity]
-  We say that a context $G\hole$ is \emph{positive} if $\inv{G\hole}$ is
+  We say that a context $G\hole$ is \emph{positive} if $\inv(G\hole)$ is
   even, and \emph{negative} otherwise. We denote positive and negative contexts
   respectively by $G^+\hole$ and $G^-\hole$.
 \end{definition}
@@ -631,7 +633,7 @@ the latter is concerned with the analysis of \emph{propositions} into their
 constituents through inference rules, while here we are interested in the
 analysis of the inference rules themselves\sidenote{We will give a positive
 answer to the question of analyticity in \sys{Alpha} at the end of
-\refsec{eg-completeness}.}. This is a philosophically debatable question,
+\refsec{eg-completeness}.}. Here there is a conceptual \emph{bottleneck},
 because inference rules are usually posited as axioms in a deductive system, and
 are thus by definition the smallest constituents of proofs. The only other
 logician we know of who attempted to give a non-trivial account of illative
@@ -989,12 +991,36 @@ to simulate an existing proof system for classical propositional logic, that is
 itself known to be complete. For instance in \cite{Roberts+1973}, completeness
 is shown by simulating the Hilbert-style system \sys{P} of Church, which only
 comprises 3 axioms for the (functionally complete) fragment $\{\limp, \neg\}$.
-We propose in this section the first proof (that we know of) by simulation of a
-\emph{deep inference} system, more specifically the calculus of structures
-\sys{SKS} first introduced in \sidecite{brunnler_local_2001}. This should
-provide a good overview of the similarities and differences between the two
-systems, and in particular of how they exemplify two distinct approaches to
-\emph{symmetry} in a deep inference setting.
+We propose in this section a proof by simulation of a \emph{deep inference}
+system, more specifically the calculus of structures \sys{SKS} first introduced
+in \sidecite{brunnler_local_2001}. This should provide a good overview of the
+similarities and differences between the two systems, and in particular of how
+they exemplify two distinct approaches to \emph{symmetry} in a deep inference
+setting.
+
+\begin{kaonote}
+  This section was written without being aware of the work of Ma and Pietarinen
+  in \sidecite{ma_proof_2017}, where they give a simulation of the calculus of
+  structures \sys{SKSg} in \sys{Alpha}, and also conversely a simulation of
+  \sys{Alpha} in \sys{SKSg}. While they do a similar comparison of features
+  between the two systems, in particular concerning their treatment of symmetry
+  and polarity, our work differs mainly in two respects:
+  \begin{description}
+    \item[Locality] \sys{SKS} is the \emph{local} version of \sys{SKSg}, and
+    thus we partake in a brief discussion on locality in \sys{SKS} and
+    \sys{Alpha}, and what our simulation says about it;
+    \item[Analyticity] crucially, our objective is to show at the end of this
+    section that \sys{Alpha} is \emph{analytic}. Ma and Pietarinen very briefly
+    discuss this question in their paper, by affirming that \sys{Alpha} is
+    analytic both in the sense of Gentzen because it can simulate the \rsf{cut}
+    rule, and in the sense of \emph{illative atomicity} discussed in
+    \refsec{atomicity}. We disagree with the first claim, and use our simulation
+    to show analyticity in the stronger sense of satisfying a form of
+    \emph{subformula property}.
+  \end{description}
+\end{kaonote}
+
+\paragraph{Structures}
 
 As the name indicates, the objects manipulated by inference rules in calculi of
 structures are so-called \emph{structures}. In the case of \sys{SKS}, they
@@ -1031,6 +1057,8 @@ as explicit rules.
   \caption{Inference rules of \sys{SKS}}
   \labfig{sks}
 \end{figure*}
+
+\paragraph{Rules}
 
 The full set of rules of \sys{SKS} is given in \reffig{sks}. All rules are
 implicitly applicable in any \emph{context} $W\hole$ of arbitrary depth, with
@@ -1113,6 +1141,8 @@ The rules of \sys{SKS} satisfy two notable properties:
     fully local subsystem of \sys{Alpha}!
 \end{description}
 
+\paragraph{Translation}
+
 To formulate the simulation, we need to translate the structures of \sys{SKS}
 into equivalent $\alpha$-graphs. This is easily done by exploiting the
 functional completeness of $\{\land, \neg\}$ (see \refsec{alpha}):
@@ -1137,6 +1167,8 @@ the hole is translated as itself) will always be positive:
   By a straightforward recurrence on $\gdepth{S\hole}$.
 \end{proof}
 
+\paragraph{Completeness}
+
 It is easy to show that a structure and its translation as a graph are
 semantically equivalent, i.e. $v(S) = v(\strans{S})$ for any valuation $v$. Thus
 to get the completeness of \sys{Alpha}, it is sufficient to simulate the
@@ -1151,10 +1183,10 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
   Since all rules of \sys{Alpha} apply in a context of unbounded depth, we know
   that there are some graphs $G_0, H_0$ and context $K'\hole$ such that $G =
   K'\select{G_0}$ and $H = K'\select{H_0}$. Then either $K'\hole$ is positive,
-  and $\inv{K^+\select{K'\hole}} = \inv{K^+\hole} + \inv{K'\hole}$ is
-  even since it is the sum of two even numbers; or $K'\hole$ is negative, and
-  $\inv{K^+\select{K'\hole}}$ is odd since it is the sum of an even and an
-  odd number. In both cases $K^+\select{K'\hole}$ has the same polarity as
+  and $\inv(K^+\select{K'\hole}) = \inv(K^+\hole) + \inv(K'\hole)$ is even since
+  it is the sum of two even numbers; or $K'\hole$ is negative, and
+  $\inv(K^+\select{K'\hole})$ is odd since it is the sum of an even and an odd
+  number. In both cases $K^+\select{K'\hole}$ has the same polarity as
   $K'\hole$, and thus the same rule can be applied.
 \end{proof}
 
@@ -1406,6 +1438,8 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
   \end{array}
   $$
 \end{proof}
+
+\paragraph{Analyticity}
 
 A powerful result of Brünnler and Tiu \cite{brunnler_local_2001}, is that the
 whole up-fragment of \sys{SKS} (all rules whose name ends with $\ua$) is

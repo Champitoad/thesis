@@ -321,16 +321,16 @@ noteworthy.
 
 \begin{remark}
 Note that in \reffig{eg-currying} and \reffig{eg-uncurrying}, we give
-\emph{direct} proofs that rewrite the premiss of the argument into its
-conclusion, rather than \emph{goal-directed} proofs (\refdef{eg-proof}) that
-rewrite a goal into the empty $\SA$, as we usually did in \refch{eg}. Direct
-proofs are closer to Peirce's usage of the illative transformations --- and thus
-to what can be found in most of the literature on EG, and have the advantage of
+\emph{forward} proofs that rewrite the premiss of the argument into its
+conclusion, rather than \emph{backward} proofs (\refdef{eg-proof}) that rewrite
+a goal into the empty $\SA$, as we usually did in \refch{eg}. Forward proofs
+correspond to Peirce's usage of the illative transformations --- and thus to
+what can be found in most of the literature on EG, and have the advantage of
 being more economical in space by leaving the goal implicit. One can easily go
-from a direct proof to a goal-directed one as shown by the \emph{deduction
-theorem} of Sowa \cite[Section 6]{sowa_peirces_2011}, which also applies
-in the intuitionistic setting by substituting the rule of Double-cut with the
-rule of Blank Antecedant.
+from a forward proof to a backward one as shown by the \emph{deduction
+theorem} of Sowa \cite[Section 6]{sowa_peirces_2011}, which also applies in the
+intuitionistic setting by substituting the rule of Double-cut with the rule of
+Blank Antecedant.
 \end{remark}
 
 \paragraph{The $n$-ary scroll}
@@ -852,17 +852,17 @@ Contrarily to EG (\refdef{eg-inv}), the number of inversions of a context does
 not coincide with its depth, since petals increase depth but preserve polarity:
 
 \begin{definition}[Inversions]
-  The number of \emph{inversions} $\inv{\Phi\hole}$ of a context $\Phi\hole$ is
+  The number of \emph{inversions} $\inv(\Phi\hole)$ of a context $\Phi\hole$ is
   defined recursively by:
   \begin{align*}
-    \inv{\Psi, \hole} &= 0 \\
-    \inv{\Psi, (\flower{\garden{\bx}{\Phi\hole}}{\Delta})} &= \inv{\Phi\hole} + 1 \\
-    \inv{\Psi, (\flower{\gamma}{\garden{\bx}{\Phi\hole} \sep \Delta})} &= \inv{\Phi\hole}
+    \inv(\Psi, \hole) &= 0 \\
+    \inv(\Psi, (\flower{\garden{\bx}{\Phi\hole}}{\Delta})) &= \inv(\Phi\hole) + 1 \\
+    \inv(\Psi, (\flower{\gamma}{\garden{\bx}{\Phi\hole} \sep \Delta})) &= \inv(\Phi\hole)
   \end{align*}
 \end{definition}
 
 \begin{definition}[Polarity]
-  We say that a context $\Phi\hole$ is \emph{positive} if $\inv{\Phi\hole}$ is even, and
+  We say that a context $\Phi\hole$ is \emph{positive} if $\inv(\Phi\hole)$ is even, and
   \emph{negative} otherwise. We denote positive and negative contexts
   respectively by $\Phi^+\hole$ and $\Phi^-\hole$.
 \end{definition}
@@ -1154,12 +1154,11 @@ for EG:
   In the case of a natural step $\Phi \step_{\Nature} \Psi$, this is immediate
   by definition. Otherwise we have a cultural step $\Xi'\select{\Phi_0}
   \step_{\Culture} \Xi'\select{\Psi_0}$. Then either $\Xi'\hole$ is positive,
-  and $\inv{\Xi^+\select{\Xi'\hole}} = \inv{\Xi^+\hole} +
-  \inv{\Xi'\hole}$ is even since it is the sum of two even numbers; or
-  $\Xi'\hole$ is negative, and $\inv{\Xi^+\select{\Xi'\hole}}$ is odd since
-  it is the sum of an even and an odd number. In both cases
-  $\Xi^+\select{\Xi'\hole}$ has the same polarity as $\Xi'\hole$, and thus the
-  same rule can be applied.
+  and $\inv(\Xi^+\select{\Xi'\hole}) = \inv(\Xi^+\hole) + \inv(\Xi'\hole)$ is
+  even since it is the sum of two even numbers; or $\Xi'\hole$ is negative, and
+  $\inv(\Xi^+\select{\Xi'\hole})$ is odd since it is the sum of an even and an
+  odd number. In both cases $\Xi^+\select{\Xi'\hole}$ has the same polarity as
+  $\Xi'\hole$, and thus the same rule can be applied.
 \end{proof}
 
 Now we can define our usual ``goal-oriented'' notion of proof:
@@ -1264,13 +1263,17 @@ of derivations, here we have the stronger requirement that there exist proofs
 for a \emph{class} of judgments $\cfill{\Xi}{\Phi}$, whose hypothetical shape
 comes from the condition that $\chyp{\Psi}{\Xi\hole}$. In practice, the
 pollination rules $\{\text{\rnmsf{poll{\da}}}, \text{\rnmsf{poll{\ua}}}\}$ and
-the {\rnmsf{epis}} rule make this equivalent to the existence of a proof
-for $\flower{\Psi}{\Phi}$. But we conjecture that the {\rnmsf{epis}} rule
-might be admissible modulo the addition of the distributivity rule
+the {\rnmsf{epis}} rule make this equivalent to the existence of a proof for
+$\flower{\Psi}{\Phi}$. But we conjecture that the {\rnmsf{epis}} rule might be
+admissible modulo the addition of the distributivity rule
 \rsf{crep}\sidenote{\rsf{crep} stands for \textsf{c}ross-\textsf{rep}roduction,
 mirroring the distinction between cross-pollination and self-pollination, but
-with respect to the self-reproduction rule \rsf{srep}.} of
-\reffig{cross-reproduction}.
+with respect to the self-reproduction rule \rsf{srep}.}\sidenote{It seems that
+the question of admissibility of \rsf{epis} is very similar to the question of
+admissibility of \emph{release} rules discussed in \refsec{dnd-completeness}.
+Both can be used to enable a local simulation of sequent calculus rules, but do
+not appear in real proofs because of the arbitrary deep/global power of link
+formation and (de)iteration rules.} of \reffig{cross-reproduction}.
 
 \begin{marginfigure}
   $$
