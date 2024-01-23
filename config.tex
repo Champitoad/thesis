@@ -1,3 +1,4 @@
+\usepackage{knowledge}
 % \usepackage{pst-node}
 % \usepackage{auto-pst-pdf}
 \usepackage{multirow}
@@ -103,38 +104,37 @@
 
 
 % knowledge
-\usepackage{knowledge}
-\knowledgeconfigure{notion, quotation}
-\input{notions.tex}
-\input{macros.tex}
-\definecolor{Dark Ruby Red}{HTML}{7c1b1e}
-\definecolor{Dark Blue Sapphire}{HTML}{004c5c}
-\definecolor{Dark Gamboge}{HTML}{be7c00}
-\IfKnowledgePaperModeTF{
-    %
-}{
-    % If we are NOT in paper mode (i.e. in composition mode or electronic mode)
-    \knowledgestyle{intro notion}{color={Dark Ruby Red}, emphasize}
-    \knowledgestyle{notion}{color={Dark Blue Sapphire}}
-    \hypersetup{
-        colorlinks=true,
-        breaklinks=true,
-        linkcolor={Dark Blue Sapphire}, % Links to sections, pages, etc.
-        citecolor={Dark Blue Sapphire}, % Links to bibliography
-        filecolor={Dark Blue Sapphire}, % Links to local file
-        urlcolor={Dark Blue Sapphire},
-    }
-    \IfKnowledgeElectronicModeTF{
-        %
-    }{
-        % If we are in composition mode, highlight unknown stuff (in yellow) and display the anchor point.
-        \knowledgeconfigure{anchor point color={Dark Ruby Red}, anchor point shape=corner}
-        \knowledgestyle{intro unknown}{color={Dark Gamboge}, emphasize}
-        \knowledgestyle{intro unknown cont}{color={Dark Gamboge}, emphasize}
-        \knowledgestyle{kl unknown}{color={Dark Gamboge}}
-        \knowledgestyle{kl unknown cont}{color={Dark Gamboge}}
-    }
-}
+% \knowledgeconfigure{notion, quotation}
+% \input{notions.tex}
+% \input{macros.tex}
+% \definecolor{Dark Ruby Red}{HTML}{7c1b1e}
+% \definecolor{Dark Blue Sapphire}{HTML}{004c5c}
+% \definecolor{Dark Gamboge}{HTML}{be7c00}
+% \IfKnowledgePaperModeTF{
+%     %
+% }{
+%     % If we are NOT in paper mode (i.e. in composition mode or electronic mode)
+%     \knowledgestyle{intro notion}{color={Dark Ruby Red}, emphasize}
+%     \knowledgestyle{notion}{color={Dark Blue Sapphire}}
+%     \hypersetup{
+%         colorlinks=true,
+%         breaklinks=true,
+%         linkcolor={Dark Blue Sapphire}, % Links to sections, pages, etc.
+%         citecolor={Dark Blue Sapphire}, % Links to bibliography
+%         filecolor={Dark Blue Sapphire}, % Links to local file
+%         urlcolor={Dark Blue Sapphire},
+%     }
+%     \IfKnowledgeElectronicModeTF{
+%         %
+%     }{
+%         % If we are in composition mode, highlight unknown stuff (in yellow) and display the anchor point.
+%         \knowledgeconfigure{anchor point color={Dark Ruby Red}, anchor point shape=corner}
+%         \knowledgestyle{intro unknown}{color={Dark Gamboge}, emphasize}
+%         \knowledgestyle{intro unknown cont}{color={Dark Gamboge}, emphasize}
+%         \knowledgestyle{kl unknown}{color={Dark Gamboge}}
+%         \knowledgestyle{kl unknown cont}{color={Dark Gamboge}}
+%     }
+% }
 
 % mdframed
 \mdfdefinestyle{emphparstyle}{
