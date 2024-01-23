@@ -362,7 +362,9 @@
 
 \newcommand{\chyp}[2]{#1 \succ #2}
 
-\newcommand{\DrawFlowers}[1]{\directlua{dofile("flower.lua").many({#1})}}
+\directlua{flower = require("flower")}
+\newcommand{\DrawFlowers}[1]{\directlua{flower.many({#1})}}
+
 
 \newcommand{\pissheet}[1]{\colorbox{pistil}{$#1$}}
 

@@ -524,7 +524,7 @@ framework and library used. For instance in Coq's standard library, it is
 implemented as a \emph{program} built by recursion on the left-hand argument.
 Thus in this setting, if one performs computation in the whole conclusion like
 so:
-$$\select{S(n) + 0 = 0 + S(n)} \qquad \text{\action{Simplify}}$$
+$$\select{S(n) + 0 = 0 + S(n)} \qquad \text{(\action{Simplify})}$$
 this will give a new conclusion
 $$S(n + 0) = S(n)$$
 where the addition program was able to automatically evaluate $S(n) + 0$ to $S(n

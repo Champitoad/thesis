@@ -1,71 +1,31 @@
-\usepackage{knowledge}
-% \usepackage{pst-node}
-% \usepackage{auto-pst-pdf}
+\usepackage[notion]{knowledge}
 \usepackage{multirow}
 \usepackage{tabularx}
 \usepackage{makecell}
-% \usepackage{tabulary}
-% \usepackage{amsmath}
-% \usepackage{amsthm}
-% \usepackage{amssymb}
 \usepackage{stmaryrd}
-% \usepackage{latexsym}
 \usepackage{mathpartir}
-% \usepackage{mathtools}
 \usepackage{prftree}
 \usepackage{cmll}
 \usepackage{float}
 \usepackage{framed}
 \usepackage{tikz-cd}
-% \usepackage{graphicx}
-% \usepackage[inline]{enumitem}
-% \usepackage{hyperref}
-% \hypersetup{
-%   colorlinks=true,
-%   linkcolor=blue,
-%   filecolor=magenta,      
-%   urlcolor=cyan,
-% }
-% \usepackage{adjustbox}
 \usepackage{pifont}
 \usepackage{turnstile}
 \usepackage[nointegrals]{wasysym}
-% \usepackage{extarrows}
 \usepackage{bm}
 \usepackage{hhline}
 \usepackage{stackengine}
 \usepackage{subfig}
 \usepackage{environ}
-
-\usetikzlibrary{calc}
-\usetikzlibrary{decorations.pathmorphing,decorations.pathreplacing,decorations.shapes}
-
-\graphicspath{{images/}{./}} % Paths where images are looked for
-
-% Epigraphs for inspirational quotes
 \usepackage{epigraph}
-\setlength{\epigraphwidth}{0.65\textwidth}
-
-% TikZiT
-\usepackage{tikzit}
-\input{drawings/bubbles.tikzstyles}
-\input{drawings/eg.tikzstyles}
-% \input{drawings/bubbles.tikzdefs}
-% \input{drawings/eg.tikzdefs}
-\newcommand{\tikzscale}[3]{
-  \scalebox{#1}{
-    \begingroup
-      \tikzset{every picture/.style={scale=#2,baseline=(current bounding box.center)}}
-      #3
-    \endgroup}}
-\renewcommand{\tikzfig}[3]{
-  \tikzscale{#1}{#2}{\InputIfFileExists{./drawings/#3.tikz}{}{{\color{red}\colorbox{pink}{missingfile : #3}}}}}
-\newcommand{\stkfig}[2]{\tikzfig{#1}{0.5}{#2}}
-
+\usepackage{newunicodechar}
 \usepackage{minted}
-
 \usepackage{fontspec}
 \usepackage{unicode-math}
+\usepackage{luacode}
+
+%%% Font config
+
 \setmathfont{Libertinus Math}
 \setmathfont{latinmodern-math.otf}[range=\multimap]
 \setmathfont{STIXTwoMath-Regular.otf}[range={\Coloneq,"29D0,"25CF,"2AD0}]
@@ -84,7 +44,6 @@
 \newcommand{\trhd}{\symbol{"29D0}}
 \newcommand{\blackcirc}{\symbol{"25CF}}
 
-\usepackage{newunicodechar}
 \newunicodechar{⊆}{{\subseteqfont\subseteq}}
 \newunicodechar{⧐}{\trhd}
 \newunicodechar{●}{\blackcirc}
@@ -102,39 +61,63 @@
 
 %%% Package config
 
+% Epigraphs for inspirational quotes
+\setlength{\epigraphwidth}{0.65\textwidth}
 
 % knowledge
-% \knowledgeconfigure{notion, quotation}
-% \input{notions.tex}
-% \input{macros.tex}
-% \definecolor{Dark Ruby Red}{HTML}{7c1b1e}
-% \definecolor{Dark Blue Sapphire}{HTML}{004c5c}
-% \definecolor{Dark Gamboge}{HTML}{be7c00}
-% \IfKnowledgePaperModeTF{
-%     %
-% }{
-%     % If we are NOT in paper mode (i.e. in composition mode or electronic mode)
-%     \knowledgestyle{intro notion}{color={Dark Ruby Red}, emphasize}
-%     \knowledgestyle{notion}{color={Dark Blue Sapphire}}
-%     \hypersetup{
-%         colorlinks=true,
-%         breaklinks=true,
-%         linkcolor={Dark Blue Sapphire}, % Links to sections, pages, etc.
-%         citecolor={Dark Blue Sapphire}, % Links to bibliography
-%         filecolor={Dark Blue Sapphire}, % Links to local file
-%         urlcolor={Dark Blue Sapphire},
-%     }
-%     \IfKnowledgeElectronicModeTF{
-%         %
-%     }{
-%         % If we are in composition mode, highlight unknown stuff (in yellow) and display the anchor point.
-%         \knowledgeconfigure{anchor point color={Dark Ruby Red}, anchor point shape=corner}
-%         \knowledgestyle{intro unknown}{color={Dark Gamboge}, emphasize}
-%         \knowledgestyle{intro unknown cont}{color={Dark Gamboge}, emphasize}
-%         \knowledgestyle{kl unknown}{color={Dark Gamboge}}
-%         \knowledgestyle{kl unknown cont}{color={Dark Gamboge}}
-%     }
-% }
+\input{notions.tex}
+\input{macros.tex}
+\definecolor{Dark Ruby Red}{HTML}{7c1b1e}
+\definecolor{Dark Blue Sapphire}{HTML}{004c5c}
+\definecolor{Dark Gamboge}{HTML}{be7c00}
+\IfKnowledgePaperModeTF{
+    %
+}{
+    % If we are NOT in paper mode (i.e. in composition mode or electronic mode)
+    \knowledgestyle{intro notion}{color={Dark Ruby Red}, emphasize}
+    \knowledgestyle{notion}{color={Dark Blue Sapphire}}
+    \hypersetup{
+        colorlinks=true,
+        breaklinks=true,
+        linkcolor={Dark Blue Sapphire}, % Links to sections, pages, etc.
+        citecolor={Dark Blue Sapphire}, % Links to bibliography
+        filecolor={Dark Blue Sapphire}, % Links to local file
+        urlcolor={Dark Blue Sapphire},
+    }
+    \IfKnowledgeElectronicModeTF{
+        %
+    }{
+        % If we are in composition mode, highlight unknown stuff (in yellow) and display the anchor point.
+        \knowledgeconfigure{anchor point color={Dark Ruby Red}, anchor point shape=corner}
+        \knowledgestyle{intro unknown}{color={Dark Gamboge}, emphasize}
+        \knowledgestyle{intro unknown cont}{color={Dark Gamboge}, emphasize}
+        \knowledgestyle{kl unknown}{color={Dark Gamboge}}
+        \knowledgestyle{kl unknown cont}{color={Dark Gamboge}}
+    }
+}
+
+% TikZ
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathmorphing,decorations.pathreplacing,decorations.shapes}
+
+% graphicx
+\graphicspath{{images/}{./}} % Paths where images are looked for
+
+% TikZiT
+\usepackage{tikzit}
+\input{drawings/bubbles.tikzstyles}
+\input{drawings/eg.tikzstyles}
+% \input{drawings/bubbles.tikzdefs}
+% \input{drawings/eg.tikzdefs}
+\newcommand{\tikzscale}[3]{
+  \scalebox{#1}{
+    \begingroup
+      \tikzset{every picture/.style={scale=#2,baseline=(current bounding box.center)}}
+      #3
+    \endgroup}}
+\renewcommand{\tikzfig}[3]{
+  \tikzscale{#1}{#2}{\InputIfFileExists{./drawings/#3.tikz}{}{{\color{red}\colorbox{pink}{missingfile : #3}}}}}
+\newcommand{\stkfig}[2]{\tikzfig{#1}{0.5}{#2}}
 
 % mdframed
 \mdfdefinestyle{emphparstyle}{
