@@ -55,7 +55,7 @@ research area now known as \emph{mathematical logic}.
 
 At the dawn of the 20\textsuperscript{th} century, some mathematicians started
 to realize that it might be possible to formalize not only specific branches of
-mathematics like algebra with its own specific language, but the \emph{whole} of
+mathematics like algebra with their own language, but the \emph{whole} of
 mathematics in a single, universal language. This idea was first intuited in the
 17\textsuperscript{th} century by Leibniz with his dream of a
 \textit{characteristica universalis}, an ideal language in which all
@@ -138,23 +138,23 @@ Hilbert, the axiomatic method was predominant, and thus proof systems of this
 era --- now called Hilbert systems --- featured very few inference rules. Almost
 all logical reasoning principles were encoded as \emph{axiom schemas} involving
 generic \emph{propositional variables}. For instance, the famous \emph{law of
-excluded middle}, that expresses that every proposition is either true or false,
-is expressed formally by the schema
+excluded middle}, that states that every proposition is either true or false, is
+expressed formally by the schema
 $$A \lor \neg A$$
-where $\lor$ and $\neg$ are symbols denoting the logical connectives of
-\emph{disjunction} and \emph{negation}, and $A$ is a propositional variable that
-can be substituted with any concrete formula built from \emph{atomic
-propositions} and other logical connectives. An atomic proposition is typically
-a property of a mathematical object, that does not involve any logical
-connective. An example of \emph{instance} of this schema would be the
-proposition ``$n$ is prime or $n$ is not prime'' with $n$ some natural number,
-which can be written formally as
+Here, $\lor$ and $\neg$ are symbols denoting the logical connectives of
+\emph{disjunction} (``or'') and \emph{negation} (``not''), and $A$ is a
+propositional variable that can be substituted with any concrete \emph{formula}
+built from \emph{atomic propositions} and logical connectives. An atomic
+proposition is typically a property of a mathematical object, that does not
+involve any logical connective. An example of \emph{instance} of this schema
+would be the proposition ``$n$ is prime or $n$ is not prime'' with $n$ some
+natural number, which can be written formally as
 $$\mathrm{prime}(n) \lor \neg\mathrm{prime}(n)$$
 Another related principle is the \emph{law of non-contradiction}, which states
 that no proposition can be both true and false at the same time. It is expressed
 by the schema
 $$\neg (A \land \neg A)$$
-where $\land$ is the symbol denoting \emph{conjunction}.
+where $\land$ is the symbol denoting \emph{conjunction} (``and'').
 
 \paragraph{Intuitionistic logic}
 
@@ -204,8 +204,8 @@ existence of constructive mathematics.
 To account for this diversity, in this thesis we design proof systems that
 support \emph{both} classical and intuitionistic reasoning. Because every
 theorem of intuitionistic logic is also a theorem of classical logic (but not
-the converse), we will always focus first on the intuitionistic ``kernel'' of
-our systems, designing the classical part as an extension of the former.
+the converse), we will often focus first on the intuitionistic ``kernel'' of our
+systems, designing the classical part as an extension of the former.
 \end{emphpar}
 
 \subsection{Structural proof theory}
