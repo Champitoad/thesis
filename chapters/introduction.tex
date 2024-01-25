@@ -7,12 +7,12 @@
 
 % \paragraph{Formal manipulations}
 
-Proof assistants --- also called \emph{interactive theorem provers} (``ITP'' for
-short) --- are software systems that allow to both create and check the
-correctness of mathematical proofs. They are based on the idea that mathematical
-knowledge can be represented unambiguously inside \emph{proof formalisms}, where
-the truth of a statement can be reduced to the mechanical application of
-symbolic manipulation rules. For instance, consider the equation
+\intro{Proof assistants} --- also called \emph{interactive theorem provers}
+(``ITP'' for short) --- are software systems that allow to both create and check
+the correctness of mathematical proofs. They are based on the idea that
+mathematical knowledge can be represented unambiguously inside \emph{proof
+formalisms}, where the truth of a statement can be reduced to the mechanical
+application of symbolic manipulation rules. For instance, consider the equation
 $$4x + 6x = (12 - 2)x$$ 
 While any mathematician would immediately recognize it as true, a middle school
 student learning algebra would have to carry manually some computations to
@@ -706,9 +706,12 @@ We leave aside the question of providing domain-specific languages for
 particular branches of mathematics, which is nonetheless as much important. It
 has been tackled extensively in Ayers' thesis \sidecite{ayers_thesis}, and more
 specifically in his framework ProofWidgets for user-extensible, interactive
-graphical notations in the Lean proof assistant\sidenote{For another related
-work that tackles this problem in the context of functional programming, see
-\cite{omar-filling-2021}.} \sidecite{ayers_graphical_2021}.
+graphical notations in the Lean proof assistant\sidenote{For a similar approach
+to ProofWidgets in the context of functional programming, see
+\cite{omar-filling-2021}.} \sidecite{ayers_graphical_2021}. De Moura and Ullrich
+have also designed a powerful macro system for Lean 4, that supports the
+elaboration of abstract notations into terms of the underlying type theory
+\sidecite{ullrich_beyond_2022}.
 
 \paragraph{Proof languages}
 
@@ -1189,11 +1192,11 @@ color levels.
 \paragraph{Hyperlinks}
   
 We tend to cross-reference many ideas from different chapters with the help of
-\emph{hyperlinks}. In particular, we use the "knowledge@@package" package from
-Thomas Colcombet to hyperlink occurrences of concepts to the place where they
-are introduced. We thus recommend the usage of a PDF reader that supports at
-least hyperlink \emph{jumping}, and if possible hyperlink \emph{preview} for a
-more comfortable reading experience.
+\emph{hyperlinks}. In particular, we use the \kl(package){knowledge} package
+from Thomas Colcombet to hyperlink occurrences of concepts to the place where
+they are introduced. We thus recommend the usage of a PDF reader that supports
+at least hyperlink \emph{jumping}, and if possible hyperlink \emph{preview} for
+a more comfortable reading experience.
 
 
 \section{Related works}\labsec{intro-rw}
