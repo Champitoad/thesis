@@ -70,85 +70,87 @@
 
 \chapter*{Abstract}
 
-Proof assistants are software systems that allow for the precise checking of
-mathematical reasoning. They can be general purpose (like Coq, Lean,
-Isabelle...) or more specialized like EasyCrypt. They enable a level of accuracy
-which certifies that no error can occur, have given birth to a wide range of
-practical and theoretical works, and have been used in a wide range of
-applications. But they remain difficult to use.
+\input{abstract.tex}
 
-We propose a new paradigm of formal proof construction through actions performed
-in a graphical user interface, to enable a more comfortable and intuitive use.
-Our paradigm builds upon direct manipulation principles, combining both old
-(Proof-by-Pointing) and new (Proof-by-Linking) interaction techniques that
-exploit recent advances in deep inference proof theory. We implement this
-paradigm in a prototype of graphical user interface called Actema, using modern
-web-based technologies. We also design a generic protocol for plugging Actema on
-any proof system that supports first-order intuitionistic logic. This protocol
-is deployed inside the Coq proof assistant through the coq-actema plugin,
-offering users the ability to integrate graphical proofs into existing textual
-developments.
+% Proof assistants are software systems that allow for the precise checking of
+% mathematical reasoning. They can be general purpose (like Coq, Lean,
+% Isabelle...) or more specialized like EasyCrypt. They enable a level of accuracy
+% which certifies that no error can occur, have given birth to a wide range of
+% practical and theoretical works, and have been used in a wide range of
+% applications. But they remain difficult to use.
 
-% Then, driven by the will to integrate and improve the various interaction
-% techniques of Actema in a unified formalism, we explore a series of deep
-% inference proof calculi that give more structure to the notion of logical goal.
-% These calculi share the ability to be represented in two alternative ways:
-% either textually through a standard inductive syntax, or graphically through a
-% metaphorical notation well-suited to direct manipulation. In particular, we
-% propose to recast C.S. Peirce's theory of existential graphs as a system for
-% interactive, goal-oriented proof building. We support this claim with another
-% web-based prototype of graphical user interface, the Flower Prover, which has
-% the property of working well on touch-based devices of varying screen sizes.
+% We propose a new paradigm of formal proof construction through actions performed
+% in a graphical user interface, to enable a more comfortable and intuitive use.
+% Our paradigm builds upon direct manipulation principles, combining both old
+% (Proof-by-Pointing) and new (Proof-by-Linking) interaction techniques that
+% exploit recent advances in deep inference proof theory. We implement this
+% paradigm in a prototype of graphical user interface called Actema, using modern
+% web-based technologies. We also design a generic protocol for plugging Actema on
+% any proof system that supports first-order intuitionistic logic. This protocol
+% is deployed inside the Coq proof assistant through the coq-actema plugin,
+% offering users the ability to integrate graphical proofs into existing textual
+% developments.
 
-Then, driven by the will to improve the various interaction techniques of Actema
-in a unified formalism, we explore a series of deep inference proof systems that
-give more structure to the notion of logical goal. These systems share the
-ability to represent goals in two alternative ways: either textually through a
-standard inductive syntax, or graphically through a metaphorical notation
-well-suited to direct manipulation.
+% % Then, driven by the will to integrate and improve the various interaction
+% % techniques of Actema in a unified formalism, we explore a series of deep
+% % inference proof calculi that give more structure to the notion of logical goal.
+% % These calculi share the ability to be represented in two alternative ways:
+% % either textually through a standard inductive syntax, or graphically through a
+% % metaphorical notation well-suited to direct manipulation. In particular, we
+% % propose to recast C.S. Peirce's theory of existential graphs as a system for
+% % interactive, goal-oriented proof building. We support this claim with another
+% % web-based prototype of graphical user interface, the Flower Prover, which has
+% % the property of working well on touch-based devices of varying screen sizes.
 
-The first family of systems, called bubble calculi, is an extension of the
-theory of nested sequents, that we reframe as local rewriting systems with a
-graphical and topological interpretation. Bubble calculi enable an efficient
-sharing of contexts between subgoals, making them well-suited to the
-factorization of both forward and backward reasoning steps in proofs. The second
-system, called flower calculus, is an intuitionistic refinement of C.S. Peirce's
-theory of existential graphs, understood as a system for interactive,
-goal-directed proof building. It provides more iconic and economical means of
-reasoning than bubble calculi, by exposing fewer inference rules that all work
-directly on the goals themselves, removing the need for logical connectives.
-% This should make the system easier to learn for users unfamiliar with symbolic
-% logic, by bridging the gap between statements and their proofs.
-Both types of systems are shown to be analytic and fully invertible, making them
-amenable to proof automation techniques.
+% Then, driven by the will to improve the various interaction techniques of Actema
+% in a unified formalism, we explore a series of deep inference proof systems that
+% give more structure to the notion of logical goal. These systems share the
+% ability to represent goals in two alternative ways: either textually through a
+% standard inductive syntax, or graphically through a metaphorical notation
+% well-suited to direct manipulation.
 
-We finally go back to practical experimentation by designing and implementing
-the Flower Prover, another web-based prototype of GUI for interactive proof
-building based on the flower calculus. An innovative feature of the Flower
-Prover is that it works well on modern mobile devices, thanks to its responsive
-layout and first-class support for touch interactions.
-
-% The first family of systems, dubbed Bubble Calculi, is an extension of the
+% The first family of systems, called bubble calculi, is an extension of the
 % theory of nested sequents, that we reframe as local rewriting systems with a
-% graphical and topological interpretation. They enable a more efficient sharing
-% of contexts between subgoals, represented as so-called bubbles. Combined with
-% their perfect symmetry, this makes them well-suited to the factorization of both
-% forward and backward reasoning steps in proofs. We also show how they are able
-% to capture intuitionistic, dual-intuitionistic, bi-intuitionistic and classical
-% logic as fragments of a single calculus, that correspond to various physical
-% laws governing the porosity of bubbles.
+% graphical and topological interpretation. Bubble calculi enable an efficient
+% sharing of contexts between subgoals, making them well-suited to the
+% factorization of both forward and backward reasoning steps in proofs. The second
+% system, called flower calculus, is an intuitionistic refinement of C.S. Peirce's
+% theory of existential graphs, understood as a system for interactive,
+% goal-directed proof building. It provides more iconic and economical means of
+% reasoning than bubble calculi, by exposing fewer inference rules that all work
+% directly on the goals themselves, removing the need for logical connectives.
+% % This should make the system easier to learn for users unfamiliar with symbolic
+% % logic, by bridging the gap between statements and their proofs.
+% Both types of systems are shown to be analytic and fully invertible, making them
+% amenable to proof automation techniques.
 
-% The second system, dubbed Flower Calculus, is an intuitionistic refinement of
-% C.S. Peirce's theory of existential graphs, understood as a system for
-% interactive, goal-oriented proof building. It provides more iconic and
-% economical means of reasoning than Bubble Calculi, by requiring fewer inference
-% rules that all work directly on the goals themselves, removing the need for
-% logical connectives. To our knowledge, we provide the first proof of analyticity
-% of existential graphs in the literature, through a normalization-by-evaluation
-% argument with respect to Kripke models. Altogether, this should make the system
-% amenable both to new proof automation techniques, and interaction with users
-% unfamiliar with symbolic logic, bridging the gap between statements and their
-% proofs.
+% We finally go back to practical experimentation by designing and implementing
+% the Flower Prover, another web-based prototype of GUI for interactive proof
+% building based on the flower calculus. An innovative feature of the Flower
+% Prover is that it works well on modern mobile devices, thanks to its responsive
+% layout and first-class support for touch interactions.
+
+% % The first family of systems, dubbed Bubble Calculi, is an extension of the
+% % theory of nested sequents, that we reframe as local rewriting systems with a
+% % graphical and topological interpretation. They enable a more efficient sharing
+% % of contexts between subgoals, represented as so-called bubbles. Combined with
+% % their perfect symmetry, this makes them well-suited to the factorization of both
+% % forward and backward reasoning steps in proofs. We also show how they are able
+% % to capture intuitionistic, dual-intuitionistic, bi-intuitionistic and classical
+% % logic as fragments of a single calculus, that correspond to various physical
+% % laws governing the porosity of bubbles.
+
+% % The second system, dubbed Flower Calculus, is an intuitionistic refinement of
+% % C.S. Peirce's theory of existential graphs, understood as a system for
+% % interactive, goal-oriented proof building. It provides more iconic and
+% % economical means of reasoning than Bubble Calculi, by requiring fewer inference
+% % rules that all work directly on the goals themselves, removing the need for
+% % logical connectives. To our knowledge, we provide the first proof of analyticity
+% % of existential graphs in the literature, through a normalization-by-evaluation
+% % argument with respect to Kripke models. Altogether, this should make the system
+% % amenable both to new proof automation techniques, and interaction with users
+% % unfamiliar with symbolic logic, bridging the gap between statements and their
+% % proofs.
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS & LIST OF FIGURES/TABLES
@@ -302,9 +304,9 @@ layout and first-class support for touch interactions.
 
 % The bibliography needs to be compiled with biber using your LaTeX editor, or on the command line with 'biber main' from the template directory
 
-\nocite{*}
-\defbibnote{bibnote}{Here are the references in alphabetical order.\par\bigskip} % Prepend this text to the bibliography
-\printbibliography[heading=bibintoc, title=Bibliography, prenote=bibnote] % Add
+% \nocite{*}
+% \defbibnote{bibnote}{Here are the references in alphabetical order.\par\bigskip} % Prepend this text to the bibliography
+% \printbibliography[heading=bibintoc, title=Bibliography, prenote=bibnote] % Add
 
 %----------------------------------------------------------------------------------------
 %	INDEX
