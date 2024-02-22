@@ -104,7 +104,7 @@ In the standalone version of Actema, the proof engine takes care of computing
 the new subgoals stemming from actions performed by the user. It is thus
 responsible for defining the \emph{semantics} of proof actions. It is also in
 charge of various other tasks that process the logical data of the proof state,
-typically checking the \emph{validity} of linkages during a DnD action, which
+typically checking the \emph{validity} of linkages during a \kl{DnD} action, which
 requires the use of a unification algorithm (see \refsec{validity}).
 
 \section{Why a plugin?}\labsec{whyplugin}
@@ -412,17 +412,17 @@ set $\mathcal{G}$ of HTML DOM nodes by the \process{Backend}, so that the goals
 can be rendered by the \process{Frontend} and exposed to the \process{User}.
 Then the \process{User} has two options:
 \begin{itemize}
-  \item she can apply either a click, DnD or contextual action\sidenote{See
+  \item she can apply either a click, \kl{DnD} or contextual action\sidenote{See
   \refsec{funcs} for an introductory example of contextual action with
   \action{Unfold}.}. The precise protocol followed for applying an action is
   summarized in \reftab{action-protocol}. Let us focus on the more complex case
-  of DnD actions. The \textbf{Start} column describes how the \process{User}
+  of \kl{DnD} actions. The \textbf{Start} column describes how the \process{User}
   \emph{starts} the action, here by dragging some item $I$ of the current
   subgoal. Then the \process{Frontend} asks the \process{Backend} for the set
-  $\mathcal{A}$ of all available DnD actions involving $I$. The
+  $\mathcal{A}$ of all available \kl{DnD} actions involving $I$. The
   \textbf{Selection} column describes how the computation of $\mathcal{A}$ is
   impacted by the set $S$ of subterms that are selected in the current subgoal.
-  For DnD actions, we essentially filter out all linkages that do not match the
+  For \kl{DnD} actions, we essentially filter out all linkages that do not match the
   selection. The \textbf{Render} column describes how $\mathcal{A}$ is
   \emph{rendered} to the \process{User}: here we highlight all valid drop
   targets, which correspond to subterms of the current goal located in other
@@ -464,7 +464,7 @@ Then the \process{User} has two options:
   \textbf{Render}                      & \textbf{End} \\ \hline
   Click         & Hover item $I$       & Ignored & Highlight $P \subseteq
   \subterms{I}$ & Click on some $p \in P$    \\ \hline
-  DnD           & Drag item $I$        &
+  \kl{DnD}           & Drag item $I$        &
       If $\exists p \in S \cap \subterms{I}$ then match only $p \link q$ where
       $q \in \compl{\subterms{I}}$
       \newline
@@ -519,12 +519,12 @@ defined as a big pattern-matching on the action's type\sidenote{Note that an
 action's type is orthogonal to what we referred to as its \emph{kind} in
 \reftab{action-protocol}, that is the interface mechanism through which it is
 accessible. One might for example want to map some action types to \emph{vocal
-commands} instead of click or DnD gestures.}. The arguments in action types rely
+commands} instead of click or \kl{DnD} gestures.}. The arguments in action types rely
 on most datatypes defined previously in \reffig{atd-fo} and \reffig{atd-goals},
 and on two new datatypes: the type \texttt{ipath} of \emph{paths}, which is used
 pervasively to designate subterms of the current subgoal (that are typically
 indicated by the \process{User} through pointing); and the type \texttt{itrace}
-of \emph{subformula linking traces}, which is used in the compilation of DnD
+of \emph{subformula linking traces}, which is used in the compilation of \kl{DnD}
 actions that perform subformula linking, to be described soon.
 
 Most click and contextual actions have a straightforward translation as Coq
@@ -545,7 +545,7 @@ briefly describe.
 
 In a \kl{deep inference} setting, one can reason on subterms located arbitrarily
 \emph{deep} inside statements, usually by applying some kind of rewriting rules
-on them. In particular, the semantics of DnD actions described in \refch{sfl}
+on them. In particular, the semantics of \kl{DnD} actions described in \refch{sfl}
 are based on the rules of SFL (\reffig{DISL}). To implement them, we chose to do
 a \emph{deep embedding} of \kl{first-order logic} inside the logic of Coq, the
 Calculus of Inductive Constructions (\kl{CoIC} hereafter). Here the word
@@ -580,7 +580,7 @@ implementation with more recent alternatives in the Coq ecosystem, like the
 successor to {\ltac} Ltac2 \cite{Ltac2}, or the MetaCoq project
 \cite{MetaCoq}.}.
 
-The most complex tactics are those implementing backward and forward DnD
+The most complex tactics are those implementing backward and forward \kl{DnD}
 actions, called respectively \texttt{backward} and \texttt{forward}. They rely
 on two Coq fixpoints \texttt{b3} and \texttt{f3} which respectively compute the
 new conclusion $\mathtt{b3}(p, q, T)$ from a backward linkage $p \back q$, and
@@ -601,11 +601,11 @@ that \texttt{reflect} is the inverse of \texttt{reify}.
 
 \begin{figure}
   \input{listings/dnd-snd.tex}
-  \caption{Soundness theorems of DnD fixpoints in Coq}
+  \caption{Soundness theorems of \kl{DnD} fixpoints in Coq}
   \labfig{dnd-snd}
 \end{figure}
 
-% \begin{theorem}[Soundness of DnD fixpoints]~\\
+% \begin{theorem}[Soundness of \kl{DnD} fixpoints]~\\
 %   $$\forall p.\ \forall q.\ \forall T.\ \mathtt{reflect}(p) \limp
 %   \mathtt{reflect}(\mathtt{b3}(p, q, T)) \limp \mathtt{reflect}(q)$$
 %   \center{and}
@@ -619,14 +619,14 @@ that \texttt{reflect} is the inverse of \texttt{reify}.
   implementing various \kl{calculi of structures} inside frameworks like Maude
   \cite{kahramanogullari_maude_2008} and Tom
   \cite{kahramanogullari_implementing_2005}, that are dedicated to the
-  specification of rewriting systems. For an integration within modern proof
-  assistants, we only know of Chaudhuri's recent work
+  specification of rewriting systems. For an integration within modern \kl{proof
+  assistants}, we only know of Chaudhuri's recent work
   \sidecite{chaudhuri_certifying_2022} that explores different techniques in
   addition to reflection, like \emph{combinators} and some more powerful usages
   of \emph{metaprogramming}. He also provides an effective implementation of the
   techniques in his \kl{Profint} tool \cite{DBLP:conf/cade/Chaudhuri21}, that
   allows to export subformula linking derivations built with \kl{Profint}'s GUI
-  as proof scripts directly executable in various proof assistants (Coq, Lean,
+  as proof scripts directly executable in various \kl{proof assistants} (Coq, Lean,
   Isabelle/HOL).
 \end{remark}
 
@@ -652,7 +652,7 @@ limited to \kl{first-order logic} is mostly a historical contingency, motivated 
 the fact that some algorithms like unification are more tractable in this
 setting. But now that we rely on Coq's proof engine, there is no fundamental
 reason for maintaining this choice. Because the language of statements is at the
-foundation of a logical framework, many other components of a proof assistant
+foundation of a logical framework, many other components of a \kl{proof assistant}
 will depend on it. Thus the switch to higher-order logic should be done as soon
 as possible, to limit the amount of refactoring work to perform in the future.
 This will require changes to Actema's \process{Backend} and \process{Frontend},
@@ -770,7 +770,7 @@ roles played by informal and formal proofs, both in the teaching of mathematics,
 and the social and scientific practice of mathematicians
 \cite{bartzia:hal-04087080}?}.
 
-In the literature and community of people designing proof assistants, these
+In the literature and community of people designing \kl{proof assistants}, these
 various problematics are generally regrouped under the term of \emph{proof
 evolution}. A fundamental remark about the Proof-by-Action paradigm, and thus
 about the \texttt{coq-actema} system, is that it has not been designed with
@@ -798,10 +798,10 @@ proof texts from imperative proof scripts has already been explored by some
 authors, especially in the case of proofs expressed in natural
 language\sidenote{See for example section 3.6 of E. Ayers' thesis
 \cite{ayers_thesis}. We can also mention ongoing work of Patrick Massot in the
-Lean proof assistant \cite{LeanIPAM}.}. Our hope is that the structure of proofs
+Lean \kl{proof assistant} \cite{LeanIPAM}.}. Our hope is that the structure of proofs
 in the Proof-by-Action paradigm might be well-suited to the generation of
 readable and concise proof texts, thanks notably to the subformula linking
-semantics of DnD actions that exhibit clearly the flow of argumentation.
+semantics of \kl{DnD} actions that exhibit clearly the flow of argumentation.
 
 An even more pragmatic solution, that should be straightforward to implement in
 the short-term, consists in inserting tactic invokations in the proof script

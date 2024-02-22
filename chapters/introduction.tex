@@ -7,12 +7,13 @@
 
 % \paragraph{Formal manipulations}
 
-\intro{Proof assistants} --- also called \intro{interactive theorem provers}
+\intro{Proof assistants} --- also called \reintro{interactive theorem provers}
 (\reintro{ITPs}) --- are software systems that allow to both create and check
 the correctness of mathematical proofs. They are based on the idea that
-mathematical knowledge can be represented unambiguously inside \emph{proof
-formalisms}, where the truth of a statement can be reduced to the mechanical
-application of symbolic manipulation rules. For instance, consider the equation
+mathematical knowledge can be represented unambiguously inside \intro{proof
+formalisms} --- also called \reintro{proof systems}, where the truth of a
+statement can be reduced to the mechanical application of symbolic manipulation
+rules. For instance, consider the equation
 $$4x + 6x = (12 - 2)x$$ 
 While any mathematician would immediately recognize it as true, a middle school
 student learning algebra would have to carry manually some computations to
@@ -24,7 +25,7 @@ Then, computing the sum on the left-hand side and the difference on the
 right-hand side gives the final equation
 $$10x = 10x$$
 which is trivially true. This is a very simple example, but it already shows the
-two main aspects of proof formalisms: on the one hand, they allow to represent
+two main aspects of \kl{proof formalisms}: on the one hand, they allow to represent
 mathematical statements in a formal language, here that of equations between
 linear univariate polynomials; on the other hand, they allow to manipulate
 this representation in order to prove the statements, here through term
@@ -36,8 +37,8 @@ heavily relies on computations, which explains why it was the target of the
 first, and to this day most popular application of computers to mathematics:
 computer algebra systems.
 
-However in this thesis, we are interested in improving the usability of proof
-assistants, which have a much broader scope than computer algebra systems: their
+However in this thesis, we are interested in improving the usability of \kl{proof
+assistants}, which have a much broader scope than computer algebra systems: their
 ambition is to enable the formalization on computers of virtually \emph{any}
 kind of mathematics. Ultimately, the dream is to provide a platform that helps
 humans in creating \emph{new} mathematics: both novel solutions and proofs to
@@ -127,14 +128,14 @@ by the great mathematician and main instigator of proof theory David Hilbert.
 The real focus throughout this thesis is on the \emph{inference rules} used to
 build (correct) proofs from axioms/assumptions. Those form the theoretical basis
 for both the \emph{interactive creation}, and the \emph{automatic checking} of
-formal proofs in proof assistants. The branch of proof theory concerned with the
+formal proofs in \kl{proof assistants}. The branch of proof theory concerned with the
 study of inference rules is called \emph{structural proof theory}.
 \end{emphpar}
 
 \paragraph{Axiomatic systems} 
 
 In the very beginnings of proof theory in the 1920s, under the influence of
-Hilbert, the axiomatic method was predominant, and thus proof systems of this
+Hilbert, the axiomatic method was predominant, and thus \kl{proof systems} of this
 era --- now called \intro{Hilbert systems} --- featured very few inference
 rules. Almost all logical reasoning principles were encoded as \emph{axiom
 schemas} involving generic \emph{propositional variables}. For instance, the
@@ -202,7 +203,7 @@ mathematicians still work in \kl{classical} logic, and are often even unaware of
 existence of constructive mathematics.
 
 \begin{emphpar}
-To account for this diversity, in this thesis we design proof systems that
+To account for this diversity, in this thesis we design \kl{proof systems} that
 support \emph{both} \kl{classical} and \kl{intuitionistic} reasoning. Because every
 theorem of \kl{intuitionistic} logic is also a theorem of \kl{classical} logic (but not
 the converse), we will often focus first on the \kl{intuitionistic} ``kernel'' of our
@@ -480,7 +481,7 @@ results presented in this thesis.
 
 Many years after Gentzen's seminal work, at the advent of the
 21\textsuperscript{th} century, Alessio Guglielmi introduced a new methodology
-for designing proof formalisms called \intro{deep inference}
+for designing \kl{proof formalisms} called \intro{deep inference}
 \sidecite{Guglielmi1999ACO}. The idea was to overcome some limitations of
 Gentzen formalisms while preserving their good properties, by allowing inference
 rules to be applied \emph{anywhere} inside formulas, instead of only at the
@@ -524,15 +525,15 @@ premiss and conclusion of a rule are equivalent, we say that the rule is
 \intro{invertible}.
 
 \begin{emphpar}
-\emph{All} the proof formalisms designed in this thesis are \kl{deep inference}
+\emph{All} the \kl{proof formalisms} designed in this thesis are \kl{deep inference}
 rewriting systems in the style of the \kl{calculus of structures}.
 \end{emphpar}
 
 \section{Proof assistants}
 
-Proof assistants are a direct application of proof theory, exploiting the
+\kl{Proof assistants} are a direct application of proof theory, exploiting the
 ability of programming languages to represent and manipulate arbitrary data
-structures to give a concrete implementation of proof formalisms. Crucially,
+structures to give a concrete implementation of \kl{proof formalisms}. Crucially,
 they open the possibility to \emph{automate} the construction and verification
 of formal proofs, by acting on two fronts:
 \begin{itemize}
@@ -553,15 +554,15 @@ of mathematicians.
 \begin{emphpar}
 In this thesis, we are concerned mostly with the \emph{human} side of the
 equation: we aim to provide smoother means for the user to communicate her
-intent to the proof assistant, and conversely for the proof assistant to
-communicate its results and suggestions on how to solve problems.
+intent to the \kl{proof assistant}, and conversely for the \kl{proof assistant}
+to communicate its results and suggestions on how to solve problems.
 \end{emphpar}
 
 \subsection{Logical frameworks}
 
 \paragraph{Type theory}
 
-The ancestor of all proof assistants was the Automath project, initiated by
+The ancestor of all \kl{proof assistants} was the Automath project, initiated by
 Nicolaas Govert de Bruijn as soon as 1967. Citing Geuvers
 \sidecite{geuvers_proof_2009}:
 \begin{quote}
@@ -573,7 +574,7 @@ results.
 \end{quote}
 Thus the design of Automath was focused on the automatic \emph{verification} of
 proofs through \emph{linguistic} means. It introduced many fundamental ideas
-that are still at work in modern proof assistants, the most prominent being the
+that are still at work in modern \kl{proof assistants}, the most prominent being the
 use of a \emph{type theory} to encode formal proofs.
 
 Contrary to \kl{predicate logic} in traditional proof theory, type theories break the
@@ -610,7 +611,7 @@ which usually model ``non-functional'' mathematical objects like numbers and
 sets.
 
 \begin{emphpar}
-In this thesis, we exclusively study proof formalisms for \emph{first-order}
+In this thesis, we exclusively study \kl{proof formalisms} for \emph{first-order}
 \kl{predicate logic} (\intro{FOL} hereafter).
 \end{emphpar}
 
@@ -626,7 +627,7 @@ We identified a few reasons for working in \kl{FOL}:
   great diversity of type theories that differ in subtle and often incompatible
   ways;
   \item \kl{FOL} is a common kernel of virtually every type theory, making our work
-  directly applicable to all present and future proof assistants;
+  directly applicable to all present and future \kl{proof assistants};
   \item it is also a simpler setting, that is powerful enough to study the
   essential features of logical reasoning, without the idiosyncracies of type
   theories aimed at capturing the full complexity of mathematics.
@@ -650,14 +651,14 @@ deduction} system \kl{NJ} of Gentzen (\reffig{calculi-NJ}).
 
 Thus the core of type theory is \emph{intuitionistic} in nature, and the
 Curry-Howard correspondence has fostered many fruitful interactions between
-computer science, logic and constructive mathematics, with proof assistants
+computer science, logic and constructive mathematics, with \kl{proof assistants}
 acting as a crucial tool and source of investigations. One influential
 development in this direction has been the \intro{intuitionistic type theory} of
-Martin-Löf, which formed the basis for the implementation of many proof
-assistants like NuPrl, Alf, and most recently Agda \cite{geuvers_proof_2009}. A
+Martin-Löf, which formed the basis for the implementation of many \kl{proof
+assistants} like NuPrl, Alf, and most recently Agda \cite{geuvers_proof_2009}. A
 system closely related to \kl{intuitionistic type theory}, the \emph{Calculus of
-Inductive Constructions} (\kl{CoIC}), is also implemented in two leading proof
-assistants: Coq \sidecite{the_coq_development_team_2022_7313584} and Lean
+Inductive Constructions} (\kl{CoIC}), is also implemented in two leading \kl{proof
+assistants}: Coq \sidecite{the_coq_development_team_2022_7313584} and Lean
 \sidecite{10.1007/978-3-030-79876-5_37}. Following the proofs-as-programs
 correspondence, these systems support the creation of both proofs and programs
 that manipulate and compute mathematical objects, by compiling everything down
@@ -667,14 +668,14 @@ to typed terms.
 
 \paragraph{Elaboration}
 
-Type theories are the logical foundation for the \emph{kernel} of proof
-assistants, i.e. the part of the system that is responsible for checking formal
+Type theories are the logical foundation for the \emph{kernel} of \kl{proof
+assistants}, i.e. the part of the system that is responsible for checking formal
 proofs expressed in a \emph{terse}, \emph{machine-oriented} format. But it
-quickly became clear that this was not enough to make proof assistants a viable
+quickly became clear that this was not enough to make \kl{proof assistants} a viable
 alternative to paper proofs: de Bruijn estimates that it takes a time factor of
 20 to translate a paper proof into a formalized proof in Automath
 \sidecite{7a66996d195e4eba8c3fe5dc5bab8fc5}. This factor has been estimated to
-be shrinkable to 4 in the Mizar proof assistant \sidecite{debruijn_factor},
+be shrinkable to 4 in the Mizar \kl{proof assistant} \sidecite{debruijn_factor},
 thanks to the design of high-level \emph{languages} for representing
 mathematical statements and proofs, that sit on top of the core logical
 theory\sidenote{In the case of Mizar, a typed set theory based on \kl{FOL}.}. The
@@ -683,20 +684,20 @@ called \emph{elaboration}.
 
 \paragraph{Statement languages}
 
-Any proof assistant must provide the two following features in its statement
+Any \kl{proof assistant} must provide the two following features in its statement
 language:
 
 \begin{itemize}
   \item[\textbf{Logical primitives}] Naturally, one needs a way to write
   propositions formed with logical connectives and quantifiers. This is usually
   done in symbolic form, either with a custom ASCII notation or with Unicode
-  characters corresponding to the standard symbols in more modern proof
-  assistants. 
+  characters corresponding to the standard symbols in more modern \kl{proof
+  assistants}. 
   \item[\textbf{Mathematical notations}] In addition to the logical primitives,
   one needs to be able to express mathematical objects and operations in the
   domain of interest, e.g. numbers and arithmetic operators. Contrary to the
-  logical language that can be hardcoded once and for all in the proof
-  assistant, the mathematical language needs to be \emph{extensible} by the
+  logical language that can be hardcoded once and for all in the \kl{proof
+  assistant}, the mathematical language needs to be \emph{extensible} by the
   user, so that custom notations can be defined for new mathematical objects.
 \end{itemize}
 
@@ -709,7 +710,7 @@ We leave aside the question of providing domain-specific languages for
 particular branches of mathematics, which is nonetheless as much important. It
 has been tackled extensively in Ayers' thesis \sidecite{ayers_thesis}, and more
 specifically in his framework ProofWidgets for user-extensible, interactive
-graphical notations in the Lean proof assistant\sidenote{For a similar approach
+graphical notations in the Lean \kl{proof assistant}\sidenote{For a similar approach
 to ProofWidgets in the context of functional programming, see
 \cite{omar-filling-2021}.} \sidecite{ayers_graphical_2021}. De Moura and Ullrich
 have also designed a powerful macro system for Lean 4, that supports the
@@ -760,7 +761,7 @@ languages:
   \rsf{\lor R_1} and \rsf{\lor R_2} (resp. \rsf{\land R}) of \kl{LJ} in their
   backward reading (\reffig{calculi-LJ}).
 
-  Coq and Lean are examples of state-of-the-art proof assistants in the
+  Coq and Lean are examples of state-of-the-art \kl{proof assistants} in the
   imperative paradigm.
   
   \item[Declarative~]proof languages follow a different approach, by
@@ -777,7 +778,7 @@ languages:
   Fitch-style \kl{natural deduction} \cite{geuvers_proof_2009}.
   
   Agda, Mizar and Isabelle (with its Isar proof language \sidecite{isar}) are
-  examples of state-of-the-art proof assistants in the declarative paradigm.
+  examples of state-of-the-art \kl{proof assistants} in the declarative paradigm.
 \end{description}
 
 \begin{emphpar}
@@ -801,7 +802,7 @@ work in Lean \cite{LeanIPAM}).
 
 \paragraph{Interoperability}
 
-Existing proof assistants can (almost) never \emph{interoperate}: a proof or
+Existing \kl{proof assistants} can (almost) never \emph{interoperate}: a proof or
 theorem written in one system cannot be imported into a different system. This
 is unsatisfactory for many reasons, including fragmentation in the formal
 methods community, and duplication of effort instead of reuse. There have been
@@ -817,7 +818,7 @@ The interoperability problem can also potentially be approached from the
 \emph{front-end}. Many kinds of logical manipulations such as discharging
 assumptions, instantiating quantifiers, and composing lemmas, are conceptually
 universal; yet, a user wishing to carry out such manipulations in a particular
-proof assistant must express the wish in terms of the specific proof language of
+\kl{proof assistant} must express the wish in terms of the specific proof language of
 the system. A \emph{universal user interface} would instead allow performing
 such manipulations directly on the \emph{goal} itself, using physical,
 reversible, and incremental actions with immediate feedback. A sequence of user
@@ -839,7 +840,7 @@ those unfamiliar with textual interfaces, which constitute the majority of users
 of computing devices nowadays; to the point that the hurdle is too great to
 overcome for most potential users.
 
-Unfortunately, the user interfaces of state-of-the-art proof assistants are
+Unfortunately, the user interfaces of state-of-the-art \kl{proof assistants} are
 mostly stuck in the pre-80s era of command-line interfaces, making them reserved
 to an audience of highly motivated, computer-savvy individuals. One could argue
 that like programming languages, this is due to their inherent
@@ -996,9 +997,9 @@ one that is omnipresent in all branches of mathematics, then it is only natural
 to expect that some diagrammatic system should exist for it, that can express in
 the most natural way most (if not all) logical arguments. This is the
 \emph{iconicity} thesis of Peirce, which motivated his inquiry into what is
-arguably the first diagrammatic proof system in history: the \intro{existential
+arguably the first diagrammatic \kl{proof system} in history: the \intro{existential
 graphs} (\reintro{EGs}). This will be the subject of \refch{eg}, and the basis
-for the development of a \emph{metaphorical} proof system in \refch{flowers}.
+for the development of a \emph{metaphorical} \kl{proof system} in \refch{flowers}.
 
 \begin{emphpar}
   Our second main working hypothesis exploited in the second part of this
@@ -1021,16 +1022,16 @@ sequents.
 
 We start in \refch{pba} with an introduction to PbP and PbL, by describing how
 to reason with logical connectives, quantifiers and equality through
-\emph{click} and \emph{drag-and-drop} (DnD) actions in a prototype of GUI called
-Actema. In particular, DnD actions can be seen as a graphical generalization of
-both the \texttt{apply} and \texttt{rewrite} tactics of imperative proof
-languages.
+\emph{click} and \emph{drag-and-drop} (\intro{DnD}) actions in a prototype of
+GUI called Actema. In particular, \kl{DnD} actions can be seen as a graphical
+generalization of both the \texttt{apply} and \texttt{rewrite} tactics of
+imperative proof languages.
 
-In \refch{sfl}, we ground the semantics of DnD actions in \kl{deep inference} proof
+In \refch{sfl}, we ground the semantics of \kl{DnD} actions in \kl{deep inference} proof
 theory, by designing a variant of the subformula linking \kl{CoS} of Chaudhuri
 introduced in \cite{Chaudhuri2013} for \kl{intuitionistic} \kl{FOL} with equality. Our
 approach differs mainly from Chaudhuri's through our notion of \emph{valid
-linkage}, which filters out \emph{non-productive} DnD actions by restricting
+linkage}, which filters out \emph{non-productive} \kl{DnD} actions by restricting
 them to \emph{unifiable} subformulas.
 
 In \refch{advanced}, we present more advanced techniques in the PbA paradigm,
@@ -1056,8 +1057,8 @@ particular concerning the question of \emph{proof evolution}.
 
 \paragraph{Iconic manipulations}
   
-In the second part of this thesis, we explore a series of \kl{deep inference} proof
-systems that give more structure to the notion of \emph{logical goal}. These
+In the second part of this thesis, we explore a series of \kl{deep inference} \kl{proof
+systems} that give more structure to the notion of \emph{logical goal}. These
 systems share the ability to represent goals in two alternative ways: either
 \emph{textually} through a standard inductive syntax, or \emph{graphically}
 through a metaphorical notation well-suited to direct manipulation. The first
@@ -1126,7 +1127,7 @@ Most of the content of \refch{pba} and \refch{sfl} has been previously published
 in \cite{10.1145/3497775.3503692}, and the \texttt{coq-actema} system described
 in \refch{plugin} is under active development by us and Benjamin Werner
 \cite{coq-actema}. A shortened version of \refch{eg} and \refch{flowers} has
-been submitted for publication at FSCD 2024 \todo{cite arxiv}. All other
+been submitted for publication at FSCD 2024 (TODO: cite arXiv). All other
 chapters present completely original and personal work.
 \end{kaonote}
 
@@ -1154,12 +1155,12 @@ Four independent paths can be followed:
 \begin{itemize}
   \item[\textbf{The applied road (\ding{175} $\to$ \ding{177})}] If
   you want to see to what extent the PbA paradigm can currently be applied for
-  practical theorem proving in real proof assistants, this is the right path for
+  practical theorem proving in real \kl{proof assistants}, this is the right path for
   you.
 
   \item[\textbf{Proof theory of SFL (\ding{174} $\to$ \ding{176})}]
   This path is for readers only interested in the proof theory of subformula
-  linking, which is the foundation for the semantics of DnD actions on symbolic
+  linking, which is the foundation for the semantics of \kl{DnD} actions on symbolic
   formulas.
 
   \item[\textbf{Bubble calculi (\ding{178} $\to$ \ding{179})}]
@@ -1227,7 +1228,7 @@ by sequent and \kl{natural deduction} calculi in order to support an intuitive
 reasoning style.
 \end{quote}
 
-Thus we are not the first to attempt to design new proof systems based on \kl{deep
+Thus we are not the first to attempt to design new \kl{proof systems} based on \kl{deep
 inference} principles, with the explicit objective of improving the usability of
 \kl{ITPs}.
 \begin{digression}
@@ -1236,7 +1237,7 @@ terminology of ``deep inference'' had not been introduced yet. Indeed, the first
 article on the subject appeared in 1999 \cite{Guglielmi1999ACO}, with very
 different motivations in mind: namely, the development of a proof-theoretical
 approach unifying concurrent and sequential computation, resulting in the
-\kl{calculus of structures} for the logic \kl{BV}. However, some proof systems based
+\kl{calculus of structures} for the logic \kl{BV}. However, some \kl{proof systems} based
 on \kl{deep inference} principles already existed and inspired researchers in window
 inference, as witnessed by the reference to Schütte's proof theory in the above
 quote.
@@ -1255,7 +1256,7 @@ However, we believe our approach is unique in that it emphasizes two aspects:
 
 More recently, Ayers described in his thesis a new tool for producing verifiable
 and explainable (formal) proofs, including both theoretical discussions of novel
-concepts and designs for components of proof assistants, and practical
+concepts and designs for components of \kl{proof assistants}, and practical
 implementations of software evaluated through user studies
 \sidecite{ayers_thesis}. Notable contributions from our point of view are:
 \begin{itemize}
@@ -1264,7 +1265,7 @@ implementations of software evaluated through user studies
 proofs, with the aim to offer more ``human-like'' interfaces for both the
 \emph{construction} and the \emph{presentation} of proofs;
   \item and his \texttt{ProofWidgets} framework, that allows to extend the Lean
-proof assistant with new interactive and domain-specific notations for
+\kl{proof assistant} with new interactive and domain-specific notations for
 mathematical objects, thus offering a form of \emph{end-user} programming.
 \end{itemize}
 The \texttt{Box} data structure easily lends itself to visualization in a
@@ -1272,10 +1273,10 @@ two-dimensional graphical notation, while \texttt{ProofWidgets} promises great
 capabilities for proofs by both direct and iconic manipulation.
 
 However, the work of Ayers focuses mainly on designing a general framework that
-can integrate modern interfaces for proofs in the Lean proof assistant, while we
+can integrate modern interfaces for proofs in the Lean \kl{proof assistant}, while we
 focus on exploring various proof calculi that provide the foundations for such
 interfaces at the purely logical level, mostly independently of any particular
-proof assistant. Thus we believe that our work is quite complementary to Ayers':
+\kl{proof assistant}. Thus we believe that our work is quite complementary to Ayers':
 it emphasizes different aspects while sharing a common vision for the future of
-proof assistants, where modern graphical interfaces play a crucial role in
+\kl{proof assistants}, where modern graphical interfaces play a crucial role in
 improving the interaction between the user and the computer.

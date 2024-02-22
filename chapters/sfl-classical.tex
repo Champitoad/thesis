@@ -2,7 +2,7 @@
 \chapter{Parallel Conclusions and Classical Logic}
 \labch{sfl-classical}
 
-In virtually every proof assistant, the goals the user is faced with are
+In virtually every \kl{proof assistant}, the goals the user is faced with are
 sequents of the form $\Gamma \seq C$, with a \emph{single} conclusion $C$ to be
 proved under many hypotheses in $\Gamma$. Historically, this form of sequent was
 introduced by Gentzen to formalize the rules of \kl{intuitionistic} logic in his
@@ -62,7 +62,7 @@ these multi-conclusion click actions in \refsec{classical-click}.
 It is clear in the proof that the negative occurrence of $A$ in $\neg A$ is the
 one that becomes the assumption $A$ that justifies the conclusion $A$ in the
 last step. It would be natural to specify this causal relationship by linking
-directly the two occurrences of $A$, as we do with DnD actions in Actema.
+directly the two occurrences of $A$, as we do with \kl{DnD} actions in Actema.
 However for this to be possible, we need to introduce a new linking operator ---
 let us note it $\para$ --- that works between two conclusions, where $A \para B$
 is obviously interpreted as $A \lor B$. Then after clicking on $A \lor \neg A$
@@ -103,10 +103,10 @@ meta-level of the proof search process instead of the object-level of inference
 rules. In an \kl{interactive theorem prover}, this corresponds to the ability for the
 user to \emph{undo} an inference and go back to a previous proof state. However
 keeping track of the times we undo/redo inferences is very hard to do as humans,
-and the user interfaces of current proof assistants do not provide any mechanism
+and the user interfaces of current \kl{proof assistants} do not provide any mechanism
 for it either. This has already been noted by Ayers\sidenote{Section 3.1.3 of
 his thesis \cite{ayers_thesis}.}, and is a good motivation for trying to design
-proof systems where the need for meta-level backtracking is reduced, or even
+\kl{proof systems} where the need for meta-level backtracking is reduced, or even
 removed. One way to do this is to maximize the proportion of inference rules
 that are \emph{invertible}, meaning that their premisses always follow from
 their conclusion. Indeed when looking at rules as tactics (see \refsec{itps}),
@@ -128,7 +128,7 @@ multiple conclusions in an \kl{intuitionistic} setting.
 \section{Implementation in theorem provers}
 
 Despite the aforementioned benefits of multi-conclusion sequents, we do not know
-of any proof assistant, whether \kl{classical} or \kl{intuitionistic}, that exposes them
+of any \kl{proof assistant}, whether \kl{classical} or \kl{intuitionistic}, that exposes them
 in its user interface. One reason is that most proof/tactic languages are based
 on the rules of \kl{natural deduction}, which use single-conclusion sequents. Another
 reason is that having one conclusion removes the need to designate it with an
@@ -145,7 +145,7 @@ However in our graphical paradigm based on direct manipulation, hypotheses and
 conclusions are designated by the act of \emph{pointing} at them with a mouse,
 finger or any other pointing device\sidenote{With the recent advances in natural
 language processing and voice recognition, one could also imagine a system based
-on the selection of subterms by spelling their content. Then click and DnD
+on the selection of subterms by spelling their content. Then click and \kl{DnD}
 actions could be triggered by voice commands once the subterms they apply to
 have been selected. This could be an important alternative for users with
 impaired vision and/or motricity.}. This opens up the possibility of exposing
@@ -185,7 +185,7 @@ capturing either \kl{intuitionistic} or \kl{classical} \kl{first-order logic}:
   hypothesis $A$ and a conclusion $B$. Without further changes, this corresponds
   to the right introduction rule from the \kl{classical} \kl{sequent calculus} \kl{LK} of
   Gentzen (named {\rsf{{\limp}R*c}} in \reffig{multi-imp-intro}), and
-  our set of actions becomes a proof system for \kl{classical} logic. To go back to
+  our set of actions becomes a \kl{proof system} for \kl{classical} logic. To go back to
   \kl{intuitionistic} logic, one needs the additional behavior that all the other
   conclusions of the goal are removed. This corresponds to the right
   introduction rule from the \kl{GHCP} calculus of Dragalin (named
@@ -256,12 +256,12 @@ to the invertible right introduction rule of \kl{G3c} ({\rsf{\exists R*}} in
 \section{DnD actions}\labsec{classical-dnd}
 
 Once we allow for more than one conclusion, it is natural to wonder whether it
-makes sense to also allow for DnD actions between two conclusions. But we
+makes sense to also allow for \kl{DnD} actions between two conclusions. But we
 already capture \emph{backward} reasoning with the $A \back B$ operator between
 a hypothesis $A$ and a conclusion $B$, and \emph{forward} reasoning with the $A
 \forw B$ operator between two hypotheses. There does not seem to be room for a
 third mode of reasoning, at least in the traditional way of building proofs we
-are used to, either on paper or with proof assistants. However from a purely
+are used to, either on paper or with \kl{proof assistants}. However from a purely
 formal point of view, there is nothing preventing us from trying to design
 rewrite rules for a new linking operator, by following the same recipe we used
 for $\back$ and $\forw$. Furthermore, we already saw earlier in the excluded
@@ -483,5 +483,5 @@ dropped the \kl{intuitionistic} restriction.
 Finally about focusing (\refsec{invert}), we can just remark that some rules
 that were not invertible in \kl{intuitionistic} logic become invertible in \kl{classical}
 logic. Therefore the dynamics of focusing should be different, and it might be
-interesting to compare the behaviors of \kl{intuitionistic} and \kl{classical} DnD actions
+interesting to compare the behaviors of \kl{intuitionistic} and \kl{classical} \kl{DnD} actions
 on specific examples.

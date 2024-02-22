@@ -28,7 +28,7 @@
 % propositional and predicate logic to describe $Γ$ as a set or multiset, because
 % the way hypotheses are ordered is immaterial with regard to provability.
 
-% However many modern proof assistants are based on \emph{dependent type theory},
+% However many modern \kl{proof assistants} are based on \emph{dependent type theory},
 % where hypotheses have explicit \emph{names} identifying them, corresponding to
 % \emph{variables}. Then sequents have the form $x_1 : A_1, …, x_n : A_n ⊢ C$, and
 % oftentimes the type $A_i$ of some hypothesis will refer to variables in $x_1, …,
@@ -58,23 +58,23 @@
 % originally by Gentzen in the context of classical logic, this syntax can also be
 % used for \kl{intuitionistic} logics, for example to implement efficient proof search
 % procedures \cite{dyckhoff_contraction-free_1992}. In practice however, we do not
-% know of any existing proof assistant using multi-conclusion goals at the user
+% know of any existing \kl{proof assistant} using multi-conclusion goals at the user
 % interface level.
 
 
 In this chapter, we focus on how both \emph{click} and \emph{drag-and-drop}
-(DnD) actions upon the formulas of a sequent can implement proof construction
+(\kl{DnD}) actions upon the formulas of a sequent can implement proof construction
 operations corresponding to the core logic; that is how they deal with logical
 connectives, quantifiers and equality. We present these core principles through
 various illustrations and examples in \kl{first-order logic}. The technical and
-proof-theoretical foundations for the semantics of DnD actions
+proof-theoretical foundations for the semantics of \kl{DnD} actions
 % , which constitute the main innovation of this work,
 will be investigated more thoroughly in \refch{sfl}.
 % , although the most important meta-theoretical
 % properties will be exposed here with outlines of their proofs.
 More advanced features of the Proof-by-Action paradigm that go beyond the core
 logic are illustrated in \refch{advanced}, and \refch{plugin} explains how it
-can be integrated in a mainstream proof assistant.
+can be integrated in a mainstream \kl{proof assistant}.
 
 We have started to implement the paradigm in a prototype named {\em Actema} (for
 Active Mathematics) running through a web HTML5/JavaScript interface. At the
@@ -84,7 +84,7 @@ an existing theorem prover as its backend) is publicly available online
 access the prototype? More generally, what is the correct way to incorporate
 software artifacts in a thesis?}. This possibility to experiment in practice,
 even though yet on a small scale, gave valuable feedback for crafting the way
-DnD actions are to be translated into proof construction steps in an intuitive
+\kl{DnD} actions are to be translated into proof construction steps in an intuitive
 and practical way. A description of the overall architecture and implementation
 design of Actema will be provided in \refch{plugin}.
 
@@ -132,7 +132,7 @@ actions involving logical connectives and quantifiers.
 
 \section{Logical setting}\labsec{setting}
 
-Any proof system must implement a given logical formalism. What we describe here
+Any \kl{proof system} must implement a given logical formalism. What we describe here
 ought to be applied to a wide range of formalisms, but in this chapter we focus
 mainly on the core of \kl{intuitionistic} \kl{first-order logic} with equality
 (\kl{FOL}). This allows us to consider sequents where hypotheses are
@@ -140,10 +140,10 @@ unordered which, in turn, simplifies the technical presentation. We will thus
 write $\Gamma,A \seq C$ for a sequent where $A$ is among the hypotheses.
 
 We use and do not recall the usual definitions of terms and propositions in
-first order logic. We assume a first order language (function and predicate
+\kl{first-order logic}. We assume a first-order language (function and predicate
 symbols) is given. Provability is defined over sequents $\Gamma\seq C$ by the
-usual logical rules of \kl{natural deduction} (\reffig{calculi-NJ}) and/or \kl{sequent
-calculus} (\reffig{calculi-LJ}).
+usual logical rules of \kl{natural deduction} (\reffig{calculi-NJ}) and/or
+\kl{sequent calculus} (\reffig{calculi-LJ}).
 
 Equality is treated in a common way: $=$ is a binary
 predicate symbol written in the usual infix notation, together with the
@@ -341,7 +341,7 @@ given in \reftab{click-rules}. A few remarks are in order:
 \begin{remark}[Click completeness]\label{rem:click-completeness}
   From the previous remarks and the completeness of the cut-free sequent
   calculus \kl{LJ}, it follows that click actions, when combined with new
-  object declarations and DnD instantiations, provide a sufficient set of
+  object declarations and \kl{DnD} instantiations, provide a sufficient set of
   interactions to prove any true formula of (\kl{intuitionistic}) \kl{first-order logic}.
 \end{remark}
 
@@ -488,7 +488,7 @@ $$
 $$
 
 On the other hand, considering a conjunctive goal $A\land B$, one can
-simplify or solve one of the branches by a DnD action. This involves
+simplify or solve one of the branches by a \kl{DnD} action. This involves
 rules \rsf{R \land_1} and
 \rsf{R \land_2}. For instance:
 $$
@@ -720,7 +720,7 @@ $$
 $$
 
 When using an existential assumption, one can either destruct it
-through a click, or use or transform it through a DnD; for instance:
+through a click, or use or transform it through a \kl{DnD}; for instance:
 $$
 \exists x.\select{P(x)}\forw \forall y.\select{P(y)}\limp
 Q(y)  ~\/~\steps{}
@@ -957,7 +957,7 @@ $$
 
 We have already mentioned Proof-by-Pointing, which was part of the CtCoq and
 Pcoq efforts \sidecite{amerkad-mathematics-2001} to design a graphical user
-interface for the Coq proof assistant. Another contemporary line of work was the
+interface for the Coq \kl{proof assistant}. Another contemporary line of work was the
 one based on \emph{window inference}, also mentioned in \refsec{intro-rw}. In
 \sidecite{robinson-formalizing-1993}, window inference is described as a general
 proof-theoretical framework, which aims to accomodate for the pervasive use of
@@ -985,15 +985,15 @@ applied to the expression, before closing the window. This propagates the
 transformations to the parent window by replacing the old subexpression by the
 new one, without modifying the surrounding context.
 
-This process is quite reminiscent of the rewriting produced by our DnD
+This process is quite reminiscent of the rewriting produced by our \kl{DnD}
 actions. One key difference is that window inference rules can be
 applied stepwise, while we choose to hide the sequence of rules that
-justifies a DnD. The window inference approach gives to the user a
+justifies a \kl{DnD}. The window inference approach gives to the user a
 precise control of the transformations to be performed and thus could
 inspire interesting extensions of our work.
 
 % This is because
-% DnD actions embody the specific intent of justifying an \emph{expression} by
+% \kl{DnD} actions embody the specific intent of justifying an \emph{expression} by
 % another \emph{user-specified} expression, which is either assumed to be, or
 % trivially equivalent. In contrast, window inference is about justifying the
 % \emph{equivalence} of an expression to another, \emph{not yet specified}
@@ -1004,22 +1004,22 @@ inspire interesting extensions of our work.
 % from being implemented in the same interface.
 
 
-\paragraph{Other gestural proof systems}
+\paragraph{Other gestural proving interfaces}
 
-There are other proof systems which include drag-and-drop features. Two of them
-are the KeY Prover \sidecite{ahrendt-using-2016} and TAS
+There are other proving interfaces which include drag-and-drop features. Two of
+them are the KeY Prover \sidecite{ahrendt-using-2016} and TAS
 \sidecite{goos-tas-2000}. TAS is a window inference system tailored for program
-refinement, and uses DnD actions between an expression and a transformation, in
+refinement, and uses \kl{DnD} actions between an expression and a transformation, in
 order to apply the latter to the former.
-%This is obviously different from our use of DnD between entities
+%This is obviously different from our use of \kl{DnD} between entities
 %of the same kind, and can be explained by the comparison made in the previous
 %paragraph.
-As for the KeY Prover, its usage of DnD overlaps only a very small
+As for the KeY Prover, its usage of \kl{DnD} overlaps only a very small
 portion of usecases that we hinted at in \refsec{edukera}, namely
 the instantiation of quantifiers with objects.
 
 We can also mention the recent work of Zhan et al. \sidecite{zhan-design-2019}.
-They share with us the vision of a proof assistant mainly driven by gestural
+They share with us the vision of a \kl{proof assistant} mainly driven by gestural
 actions, which requires far less textual inputs from the user. However, they
 only consider point-and-click actions, and rely on a text-heavy presentation at
 two levels:

@@ -49,8 +49,8 @@ at the same time to be faithful to the original presentation of the systems by
 Peirce, and more modern in some aspects of their formalization. The goal will be
 to familiarize the reader with the unique approach to proofs inherent to
 \kl{EGs}, which can be difficult to relate to more standard frameworks like
-\kl[Hilbert system]{Hilbert} and \kl[Gentzen system]{Gentzen} proof systems, and
-even \kl{deep inference} proof systems like the \kl{\kl{calculus of structures}}.
+\kl[Hilbert system]{Hilbert} and \kl[Gentzen system]{Gentzen} \kl{proof systems}, and
+even \kl{deep inference} \kl{proof systems} like the \kl{\kl{calculus of structures}}.
 This shall prove useful to get a good understanding of the historical and
 technical foundations behind our \emph{flower calculus}, to be introduced in
 \refch{flowers}.
@@ -129,7 +129,7 @@ esoteric part of Peirce's work.
 The most fundamental concept of \kl{Alpha} is the \intro{sheet of assertion},
 denoted by $\intro*\SA$ thereafter. It is the space where statements are scribed
 by the reasoner, typically a sheet of paper, a blackboard, or a computer
-display. In a proof assistant, this would either be the buffer of a text editor
+display. In a \kl{proof assistant}, this would either be the buffer of a text editor
 holding the theory the user is developing, or the proof view displaying goals to
 be proved, depending on who the reasoner is (the user or the computer,
 respectively). This last analogy suggests an important property of $\SA$: it
@@ -149,7 +149,7 @@ denote vacuous truth, traditionally symbolized by the formula $\top$.
 % world \emph{outside} of the sheet (the universe of discourse). By not scribing
 % anything, the \process{Graphist} thus refrains from asserting anything about the
 % world, only assuming implicit truths. This is illustrated by the following
-% quote, reminiscent of an interaction between a proof assistant (the
+% quote, reminiscent of an interaction between a \kl{proof assistant} (the
 % \process{Graphist}) and its user (\process{the Interpreter})
 % \cite[p.~92]{Roberts+1973}: \textit{``One of the parties, called the Graphist,
 % is responsible for scribing the original graphs at the beginning of the
@@ -250,7 +250,7 @@ through the use of \emph{(multi)sets} for modelling contexts in sequents.
 
 \paragraph{Deep inference}
 
-\AP In order to have a proof system, one needs a collection of \emph{inference
+\AP In order to have a \kl{proof system}, one needs a collection of \emph{inference
 rules} for deducing true statements from other true statements. In \kl{Alpha},
 inference rules are implemented by what Peirce called \intro{illative
 transformations} on \kl{graphs}. In modern terminology, they correspond to
@@ -987,7 +987,7 @@ from the following \emph{functoriality} lemmas:
 \section{Completeness}\labsec{eg-completeness}
 
 To show the completeness of \kl{Alpha}, it is standard in the literature on \kl{EGs}
-to simulate an existing proof system for \kl{classical} propositional logic, that is
+to simulate an existing \kl{proof system} for \kl{classical} propositional logic, that is
 itself known to be complete. For instance in \cite{Roberts+1973}, completeness
 is shown by simulating the Hilbert-style system \kl{P} of Church, which only
 comprises 3 axioms for the (functionally complete) fragment $\{\limp, \neg\}$.

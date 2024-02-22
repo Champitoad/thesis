@@ -13,7 +13,7 @@ flowers you pick, at least one is bound to be blue, doesn't it?" The second
 student said: "Of course not!". Which student was right, and why?
 }{\textbf{Raymond Smullyan}, \textit{The Flower Garden}, 1985}
 
-We introduce the \emph{flower calculus}, a novel proof system for \kl{intuitionistic}
+We introduce the \emph{flower calculus}, a novel \kl{proof system} for \kl{intuitionistic}
 \kl{predicate logic} based on syntactic objects called \emph{flowers}. We start by
 explaining how flowers stem from considerations in graphical logic, and more
 specifically from an \kl{intuitionistic} variant of the \emph{existential graphs} of
@@ -842,8 +842,8 @@ of information in flowers, just like \reffig{eg-local-justification} summarized
 the flow of information in \kl{EGs}, and \reffig{bubbles-porosity} in bubbles. From a
 UI point of view, all these figures can be understood as kind of
 ``cheatsheets'', that indicate with arrows the allowed drag-and-drop moves for
-importing a statement (the source of the DnD) into a new context (the
-destination of the DnD).}. We distinguish two cases of \emph{cross}-pollination
+importing a statement (the source of the \kl{DnD}) into a new context (the
+destination of the \kl{DnD}).}. We distinguish two cases of \emph{cross}-pollination
 and \emph{self}-pollination, as botanists do when describing the reproduction of
 flowers. This distinction does not exist in \kl{classical} \kl{EGs}, because pistils and
 petals are both identified as instances of \kl{cuts}\sidenote{The same phenomenon is
@@ -975,7 +975,7 @@ are closer to sequent-style introduction/elimination rules:
     \reffig{natural-graphical}. Through the Curry-Howard correspondence, it can
     be related to the \emph{pattern-matching generator} found in modern editors
     of some functional programming languages, such as the Hazel structure editor
-    and the Agda proof assistant \sidecite{yuan-live-2023}.
+    and the Agda \kl{proof assistant} \sidecite{yuan-live-2023}.
 \end{description}
 
 \begin{table}
@@ -1265,7 +1265,7 @@ interpreted $\alpha$-graphs with simple boolean truth values. For flowers, we
 use a third kind of models that is standard in the literature on \kl{intuitionistic}
 logic: Kripke structures. Our goal is not to fill as many pages as possible by
 introducing new definitions in each chapter, but rather to find the simplest
-semantics for our purposes with the specific proof system at hand. In the case
+semantics for our purposes with the specific \kl{proof system} at hand. In the case
 of the flower calculus, there are a few reasons that led us to the choice of
 Kripke structures, detailed hereafter by order of increasing importance:
 \begin{itemize}
@@ -1320,7 +1320,7 @@ Kripke structures, detailed hereafter by order of increasing importance:
     To palliate this limitation, we turned to a more \emph{semantic} (and not
     so-well known) strand of analyticity proofs, which nowadays tends to be
     labelled \emph{normalization-by-evaluation} \sidecite{NbE}. The idea is to
-    prove completeness of the analytic fragment of the proof system with respect
+    prove completeness of the analytic fragment of the \kl{proof system} with respect
     to some semantic models (in our case, $\vDash \phi$ implies
     $\entails{\Nature} \phi$), and then compose with the soundness of the full
     system with respect to the same models ($\entails{} \phi$ implies $\vDash
@@ -1975,7 +1975,7 @@ In this section, we give a direct completeness proof for the natural fragment
 $\Nature$ of the flower calculus: every true flower $\phi$ is naturally
 provable, i.e. $\kentails{}\phi$ implies $\entails{\Nature} \phi$. Since this
 fragment is analytic, we cannot adapt directly most of the completeness proofs
-for standard proof systems that can be found in the literature. Indeed, most of
+for standard \kl{proof systems} that can be found in the literature. Indeed, most of
 them exploit the transitivity of syntactic entailment $\entails{}$, and more
 precisely the fact that it is easily shown syntactically with the help of a
 non-analytic principle for composing proofs: in Hilbert systems it is the rule
@@ -2375,7 +2375,7 @@ $\Nature$-rules implies that the procedure will not need to perform
 \emph{backtracking}, a great source of non-determinism in proof
 search\sidenote{See also \refsec{sfl-backtracking} for a discussion on this
 topic.}, and particularly so in \kl{intuitionistic} logic\sidenote{The only fully
-invertible proof system for \kl{intuitionistic} (predicate) logic that we know of is
+invertible \kl{proof system} for \kl{intuitionistic} (predicate) logic that we know of is
 the labelled sequent calculus \kl{G3IntQ} from Lyon's thesis
 \cite{lyon_refining_2021} (we thank Lutz Stra{\ss}burger for pointing that to
 us). However, a peculiarity of labelled sequent calculi is that they need to
@@ -2896,8 +2896,8 @@ Flower Prover is highly original in mainly two respects:
   formulas: in scenarios where one needs to refer to a specific subterm, it is
   difficult to design a touch-based selection mechanism that is as precise and
   straightforward as a mouse-based one.}, which are becoming increasingly
-  ubiquitous in personal computing. While the current generation of proof
-  assistants targets mostly technical and expert users with text-based,
+  ubiquitous in personal computing. While the current generation of \kl{proof
+  assistants} targets mostly technical and expert users with text-based,
   keyboard-driven interactions, we believe that a broadening of audience ---
   especially in educational settings --- if at all possible, will require a
   reinvention of our means of interaction with formal proofs, that is more in
@@ -2925,7 +2925,7 @@ and deletion of characters.}:
 \begin{itemize}
   \item[\textbf{\Proof mode}] this is the main mode, where goals can be proved by
   reducing them to the empty bouquet $\emptyset$. It corresponds in purpose to
-  the interactive proof mode of modern proof assistants like Coq, Lean and
+  the interactive proof mode of modern \kl{proof assistants} like Coq, Lean and
   Isabelle, and to the interactive proof view of Actema.
   % Indeed, every action in this mode is performed by direct manipulation of
   % flowers through pointing interactions: either clicking on empty areas/gardens,
@@ -2936,9 +2936,9 @@ and deletion of characters.}:
   \item[\textbf{\Edit mode}] in this mode, the user can construct arbitrary
   flowers by clicking on buttons and filling text fields, or modify the goal by
   clicking and dragging flowers around. It corresponds in purpose to the text
-  editor used for writing theories in the \emph{vernacular} language of a proof
-  assistant\sidenote{The term ``vernacular'' was used for the first time in the
-  context of proof assistants by the founder of the field, N. G. de Bruijn
+  editor used for writing theories in the \emph{vernacular} language of a \kl{proof
+  assistant}\sidenote{The term ``vernacular'' was used for the first time in the
+  context of \kl{proof assistants} by the founder of the field, N. G. de Bruijn
   \cite{de_bruijn_mathematical_1994}.}. \Edit actions implement exactly the
   $\Culture$-rules of the flower calculus.
 \end{itemize}
@@ -3011,7 +3011,7 @@ are in order:
   $\chyp{\phi}{\Xi\hole}$. This is a first form of \emph{suggestion} in the
   Flower Prover, indicating available valid actions to the user through visual
   feedback\sidenote{A similar mechanism is implemented in Actema, where subterms
-  that are possible drop targets for DnD actions are also highlighted (see
+  that are possible drop targets for \kl{DnD} actions are also highlighted (see
   \refsec{validity}).}.
 
   In fact, every \Proof action has an associated visual cue, guiding interactive
@@ -3138,7 +3138,7 @@ until a fixpoint is reached. This is very much like the \emph{reproduction} and
 \emph{decomposition} phases from the \refproc{life} procedure of
 \refsec{flowers-search}, except that we also apply the \rsf{poll{\da}} rule
 (\Action{Justify} actions) wherever possible. The only \Proof action that is not
-considered is the only DnD action, \Action{Import}. This is not surprising,
+considered is the only \kl{DnD} action, \Action{Import}. This is not surprising,
 since it corresponds to the \rsf{poll{\ua}} rule, which is the main source of
 complexity in the \emph{pollination} phase of the \refproc{life} procedure,
 because of its ability to duplicate flowers of arbitrary size.
@@ -3159,7 +3159,7 @@ setting, any proof in the Flower Prover could be reduced to a sequence of
 
 \paragraph{Theories and goals}
 
-In the so-called ``proof view'' or ``goal view'' of modern proof assistants like
+In the so-called ``proof view'' or ``goal view'' of modern \kl{proof assistants} like
 Coq and Lean, there is no distinction between local and global contexts: a
 subgoal will inherit automatically every hypothesis from its parent subgoals,
 which are flattened into a big unstructured list. To recreate this distinction
@@ -3227,7 +3227,7 @@ this idea of merging proofs and statements in the same data structure in the
 conclusion, when discussing \emph{development calculi} and the
 \emph{Curry-Howard correspondence}. Note however that it is already at work in
 \emph{dependent} type theory, where proof terms can freely occur inside types.
-This is exemplified in the Agda proof assistant, where all manipulations are
+This is exemplified in the Agda \kl{proof assistant}, where all manipulations are
 done directly on the partial proof/program text.}.
 
 It would still be useful to be able to aggregate automatically the set of all
@@ -3251,7 +3251,7 @@ in the shelf:
 Since the shelf might contain \emph{a lot} of hypotheses, it will be important
 to provide efficient ways to \emph{filter} or \emph{search} through its content.
 We imagine three main ways of doing so\sidenote{The first two types of filtering
-are already available in most proof assistants, e.g. the \texttt{Search} command
+are already available in most \kl{proof assistants}, e.g. the \texttt{Search} command
 of Coq.}:
 \begin{itemize}
   \item[\textbf{By name}] the user can type the \emph{name} of a hypothesis in a
@@ -3447,7 +3447,7 @@ We have not discussed the rationale behind our notion of analyticity, be it
 historical or formal arguments explaining its origins, motivations and
 consequences. In a recent article \sidecite{bruscoli_analyticity_2019}, Bruscoli
 and Guglielmi propose such a detailed discussion around a precise and generic
-definition of analyticity for \kl{deep inference} proof systems (especially the
+definition of analyticity for \kl{deep inference} \kl{proof systems} (especially the
 \kl{calculus of structures}), which at a glance seems to encompass our own
 definition. It would be interesting to study more deeply their work, and related
 parts of the \kl{deep inference} literature concerned with analyticity and its
@@ -3479,7 +3479,7 @@ respectively to atomic and non-atomic flowers. But this is less satisfying than
 in the \kl{calculus of structures}, where one component of \rsf{poll{\ua}}, the
 duplicating \emph{contraction} rule, can be restricted to atomic formulas. This
 probably comes from the fact that \rsf{poll{\ua}} also serves the purpose of
-\emph{moving} flowers deeper, as witnessed by the DnD \Action{Import} action of
+\emph{moving} flowers deeper, as witnessed by the \kl{DnD} \Action{Import} action of
 the Flower Prover: in the \kl{calculus of structures}, this role is fulfilled by
 \emph{switch} rules, which cannot be restricted to atomic structures. The only
 solution might be to \emph{simulate} a local \kl{calculus of structures} for
@@ -3555,7 +3555,7 @@ $$
 $$
 This could also form the basis for further studies on the connections between \kl{EGs}
 and (dependent) type theory, and ultimately lead to a tight integration of the
-Flower Prover with proof assistants based on the latter such as Coq, Lean and
+Flower Prover with \kl{proof assistants} based on the latter such as Coq, Lean and
 Agda. Existing explorations of the links between type theory and \kl{deep inference}
 include, in historical order:
 \begin{itemize}

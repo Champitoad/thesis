@@ -74,7 +74,7 @@ different levels:
   vs. \texttt{destruct}...), and of their shortcomings (\texttt{apply} only
   works with $∀$ and $\limp$)};
   \item the level of \emph{inference rules}, which are usually modelled after
-  standard proof formalisms such as natural deduction and sequent
+  standard \kl{proof formalisms} such as natural deduction and sequent
   calculus\sidenote{this is especially true for dependently-typed proof
   assistants, where the correspondance with natural deduction is immediate
   through the Curry-Howard isomorphism.}, and where many pervasive commands for
@@ -107,7 +107,7 @@ However, programming languages are known to incur a great learning curve on
 users unfamiliar with programming and algorithmic thinking. Even without the
 algorithmic aspect, which is usually absent from proof languages, the use of a
 formal language with a rigid syntax is problematic for most users at the
-learning stage. And the foundational nature of standard proof formalisms, on
+learning stage. And the foundational nature of standard \kl{proof formalisms}, on
 which most proof languages are based, only accentuates this fact by exposing
 low-level primitives which do not capture the way mathematicians build and think
 about proofs. Indeed, those were designed to solve foundational

@@ -6,7 +6,7 @@ In the previous chapters, we explained the core principles of our so-called
 Proof-by-Action paradigm and especially its drag-and-drop actions, first through
 basic and abstract examples in \refch{pba}, and then from a proof-theoretical
 perspective in \refch{sfl}. The goal of this chapter is to provide a better
-sense of what proofs by action/DnD look like in practice, and how they compare
+sense of what proofs by action/\kl{DnD} look like in practice, and how they compare
 to more traditional approaches to interactive theorem proving. To that effect,
 we perform a case study of a few select examples, unrolling and commenting in
 details one or many of their proofs. Although still basic, they are fully
@@ -67,7 +67,7 @@ The original goal thus corresponds to the illustration of \reffig{edukera}.
 
 It is quite natural to approach this problem in a forward manner, by starting
 from the hypotheses to establish new facts. And a first point illustrated by
-this example is that DnD actions allow to do this in a smooth and precise
+this example is that \kl{DnD} actions allow to do this in a smooth and precise
 manner. A possible first step is to bring $h$ to the first hypothesis, to obtain
 a new fact:
 
@@ -92,7 +92,7 @@ one obtains
 $(6) ~\rich(\mother(\mother(\mother(h)))).$
 \medskip
 
-The next step is a good example where DnD actions are useful. By bringing this
+The next step is a good example where \kl{DnD} actions are useful. By bringing this
 new fact to the right-hand part of
 
 \medskip
@@ -106,12 +106,12 @@ one immediately obtains a new fact
 $(7) ~\neg{\rich(\mother(h))}$.
 \medskip
 
-\noindent In other proof systems, this last step requires a somewhat intricate
+\noindent In other \kl{proof systems}, this last step requires a somewhat intricate
 tactic line and/or writing down at least the statement of the new fact.
 
 One can then finish the case by combining $(7)$ and $(2)$ which yields
 $$\rich(\mother(\mother(h)))$$ contradicting $(4')$. These two last steps each
-correspond to a simple DnD. The other case, $\neg\rich(h)$, is quite similar.
+correspond to a simple \kl{DnD}. The other case, $\neg\rich(h)$, is quite similar.
 
 % Such a simple example is not sufficient to provide significant metrics.
 Note that once a user has understood the proof, the riddle is routinely solved
@@ -120,7 +120,7 @@ a tactic based prover. At least as important is the fact that the proof can be
 performed without typing any text, especially no intermediate statement. 
 
 To conclude this example, we propose in \reffig{edukera-coq} a complete proof of
-the riddle formalized in the Coq proof assistant, which follows very closely the
+the riddle formalized in the Coq \kl{proof assistant}, which follows very closely the
 structure of the graphical proof just outlined. To make the correspondence more
 visible and ease the comparison, we interspersed the proof script with comments
 of the form \texttt{(** [actions] *)}, where \texttt{[actions]} is a
@@ -159,7 +159,7 @@ things to note:
   In the other direction, a pattern of reasoning that occurs multiple times in
   the proof is the combination of $H_2$ with another hypothesis which
   contradicts one of the two cases, in order to deduce the truth of the other
-  case. While it is captured straightforwardly in Actema with a single DnD
+  case. While it is captured straightforwardly in Actema with a single \kl{DnD}
   between the contradictory statements, it requires in Coq a decomposition into
   many administrative steps:
   \begin{enumerate}
@@ -180,7 +180,7 @@ things to note:
   deduction/\kl{sequent calculus}. On the contrary, there is almost one tactic for
   dealing with each logical connective in Coq, e.g. \texttt{intros} for $\limp$
   and $\forall$, \texttt{split} for $\land$, \texttt{left} and \texttt{right}
-  for $\lor$, \texttt{exists} for $\exists$, etc. The same remark applies to DnD
+  for $\lor$, \texttt{exists} for $\exists$, etc. The same remark applies to \kl{DnD}
   actions, whose functionalities are provided in Coq by many different tactics:
   \texttt{apply \_}, \texttt{apply \_ in \_}, \texttt{pose proof},
   \texttt{specialize}, etc.
@@ -197,17 +197,17 @@ things to note:
 From this detailed comparison, it appears that the interface offered by the
 Proof-by-Action paradigm might be more suited to forward reasoning than the
 tactic language of Coq, at least in some respects. It makes the flow of
-argumentation more straightforward to express with DnD actions, and avoids the
+argumentation more straightforward to express with \kl{DnD} actions, and avoids the
 overheads of name management and syntax memorization. This altogether shall
-prove to be particularly helpful to beginners and learners of the proof
-assistant.
+prove to be particularly helpful to beginners and learners of the \kl{proof
+assistant}.
 
 
 \section{Sets and functions}\labsec{funcs}
 
 Our second example comes from a preprint of Bartzia et al.
 \cite{bartzia:hal-04087080}, where it is chosen specifically for a case study
-aiming to compare the features of different proof assistants' interfaces in an
+aiming to compare the features of different \kl{proof assistants}' interfaces in an
 educational setting. It is ``a typical exercise about sets, relations and
 functions, as commonly found in introductory courses about reasoning and
 proof.'' (p. 6):
@@ -225,8 +225,8 @@ proof.'' (p. 6):
 
 Compared to our previous example, this exercise has the particularity of
 involving multiple \emph{definitions}, here about sets and functions between
-them. There are many possible ways to handle definitions in a formal proof
-system. A common one is to decompose the definition into a new function or
+them. There are many possible ways to handle definitions in a formal \kl{proof
+system}. A common one is to decompose the definition into a new function or
 predicate symbol, the definition's \emph{head}, and a universally parametrized
 equality or equivalence between the head and the \emph{body} of the definition.
 For instance, the concept of injectivity can be encoded as a unary predicate
@@ -277,7 +277,7 @@ this chapter might be called \emph{nominal}, because it essentially amounts to
 giving a name (the head) to a reoccurring pattern of statement (the body). Note
 that the syntax of \kl{first-order logic} is unaware of this distinction, since in
 both cases the defined concepts are encoded as \emph{atomic} predicates. This is
-usually not the case of logical frameworks found in proof assistants: for
+usually not the case of logical frameworks found in \kl{proof assistants}: for
 instance, the duality between \emph{judgmental} (nominal) and
 \emph{propositional} (behavioral) equality is at the heart of Martin-Löf's type
 theory, and it is used extensively in Coq to perform automation, both in the
@@ -316,24 +316,24 @@ will vary:
     click on the lemma she is interested in, in order to add it as a blue item
     in the current context. An alternative and more precise way of retrieving a
     lemma is to search by \emph{content} of the statement instead of searching
-    by name. State-of-the-art proof assistants usually provide facilities for
+    by name. State-of-the-art \kl{proof assistants} usually provide facilities for
     this: for instance Coq has a \texttt{Search} command which can take
     \emph{patterns}, i.e. terms with holes or so-called \emph{metavariables}, in
     order to filter out results that do not match the given pattern. In Actema,
     we implemented a novel feature which replaces patterns by a selection of
     subterms in the current goal, similarly to what is given as argument to
     contextual actions like \action{Unfold}. Then the system will only look for
-    lemmas which can be used in a DnD action involving precisely the current
+    lemmas which can be used in a \kl{DnD} action involving precisely the current
     selection of subterms. In this case, selecting the full statement of $(1)$
     and searching:
     $$\select{x \in \compr{a \in A}{f(a) \in f(C)}} \qquad
     \text{(\action{Search})}$$
     should return the comprehension axiom among other lemmas, because this axiom
-    and $(1)$ can interact through the following forward DnD:
+    and $(1)$ can interact through the following forward \kl{DnD}:
     $$\select{x \in \compr{a \in A}{f(a) \in f(C)}} ~~\forw~~ \forall \phi.\
     \forall D.\ \forall y.\ \select{y \in \compr{d \in D}{\phi}} ~~\lequiv~~ (y
     \in D \land \subst{\phi}{y}{d})$$ by substituting $D$ with $A$, $d$ with
-    $a$, $y$ with $x$ and $\phi$ with $f(a) \in f(C)$. Performing this DnD will
+    $a$, $y$ with $x$ and $\phi$ with $f(a) \in f(C)$. Performing this \kl{DnD} will
     finally result in a new hypothesis corresponding to the intended unfolding
     of the definition of set comprehension\sidenote{Here in the sense of a
     \emph{behavioral} definition.}:
@@ -365,7 +365,7 @@ will vary:
   $$(\lambda a{:}A.\ f(C)\ f(a))\ x$$
   which $\beta$-reduces to
   $$f(C)\ f(x)$$ which we can translate back as $f(x) \in f(C)$. This encoding
-  has now found its way in the libraries of many proof assistants based on type
+  has now found its way in the libraries of many \kl{proof assistants} based on type
   theory, and is the one used in the Coq solution to the exercise provided in
   annex of \cite{bartzia:hal-04087080}. To perform $\beta$-reduction in Coq,
   there is a tactic called \texttt{simpl} as in ``simplify''\sidenote{There are
@@ -421,7 +421,7 @@ which gives us
 \begin{itemize}
   \item[(0)] $\forall y \in A.\ \forall z \in A.\ f(y) = f(z) \limp y = z$
 \end{itemize}
-Then we can use injectivity with the following forward DnD between $(0)$ and
+Then we can use injectivity with the following forward \kl{DnD} between $(0)$ and
 $(3)$:
 $$\forall y \in A.\ \forall z \in A.\ \select{f(y) = f(z)} \limp y = z ~~\forw~~ \exists a \in A.\ a \in C \land \select{f(x) = f(a)}$$
 which gives us immediately that $x = a$ in
@@ -433,9 +433,9 @@ context together with
 \begin{itemize}
   \item[(5)] $a \in C \land x = a$
 \end{itemize}
-doing a backward DnD with $(5)$ to rewrite $x$ in the conclusion into $a$:
+doing a backward \kl{DnD} with $(5)$ to rewrite $x$ in the conclusion into $a$:
 $$a \in C \land \select{x} = a ~~\back~~ \select{x} \in C$$
-and finally a backward DnD with $(5)$ to conclude the proof:
+and finally a backward \kl{DnD} with $(5)$ to conclude the proof:
 $$\select{a \in C} \land x = a ~~\back~~ \select{a \in C}$$
 
 For the sake of completeness, we included in \reffig{funset-defs},
@@ -470,7 +470,7 @@ just outlined for the second question, hence we do not add further commentary.
 In our last example, we will analyse a common proof often taught in logic
 courses: the commutativity of addition in Peano arithmetic. The novelty compared
 to previous examples is that it involves reasoning by \emph{induction}, which
-usually has special support in mainstream proof assistants. In the
+usually has special support in mainstream \kl{proof assistants}. In the
 Proof-by-Action paradigm, it seems natural to map it to a special contextual
 action \action{Induction}, whose availability and effect will depend on the
 selected subterm. One could also imagine manipulating explicitly induction
@@ -492,7 +492,7 @@ $\forall$, it must occur in a \emph{strictly positive} location, i.e. in the
 conclusion and not on the left of an implication $\limp$. Obviously the variable
 should also be of an \emph{inductive} type, i.e. one which is mapped to an
 induction scheme in the system\sidenote{The standalone version of Actema only
-supports induction on natural numbers, but in a proof assistant like Coq or Lean
+supports induction on natural numbers, but in a \kl{proof assistant} like Coq or Lean
 one can easily check if a given type is inductive.}. Then the \action{Induction}
 action will simply apply the associated induction scheme. In our commutativity
 example, we can thus start the proof like so:
@@ -546,7 +546,7 @@ ones:
 because the other axioms do not contain any subterm that could form a
 \emph{valid} backward linkage with the selection\sidenote{See \refsec{validity}
 for the notion of validity of a linkage.}. Of course we are interested in axiom
-$(c)$, which we can use through the following backward DnD:
+$(c)$, which we can use through the following backward \kl{DnD}:
 $$\forall x.\ \forall y.\ \select{S(x) + y} = S(x + y) ~~\back~~ \select{S(n) + 0} = 0 + S(n)$$
 in order to rewrite $S(n) + 0$ into $S(n + 0)$ in the conclusion.
 
@@ -554,7 +554,7 @@ Now notice that the addition program earlier was not able to evaluate $n + 0$ to
 $n$. This is because $0$ occurs on the right-hand side of $+$, and the program
 is not aware of the commutativity of addition, which is precisely what we are
 trying to prove. Fortunately, we can apply our induction hypothesis on $n$
-$(1)$, with the following backward DnD:
+$(1)$, with the following backward \kl{DnD}:
 $$\forall x \in \nats.\ \select{n + x} = x + n ~~\back~~ S(\select{n + 0}) = S(n)$$
 which rewrites $n + 0$ into $0 + n$ in the conclusion:
 $$S(0 + n) = S(n)$$
