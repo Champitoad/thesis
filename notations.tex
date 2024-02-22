@@ -97,8 +97,6 @@
 \newcommand{\mcirc}{\mathbin{⚬}}
 \newcommand{\mdiam}{◇}
 
-\DeclareRobustCommand{\sys}[1]{$\mathsf{#1}$}
-
 \knowledgenewrobustcmd\step[1]{\mathrel{\cmdkl{\rightarrow_{#1}}}}
 \knowledgenewrobustcmd\steps[1]{\mathrel{\cmdkl{\rightarrow^{\ast}_{#1}}}}
 \newrobustcmd\notstep[1]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\nrightarrow_{#1}}}}}
@@ -221,10 +219,11 @@
 \newcommand{\sementHB}{\sement_{\HeytingBrouwer}}
 \newcommand{\sementC}{\sement_{\Boolean}}
 \newcommand{\sementX}{\sement_{\ACVar}}
-\newcommand{\sysB}{\msys{B}}
-\newcommand{\sysBH}{\msys{B_{\!\Heyting}}}
-\newcommand{\sysBB}{\msys{B_{\!\Brouwer}}}
-\newcommand{\sysBHB}{\msys{B_{\!\HeytingBrouwer}}}
+
+\newcommand{\sysB}{\kl[system B]{B}}
+\newcommand{\sysBH}{B_{\!\Heyting}}
+\newcommand{\sysBB}{B_{\!\Brouwer}}
+\newcommand{\sysBHB}{B_{\!\HeytingBrouwer}}
 
 \newcommand{\psintAnd}[3]{\bigwedge_{#1 \in #2}{\psint{#3}}}
 \newcommand{\psintAndMix}[4]{\psintAnd{#1}{#2}{#1 \mix (#3 \seq #4)}}
@@ -261,6 +260,9 @@
 \knowledgenewrobustcmd\bgardens{\cmdkl{\symbf{\Gamma_\beta}}}
 \knowledgenewrobustcmd\bgraphs{\cmdkl{\symbf{G_\beta}}}
 
+\knowledgenewrobustcmd\bcut[1]{\cmdkl{[}#1\cmdkl{]}}
+\knowledgenewrobustcmd\bgarden[2]{#1 \mathbin{\cmdkl{\cdot}} #2}
+
 \newcommand{\gdepth}[1]{\left|#1\right|}
 
 \newcommand{\strans}[1]{\begingroup #1 \endgroup^{\scalebox{1.25}{$\bullet$}}}
@@ -272,6 +274,8 @@
 
 \newcommand{\ljustif}{\mathbin{\succeq_0}}
 \newcommand{\gjustif}{\mathbin{\succeq}}
+
+\knowledgenewrobustcmd\subgraph{\mathrel{\cmdkl{\prec}}}
 
 \newcommand{\westhook}[2]{
   \node[anchor=east,shape=diamond,draw,fill=white,inner sep=1pt] (#1) at (#2.west) {}
@@ -437,8 +441,7 @@
 \newcommand{\efill}[2]{#1\left[#2\right]}
 \newcommand{\lint}[1]{\lfloor#1\rfloor}
 
-\DeclareRobustCommand{\msys}[1]{\begingroup \mathsf{#1} \endgroup}
-\DeclareRobustCommand{\sys}[1]{$\msys{#1}$}
+\DeclareRobustCommand{\sys}[1]{\text{$\mathsf{#1}$}}
 \newcommand{\pair}[2]{\left\langle #1, #2 \right\rangle}
 
 \newcommand{\ra}{\rightarrow}

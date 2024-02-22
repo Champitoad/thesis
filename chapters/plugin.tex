@@ -548,13 +548,13 @@ In a deep inference setting, one can reason on subterms located arbitrarily
 on them. In particular, the semantics of DnD actions described in \refch{sfl}
 are based on the rules of SFL (\reffig{DISL}). To implement them, we chose to do
 a \emph{deep embedding} of first-order logic inside the logic of Coq, the
-Calculus of Inductive Constructions (\sys{CoIC} hereafter). Here the word
+Calculus of Inductive Constructions (\kl{CoIC} hereafter). Here the word
 ``deep'' has a different meaning, related to the fact that we encode the
 statements of first-order logic with our own custom datatypes, instead of
-reusing the statements of \sys{CoIC}. This makes it easier to define the SFL
+reusing the statements of \kl{CoIC}. This makes it easier to define the SFL
 rewrite rules, in particular because we need to manipulate \emph{contexts}
 (Definition \ref{def:formula-context}) explicitly, and those are not available
-for \sys{CoIC} propositions.
+for \kl{CoIC} propositions.
 
 Then we use a technique called \emph{computational reflection} in order to apply
 the embedded deep inference semantics to Coq goals. Originating from the
@@ -569,7 +569,7 @@ because the datatypes in a deep embedding are almost always defined as
 is a different story for the \texttt{reify} function, especially in our case:
 indeed we want to translate the statements of Coq goals into first-order
 propositions. But Coq statements are objects of type \texttt{Prop}, and thus
-cannot be pattern-matched on inside \sys{CoIC}\sidenote{For reasons of
+cannot be pattern-matched on inside \kl{CoIC}\sidenote{For reasons of
 consistency of the logic, well-known in the literature on type theory.}. Thus we
 need to have recourse to a \emph{meta-programming} language in order to inspect
 the structure of Coq goals. Here we use the standard {\ltac} language, which
@@ -624,8 +624,8 @@ that \texttt{reflect} is the inverse of \texttt{reify}.
   \sidecite{chaudhuri_certifying_2022} that explores different techniques in
   addition to reflection, like \emph{combinators} and some more powerful usages
   of \emph{metaprogramming}. He also provides an effective implementation of the
-  techniques in his \sys{Profint} tool \cite{DBLP:conf/cade/Chaudhuri21}, that
-  allows to export subformula linking derivations built with \sys{Profint}'s GUI
+  techniques in his \kl{Profint} tool \cite{DBLP:conf/cade/Chaudhuri21}, that
+  allows to export subformula linking derivations built with \kl{Profint}'s GUI
   as proof scripts directly executable in various proof assistants (Coq, Lean,
   Isabelle/HOL).
 \end{remark}

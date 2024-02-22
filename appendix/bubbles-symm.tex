@@ -176,7 +176,7 @@
 \end{lemma}
 \begin{proof}
   We show that $S \lstep{} T$ implies $\psint{T} \sementC \psint{S}$ by inspection
-  of each rule of system \sys{B}. That we can mix an arbitrary top-level context
+  of each rule of \kl{system B}. That we can mix an arbitrary top-level context
   $\Gamma \seq \Delta$ into $S$ and $T$ follows from \reffact{bubbles-top-level}.
 
   \def\arraystretch{1.25}
@@ -612,13 +612,13 @@ In the following proofs, we will denote a sequence of applications of a set of
 rules by a double inference line, and the use of a derivation obtained by
 induction hypothesis by a dotted line.
 
-\begin{lemma}[Simulation of \sys{DBiInt}]\lablemma{app:simulation-dbiint}
+\begin{lemma}[Simulation of \kl{DBiInt}]\lablemma{app:simulation-dbiint}
   
-  If $X \prov{\msys{DBiInt}} Y$ then $X \prov{\sysBHB \setminus
+  If $X \prov{\kl{DBiInt}} Y$ then $X \prov{\sysBHB \setminus
   \{\rsf{i{\ua}}\}} Y$.
 \end{lemma}
 \begin{proof}
-  By induction on the derivation of $X \prov{\msys{DBiInt}} Y$. 
+  By induction on the derivation of $X \prov{\kl{DBiInt}} Y$. 
   \begin{align*}
     \R[\rsf{id}]
       {}
@@ -832,12 +832,12 @@ induction hypothesis by a dotted line.
   \end{align*}
 \end{proof}
 
-\begin{lemma}[Simulation of \sys{G3cp}]
-  If $\Gamma \prov{\msys{G3cp}} \Delta$, then $\Gamma \prov{\sysBH \cup
+\begin{lemma}[Simulation of \kl{G3cp}]
+  If $\Gamma \prov{\kl{G3cp}} \Delta$, then $\Gamma \prov{\sysBH \cup
   \{\rsf{f{+}{+}}\} \setminus \{\rsf{i{\ua}}\}} \Delta$.
 \end{lemma}
 \begin{proof}
-  By induction on the \sys{G3cp} derivation.
+  By induction on the \kl{G3cp} derivation.
 
   \begin{align*}
     \R[]

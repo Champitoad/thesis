@@ -30,9 +30,128 @@
     }
 }
 
+% Software systems
+
+\knowledgedirective{software}{notion,typewriter}
+
+\knowledge{Coq}{software}
+\knowledge{Agda}{software}
+\knowledge{Lean}{software}
+
+\knowledge{Actema}{software}
+\knowledge{coq-actema}{software}
+\knowledge{Profint}{software}
+
+\knowledge{Flower Prover}{software}
+
+% Proof systems
+
 \knowledgedirective{system}{notion,wrap=\sys}
-\knowledgedirective{acronym}{synonym,up}
+
+\knowledge{Alpha}{system}
+\knowledge{Alpha^a}{system}
+\knowledge{Beta}{system}
+\knowledge{Gamma}{system}
+\knowledge{SKS}{system}
+\knowledge{KS}{system}
+\knowledge{\dmdual{KS}}{system}
+\knowledge{B_{inv}}{system}
+\knowledge{system B}{system}
+\knowledge{\sysBH}{system}
+\knowledge{\sysBB}{system}
+\knowledge{\sysBHB}{system}
+\knowledge{LBiInt}{system}
+\knowledge{DBiInt}{system}
+\knowledge{wBIL}{system}
+\knowledge{sBIL}{system}
+\knowledge{G3cp}{system}
+\knowledge{G3c}{system}
+\knowledge{G3i}{system}
+\knowledge{GHCP}{system}
+\knowledge{ZF}{system}
+\knowledge{ZFC}{system}
+\knowledge{NJ}{system}
+\knowledge{NK}{system}
+\knowledge{LJ}{system}
+\knowledge{LK}{system}
+\knowledge{system L}{system}
+\knowledge{LL}{system}
+\knowledge{LJT}{system}
+\knowledge{BJ}{system}
+\knowledge{FILL}{system}
+\knowledge{MLL}{system}
+\knowledge{ISgq}{system}
+\knowledge{cISgq}{system}
+\knowledge{G3IntQ}{system}
+\knowledge{BV}{system}
+\knowledge{HS}{system}
+\knowledge{G4ip}{system}
+\knowledge{ISp}{system}
+\knowledge{CoIC}{system}
+\knowledge{JN}{system}
+
+% Inference rules
+
 \knowledgedirective{rule}{notion,wrap=\rsf}
+
+\knowledge{mp}{rule}
+
+\knowledge{rule}
+ | cut@rule
+
+\knowledge{Iteration}{rule}
+\knowledge{Deiteration}{rule}
+\knowledge{Insertion}{rule}
+\knowledge{Deletion}{rule}
+\knowledge{Double{-}cut}{rule}
+
+\knowledge{Iter}{rule}
+\knowledge{Deit}{rule}
+\knowledge{Ins}{rule}
+\knowledge{Del}{rule}
+\knowledge{Dcut{\da}}{rule}
+\knowledge{Dcut{\ua}}{rule}
+\knowledge{Unif{\da}}{rule}
+\knowledge{Unif{\ua}}{rule}
+
+\knowledge{poll{\da}}{rule}
+\knowledge{poll{\ua}}{rule}
+\knowledge{epis}{rule}
+\knowledge{epet}{rule}
+\knowledge{srep}{rule}
+\knowledge{ipis}{rule}
+\knowledge{ipet}{rule}
+\knowledge{grow}{rule}
+\knowledge{crop}{rule}
+\knowledge{pull}{rule}
+\knowledge{glue}{rule}
+\knowledge{apis}{rule}
+\knowledge{apet}{rule}
+\knowledge{epis{\da}}{rule}
+
+% Introduction
+
+\knowledgedirective{acronym}{synonym,up}
+
+\knowledge{notion}
+ | symbol
+ | symbols
+ | Symbol
+ | Symbols
+ | symbolic
+ | Symbolic
+
+\knowledge{notion}
+ | icon
+ | icons
+ | Icon
+ | Icons
+ | iconic
+ | Iconic
+
+\knowledge{notion}
+ | deep inference
+ | Deep inference
 
 \knowledge{notion}
  | interactive theorem provers
@@ -75,51 +194,20 @@
 \knowledge{notion}
  | flower calculus
 
-\knowledge{notion}
- | Flower Prover
-
-\knowledge{system}
- | Alpha
-
-\knowledge{system}
- | Beta
-
-\knowledge{system}
- | Gamma
+% Existential graphs
 
 \knowledge{notion}
  | sheet of assertion
  
 \knowledge{notion}
- | vacuous truth
-
-\knowledge{notion}
- | conjunction
- | conjunctions
-
-\knowledge{notion}
- | negation
- | negations
-
-\knowledge{notion}
  | graph
  | graphs
  | Graph
  | Graphs
+
+\knowledge{notion}
  | subgraph
  | subgraphs
-
-\knowledge{notion}
- | falsehood
- | absurdity
-
-\knowledge{notion}
- | disjunction
- | disjunctions
-
-\knowledge{notion}
- | implication
- | implications
 
 \knowledge{notion}
  | juxtaposition
@@ -135,14 +223,60 @@
  | illative transformation
  | illative transformations
 
-\knowledge{rule}
- | Iteration
+\knowledge{notion}
+ | lines of identity
+ | line of identity
+\knowledge{acronym}
+ | LoIs
+ | LoI
 
-\knowledge{rule}
- | Insertion
+\knowledge{notion}
+ | binder
+ | binders
+ | Binder
+ | Binders
 
-\knowledge{rule}
- | Double{-}cut
+\knowledge{notion}
+ | sprinkler
+ | sprinklers
+ | Sprinkler
+ | Sprinklers
+
+\knowledge{notion}
+ | garden
+ | gardens
+ | Garden
+ | Gardens
+
+\knowledge{notion}
+ | node@alpha
+ | nodes@alpha
+
+\knowledge{notion}
+ | graph@alpha
+ | graphs@alpha
+
+\knowledge{notion}
+ | context@alpha
+ | contexts@alpha
+
+\knowledge{notion}
+ | node@beta
+ | nodes@beta
+
+\knowledge{notion}
+ | graph@beta
+ | graphs@beta
+
+\knowledge{notion}
+ | context@beta
+ | contexts@beta
+
+\knowledge{notion}
+ | garden@beta
+ | gardens@beta
+
+% Flower calculus
 
 \knowledge{notion}
  | scroll
@@ -173,29 +307,8 @@
  | Flowers
 
 \knowledge{notion}
- | lines of identity
- | line of identity
-\knowledge{acronym}
- | LoIs
- | LoI
-
-\knowledge{notion}
- | binder
- | binders
- | Binder
- | Binders
-
-\knowledge{notion}
- | sprinkler
- | sprinklers
- | Sprinkler
- | Sprinklers
-
-\knowledge{notion}
- | garden
- | gardens
- | Garden
- | Gardens
+ | garden@flowers
+ | gardens@flowers
 
 \knowledge{notion}
  | first-order signature
@@ -303,33 +416,6 @@
  | self-pollination
  | Self-pollination
 
-\knowledge{rule}
- | poll{\da}
-\knowledge{rule}
- | poll{\ua}
-\knowledge{rule}
- | epis
-\knowledge{rule}
- | epet
-\knowledge{rule}
- | srep
-\knowledge{rule}
- | ipis
-\knowledge{rule}
- | ipet
-\knowledge{rule}
- | grow
-\knowledge{rule}
- | crop
-\knowledge{rule}
- | pull
-\knowledge{rule}
- | glue
-\knowledge{rule}
- | apis
-\knowledge{rule}
- | apet
-
 \knowledge{notion}
  | shallow
  | Shallow
@@ -431,38 +517,3 @@
 
 \knowledge{notion}
  | topos theory
- 
-\knowledge{notion}
- | $\beta$-node
- | $\beta$-nodes
-
-\knowledge{notion}
- | $\beta$-garden
- | $\beta$-gardens
-
-\knowledge{notion}
- | $\beta$-graph
- | $\beta$-graphs
-
-\knowledge{notion}
- | $\beta$-context
- | $\beta$-contexts
-
-\knowledge{rule}
- | Iter
-\knowledge{rule}
- | Deit
-\knowledge{rule}
- | Ins
-\knowledge{rule}
- | Del
-\knowledge{rule}
- | Dcut{\da}
-\knowledge{rule}
- | Dcut{\ua}
-\knowledge{rule}
- | Unif{\da}
-\knowledge{rule}
- | Unif{\ua}
-\knowledge{rule}
- | epis{\da}

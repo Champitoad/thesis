@@ -4,17 +4,17 @@
 
 \begin{figure*}
   \input{figures/sequent-B.tex}
-  \caption{Sequent-style presentation of system \sys{B}}
+  \caption{Sequent-style presentation of \kl{system B}}
   \labfig{sequent-B}
 \end{figure*}
 
 \begin{figure*}
   \input{figures/graphical-B.tex}
-  \caption{Graphical presentation of system \sys{B}}
+  \caption{Graphical presentation of \kl{system B}}
   \labfig{graphical-B}
 \end{figure*}
 
-As for the asymmetric bubble calculus \sys{BJ}, the rules of our full symmetric
+As for the asymmetric bubble calculus \kl{BJ}, the rules of our full symmetric
 bubble calculus system $\sysB$ enjoy both a sequent-style and a graphical
 presentation, given respectively in \reffig{sequent-B} and \reffig{graphical-B}.
 The presence of closed and open solutions complicates quite a bit the graphical
@@ -38,17 +38,17 @@ given location of the canvas. For instance in the \rsf{f{-}{+}{\da}}
 rule, the status of the ambient solution where the rule is applied is denoted by
 a light yellow background, while the status of the solution $S$ enclosed in a
 red bubble is denoted by the light pink background.
-  \item[Status changes] Last but not least, many rules like \rsf{i{\da}}
-change the status of the ambient solution from open to closed: graphically, this
-means that the background must become green \emph{everywhere}, not only in the
-portion of the canvas depicted by the rule. At first it might appear as breaking
+  \item[Status changes] Last but not least, many rules like \rsf{i{\da}} change
+the status of the ambient solution from open to closed: graphically, this means
+that the background must become green \emph{everywhere}, not only in the portion
+of the canvas depicted by the rule. At first it might appear as breaking
 locality, but it should rather be understood as the result of a perfectly local
 and continuous process: one can imagine a literal \emph{drop} of green paint
 that soaks a growing portion of the canvas, until it reaches an enclosing bubble
 --- for the sake of metaphor, let us say a cut in the papersheet --- that stops
 its progression\sidenote{We will come back to this \emph{cuts in a sheet}
 metaphor, first introduced by C. S. Peirce, in \refch{flowers}. When closing the
-top-level solution --- Peirce called it the \emph{sheet of assertions}, the drop
+top-level solution --- Peirce called it the \emph{\kl{sheet of assertion}}, the drop
 expansion process becomes \emph{infinite}. I find it to be a beautiful allegory
 of the \emph{unreachability} of global, unconditional truth: it is only by being
 confined to a finite, well-delimited space, that we can affirm unequivocally our
@@ -59,11 +59,11 @@ As Wittgenstein famously said at the end of the Tractatus: \textit{``Whereof one
 cannot speak, thereof one must be silent''}.}.
 \end{description}
 
-We will now analyze the various groups of rules of system \sys{B}, by
-comparing them to those of the \sys{BJ} calculus:
+We will now analyze the various groups of rules of \kl{system B}, by
+comparing them to those of the \kl{BJ} calculus:
 \begin{description}
   \item[\textbf{\identity}] 
-  A first difference, that we will find in most rules of system \sys{B}, is that
+  A first difference, that we will find in most rules of \kl{system B}, is that
   we rely on the distributive interpretation of conclusions in solutions. For
   instance in the \rsf{i{\ua}} rule, $\Delta$ is available potentially in
   both subgoals, and we do not need to move it manually: this will be the role
@@ -94,12 +94,12 @@ comparing them to those of the \sys{BJ} calculus:
 
   \item[\textbf{\flow}]
 
-  Compared to \sys{BJ} where we only had neutral bubbles, the presence of
+  Compared to \kl{BJ} where we only had neutral bubbles, the presence of
   polarized bubbles in system $\sysB$ creates a mini-combinatorial explosion in
   the number of possible $\mathbb{F}$-rules. Indeed, the general scheme is to
   consider what types of items are allowed to flow through bubbles, either
   inwards or outwards. With $i$ item types and $b$ bubble types, this makes for
-  a total of $i \times b \times 2$ possible rules. In \sys{BJ} items consisted
+  a total of $i \times b \times 2$ possible rules. In \kl{BJ} items consisted
   only of polarized formulas and neutral bubbles ($i = 3$ and $b = 1$), thus we
   had a total of $6$ possible $\mathbb{F}$-rules. It turns out that only the
   \rsf{f{-}{\da}} rule was necessary, and it is also present in system
@@ -212,7 +212,7 @@ comparing them to those of the \sys{BJ} calculus:
   Peirce (see \refch{flowers}).
 
   \item[\textbf{\membrane}] 
-  We still have the popping rule \rsf{p} of \sys{BJ}, which is now restricted to
+  We still have the popping rule \rsf{p} of \kl{BJ}, which is now restricted to
   closed empty bubbles. We add two popping rules \rsf{p{-}} and \rsf{p{+}} for
   popping respectively negative and positive closed empty bubbles. Like the
   \rsf{i{\da}} rule, these have the effect of closing the ambient
@@ -225,7 +225,7 @@ comparing them to those of the \sys{BJ} calculus:
     \labfig{bubbles-uustalu}
   \end{marginfigure}
 
-  The novelty compared to \sys{BJ} is that we also add so-called
+  The novelty compared to \kl{BJ} is that we also add so-called
   \emph{absorption rules} $\{\rsf{a},\rsf{a{-}},\rsf{a{+}}\}$ for membranes.
   These rules state that when a bubble contains only a single neutral bubble,
   the membrane of the latter can be absorbed into the membrane of the former.
@@ -252,12 +252,12 @@ comparing them to those of the \sys{BJ} calculus:
 
   \item[\textbf{\heating}] 
   Like the \rsf{i{\ua}} rule, the \rsf{\bot{-}}, \rsf{\lor{-}} and
-  \rsf{{\limp}{-}} rules become truly local in system \sys{B} by letting
+  \rsf{{\limp}{-}} rules become truly local in \kl{system B} by letting
   $\mathbb{F}$-rules handle the distribution of conclusions in subgoals.
   Together with their dual rules \rsf{\top{+}}, \rsf{\land{+}} and
   \rsf{{\limp}{+}}, they constitute the \emph{closing} $\mathbb{H}$-rules of
   system $\sysB$. All other $\mathbb{H}$-rules work in arbitrary solutions just
-  as in \sys{BJ}. But thanks to the ability to have multiple conclusions
+  as in \kl{BJ}. But thanks to the ability to have multiple conclusions
   (\refsec{branching}) and positive bubbles (\refsec{colors}), both the
   \rsf{\lor{+}} and \rsf{{\limp}{+}} rules are now \emph{invertible}: this was
   the initial motivation for designing the symmetric bubble calculus.

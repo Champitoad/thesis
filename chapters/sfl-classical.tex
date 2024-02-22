@@ -6,10 +6,10 @@ In virtually every proof assistant, the goals the user is faced with are
 sequents of the form $\Gamma \seq C$, with a \emph{single} conclusion $C$ to be
 proved under many hypotheses in $\Gamma$. Historically, this form of sequent was
 introduced by Gentzen to formalize the rules of intuitionistic logic in his
-sequent calculus \sys{LJ}. But his main interest was in classical logic, as
+sequent calculus \kl{LJ}. But his main interest was in classical logic, as
 intuitionistic logic was still in its infancy and almost all of mathematics had
 been developed in a classical setting. Interestingly, he found that the right
-syntax to develop a rich metatheory of his classical sequent calculus \sys{LK}
+syntax to develop a rich metatheory of his classical sequent calculus \kl{LK}
 consisted in \emph{multi-conclusion} sequents of the form $\Gamma \seq \Delta$,
 where $\Delta$ is a list of conclusions that should be read
 \emph{disjunctively}. That is, a sequent
@@ -37,11 +37,11 @@ $$\bigwedge_{i=1}^{n}{A_i} \limp \bigvee_{j=1}^{m}{C_j}$$
         {\seq A, \select{\neg A}}}
       {\seq \select{A \lor \neg A}}
   \end{mathpar}
-  \caption{Proof of the excluded middle in \sys{LK}}
+  \caption{Proof of the excluded middle in \kl{LK}}
   \labfig{lk-tnd}
 \end{marginfigure}
 
-One way to get a multi-conclusion sequent in \sys{LK} is to apply the
+One way to get a multi-conclusion sequent in \kl{LK} is to apply the
 ``multiplicative''\sidenote{Terminology borrowed from linear logic, where
 {\rnm{\lor R}} is exactly the right introduction rule for multiplicative
 disjunction $\parr$.} introduction rule {\rnm{\lor R}} (\reffig{multintro}). For
@@ -114,13 +114,13 @@ it means that they will always reduce a provable goal to provable subgoals, and
 thus can never induce a backtracking point\sidenote{Except of course if the user
 deems the subgoal too complex to prove in its current form, and explicitly wants
 to backtrack to shape it differently.}. The {\rnm{\lor R}} rule is an example of
-invertible rule, and in \sys{LK} it can replace the other, non-invertible rules
+invertible rule, and in \kl{LK} it can replace the other, non-invertible rules
 {\rnm{\lor R_1}} and {\rnm{\lor R_2}}.
 
 But {\rnm{\lor R}} requires multi-conclusion sequents, and Gentzen restricted
 their use to classical logic. It turns out that logicians after Gentzen have
 proposed various multi-conclusion sequent calculi that work for intuitionistic
-logic, the most famous being \sys{GHCP} from Dragalin
+logic, the most famous being \kl{GHCP} from Dragalin
 \sidecite{dragalin_mathematical_1990}, which uses {\rnm{\lor R}}. In the rest of
 this chapter, we will consider to what extent one can benefit from having
 multiple conclusions in an intuitionistic setting.
@@ -157,7 +157,7 @@ and the theoretical foundations behind it.
 \section{Click actions}\labsec{classical-click}
 
 In \reftab{click-rules}, we showed how click actions in Actema are in direct
-correspondance with the rules of the single-conclusion sequent calculus \sys{LJ}
+correspondance with the rules of the single-conclusion sequent calculus \kl{LJ}
 for intuitionistic logic. Following the literature mentioned earlier, we just
 need to replace two actions/introduction rules to get a multi-conclusion system
 capturing either intuitionistic or classical first-order logic:
@@ -183,12 +183,12 @@ capturing either intuitionistic or classical first-order logic:
   common to both the intuitionistic and classical variants;
   \item as before, clicking on a red implication $A \limp B$ breaks it into an
   hypothesis $A$ and a conclusion $B$. Without further changes, this corresponds
-  to the right introduction rule from the classical sequent calculus \sys{LK} of
+  to the right introduction rule from the classical sequent calculus \kl{LK} of
   Gentzen (named {\rsf{{\limp}R*c}} in \reffig{multi-imp-intro}), and
   our set of actions becomes a proof system for classical logic. To go back to
   intuitionistic logic, one needs the additional behavior that all the other
   conclusions of the goal are removed. This corresponds to the right
-  introduction rule from the \sys{GHCP} calculus of Dragalin (named
+  introduction rule from the \kl{GHCP} calculus of Dragalin (named
   {\rsf{{\limp}R*i}} in \reffig{multi-imp-intro}).
 \end{itemize}
 
@@ -212,7 +212,7 @@ delayed\sidenote{In \refsec{colors}, we will see how to overcome this limitation
 by using a \emph{nested sequent} system.}. On the other hand the
 {\rsf{{\limp}R*c}} rule \emph{is} invertible: this is known to allow the
 formulation of sequent calculi for classical logic where \emph{all} rules are
-invertible, like the \sys{G3c} calculus of \sidecite{negri_structural_2001}. In
+invertible, like the \kl{G3c} calculus of \sidecite{negri_structural_2001}. In
 the propositional case, this gives a constructive decision procedure for the
 question of provability: given a sequent $\Gamma \seq \Delta$, one just has to
 choose any formula in $\Gamma$ or $\Delta$ and apply the introduction rule
@@ -244,13 +244,13 @@ Girard\cite[Section~3.3.2]{girard:hal-01322183}. This is already what happens in
 Actema for the universal quantifier: dropping a term $t$ on a blue item $\forall
 x. A$ will produce a new hypothesis $\subst{A}{t}{x}$, while keeping the
 original $\forall x. A$ item. This corresponds to the invertible left
-introduction rule of \sys{G3c} ({\rsf{\forall L*}} in \reffig{multi-inst}).
+introduction rule of \kl{G3c} ({\rsf{\forall L*}} in \reffig{multi-inst}).
 But in the single-conclusion framework, dropping a term $t$ on a red item
 $\exists x. A$ necessarily replaces it by the instantiated conclusion
 $\subst{A}{t}{x}$. Allowing multiple conclusions circumvents this problem and
 restores the symmetry between $\forall$ and $\exists$, since we can create a new
 conclusion for $\subst{A}{t}{x}$ while preserving the old one. This corresponds
-to the invertible right introduction rule of \sys{G3c} ({\rsf{\exists R*}} in
+to the invertible right introduction rule of \kl{G3c} ({\rsf{\exists R*}} in
 \reffig{multi-inst}).
 
 \section{DnD actions}\labsec{classical-dnd}
@@ -274,7 +274,7 @@ conclusions. Thus in a way, we are looking for proofs of all the conclusions
 \emph{in parallel}, and we stop as soon as we find one\sidenote{This is also
 related to the $\parr$ connective of linear logic which uses the {\rsf{\lor
 R}} rule of \reffig{multintro}, and whose spelling ``par'' is historically
-motivated by an understanding of the multiplicative fragment of \sys{LL} as a
+motivated by an understanding of the multiplicative fragment of \kl{LL} as a
 logic of parallel computation \cite{girard-linear-1987}.}. Hence we chose to
 call this third kind of interaction between two conclusions \emph{parallel}
 reasoning. This justifies the choice of notation for the parallel linking
@@ -448,7 +448,7 @@ The proof of Lemma \ref{lemma:rules-valid-in-context} is easily extended by
 inspecting each parallel rule, and we already mentioned that the backward rule
 {\rsf{L{\limp}_1}} is sound classically. Note that now sequents have multiple
 conclusions, thus one needs to use rules from a multi-succedant calculus such as
-\sys{G3c} \cite{negri_structural_2001}.
+\kl{G3c} \cite{negri_structural_2001}.
 
 Polarity preservation (Fact \ref{prop:rules-preserve-polarity}) is also true
 with $\para$, we just need to add the missing cases from \reffig{modes-schema}:

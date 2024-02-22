@@ -1233,7 +1233,7 @@ of linking sub-sentences already present in the statement.
 \labfig{ref-rule}
 \end{marginfigure}
 
-We chose the calculus \sys{G3i} from \cite{negri_structural_2001} as our basis,
+We chose the calculus \kl{G3i} from \cite{negri_structural_2001} as our basis,
 because all structural rules are admissible in it (but they would be
 straightforward to simulate apart from the cut rule). The first modification we
 do is that we model hypotheses in sequents as lists instead of multisets, to
@@ -1265,7 +1265,7 @@ admissibility theorem from \cite{negri_structural_2001}.
 % future work.
 
 \begin{theorem}[Completeness of subformula linking]\labthm{sfl-completeness}
-  If $\Gamma \seq A$ is provable in $\text{\sys{G3i}} + \{exch, {=}R, {=}L\}$,
+  If $\Gamma \seq A$ is provable in $\text{\kl{G3i}} + \{exch, {=}R, {=}L\}$,
   then $\bigwedge \Gamma \limp A \steps{} \top$.
 \end{theorem}
 \begin{proof}
@@ -1514,7 +1514,7 @@ admissibility theorem from \cite{negri_structural_2001}.
 
 Very recently, Mulder and Krebbers \sidecite{mulder_unification_2024} proposed
 an improvement over both our method of subformula linking implemented in Actema,
-and the method of Chaudhuri implemented in the \sys{Profint} prototype
+and the method of Chaudhuri implemented in the \intro{Profint} prototype
 \sidecite{DBLP:conf/cade/Chaudhuri21}. Like us, they perform \textit{a priori}
 unification on the linked subformulas to determine appropriate substitutions for
 instantiating quantifiers and rule out unwanted links. But their method improves
@@ -1523,14 +1523,13 @@ instantiation, such as the following linkage that currently fails in
 Actema\todo{Try to understand precisely why it fails, and if this invalidates
 the productivity theorem.}:
 $$(\forall x. P(x) \limp \exists y. \select{Q(x,y)}) \back \exists y. \exists z.
-\select{Q(f(z),y)}$$
-Because of the intended application of their method to \emph{automated} theorem
-proving in the Iris framework for program verification in Coq
-\sidecite{jung_iris_2018}, it is for now limited to \emph{backward} linkages.
-They provide a detailed formalization in Coq that relates their method with
-that of Actema and \sys{Profint}, based on \emph{linking judgments} of the form
-$H \curlywedge [O]\VDash G$ that have a derivation precisely when $H \back G
-\steps{} O$\sidenote{Contrary to our usage in this chapter, they use the
+\select{Q(f(z),y)}$$ Because of the intended application of their method to
+\emph{automated} theorem proving in the Iris framework for program verification
+in Coq \sidecite{jung_iris_2018}, it is for now limited to \emph{backward}
+linkages. They provide a detailed formalization in Coq that relates their method
+with that of Actema and \kl{Profint}, based on \emph{linking judgments} of the
+form $H \curlywedge [O]\VDash G$ that have a derivation precisely when $H \back
+G \steps{} O$\sidenote{Contrary to our usage in this chapter, they use the
 terminology ``linkage'' to denote derivations of these linking judgments, rather
 than paths to selected subformulas.}.
 
@@ -1568,15 +1567,6 @@ resembles the distinction between interaction phases and manual applications of
 {\rsf{conn}} and {\rsf{weak}} (\reffig{reslink}), which is itself inspired
 by the \emph{decomposition theorem} of the calculus of structures
 \sidecite[][Theorem~4.1.3]{tubella:hal-02390267}.
-
-% Another approach to canonicity is to consider a generalization of focused proofs
-% called \emph{maximally multi-focused proofs}, which have been proven isomorphic
-% to compact representations of proofs such as proof-nets
-% \sidecite{ausiello_canonical_2008} and expansion tree proofs
-% \sidecite{chaudhuri_multi-focused_2016}. We conjecture that our system
-% \sys{ISL^1_2} could be reformulated as a multi-focused proof system, where foci
-% correspond to the linked formulas, and thus their number is restricted to
-% exactly 2.
 
 There is also an analogy between the correctness criterions of proof nets, and
 the validity criterion of linkages:

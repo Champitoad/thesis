@@ -183,7 +183,7 @@ A natural way to give logical meaning to a solution is to translate it into a
 formula. In the following we provide one such translation, which will play a
 determining role in the design of inference rules for manipulating solutions. We
 qualify it of \emph{asymmetric} because it only works for single-conclusion
-solutions, in the same way that \sys{LJ} only works for single-conclusion
+solutions, in the same way that \kl{LJ} only works for single-conclusion
 sequents.
 
 \begin{remark}
@@ -219,15 +219,15 @@ entails a different encoding of the proof structure in them.
 
 \begin{figure*}
 \input{figures/sequent-BJ.tex}
-\caption{Sequent-style presentation of the asymmetric bubble calculus \sys{BJ}}
+\caption{Sequent-style presentation of the asymmetric bubble calculus \kl{BJ}}
 \labfig{sequent-BJ}
 \end{figure*}
 
 Our initial idea for a proof system based on solutions was quite simple: we take
-the inference rules of \sys{LJ}, and turn them all into unary rules by encoding
+the inference rules of \kl{LJ}, and turn them all into unary rules by encoding
 premisses as bubbles. This gives the basis for the set of rules presented in
 \reffig{sequent-BJ}, that defines our asymmetric bubble
-calculus for intuitionistic logic dubbed \sys{BJ}. It is divided in five groups:
+calculus for intuitionistic logic dubbed \kl{BJ}. It is divided in five groups:
 \begin{itemize}
 \item The {\identity}, {\resource} and {\heating} groups correspond
 respectively to the identity, structural and logical rules of sequent
@@ -274,8 +274,8 @@ context $U\hole$. That is:
 $$\vcenter{\R{S}{T}} \quad \text{should be read as} \quad
 \vcenter{\R{U\select{S}}{U\select{T}}} \quad \text{for all $U\hole$}$$
 
-\begin{definition}[\sys{BJ}-step]\labdef{BJ-step}
-We write $S \lstep{} T$ to denote the existence of a \sys{BJ}-rule instance
+\begin{definition}[\kl{BJ}-step]\labdef{BJ-step}
+We write $S \lstep{} T$ to denote the existence of a \kl{BJ}-rule instance
 $\irule{r}{S}{T}$ in the empty context, i.e. $S$ and $T$ are respectively the
 conclusion and premiss of the rule {\rsf{r}} in \reffig{sequent-BJ}, modulo
 instantiation of meta-variables\sidenote[][-11cm]{The direction of the arrow
@@ -287,32 +287,32 @@ and only if there exist $U\hole$, $S_0$ and $T_0$ such that $S =
 U\select{S_0}$, $T = U\select{T_0}$ and $S_0 \lstep{} T_0$.
 \end{definition}
 
-\begin{definition}[\sys{BJ}-derivation]\labdef{BJ-deriv}
+\begin{definition}[\kl{BJ}-derivation]\labdef{BJ-deriv}
 
-A \emph{derivation} $\deriv{\mathcal{D}}{S}{T}$ in \sys{BJ} is a list
-$\mathcal{D}$ of \sys{BJ}-steps with premiss $T$ and conclusion $S$.
+A \emph{derivation} $\deriv{\mathcal{D}}{S}{T}$ in \kl{BJ} is a list
+$\mathcal{D}$ of \kl{BJ}-steps with premiss $T$ and conclusion $S$.
 \end{definition}
 
-\begin{definition}[\sys{BJ}-proof]\labdef{BJ-proof}
-A \emph{proof} of a solution $S$ in \sys{BJ} is a derivation
+\begin{definition}[\kl{BJ}-proof]\labdef{BJ-proof}
+A \emph{proof} of a solution $S$ in \kl{BJ} is a derivation
 $\deriv{\mathcal{D}}{S}{\piq{}}$ that reduces $S$ to the empty solution, which
 denotes the proof state where there are no subgoals left.
 \end{definition}
 
 \begin{marginfigure}
 \input{figures/ex-seq-BJ.tex}
-\caption{Example of sequent-style proof in \sys{BJ}}
+\caption{Example of sequent-style proof in \kl{BJ}}
 \labfig{ex-seq-BJ}
 \end{marginfigure}
 
 \subsection{Proof-as-trace}
 
-An example of proof in \sys{BJ} is shown in \reffig{ex-seq-BJ}, where the
+An example of proof in \kl{BJ} is shown in \reffig{ex-seq-BJ}, where the
 focused subsolution is squared for each inference. Notice that many rules could
 have been applied in a different order: for instance all applications of the
 {\rsf{p}} rule could have been postponed to the top/end of the derivation.
 This is generally true of all formalisms based on CoS, which is known in the
-deep inference literature for its ``bureaucracy''. In \sys{BJ},
+deep inference literature for its ``bureaucracy''. In \kl{BJ},
 $\mathbb{H}$-rules aggravate the matter by adding all inessential rule
 permutations from sequent calculus to those of CoS. As our wording suggests,
 this is usually perceived negatively in deep inference proof theory, where a
@@ -324,19 +324,19 @@ However in our interactive proof-building setting, it should rather be seen as a
 user has more freedom to organize her reasoning in whichever order she wants, in
 an incremental and guided way. One should remember that in the Proof-by-Action
 paradigm, the focus is not the proof object, which is implicit and hidden to the
-user, but the \emph{process} of building it. Then a \sys{BJ}-derivation is
+user, but the \emph{process} of building it. Then a \kl{BJ}-derivation is
 better understood as the \emph{trace} of this building process, rather than the
 constructed proof\sidenote{The idea of \emph{proof-as-trace} is relatively
 common in logic programming \cite{miller_survey_2022}, but not so much in deep
 inference proof theory. It is Jean-Baptiste Joinet who shared with us his idea
 of applying it in this setting, based on his own work interpreting CoS for
-\sys{MLL} as a system for building \emph{multiplicative proof nets}
+\kl{MLL} as a system for building \emph{multiplicative proof nets}
 \cite{joinet_completeness_2007}.}. And the fact that this trace corresponds, or
 can be transformed into a more canonical representation is of no concern to the
 user. What matters for a good proof-building interface is to be as flexible as
 possible, in order to match the user's own mental process of argumentation.
 
-Of course flexibility comes at a price, and the rules of \sys{BJ} are probably
+Of course flexibility comes at a price, and the rules of \kl{BJ} are probably
 too numerous and low-level to be mapped directly into individual proof actions
 in a user interface. Some of these concerns will be tackled in
 \refsubsec{bubbles-search}, but we think a better answer might have been found
@@ -353,16 +353,16 @@ prototype of GUI presented in \refsec{flowers-prover}.
 
 \begin{figure*}
   \input{figures/graphical-BJ}
-  \caption{Graphical presentation of the asymmetric bubble calculus \sys{BJ}}
+  \caption{Graphical presentation of the asymmetric bubble calculus \kl{BJ}}
   \labfig{graphical-BJ}
 \end{figure*}
 
-While the sequent-style presentation of \sys{BJ} clearly shows its filiation
+While the sequent-style presentation of \kl{BJ} clearly shows its filiation
 with sequent calculus, its syntax is quite heavy, and obscures an important
 property of the rules: they almost always preserve the contexts $\Gamma, \Delta$
-of formulas and $\cS$ of bubbles. That is, the rules of \sys{BJ} are
+of formulas and $\cS$ of bubbles. That is, the rules of \kl{BJ} are
 \emph{local}. This enables a more economical and graphical presentation of the
-rules in \reffig{graphical-BJ}, where \sys{BJ} is seen as a multiset rewriting
+rules in \reffig{graphical-BJ}, where \kl{BJ} is seen as a multiset rewriting
 system just like the {\cham} thanks to \refdef{solution}. Instead of relying on
 a notion of solution context, we define formally what it means to be a
 subsolution:
@@ -387,7 +387,7 @@ rule $r$.
 one for the beginning of the proof upto {\rsf{f{-}}}, and a generic one for
 the two subproofs starting with {\rsf{{\limp}{-}}}.}
 
-\reffig{ex-gra-BJ} shows the graphical presentation of the same \sys{BJ}-proof
+\reffig{ex-gra-BJ} shows the graphical presentation of the same \kl{BJ}-proof
 as in \reffig{ex-seq-BJ}. Whereas in \reffig{ex-seq-BJ} we squared the whole
 subsolutions corresponding to the conclusions of inference rules, here we
 squared on each line the redex modified by the associated rewriting rule. This
@@ -411,8 +411,8 @@ sequence of \emph{edits}:
 \end{enumerate}
 It would be interesting to consider the question of finding a minimal set of
 edit operations like these, that can simulate all the rules of
-\sys{BJ}\sidenote{As will become apparent in \refsec{bubbles-completeness},
-\sys{BJ} itself provides a finer-grained simulation of the rules of sequent
+\kl{BJ}\sidenote{As will become apparent in \refsec{bubbles-completeness},
+\kl{BJ} itself provides a finer-grained simulation of the rules of sequent
 calculus, which in turn is known to be a more detailed variant of \emph{natural
 deduction}. Interestingly through the Curry-Howard isomorphism, this would
 correspond to a \emph{chain of compilation}, starting from the higher-level
@@ -426,13 +426,13 @@ efficient implementations of the rules with a small memory footprint.
 
 \begin{figure*}
   \input{figures/ex-gra-BJ.tex}
-  \caption{Example of graphical proof in \sys{BJ}}
+  \caption{Example of graphical proof in \kl{BJ}}
   \labfig{ex-gra-BJ}
 \end{figure*}
 
 \section{Back to Proof-by-Action}\labsec{bubbles-pba}
 
-When looking at the \sys{BJ}-proof of \reffig{ex-gra-BJ}, the astute reader
+When looking at the \kl{BJ}-proof of \reffig{ex-gra-BJ}, the astute reader
 might have been reminded of the Proof-by-Action paradigm as introduced in
 \refch{pba}, by seeing redexes as the items involved in a graphical action ---
 there are always at most two. More precisely, $\mathbb{H}$-rules correspond to
@@ -440,7 +440,7 @@ there are always at most two. More precisely, $\mathbb{H}$-rules correspond to
 ({\rnm{\mcirc{+}}} rules), and the {\rsf{i{\da}}} rule corresponds to
 the most basic DnD action between dual occurrences of a formula.
 
-As mentioned earlier when comparing \sys{BJ} to \sys{LJ}, the novelty here lies
+As mentioned earlier when comparing \kl{BJ} to \sys{LJ}, the novelty here lies
 with $\mathbb{H}$-rules, $\mathbb{F}$-rules and $\mathbb{M}$-rules that deal
 with \emph{bubbles}. Remember that the goal behind the idea of bubble calculus
 was precisely to provide a new way to manipulate subgoals through bubbles
@@ -451,7 +451,7 @@ challenges in implementing an efficient layouting algorithm for bubbles,
 typically to make solutions fit into the screen.}. Like formulas in blue and red
 items, whole subgoals could now be shown on the same screen in their respective
 bubbles, and be freely moved around with a pointing device. Following are some
-ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
+ideas for mapping the remaining rules of \kl{BJ} in such a GUI:
 
 \begin{marginfigure}
   $$
@@ -460,7 +460,7 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     \hypo{A}~~~\conc{B} &\step{} &\conc{A \back B} &\back \\
   \end{array}
   $$
-  \caption{Linkage creation rules in \sys{BJ}}
+  \caption{Linkage creation rules in \kl{BJ}}
   \labfig{bubbles-linkage}
 \end{marginfigure}
 
@@ -472,13 +472,13 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
 %     \hypo{t = u}~~~A &\step{} &\subst{A}{t}{u} &{=}{-}2 \\
 %   \end{array}
 %   $$
-%   \caption{Rules for equality in \sys{BJ}}
+%   \caption{Rules for equality in \kl{BJ}}
 %   \labfig{bubbles-eq}
 % \end{marginfigure}
 
 % \begin{marginfigure}
 %   \input{figures/bubbles-vars.tex}
-%   \caption{Rules for variables and definitions in \sys{BJ}}
+%   \caption{Rules for variables and definitions in \kl{BJ}}
 %   \labfig{bubbles-vars}
 % \end{marginfigure}
 
@@ -527,15 +527,15 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     to moving the item\sidenote{This mechanism is quite standard in GUIs that
     manipulate duplicable resources like file managers, where one maintains the
     \texttt{CTRL} key to enable copy mode. It was also chosen by K. Chaudhuri to
-    implement contraction in his \sys{ProfInt} prototype for subformula linking
+    implement contraction in his \kl{ProfInt} prototype for subformula linking
     in intuitionistic logic \cite{ProfInt}.}. As for the weakening rule
     {\rsf{w}}, it could be available as a contextual action when selecting
     blue items.
   \item[\textbf{\identity}]
     Although the {\rsf{i{\da}}} rule only corresponds to the base case
     of DnD actions, it would be easy to integrate their full SFL semantics
-    directly in \sys{BJ}. Indeed our SFL rules (\reffig{DISL}) are already
-    expressed as rewriting rules, just like the graphical rules of \sys{BJ}
+    directly in \kl{BJ}. Indeed our SFL rules (\reffig{DISL}) are already
+    expressed as rewriting rules, just like the graphical rules of \kl{BJ}
     (\reffig{graphical-BJ}). Thus it is just a matter of adding linkage creation
     rules like those of \refsec{dnd-completeness}, but between adjacent formulas
     in a solution (see \reffig{bubbles-linkage}).
@@ -587,7 +587,7 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     %   \item Instantiation rules {\rnm{\forall{-}}} and {\rnm{\exists{+}}} could
     %   be mapped as in Actema to DnD actions with a green item, corresponding to
     %   the alternative formulation of \reffig{bubbles-vars}. This way all the
-    %   rules of \sys{BJ} become \emph{analytic}: if $S \step{} T$, then every
+    %   rules of \kl{BJ} become \emph{analytic}: if $S \step{} T$, then every
     %   subterm occurring in $T$ also occurs in $S$\sidenote{The only exceptions
     %   are the {\rsf{i{\da}}} rule which will be shown to be admissible
     %   in \refsec{bubbles-completeness}, and the {\rsf{d{\ua}}} rule of
@@ -596,7 +596,7 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
 \end{description}
 
 Beyond the recovered uniformity of the user interface in terms of the chemical
-metaphor, \sys{BJ} exhibits some features that are interesting both at the
+metaphor, \kl{BJ} exhibits some features that are interesting both at the
 proof-theoretical and user-experience levels:
 \begin{description}
   \item[\textbf{Factorization}] It implements a form of \emph{context-sharing}

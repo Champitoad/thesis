@@ -241,7 +241,7 @@ not want to bother with such implementation details, and simply assume that
 higher-order definitions are possible, even though Actema is currently limited
 to first-order logic. In practice this does not affect the semantics of
 graphical actions, and we can imagine having a first-order set theory such as
-\sys{ZF} to make everything work behind the scenes\sidenote{See also
+\kl{ZF} to make everything work behind the scenes\sidenote{See also
 \refsec{pluginfuture} for a discussion on a higher-order extension of Actema.}.
 
 Let us now describe how to prove the second question of the exercise in the
@@ -269,7 +269,7 @@ together with the hypothesis:
 Now there is no available action on the conclusion $x \in C$, because set
 membership is a \emph{primitive} predicate in set theory: it does not have any
 associated definition in the sense mentioned above\sidenote{Formally, the
-meaning of $\in$ in a set theory such as \sys{ZF} comes from the various axioms
+meaning of $\in$ in a set theory such as \kl{ZF} comes from the various axioms
 involving it. One might call such a definition \emph{behavioral}, since the
 meaning of the symbol emerges from the way it can be used in proofs through
 axioms. In contrast, the usual notion of mathematical definition we tackle in
@@ -296,7 +296,7 @@ logical framework, the way to perform this deduction step in Proof-by-Action
 will vary:
 
 \begin{description}
-  \item[In \sys{ZF} set theory]
+  \item[In \kl{ZF} set theory]
     We would need to invoke explicitly the \emph{axiom of comprehension}, which
     states the following:
     $$\forall \phi.\ \forall D.\ \forall y.\ y \in \compr{d \in D}{\phi} ~~\lequiv~~ (y \in D \land \subst{\phi}{y}{d})$$

@@ -94,7 +94,7 @@ expressed in \emph{predicate} logic, i.e. the language and calculus of relations
 devised by 19\textsuperscript{th} century logicians. This crystallized into two
 famous axiomatic systems for set theory: the \textit{Principia Mathematica} of
 Russell and Whitehead \sidecite{russell25}; and Zermelo-Fraenkel set theory
-(\sys{ZF}, or \sys{ZFC} with the axiom of choice), which is the most popular
+(\kl{ZF}, or \sys{ZFC} with the axiom of choice), which is the most popular
 foundation nowadays because of its greater simplicity.
 
 \paragraph{Truth and proofs}
@@ -214,13 +214,13 @@ systems, designing the classical part as an extension of the former.
 
 In Hilbert systems, the only inference rule is that of \emph{modus ponens},
 which is expressed formally with the following figure:
-$$\R[\rsf{mp}]{A}{A \limp B}{B}$$
+$$\R[\intro{mp}]{A}{A \limp B}{B}$$
 Like axioms, it is a \emph{schema} that involves generic propositional variables
 $A$ and $B$, which may be \emph{instantiated} with arbitrary formulas. It can be
 read from top to bottom as follows: for any propositions $A$ and $B$, if we have
 a proof of $A$ and a proof of $A \limp B$, i.e. a proof that $A$ implies $B$,
 then we can immediately derive a proof of $B$ by virtue of the rule, here
-designated by the abbreviated name \rsf{mp}.This reading of the rule
+designated by the abbreviated name \kl{mp}.This reading of the rule
 corresponds to a form of \emph{forward} reasoning: starting from the known
 \emph{premises} that $A$ and $A \limp B$ are true, it \emph{necessarily} follows
 that the \emph{conclusion} $B$ is true.
@@ -267,9 +267,9 @@ components. Dually, \emph{elimination rules} explain how to \emph{use} complex
 formulas, by giving a canonical way to derive new conclusions from them.
 \reffig{calculi-NJ} shows the complete set of natural deduction rules for all
 connectives and quantifiers in intuitionistic logic, that was introduced by
-Gentzen under the name \sys{NJ}\sidenote{Gentzen simultaneously introduced a
-natural deduction calculus named \sys{NK} for classical logic, which is just
-\sys{NJ} with an additional rule modelling the principle of \emph{indirect
+Gentzen under the name \kl{NJ}\sidenote{Gentzen simultaneously introduced a
+natural deduction calculus named \kl{NK} for classical logic, which is just
+\kl{NJ} with an additional rule modelling the principle of \emph{indirect
 proof} --- i.e. the possibility to prove any proposition $A$ by deriving a
 contradiction from its negation $\neg A$ (\reffig{NK-ip}). Indeed, this
 principle can be shown to be strictly equivalent to the law of excluded middle,
@@ -282,7 +282,7 @@ e_2} allow to derive proofs of $A$ and $B$ from a proof of $A \land B$.
 
 \begin{figure*}
   \input{figures/nj.tex}
-  \caption{Natural deduction calculus \sys{NJ} for intuitionistic logic}
+  \caption{Natural deduction calculus \kl{NJ} for intuitionistic logic}
   \labfig{calculi-NJ}
 \end{figure*}
 
@@ -332,7 +332,7 @@ with another rule instance \rsf{r2} simply consists in using the conclusion of
 
 \begin{figure*}
   \input{figures/lj.tex}
-  \caption{Sequent calculus \sys{LJ} for intuitionistic logic}
+  \caption{Sequent calculus \kl{LJ} for intuitionistic logic}
   \labfig{calculi-LJ}
 \end{figure*}
 
@@ -366,8 +366,8 @@ reformulation of natural deduction with better mathematical properties, such as
 \emph{symmetries}. This gave us \emph{sequent calculus}, which is widely
 regarded as the cornerstone for most developments in proof theory to this day.
 Gentzen introduced simultaneously \emph{two} sequent calculi: one for classical
-logic called \sys{LK}, and one for intuitionistic logic called \sys{LJ}. Here we
-focus on the intuitionistic system \sys{LJ}, whose rules are shown in
+logic called \kl{LK}, and one for intuitionistic logic called \sys{LJ}. Here we
+focus on the intuitionistic system \kl{LJ}, whose rules are shown in
 \reffig{calculi-LJ}.
 
 Sequent calculus is based on the observation that some rules in natural
@@ -438,7 +438,7 @@ $\seq$ of sequents. The remaining \emph{axiom} rule \rsf{ax} is the only axiom
 of sequent calculus, and is in a sense dual to the \rsf{cut} rule: while the
 latter allows justifying a hypothesis by an identical conclusion, the \rsf{ax}
 rule allows justifying a conclusion by an identical hypothesis. \reffig{PNC-LJ}
-shows a proof of the principle of non-contradiction in \sys{LJ}.
+shows a proof of the principle of non-contradiction in \kl{LJ}.
 
 Both the \rsf{cut} and \rsf{ax} rules seem completely trivial. Yet surprisingly,
 Gentzen managed to prove a powerful result called alternatively
@@ -455,7 +455,7 @@ provable sequent can be proved without it.
 
 An important consequence of cut-elimination, which was the original motivation
 of Gentzen, is the consistency of the logic (intuitionistic predicate logic in
-the case of \sys{LJ}). This stems from the fact that all rules apart from the
+the case of \kl{LJ}). This stems from the fact that all rules apart from the
 \rsf{cut} rule satisfy the \emph{subformula property}: every formula $A$
 appearing in the premisses is a \emph{subformula} of some formula $B$ in the
 conclusion, i.e. $A$ already appears inside $B$. Thus there cannot exist a proof
@@ -469,7 +469,7 @@ mathematics by Bolzano \sidecite{bolzano}.
 
 Unfortunately, the proof of cut-elimination for the sequent calculus
 incorporating Peano's axioms, found by Gentzen a few years after proving
-cut-elimination for \sys{LJ} \sidecite{gentzen_widerspruchsfreiheit_1936}, is
+cut-elimination for \kl{LJ} \sidecite{gentzen_widerspruchsfreiheit_1936}, is
 not finitist: it makes use of a transfinite induction up to the ordinal
 $\epsilon_0$. But the very ideas of cut-elimination and analyticity will have
 far-reaching applications in proof theory and beyond, including many of the
@@ -645,7 +645,7 @@ correspondence or isomorphism\sidenote{In fact, Curry had already noticed in
 \cite{Curry1959-CURCLV} --- hence the mention of Curry.} --- where
 $\lambda$-terms in the simply-typed $\lambda$-calculus are put in one-to-one
 correspondence with proofs in the implicational fragment of the natural
-deduction system \sys{NJ} of Gentzen (\reffig{calculi-NJ}).
+deduction system \kl{NJ} of Gentzen (\reffig{calculi-NJ}).
 
 Thus the core of type theory is \emph{intuitionistic} in nature, and the
 Curry-Howard correspondence has fostered many fruitful interactions between
@@ -655,7 +655,7 @@ development in this direction has been the \emph{intuitionistic type theory} of
 Martin-Löf, which formed the basis for the implementation of many proof
 assistants like NuPrl, Alf, and most recently Agda \cite{geuvers_proof_2009}. A
 system closely related to intuitionistic type theory, the \emph{Calculus of
-Inductive Constructions} (\sys{CoIC}), is also implemented in two leading proof
+Inductive Constructions} (\kl{CoIC}), is also implemented in two leading proof
 assistants: Coq \sidecite{the_coq_development_team_2022_7313584} and Lean
 \sidecite{10.1007/978-3-030-79876-5_37}. Following the proofs-as-programs
 correspondence, these systems support the creation of both proofs and programs
@@ -756,7 +756,7 @@ languages:
   instance, a goal $\Gamma\seq A\lor B$ (resp. $\Gamma\seq A\land B$) can be
   turned into either a goal $\Gamma\seq A$ or a goal $\Gamma\seq B$ (resp. into
   two goals $\Gamma\seq A$ and $\Gamma\seq B$), corresponding to the rules
-  \rsf{\lor R_1} and \rsf{\lor R_2} (resp. \rsf{\land R}) of \sys{LJ} in their
+  \rsf{\lor R_1} and \rsf{\lor R_2} (resp. \rsf{\land R}) of \kl{LJ} in their
   backward reading (\reffig{calculi-LJ}).
 
   Coq and Lean are examples of state-of-the-art proof assistants in the
@@ -955,12 +955,12 @@ repeatedly been translated as \emph{ideography}
 
 Following the seminal work of Charles Sanders Peirce in
 \emph{semiotics}\sidenote{Semiotics is the systematic study of sign processes
-and the communication of meaning.}, we define an iconic language as one whose
-signs are mainly \emph{icons}, i.e. signs that \emph{resemble} or share
-qualities with the objects they denote. This is to be contrasted with symbolic
-languages where most signs are just \emph{symbols}, i.e. signs that
-\emph{conventionally} denote their objects. In his systematic usage of
-\emph{triads} of concepts, Peirce identified a third kind of sign,
+and the communication of meaning.}, we define an \intro{iconic} language as one
+whose signs are mainly \reintro{icons}, i.e. signs that \emph{resemble} or share
+qualities with the objects they denote. This is to be contrasted with
+\intro{symbolic} languages where most signs are just \reintro{symbols}, i.e.
+signs that \emph{conventionally} denote their objects. In his systematic usage
+of \emph{triads} of concepts, Peirce identified a third kind of sign,
 \emph{indexes} \sidecite{atkin_peirces_2023}:
 \begin{quote}
   if the constraints of successful signification require that the sign reflect
@@ -995,9 +995,9 @@ one that is omnipresent in all branches of mathematics, then it is only natural
 to expect that some diagrammatic system should exist for it, that can express in
 the most natural way most (if not all) logical arguments. This is the
 \emph{iconicity} thesis of Peirce, which motivated his inquiry into what is
-arguably the first diagrammatic proof system in history: the \emph{existential
-graphs}. This will be the subject of \refch{eg}, and the basis for the
-development of a \emph{metaphorical} proof system in \refch{flowers}.
+arguably the first diagrammatic proof system in history: the \intro{existential
+graphs} (\reintro{EGs}). This will be the subject of \refch{eg}, and the basis
+for the development of a \emph{metaphorical} proof system in \refch{flowers}.
 
 \begin{emphpar}
   Our second main working hypothesis exploited in the second part of this
@@ -1072,51 +1072,52 @@ as the substrate for GUIs in the frontend.
   sharing of contexts between subgoals, making them well-suited to the
   factorization of both forward and backward reasoning steps in proofs.
 
-  \refch{bubbles} presents the \emph{asymmetric} bubble calculus \sys{BJ} for
+  \refch{bubbles} presents the \emph{asymmetric} bubble calculus \kl{BJ} for
   intuitionistic logic, modelled after the \emph{asymmetric} sequents of the
-  intuitionistic sequent calculus \sys{LJ} of Gentzen (\reffig{calculi-LJ}). It
+  intuitionistic sequent calculus \kl{LJ} of Gentzen (\reffig{calculi-LJ}). It
   introduces the metaphor of \emph{bubbles} as a way to iconically represent the
   separation and sharing of contexts between different subgoals.
 
-  \refch{bubbles-symm} refines \sys{BJ} into a more general and symmetric
-  calculus for classical logic called ``system \sys{B}'', where bubbles can be
+  \refch{bubbles-symm} refines \kl{BJ} into a more general and symmetric
+  calculus for classical logic called ``\kl{system B}'', where bubbles can be
   \emph{polarized} in addition to formulas. Intuitionistic, dual-intuitionistic
-  and bi-intuitionistic logic can be recovered as fragments of system \sys{B},
+  and bi-intuitionistic logic can be recovered as fragments of \kl{system B},
   by forbidding certain inference rules that characterize the \emph{porosity} of
-  bubbles. We also devise a fully invertible variant of system \sys{B}, that we
+  bubbles. We also devise a fully invertible variant of \kl{system B}, that we
   conjecture to be complete.
   
   \item[Existential graphs] In the last two chapters, we study two systems based
-  on the \emph{existential graphs} (``EG'' hereafter) of Peirce, that allow us to
-  achieve \emph{full iconicity}: every logical construction has an associated
-  icon, and thus there is no use anymore for the connectives and quantifiers of
-  symbolic formulas. Hopefully, this shall remove a first barrier in the learning
-  of formal logic, which lies in the \emph{arbitrary} correspondence between
-  symbols and their meaning.
+  on the \kl{existential graphs} of Peirce, that allow us to achieve \emph{full
+  iconicity}: every logical construction has an associated icon, and thus there
+  is no use anymore for the connectives and quantifiers of symbolic formulas.
+  Hopefully, this shall remove a first barrier in the learning of formal logic,
+  which lies in the \emph{arbitrary} correspondence between symbols and their
+  meaning.
 
-  In \refch{eg}, we give a complete review of the original EG systems of Peirce
-  for propositional and first-order classical logic, which have been
+  In \refch{eg}, we give a complete review of the original \kl{EGs} systems of
+  Peirce for propositional and first-order classical logic, which have been
   consistently neglected in the proof theory literature\sidenote{One reason
-  might be that EGs have been invented at the end of the 19\textsuperscript{th}
-  century, \emph{before} the birth of proof theory as a discipline in the 1920s
-  under the impulse of Hilbert.}. We propose in particular a novel inductive
-  characterization of the syntax of EGs, as well as the first identification of
-  an \emph{analytic} fragment of the system for propositional logic that is
-  complete for provability.
+  might be that \kl{EGs} have been invented at the end of the
+  19\textsuperscript{th} century, \emph{before} the birth of proof theory as a
+  discipline in the 1920s under the impulse of Hilbert.}. We propose in
+  particular a novel inductive characterization of the syntax of \kl{EGs}, as
+  well as the first identification of an \emph{analytic} fragment of the system
+  for propositional logic that is complete for provability.
 
   Finally, we introduce in \refch{flowers} the \emph{flower calculus}, an
-  intuitionistic variant of EGs where statements are represented metaphorically
-  as \emph{flowers}. We partition the system into a \emph{natural} fragment
-  where every rule is both analytic and invertible, and a \emph{cultural}
-  fragment where every rule is non-invertible. We prove that the cultural
-  fragment is admissible thanks to a completeness proof for the natural fragment
-  with respect to Kripke semantics. We exploit these meta-theoretical results to
-  design the Flower Prover, a prototype of GUI in the PbA paradigm that aims to
-  unify the concepts of \emph{goal} and \emph{theory} in a \emph{modal
-  interface}: goals correspond to flowers manipulated with natural rules in
-  \Proof mode; while theories correspond to the same flowers manipulated with
-  cultural rules in \Edit mode. The Flower Prover is also the first
-  \emph{mobile-friendly} interface for ITPs that we know of.
+  intuitionistic variant of \kl{EGs} where statements are represented
+  metaphorically as \emph{flowers}. We partition the system into a
+  \emph{natural} fragment where every rule is both analytic and invertible, and
+  a \emph{cultural} fragment where every rule is non-invertible. We prove that
+  the cultural fragment is admissible thanks to a completeness proof for the
+  natural fragment with respect to Kripke semantics. We exploit these
+  meta-theoretical results to design the Flower Prover, a prototype of GUI in
+  the PbA paradigm that aims to unify the concepts of \emph{goal} and
+  \emph{theory} in a \emph{modal interface}: goals correspond to flowers
+  manipulated with natural rules in \Proof mode; while theories correspond to
+  the same flowers manipulated with cultural rules in \Edit mode. The Flower
+  Prover is also the first \emph{mobile-friendly} interface for ITPs that we
+  know of.
 \end{description}
 
 \begin{kaonote}
@@ -1234,7 +1235,7 @@ terminology of ``deep inference'' had not been introduced yet. Indeed, the first
 article on the subject appeared in 1999 \cite{Guglielmi1999ACO}, with very
 different motivations in mind: namely, the development of a proof-theoretical
 approach unifying concurrent and sequential computation, resulting in the
-calculus of structures for the logic \sys{BV}. However, some proof systems based
+calculus of structures for the logic \kl{BV}. However, some proof systems based
 on deep inference principles already existed and inspired researchers in window
 inference, as witnessed by the reference to Schütte's proof theory in the above
 quote.
