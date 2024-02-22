@@ -975,15 +975,15 @@ proof-theoretical framework, which aims to accomodate for the pervasive use of
 Window inference has been used both for general-purpose logics like HOL
 \sidecite{grundy-window-1991}, and in more specialized settings like program
 refinement \sidecite{grundy-window-1992}. It naturally lends itself to
-integration in a graphical user interface (\sidecite{langbacka-tkwinhol-1995},
-\sidecite{goos-tas-2000}), where the user can \emph{focus} on a subexpression by
-clicking on it. One is then presented with a new \emph{graphical} window,
-holding the selected expression as well as an extended set of hypotheses
-exposing information inferrable from the context of the expression. The user can
-pick from a list of valid transformations to be applied to the expression,
-before closing the window. This propagates the transformations to the parent
-window by replacing the old subexpression by the new one, without modifying the
-surrounding context.
+integration in a graphical user interface
+\sidecite{langbacka-tkwinhol-1995,goos-tas-2000}, where the user can
+\emph{focus} on a subexpression by clicking on it. One is then presented with a
+new \emph{graphical} window, holding the selected expression as well as an
+extended set of hypotheses exposing information inferrable from the context of
+the expression. The user can pick from a list of valid transformations to be
+applied to the expression, before closing the window. This propagates the
+transformations to the parent window by replacing the old subexpression by the
+new one, without modifying the surrounding context.
 
 This process is quite reminiscent of the rewriting produced by our DnD
 actions. One key difference is that window inference rules can be
@@ -1051,7 +1051,7 @@ Finally let us mention various recent implementations proposing various ways to
 construct proofs graphically: Building Blocks~\sidecite{buildingblocks}, the
 Incredible Proof Machine~\sidecite{blanchette-visual-2016},
 Logitext\sidenote{\url{http://logitext.mit.edu/main}} and Click \&
-coLLecT~\cite{clickcollect}. In particular, Logitext and Click \& coLLecT
+coLLecT~\sidecite{clickcollect}. In particular, Logitext and Click \& coLLecT
 exploit the same idea of associating click actions on head connectives to
 inference rules in sequent calculus. But these systems focus more on explicating
 the proof object than on making its construction easier.

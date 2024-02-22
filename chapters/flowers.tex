@@ -36,106 +36,33 @@ implementation of the Flower Prover, an early prototype of GUI for ITPs that
 uses the rules of the flower calculus both for direct manipulation of flowers in
 its frontend, and automated simplification of goals in its backend.
 
-The chapter is organized as follows: in \refsec{\kl{IEGs}}, we retrace the origin of
-Oostra's syntax for intuitionistic \kl{EGs} (hereafter ``\kl{IEGs}'') as a natural
-generalization of the \emph{scroll}, an icon for implication introduced by
-Peirce that inspired the very creation of \kl{EGs}. In \refsec{Flowers}, we explain
-how flowers are really just a fun and metaphorical way to draw \kl{IEGs}, and proceed
-to give them an inductive, multiset-based syntax as in \refsec{multisets}. In
-\refsec{Calculus}, we introduce the full set of inference rules of the flower
-calculus as well as our notion of proof, and prove a few syntactic properties,
-including two deduction theorems. In \refsec{Semantics}, we give a direct Kripke
-semantics to flowers, avoiding the need for translations to and from formulas.
-In \refsec{Soundness}, we show that the rules of the flower calculus are valid
-with respect to our Kripke semantics, and in \refsec{Completeness} we identify a
-complete fragment of the system where all rules are both \emph{analytic} and
-\emph{invertible}. This entails the admissibility of all rules outside of this
-fragment, and as a consequence the analyticity of the system. We exploit these
-properties in \refsec{flowers-search} by describing an algorithm for fully
-automated proof search in the propositional fragment; unfortunately, the current
-version of the algorithm is neither terminating nor complete. Then in
-\refsec{flowers-prover} we give an overview of the Flower Prover, a prototype of
-GUI in the Proof-by-Action paradigm whose actions map directly to the rules of
-the flower calculus, and which integrates nicely with (a restricted version of)
-our search procedure. We conclude in \refsec{Conclusion} by a comparison with
-some related works, and a discussion of future works and applications that we
-envision.
-
-% \section{Introduction}
-
-% \subsection{Interactive proof building}
-
-% Given a sufficiently expressive logic, the problem of finding a formal proof of
-% a given statement in that logic is notoriously hard. Not only because of
-% undecidability, but because proof calculi are very rigid, and expose too many
-% details compared to the informal proofs that mathematicians are used to write.
-
-% One way to tackle this limitation is to design search procedures for interesting
-% fragments of the logic under consideration. This is the approach undertaken by
-% automated theorem provers such as SMT solvers, or more specialized decision
-% procedures such as Coq's \texttt{lia} tactic for linear integer arithmetic.
-% Still, large-scale proofs of complex theorems currently require a human in the
-% loop to provide the overall structure of arguments, but also of the theories
-% built up from definitions and lemmas.
-
-% This is where proof assistants come in, by providing a set of tools to make the
-% whole process of formalizing mathematical developments easier. This includes
-% languages to specify definitions and statements conveniently, but also
-% interfaces to build proofs interactively without having to fill in all the
-% details. The dominant paradigm for these interfaces is that of \emph{tactic
-% languages} \sidecite{doi:10.1098/rsta.1984.0067}: the user is exposed with a set of
-% \emph{goals} that remain to be proved, also called the \emph{proof state}, and
-% modifies these goals through textual commands called \emph{tactics} until there
-% is no goal left. This is currently what is implemented in mainstream proof
-% assistants such as Coq \sidecite{the_coq_development_team_2022_7313584}, Isabelle
-% \sidecite{nipkow2002isabelle} and Lean \sidecite{10.1007/978-3-030-79876-5_37}.
-
-% \subsection{Graphical interfaces}
-
-% In recent years, there have been many efforts to replace or complement textual
-% tactic languages with modern \emph{graphical user interfaces} \sidecite{PbP}
-% \sidecite{langbacka-tkwinhol-1995} \sidecite{Chaudhuri2013} \sidecite{edukera}
-% \sidecite{zhan-design-2019} \sidecite{ayers_graphical_2021}. The hope is to make proof
-% assistants more intuitive and accessible to beginners and non-specialists, but
-% also to some extent more productive and ergonomic for experts. 
-
-% The initial motivation for this work was to design a proof calculus well-suited
-% to \emph{direct manipulation} in such a graphical setting. The idea is that the
-% user should be able to interact directly with the graphical representation of
-% the proof state, using a pointing device such as a mouse or fingers on a touch
-% screen. In previous work \sidecite{10.1145/3497775.3503692}, we proposed a way to
-% synthesize complex logical inferences through \emph{drag-and-drop} actions
-% between two items of the current goal. Since goals are represented as
-% \emph{sequents} $\Gamma \entails{} C$, the items involved were traditional logical
-% formulas, either two hypotheses in $\Gamma$ or one hypothesis and the conclusion
-% $C$.
-
-% \subsection{Non-symbolic reasoning}
-
-% In this work we show that sequents and formulas built from binary connectives
-% and quantifiers are unnecessary for representing the proof state. We speculate
-% that they actually get in the way of a natural flow of information in the proof,
-% and do not capture accurately the way mathematicians organise hypotheses and
-% conclusions in their reasoning. A similar argument has been made by E. Ayers in
-% his thesis \sidecite{ayers_thesis}, where his solution is to design a nested goal
-% data structure called \texttt{Box} on which reasoning can be performed directly
-% without relying on formulas.
-
-% % TODO: reference precise chapter of Ayers thesis
-
-% We introduce a closely related structure for goals, but inspired instead by an
-% early invention in the history of graphical logic: the \emph{existential graphs}
-% of C. S. Peirce \sidecite{Roberts+1973} (thereafter written ``\kl{EGs}'').
-% We noticed that our structure could be drawn and manipulated metaphorically in
-% the form of nested \emph{flowers}, and thus decided to name \emph{flower
-% calculus} the proof system that we built around it. Our focus in this work will
-% be to study the fundamental properties of the flower calculus, mainly through
-% the lens of modern structural proof theory. We only hint at some ways the
-% calculus could be used as a foundation for a graphical theorem proving
-% interface, and leave a more systematic proposal for future work.
+The chapter is organized as follows: in \refsec{IEGs}, we retrace the origin of
+Oostra's syntax for intuitionistic \kl{EGs} (hereafter ``\kl{IEGs}'') as a
+natural generalization of the \emph{scroll}, an icon for implication introduced
+by Peirce that inspired the very creation of \kl{EGs}. In \refsec{Flowers}, we
+explain how flowers are really just a fun and metaphorical way to draw
+\kl{IEGs}, and proceed to give them an inductive, multiset-based syntax as in
+\refsec{multisets}. In \refsec{Calculus}, we introduce the full set of inference
+rules of the flower calculus as well as our notion of proof, and prove a few
+syntactic properties, including two deduction theorems. In \refsec{Semantics},
+we give a direct Kripke semantics to flowers, avoiding the need for translations
+to and from formulas. In \refsec{Soundness}, we show that the rules of the
+flower calculus are valid with respect to our Kripke semantics, and in
+\refsec{Completeness} we identify a complete fragment of the system where all
+rules are both \emph{analytic} and \emph{invertible}. This entails the
+admissibility of all rules outside of this fragment, and as a consequence the
+analyticity of the system. We exploit these properties in
+\refsec{flowers-search} by describing an algorithm for fully automated proof
+search in the propositional fragment; unfortunately, the current version of the
+algorithm is neither terminating nor complete. Then in \refsec{flowers-prover}
+we give an overview of the Flower Prover, a prototype of GUI in the
+Proof-by-Action paradigm whose actions map directly to the rules of the flower
+calculus, and which integrates nicely with (a restricted version of) our search
+procedure. We conclude in \refsec{Conclusion} by a comparison with some related
+works, and a discussion of future works and applications that we envision.
 
 
-\section{Intuitionistic existential graphs}\labsec{\kl{IEGs}}
+\section{Intuitionistic existential graphs}\labsec{IEGs}
 
 \paragraph{The scroll}
 
@@ -394,7 +321,7 @@ the \emph{continuum}, how it relates to modern developments in mathematics, and
 how it is embodied in existential graphs \cite{zalamea_peirces_2003}. Actually
 according to Oostra \sidecite[][p.~162]{oostra_advances_2022}, ``the
 possibility of developing intuitionistic existential graphs was first suggested
-by Zalamea in the 1990s \cite{zalamea_ieg_1}\cite{zalamea_ieg_2}''.
+by Zalamea in the 1990s \cite{zalamea_ieg_1,zalamea_ieg_2}''.
 
 \paragraph{Coherent formulas}
 
@@ -1343,7 +1270,7 @@ of the flower calculus, there are a few reasons that led us to the choice of
 Kripke structures, detailed hereafter by order of increasing importance:
 \begin{itemize}
   \item[\textbf{Generalization of \kl{EGs}}]
-    As mentioned in \refsec{\kl{IEGs}}, the syntax of intuitionistic \kl{EGs} (and thus of
+    As mentioned in \refsec{IEGs}, the syntax of intuitionistic \kl{EGs} (and thus of
     flowers) subsumes that of Peirce's classical \kl{EGs}, by seeing the \kl{cut} as a
     $0$-ary scroll (or a flower with no petals). Similarly, it is well-known
     that Kripke structures enable a natural generalization of truth valuations,
@@ -1413,7 +1340,7 @@ Kripke structures, detailed hereafter by order of increasing importance:
     normalization proof for cubical type theory given by Sterling in his thesis
     \cite{Sterling2022}, based on a categorical and topos-theoretic
     generalization of Kripke structures.}
-    \sidecite{hutchison_semantic_2005}\sidecite{10.1007/978-3-642-02261-6_17}\sidecite{ilik:tel-00529021}.
+    \sidecite{hutchison_semantic_2005,10.1007/978-3-642-02261-6_17,ilik:tel-00529021}.
     
 \end{itemize}
 
@@ -2057,11 +1984,10 @@ in natural deduction the \emph{substitution theorem}.
 
 Fortunately as mentioned in \refsec{Semantics}, a few people have noticed that
 with Kripke semantics, it is not too difficult to find completeness proofs that
-do not rely on the assumption of transitivity for $\entails{}$, thus allowing for a
-\emph{semantic} proof of cut-elimination
-\cite{10.1007/978-3-642-02261-6_17}\cite{ilik:tel-00529021}\cite{hutchison_semantic_2005}.
-Here we propose an adaptation of this technique to our flower calculus, based on
-a completeness proof for cut-free sequent calculus given by Hermant in
+do not rely on the assumption of transitivity for $\entails{}$, thus allowing
+for a \emph{semantic} proof of cut-elimination. Here we propose an adaptation of
+this technique to our flower calculus, based on a completeness proof for
+cut-free sequent calculus given by Hermant in
 \sidecite{hutchison_semantic_2005}, which is itself close to the original
 completeness proof of Gödel with respect to classical Tarski models. Quite
 remarkably, the overall structure of the argument is the same, even though both
@@ -2197,7 +2123,7 @@ property''.
 Roughly, the first proposition captures the (intuitionistic) truth-conditions
 that make a flower \emph{valid} (i.e. true in every model) by modelling them on
 material implication, just like Peirce would do with his scroll (see
-\refsec{\kl{IEGs}}): $\phi$ is true if the content $\Phi_i$ of one of its petals
+\refsec{IEGs}): $\phi$ is true if the content $\Phi_i$ of one of its petals
 (consequents) is, or if the content $\Phi$ of its pistil (antecedant) is not.
 
 % \newcommand{\ids}{\update{\idsubst}{\bx}{\sigma}}
@@ -2466,12 +2392,12 @@ Gentzen systems, but is inherent to any deep inference formalism: it is
 precisely the fact that rules can be applied in contexts of \emph{arbitrary}
 depth, thus inducing a number of choices that is exponential in the latter.
 Kahramanogullari has proposed some attempts to tame this problem in
-\sidecite{kahramanogullari_reducing_2006} and \sidecite{lmcs:1089}, and our
-approach bears some similarities to his. In particular, we propose in the
-following a (sketch of a) proof search algorithm for the propositional flower
-calculus, whose core rests on an \emph{interaction} relation between contexts
-which is a generalization of the pollination relation (\refdef{pollination}),
-and is close to the \emph{structural} relation of Kahramanogullari
+\sidecite{kahramanogullari_reducing_2006,lmcs:1089}, and our approach bears some
+similarities to his. In particular, we propose in the following a (sketch of a)
+proof search algorithm for the propositional flower calculus, whose core rests
+on an \emph{interaction} relation between contexts which is a generalization of
+the pollination relation (\refdef{pollination}), and is close to the
+\emph{structural} relation of Kahramanogullari
 \cite[Definition~2.13]{lmcs:1089}.
 
 % \sidenote{This restriction is also suspiciously similar to the ``more
@@ -2946,7 +2872,7 @@ screenshots.
 \paragraph{Originality}
 
 We are not the first to identify the potential of \kl{EGs} for graphical proof
-building \sidecite{eg_youtube}\sidecite{eg_github}. However, we believe that the
+building \sidecite{eg_youtube,eg_github}. However, we believe that the
 Flower Prover is highly original in mainly two respects:
 \begin{itemize}
   \item[\textbf{Intuitionistic and goal-oriented}] it is based on the flower
@@ -3435,7 +3361,7 @@ Sonia Marin has noticed the connection between \emph{bipoles} in focused proofs,
 and the class of geometric/coherent formulas, where the former are seen as a
 generalization of the latter \sidecite{marin_axioms_2022}. This is to be related
 to our own identification of $n$-ary scrolls/flowers as a recursive
-generalization of coherent formulas at the end of \refsec{\kl{IEGs}}.
+generalization of coherent formulas at the end of \refsec{IEGs}.
 
 Two years earlier, Brock-Nannestad and Ilik had already made some implicit
 connections between focused proofs and coherent formulas, through their
@@ -3526,7 +3452,7 @@ calculus of structures), which at a glance seems to encompass our own
 definition. It would be interesting to study more deeply their work, and related
 parts of the deep inference literature concerned with analyticity and its
 applications to efficient proof search procedures
-\sidecite{kahramanogullari_reducing_2006}\sidecite{lmcs:1089}\sidecite{10.1145/2003476.2003501}\sidecite{chaudhuri:hal-00772420}\sidecite{10.1007/978-3-662-49630-5_23}.
+\sidecite{kahramanogullari_reducing_2006,lmcs:1089,10.1145/2003476.2003501,chaudhuri:hal-00772420,10.1007/978-3-662-49630-5_23}.
 
 \subsection{Future works}
 

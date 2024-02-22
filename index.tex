@@ -198,91 +198,20 @@
 \addpart{Symbolic Manipulations}
 \pagelayout{margin} % Restore margins
 
-% \todo{Add some illustrations in the margin, e.g. screenshot of Coq proof view or proof script?}
-% \todo{Or we move this in the introduction chapter.}
-
-% Most Interactive Theorem Provers allow the user to incrementally construct
-% formal proofs through an interaction loop. One progresses
-% through a sequence of {\em states} corresponding to incomplete proofs. Each
-% of these states is itself described by a finite set of {\em goals} and
-% the proof is completed once there are no goals left.
-% From the user's point of view, a goal appears as a sequent, in the
-% sense coined by Gentzen. In the case of intuitionistic logic that is:
-% \begin{itemize}
-% 	\item One particular proposition $C$ which is {\em to be proved}; we
-%   designate it as the goal's {\em conclusion},
-% 	\item a set of propositions $\Gamma$ corresponding to {\em hypotheses}.
-% \end{itemize}
-% On paper, this sequent is written $\Gamma\seq C$.  The user performs
-% {\em actions} on one such goal at a time, and the actions transform
-% the goal, or rather replace the goal by a new set of goals. When this
-% set is empty, the goal is said to be solved.
-
-% The actions performed by the user can be more or less
-% sophisticated. But, fundamentally, one finds elementary commands which
-% correspond roughly to the logical rules, generally of natural
-% deduction. For instance, a goal $\Gamma\seq A\vee B$
-% (resp. $\Gamma\seq A\wedge B$) can be turned into either a goal
-% $\Gamma\seq A$ or a goal $\Gamma\seq B$ (resp. into two goals
-% $\Gamma\seq A$ and $\Gamma\seq B$).
-
-% To sum up, during the proof construction process, a state is a set of
-% sequents. These goals/sequents are modified by {\em commands}, which
-% allow the user to navigate from the original statement of the theorem
-% to the state where there are no goals left to be proved.
-
-% In the dominant paradigm, these commands are provided by the user in
-% text form; since Robin Milner and
-% LCF~\cite{doi:10.1098/rsta.1984.0067}, they are called {\em
-% tactics}. Proof files are literally {\em proof-scripts}; that is the
-% sequence of tactics typed-in by the user.
-% %% This means that the
-% %% source files of most proof systems mix two languages:
-% %% \begin{itemize}
-% 	%% \item The language of mathematical statements, which is a
-% 	%%   computer-adapted version of the regular formal language of
-% 	%%   mathematics; for instance $\forall x\in{\mathbb N}. n + 1 > n$ becomes
-% 	%%   \verb&forall n:nat. n+1 < n& in Coq.
-% 	%% \item The actual proof scripts, which is a sequence of (combinations
-% 	%%   of) proof tactics.
-% 	%% \end{itemize}
-	
-% 	The work presented in this part is a form of continuation of the
-% 	\emph{Proof-by-Pointing} (PbP) effort, initiated in the 1990's by Gilles Kahn,
-% 	Yves Bertot, Laurent Théry and their group \cite{PbP}. Both works share a main
-% 	idea which is to replace the textual tactic commands by {\em gestural actions}
-% 	performed by the user on a graphical user interface. In both cases, the {\em
-% 	items} the user performs actions on are the current goal's conclusion and
-% 	hypotheses. What is new in our work is that we allow not only to {\em click}
-% 	on (subterms of) these items, but also to {\em move them} in order to
-% 	drag-and-drop (DnD) one item onto another. This enriches the language of
-% 	actions in, we argue, an intuitive way. We should point out that what is
-% 	proposed here is not meant to replace but to complement the proof-by-pointing
-% 	features. We thus envision a general {\em proof-by-action} paradigm, which
-% 	includes both PbP and DnD features.
-
-% While this first part of the thesis is confined to direct manipulation of
-% \emph{formulas} inside a goal/sequent, we will explore in the second part of the
-% thesis how to design pointing-based interactions for manipulating the
-% \emph{goals themselves}. The idea of \emph{proof-by-action} then applies equally
-% at both levels of formulas and goals, as a general principle of direct
-% manipulation of the proof state.
-
-
-% \input{chapters/pba.tex}
-% \input{chapters/sfl.tex}
-% \input{chapters/advanced.tex}
-% \input{chapters/sfl-classical.tex}
-% \input{chapters/plugin.tex}
+\input{chapters/pba.tex}
+\input{chapters/sfl.tex}
+\input{chapters/advanced.tex}
+\input{chapters/sfl-classical.tex}
+\input{chapters/plugin.tex}
 
 \pagelayout{wide} % No margins
 \addpart{Iconic Manipulations}
 \pagelayout{margin} % Restore margins
 
-% \input{chapters/bubbles.tex}
-% \input{chapters/bubbles-symm.tex}
+\input{chapters/bubbles.tex}
+\input{chapters/bubbles-symm.tex}
 \input{chapters/eg.tex}
-% \input{chapters/flowers.tex}
+\input{chapters/flowers.tex}
 
 \appendix % From here onwards, chapters are numbered with letters, as is the appendix convention
 
