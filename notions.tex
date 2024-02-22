@@ -1,31 +1,468 @@
-% \knowledgestyle*{notion}{style={color=black!80!},intro style={color=black!80!,emphasize}}
+%%% Custom colors for links
 
-% \knowledgestyle{black}{color=black}
-% \knowledgestyle{no}{color=.}
-% \knowledgestyle{notion intro}{color=LightOrange,emphasize}
-% \knowledgestyle{ignore intro}{color=LightOrange,emphasize}
+\definecolor{Dark Ruby Red}{HTML}{7c1b1e}
+\definecolor{Dark Blue Sapphire}{HTML}{004c5c}
+\definecolor{Dark Gamboge}{HTML}{be7c00}
 
-% \knowledgedirective*{notion}{autoref,style=black,intro style=notion intro}
-% \knowledgedirective*{automatic in command}{autoref,style=no,intro style=no}
-% \knowledgedirective*{ignore}{intro style=ignore intro}
-% \knowledgedirective{title}{}
-\knowledgedirective{system}{smallcaps}
+\IfKnowledgePaperModeTF{
+    %
+}{
+    % If we are NOT in paper mode (i.e. in composition mode or electronic mode)
+    \knowledgestyle{intro notion}{color={Dark Ruby Red}, emphasize}
+    \knowledgestyle{notion}{color={Dark Blue Sapphire}}
+    \hypersetup{
+        colorlinks=true,
+        breaklinks=true,
+        linkcolor={Dark Blue Sapphire}, % Links to sections, pages, etc.
+        citecolor={Dark Blue Sapphire}, % Links to bibliography
+        filecolor={Dark Blue Sapphire}, % Links to local file
+        urlcolor={Dark Blue Sapphire},
+    }
+    \IfKnowledgeElectronicModeTF{
+        %
+    }{
+        % If we are in composition mode, highlight unknown stuff (in yellow) and display the anchor point.
+        \knowledgeconfigure{anchor point color={Dark Ruby Red}, anchor point shape=corner}
+        \knowledgestyle{intro unknown}{color={Dark Gamboge}, emphasize}
+        \knowledgestyle{intro unknown cont}{color={Dark Gamboge}, emphasize}
+        \knowledgestyle{kl unknown}{color={Dark Gamboge}}
+        \knowledgestyle{kl unknown cont}{color={Dark Gamboge}}
+    }
+}
 
-\knowledge{url={https://ctan.org/pkg/knowledge}, typewriter}
- | knowledge@package
+\knowledgedirective{system}{notion,wrap=\sys}
+\knowledgedirective{acronym}{synonym,up}
+\knowledgedirective{rule}{notion,wrap=\rsf}
 
-% Systems
+\knowledge{notion}
+ | interactive theorem provers
+\knowledge{acronym}
+ | ITPs
+ | ITP
+ 
+\knowledge{notion}
+ | goal
+ | goals
+
+\knowledge{notion}
+ | proof state
+
+\knowledge{notion}
+ | tactic
+ | tactics
+
+\knowledge{notion}
+ | graphical user interfaces
+\knowledge{acronym}
+ | GUIs
+ | GUI
+
+\knowledge{notion}
+ | subformula linking
+\knowledge{acronym}
+ | SFL
+
+\knowledge{notion}
+ | first-order logic
+\knowledge{acronym}
+ | FOL
+
+\knowledge{notion}
+ | existential graphs
+\knowledge{acronym}
+ | EGs
+
+\knowledge{notion}
+ | flower calculus
+
+\knowledge{notion}
+ | Flower Prover
 
 \knowledge{system}
-  | Coq
+ | Alpha
 
 \knowledge{system}
-  | Agda
+ | Beta
 
 \knowledge{system}
-  | Lean
-  
-% Introduction
-  
-% Chapter 1
+ | Gamma
 
+\knowledge{notion}
+ | sheet of assertion
+ 
+\knowledge{notion}
+ | vacuous truth
+
+\knowledge{notion}
+ | conjunction
+ | conjunctions
+
+\knowledge{notion}
+ | negation
+ | negations
+
+\knowledge{notion}
+ | graph
+ | graphs
+ | Graph
+ | Graphs
+ | subgraph
+ | subgraphs
+
+\knowledge{notion}
+ | falsehood
+ | absurdity
+
+\knowledge{notion}
+ | disjunction
+ | disjunctions
+
+\knowledge{notion}
+ | implication
+ | implications
+
+\knowledge{notion}
+ | juxtaposition
+
+\knowledge{notion}
+ | cut
+ | cuts
+
+\knowledge{notion}
+ | isotropy
+
+\knowledge{notion}
+ | illative transformation
+ | illative transformations
+
+\knowledge{rule}
+ | Iteration
+
+\knowledge{rule}
+ | Insertion
+
+\knowledge{rule}
+ | Double{-}cut
+
+\knowledge{notion}
+ | scroll
+ | scrolls
+
+\knowledge{notion}
+ | curl
+ | curls
+
+\knowledge{notion}
+ | inloop
+ | inloops
+
+\knowledge{notion}
+ | outloop
+ | outloops
+
+\knowledge{notion}
+ | flower@informal
+ | flowers@informal
+ | Flower@informal
+ | Flowers@informal
+
+\knowledge{notion}
+ | flower
+ | flowers
+ | Flower
+ | Flowers
+
+\knowledge{notion}
+ | lines of identity
+ | line of identity
+\knowledge{acronym}
+ | LoIs
+ | LoI
+
+\knowledge{notion}
+ | binder
+ | binders
+ | Binder
+ | Binders
+
+\knowledge{notion}
+ | sprinkler
+ | sprinklers
+ | Sprinkler
+ | Sprinklers
+
+\knowledge{notion}
+ | garden
+ | gardens
+ | Garden
+ | Gardens
+
+\knowledge{notion}
+ | first-order signature
+
+\knowledge{notion}
+ | predicate symbols
+
+\knowledge{notion}
+ | arity
+
+\knowledge{notion}
+ | bouquet
+ | bouquets
+ | Bouquet
+ | Bouquets
+
+\knowledge{notion}
+ | corolla
+ | corollas
+ | Corolla
+ | Corollas
+
+\knowledge{notion}
+ | pistil
+ | pistils
+ | Pistil
+ | Pistils
+
+\knowledge{notion}
+ | petal
+ | petals
+ | Petal
+ | Petals
+
+\knowledge{notion}
+ | free variable
+ | free variables
+ | Free variable
+ | Free variables
+
+\knowledge{notion}
+ | bound variable
+ | bound variables
+ | Bound variable
+ | Bound variables
+
+\knowledge{notion}
+ | Barendregt convention
+
+\knowledge{notion}
+ | update
+
+\knowledge{notion}
+ | substitution
+ | substitutions
+ | Substitution
+ | Substitutions
+
+\knowledge{notion}
+ | support
+
+\knowledge{notion}
+ | capture-avoiding
+
+\knowledge{notion}
+ | context
+ | contexts
+ | Context
+ | Contexts
+
+\knowledge{notion}
+ | hole
+ | holes
+ | Hole
+ | Holes
+
+\knowledge{notion}
+ | filling
+
+\knowledge{notion}
+ | positive
+ | Positive
+ | positive@beta
+ | Positive@beta
+
+\knowledge{notion}
+ | negative
+ | Negative
+ | negative@beta
+ | Negative@beta
+
+\knowledge{notion}
+ | pollination
+ | Pollination
+ | pollinated
+ | pollinate
+ | pollinates
+ | pollinating
+
+\knowledge{notion}
+ | cross-pollination
+ | Cross-pollination
+
+\knowledge{notion}
+ | self-pollination
+ | Self-pollination
+
+\knowledge{rule}
+ | poll{\da}
+\knowledge{rule}
+ | poll{\ua}
+\knowledge{rule}
+ | epis
+\knowledge{rule}
+ | epet
+\knowledge{rule}
+ | srep
+\knowledge{rule}
+ | ipis
+\knowledge{rule}
+ | ipet
+\knowledge{rule}
+ | grow
+\knowledge{rule}
+ | crop
+\knowledge{rule}
+ | pull
+\knowledge{rule}
+ | glue
+\knowledge{rule}
+ | apis
+\knowledge{rule}
+ | apet
+
+\knowledge{notion}
+ | shallow
+ | Shallow
+
+\knowledge{notion}
+ | natural
+ | Natural
+
+\knowledge{notion}
+ | cultural
+ | Cultural
+
+\knowledge{notion}
+ | analytic
+ | Analytic
+ | analyticity
+
+\knowledge{notion}
+ | derivation
+ | derivations
+ | Derivation
+ | Derivations
+
+\knowledge{notion}
+ | proof
+ | proofs
+ | Proof
+ | Proofs
+ 
+\knowledge{notion}
+ | first-order
+ | First-order
+
+\knowledge{notion}
+ | higher-order
+ | Higher-order
+
+\knowledge{notion}
+ | hypothetically provable
+ | hypothetical provability
+
+\knowledge{notion}
+ | first-order structure
+ | first-order structures
+
+\knowledge{notion}
+ | Kripke structure
+ | Kripke structures
+
+\knowledge{notion}
+ | universal Kripke structure
+ | universal Kripke structures
+
+\knowledge{notion}
+ | domain
+ | domains
+
+\knowledge{notion}
+ | interpretation
+
+\knowledge{notion}
+ | world
+ | worlds
+
+\knowledge{notion}
+ | accessibility
+
+\knowledge{notion}
+ | depth
+ | depth@ctx
+
+\knowledge{notion}
+ | forcing
+ | forced
+
+\knowledge{notion}
+ | consequence
+ | semantic entailment
+ | semantically entails
+
+\knowledge{notion}
+ | equivalence
+ | equivalent
+ | semantic equivalence
+ | semantically equivalent
+
+\knowledge{notion}
+ | valid
+ | validity
+
+\knowledge{notion}
+ | theory
+ | theories
+ | Theory
+ | Theories
+
+\knowledge{notion}
+ | coherent logic
+
+\knowledge{notion}
+ | topos theory
+ 
+\knowledge{notion}
+ | $\beta$-node
+ | $\beta$-nodes
+
+\knowledge{notion}
+ | $\beta$-garden
+ | $\beta$-gardens
+
+\knowledge{notion}
+ | $\beta$-graph
+ | $\beta$-graphs
+
+\knowledge{notion}
+ | $\beta$-context
+ | $\beta$-contexts
+
+\knowledge{rule}
+ | Iter
+\knowledge{rule}
+ | Deit
+\knowledge{rule}
+ | Ins
+\knowledge{rule}
+ | Del
+\knowledge{rule}
+ | Dcut{\da}
+\knowledge{rule}
+ | Dcut{\ua}
+\knowledge{rule}
+ | Unif{\da}
+\knowledge{rule}
+ | Unif{\ua}
+\knowledge{rule}
+ | epis{\da}

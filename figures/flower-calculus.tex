@@ -2,56 +2,31 @@
 {\textsc{Nature} $\Nature$}
 \vspace{1.5em}
 \begin{mathpar}
-  \R[\rsf{poll{\da}}]
+  \R[\intro{poll{\da}}]
     {\cfill{\Xi}{\phantom{\Phi}}}
     {\cfill{\Xi}{\Phi}}
   \and
-  \R[\rsf{poll{\ua}}]
+  \R[\intro{poll{\ua}}]
     {\cfill{\Xi}{\Phi}}
     {\cfill{\Xi}{\phantom{\Phi}}}
-  % \R[\rsf{wpol}\da]
-  %   {\Psi, \cfill{\Xi}{\phantom{\Phi}}}
-  %   {\Psi, \cfill{\Xi}{\Psi}}
-  % \and
-  % \R[\rsf{wpol}\ua]
-  %   {\Psi, \cfill{\Xi}{\Psi}}
-  %   {\Psi, \cfill{\Xi}{\phantom{\Phi}}}
-  % \\
-  % \R[\rsf{spol}\da]
-  %   {\garden{\bx}{\Phi, \Psi} \csup \cfill{\Xi}{\phantom{\Phi}} \sep \Delta}
-  %   {\garden{\bx}{\Phi, \Psi} \csup \cfill{\Xi}{\Psi} \sep \Delta}
-  % \and
-  % \R[\rsf{spol}\ua]
-  %   {\garden{\bx}{\Phi, \Psi} \csup \cfill{\Xi}{\Psi} \sep \Delta}
-  %   {\garden{\bx}{\Phi, \Psi} \csup \cfill{\Xi}{\phantom{\Phi}} \sep \Delta}
-  \\\\
-  % \R[\rsf{epis}\da\rsf{pis}]
-  %   {\flower{\garden{\bx, \by}{\Psi, \Phi}}{\Delta}}
-  %   {\flower{\garden{\bx}{(\flower{\garden{{}}{{}}}{\garden{\by}{\Psi}}),
-  %   \Phi}}{\Delta}}
-  % \and
-  % \R[\rsf{epis}\da\rsf{pet}]
-  %   {\flower{\gamma}{\garden{\bx, \by}{\Psi, \Phi} \sep \Delta}}
-  %   {\flower{\gamma}{\garden{\bx}{(\flower{\garden{{}}{{}}}{\garden{\by}{\Psi}}), \Phi}
-  %   \sep \Delta}}
-  % \and
-  \R[\rsf{epis}]
+  \\
+  \R[\intro{epis}]
     {\flower{\garden{{}}{{}}}{\garden{{}}{\Phi}}}
     {\Phi}
   \and
-  \R[\rsf{epet}]
+  \R[\intro{epet}]
     {}
     {\flower{\gamma}{\garden{{}}{{}} \sep \Delta}}
   \\
-  \R[\rsf{ipis}]
+  \R[\intro{ipis}]
     {(\flower{\garden{\bx}{\sigma(\Phi)}}{\sigma(\Delta)}), (\flower{\garden{\bx, \by}{\Phi}}{\Delta})}
     {\flower{\garden{\bx, \by}{\Phi}}{\Delta}}
   \and
-  \R[\rsf{ipet}]
+  \R[\intro{ipet}]
     {\flower{\gamma}{\garden{\bx}{\sigma(\Phi)} \sep \garden{\bx, \by}{\Phi} \sep \Delta}}
     {\flower{\gamma}{\garden{\bx, \by}{\Phi} \sep \Delta}}
   \\
-  \R[\rsf{srep}]
+  \R[\intro{srep}]
     {\flower{\garden{\bx}{\Phi}}{\garden{{}}{\fset{i}{n}{\flower{\gamma_i}{\Delta}}}}}
     {\flower{\garden{\bx}{\Phi, (\flower{\garden{{}}{{}}}{\fset{i}{n}{\gamma_i}})}}{\Delta}}
 \end{mathpar}
@@ -61,37 +36,37 @@
 {\textsc{Culture} $\Culture$}
 \vspace{1.5em}
 \begin{mathpar}
-  \R[\rsf{grow}]
+  \R[\intro{grow}]
     {\cfill{\Xi^+}{\Phi}}
     {\cfill{\Xi^+}{\phantom{\Phi}}}
   \and
-  \R[\rsf{crop}]
+  \R[\intro{crop}]
     {\cfill{\Xi^-}{\phantom{\Phi}}}
     {\cfill{\Xi^-}{\Phi}}
   \\\\
-  \R[\rsf{pull}]
+  \R[\intro{pull}]
     {\cfill{\Xi^+}{\flower{\gamma}{\Delta}}}
     {\cfill{\Xi^+}{\flower{\gamma}{\Gamma \sep \Delta}}}
   \and
-  \R[\rsf{glue}]
+  \R[\intro{glue}]
     {\cfill{\Xi^-}{\flower{\gamma}{\Gamma \sep \Delta}}}
     {\cfill{\Xi^-}{\flower{\gamma}{\Delta}}}
   \\\\
-  \R[\rsf{apis}]
+  \R[\intro{apis}]
     {\cfill{\Xi^+}{\flower{\garden{\bx, \by}{\Phi}}{\Delta}}}
     {\cfill{\Xi^+}{\flower{\garden{\bx}{\sigma(\Phi)}}{\sigma(\Delta)}}}
   \and
-  \R[\rsf{apet}]
+  \R[\intro{apet}]
     {\cfill{\Xi^-}{\flower{\gamma}{\garden{\bx, \by}{\Phi} \sep \Delta}}}
     {\cfill{\Xi^-}{\flower{\gamma}{\garden{\bx}{\sigma(\Phi)} \sep \Delta}}}
 \end{mathpar}
 
 \vspace{3em}
 
-In the rules \rnmsf{poll{\da}} and \rnmsf{poll{\ua}}, we assume that
+In the rules \kl{poll{\da}} and \kl{poll{\ua}}, we assume that
 $\chyp{\Phi}{\Xi\hole}$.
 
-In the rules \rnmsf{ipis}, \rnmsf{apis} (resp. \rnmsf{ipet}, \rnmsf{apet}), we
+In the rules \kl{ipis}, \kl{apis} (resp. \kl{ipet}, \kl{apet}), we
 assume some substitution $\sigma : \by \to \terms$ that is
 capture-avoiding in $\flower{\garden{{}}{\Phi}}{\Delta}$ (resp. $\Phi$).
 \end{framed}

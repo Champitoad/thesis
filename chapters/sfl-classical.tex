@@ -67,7 +67,7 @@ However for this to be possible, we need to introduce a new linking operator ---
 let us note it $\para$ --- that works between two conclusions, where $A \para B$
 is obviously interpreted as $A \lor B$. Then after clicking on $A \lor \neg A$
 we can just finish the proof by connecting $A$ and $\neg A$:
-$$\select{A} \para \neg \select{A} ~~\steps~~ \top$$
+$$\select{A} \para \neg \select{A} ~~\steps{}~~ \top$$
 
 This would avoid the additional step of clicking on $\neg A$ to turn it into an
 hypothesis, and suggests the possibility of a more general behavior
@@ -179,23 +179,23 @@ capturing either intuitionistic or classical first-order logic:
 \begin{itemize}
   \item clicking on a red disjunction $A \lor B$ breaks it into two conclusions
   $A$ and $B$. This is the dual behavior to click actions on blue conjunctions,
-  and corresponds to the {\rnmsf{\lor R}} rule of \reffig{multintro}, which is
+  and corresponds to the {\rsf{\lor R}} rule of \reffig{multintro}, which is
   common to both the intuitionistic and classical variants;
   \item as before, clicking on a red implication $A \limp B$ breaks it into an
   hypothesis $A$ and a conclusion $B$. Without further changes, this corresponds
   to the right introduction rule from the classical sequent calculus \sys{LK} of
-  Gentzen (named {\rnmsf{{\limp}R*c}} in \reffig{multi-imp-intro}), and
+  Gentzen (named {\rsf{{\limp}R*c}} in \reffig{multi-imp-intro}), and
   our set of actions becomes a proof system for classical logic. To go back to
   intuitionistic logic, one needs the additional behavior that all the other
   conclusions of the goal are removed. This corresponds to the right
   introduction rule from the \sys{GHCP} calculus of Dragalin (named
-  {\rnmsf{{\limp}R*i}} in \reffig{multi-imp-intro}).
+  {\rsf{{\limp}R*i}} in \reffig{multi-imp-intro}).
 \end{itemize}
 
 \begin{remark}
   In the special case of intuitionistic sequents with one conclusion, the two
-  variants {\rnmsf{{\limp}R*c}} and {\rnmsf{{\limp}R*i}} collapse into the usual
-  {\rnmsf{{\limp}R}} rule.
+  variants {\rsf{{\limp}R*c}} and {\rsf{{\limp}R*i}} collapse into the usual
+  {\rsf{{\limp}R}} rule.
 \end{remark}
 Note that we only modified the behavior of the disjunction $\lor$ and
 implication $\limp$ connectives; and for the latter, only in the case when there
@@ -205,12 +205,12 @@ it is interesting to notice that the classical behavior of the other connectives
 (positive) disjunctive statements.
 
 If we stick to intuitionistic logic, the benefits of having multiple conclusions
-are unclear. Indeed while the {\rnmsf{\lor R}} rule is invertible, the
-{\rnmsf{{\limp}R*i}} rule is not, and thus at some point the choice of which
+are unclear. Indeed while the {\rsf{\lor R}} rule is invertible, the
+{\rsf{{\limp}R*i}} rule is not, and thus at some point the choice of which
 conclusion to prove must be made by the user irreversibly, even if the choice is
 delayed\sidenote{In \refsec{colors}, we will see how to overcome this limitation
 by using a \emph{nested sequent} system.}. On the other hand the
-{\rnmsf{{\limp}R*c}} rule \emph{is} invertible: this is known to allow the
+{\rsf{{\limp}R*c}} rule \emph{is} invertible: this is known to allow the
 formulation of sequent calculi for classical logic where \emph{all} rules are
 invertible, like the \sys{G3c} calculus of \sidecite{negri_structural_2001}. In
 the propositional case, this gives a constructive decision procedure for the
@@ -244,13 +244,13 @@ Girard\cite[Section~3.3.2]{girard:hal-01322183}. This is already what happens in
 Actema for the universal quantifier: dropping a term $t$ on a blue item $\forall
 x. A$ will produce a new hypothesis $\subst{A}{t}{x}$, while keeping the
 original $\forall x. A$ item. This corresponds to the invertible left
-introduction rule of \sys{G3c} ({\rnmsf{\forall L*}} in \reffig{multi-inst}).
+introduction rule of \sys{G3c} ({\rsf{\forall L*}} in \reffig{multi-inst}).
 But in the single-conclusion framework, dropping a term $t$ on a red item
 $\exists x. A$ necessarily replaces it by the instantiated conclusion
 $\subst{A}{t}{x}$. Allowing multiple conclusions circumvents this problem and
 restores the symmetry between $\forall$ and $\exists$, since we can create a new
 conclusion for $\subst{A}{t}{x}$ while preserving the old one. This corresponds
-to the invertible right introduction rule of \sys{G3c} ({\rnmsf{\exists R*}} in
+to the invertible right introduction rule of \sys{G3c} ({\rsf{\exists R*}} in
 \reffig{multi-inst}).
 
 \section{DnD actions}\labsec{classical-dnd}
@@ -269,10 +269,10 @@ middle example that such an operator did seem useful.
 
 When looking for a proof of a sequent with multiple conclusions, unless we
 commit to proving one conclusion and give up on the others by applying the
-{\rnmsf{{\limp}R*i}} rule, we can switch freely our focus between the different
+{\rsf{{\limp}R*i}} rule, we can switch freely our focus between the different
 conclusions. Thus in a way, we are looking for proofs of all the conclusions
 \emph{in parallel}, and we stop as soon as we find one\sidenote{This is also
-related to the $\parr$ connective of linear logic which uses the {\rnmsf{\lor
+related to the $\parr$ connective of linear logic which uses the {\rsf{\lor
 R}} rule of \reffig{multintro}, and whose spelling ``par'' is historically
 motivated by an understanding of the multiplicative fragment of \sys{LL} as a
 logic of parallel computation \cite{girard-linear-1987}.}. Hence we chose to
@@ -283,7 +283,7 @@ process calculi.
 
 The rules governing $\para$ are presented in \reffig{parallel}. A parallel
 linkage can be created either by drag-and-dropping two conclusions together, or
-through an instance of the new backward rule {\rnmsf{L{\limp}_1}}. It is
+through an instance of the new backward rule {\rsf{L{\limp}_1}}. It is
 important to note that this rule is only sound \emph{classically}; indeed we can
 now come back to the example of \refsubsec{polarity} and give the following
 derivation of Peirce's law with it:
@@ -291,11 +291,11 @@ derivation of Peirce's law with it:
 $$
 \begin{array}{llll}
   (\select{A} \limp B) \limp A \back \select{A}
-  &\step& (\select{A} \limp B \para \select{A}) \land (A \limp A) &\mathsf{L{\limp}_1} \\
-  &\step& ((\select{A} \back \select{A}) \lor B) \land (A \limp A) &\mathsf{P{\limp}_1} \\
-  &\step& (\top \lor B) \land (A \limp A) &\mathsf{id} \\
-  &\step& \top \land (A \limp A) &\mathsf{absl} \\
-  &\step& A \limp A &\mathsf{neul}
+  &\step{}& (\select{A} \limp B \para \select{A}) \land (A \limp A) &\mathsf{L{\limp}_1} \\
+  &\step{}& ((\select{A} \back \select{A}) \lor B) \land (A \limp A) &\mathsf{P{\limp}_1} \\
+  &\step{}& (\top \lor B) \land (A \limp A) &\mathsf{id} \\
+  &\step{}& \top \land (A \limp A) &\mathsf{absl} \\
+  &\step{}& A \limp A &\mathsf{neul}
 \end{array}
 $$
 
@@ -305,7 +305,7 @@ $$
   \begin{mathpar}
     \begin{array}{r@{\,}c@{\,}lr}
       \multicolumn{4}{c}{\textsc{Backward}} \\[2em]
-      {B \limp C \back A}   &\step&   {(B \para A) \land (C \limp A)} &\mathsf{L{\limp}_1} \\[2em]
+      {B \limp C \back A}   &\step{}&   {(B \para A) \land (C \limp A)} &\mathsf{L{\limp}_1} \\[2em]
     \end{array}
     \\
     \begin{array}{r@{\,}c@{\,}lr}
@@ -314,23 +314,23 @@ $$
       %   {\ifill{\eta}{\efill{A}{A} \ast \efill{B}{B}}}
       %   {\ifill{\eta}{\ifill{A}{A} \land \ifill{B}{B}}}
       % \\
-      {A \para (B \land C)}   &\step&   {(A \para B) \land C}   &\mathsf{P\land_1}\\
-      {A \para (C \land B)}   &\step&   {C \land (A \para B)}   &\mathsf{P\land_2}\\[1em]
+      {A \para (B \land C)}   &\step{}&   {(A \para B) \land C}   &\mathsf{P\land_1}\\
+      {A \para (C \land B)}   &\step{}&   {C \land (A \para B)}   &\mathsf{P\land_2}\\[1em]
 
-      {A \para (B \lor C)}   &\step&   {A \para B}   &\mathsf{P\lor_1}\\
-      {A \para (C \lor B)}   &\step&   {A \para B}   &\mathsf{P\lor_2}\\[1em]
+      {A \para (B \lor C)}   &\step{}&   {A \para B}   &\mathsf{P\lor_1}\\
+      {A \para (C \lor B)}   &\step{}&   {A \para B}   &\mathsf{P\lor_2}\\[1em]
 
-      {A \para (B \limp C)}   &\step&    {(B \back A) \lor C}   &\mathsf{P\!\!\limp_1}\rever\\
-      {A \para (C \limp B)}   &\step&    {C \limp (A \para B)}   &\mathsf{P\!\!\limp_2}\rever\\[1em]
+      {A \para (B \limp C)}   &\step{}&    {(B \back A) \lor C}   &\mathsf{P\!\!\limp_1}\rever\\
+      {A \para (C \limp B)}   &\step{}&    {C \limp (A \para B)}   &\mathsf{P\!\!\limp_2}\rever\\[1em]
 
-      % {A \para \neg B}   &\step&   {B \back A}   &\mathsf{P\neg}\rever\\[1em]
+      % {A \para \neg B}   &\step{}&   {B \back A}   &\mathsf{P\neg}\rever\\[1em]
 
-      {A \para (\forall x. B)}   &\step&{\forall x. (A \para B)}   &\mathsf{P\forall s}\rever\\[1em]
+      {A \para (\forall x. B)}   &\step{}&{\forall x. (A \para B)}   &\mathsf{P\forall s}\rever\\[1em]
 
-      {A \para (\exists x. B)}   &\step&   {A \para \subst{B}{x}{t}}   &\mathsf{P\exists i}\\
-      {A \para (\exists x. B)}   &\step&   {\exists x. (A \para B)}   &\mathsf{P\exists s}\rever\\[1em]
+      {A \para (\exists x. B)}   &\step{}&   {A \para \subst{B}{x}{t}}   &\mathsf{P\exists i}\\
+      {A \para (\exists x. B)}   &\step{}&   {\exists x. (A \para B)}   &\mathsf{P\exists s}\rever\\[1em]
             
-      {B \para A}   &\step&   {A \para B}   &\mathsf{Pcomm}\\
+      {B \para A}   &\step{}&   {A \para B}   &\mathsf{Pcomm}\\
     \end{array}
   \end{mathpar}
   ~\\[1em]
@@ -372,25 +372,25 @@ which is what triggers the change of mode.
 
 \section{Metatheory of parallel reasoning}
 
-Like backward rules, a parallel rule $A \step B$ will be logically sound if $B$
+Like backward rules, a parallel rule $A \step{} B$ will be logically sound if $B$
 entails $A$. Then if one wants to stick to an intuitionistic setting, one has to
-remove the rules {\rnmsf{P{\limp}_1}}, {\rnmsf{P{\limp}_2}} and {\rnmsf{P\forall
-s}} from the system, in addition to the {\rnmsf{L{\limp}_1}} rule. Indeed those
+remove the rules {\rsf{P{\limp}_1}}, {\rsf{P{\limp}_2}} and {\rsf{P\forall
+s}} from the system, in addition to the {\rsf{L{\limp}_1}} rule. Indeed those
 are all sound classically but not intuitionistically\sidenote{We do not prove
 this formally here, but this can be done by exhibiting intuitionistic
 counter-models in which the entailments are false, i.e. Kripke structures or
 Heyting algebras.}.
 
 Now if we look back at the schema from \reffig{modes-schema}, removing
-{\rnmsf{L{\limp}_1}} and {\rnmsf{P{\limp}_1}} in particular has the consequence
+{\rsf{L{\limp}_1}} and {\rsf{P{\limp}_1}} in particular has the consequence
 of isolating completely parallel reasoning from the other modes. But remember
 from \refsec{action} that we are only interested in \emph{valid} linkages, that
 is those linkages who satisfy productivity (\refthm{productivity}) and thus will
-always terminate on an instance of either the {\rnmsf{id}} rule (backward mode)
+always terminate on an instance of either the {\rsf{id}} rule (backward mode)
 or the equality rules (backward/forward modes). Thus if there is no way to reach
 either forward or backward mode from a parallel linkage, it has no meaning in
-our paradigm. Then if we trust that rules {\rnmsf{L{\limp}_1}} and
-{\rnmsf{P{\limp}_1}} are necessary to get the intended semantics, it seems that
+our paradigm. Then if we trust that rules {\rsf{L{\limp}_1}} and
+{\rsf{P{\limp}_1}} are necessary to get the intended semantics, it seems that
 parallel reasoning only makes sense in a classical setting. In the following, we
 only show that the rules of \reffig{parallel} are sufficient for our purpose, by
 extending the results of \refch{sfl} to the classical, multi-conclusion setting.
@@ -399,7 +399,7 @@ We start by updating the validity criterion on linkages, more specifically we
 drop Clause \ref{clause:intuit} of Condition \ref{cond:pol} about the polarities
 of linked subformulas. Indeed it was introduced precisely to forbid behaviors
 which only make sense in classical logic, but are now given a semantics with the
-{\rnmsf{L{\limp}_1}} rule. We also need to add a case for the $\para$ operator
+{\rsf{L{\limp}_1}} rule. We also need to add a case for the $\para$ operator
 in the other clauses of Condition \ref{cond:pol}, which gives the following
 updated condition:
 
@@ -435,28 +435,28 @@ updated condition:
 \end{condition}
 
 Then we add the following case to the statement of Theorem \ref{prop:soundness}:
-  $$\text{If $A \para B \steps C$, then $C \seq A, B$.}$$
+  $$\text{If $A \para B \steps{} C$, then $C \seq A, B$.}$$
 and we interpret $\para$ as disjunction:
   $$\lint{A \para B} = \lint{A} \lor \lint{B}$$
 We add the two following cases to Lemmas \ref{lemma:rules-valid-in-context} and
 \ref{lemma:rewriting-valid-in-context}:
 \begin{itemize}
-  \item If $C^+\select{A\para B}\step D$ then $\lint{D} \seq C^+\select{A\lor B}$.
-  \item If $C^-\select{A\para B}\step D$ then $C^-\select{A\lor B}\seq \lint{D}$.
+  \item If $C^+\select{A\para B}\step{} D$ then $\lint{D} \seq C^+\select{A\lor B}$.
+  \item If $C^-\select{A\para B}\step{} D$ then $C^-\select{A\lor B}\seq \lint{D}$.
 \end{itemize}
 The proof of Lemma \ref{lemma:rules-valid-in-context} is easily extended by
 inspecting each parallel rule, and we already mentioned that the backward rule
-{\rnmsf{L{\limp}_1}} is sound classically. Note that now sequents have multiple
+{\rsf{L{\limp}_1}} is sound classically. Note that now sequents have multiple
 conclusions, thus one needs to use rules from a multi-succedant calculus such as
 \sys{G3c} \cite{negri_structural_2001}.
 
 Polarity preservation (Fact \ref{prop:rules-preserve-polarity}) is also true
 with $\para$, we just need to add the missing cases from \reffig{modes-schema}:
 \begin{itemize}
-  \item If $C\select{A \para B} \step C'\select{A' \para B'}$ then $C\hole$ and
+  \item If $C\select{A \para B} \step{} C'\select{A' \para B'}$ then $C\hole$ and
   $C'\hole$ have the same polarity.
-  \item If $C\select{A \back B} \step C'\select{A' \para B'}$ (resp. $C\select{A
-  \para B} \step C'\select{A' \back B'}$) then $C\hole$ and $C'\hole$ have the
+  \item If $C\select{A \back B} \step{} C'\select{A' \para B'}$ (resp. $C\select{A
+  \para B} \step{} C'\select{A' \back B'}$) then $C\hole$ and $C'\hole$ have the
   same polarity.
 \end{itemize}
 The proof of Lemma \ref{lemma:rewriting-valid-in-context} is also extended

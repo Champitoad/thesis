@@ -299,7 +299,7 @@ With our new symmetric interpretation, we can start generalizing the rules of
 single-conclusion (resp. no-conclusion) solutions with open (resp. closed) ones
 (more details will be given in the next section), the ${\limp}{+}$ rule stands
 out as particularly problematic. Indeed if we content ourselves with the natural
-generalization {\rnmsf{{\limp}{+}c}} of \reffig{wrong-imp-pos}, then we can
+generalization {\rsf{{\limp}{+}c}} of \reffig{wrong-imp-pos}, then we can
 easily build a proof of the excluded middle like in \reffig{lk-tnd}, and thus
 collapse to classical logic. This fact is well-known in the literature on
 multi-conclusion intuitionistic sequent calculi, and the solution is usually to
@@ -310,8 +310,8 @@ non-invertible.
 \begin{marginfigure}
   $$
   \begin{array}{rclr}
-    \hypo{A}~~~\cbubble{\color{black}S} &\step &\cbubble{\hypo{A}~~~\color{black}S} &\mathsf{f}{-}{+}{\da} \vspace{1em}\\
-    % \conc{A}~~~\cbubble{\color{black}S} &\step &\cbubble{\conc{A}~~~\color{black}S} &\mathsf{f}{+}{+}{\da} \\
+    \hypo{A}~~~\cbubble{\color{black}S} &\step{} &\cbubble{\hypo{A}~~~\color{black}S} &\mathsf{f}{-}{+}{\da} \vspace{1em}\\
+    % \conc{A}~~~\cbubble{\color{black}S} &\step{} &\cbubble{\conc{A}~~~\color{black}S} &\mathsf{f}{+}{+}{\da} \\
   \end{array}
   $$
   \caption{$\mathbb{F}$-rule for red bubbles}
@@ -327,7 +327,7 @@ into sequents that appear as conclusions\sidenote{This corresponds to the
 {\rnm{Lift}} rule of \cite{fitting-nested-2014} and {\rnm{pl_1}} rule of
 \cite{clouston-annotation-free-2013}.}, but \emph{not other conclusions}.
 Graphically, this means that blue items can enter red bubbles (rule
-{\rnmsf{f{-}{+}}} of \reffig{flow-red-bubbles}), but red items cannot: this is
+{\rsf{f{-}{+}}} of \reffig{flow-red-bubbles}), but red items cannot: this is
 reminiscent of the electromagnetic phenomemon of \emph{repulsion} between
 objects charged with the same polarity.
 
@@ -353,7 +353,7 @@ the proofs for both directions of the equivalence are depicted parallely in
   forward step, either with $\hypo{A \limp B}$ or $\hypo{A \limp (B \lor C)}$.
   To do so, we need to bring the two hypotheses together in the same solution.
   And since items are trapped within bubbles, the only way to go is to move the
-  blue $\hypo{A}$ inside the red bubble with the {\rnmsf{f{-}{+}}} rule;
+  blue $\hypo{A}$ inside the red bubble with the {\rsf{f{-}{+}}} rule;
   \item this time we decompose the hypothesis with the new version of the rules
   {\rnm{{\lor}{-}}} and {\rnm{{\limp}{-}}}. They are basically a local variant
   of those of \sys{BJ}: we encapsulate both subformulas in separate bubbles, but
@@ -366,8 +366,8 @@ the proofs for both directions of the equivalence are depicted parallely in
   would cross the red bubble, which is expressedly forbidden.
 \end{enumerate}
 Thus in order to prove Grishin (a) and recover classical logic, it suffices
-either to add the {\rnmsf{f{+}{+}}} rule allowing red items to enter red bubbles
-(\reffig{flow-red-bubbles}), or to use the {\rnmsf{{\limp}{+}c}} rule which
+either to add the {\rsf{f{+}{+}}} rule allowing red items to enter red bubbles
+(\reffig{flow-red-bubbles}), or to use the {\rsf{{\limp}{+}c}} rule which
 avoids red bubbles altogether. In the following we will settle for the first
 option: we find it more elegant, because it explains the distinction between
 intuitionistic and classical logic as a kind of \emph{physical law} independent
@@ -384,8 +384,8 @@ view and consider more exotic beasts: the adequately named
 \begin{marginfigure}
   $$
   \begin{array}{rclr}
-    \conc{A}~~~\hbubble{\color{black}S} &\step &\hbubble{\conc{A}~~~\color{black}S} &\mathsf{f}{+}{-}{\da} \vspace{1em}\\
-    % \hypo{A}~~~\hbubble{\color{black}S} &\step &\hbubble{\hypo{A}~~~\color{black}S} &\mathsf{f}{-}{-}{\da} \\
+    \conc{A}~~~\hbubble{\color{black}S} &\step{} &\hbubble{\conc{A}~~~\color{black}S} &\mathsf{f}{+}{-}{\da} \vspace{1em}\\
+    % \hypo{A}~~~\hbubble{\color{black}S} &\step{} &\hbubble{\hypo{A}~~~\color{black}S} &\mathsf{f}{-}{-}{\da} \\
   \end{array}
   $$
   \caption{$\mathbb{F}$-rule for blue bubbles}
@@ -396,7 +396,7 @@ But for now let us stay at a purely syntactic level. The idea is very simple,
 and can be summarized in two words: \emph{color swap}. Thus the law that ``blue
 items can enter red bubbles, but red items cannot'' becomes a new law that ``red
 items can enter blue bubbles, but blue items cannot'', which is enforced by
-allowing only the use of the {\rnmsf{f{+}{-}}} rule in
+allowing only the use of the {\rsf{f{+}{-}}} rule in
 \reffig{flow-blue-bubbles}. Well this is neat, but will not be of much use if
 there is no way to spawn blue bubbles. Be it as it may: we can just craft a new
 logical connective! Since red bubbles are produced by the implication connective
@@ -414,8 +414,8 @@ $\lor$.}), whose heating rules are those of $\limp$ with swapped colors
 \begin{marginfigure}
   $$
   \begin{array}{rclr}
-    \hypo{A \lsub B} &\step &\hbubble{\hypo{A}~~~\conc{B}} &{\lsub}{-}\vspace{1em}\\
-    \conc{A \lsub B} &\step &{\bubble{\conc{A}}}~~~\bubble{\hypo{B}} &{\lsub}{+}
+    \hypo{A \lsub B} &\step{} &\hbubble{\hypo{A}~~~\conc{B}} &{\lsub}{-}\vspace{1em}\\
+    \conc{A \lsub B} &\step{} &{\bubble{\conc{A}}}~~~\bubble{\hypo{B}} &{\lsub}{+}
   \end{array}
   $$
   \caption{$\mathbb{H}$-rules for exclusion $\lsub$}
@@ -538,7 +538,7 @@ of priorization relatively to the latter:
     a rule only brings unnecessary complexity in proof search, especially in a
     user interface that aims for simplicity.}. In other words, it corresponds to
     a logical \emph{equivalence}: when all rules in a (bubble) calculus are
-    invertible, we get that $S \step T$ implies $\sint{S} \semequiv
+    invertible, we get that $S \step{} T$ implies $\sint{S} \semequiv
     \sint{T}$. This entails in particular that a user can apply the rule
     without fear of turning a provable goal into an unprovable
     one\sidenote{Assuming that the calculus is \emph{complete}
@@ -614,7 +614,7 @@ of priorization relatively to the latter:
     possible referring to generic objects that are not directly related to the
     manipulated data, in the spirit of Girard's locality. A typical example is
     the elimination rule for disjunction in natural deduction, corresponding to
-    the {\rnmsf{{\lor}{-}}} rule of \sys{BJ} that involves an arbitrary
+    the {\rsf{{\lor}{-}}} rule of \sys{BJ} that involves an arbitrary
     conclusion $\Delta$. The benefits of locality from a UX point of view have
     already been discussed at the end of \refsec{bubbles-pba}.
   \item[Linearity] 
@@ -655,7 +655,7 @@ of priorization relatively to the latter:
     where one can get a complete calculus by simply taking the dual of each
     rule.
     % \sidenote{In fact it is not even clear what would be the dual of a
-    % solution, but the {\rnmsf{i{\da}}} and {\rnmsf{i{\ua}}} rules
+    % solution, but the {\rsf{i{\da}}} and {\rsf{i{\ua}}} rules
     % suggest that open and closed solutions may be dual to eachother.}
     Thus we will content ourselves with the hypothesis/conclusion symmetry
     coming from sequent calculus. Interestingly, the calculus \sys{ISgq} of Tiu

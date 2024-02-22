@@ -171,17 +171,17 @@
 
 \begin{lemma}[Local soundness]\lablemma{app:bubbles-local-soundness}
   
-  If $S \lstep T$ then $\psint{T \mix (\Gamma \seq \Delta)} \sementC \psint{S
+  If $S \lstep{} T$ then $\psint{T \mix (\Gamma \seq \Delta)} \sementC \psint{S
   \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 \begin{proof}
-  We show that $S \lstep T$ implies $\psint{T} \sementC \psint{S}$ by inspection
+  We show that $S \lstep{} T$ implies $\psint{T} \sementC \psint{S}$ by inspection
   of each rule of system \sys{B}. That we can mix an arbitrary top-level context
   $\Gamma \seq \Delta$ into $S$ and $T$ follows from \reffact{bubbles-top-level}.
 
   \def\arraystretch{1.25}
   \begin{itemize}
-    \item[\rnmsf{i{\da}}]
+    \item[\rsf{i{\da}}]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \piq{} \Delta}
@@ -191,7 +191,7 @@
       &=& \psint{\Gamma, A \seq A, \Delta}
     \end{array}
     $$
-    \item[\rnmsf{i{\ua}}]
+    \item[\rsf{i{\ua}}]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \piq{\seq A \sep A \seq} \Delta}
@@ -203,15 +203,15 @@
       &=& \psint{\Gamma \seq \Delta} & \\
     \end{array}
     $$
-    \item[{\rnmsf{w{-}}}, {\rnmsf{w{+}}}] By \reflemma{bubbles-weakening}.
-    \item[{\rnmsf{c{-}}}, {\rnmsf{c{+}}}] By \reflemma{bubbles-contraction}.
+    \item[{\rsf{w{-}}}, {\rsf{w{+}}}] By \reflemma{bubbles-weakening}.
+    \item[{\rsf{c{-}}}, {\rsf{c{+}}}] By \reflemma{bubbles-contraction}.
 
     % Soundness of membrane rules for non-empty bubbles instead of bubble
     % swapping rules. Pro: invertible. Con: completeness might be harder to
     % prove.
 
-    % \item[{\rnmsf{s{-}}}, {\rnmsf{s{+}}}] We only write the proof for
-    % {\rnmsf{s{-}}}, the proof for {\rnmsf{s{+}}} is symmetric. We proceed by
+    % \item[{\rsf{s{-}}}, {\rsf{s{+}}}] We only write the proof for
+    % {\rsf{s{-}}}, the proof for {\rsf{s{+}}} is symmetric. We proceed by
     % recurrence on $\bradepth{\J}$.
     % \begin{itemize}
     %   \item[\bcase]
@@ -246,7 +246,7 @@
     %   $$
     % \end{itemize}
 
-    \item[{\rnmsf{f{\ua}}}]
+    \item[{\rsf{f{\ua}}}]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \piq{\cS \sep \Gamma' \piq{\cS'} \Delta' \sep S} \Delta}
@@ -256,7 +256,7 @@
     \end{array}
     $$
 
-    \item[{\rnmsf{f{-}{\da}}}]
+    \item[{\rsf{f{-}{\da}}}]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \piq{\Gamma', I \JB \Delta' \sep \cS} \Delta}
@@ -264,7 +264,7 @@
       &=& \psint{\Gamma, I \piq{\Gamma' \JB \Delta' \sep \cS} \Delta} & \\
     \end{array}
     $$
-    \item[{\rnmsf{f{+}{\da}}}]
+    \item[{\rsf{f{+}{\da}}}]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \piq{\cS \sep \Gamma' \JB I, \Delta'} \Delta}
@@ -272,7 +272,7 @@
       &=& \psint{\Gamma \piq{\cS \sep \Gamma' \JB \Delta'} I, \Delta} & \\
     \end{array}
     $$
-    \item[{\rnmsf{f{-}{+}{\da}}}]
+    \item[{\rsf{f{-}{+}{\da}}}]
     We show that $\psint{\Gamma \J (\Gamma', I \JB \Delta'), \Delta} \sement
     \psint{\Gamma, I \J (\Gamma' \JB \Delta'), \Delta}$ by recurrence on
     $\bradepth{\J}$.
@@ -300,7 +300,7 @@
       \end{array}
       $$
     \end{itemize}
-    \item[{\rnmsf{f{+}{-}{\da}}}]
+    \item[{\rsf{f{+}{-}{\da}}}]
     We show that $\psint{\Gamma, (\Gamma' \JB I, \Delta') \J \Delta} \sementHB
     \psint{\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}$ by recurrence on
     $\bradepth{\J}$.
@@ -328,7 +328,7 @@
       \end{array}
       $$
     \end{itemize}
-    \item[{\rnmsf{f{+}{+}{\ua}}}]
+    \item[{\rsf{f{+}{+}{\ua}}}]
     We show that $\psint{\Gamma \J (\Gamma' \JB \Delta'), I, \Delta} \sement
     \psint{\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}$ by recurrence on
     $\bradepth{\J}$.
@@ -354,7 +354,7 @@
       \end{array}
       $$
     \end{itemize}
-    \item[{\rnmsf{f{-}{-}{\ua}}}]
+    \item[{\rsf{f{-}{-}{\ua}}}]
     We show that $\psint{\Gamma, I, (\Gamma' \JB \Delta') \J \Delta} \sementHB
     \psint{\Gamma, (\Gamma', I \JB \Delta') \J \Delta}$ by recurrence on
     $\bradepth{\J}$.
@@ -381,13 +381,13 @@
       $$
     \end{itemize}
 
-    \item[{\rnmsf{f{-}{+}{\ua}}}, {\rnmsf{f{+}{-}{\ua}}}] Converse of
-    {\rnmsf{f{-}{+}{\da}}} (resp. {\rnmsf{f{+}{-}{\da}}}), using
+    \item[{\rsf{f{-}{+}{\ua}}}, {\rsf{f{+}{-}{\ua}}}] Converse of
+    {\rsf{f{-}{+}{\da}}} (resp. {\rsf{f{+}{-}{\da}}}), using
     the converse inequality of \reffact{weakdistrib} which only holds in
     Boolean algebras.
 
-    \item[{\rnmsf{f{+}{+}{\da}}}, {\rnmsf{f{-}{-}{\da}}}] Converse
-    of {\rnmsf{f{+}{+}{\ua}}} (resp. {\rnmsf{f{-}{-}{\ua}}}), using
+    \item[{\rsf{f{+}{+}{\da}}}, {\rsf{f{-}{-}{\da}}}] Converse
+    of {\rsf{f{+}{+}{\ua}}} (resp. {\rsf{f{-}{-}{\ua}}}), using
     the converse inequality of \reflemma{bubbles-weakdistrib} which only holds
     in Boolean algebras.
 

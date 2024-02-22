@@ -22,10 +22,10 @@ others his eponymous law for classical logic, and his pioneering work on the
 algebra of relations and quantification \sidecite{peirce_algebra_1885}. But far
 less widespread are his achievements in the realm of graphical logic, or
 \emph{iconic logic} as Shin calls it \sidecite{10.7551/mitpress/3633.001.0001}.
-He dedicated a large chunk of his life investigating diagrammatic systems,
-starting in 1882 with the \emph{entitative graphs} and culminating with the
-\emph{existential graphs}, which he developed from 1896 until his death in 1914
-\sidecite{Roberts+1973}. Interestingly, Peirce perceived existential graphs
+He dedicated a large chunk of his life to the investigation of diagrammatic
+systems, starting in 1882 with the \emph{entitative graphs} and culminating with
+the \emph{existential graphs}, which he developed from 1896 until his death in
+1914 \sidecite{Roberts+1973}. Interestingly, Peirce perceived existential graphs
 (thereafter ``EG'') as his \textit{``chef d'oeuvre''}, and that they
 \textit{``ought to be the logic of the future''}\sidenote{Both citations are
 sourced in \cite[p.~11]{Roberts+1973}.}.
@@ -325,12 +325,12 @@ of any polarity:
     Using our notation for holed contexts from previous chapters, this can be
     represented schematically like so:
     \begin{mathpar}
-      G~~~H\select{\phantom{G}} ~~~\step~~~ G~~~H\select{G}
+      G~~~H\select{\phantom{G}} ~~~\step{}~~~ G~~~H\select{G}
       \and
-      \nsheet{G~~~H\select{\phantom{G}} ~~~\step~~~ G~~~H\select{G}}
+      \nsheet{G~~~H\select{\phantom{G}} ~~~\step{}~~~ G~~~H\select{G}}
     \end{mathpar}
     % In particular, $H$ can be taken to be any empty portion of $\SA$ in the same
-    % area as $G$, giving that $G ~\step~ G~G$.
+    % area as $G$, giving that $G ~\step{}~ G~G$.
     It can be seen as a deep generalization of the \emph{identity} axiom of
     sequent calculus, where the top-level occurrence of $G$ justifies the
     occurrence inside $H\hole$\sidenote{This might also be related to the notion
@@ -344,9 +344,9 @@ of any polarity:
   \item[\textbf{Deiteration} \textit{(Factorization)}]
     Formally, this is the converse of \rsf{Iteration}:
     \begin{mathpar}
-      G~~~H\select{G} ~~~\step~~~ G~~~H\select{\phantom{G}}
+      G~~~H\select{G} ~~~\step{}~~~ G~~~H\select{\phantom{G}}
       \and
-      \nsheet{G~~~H\select{G} ~~~\step~~~ G~~~H\select{\phantom{G}}}
+      \nsheet{G~~~H\select{G} ~~~\step{}~~~ G~~~H\select{\phantom{G}}}
     \end{mathpar}
     Its interpretation as an edition principle is a bit trickier, but it can be
     understood as a form of \emph{sharing} of information. Indeed, it roughly
@@ -363,21 +363,21 @@ of any polarity:
     
     Compared to sequent calculus, it can be seen as a deep generalization of the
     \emph{contraction} rule, the base case where $H\hole = \hole$ giving $G~G
-    ~\step~ G$.
+    ~\step{}~ G$.
 \end{itemize}
 The applicability of the next two rules depends on the polarity of the
 subgraph's area:
 \begin{itemize}
   \item[\textbf{Insertion}]
     Any graph $G$ may be inserted in a negative area:
-    $$\nsheet{~~~\step~~~ G}$$
+    $$\nsheet{~~~\step{}~~~ G}$$
     This is akin to a \emph{weakening} rule, stating that if a proposition is
     known to be true, one might add (useless) hypotheses at will. The closest
     equivalent we found in the deep inference literature is indeed the weakening
     rule \rsf{wl{\da}} of \sys{ISp} in \sidecite{tiu_local_2006}.
   \item[\textbf{Deletion}]
     Any graph $G$ occurring in a positive area may be erased:
-    $$G ~~~\step~~~$$
+    $$G ~~~\step{}~~~$$
     
     This is exactly the dual of \rsf{Insertion}, stating that if a proposition
     is known to be true, then one might as well refrain from asserting it. It is
@@ -579,16 +579,16 @@ reading: then they express the different ways in which one may choose to
 simplify a goal.
 
 \begin{definition}[Derivation]
-  We write $G \step H$ to indicate a rewrite \emph{step} in \sys{Alpha}, that is
+  We write $G \step{} H$ to indicate a rewrite \emph{step} in \sys{Alpha}, that is
   an instance of some rule from \reffig{alpha} with $H$ as premiss and $G$ as
-  conclusion. A \emph{derivation} $G \nsteps{n} H$ is a sequence of rewrite
-  steps $G_0 \step G_1 \ldots \step G_n$ with $G_0 = G$, $G_n = H$ and $n \geq
+  conclusion. A \emph{derivation} $G \nsteps{n}{} H$ is a sequence of rewrite
+  steps $G_0 \step{} G_1 \ldots \step{} G_n$ with $G_0 = G$, $G_n = H$ and $n \geq
   0$. Generally the length $n$ of the derivation does not matter, and we just
-  write $G \steps H$.
+  write $G \steps{} H$.
 \end{definition}
 
 \begin{definition}[Proof]\labdef{eg-proof}
-  A \emph{proof} of an $\alpha$-graph $G$ is a derivation $G \steps \emptyset$.
+  A \emph{proof} of an $\alpha$-graph $G$ is a derivation $G \steps{} \emptyset$.
 \end{definition}
 
 \begin{figure}
@@ -818,7 +818,7 @@ is, which is the object of the following two sections.
 \section{Soundness}\labsec{eg-soundness}
 
 We are now going to prove formally the \emph{soundness} of each rule of
-\sys{Alpha}, by showing that if $G \step H$ and $H$ is \emph{true}, then so is
+\sys{Alpha}, by showing that if $G \step{} H$ and $H$ is \emph{true}, then so is
 $G$. In classical propositional logic, one can easily evaluate the truth of any
 formula $A$, given a truth-valuation $v : \atoms \to \{0,1\}$ for the atoms of
 $A$. The same applies to $\alpha$-graphs:
@@ -840,7 +840,7 @@ This follows the standard way to evaluate conjunctions and negations.
 
 To factorize the proof of soundness, we first prove a few lemmas for the
 \emph{invertible} rules of \sys{Alpha}, that is those who satisfy $v(G) = v(H)$
-for every valuation $v$ if $G \step H$.
+for every valuation $v$ if $G \step{} H$.
 
 \begin{lemma}[Iteration]\lablemma{eg-iteration}
   For every graph $G$, context $H\hole$ and valuation $v$, we have
@@ -966,7 +966,7 @@ from the following \emph{functoriality} lemmas:
 \end{corollary}
 
 \begin{theorem}[Soundness]
-  If $G \step H$, then $v(H) \leq v(G)$ for every valuation $v$.
+  If $G \step{} H$, then $v(H) \leq v(G)$ for every valuation $v$.
 \end{theorem}
 \begin{proof}
   By inspection of each rule.
@@ -1110,14 +1110,13 @@ The rules of \sys{SKS} satisfy two notable properties:
     exists in intuitionistic logic, and is in fact used in the same way to
     obtain dual rules in the intuitionistic calculus of structures \sys{SISa} of
     Tiu \cite{tiu_local_2006}. This constitutes one more argument in favor of
-    the view defended by Minghui and Pietarinen in
-    \sidecite{minghui_graphical_2019}, that Peirce had a
-    \emph{pre-intuitionistic} conception of negation. It also echoes our
-    observation in \refremark{eg-entitative}, that the choice of negation and
-    conjunction as primitives is to be connected with the eminently constructive
-    works of Girard and Melliès, in particular the non-involutive tensorial
-    negation of the latter. The issue of finding seeds of intuitionism in
-    Peirce's work will be discussed more in depth in \refsec{Flowers}.
+    the view defended by Ma and Pietarinen in \sidecite{minghui_graphical_2019},
+    that Peirce had a \emph{pre-intuitionistic} conception of negation. It also
+    echoes our observation in \refremark{eg-entitative}, that the choice of
+    negation and conjunction as primitives is to be connected with the eminently
+    constructive works of Girard and Melliès, in particular the non-involutive
+    tensorial negation of the latter. The issue of finding seeds of intuitionism
+    in Peirce's work will be discussed more in depth in \refsec{Flowers}.
     \end{remark}
 
   \item[Locality]
@@ -1177,7 +1176,7 @@ translation of each rule of \sys{SKS}. But first, we need to ensure that
 us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
 
 \begin{lemma}[Positive closure]\lablemma{eg-posclos}
-  If $G \step H$, then $K^+\select{G} \step K^+\select{H}$.
+  If $G \step{} H$, then $K^+\select{G} \step{} K^+\select{H}$.
 \end{lemma}
 \begin{proof}
   Since all rules of \sys{Alpha} apply in a context of unbounded depth, we know
@@ -1191,11 +1190,11 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
 \end{proof}
 
 \begin{theorem}[Completeness]
-  If $U\select{S} \step U\select{T}$, then $\strans{U}\select{\strans{S}} \steps
+  If $U\select{S} \step{} U\select{T}$, then $\strans{U}\select{\strans{S}} \steps{}
   \strans{U}\select{\strans{T}}$.
 \end{theorem}
 \begin{proof}
-  We show that $\strans{S} \steps \strans{T}$ by simulating each rule of
+  We show that $\strans{S} \steps{} \strans{T}$ by simulating each rule of
   \reffig{sks}. The closure with $\strans{U\hole}$ follows from
   \reffact{strans-pos} and \reflemma{eg-posclos}.
   
@@ -1443,13 +1442,13 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
 
 A powerful result of Brünnler and Tiu \cite{brunnler_local_2001}, is that the
 whole up-fragment of \sys{SKS} (all rules whose name ends with $\ua$) is
-\emph{admissible}: if a structure $S$ has a \emph{proof} $S \steps \top$, then
+\emph{admissible}: if a structure $S$ has a \emph{proof} $S \steps{} \top$, then
 it also has a proof $S \xsteps{\msys{KS}} \top$ in \sys{KS}, defined as
 \sys{SKS} without the up-fragment\sidenote{The name \sys{KS} comes from
 \sys{SKS}, with the first `\sys{S}' standing for ``symmetric'' dropped.}.
 Dually, the whole down-fragment (all rules whose name ends with $\da$) is
 \emph{``co-admissible''}: if a structure $S$ has a \emph{refutation} $\bot
-\steps S$, then it also has a refutation $\bot \xsteps{\dmdual{\msys{KS}}} S$
+\steps{} S$, then it also has a refutation $\bot \xsteps{\dmdual{\msys{KS}}} S$
 in $\dmdual{\msys{KS}}$, defined as \sys{SKS} without the down-fragment.
 
 This duality reflects nicely in our simulation: we were careful to always give
@@ -1466,7 +1465,7 @@ result that seems to be novel in the literature on EG.
 
 \begin{corollary}[Admissibility of Deletion]\label{cor:adm-era}
   $$
-  \text{If $G \steps \emptyset$, then $G \xsteps{\msys{Alpha}\setminus\{\rsf{Del}\}}
+  \text{If $G \steps{} \emptyset$, then $G \xsteps{\msys{Alpha}\setminus\{\rsf{Del}\}}
   \emptyset$.}
   $$
 \end{corollary}
@@ -1479,7 +1478,7 @@ insertion also never appears in the simulation of \sys{\dmdual{KS}}, while
 
 \begin{corollary}[Co-admissibility of Insertion]\label{cor:adm-ins}
   $$
-  \text{If $[] \steps G$, then $[]
+  \text{If $[] \steps{} G$, then $[]
   \xsteps{\msys{Alpha}\setminus\{\rsf{Ins},\rsf{Dcut{\da}}\}} G$.}
   $$
 \end{corollary}
@@ -1501,17 +1500,17 @@ that all rules of \sys{Alpha} except \rsf{Del} satisfy this property:
 \end{fact}
 
 \begin{corollary}[Analyticity]
-  If $G$ is provable in \sys{Alpha}, then it has a proof $G \step G_1 \step
-  \ldots \step G_n \step \emptyset$ where for all $i$ and $a$ such that $a
+  If $G$ is provable in \sys{Alpha}, then it has a proof $G \step{} G_1 \step{}
+  \ldots \step{} G_n \step{} \emptyset$ where for all $i$ and $a$ such that $a
   \subsol G_i$, $a \subsol G$.
 \end{corollary}
 
 % Thanks to \reffact{eg-duality}, it can easily be shown that \sys{Alpha}
-% satisfies a strong \emph{contraposition} property: $G \steps H$ if and only if
-% $[H] \steps [G]$. However, the \emph{only if} direction depends crucially on
-% \rsf{Dcut{\da}}: indeed, from $[H] \steps [G]$ one gets $[[G]] \steps [[H]]$
+% satisfies a strong \emph{contraposition} property: $G \steps{} H$ if and only if
+% $[H] \steps{} [G]$. However, the \emph{only if} direction depends crucially on
+% \rsf{Dcut{\da}}: indeed, from $[H] \steps{} [G]$ one gets $[[G]] \steps{} [[H]]$
 % through the \emph{if} direction, and then $G \xstep{\rsf{Dcut{\ua}}} [[G]]
-% \steps [[H]] \xstep{\rsf{Dcut{\da}}} H$.
+% \steps{} [[H]] \xstep{\rsf{Dcut{\da}}} H$.
 
 % When taking $H = \emptyset$, this property tells us that in \sys{Alpha},
 % provability coincides with refutability. Now thanks to Corollary
@@ -1828,10 +1827,10 @@ than a line?}.
 
   \item[Insertion/Deletion] Every pair of binders residing in the same negative
   area can be connected and replaced by a wire (\rsf{Insertion}):
-  $$\nsheet{\tikzfig{1}{0.5}{eg-delins-loi-left}~~~\step~~~\tikzfig{1}{0.5}{eg-delins-loi-right}}$$
+  $$\nsheet{\tikzfig{1}{0.5}{eg-delins-loi-left}~~~\step{}~~~\tikzfig{1}{0.5}{eg-delins-loi-right}}$$
   Dually, every wire in a positive area can be severed in two, capping off the
   newly created ends with two binders (\rsf{Deletion}):
-  $$\tikzfig{1}{0.5}{eg-delins-loi-right}~~~\step~~~\tikzfig{1}{0.5}{eg-delins-loi-left}$$
+  $$\tikzfig{1}{0.5}{eg-delins-loi-right}~~~\step{}~~~\tikzfig{1}{0.5}{eg-delins-loi-left}$$
   By reading the rules from right to left --- i.e. in \emph{proof search} mode,
   \rsf{Insertion} and \rsf{Deletion} on LoI can be understood as capturing
   respectively the operations of \emph{anti-unification} and \emph{unification}

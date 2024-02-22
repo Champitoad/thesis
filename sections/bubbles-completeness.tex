@@ -67,7 +67,7 @@ can be simulated inside system $\sysB$.
 \begin{definition}[Syntactic entailment]
   We say that $\Gamma$ \emph{entails} $\Delta$ in a fragment $\mathsf{F}$ of
   rules of system $\sysB$, written $\Gamma \prov{\mathsf{F}} \Delta$, if and
-  only if $\Gamma \seq \Delta \steps_{\mathsf{F}} \piq{}$. Similarly, we say
+  only if $\Gamma \seq \Delta \step{\mathsf{F}} \piq{}$. Similarly, we say
   that $X$ entails $Y$ in a fragment $\mathsf{F}$ of rules of \sys{DBiInt},
   written $X \prov{\mathsf{F}} Y$, if and only if $X \seq Y$ has a proof in
   \sys{DBiInt} using only rules in $\mathsf{F}$.
@@ -126,7 +126,7 @@ As in sequent calculus, every rule of system $\sysB$ other than
 \rsf{i{\ua}} satisfies the \emph{subformula property}:
 
 \begin{fact}[Subformula property]\label{cor:subformula-property} If $S
-  \step_{\sysB \setminus \{\rsf{i{\ua}}\}} T$ and $A \subsol T$, then there is a
+  \step{\sysB \setminus \{\rsf{i{\ua}}\}} T$ and $A \subsol T$, then there is a
   formula $B$ such that $A$ is a subformula of $B$ and $B \subsol S$.
 \end{fact}
 
@@ -270,6 +270,6 @@ very expressive syntax, it would be interesting to investigate its ability to
 capture both \sys{wBIL} and \sys{sBIL}, maybe by using distinct sets of flow
 rules. Goré and Shillito suggest that a framework that captures both
 \emph{provability} and \emph{refutability} ``in one shot'' would be needed, and
-we believe system $\sysB$ might just provide this: indeed a derivation $S \steps
+we believe system $\sysB$ might just provide this: indeed a derivation $S \steps{}
 \piq{}$ can be read both as a \emph{proof} of $\psint{S}$, and a
 \emph{refutation} of $\nsint{S}$.

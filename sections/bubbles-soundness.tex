@@ -217,7 +217,7 @@ formulas have been dualized (\refdef{dual-formula}).
 \end{proof}
 
 \begin{lemma}[Local rule duality]\lablemma{local-rule-duality}
-  If $S \lstep T$ then $\soldual{S} \lstep \soldual{T}$.
+  If $S \lstep{} T$ then $\soldual{S} \lstep{} \soldual{T}$.
 \end{lemma}
 \begin{proof}
   There is a bijection among the rules of system \sys{B}, that matches each rule
@@ -265,19 +265,19 @@ formulas have been dualized (\refdef{dual-formula}).
   \end{array}
   \end{mathpar}
   Notice that some rules are self-dual, namely the identity rules
-  {\rnmsf{i{\da}}} and {\rnmsf{i{\ua}}}, and the membrane rules
-  {\rnmsf{p}} and {\rnmsf{a}}.
+  {\rsf{i{\da}}} and {\rsf{i{\ua}}}, and the membrane rules
+  {\rsf{p}} and {\rsf{a}}.
 \end{proof}
 
 \begin{lemma}[Rule duality]\lablemma{rule-duality}
-  If $S \step T$ then $\soldual{S} \step \soldual{T}$.
+  If $S \step{} T$ then $\soldual{S} \step{} \soldual{T}$.
 \end{lemma}
 \begin{proof}
   Let $U\hole$, $S_0$ and $T_0$ such that $S = U\select{S_0}$, $T =
-  U\select{T_0}$ and $S_0 \lstep T_0$. By \reflemma{local-rule-duality} we have
-  $\soldual{S_0} \lstep \soldual{T_0}$, and thus
-  $\soldual{U}\select{\soldual{S_0}} \step \soldual{U}\select{\soldual{T_0}}$,
-  or equivalently $\soldual{U\select{S_0}} \step \soldual{U\select{T_0}}$.
+  U\select{T_0}$ and $S_0 \lstep{} T_0$. By \reflemma{local-rule-duality} we have
+  $\soldual{S_0} \lstep{} \soldual{T_0}$, and thus
+  $\soldual{U}\select{\soldual{S_0}} \step{} \soldual{U}\select{\soldual{T_0}}$,
+  or equivalently $\soldual{U\select{S_0}} \step{} \soldual{U\select{T_0}}$.
 \end{proof}
 
 \begin{lemma}[Interpretation duality]\lablemma{int-duality}
@@ -460,7 +460,7 @@ Lastly, we mention a technical property of rules that will be necessary for the
 final proof of soundness to go through:
 
 \begin{fact}[Top-level genericity]\labfact{bubbles-top-level}
-  If $S \lstep T$, then $S \mix (\Gamma \seq \Delta) \lstep T \mix (\Gamma \seq \Delta)$.
+  If $S \lstep{} T$, then $S \mix (\Gamma \seq \Delta) \lstep{} T \mix (\Gamma \seq \Delta)$.
 \end{fact}
 
 All the previous facts and lemmas can now be used to prove \emph{local
@@ -469,13 +469,13 @@ an (in)equality in some class of algebras:
 
 \begin{lemma}[Local soundness]\lablemma{bubbles-local-soundness}
   
-  If $S \lstep T$ then $\psint{T \mix (\Gamma \seq \Delta)} \sementC \psint{S
+  If $S \lstep{} T$ then $\psint{T \mix (\Gamma \seq \Delta)} \sementC \psint{S
   \mix (\Gamma \seq \Delta)}$.
   % and $\nsint{S \mix (\Gamma \seq \Delta)} \sement
   % \nsint{T \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 \begin{proof}
-  $S \lstep T$ implies $\psint{T} \sementC \psint{S}$, which is shown by
+  $S \lstep{} T$ implies $\psint{T} \sementC \psint{S}$, which is shown by
   inspection of each rule of system \sys{B} (see \refsec{bubbles-soundness}).
   That we can mix an arbitrary top-level context $\Gamma \seq \Delta$ into $S$
   and $T$ follows from \reffact{bubbles-top-level}.
@@ -495,9 +495,9 @@ Heyting-Brouwer algebras:
   \end{align*}
   Then we have:
   \begin{itemize}
-    \item $S \lstepsys{\sysBH} T$ implies $\psint{T} \sement \psint{S}$
-    \item $S \lstepsys{\sysBHB} T$ implies $\psint{T} \sementHB \psint{S}$
-    % \item $S \lstepsys{\text{\sysB}} T$ implies $\psint{T} \sementC \psint{S}$
+    \item $S \lstep{\sysBH} T$ implies $\psint{T} \sement \psint{S}$
+    \item $S \lstep{\sysBHB} T$ implies $\psint{T} \sementHB \psint{S}$
+    % \item $S \lstep{\text{\sysB}} T$ implies $\psint{T} \sementC \psint{S}$
   \end{itemize}
 \end{corollary}
 
@@ -508,7 +508,7 @@ implication is replaced by exclusion. To avoid verbosity, we only formulate the
 main lemma, and assume that its proof will go through mechanically:
 
 \begin{lemma}[Local co-soundness]\lablemma{bubbles-local-cosoundness}
-  If $S \lstep T$ then $\nsint{S \mix (\Gamma \seq \Delta)} \sementC \nsint{T
+  If $S \lstep{} T$ then $\nsint{S \mix (\Gamma \seq \Delta)} \sementC \nsint{T
   \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 
@@ -516,7 +516,7 @@ Then from the (assumed) proof of \reflemma{bubbles-local-cosoundness} we get:
 \begin{corollary}\label{cor:lcosoundness}
   Let $\sysBB \defeq \sysBHB \setminus \{\rsf{f{-}{+}{\da}},
   \rsf{f{+}{+}{\ua}}, \rsf{{\limp}{-}}, \rsf{{\limp}{+}}\}$. Then $S
-  \lstepsys{\sysBB} T$ implies $\nsint{S} \sementB \nsint{T}$.
+  \lstep{\sysBB} T$ implies $\nsint{S} \sementB \nsint{T}$.
 \end{corollary}
 
 The full situation is summarized in \reffig{venn-algebras}.
@@ -620,7 +620,7 @@ recursively as follows:
 
 \begin{lemma}[Contextual soundness]\lablemma{bubbles-ctx-soundness}
 
-  If $S \lstep T$ then $\psint{U\select{T} \mix (\Gamma \seq \Delta)} \sementC
+  If $S \lstep{} T$ then $\psint{U\select{T} \mix (\Gamma \seq \Delta)} \sementC
   \psint{U\select{S} \mix (\Gamma \seq \Delta)}$.
   % and $\nsint{S \mix (\Gamma \seq \Delta)} \sement
   % \nsint{T \mix (\Gamma \seq \Delta)}$.
@@ -645,7 +645,7 @@ recursively as follows:
 
     \item[\textbf{Negative case}] Suppose $\soldepth{U\hole} > 0$ and $U\hole =
     \Gamma', U_0\hole \J \Delta'$. Then by \reflemma{local-rule-duality} we have
-    $\soldual{S} \lstep \soldual{T}$, and thus by IH
+    $\soldual{S} \lstep{} \soldual{T}$, and thus by IH
     $\psint{\soldual{U_0}\select{\soldual{T}}} \sementC
     \psint{\soldual{U_0}\select{\soldual{S}}}$, or equivalently
     $\psint{\soldual{U_0\select{T}}} \sementC \psint{\soldual{U_0\select{S}}}$.
@@ -676,10 +676,10 @@ recursively as follows:
 \end{proof}
 
 \begin{theorem}[Soundness]\labthm{bubbles-soundness}
-  If $S \step T$ then $\psint{T} \sementC \psint{S}$.
+  If $S \step{} T$ then $\psint{T} \sementC \psint{S}$.
 \end{theorem}
 \begin{proof}
-  By definition of $\step$, and then applying \reflemma{bubbles-ctx-soundness}
+  By definition of $\step{}$, and then applying \reflemma{bubbles-ctx-soundness}
   with $\Gamma = \Delta = \emptyset$.
 \end{proof}
 
@@ -687,10 +687,10 @@ We also get for free soundness with respect to the negative interpretation,
 which we call \emph{co-soundness}:
 
 \begin{theorem}[Co-soundness]\labthm{bubbles-cosoundness}
-  If $S \step T$ then $\nsint{S} \sementC \nsint{T}$.
+  If $S \step{} T$ then $\nsint{S} \sementC \nsint{T}$.
 \end{theorem}
 \begin{proof}
-  By \reflemma{rule-duality} we have $\soldual{S} \step \soldual{T}$,
+  By \reflemma{rule-duality} we have $\soldual{S} \step{} \soldual{T}$,
   and thus by soundness $\psint{\soldual{T}} \sementC \psint{\soldual{S}}$. Then
   we can conclude by \reflemma{int-invert}.
 \end{proof}
@@ -703,8 +703,8 @@ thus extend our soundness result to intuitionistic and bi-intuitionistic logic:
 \begin{corollary}\label{cor:soundness}
   \sbr
   \begin{itemize}
-    \item $S \stepsys{\sysBH} T$ implies $\psint{T} \sement \psint{S}$
-    \item $S \stepsys{\sysBHB} T$ implies $\psint{T} \sementHB \psint{S}$
+    \item $S \step{\sysBH} T$ implies $\psint{T} \sement \psint{S}$
+    \item $S \step{\sysBHB} T$ implies $\psint{T} \sementHB \psint{S}$
   \end{itemize}
 \end{corollary}
 \begin{proof}
@@ -734,14 +734,14 @@ we need to dualize lemmas to the negative interpretation:
 \end{lemma}
 
 \begin{lemma}[Contextual co-soundness]\lablemma{bubbles-ctx-cosoundness}
-  If $S \lstep T$ then $\nsint{U\select{S} \mix (\Gamma \seq \Delta)} \sementC
+  If $S \lstep{} T$ then $\nsint{U\select{S} \mix (\Gamma \seq \Delta)} \sementC
   \nsint{U\select{T} \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 
 From the assumed proof of \reflemma{bubbles-ctx-cosoundness}, we finally get:
 
 \begin{corollary}\label{cor:cosoundness}
-  $S \stepsys{\sysBB} T$ implies $\nsint{S} \sementB \nsint{T}$.
+  $S \step{\sysBB} T$ implies $\nsint{S} \sementB \nsint{T}$.
 \end{corollary}
 
 Combined with the completeness proof of \refsec{bubbles-completeness}, this will

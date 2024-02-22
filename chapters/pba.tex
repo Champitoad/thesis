@@ -242,17 +242,17 @@ rewrites corresponding to the example\sidenote{Note that $\back$ has lower
 precedence than all logical connectives.}: \renewcommand{\arraystretch}{1.1}
 $$\begin{array}{lll}
     &  \forall x.\human(x)\limp \select{\mortal(x)} \back \select{\mortal(\socrates)}&\\
-    \step &
+    \step{} &
            \human(\socrates)\limp \select{\mortal(\socrates)}
            \back \select{\mortal(\socrates)}&
                                                \mathsf{L\forall i}\\
-    \step &
+    \step{} &
            \human(\socrates)\land(\select{\mortal(\socrates)}
            \back \select{\mortal(\socrates)}) &
                                                  \mathsf{L{\limp}_2}\\
-    \step &  \human(\socrates)\land \top &
+    \step{} &  \human(\socrates)\land \top &
                                            \mathsf{id}\\
-    \step & \human(\socrates)&\mathsf{neur}\\
+    \step{} & \human(\socrates)&\mathsf{neur}\\
   \end{array}$$
 
 Notice that:
@@ -268,7 +268,7 @@ Notice that:
 
 In general, the action solves the goal when the interaction ends with
 the trivially true proposition $\top$. The base case being the action
-corresponding to the axiom/identity rule \rnmsf{id}: $A\back A \step\top$.
+corresponding to the axiom/identity rule \rsf{id}: $A\back A \step{} \top$.
 
 A forward step, on the other hand, involves two (subterms of two)
 hypotheses. The interaction operator between two hypotheses is written
@@ -276,10 +276,10 @@ $\forw$. In the example above, the detail of the interaction is:
 $$
   \begin{array}{lll}
     &  \forall x .\select{\human(x)}\limp\mortal(x) \forw \select{\human(\socrates)}&\\
-    \step & \select{\human(\socrates)}\limp\mortal(\socrates) \forw \select{\human(\socrates)}& \mathsf{F \forall i}\\
-    \step & (\select{\human(\socrates)}\back \select{\human(\socrates)} )\limp\mortal(\socrates) &\mathsf{F{\limp}_1}\\
-    \step & \top \limp\mortal(\socrates) &\mathsf{id}\\
-    \step & \mortal(\socrates) & \mathsf{neul}\\
+    \step{} & \select{\human(\socrates)}\limp\mortal(\socrates) \forw \select{\human(\socrates)}& \mathsf{F \forall i}\\
+    \step{} & (\select{\human(\socrates)}\back \select{\human(\socrates)} )\limp\mortal(\socrates) &\mathsf{F{\limp}_1}\\
+    \step{} & \top \limp\mortal(\socrates) &\mathsf{id}\\
+    \step{} & \mortal(\socrates) & \mathsf{neul}\\
   \end{array}
 $$
 
@@ -321,7 +321,7 @@ given in \reftab{click-rules}. A few remarks are in order:
 \begin{itemize}
   \item In the current implementation of Actema, clicking on a blue item $A
   \limp B$ will work only if the conclusion is $B$. An alternative is to use the
-  {\rnmsf{{\limp}L}} rule from sequent calculus, which is applicable in every
+  {\rsf{{\limp}L}} rule from sequent calculus, which is applicable in every
   context.
   \item There is no action mapped to red $\bot$ items, simply because $\bot$
   does not have any introduction rule.
@@ -352,19 +352,19 @@ given in \reftab{click-rules}. A few remarks are in order:
 	\toprule
 	\thead{Head connective} & \thead{Red item} & \thead{Blue item} \\
 	\midrule
-  $\top$ & \rnmsf{\top R} & \rnmsf{\top L} \\
+  $\top$ & \rsf{\top R} & \rsf{\top L} \\
 	\midrule
-  $\bot$ & $\emptyset$ & \rnmsf{\bot L} \\
+  $\bot$ & $\emptyset$ & \rsf{\bot L} \\
 	\midrule
-	$\land$ & \rnmsf{\land R} & \rnmsf{\land L} \\
+	$\land$ & \rsf{\land R} & \rsf{\land L} \\
 	\midrule
-	$\lor$ & \rnmsf{\lor R_1, \lor R_2} & \rnmsf{\lor L} \\
+	$\lor$ & \rsf{\lor R_1, \lor R_2} & \rsf{\lor L} \\
 	\midrule
-  $\limp$ & \rnmsf{{\limp}R} & \rnmsf{{\limp}E} \\
+  $\limp$ & \rsf{{\limp}R} & \rsf{{\limp}E} \\
 	\midrule
-  $∀$ & \rnmsf{∀R} & $\emptyset$ \\
+  $∀$ & \rsf{∀R} & $\emptyset$ \\
 	\midrule
-  $∃$ & $\emptyset$ & \rnmsf{∃L} \\
+  $∃$ & $\emptyset$ & \rsf{∃L} \\
 \end{tabular}
 \end{table}
 
@@ -442,18 +442,18 @@ terms are directly written in decimal notation. The proof goes as follows:
     $$
       \begin{array}{lll}
         & \forall x. \forall y. \select{x + \suc{y}} = \suc{(x + y)} \back \select{1 + 1} = 2 & \\
-        \step & \forall y. \select{1 + \suc{y}} = \suc{(1 + y)} \back \select{1 + 1} = 2 &\mathsf{L\forall i} \\
-        \step & \select{1 + \suc{0}} = \suc{(1 + 0)} \back \select{1 + 1} = 2 &\mathsf{L\forall i} \\
+        \step{} & \forall y. \select{1 + \suc{y}} = \suc{(1 + y)} \back \select{1 + 1} = 2 &\mathsf{L\forall i} \\
+        \step{} & \select{1 + \suc{0}} = \suc{(1 + 0)} \back \select{1 + 1} = 2 &\mathsf{L\forall i} \\
         \syneq & \select{1 + 1} = \suc{(1 + 0)} \back \select{1 + 1} = 2 & \\
-        \step & \suc{(1 + 0)} = 2 &\mathsf{L{=}_1}
+        \step{} & \suc{(1 + 0)} = 2 &\mathsf{L{=}_1}
       \end{array}
     $$
   \item We link the right-hand side $x + 0$ of the first addition axiom with $1 + 0$ in the conclusion, which rewrites $1 + 0$ into $1$:
     $$
       \begin{array}{lll}
         & \forall x. x = \select{x + 0} \back \suc{(\select{1 + 0})} = 2 & \\
-        \step & 1 = \select{1 + 0} \back \suc{(\select{1 + 0})} = 2 &\mathsf{L\forall i} \\
-        \step & \suc{1} = 2 &\mathsf{L{=}_2} \\
+        \step{} & 1 = \select{1 + 0} \back \suc{(\select{1 + 0})} = 2 &\mathsf{L\forall i} \\
+        \step{} & \suc{1} = 2 &\mathsf{L{=}_2} \\
         \syneq & 2 = 2 &
       \end{array}
     $$
@@ -463,7 +463,7 @@ We end up with the conclusion $2 = 2$, which is provable by a simple click.
 Notice how the orientation of the two rewritings is determined by which side of
 the equality is selected. Also, in this case, the rewritings
 correspond to backward proof steps, because the rewriting is performed
-in the conclusion. Similar rules (\rnmsf{F{=}_1} and \rnmsf{F{=}_2}) are
+in the conclusion. Similar rules (\rsf{F{=}_1} and \rsf{F{=}_2}) are
 used to perform rewritings in hypotheses.
 
 
@@ -477,27 +477,27 @@ conclusion) which is of interest.
 \subsection{Conjunction and disjunction}
 The conjunction is an easy to explain case. A hypothesis of the form
 $A\land B$ can be used directly both as evidence for $A$ and as evidence
-for $B$. This is modeled by the rules \rnmsf{L\land_1} and
-\rnmsf{L\land_2}. A very simple action is thus:
+for $B$. This is modeled by the rules \rsf{L\land_1} and
+\rsf{L\land_2}. A very simple action is thus:
 $$
 \begin{array}{llll}
-  \select{A}\land B \back \select{A} & \step& \select{A} \back
+  \select{A}\land B \back \select{A} & \step{}& \select{A} \back
   \select{A} \hbox to 1cm {\hfil}&\mathsf{L \land_1}\\
-                                       & \step &\top & \mathsf{id}
+                                       & \step{} &\top & \mathsf{id}
 \end{array}
 $$
 
 On the other hand, considering a conjunctive goal $A\land B$, one can
 simplify or solve one of the branches by a DnD action. This involves
-rules \rnmsf{R \land_1} and
-\rnmsf{R \land_2}. For instance:
+rules \rsf{R \land_1} and
+\rsf{R \land_2}. For instance:
 $$
 \begin{array}{llll}
   \select{A} \back \select{A}\land B &
-                                         \step& (\select{A} \back
+                                         \step{}& (\select{A} \back
                                          \select{A})\land B &\mathsf{R \land_1}\\
-                                       & \step& \top \land B  & \mathsf{id}\\
-  &\step& B&\mathsf{neul}
+                                       & \step{}& \top \land B  & \mathsf{id}\\
+  &\step{}& B&\mathsf{neul}
 \end{array}
 $$
 
@@ -508,26 +508,26 @@ disjunction without comitting to proving it entirely:
 $$
 \begin{array}{llll}
   \select{A} \back (B \land \select{A}) \lor C
-    & \step & (\select{A} \back B \land \select{A}) \lor C &\mathsf{R\lor_1}\\
-    & \step & (B \land (\select{A} \back \select{A})) \lor C &\mathsf{R\land_2}\\
-    & \step & (B \land \top) \lor C &\mathsf{id}\\
-    & \step & B \lor C &\mathsf{neur}
+    & \step{} & (\select{A} \back B \land \select{A}) \lor C &\mathsf{R\lor_1}\\
+    & \step{} & (B \land (\select{A} \back \select{A})) \lor C &\mathsf{R\land_2}\\
+    & \step{} & (B \land \top) \lor C &\mathsf{id}\\
+    & \step{} & B \lor C &\mathsf{neur}
 \end{array}
 $$
 
 Disjunctive hypotheses also have a backward behavior defined by the rules
-\rnmsf{L\lor_1} and \rnmsf{L\lor_2}, although in most cases one will prefer the
+\rsf{L\lor_1} and \rsf{L\lor_2}, although in most cases one will prefer the
 usual subgoal semantics associated with click actions. More interesting is
-their forward behavior with the rules \rnmsf{F\lor_1} and \rnmsf{F\lor_2}, in
+their forward behavior with the rules \rsf{F\lor_1} and \rsf{F\lor_2}, in
 particular when they interact with negated hypotheses. For instance:
 $$
 \begin{array}{llll}
   \select{A} \lor B \forw \neg \select{A}
-    & \step & (\select{A} \forw \neg\select{A}) \lor B &\mathsf{F\lor_1}\\
-    & \step & \neg (\select{A} \back \select{A}) \lor B &\mathsf{F{\limp}_1}\\
-    & \step & \neg \top \lor B &\mathsf{id}\\
-    & \step & \bot \lor B &\mathsf{neul}\\
-    & \step & B &\mathsf{neul}\\
+    & \step{} & (\select{A} \forw \neg\select{A}) \lor B &\mathsf{F\lor_1}\\
+    & \step{} & \neg (\select{A} \back \select{A}) \lor B &\mathsf{F{\limp}_1}\\
+    & \step{} & \neg \top \lor B &\mathsf{id}\\
+    & \step{} & \bot \lor B &\mathsf{neul}\\
+    & \step{} & B &\mathsf{neul}\\
 \end{array}
 $$
 
@@ -548,18 +548,18 @@ Using the right hand part of a hypothesis $A\limp B$ turns a
 conclusion $B$ into $A$. 
 $$
 \begin{array}{llll}
-  A\limp \select{B} \back \select{B} &\step& A\land (\select{B}
+  A\limp \select{B} \back \select{B} &\step{}& A\land (\select{B}
                                                 \back
                                                 \select{B})&\mathsf{L
                                                              {\limp}_2}\\
-                                         &\step&A\land\top & \mathsf{id}\\
-    &\step& A&\mathsf{neul}
+                                         &\step{}&A\land\top & \mathsf{id}\\
+    &\step{}& A&\mathsf{neul}
 \end{array}
 $$
 
 This can also be done under conjunctions and/or disjunctions:
 $$
-  A\limp \select{B} \back C \land (D\lor \select{B}) ~~ \steps ~~ C \land (D\lor A)
+  A\limp \select{B} \back C \land (D\lor \select{B}) ~~ \steps{} ~~ C \land (D\lor A)
 $$
 
 An interesting point is what happens when using implications with
@@ -568,12 +568,12 @@ implication will behave exactly the same way:
 
 $$
   A\limp B \limp \select{C} \back D\lor \select{C}
-  ~~~\/ ~\steps~~~  D\lor (A\land B)
+  ~~~\/ ~\steps{}~~~  D\lor (A\land B)
 $$
 and:
 $$
   A\land B \limp \select{C} \back D\lor \select{C}
-  ~~~ \/ ~\steps~~~  D\lor (A\land B)
+  ~~~ \/ ~\steps{}~~~  D\lor (A\land B)
 $$
 
 
@@ -584,21 +584,21 @@ hypothesis matches one of their premisses.
 A first nice feature is the ability to strengthen a hypothesis by
 providing evidence for any of its premises:
 $$
-B\limp \select{A}\limp C \forw \select {A}  ~~\/~\/~\steps~\/~~~~~
+B\limp \select{A}\limp C \forw \select {A}  ~~\/~\/~\steps{}~\/~~~~~
 B\limp C$$
 and again the same can be done for the uncurryfied version:
 $$
-B\land \select{A}\limp C \forw \select {A}  ~\/~\/~\steps~\/~~~~~
+B\land \select{A}\limp C \forw \select {A}  ~\/~\/~\steps{}~\/~~~~~
 B\limp C.$$
 
 The two aspects of the implication can be combined:
 
 $$
-B\limp \select{A}\limp C \forw D\limp\select {A}  ~\/~\/~\steps~\/~~~~~
+B\limp \select{A}\limp C \forw D\limp\select {A}  ~\/~\/~\steps{}~\/~~~~~
 B\limp D\limp C$$
 or:
 $$
-B\land \select{A}\limp C \forw D\limp\select {A}  ~\/~\/~\steps~\/~~~~~
+B\land \select{A}\limp C \forw D\limp\select {A}  ~\/~\/~\steps{}~\/~~~~~
 B\land D \limp C.$$
 
 
@@ -616,7 +616,7 @@ arbitrary syntactical details, like the order of hypotheses or whether
 they come in curryfied form or not.
 
 Also, the rules for implication combined with the rules for equality
-\rnmsf{L{=}_i} or \rnmsf{F{=}_i} naturally give access to {\em
+\rsf{L{=}_i} or \rsf{F{=}_i} naturally give access to {\em
   conditional rewriting}; we detail this in combination with
 quantifiers in the next section.
 
@@ -625,7 +625,7 @@ quantifiers in the next section.
 
 
 As for red implications, they also have a backward semantics with the rules
-\rnmsf{R{\limp}_1} and \rnmsf{R{\limp}_2}, but most of the time one
+\rsf{R{\limp}_1} and \rsf{R{\limp}_2}, but most of the time one
 will want to destruct them immediately by click. An exception could be if one
 wants to simplify some part of an implicative, inductive goal before starting
 the induction.
@@ -633,17 +633,17 @@ the induction.
 \subsection{Quantifiers}
 As the first example of this chapter shows, drag-and-drop actions work through
 quantifiers and can trigger instantiations of quantified variables. This is made
-possible by the rules \rnmsf{L\forall i} and \rnmsf{F\forall i}, which allow the
+possible by the rules \rsf{L\forall i} and \rsf{F\forall i}, which allow the
 instantiation of a variable universally quantified in a hypothesis.
 
 Symmetrically, a variable quantified existentially in a conclusion can
 also be instantiated. For instance:
 
 $$\begin{array}{llll}
-    \select{A(t)}\back \exists x.\select{A(x)}&\step&
+    \select{A(t)}\back \exists x.\select{A(x)}&\step{}&
                                                       \select{A(t)}\back\select{A(t)}&\mathsf{L}\forall\mathsf{i}
     \\
-                                               &\step& \top&\mathsf{id}
+                                               &\step{}& \top&\mathsf{id}
   \end{array}
   $$
 
@@ -653,10 +653,10 @@ quantifiers. Consider the following possible goal:
 % $$\begin{array}{clc}
 %    & \forall x.\select{ x+0 = x }\back \forall a. \select{a+0} = 0 +
 %      a&  \\
-%          \step&\forall a.(\forall x.\select{x+0 = x }\back \select{a+0} =
+%          \step{}&\forall a.(\forall x.\select{x+0 = x }\back \select{a+0} =
 %             0 +a)&\mathsf{R}\forall\mathsf{s}\\
-%      \step&\forall a. (\select{a+0=a}\back  \select{a+0} = 0 +a)& \mathsf{L}\forall\mathsf{i}\\
-%      \step&\forall a. a = 0+a&\mathsf{L}=1
+%      \step{}&\forall a. (\select{a+0=a}\back  \select{a+0} = 0 +a)& \mathsf{L}\forall\mathsf{i}\\
+%      \step{}&\forall a. a = 0+a&\mathsf{L}=1
 %                                \end{array}$$
 % Performing such a transformation of the goal $\forall a.a+0=0+a$
 % without destroying the head quantifier is not trivial traditional
@@ -674,7 +674,7 @@ In our setting, the equality can be used under quantifiers in one single action:
 $$
 \begin{array}{ll}
   &\forall x.\forall y. \select{x+y}=y+x \back \forall a.\exists b. A(\select{f(a)+g(b)})\\
-\steps & \forall a.\exists b. A(g(b)+f(a))
+\steps{} & \forall a.\exists b. A(g(b)+f(a))
 \end{array}$$
 
 
@@ -688,12 +688,12 @@ negative position; for instance:
 $$
 \begin{array}{rcl}
  \forall x.\forall
- y. \select{P(y)}\limp R(x,y)\forw \select{P(a)} ~\/~\steps
+ y. \select{P(y)}\limp R(x,y)\forw \select{P(a)} ~\/~\steps{}
 ~\/~ \forall x. R(x,a)
  %% \\
  %% \mbox{\hbox to 0pt{\hss or equivalently:}}
  %% \forall y.\forall
- %% x. \select{P(x)}\limp R(x,y)\forw \select{P(a)} \steps
+ %% x. \select{P(x)}\limp R(x,y)\forw \select{P(a)} \steps{}
  %% \forall y. R(a,y)
 \end{array}
 $$
@@ -713,7 +713,7 @@ instantiated following a linkage:
 $$
 \begin{array}{rcl}
 \select{P(a)}\back \exists x.\exists y. \select{P(y)}\land R(x,y)
- ~\/~\steps
+ ~\/~\steps{}
 ~\/~
     \exists x. R(x,a)
 \end{array}
@@ -723,7 +723,7 @@ When using an existential assumption, one can either destruct it
 through a click, or use or transform it through a DnD; for instance:
 $$
 \exists x.\select{P(x)}\forw \forall y.\select{P(y)}\limp
-Q(y)  ~\/~\steps
+Q(y)  ~\/~\steps{}
 ~\/~\exists x.Q(x)
 $$
 
@@ -736,17 +736,17 @@ $$
 \begin{array}{lll}
   &\exists y. \forall x. \select{R(x,y)}\back \forall x'.\exists
     y'. \select{R(x',y')}& \\
-  \step& \forall y.(\forall x. \select{R(x,y)}\back \forall x'.\exists
+  \step{}& \forall y.(\forall x. \select{R(x,y)}\back \forall x'.\exists
         y'. \select{R(x',y')} ) \mbox{\hbox to 12pt{\hfill}}& \mathsf{L}\exists\mathsf{s}\\
-  \step &\forall y. \forall x'. (\forall x. \select{R(x,y)}\back \exists
+  \step{} &\forall y. \forall x'. (\forall x. \select{R(x,y)}\back \exists
   y'. \select{R(x',y')} ) ~~~~~~~~~~~~&\mathsf{R}\forall\mathsf{s}\\
-  \step &  \forall y. \forall x'. (\forall
+  \step{} &  \forall y. \forall x'. (\forall
          x. \select{R(x,y)}\back\select{R(x',y)} )&\mathsf{R}\exists\mathsf{i}\\
-  \step&   \forall y. \forall
+  \step{}&   \forall y. \forall
            x'. (\select{R(x',y)}\back\select{R(x',y)} )&\mathsf{L}\forall\mathsf{i}\\
-   \step  &  \forall y. \forall
+   \step{}  &  \forall y. \forall
            x'. \top & \mathsf{id}\\
-\steps& \top
+\steps{}& \top
 \end{array}
 $$
 
@@ -777,9 +777,9 @@ which will generate a side-condition $t\neq 0$:
 $$
 \begin{array}{lll}
   &\forall x. x\neq 0 \limp \select{f(x)} = g(x) \back A(\select{f(t)}) &\\
-  \step & t\neq 0 \limp \select{f(t)} = g(t) \back A(\select{f(t)}) &\mathsf{L \forall i}\\
-  \step & t\neq 0 \land (\select{f(t)} = g(t) \back A(\select{f(t)})) & \mathsf{L{\limp}_2}\\
-  \step &  t\neq 0 \land A(g(t)) &\mathsf{L{=}_1} \\
+  \step{} & t\neq 0 \limp \select{f(t)} = g(t) \back A(\select{f(t)}) &\mathsf{L \forall i}\\
+  \step{} & t\neq 0 \land (\select{f(t)} = g(t) \back A(\select{f(t)})) & \mathsf{L{\limp}_2}\\
+  \step{} &  t\neq 0 \land A(g(t)) &\mathsf{L{=}_1} \\
 \end{array}$$
 
 One could similarly do such a rewrite in a hypothesis. Furthermore,
@@ -788,9 +788,9 @@ $$
 \begin{array}{lll}
   &\forall x. x\neq 0 \limp \select{f(x)} = g(x) \back \exists y . A(\select{f(y)})
   &\mathsf{R \exists s}\\
-  \step &\exists y. ( \forall x. x\neq 0 \limp \select{f(x)} = g(x) \back A(\select{f(y)})) &\mathsf{L \forall i}\\
-  \step & \exists y. ( y\neq 0 \land ( \select{f(y)} = g(y) \back A(\select{f(y)}) )) &\mathsf{L{\limp}_2} \\
-  \step & \exists y .( y\neq 0 \land A(g(t))) &\mathsf{L{=}_1} \\
+  \step{} &\exists y. ( \forall x. x\neq 0 \limp \select{f(x)} = g(x) \back A(\select{f(y)})) &\mathsf{L \forall i}\\
+  \step{} & \exists y. ( y\neq 0 \land ( \select{f(y)} = g(y) \back A(\select{f(y)}) )) &\mathsf{L{\limp}_2} \\
+  \step{} & \exists y .( y\neq 0 \land A(g(t))) &\mathsf{L{=}_1} \\
 \end{array}$$
 
 
@@ -805,33 +805,33 @@ $$
     \begin{array}{r@{\quad}c@{\quad}lr}
         \multicolumn{4}{c}{\textsc{Backward}} \\[2em]
 
-        {A \back A}&\step&\top &\mathsf{id}\\
-        {t = u \back \subst{A}{t}{x}}&\step&\subst{A}{u}{x} &\mathsf{L{=}_1}\\
-        {t = u \back \subst{A}{u}{x}}&\step&\subst{A}{t}{x} &\mathsf{L{=}_2}\\[1em]
+        {A \back A}&\step{}&\top &\mathsf{id}\\
+        {t = u \back \subst{A}{t}{x}}&\step{}&\subst{A}{u}{x} &\mathsf{L{=}_1}\\
+        {t = u \back \subst{A}{u}{x}}&\step{}&\subst{A}{t}{x} &\mathsf{L{=}_2}\\[1em]
 
-        {(B \land C) \back A}&\step&        {B \back A}&\mathsf{L \land_1}\\
-        {(C \land B) \back A}&\step&        {B \back A}&\mathsf{L \land_2}\\
-        {A \back~(B \land C)}&\step&        {(A \back B) \land C}&\mathsf{R \land_1}\\
-        {A \back~(C \land B)}&\step&        {C \land (A \back B)}&\mathsf{R \land_2}\\[1em]
+        {(B \land C) \back A}&\step{}&        {B \back A}&\mathsf{L \land_1}\\
+        {(C \land B) \back A}&\step{}&        {B \back A}&\mathsf{L \land_2}\\
+        {A \back~(B \land C)}&\step{}&        {(A \back B) \land C}&\mathsf{R \land_1}\\
+        {A \back~(C \land B)}&\step{}&        {C \land (A \back B)}&\mathsf{R \land_2}\\[1em]
         
-        {(B \lor C) \back A}&\step&        {(B \back A) \land (C \limp A)}&\mathsf{L \lor_1}\rever\\
-        {(C \lor B) \back A}&\step&        {(C \limp A) \land (B \back A)}&\mathsf{L \lor_2}\rever\\
-        {A \back~(B \lor C)}&\step&        {(A \back B) \lor C}&\mathsf{R \lor_1}\\
-        {A \back~(C \lor B)}&\step&        {C \lor (A \back B)}&\mathsf{R \lor_2}\\[1em]
+        {(B \lor C) \back A}&\step{}&        {(B \back A) \land (C \limp A)}&\mathsf{L \lor_1}\rever\\
+        {(C \lor B) \back A}&\step{}&        {(C \limp A) \land (B \back A)}&\mathsf{L \lor_2}\rever\\
+        {A \back~(B \lor C)}&\step{}&        {(A \back B) \lor C}&\mathsf{R \lor_1}\\
+        {A \back~(C \lor B)}&\step{}&        {C \lor (A \back B)}&\mathsf{R \lor_2}\\[1em]
 
-        {(C \limp B) \back A}&\step&        {C \land (B \back A)}&\mathsf{L{\limp}_2}\\
-        {A \back~(B \limp C)}&\step&        {(A \forw B) \limp C}&\mathsf{R{\limp}_1}\rever\\
-        {A \back~(C \limp B)}&\step&        {C \limp (A \back B)}&\mathsf{R{\limp}_2}\rever\\[1em]
+        {(C \limp B) \back A}&\step{}&        {C \land (B \back A)}&\mathsf{L{\limp}_2}\\
+        {A \back~(B \limp C)}&\step{}&        {(A \forw B) \limp C}&\mathsf{R{\limp}_1}\rever\\
+        {A \back~(C \limp B)}&\step{}&        {C \limp (A \back B)}&\mathsf{R{\limp}_2}\rever\\[1em]
 
-        % {A \back \neg B}&\step&        {\neg (A \forw B)}&\mathsf{R\neg}\rever\\[1em]
+        % {A \back \neg B}&\step{}&        {\neg (A \forw B)}&\mathsf{R\neg}\rever\\[1em]
 
-        {(\forall x. B) \back A}&\step&        {\subst{B}{x}{t} \back A}&\mathsf{L \forall i}\\
-        {(\forall x. B) \back A}&\step&        {\exists x. (B \back A)}&\mathsf{L \forall s}\\
-        {A \back~(\forall x. B)}&\step&        {\forall x. (A \back B)}&\mathsf{R \forall s}\rever\\[1em]
+        {(\forall x. B) \back A}&\step{}&        {\subst{B}{x}{t} \back A}&\mathsf{L \forall i}\\
+        {(\forall x. B) \back A}&\step{}&        {\exists x. (B \back A)}&\mathsf{L \forall s}\\
+        {A \back~(\forall x. B)}&\step{}&        {\forall x. (A \back B)}&\mathsf{R \forall s}\rever\\[1em]
 
-        {(\exists x. B) \back A}&\step&        {\forall x. (B \back A)}&\mathsf{L \exists s}\rever\\
-        {A \back~(\exists x. B)}&\step&        {A \back \subst{B}{x}{t}}&\mathsf{R \exists i}\\
-        {A \back~(\exists x. B)}&\step&        {\exists x. (A \back B)}&\mathsf{R \exists s}\\
+        {(\exists x. B) \back A}&\step{}&        {\forall x. (B \back A)}&\mathsf{L \exists s}\rever\\
+        {A \back~(\exists x. B)}&\step{}&        {A \back \subst{B}{x}{t}}&\mathsf{R \exists i}\\
+        {A \back~(\exists x. B)}&\step{}&        {\exists x. (A \back B)}&\mathsf{R \exists s}\\
     \end{array}
   % \end{mathpar}
   \and
@@ -844,40 +844,40 @@ $$
       %   {\ifill{\eta}{\efill{A}{A} \forw \efill{B}{B}}}
       %   {\ifill{\eta}{\ifill{A}{A} \land \ifill{B}{B}}}
       % \\
-      {\subst{A}{t}{x} \forw~(t = u)} &\step& {\subst{A}{u}{x}}&\mathsf{F{=}_1}\\
-      {\subst{A}{u}{x} \forw~(t = u)} &\step& {\subst{A}{t}{x}}&\mathsf{F{=}_2}\\[1em]
+      {\subst{A}{t}{x} \forw~(t = u)} &\step{}& {\subst{A}{u}{x}}&\mathsf{F{=}_1}\\
+      {\subst{A}{u}{x} \forw~(t = u)} &\step{}& {\subst{A}{t}{x}}&\mathsf{F{=}_2}\\[1em]
 
-        {A \forw~(B \land C)} &\step&   {A \forw B}&\mathsf{F\land_1}\\
-        {A \forw~(C \land B)}&\step&        {A \forw B}&
+        {A \forw~(B \land C)} &\step{}&   {A \forw B}&\mathsf{F\land_1}\\
+        {A \forw~(C \land B)}&\step{}&        {A \forw B}&
             \mathsf{F \land_2}\\[1em]
 
-        {A \forw~(B \lor C)}& \step&       {(A \forw B) \lor C}
+        {A \forw~(B \lor C)}& \step{}&       {(A \forw B) \lor C}
       &
       \mathsf{F \lor_1}\\
-        {A \forw~(C \lor B)}&\step&        {C \lor (A \forw B)}&
+        {A \forw~(C \lor B)}&\step{}&        {C \lor (A \forw B)}&
             \mathsf{F \lor_2}\\[1em]
 
         {A \forw~(B \limp C)}
-&\step&        {(A \back B) \limp C}
+&\step{}&        {(A \back B) \limp C}
       &\mathsf{F{\limp}_1}\\
-        {A \forw~(C \limp B)}&\step&        {C \limp (A \forw B)}&
+        {A \forw~(C \limp B)}&\step{}&        {C \limp (A \forw B)}&
             \mathsf{F{\limp}_2}\\[1em]
 
 %         {A \forw \neg B}
-% &\step&        {\neg (A \back B)}
+% &\step{}&        {\neg (A \back B)}
 %       &\mathsf{F\neg}\\[1em]
 
         {A \forw~(\forall x. B)}
-&\step&        {A \forw \subst{B}{x}{t}}
+&\step{}&        {A \forw \subst{B}{x}{t}}
       &
       \mathsf{F \forall i}\\
-        {A \forw~(\forall x. B)}&\step&        {\forall x. (A \forw B)}&
+        {A \forw~(\forall x. B)}&\step{}&        {\forall x. (A \forw B)}&
             \mathsf{F \forall s}\\[1em]
 
-              {A \forw~(\exists x. B)}&\step&{\exists x. (A \forw B)}&
+              {A \forw~(\exists x. B)}&\step{}&{\exists x. (A \forw B)}&
               \mathsf{F \exists s}\rever\\[1em]
               
-          {B \forw A}&\step&
+          {B \forw A}&\step{}&
           {A \forw B}& \mathsf{Fcomm}\\
     \end{array}
     \end{mathpar}
@@ -902,17 +902,17 @@ $$
       \pair{\lor}{\bot},
       \pair{\limp}{\top}
       \}&
-      {\dagger \mcirc A}&\step&A&\mathsf{neul}\\
+      {\dagger \mcirc A}&\step{}&A&\mathsf{neul}\\
  \pair{\mcirc}{\dagger} \in \{
       \pair{\land}{\top},
       \pair{\lor}{\bot}
       \}&
-      {A \mcirc \dagger}&\step&A&\mathsf{neur}\\
+      {A \mcirc \dagger}&\step{}&A&\mathsf{neur}\\
    \pair{\mcirc}{\dagger} \in \{
       \pair{\land}{\bot},
       \pair{\lor}{\top}
       \}&
-      {\dagger \mcirc A}&\step&\dagger&
+      {\dagger \mcirc A}&\step{}&\dagger&
        \mathsf{absl}\\
   \pair{\mcirc}{\dagger} \in \{
       \pair{\land}{\bot},
@@ -920,13 +920,13 @@ $$
       \pair{\limp}{\top}
       \}&
       {A \mcirc \dagger}
-      &\step&\dagger& \mathsf{absr}\\
+      &\step{}&\dagger& \mathsf{absr}\\
   \pair{\mdiam}{\dagger} \in \{
     \pair{\forall}{\top},
     \pair{\exists}{\bot}
-    \}&      {\mdiam x. \dagger}&\step&\dagger&    \mathsf{absq}
+    \}&      {\mdiam x. \dagger}&\step{}&\dagger&    \mathsf{absq}
     \\
-&      {\bot \limp A}&\step&\top&\mathsf{efq} 
+&      {\bot \limp A}&\step{}&\top&\mathsf{efq} 
       \end{array}
   \end{mathpar}
   \end{framed}

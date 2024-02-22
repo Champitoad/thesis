@@ -232,8 +232,8 @@ calculus for intuitionistic logic dubbed \sys{BJ}. It is divided in five groups:
 \item The {\identity}, {\resource} and {\heating} groups correspond
 respectively to the identity, structural and logical rules of sequent
 calculus, following the terminology of \sidecite{girard:hal-01322183}. More
-precisely, rules {\rnmsf{i{\da}}} and {\rnmsf{i{\ua}}} correspond
-to the axiom and cut rules; rules {\rnmsf{w}} and {\rnmsf{c}} to the weakening
+precisely, rules {\rsf{i{\da}}} and {\rsf{i{\ua}}} correspond
+to the axiom and cut rules; rules {\rsf{w}} and {\rsf{c}} to the weakening
 and contraction rules; and every rule of the form $\mcirc{-}$ (resp.) that
 is, the axiom and cut rules, the contraction and weakening rules, and
 introduction rules for logical connectives.
@@ -243,13 +243,13 @@ flows in solutions by specifying what kinds of objects can traverse bubbles,
 and in which direction. They play the same role as \emph{switch} rules in
 formalisms based on CoS \cite{Guglielmi1999ACO}, which includes our own
 subformula linking rules (\reffig{DISL}). In the asymmetric bubble calculus
-there is only one $\mathbb{F}$-rule {\rnmsf{f{-}}} allowing hypotheses to flow
+there is only one $\mathbb{F}$-rule {\rsf{f{-}}} allowing hypotheses to flow
 inside bubbles.
 
 As their name suggests, $\mathbb{M}$-rules handle the behavior of the
 \emph{membrane} of bubbles, but independently from other items as opposed to
 $\mathbb{F}$-rules. In the asymmetric bubble calculus there is only one
-$\mathbb{M}$-rule {\rnmsf{p}} allowing to \emph{pop} any empty bubble, which
+$\mathbb{M}$-rule {\rsf{p}} allowing to \emph{pop} any empty bubble, which
 can be interpreted as the action of dismissing a solved subgoal. In CoS it
 would correspond to congruence rules handling the truth unit $\top$, and in
 subformula linking to the unit rules (\reffig{DISL-U}).
@@ -275,16 +275,16 @@ $$\vcenter{\R{S}{T}} \quad \text{should be read as} \quad
 \vcenter{\R{U\select{S}}{U\select{T}}} \quad \text{for all $U\hole$}$$
 
 \begin{definition}[\sys{BJ}-step]\labdef{BJ-step}
-We write $S \lstep T$ to denote the existence of a \sys{BJ}-rule instance
+We write $S \lstep{} T$ to denote the existence of a \sys{BJ}-rule instance
 $\irule{r}{S}{T}$ in the empty context, i.e. $S$ and $T$ are respectively the
-conclusion and premiss of the rule {\rnmsf{r}} in \reffig{sequent-BJ}, modulo
+conclusion and premiss of the rule {\rsf{r}} in \reffig{sequent-BJ}, modulo
 instantiation of meta-variables\sidenote[][-11cm]{The direction of the arrow
 is from conclusion to premiss, to stay consistent with our interactive proof
 building setting where inference rules are seen as goal-modifying actions.}.
-Then $\lstep$ can be seen as a binary relation on solutions, whose contextual
-closure described above is the \emph{step} relation $\step$: $S \step T$ if
+Then $\lstep{}$ can be seen as a binary relation on solutions, whose contextual
+closure described above is the \emph{step} relation $\step{}$: $S \step{} T$ if
 and only if there exist $U\hole$, $S_0$ and $T_0$ such that $S =
-U\select{S_0}$, $T = U\select{T_0}$ and $S_0 \lstep T_0$.
+U\select{S_0}$, $T = U\select{T_0}$ and $S_0 \lstep{} T_0$.
 \end{definition}
 
 \begin{definition}[\sys{BJ}-derivation]\labdef{BJ-deriv}
@@ -310,7 +310,7 @@ denotes the proof state where there are no subgoals left.
 An example of proof in \sys{BJ} is shown in \reffig{ex-seq-BJ}, where the
 focused subsolution is squared for each inference. Notice that many rules could
 have been applied in a different order: for instance all applications of the
-{\rnmsf{p}} rule could have been postponed to the top/end of the derivation.
+{\rsf{p}} rule could have been postponed to the top/end of the derivation.
 This is generally true of all formalisms based on CoS, which is known in the
 deep inference literature for its ``bureaucracy''. In \sys{BJ},
 $\mathbb{H}$-rules aggravate the matter by adding all inessential rule
@@ -384,8 +384,8 @@ rule $r$.
 \todo{Add definition of multiset inclusion somewhere?}
 
 \todo{Maybe split both \reffig{ex-gra-BJ} and \reffig{ex-seq-BJ} in two figures,
-one for the beginning of the proof upto {\rnmsf{f{-}}}, and a generic one for
-the two subproofs starting with {\rnmsf{{\limp}{-}}}.}
+one for the beginning of the proof upto {\rsf{f{-}}}, and a generic one for
+the two subproofs starting with {\rsf{{\limp}{-}}}.}
 
 \reffig{ex-gra-BJ} shows the graphical presentation of the same \sys{BJ}-proof
 as in \reffig{ex-seq-BJ}. Whereas in \reffig{ex-seq-BJ} we squared the whole
@@ -397,7 +397,7 @@ still over-approximates the modifications that really need to be performed to
 carry the transformations. Indeed, by only exposing the data of a redex $S$ and
 a reddendum $T$, a rewriting rule $\rrule{r}{S}{T}$ can only be
 interpreted as the deletion of $S$ followed by the insertion $T$. Taking for
-instance the {\rnmsf{{\limp}{-}}} rule in \reffig{graphical-BJ}, one can
+instance the {\rsf{{\limp}{-}}} rule in \reffig{graphical-BJ}, one can
 describe its graphical behavior more finely as resulting from the following
 sequence of \emph{edits}:
 \begin{enumerate}
@@ -437,7 +437,7 @@ might have been reminded of the Proof-by-Action paradigm as introduced in
 \refch{pba}, by seeing redexes as the items involved in a graphical action ---
 there are always at most two. More precisely, $\mathbb{H}$-rules correspond to
 \emph{click} actions on blue ({\rnm{\mcirc{-}}} rules) or red items
-({\rnm{\mcirc{+}}} rules), and the {\rnmsf{i{\da}}} rule corresponds to
+({\rnm{\mcirc{+}}} rules), and the {\rsf{i{\da}}} rule corresponds to
 the most basic DnD action between dual occurrences of a formula.
 
 As mentioned earlier when comparing \sys{BJ} to \sys{LJ}, the novelty here lies
@@ -456,8 +456,8 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
 \begin{marginfigure}
   $$
   \begin{array}{rcll}
-    \hypo{A}~~~\hypo{B} &\step &\hypo{A \forw B} &\forw \\
-    \hypo{A}~~~\conc{B} &\step &\conc{A \back B} &\back \\
+    \hypo{A}~~~\hypo{B} &\step{} &\hypo{A \forw B} &\forw \\
+    \hypo{A}~~~\conc{B} &\step{} &\conc{A \back B} &\back \\
   \end{array}
   $$
   \caption{Linkage creation rules in \sys{BJ}}
@@ -467,9 +467,9 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
 % \begin{marginfigure}
 %   $$
 %   \begin{array}{rcll}
-%     \conc{t = t} &\step &&{=}{+} \\
-%     \hypo{t = u}~~~A &\step &\subst{A}{u}{t} &{=}{-}1 \\
-%     \hypo{t = u}~~~A &\step &\subst{A}{t}{u} &{=}{-}2 \\
+%     \conc{t = t} &\step{} &&{=}{+} \\
+%     \hypo{t = u}~~~A &\step{} &\subst{A}{u}{t} &{=}{-}1 \\
+%     \hypo{t = u}~~~A &\step{} &\subst{A}{t}{u} &{=}{-}2 \\
 %   \end{array}
 %   $$
 %   \caption{Rules for equality in \sys{BJ}}
@@ -484,7 +484,7 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
 
 \begin{description}
   \item[\textbf{\flow}]
-    The {\rnmsf{f{-}}} rule plays a special role, in that it would not be mapped
+    The {\rsf{f{-}}} rule plays a special role, in that it would not be mapped
     to any particular action. Indeed it captures the way information flows in
     solutions, and we already described in \refsec{bubbles} how this is
     reflected in the topological behavior of bubbles. Thus it could be
@@ -494,17 +494,17 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     This of course would provide a level of interactivity unseen before in a
     proving interface, making it very discoverable and playful. It also combines
     nicely with DnD actions in general: for instance a sequence of applications
-    of {\rnmsf{f{-}}} followed by {\rnmsf{i{\da}}} could be performed as
+    of {\rsf{f{-}}} followed by {\rsf{i{\da}}} could be performed as
     a single DnD action, where the dragged hypothesis crosses successively the
     various bubbles in its way.
   \item[\textbf{\membrane}]
-    The {\rnmsf{p}} rule can be mapped very straightforwardly to the action of
+    The {\rsf{p}} rule can be mapped very straightforwardly to the action of
     clicking on the area of an empty bubble, in order to pop it. It could also
     be entirely automated, by letting the proof engine eagerly pop empty bubbles
     as soon as they appear in a solution. Note that in this graphical setting,
-    the {\rnmsf{p}} rule can be understood as resulting from a process of
+    the {\rsf{p}} rule can be understood as resulting from a process of
     \emph{contraction}\sidenote{Not to be confused with the contraction rules
-    \rnmsf{c} and \rnmsf{w}.} of the membrane into a single point: if the bubble
+    \rsf{c} and \rsf{w}.} of the membrane into a single point: if the bubble
     contains some items $\Delta$, then this process fails because the membrane
     gets stuck on the boundaries of $\Delta$. This is a topological way to check
     the emptiness of a bubble, which has the benefit of being completely
@@ -520,7 +520,7 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     % zone} in sequents where formulas can be duplicated and discarded at will,
     % and the \emph{linear zone} where they cannot.}. In a bubble-based GUI, one
     % could keep this behavior, where the context is filled with all items 
-    The contraction rule {\rnmsf{c}} could be mapped to a specific triggering
+    The contraction rule {\rsf{c}} could be mapped to a specific triggering
     input when starting to drag a blue item $\hypo{A}$ (e.g. a shortkey if a
     keyboard is available, or a long press on the item on a touchscreen), which
     has the effect of keeping a copy of $A$ at its original location in addition
@@ -529,10 +529,10 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     \texttt{CTRL} key to enable copy mode. It was also chosen by K. Chaudhuri to
     implement contraction in his \sys{ProfInt} prototype for subformula linking
     in intuitionistic logic \cite{ProfInt}.}. As for the weakening rule
-    {\rnmsf{w}}, it could be available as a contextual action when selecting
+    {\rsf{w}}, it could be available as a contextual action when selecting
     blue items.
   \item[\textbf{\identity}]
-    Although the {\rnmsf{i{\da}}} rule only corresponds to the base case
+    Although the {\rsf{i{\da}}} rule only corresponds to the base case
     of DnD actions, it would be easy to integrate their full SFL semantics
     directly in \sys{BJ}. Indeed our SFL rules (\reffig{DISL}) are already
     expressed as rewriting rules, just like the graphical rules of \sys{BJ}
@@ -544,13 +544,13 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     which adds the cut formula $A$ (input by the user in a dialog box) as a new
     hypothesis in the current goal, and as the conclusion in a new subgoal (see
     \refsec{newitems}). Since subgoals are now reified as bubbles, the
-    {\rnmsf{i{\ua}}} rule could be mapped instead to a contextual action
+    {\rsf{i{\ua}}} rule could be mapped instead to a contextual action
     available on any red item $\conc{\Delta}$, which would have the effect of
     spawning a bubble around it with a blue item $\hypo{A}$, and another bubble
     nearby it with a red item $\conc{A}$.
 
-    % Finally, an analog to the cut rule {\rnmsf{i{\ua}}} is the rule
-    % {\rnmsf{d\ua}} for adding new definitions (\reffig{bubbles-vars}).
+    % Finally, an analog to the cut rule {\rsf{i{\ua}}} is the rule
+    % {\rsf{d\ua}} for adding new definitions (\reffig{bubbles-vars}).
     % Their similarity is more striking in a logical framework like Martin-Löf
     % type theory, where mathematical objects and propositions are expressed in
     % the same language. In Actema it is handled with a separate \textsf{+expr}
@@ -587,10 +587,10 @@ ideas for mapping the remaining rules of \sys{BJ} in such a GUI:
     %   \item Instantiation rules {\rnm{\forall{-}}} and {\rnm{\exists{+}}} could
     %   be mapped as in Actema to DnD actions with a green item, corresponding to
     %   the alternative formulation of \reffig{bubbles-vars}. This way all the
-    %   rules of \sys{BJ} become \emph{analytic}: if $S \step T$, then every
+    %   rules of \sys{BJ} become \emph{analytic}: if $S \step{} T$, then every
     %   subterm occurring in $T$ also occurs in $S$\sidenote{The only exceptions
-    %   are the {\rnmsf{i{\da}}} rule which will be shown to be admissible
-    %   in \refsec{bubbles-completeness}, and the {\rnmsf{d{\ua}}} rule of
+    %   are the {\rsf{i{\da}}} rule which will be shown to be admissible
+    %   in \refsec{bubbles-completeness}, and the {\rsf{d{\ua}}} rule of
     %   \reffig{bubbles-vars}.}.
     % \end{itemize}
 \end{description}

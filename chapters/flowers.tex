@@ -106,7 +106,7 @@ envision.
 % screen. In previous work \sidecite{10.1145/3497775.3503692}, we proposed a way to
 % synthesize complex logical inferences through \emph{drag-and-drop} actions
 % between two items of the current goal. Since goals are represented as
-% \emph{sequents} $\Gamma \vdash C$, the items involved were traditional logical
+% \emph{sequents} $\Gamma \entails{} C$, the items involved were traditional logical
 % formulas, either two hypotheses in $\Gamma$ or one hypothesis and the conclusion
 % $C$.
 
@@ -831,11 +831,11 @@ of flowers:
   A \emph{bouquet context} $\Phi\hole$ is a bouquet which contains exactly one
   occurrence of the special flower $\hole$ called the \emph{hole}. The hole can
   always be \emph{filled} (substituted) with any other bouquet $\Psi$ or context
-  $\Xi\hole$, producing a new bouquet $\cfill{\Phi}{\Psi}$ or context
-  $\cfill{\Phi}{\Xi\hole}$. In particular, filling with the empty bouquet will
-  yield a bouquet $\cfill{\Phi}{\phantom{\Phi}}$, which is just $\Phi\hole$ with
-  its hole removed. A \emph{flower context} $\phi\hole$ is a bouquet context of
-  size $1$.
+  $\Xi\hole$, producing a new bouquet $\intro*\cfill{\Phi}{\Psi}$ or context
+  $\reintro*\cfill{\Phi}{\Xi\hole}$. In particular, filling with the empty
+  bouquet will yield a bouquet $\cfill{\Phi}{\phantom{\Phi}}$, which is just
+  $\Phi\hole$ with its hole removed. A \emph{flower context} $\phi\hole$ is a
+  bouquet context of size $1$.
 \end{definition}
 
 \begin{definition}[Depth]
@@ -887,7 +887,7 @@ relation of \refsec{atomicity}:
     \sep \Delta}}$ for some $\bx, \by, \Delta$.
   \end{itemize}
   A bouquet $\Psi$ can be pollinated in $\Phi\hole$, written
-  $\chyp{\Psi}{\Phi\hole}$, if $\chyp{\psi}{\Phi\hole}$ for all $\psi \in \Psi$.
+  $\chyp{\Phi}{\Phi\hole}$, if $\chyp{\phi}{\Phi\hole}$ for all $\phi \in \Phi$.
 \end{definition}
 
 \begin{marginfigure}
@@ -1129,31 +1129,31 @@ the contrary, all $\Culture$-rules are \emph{non-invertible}, and they will be
 shown to be \emph{admissible} in \refsec{Completeness}.
 
 \begin{definition}[Derivation]
-  Given a set of rules $\mathsf{R}$, we write $\Phi \step_{\mathsf{R}} \Psi$ to
+  Given a set of rules $\mathsf{R}$, we write $\Phi \step{\mathsf{R}} \Psi$ to
   indicate a rewrite \emph{step} in $\mathsf{R}$, that is an instance of some $r
   \in \mathsf{R}$ with $\Psi$ as premiss and $\Phi$ as conclusion. We just write
-  $\Phi \step \Psi$ to mean $\Phi \step_{\Nature\cup\Culture} \Psi$. A
-  \emph{derivation} $\Phi \nsteps{n}_{\mathsf{R}} \Psi$ is a sequence of rewrite
-  steps $\Phi_0 \step_{\mathsf{R}} \Phi_1 \ldots \step_{\mathsf{R}} \Phi_n$ with
+  $\Phi \step{} \Psi$ to mean $\Phi \step{\Nature\cup\Culture} \Psi$. A
+  \emph{derivation} $\Phi \nsteps{n}{\mathsf{R}} \Psi$ is a sequence of rewrite
+  steps $\Phi_0 \step{\mathsf{R}} \Phi_1 \ldots \step{\mathsf{R}} \Phi_n$ with
   $\Phi_0 = \Phi$, $\Phi_n = \Psi$ and $n \geq 0$. Generally the length $n$ of
-  the derivation does not matter, and we just write $\Phi \steps_R \Psi$.
-  Finally, natural derivations are closed under arbitrary contexts: for every
-  context $\Xi\hole$, $\Phi \step_\Nature \Psi$ implies $\cfill{\Xi}{\Phi}
-  \step_\Nature \cfill{\Xi}{\Psi}$. We write $\Phi \lstep_{\Nature} \Psi$ to
-  denote a \emph{local} natural step, i.e. a direct instance of a natural rule
-  in the empty context.
+  the derivation does not matter, and we just write $\Phi \steps{\mathsf{R}}
+  \Psi$. Finally, natural derivations are closed under arbitrary contexts: for
+  every context $\Xi\hole$, $\Phi \step{\Nature} \Psi$ implies
+  $\cfill{\Xi}{\Phi} \step{\Nature} \cfill{\Xi}{\Psi}$. We write $\Phi
+  \lstep{\Nature} \Psi$ to denote a \emph{local} natural step, i.e. a direct
+  instance of a natural rule in the empty context.
 \end{definition}
 
 The following lemma is the flower calculus equivalent of \reflemma{eg-posclos}
 for EG:
 
 \begin{lemma}[Positive closure]\lablemma{flowers-posclos}
-  If $\Phi \step \Psi$, then $\Xi^+\select{\Phi} \step \Xi^+\select{\Psi}$.
+  If $\Phi \step{} \Psi$, then $\Xi^+\select{\Phi} \step{} \Xi^+\select{\Psi}$.
 \end{lemma}
 \begin{proof}
-  In the case of a natural step $\Phi \step_{\Nature} \Psi$, this is immediate
+  In the case of a natural step $\Phi \step{\Nature} \Psi$, this is immediate
   by definition. Otherwise we have a cultural step $\Xi'\select{\Phi_0}
-  \step_{\Culture} \Xi'\select{\Psi_0}$. Then either $\Xi'\hole$ is positive,
+  \step{\Culture} \Xi'\select{\Psi_0}$. Then either $\Xi'\hole$ is positive,
   and $\inv(\Xi^+\select{\Xi'\hole}) = \inv(\Xi^+\hole) + \inv(\Xi'\hole)$ is
   even since it is the sum of two even numbers; or $\Xi'\hole$ is negative, and
   $\inv(\Xi^+\select{\Xi'\hole})$ is odd since it is the sum of an even and an
@@ -1164,7 +1164,7 @@ for EG:
 Now we can define our usual ``goal-oriented'' notion of proof:
 
 \begin{definition}[Proof]\labdef{flowers-proof}
-  A \emph{proof} of a bouquet $\Phi$ is a derivation $\Phi \steps \emptyset$.
+  A \emph{proof} of a bouquet $\Phi$ is a derivation $\Phi \steps{} \emptyset$.
 \end{definition}
 
 In Peircean terms, the empty bouquet is the blank sheet of assertion, which as
@@ -1173,46 +1173,46 @@ truth}. Then in our proof construction paradigm, proving a bouquet amounts to
 erasing it completely from the sheet of assertion, thus reducing it to absolute
 truth.
 
-If we want to speak about \emph{relative} truth $\Psi \vdash \Phi$, i.e. $\Phi$
+If we want to speak about \emph{relative} truth $\Psi \entails{} \Phi$, i.e. $\Phi$
 is true under the assumption that $\Psi$ is, we can simply rely on the existence
-of a derivation $\Phi \steps \Psi$ in the full flower calculus. This will be
+of a derivation $\Phi \steps{} \Psi$ in the full flower calculus. This will be
 justified by \emph{strong} soundness and completeness theorems, relying on the
 following strong deduction theorem:
 
 \begin{theorem}[Strong deduction]\labthm{flowers-strong-deduction}
-  $\Phi \steps \Psi$ if and only if $\flower{\Psi}{\Phi} \steps \emptyset$.
+  $\Phi \steps{} \Psi$ if and only if $\flower{\Psi}{\Phi} \steps{} \emptyset$.
 \end{theorem}
 \begin{proof}
-  Suppose that $\Phi \steps \Psi$. Then we have:
+  Suppose that $\Phi \steps{} \Psi$. Then we have:
   $$
   \begin{array}{rlll}
     \flower{\Psi}{\Phi}
-    &\steps &\flower{\Psi}{\Psi} &\text{(Hypothesis + \reflemma{flowers-posclos})}\\
-    &\step_{\rsf{poll{\da}}} &\flower{\Psi}{\cdot} &\\
-    &\step_{\rsf{epet}} &\emptyset &
+    &\steps{} &\flower{\Psi}{\Psi} &\text{(Hypothesis + \reflemma{flowers-posclos})}\\
+    &\step{\rsf{poll{\da}}} &\flower{\Psi}{\cdot} &\\
+    &\step{\rsf{epet}} &\emptyset &
   \end{array}
   $$
   
-  In the other direction, suppose that $\flower{\Psi}{\Phi} \steps \emptyset$.
+  In the other direction, suppose that $\flower{\Psi}{\Phi} \steps{} \emptyset$.
   Then we have:
   $$
   \begin{array}{rlll}
     \Phi
-    &\step_{\rsf{epis}} &\flower{}{\Phi} &\\
-    &\step_{\rsf{grow}} &(\flower{\Psi}{\Phi}),(\flower{}{\Phi}) &\\
-    &\step_{\rsf{poll{\ua}}} &(\flower{\Psi}{\Phi}),(\flower{(\flower{\Psi}{\Phi})}{\Phi}) &\\
-    &\steps &\flower{(\flower{\Psi}{\Phi})}{\Phi} &\text{(Hypothesis + \reflemma{flowers-posclos})}\\
-    &\step_{\rsf{grow}} &\Psi,(\flower{(\flower{\Psi}{\Phi})}{\Phi}) &\\
-    &\step_{\rsf{poll{\da}}} &\Psi,(\flower{(\flower{}{\Phi})}{\Phi}) &\\
-    &\step_{\rsf{srep}} &\Psi,(\flower{}{(\flower{\Phi}{\Phi})}) &\\
-    &\step_{\rsf{poll{\da}}} &\Psi,(\flower{}{(\flower{\Phi}{\cdot})}) &\\
-    &\step_{\rsf{epet}} &\Psi,(\flower{}{\cdot}) &\\
-    &\step_{\rsf{epet}} &\Psi
+    &\step{\rsf{epis}} &\flower{}{\Phi} &\\
+    &\step{\rsf{grow}} &(\flower{\Psi}{\Phi}),(\flower{}{\Phi}) &\\
+    &\step{\rsf{poll{\ua}}} &(\flower{\Psi}{\Phi}),(\flower{(\flower{\Psi}{\Phi})}{\Phi}) &\\
+    &\steps{} &\flower{(\flower{\Psi}{\Phi})}{\Phi} &\text{(Hypothesis + \reflemma{flowers-posclos})}\\
+    &\step{\rsf{grow}} &\Psi,(\flower{(\flower{\Psi}{\Phi})}{\Phi}) &\\
+    &\step{\rsf{poll{\da}}} &\Psi,(\flower{(\flower{}{\Phi})}{\Phi}) &\\
+    &\step{\rsf{srep}} &\Psi,(\flower{}{(\flower{\Phi}{\Phi})}) &\\
+    &\step{\rsf{poll{\da}}} &\Psi,(\flower{}{(\flower{\Phi}{\cdot})}) &\\
+    &\step{\rsf{epet}} &\Psi,(\flower{}{\cdot}) &\\
+    &\step{\rsf{epet}} &\Psi
   \end{array}
   $$
 \end{proof}
 
-Contrary to full derivability, natural derivability $\Phi \steps_{\Nature} \Psi$
+Contrary to full derivability, natural derivability $\Phi \step{\Nature} \Psi$
 is too weak to satisfy a strong deduction theorem. This can be intuited from the
 proof of \refthm{flowers-strong-deduction}, by noticing that the converse
 direction relies on the $\Culture$-rule \rsf{grow}, a close analog to the cut
@@ -1222,10 +1222,10 @@ A consequence of invertibility is that natural derivability is only able to
 relate logically equivalent bouquets --- in fact not even all of them. That is,
 as soon as $\flower{\Psi}{\Phi}$ is provable but the converse
 $\flower{\Phi}{\Psi}$ is not, it will necessarily follow that $\Phi
-\not\steps_{\Nature} \Psi$, thus contradicting the strong deduction theorem.
+\not\step{\Nature} \Psi$, thus contradicting the strong deduction theorem.
 
-A trivial way to circumvent this is to define directly $\Psi \vdash \Phi$ as
-$\flower{\Psi}{\Phi} \steps \emptyset$. In fact this is closer to what one would
+A trivial way to circumvent this is to define directly $\Psi \entails{} \Phi$ as
+$\flower{\Psi}{\Phi} \steps{} \emptyset$. In fact this is closer to what one would
 find in sequent calculus, where hypothetical proofs are closed derivations of
 hypothetical sequents, not open derivations. The difference is that sequents
 capture only the first-order implicative structure of logic\sidenote{As opposed
@@ -1237,20 +1237,20 @@ useful in the completeness proof of \refsec{Completeness}.
 \begin{definition}[Hypothetical provability]
   Given two bouquets $\Phi, \Psi$, we say that $\Phi$ is \emph{hypothetically
   provable} from $\Psi$ in a fragment $\mathsf{R}$ of rules, written $\Psi
-  \vdash_{\mathsf{R}} \Phi$, if for every context $\Xi\hole$ such that
-  $\chyp{\Psi}{\Xi\hole}$, $\cfill{\Xi}{\Phi} \steps_{\mathsf{R}}
-  \cfill{\Xi}{\phantom{\Phi}}$. We write $\Psi \vdash \Phi$ to denote
+  \entails{\mathsf{R}} \Phi$, if for every context $\Xi\hole$ such that
+  $\chyp{\Psi}{\Xi\hole}$, $\cfill{\Xi}{\Phi} \step{\mathsf{R}}
+  \cfill{\Xi}{\phantom{\Phi}}$. We write $\Psi \entails{} \Phi$ to denote
   hypothetical provability in the full flower calculus.
 \end{definition}
 
 \begin{lemma}[Reflexivity]\lablemma{reflexivity}
-  For any bouquet $\Phi$, $\Phi \vdash_{\Nature} \Phi$.
+  For any bouquet $\Phi$, $\Phi \entails{\Nature} \Phi$.
 \end{lemma}
 \begin{proof}
   For any context $\Xi\hole$ such that $\chyp{\Phi}{\Xi\hole}$, one has the following
   derivation:
   $$
-  \cfill{\Xi}{\Phi} \step_{\mathsf{poll{\da}}}
+  \cfill{\Xi}{\Phi} \step{\mathsf{poll{\da}}}
   \cfill{\Xi}{\phantom{\Phi}}
   $$
 \end{proof}
@@ -1262,9 +1262,9 @@ in these settings it is characterized as the existence of a proof for a
 of derivations, here we have the stronger requirement that there exist proofs
 for a \emph{class} of judgments $\cfill{\Xi}{\Phi}$, whose hypothetical shape
 comes from the condition that $\chyp{\Psi}{\Xi\hole}$. In practice, the
-pollination rules $\{\text{\rnmsf{poll{\da}}}, \text{\rnmsf{poll{\ua}}}\}$ and
-the {\rnmsf{epis}} rule make this equivalent to the existence of a proof for
-$\flower{\Psi}{\Phi}$. But we conjecture that the {\rnmsf{epis}} rule might be
+pollination rules $\{\text{\rsf{poll{\da}}}, \text{\rsf{poll{\ua}}}\}$ and
+the {\rsf{epis}} rule make this equivalent to the existence of a proof for
+$\flower{\Psi}{\Phi}$. But we conjecture that the {\rsf{epis}} rule might be
 admissible modulo the addition of the distributivity rule
 \rsf{crep}\sidenote{\rsf{crep} stands for \textsf{c}ross-\textsf{rep}roduction,
 mirroring the distinction between cross-pollination and self-pollination, but
@@ -1289,30 +1289,30 @@ Thus our stronger notion of hypothetical provability makes more sense in the
 variant $\Nature \setminus \{\rsf{epis}\} \cup \{\rsf{crep}\}$ of the
 flower calculus, although it will still be useful in this work to make
 meta-theoretical proofs slightly shorter. For now we allow the
-{\rnmsf{epis}} rule, which renders the deduction theorem trivial:
+{\rsf{epis}} rule, which renders the deduction theorem trivial:
 
 \begin{theorem}[Deduction]\labthm{deduction}
-  For any pair $\Phi, \Psi$ of bouquets, $\Psi \vdash_{\Nature} \Phi$ if and only if
-  $\vdash_{\Nature} \flower{\Psi}{\Phi}$.
+  For any pair $\Phi, \Psi$ of bouquets, $\Psi \entails{\Nature} \Phi$ if and only if
+  $\entails{\Nature} \flower{\Psi}{\Phi}$.
 \end{theorem}
 \begin{proof}
-  Let $\Xi\hole$ be some context. If $\Psi \vdash_{\Nature} \Phi$, then in
-  particular $\cfill{\Xi'}{\Phi} \steps_{\Nature} \cfill{\Xi'}{\phantom{\Phi}}$
+  Let $\Xi\hole$ be some context. If $\Psi \entails{\Nature} \Phi$, then in
+  particular $\cfill{\Xi'}{\Phi} \step{\Nature} \cfill{\Xi'}{\phantom{\Phi}}$
   for $\Xi'\hole \deq \cfill{\Xi}{\flower{\Psi}{\square}}$. Thus we have:
   $$
-  \cfill{\Xi}{\flower{\Psi}{\Phi}} \steps_{\Nature}
-  \cfill{\Xi}{\flower{\Psi}{\garden{{}}{{}}}} \step_{\mathsf{epet}}
+  \cfill{\Xi}{\flower{\Psi}{\Phi}} \step{\Nature}
+  \cfill{\Xi}{\flower{\Psi}{\garden{{}}{{}}}} \step{\mathsf{epet}}
   \cfill{\Xi}{\phantom{\Phi}}
   $$
   In the other direction, let $\Xi$ be some context such that
-  $\chyp{\Psi}{\Xi\hole}$. If $\vdash_{\Nature}
+  $\chyp{\Psi}{\Xi\hole}$. If $\entails{\Nature}
   \flower{\Psi}{\Phi}$, then in particular
-  $\cfill{\Xi}{\flower{\Psi}{\Phi}} \steps_{\Nature}
+  $\cfill{\Xi}{\flower{\Psi}{\Phi}} \step{\Nature}
   \cfill{\Xi}{\phantom{\Phi}}$. Thus we have:
   $$
-  \cfill{\Xi}{\Phi} \step_{\mathsf{epis}}
-  \cfill{\Xi}{\flower{{}}{\Phi}} \step_{\mathsf{poll{\ua}}}
-  \cfill{\Xi}{\flower{\Psi}{\Phi}} \steps_{\Nature}
+  \cfill{\Xi}{\Phi} \step{\mathsf{epis}}
+  \cfill{\Xi}{\flower{{}}{\Phi}} \step{\mathsf{poll{\ua}}}
+  \cfill{\Xi}{\flower{\Psi}{\Phi}} \step{\Nature}
   \cfill{\Xi}{\phantom{\Phi}}
   $$
 \end{proof}
@@ -1395,10 +1395,10 @@ Kripke structures, detailed hereafter by order of increasing importance:
     labelled \emph{normalization-by-evaluation} \sidecite{NbE}. The idea is to
     prove completeness of the analytic fragment of the proof system with respect
     to some semantic models (in our case, $\vDash \phi$ implies
-    $\vdash_{\Nature} \phi$), and then compose with the soundness of the full
-    system with respect to the same models ($\vdash \phi$ implies $\vDash
-    \phi$), giving the desired admissibility result ($\vdash \phi$ implies
-    $\vdash_{\Nature} \phi$). And in the case of intuitionistic logics, the
+    $\entails{\Nature} \phi$), and then compose with the soundness of the full
+    system with respect to the same models ($\entails{} \phi$ implies $\vDash
+    \phi$), giving the desired admissibility result ($\entails{} \phi$ implies
+    $\entails{\Nature} \phi$). And in the case of intuitionistic logics, the
     models used are most of the time Kripke structures\sidenote{We know of two
     exceptions: the first is the (complex) uniform completeness proof for
     various logics proposed by Okada \cite{OKADA2002471} and based on
@@ -1593,7 +1593,7 @@ The following lemmas will be useful for the soundness proof of the next section:
 \end{proof}
 
 Lastly, we define the notion of \emph{semantic entailment} $\Phi \vDash \Psi$ on
-bouquets, mirroring the syntactic entailment $\Phi \vdash \Psi$ of the last
+bouquets, mirroring the syntactic entailment $\Phi \entails{} \Psi$ of the last
 section:
 
 \begin{definition}[Semantic entailment]
@@ -1603,32 +1603,32 @@ section:
   $\eforces{w}{\Psi}{e}$ for every world $w \in W$ and $w$-evaluation $e$. This
   entailment is \emph{valid} if it holds for any Kripke structure $\mathcal{K}$,
   and in that case we simply write $\Phi \vDash \Psi$. We say that $\Phi$ is
-  \emph{semantically equivalent} to $\Psi$, written $\Phi \kequiv \Psi$, when
-  $\Phi \kentails \Psi$ and $\Psi \kentails \Phi$.
+  \emph{semantically equivalent} to $\Psi$, written $\Phi \kequiv{} \Psi$, when
+  $\Phi \kentails{}\Psi$ and $\Psi \kentails{}\Phi$.
 \end{definition}
 
 \begin{fact}[Reflexivity]\labfact{kentails-refl}
-  $\Phi \kentails \Phi$.
+  $\Phi \kentails{}\Phi$.
 \end{fact}
 
 \begin{fact}[Transitivity]\labfact{kentails-trans}
-  If $\Phi \kentails \Psi$ and $\Psi \kentails \Xi$, then $\Phi \kentails \Xi$.
+  If $\Phi \kentails{}\Psi$ and $\Psi \kentails{}\Xi$, then $\Phi \kentails{}\Xi$.
 \end{fact}
 
 
 \section{Soundness}\labsec{Soundness}
 
 We now show that every rule of the flower calculus is \emph{sound} with respect
-to our Kripke semantics for flowers, and thus that $\vdash \phi$ implies
-$\kentails \phi$ for every $\phi$. We start with the pervasive
+to our Kripke semantics for flowers, and thus that $\entails{} \phi$ implies
+$\kentails{}\phi$ for every $\phi$. We start with the pervasive
 \emph{functoriality} lemma at the basis of every deep inference
 system\sidenote{Other instances in this thesis are Lemma \ref{prop:cov},
 \reflemma{bubbles-functoriality}, \reflemma{bubbles-cofunctoriality}, and
 Corollary \ref{cor:eg-functoriality}.}:
 
-\begin{lemma}[Functoriality]\lablemma{flowers-functoriality} If $\Phi \kentails
-  \Psi$, then for any $\Xi\hole$ either $\Xi\select{\Phi} \kentails
-  \Xi\select{\Psi}$ if $\Xi\hole$ is positive, or $\Xi\select{\Psi} \kentails
+\begin{lemma}[Functoriality]\lablemma{flowers-functoriality} If $\Phi \kentails{}
+  \Psi$, then for any $\Xi\hole$ either $\Xi\select{\Phi} \kentails{}
+  \Xi\select{\Psi}$ if $\Xi\hole$ is positive, or $\Xi\select{\Psi} \kentails{}
   \Xi\select{\Phi}$ if $\Xi\hole$ is negative.
 \end{lemma}
 \begin{proof}
@@ -1640,14 +1640,14 @@ are purely semantic, but they will participate in the admissibility of the
 weakening rules $\{\rsf{grow},\rsf{crop},\rsf{pull},\rsf{glue}\}$:
 
 \begin{lemma}[Weakening]\lablemma{flowers-weakening}
-  $\Phi \kentails \emptyset$.
+  $\Phi \kentails{}\emptyset$.
 \end{lemma}
 \begin{proof}
   Trivial by \refdef{forcing}.
 \end{proof}
 
 \begin{lemma}[Co-weakening]\lablemma{flowers-coweakening}
-  $\flower{\gamma}{\Delta} \kentails \flower{\gamma}{\Gamma \sep \Delta}$.
+  $\flower{\gamma}{\Delta} \kentails{}\flower{\gamma}{\Gamma \sep \Delta}$.
 \end{lemma}
 \begin{proof}
   Let $\gamma = \garden{\bx}{\Phi}$, $w$ a world in some Kripke structure
@@ -1664,7 +1664,7 @@ and reliance on the pollination relation. The following lemma can be compared to
 \reflemma{eg-iteration} for the (de)iteration rules in EG:
 
 \begin{lemma}[Cross-pollination]\lablemma{flowers-cross-pollination}
-  $\Phi, \Xi\select{\Phi} \kequiv \Phi, \Xi\select{\phantom{\Phi}}$.
+  $\Phi, \Xi\select{\Phi} \kequiv{} \Phi, \Xi\select{\phantom{\Phi}}$.
 \end{lemma}
 \begin{proof}
   Let $w$ a world in some Kripke structure $\mathcal{K}$, and $e$ a
@@ -1695,9 +1695,9 @@ and reliance on the pollination relation. The following lemma can be compared to
             $\eforces{w}{\rfillXi{\phantom{\Phi}}}{e}$. Let $w' \geq w$ and $e'$
             a $w'$-evaluation such that
             $\eforces{w'}{\Xi_0\select{\phantom{\Phi}}}{\update{e}{\bx}{e'}}$.
-            By IH we have $\Phi, \Xi_0\select{\phantom{\Phi}} \kentails \Phi,
+            By IH we have $\Phi, \Xi_0\select{\phantom{\Phi}} \kentails{}\Phi,
             \Xi_0\select{\Phi}$, and thus by \reflemma{flowers-functoriality}
-            $\rFillXi{\Phi, \Xi_0\select{\Phi}} \kentails \rFillXi{\Phi,
+            $\rFillXi{\Phi, \Xi_0\select{\Phi}} \kentails{}\rFillXi{\Phi,
             \Xi_0\select{\phantom{\Phi}}}$. By \reflemma{flowers-weakening} and
             \reflemma{flowers-functoriality} we have $\eforces{w}{\rFillXi{\Phi,
             \Xi_0\select{\Phi}}}{e}$, and thus $\eforces{w}{\rFillXi{\Phi,
@@ -1715,16 +1715,16 @@ and reliance on the pollination relation. The following lemma can be compared to
             % remains to show that $w \forces \fillXi{\Phi}$. Let $w' \geq w$ and
             % $e$ a $w'$-evaluation such that
             % $\eforces{w'}{\Xi_0\select{\Phi}}{e}$. By IH we have $\Phi,
-            % \Xi_0\select{\Phi} \kentails \Phi, \Xi_0\select{\phantom{\Phi}}$,
+            % \Xi_0\select{\Phi} \kentails{}\Phi, \Xi_0\select{\phantom{\Phi}}$,
             % and thus by \reflemma{flowers-functoriality} $\FillXi{\Phi,
-            % \Xi_0\select{\phantom{\Phi}}} \kentails \FillXi{\Phi,
+            % \Xi_0\select{\phantom{\Phi}}} \kentails{}\FillXi{\Phi,
             % \Xi_0\select{\Phi}}$. By \reflemma{flowers-weakening} we have $w
             % \forces \FillXi{\Phi, \Xi_0\select{\phantom{\Phi}}}$, and thus $w
             % \forces \FillXi{\Phi, \Xi_0\select{\Phi}}$. Then since
             % $\eforces{w'}{\Xi_0\select{\Phi}}{e}$, and since by
             % \reflemma{access-mono} we have $\eforces{w'}{\Phi}{e}$, we can
             % conclude that $\eforces{w'}{\Delta}{e}$.
-            \item $\Phi, \ffillXi{\phantom{\Phi}} \kentails \Phi, \ffillXi{\Phi}$
+            \item $\Phi, \ffillXi{\phantom{\Phi}} \kentails{}\Phi, \ffillXi{\Phi}$
             holds by the same argument in the other direction.
           \end{enumerate}
 
@@ -1763,7 +1763,7 @@ and reliance on the pollination relation. The following lemma can be compared to
               \Xi_0\select{\phantom{\Phi}}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
             \end{itemize}
 
-            \item $\Phi, \ffillXi{\phantom{\Phi}} \kentails \Phi,
+            \item $\Phi, \ffillXi{\phantom{\Phi}} \kentails{}\Phi,
             \ffillXi{\Phi}$ holds by the same argument in the other direction.
           \end{enumerate}
       \end{itemize}
@@ -1774,22 +1774,22 @@ Then we also need to account for \emph{self-pollination}:
 
 \begin{lemma}[Pollination]\lablemma{flowers-pollination}
   
-  If $\chyp{\Phi}{\Xi\hole}$, then $\Xi\select{\Phi} \kequiv
+  If $\chyp{\Phi}{\Xi\hole}$, then $\Xi\select{\Phi} \kequiv{}
   \Xi\select{\phantom{\Phi}}$.
 \end{lemma}
 \begin{proof}
-  We show that $\chyp{\phi}{\Xi\hole}$ implies $\Xi\select{\phi} \kequiv
+  We show that $\chyp{\phi}{\Xi\hole}$ implies $\Xi\select{\phi} \kequiv{}
   \Xi\select{\phantom{\phi}}$ for any flower $\phi$ and context $\Xi\hole$: then
   assuming that $\Phi = \phi_1, \ldots, \phi_n$, we get
-  $$\underbrace{\Xi\select{\phi_1, \ldots, \phi_n} \kequiv \Xi\select{\phi_2,
-  \ldots, \phi_n} \kequiv \ldots \kequiv \Xi\select{\phantom{\phi}}}_{\text{$n$
+  $$\underbrace{\Xi\select{\phi_1, \ldots, \phi_n} \kequiv{} \Xi\select{\phi_2,
+  \ldots, \phi_n} \kequiv{} \ldots \kequiv{} \Xi\select{\phantom{\phi}}}_{\text{$n$
   times}}$$ and conclude by \reffact{kentails-trans}.
   
   By \refdef{pollination}, there are a bouquet $\Psi$ and two contexts $\Xi',
   \Xi_0\hole$ such that one of the two following cases holds:
   \begin{itemize}
     \item[\textbf{(Cross-pollination)}] $\Xi\hole = \Xi'\select{\Psi, \phi,
-    \Xi_0\hole}$. Then $\phi, \Xi_0\select{\phi} \kequiv \phi,
+    \Xi_0\hole}$. Then $\phi, \Xi_0\select{\phi} \kequiv{} \phi,
     \Xi_0\select{\phantom\phi}$ by \reflemma{flowers-cross-pollination}, and we
     conclude by \reflemma{flowers-functoriality}.
     \item[\textbf{(Self-pollination)}] $\Xi\hole =
@@ -1827,7 +1827,7 @@ Then we also need to account for \emph{self-pollination}:
       \end{itemize}
     \item $\flower{\garden{\bx}{\Psi,
     \phi}}{\garden{\by}{\Xi_0\select{\phantom{\phi}} \sep \Delta}}
-    \kentails \flower{\garden{\bx}{\Psi,
+    \kentails{}\flower{\garden{\bx}{\Psi,
     \phi}}{\garden{\by}{\Xi_0\select{\phi}} \sep \Delta}$ holds by the same
     argument in the other direction.
     \end{enumerate}
@@ -1844,7 +1844,7 @@ handled locally with (de)iteration rules.
 \begin{lemma}[Universal instantiation]\lablemma{flowers-univ-inst}
   
   If $\sigma : \by \to \terms$ is capture-avoiding in $\flower{\Phi}{\Delta}$,
-  then $\flower{\garden{\bx, \by}{\Phi}}{\Delta} \kentails
+  then $\flower{\garden{\bx, \by}{\Phi}}{\Delta} \kentails{}
   \flower{\garden{\bx}{\sigma(\Phi)}}{\sigma(\Delta)}$.
 \end{lemma}
 \begin{proof}
@@ -1872,7 +1872,7 @@ handled locally with (de)iteration rules.
 \begin{lemma}[Existential instantiation]\lablemma{flowers-ex-inst}
   
   If $\sigma : \by \to \terms$ is capture-avoiding in $\Phi$, then
-  $\flower{\gamma}{\garden{\bx}{\sigma(\Phi)} \sep \Delta} \kentails
+  $\flower{\gamma}{\garden{\bx}{\sigma(\Phi)} \sep \Delta} \kentails{}
   \flower{\gamma}{\garden{\bx,\by}{\Phi} \sep \Delta}$.
 \end{lemma}
 \begin{proof}
@@ -1904,7 +1904,7 @@ prove more: that every $\Nature$-rule is \emph{invertible}, i.e. its conclusion
 entails its premiss.
 
 \begin{lemma}[Local soundness]\lablemma{flowers-local-soundness}
-  If $\Phi \lstep_\Nature \Psi$, then $\Phi \kequiv \Psi$.
+  If $\Phi \lstep{\Nature} \Psi$, then $\Phi \kequiv{} \Psi$.
 \end{lemma}
 \begin{proof}
   Let $w$ a world in some Kripke structure $\mathcal{K}$, $w' \geq w$, $e$
@@ -1933,7 +1933,7 @@ entails its premiss.
       and thus can conclude.
 
     \item[\textbf{(\rsf{ipis})}] We trivially have $\flower{\garden{\bx,\by}{\Phi}}{\Delta}
-      \kentails \flower{\garden{\bx,\by}{\Phi}}{\Delta}$ by
+      \kentails{}\flower{\garden{\bx,\by}{\Phi}}{\Delta}$ by
       \reffact{kentails-refl}, and thus we can conclude by
       \reflemma{flowers-univ-inst}.
 
@@ -2000,7 +2000,7 @@ Then the soundness of the contextual closure of natural rules follows
 immediately from functoriality:
 
 \begin{lemma}[Natural soundness]\lablemma{flowers-natural-soundness}
-  If $\Phi \step_{\Nature} \Psi$ then $\Phi \kequiv \Psi$.
+  If $\Phi \step{\Nature} \Psi$ then $\Phi \kequiv{} \Psi$.
 \end{lemma}
 \begin{proof}
   By \reflemma{flowers-local-soundness} and \reflemma{flowers-functoriality}.
@@ -2009,7 +2009,7 @@ immediately from functoriality:
 The soundness of cultural rules is straightforward with the previous lemmas:
 
 \begin{lemma}[Cultural soundness]\lablemma{flowers-cultural-soundness}
-  If $\Phi \step_{\Culture} \Psi$ then $\Psi \kentails \Phi$.
+  If $\Phi \step{\Culture} \Psi$ then $\Psi \kentails{}\Phi$.
 \end{lemma}
 \begin{proof}
   By inspection of every $\Culture$-rule.
@@ -2029,7 +2029,7 @@ The soundness of cultural rules is straightforward with the previous lemmas:
 Then it follows that every derivation in the flower calculus is sound:
 
 \begin{lemma}
-  If $\Phi \steps \Psi$ then $\Psi \kentails \Phi$.
+  If $\Phi \steps{} \Psi$ then $\Psi \kentails{}\Phi$.
 \end{lemma}
 \begin{proof}
   By \reflemma{flowers-natural-soundness}, \reflemma{flowers-cultural-soundness}
@@ -2039,17 +2039,17 @@ Then it follows that every derivation in the flower calculus is sound:
 In particular, every provable flower is ``true'':
 
 \begin{theorem}[Soundness]\labthm{flowers-soundness}
-  If $\vdash \phi$ then $\kentails \phi$.
+  If $\entails{} \phi$ then $\kentails{}\phi$.
 \end{theorem}
 
 \section{Completeness}\labsec{Completeness}
 
 In this section, we give a direct completeness proof for the natural fragment
 $\Nature$ of the flower calculus: every true flower $\phi$ is naturally
-provable, i.e. $\kentails \phi$ implies $\vdash_{\Nature} \phi$. Since this
+provable, i.e. $\kentails{}\phi$ implies $\entails{\Nature} \phi$. Since this
 fragment is analytic, we cannot adapt directly most of the completeness proofs
 for standard proof systems that can be found in the literature. Indeed, most of
-them exploit the transitivity of syntactic entailment $\vdash$, and more
+them exploit the transitivity of syntactic entailment $\entails{}$, and more
 precisely the fact that it is easily shown syntactically with the help of a
 non-analytic principle for composing proofs: in Hilbert systems it is the rule
 of \emph{modus ponens}, in sequent calculi the \emph{cut} rule, and in natural
@@ -2057,7 +2057,7 @@ deduction the \emph{substitution} theorem.
 
 Fortunately as mentioned in \refsec{Semantics}, a few people have noticed that
 with Kripke semantics, it is not too difficult to find completeness proofs that
-do not rely on the assumption of transitivity for $\vdash$, thus allowing for a
+do not rely on the assumption of transitivity for $\entails{}$, thus allowing for a
 \emph{semantic} proof of cut-elimination
 \cite{10.1007/978-3-642-02261-6_17}\cite{ilik:tel-00529021}\cite{hutchison_semantic_2005}.
 Here we propose an adaptation of this technique to our flower calculus, based on
@@ -2081,8 +2081,8 @@ possibly \emph{infinite} sets of flowers, so-called \emph{theories}:
   Any set $\tT \subseteq \flowers$ of flowers is called a \emph{theory}. In
   particular, a bouquet can be regarded as a finite theory, by forgetting the
   number of repetitions of its elements. We say that a bouquet $\Phi$ is
-  \emph{provable from} a theory $\tT$, written $\tT \vdash \Phi$, if there exists a
-  bouquet $\Psi \subseteq \tT$ such that $\Psi \vdash \Phi$. Given a Kripke
+  \emph{provable from} a theory $\tT$, written $\tT \entails{} \Phi$, if there exists a
+  bouquet $\Psi \subseteq \tT$ such that $\Psi \entails{} \Phi$. Given a Kripke
   structure $\mathcal{K}$, a world $w$ in $\mathcal{K}$ and a $w$-evaluation
   $e$, we say that $\tT$ is \emph{forced} by $w$ under $e$, written
   $\eforces{w}{\tT}{e}$, if $\eforces{w}{\phi}{e}$ for all $\phi \in \tT$. Then
@@ -2092,7 +2092,7 @@ possibly \emph{infinite} sets of flowers, so-called \emph{theories}:
 \end{definition}
 
 \begin{lemma}[Weakening]\lablemma{weakening}
-  If $\tT \subseteq \tT'$ and $\tT \vdash \phi$, then $\tT' \vdash \phi$.
+  If $\tT \subseteq \tT'$ and $\tT \entails{} \phi$, then $\tT' \entails{} \phi$.
 \end{lemma}
 \begin{proof}
   This follows immediately from our definition of provability from a theory
@@ -2103,12 +2103,12 @@ The following notions our crucial to define the \emph{completion} procedure at
 the heart of any Gödel-style completeness proof:
 
 \begin{definition}[$\psi$-consistency]
-  A theory $\tT$ is \emph{$\psi$-consistent} when $\tT \nvdash_\Nature \psi$.
+  A theory $\tT$ is \emph{$\psi$-consistent} when $\tT \nvdash{\Nature} \psi$.
 \end{definition}
 
 \begin{definition}[$\psi$-completeness]
   A theory $\tT$ is \emph{$\psi$-complete} when for all $\phi \in \flowers$,
-  either $\tT, \phi \vdash_\Nature \psi$ or $\phi \in \tT$.
+  either $\tT, \phi \entails{\Nature} \psi$ or $\phi \in \tT$.
 \end{definition}
 
 Intuitively, a theory $\tT$ is $\psi$-consistent when one cannot deduce $\psi$
@@ -2164,12 +2164,12 @@ $\psi$-complete.
 \end{lemma}
 \begin{proof}
   It is immediate by recurrence on $n$ that $\ncompletion{\tT}{n}$ is
-  $\psi$-consistent. Then suppose that $\completion{\tT} \vdash_\Nature \psi$,
+  $\psi$-consistent. Then suppose that $\completion{\tT} \entails{\Nature} \psi$,
   that is there is some bouquet $\Phi \subseteq \completion{\tT}$ such that $\Phi
-  \vdash_\Nature \psi$. For each $\phi \in \Phi$, there is some rank $n$ such
+  \entails{\Nature} \psi$. For each $\phi \in \Phi$, there is some rank $n$ such
   that $\phi \in \ncompletion{\tT}{n}$. Let $m$ be the greatest such rank. Then
   $\Phi \subseteq \ncompletion{\tT}{m}$, and thus by weakening
-  (\reflemma{weakening}) $\Phi \nvdash_\Nature \psi$. Contradiction.
+  (\reflemma{weakening}) $\Phi \nvdash{\Nature} \psi$. Contradiction.
 \end{proof}
 
 
@@ -2178,7 +2178,7 @@ $\psi$-complete.
 \end{lemma}
 \begin{proof}
   Suppose that there is some $\phi$ such that $\completion{\tT}, \phi
-  \nvdash_\Nature \psi$ and $\phi \not\in \completion{\tT}$, and let $\phi =
+  \nvdash{\Nature} \psi$ and $\phi \not\in \completion{\tT}$, and let $\phi =
   \phi_n$. Then $\completion{\tT} \cup \phi_n$ is $\psi$-consistent, and thus by
   weakening (\reflemma{weakening}) so is $\ncompletion{\tT}{n} \cup \phi_n$. This
   entails that $\phi_n \in \ncompletion{\tT}{n+1} \subseteq \completion{\tT}$.
@@ -2208,40 +2208,40 @@ material implication, just like Peirce would do with his scroll (see
   = \fset{i}{n}{\delta_i} = \fset{i}{n}{\garden{\bx_i}{\Phi_i}}$ such
   that $\phi \in \tT$. Then for every substitution $\sigma : \bx \to
   \terms$, either $\sigma(\Phi_i) \subseteq \tT$ for some $1 \leq i \leq n$, or $\tT
-  \nvdash_\Nature \sigma(\Phi)$.
+  \nvdash{\Nature} \sigma(\Phi)$.
 \end{proposition}
 \begin{proof}
   Suppose the contrary, i.e. there is a substitution $\sigma$ such that $\tT
-  \vdash_\Nature \sigma(\Phi)$ and for all $1 \leq i \leq n$, there is some
+  \entails{\Nature} \sigma(\Phi)$ and for all $1 \leq i \leq n$, there is some
   \Hyp{$\phi_i \in \Phi_i$}~{\HOne} such that $\sigma(\phi_i) \not\in \tT$. Thus
-  by $\psi$-completeness of $\tT$, we get $\tT, \sigma(\phi_i) \vdash_\Nature
+  by $\psi$-completeness of $\tT$, we get $\tT, \sigma(\phi_i) \entails{\Nature}
   \psi$. So there are $\Psi \subseteq \tT$ and $\Psi_i \subseteq \tT \cup
-  \sigma(\phi_i)$ such that \Hyp{$\Psi \vdash_\Nature \sigma(\Phi)$}~{\HTwo} and
-  \Hyp{$\Psi_i \vdash_\Nature \psi$}~{\HThree}. Now it cannot be the case that
+  \sigma(\phi_i)$ such that \Hyp{$\Psi \entails{\Nature} \sigma(\Phi)$}~{\HTwo} and
+  \Hyp{$\Psi_i \entails{\Nature} \psi$}~{\HThree}. Now it cannot be the case that
   $\Psi_i \subseteq \tT$, otherwise by weakening and $\psi$-consistency of $\tT$
-  we would have $\Psi_i \nvdash_\Nature \psi$. So there must exist $\Psi_i'
+  we would have $\Psi_i \nvdash{\Nature} \psi$. So there must exist $\Psi_i'
   \subseteq \tT$ such that \Hyp{$\Psi_i = \Psi_i' \cup
   \sigma(\phi_i)$}~{\HFour}. Again by weakening and $\psi$-consistency of $\tT$,
-  we get $\Psi, \bigcup_{i = 1}^{n}{\Psi_i'}, \phi \nvdash_\Nature \psi$. Now we
+  we get $\Psi, \bigcup_{i = 1}^{n}{\Psi_i'}, \phi \nvdash{\Nature} \psi$. Now we
   derive a contradiction by showing $\Psi, \bigcup_{i = 1}^{n}{\Psi_i'}, \phi
-  \vdash_\Nature \psi$. Let $\Xi$ be a context such that \Hyp{$\chyp{\Psi,
+  \entails{\Nature} \psi$. Let $\Xi$ be a context such that \Hyp{$\chyp{\Psi,
   \bigcup_{i = 1}^{n}{\Psi_i'}, \phi}{\Xi}$}~{\HFive}. Then $\cfill{\Xi}{\psi}
-  \steps_\Nature \cfill{\Xi}{\phantom{\Phi}}$ with the following derivation:
+  \steps{\Nature} \cfill{\Xi}{\phantom{\Phi}}$ with the following derivation:
   $$
   \begin{array}{rlll}
     \cfill{\Xi}{\psi}
-    &\step_{\mathsf{epis}} &\cfill{\Xi}{\flower{\garden{{}}{{}}}{\garden{{}}{\psi}}} & \\
-    &\step_{\mathsf{poll{\ua}}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\psi}}} &\text{(\HFive)} \\
-    &\step_{\mathsf{ipis}} &\cfill{\Xi}{\flower{\garden{{}}{(\flower{\garden{{}}{\sigma(\Phi)}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} & \\
-    &\step_{\mathsf{poll{\da}}} &\cfill{\Xi}{\flower{\garden{{}}{(\flower{\garden{}{{}}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} &\text{(\HTwo, \HFive)} \\
-    &\step_{\mathsf{srep}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\sigma(\delta_i)}{\garden{{}}{\psi}}}}}} & \\
+    &\step{\mathsf{epis}} &\cfill{\Xi}{\flower{\garden{{}}{{}}}{\garden{{}}{\psi}}} & \\
+    &\step{\mathsf{poll{\ua}}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\psi}}} &\text{(\HFive)} \\
+    &\step{\mathsf{ipis}} &\cfill{\Xi}{\flower{\garden{{}}{(\flower{\garden{{}}{\sigma(\Phi)}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} & \\
+    &\step{\mathsf{poll{\da}}} &\cfill{\Xi}{\flower{\garden{{}}{(\flower{\garden{}{{}}}{\sigma(\Delta)}), \phi}}{\garden{{}}{\psi}}} &\text{(\HTwo, \HFive)} \\
+    &\step{\mathsf{srep}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\sigma(\delta_i)}{\garden{{}}{\psi}}}}}} & \\
     &= &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\bx_i}{\sigma(\Phi_i)}}{\garden{{}}{\psi}}}}}} & \\
-    &\nsteps{n}_{\mathsf{poll}{\da}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\bx_i}{\sigma(\Phi_i)}}{\garden{{}}{{}}}}}}} &\text{(\HOne, \HThree, \HFour, \HFive)} \\
-    &\nsteps{n}_{\mathsf{epet}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{{}}}} & \\
-    &\step_{\mathsf{epet}} &\cfill{\Xi}{\phantom{\Phi}} &
-    % &\steps_{\mathsf{ipis}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\psi}}), (\flower{\garden{\bx_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
+    &\nsteps{n}{\mathsf{poll}{\da}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\bx_i}{\sigma(\Phi_i)}}{\garden{{}}{{}}}}}}} &\text{(\HOne, \HThree, \HFour, \HFive)} \\
+    &\nsteps{n}{\mathsf{epet}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{{}}}} & \\
+    &\step{\mathsf{epet}} &\cfill{\Xi}{\phantom{\Phi}} &
+    % &\step{\mathsf{ipis}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\psi}}), (\flower{\garden{\bx_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
     % && \qquad\quad~~\, (\flower{\garden{{}}{\sigma_n \circ \sigma(\Phi_n)}}{\garden{{}}{\psi}}), (\flower{\garden{\bx_n}{\sigma(\Phi_n)}}{\garden{{}}{\psi}})}}} \\
-    % &\steps_{\mathsf{poll{\da}}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\phantom{\Phi}}}), (\flower{\garden{\bx_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
+    % &\step{\mathsf{poll{\da}}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\phantom{\Phi}}}), (\flower{\garden{\bx_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
     % && \qquad\quad~~\, (\flower{\garden{{}}{\sigma_n \circ \sigma(\Phi_n)}}{\garden{{}}{{}}}), (\flower{\garden{\bx_n}{\sigma(\Phi_n)}}{\garden{{}}{\psi}})}}} \\
   \end{array}
   $$
@@ -2257,26 +2257,26 @@ of its petals $\Phi_i$ is.
   Let $\psi \in \flowers$, $\tT$ some $\psi$-consistent and $\psi$-complete
   theory, and $\phi = \flower{\garden{\bx}{\Phi}}{\Delta}$ with $\Delta
   = \fset{i}{n}{\delta_i} = \fset{i}{n}{\garden{\bx_i}{\Phi_i}}$ such
-  that $\tT \nvdash_\Nature \phi$. Then for every $1 \leq i \leq n$ and substitution
+  that $\tT \nvdash{\Nature} \phi$. Then for every $1 \leq i \leq n$ and substitution
   $\sigma : \bx_i \to \terms$, there is some $\phi_i \in \Phi_i$ such
-  that $\tT, \Phi \nvdash_\Nature \sigma(\phi_i)$.
+  that $\tT, \Phi \nvdash{\Nature} \sigma(\phi_i)$.
 \end{proposition}
 \begin{proof}
   Suppose the contrary, i.e. there are some $1 \leq i \leq n$ and $\sigma :
-  \bx_i \to \terms$ such that $\tT, \Phi \vdash_\Nature \sigma(\Phi_i)$.
+  \bx_i \to \terms$ such that $\tT, \Phi \entails{\Nature} \sigma(\Phi_i)$.
   Therefore there must exist $\Psi \subseteq \tT$ and \Hyp{$\Phi_0 \subseteq
-  \Phi$}~{\HOne} such that \Hyp{$\Psi, \Phi_0 \vdash_\Nature
+  \Phi$}~{\HOne} such that \Hyp{$\Psi, \Phi_0 \entails{\Nature}
   \sigma(\Phi_i)$}~{\HTwo}. By hypothesis, for every $\Phi' \subseteq \tT$ there
   is a context $\Xi$ such that $\chyp{\Phi'}{\Xi}$ and $\cfill{\Xi}{\phi}
-  \notsteps_\Nature \cfill{\Xi}{\phantom{\Phi}}$. We now derive a contradiction
-  by showing $\cfill{\Xi}{\phi} \steps_\Nature \cfill{\Xi}{\phantom{\Phi}}$ for
+  \notsteps{\Nature} \cfill{\Xi}{\phantom{\Phi}}$. We now derive a contradiction
+  by showing $\cfill{\Xi}{\phi} \steps{\Nature} \cfill{\Xi}{\phantom{\Phi}}$ for
   all $\Xi$ such that \Hyp{$\chyp{\Psi}{\Xi}$}~{\HThree}:
   $$
   \begin{array}{rlll}
     \cfill{\Xi}{\phi}
-    &\step_{\mathsf{ipet}} &\cfill{\Xi}{\flower{\garden{\bx}{\Phi}}{\garden{{}}{\sigma(\Phi_i)} \sep \Delta}} & \\
-    &\step_{\mathsf{poll}{\da}} &\cfill{\Xi}{\flower{\garden{\bx}{\Phi}}{\garden{{}}{{}} \sep \Delta}} &\text{(\HOne, \HTwo, \HThree)} \\
-    &\step_{\mathsf{epet}} &\cfill{\Xi}{\phantom{\Phi}} &
+    &\step{\mathsf{ipet}} &\cfill{\Xi}{\flower{\garden{\bx}{\Phi}}{\garden{{}}{\sigma(\Phi_i)} \sep \Delta}} & \\
+    &\step{\mathsf{poll}{\da}} &\cfill{\Xi}{\flower{\garden{\bx}{\Phi}}{\garden{{}}{{}} \sep \Delta}} &\text{(\HOne, \HTwo, \HThree)} \\
+    &\step{\mathsf{epet}} &\cfill{\Xi}{\phantom{\Phi}} &
   \end{array}
   $$
 \end{proof}
@@ -2318,10 +2318,6 @@ $\rewolF{\psi}$ relative to a flower $\psi$:
   hold for $\rewolF{\psi}$.
 \end{definition}
 
-% From now on, we always assume the ambient Kripke structure to be
-% $\rewolF(\psi)$, and will freely confuse $\kentails$ with
-% $\kentails_{\rewolF(\psi)}$ since they are equivalent.
-
 We are now equipped to prove the main \emph{adequacy} lemma, which relates
 forcing in $\rewolF{\psi}$ with $\psi$-consistency and $\psi$-completeness:
 
@@ -2333,7 +2329,7 @@ forcing in $\rewolF{\psi}$ with $\psi$-consistency and $\psi$-completeness:
   Then
   \begin{enumerate}
     \item $\sigma(\phi) \in \tT$ implies $\eforces{\tT}{\phi}{\sigma}$, and
-    \item $\tT \nvdash_\Nature \sigma(\phi)$ implies $\neforces{\tT}{\phi}{\sigma}$
+    \item $\tT \nvdash{\Nature} \sigma(\phi)$ implies $\neforces{\tT}{\phi}{\sigma}$
   \end{enumerate}.
 \end{lemma}
 \begin{proof}
@@ -2346,8 +2342,8 @@ forcing in $\rewolF{\psi}$ with $\psi$-consistency and $\psi$-completeness:
       $\sigma(p(\tvec{t})) \in \tT$.
       \item Suppose that $\eforces{\tT}{\phi}{\sigma}$, that is $\sigma(\phi)
       \in \tT$. Then by weakening (\reflemma{weakening}), we get $\sigma(\phi)
-      \nvdash_\Nature \sigma(\phi)$. But this is impossible by reflexivity of
-      $\vdash$ (\reflemma{reflexivity}).
+      \nvdash{\Nature} \sigma(\phi)$. But this is impossible by reflexivity of
+      $\entails{}$ (\reflemma{reflexivity}).
     \end{enumerate}
     \item Suppose $\phi =
     \flower{\garden{\bx}{\Phi}}{\fset{i}{n}{\garden{\bx_i}{\Phi_i}}}$.
@@ -2359,7 +2355,7 @@ forcing in $\rewolF{\psi}$ with $\psi$-consistency and $\psi$-completeness:
       for every substitution $\tau$, either $ \update{}{\bx}{\tau} \circ
       \restr{\sigma}{\bx \cup \bx_i}(\Phi_i) =
       \update{\update{\sigma}{\bx}{\tau}}{\bx_i}{}(\Phi_i) \subseteq \tU$ for
-      some $1 \leq i \leq n$, or $\tU \nvdash_\Nature \update{}{\bx}{\tau} \circ
+      some $1 \leq i \leq n$, or $\tU \nvdash{\Nature} \update{}{\bx}{\tau} \circ
       \restr{\sigma}{\bx}(\Phi) = \update{\sigma}{\bx}{\tau}(\Phi)$. In the
       first case, we get
       $\eforces{\tU}{\Phi_i}{\update{\update{\sigma}{\bx}{\tau}}{\bx_i}{}}$ by
@@ -2370,7 +2366,7 @@ forcing in $\rewolF{\psi}$ with $\psi$-consistency and $\psi$-completeness:
       that is $\eforces{\tT}{\phi}{\sigma}$.
       \item By \refprop{inv-deriv-flower}, for every $1 \leq i \leq n$ and
       substitution $\tau$, there is some $\phi_i \in \Phi_i$ such that $\tT,
-      \restr{\sigma}{\bx}(\Phi) \nvdash_\Nature \update{}{\bx_i}{\tau} \circ
+      \restr{\sigma}{\bx}(\Phi) \nvdash{\Nature} \update{}{\bx_i}{\tau} \circ
       \restr{\sigma}{\bx \cup \bx_i}(\phi_i) =
       \update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}(\phi_i)$. By the completion
       procedure, we get a theory $\tU = \completion{\tT \cup
@@ -2412,7 +2408,7 @@ We get completeness as the direct (and classical) contraposition of
 \reflemma{completeness-contra}, in the case where $\tT = \emptyset$:
 
 \begin{theorem}[Completeness]\labthm{flowers-completeness}
-  $\vDash \phi$ implies $\vdash_\Nature \phi$.
+  $\vDash \phi$ implies $\entails{\Nature} \phi$.
 \end{theorem}
 % \begin{proof}
 %   If $\phi$ is closed, then we can immediately conclude by
@@ -2421,7 +2417,7 @@ We get completeness as the direct (and classical) contraposition of
 %   \upd{\fv(\phi)} e}$ by \reffact{update-idempot}, which means that we also have
 %   $\eforces{w}{\psi}{e}$ where $\psi \deq
 %   \flower{\garden{\fv(\phi)}{}}{\phi}$ is closed. Thus by
-%   \reflemma{completeness-contra} we have $\psi \steps_{\Nature} \emptyset$
+%   \reflemma{completeness-contra} we have $\psi \step{\Nature} \emptyset$
 % \end{proof}
 
 Combined with strong deduction (\refthm{flowers-strong-deduction}), this also
@@ -2429,10 +2425,10 @@ yields a strong completeness theorem for the full flower calculus (actually for
 the fragment $\Nature \cup \{\rsf{grow}\}$):
 
 \begin{theorem}[Strong completeness]\labthm{flowers-strong-completeness}
-  $\Phi \kentails \Psi$ implies $\Psi \steps \Phi$.
+  $\Phi \kentails{}\Psi$ implies $\Psi \steps{} \Phi$.
 \end{theorem}
 \begin{proof}
-  By \reflemma{completeness-contra} we have that $\flower{\Phi}{\Psi} \steps
+  By \reflemma{completeness-contra} we have that $\flower{\Phi}{\Psi} \steps{}
   \emptyset$, and by \refthm{flowers-strong-deduction} we can conclude.
 \end{proof}
 
@@ -3466,16 +3462,16 @@ such systems \emph{development calculi}. In particular, he presents his own
 development calculus inspired by McBride's OLEG system
 \sidecite{mcbride_dependently_2000} and G\&G's prover
 \sidecite{ganesalingam_fully_2017} called the \texttt{Box} calculus, where both
-goals and partial proofs are represented by the same \texttt{Box} datastructure.
-Once again, \texttt{Box}es seem to share a very similar structure with flowers,
-which was here motivated by the need to avoid backtracking by having the ability
-to maintain a disjunction of goals with so-called \emph{disjunctive pairs},
-corresponding to the petals of flowers. The main difference is that the
-\texttt{Box} calculus is based on dependent type theory instead of first-order
-logic: this allows to store the partial proof terms inside of the \texttt{Box}es
-themselves, while this information is lost during the construction of flowers
-(but might be reconstructed from the sequence of graphical actions and the
-initial goal).
+goals and partial proofs are represented by the same \texttt{Box} data
+structure. Once again, \texttt{Box}es seem to share a very similar structure
+with flowers, which was here motivated by the need to avoid backtracking by
+having the ability to maintain a disjunction of goals with so-called
+\emph{disjunctive pairs}, corresponding to the petals of flowers. The main
+difference is that the \texttt{Box} calculus is based on dependent type theory
+instead of first-order logic: this allows to store the partial proof terms
+inside of the \texttt{Box}es themselves, while this information is lost during
+the construction of flowers (but might be reconstructed from the sequence of
+graphical actions and the initial goal).
 
 Ayers also mentions the category-theoretical treatment of development calculi by
 Sterling and Harper \sidecite{sterling_algebraic_2017}, that abstracts from any

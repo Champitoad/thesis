@@ -5,11 +5,11 @@
 \section{Completeness}\labsec{app:eg-completeness}
 
 \begin{theorem}[Completeness]
-  If $U\select{S} \step U\select{T}$, then $\strans{U}\select{\strans{S}} \steps
+  If $U\select{S} \step{} U\select{T}$, then $\strans{U}\select{\strans{S}} \steps{}
   \strans{U}\select{\strans{T}}$.
 \end{theorem}
 \begin{proof}
-  We show that $\strans{S} \steps \strans{T}$ by simulating each rule of
+  We show that $\strans{S} \steps{} \strans{T}$ by simulating each rule of
   \reffig{sks}. The closure with $\strans{U\hole}$ follows from
   \reffact{strans-pos} and \reflemma{eg-posclos}. To make the notation lighter,
   we implicitly apply the translation $\strans{(-)}$ on substructures.
