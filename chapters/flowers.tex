@@ -831,11 +831,11 @@ of flowers:
   A \emph{bouquet context} $\Phi\hole$ is a bouquet which contains exactly one
   occurrence of the special flower $\hole$ called the \emph{hole}. The hole can
   always be \emph{filled} (substituted) with any other bouquet $\Psi$ or context
-  $\Xi\hole$, producing a new bouquet $\intro*\cfill{\Phi}{\Psi}$ or context
-  $\reintro*\cfill{\Phi}{\Xi\hole}$. In particular, filling with the empty
-  bouquet will yield a bouquet $\cfill{\Phi}{\phantom{\Phi}}$, which is just
-  $\Phi\hole$ with its hole removed. A \emph{flower context} $\phi\hole$ is a
-  bouquet context of size $1$.
+  $\Xi\hole$, producing a new bouquet $\cfill{\Phi}{\Psi}$ or context
+  $\cfill{\Phi}{\Xi\hole}$. In particular, filling with the empty bouquet will
+  yield a bouquet $\cfill{\Phi}{\phantom{\Phi}}$, which is just $\Phi\hole$ with
+  its hole removed. A \emph{flower context} $\phi\hole$ is a bouquet context of
+  size $1$.
 \end{definition}
 
 \begin{definition}[Depth]
