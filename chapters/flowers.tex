@@ -13,31 +13,31 @@ flowers you pick, at least one is bound to be blue, doesn't it?" The second
 student said: "Of course not!". Which student was right, and why?
 }{\textbf{Raymond Smullyan}, \textit{The Flower Garden}, 1985}
 
-We introduce the \emph{flower calculus}, a novel proof system for intuitionistic
-predicate logic based on syntactic objects called \emph{flowers}. We start by
+We introduce the \emph{flower calculus}, a novel proof system for \kl{intuitionistic}
+\kl{predicate logic} based on syntactic objects called \emph{flowers}. We start by
 explaining how flowers stem from considerations in graphical logic, and more
-specifically from an intuitionistic variant of the \emph{existential graphs} of
+specifically from an \kl{intuitionistic} variant of the \emph{existential graphs} of
 C. S. Peirce proposed by A. Oostra. Then we present our inductive syntax for
-flowers, reminiscent at the same time of the nested sequents of deep inference
+flowers, reminiscent at the same time of the nested sequents of \kl{deep inference}
 proof theory, and the geometric/coherent formulas of categorical logic. A
 salient feature of our calculus inherited from \kl{EGs}, is that it is \emph{fully
 iconic}: it dispenses completely with the traditional notion of symbolic
 formula, operating instead as a rewriting system on flowers containing only
 atomic predicates. We also propose a notion of proof geared towards analyticity
 results à la Gentzen, suggesting new rules absent from other works on
-intuitionistic \kl{EGs}. This allows us to prove admissibility theorems for many
+\kl{intuitionistic} \kl{EGs}. This allows us to prove admissibility theorems for many
 rules, including Peirce's deletion rule which is a variant of Gentzen's cut
 rule. These results are obtained as a consequence of our soundness and
 completeness proofs with respect to Kripke semantics, in the spirit of the
 \emph{normalization-by-evaluation} technique. Furthermore, the kernel of rules
 targetted by completeness is fully invertible, a desirable property in both
 automated and interactive proof search. This is illustrated by our
-implementation of the Flower Prover, an early prototype of GUI for ITPs that
+implementation of the Flower Prover, an early prototype of GUI for \kl{ITPs} that
 uses the rules of the flower calculus both for direct manipulation of flowers in
 its frontend, and automated simplification of goals in its backend.
 
 The chapter is organized as follows: in \refsec{IEGs}, we retrace the origin of
-Oostra's syntax for intuitionistic \kl{EGs} (hereafter ``\kl{IEGs}'') as a
+Oostra's syntax for \kl{intuitionistic} \kl{EGs} (hereafter ``\kl{IEGs}'') as a
 natural generalization of the \emph{scroll}, an icon for implication introduced
 by Peirce that inspired the very creation of \kl{EGs}. In \refsec{Flowers}, we
 explain how flowers are really just a fun and metaphorical way to draw
@@ -132,7 +132,7 @@ both A and B are true, then both C and D are true. [...] a Conditional de inesse
 the consequent is true. 
 \end{quote}
 
-This shows the classical view of Peirce on \kl{EGs}, who interprets the scroll as
+This shows the \kl{classical} view of Peirce on \kl{EGs}, who interprets the scroll as
 signifying the \textit{conditional de inesse} --- also called nowadays
 \emph{material implication}, and defined here in its disjunctive form, expressed
 symbolically by $A \limp B \defeq \neg A \lor B$. This is no coincidence that
@@ -212,13 +212,13 @@ joined at a single point highlighted in orange, as illustrated in
 
 \begin{marginfigure}[0em]
   \input{figures/eg-currying.tex}
-  \caption{Intuitionistic proof of currying}
+  \caption{\kl{Intuitionistic} proof of currying}
   \labfig{eg-currying}
 \end{marginfigure}
 
 \begin{marginfigure}[27em]
   \input{figures/eg-uncurrying.tex}
-  \caption{Intuitionistic proof of uncurrying}
+  \caption{\kl{Intuitionistic} proof of uncurrying}
   \labfig{eg-uncurrying}
 \end{marginfigure}
 
@@ -240,10 +240,10 @@ inner oval) stays glued to the Wall (the outer oval), then one cannot derive
 currying through the rule of \kl{Double{-}cut}, precisely because the system
 only permits to collapse a Wall and a Fence continuously joined in the same
 scroll, by the weaker rule of Blank Antecedant. Fear not however, as one can
-still derive the currying and uncurrying laws in this intuitionistic setting,
+still derive the currying and uncurrying laws in this \kl{intuitionistic} setting,
 but through the additional use of the insertion and deiteration rules, as
 depicted in \reffig{eg-currying} and \reffig{eg-uncurrying}. Yet we find that
-Peirce's insight on the topological explanation of currying in the classical
+Peirce's insight on the topological explanation of currying in the \kl{classical}
 setting remains noteworthy.
 
 \begin{remark}
@@ -256,7 +256,7 @@ what can be found in most of the literature on \kl{EGs}, and have the advantage
 of being more economical in space by leaving the goal implicit. One can easily
 go from a forward proof to a backward one as shown by the \emph{deduction
 theorem} of Sowa \cite[Section 6]{sowa_peirces_2011}, which also applies in the
-intuitionistic setting by substituting the rule of \kl{Double-cut} with the rule
+\kl{intuitionistic} setting by substituting the rule of \kl{Double-cut} with the rule
 of Blank Antecedant.
 \end{remark}
 
@@ -290,7 +290,7 @@ outloop to which they are attached. Then the $5$-ary scroll of
 \reffig{five-loops} is read as the formula $a \limp b \lor c \lor d \lor e \lor
 f$; and the $0$-ary scroll obtained by removing all inloops from the latter as
 $a \limp \bot$, since a $0$-ary disjunction is naturally evaluated to its
-neutral element $\bot$. This coincides with the intuitionistic reading of
+neutral element $\bot$. This coincides with the \kl{intuitionistic} reading of
 negation $\neg A \defeq A \limp \bot$, and is thus consistent with the
 interpretation of \kl{cuts} as negations.
 
@@ -304,7 +304,7 @@ interpretation of \kl{cuts} as negations.
 
 With this interpretation of the $n$-ary scroll, the \kl{Alpha} encodings of
 disjunction and implication as nested \kl{cuts} are no longer valid, because they are
-not intuitionistically equivalent to the associated binary and unary scrolls.
+not \kl{intuitionistically} equivalent to the associated binary and unary scrolls.
 This is illustrated in \reffig{eg-disj-imp}, where the closeness in meaning is
 reflected iconically (but not symbolically) in the fact that the graphs only
 differ in the \emph{continuity} (or lack thereof) between inloops and their
@@ -312,7 +312,7 @@ outloop. Indeed, contrary to nested \kl{cuts}, any $n$-ary scroll can be drawn b
 \emph{continuous} movement of the pen, producing a self-intersecting curve as
 described by Peirce in \cite{peirce_prolegomena_1906}. This might be related to
 other manifestations of the notion of continuity in the semantics of
-intuitionistic logic, such as the well-known Stone-Tarski interpretation of
+\kl{intuitionistic} logic, such as the well-known Stone-Tarski interpretation of
 formulas as topological spaces \cite{stone_topological_1938}, and the
 interpretation of proofs as continuous maps in the \emph{denotational semantics}
 of Dana Scott \sidecite{10.5555/218742.218744}. Before the advent of Oostra's
@@ -320,7 +320,7 @@ of Dana Scott \sidecite{10.5555/218742.218744}. Before the advent of Oostra's
 the \emph{continuum}, how it relates to modern developments in mathematics, and
 how it is embodied in existential graphs \cite{zalamea_peirces_2003}. Actually
 according to Oostra \sidecite[][p.~162]{oostra_advances_2022}, ``the
-possibility of developing intuitionistic existential graphs was first suggested
+possibility of developing \kl{intuitionistic} existential graphs was first suggested
 by Zalamea in the 1990s \cite{zalamea_ieg_1,zalamea_ieg_2}''.
 
 \paragraph{Coherent formulas}
@@ -367,19 +367,19 @@ is invariant under polarity, meaning that for instance the graphs
 $$\stkfig{1}{scroll-neg-forall} \text{   and   } \stkfig{1}{scroll-neg-exists}$$
 obtained by enclosing the previous graphs in a \kl{cut} are interpreted with the same
 quantifiers, as the formulas $\neg \forall x. p(x)$ and $\neg \exists x. p(x)$.
-In \kl{Beta}, we would have exploited the classical equivalences $\neg \forall
+In \kl{Beta}, we would have exploited the \kl{classical} equivalences $\neg \forall
 x. A \semequiv \exists x. \neg A$ and $\neg \exists x. A \semequiv \forall x.
 \neg A$ (justified by the \kl{Double{-}cut} principle) in order to interpret them as
 $\exists x. \neg p(x)$ and $\forall x. \neg p(x)$, emphasizing the idea that
 positive and negative binders encode respectively $\exists$ and $\forall$. But
-this is not possible anymore with the intuitionistic interpretation of $n$-ary
+this is not possible anymore with the \kl{intuitionistic} interpretation of $n$-ary
 scrolls, where the $\exists/\forall$ duality is replaced by the inloop/outloop
 distinction. In fact, we are tempted to further qualify this distinction of
 \emph{adjunction}, following a classical result of Lawvere in the context of
 categorical logic \sidecite{lawvere_quantifiers_sheaves}.
 
 Lawvere is also known for some contributions to the study of \emph{geometric
-logic} \sidecite{lawvere_geometric}, a subset of the formulas of FOL first
+logic} \sidecite{lawvere_geometric}, a subset of the formulas of \kl{FOL} first
 discovered by Skolem \sidecite{skolem_geometric} that is capable of expressing
 many mathematical theories, and has close connections to \emph{topos theory}.
 Quite remarkably, the interpretation of $n$-ary scrolls coincides exactly with
@@ -402,7 +402,7 @@ some extent. We only mention two important ones:
   procedures compared to arbitrary formulas, making automation more tractable
   computationally. They also allow the direct encoding of many reasoning
   problems, thanks to their use of the full set of connectives and quantifiers
-  of FOL; and avoiding complex encodings (as can be found e.g. in SMT solvers)
+  of \kl{FOL}; and avoiding complex encodings (as can be found e.g. in SMT solvers)
   is crucial in \emph{interactive} theorem proving, where the user and the
   computer manipulate the same formulas in goals
   \sidecite{bezem_automating_2005}. This has been exploited already in some
@@ -424,12 +424,12 @@ some extent. We only mention two important ones:
 \paragraph{Blooming}
 
 As we have seen, the ($n$-ary) scroll is a powerful icon, because it captures
-the distinction between classical and intuitionistic logic as being a matter of
+the distinction between \kl{classical} and \kl{intuitionistic} logic as being a matter of
 \emph{continuity} between the space of inputs/hypotheses (outloop) and the
 spaces of outputs/conclusions (inloops), reflecting an intuition discovered much
 later in the denotational semantics of the $\lambda$-calculus. However as a
 diagrammatic component to be operated upon through direct manipulation, it has
-one notable flaw, also shared with the classical \kl{cut}-based syntax: it quickly
+one notable flaw, also shared with the \kl{classical} \kl{cut}-based syntax: it quickly
 induces heavy nestings of curves in the plane, making even a simple graph like
 that of \reffig{scroll-curried} hard to read for an untrained eye.
 
@@ -486,7 +486,7 @@ at a single point, for purely aesthetic reasons.
 
 \paragraph{Multisets}
 
-As we did for classical \kl{EGs} in \refsec{multisets} and \refsec{gardens}, we are
+As we did for \kl{classical} \kl{EGs} in \refsec{multisets} and \refsec{gardens}, we are
 now going to distill the syntactic essence of flowers into an inductive,
 (multi)set-based data structure. This will allow for a more compact textual
 notation, that is better suited to proof-theoretical study.
@@ -845,7 +845,7 @@ UI point of view, all these figures can be understood as kind of
 importing a statement (the source of the DnD) into a new context (the
 destination of the DnD).}. We distinguish two cases of \emph{cross}-pollination
 and \emph{self}-pollination, as botanists do when describing the reproduction of
-flowers. This distinction does not exist in classical \kl{EGs}, because pistils and
+flowers. This distinction does not exist in \kl{classical} \kl{EGs}, because pistils and
 petals are both identified as instances of \kl{cuts}\sidenote{The same phenomenon is
 at work in \emph{subformula linking} (\refch{sfl}): self-pollination and
 cross-pollination correspond respectively to the \emph{backward} $\back$ and
@@ -860,7 +860,7 @@ explanation for the scope of binders (\refremark{flower-scope}).
 
 As has become standard in this thesis, we define the flower calculus as a
 \emph{rewriting system} on bouquets, presented in \reffig{flower-calculus} as a
-set of unary deep inference rules: when read \emph{top-down}, they correspond to
+set of unary \kl{deep inference} rules: when read \emph{top-down}, they correspond to
 usual inferences from premiss to conclusion, and will be justified by the
 soundness theorem of \refsec{Soundness}.
 % This gives them a \emph{static}, \emph{a posteriori} meaning, since this is
@@ -895,8 +895,8 @@ a direct adaptation of the rules of \kl{Beta} (\reffig{beta}):
 
     It allows to enclose any bouquet in a petal attached to an \textsf{(e)}mpty
     \textsf{(pis)}til. This is one direction of the rule \rsf{BA} of
-    (\reffig{rule-empty-antecedant}), which is a weaker, intuitionistic version
-    of the classical rule \rsf{Dcut{\ua}} of \kl{Alpha} and \sys{Beta}. The
+    (\reffig{rule-empty-antecedant}), which is a weaker, \kl{intuitionistic} version
+    of the \kl{classical} rule \rsf{Dcut{\ua}} of \kl{Alpha} and \sys{Beta}. The
     other direction (rule \rsf{epis{\da}} in \reffig{flowers-episda}) is
     actually admissible, which might be related to the co-admissibility of
     \rsf{Dcut{\da}} in \kl{Alpha} (Corollary \ref{cor:adm-ins}).
@@ -904,7 +904,7 @@ a direct adaptation of the rules of \kl{Beta} (\reffig{beta}):
   %   They allow to enclose (\rsf{epis{\ua}}) or free (\rsf{epis{\da}}) any
   %   bouquet in a petal attached to an \textsf{(e)}mpty \textsf{(pis)}til. They
   %   correspond to the rule \rsf{BA} of \reffig{rule-empty-antecedant}, which is
-  %   a weaker, intuitionistic version of the classical rules \rsf{Dcut{\ua}} and
+  %   a weaker, intuitionistic version of the \kl{classical} rules \rsf{Dcut{\ua}} and
   %   \rsf{Dcut{\da}} of \kl{Alpha} and \sys{Beta}. \rsf{epis{\da}} will be shown
   %   to be admissible in \refsec{Completeness}, which might be related to the
   %   co-admissibility of \rsf{Dcut{\da}} in \kl{Alpha} (Corollary
@@ -948,7 +948,7 @@ a direct adaptation of the rules of \kl{Beta} (\reffig{beta}):
     Insertion/Deletion. Note that for the instantiation rules
     \rsf{ipis}/\rsf{ipet} to be invertible, we duplicate the whole flower/petal
     where the sprinkler occurs, mirroring what is done in multi-conclusion
-    sequent calculi (see \reffig{multi-inst}).
+    \kl{sequent calculi} (see \reffig{multi-inst}).
 \end{description}
 
 The last two rules mainly handle the behavior of disjunctive and absurd
@@ -967,7 +967,7 @@ are closer to sequent-style introduction/elimination rules:
 
   \item[Disjunction/Falsity Elimination (\rsf{srep})]
     It corresponds to a $n$-ary generalization of the left introduction rule for
-    disjunction in sequent calculus, the $0$-ary case capturing falsity
+    disjunction in \kl{sequent calculus}, the $0$-ary case capturing falsity
     elimination (\textit{ex falso quodlibet}). The binary case is also used in
     the \kl{IEGs} system of \cite{minghui_graphical_2019}, together with its converse.
     The name \rsf{srep} is short for \textsf{(s)}elf-\textsf{(rep)}roduction,
@@ -1013,7 +1013,7 @@ are closer to sequent-style introduction/elimination rules:
     \hline
   \end{array}
   $$
-  \caption{Fragments of intuitionistic logic as cardinality constraints on flowers}
+  \caption{Fragments of \kl{intuitionistic} logic as cardinality constraints on flowers}
   \labtab{flowers-fragments}
 \end{table}
 
@@ -1021,7 +1021,7 @@ The rules of the flower calculus have an interesting property: they are mostly
 \emph{arity-agnostic}, i.e. they work uniformly on flowers, bouquets and gardens
 with any number of petals, flowers and binders. In particular, this means that
 the same rules can be used to capture provability in almost any \emph{fragment}
-of intuitionistic predicate logic, understood as any subset $\mathfrak{F}
+of \kl{intuitionistic} \kl{predicate logic}, understood as any subset $\mathfrak{F}
 \subset \flowers$ of the set of all flowers\sidenote{The only exception seems to
 be the rule (\rsf{ipis}) (resp. \rsf{ipet}), whose duplication of flowers (resp.
 petals) prevents $\forall$ from being expressible (i.e. provable) without
@@ -1143,7 +1143,7 @@ Contrary to full derivability, natural derivability $\Phi \step{\Nature} \Psi$
 is too weak to satisfy a strong deduction theorem. This can be intuited from the
 proof of \refthm{flowers-strong-deduction}, by noticing that the converse
 direction relies on the $\Culture$-rule \rsf{grow}, a close analog to the cut
-rule in sequent calculus. Also as already mentioned, the natural rules of the
+rule in \kl{sequent calculus}. Also as already mentioned, the natural rules of the
 flower calculus are both \emph{invertible} and \emph{complete} for provability.
 A consequence of invertibility is that natural derivability is only able to
 relate logically equivalent bouquets --- in fact not even all of them. That is,
@@ -1153,11 +1153,11 @@ $\flower{\Phi}{\Psi}$ is not, it will necessarily follow that $\Phi
 
 A trivial way to circumvent this is to define directly $\Psi \entails{} \Phi$ as
 $\flower{\Psi}{\Phi} \steps{} \emptyset$. In fact this is closer to what one would
-find in sequent calculus, where hypothetical proofs are closed derivations of
+find in \kl{sequent calculus}, where hypothetical proofs are closed derivations of
 hypothetical sequents, not open derivations. The difference is that sequents
 capture only the first-order implicative structure of logic\sidenote{As opposed
 to \emph{higher-order}, i.e. negatively nested implications.}, while flowers
-capture the full structure of intuitionistic predicate logic. This allows for a
+capture the full structure of \kl{intuitionistic} \kl{predicate logic}. This allows for a
 nice generalization of the notion of hypothetical provability, which will be
 useful in the completeness proof of \refsec{Completeness}. 
 
@@ -1198,7 +1198,7 @@ mirroring the distinction between cross-pollination and self-pollination, but
 with respect to the self-reproduction rule \rsf{srep}.}\sidenote{It seems that
 the question of admissibility of \rsf{epis} is very similar to the question of
 admissibility of \emph{release} rules discussed in \refsec{dnd-completeness}.
-Both can be used to enable a local simulation of sequent calculus rules, but do
+Both can be used to enable a local simulation of \kl{sequent calculus} rules, but do
 not appear in real proofs because of the arbitrary deep/global power of link
 formation and (de)iteration rules.} of \reffig{cross-reproduction}.
 
@@ -1259,10 +1259,10 @@ meta-theoretical proofs slightly shorter. For now we allow the
 \section{Kripke semantics}\labsec{Semantics}
 
 In \refsec{bubbles-soundness}, in order to prove the soundness of system
-\kl{B}, we gave a bi-intuitionistic (resp. classical) semantics to bubbles in
+\kl{B}, we gave a \kl{bi-intuitionistic} (resp. \kl{classical}) semantics to bubbles in
 Heyting-Brouwer (resp. Boolean) algebras, and in \refsec{eg-soundness} we
 interpreted $\alpha$-graphs with simple boolean truth values. For flowers, we
-use a third kind of models that is standard in the literature on intuitionistic
+use a third kind of models that is standard in the literature on \kl{intuitionistic}
 logic: Kripke structures. Our goal is not to fill as many pages as possible by
 introducing new definitions in each chapter, but rather to find the simplest
 semantics for our purposes with the specific proof system at hand. In the case
@@ -1270,11 +1270,11 @@ of the flower calculus, there are a few reasons that led us to the choice of
 Kripke structures, detailed hereafter by order of increasing importance:
 \begin{itemize}
   \item[\textbf{Generalization of \kl{EGs}}]
-    As mentioned in \refsec{IEGs}, the syntax of intuitionistic \kl{EGs} (and thus of
-    flowers) subsumes that of Peirce's classical \kl{EGs}, by seeing the \kl{cut} as a
+    As mentioned in \refsec{IEGs}, the syntax of \kl{intuitionistic} \kl{EGs} (and thus of
+    flowers) subsumes that of Peirce's \kl{classical} \kl{EGs}, by seeing the \kl{cut} as a
     $0$-ary scroll (or a flower with no petals). Similarly, it is well-known
     that Kripke structures enable a natural generalization of truth valuations,
-    where classical valuations are those limited to ``unary'' structures with a
+    where \kl{classical} valuations are those limited to ``unary'' structures with a
     single possible world\sidenote{It is tempting to draw a parallel between
     \emph{possible worlds} and the \emph{petals} of flowers, where the
     accessibility relation $\access$ between worlds might be reflected to some
@@ -1284,7 +1284,7 @@ Kripke structures, detailed hereafter by order of increasing importance:
     $\access$ could correspond to the possibility of cross-pollinating a petal
     by first cross-pollinating the pistil to which it is attached, and then
     performing self-pollination. An analogy between possible worlds and
-    intuitionistic disjunction is also proposed by Girard in
+    \kl{intuitionistic} disjunction is also proposed by Girard in
     \cite{girard_parallel}, although as usual he demonstrates his (free)
     criticism towards Kripke semantics.}.
   
@@ -1299,17 +1299,17 @@ Kripke structures, detailed hereafter by order of increasing importance:
     Rather than just completeness, we are interested more specifically in the
     completeness of the natural fragment $\Nature$ of the flower calculus, where
     all rules are \emph{analytic}. In Gentzen systems, this corresponds to the
-    well-known questions of \emph{proof normalization} (natural deduction) and
-    \emph{cut admissibility} (sequent calculus). Gentzen originally proved cut
+    well-known questions of \emph{proof normalization} (\kl{natural deduction}) and
+    \emph{cut admissibility} (\kl{sequent calculus}). Gentzen originally proved cut
     admissibility through a syntactic procedure of \emph{cut-elimination}, which
-    is very hard to transpose in our deep inference setting, especially since
+    is very hard to transpose in our \kl{deep inference} setting, especially since
     there is no known internal cut-elimination procedure in the (sparse)
-    literature on deep inference systems for full intuitionistic logic. In fact,
+    literature on \kl{deep inference} systems for full \kl{intuitionistic} logic. In fact,
     the requirement that the procedure be \emph{internal} is useful when
     studying the computational content of proofs, but too strong for our logical
     study of analyticity. Thus our first attempt was to devise an
     \emph{external} syntactic procedure, based on the simulation of a cut-free
-    sequent calculus as in \sidecite{tiu_local_2006}; and we do have a working,
+    \kl{sequent calculus} as in \sidecite{tiu_local_2006}; and we do have a working,
     verified implementation of this procedure in Coq \cite{flowers-metatheory}.
     However, we realized \textit{a posteriori} that this only proves a weak form
     of completeness, in the sense that we only guarantee that a true flower is
@@ -1325,7 +1325,7 @@ Kripke structures, detailed hereafter by order of increasing importance:
     $\entails{\Nature} \phi$), and then compose with the soundness of the full
     system with respect to the same models ($\entails{} \phi$ implies $\vDash
     \phi$), giving the desired admissibility result ($\entails{} \phi$ implies
-    $\entails{\Nature} \phi$). And in the case of intuitionistic logics, the
+    $\entails{\Nature} \phi$). And in the case of \kl{intuitionistic} logics, the
     models used are most of the time Kripke structures\sidenote{We know of two
     exceptions: the first is the (complex) uniform completeness proof for
     various logics proposed by Okada \cite{OKADA2002471} and based on
@@ -1548,7 +1548,7 @@ section:
 We now show that every rule of the flower calculus is \emph{sound} with respect
 to our Kripke semantics for flowers, and thus that $\entails{} \phi$ implies
 $\kentails{}\phi$ for every $\phi$. We start with the pervasive
-\emph{functoriality} lemma at the basis of every deep inference
+\emph{functoriality} lemma at the basis of every \kl{deep inference}
 system\sidenote{Other instances in this thesis are Lemma \ref{prop:cov},
 \reflemma{bubbles-functoriality}, \reflemma{bubbles-cofunctoriality}, and
 Corollary \ref{cor:eg-functoriality}.}:
@@ -1979,20 +1979,20 @@ for standard proof systems that can be found in the literature. Indeed, most of
 them exploit the transitivity of syntactic entailment $\entails{}$, and more
 precisely the fact that it is easily shown syntactically with the help of a
 non-analytic principle for composing proofs: in Hilbert systems it is the rule
-of \emph{modus ponens} \kl{mp}, in sequent calculi the \kl(rule){cut} rule, and
-in natural deduction the \emph{substitution theorem}.
+of \emph{modus ponens} \kl{mp}, in \kl{sequent calculi} the \kl(rule){cut} rule, and
+in \kl{natural deduction} the \emph{substitution theorem}.
 
 Fortunately as mentioned in \refsec{Semantics}, a few people have noticed that
 with Kripke semantics, it is not too difficult to find completeness proofs that
 do not rely on the assumption of transitivity for $\entails{}$, thus allowing
 for a \emph{semantic} proof of cut-elimination. Here we propose an adaptation of
 this technique to our flower calculus, based on a completeness proof for
-cut-free sequent calculus given by Hermant in
+cut-free \kl{sequent calculus} given by Hermant in
 \sidecite{hutchison_semantic_2005}, which is itself close to the original
-completeness proof of Gödel with respect to classical Tarski models. Quite
+completeness proof of Gödel with respect to \kl{classical} Tarski models. Quite
 remarkably, the overall structure of the argument is the same, even though both
 the forcing relation on flowers and the rules of the flower calculus differ
-significantly from the forcing relation on formulas and sequent calculus rules.
+significantly from the forcing relation on formulas and \kl{sequent calculus} rules.
 A novelty of our proof is that it dispenses completely with the need for
 \emph{Henkin witnesses}, thus avoiding some technicalities involving among
 others the manipulation of an infinite hierarchy of first-order languages.
@@ -2120,7 +2120,7 @@ which Hermant identifies as ``an important property of any $A$-consistent,
 $A$-complete theory, [...] that it enjoys some form of the subformula
 property''.
 
-Roughly, the first proposition captures the (intuitionistic) truth-conditions
+Roughly, the first proposition captures the (\kl{intuitionistic}) truth-conditions
 that make a flower \emph{valid} (i.e. true in every model) by modelling them on
 material implication, just like Peirce would do with his scroll (see
 \refsec{IEGs}): $\phi$ is true if the content $\Phi_i$ of one of its petals
@@ -2213,7 +2213,7 @@ proved indirectly by contradiction, but that the contradiction is obtained by
 exhibiting a concrete derivation, exploiting respectively the universal
 instantiation of pistils with the \rsf{ipis} rule, and the existential
 instantiation of petals with the \rsf{ipet} rule. Thus there seems to be some
-constructive content to these proofs, despite their use of a classical reasoning
+constructive content to these proofs, despite their use of a \kl{classical} reasoning
 principle. Also, this is the only place in the completeness proof where we build
 derivations, and all $\Nature$-rules (and only them) seem to be required to
 conclude.
@@ -2330,7 +2330,7 @@ forcing in $\rewolF{\psi}$ with $\psi$-consistency and $\psi$-completeness:
   \end{itemize}
 \end{proof}
 
-We get completeness as the direct (and classical) contraposition of
+We get completeness as the direct (and \kl{classical}) contraposition of
 \reflemma{completeness-contra}, in the case where $\tT = \emptyset$:
 
 \begin{theorem}[Completeness]\labthm{flowers-completeness}
@@ -2365,7 +2365,7 @@ the fragment $\Nature \cup \{\rsf{grow}\}$):
 The completeness of $\Nature$-rules (\refthm{flowers-completeness}) suggests
 that some efficient proof search procedure might be devised for the flower
 calculus, and even a complete one for the propositional fragment where every
-sprinkler is empty\sidenote{It is well-known that provability in intuitionistic
+sprinkler is empty\sidenote{It is well-known that provability in \kl{intuitionistic}
 propositional logic is decidable, a result first demonstrated by Gentzen
 \cite{gentzen_untersuchungen_1935}.}. Indeed in sequent calculi, analyticity
 (the subformula property) greatly reduces the search space when looking for a
@@ -2374,8 +2374,8 @@ fragment $\Nature$ of the flower calculus. Also, the invertibility of
 $\Nature$-rules implies that the procedure will not need to perform
 \emph{backtracking}, a great source of non-determinism in proof
 search\sidenote{See also \refsec{sfl-backtracking} for a discussion on this
-topic.}, and particularly so in intuitionistic logic\sidenote{The only fully
-invertible proof system for intuitionistic (predicate) logic that we know of is
+topic.}, and particularly so in \kl{intuitionistic} logic\sidenote{The only fully
+invertible proof system for \kl{intuitionistic} (predicate) logic that we know of is
 the labelled sequent calculus \kl{G3IntQ} from Lyon's thesis
 \cite{lyon_refining_2021} (we thank Lutz Stra{\ss}burger for pointing that to
 us). However, a peculiarity of labelled sequent calculi is that they need to
@@ -2388,7 +2388,7 @@ the flower calculus, which will be crucial from a user interface standpoint in
 \paragraph{Depth and interaction}
 
 However, there is another great source of non-determinism that does not arise in
-Gentzen systems, but is inherent to any deep inference formalism: it is
+Gentzen systems, but is inherent to any \kl{deep inference} formalism: it is
 precisely the fact that rules can be applied in contexts of \emph{arbitrary}
 depth, thus inducing a number of choices that is exponential in the latter.
 Kahramanogullari has proposed some attempts to tame this problem in
@@ -2441,16 +2441,16 @@ recurring idea in this thesis.
 \end{definition}
 
 Then, two atomic occurrences can interact when their contexts can. In the
-(linear) classical setting of \cite{lmcs:1089}, there is no preferred direction
+(linear) \kl{classical} setting of \cite{lmcs:1089}, there is no preferred direction
 in the information flow between two interacting atoms, which can be seen as the
 essence of the (linear) law of excluded middle $A \parr A^\bot$. However in our
-intuitionistic setting, implication forces a direction from premisses to
+\kl{intuitionistic} setting, implication forces a direction from premisses to
 conclusions, which is reflected in our distinction between the symmetric
 cross-interaction relation $\cinter$, and the asymmetric self-interaction
 relation $\sinter$\sidenote{Arguably, the linear heart of this phenomenon can be
 studied in the logic \kl{BV}, which adds to the commutative connective $\parr$
 a non-commutative or \emph{sequential} operator $\triangleright$. Interestingly,
-\kl{BV} is the logic that motivated the whole development of the deep inference
+\kl{BV} is the logic that motivated the whole development of the \kl{deep inference}
 methodology by Guglielmi \cite{Guglielmi1999ACO}, because it could not be
 accurately expressed in shallow Gentzen formalisms.}. In turn, the asymmetry of
 $\sinter$ will impose a causality on atoms, where one atom can potentially be
@@ -2765,7 +2765,7 @@ we rely on a straightforward translation of formulas into (bouquets of) flowers,
 given in \reffig{flowers-formulas}. Out of the 62 tautologies, 53 were proved by
 the algorithm, and among the 9 unproved tautologies, only the 2 formulas
 $\neg\neg(\neg\neg A \limp A)$ and $\neg\neg(((A \limp B) \limp A) \limp A)$ are
-intuitionistically valid, while the other 7 formulas are only classically valid.
+\kl{intuitionistically} valid, while the other 7 formulas are only \kl{classically} valid.
 
 \paragraph{Incompleteness}
 
@@ -2776,7 +2776,7 @@ intuitionistically valid, while the other 7 formulas are only classically valid.
 \end{figure*}
 
 Interestingly on this dataset, the algorithm only fails on formulas that
-correspond to the double-negation of a classical law. Of course,
+correspond to the double-negation of a \kl{classical} law. Of course,
 \refthm{flowers-completeness} guarantees that there must exist proofs for these
 formulas, using only $\Nature$-rules. While this may include the \rsf{epis}
 rules, we conjecture that it is not actually needed to get a complete decision
@@ -2791,10 +2791,10 @@ $$\flower{(\flower{(\flower{(\flower{(\flower{a}{})}{})}{a})}{}),
 which is then provable by the algorithm as shown in \reffig{dneg-traces}.
 
 Encouraged by these positive results, we attempted to validate the algorithm on
-a more challenging dataset: the ILTP problem library for intuitionistic logic,
+a more challenging dataset: the ILTP problem library for \kl{intuitionistic} logic,
 version 1.1.2 \sidecite{raths_iltp_2007}. Unfortunately, it turns out that
 neither the basic \refproc{life} procedure nor its extension are able to prove
-the following theorem of intuitionistic logic (problem \texttt{SYJ106+1}):
+the following theorem of \kl{intuitionistic} logic (problem \texttt{SYJ106+1}):
 $$(((\neg (t \limp r) \limp p) \land s) \limp (\neg ((p \limp q) \land (t \limp
 r)) \limp (\neg \neg p \land (s \land s))))$$
 Worse, the extension seems to loop indefinitely on it.
@@ -2803,7 +2803,7 @@ Worse, the extension seems to loop indefinitely on it.
 
 In fact, even the basic version of the \refproc{life} procedure does not
 terminate (at least in reasonable time, i.e. less that 3 minutes) on another
-intuitionistic theorem (problem \texttt{SYJ201+1.001}):
+\kl{intuitionistic} theorem (problem \texttt{SYJ201+1.001}):
 \begin{align*}
 ((((&(p3 \Leftrightarrow p1)\\
 \limp ~&(p1 \land (p2 \land p3)))\\
@@ -2875,9 +2875,9 @@ We are not the first to identify the potential of \kl{EGs} for graphical proof
 building \sidecite{eg_youtube,eg_github}. However, we believe that the
 Flower Prover is highly original in mainly two respects:
 \begin{itemize}
-  \item[\textbf{Intuitionistic and goal-oriented}] it is based on the flower
+  \item[\textbf{\kl{Intuitionistic} and goal-oriented}] it is based on the flower
   calculus, which proposes a quite unusual, non-exegetic take on \kl{EGs}. It does so
-  both at the level of \emph{statements}, by building upon the intuitionistic
+  both at the level of \emph{statements}, by building upon the \kl{intuitionistic}
   icon of the $n$-ary scroll; and at the level of \emph{proofs}, by focusing on
   a goal-oriented reading of rules that emphasizes the importance of
   \emph{invertibility} and \emph{analyticity} in the inference process, through
@@ -3054,7 +3054,7 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
   \item[\textbf{Insertion}] The main interface mechanism that is currently
   implemented is the \texttt{Add} button: since the \rsf{grow} rule allows to
   insert any flower in a positive bouquet (i.e. add a new subgoal, just like the
-  \kl(rule){cut} rule in sequent calculus), we expose buttons in all the corresponding
+  \kl(rule){cut} rule in \kl{sequent calculus}), we expose buttons in all the corresponding
   areas (blue ``+'' buttons in \reffig{flowers-prover-modes}), that can be
   clicked to insert a new flower precisely at the location of the button. There
   are two usage scenarios:
@@ -3271,7 +3271,7 @@ of Coq.}:
 
 % \todo{Write simulation of modus ponens $A \land (A \limp B) \limp B$}
 
-% Let us give an example of how to \emph{simulate} a rule from natural deduction
+% Let us give an example of how to \emph{simulate} a rule from \kl{natural deduction}
 % in the flower calculus. Rather than reducing the bouquet associated to a formula
 % to the empty bouquet, we want to reduce the bouquet associated to the conclusion
 % of the rule into the bouquet associated to its premisses. \reffig{flowers-mp}
@@ -3302,7 +3302,7 @@ of Coq.}:
 
 \subsection{Related works}
 
-\paragraph{Intuitionistic \kl{EGs}}
+\paragraph{Intuitionistic EGs}
   
 \begin{marginfigure}
   \begin{mathpar}
@@ -3365,17 +3365,17 @@ generalization of coherent formulas at the end of \refsec{IEGs}.
 
 Two years earlier, Brock-Nannestad and Ilik had already made some implicit
 connections between focused proofs and coherent formulas, through their
-\emph{exponential normal form} for intuitionistic formulas based on Tarski's
+\emph{exponential normal form} for \kl{intuitionistic} formulas based on Tarski's
 highschool identities \sidecite{brock-nannestad_intuitionistic_2019}. Quite
 remarkably, first-order formulas in their exponential normal form have the exact
 same structure as flowers
-\cite[Definition~4.2]{brock-nannestad_intuitionistic_2019}. However, the sequent
-calculus \kl{HS} based on them makes the tradeoff opposite to that of the
+\cite[Definition~4.2]{brock-nannestad_intuitionistic_2019}. However, the \kl{sequent
+calculus} \kl{HS} based on them makes the tradeoff opposite to that of the
 natural fragment $\Nature$ of the flower calculus: every inference rule is
 \emph{non}-invertible, but the calculus is contraction-free. One advantage of
 this tradeoff is that they can easily show termination of proof search, while we
 have not found a terminating procedure yet for the flower calculus. The authors
-also mention that \kl{HS} could be turned into a deep inference calculus in the
+also mention that \kl{HS} could be turned into a \kl{deep inference} calculus in the
 style of \kl{G4ip}\sidenote{This is just another name for the system \sys{LJT}
 of Dyckhoff already mentioned in \refch{bubbles-symm}.}.
 
@@ -3394,7 +3394,7 @@ with flowers, which was here motivated by the need to avoid backtracking by
 having the ability to maintain a disjunction of goals with so-called
 \emph{disjunctive pairs}, corresponding to the petals of flowers. The main
 difference is that the \texttt{Box} calculus is based on dependent type theory
-instead of first-order logic: this allows to store the partial proof terms
+instead of \kl{first-order logic}: this allows to store the partial proof terms
 inside of the \texttt{Box}es themselves, while this information is lost during
 the construction of flowers (but might be reconstructed from the sequence of
 graphical actions and the initial goal).
@@ -3419,7 +3419,7 @@ occurrences of atoms, and thus forming a graph with an associated adjacency
 matrix whose structure can be exploited in proof search, really dates back to
 the \emph{connection method} developed independently by Bibel and Andrews in the
 1970s \sidecite{Bibel:2009}. Otten and Kreitz have adapted the connection method
-to intuitionistic logic \sidecite{10.1007/3-540-59338-1_32}, stating that it is
+to \kl{intuitionistic} logic \sidecite{10.1007/3-540-59338-1_32}, stating that it is
 especially well-suited in an interactive theorem proving environment. Thus it
 might be instructive to learn from their proof search algorithm to fix ours.
 
@@ -3427,7 +3427,7 @@ In fact all proof search procedures designed in this thesis, whether for bubble
 calculi (\refsubsec{bubbles-search}) or the flower calculus
 (\refsec{flowers-search}), rest on the fundamental observation coming from the
 subformula linking methodology of Chaudhuri \sidecite{Chaudhuri2013}, that the
-construction of proofs in deep inference systems can be driven efficiently and
+construction of proofs in \kl{deep inference} systems can be driven efficiently and
 incrementally by the connection of dual atoms. With its pollination rules, the
 flower calculus allows for a particularly elegant implementation of subformula
 linking that abstracts away from the syntactic bureaucracy of symbolic
@@ -3447,10 +3447,10 @@ We have not discussed the rationale behind our notion of analyticity, be it
 historical or formal arguments explaining its origins, motivations and
 consequences. In a recent article \sidecite{bruscoli_analyticity_2019}, Bruscoli
 and Guglielmi propose such a detailed discussion around a precise and generic
-definition of analyticity for deep inference proof systems (especially the
-calculus of structures), which at a glance seems to encompass our own
+definition of analyticity for \kl{deep inference} proof systems (especially the
+\kl{calculus of structures}), which at a glance seems to encompass our own
 definition. It would be interesting to study more deeply their work, and related
-parts of the deep inference literature concerned with analyticity and its
+parts of the \kl{deep inference} literature concerned with analyticity and its
 applications to efficient proof search procedures
 \sidecite{kahramanogullari_reducing_2006,lmcs:1089,10.1145/2003476.2003501,chaudhuri:hal-00772420,10.1007/978-3-662-49630-5_23}.
 
@@ -3472,27 +3472,27 @@ does not look particularly well-suited to either automated or interactive
 theorem proving.
 
 Another line of research would concern properties of \emph{locality}, in the
-sense coined by the deep inference community with systems like \kl{SKS} (see
+sense coined by the \kl{deep inference} community with systems like \kl{SKS} (see
 \refsec{eg-completeness}). As mentioned in \refsec{flowers-prover}, we
 conjecture that the \rsf{poll{\da}} and \rsf{poll{\ua}} rules can be restricted
 respectively to atomic and non-atomic flowers. But this is less satisfying than
-in the calculus of structures, where one component of \rsf{poll{\ua}}, the
+in the \kl{calculus of structures}, where one component of \rsf{poll{\ua}}, the
 duplicating \emph{contraction} rule, can be restricted to atomic formulas. This
 probably comes from the fact that \rsf{poll{\ua}} also serves the purpose of
 \emph{moving} flowers deeper, as witnessed by the DnD \Action{Import} action of
-the Flower Prover: in the calculus of structures, this role is fulfilled by
+the Flower Prover: in the \kl{calculus of structures}, this role is fulfilled by
 \emph{switch} rules, which cannot be restricted to atomic structures. The only
-solution might be to \emph{simulate} a local calculus of structures for
-intuitionistic logic, like the system \kl{ISp} of Tiu
+solution might be to \emph{simulate} a local \kl{calculus of structures} for
+\kl{intuitionistic} logic, like the system \kl{ISp} of Tiu
 \sidecite{tiu_local_2006}.
 
 Lastly, it would be interesting to exhibit an \emph{internal}, syntactic
 procedure for eliminating cultural $\Culture$-rules in proofs, just like Gentzen
-showed cut-elimination in sequent calculus\sidenote{A sort of
+showed cut-elimination in \kl{sequent calculus}\sidenote{A sort of
 \emph{cult}-elimination, so to speak.}. In this work we preferred a more
 semantic approach, because it was simpler and at the right level of abstraction
 for our needs. We might be able to take some inspiration from the
-cut-elimination proofs of calculi of structures, which are indeed notoriously
+cut-elimination proofs of \kl{calculi of structures}, which are indeed notoriously
 involved.
 
 \paragraph{Automated proof search}
@@ -3556,24 +3556,24 @@ $$
 This could also form the basis for further studies on the connections between \kl{EGs}
 and (dependent) type theory, and ultimately lead to a tight integration of the
 Flower Prover with proof assistants based on the latter such as Coq, Lean and
-Agda. Existing explorations of the links between type theory and deep inference
+Agda. Existing explorations of the links between type theory and \kl{deep inference}
 include, in historical order:
 \begin{itemize}
   \item a first attempt by Brünnler and McKinnley to devise a Curry-Howard
-  correspondence for a simple intuitionistic deep inference calculus with
+  correspondence for a simple \kl{intuitionistic} \kl{deep inference} calculus with
   conjunction and implication \sidecite{cervesato_algorithmic_2008};
   \item the thesis of Nicolas Guenot, and more precisely the part on "Nested
   Proofs as Programs" where he gives a correspondence between simply-typed
   $\lambda$-calculi with explicit substitutions at one end, and calculi of
   structures (Chapter 6) and nested sequent calculi (Chapter 5) for the
-  implicational fragment of intuitionistic logic at the other end
+  implicational fragment of \kl{intuitionistic} logic at the other end
   \cite{guenot_nested_2013};
   \item the atomic $\lambda$-calculus, a simply-typed $\lambda$-calculus with
   explicit sharing that has a Curry-Howard correspondence with proofs in the
   formalism of \emph{open deduction} \sidecite{gundersen_atomic_2013};
-  \item a type system for interaction nets based on a calculus of structures for
+  \item a type system for interaction nets based on a \kl{calculus of structures} for
   Multiplicative Exponential Linear Logic \sidecite{gimenez_structure_2013};
-  \item the thesis of Fanny He, that explores a classical variant of the atomic
+  \item the thesis of Fanny He, that explores a \kl{classical} variant of the atomic
   $\lambda$-calculus based on Saurin's $\Lambda\mu$-calculus
   \sidecite{he_fanny_thesis};
   \item the \emph{spinal} atomic $\lambda$-calculus, an extension and

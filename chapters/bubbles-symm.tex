@@ -6,20 +6,20 @@ In this chapter, we explore to what extent the bubble calculus of
 \refch{bubbles} can be made more \emph{symmetric}, by relaxing the restriction
 that solutions must contain at most one conclusion. At a surface level, our
 approach is similar to that of Gentzen, who went from his single-conclusion
-sequent calculus \kl{LJ} to the multi-conclusion calculus \sys{LK}. Like him,
-we will uncover beautiful dualities that were hidden by the asymmetry of the
-initial calculus. But by sticking unwaveringly to intuitionism, we will be led
-to the exotic territory of \emph{bi-intuitionistic} logic, an intermediate logic
-that conservatively extends intuitionistic logic, but does not prove the law of
-excluded middle. An underlying thread of our investigation will be the quest for
-a \emph{fully iconic} proof system, where all logical connectives can be
-replaced by appropriate (new) kinds of bubbles. This will lead us to rediscover
-many principles already studied in the deep inference literature, with
-topological intuitions of the bubble metaphor shedding a new light on them. We
-will end up with two symmetric bubble calculi, each with their own tradeoffs on
-the properties satisfied by inference rules. In particular, their ability to
-\emph{factorize} both forward and backward proof steps might prove useful to
-build concise proofs, all through direct manipulation.
+\kl{sequent calculus} \kl{LJ} to the multi-conclusion calculus \sys{LK}. Like
+him, we will uncover beautiful dualities that were hidden by the asymmetry of
+the initial calculus. But by sticking unwaveringly to intuitionism, we will be
+led to the exotic territory of \kl{bi-intuitionistic} logic, an intermediate
+logic that conservatively extends \kl{intuitionistic} logic, but does not prove the
+law of excluded middle. An underlying thread of our investigation will be the
+quest for a \emph{fully \kl{iconic}} proof system, where all logical connectives
+can be replaced by appropriate (new) kinds of bubbles. This will lead us to
+rediscover many principles already studied in the \kl{deep inference}
+literature, with topological intuitions of the bubble metaphor shedding a new
+light on them. We will end up with two symmetric bubble calculi, each with their
+own tradeoffs on the properties satisfied by inference rules. In particular,
+their ability to \emph{factorize} both forward and backward proof steps might
+prove useful to build concise proofs, all through direct manipulation.
 
 The chapter is organized as follows: in \refsec{non-determinism} we motivate our
 quest for a system where all introduction rules for logical connectives are
@@ -32,15 +32,15 @@ bubbles can themselves be \emph{polarized}. In \refsec{design-props} we identify
 key properties that will guide the design of inference rules, some of which were
 already aimed for implicitly through the evolution of our concept of bubble. In
 \refsec{symmetric-calculus} we introduce a core \emph{symmetric bubble calculus}
-for classical logic called ``\kl{system B}'', in reference to the symmetric
+for \kl{classical} logic called ``\kl{system B}'', in reference to the symmetric
 \kl{system L} of Herbelin \sidecite[10em]{herbelin_duality_nodate}. Then in
 \refsec{bubbles-soundness} we prove the soundness of \kl{system B}, and show
 that by removing selectively among inference rules that define the
-\emph{porosity} of polarized bubbles, one gets intuitionistic,
-dual-intuitionistic and bi-intuitionistic logic as fragments. In
+\emph{porosity} of polarized bubbles, one gets \kl{intuitionistic},
+\kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic as fragments. In
 \refsec{bubbles-completeness} we support this claim by showing that the
-bi-intuitionistic fragment is not only sound, but also \emph{cut-free complete}
-with respect to the cut-free nested sequent calculus \kl{DBiInt} of Postniece
+\kl{bi-intuitionistic} fragment is not only sound, but also \emph{cut-free complete}
+with respect to the cut-free nested \kl{sequent calculus} \kl{DBiInt} of Postniece
 \cite{postniece_deep_2009}. Finally in \refsec{invertible-calculus}, we
 introduce a fully invertible variant of system $\sysB$ that we conjecture to be
 complete, and present a canonical way to search for proofs in this system.
@@ -60,17 +60,17 @@ system $\sysB$ from being fully iconic.
 soundness and completeness of bubble calculi for \emph{propositional} logic.
 Indeed quantifiers would make the algebraic semantics more involved when proving
 soundness, and during our literature review we found very few proof systems for
-bi-intuitionistic logic supporting them, at least none suitable for our
-syntactic completeness proof. More generally, bi-intuitionistic logic has
+\kl{bi-intuitionistic} logic supporting them, at least none suitable for our
+syntactic completeness proof. More generally, \kl{bi-intuitionistic} logic has
 received less attention in the first-order setting, probably because it is
-\emph{not} a conservative extension of intuitionistic predicate logic, but only
-of \emph{constant-domain} predicate logic (see
+\emph{not} a conservative extension of \kl{intuitionistic} \kl{predicate logic}, but only
+of \emph{constant-domain} \kl{predicate logic} (see
 \cite{crolard_subtractive_2001,aschieri_natural_2018}).
 \end{remark}
 
 \section{Non-determinism and iconicity}\labsec{non-determinism}
 
-In all known sequent calculus formulations of intuitionistic logic, there are at
+In all known \kl{sequent calculus} formulations of \kl{intuitionistic} logic, there are at
 least two rules which are invariably \emph{non-invertible}:
 \begin{enumerate}
   \item a left introduction rule for $\limp$ (there might be many ones, as in
@@ -112,10 +112,10 @@ possible transformations on the proof state.
 % terminology introduced by C. S. Peirce in his \emph{semiotics}
 % \sidecite{noth_peircean_1999}, which he also applied to his diagrammatic proof
 % system of \emph{existential graphs} \sidecite{10.7551/mitpress/3633.001.0001}.
-Unfortunately, the systems in \cite{guenot_nested_2013} only handle classical
-logic, and the implicative fragment of intuitionistic logic. Thus began our
-quest for a bubble calculus in the style of Guenot capturing full intuitionistic
-logic\sidenote{Other nested sequent systems for full intuitionistic logic exist
+Unfortunately, the systems in \cite{guenot_nested_2013} only handle \kl{classical}
+logic, and the implicative fragment of \kl{intuitionistic} logic. Thus began our
+quest for a bubble calculus in the style of Guenot capturing full \kl{intuitionistic}
+logic\sidenote{Other nested sequent systems for full \kl{intuitionistic} logic exist
 \cite{postniece_deep_2009,fitting-nested-2014}, but they are based on
 tree-shaped proofs, and thus ignore the whole \emph{raison d'être} of our
 concept of bubble.}.
@@ -125,7 +125,7 @@ concept of bubble.}.
 
 The first direction we followed was to relax the constraint that solutions must
 be single-conclusion. Indeed as already noted in \refsec{sfl-backtracking}, a
-notable property of sequent calculi with multiple conclusions is that their
+notable property of \kl{sequent calculi} with multiple conclusions is that their
 right introduction rule for $\lor$ is invertible.
 
 The main difficulty lies in the way one should interpret a multi-conclusion
@@ -153,7 +153,7 @@ find a contradiction in $\Gamma$; which is obviously not what we have in mind.
   \labfig{multi-and-intro}
 \end{marginfigure}
 
-A key observation was that in the rules of multi-conclusion sequent calculi, one
+A key observation was that in the rules of multi-conclusion \kl{sequent calculi}, one
 usually distributes the context $\Delta$ of conclusions in all premisses: this
 restores a perfect symmetry with respect to the context of hypotheses $\Gamma$,
 as illustrated by the {\rnm{\land R*}} rule (\reffig{multi-and-intro}). Then our
@@ -237,10 +237,10 @@ through some algebraic developments:
 \end{align}
 Wait, we did manage to prove it! The trick resides in \refeq{grishin}, which
 uses twice the equivalence $(A \limp B) \lor C \semequiv A \limp (B \lor C)$. It
-turns out that this equivalence is true in classical logic, but \emph{not} in
-intuitionistic logic. More precisely, it is the implication $G \defeq (A \limp
+turns out that this equivalence is true in \kl{classical} logic, but \emph{not} in
+\kl{intuitionistic} logic. More precisely, it is the implication $G \defeq (A \limp
 (B \lor C)) \limp ((A \limp B) \lor C)$ which is not provable
-intuitionistically, since it can easily be shown equivalent to the law of
+\kl{intuitionistically}, since it can easily be shown equivalent to the law of
 excluded middle\sidenote{This was already noticed in
 \cite{clouston-annotation-free-2013}, with the linear version $(A \multimap (B
 \parr C)) \multimap ((A \multimap B) \parr C)$ of $G$ called Grishin (a) and its
@@ -290,7 +290,7 @@ as will be demonstrated formally in \refsec{bubbles-soundness}.
     {\Gamma, A \J B, \Delta}
     {\Gamma \J A \limp B, \Delta}
   $$
-  \caption{Classical multi-conclusion version of ${\limp}{+}$}
+  \caption{\kl{Classical} multi-conclusion version of ${\limp}{+}$}
   \labfig{wrong-imp-pos}
 \end{marginfigure}
 
@@ -301,8 +301,8 @@ single-conclusion (resp. no-conclusion) solutions with open (resp. closed) ones
 out as particularly problematic. Indeed if we content ourselves with the natural
 generalization {\rsf{{\limp}{+}c}} of \reffig{wrong-imp-pos}, then we can
 easily build a proof of the excluded middle like in \reffig{lk-tnd}, and thus
-collapse to classical logic. This fact is well-known in the literature on
-multi-conclusion intuitionistic sequent calculi, and the solution is usually to
+collapse to \kl{classical} logic. This fact is well-known in the literature on
+multi-conclusion \kl{intuitionistic} \kl{sequent calculi}, and the solution is usually to
 discard the context of conclusions $\Delta$, as in the {\rnm{{\limp}R*i}} rule
 of \reffig{multi-imp-intro}. But this would make our rule both non-local and
 non-invertible.
@@ -338,7 +338,7 @@ objects charged with the same polarity.
 \end{figure*}
 
 To illustrate why this works, let us consider how one can manipulate with red
-bubbles the classical equivalence $ (A \limp B) \lor C \semequiv A \limp (B \lor
+bubbles the \kl{classical} equivalence $ (A \limp B) \lor C \semequiv A \limp (B \lor
 C)$, that we already stumbled upon in the previous section. The begginings of
 the proofs for both directions of the equivalence are depicted parallely in
 \reffig{bubbles-grishin}. Indeed both proofs have a very similar structure:
@@ -365,12 +365,12 @@ the proofs for both directions of the equivalence are depicted parallely in
   $\hypo{A}$ and $\conc{B}$, but not for $\conc{C}$ (orange dotted arrow): it
   would cross the red bubble, which is expressedly forbidden.
 \end{enumerate}
-Thus in order to prove Grishin (a) and recover classical logic, it suffices
+Thus in order to prove Grishin (a) and recover \kl{classical} logic, it suffices
 either to add the {\rsf{f{+}{+}}} rule allowing red items to enter red bubbles
 (\reffig{flow-red-bubbles}), or to use the {\rsf{{\limp}{+}c}} rule which
 avoids red bubbles altogether. In the following we will settle for the first
 option: we find it more elegant, because it explains the distinction between
-intuitionistic and classical logic as a kind of \emph{physical law} independent
+\kl{intuitionistic} and \kl{classical} logic as a kind of \emph{physical law} independent
 of logical connectives.
 
 \subsection{Blue bubbles}
@@ -379,7 +379,7 @@ Now it is only natural to wonder: since bubbles can be colored in red, or
 charged positively, would it also make sense to have \emph{blue} bubbles charged
 \emph{negatively}? The answer is \emph{yes}, but we need to broaden our logical
 view and consider more exotic beasts: the adequately named
-\emph{dual-intuitionistic} logic, and \emph{bi-intuitionistic logic}.
+\emph{\kl{dual-intuitionistic}} logic, and \emph{\kl{bi-intuitionistic} logic}.
 
 \begin{marginfigure}
   $$
@@ -423,14 +423,14 @@ $\lor$.}), whose heating rules are those of $\limp$ with swapped colors
 \end{marginfigure}
 
 Not very surprisingly, the exclusion connective has already been studied in the
-literature on intuitionistic logic, starting with the seminal paper of Rauszer
-on \emph{Heyting-Brouwer logic}, i.e. intuitionistic logic to which we add
+literature on \kl{intuitionistic} logic, starting with the seminal paper of Rauszer
+on \emph{Heyting-Brouwer logic}, i.e. \kl{intuitionistic} logic to which we add
 exclusion \sidecite{Rauszer1974-RAUSAA}. In this paper, exclusion was called
 \emph{pseudo-difference}, to evoke its close connection with set-theoretical
 difference. Indeed given two sets $A$ and $B$, one can define the set $A
 \setminus B$ by comprehension as $\{x \mid x \in A \land x \not\in B\}$, which
 is the set $A$ from which all elements of $B$ have been \emph{excluded}. With an
-interpretation in boolean algebras, this corresponds to the classical connective
+interpretation in boolean algebras, this corresponds to the \kl{classical} connective
 defined by the truth table of $A \land \neg B$, which is dual to the truth table
 of $\neg A \lor B$ defining material implication.
 
@@ -439,15 +439,15 @@ tradition of algebraic logic, she also explored in later works the
 proof-theoretic \sidecite{rauszer_formalization_1974} and model-theoretic
 \sidecite{rauszer_applications_1977} sides of the question. Many authors have
 then deepened the proof theory of exclusion, whether in isolation from
-implication in \emph{dual-intuitionistic} logic
+implication in \intro{dual-intuitionistic} logic
 \sidecite{urbas_dual-intuitionistic_1996,gore_dual_2000}, or with both
-connectives in \emph{bi-intuitionistic} logic as in Rauszer's original
+connectives in \intro{bi-intuitionistic} logic as in Rauszer's original
 work\sidenote{Crolard \cite{crolard_subtractive_2001} and Aschieri
 \cite{aschieri_natural_2018} have also explored the computational counterpart of
 exclusion through the Curry-Howard correspondence, which is claimed by the first
 author to be a typing operator for \emph{first-class coroutines}.}
 \sidecite{postniece_proof_2010,pinto_relating_2011}. In particular, we are going
-to rely in \refsec{bubbles-completeness} on the deep inference calculus
+to rely in \refsec{bubbles-completeness} on the \kl{deep inference} calculus
 developed by Postniece in her thesis \cite{postniece_proof_2010} to get
 completeness and cut admissibility of our symmetric bubble calculus introduced
 in the next section.
@@ -518,7 +518,7 @@ nested sequents for \kl{FILL} \cite{clouston-annotation-free-2013}.}:
 One can easily check that the interpretation of a solution that has no negative
 (resp. positive) subsolution will not contain any occurrence of the exclusion
 (resp. implication) connective. This will be crucial later to represent proofs
-of both intuitionistic, dual-intuitionistic and bi-intuitionistic logic in the
+of both \kl{intuitionistic}, \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic in the
 same system.
 
 \section{Designing for properties}\labsec{design-props}
@@ -553,8 +553,8 @@ of priorization relatively to the latter:
     connectives ``for free'', and thus reason solely on solutions that comprise
     only bubbles and atomic formulas. As far as we know, it has never been
     identified explicitly in the literature before, although it can loosely be
-    seen as an extension of the decomposition procedures of existing deep
-    inference systems\sidenote{One could argue that more ``semantic'' approaches
+    seen as an extension of the decomposition procedures of existing \kl{deep
+    inference} systems\sidenote{One could argue that more ``semantic'' approaches
     in proof theory have achieved connective-free explanations of proofs, like
     strategies in game semantics or the combinatorial proofs of D. Hughes
     \cite{heijltjes_intuitionistic_2019}. But this is more of a side effect than
@@ -563,7 +563,7 @@ of priorization relatively to the latter:
     works starting from \emph{ludics} \cite{girard_locus_2001} and culminating
     in \emph{transcendental syntax} \cite{eng_exegesis_2023}, where both
     frameworks are founded upon the syntactic mechanisms of proof search
-    (focusing in sequent calculus, and unification in the resolution algorithm
+    (focusing in \kl{sequent calculus}, and unification in the resolution algorithm
     of Robinson, respectively). Here the aim to rid proofs of connectives is
     greatly emphasized by Girard, but the focus is again on \emph{proofs} and
     not \emph{proof states}. Also Girard embraces the full space of incomplete
@@ -593,9 +593,9 @@ of priorization relatively to the latter:
     various authors in proof theory, in ways that are often hard to compare. For
     instance in \sidecite{negri_structural_2001}, sequent rules are said to be
     local because the contexts of hypotheses involved in a rule are located in
-    the sequents of that rule, by opposition to natural deduction rules in their
+    the sequents of that rule, by opposition to \kl{natural deduction} rules in their
     labelled presentation where hypotheses are located in arbitrary distant
-    leaves of the derivation. In the setting of deep inference, local rules are
+    leaves of the derivation. In the setting of \kl{deep inference}, local rules are
     those that can be applied without ``inspection of expressions of arbitrary
     size''\sidenote{Definition 2.1.1 in \cite{tubella:hal-02390267}. The same
     definition is used in \cite{tiu_local_2006}.}. Finally in his transcendental
@@ -607,14 +607,14 @@ of priorization relatively to the latter:
     Our conception of locality is related to all the previous ones, although it
     is guided by the idea of direct manipulation of logical entities by humans,
     rather than purely proof-theoretical considerations. For instance, \kl{BJ}
-    has some locality in the deep inference sense because all rules are
+    has some locality in the \kl{deep inference} sense because all rules are
     applicable in arbitrary contexts; but we relax the \emph{atomicity}
     constraint that reduces $\mathbb{I}$-rules and $\mathbb{R}$-rules to their
     atomic version, because it would be unnecessarily restrictive for the
     purpose of building proofs manually. Still, we want to avoid as much as
     possible referring to generic objects that are not directly related to the
     manipulated data, in the spirit of Girard's locality. A typical example is
-    the elimination rule for disjunction in natural deduction, corresponding to
+    the elimination rule for disjunction in \kl{natural deduction}, corresponding to
     the {\rsf{{\lor}{-}}} rule of \kl{BJ} that involves an arbitrary
     conclusion $\Delta$. The benefits of locality from a UX point of view have
     already been discussed at the end of \refsec{bubbles-pba}.
@@ -625,7 +625,7 @@ of priorization relatively to the latter:
     or remove (even numbers of) atoms. Thus we cannot achieve full linearity in
     that sense, but it is still interesting to maximize it. The first reason is
     \emph{methodological}: by the words of its creator A. Guglielmi,
-    \textit{``[...] deep inference is obtained by applying some of the main
+    \textit{``[...] \kl{deep inference} is obtained by applying some of the main
     concepts behind linear logic to the formalisms, i.e., to the rules by which
     proof systems are designed.''} \sidecite{deep_inference}. The second reason
     is \emph{computational}: it can enable a measure on solutions that is
@@ -637,30 +637,30 @@ of priorization relatively to the latter:
     duplicate formulas can quickly overload the goal with useless copies, making
     it harder to read and navigate.
   \item[Symmetry] 
-    In classical logic, both sequent calculi like \kl{LK} and deep inference
-    systems like CoS are known for their very rich \emph{symmetries}. In fact,
-    one of our ambitions with bubbles was to bring back the symmetry of
-    classical logic in a constructive setting, without resorting to linear
-    logic. This chapter stems in great part from our lack of satisfaction with
-    the asymmetry at work in the \kl{BJ} calculus, which looked quite
-    unnatural. Of course we will not be able to completely eliminate it, but it
-    will be distilled into the flow rules governing the \emph{porosity} of
-    bubbles that were hinted at in \refsec{colors}, rather than through the
-    arbitrary restriction of sequents to one conclusion\sidenote{Whether it is
-    enforced in the syntax of sequents themselves, or through restriction on
-    rules that manipulate conclusions like contraction or the introduction rule
-    for $\limp$.}. Our treatment of dual and bi-intuitionistic logic through
-    blue bubbles is also motivated by this quest for symmetry. It should be
-    noted that although we use naming conventions for rules that resemble those
-    of CoS (e.g. with the identity rules), we do not aim for a perfect symmetry
-    where one can get a complete calculus by simply taking the dual of each
-    rule.
+    In \kl{classical} logic, both \kl{sequent calculi} like \kl{LK} and \kl{deep
+    inference} systems like \kl{CoS} are known for their very rich
+    \emph{symmetries}. In fact, one of our ambitions with bubbles was to bring
+    back the symmetry of \kl{classical} logic in a constructive setting, without
+    resorting to linear logic. This chapter stems in great part from our lack of
+    satisfaction with the asymmetry at work in the \kl{BJ} calculus, which
+    looked quite unnatural. Of course we will not be able to completely
+    eliminate it, but it will be distilled into the flow rules governing the
+    \emph{porosity} of bubbles that were hinted at in \refsec{colors}, rather
+    than through the arbitrary restriction of sequents to one
+    conclusion\sidenote{Whether it is enforced in the syntax of sequents
+    themselves, or through restriction on rules that manipulate conclusions like
+    contraction or the introduction rule for $\limp$.}. Our treatment of
+    \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic through blue bubbles is
+    also motivated by this quest for symmetry. It should be noted that although
+    we use naming conventions for rules that resemble those of \kl{CoS} (e.g.
+    with the identity rules), we do not aim for a perfect symmetry where one can
+    get a complete calculus by simply taking the dual of each rule.
     % \sidenote{In fact it is not even clear what would be the dual of a
     % solution, but the {\rsf{i{\da}}} and {\rsf{i{\ua}}} rules
     % suggest that open and closed solutions may be dual to eachother.}
     Thus we will content ourselves with the hypothesis/conclusion symmetry
-    coming from sequent calculus. Interestingly, the calculus \kl{ISgq} of Tiu
-    for intuitionistic predicate logic does the opposite, by having a perfect
+    coming from \kl{sequent calculus}. Interestingly, the calculus \kl{ISgq} of Tiu
+    for \kl{intuitionistic} \kl{predicate logic} does the opposite, by having a perfect
     dual system \kl{cISgq} but no symmetries among its switch rules (the
     equivalent of our flow rules) \cite{tiu_local_2006}.
 \end{description}

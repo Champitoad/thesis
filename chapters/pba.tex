@@ -56,7 +56,7 @@
 % That is, a sequent $Γ ⊢ Δ$ seen as a goal can be read ``at least one of the
 % conclusions in Δ must be proved under the context $Γ$''. Although introduced
 % originally by Gentzen in the context of classical logic, this syntax can also be
-% used for intuitionistic logics, for example to implement efficient proof search
+% used for \kl{intuitionistic} logics, for example to implement efficient proof search
 % procedures \cite{dyckhoff_contraction-free_1992}. In practice however, we do not
 % know of any existing proof assistant using multi-conclusion goals at the user
 % interface level.
@@ -66,7 +66,7 @@ In this chapter, we focus on how both \emph{click} and \emph{drag-and-drop}
 (DnD) actions upon the formulas of a sequent can implement proof construction
 operations corresponding to the core logic; that is how they deal with logical
 connectives, quantifiers and equality. We present these core principles through
-various illustrations and examples in first-order logic. The technical and
+various illustrations and examples in \kl{first-order logic}. The technical and
 proof-theoretical foundations for the semantics of DnD actions
 % , which constitute the main innovation of this work,
 will be investigated more thoroughly in \refch{sfl}.
@@ -134,16 +134,16 @@ actions involving logical connectives and quantifiers.
 
 Any proof system must implement a given logical formalism. What we describe here
 ought to be applied to a wide range of formalisms, but in this chapter we focus
-mainly on the core of intuitionistic first-order logic with equality
-(FOL). This allows us to consider sequents where hypotheses are
+mainly on the core of \kl{intuitionistic} \kl{first-order logic} with equality
+(\kl{FOL}). This allows us to consider sequents where hypotheses are
 unordered which, in turn, simplifies the technical presentation. We will thus
 write $\Gamma,A \seq C$ for a sequent where $A$ is among the hypotheses.
 
 We use and do not recall the usual definitions of terms and propositions in
 first order logic. We assume a first order language (function and predicate
 symbols) is given. Provability is defined over sequents $\Gamma\seq C$ by the
-usual logical rules of natural deduction (\reffig{calculi-NJ}) and/or sequent
-calculus (\reffig{calculi-LJ}).
+usual logical rules of \kl{natural deduction} (\reffig{calculi-NJ}) and/or \kl{sequent
+calculus} (\reffig{calculi-LJ}).
 
 Equality is treated in a common way: $=$ is a binary
 predicate symbol written in the usual infix notation, together with the
@@ -166,7 +166,7 @@ substitutions, implicitly applying the so-called Barendregt
 convention, that bound and free variables are distinct and that a
 variable is bound at most once.
 
-Extending this work to simple extensions of FOL, like multi-sorted predicate
+Extending this work to simple extensions of \kl{FOL}, like multi-sorted predicate
 calculus is straightforward (and actually done in the Actema prototype). Some
 interesting points may show up when considering how to apply this work to more
 complex formalisms like type theories. We will not explore these questions here.
@@ -321,7 +321,7 @@ given in \reftab{click-rules}. A few remarks are in order:
 \begin{itemize}
   \item In the current implementation of Actema, clicking on a blue item $A
   \limp B$ will work only if the conclusion is $B$. An alternative is to use the
-  {\rsf{{\limp}L}} rule from sequent calculus, which is applicable in every
+  {\rsf{{\limp}L}} rule from \kl{sequent calculus}, which is applicable in every
   context.
   \item There is no action mapped to red $\bot$ items, simply because $\bot$
   does not have any introduction rule.
@@ -342,7 +342,7 @@ given in \reftab{click-rules}. A few remarks are in order:
   From the previous remarks and the completeness of the cut-free sequent
   calculus \kl{LJ}, it follows that click actions, when combined with new
   object declarations and DnD instantiations, provide a sufficient set of
-  interactions to prove any true formula of (intuitionistic) first-order logic.
+  interactions to prove any true formula of (\kl{intuitionistic}) \kl{first-order logic}.
 \end{remark}
 
 \begin{table}[H]
@@ -411,7 +411,7 @@ work}.
 
 \section{A simple example involving equality}\labsec{equality}
 
-Most interactive theorem provers expose a \emph{rewrite} tactic that allows the
+Most \kl{interactive theorem provers} expose a \emph{rewrite} tactic that allows the
 use of equality hypotheses, that is known equations of the form $t = u$, in
 order to replace some occurrences of $t$ by $u$ (or symmetrically, occurrences
 of $u$ by $t$). This substitution can be performed in the conclusion or in
@@ -1053,5 +1053,5 @@ Incredible Proof Machine~\sidecite{blanchette-visual-2016},
 Logitext\sidenote{\url{http://logitext.mit.edu/main}} and Click \&
 coLLecT~\sidecite{clickcollect}. In particular, Logitext and Click \& coLLecT
 exploit the same idea of associating click actions on head connectives to
-inference rules in sequent calculus. But these systems focus more on explicating
+inference rules in \kl{sequent calculus}. But these systems focus more on explicating
 the proof object than on making its construction easier.

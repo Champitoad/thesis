@@ -89,7 +89,7 @@ comparing them to those of the \kl{BJ} calculus:
   apply to an arbitrary item $I$, which can either be a formula or a solution.
   Combined to the fact that the ambient solution can be either open or closed,
   this gives the most general and expressive formulation of the rules. We
-  believe that like in CoS, the atomic version where $I$ is restricted to an
+  believe that like in \kl{CoS}, the atomic version where $I$ is restricted to an
   atomic formula might be sufficient for completeness.
 
   \item[\textbf{\flow}]
@@ -131,33 +131,33 @@ comparing them to those of the \kl{BJ} calculus:
   (\rsf{f{-}{+}{\da}} versus \rsf{f{+}{+}{\ua}}).
 
   Taken together, these $6$ rules capture provability in
-  \emph{bi-intuitionistic} logic, as will be demonstrated by the soundness and
+  \emph{\kl{bi-intuitionistic}} logic, as will be demonstrated by the soundness and
   completeness theorems for system $\sysB$. By adding any one of the converses
   to the $4$ rules that define the porosity of polarized bubbles
   (\rsf{f{-}{+}{\ua}}, \rsf{f{+}{-}{\ua}}, \rsf{f{-}{-}{\da}},
   \rsf{f{+}{+}{\da}}), the system collapses to \emph{classical} logic.
   This situation is summarized in \reffig{bubbles-porosity}: as in
   \reffig{bubbles-flow}, green and orange arrows represent respectively valid
-  and invalid moves, but in bi-intuitionistic rather than intuitionistic logic.
+  and invalid moves, but in \kl{bi-intuitionistic} rather than \kl{intuitionistic} logic.
   To recover the latter, one can just ignore all arrows that cross the blue
-  bubble, which are only useful in dual-intuitionistic logic. Then the purple
-  arrows represent moves that are valid only in classical logic. The reader can
+  bubble, which are only useful in \kl{dual-intuitionistic} logic. Then the purple
+  arrows represent moves that are valid only in \kl{classical} logic. The reader can
   easily check that there is a total of $18$ arrows, and map the green and
   purple arrows back to the corresponding $\mathbb{F}$-rules of
   \reffig{graphical-B}.
 
   \begin{remark}
-    Since all items can freely go in and out of polarized bubbles in classical
+    Since all items can freely go in and out of polarized bubbles in \kl{classical}
     logic, the latter are useless. In fact, one could restrict the syntax of
     solutions to neutral bubbles and only one polarity of formulas, say
     conclusions. This corresponds to the possibility of having one-sided
-    formulations of sequent calculi for classical logic, by restricting negation
+    formulations of \kl{sequent calculi} for \kl{classical} logic, by restricting negation
     to atomic formulas and extending it to arbitrary formulas through De Morgan
-    dualities\sidenote{See for instance the one-sided sequent calculus in
+    dualities\sidenote{See for instance the one-sided \kl{sequent calculus} in
     \cite{girard:hal-01322183}.}
   \end{remark}
   
-  In their graphical representation, the bi-intuitionistic $\mathbb{F}$-rules of
+  In their graphical representation, the \kl{bi-intuitionistic} $\mathbb{F}$-rules of
   system $\sysB$ are equivalent to the three following \emph{topological laws},
   that we call the \emph{$\mathbb{F}$-laws}\sidenote{Hopefully, those are not
   \emph{flaws} of our \emph{flow} rules, but rather the opposite\dots}:
@@ -181,7 +181,7 @@ comparing them to those of the \kl{BJ} calculus:
   items corresponds to outward (resp. inward) orange arrows. $\mathbb{F}$-laws
   are thus the ``negative'' counterpart --- in the grammatical sense --- of
   $\mathbb{F}$-rules, represented by green arrows. The fact that purple arrows
-  are demoted to orange arrows in bi-intuitionistic logic, can be interpreted as
+  are demoted to orange arrows in \kl{bi-intuitionistic} logic, can be interpreted as
   resulting from their violation of the first $\mathbb{F}$-law. The second and
   third $\mathbb{F}$-laws characterize the behavior of neutral bubbles, and are
   respected by all rules of system $\sysB$.
@@ -192,7 +192,7 @@ comparing them to those of the \kl{BJ} calculus:
   \reffig{graphical-B}, it can be seen as the act of \emph{abstracting} the
   subgoal $T$ from its parent subgoal $S$, since the hypotheses and conclusions
   of $S$ cannot be brought to interact with those of $T$ anymore. More generally
-  in bi-intuitionistic logic, all flow rules can be understood as
+  in \kl{bi-intuitionistic} logic, all flow rules can be understood as
   \emph{abstraction} moves, that strengthen the goal by moving irreversibly an
   item $I$ out of its subgoal $S$. In the case of outward rules (whose name ends
   with $\ua$), $I$ is brought closer to the \emph{root} of the proof tree;
@@ -234,7 +234,7 @@ comparing them to those of the \kl{BJ} calculus:
   use of the \rsf{a{+}} rule in the proof of Uustalu's formula in
   \reffig{bubbles-uustalu}. This formula was first introduced in
   \sidecite{hutchison_proof_2009} as a counter-example to the cut-elimination
-  theorem of Rauszer's sequent calculus for bi-intuitionistic logic
+  theorem of Rauszer's \kl{sequent calculus} for \kl{bi-intuitionistic} logic
   \sidecite{rauszer_formalization_1974}, and our initial motivation for
   introducing absorption rules was precisely to provide a cut-free proof of this
   formula in system $\sysB$.

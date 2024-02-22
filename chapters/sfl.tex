@@ -4,7 +4,7 @@
 
 In this chapter, we engage in a thorough analysis of the logical semantics of
 DnD actions, which were introduced informally through examples in \refch{pba}.
-We do this mainly from the formal perspective of deep inference proof theory,
+We do this mainly from the formal perspective of \kl{deep inference} proof theory,
 following the original work of K. Chaudhuri on \emph{subformula linking}
 \cite{Chaudhuri2013}. But we always keep in mind the intended application to
 proof assistants, by motivating various design choices --- actual or prospective
@@ -35,7 +35,7 @@ understand the status of quantified variables (\refsubsec{identity}).
 As is standard in term rewriting, our notion of context will correspond to that
 of a (formula) tree with a distinguished leaf called its \emph{hole}.
 % \sidenote{More precisely, our contexts correspond to what is called a
-% ``structure'' in the first deep inference formalism to date, the \emph{Calculus
+% ``structure'' in the first \kl{deep inference} formalism to date, the \emph{Calculus
 % of Structures} (see \refsec{cos}).}
 
 \begin{definition}[Formula context]\label{def:formula-context}
@@ -311,7 +311,7 @@ polarities, and Clause \ref{clause:intuit} ensures that the linkage makes sense
 in our \emph{intuitionistic} setting.
 
 Indeed one could imagine the following behavior
-in classical logic:
+in \kl{classical} logic:
 $$(\select{A}\limp B)\limp C\back \select{A}~~\steps{}~~ C\limp A$$ which gives a
 proof of Peirce's law when replacing $C$ with $A$. We will come back to this
 example in \refch{sfl-classical}, but for now we can just remark that there is
@@ -974,7 +974,7 @@ integrated in our paradigm, in the form of generalized substitution rules in
 place of {\rsf{L{=}_i}} and {\rsf{F{=}_i}}.}. This again contrasts with the
 release semantics of subformula linking which do not provide this guarantee of
 productivity, or with the logical reasoning tactics of proof assistants based on
-natural deduction rules.
+\kl{natural deduction} rules.
 
 \section{Focusing}\labsec{invert}
 
@@ -1001,7 +1001,7 @@ which leads to the following behavior:
 $$\select{A}\lor B \back B\lor\select{A}\steps{} B\limp B\lor A.$$
 This is indeed the ``right'' choice, since applying \rsf{R\lor_2} first would
 lead to a dead-end\sidenote{Interestingly in this case it creates a dead-end
-only in intuitionistic logic: in classical logic both results are provable.}:
+only in \kl{intuitionistic} logic: in \kl{classical} logic both results are provable.}:
 $$\select{A}\lor B \back B\lor\select{A}\steps{} B\lor(B\limp A).$$
 
 The general scheme for choosing a rule to apply to a redex $C\select{A} \link
@@ -1061,17 +1061,17 @@ provide rigorous proofs in annex when time permits.
 To enable a fully graphical approach to theorem proving that does not rely on a
 textual proof language, it is important to show that (a subset of) the set of
 actions exposed to the user is \emph{complete} with respect to provability. That
-is, any formula $A$ which is \emph{true} in our logic --- here intuitionistic
-FOL --- can be proved by executing a sequence of graphical actions that reduces
+is, any formula $A$ which is \emph{true} in our logic --- here \kl{intuitionistic}
+\kl{FOL} --- can be proved by executing a sequence of graphical actions that reduces
 it to the empty goal. We noticed in Remark \ref{rem:click-completeness} that
 click actions are a sufficient basis for completeness. While we believe that a
 combination of both click and DnD actions is more comfortable to handle a
 variety of proof situations, it is still interesting to consider the question of
 completeness for DnD actions alone. It turns out that the answer is positive:
 the mechanism of \emph{subformula linking} underlying DnD actions is powerful
-enough to capture provability in FOL. This has already been shown by Chaudhuri
+enough to capture provability in \kl{FOL}. This has already been shown by Chaudhuri
 in \cite{Chaudhuri2013} for linear logic, and \cite{DBLP:conf/cade/Chaudhuri21}
-for intuitionistic logic. Here we give a completeness proof for a system based
+for \kl{intuitionistic} logic. Here we give a completeness proof for a system based
 on a slight extension of our rewrite rules, following ideas from these works.
 
 \begin{remark}
@@ -1116,7 +1116,7 @@ $C^+\hole$, and dually rule {\rsf{F}} creates a \emph{forward} linkage between
 $\land$-linked formulas in any negative context $C^-\hole$\sidenote{This is
 reminiscent of the adjunction between the product and the exponential in
 \emph{cartesian closed categories}, which respectively interpret conjunction and
-implication in the Curry-Howard-Lambek correspondance for intuitionistic
+implication in the Curry-Howard-Lambek correspondance for \kl{intuitionistic}
 logic.}. Note that contrary to the rules considered up to now, linkage formation
 rules are not closed under arbitrary contexts: indeed the polarity restrictions
 are necessary to ensure soundness, as reviewed in \refsec{soundness}. A backward
@@ -1141,7 +1141,7 @@ C^-\select{D\select{A} \forw E\select{B}}$$ of {\rsf{F}} where $C^-\hole \syneq
 \end{marginfigure}
 
 Another necessary ingredient is the addition of a deep version of the
-\emph{structural rules} of sequent calculus. We already have the {\rsf{Fcomm}}
+\emph{structural rules} of \kl{sequent calculus}. We already have the {\rsf{Fcomm}}
 rule to handle commutativity of the $\forw$ operator, which acts as a kind of
 \emph{exchange} rule. Then we add the equivalent of \emph{contraction} and
 \emph{weakening} with the rules {\rsf{conn}} and {\rsf{weak}}
@@ -1181,16 +1181,16 @@ in order to make derivations more concise.
 Because linkages created by rules {\rsf{B} and \rsf{F}} are not
 necessarily valid, one needs to add the so-called \emph{release} rules already
 mentioned in \refsec{linkages} (\reffig{rellink}). In fact these rules are
-crucial in order to simulate rules from sequent calculus, which will be the
+crucial in order to simulate rules from \kl{sequent calculus}, which will be the
 backbone of our completeness proof as in \cite{Chaudhuri2013}. It is interesting
 to consider the question of completeness without release rules, especially since
 we do not use them in the semantics of DnD actions. We conjecture that it should
 hold but would require a completely different argument, maybe of a more semantic
 nature like the original proof of Gödel with Tarski models\sidenote{Or Kripke
-models in an intuitionistic setting. }. Another possibility might be to use a
+models in an \kl{intuitionistic} setting. }. Another possibility might be to use a
 more canonical representation of proofs that is in-between syntax and semantics,
 like the combinatorial proofs of Hughes \sidecite{Hughes_2006} which are known
-to be closely related to deep inference proofs.
+to be closely related to \kl{deep inference} proofs.
 
 \begin{marginfigure}
   \begin{mathpar}
@@ -1213,9 +1213,9 @@ would play the same role as the rules of \reffig{DISL-U}. Thus adding this rule
 does not correspond morally to modelling a click action, nor to a modification
 of the semantics of DnD actions as for release rules.
 
-Then we simply rely on the completeness of sequent calculus by performing a
-proof by simulation. There are many variants of sequent calculi for
-intuitionistic first-order logic described in the literature. In our case the
+Then we simply rely on the completeness of \kl{sequent calculus} by performing a
+proof by simulation. There are many variants of \kl{sequent calculi} for
+\kl{intuitionistic} \kl{first-order logic} described in the literature. In our case the
 choice mostly does not matter: all we need is that it is \emph{analytic}, i.e.
 satisifies the subformula property. Indeed the very idea of subformula linking
 is based on analyticity: one should be able to prove a statement by the sole act
@@ -1273,7 +1273,7 @@ admissibility theorem from \cite{negri_structural_2001}.
   rules {\rnm{ax}}, {\rnm{\top R}}, {\rnm{\bot L}} and {\rnm{{=}R}}. Other rules
   are simulated as usual by composing the derivations obtained from the
   induction hypotheses, making a crucial use of the release rules {\rsf{Brel}}
-  and {\rsf{Frel}}. The full mapping from sequent calculus rules to
+  and {\rsf{Frel}}. The full mapping from \kl{sequent calculus} rules to
   derivations in our subformula linking calculus is given in the following
   table. Note that we treat conjunctive formulas modulo associativity to avoid
   bureaucratic details.
@@ -1555,17 +1555,17 @@ allows to completely characterize a proof net by the set of its \emph{axiom}
 links\sidenote{The difference with matings is that correctness of a proof
 structure can be checked in \emph{polynomial} instead of exponential time.},
 because of the absence of duplication. This is because adding additives or
-exponentials, which can encode intuitionistic and classical logic, requires
+exponentials, which can encode \kl{intuitionistic} and \kl{classical} logic, requires
 additional structure to represent uses of weakening and contraction. The
 \emph{combinatorial proofs} of Hughes
 \sidecite{Hughes_2006,heijltjes_intuitionistic_2019} are examples of
 polynomially-checkable proof objects exhibiting such structure, and have
-recently been extended to handle first-order classical quantifiers
-\sidecite{hughes2019firstorder} (intuitionistic quantifiers are still an open
+recently been extended to handle first-order \kl{classical} quantifiers
+\sidecite{hughes2019firstorder} (\kl{intuitionistic} quantifiers are still an open
 problem). This compartmentalization of axiom links and structural rules
 resembles the distinction between interaction phases and manual applications of
 {\rsf{conn}} and {\rsf{weak}} (\reffig{reslink}), which is itself inspired by
-the \emph{decomposition theorem} of the calculus of structures
+the \emph{decomposition theorem} of the \kl{calculus of structures}
 \sidecite[][Theorem~4.1.3]{tubella:hal-02390267}.
 
 There is also an analogy between the correctness criterions of proof nets, and
@@ -1574,16 +1574,16 @@ the validity criterion of linkages:
   \item they both identify a subset of valid objects among a larger set of
   structures characterized by links on formulas;
   \item they both allow many different \emph{sequential} readings, that is
-  sequent calculus proofs for proof nets, and CoS proofs for
-  linkages\sidenote{Note that invalid linkages still give rise to CoS-style
+  \kl{sequent calculus} proofs for proof nets, and \kl{CoS} proofs for
+  linkages\sidenote{Note that invalid linkages still give rise to \kl{CoS}-style
   \emph{derivations}, but not \emph{proofs} since they do not end with $\top$.
   The incorrect proof structures of Girard are in a sense more parallel as they
-  cannot always be mapped to correct sequent calculus derivations.}.
+  cannot always be mapped to correct \kl{sequent calculus} derivations.}.
 \end{itemize}
 Hence, our approach to subformula linking seems to exhibit some properties of
 canonical proofs, but at the level of \emph{partial proofs}: valid linkages make
 for \emph{compact-parallel-spatial} representations of inferences, whose
-operational meaning is given by their \emph{detailed-sequential-temporal} CoS
+operational meaning is given by their \emph{detailed-sequential-temporal} \kl{CoS}
 derivations.
 
 

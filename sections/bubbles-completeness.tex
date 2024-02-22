@@ -1,10 +1,10 @@
-We are now going to prove the \emph{completeness} of the bi-intuitionistic (and
+We are now going to prove the \emph{completeness} of the \kl{bi-intuitionistic} (and
 propositional) fragment $\sysBHB$ of system $\sysB$, by simulating the nested
 sequent system \kl{DBiInt} of Postniece. In \sidecite{postniece_deep_2009} she
 shows that this calculus is sound and complete with respect to another calculus
 \kl{LBiInt}, and in Chapter 4 of her thesis \sidecite{postniece_proof_2010} she
 proves that \kl{LBiInt} is sound and complete with respect to the Kripke
-semantics of bi-intuitionistic logic. Importantly, the cut rule is shown to be
+semantics of \kl{bi-intuitionistic} logic. Importantly, the cut rule is shown to be
 \emph{admissible} in both systems, through a syntactic process of
 cut-elimination in \kl{LBiInt}. We will rely on this result to obtain
 admissibility of the cut rule \rsf{i{\ua}} in $\sysBHB$, and by extension
@@ -40,7 +40,7 @@ and rely on meta-variables $X, Y$ to distinguish structures from arbitrary
 solutions when necessary.
 
 The rules of \kl{DBiInt} are given in \reffig{rules-dbiint}. Note that like
-bubble calculi, \kl{DBiInt} is truly a \emph{deep inference} system, in the
+bubble calculi, \kl{DBiInt} is truly a \emph{\kl{deep inference}} system, in the
 sense that rules can be applied on sequents nested arbitrarily deep inside
 structures\sidenote{Our presentation of rules is slightly different from
 \cite{postniece_deep_2009}: the contexts in which rules apply are left implicit,
@@ -122,7 +122,7 @@ improving \emph{factorizability}, just like the cut rule does.
 % and thus the admissibility of \emph{logical connectives}. But this has yet to be
 % demonstrated.
 
-As in sequent calculus, every rule of system $\sysB$ other than
+As in \kl{sequent calculus}, every rule of system $\sysB$ other than
 \rsf{i{\ua}} satisfies the \emph{subformula property}:
 
 \begin{fact}[Subformula property]\label{cor:subformula-property} If $S
@@ -145,16 +145,16 @@ humans.
 
 As noted in \cite{postniece_deep_2009}, one can simply ignore rules related to
 the exclusion connective $\lsub$ to get a sound and complete system for
-intuitionistic logic. In \kl{DBiInt}, these rules are the introduction rules
+\kl{intuitionistic} logic. In \kl{DBiInt}, these rules are the introduction rules
 \rsf{{\lsub}_R} and \rsf{{\lsub}_L}, as well as the propagation rules
 \rsf{{\seq}_{L1}} and \rsf{{\seq}_{R2}}. Indeed the latter are only useful in
 combination with the former, since \rsf{{\lsub}_L} is the only rule of
 \kl{DBiInt} that can introduce nested sequents in negative contexts. The
 situation is similar in system $\sysB$, and in fact the proof of
-\reflemma{simulation-dbiint} shows that the intuitionistic fragment $\sysBH$ is
+\reflemma{simulation-dbiint} shows that the \kl{intuitionistic} fragment $\sysBH$ is
 sufficient to simulate \kl{DBiInt} without the aforementioned rules. The dual
-argument can be made for dual-intuitionistic logic, and thus we obtain
-(cut-free) intuitionistic (resp. dual-intuitionistic) completeness of $\sysBH$
+argument can be made for \kl{dual-intuitionistic} logic, and thus we obtain
+(cut-free) \kl{intuitionistic} (resp. \kl{dual-intuitionistic}) completeness of $\sysBH$
 (resp. $\sysBB$):
 
 \begin{corollary}[Intuitionistic completeness]
@@ -201,16 +201,16 @@ argument can be made for dual-intuitionistic logic, and thus we obtain
 
 \reffig{dne-bubbles} shows a proof of the double-negation elimination law
 $\mathrm{DNE} \defeq \neg \neg A \seq A$ in system $\sysB$. Since $\sysBH$ is
-intuitionistically complete, the well-known double-negation embedding of
-classical logic into intuitionistic logic tells us that $\neg \neg A$ is
+\kl{intuitionistically} complete, the well-known double-negation embedding of
+\kl{classical} logic into \kl{intuitionistic} logic tells us that $\neg \neg A$ is
 provable in $\sysBH$ (and a fortiori in $\sysB$) if $A$ is a theorem of
-classical logic. Combining the two previous facts, we obtain the classical
+\kl{classical} logic. Combining the two previous facts, we obtain the \kl{classical}
 completeness of system $\sysB$. In fact the proof of DNE only relies on the use
 of the \rsf{f{+}{+}{\da}} rule, so we can make the following stronger
 statement:
 
-\begin{corollary}[Classical completeness]\label{cor:bubbles-completeness-classical}
-  If $A$ is a theorem of classical logic, then $\prov{\sysBH \cup
+\begin{corollary}[\kl{Classical} completeness]\label{cor:bubbles-completeness-classical}
+  If $A$ is a theorem of \kl{classical} logic, then $\prov{\sysBH \cup
   \{\rsf{f{+}{+}{\da}}\}} A$.
 \end{corollary}
 \begin{proof}
@@ -235,13 +235,13 @@ statement:
 
 Alas this argument makes use of the \rsf{i{\ua}} rule. Note however that
 the reason we chose to prove completeness of $\sysBHB$ by simulating a rather
-exotic system like \kl{DBiInt}, was that standard sequent calculi for
-bi-intuitionistic logic like the one of Rauszer
+exotic system like \kl{DBiInt}, was that standard \kl{sequent calculi} for
+\kl{bi-intuitionistic} logic like the one of Rauszer
 \sidecite{rauszer_formalization_1974} are not \emph{cut-free} complete; and in
 our literature review, \kl{DBiInt} was the cut-free system closest in its
-syntax and rules to system $\sysB$. But for classical logic we do not have this
+syntax and rules to system $\sysB$. But for \kl{classical} logic we do not have this
 limitation, and thus it is straightforward to simulate directly a cut-free
-sequent calculus such as \kl{G3cp} \sidecite{negri_structural_2001}:
+\kl{sequent calculus} such as \kl{G3cp} \sidecite{negri_structural_2001}:
 
 \begin{lemma}[Simulation of \kl{G3cp}]
   If $\Gamma \prov{\kl{G3cp}} \Delta$, then $\Gamma \prov{\sysBH \cup
@@ -255,17 +255,17 @@ sequent calculus such as \kl{G3cp} \sidecite{negri_structural_2001}:
 Lastly, let us mention a recent result of Goré and Shillito
 \cite{gore_bi-intuitionistic_2020}, where they uncover a distinction between a
 \emph{weak} and a \emph{strong} consequence relation in the semantics of
-bi-intuitionistic logic. Although they define the same set of theorems, these
+\kl{bi-intuitionistic} logic. Although they define the same set of theorems, these
 two relations have different properties at the meta-level, and thus the authors
 argue that they define two distinct logics, called respectively \kl{wBIL} and
 \kl{sBIL}. At the end of the article, they conjecture that the various existing
 calculi in the literature are sound and complete for \kl{wBIL}, including a
 calculus designed by Postniece. Since our completeness proof is by simulation of
 the system \kl{DBiInt} by the same author, we follow this conjecture regarding
-the completeness of the bi-intuitionistic fragment $\sysBHB$ of system $\sysB$.
+the completeness of the \kl{bi-intuitionistic} fragment $\sysBHB$ of system $\sysB$.
 For soundness, we would need to clarify the relationship between Heyting-Brouwer
 algebras and these consequence relations, which stem instead from an analysis of
-the Kripke semantics of bi-intuitionistic logic. Since system $\sysB$ offers a
+the Kripke semantics of \kl{bi-intuitionistic} logic. Since system $\sysB$ offers a
 very expressive syntax, it would be interesting to investigate its ability to
 capture both \kl{wBIL} and \sys{sBIL}, maybe by using distinct sets of flow
 rules. Goré and Shillito suggest that a framework that captures both

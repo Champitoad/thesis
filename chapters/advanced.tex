@@ -177,7 +177,7 @@ things to note:
   \emph{context-dependent} than the tactics of Coq. For instance, click actions
   have a different effect depending on the main connective of the formula being
   clicked, but provide a unique interface for applying rules of natural
-  deduction/sequent calculus. On the contrary, there is almost one tactic for
+  deduction/\kl{sequent calculus}. On the contrary, there is almost one tactic for
   dealing with each logical connective in Coq, e.g. \texttt{intros} for $\limp$
   and $\forall$, \texttt{split} for $\land$, \texttt{left} and \texttt{right}
   for $\lor$, \texttt{exists} for $\exists$, etc. The same remark applies to DnD
@@ -239,7 +239,7 @@ takes any function as argument. Depending on the underlying logical framework,
 this might have an impact on the exact way the definition is encoded. Here we do
 not want to bother with such implementation details, and simply assume that
 higher-order definitions are possible, even though Actema is currently limited
-to first-order logic. In practice this does not affect the semantics of
+to \kl{first-order logic}. In practice this does not affect the semantics of
 graphical actions, and we can imagine having a first-order set theory such as
 \kl{ZF} to make everything work behind the scenes\sidenote{See also
 \refsec{pluginfuture} for a discussion on a higher-order extension of Actema.}.
@@ -275,7 +275,7 @@ meaning of the symbol emerges from the way it can be used in proofs through
 axioms. In contrast, the usual notion of mathematical definition we tackle in
 this chapter might be called \emph{nominal}, because it essentially amounts to
 giving a name (the head) to a reoccurring pattern of statement (the body). Note
-that the syntax of first-order logic is unaware of this distinction, since in
+that the syntax of \kl{first-order logic} is unaware of this distinction, since in
 both cases the defined concepts are encoded as \emph{atomic} predicates. This is
 usually not the case of logical frameworks found in proof assistants: for
 instance, the duality between \emph{judgmental} (nominal) and

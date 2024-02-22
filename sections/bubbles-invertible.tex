@@ -33,15 +33,15 @@ Thus the only remaining rules of \kl{system B} that are (most probably) not
 invertible are the weakening rules $\{\rsf{w{-}},\rsf{w{+}}\}$, all the
 $\mathbb{F}$-rules, and the $\mathbb{H}$-rules $\{\rsf{{\limp}{-}},
 \rsf{{\lsub}{+}}\}$ that \emph{apply} an implication/exclusion\sidenote{For
-quantifier rules, we conjecture that as in sequent calculus, the rules
+quantifier rules, we conjecture that as in \kl{sequent calculus}, the rules
 $\{\rsf{\forall{+}}, \rsf{\exists{-}}\}$ are invertible, while the rules
-$\{\rsf{\forall{-}}, \rsf{\exists{+}}\}$ are not. And as in sequent calculus,
+$\{\rsf{\forall{-}}, \rsf{\exists{+}}\}$ are not. And as in \kl{sequent calculus},
 this can be remedied by systematically duplicating the instantiated formula.}.
 In \reffig{sequent-B-inv} we define the \kl{B_{inv}} calculus, which results
 from the following modifications to the previous rules:
 \begin{description}
   \item[\textbf{Weakening}]
-    Here we follow a standard technique in sequent calculus, that merges the
+    Here we follow a standard technique in \kl{sequent calculus}, that merges the
     weakening rule in all \emph{terminal} rules of the calculus (i.e. rules with
     no premisses). In bubble calculi, the notion of premiss is captured by
     neutral bubbles; thus we incorporate weakenings in all rules that solve
@@ -72,7 +72,7 @@ from the following modifications to the previous rules:
     distance. This can be done with inference rules that are \emph{doubly} deep,
     by encoding the path to the destination as a second solution context inside
     the context where the rule is applied\sidenote{Such rules are sometimes
-    called \emph{super-switch} rules in the deep inference literature, see for
+    called \emph{super-switch} rules in the \kl{deep inference} literature, see for
     instance Chapter 8, Section 2.1 of \cite{guenot_nested_2013}.}. It turns out
     to be hard to express in bubbles, because this requires a syntactic way to
     describe contexts that correspond to valid flow paths of arbitrary
@@ -92,7 +92,7 @@ from the following modifications to the previous rules:
     The last source of non-invertibility is the $\mathbb{H}$-rules
     \rsf{{\limp}{-}} and \rsf{{\lsub}{+}}, that respectively allow to use an
     implication hypothesis, and prove an exclusion conclusion.
-    % This problem is has been known in the sequent calculus literature at least
+    % This problem is has been known in the \kl{sequent calculus} literature at least
     % since \sidecite{nikolai1952vorob}, and a solution is proposed in
     % \sidecite{dyckhoff_contraction-free_1992} by splitting the rule
     % \rsf{{\limp}{-}} into  
@@ -146,12 +146,12 @@ of \kl{DBiInt} preserve the principal formula; but this is precisely what we
 are trying to avoid with our version of the rules. Of course, if we either give
 up on this constraint or include contraction rules in \kl{B_{inv}}, then we
 immediately get our desired result: \kl{B_{inv}} is a fully invertible
-calculus, where the same fragments as system $\sysB$ capture intuitionistic,
-dual-intuitionistic, bi-intuitionistic and classical logic.
+calculus, where the same fragments as system $\sysB$ capture \kl{intuitionistic},
+\kl{dual-intuitionistic}, \kl{bi-intuitionistic} and \kl{classical} logic.
 
 \subsection{Semi-automated proof search}\labsubsec{bubbles-search}
 
-In the intuitionistic (propositional) fragment of \kl{B_{inv}}, a canonical way
+In the \kl{intuitionistic} (propositional) fragment of \kl{B_{inv}}, a canonical way
 to search for a proof of a formula $A$ consists in the following $5$
 \emph{phases}, applied successively in a loop until the empty closed solution is
 reached:
@@ -340,7 +340,7 @@ introduction rule \rsf{e} (\reffig{jn-rule-e}). But we cannot do this in system
 $\sysB$, because this would conflict with the subtractive reading of negative
 solutions, i.e. $\nsint{A \seq B} = \nsint{A} \lsub \nsint{B}$. In
 \refch{flowers}, the problem will also be solved through an asymmetric treatment
-of nested sequents, capturing only intuitionistic logic instead of
-bi-intuitionistic logic. But this is a small price to pay, since
-bi-intuitionistic logic does not (currently) have any applications in the realm
+of nested sequents, capturing only \kl{intuitionistic} logic instead of
+\kl{bi-intuitionistic} logic. But this is a small price to pay, since
+\kl{bi-intuitionistic} logic does not (currently) have any applications in the realm
 of interactive theorem proving.

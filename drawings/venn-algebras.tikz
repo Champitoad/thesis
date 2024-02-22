@@ -12,27 +12,27 @@
 		\node [style=none] (12) at (-4.775, -2) {$
 		\begin{array}{c}
 			\text{\textbf{Heyting}} \\
-			\text{\footnotesize(Intuitionistic)} \\
+			\text{\footnotesize(\kl{Intuitionistic})} \\
 			\{\mathsf{f}{-}{+}{\da}, \mathsf{f}{+}{+}{\ua}\}
 		\end{array}
      $};
 		\node [style=none] (13) at (0, 0.425) {$
 		\begin{array}{c}
 			\text{\textbf{Heyting-Brouwer}} \\
-			\text{\footnotesize(Bi-Intuitionistic)} \\
+			\text{\footnotesize(\kl{Bi-Intuitionistic})} \\
 		\end{array}
      $};
 		\node [style=none] (14) at (4.775, -2) {$
 		\begin{array}{c}
 			\text{\textbf{Brouwer}} \\
-			\text{\footnotesize(Dual-Intuitionistic)} \\
+			\text{\footnotesize(\kl{Dual-Intuitionistic})} \\
 			\{\mathsf{f}{+}{-}{\da}, \mathsf{f}{-}{-}{\ua}\}
 		\end{array}
      $};
 		\node [style=none] (15) at (0.025, -3.075) {$
 		\begin{array}{c}
 			\text{\textbf{Boolean}} \\
-			\text{\footnotesize(Classical)} \\
+			\text{\footnotesize(\kl{Classical})} \\
 			\{\mathsf{f}{-}{+}{\ua}, \mathsf{f}{+}{+}{\da}, \mathsf{f}{+}{-}{\ua}, \mathsf{f}{-}{-}{\da}\}
 		\end{array}
      $};

@@ -4,7 +4,7 @@
 
 In the previous chapters, we introduced the Proof-by-Action paradigm
 (\refch{pba}), and tried to convince the reader that it is both theoretically
-sound with its firm grounding in deep inference proof theory (\refch{sfl} and
+sound with its firm grounding in \kl{deep inference} proof theory (\refch{sfl} and
 \refch{sfl-classical}), and practically useful by analysing proofs of
 mathematical problems expressed within it (\refch{advanced}). We also mentioned
 multiple times our prototype of interface implementing Proof-by-Action called
@@ -16,8 +16,8 @@ procedures. However due to both historical choices in its design and lack of
 human resources for development, Actema's proof engine is quite limited in its
 features:
 \begin{itemize}
-  \item it can only handle goals expressed in many-sorted intuitionistic
-    first-order logic (hereafter iFOL), whereas all state-of-the-art PAs support
+  \item it can only handle goals expressed in many-sorted \kl{intuitionistic}
+    \kl{first-order logic} (\intro{iFOL}), whereas all state-of-the-art PAs support
     \emph{higher-order logic} in one form or another; and higher-order features
     are crucial for formalizing many mathematical notions in a concise way, as
     witnessed by the example of \refsec{funcs};
@@ -47,16 +47,16 @@ experimentations through the huge body of theories already developed in Coq, and
 make the Proof-by-Action paradigm visible to the large community of existing
 users of this popular PA.
 
-Note that the same approach should be applicable in principle to any ITP that
-supports at least iFOL, and provides an interaction protocol for building proofs
+Note that the same approach should be applicable in principle to any \kl{ITP} that
+supports at least \kl{iFOL}, and provides an interaction protocol for building proofs
 in a goal-directed manner. This includes other popular PAs such as Lean and
 Isabelle, but also more specialized software like the Why3 platform for
 deductive program verification, the Meta-F* framework in the F* programming
 language, or the EasyCrypt toolset for proving cryptographic protocols\todo{add
 citations}.
 
-% Moreover, since Actema works with goals expressed in iFOL, the same approach
-% could be applied to any goal-directed ITP whose logical framework supports iFOL,
+% Moreover, since Actema works with goals expressed in \kl{iFOL}, the same approach
+% could be applied to any goal-directed ITP whose logical framework supports \kl{iFOL},
 % which is virtually every ITP.
 
 The chapter is organized as follows: we start in \refsec{actema} by explaining
@@ -120,7 +120,7 @@ web-based and uses js\_of\_ocaml, our first idea was essentially to fork jsCoq
 and replace its interface by that of Actema. However as noted by E. J. G. Arias,
 the SerAPI protocol --- and in fact all the other protocols turn out to be too
 high-level for our purpose. Typically we need to (partially) translate Coq goals
-into iFOL goals, which can be done much more easily with a direct access to
+into \kl{iFOL} goals, which can be done much more easily with a direct access to
 Coq's low-level API for manipulating kernel terms.
 % We also heavily rely on unification to interactively suggest valid
 % actions on subterms of the goal, and none of the protocols implement unification
@@ -356,7 +356,7 @@ datatypes, for the reader already acquainted with this language.}. It relies on
 the ATD types \texttt{form} of \emph{formulas}, and \texttt{env} of
 \emph{environments} of available constants and variables. In our setting, these
 correspond respectively to the formulas and \emph{signatures} of many-sorted
-first-order logic, whose ATD definitions are given in \reffig{atd-fo}. But one
+\kl{first-order logic}, whose ATD definitions are given in \reffig{atd-fo}. But one
 could imagine using formulas and environments in higher-order logic instead, and
 this would not change the structure of the \texttt{goal} datatype. Note that
 hypotheses are encoded with a \texttt{h\_id} attribute corresponding to their
@@ -536,28 +536,28 @@ $\limp$ and $\forall$, \texttt{split} for $\land$, etc. The actions
 contextual actions \action{Induction}, \action{Simplify} and \action{Unfold}
 introduced in \refch{advanced}, and are mapped almost directly to the equivalent
 Coq tactics \texttt{induction}, \texttt{simpl} and \texttt{red}. The only
-difference is that they have a \emph{deep inference} flavor, since they can all
+difference is that they have a \emph{\kl{deep inference}} flavor, since they can all
 be applied on an arbitrary subterm selected by the \process{User}. This relies
-on our implementation of deep inference semantics directly in Coq, that we now
+on our implementation of \kl{deep inference} semantics directly in Coq, that we now
 briefly describe.
 
 \subsection{Deep inference semantics}
 
-In a deep inference setting, one can reason on subterms located arbitrarily
+In a \kl{deep inference} setting, one can reason on subterms located arbitrarily
 \emph{deep} inside statements, usually by applying some kind of rewriting rules
 on them. In particular, the semantics of DnD actions described in \refch{sfl}
 are based on the rules of SFL (\reffig{DISL}). To implement them, we chose to do
-a \emph{deep embedding} of first-order logic inside the logic of Coq, the
+a \emph{deep embedding} of \kl{first-order logic} inside the logic of Coq, the
 Calculus of Inductive Constructions (\kl{CoIC} hereafter). Here the word
 ``deep'' has a different meaning, related to the fact that we encode the
-statements of first-order logic with our own custom datatypes, instead of
+statements of \kl{first-order logic} with our own custom datatypes, instead of
 reusing the statements of \kl{CoIC}. This makes it easier to define the SFL
 rewrite rules, in particular because we need to manipulate \emph{contexts}
 (Definition \ref{def:formula-context}) explicitly, and those are not available
 for \kl{CoIC} propositions.
 
 Then we use a technique called \emph{computational reflection} in order to apply
-the embedded deep inference semantics to Coq goals. Originating from the
+the embedded \kl{deep inference} semantics to Coq goals. Originating from the
 \emph{small scale reflection} methodology supported by the {\ssreflect}
 framework \cite{SSR}, it consists in translating Coq objects into their
 equivalent formulation in the deep embedding with a \texttt{reify} function,
@@ -587,7 +587,7 @@ new conclusion $\mathtt{b3}(p, q, T)$ from a backward linkage $p \back q$, and
 the new hypothesis $\mathtt{f3}(p, q, T)$ from a forward linkage $p \forw q$,
 where $T$ is the so-called \emph{subformula linking trace} mentioned earlier. Of
 course the paths $p, q$ and the trace $T$ are all expressed with custom Coq
-datatypes relying on our deep embedding of first-order logic. The role of the
+datatypes relying on our deep embedding of \kl{first-order logic}. The role of the
 trace in particular is to provide the list of SFL rewrite rules to apply,
 including Coq terms instantiating quantifiers that were computed in Actema by
 unification of the two linked subformulas. Then we formulate in Coq two theorems
@@ -614,9 +614,9 @@ that \texttt{reflect} is the inverse of \texttt{reify}.
 % \end{theorem}
 
 \begin{remark}
-  There exist a few other approaches to the computer implementation of deep
-  inference systems. Ozan Kahramanoğulları has pioneered the field, by
-  implementing various calculi of structures inside frameworks like Maude
+  There exist a few other approaches to the computer implementation of \kl{deep
+  inference} systems. Ozan Kahramanoğulları has pioneered the field, by
+  implementing various \kl{calculi of structures} inside frameworks like Maude
   \cite{kahramanogullari_maude_2008} and Tom
   \cite{kahramanogullari_implementing_2005}, that are dedicated to the
   specification of rewriting systems. For an integration within modern proof
@@ -648,7 +648,7 @@ scope and improve the UX of the system.
 
 The importance of being able to express and manipulate higher-order functions
 and predicates has been stressed multiple times before. The fact that Actema is
-limited to first-order logic is mostly a historical contingency, motivated by
+limited to \kl{first-order logic} is mostly a historical contingency, motivated by
 the fact that some algorithms like unification are more tractable in this
 setting. But now that we rely on Coq's proof engine, there is no fundamental
 reason for maintaining this choice. Because the language of statements is at the
@@ -657,7 +657,7 @@ will depend on it. Thus the switch to higher-order logic should be done as soon
 as possible, to limit the amount of refactoring work to perform in the future.
 This will require changes to Actema's \process{Backend} and \process{Frontend},
 but also to the Coq \process{Plugin}\sidenote{The Coq theory implementing the
-tactics for deep inference-based actions already has partial support for
+tactics for \kl{deep inference}-based actions already has partial support for
 higher-order goals, thus work remains mostly on the side of the translation
 module for Actema written in OCaml.} and the ATD datatype definitions enabling
 communication between the two.
@@ -809,13 +809,13 @@ that are in one-to-one correspondence with graphical actions. Since we actually
 compile actions into tactics, this is in principle easy to implement. However,
 there are currently two drawbacks to this approach:
 \begin{itemize}
-  \item Since most tactics are deep inference-based, they take as arguments the
+  \item Since most tactics are \kl{deep inference}-based, they take as arguments the
   paths to manipulated subterms, in the form of lists of integers. Those are
   hard to read by humans, and very sensible to small changes in the shape of the
   goal. This is even worse for the \texttt{backward} and \texttt{forward}
   tactics, because they also take as argument the subformula linking trace,
   which is a very complex data structure expressed in our deep embedding of
-  first-order logic, and hence should not leak into the user interface.
+  \kl{first-order logic}, and hence should not leak into the user interface.
   Hopefully, relying on Coq's unification instead of Actema's should mitigate
   the complexity of the trace, by removing the need to incorporate full
   substitutions. There is also the possibility of replacing integer-based paths

@@ -7,11 +7,11 @@
 \end{figure*}
 
 We are now going to prove the soundness of \kl{system B} with respect to
-various classes of \emph{algebras}. While the full system is classical and thus
+various classes of \emph{algebras}. While the full system is \kl{classical} and thus
 sound only in \emph{Boolean} algebras, most rules are sound in larger classes of
-algebras, namely: \emph{Heyting} algebras for intuitionistic logic,
-\emph{Brouwer} algebras for dual-intuitionistic logic, and
-\emph{Heyting-Brouwer} algebras for bi-intuitionistic logic. These 4 classes are
+algebras, namely: \emph{Heyting} algebras for \kl{intuitionistic} logic,
+\emph{Brouwer} algebras for \kl{dual-intuitionistic} logic, and
+\emph{Heyting-Brouwer} algebras for \kl{bi-intuitionistic} logic. These 4 classes are
 all instances of \emph{bounded lattices}, and their relationship is summarized
 in the Venn diagram of \reffig{venn-algebras}.
 
@@ -46,14 +46,14 @@ First we recall the definitions of the various algebras:
   for quantifiers: this would require considering \emph{complete} lattices, i.e.
   with meets and joins for arbitrary sets rather than just pairs\sidenote{see
   for instance section 4 of \cite{forster_completeness_2021} for a concise
-  treatment of the soundness and completeness of intuitionistic and classical
-  natural deduction for first-order logic with respect to algebraic semantics.}.
+  treatment of the soundness and completeness of \kl{intuitionistic} and \kl{classical}
+  \kl{natural deduction} for \kl{first-order logic} with respect to algebraic semantics.}.
 \end{remark}
 
 As the notation strongly suggests, the greatest and smallest elements $\top$ and
 $\bot$ will model respectively truth and falsehood, while the meet $\lmeet$ and
 join $\ljoin$ will model conjunction and disjunction. In fact the conditions of
-\refdef{bounded-lattice} are very close to the rules of natural deduction for
+\refdef{bounded-lattice} are very close to the rules of \kl{natural deduction} for
 these connectives, by replacing the sequent operator $\seq$ with the partial
 order relation $\sement$. The same idea can be applied to the implication
 connective, and adding a corresponding \emph{exponential} operation $\lexp$
@@ -70,7 +70,7 @@ indeed gives the definition of a Heyting algebra:
 \end{definition}
 
 By dualizing this definition, we get a \emph{co-exponential} operation $\lcoexp$
-that models the exclusion connective, and thus dual-intuitionistic logic in
+that models the exclusion connective, and thus \kl{dual-intuitionistic} logic in
 so-called Brouwer algebras:
 
 \begin{definition}[Brouwer algebra]
@@ -83,7 +83,7 @@ so-called Brouwer algebras:
   \mathcal{A}$ s.t. $b \sement a \ljoin c$.
 \end{definition}
 
-Then we can model bi-intuitionistic logic, which comprises both implication and
+Then we can model \kl{bi-intuitionistic} logic, which comprises both implication and
 exclusion, by just taking pairs of a Heyting and a Brouwer algebra on the same
 bounded lattice:
 
@@ -94,8 +94,8 @@ bounded lattice:
   \sement, \ltop, \lbot, \lmeet, \ljoin, \lcoexp)$ is a Brouwer algebra.
 \end{definition}
 
-Finally, we recover classical logic by collapsing exponentials and
-co-exponentials to their classical definitions, giving a characterization of
+Finally, we recover \kl{classical} logic by collapsing exponentials and
+co-exponentials to their \kl{classical} definitions, giving a characterization of
 Boolean algebras:
 
 \begin{definition}\labdef{boolean-algebra}
@@ -161,7 +161,7 @@ proofs.
 \end{fact}
 
 We omit the proof of \reffact{duality}, but this can easily be obtained from the
-soundness and completeness of a symmetric sequent calculus for bi-intuitionistic
+soundness and completeness of a symmetric \kl{sequent calculus} for \kl{bi-intuitionistic}
 logic, see for instance Lemma 2 of \sidecite{restall_extending_1997}.
 
 \begin{definition}[Dual solution]\labdef{dual-solution}
@@ -303,7 +303,7 @@ formulas have been dualized (\refdef{dual-formula}).
 
 In the following we give a number of (in)equalities that hold in the various
 classes of algebras. They can easily be checked by building derivations in an
-adequate sequent calculus.
+adequate \kl{sequent calculus}.
 
 \begin{fact}[Commutativity]\labfact{lattice-commutativity}
   $A \lor B \semequiv_{\Lattice} B \lor A$ and $A \land B \semequiv_{\Lattice} B \land A$.
@@ -481,7 +481,7 @@ an (in)equality in some class of algebras:
   and $T$ follows from \reffact{bubbles-top-level}.
 \end{proof}
 
-Since some rules only hold classically, the statement for the full system is
+Since some rules only hold \kl{classically}, the statement for the full system is
 relative to Boolean algebras. But from the detailed proof in
 \refsec{app:bubbles-soundness}, we can identify two fragments $\sysBH$ and
 $\sysBHB$ of system $\sysB$ that are sound with respect to Heyting and
@@ -698,7 +698,7 @@ which we call \emph{co-soundness}:
 As for local soundness (Corollaries \ref{cor:lsoundness} and
 \ref{cor:lcosoundness}), we can easily generalize the proof of
 \reflemma{bubbles-ctx-soundness} to Heyting and Heyting-Brouwer algebras, and
-thus extend our soundness result to intuitionistic and bi-intuitionistic logic:
+thus extend our soundness result to \kl{intuitionistic} and \kl{bi-intuitionistic} logic:
 
 \begin{corollary}\label{cor:soundness}
   \sbr
@@ -719,7 +719,7 @@ thus extend our soundness result to intuitionistic and bi-intuitionistic logic:
   Corollary \ref{cor:lsoundness}.
 \end{proof}
 
-Once again in order to extend contextual soundness to dual-intuitionistic logic,
+Once again in order to extend contextual soundness to \kl{dual-intuitionistic} logic,
 we need to dualize lemmas to the negative interpretation:
 
 \begin{lemma}[Co-functoriality]\lablemma{bubbles-cofunctoriality}
@@ -746,5 +746,5 @@ From the assumed proof of \reflemma{bubbles-ctx-cosoundness}, we finally get:
 
 Combined with the completeness proof of \refsec{bubbles-completeness}, this will
 give us our main result that $\sysBH$, $\sysBB$, $\sysBHB$ and $\sysB$ capture
-exactly provability in intuitionistic, dual-intuitionistic, bi-intuitionistic
-and classical logic.
+exactly provability in \kl{intuitionistic}, \kl{dual-intuitionistic}, \kl{bi-intuitionistic}
+and \kl{classical} logic.

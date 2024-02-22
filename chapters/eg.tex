@@ -18,7 +18,7 @@ to an Apology for Pragmaticism}, 1906}
 
 
 C. S. Peirce is famous for his contributions to symbolic logic, including among
-others his eponymous law for classical logic, and his pioneering work on the
+others his eponymous law for \kl{classical} logic, and his pioneering work on the
 algebra of relations and quantification \sidecite{peirce_algebra_1885}. But far
 less widespread are his achievements in the realm of graphical logic, or
 \emph{\kl{iconic} logic} as Shin calls it \sidecite{10.7551/mitpress/3633.001.0001}.
@@ -37,7 +37,7 @@ conceptual graphs for computerized knowledge representation on \kl{EGs}
 \sidecite{caterina_new_2020} and Haydon, Sobociński
 \sidecite{pietarinen_compositional_2020} proposed various reconstructions of
 \kl{EGs} through the lens of \emph{topology} and \emph{category theory}; lastly,
-Melliès, Zeilberger \sidecite{mellies_bifibrational_2016} and Bonchi, Di Giorgio
+Melliès, Zeilberger \sidecite{mellies_bifibrational_2016} and Bonchi et al.
 \sidecite{bonchi_diagrammatic_2024} refined respectively the interpretations of
 \cite{brady_string_nodate} and \cite{pietarinen_compositional_2020} by making
 further connections with \emph{linear logic} \sidecite{girard-linear-1987} and
@@ -49,13 +49,14 @@ at the same time to be faithful to the original presentation of the systems by
 Peirce, and more modern in some aspects of their formalization. The goal will be
 to familiarize the reader with the unique approach to proofs inherent to
 \kl{EGs}, which can be difficult to relate to more standard frameworks like
-Hilbert and Gentzen proof systems, and even deep inference proof systems like
-the calculus of structures. This shall prove useful to get a good understanding
-of the historical and technical foundations behind our \emph{flower calculus},
-to be introduced in \refch{flowers}.
+\kl[Hilbert system]{Hilbert} and \kl[Gentzen system]{Gentzen} proof systems, and
+even \kl{deep inference} proof systems like the \kl{\kl{calculus of structures}}.
+This shall prove useful to get a good understanding of the historical and
+technical foundations behind our \emph{flower calculus}, to be introduced in
+\refch{flowers}.
 
 The chapter is organized as follows: we start in \refsec{alpha} by presenting
-the diagrammatic syntax of the system \kl{Alpha} of \kl{EGs} for classical
+the diagrammatic syntax of the system \kl{Alpha} of \kl{EGs} for \kl{classical}
 propositional logic. In \refsec{illative}, we introduce the inference rules of
 \kl{Alpha} for manipulating \kl{existential graphs}, called \emph{illative
 transformations} by Peirce. In \refsec{multisets}, we give an equivalent
@@ -67,7 +68,7 @@ motivated by Peirce's quest for \emph{illative atomicity}. In
 \refsec{eg-soundness}, we take advantage of our reformulation to give a simple
 proof of soundness for \kl{Alpha}, based on a direct truth-evaluation of graphs.
 In \refsec{eg-completeness} we give a syntactic proof of completeness for
-\kl{Alpha}, by simulating the calculus of structures \intro{SKS} of Brünnler and
+\kl{Alpha}, by simulating the \kl{calculus of structures} \intro{SKS} of Brünnler and
 Tiu \sidecite{brunnler_local_2001}. In this way, \kl{Alpha} is shown to have
 subsystems that inherit the \emph{locality} property of \kl{SKS}, and where the
 deletion and insertion rules are respectively admissible for \emph{provability}
@@ -93,7 +94,7 @@ Peirce designed in total three systems of \kl{EGs}, which he called respectively
 \intro{Alpha}, \intro{Beta} and \intro{Gamma}. They were invented
 chronologically in that order, which also captures their relationship in terms
 of complexity: \kl{Alpha} is the foundation on which the other systems are
-built, and can today be understood as a diagrammatic calculus for classical
+built, and can today be understood as a diagrammatic calculus for \kl{classical}
 \emph{propositional} logic. As we will see in \refsec{beta}, \kl{Beta}
 corresponds to a variable-free representation of \emph{predicate} logic without
 function symbols, and with primitive support for \emph{equality}. The last
@@ -160,7 +161,7 @@ denote vacuous truth, traditionally symbolized by the formula $\top$.
 
 \paragraph{Juxtaposition}
 
-As we know from natural deduction, asserting the truth of the conjunction $a
+As we know from \kl{natural deduction}, asserting the truth of the conjunction $a
 \land b$ of two propositions $a$ and $b$, amounts to asserting \emph{both} the
 truth of $a$ and the truth of $b$. In \kl{Alpha}, there is no need to introduce
 the symbolic connective $\land$, since one can just write both $a$ and $b$ at
@@ -181,7 +182,7 @@ Asserting the truth of the negation $\neg a$ of a proposition $a$, amounts to
 done in \kl{Alpha} by \emph{enclosing} $a$ in a closed curve like so:
 $$\pcut{a}$$
 Peirce called such curves \intro{cuts}\sidenote{Not to be confused with the name
-given to instances of the \kl(rule){cut} rule in sequent calculus.}, because
+given to instances of the \kl(rule){cut} rule in \kl{sequent calculus}.}, because
 they ought to be seen as literal \kl{cuts} in the paper sheet that embodies
 $\SA$. Note that they do not need to be circles: all that matters is that $a$ is
 in a separate area from the rest of $\SA$. This is precisely the content of the
@@ -205,8 +206,8 @@ them.
 Now, it is well-known that $\{\land,\neg\}$ is \emph{functionally complete},
 meaning that any boolean truth function can be expressed as the composition of
 boolean conjunctions and negations. In particular, the symbolic definitions of
-falsehood $\bot \defeq \neg\top$, classical disjunction $A \lor B \defeq
-\neg(\neg A \land \neg B)$ and classical implication $A \limp B \defeq \neg (A
+falsehood $\bot \defeq \neg\top$, \kl{classical} disjunction $A \lor B \defeq
+\neg(\neg A \land \neg B)$ and \kl{classical} implication $A \limp B \defeq \neg (A
 \land \neg B)$ can be expressed by the following three \kl{graphs}\sidenote{Note the
 resemblance with the translation of formulas as \kl{solutions} in
 \reffig{bubbles-native}, in particular for negative disjunctions.}:
@@ -217,9 +218,9 @@ resemblance with the translation of formulas as \kl{solutions} in
   \and
   \pcut{A~~~\pcut{B}}
 \end{mathpar}
-Thus one can easily encode any propositional formula into a classically
+Thus one can easily encode any propositional formula into a \kl{classically}
 equivalent \kl{graph}. Conversely, one can translate any \kl{graph} into a
-classically equivalent formula, as has been shown for instance in
+\kl{classically} equivalent formula, as has been shown for instance in
 \sidecite{10.7551/mitpress/3633.001.0001}. In fact, there are usually many
 possible formula readings of a given \kl{graph}. One reason is that
 \kl{juxtaposition} of \kl{graphs} is a \emph{variadic} operation, as opposed to
@@ -288,7 +289,7 @@ straining for the eyes by being less contrasted, and more economical in ink for
 print. A nice advantage of these notations is that they remove the need to count
 manually the number of \kl{cuts} starting from the top-level of $\SA$: the
 information is immediately apparent in the \kl{subgraph}, and thus completely
-\emph{local}\sidenote{A similar device is used in the deep inference system
+\emph{local}\sidenote{A similar device is used in the \kl{deep inference} system
 \kl{ISp} of Tiu \cite{tiu_local_2006}, where the polarities of substructures
 are attached to them as explicit labels.}.
 
@@ -338,7 +339,7 @@ of any polarity:
     % In particular, $H$ can be taken to be any empty portion of $\SA$ in the same
     % area as $G$, giving that $G ~\step{}~ G~G$.
     It can be seen as a deep generalization of the \emph{identity} axiom of
-    sequent calculus, where the top-level occurrence of $G$ justifies the
+    \kl{sequent calculus}, where the top-level occurrence of $G$ justifies the
     occurrence inside $H\hole$\sidenote{This might also be related to the notion
     of \emph{justified move} in game semantics, where the nesting of \kl{cuts} in the
     context $H\hole$ corresponds to a sequence of alternating moves between
@@ -346,7 +347,7 @@ of any polarity:
     (resp. justified) occurrence must be a negative hypothesis (resp. a positive
     conclusion), the \kl{Iteration} rule also allows the opposite relationship
     of a conclusion justifying a hypothesis, thus also exhibiting one aspect of
-    the \emph{cut} rule of sequent calculus.
+    the \emph{cut} rule of \kl{sequent calculus}.
   \item[\textbf{Deiteration} \textit{(Factorization)}]
     Formally, this is the converse of \kl{Iteration}:
     \begin{mathpar}
@@ -367,7 +368,7 @@ of any polarity:
     even closer to the variant of the same rules in \kl{B_{inv}}
     (\reffig{sequent-B-inv}).}.
     
-    Compared to sequent calculus, it can be seen as a deep generalization of the
+    Compared to \kl{sequent calculus}, it can be seen as a deep generalization of the
     \emph{contraction} rule, the base case where $H\hole = \hole$ giving $G~G
     ~\step{}~ G$.
 \end{itemize}
@@ -379,7 +380,7 @@ The applicability of the next two rules depends on the polarity of the
     $$\nsheet{~~~\step{}~~~ G}$$
     This is akin to a \emph{weakening} rule, stating that if a proposition is
     known to be true, one might add (useless) hypotheses at will. The closest
-    equivalent we found in the deep inference literature is indeed the weakening
+    equivalent we found in the \kl{deep inference} literature is indeed the weakening
     rule \kl{wl{\da}} of \kl{ISp} in \sidecite{tiu_local_2006}.
   \item[\textbf{Deletion}]
     Any \kl{graph} $G$ occurring in a positive area may be erased:
@@ -391,7 +392,7 @@ The applicability of the next two rules depends on the polarity of the
     conclusion to premiss, since $G$ does not already appear in the right-hand
     side. It is thus strongly related to the \emph{cut} rule of sequent
     calculus, which it can simulate together with the \kl{Deiteration} rule.
-    % It is strongly related to the cut rule of sequent calculus, as will be
+    % It is strongly related to the cut rule of \kl{sequent calculus}, as will be
     % demonstrated shortly.
 \end{itemize}
 The last rule is more of a \emph{space management} principle that works as an
@@ -409,9 +410,9 @@ The last rule is more of a \emph{space management} principle that works as an
     % \sidenote{We could have merged \kl{Iteration} and \kl{Deiteration} in this
     % way, but chose to follow the original presentation of the rules by Peirce
     % instead, as exposed in \cite{Roberts+1973}.}
-    Logically, this corresponds to the classical equivalence $\neg\neg A
+    Logically, this corresponds to the \kl{classical} equivalence $\neg\neg A
     \semequiv A$, where in particular the deletion direction $\neg\neg A \limp A$
-    is not true intuitionistically. Topollogically, the double-\kl{cut} forms a
+    is not true \kl{intuitionistically}. Topollogically, the double-\kl{cut} forms a
     \emph{ring}, that separates $G$ from the rest of $\SA$ while preserving its
     polarity. Then the two directions of the rules can be understood as the
     following dual \emph{homotopies}:
@@ -627,7 +628,7 @@ precisely as the definition of what it means for an inference step to be (the
 most) \emph{elementary}.
 
 Note that this should be distinguished from the notion of \emph{analyticity}, as
-popularized by Gentzen with the \emph{subformula property} in sequent calculus:
+popularized by Gentzen with the \emph{subformula property} in \kl{sequent calculus}:
 the latter is concerned with the analysis of \emph{propositions} into their
 constituents through inference rules, while here we are interested in the
 analysis of the inference rules themselves\sidenote{We will give a positive
@@ -722,7 +723,7 @@ With our formalization of \kl{graphs} as multisets, we can give a more rigorous
 formulation than the original natural language description given by
 Peirce\sidenote{Although we limit ourselves to propositional logic in
 \kl{Alpha}, while in \cite{peirce_prolegomena_1906} Peirce also accounts for
-the lines of identity of \kl{Beta} handling predicate logic, to be introduced
+the lines of identity of \kl{Beta} handling \kl{predicate logic}, to be introduced
 in \refsec{beta}.}. In this setting, a location in a \kl{graph} is represented by the
 hole of a context, thus the relation of local justification between two areas is
 defined on contexts:
@@ -773,11 +774,11 @@ terminology ``atomic'' might be a bit confusing: here we think of
 \emph{illative} atomicity in Peirce's sense, not the fact that the \kl{graphs}
 manipulated by rules are atomic, which might be termed \emph{structural}
 atomicity. There seems to be a symmetric tradeoff when comparing \kl{EGs} to the
-calculus of structures: in the former, one maximizes illative atomicity by
+\kl{calculus of structures}: in the former, one maximizes illative atomicity by
 minimizing linearity and structural atomicity; while in the latter, one
 maximizes structural atomicity and linearity by minimizing illative atomicity.
 This will become explicit in \refsec{eg-completeness}, when simulating the
-calculus of structures \kl{SKS} in \kl{Alpha}.}. The atomic (de)iteration
+\kl{calculus of structures} \kl{SKS} in \kl{Alpha}.}. The atomic (de)iteration
 rules are a restriction of the original ones in two respects:
 \begin{description}
   \item[Locality] Following \refdef{eg-local-justification}, the depth of the
@@ -790,7 +791,7 @@ rules are a restriction of the original ones in two respects:
   the local relation $\ljustif$, modulo the 4\textsuperscript{th} condition for
   double-\kl{cuts}\sidenote{Our notation for justification relations actually comes
   from \cite{minghui_graphical_2019}, where the authors define the same notion
-  informally for an intuitionistic variant of \kl{EGs}.}.
+  informally for an \kl{intuitionistic} variant of \kl{EGs}.}.
   \item[Polarity] In the atomic iteration (resp. deiteration) rules, the
   justified context must be positive (resp. negative), while it can have an
   arbitrary polarity in the original rules. This is expressed by splitting each
@@ -804,7 +805,7 @@ rules are a restriction of the original ones in two respects:
   \kl{Iter/Deit} or \kl{Ins/Del}. They also eliminate the possibility for a
   conclusion to justify a hypothesis, as remarked in \refsec{illative} when
   commenting on the principle of \kl{Iteration}, making them closer to the
-  rules of sequent calculus\sidenote{We suspect however that the more general
+  rules of \kl{sequent calculus}\sidenote{We suspect however that the more general
   (de)iteration rules are still relevant from a computational point of view.}.
 \end{description}
 
@@ -818,7 +819,7 @@ is, which is the object of the following two sections.
 
 We are now going to prove formally the \emph{soundness} of each rule of
 \kl{Alpha}, by showing that if $G \step{} H$ and $H$ is \emph{true}, then so is
-$G$. In classical propositional logic, one can easily evaluate the truth of any
+$G$. In \kl{classical} propositional logic, one can easily evaluate the truth of any
 formula $A$, given a truth-valuation $v : \atoms \to \{0,1\}$ for the atoms of
 $A$. The same applies to \kl{graphs}:
 
@@ -986,15 +987,15 @@ from the following \emph{functoriality} lemmas:
 \section{Completeness}\labsec{eg-completeness}
 
 To show the completeness of \kl{Alpha}, it is standard in the literature on \kl{EGs}
-to simulate an existing proof system for classical propositional logic, that is
+to simulate an existing proof system for \kl{classical} propositional logic, that is
 itself known to be complete. For instance in \cite{Roberts+1973}, completeness
 is shown by simulating the Hilbert-style system \kl{P} of Church, which only
 comprises 3 axioms for the (functionally complete) fragment $\{\limp, \neg\}$.
-We propose in this section a proof by simulation of a \emph{deep inference}
-system, more specifically the calculus of structures \kl{SKS} first introduced
+We propose in this section a proof by simulation of a \emph{\kl{deep inference}}
+system, more specifically the \kl{calculus of structures} \kl{SKS} first introduced
 in \sidecite{brunnler_local_2001}. This should provide a good overview of the
 similarities and differences between the two systems, and in particular of how
-they exemplify two distinct approaches to \emph{symmetry} in a deep inference
+they exemplify two distinct approaches to \emph{symmetry} in a \kl{deep inference}
 setting.
 
 \begin{kaonote}
@@ -1021,8 +1022,8 @@ setting.
 
 \paragraph{Structures}
 
-As the name indicates, the objects manipulated by inference rules in calculi of
-structures are so-called \emph{structures}. In the case of \kl{SKS}, they
+As the name indicates, the objects manipulated by inference rules in \kl{calculi of
+structures} are so-called \emph{structures}. In the case of \kl{SKS}, they
 correspond to formulas in \emph{negation normal form} built from atoms and units
 $\{\top, \bot\}$, i.e. where connectives are restricted to the fragment
 $\{\land, \lor\}$, and negation is pushed to atoms by relying on De Morgan's
@@ -1044,7 +1045,7 @@ laws.
   \end{align*}
 \end{definition}
 
-It is customary in CoS to further quotient the set of structures with additional
+It is customary in \kl{CoS} to further quotient the set of structures with additional
 equations between them, which account for various algebraic properties of
 connectives such as associativity, commutativity and unitality. Here we will
 rely instead on the formulation of \kl{SKS} given by Tubella and Straßburger in
@@ -1106,8 +1107,8 @@ The rules of \kl{SKS} satisfy two notable properties:
     \begin{remark}\labremark{eg-intuitionism}
       
     Contrary to De Morgan duality, the notion of polarity of a context also
-    exists in intuitionistic logic, and is in fact used in the same way to
-    obtain dual rules in the intuitionistic calculus of structures \kl{SISa} of
+    exists in \kl{intuitionistic} logic, and is in fact used in the same way to
+    obtain dual rules in the \kl{intuitionistic} \kl{calculus of structures} \kl{SISa} of
     Tiu \cite{tiu_local_2006}. This constitutes one more argument in favor of
     the view defended by Ma and Pietarinen in \sidecite{minghui_graphical_2019},
     that Peirce had a \emph{pre-intuitionistic} conception of negation. It also
@@ -1123,7 +1124,7 @@ The rules of \kl{SKS} satisfy two notable properties:
     inspection of expressions of arbitrary size (Definition 2.1.1 in
     \cite{tubella:hal-02390267}). This is almost the opposite in \kl{Alpha}: to
     the exception of the rules of double-\kl{cut} (which are best seen as a
-    structural equivalence like those of CoS), all rules depend heavily on the
+    structural equivalence like those of \kl{CoS}), all rules depend heavily on the
     creation, duplication or deletion of \kl{subgraphs} of arbitrary size. This is
     exemplified by the derivation of Peirce's law in \reffig{eg-peirce-law},
     where not a single rule is instantiated on atoms. In fact it is quite hard
@@ -1528,8 +1529,8 @@ that all rules of \kl{Alpha} except \kl{Del} satisfy this property:
 
 Before working on \kl{EGs}, Peirce had already developed a deep understanding of the
 logic of relations of arbitrary arity, inventing the notions of variables and
-quantifiers 30 years before the standard Russell-Whitehead syntax for predicate
-logic appeared in 1910 \cite{sep-peirce}. This all stemmed from his extensive
+quantifiers 30 years before the standard Russell-Whitehead syntax for \kl{predicate
+logic} appeared in 1910 \cite{sep-peirce}. This all stemmed from his extensive
 study of \emph{relation algebras}, first investigated by De Morgan in 1860.
 However in his system \kl{Beta} of \kl{EGs}, Peirce gives a very different account of
 the logic of relations, both in the graphical representation of relational
@@ -1635,10 +1636,10 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
   Morgan duality is equivalent to
   $$\forall x. \neg \mathsf{PersonSittingDown}(x) \vee \neg
   \mathsf{Socrates}(x)$$
-  More generally, it is well-known that in classical logic, \emph{universal}
+  More generally, it is well-known that in \kl{classical} logic, \emph{universal}
   quantification can be defined symbolically by $\forall x. P(x) \defeq \neg
-  \exists x. \neg P(x)$, and hence that any formula in the usual language of FOL
-  has a classically equivalent formula in the fragment $\{\neg, \land,
+  \exists x. \neg P(x)$, and hence that any formula in the usual language of \kl{FOL}
+  has a \kl{classically} equivalent formula in the fragment $\{\neg, \land,
   \exists\}$. This is precisely how Peirce expresses universal quantification in
   \kl{Beta}, as illustrated for a unary predicate $P$ by the \kl{graph}
   (\ref{eq:eg-forall}) of \reffig{eg-forall}. But in order to interpret
@@ -1687,7 +1688,7 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
     $\forall x. B$ and implication $A \limp B$ are seen as instances of a more
     general construct, the \emph{dependent product type} $\Pi x : A. B$. Thus
     retrospectively, one might interpret the above observation as another
-    manifestation of Peirce's pre-intuitionistic conception of logic.
+    manifestation of Peirce's pre-\kl{intuitionistic} conception of logic.
   \end{remark}
 
   \item[Teridentity]
@@ -1729,7 +1730,7 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
 LoI (or their decomposition into the above constructs) constitute the only icons
 introduced in \kl{Beta} compared to \kl{Alpha}.
 % We will see shortly that they are sufficiently powerful to express and combine
-% all features of first-order logic in an elegant and intuitive way, particulary
+% all features of \kl{first-order logic} in an elegant and intuitive way, particulary
 % so at the \emph{illative} level.
 
 \paragraph{Iconic atomicity}
@@ -1812,8 +1813,8 @@ individuals denoted by LoI behave in the exact same way as the propositions
 denoted by the \kl{graphs} of \kl{Alpha}. This can be interpreted as a manifestation
 of Peirce's \emph{psycho-physical monism} \cite{sep-peirce}, that blurs the
 distinction between the psychological level of propositions (concepts) and the
-physical level of individuals (objects) enforced in the language of predicate
-logic, and inherited from Aristotle's conception of predication. Independently,
+physical level of individuals (objects) enforced in the language of \kl{predicate
+logic}, and inherited from Aristotle's conception of predication. Independently,
 Girard has recently been pushing the idea further in his transcendental syntax
 programme, by proposing to see individuals as particular kinds of \emph{linear}
 propositions (see \cite[\S 84.3]{eng_exegesis_2023}). And what is more linear
@@ -1848,7 +1849,7 @@ than a line?}.
   substituting $x$ for $z$ in every $P_i$, and $y$ for $z$ in every $Q_j$.
   \end{itemize}
   Unification and anti-unification are the heart of many (semi-)decision
-  procedures implemented in automated and interactive theorem provers; thus it
+  procedures implemented in automated and \kl{interactive theorem provers}; thus it
   is remarkable that they constitute a core illative principle of \kl{Beta}.
 
 \end{description}
@@ -1890,12 +1891,12 @@ The essence of the syllogism lies in the instantiation of the universally
 quantified variable $y$ by $x$ in formula (\ref{eq:socrates-mortal-fo}),
 captured by the \kl{Deletion} step in \reffig{eg-socrates-mortal}. Thus
 contrary to \kl{Alpha}, it seems that \kl{Deletion} is not admissible in
-\kl{Beta} anymore. Because of the \emph{subterm property} of first-order logic
+\kl{Beta} anymore. Because of the \emph{subterm property} of \kl{first-order logic}
 \sidecite{DBLP:books/el/RV01/DegtyarevV01}, this should not break analyticity:
 indeed we should only need \kl{Deletion} on LoI, which connects already
 existing binders. However one still needs to find out the binders that must be
 connected, which we conjecture to be a major factor in the undecidability of
-first-order logic.
+\kl{first-order logic}.
 
 \section{Gardens}\labsec{gardens}
 

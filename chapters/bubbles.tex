@@ -39,7 +39,7 @@ lends itself quite naturally to a metaphorical interpretation, where actions are
 seen as \emph{chemical} reactions. In \refsec{bubbles} we introduce the concept
 of \emph{bubble} as a way to control the scope of hypotheses inside nested
 sequents that we call \emph{solutions}. In \refsec{asymmetric} we describe our
-proof system for intuitionistic logic dubbed \emph{asymmetric bubble calculus},
+proof system for \kl{intuitionistic} logic dubbed \emph{asymmetric bubble calculus},
 based on multiset rewriting rules on solutions comprising at most one
 conclusion. Finally in \refsec{bubbles-pba}, we import ideas from this bubble
 calculus back to the realm of GUIs for interactive proof building, analysing
@@ -54,7 +54,7 @@ and equality rewriting are the main mechanism, but they only work in a goal
 comprising multiple items. Since it is customary in proof assistants to specify
 the goal to be proved as a single logical formula, one needs a way to decompose
 it into many items for further processing through DnD. This is precisely what
-the introduction rules for logical connectives in sequent calculus do, and
+the introduction rules for logical connectives in \kl{sequent calculus} do, and
 following the Proof-by-Pointing paradigm \cite{PbP} we map them to click
 actions (see \refsec{clicks}).
 
@@ -78,7 +78,7 @@ ion into a hypothesis/blue item/negative ion and a new conclusion, and a
 hypothesis into two hypotheses. In fact, it is strongly conjectured that these
 are the only click actions needed to obtain a complete deductive system for
 propositional logic: breaking red implications allows for backward DnDs, and
-blue conjunctions for forward DnDs\sidenote{In predicate logic, one would also
+blue conjunctions for forward DnDs\sidenote{In \kl{predicate logic}, one would also
 need the right (resp. left) introduction rule for $\forall$ (resp. $\exists$).
 It might also be the case that backward DnDs alone are sufficient for
 completeness, since a linkage of the form $A \back \select{B} \limp C$ will
@@ -93,10 +93,10 @@ interface: if the user is allowed to decompose red $\limp$ and blue $\land$, she
 will assume naturally that she can also decompose blue $\limp$ and red $\land$,
 as well as $\lor$ of any color. While red $\lor$ can be handled by pointing
 directly at the disjunct to be proved, other configurations correspond to rules
-of sequent calculus with multiple premisses. In Actema, this corresponds to
+of \kl{sequent calculus} with multiple premisses. In Actema, this corresponds to
 creating a new subgoal for each premise, where subgoals are displayed one at a
 time in different \emph{tabs}: this new interface mechanism breaks the chemical
-metaphor. The root cause lies in the way sequent calculus implements
+metaphor. The root cause lies in the way \kl{sequent calculus} implements
 \emph{context-scoping}: each subgoal will share the same initial context of
 hypotheses, but future hypotheses ``buried'' in the conclusions must be
 available only in their respective subgoals. The tabs mechanism implements this
@@ -153,7 +153,7 @@ S, T, U \Coloneq \Gamma \piq{S_1 \sep \ldots \sep S_n} \Delta
 \and
 \Gamma, \Delta \Coloneq A_1, \ldots, A_n
 \end{mathpar}
-where the $A_i$ are usual formulas of FOL. Thus solutions are just like
+where the $A_i$ are usual formulas of \kl{FOL}. Thus solutions are just like
 sequents, except that we add a collection of nested solutions $S_i$ that will
 represent subgoals, or premisses of usual inference rules. To be more precise,
 the collections of formulas $A_i$ and solutions $S_i$ are \emph{multisets},
@@ -227,11 +227,11 @@ Our initial idea for a proof system based on solutions was quite simple: we take
 the inference rules of \kl{LJ}, and turn them all into unary rules by encoding
 premisses as bubbles. This gives the basis for the set of rules presented in
 \reffig{sequent-BJ}, that defines our asymmetric bubble
-calculus for intuitionistic logic dubbed \kl{BJ}. It is divided in five groups:
+calculus for \kl{intuitionistic} logic dubbed \kl{BJ}. It is divided in five groups:
 \begin{itemize}
 \item The {\identity}, {\resource} and {\heating} groups correspond
-respectively to the identity, structural and logical rules of sequent
-calculus, following the terminology of \sidecite{girard:hal-01322183}. More
+respectively to the identity, structural and logical rules of \kl{sequent
+calculus}, following the terminology of \sidecite{girard:hal-01322183}. More
 precisely, rules {\rsf{i{\da}}} and {\rsf{i{\ua}}} correspond
 to the axiom and cut rules; rules {\rsf{w}} and {\rsf{c}} to the weakening
 and contraction rules; and every rule of the form $\mcirc{-}$ (resp.) that
@@ -241,7 +241,7 @@ introduction rules for logical connectives.
 bubbles. More specifically, $\mathbb{F}$-rules characterize how information
 flows in solutions by specifying what kinds of objects can traverse bubbles,
 and in which direction. They play the same role as \emph{switch} rules in
-formalisms based on CoS \cite{Guglielmi1999ACO}, which includes our own
+formalisms based on \kl{CoS} \cite{Guglielmi1999ACO}, which includes our own
 subformula linking rules (\reffig{DISL}). In the asymmetric bubble calculus
 there is only one $\mathbb{F}$-rule {\rsf{f{-}}} allowing hypotheses to flow
 inside bubbles.
@@ -250,7 +250,7 @@ As their name suggests, $\mathbb{M}$-rules handle the behavior of the
 \emph{membrane} of bubbles, but independently from other items as opposed to
 $\mathbb{F}$-rules. In the asymmetric bubble calculus there is only one
 $\mathbb{M}$-rule {\rsf{p}} allowing to \emph{pop} any empty bubble, which
-can be interpreted as the action of dismissing a solved subgoal. In CoS it
+can be interpreted as the action of dismissing a solved subgoal. In \kl{CoS} it
 would correspond to congruence rules handling the truth unit $\top$, and in
 subformula linking to the unit rules (\reffig{DISL-U}).
 \end{itemize}
@@ -311,11 +311,11 @@ An example of proof in \kl{BJ} is shown in \reffig{ex-seq-BJ}, where the
 focused subsolution is squared for each inference. Notice that many rules could
 have been applied in a different order: for instance all applications of the
 {\rsf{p}} rule could have been postponed to the top/end of the derivation.
-This is generally true of all formalisms based on CoS, which is known in the
-deep inference literature for its ``bureaucracy''. In \kl{BJ},
+This is generally true of all formalisms based on \kl{CoS}, which is known in the
+\kl{deep inference} literature for its ``bureaucracy''. In \kl{BJ},
 $\mathbb{H}$-rules aggravate the matter by adding all inessential rule
-permutations from sequent calculus to those of CoS. As our wording suggests,
-this is usually perceived negatively in deep inference proof theory, where a
+permutations from \kl{sequent calculus} to those of \kl{CoS}. As our wording suggests,
+this is usually perceived negatively in \kl{deep inference} proof theory, where a
 central question is that of finding \emph{canonical} representations of proof
 objects \sidecite{strasburger-problem-2019}.
 
@@ -327,9 +327,9 @@ paradigm, the focus is not the proof object, which is implicit and hidden to the
 user, but the \emph{process} of building it. Then a \kl{BJ}-derivation is
 better understood as the \emph{trace} of this building process, rather than the
 constructed proof\sidenote{The idea of \emph{proof-as-trace} is relatively
-common in logic programming \cite{miller_survey_2022}, but not so much in deep
-inference proof theory. It is Jean-Baptiste Joinet who shared with us his idea
-of applying it in this setting, based on his own work interpreting CoS for
+common in logic programming \cite{miller_survey_2022}, but not so much in \kl{deep
+inference} proof theory. It is Jean-Baptiste Joinet who shared with us his idea
+of applying it in this setting, based on his own work interpreting \kl{CoS} for
 \kl{MLL} as a system for building \emph{multiplicative proof nets}
 \cite{joinet_completeness_2007}.}. And the fact that this trace corresponds, or
 can be transformed into a more canonical representation is of no concern to the
@@ -358,7 +358,7 @@ prototype of GUI presented in \refsec{flowers-prover}.
 \end{figure*}
 
 While the sequent-style presentation of \kl{BJ} clearly shows its filiation
-with sequent calculus, its syntax is quite heavy, and obscures an important
+with \kl{sequent calculus}, its syntax is quite heavy, and obscures an important
 property of the rules: they almost always preserve the contexts $\Gamma, \Delta$
 of formulas and $\cS$ of bubbles. That is, the rules of \kl{BJ} are
 \emph{local}. This enables a more economical and graphical presentation of the
@@ -412,17 +412,18 @@ sequence of \emph{edits}:
 It would be interesting to consider the question of finding a minimal set of
 edit operations like these, that can simulate all the rules of
 \kl{BJ}\sidenote{As will become apparent in \refsec{bubbles-completeness},
-\kl{BJ} itself provides a finer-grained simulation of the rules of sequent
-calculus, which in turn is known to be a more detailed variant of \emph{natural
-deduction}. Interestingly through the Curry-Howard isomorphism, this would
-correspond to a \emph{chain of compilation}, starting from the higher-level
-$\lambda$-calculus (natural deduction), going into abstract machines (sequent
-calculus) \cite{downen_sequent_2016}, down to something akin to \emph{assembly
-language} with \texttt{jump} instructions (Section 6.3.1 of
-\cite{guenot_nested_2013}).}. Note however that most of the above edits are
-\emph{unsound} as reasoning steps. If not for logical insight, such an edit
-calculus could still be relevant \emph{computationally}, typically by enabling
-efficient implementations of the rules with a small memory footprint.
+\kl{BJ} itself provides a finer-grained simulation of the rules of \kl{sequent
+calculus}, which in turn is known to be a more detailed variant of
+\emph{\kl{natural deduction}}. Interestingly through the Curry-Howard
+isomorphism, this would correspond to a \emph{chain of compilation}, starting
+from the higher-level $\lambda$-calculus (\kl{natural deduction}), going into
+abstract machines (\kl{sequent calculus}) \cite{downen_sequent_2016}, down to
+something akin to \emph{assembly language} with \texttt{jump} instructions
+(Section 6.3.1 of \cite{guenot_nested_2013}).}. Note however that most of the
+above edits are \emph{unsound} as reasoning steps. If not for logical insight,
+such an edit calculus could still be relevant \emph{computationally}, typically
+by enabling efficient implementations of the rules with a small memory
+footprint.
 
 \begin{figure*}
   \input{figures/ex-gra-BJ.tex}
@@ -528,7 +529,7 @@ ideas for mapping the remaining rules of \kl{BJ} in such a GUI:
     manipulate duplicable resources like file managers, where one maintains the
     \texttt{CTRL} key to enable copy mode. It was also chosen by K. Chaudhuri to
     implement contraction in his \kl{ProfInt} prototype for subformula linking
-    in intuitionistic logic \cite{ProfInt}.}. As for the weakening rule
+    in \kl{intuitionistic} logic \cite{ProfInt}.}. As for the weakening rule
     {\rsf{w}}, it could be available as a contextual action when selecting
     blue items.
   \item[\textbf{\identity}]
@@ -665,7 +666,7 @@ proof-theoretical and user-experience levels:
     preserved. In other words, bubbles make it easier to understand the
     \emph{difference} between a goal and subgoals generated by a proof action,
     which is crucial when learning the semantics of actions through practice.
-    % This is of limited importance however in our case, because sequent calculus
+    % This is of limited importance however in our case, because \kl{sequent calculus}
     % rules always perform the same trivial operation on the global state:
     % duplicating the whole context of hypotheses.
 \end{description}
