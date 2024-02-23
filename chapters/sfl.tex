@@ -12,10 +12,10 @@ following the original work of K. Chaudhuri on \emph{subformula linking}
 
 The chapter is organized as follows: \refsec{linkages} introduces the notions of
 context and polarity, and explains how \kl{DnD} actions are specified by the user
-interactively through schemas called \emph{linkages}. \refsec{validity} explains
-how one can identify a subset of linkages that guarantees a \emph{productivity}
+interactively through schemas called \emph{\kl{linkages}}. \refsec{validity} explains
+how one can identify a subset of \kl{linkages} that guarantees a \emph{productivity}
 property on \kl{DnD} actions. \refsec{action} describes the overall structure of how
-linkages translate into logical steps, and \refsec{invert} discusses some
+\kl{linkages} translate into logical steps, and \refsec{invert} discusses some
 subtleties of this translation that are related to the concept of
 \emph{focusing} in automated proof search. \refsec{soundness} shows that the
 logical steps are sound, and \refsec{productivity} states and proves formally
@@ -90,12 +90,12 @@ used for {\em negative} contexts, meaning that $\inv(A^-\hole)$ is odd.
 
 In addition to the items involved, every \kl{DnD} action specifies the
 \emph{selection} of a subterm in each item, which can be expressed formally as a
-path (Definition \ref{def:path}). We call \emph{linkage} the combined data of
+path (Definition \ref{def:path}). We call \intro{linkage} the combined data of
 the two items together with the selection, since the intent is to \emph{link}
 the subterms to make them interact in some way.
 
 \begin{remark}
-In this thesis we only consider linkages between two subterms. But as noted in
+In this thesis we only consider \kl{linkages} between two subterms. But as noted in
 \refsec{equality}, rewriting is an example of action that can benefit from
 allowing multiple selections\sidenote{A restricted kind of multi-occurrence
 rewrite is already available in the standalone version of Actema: one needs to
@@ -108,29 +108,29 @@ to some other term $u$, the last step is to drag an equality hypothesis $t = u$
 $t$.}.
 \end{remark}
 
-Each kind of \kl{DnD} action is mapped in the system to a specific form of linkage,
+Each kind of \kl{DnD} action is mapped in the system to a specific form of \kl{linkage},
 which is designed to hold all the information necessary for the correct
 execution of the action. In this way the system can automatically search for
-linkages of a certain form, and propose to the user all well-defined actions
-associated to these linkages.
+\kl{linkages} of a certain form, and propose to the user all well-defined actions
+associated to these \kl{linkages}.
 
 \begin{remark}
   In the future, one can imagine several \kl{DnD} actions associated to a given
-  linkage. In this case, the user could be queried to choose the action to be
+  \kl{linkage}. In this case, the user could be queried to choose the action to be
   performed (typically with a pop-up menu). However with the actions considered
   in this thesis, such ambiguities never arise.
 \end{remark}
 
-On the ``items axis'', we already distinguished between backward and forward
-linkages, written respectively $A \back B$ and $A \forw B$. If the items are
+On the ``items axis'', we already distinguished between \kl(dnd){backward} and \kl(dnd){forward}
+\kl{linkages}, written respectively $A \back B$ and $A \forw B$. If the items are
 unspecified, we will write $A \link B$.
 
 Using the ``selection axis'', we can specify a further distinction that was
 informal up to now: that of \emph{logical} action and \emph{rewrite} action.
 \begin{itemize}
-  \item \emph{Logical} linkages link two subformulas. Thus they have the form
+  \itemAP \intro{Logical linkages} link two subformulas. Thus they have the form
   $B\select{A} \link C\select{A'}$.
-  \item \emph{Rewrite} linkages link one side of an equality with a first-order
+  \itemAP \intro{Rewrite linkages} link one side of an equality with a first-order
   term. Using liberally the notations from Definitions \ref{def:formula-context} and
   \ref{def:path}, they thus have the form
   $$B\select{\select{t} = u} \link C
@@ -141,14 +141,14 @@ informal up to now: that of \emph{logical} action and \emph{rewrite} action.
 \end{itemize}
 
 By forgetting the information on which subterms are selected, one can see any
-linkage as a formula whose topmost connective is a linking operator $\link \in
-\{\back,\forw\}$. Then it is natural to view linkages as the redexes of the
-rewrite rules of \reffig{DISL}, although from the user's standpoint linkages
+\kl{linkage} as a formula whose topmost connective is a linking operator $\link \in
+\{\back,\forw\}$. Then it is natural to view \kl{linkages} as the redexes of the
+rewrite rules of \reffig{DISL}, although from the user's standpoint \kl{linkages}
 only happen at the top level\sidenote{In fact this is more of a limitation of
 Actema's current interface: one cannot link two subterms that live in the same
 item, because dragging actions can only be performed on \emph{entire} items. But
 in the original formulation and implementation of subformula linking
-\cite{Chaudhuri2013}, linkages can be created between arbitrary subformulas. We
+\cite{Chaudhuri2013}, \kl{linkages} can be created between arbitrary subformulas. We
 come back to this issue in \refsec{dnd-completeness}.}.
 
 \section{Validity}\labsec{validity}
@@ -165,14 +165,14 @@ come back to this issue in \refsec{dnd-completeness}.}.
 \end{marginfigure}
 
 In the original formulation of subformula linking \sidecite{Chaudhuri2013}, a
-semantics is associated to every logical linkage, even when the selected
+semantics is associated to every \kl{logical linkage}, even when the selected
 subformulas $A$ and $A'$ are not unifiable. This is made possible by the
 addition of so-called \emph{release} rules\sidenote{A terminology coming from
 the line of works on \emph{focusing} in proof theory \cite{andreoli1992}, see
 also \refsec{invert}.}, which simply turn linking operators into their
 associated logical connective. In our setting this would give the rewrite rules
 of \reffig{rellink}. However in this work we opt for a different approach:
-instead we define a \emph{validity criterion} on linkages, which guarantees that
+instead we define a \emph{validity criterion} on \kl{linkages}, which guarantees that
 they give rise to the behaviors described in the previous sections. The
 criterion tackles two issues:
 \begin{itemize}
@@ -184,18 +184,17 @@ criterion tackles two issues:
   through the {\rsf{id}} rule or the equality rules {\rsf{L{=}_i},
   \rsf{F{=}_i}}.
 \end{itemize}
-One benefit of using this criterion is that it filters out all linkages whose
+One benefit of using this criterion is that it filters out all \kl{linkages} whose
 semantics relies on release rules, capturing intuitively a notion of
 \emph{productivity}: instead of just moving around subformulas, we know for sure
 that some simplification occurs, either a justification with the {\rsf{id}}
-rule on logical linkages, or a rewriting with the equality rules on rewrite
-linkages. This will be stated more formally in \refsec{productivity}.
+rule on \kl{logical linkages}, or a rewriting with the equality rules on \kl{rewrite linkages}. This will be stated more formally in \refsec{productivity}.
 
 Validity is very useful to support the \emph{suggestion} mechanism implemented
 in Actema. The idea is that when the user starts dragging an item, this
 indicates to the system that she wants to perform a \kl{DnD} action involving
 subterms of this item. Then the system can suggest such possible actions by
-highlighting subterms in the goal which form a valid linkage with the dragged
+highlighting subterms in the goal which form a valid \kl{linkage} with the dragged
 item. Typically in the example of \reffig{aristote}, dragging the hypothesis
 $\forall x. \human(x) \limp \mortal(x)$ will have the effect of highlighting
 exactly $\mortal(\socrates)$ in the conclusion and $\human(\socrates)$ in the
@@ -226,49 +225,10 @@ core principle for such a methodology.
 
 The restrictions on polarities are captured formally by the following condition:
 
-% \begin{condition}[Polarity]\label{cond:pol}
-  
-%   Given a goal $Γ \seq C$, the following must be true for a logical linkage
-%   $B\select{A}\link D\select{A'}$ to be valid:
-%   \begin{enumerate}
-%     \item $B\select{A}\in \Gamma$;\label{clause:hyp}
-%     \item $D\select{A'} \begin{cases}
-%       \syneq C & \text{if $\link$ is $\back$} \\
-%       \in \Gamma & \text{if $\link$ is $\forw$}
-%       \end{cases}$\label{clause:concl}
-%     \item $\inv(B\hole)$ has the same (resp. opposite) parity as $\inv(D\hole)$
-%     if $\link$ is $\back$ (resp. $\forw$);\label{clause:opposite}
-%     \item if $\link$ is $\back$ and $\inv(D\hole) = 0$, then $\inv(B\hole) =
-%     0$\label{clause:intuit}.
-%   \end{enumerate}
-
-%   Similarly, the following must be true for a rewrite linkage
-%   $$B\select{\select{t} = u} {\link} D\select{t'}$$ to be valid:
-%   either $B\select{\select{t} = u}\in \Gamma$, then
-%   \begin{enumerate}
-%     \item $D\select{t'} \begin{cases}
-%       \syneq C & \text{if $\link$ is $\back$} \\
-%       \in \Gamma & \text{if $\link$ is $\forw$}
-%       \end{cases}$
-%     \item $B\hole$ is positive
-%   \end{enumerate}
-%   or $B\select{\select{t} = u} \syneq C$, $\link$ is $\back$ and
-%   \begin{enumerate}
-%     \item $D\select{t'} \in \Gamma$;
-%     \item $B\hole$ is negative.
-%   \end{enumerate}
-% \end{condition}
-
-% One understands that for rewrite linkages, this simply guarantees that the
-% equality is in negative position in the given goal. For logical linkages,
-% Clauses \ref{clause:hyp}, \ref{clause:concl}, \ref{clause:opposite} ensure that
-% the selected subformulas have opposite polarities, and Clause
-% \ref{clause:intuit} ensures that the linkage makes sense in our
-% \emph{intuitionistic} setting.
 
 \begin{condition}[Polarity]\label{cond:pol}
   
-  The following must be true for a logical linkage
+  The following must be true for a \kl{logical linkage}
   $B\select{A}\link D\select{A'}$ to be valid:
 
   \begin{enumerate}
@@ -283,7 +243,7 @@ The restrictions on polarities are captured formally by the following condition:
     0$\label{clause:intuit}.
   \end{enumerate}
 
-  The following must be true for a rewrite linkage $B\select{t} @ D\select{t'}$
+  The following must be true for a \kl{rewrite linkage} $B\select{t} @ D\select{t'}$
   to be valid:
 
   \begin{enumerate}
@@ -304,10 +264,10 @@ The restrictions on polarities are captured formally by the following condition:
   \end{enumerate}
 \end{condition}
 
-One understands that for rewrite linkages, this simply guarantees that the
-equality is in negative position. For logical linkages, Clause
+One understands that for \kl{rewrite linkages}, this simply guarantees that the
+equality is in negative position. For \kl{logical linkages}, Clause
 \ref{clause:opposite} ensures that the selected subformulas have opposite
-polarities, and Clause \ref{clause:intuit} ensures that the linkage makes sense
+polarities, and Clause \ref{clause:intuit} ensures that the \kl{linkage} makes sense
 in our \emph{intuitionistic} setting.
 
 Indeed one could imagine the following behavior
@@ -385,7 +345,7 @@ For instance, if $A\hole \syneq \forall x. \exists y. (B \land ((\exists x'.
 % and whether they are in a hypothesis or the conclusion.
 
 \begin{definition}[Unifiable variables]\label{def:uvars}
-  The set $\uvars(\mathcal{L})$ of {\em unifiable variables} of a linkage
+  The set $\uvars(\mathcal{L})$ of {\em unifiable variables} of a \kl{linkage}
   $\mathcal{L} \syneq B\select{A}\link C\select{A'}$ is:
   \begin{itemize}
   \item $\lvarn(B\hole)\cup\lvarp(C\hole)$ if $\link$ is $\back$, and
@@ -425,11 +385,11 @@ whether $A$ and $A'$ are unifiable over $l$ and constructs the
 substitution when it exists~\sidecite{Montanari}.
 
 \begin{condition}[Identity]\label{cond:unif} 
-  For a linkage $B\select{A}\link C\select{A'}$ to be valid, the following must
+  For a \kl{linkage} $B\select{A}\link C\select{A'}$ to be valid, the following must
   be true:
   \begin{enumerate}
    \item There exists a substitution $\sigma$ which unifies $A$ and
-     $A'$ over the unifiable variables of the linkage.\label{clause:unif}
+     $A'$ over the unifiable variables of the \kl{linkage}.\label{clause:unif}
    \item \label{lab:cond} Furthermore, the unification respects the order over
      the variables. More precisely, we request that there exists a list $l$
      which is an interleaving of $\lvar(B\hole)$ and $\lvar(C\hole)$ such
@@ -441,25 +401,25 @@ substitution when it exists~\sidecite{Montanari}.
 \end{condition}
 
 The last condition ensures acyclicity and will prohibit invalid
-linkages as described in \refsec{acyclicity}. More precisely,
+\kl{linkages} as described in \refsec{acyclicity}. More precisely,
 the list $l$ specifies the order in which the quantifiers will be
 treated in the proof construction.
 
 
-Finally we can state the full validity criterion for linkages:
+Finally we can state the full validity criterion for \kl{linkages}:
 
 \begin{definition}[Valid linkage]\labdef{valid-linkage}
-  We say that a linkage $\mathcal{L}$ is \emph{valid} if it satisfies Conditions
+  We say that a \kl{linkage} $\mathcal{L}$ is \emph{valid} if it satisfies Conditions
   \ref{cond:pol} and \ref{cond:unif}.
 \end{definition}
 
 One can check that all the examples given up to here were based on valid
-linkages.
+\kl{linkages}.
 
 \section{Describing DnD actions}\labsec{action}
 
-We are now equipped to specify how logical and rewrite linkages translate
-deterministically to the backward and forward proof steps shown in all examples.
+We are now equipped to specify how logical and \kl{rewrite linkages} translate
+deterministically to the \kl(dnd){backward} and \kl(dnd){forward} proof steps shown in all examples.
 
 First some remarks can be made about the rewrite rules of \reffig{DISL}:
 \begin{itemize}
@@ -479,15 +439,15 @@ Here is a high-level overview of the complete procedure followed to generate a
 proof step:
 \begin{enumerate}
 \item \textbf{Selection:} the user selects two subterms in two items of the current goal; \label{step:selection}
-\item \textbf{Linkage:} this either gives rise to a logical linkage $B\select{A}
-  \link C\select{A'}$ (resp. a rewrite linkage $B\select{\select{t} = u} \link
-  C\select{t'}$), or does not correspond to a known form of linkage. In this case
+\item \textbf{Linkage:} this either gives rise to a \kl{logical linkage} $B\select{A}
+  \link C\select{A'}$ (resp. a \kl{rewrite linkage} $B\select{\select{t} = u} \link
+  C\select{t'}$), or does not correspond to a known form of \kl{linkage}. In this case
   the procedure stops here, and the system does not propose any action to the
   user; \label{step:linkage}
-\item \textbf{Validity:} the system verifies that the linkage is \emph{valid},
+\item \textbf{Validity:} the system verifies that the \kl{linkage} is \emph{valid},
   by performing successively the following checks:
   \begin{enumerate}
-    \item \textbf{Polarity:} the linkage must satisfy Condition \ref{cond:pol};
+    \item \textbf{Polarity:} the \kl{linkage} must satisfy Condition \ref{cond:pol};
     \item \textbf{Unification:} the selected subterms $A$ and $A'$ (resp. $t$
     and $t'$) must be unifiable, yielding a substitution $\sigma$;
     \item \textbf{Dependencies:} the substitution $\sigma$ must satisfy
@@ -496,7 +456,7 @@ proof step:
   The procedure stops if it fails at any of the above checks;
   \label{step:validity}
 \item \textbf{Linking:} the system then chooses a rewriting start\-ing from the
-  linkage. Thanks to \refthm{productivity}, this re\-writing always ends with a
+  \kl{linkage}. Thanks to \refthm{productivity}, this re\-writing always ends with a
   proposition of the form $D\select{\sigma(A) \back \sigma(A')}$ $$\text{(resp.
   $D\select{\select{\sigma(t)} = u \link C_0\select{\sigma(t')}}$)}$$
   \label{step:linking}
@@ -506,8 +466,8 @@ $\{\mathsf{L\!\!=\!\!_1}, \mathsf{L\!\!=\!\!_2}, \mathsf{F\!\!=\!\!_1},
 \item \textbf{Unit elimination:} in the case of a logical action, this creates an occurrence of $\top$,
 which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimination}
 \item \textbf{Goal modification:} the two previous steps produced a formula $E$.
-  In the case of a forward linkage, a hypothesis $E$ is added to the goal; in
-  the case of a backward linkage, the goal's conclusion becomes $E$. In both
+  In the case of a \kl(dnd){forward} \kl{linkage}, a hypothesis $E$ is added to the goal; in
+  the case of a \kl(dnd){backward} \kl{linkage}, the goal's conclusion becomes $E$. In both
   cases, the logical soundness is guaranteed by
   Property~\ref{prop:soundness}. \label{step:goal-modification}
 \end{enumerate}
@@ -519,10 +479,10 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
 All examples up to now followed the scheme for \kl{DnD} actions sketched in
 \refsec{aristote}:
 \begin{itemize}
-  \item Given a blue item $A$ and a red item $B$, backward proof steps produce a
+  \item Given a blue item $A$ and a red item $B$, \kl(dnd){backward} proof steps produce a
   new conclusion $C$ by applying a sequence of rewrite rules $A \back B \steps{}
   C$.
-  \item Given two blue items $A$ and $B$, forward proof steps produce a new
+  \item Given two blue items $A$ and $B$, \kl(dnd){forward} proof steps produce a new
   hypothesis $C$ by applying a sequence of rewrite rules $A \forw B \steps{} C$.
 \end{itemize}
 
@@ -702,9 +662,9 @@ ensures that we can proceed to the interaction step \ref{step:interaction}.
 Because the rewrite rules are terminating, the important point is to show that
 one can always apply a rule until one reaches an interaction rule on the
 selected subterms. In other words, it is possible to find at least one rule
-which preserves Conditions \ref{cond:pol} and \ref{cond:unif} on linkages:
+which preserves Conditions \ref{cond:pol} and \ref{cond:unif} on \kl{linkages}:
 
-\begin{lemma}[Valid Progress]\label{thm:vprogress} If a linkage $\mathcal{L} \syneq
+\begin{lemma}[Valid Progress]\label{thm:vprogress} If a \kl{linkage} $\mathcal{L} \syneq
   C\select{A} \link C'\select{A'}$ (resp. $C\select{t} \link C'\select{t'}$) is
   valid, then either:
   \begin{enumerate}
@@ -726,7 +686,7 @@ which preserves Conditions \ref{cond:pol} and \ref{cond:unif} on linkages:
   \end{enumerate}
 \end{lemma}
 
-A detailed proof is given hereafter for the case of logical linkages. It is not
+A detailed proof is given hereafter for the case of \kl{logical linkages}. It is not
 fundamentally difficult, but understandably verbose. The two main points are:
 \begin{itemize}
 \item The rules involving a connective always preserve validity.
@@ -739,19 +699,19 @@ fundamentally difficult, but understandably verbose. The two main points are:
   \mathsf{R\exists s}, \mathsf{F\exists s}\}$}).
 \end{itemize}
 \begin{proof}
-  Let $\mathcal{L} \syneq B\select{A} \link C\select{A'}$ be a valid linkage.\\
+  Let $\mathcal{L} \syneq B\select{A} \link C\select{A'}$ be a valid \kl{linkage}.\\
   \begin{enumerate}[itemsep=0.8em]
     \item Suppose $B\hole \syneq C\hole \syneq \square$. By
-    Condition~\ref{cond:pol}, we know that a forward linkage cannot verify
+    Condition~\ref{cond:pol}, we know that a \kl(dnd){forward} \kl{linkage} cannot verify
     $(\inv(B\square), \inv(C\square)) = (0,0)$, thus $\mathcal{L}$ must be a
-    backward linkage. Also $\lvar(B\square)$ and $\lvar(C\square)$ are empty,
+    \kl(dnd){backward} \kl{linkage}. Also $\lvar(B\square)$ and $\lvar(C\square)$ are empty,
     hence by Condition~\ref{cond:unif} $A$ and $A'$ are unified by an empty
     substitution, which entails that $A \syneq A'$. Therefore we are in the
     first case where $\mathcal{L} \syneq \select{A} \back \select{A}$.
 
     \item Otherwise, either $B\hole$ or $C\hole$ is non-empty. In the following,
     we show that we can always apply a rewrite rule that produces a new, valid
-    linkage $\mathcal{L'} \syneq B' \link' C'$.
+    \kl{linkage} $\mathcal{L'} \syneq B' \link' C'$.
     
     Let $\sigma$ and $\lvar$ be respectively the substitution and interleaving
     of the quantified variables of $B\square$ and $C\square$ given by Condition
@@ -765,7 +725,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
           \item[Switch rule (\rsf{L\forall s}, \rsf{L\exists s},
           \rsf{R\forall s}, \rsf{R\exists s}, \rsf{F\forall s},
           \rsf{F\exists s})] Only if $x$ is not in the domain of $\sigma$. In
-          forward mode and when $B\square$ binds $x$, one must first apply the
+          \kl(dnd){forward} mode and when $B\square$ binds $x$, one must first apply the
           rule \rsf{Fcomm} to put $B\select{A}$ on the right of $\forw$, so
           that the switch rule is applicable. Now we show that $\mathcal{L'}$ is
           valid:
@@ -785,7 +745,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
             
             \item In all switch rules, we have $\lvar(\mathcal{L'}) = \lvar'$
             because the quantifier of $x$ is moved in the outer context of the
-            linkage. Thus we can just take $\lvar'$ as interleaving, and
+            \kl{linkage}. Thus we can just take $\lvar'$ as interleaving, and
             Condition \ref{cond:unif} will still be verified because $\lvar'$ is
             a sublist of $\lvar$.
           \end{enumerate}
@@ -862,26 +822,26 @@ fundamentally difficult, but understandably verbose. The two main points are:
         But since they are also the only rules that change the linking operator,
         the truth of Clause \ref{clause:opposite} is preserved: if the parities
         were opposite (resp. identical) in $\mathcal{L}$, then $\mathcal{L}$
-        must be forward (resp. backward). Thus $\mathcal{L'}$ is necessarily
-        backward (resp. forward), and so the parities in $\mathcal{L'}$ must be
+        must be \kl(dnd){forward} (resp. \kl(dnd){backward}). Thus $\mathcal{L'}$ is necessarily
+        \kl(dnd){backward} (resp. \kl(dnd){forward}), and so the parities in $\mathcal{L'}$ must be
         identical (resp. opposite), which is the case thanks to the inversion
         decrement.
 
         For Clause \ref{clause:intuit}, we can distinguish two cases:
         \begin{itemize}
-          \item If $\mathcal{L}$ is backward, then either we apply the
-          {\rsf{R{\limp}_1}} rule and $\mathcal{L'}$ is forward, and thus
+          \item If $\mathcal{L}$ is \kl(dnd){backward}, then either we apply the
+          {\rsf{R{\limp}_1}} rule and $\mathcal{L'}$ is \kl(dnd){forward}, and thus
           satisfies Clause \ref{clause:intuit} trivially; or we apply another
-          backward rule and $\mathcal{L'}$ is backward. Now suppose
+          \kl(dnd){backward} rule and $\mathcal{L'}$ is \kl(dnd){backward}. Now suppose
           $\inv(C'\hole) = 0$. Then we must have $\inv(C\hole) = \inv(C'\hole) =
-          0$ and $\inv(B\hole) = \inv(B'\hole)$ since all backward rules other
+          0$ and $\inv(B\hole) = \inv(B'\hole)$ since all \kl(dnd){backward} rules other
           than {\rsf{R{\limp}_1}} preserve the number of inversions. And
           because $\mathcal{L}$ satisfies Clause \ref{clause:intuit} by
           validity, we can deduce that $\inv(B\hole) = 0$, and thus
           $\inv(B'\hole) = 0$.
-          \item If $\mathcal{L}$ is forward, then either we apply a forward rule
+          \item If $\mathcal{L}$ is \kl(dnd){forward}, then either we apply a \kl(dnd){forward} rule
           that is neither {\rsf{F{\limp}_1}} nor {\rsf{Fcomm}} and
-          $\mathcal{L'}$ is forward, and thus satisfies Clause
+          $\mathcal{L'}$ is \kl(dnd){forward}, and thus satisfies Clause
           \ref{clause:intuit} trivially; or we consider applying either
           {\rsf{F{\limp}_1}} of {\rsf{Fcomm}}. There are three cases:
           \begin{itemize}
@@ -889,7 +849,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
             {\rsf{F{\limp}_1}} since we have $\inv(C'\hole) = \inv(C\hole) - 1 >
             0$;
             \item If $\inv(C\hole) = 0$, then $C\hole$ is empty and we are
-            forced to apply {\rsf{Fcomm}} so that we can apply the forward
+            forced to apply {\rsf{Fcomm}} so that we can apply the \kl(dnd){forward}
             rule corresponding to the head connective of $B\hole$. Then $C\hole$
             ends up on the left of $\forw$, thus if we apply
             {\rsf{F{\limp}_1}} for $B\hole$ Clause \ref{clause:intuit} will be
@@ -949,7 +909,7 @@ consequence of the previous lemma and the fact that the rewrite rules
 terminate:
 
 \begin{theorem}[Productivity]\labthm{productivity}
-If $\mathcal{L}$ is a valid linkage, then there
+If $\mathcal{L}$ is a valid \kl{linkage}, then there
 is a sequence of reductions with one of the following forms:
 \begin{mathpar}
   \mathcal{L} \steps{} D^+\select{\select{A} \back \select{A}} \\
@@ -962,9 +922,9 @@ This is the formal counterpart to the notion of productivity mentioned in
 \refsec{validity}. Intuitively, this theorem ensures non-trivial progress in the
 reasoning: we managed to connect some dots in the problem and actually solve a
 subgoal. That is, either the conclusion is \emph{strictly} weakened after a
-backward \kl{DnD}, or the assumptions are \emph{strictly} strengthened after a
-forward \kl{DnD}, instead of having just an equivalent goal written in a different
-way\sidenote{This remark only applies to logical linkages however, since
+\kl(dnd){backward} \kl{DnD}, or the assumptions are \emph{strictly} strengthened after a
+\kl(dnd){forward} \kl{DnD}, instead of having just an equivalent goal written in a different
+way\sidenote{This remark only applies to \kl{logical linkages} however, since
 rewriting equalities can only produce equivalent statements. Some \kl{proof
 assistants} provide facilities to rewrite arbitrary relations in subterms of
 arbitrary depth, such as Coq with its \emph{generalized rewriting} mechanism
@@ -1104,27 +1064,27 @@ on a slight extension of our rewrite rules, following ideas from these works.
         {C^-\select{A \land B}}&\step{}&{C^-\select{A \forw B}} &\mathsf{F}\\
     \end{array}
   \end{mathpar}
-  \caption{Linkage formation rules}
+  \caption{\kl{Linkage} formation rules}
   \labfig{newlink}
 \end{marginfigure}
 
-To the rewrite rules of \reffig{DISL} and \reffig{DISL-U}, we add \emph{linkage
-formation} rules (\reffig{newlink}), which are a deep generalization of linkage
+To the rewrite rules of \reffig{DISL} and \reffig{DISL-U}, we add \emph{\kl{linkage}
+formation} rules (\reffig{newlink}), which are a deep generalization of \kl{linkage}
 creation between two formulas of a sequent. Rule {\rsf{B}} creates a
-\emph{backward} linkage between $\limp$-linked formulas in any positive context
-$C^+\hole$, and dually rule {\rsf{F}} creates a \emph{forward} linkage between
+\emph{\kl(dnd){backward}} \kl{linkage} between $\limp$-linked formulas in any positive context
+$C^+\hole$, and dually rule {\rsf{F}} creates a \emph{\kl(dnd){forward}} \kl{linkage} between
 $\land$-linked formulas in any negative context $C^-\hole$\sidenote{This is
 reminiscent of the adjunction between the product and the exponential in
 \emph{cartesian closed categories}, which respectively interpret conjunction and
 implication in the Curry-Howard-Lambek correspondance for \kl{intuitionistic}
-logic.}. Note that contrary to the rules considered up to now, linkage formation
+logic.}. Note that contrary to the rules considered up to now, \kl{linkage} formation
 rules are not closed under arbitrary contexts: indeed the polarity restrictions
-are necessary to ensure soundness, as reviewed in \refsec{soundness}. A backward
-linkage in a sequent $\Gamma, D\select{A} \seq E\select{B}$ would be encoded by
+are necessary to ensure soundness, as reviewed in \refsec{soundness}. A \kl(dnd){backward}
+\kl{linkage} in a sequent $\Gamma, D\select{A} \seq E\select{B}$ would be encoded by
 the instance
 $$C^+\select{D\select{A} \limp E\select{B}} \step{} C^+\select{D\select{A} \back
 E\select{B}}$$ of {\rsf{B}} where $C^+\hole \syneq \bigwedge Γ \limp \hole$, while
-a forward linkage in a sequent $\Gamma, D\select{A}, E\select{B} \seq F$ would
+a \kl(dnd){forward} \kl{linkage} in a sequent $\Gamma, D\select{A}, E\select{B} \seq F$ would
 be encoded by the instance $$C^-\select{D\select{A} \land E\select{B}} \step{}
 C^-\select{D\select{A} \forw E\select{B}}$$ of {\rsf{F}} where $C^-\hole \syneq
 \bigwedge \Gamma \wedge \hole \limp F$.
@@ -1157,12 +1117,12 @@ under arbitrary contexts.
         {C^-\select{A \land B}}&\step{}&{C^-\select{A \land (A \forw B) \land B}} &\mathsf{Fconn}\\
     \end{array}
   \end{mathpar}
-  \caption{Duplicating linkage formation rules}
+  \caption{Duplicating \kl{linkage} formation rules}
   \labfig{newreslink}
 \end{marginfigure}
 
 An alternative to the full contraction rule {\rsf{conn}} is to systematically
-duplicate negative formulas in the linkage formation rules, giving the rules
+duplicate negative formulas in the \kl{linkage} formation rules, giving the rules
 {\rsf{Bconn} and \rsf{Fconn}} of \reffig{newreslink}. This models more
 closely what we do in Actema, where hypotheses involved in a \kl{DnD} action are
 always preserved in the new goal. This is important from a usability standpoint,
@@ -1178,7 +1138,7 @@ In our completeness proof we will use all the rules in $\{\text{{\rsf{conn}},
 {\rsf{weak}}, {\rsf{B}}, {\rsf{F}}, {\rsf{Bconn}}, {\rsf{Fconn}}}\}$,
 in order to make derivations more concise.
 
-Because linkages created by rules {\rsf{B} and \rsf{F}} are not
+Because \kl{linkages} created by rules {\rsf{B} and \rsf{F}} are not
 necessarily valid, one needs to add the so-called \emph{release} rules already
 mentioned in \refsec{linkages} (\reffig{rellink}). In fact these rules are
 crucial in order to simulate rules from \kl{sequent calculus}, which will be the
@@ -1519,14 +1479,14 @@ and the method of Chaudhuri implemented in the \intro{Profint} prototype
 unification on the linked subformulas to determine appropriate substitutions for
 instantiating quantifiers and rule out unwanted links. But their method improves
 upon ours by being able to link subformulas with non-trivial quantifier
-instantiation, such as the following linkage that currently fails in
+instantiation, such as the following \kl{linkage} that currently fails in
 Actema\todo{Try to understand precisely why it fails, and if this invalidates
 the productivity theorem.}:
 $$(\forall x. P(x) \limp \exists y. \select{Q(x,y)}) \back \exists y. \exists z.
 \select{Q(f(z),y)}$$ Because of the intended application of their method to
 \emph{automated} theorem proving in the Iris framework for program verification
-in Coq \sidecite{jung_iris_2018}, it is for now limited to \emph{backward}
-linkages. They provide a detailed formalization in Coq that relates their method
+in Coq \sidecite{jung_iris_2018}, it is for now limited to \emph{\kl(dnd){backward}}
+\kl{linkages}. They provide a detailed formalization in Coq that relates their method
 with that of Actema and \kl{Profint}, based on \emph{linking judgments} of the
 form $H \curlywedge [O]\VDash G$ that have a derivation precisely when $H \back
 G \steps{} O$\sidenote{Contrary to our usage in this chapter, they use the
@@ -1569,19 +1529,19 @@ the \emph{decomposition theorem} of the \kl{calculus of structures}
 \sidecite[][Theorem~4.1.3]{tubella:hal-02390267}.
 
 There is also an analogy between the correctness criterions of proof nets, and
-the validity criterion of linkages:
+the validity criterion of \kl{linkages}:
 \begin{itemize}
   \item they both identify a subset of valid objects among a larger set of
   structures characterized by links on formulas;
   \item they both allow many different \emph{sequential} readings, that is
   \kl{sequent calculus} proofs for proof nets, and \kl{CoS} proofs for
-  linkages\sidenote{Note that invalid linkages still give rise to \kl{CoS}-style
+  \kl{linkages}\sidenote{Note that invalid \kl{linkages} still give rise to \kl{CoS}-style
   \emph{derivations}, but not \emph{proofs} since they do not end with $\top$.
   The incorrect proof structures of Girard are in a sense more parallel as they
   cannot always be mapped to correct \kl{sequent calculus} derivations.}.
 \end{itemize}
 Hence, our approach to subformula linking seems to exhibit some properties of
-canonical proofs, but at the level of \emph{partial proofs}: valid linkages make
+canonical proofs, but at the level of \emph{partial proofs}: valid \kl{linkages} make
 for \emph{compact-parallel-spatial} representations of inferences, whose
 operational meaning is given by their \emph{detailed-sequential-temporal} \kl{CoS}
 derivations.

@@ -17,8 +17,8 @@ can be replaced by appropriate (new) kinds of bubbles. This will lead us to
 rediscover many principles already studied in the \kl{deep inference}
 literature, with topological intuitions of the bubble metaphor shedding a new
 light on them. We will end up with two symmetric bubble calculi, each with their
-own tradeoffs on the properties satisfied by inference rules. In particular,
-their ability to \emph{factorize} both forward and backward proof steps might
+own tradeoffs on the properties satisfied by \kl{inference rules}. In particular,
+their ability to \emph{factorize} both \kl{forward} and \kl{backward} proof steps might
 prove useful to build concise proofs, all through direct manipulation.
 
 The chapter is organized as follows: in \refsec{non-determinism} we motivate our
@@ -29,13 +29,13 @@ quest for a system where all introduction rules for logical connectives are
 requires a new distinction between \emph{closed} and \emph{open} solutions. This
 gives rise in \refsec{colors} to an extension of the syntax of solutions, where
 bubbles can themselves be \emph{polarized}. In \refsec{design-props} we identify
-key properties that will guide the design of inference rules, some of which were
+key properties that will guide the design of \kl{inference rules}, some of which were
 already aimed for implicitly through the evolution of our concept of bubble. In
 \refsec{symmetric-calculus} we introduce a core \emph{symmetric bubble calculus}
 for \kl{classical} logic called ``\kl{system B}'', in reference to the symmetric
 \kl{system L} of Herbelin \sidecite[10em]{herbelin_duality_nodate}. Then in
 \refsec{bubbles-soundness} we prove the soundness of \kl{system B}, and show
-that by removing selectively among inference rules that define the
+that by removing selectively among \kl{inference rules} that define the
 \emph{porosity} of polarized bubbles, one gets \kl{intuitionistic},
 \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic as fragments. In
 \refsec{bubbles-completeness} we support this claim by showing that the
@@ -88,7 +88,7 @@ $\conc{\lor}$ need to be performed in a specific order to be able to complete
 proofs.
 
 In his thesis \cite{guenot_nested_2013}, Guenot introduced a specific kind of
-nested sequent system, where like in \kl{BJ} inference rules can be expressed
+nested sequent system, where like in \kl{BJ} \kl{inference rules} can be expressed
 as rewriting rules. An interesting feature of these systems is that they satisfy
 a \emph{decomposability} property: all introduction rules for connectives are
 \emph{invertible}, and formulas can be completely decomposed with them until
@@ -158,7 +158,7 @@ usually distributes the context $\Delta$ of conclusions in all premisses: this
 restores a perfect symmetry with respect to the context of hypotheses $\Gamma$,
 as illustrated by the {\rnm{\land R*}} rule (\reffig{multi-and-intro}). Then our
 idea was that instead of implementing distribution/sharing of conclusions inside
-inference rules, we could do it implicitly in the interpretation of solutions.
+\kl{inference rules}, we could do it implicitly in the interpretation of solutions.
 This is already what happens in the asymmetric interpretation for hypotheses
 (\refdef{ainterp}); indeed the context $\Gamma$ is shared among subgoals,
 because:
@@ -350,7 +350,7 @@ the proofs for both directions of the equivalence are depicted parallely in
   the antecedant to prove conclusions other than the consequent, as will become
   apparent later;
   \item then in both cases we want to apply the hypothesis $\hypo{A}$ in a
-  forward step, either with $\hypo{A \limp B}$ or $\hypo{A \limp (B \lor C)}$.
+  \kl{forward} step, either with $\hypo{A \limp B}$ or $\hypo{A \limp (B \lor C)}$.
   To do so, we need to bring the two hypotheses together in the same solution.
   And since items are trapped within bubbles, the only way to go is to move the
   blue $\hypo{A}$ inside the red bubble with the {\rsf{f{-}{+}}} rule;
@@ -582,14 +582,14 @@ of priorization relatively to the latter:
     We say that a proof calculus is \emph{factorizable} when it makes it easier
     to avoid duplicating arguments in subproofs. In \refsec{bubbles-pba}, we
     already remarked that the ability to share hypotheses between subgoals in
-    \kl{BJ} enables the factorization of \emph{forward} reasoning steps at any
+    \kl{BJ} enables the factorization of \emph{\kl{forward}} reasoning steps at any
     stage of the proof construction. With our new symmetric interpretation of
-    multi-conclusion solutions, we will now be able to factorize \emph{backward}
+    multi-conclusion solutions, we will now be able to factorize \emph{\kl{backward}}
     reasoning steps as well, which was in fact the main motivation behind
     Example \ref{eq:concdistr} in \refsec{branching}.
   \item[Locality]
     There does not seem to be a general consensus on what it means precisely for
-    an inference rule to be \emph{local}. This terminology has been employed by
+    an \kl{inference rule} to be \emph{local}. This terminology has been employed by
     various authors in proof theory, in ways that are often hard to compare. For
     instance in \sidecite{negri_structural_2001}, sequent rules are said to be
     local because the contexts of hypotheses involved in a rule are located in
@@ -619,7 +619,7 @@ of priorization relatively to the latter:
     conclusion $\Delta$. The benefits of locality from a UX point of view have
     already been discussed at the end of \refsec{bubbles-pba}.
   \item[Linearity] 
-    We consider an inference rule to be \emph{linear} when it preserves the
+    We consider an \kl{inference rule} to be \emph{linear} when it preserves the
     number of atomic formulas in solutions. This is a strong requirement, which
     for instance excludes the identity rules of \kl{BJ} since they can insert
     or remove (even numbers of) atoms. Thus we cannot achieve full linearity in

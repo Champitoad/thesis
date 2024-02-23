@@ -84,8 +84,8 @@ different levels:
   More to the point are Coq, Lean and HOL, which share similar sets of
   primitives modelled after the \emph{introduction/elimination} rule duality.
   Declarative proof language like Isar seem to make an explicit effort to
-  avoid this schema, by following a higher-level approach based on forward
-  rather than backward reasoning, which is closer to mathematical practice.}. 
+  avoid this schema, by following a higher-level approach based on \kl{forward}
+  rather than \kl{backward} reasoning, which is closer to mathematical practice.}. 
 \end{itemize}
 
 This focus on the formal, low-level proof object is likely rooted in the

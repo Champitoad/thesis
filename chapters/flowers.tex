@@ -42,8 +42,8 @@ natural generalization of the \emph{scroll}, an icon for implication introduced
 by Peirce that inspired the very creation of \kl{EGs}. In \refsec{Flowers}, we
 explain how flowers are really just a fun and metaphorical way to draw
 \kl{IEGs}, and proceed to give them an inductive, multiset-based syntax as in
-\refsec{multisets}. In \refsec{Calculus}, we introduce the full set of inference
-rules of the flower calculus as well as our notion of proof, and prove a few
+\refsec{multisets}. In \refsec{Calculus}, we introduce the full set of \kl{inference
+rules} of the flower calculus as well as our notion of proof, and prove a few
 syntactic properties, including two deduction theorems. In \refsec{Semantics},
 we give a direct Kripke semantics to flowers, avoiding the need for translations
 to and from formulas. In \refsec{Soundness}, we show that the rules of the
@@ -56,7 +56,7 @@ analyticity of the system. We exploit these properties in
 search in the propositional fragment; unfortunately, the current version of the
 algorithm is neither terminating nor complete. Then in \refsec{flowers-prover}
 we give an overview of the Flower Prover, a prototype of GUI in the
-Proof-by-Action paradigm whose actions map directly to the rules of the flower
+\kl{Proof-by-Action} paradigm whose actions map directly to the rules of the flower
 calculus, and which integrates nicely with (a restricted version of) our search
 procedure. We conclude in \refsec{Conclusion} by a comparison with some related
 works, and a discussion of future works and applications that we envision.
@@ -248,13 +248,13 @@ setting remains noteworthy.
 
 \begin{remark}
 Note that in \reffig{eg-currying} and \reffig{eg-uncurrying}, we give
-\emph{forward} proofs that rewrite the premiss of the argument into its
-conclusion, rather than \emph{backward} proofs (\refdef{eg-proof}) that rewrite
-a goal into the empty $\SA$, as we usually did in \refch{eg}. Forward proofs
+\emph{\kl{forward}} proofs that rewrite the premiss of the argument into its
+conclusion, rather than \emph{\kl{backward}} proofs (\refdef{eg-proof}) that rewrite
+a goal into the empty $\SA$, as we usually did in \refch{eg}. \kl{Forward} proofs
 correspond to Peirce's usage of the illative transformations --- and thus to
 what can be found in most of the literature on \kl{EGs}, and have the advantage
 of being more economical in space by leaving the goal implicit. One can easily
-go from a forward proof to a backward one as shown by the \emph{deduction
+go from a \kl{forward} proof to a \kl{backward} one as shown by the \emph{deduction
 theorem} of Sowa \cite[Section 6]{sowa_peirces_2011}, which also applies in the
 \kl{intuitionistic} setting by substituting the rule of \kl{Double-cut} with the rule
 of Blank Antecedant.
@@ -748,8 +748,8 @@ update}, which will be useful for the semantic evaluation of flowers in
 
 \paragraph{Contexts}
 
-Equipped with an inductive syntax, we can now express formally the inference
-rules of our flower calculus, just as we did for \kl{Alpha}
+Equipped with an inductive syntax, we can now express formally the \kl{inference
+rules} of our flower calculus, just as we did for \kl{Alpha}
 (\refsec{multisets}) and \kl{Beta} (\refsec{gardens}). There, graphs and their
 contexts were defined as multisets of nodes, which have now turned into bouquets
 of flowers:
@@ -839,22 +839,23 @@ the location of the justifying/pollinating occurrence of $\phi$, and the red
 dots all the areas that it (locally) justifies/pollinates, and thus where $\phi$
 can be (de)iterated\sidenote{\reffig{pollination} summarizes visually the flow
 of information in flowers, just like \reffig{eg-local-justification} summarized
-the flow of information in \kl{EGs}, and \reffig{bubbles-porosity} in bubbles. From a
-UI point of view, all these figures can be understood as kind of
+the flow of information in \kl{EGs}, and \reffig{bubbles-porosity} in bubbles.
+From a UI point of view, all these figures can be understood as kind of
 ``cheatsheets'', that indicate with arrows the allowed drag-and-drop moves for
 importing a statement (the source of the \kl{DnD}) into a new context (the
-destination of the \kl{DnD}).}. We distinguish two cases of \emph{cross}-pollination
-and \emph{self}-pollination, as botanists do when describing the reproduction of
-flowers. This distinction does not exist in \kl{classical} \kl{EGs}, because pistils and
-petals are both identified as instances of \kl{cuts}\sidenote{The same phenomenon is
-at work in \emph{subformula linking} (\refch{sfl}): self-pollination and
-cross-pollination correspond respectively to the \emph{backward} $\back$ and
-\emph{forward} $\forw$ linking operators, which are collapsed into a single
-interaction operator $\ast$ in the original formulation of subformula linking
-for classical linear logic \cite{Chaudhuri2013}.}. If we were to replace binders
-by LoI (lines of identity, see \refsec{beta}), then the pollination relation
-would also prescribe in which areas LoI can be extended/iterated, providing an
-explanation for the scope of binders (\refremark{flower-scope}).
+destination of the \kl{DnD}).}. We distinguish two cases of
+\emph{cross}-pollination and \emph{self}-pollination, as botanists do when
+describing the reproduction of flowers. This distinction does not exist in
+\kl{classical} \kl{EGs}, because pistils and petals are both identified as
+instances of \kl{cuts}\sidenote{The same phenomenon is at work in
+\emph{subformula linking} (\refch{sfl}): self-pollination and cross-pollination
+correspond respectively to the \emph{\kl(dnd){backward}} $\back$ and
+\emph{\kl(dnd){forward}} $\forw$ linking operators, which are collapsed into a
+single interaction operator $\ast$ in the original formulation of subformula
+linking for classical linear logic \cite{Chaudhuri2013}.}. If we were to replace
+binders by LoI (lines of identity, see \refsec{beta}), then the pollination
+relation would also prescribe in which areas LoI can be extended/iterated,
+providing an explanation for the scope of binders (\refremark{flower-scope}).
 
 \paragraph{Rules}
 
@@ -2846,7 +2847,7 @@ interaction we are interested in is that of \emph{direct manipulation} in a GUI.
 This was our initial motivation for studying the graphical formalism of \kl{EGs}, and
 we always kept this objective in mind when developing the flower calculus. In
 this section, we present ongoing work on the \emph{Flower Prover}, a prototype
-of GUI in the Proof-by-Action paradigm based on the direct manipulation of
+of GUI in the \kl{Proof-by-Action} paradigm based on the direct manipulation of
 flowers, that builds upon the various concepts, rules and metatheory of the
 previous sections.
 
@@ -3371,7 +3372,7 @@ remarkably, first-order formulas in their exponential normal form have the exact
 same structure as flowers
 \cite[Definition~4.2]{brock-nannestad_intuitionistic_2019}. However, the \kl{sequent
 calculus} \kl{HS} based on them makes the tradeoff opposite to that of the
-natural fragment $\Nature$ of the flower calculus: every inference rule is
+natural fragment $\Nature$ of the flower calculus: every \kl{inference rule} is
 \emph{non}-invertible, but the calculus is contraction-free. One advantage of
 this tradeoff is that they can easily show termination of proof search, while we
 have not found a terminating procedure yet for the flower calculus. The authors
@@ -3629,7 +3630,7 @@ that emphasizes goal-reduction through invertible and analytic rules, enabled us
 to design a novel and promising type of graphical interface for interactive
 proof building, which integrates easily and elegantly some (limited) forms of
 automation. This was also made possible by the use of variables instead of lines
-of identity, trading a heavy graphical apparatus with local inference rules for
+of identity, trading a heavy graphical apparatus with local \kl{inference rules} for
 a simple, well-known textual syntax with complex (but automated) global dynamics
 in the form of substitutions. Hence we believe the \emph{opposite}, that \kl{EGs}
 \emph{can} form the basis for an ergonomic calculus of logical deduction, in

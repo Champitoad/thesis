@@ -49,7 +49,7 @@ apply on sequents and never on formulas, which makes them more verbose. Also we
 do not rely on the notion of ``top-level formulas'' of a structure, making the
 propagation rules yet more verbose.}. The main difference lies in the fact that
 proofs in \kl{DBiInt} are \emph{trees} built up by composing traditional
-inference rules with multiple premisses, while we use closed solutions (neutral
+\kl{inference rules} with multiple premisses, while we use closed solutions (neutral
 bubbles) to internalize the tree structure of proofs inside solutions. This
 gives a lot of expressive power since closed solutions can themselves be nested
 in open solutions and thus \emph{polarized}, a phenomemon which cannot be
@@ -136,7 +136,7 @@ proof of a given solution $S$, one does not need to come up with or ``invent'' a
 formula that does not appear in $S$. This is crucial when designing
 \emph{automated} decision procedures because it reduces drastically the search
 space, but is also desirable in the setting of \emph{interactive} proof
-building. Indeed with our Proof-by-Action interpretation of bubble calculi
+building. Indeed with our \kl{Proof-by-Action} interpretation of bubble calculi
 (\refsec{bubbles-pba}), this means that all logical reasoning can be performed
 by direct manipulation of \emph{what is already there}. Then the cut rule is
 indispensable, but confined to a role of \emph{theory building}: it allows the

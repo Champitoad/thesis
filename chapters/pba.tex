@@ -72,7 +72,7 @@ proof-theoretical foundations for the semantics of \kl{DnD} actions
 will be investigated more thoroughly in \refch{sfl}.
 % , although the most important meta-theoretical
 % properties will be exposed here with outlines of their proofs.
-More advanced features of the Proof-by-Action paradigm that go beyond the core
+More advanced features of the \kl{Proof-by-Action} paradigm that go beyond the core
 logic are illustrated in \refch{advanced}, and \refch{plugin} explains how it
 can be integrated in a mainstream \kl{proof assistant}.
 
@@ -179,7 +179,7 @@ complex formalisms like type theories. We will not explore these questions here.
 \section{A first example}\labsec{aristote}
 
 \subsection{Layout}
-One advantage of the PbA paradigm, is that it allows a very lean visual layout
+One advantage of the \kl{PbA} paradigm, is that it allows a very lean visual layout
 of the proof state. There is no need to name hypotheses. In the prototype we
 also dispense with a text buffer, since proofs are solely built through
 graphical actions.
@@ -218,10 +218,10 @@ bring together the item $\human(\socrates)$ with the premise $\human(x)$ of the
 first hypothesis. This will yield a new hypothesis $\mortal(\socrates)$.
 \end{itemize}
 
-The first case is what we call a {\em backward step} where the conclusion is
-modified by using a hypothesis. The second case is a {\em forward step} where
-two known facts are combined to deduce a new fact, that is an additional blue
-item.
+The first case is what we call a {\em \intro(dnd){backward} step} where the
+conclusion is modified by using a hypothesis. The second case is a {\em
+\intro(dnd){forward} step} where two known facts are combined to deduce a new
+fact, that is an additional blue item.
 
 In both cases, the proof can then be finished invoking the logical
 axiom rule. In practice this means bringing together the blue
@@ -231,7 +231,7 @@ $\mortal(\socrates)$) with the identical red conclusion.
 
 \subsection{Modelling the mechanism}
 
-A backward step involves a hypothesis, here $\forall x.\-\human(x)
+A \kl(dnd){backward} step involves a hypothesis, here $\forall x.\-\human(x)
 \allowbreak\limp \mortal(x)$ and the conclusion, here $\mortal(\socrates)$.
 Furthermore, the action actually links together two {\em subterms} of each of
 these items; this is written by squaring these subterms. The symbol ${\back}$,
@@ -270,7 +270,7 @@ In general, the action solves the goal when the interaction ends with
 the trivially true proposition $\top$. The base case being the action
 corresponding to the axiom/identity rule \rsf{id}: $A\back A \step{} \top$.
 
-A forward step, on the other hand, involves two (subterms of two)
+A \kl(dnd){forward} step, on the other hand, involves two (subterms of two)
 hypotheses. The interaction operator between two hypotheses is written
 $\forw$. In the example above, the detail of the interaction is:
 $$
@@ -316,7 +316,7 @@ drag-and-drop actions.
 One can see that these actions correspond essentially to the (right)
 introduction rules of the head connective for the conclusion, and either the
 elimination rule from \kl{NJ} or the left introduction rule from \sys{LJ} for
-hypotheses. The exact mapping between click actions and inference rules is
+hypotheses. The exact mapping between click actions and \kl{inference rules} is
 given in \reftab{click-rules}. A few remarks are in order:
 \begin{itemize}
   \item In the current implementation of Actema, clicking on a blue item $A
@@ -346,7 +346,7 @@ given in \reftab{click-rules}. A few remarks are in order:
 \end{remark}
 
 \begin{table}[H]
-\caption[]{Mapping of click actions to inference rules}
+\caption[]{Mapping of click actions to \kl{inference rules}}
 \labtab{click-rules}
 \begin{tabular}{ccc}
 	\toprule
@@ -462,7 +462,7 @@ terms are directly written in decimal notation. The proof goes as follows:
 We end up with the conclusion $2 = 2$, which is provable by a simple click.
 Notice how the orientation of the two rewritings is determined by which side of
 the equality is selected. Also, in this case, the rewritings
-correspond to backward proof steps, because the rewriting is performed
+correspond to \kl(dnd){backward} proof steps, because the rewriting is performed
 in the conclusion. Similar rules (\rsf{F{=}_1} and \rsf{F{=}_2}) are
 used to perform rewritings in hypotheses.
 
@@ -515,10 +515,10 @@ $$
 \end{array}
 $$
 
-Disjunctive hypotheses also have a backward behavior defined by the rules
+Disjunctive hypotheses also have a \kl(dnd){backward} behavior defined by the rules
 \rsf{L\lor_1} and \rsf{L\lor_2}, although in most cases one will prefer the
 usual subgoal semantics associated with click actions. More interesting is
-their forward behavior with the rules \rsf{F\lor_1} and \rsf{F\lor_2}, in
+their \kl(dnd){forward} behavior with the rules \rsf{F\lor_1} and \rsf{F\lor_2}, in
 particular when they interact with negated hypotheses. For instance:
 $$
 \begin{array}{llll}
@@ -578,7 +578,7 @@ $$
 
 
 As we have seen in Aristotle's example (\refsec{aristote}), blue
-implications can also be used in forward steps, where another
+implications can also be used in \kl(dnd){forward} steps, where another
 hypothesis matches one of their premisses.
 
 A first nice feature is the ability to strengthen a hypothesis by
@@ -604,8 +604,8 @@ B\land D \limp C.$$
 
 Note that there is almost no difference in the way one uses different
 versions of a hypothesis $A\limp B\limp C$, $A\land B\limp
-C$, but also $B\limp A\limp C$, in forward as well as in
-backward steps\sidenote{When viewed as types through the Curry-Howard
+C$, but also $B\limp A\limp C$, in \kl(dnd){forward} as well as in
+\kl(dnd){backward} steps\sidenote{When viewed as types through the Curry-Howard
 isomorphism, $A\limp B\limp C$, $A\land B\limp C$, $B\land
 A\limp C$ and $B\limp A\limp C$ are {\em isomorphic types};
 and Roberto di Cosmo~\cite{ISOSBook} has also precisely underlined
@@ -624,7 +624,7 @@ quantifiers in the next section.
 %\emph{any depth} under logical connectives.
 
 
-As for red implications, they also have a backward semantics with the rules
+As for red implications, they also have a \kl(dnd){backward} semantics with the rules
 \rsf{R{\limp}_1} and \rsf{R{\limp}_2}, but most of the time one
 will want to destruct them immediately by click. An exception could be if one
 wants to simplify some part of an implicative, inductive goal before starting
@@ -709,7 +709,7 @@ is usually defined as a special case of universal quantification.}.
 
 
 Again, in some cases, only some existential quantifiers may be
-instantiated following a linkage:
+instantiated following a \kl{linkage}:
 $$
 \begin{array}{rcl}
 \select{P(a)}\back \exists x.\exists y. \select{P(y)}\land R(x,y)
@@ -731,7 +731,7 @@ $$
 Some more advanced examples yield simultaneous instantiations of
 existentially and universally quantified variables. In such cases, the
 system needs to check some dependency conditions. For instance, the
-following linkage is valid and solves the goal through one action:
+following \kl{linkage} is valid and solves the goal through one action:
 $$
 \begin{array}{lll}
   &\exists y. \forall x. \select{R(x,y)}\back \forall x'.\exists
@@ -751,13 +751,13 @@ $$
 $$
 
 But the converse situation is not provable; the system will refuse
-the following linkage:
+the following \kl{linkage}:
 $$
 \begin{array}{rcl}
   \forall x. \exists y. \select{R(x,y)}\back \exists y'.\forall x'. \select{R(x',y')}
 \end{array}
 $$
-Indeed, there is no reduction path starting from this linkage ending with the
+Indeed, there is no reduction path starting from this \kl{linkage} ending with the
 \textsf{id} rule. This can be detected by the system because the unification of
 $R(x,y)$ and $R(x',y')$ here results in a cycle in the instantiations of
 variables\sidenote{We will come back to this in \refsec{linkages}. Also notice
@@ -803,7 +803,7 @@ $$
   \begin{framed}
   \begin{mathpar}
     \begin{array}{r@{\quad}c@{\quad}lr}
-        \multicolumn{4}{c}{\textsc{Backward}} \\[2em]
+        \multicolumn{4}{c}{\textsc{\kl(dnd){Backward}}} \\[2em]
 
         {A \back A}&\step{}&\top &\mathsf{id}\\
         {t = u \back \subst{A}{t}{x}}&\step{}&\subst{A}{u}{x} &\mathsf{L{=}_1}\\
@@ -838,7 +838,7 @@ $$
   % \textsc{Forward}\\
   % \begin{mathpar}
     \begin{array}{r@{\quad}c@{\quad}lr}
-      \multicolumn{4}{c}{\textsc{Forward}} \\[2em]
+      \multicolumn{4}{c}{\textsc{\kl(dnd){Forward}}} \\[2em]
 
       % \R[\mathsf{lnn}]
       %   {\ifill{\eta}{\efill{A}{A} \forw \efill{B}{B}}}
@@ -986,7 +986,7 @@ transformations to the parent window by replacing the old subexpression by the
 new one, without modifying the surrounding context.
 
 This process is quite reminiscent of the rewriting produced by our \kl{DnD}
-actions. One key difference is that window inference rules can be
+actions. One key difference is that window \kl{inference rules} can be
 applied stepwise, while we choose to hide the sequence of rules that
 justifies a \kl{DnD}. The window inference approach gives to the user a
 precise control of the transformations to be performed and thus could
@@ -1053,5 +1053,5 @@ Incredible Proof Machine~\sidecite{blanchette-visual-2016},
 Logitext\sidenote{\url{http://logitext.mit.edu/main}} and Click \&
 coLLecT~\sidecite{clickcollect}. In particular, Logitext and Click \& coLLecT
 exploit the same idea of associating click actions on head connectives to
-inference rules in \kl{sequent calculus}. But these systems focus more on explicating
+\kl{inference rules} in \kl{sequent calculus}. But these systems focus more on explicating
 the proof object than on making its construction easier.

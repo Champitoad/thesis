@@ -113,7 +113,7 @@ Traditionally, the branch of mathematical logic that tries to model the
 ``semantic'' content of axioms through the notion of truth is called \emph{model
 theory}. In this thesis, we are concerned with the construction of formal proofs
 that derive the consequences of axioms by pure ``syntactic'' manipulation,
-through the application of so-called \emph{inference rules}. Accordingly, the
+through the application of so-called \intro{inference rules}. Accordingly, the
 branch of mathematical logic studying this activity is called \emph{proof
 theory}. We will still do a bit of model theory in a few places
 (\refsec{bubbles-soundness}, \refsec{Completeness}), but only as a means to
@@ -125,19 +125,19 @@ the \emph{formalist} school of thought in philosophy of mathematics, represented
 by the great mathematician and main instigator of proof theory David Hilbert.
 
 \begin{emphpar}
-The real focus throughout this thesis is on the \emph{inference rules} used to
+The real focus throughout this thesis is on the \emph{\kl{inference rules}} used to
 build (correct) proofs from axioms/assumptions. Those form the theoretical basis
 for both the \emph{interactive creation}, and the \emph{automatic checking} of
 formal proofs in \kl{proof assistants}. The branch of proof theory concerned with the
-study of inference rules is called \emph{structural proof theory}.
+study of \kl{inference rules} is called \emph{structural proof theory}.
 \end{emphpar}
 
 \paragraph{Axiomatic systems} 
 
 In the very beginnings of proof theory in the 1920s, under the influence of
 Hilbert, the axiomatic method was predominant, and thus \kl{proof systems} of this
-era --- now called \intro{Hilbert systems} --- featured very few inference
-rules. Almost all logical reasoning principles were encoded as \emph{axiom
+era --- now called \intro{Hilbert systems} --- featured very few \kl{inference
+rules}. Almost all logical reasoning principles were encoded as \emph{axiom
 schemas} involving generic \emph{propositional variables}. For instance, the
 famous \emph{law of excluded middle}, that states that every proposition is
 either true or false, is expressed formally by the schema
@@ -214,7 +214,7 @@ systems, designing the \kl{classical} part as an extension of the former.
 
 \paragraph{Inference rules}
 
-In \kl{Hilbert systems}, the only inference rule is that of \emph{modus ponens},
+In \kl{Hilbert systems}, the only \kl{inference rule} is that of \emph{modus ponens},
 which is expressed formally with the following figure:
 $$\R[\intro{mp}]{A}{A \limp B}{B}$$
 Like axioms, it is a \emph{schema} that involves generic propositional variables
@@ -223,25 +223,25 @@ read from top to bottom as follows: for any propositions $A$ and $B$, if we have
 a proof of $A$ and a proof of $A \limp B$, i.e. a proof that $A$ implies $B$,
 then we can immediately derive a proof of $B$ by virtue of the rule, here
 designated by the abbreviated name \kl{mp}.This reading of the rule
-corresponds to a form of \emph{forward} reasoning: starting from the known
+corresponds to a form of \intro{forward} reasoning: starting from the known
 \emph{premises} that $A$ and $A \limp B$ are true, it \emph{necessarily} follows
 that the \emph{conclusion} $B$ is true.
 
 Conversely, one can also have a bottom-up reading of the rule: to build a proof
 of any proposition $B$, one way to proceed is to come up with another
 proposition $A$ such that both $A$ and $A \limp B$ are provable. This reading
-corresponds to a form of \emph{backward} reasoning: we start from the conclusion
-$B$ that we want to reach, also called the \emph{goal}, and try to find
-\emph{subgoals} $A$ and $A \limp B$ that are provable, and hopefully simpler to
+corresponds to a form of \intro{backward} reasoning: we start from the conclusion
+$B$ that we want to reach, also called the \intro{goal}, and try to find
+\intro{subgoals} $A$ and $A \limp B$ that are provable, and hopefully simpler to
 prove; then the rule guarantees that proving these subgoals is \emph{sufficient}
 to ensure the truth of the original goal.
 
-Forward reasoning is typically how mathematicians write (informal) proofs on
+\kl{Forward} reasoning is typically how mathematicians write (informal) proofs on
 paper, for the \emph{presentation} of their proofs to other mathematicians.
 Indeed, it is more natural for humans to follow an argument by starting from its
 premises, because the latter will always contain all the information required to
 deduce the conclusion, the argument only serving as a means to explicate how
-this information is combined. On the other hand, backward reasoning is more
+this information is combined. On the other hand, \kl{backward} reasoning is more
 natural during the \emph{construction} phase of a proof, because the information
 required to reach the conclusion (e.g. the proposition $A$ in the \rsf{mp} rule)
 is not yet known.
@@ -261,26 +261,27 @@ delivered to the faculty of mathematical sciences of the University of Göttinge
 proposed independently his famous calculus of \intro{natural deduction}.
 
 This formalism follows the opposite approach to \kl{Hilbert systems}: it
-features as few axioms as possible, favoring the use of \emph{inference rules}
-to model the forms of reasoning found in mathematical practice. Those are
-divided into two categories: \emph{introduction} rules \emph{define} the meaning
-of logical connectives, by prescribing how to prove complex formulas from proofs
-of their components. Dually, \emph{elimination rules} explain how to \emph{use}
-complex formulas, by giving a canonical way to derive new conclusions from them.
-\reffig{calculi-NJ} shows the complete set of \kl{natural deduction} rules for all
-connectives and quantifiers in \kl{intuitionistic} logic, that was introduced by
-Gentzen under the name \intro{NJ}\sidenote{Gentzen simultaneously introduced a
-\kl{natural deduction} calculus named \intro{NK} for \kl{classical} logic, which is just
-\kl{NJ} with an additional rule modelling the principle of \emph{indirect proof}
---- i.e. the possibility to prove any proposition $A$ by deriving a
-contradiction from its negation $\neg A$ (\reffig{NK-ip}). Indeed, this
-principle can be shown to be strictly equivalent to the law of excluded middle,
-in the sense that the former is (\kl{intuitionistically}) provable if and only if the
-latter is.} \cite{gentzen_untersuchungen_1935}. The most simple example can be
-found in the rules for the conjunction connective $\land$: the introduction rule
-\rsf{\land i} allows to build a proof of $A \land B$ by combining a proof of $A$
-and a proof of $B$; while the elimination rules \rsf{\land e_1} and \rsf{\land
-e_2} allow to derive proofs of $A$ and $B$ from a proof of $A \land B$.
+features as few axioms as possible, favoring the use of \emph{\kl{inference
+rules}} to model the forms of reasoning found in mathematical practice. Those
+are divided into two categories: \emph{introduction} rules \emph{define} the
+meaning of logical connectives, by prescribing how to prove complex formulas
+from proofs of their components. Dually, \emph{elimination rules} explain how to
+\emph{use} complex formulas, by giving a canonical way to derive new conclusions
+from them. \reffig{calculi-NJ} shows the complete set of \kl{natural deduction}
+rules for all connectives and quantifiers in \kl{intuitionistic} logic, that was
+introduced by Gentzen under the name \intro{NJ}\sidenote{Gentzen simultaneously
+introduced a \kl{natural deduction} calculus named \intro{NK} for \kl{classical}
+logic, which is just \kl{NJ} with an additional rule modelling the principle of
+\emph{indirect proof} --- i.e. the possibility to prove any proposition $A$ by
+deriving a contradiction from its negation $\neg A$ (\reffig{NK-ip}). Indeed,
+this principle can be shown to be strictly equivalent to the law of excluded
+middle, in the sense that the former is (\kl{intuitionistically}) provable if
+and only if the latter is.} \cite{gentzen_untersuchungen_1935}. The most simple
+example can be found in the rules for the conjunction connective $\land$: the
+introduction rule \rsf{\land i} allows to build a proof of $A \land B$ by
+combining a proof of $A$ and a proof of $B$; while the elimination rules
+\rsf{\land e_1} and \rsf{\land e_2} allow to derive proofs of $A$ and $B$ from a
+proof of $A \land B$.
 
 \begin{figure*}
   \input{figures/nj.tex}
@@ -376,13 +377,14 @@ focus on the \kl{intuitionistic} system \kl{LJ}, whose rules are shown in
 deduction} depend crucially on the use of \emph{hypotheses} that appear
 ``higher'' or earlier in the proof. The prototypical example is the introduction
 rule \rsf{{\limp}i} for implication: to prove $A \limp B$, it suffices to prove
-$B$ under the assumption that $A$ is true. Then the assumption $A$ is
+$B$ under the assumption that $A$ is true. Then the hypothesis $A$ is
 \emph{discharged} by the rule (bracket notation in \reffig{calculi-NJ}), meaning
 that the conclusion $A \limp B$ holds \emph{unconditionally}, without the
-assumption. In \kl{sequent calculus}, this relation of provability of a conclusion
-$C$ under a collection of assumptions/hypotheses $\Gamma$ is captured by the
-expression $\Gamma \seq C$, called a \emph{sequent}. The introduction rule
-\rsf{{\limp}i} is then expressed by the so-called \emph{right introduction} rule
+assumption. In \kl{sequent calculus}, this relation of provability of a
+conclusion $C$ under a collection/\intro(sequent){context} of
+assumptions/hypotheses $\Gamma$ is captured by the expression $\Gamma
+\intro*\seq C$, called a \intro{sequent}. The introduction rule \rsf{{\limp}i}
+is then expressed by the so-called \emph{right introduction} rule
 \rsf{{\limp}R}, which keeps track of the full \emph{context} of hypotheses by
 having sequents as premiss and conclusion, instead of just formulas. Right
 introduction rules for other connectives are also obtained straightforwardly
@@ -483,17 +485,17 @@ Many years after Gentzen's seminal work, at the advent of the
 21\textsuperscript{th} century, Alessio Guglielmi introduced a new methodology
 for designing \kl{proof formalisms} called \intro{deep inference}
 \sidecite{Guglielmi1999ACO}. The idea was to overcome some limitations of
-Gentzen formalisms while preserving their good properties, by allowing inference
-rules to be applied \emph{anywhere} inside formulas, instead of only at the
-top-level of sequents\sidenote{In fact, Schütte had already proposed a \kl{deep
-inference} system as early as 1977 \cite{schutte_proof_1977}, as did Peirce one
-century before him with his \emph{entitative graphs} (as we will see in
-\refch{eg}). But the idea did not generate much interest at the time.}. The
+Gentzen formalisms while preserving their good properties, by allowing
+\kl{inference rules} to be applied \emph{anywhere} inside formulas, instead of
+only at the top-level of sequents\sidenote{In fact, Schütte had already proposed
+a \kl{deep inference} system as early as 1977 \cite{schutte_proof_1977}, as did
+Peirce one century before him with his \emph{entitative graphs} (as we will see
+in \refch{eg}). But the idea did not generate much interest at the time.}. The
 first \kl{deep inference} system was the \intro{calculus of structures}
 (\reintro{CoS}), which can be succinctly described as a \emph{rewriting system}
 on formulas. For instance, the following \emph{switch} rule, when read bottom-up
-(i.e. in backward mode), indicates that the formula $A \lor (B \land C)$ may be
-rewritten into $(A \lor B) \land C$:
+(i.e. in \kl{backward} mode), indicates that the formula $A \lor (B \land C)$
+may be rewritten into $(A \lor B) \land C$:
 $$\R[\rsf{s}]{S\select{(A \lor B) \land C}}{S\select{A \lor (B \land C)}}$$
 Importantly, the rule can be applied in any \emph{context} $S\hole$. A context
 $S\hole$ is simply a formula containing a single occurrence of a special
@@ -759,7 +761,7 @@ languages:
   turned into either a goal $\Gamma\seq A$ or a goal $\Gamma\seq B$ (resp. into
   two goals $\Gamma\seq A$ and $\Gamma\seq B$), corresponding to the rules
   \rsf{\lor R_1} and \rsf{\lor R_2} (resp. \rsf{\land R}) of \kl{LJ} in their
-  backward reading (\reffig{calculi-LJ}).
+  \kl{backward} reading (\reffig{calculi-LJ}).
 
   Coq and Lean are examples of state-of-the-art \kl{proof assistants} in the
   imperative paradigm.
@@ -892,7 +894,7 @@ the user can specify \emph{patterns} to designate particular occurrences of a
 term $t$ that are to be rewritten into an equal term $u$, usually thanks to an
 assumed equation $t = u$. But coming up with such patterns is a lot slower than
 directly \emph{pointing} at the locations of interest onscreen.}. While the
-semantics of PbP actions is still based on the \emph{shallow} inference rules of
+semantics of PbP actions is still based on the \emph{shallow} \kl{inference rules} of
 \kl{sequent calculus}, PbL fully embraces the \kl{deep inference} paradigm by relying on
 \kl{CoS}-style rewriting rules.
 
@@ -901,7 +903,7 @@ semantics of PbP actions is still based on the \emph{shallow} inference rules of
   the research programme initiated by PbP and PbL. The aim is to \emph{replace}
   textual proof languages with \emph{gestural} actions performed directly upon
   \emph{goals} in a \emph{graphical} user interface (GUI). To be as general as
-  possible, we call such a paradigm ``Proof-by-Action'' (PbA).
+  possible, we call such a paradigm ``\intro{Proof-by-Action}'' (\reintro{PbA}).
 \end{emphpar}
 
 \paragraph{Proof exploration}
@@ -914,19 +916,19 @@ Note that we believe such a replacement to be useful mostly during the
 object of interest directly and to generate multiple alternatives rapidly.
 \end{quote}
 Thus in the context of \kl{ITPs}, the major advantage of a (well-designed) GUI in the
-PbA paradigm would be to enable the \emph{rapid exploration} of multiple paths
+\kl{PbA} paradigm would be to enable the \emph{rapid exploration} of multiple paths
 towards the construction of a complete proof. But once a proof has been found,
 the \emph{dynamic} sequence of actions that led to it could be ``compiled'' into
 a \emph{static}, textual representation of the proof in the favorite proof
 language of the user, to facilitate the \emph{reading} phase.
 
-As for the \emph{modification} phase of proofs, the PbA paradigm requires a way
+As for the \emph{modification} phase of proofs, the \kl{PbA} paradigm requires a way
 to navigate and edit directly a recorded sequence of actions, and possibly a
 mechanism for mapping parts of a static proof text to the actions that generated
 them.
 
 \begin{emphpar}
-  In this thesis, we leave the question of \emph{proof evolution} in PbA ---
+  In this thesis, we leave the question of \emph{proof evolution} in \kl{PbA} ---
   i.e. the design of interfaces for the reading and modification phases, that
   support a smooth interaction with the writing phase --- for future work. A
   more detailed discussion can be found in \refsubsec{proof-evolution}.
@@ -1015,7 +1017,7 @@ above.
 
 \paragraph{Symbolic manipulations}
   
-In the first part of this thesis, we substantiate the PbA paradigm in the
+In the first part of this thesis, we substantiate the \kl{PbA} paradigm in the
 context of traditional representations of goals, by presenting a number of
 techniques based on the direct manipulation of \emph{symbolic} formulas in
 sequents.
@@ -1027,21 +1029,22 @@ GUI called Actema. In particular, \kl{DnD} actions can be seen as a graphical
 generalization of both the \texttt{apply} and \texttt{rewrite} tactics of
 imperative proof languages.
 
-In \refch{sfl}, we ground the semantics of \kl{DnD} actions in \kl{deep inference} proof
-theory, by designing a variant of the subformula linking \kl{CoS} of Chaudhuri
-introduced in \cite{Chaudhuri2013} for \kl{intuitionistic} \kl{FOL} with equality. Our
-approach differs mainly from Chaudhuri's through our notion of \emph{valid
-linkage}, which filters out \emph{non-productive} \kl{DnD} actions by restricting
-them to \emph{unifiable} subformulas.
+In \refch{sfl}, we ground the semantics of \kl{DnD} actions in \kl{deep
+inference} proof theory, by designing a variant of the subformula linking
+\kl{CoS} of Chaudhuri introduced in \cite{Chaudhuri2013} for \kl{intuitionistic}
+\kl{FOL} with equality. Our approach differs mainly from Chaudhuri's through our
+notion of \emph{\kl(dnd){valid} \kl{linkage}}, which filters out
+\emph{non-productive} \kl{DnD} actions by restricting them to
+\emph{\kl{unifiable}} subformulas.
 
-In \refch{advanced}, we present more advanced techniques in the PbA paradigm,
+In \refch{advanced}, we present more advanced techniques in the \kl{PbA} paradigm,
 that handle practical kinds of reasoning found in mathematical practice such as
 the use of \emph{definitions}, reasoning by \emph{induction}, and the
 \emph{simplification} of subterms through automatic computation. This is
 illustrated through a few case studies of basic logical and mathematical
 problems.
 
-In \refch{sfl-classical}, we investigate an extension of PbA to sequents with
+In \refch{sfl-classical}, we investigate an extension of \kl{PbA} to sequents with
 \emph{multiple} alternative conclusions, as opposed to the
 \emph{single}-conclusion sequents found in the interface of almost every \kl{ITP}. We
 argue that the use of direct manipulation greatly facilitates the handling of
@@ -1072,7 +1075,7 @@ as the substrate for GUIs in the frontend.
   \sidecite{brunnler_deep_2009}, that we reframe as local rewriting systems with
   a graphical and topological interpretation. Bubble calculi enable an efficient
   sharing of contexts between subgoals, making them well-suited to the
-  factorization of both forward and backward reasoning steps in proofs.
+  factorization of both \kl{forward} and \kl{backward} reasoning steps in proofs.
 
   \refch{bubbles} presents the \emph{asymmetric} bubble calculus \kl{BJ} for
   \kl{intuitionistic} logic, modelled after the \emph{asymmetric} sequents of the
@@ -1084,7 +1087,7 @@ as the substrate for GUIs in the frontend.
   calculus for \kl{classical} logic called ``\kl{system B}'', where bubbles can be
   \emph{polarized} in addition to formulas. \kl{Intuitionistic}, \kl{dual-intuitionistic}
   and \kl{bi-intuitionistic} logic can be recovered as fragments of \kl{system B},
-  by forbidding certain inference rules that characterize the \emph{porosity} of
+  by forbidding certain \kl{inference rules} that characterize the \emph{porosity} of
   bubbles. We also devise a fully invertible variant of \kl{system B}, that we
   conjecture to be complete.
   
@@ -1114,7 +1117,7 @@ as the substrate for GUIs in the frontend.
   the cultural fragment is admissible thanks to a completeness proof for the
   natural fragment with respect to Kripke semantics. We exploit these
   meta-theoretical results to design the Flower Prover, a prototype of GUI in
-  the PbA paradigm that aims to unify the concepts of \emph{goal} and
+  the \kl{PbA} paradigm that aims to unify the concepts of \emph{goal} and
   \emph{theory} in a \emph{modal interface}: goals correspond to flowers
   manipulated with natural rules in \Proof mode; while theories correspond to
   the same flowers manipulated with cultural rules in \Edit mode. The Flower
@@ -1147,14 +1150,14 @@ the first one.
 
 \begin{emphpar}
   In all cases, the reader should start with \refch{pba}, which gives a taste of
-  the PbA paradigm explored in all other chapters.
+  the \kl{PbA} paradigm explored in all other chapters.
 \end{emphpar}
 
 \reffig{chapter-deps} shows the precise graph of dependencies between chapters.
 Four independent paths can be followed:
 \begin{itemize}
   \item[\textbf{The applied road (\ding{175} $\to$ \ding{177})}] If
-  you want to see to what extent the PbA paradigm can currently be applied for
+  you want to see to what extent the \kl{PbA} paradigm can currently be applied for
   practical theorem proving in real \kl{proof assistants}, this is the right path for
   you.
 
@@ -1221,7 +1224,7 @@ of its main contributors, Serge Autexier \sidecite[][p.~184--187]{autexier_phd}:
 \begin{quote}
 We believe it is an essential feature of a calculus for intuitive reasoning to
 support the transformation of parts of a formula without actually being forced
-to decompose the formula. In that respect the inference rules of Schütte's proof
+to decompose the formula. In that respect the \kl{inference rules} of Schütte's proof
 theory are a clear contribution. [...] One motivation for the development of the
 CORE proof theory was to overcome the need for formula decomposition as enforced
 by sequent and \kl{natural deduction} calculi in order to support an intuitive

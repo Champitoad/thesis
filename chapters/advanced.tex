@@ -3,7 +3,7 @@
 \labch{advanced}
 
 In the previous chapters, we explained the core principles of our so-called
-Proof-by-Action paradigm and especially its drag-and-drop actions, first through
+\kl{Proof-by-Action} paradigm and especially its drag-and-drop actions, first through
 basic and abstract examples in \refch{pba}, and then from a proof-theoretical
 perspective in \refch{sfl}. The goal of this chapter is to provide a better
 sense of what proofs by action/\kl{DnD} look like in practice, and how they compare
@@ -30,7 +30,7 @@ paradigm to deal with more specialized forms of reasoning: \emph{induction} and
   to follow the structure of the graphical proof, for the sake of comparison
   with a more standard text-based interface. But this would obviously compare
   differently with other textual approaches, e.g. Isar which is more
-  declarative, and thus farther from the Proof-by-Action paradigm. }
+  declarative, and thus farther from the \kl{Proof-by-Action} paradigm. }
 
 \todo{ Maybe advise the reader to reproduce the examples herself? Supposes an
   easy way to setup and use coq-actema: nix seems like a good option, but maybe
@@ -65,7 +65,7 @@ The original goal thus corresponds to the illustration of \reffig{edukera}.
   \labfig{edukera}
 \end{figure*}
 
-It is quite natural to approach this problem in a forward manner, by starting
+It is quite natural to approach this problem in a \kl{forward} manner, by starting
 from the hypotheses to establish new facts. And a first point illustrated by
 this example is that \kl{DnD} actions allow to do this in a smooth and precise
 manner. A possible first step is to bring $h$ to the first hypothesis, to obtain
@@ -135,7 +135,7 @@ things to note:
   something that an Actema user does with her pointing device when designating
   the blue items involved in an action. It appears clearly in
   \reffig{edukera-coq} that in a moderately long proof like this based mostly on
-  forward reasoning, one needs to keep track of \emph{a lot} of names, which can
+  \kl{forward} reasoning, one needs to keep track of \emph{a lot} of names, which can
   be overwhelming for many users. This is especially true for beginners
   discovering Coq, because the syntax for assigning names, based on patterns
   like \texttt{[H | H]} that reproduce the subgoal structure, can induce a steep
@@ -195,7 +195,7 @@ things to note:
 \end{figure}
 
 From this detailed comparison, it appears that the interface offered by the
-Proof-by-Action paradigm might be more suited to forward reasoning than the
+\kl{PbA} paradigm might be more suited to \kl{forward} reasoning than the
 tactic language of Coq, at least in some respects. It makes the flow of
 argumentation more straightforward to express with \kl{DnD} actions, and avoids the
 overheads of name management and syntax memorization. This altogether shall
@@ -245,7 +245,7 @@ graphical actions, and we can imagine having a first-order set theory such as
 \refsec{pluginfuture} for a discussion on a higher-order extension of Actema.}.
 
 Let us now describe how to prove the second question of the exercise in the
-Proof-by-Action paradigm. The first thing we want to do is to unfold the
+\kl{PbA} paradigm. The first thing we want to do is to unfold the
 definition of set inclusion in the conclusion $f^{-1}(f(C)) \subseteq C$, so
 that we can see how to prove logically such an inclusion. One might imagine
 multiple kinds of graphical actions for doing this. In Actema we implemented a
@@ -292,7 +292,7 @@ which, assuming a definition based on set comprehension, gives:
 \end{itemize}
 At this stage, we would like to make the set comprehension in $(1)$ disappear,
 by simply deducing $f(x) \in f(C)$ from it. But depending on the underlying
-logical framework, the way to perform this deduction step in Proof-by-Action
+logical framework, the way to perform this deduction step in \kl{PbA}
 will vary:
 
 \begin{description}
@@ -329,7 +329,7 @@ will vary:
     $$\select{x \in \compr{a \in A}{f(a) \in f(C)}} \qquad
     \text{(\action{Search})}$$
     should return the comprehension axiom among other lemmas, because this axiom
-    and $(1)$ can interact through the following forward \kl{DnD}:
+    and $(1)$ can interact through the following \kl(dnd){forward} \kl{DnD}:
     $$\select{x \in \compr{a \in A}{f(a) \in f(C)}} ~~\forw~~ \forall \phi.\
     \forall D.\ \forall y.\ \select{y \in \compr{d \in D}{\phi}} ~~\lequiv~~ (y
     \in D \land \subst{\phi}{y}{d})$$ by substituting $D$ with $A$, $d$ with
@@ -372,7 +372,7 @@ will vary:
   also \texttt{simp} tactics available in Isabelle and Lean, although they are
   not restricted to $\beta$-reduction and can perform rewriting of arbitrary
   equalities and equivalences present in the lemma database, as long as they are
-  flagged as simplification rules.}. Coming back to Proof-by-Action, one can
+  flagged as simplification rules.}. Coming back to \kl{PbA}, one can
   easily imagine a corresponding \action{Simplify} or \action{Compute}
   contextual action, which performs $\beta$-reduction inside of the selected
   subterm. Then the previous transormation is achieved by applying this action
@@ -387,7 +387,7 @@ fact one could also use the axiom of comprehension implicitly by relying on
 stronger automation. For example in Isabelle/Isar, one would write explicitly
 the desired goal $f(x) \in f(C)$, refer to the axiom by its name in the library,
 and then let the engine find the details of how to apply it. But writing
-statements manually goes against the philosophy of Proof-by-Action, which
+statements manually goes against the philosophy of \kl{PbA}, which
 explores to what extent proofs can be carried by pure manipulation of the proof
 state. Of course there is still an escape hatch for doing this when strictly
 necessary or more convenient.}. Depending on the user's background and context
@@ -421,7 +421,7 @@ which gives us
 \begin{itemize}
   \item[(0)] $\forall y \in A.\ \forall z \in A.\ f(y) = f(z) \limp y = z$
 \end{itemize}
-Then we can use injectivity with the following forward \kl{DnD} between $(0)$ and
+Then we can use injectivity with the following \kl(dnd){forward} \kl{DnD} between $(0)$ and
 $(3)$:
 $$\forall y \in A.\ \forall z \in A.\ \select{f(y) = f(z)} \limp y = z ~~\forw~~ \exists a \in A.\ a \in C \land \select{f(x) = f(a)}$$
 which gives us immediately that $x = a$ in
@@ -433,9 +433,10 @@ context together with
 \begin{itemize}
   \item[(5)] $a \in C \land x = a$
 \end{itemize}
-doing a backward \kl{DnD} with $(5)$ to rewrite $x$ in the conclusion into $a$:
-$$a \in C \land \select{x} = a ~~\back~~ \select{x} \in C$$
-and finally a backward \kl{DnD} with $(5)$ to conclude the proof:
+doing a \kl(dnd){backward} \kl{DnD} with $(5)$ to rewrite $x$ in the conclusion
+into $a$:
+$$a \in C \land \select{x} = a ~~\back~~ \select{x} \in C$$ and finally a
+\kl(dnd){backward} \kl{DnD} with $(5)$ to conclude the proof:
 $$\select{a \in C} \land x = a ~~\back~~ \select{a \in C}$$
 
 For the sake of completeness, we included in \reffig{funset-defs},
@@ -471,7 +472,7 @@ In our last example, we will analyse a common proof often taught in logic
 courses: the commutativity of addition in Peano arithmetic. The novelty compared
 to previous examples is that it involves reasoning by \emph{induction}, which
 usually has special support in mainstream \kl{proof assistants}. In the
-Proof-by-Action paradigm, it seems natural to map it to a special contextual
+\kl{PbA} paradigm, it seems natural to map it to a special contextual
 action \action{Induction}, whose availability and effect will depend on the
 selected subterm. One could also imagine manipulating explicitly induction
 schemes as blue items, in the same way we did for the axiom of comprehension in
@@ -532,7 +533,7 @@ where the addition program was able to automatically evaluate $S(n) + 0$ to $S(n
 right-hand side. If the proof engine does not offer such a level of automation,
 one can always fallback to using Peano axioms manually, provided they are
 available in the lemma database. As we have already seen, the most convenient
-way to do this in the Proof-by-Action paradigm is to perform a \action{Search}
+way to do this in the \kl{PbA} paradigm is to perform a \action{Search}
 action. For example to evaluate $S(n) + 0$, one might first select it in the
 conclusion and then make a search query:
 $$\select{S(n) + 0} = 0 + S(n) \qquad \text{(\action{Search})}$$
@@ -544,9 +545,10 @@ ones:
   \item[(c)] $\forall x.\ \forall y.\ S(x) + y = S(x + y)$
 \end{itemize}
 because the other axioms do not contain any subterm that could form a
-\emph{valid} backward linkage with the selection\sidenote{See \refsec{validity}
-for the notion of validity of a linkage.}. Of course we are interested in axiom
-$(c)$, which we can use through the following backward \kl{DnD}:
+\kl(dnd){valid} \kl(dnd){backward} \kl{linkage} with the selection\sidenote{See
+\refsec{validity} for the notion of \kl[valid@dnd]{validity} of a \kl{linkage}.}. Of
+course we are interested in axiom $(c)$, which we can use through the following
+\kl(dnd){backward} \kl{DnD}:
 $$\forall x.\ \forall y.\ \select{S(x) + y} = S(x + y) ~~\back~~ \select{S(n) + 0} = 0 + S(n)$$
 in order to rewrite $S(n) + 0$ into $S(n + 0)$ in the conclusion.
 
@@ -554,7 +556,7 @@ Now notice that the addition program earlier was not able to evaluate $n + 0$ to
 $n$. This is because $0$ occurs on the right-hand side of $+$, and the program
 is not aware of the commutativity of addition, which is precisely what we are
 trying to prove. Fortunately, we can apply our induction hypothesis on $n$
-$(1)$, with the following backward \kl{DnD}:
+$(1)$, with the following \kl(dnd){backward} \kl{DnD}:
 $$\forall x \in \nats.\ \select{n + x} = x + n ~~\back~~ S(\select{n + 0}) = S(n)$$
 which rewrites $n + 0$ into $0 + n$ in the conclusion:
 $$S(0 + n) = S(n)$$

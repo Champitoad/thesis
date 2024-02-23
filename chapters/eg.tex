@@ -57,7 +57,7 @@ technical foundations behind our \emph{flower calculus}, to be introduced in
 
 The chapter is organized as follows: we start in \refsec{alpha} by presenting
 the diagrammatic syntax of the system \kl{Alpha} of \kl{EGs} for \kl{classical}
-propositional logic. In \refsec{illative}, we introduce the inference rules of
+propositional logic. In \refsec{illative}, we introduce the \kl{inference rules} of
 \kl{Alpha} for manipulating \kl{existential graphs}, called \emph{illative
 transformations} by Peirce. In \refsec{multisets}, we give an equivalent
 formulation of the syntax and rules of \kl{Alpha} as a \emph{multiset} rewriting
@@ -236,29 +236,30 @@ through the use of \emph{(multi)sets} for modelling contexts in sequents.
 \begin{remark}\labremark{eg-entitative}
   
   In a first version of \kl{EGs} called \emph{entitative graphs}, Peirce used
-  \kl{juxtaposition} to denote \emph{disjunction} instead of conjunction. Although
-  $\{\lor,\neg\}$ is also functionally complete, Peirce quickly grew unsatisfied
-  with these entitative graphs, stating that \kl{EGs} formed ``a far preferable system
-  on the whole'' (Ms 280, pp.~21--22). I find it interesting that more
-  contemporary works in logic have also made the choice to take conjunction and
-  negation as their primitive operations, like the tensorial logic of Melliès
-  \cite{mellies_micrological_2017}, or the realizability constructions for
-  linear logic in Girard's transcendental syntax \cite{eng_stellar_2020}.
+  \kl{juxtaposition} to denote \emph{disjunction} instead of conjunction.
+  Although $\{\lor,\neg\}$ is also functionally complete, Peirce quickly grew
+  unsatisfied with these entitative graphs, stating that \kl{EGs} formed ``a far
+  preferable system on the whole'' (Ms 280, pp.~21--22). I find it interesting
+  that more contemporary works in logic have also made the choice to take
+  conjunction and negation as their primitive operations, like the tensorial
+  logic of Melliès \cite{mellies_micrological_2017}, or the realizability
+  constructions for linear logic in Girard's transcendental syntax
+  \cite{eng_stellar_2020}.
 \end{remark}
 
 \section{Illative transformations}\labsec{illative}
 
 \paragraph{Deep inference}
 
-\AP In order to have a \kl{proof system}, one needs a collection of \emph{inference
-rules} for deducing true statements from other true statements. In \kl{Alpha},
-inference rules are implemented by what Peirce called \intro{illative
-transformations} on \kl{graphs}. In modern terminology, they correspond to
-\emph{rewriting} rules that can be applied to any \kl{subgraph}. By measuring
-the depth of a \kl{subgraph} as the number of \kl{cuts} in which it is enclosed,
-we thus have that the rules of \kl{Alpha} are applicable on \kl{subgraphs} of
-arbitrary depth. This makes \kl{Alpha} deserving of the title of \kl{deep
-inference} system.
+\AP In order to have a \kl{proof system}, one needs a collection of
+\emph{\kl{inference rules}} for deducing true statements from other true
+statements. In \kl{Alpha}, \kl{inference rules} are implemented by what Peirce called
+\intro{illative transformations} on \kl{graphs}. In modern terminology, they
+correspond to \emph{rewriting} rules that can be applied to any \kl{subgraph}.
+By measuring the depth of a \kl{subgraph} as the number of \kl{cuts} in which it
+is enclosed, we thus have that the rules of \kl{Alpha} are applicable on
+\kl{subgraphs} of arbitrary depth. This makes \kl{Alpha} deserving of the title
+of \kl{deep inference} system.
 
 \begin{marginfigure}
   $$\ncut{a~~~\pcut{\ncut{b}~~~c}}$$
@@ -306,7 +307,7 @@ are attached to them as explicit labels.}.
 
 \paragraph{Inference rules}
 
-Quite surprisingly, Peirce showed that one only needs five inference rules to get
+Quite surprisingly, Peirce showed that one only needs five \kl{inference rules} to get
 a \emph{strongly complete} system, in the sense that if the truth of a \kl{graph} $G$
 entails the truth of another \kl{graph} $H$, then $G$ can always be rewritten into
 $H$ by applying exclusively instances of these five rules\sidenote{Of course
@@ -568,7 +569,7 @@ context coincides with its number of \emph{inversions}, i.e. the number of
 \end{definition}
 
 The inductive version of the rules of \kl{Alpha} is given in \reffig{alpha}, as
-a set of unary inference rules on \kl{graphs}: when read \emph{top-down},
+a set of unary \kl{inference rules} on \kl{graphs}: when read \emph{top-down},
 they correspond to usual inferences from premiss to conclusion, as we first
 introduced them in \refsec{illative}.
 % This gives them a \emph{static}, \emph{a posteriori} meaning, since this is
@@ -630,11 +631,11 @@ most) \emph{elementary}.
 Note that this should be distinguished from the notion of \emph{analyticity}, as
 popularized by Gentzen with the \emph{subformula property} in \kl{sequent calculus}:
 the latter is concerned with the analysis of \emph{propositions} into their
-constituents through inference rules, while here we are interested in the
-analysis of the inference rules themselves\sidenote{We will give a positive
+constituents through \kl{inference rules}, while here we are interested in the
+analysis of the \kl{inference rules} themselves\sidenote{We will give a positive
 answer to the question of analyticity in \kl{Alpha} at the end of
 \refsec{eg-completeness}.}. Here there is a conceptual \emph{bottleneck},
-because inference rules are usually posited as axioms in a deductive system, and
+because \kl{inference rules} are usually posited as axioms in a deductive system, and
 are thus by definition the smallest constituents of proofs. The only other
 logician we know of who attempted to give a non-trivial account of illative
 atomicity is J.-Y. Girard. In fact it can be argued that it is the principal
@@ -1022,7 +1023,7 @@ setting.
 
 \paragraph{Structures}
 
-As the name indicates, the objects manipulated by inference rules in \kl{calculi of
+As the name indicates, the objects manipulated by \kl{inference rules} in \kl{calculi of
 structures} are so-called \emph{structures}. In the case of \kl{SKS}, they
 correspond to formulas in \emph{negation normal form} built from atoms and units
 $\{\top, \bot\}$, i.e. where connectives are restricted to the fragment
@@ -1054,7 +1055,7 @@ as explicit rules.
 
 \begin{figure*}
   \input{figures/sks.tex}
-  \caption{Inference rules of \kl{SKS}}
+  \caption{\kl{Inference rules} of \kl{SKS}}
   \labfig{sks}
 \end{figure*}
 
@@ -1370,7 +1371,7 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
   rules only requires the double-\kl{cut} rules, substantiating our claim (based
   on Peirce's own view, see \refsec{atomicity}) that the latter should be seen
   as expressing a structural equivalence, rather than as \textit{bona fide}
-  inference rules.
+  \kl{inference rules}.
 
   $$
   \begin{array}{r@{\mt}l@{\qquad\qquad}r@{\mt}l@{\vsp}}

@@ -99,15 +99,15 @@ stage.
 % (TODO: add reference).}.
 
 In fact backtracking can still be performed in \kl{intuitionistic} logic, but at the
-meta-level of the proof search process instead of the object-level of inference
-rules. In an \kl{interactive theorem prover}, this corresponds to the ability for the
+meta-level of the proof search process instead of the object-level of \kl{inference
+rules}. In an \kl{interactive theorem prover}, this corresponds to the ability for the
 user to \emph{undo} an inference and go back to a previous proof state. However
 keeping track of the times we undo/redo inferences is very hard to do as humans,
 and the user interfaces of current \kl{proof assistants} do not provide any mechanism
 for it either. This has already been noted by Ayers\sidenote{Section 3.1.3 of
 his thesis \cite{ayers_thesis}.}, and is a good motivation for trying to design
 \kl{proof systems} where the need for meta-level backtracking is reduced, or even
-removed. One way to do this is to maximize the proportion of inference rules
+removed. One way to do this is to maximize the proportion of \kl{inference rules}
 that are \emph{invertible}, meaning that their premisses always follow from
 their conclusion. Indeed when looking at rules as tactics (see \refsec{itps}),
 it means that they will always reduce a provable goal to provable subgoals, and
@@ -257,8 +257,8 @@ to the invertible right introduction rule of \kl{G3c} ({\rsf{\exists R*}} in
 
 Once we allow for more than one conclusion, it is natural to wonder whether it
 makes sense to also allow for \kl{DnD} actions between two conclusions. But we
-already capture \emph{backward} reasoning with the $A \back B$ operator between
-a hypothesis $A$ and a conclusion $B$, and \emph{forward} reasoning with the $A
+already capture \emph{\kl{backward}} reasoning with the $A \back B$ operator between
+a hypothesis $A$ and a conclusion $B$, and \emph{\kl{forward}} reasoning with the $A
 \forw B$ operator between two hypotheses. There does not seem to be room for a
 third mode of reasoning, at least in the traditional way of building proofs we
 are used to, either on paper or with \kl{proof assistants}. However from a purely
@@ -282,8 +282,8 @@ operator $\para$, which is suggestive of the parallel composition $\mid$ from
 process calculi.
 
 The rules governing $\para$ are presented in \reffig{parallel}. A parallel
-linkage can be created either by drag-and-dropping two conclusions together, or
-through an instance of the new backward rule {\rsf{L{\limp}_1}}. It is
+\kl{linkage} can be created either by drag-and-dropping two conclusions together, or
+through an instance of the new \kl(dnd){backward} rule {\rsf{L{\limp}_1}}. It is
 important to note that this rule is only sound \emph{\kl{classically}}; indeed we can
 now come back to the example of \refsubsec{polarity} and give the following
 derivation of Peirce's law with it:
@@ -304,7 +304,7 @@ $$
     \renewcommand{\arraystretch}{1.25}
   \begin{mathpar}
     \begin{array}{r@{\,}c@{\,}lr}
-      \multicolumn{4}{c}{\textsc{Backward}} \\[2em]
+      \multicolumn{4}{c}{\textsc{\kl(dnd){Backward}}} \\[2em]
       {B \limp C \back A}   &\step{}&   {(B \para A) \land (C \limp A)} &\mathsf{L{\limp}_1} \\[2em]
     \end{array}
     \\
@@ -356,11 +356,11 @@ $$
   \labfig{modes-schema}
 \end{marginfigure}
 
-The other rules of \reffig{parallel} handle the rewriting of parallel linkages,
-and were conceived as the dual counterpart of forward rules. Indeed, while a
-forward linkage combines two negative subformulas in the same context to produce
-a new \emph{hypothesis}, a parallel linkage combines two positive subformulas in
-the same context to produce a new \emph{conclusion}. Backward linkages can then
+The other rules of \reffig{parallel} handle the rewriting of parallel \kl{linkages},
+and were conceived as the dual counterpart of \kl(dnd){forward} rules. Indeed, while a
+\kl(dnd){forward} \kl{linkage} combines two negative subformulas in the same context to produce
+a new \emph{hypothesis}, a parallel \kl{linkage} combines two positive subformulas in
+the same context to produce a new \emph{conclusion}. \kl(dnd){Backward} \kl{linkages} can then
 be seen as mediating between these two opposite modes of reasoning, by handling
 the interaction of a positive and a negative subformula in the same context. A
 schematic view of the back and forth between the different modes through the 4
@@ -372,7 +372,7 @@ which is what triggers the change of mode.
 
 \section{Metatheory of parallel reasoning}
 
-Like backward rules, a parallel rule $A \step{} B$ will be logically sound if $B$
+Like \kl(dnd){backward} rules, a parallel rule $A \step{} B$ will be logically sound if $B$
 entails $A$. Then if one wants to stick to an \kl{intuitionistic} setting, one has to
 remove the rules {\rsf{P{\limp}_1}}, {\rsf{P{\limp}_2}} and {\rsf{P\forall
 s}} from the system, in addition to the {\rsf{L{\limp}_1}} rule. Indeed those
@@ -384,18 +384,18 @@ Heyting algebras.}.
 Now if we look back at the schema from \reffig{modes-schema}, removing
 {\rsf{L{\limp}_1}} and {\rsf{P{\limp}_1}} in particular has the consequence
 of isolating completely parallel reasoning from the other modes. But remember
-from \refsec{action} that we are only interested in \emph{valid} linkages, that
-is those linkages who satisfy productivity (\refthm{productivity}) and thus will
-always terminate on an instance of either the {\rsf{id}} rule (backward mode)
-or the equality rules (backward/forward modes). Thus if there is no way to reach
-either forward or backward mode from a parallel linkage, it has no meaning in
+from \refsec{action} that we are only interested in \emph{valid} \kl{linkages}, that
+is those \kl{linkages} who satisfy productivity (\refthm{productivity}) and thus will
+always terminate on an instance of either the {\rsf{id}} rule (\kl(dnd){backward} mode)
+or the equality rules (\kl(dnd){backward}/\kl(dnd){forward} modes). Thus if there is no way to reach
+either \kl(dnd){forward} or \kl(dnd){backward} mode from a parallel \kl{linkage}, it has no meaning in
 our paradigm. Then if we trust that rules {\rsf{L{\limp}_1}} and
 {\rsf{P{\limp}_1}} are necessary to get the intended semantics, it seems that
 parallel reasoning only makes sense in a \kl{classical} setting. In the following, we
 only show that the rules of \reffig{parallel} are sufficient for our purpose, by
 extending the results of \refch{sfl} to the \kl{classical}, multi-conclusion setting.
 
-We start by updating the validity criterion on linkages, more specifically we
+We start by updating the validity criterion on \kl{linkages}, more specifically we
 drop Clause \ref{clause:intuit} of Condition \ref{cond:pol} about the polarities
 of linked subformulas. Indeed it was introduced precisely to forbid behaviors
 which only make sense in \kl{classical} logic, but are now given a semantics with the
@@ -405,7 +405,7 @@ updated condition:
 
 \begin{condition}[Classical Polarity]\label{cond:pol-classical}
   
-  The following must be true for a logical linkage $B\select{A}\link
+  The following must be true for a \kl{logical linkage} $B\select{A}\link
   D\select{A'}$ to be \emph{\kl{classically} valid}:
   \begin{enumerate}
     \item the parity of $\inv(B\hole)$ is:
@@ -416,7 +416,7 @@ updated condition:
       \end{enumerate}\label{clause:opposite}
   \end{enumerate}
 
-  The following must be true for a rewrite linkage $B\select{t} @ D\select{t'}$
+  The following must be true for a \kl{rewrite linkage} $B\select{t} @ D\select{t'}$
   to be \emph{\kl{classically} valid}:
   \begin{enumerate}
     \item if $B\hole$ holds the equality, then it must be:
@@ -445,7 +445,7 @@ We add the two following cases to Lemmas \ref{lemma:rules-valid-in-context} and
   \item If $C^-\select{A\para B}\step{} D$ then $C^-\select{A\lor B}\seq \lint{D}$.
 \end{itemize}
 The proof of Lemma \ref{lemma:rules-valid-in-context} is easily extended by
-inspecting each parallel rule, and we already mentioned that the backward rule
+inspecting each parallel rule, and we already mentioned that the \kl(dnd){backward} rule
 {\rsf{L{\limp}_1}} is sound \kl{classically}. Note that now sequents have multiple
 conclusions, thus one needs to use rules from a multi-succedant calculus such as
 \kl{G3c} \cite{negri_structural_2001}.
@@ -475,8 +475,8 @@ rules now allow us to prove Peirce's law, which is known to be sufficient to
 recover \kl{classical} logic from \kl{intuitionistic} logic.
 
 The proof of productivity (\refthm{productivity}) is again extended
-straightforwardedly, by considering the additional case of parallel linkages and
-using arguments ``dual'' to those used for forward linkages. There is even less
+straightforwardedly, by considering the additional case of parallel \kl{linkages} and
+using arguments ``dual'' to those used for \kl(dnd){forward} \kl{linkages}. There is even less
 work to do regarding the preservation of Condition \ref{cond:pol} since we
 dropped the \kl{intuitionistic} restriction.
 
