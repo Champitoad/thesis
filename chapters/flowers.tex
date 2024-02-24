@@ -13,32 +13,33 @@ flowers you pick, at least one is bound to be blue, doesn't it?" The second
 student said: "Of course not!". Which student was right, and why?
 }{\textbf{Raymond Smullyan}, \textit{The Flower Garden}, 1985}
 
-We introduce the \emph{flower calculus}, a novel \kl{proof system} for \kl{intuitionistic}
-\kl{predicate logic} based on syntactic objects called \emph{flowers}. We start by
-explaining how flowers stem from considerations in graphical logic, and more
-specifically from an \kl{intuitionistic} variant of the \emph{existential graphs} of
-C. S. Peirce proposed by A. Oostra. Then we present our inductive syntax for
-flowers, reminiscent at the same time of the nested sequents of \kl{deep inference}
-proof theory, and the geometric/coherent formulas of categorical logic. A
-salient feature of our calculus inherited from \kl{EGs}, is that it is \emph{fully
-iconic}: it dispenses completely with the traditional notion of symbolic
-formula, operating instead as a rewriting system on flowers containing only
-atomic predicates. We also propose a notion of proof geared towards analyticity
-results à la Gentzen, suggesting new rules absent from other works on
-\kl{intuitionistic} \kl{EGs}. This allows us to prove admissibility theorems for many
-rules, including Peirce's deletion rule which is a variant of Gentzen's cut
-rule. These results are obtained as a consequence of our soundness and
-completeness proofs with respect to Kripke semantics, in the spirit of the
-\emph{normalization-by-evaluation} technique. Furthermore, the kernel of rules
-targetted by completeness is fully invertible, a desirable property in both
-automated and interactive proof search. This is illustrated by our
-implementation of the Flower Prover, an early prototype of GUI for \kl{ITPs} that
-uses the rules of the flower calculus both for direct manipulation of flowers in
-its frontend, and automated simplification of goals in its backend.
+We introduce the \emph{flower calculus}, a novel \kl{proof system} for
+\kl{intuitionistic} \kl{predicate logic} based on syntactic objects called
+\emph{flowers}. We start by explaining how flowers stem from considerations in
+graphical logic, and more specifically from an \kl{intuitionistic} variant of
+the \emph{existential graphs} of C. S. Peirce proposed by A. Oostra. Then we
+present our inductive syntax for flowers, reminiscent at the same time of the
+nested sequents of \kl{deep inference} \kl{proof theory}, and the geometric/coherent
+formulas of categorical logic. A salient feature of our calculus inherited from
+\kl{EGs}, is that it is \emph{fully \kl{iconic}}: it dispenses completely with
+the traditional notion of \kl{symbolic} formula, operating instead as a
+rewriting system on flowers containing only atomic predicates. We also propose a
+notion of proof geared towards analyticity results à la Gentzen, suggesting new
+rules absent from other works on \kl{intuitionistic} \kl{EGs}. This allows us to
+prove admissibility theorems for many rules, including Peirce's deletion rule
+which is a variant of Gentzen's cut rule. These results are obtained as a
+consequence of our soundness and completeness proofs with respect to Kripke
+semantics, in the spirit of the \emph{normalization-by-evaluation} technique.
+Furthermore, the kernel of rules targetted by completeness is fully invertible,
+a desirable property in both automated and interactive proof search. This is
+illustrated by our implementation of the Flower Prover, an early prototype of
+\kl{GUI} for \kl{ITPs} that uses the rules of the flower calculus both for direct
+manipulation of flowers in its frontend, and automated simplification of goals
+in its backend.
 
 The chapter is organized as follows: in \refsec{IEGs}, we retrace the origin of
 Oostra's syntax for \kl{intuitionistic} \kl{EGs} (hereafter ``\kl{IEGs}'') as a
-natural generalization of the \emph{scroll}, an icon for implication introduced
+natural generalization of the \emph{scroll}, an \kl{icon} for implication introduced
 by Peirce that inspired the very creation of \kl{EGs}. In \refsec{Flowers}, we
 explain how flowers are really just a fun and metaphorical way to draw
 \kl{IEGs}, and proceed to give them an inductive, multiset-based syntax as in
@@ -55,7 +56,7 @@ analyticity of the system. We exploit these properties in
 \refsec{flowers-search} by describing an algorithm for fully automated proof
 search in the propositional fragment; unfortunately, the current version of the
 algorithm is neither terminating nor complete. Then in \refsec{flowers-prover}
-we give an overview of the Flower Prover, a prototype of GUI in the
+we give an overview of the Flower Prover, a prototype of \kl{GUI} in the
 \kl{Proof-by-Action} paradigm whose actions map directly to the rules of the flower
 calculus, and which integrates nicely with (a restricted version of) our search
 procedure. We conclude in \refsec{Conclusion} by a comparison with some related
@@ -67,7 +68,7 @@ works, and a discussion of future works and applications that we envision.
 \paragraph{The scroll}
 
 In \refsec{alpha}, we presented the syntax of existential graphs (\kl{EGs}) as
-stemming from two fundamental icons: the \kl{\kl{sheet of assertion}} ($\SA$),
+stemming from two fundamental \kl{icons}: the \kl{\kl{sheet of assertion}} ($\SA$),
 with its ability to represent the conjunction of assertions through
 \emph{\kl{juxtaposition}}, and \emph{\kl{cuts}} in $\SA$ that signify the denial or
 negation of assertions. However as noted in \refremark{eg-entitative}, the first
@@ -99,7 +100,7 @@ Thus the conjunctive reading of \kl{juxtaposition} itself stemmed from ``a serie
 considerations'' that ``forced'' Peirce to adopt it. While in this article he
 does not give the full ``exact logical deduction of all the features of
 Existential Graphs'', he exposes in some details the initial and determining
-insight that kickstarted the whole development: the discovery of the icon called
+insight that kickstarted the whole development: the discovery of the \kl{icon} called
 the \emph{scroll}. Again, I will let Peirce speak for
 himself \cite[pp.~533--534]{peirce_prolegomena_1906}:
 
@@ -135,11 +136,11 @@ the consequent is true.
 This shows the \kl{classical} view of Peirce on \kl{EGs}, who interprets the scroll as
 signifying the \textit{conditional de inesse} --- also called nowadays
 \emph{material implication}, and defined here in its disjunctive form, expressed
-symbolically by $A \limp B \defeq \neg A \lor B$. This is no coincidence that
-Peirce based his most fundamental icon on implication: according to Lewis
+\kl{symbolically} by $A \limp B \defeq \neg A \lor B$. This is no coincidence that
+Peirce based his most fundamental \kl{icon} on implication: according to Lewis
 \sidecite[][p.~79]{Lewis1920-LEWASO-4}, he was the one who introduced the
-``illative relation'' of implication into symbolic logic in the first place, by
-giving it a distinguished symbol, and studying extensively the algebraic laws
+``illative relation'' of implication into \kl{symbolic} logic in the first place, by
+giving it a distinguished \kl{symbol}, and studying extensively the algebraic laws
 that govern it (including Peirce's law).
 
 \paragraph{Blank Antecedant}
@@ -164,7 +165,7 @@ standing, asserted, in the open field.
 \end{quote}
 
 This first form of ``collapsing of walls'' is called the \emph{Rule of Blank
-Antecedant} in \cite{minghui_graphical_2019}, and corresponds symbolically to
+Antecedant} in \cite{minghui_graphical_2019}, and corresponds \kl{symbolically} to
 the equivalence $\top \limp A \semequiv A$. The reader might be tempted to see
 the ``former clause'' that permits any insertion in the outer close as a special
 case of the Insertion principle of \kl{Alpha} (\refsec{alpha}). However, we
@@ -222,7 +223,7 @@ joined at a single point highlighted in orange, as illustrated in
   \labfig{eg-uncurrying}
 \end{marginfigure}
 
-Peirce was aware of the phenomenon of \emph{currying}, expressed symbolically by
+Peirce was aware of the phenomenon of \emph{currying}, expressed \kl{symbolically} by
 the equivalence $A \limp B \limp C \semequiv A \land B \limp C$, as witnessed by
 the following passage \cite[p.~535]{peirce_prolegomena_1906}:
 \begin{quote}
@@ -263,7 +264,7 @@ of Blank Antecedant.
 \paragraph{The $n$-ary scroll}
 
 In \cite{oostra_graficos_2010}, A. Oostra proposes to take the above remark
-seriously, by reifying the scroll as a primitive icon of \kl{EGs} (``\emph{rizo}'' in
+seriously, by reifying the scroll as a primitive \kl{icon} of \kl{EGs} (``\emph{rizo}'' in
 Spanish), that exists alongside the \kl{cut} (``\emph{corte}''), and is distinguished
 from it. In fact he goes further than this, and proposes to generalize both the
 \kl{cut} and the scroll into an $n$-ary construction called the \emph{curl}
@@ -306,7 +307,7 @@ With this interpretation of the $n$-ary scroll, the \kl{Alpha} encodings of
 disjunction and implication as nested \kl{cuts} are no longer valid, because they are
 not \kl{intuitionistically} equivalent to the associated binary and unary scrolls.
 This is illustrated in \reffig{eg-disj-imp}, where the closeness in meaning is
-reflected iconically (but not symbolically) in the fact that the graphs only
+reflected \kl{iconically} (but not \kl{symbolically}) in the fact that the graphs only
 differ in the \emph{continuity} (or lack thereof) between inloops and their
 outloop. Indeed, contrary to nested \kl{cuts}, any $n$-ary scroll can be drawn by a
 \emph{continuous} movement of the pen, producing a self-intersecting curve as
@@ -393,9 +394,9 @@ coherent formulas are restricted to atoms.
 Coherent formulas have some nice properties, which might also apply to \kl{IEGs} to
 some extent. We only mention two important ones:
 \begin{description}
-  \item[Completeness] Every first-order theory has a coherent conservative
+  \item[Completeness] Every \kl{first-order} theory has a coherent conservative
   extension, making coherent formulas (and thus non-nested $n$-ary scrolls) in
-  principle as expressive as arbitrary first-order formulas
+  principle as expressive as arbitrary \kl{first-order} formulas
   \sidecite{negri_geometric}.
   
   \item[Automation] Coherent formulas benefit from faster proof-search
@@ -415,7 +416,7 @@ some extent. We only mention two important ones:
   \begin{remark}
   Thus with \kl{IEGs}, one becomes able to reason \emph{geometrically} on geometric
   formulas that speak about geometry: another beautiful incarnation of the
-  reflexivity at work in Peirce's iconic logic.
+  reflexivity at work in Peirce's \kl{iconic} logic.
   \end{remark}
 \end{description}
 
@@ -423,7 +424,7 @@ some extent. We only mention two important ones:
 
 \paragraph{Blooming}
 
-As we have seen, the ($n$-ary) scroll is a powerful icon, because it captures
+As we have seen, the ($n$-ary) scroll is a powerful \kl{icon}, because it captures
 the distinction between \kl{classical} and \kl{intuitionistic} logic as being a matter of
 \emph{continuity} between the space of inputs/hypotheses (outloop) and the
 spaces of outputs/conclusions (inloops), reflecting an intuition discovered much
@@ -458,7 +459,7 @@ because the very process of turning inside-out can be seen as a continuous
 movement in three-dimensional space, where the inloops are rotated around their
 intersection points with the outloop. In this way, we have effectively divided
 the amount of curve-nesting in scrolls by two. And as an added bonus, the new
-icon is reminiscent of a \emph{flower}, as if it had bloomed from its curled
+\kl{icon} is reminiscent of a \emph{flower}, as if it had bloomed from its curled
 bud; or as if the pistol cylinder from \reffig{five-loops} had transformed into
 a \emph{pistil}, and its bullet chambers into \emph{petals}\sidenote{As the
 saying goes: make love, not war.}.
@@ -489,11 +490,11 @@ at a single point, for purely aesthetic reasons.
 As we did for \kl{classical} \kl{EGs} in \refsec{multisets} and \refsec{gardens}, we are
 now going to distill the syntactic essence of flowers into an inductive,
 (multi)set-based data structure. This will allow for a more compact textual
-notation, that is better suited to proof-theoretical study.
+notation, that is better suited to \kl{proof-theoretical} study.
 
 In \refsec{beta}, we explained how the graphs of \kl{Beta} allow to represent
 purely relational statements, without function symbols. Since functions are just
-deterministic relations, one can in principle formalize any first-order theory
+deterministic relations, one can in principle formalize any \kl{first-order} theory
 in this syntax\sidenote{Conversely, every relation can be faithfully encoded as
 its characteristic function, which is the basis for the formalization of
 mathematics in \emph{type theories}.}. However it is much more convenient to
@@ -1029,7 +1030,7 @@ petals) prevents $\forall$ from being expressible (i.e. provable) without
 $\land$ (resp. $\lor$). This can be fixed by simply removing the duplication and
 polarizing the context of application as for the rule \rsf{apis} (resp.
 \rsf{apet}), at the cost of making the rule non-invertible.}.
-\reftab{flowers-fragments} shows how all the usual symbolic connectives can be
+\reftab{flowers-fragments} shows how all the usual \kl{symbolic} connectives can be
 expressed by \emph{cardinality} constraints on set-based syntactic constructs:
 $<$, $\leq$, $=$, $\geq$, $>$ correspond respectively to a cardinality smaller,
 smaller or equal, equal, greater or equal, and greater than $1$; and `$-$'
@@ -1096,7 +1097,7 @@ Now we can define our usual ``goal-oriented'' notion of proof:
 \end{definition}
 
 In Peircean terms, the empty bouquet is the blank \kl{sheet of assertion}, which as
-we have seen in \refsec{alpha} can be interpreted as the icon of \emph{absolute
+we have seen in \refsec{alpha} can be interpreted as the \kl{icon} of \emph{absolute
 truth}. Then in our proof construction paradigm, proving a bouquet amounts to
 erasing it completely from the \kl{sheet of assertion}, thus reducing it to absolute
 truth.
@@ -1153,14 +1154,15 @@ $\flower{\Phi}{\Psi}$ is not, it will necessarily follow that $\Phi
 \not\step{\Nature} \Psi$, thus contradicting the strong deduction theorem.
 
 A trivial way to circumvent this is to define directly $\Psi \entails{} \Phi$ as
-$\flower{\Psi}{\Phi} \steps{} \emptyset$. In fact this is closer to what one would
-find in \kl{sequent calculus}, where hypothetical proofs are closed derivations of
-hypothetical sequents, not open derivations. The difference is that sequents
-capture only the first-order implicative structure of logic\sidenote{As opposed
-to \emph{higher-order}, i.e. negatively nested implications.}, while flowers
-capture the full structure of \kl{intuitionistic} \kl{predicate logic}. This allows for a
-nice generalization of the notion of hypothetical provability, which will be
-useful in the completeness proof of \refsec{Completeness}. 
+$\flower{\Psi}{\Phi} \steps{} \emptyset$. In fact this is closer to what one
+would find in \kl{sequent calculus}, where hypothetical proofs are closed
+derivations of hypothetical sequents, not open derivations. The difference is
+that sequents capture only the \intro(implication){first-order} implicative
+structure of logic\sidenote{As opposed to \intro(implication){higher-order},
+i.e. negatively nested implications.}, while flowers capture the full structure
+of \kl{intuitionistic} \kl{predicate logic}. This allows for a nice
+generalization of the notion of hypothetical provability, which will be useful
+in the completeness proof of \refsec{Completeness}. 
 
 \begin{definition}[Hypothetical provability]
   Given two bouquets $\Phi, \Psi$, we say that $\Phi$ is \emph{hypothetically
@@ -1314,7 +1316,7 @@ Kripke structures, detailed hereafter by order of increasing importance:
     verified implementation of this procedure in Coq \cite{flowers-metatheory}.
     However, we realized \textit{a posteriori} that this only proves a weak form
     of completeness, in the sense that we only guarantee that a true flower is
-    provable if it is the direct translation of a symbolic formula. But formulas
+    provable if it is the direct translation of a \kl{symbolic} formula. But formulas
     are based on binary connectives and unary quantifiers, and are thus less
     expressive syntactically than flowers and their $n$-ary constructs.
 
@@ -1563,7 +1565,7 @@ Corollary \ref{cor:eg-functoriality}.}:
   By recurrence on $\soldepth{\Xi\hole}$.
 \end{proof}
 
-Weakening lemmas are also standard in proof theory and type theory. Here they
+Weakening lemmas are also standard in \kl{proof theory} and type theory. Here they
 are purely semantic, but they will participate in the admissibility of the
 weakening rules $\{\rsf{grow},\rsf{crop},\rsf{pull},\rsf{glue}\}$:
 
@@ -2761,7 +2763,7 @@ We have implemented the \refproc{life} procedure in the OCaml programming
 language \cite{flower-auto}. In fact, we refined the design of the algorithm
 iteratively, by testing it on a set of 62 tautologies taken from Edukera's logic
 course \cite{edukera} (the full set is available in
-\reffig{flowers-edukera}). Since those are expressed with symbolic formulas,
+\reffig{flowers-edukera}). Since those are expressed with \kl{symbolic} formulas,
 we rely on a straightforward translation of formulas into (bouquets of) flowers,
 given in \reffig{flowers-formulas}. Out of the 62 tautologies, 53 were proved by
 the algorithm, and among the 9 unproved tautologies, only the 2 formulas
@@ -2843,11 +2845,11 @@ desideratum, our focus in this thesis is not on full automation --- which is not
 possible anyway as soon as we leave the propositional fragment, but rather on
 automation that integrates well with, and even improves the experience of
 building proofs \emph{interactively}. More specifically, the paradigm of
-interaction we are interested in is that of \emph{direct manipulation} in a GUI.
+interaction we are interested in is that of \emph{direct manipulation} in a \kl{GUI}.
 This was our initial motivation for studying the graphical formalism of \kl{EGs}, and
 we always kept this objective in mind when developing the flower calculus. In
 this section, we present ongoing work on the \emph{Flower Prover}, a prototype
-of GUI in the \kl{Proof-by-Action} paradigm based on the direct manipulation of
+of \kl{GUI} in the \kl{Proof-by-Action} paradigm based on the direct manipulation of
 flowers, that builds upon the various concepts, rules and metatheory of the
 previous sections.
 
@@ -2858,13 +2860,13 @@ sprinklers.
 
 \paragraph{Implementation}
 
-The prototype is implemented in Elm \sidecite{10.1145/2491956.2462161}, a modern
-functional reactive programming language that is particularly well-suited for
-building GUIs that are based on complex compositional data-structures like
-flowers. It also natively compiles to HTML and JavaScript, making it easy to run
-and test the interface on any device equipped with a web browser. The source
-code is available on GitHub \cite{flower-prover}, and the interface is currently
-hosted online as a simple HTML
+The prototype is implemented in \intro{Elm} \sidecite{10.1145/2491956.2462161},
+a modern functional reactive programming language that is particularly
+well-suited for building \kl{GUIs} that are based on complex compositional
+data-structures like flowers. It also natively compiles to HTML and JavaScript,
+making it easy to run and test the interface on any device equipped with a web
+browser. The source code is available on GitHub \cite{flower-prover}, and the
+interface is currently hosted online as a simple HTML
 page\sidenote{\url{https://www.lix.polytechnique.fr/Labo/Pablo.DONATO/flowerprover/}}.
 The reader is invited to try out the Flower Prover in her own browser, although
 we will try to give self-contained explanations illustrated through various
@@ -2879,7 +2881,7 @@ Flower Prover is highly original in mainly two respects:
   \item[\textbf{\kl{Intuitionistic} and goal-oriented}] it is based on the flower
   calculus, which proposes a quite unusual, non-exegetic take on \kl{EGs}. It does so
   both at the level of \emph{statements}, by building upon the \kl{intuitionistic}
-  icon of the $n$-ary scroll; and at the level of \emph{proofs}, by focusing on
+  \kl{icon} of the $n$-ary scroll; and at the level of \emph{proofs}, by focusing on
   a goal-oriented reading of rules that emphasizes the importance of
   \emph{invertibility} and \emph{analyticity} in the inference process, through
   the distinction between $\Nature$-rules and $\Culture$-rules.
@@ -3110,16 +3112,17 @@ a specific subgoal, by simply clicking on the corresponding nested flower. This
 would make the subgoal take up the whole screen, hiding the outer context from
 view. Dually, it should also be possible to unfocus a previously focused subgoal
 --- e.g. by clicking again on it, so that the full tree structure of the goal
-can be freely navigated. Proof-theoretically, the \Navigation mode implements the
+can be freely navigated. \kl{Proof-theoretically}, the \Navigation mode implements the
 \emph{functoriality} of rules, i.e. the fact that they can be applied in
 contexts of \emph{arbitrary} depth.
 
 \begin{remark}
 This way of navigating tree structures represented as nested areas is typical of
-\emph{zoomable user interfaces} or ZUI, a strand of GUI that has been developed
+\intro{zoomable user interfaces} (\reintro{ZUI}), a strand of \kl{GUI} that has been developed
 by many pioneers in the field of human-computer interaction such as Ivan
-Sutherland in his Sketchpad system \sidecite{10.1145/800265.810742}, and Alan
-Kay in his Smalltalk system \sidecite[4em]{goldberg_smalltalk-72_1976}.
+Sutherland in his \intro{Sketchpad} system \sidecite{10.1145/800265.810742}, and
+Alan Kay in his \intro{Smalltalk} system
+\sidecite[4em]{goldberg_smalltalk-72_1976}.
 \end{remark}
 
 \paragraph{Automation}
@@ -3206,7 +3209,7 @@ of interaction from the language of \emph{statements} used to build theories.
 And this separation between proofs and statements is a natural one that is hard
 to question, since it is rooted in what is arguably the most important
 inspiration of formal logic, and also the form in which informal mathematics
-present themselves: \emph{natural language}. Indeed, symbolic formulas reproduce
+present themselves: \emph{natural language}. Indeed, \kl{symbolic} formulas reproduce
 the grammatical structure of sentences expressing logical propositions, and
 formal proofs reproduce the inferential structure of arguments built from
 sequences of sentences.
@@ -3368,7 +3371,7 @@ Two years earlier, Brock-Nannestad and Ilik had already made some implicit
 connections between focused proofs and coherent formulas, through their
 \emph{exponential normal form} for \kl{intuitionistic} formulas based on Tarski's
 highschool identities \sidecite{brock-nannestad_intuitionistic_2019}. Quite
-remarkably, first-order formulas in their exponential normal form have the exact
+remarkably, \kl{first-order} formulas in their exponential normal form have the exact
 same structure as flowers
 \cite[Definition~4.2]{brock-nannestad_intuitionistic_2019}. However, the \kl{sequent
 calculus} \kl{HS} based on them makes the tradeoff opposite to that of the
@@ -3431,16 +3434,16 @@ subformula linking methodology of Chaudhuri \sidecite{Chaudhuri2013}, that the
 construction of proofs in \kl{deep inference} systems can be driven efficiently and
 incrementally by the connection of dual atoms. With its pollination rules, the
 flower calculus allows for a particularly elegant implementation of subformula
-linking that abstracts away from the syntactic bureaucracy of symbolic
+linking that abstracts away from the syntactic bureaucracy of \kl{symbolic}
 connectives, as witnessed by the pollination phase of our search procedure. In
 \refsubsec{bubbles-search}, we sketched some ideas that blur the frontier
 between automated and interactive proof search, notably with the so-called
 \emph{rule of thumb} which is another manifestation of subformula linking. This
 integration of automated and interactive aspects is also at work in the Flower
 Prover, and it would be interesting to investigate further how to incorporate
-our drag-and-drop proof tactic (\refch{pba}), but also other symbolic
+our drag-and-drop proof tactic (\refch{pba}), but also other \kl{symbolic}
 manipulation techniques introduced in the first part of this thesis, into the
-iconic framework of the Flower Prover.
+\kl{iconic} framework of the Flower Prover.
 
 \paragraph{Analyticity}
 
@@ -3502,7 +3505,7 @@ We shall investigate the current sources of non-termination and incompleteness
 for our \refproc{life} proof search procedure, through further testing on the
 ILTP dataset. If we succeed in passing all tests, the natural continuation will
 be to provide formal proofs of termination and completeness. A follow-up
-direction would be to extend our algorithm to the first-order setting by adding
+direction would be to extend our algorithm to the \kl{first-order} setting by adding
 heuristics for handling sprinklers, thus losing completeness.
 
 Another direction of research would consist in comparing our algorithm to
@@ -3601,8 +3604,8 @@ intend to implement in the future. This includes the \Navigation mode, the
 ability to \emph{select} flowers, the \Action{Fence} \Proof action, and the
 \emph{shelf} mechanism.
 
-The next step would be to support first-order reasoning by adding sprinklers and
-first-order terms, and devising graphical actions for the rules $\{\rsf{ipis},
+The next step would be to support \kl{first-order} reasoning by adding sprinklers and
+\kl{first-order} terms, and devising graphical actions for the rules $\{\rsf{ipis},
 \rsf{ipet}\}$ in \Proof mode, and $\{\rsf{apis}, \rsf{apet}\}$ in \Edit mode.
 
 Last but not least, we want to provide a way to \emph{save} proved lemmas along

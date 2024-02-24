@@ -17,7 +17,7 @@ would feel the benefit of it.}{\textbf{Charles S. Peirce}, \textit{Prolegomena
 to an Apology for Pragmaticism}, 1906}
 
 
-C. S. Peirce is famous for his contributions to symbolic logic, including among
+C. S. Peirce is famous for his contributions to \kl{symbolic} logic, including among
 others his eponymous law for \kl{classical} logic, and his pioneering work on the
 algebra of relations and quantification \sidecite{peirce_algebra_1885}. But far
 less widespread are his achievements in the realm of graphical logic, or
@@ -100,7 +100,7 @@ corresponds to a variable-free representation of \emph{predicate} logic without
 function symbols, and with primitive support for \emph{equality}. The last
 system \kl{Gamma} is more experimental, with various unfinished features that
 have been interpreted as attempts to capture \emph{modal}
-\sidecite{zeman_graphical_1964} and \emph{higher-order} logics.
+\sidecite{zeman_graphical_1964} and \emph{\kl{higher-order}} logics.
 
 \begin{digression}
 At the end of his life, Peirce pushed his experimentations beyond the scope of
@@ -135,13 +135,13 @@ be proved, depending on who the reasoner is (the user or the computer,
 respectively). This last analogy suggests an important property of $\SA$: it
 must offer a \emph{virtually infinite} amount of space, so that one can perform
 as much reasoning as needed. Just like a Turing machine has an infinite tape, so
-that one can perform as much computation as needed. In symbolic logic, this is
+that one can perform as much computation as needed. In \kl{symbolic} logic, this is
 captured by the fact that formulas, although usually finite, can have an
 unbounded size.
 
 As its name indicates, scribing a statement on $\SA$ amounts to \emph{asserting
 its truth}. Thus very naturally, the empty $\SA$ where nothing is scribed will
-denote vacuous truth, traditionally symbolized by the formula $\top$.
+denote vacuous truth, traditionally \kl{symbolized} by the formula $\top$.
 
 % \begin{remark}
 %   Peirce had an \emph{externalist} conception of truth, where the assertions
@@ -164,7 +164,7 @@ denote vacuous truth, traditionally symbolized by the formula $\top$.
 As we know from \kl{natural deduction}, asserting the truth of the conjunction $a
 \land b$ of two propositions $a$ and $b$, amounts to asserting \emph{both} the
 truth of $a$ and the truth of $b$. In \kl{Alpha}, there is no need to introduce
-the symbolic connective $\land$, since one can just write both $a$ and $b$ at
+the \kl{symbolic} connective $\land$, since one can just write both $a$ and $b$ at
 distinct locations on $\SA$:
 $$a~~~b$$
 More generally, one might consider any two portions $G$ and $H$ of $\SA$, and
@@ -197,15 +197,15 @@ in $G$.
 
 With just these two \kl{icons}, \kl{juxtaposition} and \kl{cuts}, one can
 therefore assert the truth of any proposition made up of conjunctions and
-negations and built from atomic propositions. Importantly, the only symbols
+negations and built from atomic propositions. Importantly, the only \kl{symbols}
 needed for doing so are letters $a, b, c\ldots$ denoting atomic propositions,
-that is ``pure'' symbols that do not have any logical meaning associated to
+that is ``pure'' \kl{symbols} that do not have any logical meaning associated to
 them.
 
 \AP
 Now, it is well-known that $\{\land,\neg\}$ is \emph{functionally complete},
 meaning that any boolean truth function can be expressed as the composition of
-boolean conjunctions and negations. In particular, the symbolic definitions of
+boolean conjunctions and negations. In particular, the \kl{symbolic} definitions of
 falsehood $\bot \defeq \neg\top$, \kl{classical} disjunction $A \lor B \defeq
 \neg(\neg A \land \neg B)$ and \kl{classical} implication $A \limp B \defeq \neg (A
 \land \neg B)$ can be expressed by the following three \kl{graphs}\sidenote{Note the
@@ -230,7 +230,7 @@ thanks to the topological nature of $\SA$, \kl{juxtaposition} is naturally
 \emph{commutative}: the locations of two juxtaposed \kl{graphs} do not matter,
 as long as they live in the same area delimited by a \kl{cut}. The combination
 of these properties is called the \intro{isotropy} of $\SA$ in
-\sidecite{minghui_graphical_2019}, and is captured in traditional proof theory
+\sidecite{minghui_graphical_2019}, and is captured in traditional \kl{proof theory}
 through the use of \emph{(multi)sets} for modelling contexts in sequents.
 
 \begin{remark}\labremark{eg-entitative}
@@ -282,7 +282,7 @@ number of \kl{cuts} (negations) enclosing $G$. In one of his unpublished manuscr
 (Ms 514), Peirce did this by \emph{shading} negative areas --- those enclosed in
 an odd number of \kl{cuts} --- in gray, as illustrated in \reffig{peirce-neg-areas}
 \sidecite{sowa_peirces_2011}. Unconstrained by hand-drawing, one could adopt an
-even more iconic notation, where negative areas are \emph{literally} drawn like
+even more \kl{iconic} notation, where negative areas are \emph{literally} drawn like
 a negative in photography, by inverting white and black. The example of
 \reffig{peirce-neg-areas} would then be drawn as in \reffig{our-neg-areas}.
 However in this thesis, we will stick to Peirce's notation, which is both less
@@ -311,9 +311,9 @@ Quite surprisingly, Peirce showed that one only needs five \kl{inference rules} 
 a \emph{strongly complete} system, in the sense that if the truth of a \kl{graph} $G$
 entails the truth of another \kl{graph} $H$, then $G$ can always be rewritten into
 $H$ by applying exclusively instances of these five rules\sidenote{Of course
-Peirce did not show completeness formally in the sense of modern model theory,
+Peirce did not show completeness formally in the sense of modern \kl{model theory},
 although Sowa argues in \cite{sowa_peirces_2011} (Section 4) that he had started
-to develop his own model theory equivalent to Tarski's (but closer to the
+to develop his own \kl{model theory} equivalent to Tarski's (but closer to the
 \emph{game-theoretical semantics} of Hintikka \cite{Hintikka1973-HINLLA}).
 % One can find a modern categorical treatment of completeness with respect to
 % Boolean algebras, based on a rigorous formalization of the geometry and algebra
@@ -629,19 +629,20 @@ precisely as the definition of what it means for an inference step to be (the
 most) \emph{elementary}.
 
 Note that this should be distinguished from the notion of \emph{analyticity}, as
-popularized by Gentzen with the \emph{subformula property} in \kl{sequent calculus}:
-the latter is concerned with the analysis of \emph{propositions} into their
-constituents through \kl{inference rules}, while here we are interested in the
-analysis of the \kl{inference rules} themselves\sidenote{We will give a positive
-answer to the question of analyticity in \kl{Alpha} at the end of
-\refsec{eg-completeness}.}. Here there is a conceptual \emph{bottleneck},
-because \kl{inference rules} are usually posited as axioms in a deductive system, and
-are thus by definition the smallest constituents of proofs. The only other
-logician we know of who attempted to give a non-trivial account of illative
-atomicity is J.-Y. Girard. In fact it can be argued that it is the principal
-motivation behind most of his works starting from linear logic, which became
-explicit in ludics with his slogan ``From the rules of logic to the logic of
-rules'' \cite{girard_locus_2001}.
+popularized by Gentzen with the \emph{subformula property} in \kl{sequent
+calculus}: the latter is concerned with the analysis of \emph{propositions} into
+their constituents through \kl{inference rules}, while here we are interested in
+the analysis of the \kl{inference rules} themselves\sidenote{We will give a
+positive answer to the question of analyticity in \kl{Alpha} at the end of
+\refsec{eg-completeness}.}. However there is a conceptual bottleneck, because
+\kl{inference rules} are usually conceived \emph{by definition} as the smallest
+constituents of proofs in a given \kl{proof system}; and it is very hard to
+formulate objective criteria for comparing rules in different \kl{proof
+systems}. Apart from Peirce, the only other logician we know of who attempted to
+give a non-trivial account of illative atomicity is J.-Y. Girard. In fact it can
+be argued that it is the principal motivation behind most of his works starting
+from linear logic, which became explicit in ludics with his slogan ``From the
+rules of logic to the logic of rules'' \cite{girard_locus_2001}.
 
 \paragraph{Linearity}
 
@@ -991,7 +992,7 @@ To show the completeness of \kl{Alpha}, it is standard in the literature on \kl{
 to simulate an existing \kl{proof system} for \kl{classical} propositional logic, that is
 itself known to be complete. For instance in \cite{Roberts+1973}, completeness
 is shown by simulating the Hilbert-style system \kl{P} of Church, which only
-comprises 3 axioms for the (functionally complete) fragment $\{\limp, \neg\}$.
+comprises 3 \kl{axioms} for the (functionally complete) fragment $\{\limp, \neg\}$.
 We propose in this section a proof by simulation of a \emph{\kl{deep inference}}
 system, more specifically the \kl{calculus of structures} \kl{SKS} first introduced
 in \sidecite{brunnler_local_2001}. This should provide a good overview of the
@@ -1537,8 +1538,8 @@ However in his system \kl{Beta} of \kl{EGs}, Peirce gives a very different accou
 the logic of relations, both in the graphical representation of relational
 statements, and the illative transformations that govern them. In the following,
 we illustrate informally the principles of \kl{Beta}, and how they are able to
-capture what is identified nowadays in symbolic logic as \emph{purely
-relational} first-order theories (that is, without constant nor function
+capture what is identified nowadays in \kl{symbolic} logic as \emph{purely
+relational} \kl{first-order} theories (that is, without constant nor function
 symbols) equipped with a primitive equality predicate.
 
 \subsection{Syntax}
@@ -1585,7 +1586,7 @@ denomination ``existential graph''. Note that no information is given but the
 individual's existence: in particular, two distinct points on $\SA$ might or
 might not denote two distinct individuals, just as two distinct variables $x$
 and $y$ might or might not refer to the same object. It is the \emph{continuity}
-of a LoI that signifies, in an iconic way, the identity of every
+of a LoI that signifies, in an \kl{iconic} way, the identity of every
 point/individual constituting, and connected by the line. Hence the following
 \kl{graph}
 $$\tikzfig{1}{0.5}{sitting-socrates-disconnected}$$ expresses that both the
@@ -1593,7 +1594,7 @@ person sitting down and Socrates exist, but we do not know whether they are the
 same individual.
 
 \paragraph{First-order logic} ``The person sitting down is Socrates'' might be
-equivalently expressed in a first-order language as the formula
+equivalently expressed in a \kl{first-order} language as the formula
 \begin{equation}
   \exists x. \mathsf{PersonSittingDown}(x) \wedge \mathsf{Socrates}(x) \label{eq:sitting-socrates-fo}
 \end{equation}
@@ -1603,8 +1604,8 @@ correspond to the extremities of the line connected to the hooks. As in
 \kl{Alpha}, the conjunctive aspect of the sentence is accounted for by the fact
 that the two spots are juxtaposed in the same area on $\SA$.
 
-Now if one considers a first-order theory with a predicate symbol $=$ satisfying
-the usual axioms for equality, then our sentence can alternatively be expressed
+Now if one considers a \kl{first-order} theory with a predicate symbol $=$ satisfying
+the usual \kl{axioms} for equality, then our sentence can alternatively be expressed
 by the following formula:
 \begin{equation}
   \exists x. \exists y. \mathsf{PersonSittingDown}(x) \wedge
@@ -1615,7 +1616,7 @@ formulations, and they would both be represented by \kl{graph}
 (\ref{eq:sitting-socrates}). However in
 \sidecite{pietarinen_compositional_2020}, in order to have a rigorous
 interpretation of the syntax of \kl{Beta} in category theory, the authors
-propose to analyze LoI into essentially two distinct icons, \emph{binders} and
+propose to analyze LoI into essentially two distinct \kl{icons}, \emph{binders} and
 \emph{teridentities}\sidenote{This is our own terminology, chosen mainly for
 historical reasons. In \cite{pietarinen_compositional_2020}, binders and
 teridentities correspond respectively to the generators of the monoid-comonoid
@@ -1638,7 +1639,7 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
   $$\forall x. \neg \mathsf{PersonSittingDown}(x) \vee \neg
   \mathsf{Socrates}(x)$$
   More generally, it is well-known that in \kl{classical} logic, \emph{universal}
-  quantification can be defined symbolically by $\forall x. P(x) \defeq \neg
+  quantification can be defined \kl{symbolically} by $\forall x. P(x) \defeq \neg
   \exists x. \neg P(x)$, and hence that any formula in the usual language of \kl{FOL}
   has a \kl{classically} equivalent formula in the fragment $\{\neg, \land,
   \exists\}$. This is precisely how Peirce expresses universal quantification in
@@ -1682,7 +1683,7 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
     
     The \kl{graph} of universal quantification (\ref{eq:eg-forall-out}) bears a
     striking similarity to that of implication, as illustrated in
-    \reffig{eg-forall-imp}. While the similarity also exists for the symbolic
+    \reffig{eg-forall-imp}. While the similarity also exists for the \kl{symbolic}
     encoding of these connectives in the fragment $\{\neg, \land, \exists\}$
     captured by \kl{Beta}, the graphical representation makes this fact more
     apparent. In constructive type theories, both universal quantification
@@ -1728,14 +1729,14 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
   \reffig{sitting-socrates-teridentity}.
 \end{description}
 
-LoI (or their decomposition into the above constructs) constitute the only icons
+LoI (or their decomposition into the above constructs) constitute the only \kl{icons}
 introduced in \kl{Beta} compared to \kl{Alpha}.
 % We will see shortly that they are sufficiently powerful to express and combine
 % all features of \kl{first-order logic} in an elegant and intuitive way, particulary
 % so at the \emph{illative} level.
 
 \paragraph{Iconic atomicity}
-The fact that Peirce took LoI to be a primitive, unanalyzed icon can be seen as
+The fact that Peirce took LoI to be a primitive, unanalyzed \kl{icon} can be seen as
 a consequence (or a cause?) of his view that only \emph{closed} sentences should
 be considered. Indeed in an early exposition of \kl{EGs} (Ms 493), he proposed a way
 to show, if necessary, that ``a complete assertion is not intended''
@@ -1809,7 +1810,7 @@ $\tikz{\draw (0,0) -- (2,0);
 
 A remarkable fact about \kl{Beta} is that it does not need any new illative
 principle compared to \kl{Alpha}. Rather, it simply generalizes those of
-\kl{Alpha} to account for LoI\sidenote{Thus in a sense, the first-order
+\kl{Alpha} to account for LoI\sidenote{Thus in a sense, the \kl{first-order}
 individuals denoted by LoI behave in the exact same way as the propositions
 denoted by the \kl{graphs} of \kl{Alpha}. This can be interpreted as a manifestation
 of Peirce's \emph{psycho-physical monism} \cite{sep-peirce}, that blurs the
@@ -1856,14 +1857,14 @@ than a line?}.
 \end{description}
 
 \begin{remark}
-In the original \kl{Beta} system, Peirce enforces the usual model-theoretic
+In the original \kl{Beta} system, Peirce enforces the usual \kl{model-theoretic}
 assumption that the universe of discourse must be non-empty --- i.e. contain at
-least one individual, through an \emph{axiom} permitting to ``scribe a heavy dot
+least one individual, through an \emph{\kl{axiom}} permitting to ``scribe a heavy dot
 or unattached line on $\SA$'' \cite[p.~47]{Roberts+1973}. In fact together with
-the axiom allowing to assert the blank $\SA$, which was implicit in our notion
-of proof for \kl{Alpha} (\refdef{eg-proof}), these are the only axiom in all
+the \kl{axiom} allowing to assert the blank $\SA$, which was implicit in our notion
+of proof for \kl{Alpha} (\refdef{eg-proof}), these are the only \kl{axioms} in all
 systems of \kl{EGs}. This is yet another striking similarity with Girard's philosophy,
-who attempted to get rid of axioms in logic starting with ludics --- although in
+who attempted to get rid of \kl{axioms} in logic starting with ludics --- although in
 many of his writings, he actively criticizes the non-empty model assumption.
 \end{remark}
 
@@ -1953,12 +1954,12 @@ erasing the part that crosses to the Cut and attaching to the two Loose Ends so
 produced two Instances of a Proper Name nowhere else used; such a Proper name
 (for which a capital letter will serve) being termed a \emph{Selective}.
 \end{quote}
-The idea of connecting two locations by marking them with the same symbol is
+The idea of connecting two locations by marking them with the same \kl{symbol} is
 quite natural, and is implemented for instance in \emph{footnotes} --- or in
 this thesis, sidenotes --- with the help of \emph{numbers} rather than capital
 letters. Footnotes are a good example, because contrary to variables, they share
 with selectives a \emph{linearity} property, that exactly \emph{two} occurrences
-of the symbol must be present. This is necessary to simulate accurately a
+of the \kl{symbol} must be present. This is necessary to simulate accurately a
 two-ended wire, and it is not surprising that the same device has been used
 recently (under the name of \emph{ports}) to give an algebraic syntax to
 \emph{interaction nets} \sidecite{10.1007/978-3-642-40184-8_15}, a model of

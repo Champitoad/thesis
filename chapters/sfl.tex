@@ -4,7 +4,7 @@
 
 In this chapter, we engage in a thorough analysis of the logical semantics of
 \kl{DnD} actions, which were introduced informally through examples in \refch{pba}.
-We do this mainly from the formal perspective of \kl{deep inference} proof theory,
+We do this mainly from the formal perspective of \kl{deep inference} \kl{proof theory},
 following the original work of K. Chaudhuri on \emph{subformula linking}
 \cite{Chaudhuri2013}. But we always keep in mind the intended application to
 \kl{proof assistants}, by motivating various design choices --- actual or prospective
@@ -130,7 +130,7 @@ informal up to now: that of \emph{logical} action and \emph{rewrite} action.
 \begin{itemize}
   \itemAP \intro{Logical linkages} link two subformulas. Thus they have the form
   $B\select{A} \link C\select{A'}$.
-  \itemAP \intro{Rewrite linkages} link one side of an equality with a first-order
+  \itemAP \intro{Rewrite linkages} link one side of an equality with a \kl{first-order}
   term. Using liberally the notations from Definitions \ref{def:formula-context} and
   \ref{def:path}, they thus have the form
   $$B\select{\select{t} = u} \link C
@@ -168,7 +168,7 @@ In the original formulation of subformula linking \sidecite{Chaudhuri2013}, a
 semantics is associated to every \kl{logical linkage}, even when the selected
 subformulas $A$ and $A'$ are not unifiable. This is made possible by the
 addition of so-called \emph{release} rules\sidenote{A terminology coming from
-the line of works on \emph{focusing} in proof theory \cite{andreoli1992}, see
+the line of works on \emph{focusing} in \kl{proof theory} \cite{andreoli1992}, see
 also \refsec{invert}.}, which simply turn linking operators into their
 associated logical connective. In our setting this would give the rewrite rules
 of \reffig{rellink}. However in this work we opt for a different approach:
@@ -1520,7 +1520,7 @@ additional structure to represent uses of weakening and contraction. The
 \emph{combinatorial proofs} of Hughes
 \sidecite{Hughes_2006,heijltjes_intuitionistic_2019} are examples of
 polynomially-checkable proof objects exhibiting such structure, and have
-recently been extended to handle first-order \kl{classical} quantifiers
+recently been extended to handle \kl{first-order} \kl{classical} quantifiers
 \sidecite{hughes2019firstorder} (\kl{intuitionistic} quantifiers are still an open
 problem). This compartmentalization of axiom links and structural rules
 resembles the distinction between interaction phases and manual applications of

@@ -1,7 +1,7 @@
   \begin{framed}
   \textsc{Identity}
   \begin{mathpar}
-  \R[\rsf{ax}]
+  \R[\intro{ax}]
   {A \seq A}
   \and
   \R[\intro(rule){cut}]
@@ -12,76 +12,76 @@
   \end{mathpar}
   \textsc{Structural}
   \begin{mathpar}
-  \R[\rsf{ex}]
+  \R[\intro{ex}]
   {\Gamma, A, B, \Delta \seq C}
   {\Gamma, B, A, \Delta \seq C}
   \and
-  \R[\rsf{ctr}]
+  \R[\intro{ctr}]
   {\Gamma, A, A \seq C}
   {\Gamma, A \seq C}
   \and
-  \R[\rsf{wkn}]
+  \R[\intro{wkn}]
   {\Gamma \seq C}
   {\Gamma, A \seq C}
   \vspace{1em}
   \end{mathpar}
   \textsc{Logical}
   \begin{mathpar}
-  \R[\rsf{\bot L}]
+  \R[\intro{\bot L}]
   {\Gamma, \bot \seq C}
   \and
-  \R[\rsf{{\limp}L}]
+  \R[\intro{{\limp}L}]
   {\Gamma \seq A}
   {\Delta, B \seq C}
   {\Gamma, \Delta, A \limp B \seq C}
   \and
-  \R[\rsf{{\limp}R}]
+  \R[\intro{{\limp}R}]
   {\Gamma, A \seq B}
   {\Gamma \seq A \limp B}
   \\
-  \R[\rsf{\land L_1}]
+  \R[\intro{\land L_1}]
   {\Gamma, A \seq C}
   {\Gamma, A \land B \seq C}
   \and
-  \R[\rsf{\land L_2}]
+  \R[\intro{\land L_2}]
   {\Gamma, B \seq C}
   {\Gamma, A \land B \seq C}
   \and
-  \R[\rsf{\land R}]
+  \R[\intro{\land R}]
   {\Gamma \seq A}
   {\Delta \seq B}
   {\Gamma, \Delta \seq A \land B}
   \\
-  \R[\rsf{\lor L}]
+  \R[\intro{\lor L}]
   {\Gamma, A \seq C}
   {\Delta, B \seq C}
   {\Gamma, \Delta, A \lor B \seq C}
   \and
-  \R[\rsf{\lor R_1}]
+  \R[\intro{\lor R_1}]
   {\Gamma \seq A}
   {\Gamma \seq A \lor B}
   \and
-  \R[\rsf{\lor R_2}]
+  \R[\intro{\lor R_2}]
   {\Gamma \seq B}
   {\Gamma \seq A \lor B}
   \\
-  \R[\rsf{\forall L}]
+  \R[\intro{\forall L}]
   {\Gamma, \subst{A}{t}{x} \seq C}
   {\Gamma, \forall x. A \seq C}
   \and
-  \R[\rsf{\forall R}]
+  \R[\intro{\forall R}]
   {\Gamma \seq A}
   {\Gamma \seq \forall x. A}
   \and
-  \R[\rsf{\exists L}]
+  \R[\intro{\exists L}]
   {\Gamma, A \seq C}
   {\Gamma, \exists x. A \seq C}
   \and
-  \R[\rsf{\exists R}]
+  \R[\intro{\exists R}]
   {\Gamma \seq \subst{A}{t}{x}}
   {\Gamma \seq \exists x. A}
   \vspace{1em}
   \end{mathpar}
-  In the rules \rsf{\forall R} and \rsf{\exists L}, $x$ must not occur free in
+  In the rules \kl{\forall R} and \kl{\exists L}, $x$ must not occur free in
   $\Gamma$ and $C$.
   \end{framed}

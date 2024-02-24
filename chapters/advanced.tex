@@ -4,7 +4,7 @@
 
 In the previous chapters, we explained the core principles of our so-called
 \kl{Proof-by-Action} paradigm and especially its drag-and-drop actions, first through
-basic and abstract examples in \refch{pba}, and then from a proof-theoretical
+basic and abstract examples in \refch{pba}, and then from a \kl{proof-theoretical}
 perspective in \refch{sfl}. The goal of this chapter is to provide a better
 sense of what proofs by action/\kl{DnD} look like in practice, and how they compare
 to more traditional approaches to interactive theorem proving. To that effect,
@@ -234,15 +234,15 @@ $\injective(\cdot)$ on functions, satisfying the following equivalence:
 $$\forall A.\ \forall B.\ \forall f{:}A \to B.~\ \injective(f) ~\lequiv~ \forall x
 \in A.\ \forall y \in A.\ f(x) = f(y) \limp x = y$$
 
-Notice that $\injective(\cdot)$ is a \emph{higher-order} predicate, since it
+Notice that $\injective(\cdot)$ is a \emph{\kl{higher-order}} predicate, since it
 takes any function as argument. Depending on the underlying logical framework,
 this might have an impact on the exact way the definition is encoded. Here we do
 not want to bother with such implementation details, and simply assume that
-higher-order definitions are possible, even though Actema is currently limited
+\kl{higher-order} definitions are possible, even though Actema is currently limited
 to \kl{first-order logic}. In practice this does not affect the semantics of
-graphical actions, and we can imagine having a first-order set theory such as
+graphical actions, and we can imagine having a \kl{first-order} \kl{set theory} such as
 \kl{ZF} to make everything work behind the scenes\sidenote{See also
-\refsec{pluginfuture} for a discussion on a higher-order extension of Actema.}.
+\refsec{pluginfuture} for a discussion on a \kl{higher-order} extension of Actema.}.
 
 Let us now describe how to prove the second question of the exercise in the
 \kl{PbA} paradigm. The first thing we want to do is to unfold the
@@ -267,12 +267,12 @@ together with the hypothesis:
 \end{itemize}
 
 Now there is no available action on the conclusion $x \in C$, because set
-membership is a \emph{primitive} predicate in set theory: it does not have any
+membership is a \emph{primitive} predicate in \kl{set theory}: it does not have any
 associated definition in the sense mentioned above\sidenote{Formally, the
-meaning of $\in$ in a set theory such as \kl{ZF} comes from the various axioms
+meaning of $\in$ in a \kl{set theory} such as \kl{ZF} comes from the various \kl{axioms}
 involving it. One might call such a definition \emph{behavioral}, since the
-meaning of the symbol emerges from the way it can be used in proofs through
-axioms. In contrast, the usual notion of mathematical definition we tackle in
+meaning of the \kl{symbol} emerges from the way it can be used in proofs through
+\kl{axioms}. In contrast, the usual notion of mathematical definition we tackle in
 this chapter might be called \emph{nominal}, because it essentially amounts to
 giving a name (the head) to a reoccurring pattern of statement (the body). Note
 that the syntax of \kl{first-order logic} is unaware of this distinction, since in
@@ -299,16 +299,17 @@ will vary:
   \item[In \kl{ZF} set theory]
     We would need to invoke explicitly the \emph{axiom of comprehension}, which
     states the following:
-    $$\forall \phi.\ \forall D.\ \forall y.\ y \in \compr{d \in D}{\phi} ~~\lequiv~~ (y \in D \land \subst{\phi}{y}{d})$$
-    Note that this is again a higher-order statement, but this time because it
-    quantifies over every formula $\phi$\sidenote{Traditionnally, logicians
-    preferred to speak of \emph{axiom schemas}, that is denumerable sets of
-    axioms, rather than higher-order axioms, in order to stay purely in a
-    first-order setting. But this does not make much sense from an
-    implementation point of view, as a proof engine will only be able to
-    manipulate a finite amount of axioms.}. Thus we assume that the underlying
-    proof engine can handle such higher-order statements, and in particular that
-    the axiom of comprehension is available in its database of lemmas.
+    $$\forall \phi.\ \forall D.\ \forall y.\ y \in \compr{d \in D}{\phi}
+    ~~\lequiv~~ (y \in D \land \subst{\phi}{y}{d})$$ Note that this is again a
+    \kl{higher-order} statement, but this time because it quantifies over every
+    formula $\phi$\sidenote{Traditionnally, logicians preferred to speak of
+    \emph{axiom schemas}, that is countable sets of \kl{axioms}, rather than
+    \kl{higher-order} \kl{axioms}, in order to stay purely in a \kl{first-order} setting. But
+    this does not make much sense from an implementation point of view, as a
+    proof engine will only be able to manipulate a finite amount of \kl{axioms}.}.
+    Thus we assume that the underlying proof engine can handle such \kl{higher-order}
+    statements, and in particular that the axiom of comprehension is available
+    in its database of lemmas.
     
     In Actema, one can freely search in this database by typing text in a search
     bar, typically in this case the keyword ``comprehension''. Then the system
@@ -344,24 +345,24 @@ will vary:
   \item[In higher-order type theory] In type theory, every mathematical object
   or statement is ultimately encoded as a function, in the sense of the
   $\lambda$-calculus. It is Alonzo Church who first got the idea of representing
-  a set by its \emph{characteristic function} in his higher-order logic, as a
-  $\lambda$-term of type $\iota \to \omicron$ where $\iota$ is the type of
-  individuals, and $\omicron$ the type of propositions\todo{add citation}. With
-  this encoding, the only way to construct a set is by comprehension, and set
-  membership corresponds to function application; that is, $\compr{x \in
-  A}{\phi}$ is identified with the characteristic function $\lambda x{:}A.\
-  \phi$, and $x \in t$ is the application $t\ x$\sidenote{Note that this induces
-  a strict hierarchical notion of set as in Russell's type theory, where sets
-  containing other sets have a higher-order type, i.e. they correspond to
-  functions taking other functions as arguments.}. Then if we consider
-  $\lambda$-terms modulo $\beta$-equivalence, unfolding the ``definition'' of
-  set comprehension just amounts to performing one step of
-  $\beta$-reduction\sidenote{One can consider this as a third kind of definition
-  qualified of \emph{computational}. In Martin-Löf's type theory, it is merged
-  with nominal definitions in the concept of judgmental equality. In Coq they
-  are distinguished: computational and nominal definitions correspond
-  respectively to $\beta$-reduction and $\delta$-reduction.}: hypothesis $(1)$
-  becomes
+  a set by its \emph{characteristic function} in his \intro{higher-order logic}
+  (\reintro{HOL}), as a $\lambda$-term of type $\iota \to \omicron$ where
+  $\iota$ is the type of individuals, and $\omicron$ the type of
+  propositions\todo{add citation}. With this encoding, the only way to construct
+  a set is by comprehension, and set membership corresponds to function
+  application; that is, $\compr{x \in A}{\phi}$ is identified with the
+  characteristic function $\lambda x{:}A.\ \phi$, and $x \in t$ is the
+  application $t\ x$\sidenote{Note that this induces a strict hierarchical
+  notion of set as in Russell's type theory, where sets containing other sets
+  have a \kl{higher-order} type, i.e. they correspond to functions taking other
+  functions as arguments.}. Then if we consider $\lambda$-terms modulo
+  $\beta$-equivalence, unfolding the ``definition'' of set comprehension just
+  amounts to performing one step of $\beta$-reduction\sidenote{One can consider
+  this as a third kind of definition qualified of \emph{computational}. In
+  Martin-Löf's type theory, it is merged with nominal definitions in the concept
+  of judgmental equality. In Coq they are distinguished: computational and
+  nominal definitions correspond respectively to $\beta$-reduction and
+  $\delta$-reduction.}: hypothesis $(1)$ becomes
   $$(\lambda a{:}A.\ f(C)\ f(a))\ x$$
   which $\beta$-reduces to
   $$f(C)\ f(x)$$ which we can translate back as $f(x) \in f(C)$. This encoding
@@ -385,9 +386,9 @@ comprehension is \emph{implicit} in the type-theoretical encoding, it must be
 manipulated \emph{explicitly} when using the axiom of comprehension\sidenote{In
 fact one could also use the axiom of comprehension implicitly by relying on
 stronger automation. For example in Isabelle/Isar, one would write explicitly
-the desired goal $f(x) \in f(C)$, refer to the axiom by its name in the library,
-and then let the engine find the details of how to apply it. But writing
-statements manually goes against the philosophy of \kl{PbA}, which
+the desired goal $f(x) \in f(C)$, refer to the \kl{axiom} by its name in the
+library, and then let the engine find the details of how to apply it. But
+writing statements manually goes against the philosophy of \kl{PbA}, which
 explores to what extent proofs can be carried by pure manipulation of the proof
 state. Of course there is still an escape hatch for doing this when strictly
 necessary or more convenient.}. Depending on the user's background and context
@@ -544,10 +545,10 @@ ones:
   \item[(b)] $\forall x.\ \forall y.\ S(x) = S(y) \limp x = y$
   \item[(c)] $\forall x.\ \forall y.\ S(x) + y = S(x + y)$
 \end{itemize}
-because the other axioms do not contain any subterm that could form a
+because the other \kl{axioms} do not contain any subterm that could form a
 \kl(dnd){valid} \kl(dnd){backward} \kl{linkage} with the selection\sidenote{See
 \refsec{validity} for the notion of \kl[valid@dnd]{validity} of a \kl{linkage}.}. Of
-course we are interested in axiom $(c)$, which we can use through the following
+course we are interested in \kl{axiom} $(c)$, which we can use through the following
 \kl(dnd){backward} \kl{DnD}:
 $$\forall x.\ \forall y.\ \select{S(x) + y} = S(x + y) ~~\back~~ \select{S(n) + 0} = 0 + S(n)$$
 in order to rewrite $S(n) + 0$ into $S(n + 0)$ in the conclusion.

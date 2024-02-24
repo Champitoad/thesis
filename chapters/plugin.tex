@@ -4,7 +4,7 @@
 
 In the previous chapters, we introduced the \kl{Proof-by-Action} paradigm
 (\refch{pba}), and tried to convince the reader that it is both theoretically
-sound with its firm grounding in \kl{deep inference} proof theory (\refch{sfl} and
+sound with its firm grounding in \kl{deep inference} \kl{proof theory} (\refch{sfl} and
 \refch{sfl-classical}), and practically useful by analysing proofs of
 mathematical problems expressed within it (\refch{advanced}). We also mentioned
 multiple times our prototype of interface implementing \kl{PbA} called
@@ -18,7 +18,7 @@ features:
 \begin{itemize}
   \item it can only handle goals expressed in many-sorted \kl{intuitionistic}
     \kl{first-order logic} (\intro{iFOL}), whereas all state-of-the-art PAs support
-    \emph{higher-order logic} in one form or another; and higher-order features
+    \emph{\kl{higher-order} logic} in one form or another; and \kl{higher-order} features
     are crucial for formalizing many mathematical notions in a concise way, as
     witnessed by the example of \refsec{funcs};
   \item it does not implement a \emph{certified logical kernel} for checking proof
@@ -141,7 +141,7 @@ actions as new tactics, instead of Actema's backend. This allows us to leverage
 the facilities already provided by Coq to handle the proof state and generate
 proof terms in its own logical framework, the Calculus of Inductive
 Construction. This does not make the backend of Actema completely irrelevant
-however: we still need it so that Actema can maintain its own, first-order
+however: we still need it so that Actema can maintain its own, \kl{first-order}
 version of the proof state, with additional metadata used to display and
 interact graphically with objects and statements. Also tasks related to the
 querying of both display data and proof actions, like the \texttt{html} method
@@ -340,7 +340,7 @@ implementations our own domain-specific helpers for manipulating this data.
 
 \begin{figure}
   \input{listings/atd-fo.tex}
-  \caption{ATD definitions for first-order formulas and environments}
+  \caption{ATD definitions for \kl{first-order} formulas and environments}
   \labfig{atd-fo}
 \end{figure}
 
@@ -357,7 +357,7 @@ the ATD types \texttt{form} of \emph{formulas}, and \texttt{env} of
 \emph{environments} of available constants and variables. In our setting, these
 correspond respectively to the formulas and \emph{signatures} of many-sorted
 \kl{first-order logic}, whose ATD definitions are given in \reffig{atd-fo}. But one
-could imagine using formulas and environments in higher-order logic instead, and
+could imagine using formulas and environments in \kl{higher-order} logic instead, and
 this would not change the structure of the \texttt{goal} datatype. Note that
 hypotheses are encoded with a \texttt{h\_id} attribute corresponding to their
 string identifier in the Coq goal, even though we do not display it in Actema's
@@ -380,7 +380,7 @@ to apply the full sequence of actions.
 \begin{remark}
   Currently the translation $\trgoal{\cdot}$ is not \emph{injective}: it might
   map two different Coq goals to the same Actema goal, because strictly
-  higher-order subterms are translated into a \texttt{dummy} atomic predicate.
+  \kl{higher-order} subterms are translated into a \texttt{dummy} atomic predicate.
   Thus one might retrieve a proof from a different goal when calling the
   \texttt{actema} tactic. However this is not problematic, since the
   \process{User} cannot perform any actions involving the part of the two goals
@@ -500,7 +500,7 @@ $\traction{\cdot}$ which translates any action $A$ into a Coq tactic
 $\traction{A}$. This function actually has access to some other data used for
 interpreting actions: Coq's goal $G$, its Actema translation $\trgoal{G}$, and a
 bijective mapping $\Sigma$ between Coq constants in the environment of $G$ and
-the corresponding Actema symbols in the first-order signature of $\trgoal{G}$.
+the corresponding Actema symbols in the \kl{first-order} signature of $\trgoal{G}$.
 
 \subsection{The \texttt{action} datatype}
 
@@ -567,7 +567,7 @@ reasoning on the deep embedding with Coq programs (also called
 because the datatypes in a deep embedding are almost always defined as
 \emph{inductive} types, and thus one can easily do pattern-matching on them. It
 is a different story for the \texttt{reify} function, especially in our case:
-indeed we want to translate the statements of Coq goals into first-order
+indeed we want to translate the statements of Coq goals into \kl{first-order}
 propositions. But Coq statements are objects of type \texttt{Prop}, and thus
 cannot be pattern-matched on inside \kl{CoIC}\sidenote{For reasons of
 consistency of the logic, well-known in the literature on type theory.}. Thus we
@@ -625,7 +625,7 @@ that \texttt{reflect} is the inverse of \texttt{reify}.
   addition to reflection, like \emph{combinators} and some more powerful usages
   of \emph{metaprogramming}. He also provides an effective implementation of the
   techniques in his \kl{Profint} tool \cite{DBLP:conf/cade/Chaudhuri21}, that
-  allows to export subformula linking derivations built with \kl{Profint}'s GUI
+  allows to export subformula linking derivations built with \kl{Profint}'s \kl{GUI}
   as proof scripts directly executable in various \kl{proof assistants} (Coq, Lean,
   Isabelle/HOL).
 \end{remark}
@@ -638,7 +638,7 @@ implemented and tested on various simple examples, including those of
 properly handled in Actema, which still hinders the usability of the system in
 real mathematical developments, even in an educational setting. Typically, the
 example of \refsec{funcs} cannot be completely performed in Actema, in this case
-because of the lack of support for \emph{higher-order} functions and predicates,
+because of the lack of support for \emph{\kl{higher-order}} functions and predicates,
 but also because of the poor support for user-defined \emph{notations}. Those
 are only a few of the current limitations of \texttt{coq-actema}, and we
 describe in the following pages how they could be overcome, both to widen the
@@ -646,23 +646,23 @@ scope and improve the UX of the system.
 
 \subsection{Higher-order logic}
 
-The importance of being able to express and manipulate higher-order functions
+The importance of being able to express and manipulate \kl{higher-order} functions
 and predicates has been stressed multiple times before. The fact that Actema is
 limited to \kl{first-order logic} is mostly a historical contingency, motivated by
 the fact that some algorithms like unification are more tractable in this
 setting. But now that we rely on Coq's proof engine, there is no fundamental
 reason for maintaining this choice. Because the language of statements is at the
 foundation of a logical framework, many other components of a \kl{proof assistant}
-will depend on it. Thus the switch to higher-order logic should be done as soon
+will depend on it. Thus the switch to \kl{higher-order} logic should be done as soon
 as possible, to limit the amount of refactoring work to perform in the future.
 This will require changes to Actema's \process{Backend} and \process{Frontend},
 but also to the Coq \process{Plugin}\sidenote{The Coq theory implementing the
 tactics for \kl{deep inference}-based actions already has partial support for
-higher-order goals, thus work remains mostly on the side of the translation
+\kl{higher-order} goals, thus work remains mostly on the side of the translation
 module for Actema written in OCaml.} and the ATD datatype definitions enabling
 communication between the two.
 
-One central question in the transition to higher-order logic is how unification
+One central question in the transition to \kl{higher-order} logic is how unification
 of subterms will be handled. Algorithms in this setting are known to be
 incomplete because of undecidability \sidecite{huet_undecidability_1973}, and
 their implementation can be very tricky. The most sensible option seems to rely
@@ -763,7 +763,7 @@ context of \emph{programming} environments. Thus one might get insight by
 cross-pollinating ideas from both domains, in the spirit of the Curry-Howard
 correspondence (which also underlies the design of Coq).}\sidenote{One might
 even argue that thinking about the best way to \emph{represent} a proof leads to
-more fundamental questions, that have been much debated both in proof theory and
+more fundamental questions, that have been much debated both in \kl{proof theory} and
 the history and philosophy of mathematics: what is the essence of a proof, seen
 as a meta-mathematical object \cite{strasburger-problem-2019}? What are the
 roles played by informal and formal proofs, both in the teaching of mathematics,

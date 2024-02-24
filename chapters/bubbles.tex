@@ -43,7 +43,7 @@ sequents that we call \emph{solutions}. In \refsec{asymmetric} we describe our
 \kl{proof system} for \kl{intuitionistic} logic dubbed \emph{asymmetric bubble calculus},
 based on multiset rewriting rules on solutions comprising at most one
 conclusion. Finally in \refsec{bubbles-pba}, we import ideas from this bubble
-calculus back to the realm of GUIs for interactive proof building, analysing
+calculus back to the realm of \kl{GUIs} for interactive proof building, analysing
 their possible impact for UX improvements.
 
 
@@ -125,7 +125,7 @@ violate context-scoping.
 
 This situation is illustrated in \reffig{bubbles-flow}, where bubbles are
 represented by gray circles, and possible drag moves of formulas by arrows. More
-specifically, green and orange arrows symbolize respectively valid and invalid
+specifically, green and orange arrows \kl{symbolize} respectively valid and invalid
 moves. Notice how this graphical depiction of bubbles exhibits their
 \emph{topological} behavior: while objects can enter inside bubbles from the
 outside, they get blocked by the membrane in the opposite direction. Indeed the
@@ -317,7 +317,7 @@ This is generally true of all formalisms based on \kl{CoS}, which is known in th
 \kl{deep inference} literature for its ``bureaucracy''. In \kl{BJ},
 $\mathbb{H}$-rules aggravate the matter by adding all inessential rule
 permutations from \kl{sequent calculus} to those of \kl{CoS}. As our wording suggests,
-this is usually perceived negatively in \kl{deep inference} proof theory, where a
+this is usually perceived negatively in \kl{deep inference} \kl{proof theory}, where a
 central question is that of finding \emph{canonical} representations of proof
 objects \sidecite{strasburger-problem-2019}.
 
@@ -330,7 +330,7 @@ user, but the \emph{process} of building it. Then a \kl{BJ}-derivation is
 better understood as the \emph{trace} of this building process, rather than the
 constructed proof\sidenote{The idea of \emph{proof-as-trace} is relatively
 common in logic programming \cite{miller_survey_2022}, but not so much in \kl{deep
-inference} proof theory. It is Jean-Baptiste Joinet who shared with us his idea
+inference} \kl{proof theory}. It is Jean-Baptiste Joinet who shared with us his idea
 of applying it in this setting, based on his own work interpreting \kl{CoS} for
 \kl{MLL} as a system for building \emph{multiplicative proof nets}
 \cite{joinet_completeness_2007}.}. And the fact that this trace corresponds, or
@@ -343,7 +343,7 @@ too numerous and low-level to be mapped directly into individual proof actions
 in a user interface. Some of these concerns will be tackled in
 \refsubsec{bubbles-search}, but we think a better answer might have been found
 with the \kl{proof system} introduced in \refch{flowers}, and its associated
-prototype of GUI presented in \refsec{flowers-prover}.
+prototype of \kl{GUI} presented in \refsec{flowers-prover}.
 
 \todo{ This section might be getting too long with too many subsections; will
   probably need to move philosophical reflections like this somewhere else.
@@ -448,13 +448,13 @@ with $\mathbb{H}$-rules, $\mathbb{F}$-rules and $\mathbb{M}$-rules that deal
 with \emph{bubbles}. Remember that the goal behind the idea of bubble calculus
 was precisely to provide a new way to manipulate subgoals through bubbles
 instead of tabs, which are more in line with the chemical metaphor. It is quite
-easy to imagine a GUI presenting the proof state as a solution, in a graphical
+easy to imagine a \kl{GUI} presenting the proof state as a solution, in a graphical
 layout close to that of \reffig{ex-gra-BJ}\sidenote{Although there might be some
 challenges in implementing an efficient layouting algorithm for bubbles,
 typically to make solutions fit into the screen.}. Like formulas in blue and red
 items, whole subgoals could now be shown on the same screen in their respective
 bubbles, and be freely moved around with a pointing device. Following are some
-ideas for mapping the remaining rules of \kl{BJ} in such a GUI:
+ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
 
 \begin{marginfigure}
   $$
@@ -521,13 +521,13 @@ ideas for mapping the remaining rules of \kl{BJ} in such a GUI:
     % thus implicitly duplicated\sidenote{In the literature on focusing in linear
     % logic, this corresponds roughly to the distinction between the \emph{storage
     % zone} in sequents where formulas can be duplicated and discarded at will,
-    % and the \emph{linear zone} where they cannot.}. In a bubble-based GUI, one
+    % and the \emph{linear zone} where they cannot.}. In a bubble-based \kl{GUI}, one
     % could keep this behavior, where the context is filled with all items 
     The contraction rule {\rsf{c}} could be mapped to a specific triggering
     input when starting to drag a blue item $\hypo{A}$ (e.g. a shortkey if a
     keyboard is available, or a long press on the item on a touchscreen), which
     has the effect of keeping a copy of $A$ at its original location in addition
-    to moving the item\sidenote{This mechanism is quite standard in GUIs that
+    to moving the item\sidenote{This mechanism is quite standard in \kl{GUIs} that
     manipulate duplicable resources like file managers, where one maintains the
     \texttt{CTRL} key to enable copy mode. It was also chosen by K. Chaudhuri to
     implement contraction in his \kl{ProfInt} prototype for subformula linking
@@ -573,7 +573,7 @@ ideas for mapping the remaining rules of \kl{BJ} in such a GUI:
     % \begin{itemize}
     %   \item In Actema, rules {\rnm{\forall{+}}} and {\rnm{\exists{-}}} would
     %   introduce a new green variable in the context. To accomodate for this in a
-    %   bubble-based GUI, one needs to extend the notion of solution so that
+    %   bubble-based \kl{GUI}, one needs to extend the notion of solution so that
     %   it incorporates local variables, in addition to formulas:
     %   \begin{align*}
     %     \Gamma, \Delta &\Coloneq \iota_1, \ldots, \iota_n \\
@@ -600,7 +600,7 @@ ideas for mapping the remaining rules of \kl{BJ} in such a GUI:
 
 Beyond the recovered uniformity of the user interface in terms of the chemical
 metaphor, \kl{BJ} exhibits some features that are interesting both at the
-proof-theoretical and user-experience levels:
+\kl{proof-theoretical} and user-experience levels:
 \begin{description}
   \item[\textbf{Factorization}] It implements a form of \emph{context-sharing}
     between subgoals: that is, one can perform transformations on shared
