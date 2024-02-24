@@ -28,7 +28,7 @@ already shows the two main aspects of \kl{proof formalisms}: on the one hand,
 they allow to \emph{represent} mathematical statements in a formal language,
 here that of equations between linear univariate polynomials; on the other hand,
 they allow to \emph{manipulate} this representation in order to prove the
-statements, here through term rewriting rules that transform a valid equation
+statements, here through \intro{rewriting rules} that transform a valid equation
 into another valid equation.
 
 Algebra lends itself particularly well to formalization, as it is arguably the
@@ -95,8 +95,8 @@ expressed in \intro{predicate logic}, i.e. the language and calculus of
 relations devised by 19\textsuperscript{th} century logicians. This crystallized
 into two famous axiomatic systems for \kl{set theory}: the \textit{Principia
 Mathematica} of Russell and Whitehead \sidecite{russell25}; and Zermelo-Fraenkel
-\kl{set theory} (\kl{ZF}, or \sys{ZFC} with the axiom of choice), which is the most
-popular foundation nowadays because of its greater simplicity.
+\kl{set theory} (\intro{ZF}, or \intro{ZFC} with the axiom of choice), which is
+the most popular foundation nowadays because of its greater simplicity.
 
 \paragraph{Truth and proofs}
 
@@ -136,12 +136,13 @@ study of \kl{inference rules} is called \intro{structural proof theory}.
 \paragraph{Axiomatic systems} 
 
 In the very beginnings of \kl{proof theory} in the 1920s, under the influence of
-Hilbert, the axiomatic method was predominant, and thus \kl{proof systems} of this
-era --- now called \intro{Hilbert systems} --- featured very few \kl{inference
-rules}. Almost all logical reasoning principles were encoded as \emph{axiom
-schemas} involving generic \emph{propositional variables}. For instance, the
-famous \emph{law of excluded middle}, that states that every proposition is
-either true or false, is expressed formally by the schema
+Hilbert, the axiomatic method was predominant, and thus \kl{proof systems} of
+this era --- now called \intro{Hilbert systems} --- featured very few
+\kl{inference rules}. Almost all logical reasoning principles were encoded as
+\emph{axiom schemas} involving generic \emph{propositional variables}. For
+instance, the famous \intro{law of excluded middle} (\reintro{LEM}), that states
+that every proposition is either true or false, is expressed formally by the
+schema
 $$A \lor \neg A$$
 Here, $\lor$ and $\neg$ are \kl{symbols} denoting the logical connectives of
 \emph{disjunction} (``or'') and \emph{negation} (``not''), and $A$ is a
@@ -152,7 +153,7 @@ involve any logical connective. An example of \emph{instance} of this schema
 would be the proposition ``$n$ is prime or $n$ is not prime'' with $n$ some
 natural number, which can be written formally as
 $$\mathrm{prime}(n) \lor \neg\mathrm{prime}(n)$$
-Another related principle is the \emph{law of non-contradiction}, which states
+Another related principle is the \intro{law of non-contradiction}, which states
 that no proposition can be both true and false at the same time. It is expressed
 by the schema
 $$\neg (A \land \neg A)$$
@@ -186,12 +187,12 @@ Heyting, one of Brouwer's students, from developing an axiomatic system in the
 style of Hilbert and Frege, in an attempt to capture formally the objections of
 Brouwer towards \intro{classical} logic --- i.e. the logic developed by
 19\textsuperscript{th} century logicians that was at the heart of the new
-set-theoretical foundations. Heyting's system captures what is now called
-\emph{\intro{intuitionistic} logic}, which can be succinctly summarized as being
-exactly \kl{classical} logic, but \emph{without} the law of excluded middle.
-Thus \kl{intuitionistic} logic is a generalization of \kl{classical} logic,
-where propositions cannot be assigned a truth value \emph{a priori}: they are
-only considered true if they can be proved with \emph{direct}, constructive
+\kl{set-theoretical} foundations. Heyting's system captures what is now called
+\\intro{intuitionistic} logic, which can be succinctly summarized as being
+exactly \kl{classical} logic, but \emph{without} the \kl{law of excluded
+middle}. Thus \kl{intuitionistic} logic is a generalization of \kl{classical}
+logic, where propositions cannot be assigned a truth value \emph{a priori}: they
+are only considered true if they can be proved with \emph{direct}, constructive
 evidence.
 
 To this day, there is no consensus among mathematicians as to which logic ---
@@ -215,15 +216,15 @@ systems, designing the \kl{classical} part as an extension of the former.
 
 \paragraph{Inference rules}
 
-In \kl{Hilbert systems}, the only \kl{inference rule} is that of \emph{modus ponens},
-which is expressed formally with the following figure:
+In \kl{Hilbert systems}, the only \kl{inference rule} is that of \intro{modus
+ponens}, which is expressed formally with the following figure:
 $$\R[\intro{mp}]{A}{A \limp B}{B}$$
 Like \kl{axioms}, it is a \emph{schema} that involves generic propositional variables
 $A$ and $B$, which may be \emph{instantiated} with arbitrary formulas. It can be
 read from top to bottom as follows: for any propositions $A$ and $B$, if we have
 a proof of $A$ and a proof of $A \limp B$, i.e. a proof that $A$ implies $B$,
 then we can immediately derive a proof of $B$ by virtue of the rule, here
-designated by the abbreviated name \kl{mp}.This reading of the rule
+designated by the abbreviated name \kl{mp}. This reading of the rule
 corresponds to a form of \intro{forward} reasoning: starting from the known
 \emph{premises} that $A$ and $A \limp B$ are true, it \emph{necessarily} follows
 that the \emph{conclusion} $B$ is true.
@@ -244,7 +245,7 @@ premises, because the latter will always contain all the information required to
 deduce the conclusion, the argument only serving as a means to explicate how
 this information is combined. On the other hand, \kl{backward} reasoning is more
 natural during the \emph{construction} phase of a proof, because the information
-required to reach the conclusion (e.g. the proposition $A$ in the \rsf{mp} rule)
+required to reach the conclusion (e.g. the proposition $A$ in the \kl{mp} rule)
 is not yet known.
 
 \paragraph{Natural deduction}
@@ -264,25 +265,27 @@ logician Gerhard Gentzen proposed independently his famous calculus of
 This formalism follows the opposite approach to \kl{Hilbert systems}: it
 features as few \kl{axioms} as possible, favoring the use of \emph{\kl{inference
 rules}} to model the forms of reasoning found in mathematical practice. Those
-are divided into two categories: \emph{introduction} rules \emph{define} the
-meaning of logical connectives, by prescribing how to prove complex formulas
-from proofs of their components. Dually, \emph{elimination rules} explain how to
-\emph{use} complex formulas, by giving a canonical way to derive new conclusions
-from them. \reffig{calculi-NJ} shows the complete set of \kl{natural deduction}
-rules for all connectives and quantifiers in \kl{intuitionistic} logic, that was
-introduced by Gentzen under the name \intro{NJ}\sidenote{Gentzen simultaneously
-introduced a \kl{natural deduction} calculus named \intro{NK} for \kl{classical}
-logic, which is just \kl{NJ} with an additional rule modelling the principle of
-\emph{indirect proof} --- i.e. the possibility to prove any proposition $A$ by
-deriving a contradiction from its negation $\neg A$ (\reffig{NK-ip}). Indeed,
-this principle can be shown to be strictly equivalent to the law of excluded
-middle, in the sense that the former is (\kl{intuitionistically}) provable if
-and only if the latter is.} \cite{gentzen_untersuchungen_1935}. The most simple
-example can be found in the rules for the conjunction connective $\land$: the
-introduction rule \rsf{\land i} allows to build a proof of $A \land B$ by
-combining a proof of $A$ and a proof of $B$; while the elimination rules
-\rsf{\land e_1} and \rsf{\land e_2} allow to derive proofs of $A$ and $B$ from a
-proof of $A \land B$.
+are divided into two categories: \intro(natded){introduction rules}
+\emph{define} the meaning of logical connectives, by prescribing how to prove
+complex formulas from proofs of their components. Dually, \intro{elimination
+rules} explain how to \emph{use} complex formulas, by giving a canonical way to
+derive new conclusions from them. \reffig{calculi-NJ} shows the complete set of
+\kl{natural deduction} rules for all connectives and quantifiers in
+\kl{intuitionistic} logic, that was introduced by Gentzen under the name
+\intro{NJ}\sidenote{Gentzen simultaneously introduced a \kl{natural deduction}
+calculus named \intro{NK} for \kl{classical} logic, which is just \kl{NJ} with
+an additional rule modelling the principle of \emph{indirect proof} --- i.e. the
+possibility to prove any proposition $A$ by deriving a contradiction from its
+negation $\neg A$ (\reffig{NK-ip}). Indeed, this principle can be expressed by
+the formula $\neg\neg A \limp A$ which is strictly equivalent to the \kl{law of
+excluded middle}, in the sense that $\neg\neg A \limp A$ is
+(\kl{intuitionistically}) provable if and only if $A \lor \neg A$ is.}
+\cite{gentzen_untersuchungen_1935}. The most simple example can be found in the
+rules for the conjunction connective $\land$: the \kl(natded){introduction rule}
+\kl{\land i} allows to build a proof of $A \land B$ by combining a proof of $A$
+and a proof of $B$; while the \kl{elimination rules} \kl{\land e_1} and
+\kl{\land e_2} allow to derive proofs of $A$ and $B$ from a proof of $A \land
+B$.
 
 \begin{figure*}
   \input{figures/nj.tex}
@@ -292,7 +295,7 @@ proof of $A \land B$.
 
 \begin{marginfigure}
   $$
-  \prftree[r][l]{\rsf{ip}}{\small[\prfref<H1>]}
+  \prftree[r][l]{\intro{ip}}{\small[\prfref<H1>]}
   {\summ
     {\Gamma, \prfboundedassumption<H1>{\neg A}}
     {\bot}}
@@ -312,27 +315,27 @@ proof of $A \land B$.
 
 \begin{marginfigure}
   $$
-  \prftree[r][l]{\rsf{{\limp}i}}{\small[\prfref<H1>]}
-    {\R[\rsf{{\limp}e}]
-      {\R[\rsf{\land e_1}]
+  \prftree[r][l]{\kl{{\limp}i}}{\small[\prfref<H1>]}
+    {\R[\kl{{\limp}e}]
+      {\R[\kl{\land e_1}]
         {\prfboundedassumption<H1>{A \land \neg A}}
         {A}}
-      {\R[\rsf{\land e_2}]
+      {\R[\kl{\land e_2}]
         {\prfboundedassumption<H1>{A \land \neg A}}
         {\neg A}}
       {\bot}}
     {\neg (A \land \neg A)}
   $$
-  \caption{Proof of the principle of non-contradiction in \kl{natural deduction}}
+  \caption{Proof of the \kl{law of non-contradiction} in \kl{natural deduction}}
   \labfig{PNC-NJ}
 \end{marginfigure}
 
 All logical reasoning principles that were \emph{axiomatized} in \kl{Hilbert
 systems} can be \emph{derived} in \kl{natural deduction}. For example,
-\reffig{PNC-NJ} shows a proof of the principle of non-contradiction, built by
-\emph{composing} instances of rules from \reffig{calculi-NJ}. The composition of
-a rule instance \rsf{r1} with another rule instance \rsf{r2} simply consists in
-using the conclusion of \rsf{r1} as one of the premisses of \rsf{r2}.
+\reffig{PNC-NJ} shows a proof of the \kl{law of non-contradiction}, built
+by \emph{composing} instances of rules from \reffig{calculi-NJ}. The composition
+of a rule instance \rsf{r1} with another rule instance \rsf{r2} simply consists
+in using the conclusion of \rsf{r1} as one of the premisses of \rsf{r2}.
 
 \begin{figure*}
   \input{figures/lj.tex}
@@ -345,79 +348,82 @@ using the conclusion of \rsf{r1} as one of the premisses of \rsf{r2}.
 In addition to the constructivists' objections, some doubts were raised by the
 discovery of fatal flaws in early attempts at defining foundational
 \kl{axiomatic systems}, the most famous one being the \emph{antinomy} of
-Russell's paradox caused by the unrestricted axiom of comprehension in naive \kl{set
-theory}. In order to restore absolute trust in the foundations of
+Russell's paradox caused by the unrestricted axiom of comprehension in naive
+\kl{set theory}. In order to restore absolute trust in the foundations of
 (\kl{classical}) mathematics, Hilbert proposed in the early 1920s to prove
-\emph{mathematically} the consistency of the \kl{axiomatic system} for
-arithmetic introduced in 1889 by Peano\sidenote{A more involved \kl{axiomatic
-system} was proposed one year earlier by Dedekind \cite{dedekind_nat}. Less
-known is that Peirce had already published in 1881 an equivalent axiomatization
-of natural numbers \cite{peirce_logic_1881}.}, i.e. that no contradiction can be
-derived from Peano's axioms. Indeed, he believed that every mathematical truth
-could be derived from the principles of arithmetic, thus reducing the problem of
-the consistency of mathematics to that of arithmetic. Moreover, Hilbert's
-program was to be carried by \emph{finitist} means, without resorting to any
-reasoning principle involving infinite collections --- which were at the heart
-of the controversy started by constructivists. This was the initial impulse for
+mathematically the \intro{consistency} of the \kl{axiomatic system} for arithmetic
+introduced in 1889 by Peano\sidenote{A more involved \kl{axiomatic system} was
+proposed one year earlier by Dedekind \cite{dedekind_nat}. Less known is that
+Peirce had already published in 1881 an equivalent axiomatization of natural
+numbers \cite{peirce_logic_1881}.}, i.e. that no contradiction can be derived
+from Peano's axioms. Indeed, he believed that every mathematical truth could be
+derived from the principles of arithmetic, thus reducing the problem of the
+\kl{consistency} of mathematics to that of arithmetic. Moreover, Hilbert's program
+was to be carried by \emph{finitist} means, without resorting to any reasoning
+principle involving infinite collections --- which were at the heart of the
+controversy started by constructivists. This was the initial impulse for
 developing \kl{proof theory}, since it provided a mathematical definition of
-``mathematical proofs'' as \emph{finite} sequences of \kl{symbols} satisfying certain
-properties.
+``mathematical proofs'' as \emph{finite} sequences of \kl{symbols} satisfying
+certain properties.
 
-Gentzen's work on \kl{natural deduction} was an integral part of this program, as an
-attempt to render the \emph{metamathematics} of \kl{proof theory} more structured and
-elegant. However, he could not devise any argument for consistency in this
-framework. He thus set out to devise a new formalism that would be a
-reformulation of \kl{natural deduction} with better mathematical properties, such as
-\emph{symmetries}. This gave us \intro{sequent calculus}, which is widely
-regarded as the cornerstone for most developments in \kl{proof theory} to this day.
-Gentzen introduced simultaneously \emph{two} \kl{sequent calculi}: one for \kl{classical}
-logic called \kl{LK}, and one for \kl{intuitionistic} logic called \sys{LJ}. Here we
-focus on the \kl{intuitionistic} system \kl{LJ}, whose rules are shown in
+Gentzen's work on \kl{natural deduction} was an integral part of this program,
+as an attempt to render the \emph{metamathematics} of \kl{proof theory} more
+structured and elegant. However, he could not devise any argument for
+\kl{consistency} in this framework. He thus set out to devise a new formalism
+that would be a reformulation of \kl{natural deduction} with better mathematical
+properties, such as \emph{symmetries}. This gave us \intro{sequent calculus},
+which is widely regarded as the cornerstone for most developments in \kl{proof
+theory} to this day. Gentzen introduced simultaneously \emph{two} \kl{sequent
+calculi}: one for \kl{classical} logic called \intro{LK}, and one for
+\kl{intuitionistic} logic called \intro{LJ}. Here we focus on the
+\kl{intuitionistic} system \kl{LJ}, whose rules are shown in
 \reffig{calculi-LJ}.
 
 \kl{Sequent calculus} is based on the observation that some rules in \kl{natural
 deduction} depend crucially on the use of \emph{hypotheses} that appear
-``higher'' or earlier in the proof. The prototypical example is the introduction
-rule \rsf{{\limp}i} for implication: to prove $A \limp B$, it suffices to prove
-$B$ under the assumption that $A$ is true. Then the hypothesis $A$ is
-\emph{discharged} by the rule (bracket notation in \reffig{calculi-NJ}), meaning
-that the conclusion $A \limp B$ holds \emph{unconditionally}, without the
-assumption. In \kl{sequent calculus}, this relation of provability of a
-conclusion $C$ under a collection/\intro(sequent){context} of
-assumptions/hypotheses $\Gamma$ is captured by the expression $\Gamma
-\intro*\seq C$, called a \intro{sequent}. The introduction rule \rsf{{\limp}i}
-is then expressed by the so-called \emph{right introduction} rule
-\rsf{{\limp}R}, which keeps track of the full \emph{context} of hypotheses by
-having sequents as premiss and conclusion, instead of just formulas. Right
-introduction rules for other connectives are also obtained straightforwardly
-from the corresponding introduction rules in \kl{natural deduction}, by simply
-making the contexts of hypotheses $\Gamma$ and $\Delta$ always explicit.
+``higher'' or earlier in the proof. The prototypical example is the
+\kl(natded){introduction rule} \kl{{\limp}i} for implication: to prove $A \limp
+B$, it suffices to prove $B$ under the assumption that $A$ is true. Then the
+hypothesis $A$ is \emph{discharged} by the rule (bracket notation in
+\reffig{calculi-NJ}), meaning that the conclusion $A \limp B$ holds
+\emph{unconditionally}, without the assumption. In \kl{sequent calculus}, this
+relation of provability of a conclusion $C$ under a
+collection/\intro(sequent){context} of hypotheses $\Gamma$ is captured by the
+expression $\Gamma \intro*\seq C$, called a \intro{sequent}. The
+\kl(natded){introduction rule} \kl{{\limp}i} is then expressed by the so-called
+\intro{right introduction rule} \kl{{\limp}R}, which keeps track of the full
+\kl(sequent){context} of hypotheses by having sequents as premiss and
+conclusion, instead of just formulas. \kl{Right introduction rules} for other
+connectives are also obtained straightforwardly from the corresponding
+\kl(natded){introduction rules} in \kl{natural deduction}, by simply making the
+\kl(sequent){contexts} $\Gamma$ and $\Delta$ always explicit.
 
-Following the original presentation of Gentzen, contexts are taken to be
-\emph{lists} of formulas (``sequenz'' in German), i.e. ordered collections where
-repetitions are allowed. Still, we really want to see them as \emph{sets} of
-formulas, since it is implicit in mathematical practice that:
+Following the original presentation of Gentzen, \kl(sequent){contexts} are taken
+to be \emph{lists} of formulas (``Sequenz'' in German), i.e. ordered collections
+where repetitions are allowed. Still, we really want to see them as \emph{sets}
+of formulas, since it is implicit in mathematical practice that:
 \begin{enumerate}
 \item the \emph{order} in which hypotheses are listed does not matter;
 \item hypotheses may be used \emph{more than once} in a proof (as in
 \reffig{PNC-NJ}).
 \end{enumerate}
-These two conventions are respectively captured by the \emph{structural rules}
-\rsf{ex} of \emph{exchange} and \rsf{ctr} of \emph{contraction} in
-\reffig{calculi-LJ}. A third structural rule, \rsf{wkn} for \emph{weakening},
-accounts for the presence of unused assumptions in some proofs, by allowing the
-introduction of new hypotheses at will (with a top-down reading of rules).
+These two conventions are respectively captured by the \intro{structural rules}
+\kl{ex} of \intro{exchange} and \kl{ctr} of \intro{contraction} in
+\reffig{calculi-LJ}. A third \kl{structural rule}, \kl{wkn} for
+\intro{weakening}, accounts for the presence of unused assumptions in some
+proofs, by allowing the introduction of new hypotheses at will (with a top-down
+reading of rules).
 
 \begin{marginfigure}
   $$
-  \R[\rsf{{\limp} R}]
-  {\R[\rsf{ctr}]
-  {\R[\rsf{\land L_1}]
-  {\R[\rsf{\land L_2}]
-  {\R[\rsf{{\limp} L}]
-    {\R[\rsf{ax}]
+  \R[\kl{{\limp}R}]
+  {\R[\kl{ctr}]
+  {\R[\kl{\land L_1}]
+  {\R[\kl{\land L_2}]
+  {\R[\kl{{\limp}L}]
+    {\R[\kl{ax}]
     {A \seq A}}
-    {\R[\rsf{ax}]
+    {\R[\kl{ax}]
     {\bot \seq \bot}}
     {A, \neg A \seq \bot}}
   {A, A \land \neg A \seq \bot}}
@@ -425,52 +431,52 @@ introduction of new hypotheses at will (with a top-down reading of rules).
   {A \land \neg A \seq \bot}}
   {\seq \neg (A \land \neg A)}
   $$
-  \caption{Proof of the law of non-contradiction in \kl{sequent calculus}}
+  \caption{Proof of the \kl{law of non-contradiction} in \kl{sequent calculus}}
   \labfig{PNC-LJ}
 \end{marginfigure}
 
 The main difference between \kl{sequent calculus} and \kl{natural deduction}
-lies in its splitting of elimination rules into two parts: \emph{left
-introduction} rules, and the \emph{cut} rule. As their name indicates, left
-introduction rules serve a purpose symmetric to right introduction rules: while
-the latter define how to introduce a connective in the conclusion of a sequent,
-the former define how to introduce a connective in one of its hypotheses. Then,
-the only way to \emph{use} such an hypothesis $A$ is through the \rsf{cut} rule,
-which erases $A$ from the context in the conclusion of the rule, by justifying
-it with the proof of $A$ given as premiss. The \rsf{cut} rule can also be seen
-as a generalization of the \textit{modus ponens} rule of \kl{Hilbert systems},
-replacing the logical connective $\limp$ of implication by the ``structural
-connective'' $\seq$ of sequents. The remaining \intro(rule){axiom} rule
-\intro{ax} is in a sense dual to the \rsf{cut} rule: while the latter allows
-justifying a hypothesis by an identical conclusion, the \rsf{ax} rule allows
-justifying a conclusion by an identical hypothesis\sidenote{It is not clear
-where the terminology ``axiom rule'' comes from. It might be because hypotheses
-can be considered as \kl{axioms} in the sense we introduced earlier, i.e.
-statements that we \emph{assume} to be true. In any case, it would be a
-misattribution of category to consider the \rsf{ax} rule itself as an
-\kl{axiom}, and some authors like Girard call it the \emph{identity} or \rsf{id}
-rule to avoid the confusion.}. \reffig{PNC-LJ} shows a proof of the principle of
-non-contradiction in \kl{LJ}.
+lies in its splitting of \kl{elimination rules} into two parts: \intro{left
+introduction rules}, and the \intro(rule){cut} rule \kl{cut}. As their name
+indicates, \kl{left introduction rules} serve a purpose symmetric to \kl{right
+introduction rules}: while the latter define how to introduce a connective in
+the conclusion of a sequent, the former define how to introduce a connective in
+one of its hypotheses. Then, the only way to \emph{use} such an hypothesis $A$
+is through the \kl{cut} rule, which erases $A$ from the \kl{context} in the
+conclusion of the rule, by justifying it with the proof of $A$ given as premiss.
+The \kl{cut} rule can also be seen as a generalization of the \kl{modus ponens}
+rule of \kl{Hilbert systems}, replacing the logical connective $\limp$ of
+implication by the ``structural connective'' $\seq$ of sequents. The remaining
+\intro(rule){axiom} rule \intro{ax} is in a sense dual to the \kl{cut} rule:
+while the latter allows justifying a hypothesis by an identical conclusion, the
+\kl{ax} rule allows justifying a conclusion by an identical
+hypothesis\sidenote{It is not clear where the terminology ``axiom rule'' comes
+from. It might be because hypotheses can be considered as \kl{axioms} in the
+sense we introduced earlier, i.e. statements that we \emph{assume} to be true.
+In any case, it would be a misattribution of category to consider the \kl{ax}
+rule itself as an \kl{axiom}, and some authors like Girard call it the
+\emph{identity} or \rsf{id} rule to avoid the confusion.}. \reffig{PNC-LJ} shows
+a proof of the \kl{law of non-contradiction} in \kl{LJ}.
 
-Both the \rsf{cut} and \rsf{ax} rules seem completely trivial. Yet surprisingly,
+% Both the \kl{cut} and \kl{ax} rules seem completely trivial. Yet surprisingly,
 Gentzen managed to prove a powerful result called alternatively
 \textit{Haupstatz}, \emph{fundamental theorem} (of \kl{proof theory}), or
 \emph{cut-elimination}: every provable formula in \kl{sequent calculus} has a
-\emph{cut-free} proof, i.e. a proof that does not make use of the \rsf{cut}
+\emph{cut-free} proof, i.e. a proof that does not make use of the \kl{cut}
 rule. Intuitively, it can be understood as a formal justification for the
 possibility to \emph{inline} proofs of lemmas, by seeing an instance of
-\rsf{cut} on $A$ as a way to invoke the lemma $A$ without duplicating its proof.
+\kl{cut} on $A$ as a way to invoke the lemma $A$ without duplicating its proof.
 Moreover, Gentzen's proof of the Haupstatz is itself constructive: it describes
 an \emph{algorithm} for transforming every \kl{sequent calculus} proof into a
-cut-free one. Thus the \rsf{cut} rule is said to be \emph{admissible}, since any
+cut-free one. Thus the \kl{cut} rule is said to be \emph{admissible}, since any
 provable sequent can be proved without it.
 
 An important consequence of cut-elimination, which was the original motivation
 of Gentzen, is the consistency of the logic (\kl{intuitionistic} \kl{predicate logic} in
 the case of \kl{LJ}). This stems from the fact that all rules apart from the
-\rsf{cut} rule satisfy the \emph{subformula property}: every formula $A$
+\kl{cut} rule satisfy the \emph{subformula property}: every formula $A$
 appearing in the premisses is a \emph{subformula} of some formula $B$ in the
-conclusion, i.e. $A$ already appears inside $B$. Thus there cannot exist a proof
+conclusion, i.e. $A$ already occurs inside $B$. Thus there cannot exist a proof
 of the absurd sequent $\seq \bot$, since the only formula that is a subformula
 of $\bot$ is $\bot$ itself, and there is no rule instance with $\seq \bot$ as
 conclusion that only contains $\bot$ in its premisses. The subformula property
@@ -498,45 +504,48 @@ Gentzen formalisms while preserving their good properties, by allowing
 only at the top-level of sequents\sidenote{In fact, Schütte had already proposed
 a \kl{deep inference} system as early as 1977 \cite{schutte_proof_1977}, as did
 Peirce one century before him with his \emph{entitative graphs} (as we will see
-in \refch{eg}). But the idea did not generate much interest at the time.}. The
+in \refch{eg}). But the idea did not generate much interest at the times.}. The
 first \kl{deep inference} system was the \intro{calculus of structures}
-(\reintro{CoS}), which can be succinctly described as a \emph{rewriting system}
-on formulas. For instance, the following \emph{switch} rule, when read bottom-up
-(i.e. in \kl{backward} mode), indicates that the formula $A \lor (B \land C)$
-may be rewritten into $(A \lor B) \land C$:
+(\reintro{CoS}), which can be succinctly described as a \intro{rewriting system}
+on formulas. For instance, the following \intro{switch rule}, when read
+bottom-up (i.e. in \kl{backward} mode), indicates that the formula $A \lor (B
+\land C)$ may be rewritten into $(A \lor B) \land C$:
 $$\R[\rsf{s}]{S\select{(A \lor B) \land C}}{S\select{A \lor (B \land C)}}$$
-Importantly, the rule can be applied in any \emph{context} $S\hole$. A context
-$S\hole$ is simply a formula containing a single occurrence of a special
-subformula $\hole$ called its \emph{hole}, which can be \emph{filled} (i.e.
-substituted) with any formula $A$ to give a new formula $S\select{A}$. This
-notion of context serves two purposes:
+Importantly, the rule can be applied in any \emph{context} $S\hole$. A
+\intro{context} $S\hole$ is simply a formula containing a single occurrence of a
+special subformula $\hole$ called its \intro{hole}, which can be \intro{filled}
+(i.e. substituted) with any formula $A$ to give a new formula $S\select{A}$.
+This notion of \kl{context} serves two purposes:
 \begin{itemize}
-  \item it formalizes the ability of rewriting rules to be applied at an
+  \item it formalizes the ability of \kl{rewriting rules} to be applied at an
   arbitrary \emph{depth} inside expressions, while retaining all the information
-  available in the surrounding context;
-  \item it generalizes the contexts $\Gamma, \Delta$ of \kl{sequent calculus}, by
-  giving them the full structure of formulas instead of just flat lists of
-  formulas. Indeed, a sequent $\Gamma \seq C$ can be interpreted as the formula
-  $\bigwedge \Gamma \limp C$, where $\bigwedge \Gamma$ denotes the conjunction
-  of all the formulas in $\Gamma$.
+  available in the surrounding \kl{context};
+  \item it generalizes the \kl(sequent){contexts} $\Gamma, \Delta$ of
+  \kl{sequent calculus}, by giving them the full structure of formulas instead
+  of just flat lists of formulas. Indeed, a sequent $\Gamma \seq C$ can be
+  interpreted as the formula $\bigwedge \Gamma \limp C$, where $\bigwedge
+  \Gamma$ denotes the conjunction of all the formulas in $\Gamma$.
 \end{itemize}
 Then, a proof of a formula $A$ in the \kl{calculus of structures} is not a
-\emph{tree} of rule instances as in \kl{natural deduction} and \kl{sequent calculus}, but
-a \emph{sequence} of rewritings $A \steps{} \top$ that reduces $A$ to the
-trivially true goal $\top$.
+\emph{tree} of rule instances as in \kl{natural deduction} and \kl{sequent
+calculus}, but a \emph{sequence} of rewritings $A \steps{} \top$ that reduces
+$A$ to the trivially true goal $\top$.
 
-The \kl{calculus of structures}, as a rewriting system, is closer to the equational
-reasoning that mathematicians are accustomed to in algebra. The main difference
-is that most rules (including the switch rule \rsf{s}) can only be applied in a
-\emph{single} direction, because the premiss and conclusion are not
-\emph{equivalent}\sidenote{A better analogy would be with the rewriting rules
-that are sometimes used to solve \emph{inequations} between numbers.}. When the
-premiss and conclusion of a rule are equivalent, we say that the rule is
+The \kl{calculus of structures}, as a \kl{rewriting system}, is closer to the
+equational reasoning that mathematicians are accustomed to in algebra. The main
+difference is that most rules (including the \kl{switch rule} \rsf{s}) can only
+be applied in a \emph{single} direction, because the premiss and conclusion are
+not \emph{equivalent}\sidenote{In the standard system \kl{SKS} where the \kl{s}
+rule originates, every context is \emph{positive}, in the sense that the hole
+$\hole$ never occurs under a negation $\neg$ or left-hand side of an implication
+$\limp$; otherwise the rule would need to be restricted to positive contexts to
+stay valid. See \refsec{eg-completeness} for more details on \kl{SKS}.}. When
+the premiss and conclusion of a rule are equivalent, we say that the rule is
 \intro{invertible}.
 
 \begin{emphpar}
 \emph{All} the \kl{proof formalisms} designed in this thesis are \kl{deep inference}
-rewriting systems in the style of the \kl{calculus of structures}.
+\kl{rewriting systems} in the style of the \kl{calculus of structures}.
 \end{emphpar}
 
 \section{Proof assistants}
@@ -768,7 +777,7 @@ languages:
   instance, a goal $\Gamma\seq A\lor B$ (resp. $\Gamma\seq A\land B$) can be
   turned into either a goal $\Gamma\seq A$ or a goal $\Gamma\seq B$ (resp. into
   two goals $\Gamma\seq A$ and $\Gamma\seq B$), corresponding to the rules
-  \rsf{\lor R_1} and \rsf{\lor R_2} (resp. \rsf{\land R}) of \kl{LJ} in their
+  \kl{\lor R_1} and \kl{\lor R_2} (resp. \kl{\land R}) of \kl{LJ} in their
   \kl{backward} reading (\reffig{calculi-LJ}).
 
   Coq and Lean are examples of state-of-the-art \kl{proof assistants} in the
@@ -904,7 +913,7 @@ assumed equation $t = u$. But coming up with such patterns is a lot slower than
 directly \emph{pointing} at the locations of interest onscreen.}. While the
 semantics of PbP actions is still based on the \emph{shallow} \kl{inference rules} of
 \kl{sequent calculus}, PbL fully embraces the \kl{deep inference} paradigm by relying on
-\kl{CoS}-style rewriting rules.
+\kl{CoS}-style \kl{rewriting rules}.
 
 \begin{emphpar}
   All the works presented in this thesis can be seen as a direct continuation of
@@ -1081,7 +1090,7 @@ as the substrate for \kl{GUIs} in the frontend.
   \item[Bubble calculi] In the first two chapters, we introduce a family of
   systems called \emph{bubble calculi}. They are an extension of the theory of
   \emph{nested sequents} first introduced by Brünnler
-  \sidecite{brunnler_deep_2009}, that we reframe as local rewriting systems with
+  \sidecite{brunnler_deep_2009}, that we reframe as local \kl{rewriting systems} with
   a graphical and topological interpretation. Bubble calculi enable an efficient
   sharing of contexts between subgoals, making them well-suited to the
   factorization of both \kl{forward} and \kl{backward} reasoning steps in proofs.

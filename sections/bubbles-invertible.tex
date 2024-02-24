@@ -30,7 +30,7 @@ invalidates the converse inequality.}.
 \end{fact}
 
 Thus the only remaining rules of \kl{system B} that are (most probably) not
-invertible are the weakening rules $\{\rsf{w{-}},\rsf{w{+}}\}$, all the
+invertible are the \kl{weakening} rules $\{\rsf{w{-}},\rsf{w{+}}\}$, all the
 $\mathbb{F}$-rules, and the $\mathbb{H}$-rules $\{\rsf{{\limp}{-}},
 \rsf{{\lsub}{+}}\}$ that \emph{apply} an implication/exclusion\sidenote{For
 quantifier rules, we conjecture that as in \kl{sequent calculus}, the rules
@@ -42,20 +42,20 @@ from the following modifications to the previous rules:
 \begin{description}
   \item[\textbf{Weakening}]
     Here we follow a standard technique in \kl{sequent calculus}, that merges the
-    weakening rule in all \emph{terminal} rules of the calculus (i.e. rules with
+    \kl{weakening} rule in all \emph{terminal} rules of the calculus (i.e. rules with
     no premisses). In bubble calculi, the notion of premiss is captured by
-    neutral bubbles; thus we incorporate weakenings in all rules that solve
+    neutral bubbles; thus we incorporate \kl{weakenings} in all rules that solve
     subgoals by closing solutions with no neutral bubbles. Those are the rules
     $\{\rsf{i{\da}},\rsf{p{-}},\rsf{p{+}}\}$, which for the occasion have
     also been generalized to arbitrary solutions. Indeed in system $\sysB$ we
     restricted them to open solutions to make them \emph{local}, but here the
-    weakenings break locality anyway, and the general version improves
+    \kl{weakenings} break locality anyway, and the general version improves
     \emph{factorizability} by solving instantly all subgoals inside $\J$.
 
   \item[\textbf{Flow}]
     As shown by the simulation of \reflemma{simulation-dbiint}, the
     \emph{propagation} rules of \kl{DBiInt} combine an instance of
-    \emph{contraction} followed by the application of a flow rule on the
+    \emph{\kl{contraction}} followed by the application of a flow rule on the
     duplicated formula. Thus we can make all $\mathbb{F}$-rules of system
     $\sysB$ invertible by systematically duplicating the moved formula, although
     this breaks \emph{linearity}.
@@ -97,16 +97,16 @@ from the following modifications to the previous rules:
     % \sidecite{dyckhoff_contraction-free_1992} by splitting the rule
     % \rsf{{\limp}{-}} into  
     Here we can just duplicate the implication/exclusion formula, as in the
-    introduction rules of \kl{DBiInt}. Also like in \sys{DBiInt}, we removed
-    the contraction rules \rsf{c{-}} and \rsf{c{+}}, which are now merged with
-    these two rules as well as the $\mathbb{F}$-rules. Although contraction
+    \kl{introduction rules} of \kl{DBiInt}. Also like in \sys{DBiInt}, we removed
+    the \kl{contraction} rules \rsf{c{-}} and \rsf{c{+}}, which are now merged with
+    these two rules as well as the $\mathbb{F}$-rules. Although \kl{contraction}
     rules are invertible, they induce a lot of complexity in proof search,
     because it is hard to predict the (occurrences of) formulas that need to be
     duplicated, and one can duplicate \emph{ad infinitum}. Thus it is preferable
     to design a calculus where they are admissible. But unlike what is done in
-    \kl{DBiInt}, we did not incorporate contractions in other
-    $\mathbb{H}$-rules. Thus we cannot simulate exactly all the introduction
-    rules of \kl{DBiInt} in \sys{B_{inv}}.
+    \kl{DBiInt}, we did not incorporate \kl{contraction} in other
+    $\mathbb{H}$-rules. Thus we cannot simulate exactly all the \kl{introduction
+    rules} of \kl{DBiInt} in \sys{B_{inv}}.
 
 \end{description}
 
@@ -120,8 +120,8 @@ from the following modifications to the previous rules:
 
 These modifications only change superficially the proof of soundness, and thus
 we do not redo it. As for completeness, we would need to prove that the
-contraction rules are admissible, in order to solve the aforementioned problem
-of simulating \kl{DBiInt}'s introduction rules:
+\kl{contraction} rules are admissible, in order to solve the aforementioned problem
+of simulating \kl{DBiInt}'s \kl{introduction rules}:
 
 \begin{lemma}[Admissibility of contraction]\lablemma{admissibility-contraction}
   % If $\prov{\kl{B_{inv}} \cup \{\rsf{c{-}},\rsf{c{+}}\}} S$, then
@@ -135,18 +135,18 @@ of simulating \kl{DBiInt}'s introduction rules:
   \end{itemize}
 \end{lemma}
 
-Note that it is sufficient to prove admissibility of contraction on formulas,
-rather than on arbitrary items. Indeed we only need it to simulate the
-introduction rules of \kl{DBiInt}, which always duplicate formulas. For now we
-only conjecture completeness of \kl{B_{inv}}, since it not clear what method
+Note that it is sufficient to prove admissibility of \kl{contraction} on
+formulas, rather than on arbitrary items. Indeed we only need it to simulate the
+\kl{introduction rules} of \kl{DBiInt}, which always duplicate formulas. For now
+we only conjecture completeness of \kl{B_{inv}}, since it not clear what method
 should be used to prove \reflemma{admissibility-contraction}. In her thesis
 \cite{postniece_proof_2010} (Lemma 5.2.3), Postniece does a proof by recurrence
-on the depth of the derivation, relying on the fact that all introduction rules
-of \kl{DBiInt} preserve the principal formula; but this is precisely what we
-are trying to avoid with our version of the rules. Of course, if we either give
-up on this constraint or include contraction rules in \kl{B_{inv}}, then we
-immediately get our desired result: \kl{B_{inv}} is a fully invertible
-calculus, where the same fragments as system $\sysB$ capture \kl{intuitionistic},
+on the depth of the derivation, relying on the fact that all \kl{introduction
+rules} of \kl{DBiInt} preserve the principal formula; but this is precisely what
+we are trying to avoid with our version of the rules. Of course, if we either
+give up on this constraint or include \kl{contraction} rules in \kl{B_{inv}}, then we
+immediately get our desired result: \kl{B_{inv}} is a fully invertible calculus,
+where the same fragments as system $\sysB$ capture \kl{intuitionistic},
 \kl{dual-intuitionistic}, \kl{bi-intuitionistic} and \kl{classical} logic.
 
 \subsection{Semi-automated proof search}\labsubsec{bubbles-search}
@@ -249,11 +249,11 @@ reached:
 \end{description}
 
 \begin{remark}
-  By adopting $\mathbb{H}$-rules in the style of \kl{DBiInt}'s introduction
-  rules, we would make the \textbf{Decomposition} phase, and thus the whole
+  By adopting $\mathbb{H}$-rules in the style of \kl{DBiInt}'s \kl{introduction
+  rules}, we would make the \textbf{Decomposition} phase, and thus the whole
   procedure inoperable, since the \textbf{Linking} phase depends crucially on
-  it. Allowing contraction rules would also jeopardize the potential
-  completeness of the procedure, because contractions might be needed at
+  it. Allowing \kl{contraction} rules would also jeopardize the potential
+  completeness of the procedure, because \kl{contraction} might be needed at
   unpredictable moments, and on unpredictable formulas.
 \end{remark}
 
@@ -298,7 +298,7 @@ have the ability to perform \textbf{Decomposition} and \textbf{Linking} by hand
 
 \subsection{Failure of full iconicity}
 
-Because of the implicit contraction in the rules \rsf{{\limp}{-}} and
+Because of the implicit \kl{contraction} in the rules \rsf{{\limp}{-}} and
 \rsf{{\lsub}{+}}, one cannot fully decompose a formula into an equivalent
 solution by deterministically applying a sequence of $\mathbb{H}$-rules (and
 possibly $\mathbb{F}$-rules, to distribute positive conjunctions and negative
@@ -327,7 +327,7 @@ mapped to $S$, then $\psint{A} \semequiv \psint{S}$.
     {\Gamma, (\Delta, A \seq B) \seq C}
     {\Gamma, (\Delta \seq A \limp B) \seq C}
   $$
-  \caption{Left introduction rule for $\limp$ in \kl{JN}}
+  \caption{\kl{Left introduction rule} for $\limp$ in \kl{JN}}
   \labfig{jn-rule-e}
 \end{marginfigure}
 
@@ -335,12 +335,12 @@ This seems to be a fundamental limitation of system $\sysB$, caused by its
 symmetric treatment of implication and subtraction. For instance in the nested
 sequent calculus \kl{JN} of Guenot for implicative logic \cite[Chapter
 3]{guenot_nested_2013}, which is fully decomposable, nested sequents that appear
-in negative contexts are interpreted as implications, as illustrated by the left
-introduction rule \rsf{e} (\reffig{jn-rule-e}). But we cannot do this in system
-$\sysB$, because this would conflict with the subtractive reading of negative
-solutions, i.e. $\nsint{A \seq B} = \nsint{A} \lsub \nsint{B}$. In
+in negative contexts are interpreted as implications, as illustrated by the
+\kl{left introduction rule} \rsf{e} (\reffig{jn-rule-e}). But we cannot do this
+in system $\sysB$, because this would conflict with the subtractive reading of
+negative solutions, i.e. $\nsint{A \seq B} = \nsint{A} \lsub \nsint{B}$. In
 \refch{flowers}, the problem will also be solved through an asymmetric treatment
 of nested sequents, capturing only \kl{intuitionistic} logic instead of
 \kl{bi-intuitionistic} logic. But this is a small price to pay, since
-\kl{bi-intuitionistic} logic does not (currently) have any applications in the realm
-of interactive theorem proving.
+\kl{bi-intuitionistic} logic does not (currently) have any applications in the
+realm of interactive theorem proving.

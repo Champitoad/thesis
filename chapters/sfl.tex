@@ -25,7 +25,7 @@ click actions.
 
 \section{Linkages}\labsec{linkages}
 
-Like most rewriting systems on terms (that is, tree-shaped data), the rewrite
+Like most \kl{rewriting systems} on terms (that is, tree-shaped data), the rewriting
 rules of \reffig{DISL} and \reffig{DISL-U} apply at any depth inside formulas.
 However logically, the shape of the \emph{context} in which this rewriting
 occurs can provide important information, either to ensure soundness of the
@@ -143,7 +143,7 @@ informal up to now: that of \emph{logical} action and \emph{rewrite} action.
 By forgetting the information on which subterms are selected, one can see any
 \kl{linkage} as a formula whose topmost connective is a linking operator $\link \in
 \{\back,\forw\}$. Then it is natural to view \kl{linkages} as the redexes of the
-rewrite rules of \reffig{DISL}, although from the user's standpoint \kl{linkages}
+\kl{rewriting rules} of \reffig{DISL}, although from the user's standpoint \kl{linkages}
 only happen at the top level\sidenote{In fact this is more of a limitation of
 Actema's current interface: one cannot link two subterms that live in the same
 item, because dragging actions can only be performed on \emph{entire} items. But
@@ -170,7 +170,7 @@ subformulas $A$ and $A'$ are not unifiable. This is made possible by the
 addition of so-called \emph{release} rules\sidenote{A terminology coming from
 the line of works on \emph{focusing} in \kl{proof theory} \cite{andreoli1992}, see
 also \refsec{invert}.}, which simply turn linking operators into their
-associated logical connective. In our setting this would give the rewrite rules
+associated logical connective. In our setting this would give the \kl{rewriting rules}
 of \reffig{rellink}. However in this work we opt for a different approach:
 instead we define a \emph{validity criterion} on \kl{linkages}, which guarantees that
 they give rise to the behaviors described in the previous sections. The
@@ -421,9 +421,9 @@ One can check that all the examples given up to here were based on valid
 We are now equipped to specify how logical and \kl{rewrite linkages} translate
 deterministically to the \kl(dnd){backward} and \kl(dnd){forward} proof steps shown in all examples.
 
-First some remarks can be made about the rewrite rules of \reffig{DISL}:
+First some remarks can be made about the \kl{rewriting rules} of \reffig{DISL}:
 \begin{itemize}
-\item The set of rewrite rules is obviously non-confluent. 
+\item The set of \kl{rewriting rules} is obviously non-confluent. 
 \item It is also terminating, because the number of connectives or quantifiers
   under $\forw$ or $\back$ decreases\sidenote{Except for the \textsf{Fcomm} rule
   which is just meant to make the $\forw$ operator commutative; formally, the
@@ -480,14 +480,14 @@ All examples up to now followed the scheme for \kl{DnD} actions sketched in
 \refsec{aristote}:
 \begin{itemize}
   \item Given a blue item $A$ and a red item $B$, \kl(dnd){backward} proof steps produce a
-  new conclusion $C$ by applying a sequence of rewrite rules $A \back B \steps{}
+  new conclusion $C$ by applying a sequence of \kl{rewriting rules} $A \back B \steps{}
   C$.
   \item Given two blue items $A$ and $B$, \kl(dnd){forward} proof steps produce a new
-  hypothesis $C$ by applying a sequence of rewrite rules $A \forw B \steps{} C$.
+  hypothesis $C$ by applying a sequence of \kl{rewriting rules} $A \forw B \steps{} C$.
 \end{itemize}
 
 Thus for such actions to be logically sound, we have to make sure that our
-rewriting system satisfies the following property:
+\kl{rewriting system} satisfies the following property:
 
 \begin{theorem}[Soundness]\label{prop:soundness}
   \phantom{a}
@@ -557,7 +557,7 @@ consider the polarity of their context.
 \end{remark}
 
 
-An easy but important technical point is that rewrite rules preserve the
+An easy but important technical point is that \kl{rewriting rules} preserve the
 polarity of contexts around redexes, in the following precise sense:
 \begin{fact}[Polarity preservation]\label{prop:rules-preserve-polarity}
   \phantom{a}
@@ -575,7 +575,7 @@ polarity of contexts around redexes, in the following precise sense:
 
 Combining Lemma \ref{lemma:rules-valid-in-context} and Fact
 \ref{prop:rules-preserve-polarity}, we obtain the central soundness result
-about the rewrite rules:
+about the \kl{rewriting rules}:
 \begin{lemma}[Contextual soundness]\label{lemma:rewriting-valid-in-context}
   \phantom{a}
   \begin{itemize}
@@ -616,11 +616,11 @@ case where the rewriting starts in the (positive) empty context.
 
 % In the previous chapter, we showed how to associate a logical behaviour to
 % drag-and-drop actions involving two subterms in a sequent, by following a set of
-% rewrite rules on formulas. While we proved the soundness of these rules and a
+% \kl{rewriting rules} on formulas. While we proved the soundness of these rules and a
 % so-called \emph{productivity} property that makes them suitable for interactive
 % proof exploration, we left untreated a central question when doing proof theory:
 % \emph{completeness}. That is, can we prove any true statement using only these
-% rewrite rules? The answer is \emph{yes}, and \refsec{sfl-completeness} gives 
+% \kl{rewriting rules}? The answer is \emph{yes}, and \refsec{sfl-completeness} gives 
 
 % \section{Intuitionistic Completeness}\labsec{sfl-completeness}
 
@@ -638,7 +638,7 @@ ensures that we can proceed to the interaction step \ref{step:interaction}.
 
 %% This process of evidence-providing appears as a good measure of progress in the
 %% construction of a proof. In particular, it is stronger than the application of
-%% basic introduction rules such as those performed by PbP, since those only
+%% basic \kl{introduction rules} such as those performed by PbP, since those only
 %% capture the semantics of logical connectives, i.e. how they shape the
 %% superficial structure of the proof. Thus we call this property
 %% \emph{productivity}, and provide in the following an outline of its proof.
@@ -659,7 +659,7 @@ ensures that we can proceed to the interaction step \ref{step:interaction}.
 %%   By straightforward inspection of all rules except \rsf{id}.
 %% \end{proof}
 
-Because the rewrite rules are terminating, the important point is to show that
+Because the \kl{rewriting rules} are terminating, the important point is to show that
 one can always apply a rule until one reaches an interaction rule on the
 selected subterms. In other words, it is possible to find at least one rule
 which preserves Conditions \ref{cond:pol} and \ref{cond:unif} on \kl{linkages}:
@@ -694,7 +694,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
   $\exists x$), one checks whether the substitution instantiates $x$ or not. In
   the first case one performs the instantiation rule \rsf{L\forall i} or
   \rsf{F\forall i} (resp. \rsf{R\exists i}); in the second case the
-  corresponding switch rule in {\small $\{\mathsf{L\forall s}, \mathsf{R\forall
+  corresponding \kl{switch rule} in {\small $\{\mathsf{L\forall s}, \mathsf{R\forall
   s}, \mathsf{F\forall s}\}$} (resp. {\small $\{\mathsf{L\exists s},
   \mathsf{R\exists s}, \mathsf{F\exists s}\}$}).
 \end{itemize}
@@ -710,7 +710,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
     first case where $\mathcal{L} \syneq \select{A} \back \select{A}$.
 
     \item Otherwise, either $B\hole$ or $C\hole$ is non-empty. In the following,
-    we show that we can always apply a rewrite rule that produces a new, valid
+    we show that we can always apply a \kl{rewriting rule} that produces a new, valid
     \kl{linkage} $\mathcal{L'} \syneq B' \link' C'$.
     
     Let $\sigma$ and $\lvar$ be respectively the substitution and interleaving
@@ -727,7 +727,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
           \rsf{F\exists s})] Only if $x$ is not in the domain of $\sigma$. In
           \kl(dnd){forward} mode and when $B\square$ binds $x$, one must first apply the
           rule \rsf{Fcomm} to put $B\select{A}$ on the right of $\forw$, so
-          that the switch rule is applicable. Now we show that $\mathcal{L'}$ is
+          that the \kl{switch rule} is applicable. Now we show that $\mathcal{L'}$ is
           valid:
 
           \begin{enumerate}[itemsep=0.4em]
@@ -735,15 +735,15 @@ fundamentally difficult, but understandably verbose. The two main points are:
             \renewcommand{\theenumii}{\arabic{enumii}.}
 
             \item $\mathcal{L'}$ satisfies Condition \ref{cond:pol} trivially
-            since none of the switch rules changes the number of inversions.
+            since none of the \kl{switch rules} changes the number of inversions.
 
-            \item For each switch rule we can show, using the fact that $x$ is
+            \item For each \kl{switch rule} we can show, using the fact that $x$ is
             not in the domain of $\sigma$, that $\uvars(\mathcal{L'}) =
             \uvars(\mathcal{L})$. Since the selected formulas $A$ and $A'$ stay
             untouched by the rule, we can choose $\sigma$ as a valid unifier
             that ranges over $\uvars(\mathcal{L'})$.
             
-            \item In all switch rules, we have $\lvar(\mathcal{L'}) = \lvar'$
+            \item In all \kl{switch rules}, we have $\lvar(\mathcal{L'}) = \lvar'$
             because the quantifier of $x$ is moved in the outer context of the
             \kl{linkage}. Thus we can just take $\lvar'$ as interleaving, and
             Condition \ref{cond:unif} will still be verified because $\lvar'$ is
@@ -905,7 +905,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
 % Most of the magic occurs here, but by lack of space we had to move this proof to
 % appendix \ref{?}.
 Then we can state the following \emph{productivity theorem}, which is a direct
-consequence of the previous lemma and the fact that the rewrite rules
+consequence of the previous lemma and the fact that the \kl{rewriting rules}
 terminate:
 
 \begin{theorem}[Productivity]\labthm{productivity}
@@ -951,7 +951,7 @@ $\select{A}\lor B \back B\lor\select{A}$ one can apply either
 Interestingly, an answer is provided by {\em focusing}. It has been noticed by
 Andreoli~\sidecite{andreoli1992} that, in bottom-up proof search, one should
 apply the invertible logical rules first since they preserve provability. In our
-framework, this translates into first applying the invertible rewrite rules (the
+framework, this translates into first applying the invertible \kl{rewriting rules} (the
 ones marked by a *).
 % \sidenote{Hopefully at some point, detailed proofs of
 % non-invertibility for intuitionistic/classical logic based on counter-models
@@ -1032,7 +1032,7 @@ the mechanism of \emph{subformula linking} underlying \kl{DnD} actions is powerf
 enough to capture provability in \kl{FOL}. This has already been shown by Chaudhuri
 in \cite{Chaudhuri2013} for linear logic, and \cite{DBLP:conf/cade/Chaudhuri21}
 for \kl{intuitionistic} logic. Here we give a completeness proof for a system based
-on a slight extension of our rewrite rules, following ideas from these works.
+on a slight extension of our \kl{rewriting rules}, following ideas from these works.
 
 \begin{remark}
   What we prove in this section is a \emph{weak} form of completeness: we show
@@ -1068,7 +1068,7 @@ on a slight extension of our rewrite rules, following ideas from these works.
   \labfig{newlink}
 \end{marginfigure}
 
-To the rewrite rules of \reffig{DISL} and \reffig{DISL-U}, we add \emph{\kl{linkage}
+To the \kl{rewriting rules} of \reffig{DISL} and \reffig{DISL-U}, we add \emph{\kl{linkage}
 formation} rules (\reffig{newlink}), which are a deep generalization of \kl{linkage}
 creation between two formulas of a sequent. Rule {\rsf{B}} creates a
 \emph{\kl(dnd){backward}} \kl{linkage} between $\limp$-linked formulas in any positive context
@@ -1101,10 +1101,10 @@ C^-\select{D\select{A} \forw E\select{B}}$$ of {\rsf{F}} where $C^-\hole \syneq
 \end{marginfigure}
 
 Another necessary ingredient is the addition of a deep version of the
-\emph{structural rules} of \kl{sequent calculus}. We already have the {\rsf{Fcomm}}
-rule to handle commutativity of the $\forw$ operator, which acts as a kind of
-\emph{exchange} rule. Then we add the equivalent of \emph{contraction} and
-\emph{weakening} with the rules {\rsf{conn}} and {\rsf{weak}}
+\emph{\kl{structural rules}} of \kl{sequent calculus}. We already have the
+{\rsf{Fcomm}} rule to handle commutativity of the $\forw$ operator, which acts
+as a kind of \kl{exchange} rule. Then we add the equivalent of \kl{contraction}
+and \kl{weakening} with the rules {\rsf{conn}} and {\rsf{weak}}
 (\reffig{reslink}). These allow to erase and duplicate hypotheses at will, by
 identifying any subformula occurring in a negative context as a hypothesis. Thus
 once again we need to be careful about polarity, and cannot close these rules
@@ -1121,14 +1121,14 @@ under arbitrary contexts.
   \labfig{newreslink}
 \end{marginfigure}
 
-An alternative to the full contraction rule {\rsf{conn}} is to systematically
+An alternative to the full \kl{contraction} rule {\rsf{conn}} is to systematically
 duplicate negative formulas in the \kl{linkage} formation rules, giving the rules
 {\rsf{Bconn} and \rsf{Fconn}} of \reffig{newreslink}. This models more
 closely what we do in Actema, where hypotheses involved in a \kl{DnD} action are
 always preserved in the new goal. This is important from a usability standpoint,
 because this ensures the user needs not fret with manual duplication of
 hypotheses in order to complete a proof. The downside is that the context always
-grows bigger, but this can be balanced by exposing the weakening rule in the
+grows bigger, but this can be balanced by exposing the \kl{weakening} rule in the
 interface. In Actema it is mapped to a ``delete'' button placed next to every
 hypothesis (the little gray trashbin icons in \reffig{oneplusone}).
 % But for the purpose of completeness only, the weakening rule {\rsf{weak}}
@@ -1194,30 +1194,31 @@ of linking sub-sentences already present in the statement.
 \end{marginfigure}
 
 We chose the calculus \kl{G3i} from \cite{negri_structural_2001} as our basis,
-because all structural rules are admissible in it (but they would be
+because all \kl{structural rules} are admissible in it (but they would be
 straightforward to simulate apart from the cut rule). The first modification we
 do is that we model hypotheses in sequents as lists instead of multisets, to
 make the translation from sequents to formulas completely deterministic. Thus we
-need to add the exchange rule {\rnm{exch}}, which is simulated straightforwardly
-with the {\rsf{Fcomm}} rule as mentioned earlier. The second modification we
-do is adding introduction rules {\rnm{{=}R}} and {\rnm{{=}L}} for equality. The
-left introduction rule {\rnm{{=}L}} captures Leibniz's elimination scheme, and
-is in fact the rule {\rnm{Repl}} from \cite{negri_structural_2001} (modulo the
-fact that we use single-succedant instead of multi-succedant sequents). The
-right introduction rule {\rnm{{=}R}} is an axiomatic reflexivity rule, instead
-of the {\rnm{Ref}} rule from \cite{negri_structural_2001} (\reffig{ref-rule}).
-The reason is that we cannot simulate the latter directly without adding its
-equivalent rule {\rsf{ref}} to our calculus (\reffig{ref-rule}), which we do
-not want to do because it would break the subformula property. We conjecture
-that using {\rnm{{=}R}} instead of {\rnm{Ref}} does not break the cut
-admissibility theorem from \cite{negri_structural_2001}.
+need to add the \kl{exchange} rule {\rnm{exch}}, which is simulated
+straightforwardly with the {\rsf{Fcomm}} rule as mentioned earlier. The second
+modification we do is adding \kl{introduction rules} {\rnm{{=}R}} and
+{\rnm{{=}L}} for equality. The \kl{left introduction rule} {\rnm{{=}L}} captures
+Leibniz's elimination scheme, and is in fact the rule {\rnm{Repl}} from
+\cite{negri_structural_2001} (modulo the fact that we use single-succedant
+instead of multi-succedant sequents). The \kl{right introduction rule}
+{\rnm{{=}R}} is an axiomatic reflexivity rule, instead of the {\rnm{Ref}} rule
+from \cite{negri_structural_2001} (\reffig{ref-rule}). The reason is that we
+cannot simulate the latter directly without adding its equivalent rule
+{\rsf{ref}} to our calculus (\reffig{ref-rule}), which we do not want to do
+because it would break the subformula property. We conjecture that using
+{\rnm{{=}R}} instead of {\rnm{Ref}} does not break the cut admissibility theorem
+from \cite{negri_structural_2001}.
 
 % We could not find mention of such a rule in the literature, where instead people
 % use either a non-analytic rule\todo{cite nlab at
 % https://ncatlab.org/nlab/show/sequent+calculus}, a unification-based
 % rule\todo{cite Dale Miller's paper}, or the more traditional axiomatic
 % formulation of equality as a congruent equivalence relation instead of a left
-% introduction rule\todo{cite someone}. But our rule looks reasonable enough, so
+% \kl{introduction rule}\todo{cite someone}. But our rule looks reasonable enough, so
 % we did not attempt a formal justification of soundness/completeness that would
 % certainly lead us astray. The only problematic aspect would be if it breaks cut
 % admissibility. We conjecture it does not, and postpone an update of the cut
@@ -1516,13 +1517,13 @@ links\sidenote{The difference with matings is that correctness of a proof
 structure can be checked in \emph{polynomial} instead of exponential time.},
 because of the absence of duplication. This is because adding additives or
 exponentials, which can encode \kl{intuitionistic} and \kl{classical} logic, requires
-additional structure to represent uses of weakening and contraction. The
+additional structure to represent uses of \kl{weakening} and \kl{contraction}. The
 \emph{combinatorial proofs} of Hughes
 \sidecite{Hughes_2006,heijltjes_intuitionistic_2019} are examples of
 polynomially-checkable proof objects exhibiting such structure, and have
 recently been extended to handle \kl{first-order} \kl{classical} quantifiers
 \sidecite{hughes2019firstorder} (\kl{intuitionistic} quantifiers are still an open
-problem). This compartmentalization of axiom links and structural rules
+problem). This compartmentalization of axiom links and \kl{structural rules}
 resembles the distinction between interaction phases and manual applications of
 {\rsf{conn}} and {\rsf{weak}} (\reffig{reslink}), which is itself inspired by
 the \emph{decomposition theorem} of the \kl{calculus of structures}
@@ -1564,7 +1565,7 @@ notion of subformula linking, when viewing function and product types
 as implications and conjunctions through the formulae-as-types
 interpretation. He also devised a system of basic combinators which
 are composed sequentially to compute the result of a \kl{DnD}, though it
-follows a more complex dynamic than our rewrite rules. Even if the
+follows a more complex dynamic than our \kl{rewriting rules}. Even if the
 mapping between proofs and programs is not exact in this case, it
 suggests a possible interesting field of application for the
 Curry-Howard correspondance, in the realm of graphical

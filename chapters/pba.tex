@@ -236,7 +236,7 @@ A \kl(dnd){backward} step involves a hypothesis, here $\forall x.\-\human(x)
 Furthermore, the action actually links together two {\em subterms} of each of
 these items; this is written by squaring these subterms. The \kl{symbol} ${\back}$,
 used as an operator, is meant to describe the result of the interaction.
-Internally, the behavior of this operator is defined by a set of rewrite rules
+Internally, the behavior of this operator is defined by a set of \kl{rewriting rules}
 given in \reffig{DISL} and \reffig{DISL-U}. Here is the sequence of
 rewrites corresponding to the example\sidenote{Note that $\back$ has lower
 precedence than all logical connectives.}: \renewcommand{\arraystretch}{1.1}
@@ -260,7 +260,7 @@ Notice that:
 \item   These elementary rewrites are not visible for the user. What she sees is
   the final result of the action, that is the last expression of the rewrite
   sequence.
-\item The definitions of the rewrite rules in \reffig{DISL} and
+\item The definitions of the \kl{rewriting rules} in \reffig{DISL} and
   \reffig{DISL-U} do not involve squared subterms. The information of which
   subterms are squared is only used by the system to decide which rules to
   apply in which order.
@@ -283,8 +283,8 @@ $$
   \end{array}
 $$
 
-The final result is the new hypothesis. We come back to the study of the rewrite
-rules of ${\back}$ and ${\forw}$ in \refch{sfl}.
+The final result is the new hypothesis. We come back to the study of the \kl{rewriting
+rules} of ${\back}$ and ${\forw}$ in \refch{sfl}.
 
 
 \section{Proof steps through clicks}\labsec{clicks}
@@ -313,18 +313,19 @@ drag-and-drop actions.
 \item Clicking on a red equality $t = t$ solves the goal immediately.
 \end{itemize}
 
-One can see that these actions correspond essentially to the (right)
-introduction rules of the head connective for the conclusion, and either the
-elimination rule from \kl{NJ} or the left introduction rule from \sys{LJ} for
-hypotheses. The exact mapping between click actions and \kl{inference rules} is
-given in \reftab{click-rules}. A few remarks are in order:
+One can see that these actions correspond essentially to the \kl{right
+introduction rules} of the head connective for the conclusion, and either the
+\kl{elimination rule} from \kl{NJ} or the \kl{left introduction rule} from
+\sys{LJ} for hypotheses. The exact mapping between click actions and
+\kl{inference rules} is given in \reftab{click-rules}. A few remarks are in
+order:
 \begin{itemize}
   \item In the current implementation of Actema, clicking on a blue item $A
   \limp B$ will work only if the conclusion is $B$. An alternative is to use the
   {\rsf{{\limp}L}} rule from \kl{sequent calculus}, which is applicable in every
   context.
   \item There is no action mapped to red $\bot$ items, simply because $\bot$
-  does not have any introduction rule.
+  does not have any \kl{introduction rule}.
   \item There is currently no action mapped to blue $∀$ and red $∃$ items. The
   reason is that one needs additional information about the \emph{witness} to be
   used when instantiating with the $∀L$ or $∃R$ rule. This could be provided

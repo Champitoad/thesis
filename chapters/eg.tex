@@ -60,8 +60,8 @@ the diagrammatic syntax of the system \kl{Alpha} of \kl{EGs} for \kl{classical}
 propositional logic. In \refsec{illative}, we introduce the \kl{inference rules} of
 \kl{Alpha} for manipulating \kl{existential graphs}, called \emph{illative
 transformations} by Peirce. In \refsec{multisets}, we give an equivalent
-formulation of the syntax and rules of \kl{Alpha} as a \emph{multiset} rewriting
-system. In \refsec{atomicity}, we formalize a variant of the (de)iteration
+formulation of the syntax and rules of \kl{Alpha} as a \emph{multiset} \kl{rewriting
+system}. In \refsec{atomicity}, we formalize a variant of the (de)iteration
 principle described by Peirce in \sidecite{peirce_prolegomena_1906} that
 eliminates the need for the double-\kl{cut} principle, and discuss how it was
 motivated by Peirce's quest for \emph{illative atomicity}. In
@@ -206,7 +206,7 @@ them.
 Now, it is well-known that $\{\land,\neg\}$ is \emph{functionally complete},
 meaning that any boolean truth function can be expressed as the composition of
 boolean conjunctions and negations. In particular, the \kl{symbolic} definitions of
-falsehood $\bot \defeq \neg\top$, \kl{classical} disjunction $A \lor B \defeq
+absurdity $\bot \defeq \neg\top$, \kl{classical} disjunction $A \lor B \defeq
 \neg(\neg A \land \neg B)$ and \kl{classical} implication $A \limp B \defeq \neg (A
 \land \neg B)$ can be expressed by the following three \kl{graphs}\sidenote{Note the
 resemblance with the translation of formulas as \kl{solutions} in
@@ -370,7 +370,7 @@ of any polarity:
     (\reffig{sequent-B-inv}).}.
     
     Compared to \kl{sequent calculus}, it can be seen as a deep generalization of the
-    \emph{contraction} rule, the base case where $H\hole = \hole$ giving $G~G
+    \emph{\kl{contraction}} rule, the base case where $H\hole = \hole$ giving $G~G
     ~\step{}~ G$.
 \end{itemize}
 The applicability of the next two rules depends on the polarity of the
@@ -379,9 +379,9 @@ The applicability of the next two rules depends on the polarity of the
   \item[\textbf{Insertion}]
     Any \kl{graph} $G$ may be inserted in a negative area:
     $$\nsheet{~~~\step{}~~~ G}$$
-    This is akin to a \emph{weakening} rule, stating that if a proposition is
+    This is akin to a \emph{\kl{weakening}} rule, stating that if a proposition is
     known to be true, one might add (useless) hypotheses at will. The closest
-    equivalent we found in the \kl{deep inference} literature is indeed the weakening
+    equivalent we found in the \kl{deep inference} literature is indeed the \kl{weakening}
     rule \kl{wl{\da}} of \kl{ISp} in \sidecite{tiu_local_2006}.
   \item[\textbf{Deletion}]
     Any \kl{graph} $G$ occurring in a positive area may be erased:
@@ -529,7 +529,7 @@ the definitions of bubbles (enclosures) and solutions (areas)
 is that in the former formulas (ions) are restricted to atoms (spots), and they
 are not \emph{polarized} (see \refremark{eg-polarity}).
 
-The five rules of \kl{Alpha} can now be formalized as multiset rewriting rules
+The five rules of \kl{Alpha} can now be formalized as multiset \kl{rewriting rules}
 on \kl{graphs}. But first, we need a notion of \emph{context} in which rules
 apply:
 
@@ -1247,8 +1247,8 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
   \end{array}
   $$
 
-  Then onto weakening $\{\kl{aw{\da}},\kl{aw{\ua}}\}$ and
-  contraction
+  Then onto \kl{weakening} $\{\kl{aw{\da}},\kl{aw{\ua}}\}$ and
+  \kl{contraction}
   $\{\kl{ac{\da}},\kl{ac{\ua}},\kl{nm{\da}},\kl{nm{\ua}}\}$:
   $$
   \begin{array}{r@{\mt}l@{\qquad\qquad}r@{\mt}l@{\vsp}}
@@ -1309,7 +1309,7 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
   \end{array}
   $$
   
-  For the switch rule \kl{s}, we give two dual derivations: the first uses the
+  For the \kl{switch rule} \kl{s}, we give two dual derivations: the first uses the
   rules \kl{Deit} and \kl{Ins} to move $U$ \emph{into} the \kl{cuts} enclosing $T$,
   while the second uses the rules \kl{Del} and \kl{Iter} to move $S$ \emph{out
   of} the \kl{cuts} of $T$.

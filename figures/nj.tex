@@ -1,41 +1,41 @@
   \begin{framed}
   \begin{mathpar}
-  \R[\rsf{\bot e}]
+  \R[\intro{\bot e}]
   {\bot}
   {A}
   \and
-  \prftree[r][l]{\rsf{{\limp}i}}{\small[\prfref<H1>]}
+  \prftree[r][l]{\intro{{\limp}i}}{\small[\prfref<H1>]}
   {\summ
     {\Gamma, \prfboundedassumption<H1>{A}}
     {B}}
   {A \limp B}    
   \and
-  \R[\rsf{{\limp}e}]
+  \R[\intro{{\limp}e}]
   {A}
   {A \limp B}
   {B}
   \\
-  \R[\rsf{\land i}]
+  \R[\intro{\land i}]
   {A}{B}
   {A \land B}
   \and
-  \R[\rsf{\land e_1}]
+  \R[\intro{\land e_1}]
   {A \land B}
   {A}
   \and
-  \R[\rsf{\land e_2}]
+  \R[\intro{\land e_2}]
   {A \land B}
   {B}
   \\
-  \R[\rsf{\lor i_1}]
+  \R[\intro{\lor i_1}]
   {A}
   {A \lor B}
   \and
-  \R[\rsf{\lor i_2}]
+  \R[\intro{\lor i_2}]
   {B}
   {A \lor B}
   \and
-  \prftree[r][l]{\rsf{\lor e}}{\small[\prfref<H1>,\prfref<H2>]}
+  \prftree[r][l]{\intro{\lor e}}{\small[\prfref<H1>,\prfref<H2>]}
   {A \lor B}
   {\summ
     {\Gamma, \prfboundedassumption<H1>{A}}
@@ -45,24 +45,24 @@
     {C}}
   {C}
   \\
-  \R[\rsf{\forall i}]
+  \R[\intro{\forall i}]
   {\summ{\Gamma}{A}}
   {\forall x. A}
   \and
-  \R[\rsf{\forall e}]
+  \R[\intro{\forall e}]
   {\forall x. A}
   {\subst{A}{t}{x}}
   \and
-  \R[\rsf{\exists i}]
+  \R[\intro{\exists i}]
   {\subst{A}{t}{x}}
   {\exists x. A}
   \and
-  \R[\rsf{\exists e}]
+  \R[\intro{\exists e}]
   {\exists x. A}
   {\summ{\Gamma, A}{C}}
   {C}
   \vspace{1em}
   \end{mathpar}
-  In the rules \rsf{\forall i} and \rsf{\exists e}, $x$ must not occur free in
+  In the rules \kl{\forall i} and \kl{\exists e}, $x$ must not occur free in
   $\Gamma$ and $C$.
   \end{framed}

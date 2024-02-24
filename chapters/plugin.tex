@@ -544,7 +544,7 @@ briefly describe.
 \subsection{Deep inference semantics}
 
 In a \kl{deep inference} setting, one can reason on subterms located arbitrarily
-\emph{deep} inside statements, usually by applying some kind of rewriting rules
+\emph{deep} inside statements, usually by applying some kind of \kl{rewriting rules}
 on them. In particular, the semantics of \kl{DnD} actions described in \refch{sfl}
 are based on the rules of SFL (\reffig{DISL}). To implement them, we chose to do
 a \emph{deep embedding} of \kl{first-order logic} inside the logic of Coq, the
@@ -552,7 +552,7 @@ Calculus of Inductive Constructions (\kl{CoIC} hereafter). Here the word
 ``deep'' has a different meaning, related to the fact that we encode the
 statements of \kl{first-order logic} with our own custom datatypes, instead of
 reusing the statements of \kl{CoIC}. This makes it easier to define the SFL
-rewrite rules, in particular because we need to manipulate \emph{contexts}
+\kl{rewriting rules}, in particular because we need to manipulate \emph{contexts}
 (Definition \ref{def:formula-context}) explicitly, and those are not available
 for \kl{CoIC} propositions.
 
@@ -570,11 +570,11 @@ is a different story for the \texttt{reify} function, especially in our case:
 indeed we want to translate the statements of Coq goals into \kl{first-order}
 propositions. But Coq statements are objects of type \texttt{Prop}, and thus
 cannot be pattern-matched on inside \kl{CoIC}\sidenote{For reasons of
-consistency of the logic, well-known in the literature on type theory.}. Thus we
-need to have recourse to a \emph{meta-programming} language in order to inspect
-the structure of Coq goals. Here we use the standard {\ltac} language, which
-provides powerful constructs for pattern-matching on goals\sidenote{A downside
-of {\ltac} is that it is an \emph{untyped} language, whose programs are
+\kl{consistency} of the logic, well-known in the literature on type theory.}.
+Thus we need to have recourse to a \emph{meta-programming} language in order to
+inspect the structure of Coq goals. Here we use the standard {\ltac} language,
+which provides powerful constructs for pattern-matching on goals\sidenote{A
+downside of {\ltac} is that it is an \emph{untyped} language, whose programs are
 notoriously hard to debug and maintain. One might consider a cleaner
 implementation with more recent alternatives in the Coq ecosystem, like the
 successor to {\ltac} Ltac2 \cite{Ltac2}, or the MetaCoq project
@@ -588,7 +588,7 @@ the new hypothesis $\mathtt{f3}(p, q, T)$ from a \kl(dnd){forward} \kl{linkage} 
 where $T$ is the so-called \emph{subformula linking trace} mentioned earlier. Of
 course the paths $p, q$ and the trace $T$ are all expressed with custom Coq
 datatypes relying on our deep embedding of \kl{first-order logic}. The role of the
-trace in particular is to provide the list of SFL rewrite rules to apply,
+trace in particular is to provide the list of SFL \kl{rewriting rules} to apply,
 including Coq terms instantiating quantifiers that were computed in Actema by
 unification of the two linked subformulas. Then we formulate in Coq two theorems
 that guarantee the logical \emph{soundness} of \texttt{b3} and \texttt{f3}
@@ -619,7 +619,7 @@ that \texttt{reflect} is the inverse of \texttt{reify}.
   implementing various \kl{calculi of structures} inside frameworks like Maude
   \cite{kahramanogullari_maude_2008} and Tom
   \cite{kahramanogullari_implementing_2005}, that are dedicated to the
-  specification of rewriting systems. For an integration within modern \kl{proof
+  specification of \kl{rewriting systems}. For an integration within modern \kl{proof
   assistants}, we only know of Chaudhuri's recent work
   \sidecite{chaudhuri_certifying_2022} that explores different techniques in
   addition to reflection, like \emph{combinators} and some more powerful usages

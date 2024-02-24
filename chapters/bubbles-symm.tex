@@ -11,7 +11,7 @@ him, we will uncover beautiful dualities that were hidden by the asymmetry of
 the initial calculus. But by sticking unwaveringly to intuitionism, we will be
 led to the exotic territory of \kl{bi-intuitionistic} logic, an intermediate
 logic that conservatively extends \kl{intuitionistic} logic, but does not prove the
-law of excluded middle. An underlying thread of our investigation will be the
+\kl{law of excluded middle}. An underlying thread of our investigation will be the
 quest for a \emph{fully \kl{iconic}} \kl{proof system}, where all logical connectives
 can be replaced by appropriate (new) kinds of bubbles. This will lead us to
 rediscover many principles already studied in the \kl{deep inference}
@@ -22,7 +22,7 @@ their ability to \emph{factorize} both \kl{forward} and \kl{backward} proof step
 prove useful to build concise proofs, all through direct manipulation.
 
 The chapter is organized as follows: in \refsec{non-determinism} we motivate our
-quest for a system where all introduction rules for logical connectives are
+quest for a system where all \kl{introduction rules} for logical connectives are
 \emph{invertible}, to reduce non-determinism in proof search and enable a fully
 \emph{\kl{iconic}} approach to proof building. To that effect, we relax in
 \refsec{branching} the restriction to single-conclusion solutions, which
@@ -50,7 +50,7 @@ system $\sysB$ from being fully \kl{iconic}.
 
 % In \refsec{invertible-calculus} we present a fully invertible variant of system
 % \kl{B}, whose completeness follows naturally from the proof of
-% \refsec{bubbles-completeness}. Despite the invertibility of introduction rules,
+% \refsec{bubbles-completeness}. Despite the invertibility of \kl{introduction rules},
 % it turns out that this variant does not satisfy the \emph{decomposability}
 % property. We fix this defect in \refsec{decomposable-calculus} with another
 % variant of the system conjectured complete, finally achieving full iconicity.
@@ -73,7 +73,7 @@ received less attention in the setting of \kl{FOL}, probably because it is
 In all known \kl{sequent calculus} formulations of \kl{intuitionistic} logic, there are at
 least two rules which are invariably \emph{non-invertible}:
 \begin{enumerate}
-  \item a left introduction rule for $\limp$ (there might be many ones, as in
+  \item a \kl{left introduction rule} for $\limp$ (there might be many ones, as in
   the calculus \kl{LJT} of \sidecite{dyckhoff_contraction-free_1992});
   \item the right introduction for either:
     \begin{itemize}
@@ -89,13 +89,13 @@ proofs.
 
 In his thesis \cite{guenot_nested_2013}, Guenot introduced a specific kind of
 nested sequent system, where like in \kl{BJ} \kl{inference rules} can be expressed
-as rewriting rules. An interesting feature of these systems is that they satisfy
-a \emph{decomposability} property: all introduction rules for connectives are
+as \kl{rewriting rules}. An interesting feature of these systems is that they satisfy
+a \emph{decomposability} property: all \kl{introduction rules} for connectives are
 \emph{invertible}, and formulas can be completely decomposed with them until
-atoms are reached, before applying other rules. Thus introduction rules are
+atoms are reached, before applying other rules. Thus \kl{introduction rules} are
 \emph{admissible} in these systems, because every formula can be translated into
 an equivalent pure nested sequent with the same number of atoms\sidenote{As far
-as we know, the admissibility of introduction rules is not proved, let alone
+as we know, the admissibility of \kl{introduction rules} is not proved, let alone
 mentioned in \cite{guenot_nested_2013}. This is our own observation which lacks
 a proper formal proof, and is thus subject to caution.}. Non-determinism then
 arises in the choice of atoms that are to be connected in axioms, as well as the
@@ -126,7 +126,7 @@ concept of bubble.}.
 The first direction we followed was to relax the constraint that solutions must
 be single-conclusion. Indeed as already noted in \refsec{sfl-backtracking}, a
 notable property of \kl{sequent calculi} with multiple conclusions is that their
-right introduction rule for $\lor$ is invertible.
+\kl{right introduction rule} for $\lor$ is invertible.
 
 The main difficulty lies in the way one should interpret a multi-conclusion
 solution $S$ as a formula $\sint{S}$. If we just take the asymmetric
@@ -149,7 +149,7 @@ find a contradiction in $\Gamma$; which is obviously not what we have in mind.
     {\Gamma \seq B, \Delta}
     {\Gamma \seq A \land B, \Delta}
   $$
-  \caption{Multi-conclusion right introduction rule for conjunction}
+  \caption{Multi-conclusion \kl{right introduction rule} for conjunction}
   \labfig{multi-and-intro}
 \end{marginfigure}
 
@@ -240,8 +240,8 @@ uses twice the equivalence $(A \limp B) \lor C \semequiv A \limp (B \lor C)$. It
 turns out that this equivalence is true in \kl{classical} logic, but \emph{not} in
 \kl{intuitionistic} logic. More precisely, it is the implication $G \defeq (A \limp
 (B \lor C)) \limp ((A \limp B) \lor C)$ which is not provable
-\kl{intuitionistically}, since it can easily be shown equivalent to the law of
-excluded middle\sidenote{This was already noticed in
+\kl{intuitionistically}, since it can easily be shown equivalent to the \kl{law of
+excluded middle}\sidenote{This was already noticed in
 \cite{clouston-annotation-free-2013}, with the linear version $(A \multimap (B
 \parr C)) \multimap ((A \multimap B) \parr C)$ of $G$ called Grishin (a) and its
 converse Grishin (b). More precisely, it is affirmed that while Grishin (b) is
@@ -423,16 +423,17 @@ $\lor$.}), whose heating rules are those of $\limp$ with swapped colors
 \end{marginfigure}
 
 Not very surprisingly, the exclusion connective has already been studied in the
-literature on \kl{intuitionistic} logic, starting with the seminal paper of Rauszer
-on \emph{Heyting-Brouwer logic}, i.e. \kl{intuitionistic} logic to which we add
-exclusion \sidecite{Rauszer1974-RAUSAA}. In this paper, exclusion was called
-\emph{pseudo-difference}, to evoke its close connection with set-theoretical
-difference. Indeed given two sets $A$ and $B$, one can define the set $A
-\setminus B$ by comprehension as $\{x \mid x \in A \land x \not\in B\}$, which
-is the set $A$ from which all elements of $B$ have been \emph{excluded}. With an
-interpretation in boolean algebras, this corresponds to the \kl{classical} connective
-defined by the truth table of $A \land \neg B$, which is dual to the truth table
-of $\neg A \lor B$ defining material implication.
+literature on \kl{intuitionistic} logic, starting with the seminal paper of
+Rauszer on \emph{Heyting-Brouwer logic}, i.e. \kl{intuitionistic} logic to which
+we add exclusion \sidecite{Rauszer1974-RAUSAA}. In this paper, exclusion was
+called \emph{pseudo-difference}, to evoke its close connection with
+\kl{set-theoretical} difference. Indeed given two sets $A$ and $B$, one can
+define the set $A \setminus B$ by comprehension as $\{x \mid x \in A \land x
+\not\in B\}$, which is the set $A$ from which all elements of $B$ have been
+\emph{excluded}. With an interpretation in boolean algebras, this corresponds to
+the \kl{classical} connective defined by the truth table of $A \land \neg B$,
+which is dual to the truth table of $\neg A \lor B$ defining material
+implication.
 
 While the first paper of Rauszer \cite{Rauszer1974-RAUSAA} belongs to the Polish
 tradition of algebraic logic, she also explored in later works the
@@ -606,18 +607,19 @@ of priorization relatively to the latter:
     
     Our conception of locality is related to all the previous ones, although it
     is guided by the idea of direct manipulation of logical entities by humans,
-    rather than purely \kl{proof-theoretical} considerations. For instance, \kl{BJ}
-    has some locality in the \kl{deep inference} sense because all rules are
-    applicable in arbitrary contexts; but we relax the \emph{atomicity}
+    rather than purely \kl{proof-theoretical} considerations. For instance,
+    \kl{BJ} has some locality in the \kl{deep inference} sense because all rules
+    are applicable in arbitrary contexts; but we relax the \emph{atomicity}
     constraint that reduces $\mathbb{I}$-rules and $\mathbb{R}$-rules to their
     atomic version, because it would be unnecessarily restrictive for the
     purpose of building proofs manually. Still, we want to avoid as much as
     possible referring to generic objects that are not directly related to the
     manipulated data, in the spirit of Girard's locality. A typical example is
-    the elimination rule for disjunction in \kl{natural deduction}, corresponding to
-    the {\rsf{{\lor}{-}}} rule of \kl{BJ} that involves an arbitrary
-    conclusion $\Delta$. The benefits of locality from a UX point of view have
-    already been discussed at the end of \refsec{bubbles-pba}.
+    the \kl{elimination rule} \kl{\lor e} for disjunction in \kl{natural
+    deduction}, corresponding to the {\rsf{{\lor}{-}}} rule of \kl{BJ} that
+    involves an arbitrary conclusion $\Delta$. The benefits of locality from a
+    UX point of view have already been discussed at the end of
+    \refsec{bubbles-pba}.
   \item[Linearity] 
     We consider an \kl{inference rule} to be \emph{linear} when it preserves the
     number of atomic formulas in solutions. This is a strong requirement, which
@@ -649,19 +651,20 @@ of priorization relatively to the latter:
     than through the arbitrary restriction of sequents to one
     conclusion\sidenote{Whether it is enforced in the syntax of sequents
     themselves, or through restriction on rules that manipulate conclusions like
-    contraction or the introduction rule for $\limp$.}. Our treatment of
-    \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic through blue bubbles is
-    also motivated by this quest for symmetry. It should be noted that although
-    we use naming conventions for rules that resemble those of \kl{CoS} (e.g.
-    with the identity rules), we do not aim for a perfect symmetry where one can
-    get a complete calculus by simply taking the dual of each rule.
+    \kl{contraction} or the \kl{right introduction rule} for $\limp$.}. Our
+    treatment of \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic
+    through blue bubbles is also motivated by this quest for symmetry. It should
+    be noted that although we use naming conventions for rules that resemble
+    those of \kl{CoS} (e.g. with the identity rules), we do not aim for a
+    perfect symmetry where one can get a complete calculus by simply taking the
+    dual of each rule.
     % \sidenote{In fact it is not even clear what would be the dual of a
     % solution, but the {\rsf{i{\da}}} and {\rsf{i{\ua}}} rules
     % suggest that open and closed solutions may be dual to eachother.}
     Thus we will content ourselves with the hypothesis/conclusion symmetry
     coming from \kl{sequent calculus}. Interestingly, the calculus \kl{ISgq} of Tiu
     for \kl{intuitionistic} \kl{predicate logic} does the opposite, by having a perfect
-    dual system \kl{cISgq} but no symmetries among its switch rules (the
+    dual system \kl{cISgq} but no symmetries among its \kl{switch rules} (the
     equivalent of our flow rules) \cite{tiu_local_2006}.
 \end{description}
 

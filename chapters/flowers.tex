@@ -23,7 +23,7 @@ nested sequents of \kl{deep inference} \kl{proof theory}, and the geometric/cohe
 formulas of categorical logic. A salient feature of our calculus inherited from
 \kl{EGs}, is that it is \emph{fully \kl{iconic}}: it dispenses completely with
 the traditional notion of \kl{symbolic} formula, operating instead as a
-rewriting system on flowers containing only atomic predicates. We also propose a
+\kl{rewriting system} on flowers containing only atomic predicates. We also propose a
 notion of proof geared towards analyticity results à la Gentzen, suggesting new
 rules absent from other works on \kl{intuitionistic} \kl{EGs}. This allows us to
 prove admissibility theorems for many rules, including Peirce's deletion rule
@@ -861,7 +861,7 @@ providing an explanation for the scope of binders (\refremark{flower-scope}).
 \paragraph{Rules}
 
 As has become standard in this thesis, we define the flower calculus as a
-\emph{rewriting system} on bouquets, presented in \reffig{flower-calculus} as a
+\emph{\kl{rewriting system}} on bouquets, presented in \reffig{flower-calculus} as a
 set of unary \kl{deep inference} rules: when read \emph{top-down}, they correspond to
 usual inferences from premiss to conclusion, and will be justified by the
 soundness theorem of \refsec{Soundness}.
@@ -870,7 +870,7 @@ soundness theorem of \refsec{Soundness}.
 % \emph{after the fact}.
 But the more interesting direction, and the one around which the calculus has
 been designed, is when you read the rules \emph{bottom-up}: then they are indeed
-rewrite rules, telling you the different ways in which you can choose to
+\kl{rewriting rules}, telling you the different ways in which you can choose to
 simplify a goal. This is how the \emph{graphical} version of the rules is
 presented in \reffig{natural-graphical} and \reffig{cultural-graphical}.
 % Note that in the graphical presentation, the rules
@@ -955,7 +955,7 @@ a direct adaptation of the rules of \kl{Beta} (\reffig{beta}):
 
 The last two rules mainly handle the behavior of disjunctive and absurd
 statements, i.e. flowers with respectively $n \geq 2$ and $n = 0$ petals, and
-are closer to sequent-style introduction/elimination rules:
+are closer to sequent-style introduction/\kl{elimination rules}:
 
 \begin{description}
   \item[Disjunction Introduction (\rsf{epet})]
@@ -967,17 +967,18 @@ are closer to sequent-style introduction/elimination rules:
     came up with this rule when trying to design a decision procedure for
     flowers (see \refsec{flowers-search}).
 
-  \item[Disjunction/Falsity Elimination (\rsf{srep})]
-    It corresponds to a $n$-ary generalization of the left introduction rule for
-    disjunction in \kl{sequent calculus}, the $0$-ary case capturing falsity
-    elimination (\textit{ex falso quodlibet}). The binary case is also used in
-    the \kl{IEGs} system of \cite{minghui_graphical_2019}, together with its converse.
-    The name \rsf{srep} is short for \textsf{(s)}elf-\textsf{(rep)}roduction,
-    which is more clearly visualized in the graphical version of the rule in
-    \reffig{natural-graphical}. Through the Curry-Howard correspondence, it can
-    be related to the \emph{pattern-matching generator} found in modern editors
-    of some functional programming languages, such as the Hazel structure editor
-    and the Agda \kl{proof assistant} \sidecite{yuan-live-2023}.
+  \item[Disjunction/Absurdity Elimination (\rsf{srep})]
+    It corresponds to a $n$-ary generalization of the \kl{left introduction
+    rule} for disjunction in \kl{sequent calculus}, the $0$-ary case capturing
+    absurdity elimination (\textit{ex falso quodlibet}). The binary case is also
+    used in the \kl{IEGs} system of \cite{minghui_graphical_2019}, together with
+    its converse. The name \rsf{srep} is short for
+    \textsf{(s)}elf-\textsf{(rep)}roduction, which is more clearly visualized in
+    the graphical version of the rule in \reffig{natural-graphical}. Through the
+    Curry-Howard correspondence, it can be related to the \emph{pattern-matching
+    generator} found in modern editors of some functional programming languages,
+    such as the Hazel structure editor and the Agda \kl{proof assistant}
+    \sidecite{yuan-live-2023}.
 \end{description}
 
 \begin{table}
@@ -1567,7 +1568,7 @@ Corollary \ref{cor:eg-functoriality}.}:
 
 Weakening lemmas are also standard in \kl{proof theory} and type theory. Here they
 are purely semantic, but they will participate in the admissibility of the
-weakening rules $\{\rsf{grow},\rsf{crop},\rsf{pull},\rsf{glue}\}$:
+\kl{weakening} rules $\{\rsf{grow},\rsf{crop},\rsf{pull},\rsf{glue}\}$:
 
 \begin{lemma}[Weakening]\lablemma{flowers-weakening}
   $\Phi \kentails{}\emptyset$.
@@ -1982,7 +1983,7 @@ for standard \kl{proof systems} that can be found in the literature. Indeed, mos
 them exploit the transitivity of syntactic entailment $\entails{}$, and more
 precisely the fact that it is easily shown syntactically with the help of a
 non-analytic principle for composing proofs: in Hilbert systems it is the rule
-of \emph{modus ponens} \kl{mp}, in \kl{sequent calculi} the \kl(rule){cut} rule, and
+of \kl{modus ponens} \kl{mp}, in \kl{sequent calculi} the \kl(rule){cut} rule, and
 in \kl{natural deduction} the \emph{substitution theorem}.
 
 Fortunately as mentioned in \refsec{Semantics}, a few people have noticed that
@@ -2446,7 +2447,7 @@ recurring idea in this thesis.
 Then, two atomic occurrences can interact when their contexts can. In the
 (linear) \kl{classical} setting of \cite{lmcs:1089}, there is no preferred direction
 in the information flow between two interacting atoms, which can be seen as the
-essence of the (linear) law of excluded middle $A \parr A^\bot$. However in our
+essence of the (linear) \kl{law of excluded middle} $A \parr A^\bot$. However in our
 \kl{intuitionistic} setting, implication forces a direction from premisses to
 conclusions, which is reflected in our distinction between the symmetric
 cross-interaction relation $\cinter$, and the asymmetric self-interaction
@@ -2727,7 +2728,8 @@ of the \refproc{lifecycle} procedure:
 
 \begin{figure*}
   \input{figures/flowers-lifetrace.tex}
-  \caption{Life traces for modus ponens (left) and identity expansion of disjunction (right)}
+  \caption{Life traces for \kl{modus ponens} (left) and identity expansion of
+  disjunction (right)}
   \labfig{lifetrace}
 \end{figure*}
 
@@ -3356,8 +3358,8 @@ linear logic \sidecite{andreoli1992}. Indeed, both rules duplicate a formula
 available in the (non-linear) context of the sequent/location where the rule is
 applied, in order to enable further usage of the formula at said location. While
 the absorption rule removes the need for permutation-equivalences between proofs
-involving the \emph{contraction} rule, the identity rule $[I]$ of $\Sigma_2$
-removes the need for the \emph{weakening} rule by discarding the non-linear
+involving the \emph{\kl{contraction}} rule, the identity rule $[I]$ of $\Sigma_2$
+removes the need for the \emph{\kl{weakening}} rule by discarding the non-linear
 context in one go, just as the \rsf{epet} rule of the flower calculus renders
 the \rsf{crop} rule admissible.
 
@@ -3376,7 +3378,7 @@ same structure as flowers
 \cite[Definition~4.2]{brock-nannestad_intuitionistic_2019}. However, the \kl{sequent
 calculus} \kl{HS} based on them makes the tradeoff opposite to that of the
 natural fragment $\Nature$ of the flower calculus: every \kl{inference rule} is
-\emph{non}-invertible, but the calculus is contraction-free. One advantage of
+\emph{non}-invertible, but the calculus is \kl{contraction}-free. One advantage of
 this tradeoff is that they can easily show termination of proof search, while we
 have not found a terminating procedure yet for the flower calculus. The authors
 also mention that \kl{HS} could be turned into a \kl{deep inference} calculus in the
@@ -3481,7 +3483,7 @@ sense coined by the \kl{deep inference} community with systems like \kl{SKS} (se
 conjecture that the \rsf{poll{\da}} and \rsf{poll{\ua}} rules can be restricted
 respectively to atomic and non-atomic flowers. But this is less satisfying than
 in the \kl{calculus of structures}, where one component of \rsf{poll{\ua}}, the
-duplicating \emph{contraction} rule, can be restricted to atomic formulas. This
+duplicating \emph{\kl{contraction}} rule, can be restricted to atomic formulas. This
 probably comes from the fact that \rsf{poll{\ua}} also serves the purpose of
 \emph{moving} flowers deeper, as witnessed by the \kl{DnD} \Action{Import} action of
 the Flower Prover: in the \kl{calculus of structures}, this role is fulfilled by

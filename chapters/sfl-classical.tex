@@ -23,14 +23,14 @@ $$\bigwedge_{i=1}^{n}{A_i} \limp \bigvee_{j=1}^{m}{C_j}$$
       {\Gamma \seq A, B, \Delta}
       {\Gamma \seq A \lor B, \Delta}
   \end{mathpar}
-  \caption{Multiplicative right introduction rule for disjunction}
+  \caption{Multiplicative \kl{right introduction rule} for disjunction}
   \labfig{multintro}
 \end{marginfigure}
 
 \begin{marginfigure}
   \begin{mathpar}
     \R[\lor R]
-      {\R[{\limp} R]
+      {\R[{\limp}R]
         {\R[ax]
           {}
           {A \seq \select{A}, \bot}}
@@ -43,10 +43,10 @@ $$\bigwedge_{i=1}^{n}{A_i} \limp \bigvee_{j=1}^{m}{C_j}$$
 
 One way to get a multi-conclusion sequent in \kl{LK} is to apply the
 ``multiplicative''\sidenote{Terminology borrowed from linear logic, where
-{\rnm{\lor R}} is exactly the right introduction rule for multiplicative
-disjunction $\parr$.} introduction rule {\rnm{\lor R}} (\reffig{multintro}). For
-instance, \reffig{lk-tnd} shows a proof of the law of excluded middle, where for
-each rule we squared the principal formula.
+{\rnm{\lor R}} is exactly the \kl{right introduction rule} for multiplicative
+disjunction $\parr$.} \kl{introduction rule} {\kl{\lor R}} (\reffig{multintro}).
+For instance, \reffig{lk-tnd} shows a proof of the \kl{law of excluded middle},
+where for each rule we squared the principal formula.
 % Following the mapping of click actions to \kl{sequent calculus} rules
 % (\reftab{click-rules}),
 One could imagine performing the same proof in Actema by successively clicking
@@ -90,7 +90,7 @@ Interestingly, the \kl{classical} aspect of the proof of $A \lor \neg A$ in
 \reffig{lk-tnd} comes exclusively from the \emph{backtracking} operation during
 the last step, a phenomemon which is well known in the literature on
 constructive/computational properties of \kl{classical} logic\todo{add references}.
-Then one can see the introduction rules {\rnm{\lor R_1}} and {\rnm{\lor R_2}},
+Then one can see the \kl{introduction rules} {\rnm{\lor R_1}} and {\rnm{\lor R_2}},
 and the restriction of \kl{intuitionistic} sequents to one conclusion, as ways to
 prevent such backtracking by forcing the choice of disjunct to prove at an early
 stage.
@@ -159,7 +159,7 @@ and the theoretical foundations behind it.
 In \reftab{click-rules}, we showed how click actions in Actema are in direct
 correspondance with the rules of the single-conclusion \kl{sequent calculus} \kl{LJ}
 for \kl{intuitionistic} logic. Following the literature mentioned earlier, we just
-need to replace two actions/introduction rules to get a multi-conclusion system
+need to replace two actions/\kl{introduction rules} to get a multi-conclusion system
 capturing either \kl{intuitionistic} or \kl{classical} \kl{first-order logic}:
 
 \begin{marginfigure}
@@ -172,7 +172,7 @@ capturing either \kl{intuitionistic} or \kl{classical} \kl{first-order logic}:
       {\Gamma, A \seq B}
       {\Gamma \seq A \limp B, \Delta}
   \end{mathpar}
-  \caption{Multi-conclusion right introduction rules for implication}
+  \caption{Multi-conclusion \kl{right introduction rules} for implication}
   \labfig{multi-imp-intro}
 \end{marginfigure}
 
@@ -183,13 +183,14 @@ capturing either \kl{intuitionistic} or \kl{classical} \kl{first-order logic}:
   common to both the \kl{intuitionistic} and \kl{classical} variants;
   \item as before, clicking on a red implication $A \limp B$ breaks it into an
   hypothesis $A$ and a conclusion $B$. Without further changes, this corresponds
-  to the right introduction rule from the \kl{classical} \kl{sequent calculus} \kl{LK} of
-  Gentzen (named {\rsf{{\limp}R*c}} in \reffig{multi-imp-intro}), and
-  our set of actions becomes a \kl{proof system} for \kl{classical} logic. To go back to
-  \kl{intuitionistic} logic, one needs the additional behavior that all the other
-  conclusions of the goal are removed. This corresponds to the right
-  introduction rule from the \kl{GHCP} calculus of Dragalin (named
-  {\rsf{{\limp}R*i}} in \reffig{multi-imp-intro}).
+  to the \kl{right introduction rule} from the \kl{classical} \kl{sequent
+  calculus} \kl{LK} of Gentzen (named {\rsf{{\limp}R*c}} in
+  \reffig{multi-imp-intro}), and our set of actions becomes a \kl{proof system}
+  for \kl{classical} logic. To go back to \kl{intuitionistic} logic, one needs
+  the additional behavior that all the other conclusions of the goal are
+  removed. This corresponds to the \kl{right introduction rule} from the
+  \kl{GHCP} calculus of Dragalin (named {\rsf{{\limp}R*i}} in
+  \reffig{multi-imp-intro}).
 \end{itemize}
 
 \begin{remark}
@@ -215,11 +216,11 @@ formulation of \kl{sequent calculi} for \kl{classical} logic where \emph{all} ru
 invertible, like the \kl{G3c} calculus of \sidecite{negri_structural_2001}. In
 the propositional case, this gives a constructive decision procedure for the
 question of provability: given a sequent $\Gamma \seq \Delta$, one just has to
-choose any formula in $\Gamma$ or $\Delta$ and apply the introduction rule
+choose any formula in $\Gamma$ or $\Delta$ and apply the \kl{introduction rule}
 associated to its main connective, or the axiom rule whenever possible. In
 Actema, this would correspond to having the user click randomly on blue and red
-items until all goals are solved. The procedure ends because all introduction
-rules destroy the main connective, and none of them duplicate formulas: thus the
+items until all goals are solved. The procedure ends because all \kl{introduction
+rules} destroy the main connective, and none of them duplicate formulas: thus the
 total size of the sequent decreases strictly after each rule application.
 
 \begin{marginfigure}
@@ -237,20 +238,20 @@ total size of the sequent decreases strictly after each rule application.
 \end{marginfigure}
 
 When dealing with quantifiers, the situation is not so simple: if one wants
-invertible introduction rules, it is necessary to duplicate the quantified
+invertible \kl{introduction rules}, it is necessary to duplicate the quantified
 formula being instantiated, which can be seen as the root cause of
 undecidability in \kl{predicate logic} as noted by
 Girard\cite[Section~3.3.2]{girard:hal-01322183}. This is already what happens in
 Actema for the universal quantifier: dropping a term $t$ on a blue item $\forall
 x. A$ will produce a new hypothesis $\subst{A}{t}{x}$, while keeping the
-original $\forall x. A$ item. This corresponds to the invertible left
-introduction rule of \kl{G3c} ({\rsf{\forall L*}} in \reffig{multi-inst}).
+original $\forall x. A$ item. This corresponds to the invertible
+\kl{left introduction rule} of \kl{G3c} ({\rsf{\forall L*}} in \reffig{multi-inst}).
 But in the single-conclusion framework, dropping a term $t$ on a red item
 $\exists x. A$ necessarily replaces it by the instantiated conclusion
 $\subst{A}{t}{x}$. Allowing multiple conclusions circumvents this problem and
 restores the symmetry between $\forall$ and $\exists$, since we can create a new
 conclusion for $\subst{A}{t}{x}$ while preserving the old one. This corresponds
-to the invertible right introduction rule of \kl{G3c} ({\rsf{\exists R*}} in
+to the invertible \kl{right introduction rule} of \kl{G3c} ({\rsf{\exists R*}} in
 \reffig{multi-inst}).
 
 \section{DnD actions}\labsec{classical-dnd}
@@ -263,7 +264,7 @@ a hypothesis $A$ and a conclusion $B$, and \emph{\kl{forward}} reasoning with th
 third mode of reasoning, at least in the traditional way of building proofs we
 are used to, either on paper or with \kl{proof assistants}. However from a purely
 formal point of view, there is nothing preventing us from trying to design
-rewrite rules for a new linking operator, by following the same recipe we used
+\kl{rewriting rules} for a new linking operator, by following the same recipe we used
 for $\back$ and $\forw$. Furthermore, we already saw earlier in the excluded
 middle example that such an operator did seem useful.
 
@@ -364,7 +365,7 @@ the same context to produce a new \emph{conclusion}. \kl(dnd){Backward} \kl{link
 be seen as mediating between these two opposite modes of reasoning, by handling
 the interaction of a positive and a negative subformula in the same context. A
 schematic view of the back and forth between the different modes through the 4
-rewriting rules that change linking operators is provided in
+\kl{rewriting rules} that change linking operators is provided in
 \reffig{modes-schema}. Notice that the latter correspond exactly to the rules
 that handle interaction with the antecedant of an implication: this is because
 it is the only way to switch polarity when descending into a direct subformula,

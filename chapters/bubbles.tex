@@ -41,7 +41,7 @@ seen as \emph{chemical} reactions. In \refsec{bubbles} we introduce the concept
 of \emph{bubble} as a way to control the scope of hypotheses inside nested
 sequents that we call \emph{solutions}. In \refsec{asymmetric} we describe our
 \kl{proof system} for \kl{intuitionistic} logic dubbed \emph{asymmetric bubble calculus},
-based on multiset rewriting rules on solutions comprising at most one
+based on multiset \kl{rewriting rules} over solutions comprising at most one
 conclusion. Finally in \refsec{bubbles-pba}, we import ideas from this bubble
 calculus back to the realm of \kl{GUIs} for interactive proof building, analysing
 their possible impact for UX improvements.
@@ -55,7 +55,7 @@ and equality rewriting are the main mechanism, but they only work in a goal
 comprising multiple items. Since it is customary in \kl{proof assistants} to specify
 the goal to be proved as a single logical formula, one needs a way to decompose
 it into many items for further processing through \kl{DnD}. This is precisely what
-the introduction rules for logical connectives in \kl{sequent calculus} do, and
+the \kl{introduction rules} for logical connectives in \kl{sequent calculus} do, and
 following the Proof-by-Pointing paradigm \cite{PbP} we map them to click
 actions (see \refsec{clicks}).
 
@@ -72,20 +72,21 @@ earlier in the history of logic, C. S. Peirce took inspiration from chemical
 diagrams to devise his \emph{existential graphs} --- see
 \cite[pp.~17--18]{Roberts+1973}, or our own presentation in \refsec{beta} for
 more details.}. Click actions are then a mean to ``heat'' molecules to the point
-of breaking these chemical bonds. The most canonical examples are the
-right-introduction rule for implication $\limp$ and the left-introduction rule
+of breaking these chemical bonds. The most canonical examples are the \kl{right
+introduction rule} for implication $\limp$ and the \kl{left introduction rule}
 for conjunction $\land$, which break respectively a conclusion/red item/positive
 ion into a hypothesis/blue item/negative ion and a new conclusion, and a
 hypothesis into two hypotheses. In fact, it is strongly conjectured that these
 are the only click actions needed to obtain a complete deductive system for
 propositional logic: breaking red implications allows for \kl(dnd){backward}
 \kl{DnDs}, and blue conjunctions for \kl(dnd){forward} \kl{DnDs}\sidenote{In
-\kl{predicate logic}, one would also need the right (resp. left) introduction
-rule for $\forall$ (resp. $\exists$). It might also be the case that
-\kl(dnd){backward} \kl{DnDs} alone are sufficient for completeness, since a
-\kl{linkage} of the form $A \back \select{B} \limp C$ will involve a
-\kl(dnd){forward} phase. In this case only the right introduction rules for
-$\limp$ and $\forall$ would be required.}.
+\kl{predicate logic}, one would also need the \kl[right introduction
+rule]{right} (resp. \kl[left introduction rule]{left}) introduction rule for
+$\forall$ (resp. $\exists$). It might also be the case that \kl(dnd){backward}
+\kl{DnDs} alone are sufficient for completeness, since a \kl{linkage} of the
+form $A \back \select{B} \limp C$ will involve a \kl(dnd){forward} phase. In
+this case only the \kl{right introduction rules} for $\limp$ and $\forall$ would
+be required.}.
 % \sidenote{Interestingly,
 % those rules are the basis for the adjunction between $\land$ and $\limp$ in the
 % interpretation of IPL into cartesian closed categories.}
@@ -235,10 +236,10 @@ calculus for \kl{intuitionistic} logic dubbed \kl{BJ}. It is divided in five gro
 respectively to the identity, structural and logical rules of \kl{sequent
 calculus}, following the terminology of \sidecite{girard:hal-01322183}. More
 precisely, rules {\rsf{i{\da}}} and {\rsf{i{\ua}}} correspond
-to the axiom and cut rules; rules {\rsf{w}} and {\rsf{c}} to the weakening
-and contraction rules; and every rule of the form $\mcirc{-}$ (resp.) that
-is, the axiom and cut rules, the contraction and weakening rules, and
-introduction rules for logical connectives.
+to the axiom and cut rules; rules {\rsf{w}} and {\rsf{c}} to the \kl{weakening}
+and \kl{contraction} rules; and every rule of the form $\mcirc{-}$ (resp.) that
+is, the axiom and cut rules, the \kl{contraction} and \kl{weakening} rules, and
+\kl{introduction rules} for logical connectives.
 \item The {\flow} and {\membrane} groups are new, and define the behavior of
 bubbles. More specifically, $\mathbb{F}$-rules characterize how information
 flows in solutions by specifying what kinds of objects can traverse bubbles,
@@ -364,8 +365,8 @@ with \kl{sequent calculus}, its syntax is quite heavy, and obscures an important
 property of the rules: they almost always preserve the contexts $\Gamma, \Delta$
 of formulas and $\cS$ of bubbles. That is, the rules of \kl{BJ} are
 \emph{local}. This enables a more economical and graphical presentation of the
-rules in \reffig{graphical-BJ}, where \kl{BJ} is seen as a multiset rewriting
-system just like the {\cham} thanks to \refdef{solution}. Instead of relying on
+rules in \reffig{graphical-BJ}, where \kl{BJ} is seen as a multiset \kl{rewriting
+system} just like the {\cham} thanks to \refdef{solution}. Instead of relying on
 a notion of solution context, we define formally what it means to be a
 subsolution:
 
@@ -375,10 +376,10 @@ subsolution:
   denotes multiset inclusion. 
 \end{definition}
 
-Then a multiset rewriting rule $\rrule{r}{S}{T}$ can be applied in a
+Then a multiset \kl{rewriting rule} $\rrule{r}{S}{T}$ can be applied in a
 solution $U$ whenever $S \subsol U$, by replacing one occurrence of $S$ by $T$
 inside $U$. The notions of derivation (\refdef{BJ-deriv}) and proof
-(\refdef{BJ-proof}) stay unchanged, by observing that the rewriting rule
+(\refdef{BJ-proof}) stay unchanged, by observing that the \kl{rewriting rule}
 $\rrule{r}{S}{T}$ from $S$ to $T$ and the \kl{inference rule}
 $\irule{r}{S}{T}$ with premiss $T$ and conclusion $S$ denote the same
 rule $r$.
@@ -392,12 +393,12 @@ the two subproofs starting with {\rsf{{\limp}{-}}}.}
 \reffig{ex-gra-BJ} shows the graphical presentation of the same \kl{BJ}-proof
 as in \reffig{ex-seq-BJ}. Whereas in \reffig{ex-seq-BJ} we squared the whole
 subsolutions corresponding to the conclusions of \kl{inference rules}, here we
-squared on each line the redex modified by the associated rewriting rule. This
+squared on each line the redex modified by the associated \kl{rewriting rule}. This
 example highlights the greater locality of the rewriting approach, by indicating
 more precisely which parts of the proof state are changed by the rules. But it
 still over-approximates the modifications that really need to be performed to
 carry the transformations. Indeed, by only exposing the data of a redex $S$ and
-a reddendum $T$, a rewriting rule $\rrule{r}{S}{T}$ can only be
+a reddendum $T$, a \kl{rewriting rule} $\rrule{r}{S}{T}$ can only be
 interpreted as the deletion of $S$ followed by the insertion $T$. Taking for
 instance the {\rsf{{\limp}{-}}} rule in \reffig{graphical-BJ}, one can
 describe its graphical behavior more finely as resulting from the following
@@ -506,12 +507,12 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
     be entirely automated, by letting the proof engine eagerly pop empty bubbles
     as soon as they appear in a solution. Note that in this graphical setting,
     the {\rsf{p}} rule can be understood as resulting from a process of
-    \emph{contraction}\sidenote{Not to be confused with the contraction rules
-    \rsf{c} and \rsf{w}.} of the membrane into a single point: if the bubble
-    contains some items $\Delta$, then this process fails because the membrane
-    gets stuck on the boundaries of $\Delta$. This is a topological way to check
-    the emptiness of a bubble, which has the benefit of being completely
-    \emph{local}, on top of being very clear visually.
+    \emph{contraction}\sidenote{Not to be confused with the \kl{contraction} rule
+    \rsf{c}.} of the membrane into a single point: if the bubble contains some
+    items $\Delta$, then this process fails because the membrane gets stuck on
+    the boundaries of $\Delta$. This is a topological way to check the emptiness
+    of a bubble, which has the benefit of being completely \emph{local}, on top
+    of being very clear visually.
   \item[\textbf{\resource}]
     % In Actema, hypotheses are displayed in blue items inside a reserved zone
     % holding the entire context, including also local variables and definitions
@@ -523,22 +524,22 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
     % zone} in sequents where formulas can be duplicated and discarded at will,
     % and the \emph{linear zone} where they cannot.}. In a bubble-based \kl{GUI}, one
     % could keep this behavior, where the context is filled with all items 
-    The contraction rule {\rsf{c}} could be mapped to a specific triggering
+    The \kl{contraction} rule {\rsf{c}} could be mapped to a specific triggering
     input when starting to drag a blue item $\hypo{A}$ (e.g. a shortkey if a
     keyboard is available, or a long press on the item on a touchscreen), which
     has the effect of keeping a copy of $A$ at its original location in addition
     to moving the item\sidenote{This mechanism is quite standard in \kl{GUIs} that
     manipulate duplicable resources like file managers, where one maintains the
     \texttt{CTRL} key to enable copy mode. It was also chosen by K. Chaudhuri to
-    implement contraction in his \kl{ProfInt} prototype for subformula linking
-    in \kl{intuitionistic} logic \cite{ProfInt}.}. As for the weakening rule
+    implement \kl{contraction} in his \kl{ProfInt} prototype for subformula linking
+    in \kl{intuitionistic} logic \cite{ProfInt}.}. As for the \kl{weakening} rule
     {\rsf{w}}, it could be available as a contextual action when selecting
     blue items.
   \item[\textbf{\identity}]
     Although the {\rsf{i{\da}}} rule only corresponds to the base case
     of \kl{DnD} actions, it would be easy to integrate their full SFL semantics
     directly in \kl{BJ}. Indeed our SFL rules (\reffig{DISL}) are already
-    expressed as rewriting rules, just like the graphical rules of \kl{BJ}
+    expressed as \kl{rewriting rules}, just like the graphical rules of \kl{BJ}
     (\reffig{graphical-BJ}). Thus it is just a matter of adding \kl{linkage} creation
     rules like those of \refsec{dnd-completeness}, but between adjacent formulas
     in a solution (see \reffig{bubbles-linkage}).
