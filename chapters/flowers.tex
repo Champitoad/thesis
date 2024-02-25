@@ -428,7 +428,7 @@ As we have seen, the ($n$-ary) scroll is a powerful \kl{icon}, because it captur
 the distinction between \kl{classical} and \kl{intuitionistic} logic as being a matter of
 \emph{continuity} between the space of inputs/hypotheses (outloop) and the
 spaces of outputs/conclusions (inloops), reflecting an intuition discovered much
-later in the denotational semantics of the $\lambda$-calculus. However as a
+later in the denotational semantics of the \kl{$\lambda$-calculus}. However as a
 diagrammatic component to be operated upon through direct manipulation, it has
 one notable flaw, also shared with the \kl{classical} \kl{cut}-based syntax: it quickly
 induces heavy nestings of curves in the plane, making even a simple graph like
@@ -497,7 +497,7 @@ purely relational statements, without function symbols. Since functions are just
 deterministic relations, one can in principle formalize any \kl{first-order} theory
 in this syntax\sidenote{Conversely, every relation can be faithfully encoded as
 its characteristic function, which is the basis for the formalization of
-mathematics in \emph{type theories}.}. However it is much more convenient to
+mathematics in \emph{\kl{type theories}}.}. However it is much more convenient to
 have a dedicated syntax for functions, and we will thus introduce them as is
 usually done in predicate calculus.
 
@@ -1187,7 +1187,7 @@ in the completeness proof of \refsec{Completeness}.
 \end{proof}
 
 There is a subtle but important shift here with respect to the standard notions
-of hypothetical provability, as found in Gentzen systems or type theories: while
+of hypothetical provability, as found in Gentzen systems or \kl{type theories}: while
 in these settings it is characterized as the existence of a proof for a
 \emph{single} hypothetical judgment $\Gamma \seq C$ which constrains the space
 of derivations, here we have the stronger requirement that there exist proofs
@@ -1324,14 +1324,14 @@ Kripke structures, detailed hereafter by order of increasing importance:
     To palliate this limitation, we turned to a more \emph{semantic} (and not
     so-well known) strand of analyticity proofs, which nowadays tends to be
     labelled \emph{normalization-by-evaluation} \sidecite{NbE}. The idea is to
-    prove completeness of the analytic fragment of the \kl{proof system} with respect
-    to some semantic models (in our case, $\vDash \phi$ implies
+    prove completeness of the analytic fragment of the \kl{proof system} with
+    respect to some semantic models (in our case, $\vDash \phi$ implies
     $\entails{\Nature} \phi$), and then compose with the soundness of the full
     system with respect to the same models ($\entails{} \phi$ implies $\vDash
     \phi$), giving the desired admissibility result ($\entails{} \phi$ implies
-    $\entails{\Nature} \phi$). And in the case of \kl{intuitionistic} logics, the
-    models used are most of the time Kripke structures\sidenote{We know of two
-    exceptions: the first is the (complex) uniform completeness proof for
+    $\entails{\Nature} \phi$). And in the case of \kl{intuitionistic} logics,
+    the models used are most of the time Kripke structures\sidenote{We know of
+    two exceptions: the first is the (complex) uniform completeness proof for
     various logics proposed by Okada \cite{OKADA2002471} and based on
     \emph{phase spaces}, which are the closest one can get to a truth-based (or
     Tarskian) semantics for \emph{linear logic} \cite{girard-linear-1987}. The
@@ -1341,9 +1341,9 @@ Kripke structures, detailed hereafter by order of increasing importance:
     in contemporary deductive program verification. It is based on so-called
     \emph{BI algebras}, a kind of Heyting algebra with additional structure for
     the linear part of the logic. We should also mention the recent
-    normalization proof for cubical type theory given by Sterling in his thesis
-    \cite{Sterling2022}, based on a categorical and topos-theoretic
-    generalization of Kripke structures.}
+    normalization proof for \emph{cubical type theory} given by Sterling in his
+    thesis \cite{Sterling2022}, based on a categorical and topos-theoretic
+    generalization of \kl{Kripke structures}.}
     \sidecite{hutchison_semantic_2005,10.1007/978-3-642-02261-6_17,ilik:tel-00529021}.
     
 \end{itemize}
@@ -1566,7 +1566,7 @@ Corollary \ref{cor:eg-functoriality}.}:
   By recurrence on $\soldepth{\Xi\hole}$.
 \end{proof}
 
-Weakening lemmas are also standard in \kl{proof theory} and type theory. Here they
+Weakening lemmas are also standard in \kl{proof theory} and \kl{type theory}. Here they
 are purely semantic, but they will participate in the admissibility of the
 \kl{weakening} rules $\{\rsf{grow},\rsf{crop},\rsf{pull},\rsf{glue}\}$:
 
@@ -3004,7 +3004,7 @@ are in order:
   by clicking on them, and \Action{Import} \emph{non-atomic} flowers by dragging
   and dropping them at the desired location. We conjecture that these
   restrictions do not jeopardize the completeness of $\Nature$-rules, and
-  correspond to the process of $\eta$-expansion in $\lambda$-calculus.
+  correspond to the process of $\eta$-expansion in \kl{$\lambda$-calculus}.
   
   \item[\textbf{Suggestions}]
   
@@ -3227,14 +3227,14 @@ nested flowers). Then rather than being segregated in a separate interface (the
 text buffer of the theory), the \emph{global} context is simply the
 \emph{entire} goal. In fact, there is no reason anymore to make a terminological
 distinction between goals and theories: a goal is just a theory that has yet to
-be justified, which can itself be identified with a partial proof (or a ``proof
-term with holes'' in type-theoretical parlance)\sidenote{We will come back to
+be justified, which can itself be identified with a partial proof (or a ``\kl{proof
+term} with holes'' in \kl{type-theoretical} parlance)\sidenote{We will come back to
 this idea of merging proofs and statements in the same data structure in the
 conclusion, when discussing \emph{development calculi} and the
 \emph{Curry-Howard correspondence}. Note however that it is already at work in
-\emph{dependent} type theory, where proof terms can freely occur inside types.
-This is exemplified in the Agda \kl{proof assistant}, where all manipulations are
-done directly on the partial proof/program text.}.
+\emph{dependent} \kl{type theory}, where \kl{proof terms} can freely occur inside
+types. This is exemplified in the \kl{Agda} \kl{proof assistant}, where all
+manipulations are done directly on the partial proof/program text.}.
 
 It would still be useful to be able to aggregate automatically the set of all
 lemmas and definitions (i.e. hypotheses) available in a focused subgoal
@@ -3399,8 +3399,8 @@ structure. Once again, \texttt{Box}es seem to share a very similar structure
 with flowers, which was here motivated by the need to avoid backtracking by
 having the ability to maintain a disjunction of goals with so-called
 \emph{disjunctive pairs}, corresponding to the petals of flowers. The main
-difference is that the \texttt{Box} calculus is based on dependent type theory
-instead of \kl{first-order logic}: this allows to store the partial proof terms
+difference is that the \texttt{Box} calculus is based on dependent \kl{type theory}
+instead of \kl{first-order logic}: this allows to store the partial \kl{proof terms}
 inside of the \texttt{Box}es themselves, while this information is lost during
 the construction of flowers (but might be reconstructed from the sequence of
 graphical actions and the initial goal).
@@ -3410,7 +3410,7 @@ Sterling and Harper \sidecite{sterling_algebraic_2017}, that abstracts from any
 particular type of judgment. Thus it might be possible to fit the flower
 calculus into this framework, by identifying the set of flowers $\flowers$ as a
 category of \emph{nested judgments}\sidenote{Nested judgments are already
-considered in some recent categorical semantics of type theory, and in
+considered in some recent categorical semantics of \kl{type theory}, and in
 particular those in Sterling's thesis \cite{Sterling2022}. See also
 \cite{huang2023synthetic} for a (technical) introduction to the subject.}.
 
@@ -3518,8 +3518,8 @@ developed by Peirce, and described by Oostra in \sidecite{oostra_advances_2022}.
 
 We have begun to sketch some ideas for a Curry-Howard correspondence, where
 flowers and \Proof actions for justifying them ($\Nature$-rules) are identified
-respectively with \emph{normal} and \emph{neutral} terms of the simply-typed
-$\lambda$-calculus. For instance, the computational counterpart of the rule
+respectively with \emph{normal} and \emph{neutral} \kl{terms} of the simply-typed
+\kl{$\lambda$-calculus}. For instance, the computational counterpart of the rule
 \rsf{poll{\da}} in pistils would be a kind of \emph{function application}
 expressed by the following \rsf{app} rule, which is highly reminiscent of the
 instantiation rule \rsf{ipis}:
@@ -3528,11 +3528,11 @@ $$
   {\Xi\select{t~u : (\flower{\subst{\Phi}{u}{x}}{\subst{\Delta}{u}{x}})}}
   {\Xi\select{t : (\flower{\Phi, x : \phi}{\Delta})}}
 $$
-Given a flower $\phi$ and a neutral term $t$, i.e. an $n$-ary function
+Given a flower $\phi$ and a neutral \kl{term} $t$, i.e. an $n$-ary function
 application of the form $x~t_1 \ldots t_n$, the expression $t : \phi$ is a
-\emph{term annotation}, that should be read in context as ``this occurrence of
-$\phi$ is justified by $t$''. Interestingly, $\phi$ itself may contain term
-annotations, mimicking the fact that normal and neutral terms can be defined by
+\emph{\kl{term} annotation}, that should be read in context as ``this occurrence of
+$\phi$ is justified by $t$''. Interestingly, $\phi$ itself may contain \kl{term}
+annotations, mimicking the fact that normal and neutral \kl{terms} can be defined by
 mutual recursion. Then in the \rsf{app} rule, we do not just erase the formula
 $\phi$ as in the \rsf{poll{\da}} rule, but also keep track of the flow of
 information by appending the argument $u$ to the justification $t$ (where
@@ -3543,10 +3543,10 @@ As of now the syntax of annotated flowers is not yet stable, and it is unclear
 what would be the computational interpretation of flowers with $n \not= 1$
 petals. In particular for disjunctive flowers ($n > 1$), it seems that we are
 closer to a notion of non-deterministic or parallel computation, than to the
-usual branching computation of sum or inductive types.
+usual branching computation of sum or inductive \kl{types}.
 
 If our intuition is right, then the fact that flowers correspond to (normal)
-$\lambda$-terms would embody syntactically a recent motto from Miquel stemming
+\kl{$\lambda$-terms} would embody syntactically a recent motto from Miquel stemming
 from his study of the foundations of forcing and realizability in implicative
 algebras, where ``elements can be seen both as truth values and as (generalized)
 realizers, thus \textbf{blurring the frontier between proofs and
@@ -3560,9 +3560,9 @@ $$
 \text{\textbf{Realizer}} = \text{\textbf{Program}} = \text{\textbf{Formula}} = \text{\textbf{Type}}
 $$
 This could also form the basis for further studies on the connections between \kl{EGs}
-and (dependent) type theory, and ultimately lead to a tight integration of the
+and (dependent) \kl{type theory}, and ultimately lead to a tight integration of the
 Flower Prover with \kl{proof assistants} based on the latter such as Coq, Lean and
-Agda. Existing explorations of the links between type theory and \kl{deep inference}
+Agda. Existing explorations of the links between \kl{type theory} and \kl{deep inference}
 include, in historical order:
 \begin{itemize}
   \item a first attempt by Brünnler and McKinnley to devise a Curry-Howard
@@ -3570,26 +3570,26 @@ include, in historical order:
   conjunction and implication \sidecite{cervesato_algorithmic_2008};
   \item the thesis of Nicolas Guenot, and more precisely the part on "Nested
   Proofs as Programs" where he gives a correspondence between simply-typed
-  $\lambda$-calculi with explicit substitutions at one end, and calculi of
+  \kl{$\lambda$-calculi} with explicit substitutions at one end, and calculi of
   structures (Chapter 6) and nested sequent calculi (Chapter 5) for the
   implicational fragment of \kl{intuitionistic} logic at the other end
   \cite{guenot_nested_2013};
-  \item the atomic $\lambda$-calculus, a simply-typed $\lambda$-calculus with
+  \item the atomic \kl{$\lambda$-calculus}, a simply-typed \kl{$\lambda$-calculus} with
   explicit sharing that has a Curry-Howard correspondence with proofs in the
   formalism of \emph{open deduction} \sidecite{gundersen_atomic_2013};
-  \item a type system for interaction nets based on a \kl{calculus of structures} for
+  \item a \kl{type} system for interaction nets based on a \kl{calculus of structures} for
   Multiplicative Exponential Linear Logic \sidecite{gimenez_structure_2013};
   \item the thesis of Fanny He, that explores a \kl{classical} variant of the atomic
-  $\lambda$-calculus based on Saurin's $\Lambda\mu$-calculus
+  \kl{$\lambda$-calculus} based on Saurin's $\Lambda\mu$-calculus
   \sidecite{he_fanny_thesis};
-  \item the \emph{spinal} atomic $\lambda$-calculus, an extension and
-  improvement on the atomic $\lambda$-calculus based on a computational
+  \item the \emph{spinal} atomic \kl{$\lambda$-calculus}, an extension and
+  improvement on the atomic \kl{$\lambda$-calculus} based on a computational
   interpretation of the \emph{switch} rule \sidecite{goubault-larrecq_spinal_2020};
   \item the \emph{collection calculus} that subsumes resource,
-  intersection-typed and simply-typed $\lambda$-calculi, with a type system
+  intersection-typed and simply-typed \kl{$\lambda$-calculi}, with a \kl{type} system
   again in open deduction \sidecite{guerrieri_deep_2021};
   \item Ongoing research by Kaustuv Chaudhuri to extend subformula linking to
-  dependent type theory\sidenote{Private communication.}.
+  dependent \kl{type theory}\sidenote{Private communication.}.
 \end{itemize}
 The work of Guenot on computational interpretations of nested sequent calculi
 seems closest to the syntax of flowers. Indeed, nested sequents are variadic by
@@ -3614,7 +3614,7 @@ Last but not least, we want to provide a way to \emph{save} proved lemmas along
 with their proof, so that they can be reused and read statically. This will be
 crucial for \emph{proof evolution} (see \refsubsec{proof-evolution}), and will
 probably rely on the computational, dependently-typed version of the flower
-calculus sketched above, where proof terms can appear inside flowers.
+calculus sketched above, where \kl{proof terms} can appear inside flowers.
 
 \subsection{Theory vs. Practice}
 

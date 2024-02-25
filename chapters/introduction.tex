@@ -7,13 +7,13 @@
 
 % \paragraph{Formal manipulations}
 
-\intro{Proof assistants} --- also called \reintro{interactive theorem provers}
-(\reintro{ITPs}) --- are software systems that allow to both create and check
-the correctness of mathematical proofs. They are based on the idea that
+\AP \intro{Proof assistants} --- also called \reintro{interactive theorem
+provers} (\reintro{ITPs}) --- are software systems that allow to both create and
+check the correctness of mathematical proofs. They are based on the idea that
 mathematical knowledge can be represented unambiguously inside \intro{proof
 formalisms} --- also called \reintro{proof systems}, where the truth of a
-statement can be reduced to the mechanical application of \kl{symbolic} manipulation
-rules. For instance, consider the equation
+statement can be reduced to the mechanical application of \kl{symbolic}
+manipulation rules. For instance, consider the equation
 $$4x + 6x = (12 - 2)x$$ 
 While any mathematician would immediately recognize it as true, a middle school
 student learning algebra would have to carry manually some computations to
@@ -23,13 +23,14 @@ side of the equation, yielding the new equation
 $$(4 + 6)x = (12 - 2)x$$
 Then, computing the sum on the left-hand side and the difference on the
 right-hand side gives the final equation
-$$10x = 10x$$ which is trivially true. This is a very simple example, but it
-already shows the two main aspects of \kl{proof formalisms}: on the one hand,
-they allow to \emph{represent} mathematical statements in a formal language,
-here that of equations between linear univariate polynomials; on the other hand,
-they allow to \emph{manipulate} this representation in order to prove the
-statements, here through \intro{rewriting rules} that transform a valid equation
-into another valid equation.
+$$10x = 10x$$
+\AP which is trivially true. This is a very simple example, but it already shows
+the two main aspects of \kl{proof formalisms}: on the one hand, they allow to
+\emph{represent} mathematical statements in a formal language, here that of
+equations between linear univariate polynomials; on the other hand, they allow
+to \emph{manipulate} this representation in order to prove the statements, here
+through \intro{rewriting rules} that transform a valid equation into another
+valid equation.
 
 Algebra lends itself particularly well to formalization, as it is arguably the
 very study of the rules governing \kl{symbolic} manipulations in mathematics. It also
@@ -44,7 +45,7 @@ systems: their ambition is to enable the formalization on computers of virtually
 that helps humans in creating \emph{new} mathematics: both novel solutions and
 proofs to existing problems, and brand new theories involving new types of
 mathematical objects. This seemingly disproportionate ambition is not entirely
-utopic: it is based on the great discoveries of 19\textsuperscript{th} and
+utopic: \AP it is based on the great discoveries of 19\textsuperscript{th} and
 20\textsuperscript{th} century mathematicians and logicians, in the broad
 research area now known as \intro{mathematical logic}.
 
@@ -54,6 +55,7 @@ research area now known as \intro{mathematical logic}.
 
 \paragraph{Universal language}
 
+\AP
 At the dawn of the 20\textsuperscript{th} century, some mathematicians started
 to realize that it may be possible to formalize not only specific branches of
 mathematics like algebra with their own language, but the \emph{whole} of
@@ -72,6 +74,7 @@ in the language of mathematics'' \cite{assayer}.}.
 
 \paragraph{Predicate logic and set theory}
 
+\AP
 The possibility of a universal language for mathematics became credible at the
 dusk of the 19\textsuperscript{th} century, thanks to the works of logicians
 like Boole, Frege and Peirce on one hand
@@ -87,6 +90,7 @@ defined, a notion that became increasingly central in modern mathematics.
 
 \paragraph{Foundations}
 
+\AP
 This formed the basis for a unification of many branches of mathematics on the
 same \emph{foundation}: it was realized that with enough effort, every
 mathematical structure could be encoded with the sets of Cantor, and all the
@@ -100,6 +104,7 @@ the most popular foundation nowadays because of its greater simplicity.
 
 \paragraph{Truth and proofs}
 
+\AP
 An \intro{axiomatic system} specifies the formal language in which statements
 about mathematical objects are expressed, as well as a collection of such
 statements --- the \intro{axioms} --- that are taken to be true from the outset,
@@ -110,6 +115,7 @@ abstract objects in some ``mathematical universe'' is a particular philosophical
 stance (platonism), which has nothing to do with concrete reasoning on the
 formal representation.
 
+\AP
 Traditionally, the branch of \kl{mathematical logic} that tries to model the
 ``semantic'' content of \kl{axioms} through the notion of truth is called
 \intro{model theory}. In this thesis, we are concerned with the construction of
@@ -126,15 +132,17 @@ the \emph{formalist} school of thought in philosophy of mathematics, represented
 by the great mathematician and main instigator of \kl{proof theory} David Hilbert.
 
 \begin{emphpar}
-The real focus throughout this thesis is on the \emph{\kl{inference rules}} used to
-build (correct) proofs from \kl{axioms}/assumptions. Those form the theoretical basis
-for both the \emph{interactive creation}, and the \emph{automatic checking} of
-formal proofs in \kl{proof assistants}. The branch of \kl{proof theory} concerned with the
-study of \kl{inference rules} is called \intro{structural proof theory}.
+\AP The real focus throughout this thesis is on the \emph{\kl{inference rules}}
+used to build (correct) proofs from \kl{axioms}/assumptions. Those form the
+theoretical basis for both the \emph{interactive creation}, and the
+\emph{automatic checking} of formal proofs in \kl{proof assistants}. The branch
+of \kl{proof theory} concerned with the study of \kl{inference rules} is called
+\intro{structural proof theory}.
 \end{emphpar}
 
 \paragraph{Axiomatic systems} 
 
+\AP
 In the very beginnings of \kl{proof theory} in the 1920s, under the influence of
 Hilbert, the axiomatic method was predominant, and thus \kl{proof systems} of
 this era --- now called \intro{Hilbert systems} --- featured very few
@@ -153,7 +161,7 @@ involve any logical connective. An example of \emph{instance} of this schema
 would be the proposition ``$n$ is prime or $n$ is not prime'' with $n$ some
 natural number, which can be written formally as
 $$\mathrm{prime}(n) \lor \neg\mathrm{prime}(n)$$
-Another related principle is the \intro{law of non-contradiction}, which states
+\AP Another related principle is the \intro{law of non-contradiction}, which states
 that no proposition can be both true and false at the same time. It is expressed
 by the schema
 $$\neg (A \land \neg A)$$
@@ -179,6 +187,7 @@ properties in question. This marked the birth of \emph{constructivism} in
 philosophy of mathematics, whose most famous incarnation is Brouwer's
 \emph{intuitionism}.
 
+\AP
 The original intuitionism of Brouwer was strongly opposed to any attempt at
 formalizing mathematics, standing against both Frege and Russell's logicism that
 saw mathematics as a mere branch of logic, and Hilbert's formalism that reduced
@@ -188,7 +197,7 @@ style of Hilbert and Frege, in an attempt to capture formally the objections of
 Brouwer towards \intro{classical} logic --- i.e. the logic developed by
 19\textsuperscript{th} century logicians that was at the heart of the new
 \kl{set-theoretical} foundations. Heyting's system captures what is now called
-\\intro{intuitionistic} logic, which can be succinctly summarized as being
+\intro{intuitionistic} logic, which can be succinctly summarized as being
 exactly \kl{classical} logic, but \emph{without} the \kl{law of excluded
 middle}. Thus \kl{intuitionistic} logic is a generalization of \kl{classical}
 logic, where propositions cannot be assigned a truth value \emph{a priori}: they
@@ -216,6 +225,7 @@ systems, designing the \kl{classical} part as an extension of the former.
 
 \paragraph{Inference rules}
 
+\AP
 In \kl{Hilbert systems}, the only \kl{inference rule} is that of \intro{modus
 ponens}, which is expressed formally with the following figure:
 $$\R[\intro{mp}]{A}{A \limp B}{B}$$
@@ -229,6 +239,7 @@ corresponds to a form of \intro{forward} reasoning: starting from the known
 \emph{premises} that $A$ and $A \limp B$ are true, it \emph{necessarily} follows
 that the \emph{conclusion} $B$ is true.
 
+\AP
 Conversely, one can also have a bottom-up reading of the rule: to build a proof
 of any proposition $B$, one way to proceed is to come up with another
 proposition $A$ such that both $A$ and $A \limp B$ are provable. This reading
@@ -250,6 +261,7 @@ is not yet known.
 
 \paragraph{Natural deduction}
 
+\AP
 \kl{Axiomatic systems} can be relatively concise, in that many logics can be
 expressed in them with a small number of \kl{axioms}. In return, they produce very
 long and verbose formal proofs that are hard for humans to follow, and almost
@@ -262,6 +274,7 @@ the University of Göttingen \sidecite{gentzen_untersuchungen_1935}, the German
 logician Gerhard Gentzen proposed independently his famous calculus of
 \intro{natural deduction}.
 
+\AP
 This formalism follows the opposite approach to \kl{Hilbert systems}: it
 features as few \kl{axioms} as possible, favoring the use of \emph{\kl{inference
 rules}} to model the forms of reasoning found in mathematical practice. Those
@@ -345,6 +358,7 @@ in using the conclusion of \rsf{r1} as one of the premisses of \rsf{r2}.
 
 \paragraph{Sequent calculus}
 
+\AP
 In addition to the constructivists' objections, some doubts were raised by the
 discovery of fatal flaws in early attempts at defining foundational
 \kl{axiomatic systems}, the most famous one being the \emph{antinomy} of
@@ -366,6 +380,7 @@ developing \kl{proof theory}, since it provided a mathematical definition of
 ``mathematical proofs'' as \emph{finite} sequences of \kl{symbols} satisfying
 certain properties.
 
+\AP
 Gentzen's work on \kl{natural deduction} was an integral part of this program,
 as an attempt to render the \emph{metamathematics} of \kl{proof theory} more
 structured and elegant. However, he could not devise any argument for
@@ -379,6 +394,7 @@ calculi}: one for \kl{classical} logic called \intro{LK}, and one for
 \kl{intuitionistic} system \kl{LJ}, whose rules are shown in
 \reffig{calculi-LJ}.
 
+\AP
 \kl{Sequent calculus} is based on the observation that some rules in \kl{natural
 deduction} depend crucially on the use of \emph{hypotheses} that appear
 ``higher'' or earlier in the proof. The prototypical example is the
@@ -398,6 +414,7 @@ connectives are also obtained straightforwardly from the corresponding
 \kl(natded){introduction rules} in \kl{natural deduction}, by simply making the
 \kl(sequent){contexts} $\Gamma$ and $\Delta$ always explicit.
 
+\AP
 Following the original presentation of Gentzen, \kl(sequent){contexts} are taken
 to be \emph{lists} of formulas (``Sequenz'' in German), i.e. ordered collections
 where repetitions are allowed. Still, we really want to see them as \emph{sets}
@@ -435,6 +452,7 @@ reading of rules).
   \labfig{PNC-LJ}
 \end{marginfigure}
 
+\AP
 The main difference between \kl{sequent calculus} and \kl{natural deduction}
 lies in its splitting of \kl{elimination rules} into two parts: \intro{left
 introduction rules}, and the \intro(rule){cut} rule \kl{cut}. As their name
@@ -472,17 +490,17 @@ cut-free one. Thus the \kl{cut} rule is said to be \emph{admissible}, since any
 provable sequent can be proved without it.
 
 An important consequence of cut-elimination, which was the original motivation
-of Gentzen, is the consistency of the logic (\kl{intuitionistic} \kl{predicate logic} in
-the case of \kl{LJ}). This stems from the fact that all rules apart from the
-\kl{cut} rule satisfy the \emph{subformula property}: every formula $A$
+of Gentzen, is the consistency of the logic (\kl{intuitionistic} \kl{predicate
+logic} in the case of \kl{LJ}). This stems from the fact that all rules apart
+from the \kl{cut} rule satisfy the \emph{subformula property}: every formula $A$
 appearing in the premisses is a \emph{subformula} of some formula $B$ in the
 conclusion, i.e. $A$ already occurs inside $B$. Thus there cannot exist a proof
 of the absurd sequent $\seq \bot$, since the only formula that is a subformula
 of $\bot$ is $\bot$ itself, and there is no rule instance with $\seq \bot$ as
 conclusion that only contains $\bot$ in its premisses. The subformula property
-is the first occurrence of the concept of \emph{analyticity} in \kl{proof theory},
-and can be seen as a technical realization of the philosophical notion of
-analyticity first applied to propositions by Kant, and later to proofs in
+is the first occurrence of the concept of \emph{analyticity} in \kl{proof
+theory}, and can be seen as a technical realization of the philosophical notion
+of analyticity first applied to propositions by Kant, and later to proofs in
 mathematics by Bolzano \sidecite{bolzano}.
 
 Unfortunately, the proof of cut-elimination for the \kl{sequent calculus}
@@ -495,6 +513,7 @@ results presented in this thesis.
 
 \paragraph{Deep inference}
 
+\AP
 Many years after Gentzen's seminal work, at the advent of the
 21\textsuperscript{th} century, Alessio Guglielmi introduced a new methodology
 for designing \kl{proof formalisms} called \intro{deep inference}
@@ -511,7 +530,7 @@ on formulas. For instance, the following \intro{switch rule}, when read
 bottom-up (i.e. in \kl{backward} mode), indicates that the formula $A \lor (B
 \land C)$ may be rewritten into $(A \lor B) \land C$:
 $$\R[\rsf{s}]{S\select{(A \lor B) \land C}}{S\select{A \lor (B \land C)}}$$
-Importantly, the rule can be applied in any \emph{context} $S\hole$. A
+\AP Importantly, the rule can be applied in any \emph{context} $S\hole$. A
 \intro{context} $S\hole$ is simply a formula containing a single occurrence of a
 special subformula $\hole$ called its \intro{hole}, which can be \intro{filled}
 (i.e. substituted) with any formula $A$ to give a new formula $S\select{A}$.
@@ -531,17 +550,18 @@ Then, a proof of a formula $A$ in the \kl{calculus of structures} is not a
 calculus}, but a \emph{sequence} of rewritings $A \steps{} \top$ that reduces
 $A$ to the trivially true goal $\top$.
 
+\AP
 The \kl{calculus of structures}, as a \kl{rewriting system}, is closer to the
 equational reasoning that mathematicians are accustomed to in algebra. The main
 difference is that most rules (including the \kl{switch rule} \rsf{s}) can only
 be applied in a \emph{single} direction, because the premiss and conclusion are
-not \emph{equivalent}\sidenote{In the standard system \kl{SKS} where the \kl{s}
-rule originates, every context is \emph{positive}, in the sense that the hole
-$\hole$ never occurs under a negation $\neg$ or left-hand side of an implication
-$\limp$; otherwise the rule would need to be restricted to positive contexts to
-stay valid. See \refsec{eg-completeness} for more details on \kl{SKS}.}. When
-the premiss and conclusion of a rule are equivalent, we say that the rule is
-\intro{invertible}.
+not \emph{equivalent}\sidenote{In the standard system \kl{SKS} from where the
+\kl{s} rule originates, every context is \emph{positive}, in the sense that the
+hole $\hole$ never occurs under a negation $\neg$ or left-hand side of an
+implication $\limp$; otherwise the rule would need to be restricted to positive
+contexts to stay valid. See \refsec{eg-completeness} for more details on
+\kl{SKS}.}. When the premiss and conclusion of a rule are equivalent, we say
+that the rule is \intro{invertible}.
 
 \begin{emphpar}
 \emph{All} the \kl{proof formalisms} designed in this thesis are \kl{deep inference}
@@ -581,8 +601,8 @@ to communicate its results and suggestions on how to solve problems.
 
 \paragraph{Type theory}
 
-The ancestor of all \kl{proof assistants} was the Automath project, initiated by
-Nicolaas Govert de Bruijn as soon as 1967. Citing Geuvers
+The ancestor of all \kl{proof assistants} was the \intro{Automath} project,
+initiated by Nicolaas Govert de Bruijn as soon as 1967. Citing Geuvers
 \sidecite{geuvers_proof_2009}:
 \begin{quote}
 [One] aim of the project was to develop a mathematical language in which all of
@@ -591,47 +611,49 @@ correctness implies mathematical correctness. This language should be computer
 checkable and it should be helpful in improving the reliability of mathematical
 results.
 \end{quote}
-Thus the design of Automath was focused on the automatic \emph{verification} of
-proofs through \emph{linguistic} means. It introduced many fundamental ideas
-that are still at work in modern \kl{proof assistants}, the most prominent being the
-use of a \emph{type theory} to encode formal proofs.
+Thus the design of \kl{Automath} was focused on the automatic
+\emph{verification} of proofs through \emph{linguistic} means. It introduced
+many fundamental ideas that are still at work in many modern \kl{proof
+assistants}, the most prominent being the use of a \intro{type theory} to encode
+formal proofs.
 
-Contrary to \kl{predicate logic} in traditional \kl{proof theory}, type theories break the
+Contrary to \kl{predicate logic} in traditional \kl{proof theory}, \kl{type theories} break the
 syntactic hierarchy imposed upon mathematical objects, propositions and proofs,
-by giving them a uniform representation as so-called \emph{terms} that can be
-assigned a \emph{type}. The assertion that a term $t$ has type $T$ is usually
+by giving them a uniform representation as so-called \intro{terms} that can be
+assigned a \intro{type}. The assertion that a \kl{term} $t$ has \kl{type} $T$ is usually
 written with the expression $t : T$, which has come to be called a \emph{typing
 judgment} after Martin-Löf. For instance, the judgment $3 : \nats$ states that
-the term $3$ has the type $\nats$ of natural numbers, and $1 + 1 = 2 : \Prop$
-states that the term $1 + 1 = 2$ has the type $\Prop$ of propositions.
+the \kl{term} $3$ has the \kl{type} $\nats$ of natural numbers, and $1 + 1 = 2 : \Prop$
+states that the \kl{term} $1 + 1 = 2$ has the \kl{type} $\Prop$ of propositions.
 
 \paragraph{First-order vs. higher-order}
 
-Almost all type theories are \intro{higher-order}: they give a first-class
+\AP
+Almost all \kl{type theories} are \intro{higher-order}: they give a first-class
 status to functions and predicates, by allowing them to take other functions and
 predicates as arguments. This is because they are based on the
-\emph{$\lambda$-calculus} of Alonzo Church
+\intro{$\lambda$-calculus} of Alonzo Church
 \sidecite{15897363-af72-3dac-82e6-fde144ad66c0}, an intensional theory of
 \kl{higher-order} functions that is now considered to be the first functional
 programming language in history. For instance in \emph{simply-typed}
-$\lambda$-calculus \sidecite{e4d9a073-5bba-3a5b-90d3-81832cd433e5}, one may type
+\kl{$\lambda$-calculus} \sidecite{e4d9a073-5bba-3a5b-90d3-81832cd433e5}, one may type
 the \emph{sum operator} over sequences of natural numbers with the judgment
 $\lambda u. \lambda n. \sum_{i = 1}^{n}{u~i} : (\nats \to \nats) \to \nats \to
 \nats$, where $\lambda u. \lambda n. \sum_{i = 1}^{n}{u~i}$ is a
-\emph{$\lambda$-term} encoding the \kl{higher-order} function that takes a sequence
+\intro{$\lambda$-term} encoding the \kl{higher-order} function that takes a sequence
 represented as a function $u : \nats \to \nats$ and a bound $n : \nats$, and
 returns the sum of each of $u$'s values at index $1 \leq i \leq n$ encoded as
 the \emph{function application} $u~i$.
 
-By contrast, the \kl{predicate logic} developed in the 19\textsuperscript{th}
-century and studied in traditional \kl{proof theory} is \intro{first-order}:
-functions and predicates can only take so-called \emph{first-order individuals}
-as arguments, which usually model ``non-functional'' mathematical objects like
-numbers and sets.
+\AP By contrast, the \kl{predicate logic} developed in the
+19\textsuperscript{th} century and studied in traditional \kl{proof theory} is
+\intro{first-order}: functions and predicates can only take so-called
+\emph{first-order individuals} as arguments, which usually model
+``non-functional'' mathematical objects like numbers and sets.
 
 \begin{emphpar}
-In this thesis, we exclusively study \kl{proof formalisms} for \emph{\kl{first-order}}
-\kl{predicate logic} (\intro{FOL} hereafter).
+In this thesis, we exclusively study \kl{proof formalisms} for
+\emph{\kl{first-order}} \kl{predicate logic} (\reintro{FOL} hereafter).
 \end{emphpar}
 
 We identified a few reasons for working in \kl{FOL}:
@@ -640,65 +662,66 @@ We identified a few reasons for working in \kl{FOL}:
   attention, allowing us to exploit various existing works from the \kl{structural
   proof theory} literature, and even from some overlooked theories of
   19\textsuperscript{th} century logicians;
-  \item by contrast, type theory is a quite recent subject\sidenote{Almost 100
+  \item by contrast, \kl{type theory} is a quite recent subject\sidenote{Almost 100
   years younger than \kl{FOL} if we ignore Russell's theory of types (1902), that was
   based on a \kl{set theory} encoded in \kl{FOL}.}, which explains why there is still a
-  great diversity of type theories that differ in subtle and often incompatible
+  great diversity of \kl{type theories} that differ in subtle and often incompatible
   ways;
-  \item \kl{FOL} is a common kernel of virtually every type theory, making our work
+  \item \kl{FOL} is a common kernel of virtually every \kl{type theory}, making our work
   directly applicable to all present and future \kl{proof assistants};
   \item it is also a simpler setting, that is powerful enough to study the
-  essential features of logical reasoning, without the idiosyncracies of type
-  theories aimed at capturing the full complexity of mathematics.
+  essential features of logical reasoning, without the idiosyncracies of \kl{type
+  theories} aimed at capturing the full complexity of mathematics.
 \end{itemize}
 
 \paragraph{Curry-Howard correspondence}
 
 De Bruijn came up with the revolutionary idea that propositions could themselves
-be seen as types, by having judgments such as $t : 1 + 1 = 2$ where $t$ is a
-\emph{proof term} representing a proof of the proposition $1 + 1 = 2$. This
-\emph{propositions-as-types} principle was rediscovered independently by Howard
+be seen as \kl{types}, by having judgments such as $t : 1 + 1 = 2$ where $t$ is a
+\intro{proof term} representing a proof of the proposition $1 + 1 = 2$. This
+\intro{propositions-as-types} principle was rediscovered independently by Howard
 in 1978 \sidecite{Howard1980-HOWTFN-2}, and developed further into a
-\emph{proofs-as-programs} correspondence --- also called Curry-Howard
-correspondence or isomorphism\sidenote{In fact, Curry had already noticed in
-1958 a similar connection between the types of combinators in his
-\emph{combinatory logic}, and the \kl{axioms} of \kl{Hilbert systems} for implication
-\cite{Curry1959-CURCLV} --- hence the mention of Curry.} --- where
-$\lambda$-terms in the simply-typed $\lambda$-calculus are put in one-to-one
-correspondence with proofs in the implicational fragment of the \kl{natural
-deduction} system \kl{NJ} of Gentzen (\reffig{calculi-NJ}).
+\intro{proofs-as-programs} correspondence --- also called \reintro{Curry-Howard
+correspondence} or \reintro{Curry-Howard isomorphism}\sidenote{In fact, Curry
+had already noticed in 1958 a similar connection between the \kl{types} of
+combinators in his \emph{combinatory logic}, and the \kl{axioms} of \kl{Hilbert
+systems} for implication \cite{Curry1959-CURCLV} --- hence the mention of
+Curry.} --- where \kl{$\lambda$-terms} in the simply-typed \kl{$\lambda$-calculus} are put
+in one-to-one correspondence with proofs in the implicational fragment of the
+\kl{natural deduction} system \kl{NJ} of Gentzen (\reffig{calculi-NJ}).
 
-Thus the core of type theory is \emph{intuitionistic} in nature, and the
+\AP Thus the core of \kl{type theory} is \emph{intuitionistic} in nature, and the
 Curry-Howard correspondence has fostered many fruitful interactions between
 computer science, logic and constructive mathematics, with \kl{proof assistants}
 acting as a crucial tool and source of investigations. One influential
 development in this direction has been the \intro{intuitionistic type theory} of
-Martin-Löf, which formed the basis for the implementation of many \kl{proof
-assistants} like NuPrl, Alf, and most recently Agda \cite{geuvers_proof_2009}. A
-system closely related to \kl{intuitionistic type theory}, the \emph{Calculus of
-Inductive Constructions} (\kl{CoIC}), is also implemented in two leading \kl{proof
-assistants}: Coq \sidecite{the_coq_development_team_2022_7313584} and Lean
+Martin-Löf (\reintro{ITT} or \reintro{MLTT}), which formed the basis for the
+implementation of many \kl{proof assistants} like \kl{NuPrl}, \kl{Alf}, and most
+recently \kl{Agda} \cite{geuvers_proof_2009}. A system closely related to
+\kl{MLTT}, the \intro{calculus of inductive constructions} (\reintro{CoIC}), is
+also implemented in two leading \kl{proof assistants}: \intro{Coq}
+\sidecite{the_coq_development_team_2022_7313584} and \intro{Lean}
 \sidecite{10.1007/978-3-030-79876-5_37}. Following the proofs-as-programs
 correspondence, these systems support the creation of both proofs and programs
 that manipulate and compute mathematical objects, by compiling everything down
-to typed terms.
+to \kl{typed} \kl{terms}.
 
 \subsection{Interfaces}
 
 \paragraph{Elaboration}
 
-Type theories are the logical foundation for the \emph{kernel} of \kl{proof
+\kl{Type theories} are the logical foundation for the \emph{kernel} of \kl{proof
 assistants}, i.e. the part of the system that is responsible for checking formal
 proofs expressed in a \emph{terse}, \emph{machine-oriented} format. But it
 quickly became clear that this was not enough to make \kl{proof assistants} a viable
 alternative to paper proofs: de Bruijn estimates that it takes a time factor of
-20 to translate a paper proof into a formalized proof in Automath
+20 to translate a paper proof into a formalized proof in \kl{Automath}
 \sidecite{7a66996d195e4eba8c3fe5dc5bab8fc5}. This factor has been estimated to
 be shrinkable to 4 in the Mizar \kl{proof assistant} \sidecite{debruijn_factor},
 thanks to the design of high-level \emph{languages} for representing
 mathematical statements and proofs, that sit on top of the core logical
 theory\sidenote{In the case of Mizar, a typed \kl{set theory} based on \kl{FOL}.}. The
-process of compiling a high-level proof text into a low-level proof term is
+process of compiling a high-level proof text into a low-level \kl{proof term} is
 called \emph{elaboration}.
 
 \paragraph{Statement languages}
@@ -733,7 +756,7 @@ graphical notations in the Lean \kl{proof assistant}\sidenote{For a similar appr
 to ProofWidgets in the context of functional programming, see
 \cite{omar-filling-2021}.} \sidecite{ayers_graphical_2021}. De Moura and Ullrich
 have also designed a powerful macro system for Lean 4, that supports the
-elaboration of abstract notations into terms of the underlying type theory
+elaboration of abstract notations into \kl{terms} of the underlying \kl{type theory}
 \sidecite{ullrich_beyond_2022}.
 
 \paragraph{Proof languages}
@@ -919,7 +942,7 @@ semantics of PbP actions is still based on the \emph{shallow} \kl{inference rule
   All the works presented in this thesis can be seen as a direct continuation of
   the research programme initiated by PbP and PbL. The aim is to \emph{replace}
   textual proof languages with \emph{gestural} actions performed directly upon
-  \emph{goals} in a \intro{graphical user interfac} (\reintro{GUI}). To be as
+  \emph{goals} in a \intro{graphical user interface} (\reintro{GUI}). To be as
   general as possible, we call such a paradigm ``\intro{Proof-by-Action}''
   (\reintro{PbA}).
 \end{emphpar}

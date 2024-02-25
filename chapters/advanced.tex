@@ -267,24 +267,25 @@ together with the hypothesis:
 \end{itemize}
 
 Now there is no available action on the conclusion $x \in C$, because set
-membership is a \emph{primitive} predicate in \kl{set theory}: it does not have any
-associated definition in the sense mentioned above\sidenote{Formally, the
-meaning of $\in$ in a \kl{set theory} such as \kl{ZF} comes from the various \kl{axioms}
-involving it. One might call such a definition \emph{behavioral}, since the
-meaning of the \kl{symbol} emerges from the way it can be used in proofs through
-\kl{axioms}. In contrast, the usual notion of mathematical definition we tackle in
-this chapter might be called \emph{nominal}, because it essentially amounts to
-giving a name (the head) to a reoccurring pattern of statement (the body). Note
-that the syntax of \kl{first-order logic} is unaware of this distinction, since in
-both cases the defined concepts are encoded as \emph{atomic} predicates. This is
-usually not the case of logical frameworks found in \kl{proof assistants}: for
-instance, the duality between \emph{judgmental} (nominal) and
-\emph{propositional} (behavioral) equality is at the heart of Martin-Löf's type
-theory, and it is used extensively in Coq to perform automation, both in the
-computation of expressions and the matching of statements modulo definitions.}.
-But we can still unfold some definitions in the context, which might suggest
-further possible interactions. First we can unfold the definition of preimage
-used in $(1)$ by selecting the precise corresponding subterm:
+membership is a \emph{primitive} predicate in \kl{set theory}: it does not have
+any associated definition in the sense mentioned above\sidenote{Formally, the
+meaning of $\in$ in a \kl{set theory} such as \kl{ZF} comes from the various
+\kl{axioms} involving it. One might call such a definition \emph{behavioral},
+since the meaning of the \kl{symbol} emerges from the way it can be used in
+proofs through \kl{axioms}. In contrast, the usual notion of mathematical
+definition we tackle in this chapter might be called \emph{nominal}, because it
+essentially amounts to giving a name (the head) to a reoccurring pattern of
+statement (the body). Note that the syntax of \kl{first-order logic} is unaware
+of this distinction, since in both cases the defined concepts are encoded as
+\emph{atomic} predicates. This is usually not the case of logical frameworks
+found in \kl{proof assistants}: for instance, the duality between
+\emph{judgmental} (nominal) and \emph{propositional} (behavioral) equality is at
+the heart of \kl{Martin-Löf type theory}, and it is used extensively in Coq to
+perform automation, both in the computation of expressions and the matching of
+statements modulo definitions.}. But we can still unfold some definitions in the
+context, which might suggest further possible interactions. First we can unfold
+the definition of preimage used in $(1)$ by selecting the precise corresponding
+subterm:
 $$x \in \select{f^{-1}(f(C))} \qquad \text{(\action{Unfold})}$$
 which, assuming a definition based on set comprehension, gives:
 \begin{itemize}
@@ -304,12 +305,12 @@ will vary:
     \kl{higher-order} statement, but this time because it quantifies over every
     formula $\phi$\sidenote{Traditionnally, logicians preferred to speak of
     \emph{axiom schemas}, that is countable sets of \kl{axioms}, rather than
-    \kl{higher-order} \kl{axioms}, in order to stay purely in a \kl{first-order} setting. But
-    this does not make much sense from an implementation point of view, as a
-    proof engine will only be able to manipulate a finite amount of \kl{axioms}.}.
-    Thus we assume that the underlying proof engine can handle such \kl{higher-order}
-    statements, and in particular that the axiom of comprehension is available
-    in its database of lemmas.
+    \kl{higher-order} \kl{axioms}, in order to stay purely in a \kl{first-order}
+    setting. But this does not make much sense from an implementation point of
+    view, as a proof engine will only be able to manipulate a finite amount of
+    \kl{axioms}.}. Thus we assume that the underlying proof engine can handle
+    such \kl{higher-order} statements, and in particular that the axiom of
+    comprehension is available in its database of lemmas.
     
     In Actema, one can freely search in this database by typing text in a search
     bar, typically in this case the keyword ``comprehension''. Then the system
@@ -319,7 +320,7 @@ will vary:
     lemma is to search by \emph{content} of the statement instead of searching
     by name. State-of-the-art \kl{proof assistants} usually provide facilities for
     this: for instance Coq has a \texttt{Search} command which can take
-    \emph{patterns}, i.e. terms with holes or so-called \emph{metavariables}, in
+    \emph{patterns}, i.e. \kl{terms} with holes or so-called \emph{metavariables}, in
     order to filter out results that do not match the given pattern. In Actema,
     we implemented a novel feature which replaces patterns by a selection of
     subterms in the current goal, similarly to what is given as argument to
@@ -342,32 +343,32 @@ will vary:
       \item[(2)] $x \in A \land f(x) \in f(C)$
     \end{itemize}
   
-  \item[In higher-order type theory] In type theory, every mathematical object
-  or statement is ultimately encoded as a function, in the sense of the
-  $\lambda$-calculus. It is Alonzo Church who first got the idea of representing
+  \item[In higher-order type theory] In \kl{type theory}, every mathematical
+  object or statement is ultimately encoded as a function, in the sense of the
+  \kl{$\lambda$-calculus}. It is Alonzo Church who first got the idea of representing
   a set by its \emph{characteristic function} in his \intro{higher-order logic}
-  (\reintro{HOL}), as a $\lambda$-term of type $\iota \to \omicron$ where
-  $\iota$ is the type of individuals, and $\omicron$ the type of
+  (\reintro{HOL}), as a \kl{$\lambda$-term} of \kl{type} $\iota \to \omicron$ where
+  $\iota$ is the \kl{type} of individuals, and $\omicron$ the \kl{type} of
   propositions\todo{add citation}. With this encoding, the only way to construct
   a set is by comprehension, and set membership corresponds to function
   application; that is, $\compr{x \in A}{\phi}$ is identified with the
   characteristic function $\lambda x{:}A.\ \phi$, and $x \in t$ is the
   application $t\ x$\sidenote{Note that this induces a strict hierarchical
   notion of set as in Russell's type theory, where sets containing other sets
-  have a \kl{higher-order} type, i.e. they correspond to functions taking other
-  functions as arguments.}. Then if we consider $\lambda$-terms modulo
+  have a \kl{higher-order} \kl{type}, i.e. they correspond to functions taking other
+  functions as arguments.}. Then if we consider \kl{$\lambda$-terms} modulo
   $\beta$-equivalence, unfolding the ``definition'' of set comprehension just
   amounts to performing one step of $\beta$-reduction\sidenote{One can consider
   this as a third kind of definition qualified of \emph{computational}. In
-  Martin-Löf's type theory, it is merged with nominal definitions in the concept
-  of judgmental equality. In Coq they are distinguished: computational and
-  nominal definitions correspond respectively to $\beta$-reduction and
-  $\delta$-reduction.}: hypothesis $(1)$ becomes
+  \kl{MLTT}, it is merged with nominal definitions in the concept of judgmental
+  equality. In Coq they are distinguished: computational and nominal definitions
+  correspond respectively to $\beta$-reduction and $\delta$-reduction.}:
+  hypothesis $(1)$ becomes
   $$(\lambda a{:}A.\ f(C)\ f(a))\ x$$
   which $\beta$-reduces to
   $$f(C)\ f(x)$$ which we can translate back as $f(x) \in f(C)$. This encoding
-  has now found its way in the libraries of many \kl{proof assistants} based on type
-  theory, and is the one used in the Coq solution to the exercise provided in
+  has now found its way in the libraries of many \kl{proof assistants} based on \kl{type
+  theory}, and is the one used in the Coq solution to the exercise provided in
   annex of \cite{bartzia:hal-04087080}. To perform $\beta$-reduction in Coq,
   there is a tactic called \texttt{simpl} as in ``simplify''\sidenote{There are
   also \texttt{simp} tactics available in Isabelle and Lean, although they are
@@ -382,7 +383,7 @@ will vary:
 \end{description}
 From a user perspective, the two styles of actions induced by the two types of
 logical frameworks differ mainly in one aspect: while the definition of set
-comprehension is \emph{implicit} in the type-theoretical encoding, it must be
+comprehension is \emph{implicit} in the \kl{type-theoretical} encoding, it must be
 manipulated \emph{explicitly} when using the axiom of comprehension\sidenote{In
 fact one could also use the axiom of comprehension implicitly by relying on
 stronger automation. For example in Isabelle/Isar, one would write explicitly
@@ -492,10 +493,10 @@ occurrence of the variable regardless of its binding point, since the system can
 always infer it. The only condition is that if the variable is bound by a
 $\forall$, it must occur in a \emph{strictly positive} location, i.e. in the
 conclusion and not on the left of an implication $\limp$. Obviously the variable
-should also be of an \emph{inductive} type, i.e. one which is mapped to an
+should also be of an \emph{inductive} \kl{type}, i.e. one which is mapped to an
 induction scheme in the system\sidenote{The standalone version of Actema only
 supports induction on natural numbers, but in a \kl{proof assistant} like Coq or Lean
-one can easily check if a given type is inductive.}. Then the \action{Induction}
+one can easily check if a given \kl{type} is inductive.}. Then the \action{Induction}
 action will simply apply the associated induction scheme. In our commutativity
 example, we can thus start the proof like so:
 $$\select{\forall n \in \nats.\ \forall m \in \nats.\ n + m = m + n} \qquad

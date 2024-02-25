@@ -41,7 +41,7 @@
 
 % Another common feature consists in extending $Γ$ with \emph{definitions} of the
 % form $x := b : A$, where $b$ is some term \emph{provably} of type
-% $A$\sidenote{This type-theoretical encoding of definitions dates back to the
+% $A$\sidenote{This \kl{type-theoretical} encoding of definitions dates back to the
 % work of N. G. De Bruijn on Automath, according to \cite{geuvers_proof_2009}.}.
 % Then $x$ acts as a name for the body $b$ of the definition, and is not just
 % assumed to be of type $A$. The more neutral word \emph{context} is usually
@@ -169,7 +169,7 @@ variable is bound at most once.
 Extending this work to simple extensions of \kl{FOL}, like multi-sorted predicate
 calculus is straightforward (and actually done in the Actema prototype). Some
 interesting points may show up when considering how to apply this work to more
-complex formalisms like type theories. We will not explore these questions here.
+complex formalisms like \kl{type theories}. We will not explore these questions here.
 
 % Another interesting question is how our approach extends to classical logic(s),
 % by using multi-conclusion sequents. In this chapter we only give a few hints on
@@ -606,11 +606,11 @@ B\land D \limp C.$$
 Note that there is almost no difference in the way one uses different
 versions of a hypothesis $A\limp B\limp C$, $A\land B\limp
 C$, but also $B\limp A\limp C$, in \kl(dnd){forward} as well as in
-\kl(dnd){backward} steps\sidenote{When viewed as types through the Curry-Howard
+\kl(dnd){backward} steps\sidenote{When viewed as \kl{types} through the Curry-Howard
 isomorphism, $A\limp B\limp C$, $A\land B\limp C$, $B\land
-A\limp C$ and $B\limp A\limp C$ are {\em isomorphic types};
+A\limp C$ and $B\limp A\limp C$ are {\em isomorphic \kl{types}};
 and Roberto di Cosmo~\cite{ISOSBook} has also precisely underlined
-that type isomorphisms should help to free the programmer from
+that \kl{type} isomorphisms should help to free the programmer from
 arbitrary syntactical choices.}. This underlines, we hope, that our
 proposal makes the proof construction process much less dependent on
 arbitrary syntactical details, like the order of hypotheses or whether
@@ -701,7 +701,7 @@ $$
 This last example illustrates how partial instantiation abstracts away the order
 in which quantifiers are declared, very much like the partial application
 presented earlier for implication\sidenote{This fact should not be too
-surprising to the reader familiar with dependent type theory, where implication
+surprising to the reader familiar with dependent \kl{type theory}, where implication
 is usually defined as a special case of universal quantification.}.
 %% What the last example stresses is, again, that syntactical details,
 %% here the order in which variables are quantified, are much less

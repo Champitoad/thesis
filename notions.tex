@@ -30,10 +30,15 @@
     }
 }
 
+\knowledgedirective{acronym}{synonym,up}
+
 % Software systems
 
-\knowledgedirective{software}{notion,typewriter}
+\knowledgedirective{software}{notion,typewriter,up}
 
+\knowledge{Automath}{software}
+\knowledge{NuPrl}{software}
+\knowledge{Alf}{software}
 \knowledge{Coq}{software}
 \knowledge{Agda}{software}
 \knowledge{Lean}{software}
@@ -101,8 +106,22 @@
 \knowledge{HS}{system}
 \knowledge{G4ip}{system}
 \knowledge{ISp}{system}
-\knowledge{CoIC}{system}
 \knowledge{JN}{system}
+
+\knowledge{notion}
+ | calculus of inductive constructions
+ | Calculus of Inductive Constructions
+\knowledge{system,acronym}
+ | CoIC
+
+\knowledge{notion}
+ | Martin-Löf type theory
+ | constructive type theory
+ | intuitionistic type theory
+ | Intuitionistic type theory
+\knowledge{system,acronym}
+ | MLTT
+ | ITT
 
 % Inference rules
 
@@ -180,8 +199,6 @@
 
 % Introduction
 
-\knowledgedirective{acronym}{synonym,up}
-
 \knowledge{notion}
  | proof assistant
  | Proof assistant
@@ -239,10 +256,18 @@
  | Axioms
 
 \knowledge{notion}
- | first-order logic
- | First-order logic
+ | first-order
+ | First-order
+
+\knowledge{notion}
+ | higher-order
+ | Higher-order
+
+\knowledge{notion}
  | predicate logic
  | Predicate logic
+ | first-order logic
+ | First-order logic
 \knowledge{acronym}
  | FOL
 \knowledge{acronym}
@@ -252,6 +277,14 @@
  | higher-order logic
 \knowledge{acronym}
  | HOL
+
+\knowledge{notion}
+ | $\lambda$-calculus
+ | $\lambda$-calculi
+ 
+\knowledge{notion}
+ | $\lambda$-term
+ | $\lambda$-terms
 
 \knowledge{notion}
  | model theory
@@ -430,7 +463,40 @@
  | Invertible
 
 \knowledge{notion}
- | intuitionistic type theory
+ | type theory
+ | type theories
+ | type-theoretical
+ | Type theory
+ | Type theories
+ | Type-theoretical
+
+\knowledge{notion}
+ | term
+ | terms
+ | Term
+ | Terms
+
+\knowledge{notion}
+ | type
+ | types
+ | typed
+ | Type
+ | Types
+ | Typed
+
+\knowledge{notion}
+ | proof term
+ | proof terms
+ | Proof term
+ | Proof terms
+
+\knowledge{notion}
+ | propositions-as-types
+
+\knowledge{notion}
+ | proofs-as-programs
+ | Curry-Howard correspondence
+ | Curry-Howard isomorphism
 
 \knowledge{notion}
  | forward
@@ -830,14 +896,6 @@
  | Proof
  | Proofs
  
-\knowledge{notion}
- | first-order
- | First-order
-
-\knowledge{notion}
- | higher-order
- | Higher-order
-
 \knowledge{notion}
  | first-order@implication
  | First-order@implication

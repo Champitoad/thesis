@@ -118,7 +118,7 @@ hence the ``tinctured'' qualificative. The precise rules, meaning and purpose of
 tinctured \kl{EGs} remain elusive to this day, and might constitute the most
 esoteric part of Peirce's work.
 \end{digression}
-% We see a possible connection with the type-theoretical concept of
+% We see a possible connection with the \kl{type-theoretical} concept of
 % \emph{judgment}, which was rehabilitated by Martin-Löf from the philosophy of
 % Kant \cite{Martin-Lof1996-MAROTM-7}, who was of great influence on Peirce's own
 % philosophy \cite{sep-peirce}.}.
@@ -662,8 +662,8 @@ This might be the consequence of an opposite treatment given to \emph{negation}:
 while in \kl{EGs} it is the only primitive constructor of the system --- remember that
 the only way to increase the depth of a \kl{graph} is with a \kl{cut}, in LL negation is
 the only defined notion through De Morgan dualities. Thus \kl{EGs} are closer (at
-least syntactically) to \emph{type theories}, which also take a negative
-operation (the arrow or dependent product type) as their sole primitive
+least syntactically) to \emph{\kl{type theories}}, which also take a negative
+operation (the arrow or dependent product \kl{type}) as their sole primitive
 construct.
 
 \paragraph{Interactivity and Locativity}
@@ -1529,35 +1529,36 @@ that all rules of \kl{Alpha} except \kl{Del} satisfy this property:
 
 \begin{scope}\knowledgeimport{beta}
 
-Before working on \kl{EGs}, Peirce had already developed a deep understanding of the
-logic of relations of arbitrary arity, inventing the notions of variables and
-quantifiers 30 years before the standard Russell-Whitehead syntax for \kl{predicate
-logic} appeared in 1910 \cite{sep-peirce}. This all stemmed from his extensive
-study of \emph{relation algebras}, first investigated by De Morgan in 1860.
-However in his system \kl{Beta} of \kl{EGs}, Peirce gives a very different account of
-the logic of relations, both in the graphical representation of relational
-statements, and the illative transformations that govern them. In the following,
-we illustrate informally the principles of \kl{Beta}, and how they are able to
-capture what is identified nowadays in \kl{symbolic} logic as \emph{purely
-relational} \kl{first-order} theories (that is, without constant nor function
-symbols) equipped with a primitive equality predicate.
+Before working on \kl{EGs}, Peirce had already developed a deep understanding of
+the logic of relations of arbitrary arity, inventing the notions of variables
+and quantifiers 30 years before the standard Russell-Whitehead syntax for
+\kl{predicate logic} appeared in 1910 \cite{sep-peirce}. This all stemmed from
+his extensive study of \emph{relation algebras}, first investigated by De Morgan
+in 1860. However in his system \kl{Beta} of \kl{EGs}, Peirce gives a very
+different account of the logic of relations, both in the graphical
+representation of relational statements, and the illative transformations that
+govern them. In the following, we illustrate informally the principles of
+\kl{Beta}, and how they are able to capture what is identified nowadays in
+\kl{symbolic} logic as \emph{purely relational} \kl{first-order} theories (that
+is, without constant nor function symbols) equipped with a primitive equality
+predicate.
 
 \subsection{Syntax}
 
-\paragraph{Spots} In the propositional system \kl{Alpha}, atomic \kl(alpha){graphs}
-represent sentences that can be asserted or denied (or equivalently, assigned a
-truth value), but they do not exhibit any internal structure syntactically: they
-might as well be depicted just as (distinguished) points on $\SA$. As most
-logicians of his time, Peirce was directly influenced by the \emph{term logic}
-of Aristotle, where assertions are decomposed into a \emph{subject} to which
-applies some \emph{predicate}. However, while Aristotle's notion of predicate
-has a metaphysical flavor, Peirce's notion is purely grammatical. For instance,
-Aristotle rejected the sentence ``The person sitting down is Socrates'' as a
-genuine predication, because Socrates is an \emph{individual}, and in his view
-predicates could only be so-called \emph{universals} like ``humans'' or
-``mortals'' \sidecite{smith_aristotles_2022}. In \kl{Beta} there is no such
-restriction, and the previous sentence can be represented by the following
-\kl{graph}:
+\paragraph{Spots} In the propositional system \kl{Alpha}, atomic
+\kl(alpha){graphs} represent sentences that can be asserted or denied (or
+equivalently, assigned a truth value), but they do not exhibit any internal
+structure syntactically: they might as well be depicted just as (distinguished)
+points on $\SA$. As most logicians of his time, Peirce was directly influenced
+by the \emph{term logic} of Aristotle, where assertions are decomposed into a
+\emph{subject} to which applies some \emph{predicate}. However, while
+Aristotle's notion of predicate has a metaphysical flavor, Peirce's notion is
+purely grammatical. For instance, Aristotle rejected the sentence ``The person
+sitting down is Socrates'' as a genuine predication, because Socrates is an
+\emph{individual}, and in his view predicates could only be so-called
+\emph{universals} like ``humans'' or ``mortals''
+\sidecite{smith_aristotles_2022}. In \kl{Beta} there is no such restriction, and
+the previous sentence can be represented by the following \kl{graph}:
 \begin{equation}
   \tikzfig{1}{0.5}{sitting-socrates} \label{eq:sitting-socrates}
 \end{equation}
@@ -1604,9 +1605,9 @@ correspond to the extremities of the line connected to the hooks. As in
 \kl{Alpha}, the conjunctive aspect of the sentence is accounted for by the fact
 that the two spots are juxtaposed in the same area on $\SA$.
 
-Now if one considers a \kl{first-order} theory with a predicate symbol $=$ satisfying
-the usual \kl{axioms} for equality, then our sentence can alternatively be expressed
-by the following formula:
+Now if one considers a \kl{first-order} theory with a predicate symbol $=$
+satisfying the usual \kl{axioms} for equality, then our sentence can
+alternatively be expressed by the following formula:
 \begin{equation}
   \exists x. \exists y. \mathsf{PersonSittingDown}(x) \wedge
   \mathsf{Socrates}(y) \wedge x = y \label{eq:sitting-socrates-fo-eq}
@@ -1683,14 +1684,15 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
     
     The \kl{graph} of universal quantification (\ref{eq:eg-forall-out}) bears a
     striking similarity to that of implication, as illustrated in
-    \reffig{eg-forall-imp}. While the similarity also exists for the \kl{symbolic}
-    encoding of these connectives in the fragment $\{\neg, \land, \exists\}$
-    captured by \kl{Beta}, the graphical representation makes this fact more
-    apparent. In constructive type theories, both universal quantification
-    $\forall x. B$ and implication $A \limp B$ are seen as instances of a more
-    general construct, the \emph{dependent product type} $\Pi x : A. B$. Thus
-    retrospectively, one might interpret the above observation as another
-    manifestation of Peirce's pre-\kl{intuitionistic} conception of logic.
+    \reffig{eg-forall-imp}. While the similarity also exists for the
+    \kl{symbolic} encoding of these connectives in the fragment $\{\neg, \land,
+    \exists\}$ captured by \kl{Beta}, the graphical representation makes this
+    fact more apparent. In \kl[ITT]{constructive type theories}, both universal
+    quantification $\forall x. B$ and implication $A \limp B$ are seen as
+    instances of a more general construct, the \emph{dependent product \kl{type}}
+    $\Pi x : A. B$. Thus retrospectively, one might interpret the above
+    observation as another manifestation of Peirce's pre-\kl{intuitionistic}
+    conception of logic.
   \end{remark}
 
   \item[Teridentity]
@@ -1812,15 +1814,15 @@ A remarkable fact about \kl{Beta} is that it does not need any new illative
 principle compared to \kl{Alpha}. Rather, it simply generalizes those of
 \kl{Alpha} to account for LoI\sidenote{Thus in a sense, the \kl{first-order}
 individuals denoted by LoI behave in the exact same way as the propositions
-denoted by the \kl{graphs} of \kl{Alpha}. This can be interpreted as a manifestation
-of Peirce's \emph{psycho-physical monism} \cite{sep-peirce}, that blurs the
-distinction between the psychological level of propositions (concepts) and the
-physical level of individuals (objects) enforced in the language of \kl{predicate
-logic}, and inherited from Aristotle's conception of predication. Independently,
-Girard has recently been pushing the idea further in his transcendental syntax
-programme, by proposing to see individuals as particular kinds of \emph{linear}
-propositions (see \cite[\S 84.3]{eng_exegesis_2023}). And what is more linear
-than a line?}.
+denoted by the \kl{graphs} of \kl{Alpha}. This can be interpreted as a
+manifestation of Peirce's \emph{psycho-physical monism} \cite{sep-peirce}, that
+blurs the distinction between the psychological level of propositions (concepts)
+and the physical level of individuals (objects) enforced in the language of
+\kl{predicate logic}, and inherited from Aristotle's conception of predication.
+Independently, Girard has recently been pushing the idea further in his
+transcendental syntax programme, by proposing to see individuals as particular
+kinds of \emph{linear} propositions (see \cite[\S 84.3]{eng_exegesis_2023}). And
+what is more linear than a line?}.
 
 \begin{description}
   \item[Iteration/Deiteration] When a spot is iterated, every hook of the new

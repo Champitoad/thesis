@@ -70,7 +70,7 @@ Coq and Actema. \refsec{protocol} describes in more details the main usage
 scenario of \texttt{coq-actema}, following the flow of data and control between
 the different processes involved. \refsec{compilation} explains how the various
 graphical actions performed by the user in Actema are compiled into Coq tactics,
-ultimately producing certified proof terms. Finally in \refsec{pluginfuture}, we
+ultimately producing certified \kl{proof terms}. Finally in \refsec{pluginfuture}, we
 discuss possible avenues for extending the usability of \texttt{coq-actema} to a
 broader class of Coq goals, as well as prospective solutions to the problem of
 \emph{proof evolution} in our graphical paradigm.
@@ -121,7 +121,7 @@ and replace its interface by that of Actema. However as noted by E. J. G. Arias,
 the SerAPI protocol --- and in fact all the other protocols turn out to be too
 high-level for our purpose. Typically we need to (partially) translate Coq goals
 into \kl{iFOL} goals, which can be done much more easily with a direct access to
-Coq's low-level API for manipulating kernel terms.
+Coq's low-level API for manipulating kernel \kl{terms}.
 % We also heavily rely on unification to interactively suggest valid
 % actions on subterms of the goal, and none of the protocols implement unification
 % queries.
@@ -139,19 +139,19 @@ workflows.
 In this setting, it is now the Coq plugin which defines the semantics of proof
 actions as new tactics, instead of Actema's backend. This allows us to leverage
 the facilities already provided by Coq to handle the proof state and generate
-proof terms in its own logical framework, the Calculus of Inductive
-Construction. This does not make the backend of Actema completely irrelevant
-however: we still need it so that Actema can maintain its own, \kl{first-order}
-version of the proof state, with additional metadata used to display and
-interact graphically with objects and statements. Also tasks related to the
-querying of both display data and proof actions, like the \texttt{html} method
-and unification algorithm mentioned in the previous section, are at the time of
-writing of this thesis still performed in Actema's backend. It is unclear to
-what extent this should rather be a responsibility of the Coq plugin, relegating
-Actema to a pure role of frontend to the PA\sidenote{For instance in the
-ProofWidgets framework of Lean \cite{ayers_graphical_2021}, all these tasks are
-implemented in the meta-programming language of Lean itself, which makes it
-easily extensible by (expert) users of the PA.}.
+\kl{proof terms} in the \kl{calculus of inductive constructions}. This does not
+make the backend of Actema completely irrelevant however: we still need it so
+that Actema can maintain its own, \kl{first-order} version of the proof state,
+with additional metadata used to display and interact graphically with objects
+and statements. Also tasks related to the querying of both display data and
+proof actions, like the \texttt{html} method and unification algorithm mentioned
+in the previous section, are at the time of writing of this thesis still
+performed in Actema's backend. It is unclear to what extent this should rather
+be a responsibility of the Coq plugin, relegating Actema to a pure role of
+frontend to the PA\sidenote{For instance in the ProofWidgets framework of Lean
+\cite{ayers_graphical_2021}, all these tasks are implemented in the
+meta-programming language of Lean itself, which makes it easily extensible by
+(expert) users of the PA.}.
 
 \section{The \texttt{coq-actema} system}\labsec{architecture}
 \begin{figure*}
@@ -544,17 +544,16 @@ briefly describe.
 \subsection{Deep inference semantics}
 
 In a \kl{deep inference} setting, one can reason on subterms located arbitrarily
-\emph{deep} inside statements, usually by applying some kind of \kl{rewriting rules}
-on them. In particular, the semantics of \kl{DnD} actions described in \refch{sfl}
-are based on the rules of SFL (\reffig{DISL}). To implement them, we chose to do
-a \emph{deep embedding} of \kl{first-order logic} inside the logic of Coq, the
-Calculus of Inductive Constructions (\kl{CoIC} hereafter). Here the word
-``deep'' has a different meaning, related to the fact that we encode the
-statements of \kl{first-order logic} with our own custom datatypes, instead of
-reusing the statements of \kl{CoIC}. This makes it easier to define the SFL
-\kl{rewriting rules}, in particular because we need to manipulate \emph{contexts}
-(Definition \ref{def:formula-context}) explicitly, and those are not available
-for \kl{CoIC} propositions.
+\emph{deep} inside statements, usually by applying some kind of \kl{rewriting
+rules} on them. In particular, the semantics of \kl{DnD} actions described in
+\refch{sfl} are based on the rules of SFL (\reffig{DISL}). To implement them, we
+chose to do a \emph{deep embedding} of \kl{first-order logic} inside \kl{CoIC}.
+Here the word ``deep'' has a different meaning, related to the fact that we
+encode the statements of \kl{first-order logic} with our own custom datatypes,
+instead of reusing the statements of \kl{CoIC}. This makes it easier to define
+the SFL \kl{rewriting rules}, in particular because we need to manipulate
+\emph{contexts} (Definition \ref{def:formula-context}) explicitly, and those are
+not available for \kl{CoIC} propositions.
 
 Then we use a technique called \emph{computational reflection} in order to apply
 the embedded \kl{deep inference} semantics to Coq goals. Originating from the
@@ -565,12 +564,12 @@ reasoning on the deep embedding with Coq programs (also called
 \emph{fixpoints}), and then translating objects back into Coq with a
 \texttt{reflect} function. It is easy to implement the \texttt{reflect} function
 because the datatypes in a deep embedding are almost always defined as
-\emph{inductive} types, and thus one can easily do pattern-matching on them. It
+\emph{inductive} \kl{types}, and thus one can easily do pattern-matching on them. It
 is a different story for the \texttt{reify} function, especially in our case:
 indeed we want to translate the statements of Coq goals into \kl{first-order}
-propositions. But Coq statements are objects of type \texttt{Prop}, and thus
+propositions. But Coq statements are objects of \kl{type} \texttt{Prop}, and thus
 cannot be pattern-matched on inside \kl{CoIC}\sidenote{For reasons of
-\kl{consistency} of the logic, well-known in the literature on type theory.}.
+\kl{consistency} of the logic, well-known in the literature on \kl{type theory}.}.
 Thus we need to have recourse to a \emph{meta-programming} language in order to
 inspect the structure of Coq goals. Here we use the standard {\ltac} language,
 which provides powerful constructs for pattern-matching on goals\sidenote{A
@@ -589,7 +588,7 @@ where $T$ is the so-called \emph{subformula linking trace} mentioned earlier. Of
 course the paths $p, q$ and the trace $T$ are all expressed with custom Coq
 datatypes relying on our deep embedding of \kl{first-order logic}. The role of the
 trace in particular is to provide the list of SFL \kl{rewriting rules} to apply,
-including Coq terms instantiating quantifiers that were computed in Actema by
+including Coq \kl{terms} instantiating quantifiers that were computed in Actema by
 unification of the two linked subformulas. Then we formulate in Coq two theorems
 that guarantee the logical \emph{soundness} of \texttt{b3} and \texttt{f3}
 (\reffig{dnd-snd}). Note that the theorems are formulated using the native
@@ -695,7 +694,7 @@ manipulate directly statements in the goal. Now that we are connected to Coq, we
 can in principle reuse the notation system already implemented within Coq. The
 \texttt{coq-core} OCaml API indeed exposes methods for pretty-printing Coq terms
 using their assigned notations. The problem is that these methods only return
-\emph{strings}, but in order to manipulate terms interactively in Actema we also
+\emph{strings}, but in order to manipulate \kl{terms} interactively in Actema we also
 need access to \emph{trees} mapping their subterm structure to the
 pretty-printed string. At the time of writing there is no support for the
 latter, but the Coq development team informed us that they plan to add it. The
@@ -720,9 +719,9 @@ One could imagine in the long-term embedding this system as a subsystem of
 In fact the ProofWidgets framework mentioned earlier has been designed with this
 usecase in mind from the outset. But they rely on a very different architecture
 compared to that of \texttt{coq-actema}, where the methods generating the
-HTML/JS code of pretty-printed terms are directly implemented in a DSL embedded
+HTML/JS code of pretty-printed \kl{terms} are directly implemented in a DSL embedded
 in the meta-programming language of the PA. While this allows easy access to all
-meta-programming facilities for manipulating terms, this makes their framework
+meta-programming facilities for manipulating \kl{terms}, this makes their framework
 only usable within Lean, while Actema could in principle be used with any PA
 that implements a corresponding plugin (for example with a \texttt{lean-actema}
 variant of our system).
