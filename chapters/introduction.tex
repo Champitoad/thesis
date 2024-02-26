@@ -617,6 +617,7 @@ many fundamental ideas that are still at work in many modern \kl{proof
 assistants}, the most prominent being the use of a \intro{type theory} to encode
 formal proofs.
 
+\AP
 Contrary to \kl{predicate logic} in traditional \kl{proof theory}, \kl{type theories} break the
 syntactic hierarchy imposed upon mathematical objects, propositions and proofs,
 by giving them a uniform representation as so-called \intro{terms} that can be
@@ -628,22 +629,21 @@ states that the \kl{term} $1 + 1 = 2$ has the \kl{type} $\Prop$ of propositions.
 
 \paragraph{First-order vs. higher-order}
 
-\AP
-Almost all \kl{type theories} are \intro{higher-order}: they give a first-class
-status to functions and predicates, by allowing them to take other functions and
-predicates as arguments. This is because they are based on the
+\AP Almost all \kl{type theories} are \intro{higher-order}: they give a
+first-class status to functions and predicates, by allowing them to take other
+functions and predicates as arguments. This is because they are based on the
 \intro{$\lambda$-calculus} of Alonzo Church
 \sidecite{15897363-af72-3dac-82e6-fde144ad66c0}, an intensional theory of
 \kl{higher-order} functions that is now considered to be the first functional
 programming language in history. For instance in \emph{simply-typed}
-\kl{$\lambda$-calculus} \sidecite{e4d9a073-5bba-3a5b-90d3-81832cd433e5}, one may type
-the \emph{sum operator} over sequences of natural numbers with the judgment
-$\lambda u. \lambda n. \sum_{i = 1}^{n}{u~i} : (\nats \to \nats) \to \nats \to
-\nats$, where $\lambda u. \lambda n. \sum_{i = 1}^{n}{u~i}$ is a
-\intro{$\lambda$-term} encoding the \kl{higher-order} function that takes a sequence
-represented as a function $u : \nats \to \nats$ and a bound $n : \nats$, and
-returns the sum of each of $u$'s values at index $1 \leq i \leq n$ encoded as
-the \emph{function application} $u~i$.
+\kl{$\lambda$-calculus} \sidecite{e4d9a073-5bba-3a5b-90d3-81832cd433e5}, one may
+\kl{type} the \emph{sum operator} over sequences of natural numbers with the
+judgment $\lambda u. \lambda n. \sum_{i = 1}^{n}{u~i} : (\nats \to \nats) \to
+\nats \to \nats$, where $\lambda u. \lambda n. \sum_{i = 1}^{n}{u~i}$ is a
+\intro{$\lambda$-term} encoding the \kl{higher-order} function that takes a
+sequence represented as a function $u : \nats \to \nats$ and a bound $n :
+\nats$, and returns the sum of each of $u$'s values at index $1 \leq i \leq n$
+encoded as the function application $u~i$.
 
 \AP By contrast, the \kl{predicate logic} developed in the
 19\textsuperscript{th} century and studied in traditional \kl{proof theory} is
@@ -653,7 +653,7 @@ the \emph{function application} $u~i$.
 
 \begin{emphpar}
 In this thesis, we exclusively study \kl{proof formalisms} for
-\emph{\kl{first-order}} \kl{predicate logic} (\reintro{FOL} hereafter).
+\emph{\kl{first-order}} \kl{predicate logic} (``\reintro{FOL}'' hereafter).
 \end{emphpar}
 
 We identified a few reasons for working in \kl{FOL}:
@@ -676,32 +676,33 @@ We identified a few reasons for working in \kl{FOL}:
 
 \paragraph{Curry-Howard correspondence}
 
+\AP
 De Bruijn came up with the revolutionary idea that propositions could themselves
-be seen as \kl{types}, by having judgments such as $t : 1 + 1 = 2$ where $t$ is a
-\intro{proof term} representing a proof of the proposition $1 + 1 = 2$. This
-\intro{propositions-as-types} principle was rediscovered independently by Howard
-in 1978 \sidecite{Howard1980-HOWTFN-2}, and developed further into a
+be seen as \kl{types}, by having judgments such as $~t : 1 + 1 = 2~$ where $t$
+is a \intro{proof term} representing a proof of the proposition $1 + 1 = 2$.
+This \intro{propositions-as-types} principle was rediscovered independently by
+Howard in 1978 \sidecite{Howard1980-HOWTFN-2}, and developed further into a
 \intro{proofs-as-programs} correspondence --- also called \reintro{Curry-Howard
 correspondence} or \reintro{Curry-Howard isomorphism}\sidenote{In fact, Curry
 had already noticed in 1958 a similar connection between the \kl{types} of
 combinators in his \emph{combinatory logic}, and the \kl{axioms} of \kl{Hilbert
 systems} for implication \cite{Curry1959-CURCLV} --- hence the mention of
-Curry.} --- where \kl{$\lambda$-terms} in the simply-typed \kl{$\lambda$-calculus} are put
-in one-to-one correspondence with proofs in the implicational fragment of the
-\kl{natural deduction} system \kl{NJ} of Gentzen (\reffig{calculi-NJ}).
+Curry.} --- where \kl{$\lambda$-terms} in the simply-typed
+\kl{$\lambda$-calculus} are put in one-to-one correspondence with proofs in the
+implicational fragment of the \kl{natural deduction} system \kl{NJ} of Gentzen.
 
-\AP Thus the core of \kl{type theory} is \emph{intuitionistic} in nature, and the
-Curry-Howard correspondence has fostered many fruitful interactions between
-computer science, logic and constructive mathematics, with \kl{proof assistants}
-acting as a crucial tool and source of investigations. One influential
-development in this direction has been the \intro{intuitionistic type theory} of
-Martin-Löf (\reintro{ITT} or \reintro{MLTT}), which formed the basis for the
-implementation of many \kl{proof assistants} like \kl{NuPrl}, \kl{Alf}, and most
-recently \kl{Agda} \cite{geuvers_proof_2009}. A system closely related to
-\kl{MLTT}, the \intro{calculus of inductive constructions} (\reintro{CoIC}), is
-also implemented in two leading \kl{proof assistants}: \intro{Coq}
-\sidecite{the_coq_development_team_2022_7313584} and \intro{Lean}
-\sidecite{10.1007/978-3-030-79876-5_37}. Following the proofs-as-programs
+\AP Thus the core of \kl{type theory} is \emph{\kl{intuitionistic}} in nature,
+and the \kl{Curry-Howard correspondence} has fostered many fruitful interactions
+between computer science, logic and constructive mathematics, with \kl{proof
+assistants} acting as a crucial tool and source of investigations. One
+influential development in this direction has been the \intro{intuitionistic
+type theory} of Martin-Löf (\reintro{MLTT}), which formed the basis for the
+implementation of many \kl{proof assistants} like \intro{NuPrl}, \intro{Alf},
+and most recently \intro{Agda} \cite{geuvers_proof_2009}. A system closely
+related to \kl{MLTT}, the \intro{calculus of inductive constructions}
+(\reintro{CoIC}), is also implemented in two leading \kl{proof assistants}:
+\intro{Coq} \sidecite{the_coq_development_team_2022_7313584} and \intro{Lean}
+\sidecite{10.1007/978-3-030-79876-5_37}. Following the \kl{proofs-as-programs}
 correspondence, these systems support the creation of both proofs and programs
 that manipulate and compute mathematical objects, by compiling everything down
 to \kl{typed} \kl{terms}.
@@ -710,19 +711,20 @@ to \kl{typed} \kl{terms}.
 
 \paragraph{Elaboration}
 
-\kl{Type theories} are the logical foundation for the \emph{kernel} of \kl{proof
-assistants}, i.e. the part of the system that is responsible for checking formal
-proofs expressed in a \emph{terse}, \emph{machine-oriented} format. But it
-quickly became clear that this was not enough to make \kl{proof assistants} a viable
-alternative to paper proofs: de Bruijn estimates that it takes a time factor of
-20 to translate a paper proof into a formalized proof in \kl{Automath}
-\sidecite{7a66996d195e4eba8c3fe5dc5bab8fc5}. This factor has been estimated to
-be shrinkable to 4 in the Mizar \kl{proof assistant} \sidecite{debruijn_factor},
-thanks to the design of high-level \emph{languages} for representing
-mathematical statements and proofs, that sit on top of the core logical
-theory\sidenote{In the case of Mizar, a typed \kl{set theory} based on \kl{FOL}.}. The
-process of compiling a high-level proof text into a low-level \kl{proof term} is
-called \emph{elaboration}.
+\AP
+\kl{Type theories} are the logical foundation for the \intro(PA){kernel} of
+\kl{proof assistants}, i.e. the part of the system that is responsible for
+checking formal proofs expressed in a \emph{terse}, \emph{machine-oriented}
+format. But it quickly became clear that this was not enough to make \kl{proof
+assistants} a viable alternative to paper proofs: de Bruijn estimates that it
+takes a time factor of 20 to translate a paper proof into a formalized proof in
+\kl{Automath} \sidecite{7a66996d195e4eba8c3fe5dc5bab8fc5}. This factor has been
+estimated to be shrinkable to 4 in the \intro{Mizar} \kl{proof assistant}
+\sidecite{debruijn_factor}, thanks to the design of high-level \emph{languages}
+for representing mathematical statements and proofs, that sit on top of the core
+logical theory\sidenote{In the case of \kl{Mizar}, a typed \kl{set theory} based
+on \kl{FOL}.}. The process of compiling a high-level proof text into a low-level
+\kl{proof term} is called \intro{elaboration}.
 
 \paragraph{Statement languages}
 
@@ -732,9 +734,9 @@ language:
 \begin{itemize}
   \item[\textbf{Logical primitives}] Naturally, one needs a way to write
   propositions formed with logical connectives and quantifiers. This is usually
-  done in \kl{symbolic} form, either with a custom ASCII notation or with Unicode
-  characters corresponding to the standard \kl{symbols} in more modern \kl{proof
-  assistants}. 
+  done in \kl{symbolic} form, either with a custom ASCII notation, or with
+  Unicode characters corresponding to the standard \kl{symbols} in more modern
+  \kl{proof assistants}. 
   \item[\textbf{Mathematical notations}] In addition to the logical primitives,
   one needs to be able to express mathematical objects and operations in the
   domain of interest, e.g. numbers and arithmetic operators. Contrary to the
@@ -748,15 +750,17 @@ language:
   they are found universally in all types of mathematical reasoning. 
 \end{emphpar}
 
+\AP
 We leave aside the question of providing domain-specific languages for
 particular branches of mathematics, which is nonetheless as much important. It
 has been tackled extensively in Ayers' thesis \sidecite{ayers_thesis}, and more
-specifically in his framework ProofWidgets for user-extensible, interactive
-graphical notations in the Lean \kl{proof assistant}\sidenote{For a similar approach
-to ProofWidgets in the context of functional programming, see
-\cite{omar-filling-2021}.} \sidecite{ayers_graphical_2021}. De Moura and Ullrich
-have also designed a powerful macro system for Lean 4, that supports the
-elaboration of abstract notations into \kl{terms} of the underlying \kl{type theory}
+specifically in his framework \intro{ProofWidgets} for user-extensible,
+interactive graphical notations in the \kl{Lean} \kl{proof
+assistant}\sidenote{For a similar approach to \kl{ProofWidgets} in the context
+of functional programming, see \cite{omar-filling-2021}.}
+\sidecite{ayers_graphical_2021}. De Moura and Ullrich have also designed a
+powerful macro system for \kl{Lean} 4, that supports the \kl{elaboration} of
+abstract notations into \kl{terms} of the underlying \kl{type theory}
 \sidecite{ullrich_beyond_2022}.
 
 \paragraph{Proof languages}
@@ -767,34 +771,35 @@ There have been broadly two approaches in the design of high-level proof
 languages:
 
 \begin{description}[labelsep=0pt]
-  \item[Imperative~]proof languages, like imperative programming languages,
+  \itemAP[\intro{Imperative}~]proof languages, like imperative programming languages,
   offer a set of \emph{commands} or instructions than can be given to the
   computer to modify some state stored in memory. The latter is called the
-  \emph{proof state}, and corresponds to the \emph{partial} proof that is built
+  \intro{proof state}, and corresponds to the \emph{partial} proof that is built
   by the system incrementally through the execution of commands. In the dominant
   paradigm, these commands are provided by the user in text form; since Robin
   Milner and the LCF theorem prover~\sidecite{doi:10.1098/rsta.1984.0067}, they
-  are called \emph{tactics}. Proof files are literally \emph{proof scripts},
-  that is the sequence of tactics typed in by the user.
+  are called \intro{tactics}. Proof files are literally \intro{proof scripts},
+  that is the sequence of \kl{tactics} typed in by the user.
   
+  \AP
   Contrary to imperative programming languages, the main execution paradigm for
-  proof scripts is \emph{interactive}: the user triggers commands one at a time,
-  so that she can visualize the intermediate proof states and determine the next
-  steps to take. In most tactics-based \kl{ITPs},
-  % \sidenote{One notable exception is the Agda proof assistant, where the proof
+  \kl{proof scripts} is \emph{interactive}: the user triggers commands one at a time,
+  so that she can visualize the intermediate \kl{proof states} and determine the next
+  steps to take. In most \kl{tactics}-based \kl{ITPs},
+  % \sidenote{One notable exception is the \kl{Agda} proof assistant, where the proof
   % state is assimilated with the whole file being edited, which is itself a
   % partial \emph{program} in a dependently-typed programming language,
   % following the Curry-Howard correspondence.}
-  only the \emph{statement} part of the proof state is shown, in a so-called
-  \emph{proof view} or \emph{goal view}. This corresponds to the goals that the
+  only the \emph{statement} part of the \kl{proof state} is shown, in a so-called
+  \intro{proof view} or \reintro{goal view}. This corresponds to the goals that the
   user needs to prove, and each goal is presented in the form of a sequent
   $\Gamma \seq C$, where $C$ is the conclusion that must be reached under the
-  assumptions in $\Gamma$. Tactics generally apply to one goal at a time, and
+  assumptions in $\Gamma$. \kl{Tactics} generally apply to one goal at a time, and
   the user can choose which goal to \emph{focus} at any point during the
   interaction. When the set of goals becomes empty, we say that the initial goal
   or conjecture has been \emph{solved}.
 
-  The transformations performed by tactics can be more or less sophisticated.
+  The transformations performed by \kl{tactics} can be more or less sophisticated.
   But, fundamentally, one finds elementary commands that correspond roughly to
   the logical rules, generally of \kl{natural deduction} or \kl{sequent calculus}. For
   instance, a goal $\Gamma\seq A\lor B$ (resp. $\Gamma\seq A\land B$) can be
@@ -803,30 +808,31 @@ languages:
   \kl{\lor R_1} and \kl{\lor R_2} (resp. \kl{\land R}) of \kl{LJ} in their
   \kl{backward} reading (\reffig{calculi-LJ}).
 
-  Coq and Lean are examples of state-of-the-art \kl{proof assistants} in the
-  imperative paradigm.
+  \kl{Coq} and \kl{Lean} are examples of state-of-the-art \kl{proof assistants} in the
+  \kl{imperative} paradigm.
   
-  \item[Declarative~]proof languages follow a different approach, by
+  \itemAP[\intro{Declarative}~]proof languages follow a different approach, by
   aiming to provide an \emph{explicit}, \emph{self-contained} description of the
-  proof. Although a goal view is still available to guide the user during the
+  proof. Although a \kl{goal view} is still available to guide the user during the
   proof construction process, the finished proof must be readable
   \emph{statically} by a human, without relying on the \kl{ITP} to compute and
-  display intermediate proof states. Consequently, declarative proofs are more
-  verbose and take longer to type than their imperative homologues. But since
+  display intermediate \kl{proof states}. Consequently, \kl{declarative} proofs are more
+  verbose and take longer to type than their \kl{imperative} homologues. But since
   they contain more information, they have the advantage of being more
-  \emph{robust} to slight changes in definitions or to the statement of the
+  \emph{robust} to slight changes to definitions or to the statement of the
   theorem being proved, and are generally easier to \emph{debug}. They can also
   be put in correspondence with some \kl{proof-theoretical} formalisms, usually
   Fitch-style \kl{natural deduction} \cite{geuvers_proof_2009}.
   
-  Agda, Mizar and Isabelle (with its Isar proof language \sidecite{isar}) are
-  examples of state-of-the-art \kl{proof assistants} in the declarative paradigm.
+  \kl{Agda}, \kl{Mizar} and \intro{Isabelle} (with its \intro{Isar} proof
+  language \sidecite{isar}) are examples of state-of-the-art \kl{proof
+  assistants} in the \kl{declarative} paradigm.
 \end{description}
 
 \begin{emphpar}
   In this thesis, we focus mostly on exploring new modalities of interaction in
-  the \emph{imperative} paradigm. Only in \refsubsec{flowers-unified} do we
-  sketch a possible escape from the imperative/declarative dichotomy.
+  the \emph{\kl{imperative}} paradigm. Only in \refsubsec{flowers-unified} do we
+  sketch a possible escape from the \kl{imperative}/\kl{declarative} dichotomy.
 \end{emphpar}
 
 \begin{remark}
@@ -834,7 +840,7 @@ In some rare cases, an additional \emph{natural language} layer is added on top
 of the proof language, to be as close as possible to informal proofs. With the
 recent development of large language models like GPT, such natural language
 translations are becoming increasingly convincing (see e.g. Patrick Massot's
-work in Lean \cite{LeanIPAM}).
+work in \kl{Lean} \cite{LeanIPAM}).
 \end{remark}
 
 
@@ -901,7 +907,7 @@ professional researchers, teachers, and novice students alike.
   mathematics.
 \end{emphpar}
 
-In fact, following the proofs-as-programs correspondence, we also believe that
+In fact, following the \kl{proofs-as-programs} correspondence, we also believe that
 this applies (to some extent) to \emph{programming}, and that it is only a
 matter of time before direct manipulation becomes viable for building
 (general-purpose) programs, in the spirit of \emph{visual programming
@@ -915,7 +921,7 @@ well; and one of the reasons why we chose to focus as much on
 A first attempt to design direct manipulation principles for interactive proof
 building was made in the 90s by the team of Gilles Kahn at Inria, where they
 coined the ``Proof-by-Pointing'' (hereafter ``PbP'') paradigm \sidecite{PbP}.
-The idea was to synthesize complex tactics from the simple act of
+The idea was to synthesize complex \kl{tactics} from the simple act of
 \emph{pointing} at specific locations inside expressions occurring in the goal,
 typically with a mouse cursor. More recently \sidecite{Chaudhuri2013}, Kaustuv
 Chaudhuri proposed a variation on this idea termed ``subformula linking'' or
@@ -929,7 +935,7 @@ on the use of \emph{\kl{deep inference}}, since the user can point at subformula
 that occur at an arbitrary depth inside the goal. This is in contrast with the
 basic commands found in the proof languages of \kl{ITPs}, where the user can only
 designate formulas appearing at the top level of sequents\sidenote{A notable
-exception is the \texttt{rewrite} tactic of imperative proof languages, where
+exception is the \texttt{rewrite} \kl{tactic} of \kl{imperative} proof languages, where
 the user can specify \emph{patterns} to designate particular occurrences of a
 term $t$ that are to be rewritten into an equal term $u$, usually thanks to an
 assumed equation $t = u$. But coming up with such patterns is a lot slower than
@@ -969,7 +975,7 @@ mechanism for mapping parts of a static proof text to the actions that generated
 them.
 
 \begin{emphpar}
-  In this thesis, we leave the question of \emph{proof evolution} in \kl{PbA} ---
+  In this thesis, we leave the question of \kl{proof evolution} in \kl{PbA} ---
   i.e. the design of interfaces for the reading and modification phases, that
   support a smooth interaction with the writing phase --- for future work. A
   more detailed discussion can be found in \refsubsec{proof-evolution}.
@@ -1066,9 +1072,9 @@ sequents.
 We start in \refch{pba} with an introduction to PbP and PbL, by describing how
 to reason with logical connectives, quantifiers and equality through
 \emph{click} and \emph{drag-and-drop} (\intro{DnD}) actions in a prototype of
-\kl{GUI} called Actema. In particular, \kl{DnD} actions can be seen as a graphical
-generalization of both the \texttt{apply} and \texttt{rewrite} tactics of
-imperative proof languages.
+\kl{GUI} called \kl{Actema}. In particular, \kl{DnD} actions can be seen as a graphical
+generalization of both the \texttt{apply} and \texttt{rewrite} \kl{tactics} of
+\kl{imperative} proof languages.
 
 In \refch{sfl}, we ground the semantics of \kl{DnD} actions in \kl{deep
 inference} \kl{proof theory}, by designing a variant of the subformula linking
@@ -1094,10 +1100,10 @@ to model reasoning in \kl{classical} logic that involves the interaction of two
 conclusions.
 
 Lastly in \refch{plugin}, we present the architecture, interaction protocols and
-elaboration/compilation strategy implemented in \texttt{coq-actema}, a plugin
-that integrates the Actema web app as an interactive proof view in Coq. We also
-discuss its current shortcomings and future directions for improvement, in
-particular concerning the question of \emph{proof evolution}.
+\kl{elaboration}/compilation strategy implemented in \texttt{coq-actema}, a
+plugin that integrates the \kl{Actema} web app as an interactive \kl{proof view} in \kl{Coq}.
+We also discuss its current shortcomings and future directions for improvement,
+in particular concerning the question of \kl{proof evolution}.
 
 \paragraph{Iconic manipulations}
   
@@ -1292,7 +1298,7 @@ However, we believe our approach is unique in that it emphasizes two aspects:
   (although some pointing interactions were already at work in window
   inference-based systems);
   \item in the second part of this thesis, the use of \emph{\kl{iconic}}
-  representations for the proof state, that stray away from traditional \kl{symbolic}
+  representations for the \kl{proof state}, that stray away from traditional \kl{symbolic}
   formulas.
 \end{itemize}
 
@@ -1308,16 +1314,17 @@ implementations of software evaluated through user studies
 \texttt{Box} data structure representing at the same time goals and partial
 proofs, with the aim to offer more ``human-like'' interfaces for both the
 \emph{construction} and the \emph{presentation} of proofs;
-  \item and his \texttt{ProofWidgets} framework, that allows to extend the Lean
-\kl{proof assistant} with new interactive and domain-specific notations for
-mathematical objects, thus offering a form of \emph{end-user} programming.
+  \item and his \texttt{ProofWidgets} framework, that allows to extend the
+\kl{Lean} \kl{proof assistant} with new interactive and domain-specific
+notations for mathematical objects, thus offering a form of \emph{end-user}
+programming.
 \end{itemize}
 The \texttt{Box} data structure easily lends itself to visualization in a
 two-dimensional graphical notation, while \texttt{ProofWidgets} promises great
 capabilities for proofs by both direct and \kl{iconic} manipulation.
 
 However, the work of Ayers focuses mainly on designing a general framework that
-can integrate modern interfaces for proofs in the Lean \kl{proof assistant}, while we
+can integrate modern interfaces for proofs in the \kl{Lean} \kl{proof assistant}, while we
 focus on exploring various proof calculi that provide the foundations for such
 interfaces at the purely logical level, mostly independently of any particular
 \kl{proof assistant}. Thus we believe that our work is quite complementary to Ayers':

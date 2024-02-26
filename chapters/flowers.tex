@@ -68,7 +68,7 @@ works, and a discussion of future works and applications that we envision.
 \paragraph{The scroll}
 
 In \refsec{alpha}, we presented the syntax of existential graphs (\kl{EGs}) as
-stemming from two fundamental \kl{icons}: the \kl{\kl{sheet of assertion}} ($\SA$),
+stemming from two fundamental \kl{icons}: the \kl{sheet of assertion} ($\SA$),
 with its ability to represent the conjunction of assertions through
 \emph{\kl{juxtaposition}}, and \emph{\kl{cuts}} in $\SA$ that signify the denial or
 negation of assertions. However as noted in \refremark{eg-entitative}, the first
@@ -975,9 +975,9 @@ are closer to sequent-style introduction/\kl{elimination rules}:
     its converse. The name \rsf{srep} is short for
     \textsf{(s)}elf-\textsf{(rep)}roduction, which is more clearly visualized in
     the graphical version of the rule in \reffig{natural-graphical}. Through the
-    Curry-Howard correspondence, it can be related to the \emph{pattern-matching
+    \kl{Curry-Howard correspondence}, it can be related to the \emph{pattern-matching
     generator} found in modern editors of some functional programming languages,
-    such as the Hazel structure editor and the Agda \kl{proof assistant}
+    such as the Hazel structure editor and the \kl{Agda} \kl{proof assistant}
     \sidecite{yuan-live-2023}.
 \end{description}
 
@@ -1314,7 +1314,7 @@ Kripke structures, detailed hereafter by order of increasing importance:
     study of analyticity. Thus our first attempt was to devise an
     \emph{external} syntactic procedure, based on the simulation of a cut-free
     \kl{sequent calculus} as in \sidecite{tiu_local_2006}; and we do have a working,
-    verified implementation of this procedure in Coq \cite{flowers-metatheory}.
+    verified implementation of this procedure in \kl{Coq} \cite{flowers-metatheory}.
     However, we realized \textit{a posteriori} that this only proves a weak form
     of completeness, in the sense that we only guarantee that a true flower is
     provable if it is the direct translation of a \kl{symbolic} formula. But formulas
@@ -2895,7 +2895,7 @@ Flower Prover is highly original in mainly two respects:
   touch in addition to mouse gestures, so that there is no loss in precision.
   The combination of these two properties makes the interface perfectly usable
   on mobile devices like phones and tablets\sidenote{This is not the case
-  currently for Actema (\refch{pba}), which does not provide a vertical layout,
+  currently for \kl{Actema} (\refch{pba}), which does not provide a vertical layout,
   and has poor support for touch interactions. While the former issue could be
   solved easily, the latter is somehow inherent to the textual nature of
   formulas: in scenarios where one needs to refer to a specific subterm, it is
@@ -2930,8 +2930,8 @@ and deletion of characters.}:
 \begin{itemize}
   \item[\textbf{\Proof mode}] this is the main mode, where goals can be proved by
   reducing them to the empty bouquet $\emptyset$. It corresponds in purpose to
-  the interactive proof mode of modern \kl{proof assistants} like Coq, Lean and
-  Isabelle, and to the interactive proof view of Actema.
+  the interactive proof mode of modern \kl{proof assistants} like \kl{Coq}, \kl{Lean} and
+  \kl{Isabelle}, and to the interactive \kl{proof view} of \kl{Actema}.
   % Indeed, every action in this mode is performed by direct manipulation of
   % flowers through pointing interactions: either clicking on empty areas/gardens,
   % or dragging and dropping flowers into gardens.
@@ -3015,7 +3015,7 @@ are in order:
   $\Xi\hole$ where $\phi$ can be imported, i.e. such that
   $\chyp{\phi}{\Xi\hole}$. This is a first form of \emph{suggestion} in the
   Flower Prover, indicating available valid actions to the user through visual
-  feedback\sidenote{A similar mechanism is implemented in Actema, where subterms
+  feedback\sidenote{A similar mechanism is implemented in \kl{Actema}, where subterms
   that are possible drop targets for \kl{DnD} actions are also highlighted (see
   \refsec{validity}).}.
 
@@ -3131,7 +3131,7 @@ Alan Kay in his \intro{Smalltalk} system
 
 The last feature of the Flower Prover that we have implemented is the
 \Action{Auto} \Proof action. It is similar in purpose to the \texttt{auto}
-tactic of Coq, that tries to simplify the goal by performing a limited form of
+tactic of \kl{Coq}, that tries to simplify the goal by performing a limited form of
 automation. The \Action{Auto} action is mapped to a dedicated button in the
 bottom-left corner of the screen, which is only enabled in \Proof mode
 (\reffig{flowers-prover-modes}).
@@ -3165,27 +3165,26 @@ setting, any proof in the Flower Prover could be reduced to a sequence of
 
 \paragraph{Theories and goals}
 
-In the so-called ``proof view'' or ``goal view'' of modern \kl{proof assistants} like
-Coq and Lean, there is no distinction between local and global contexts: a
-subgoal will inherit automatically every hypothesis from its parent subgoals,
-which are flattened into a big unstructured list. To recreate this distinction
-and reduce the size of goals to a manageable level, the only interface mechanism
-offered to the user is to exit interactive proof mode, and outsource chunks of
-the local context as additional global lemmas and definitions in the current
-theory file.
+In the \kl{proof view} of modern \kl{proof assistants} like \kl{Coq} and \kl{Lean},
+there is no distinction between local and global contexts: a subgoal will
+inherit automatically every hypothesis from its parent subgoals, which are
+flattened into a big unstructured list. To recreate this distinction and reduce
+the size of goals to a manageable level, the only interface mechanism offered to
+the user is to exit interactive proof mode, and outsource chunks of the local
+context as additional global lemmas and definitions in the current theory file.
 
 Thus the user has to juggle between two different interfaces that manipulate two
 distinct data structures: a traditional text editor for modifying
-\emph{theories}, and an IDE for writing and executing proof scripts that modify
-\emph{goals}, themselves visualized in a separate proof view. This results in a
-duplication of means to achieve essentially the same things: for instance,
-reordering two lemmas will require to cut and paste one of them in the theory
-file, while reordering two hypotheses will require the use of a dedicated
-\texttt{move} tactic. Other examples can be found for renaming definitions,
-applying lemmas, constructing functions, etc. Crucially, the two interfaces
-cannot communicate straightforwardly with eachother. In fact, communication is
-completely one-way: the user can only invoke definitions and lemmas of the
-theory from her proof script, by referring to their names.
+\emph{theories}, and an IDE for writing and executing \kl{proof scripts} that
+modify \emph{\kl{goals}}, themselves visualized in a separate \kl{proof view}.
+This results in a duplication of means to achieve essentially the same things:
+for instance, reordering two lemmas will require to cut and paste one of them in
+the theory file, while reordering two hypotheses will require the use of a
+dedicated \texttt{move} \kl{tactic}. Other examples can be found for renaming
+definitions, applying lemmas, constructing functions, etc. Crucially, the two
+interfaces cannot communicate straightforwardly with eachother. In fact,
+communication is completely one-way: the user can only invoke definitions and
+lemmas of the theory from her \kl{proof script}, by referring to their names.
 
 The Flower Prover can theoretically solve this divide, because it works on a
 single data structure: flowers represent \emph{at the same time} the current
@@ -3203,18 +3202,18 @@ we envision to achieve the latter.
 
 \paragraph{Statements and proofs}
 
-Our above example of ``redundant'' manipulations targets imperative tactic
-languages, but the argument equally applies to more declarative languages like
-Isar in Isabelle: the point is that the \emph{proof} language, be it imperative
-or declarative, is separated both conceptually and through its available means
+Our above example of ``redundant'' manipulations targets \kl{imperative} tactic
+languages, but the argument equally applies to more \kl{declarative} languages
+like \kl{Isar}: the point is that the \emph{proof} language, be it \kl{imperative} or
+\kl{declarative}, is separated both conceptually and through its available means
 of interaction from the language of \emph{statements} used to build theories.
 And this separation between proofs and statements is a natural one that is hard
 to question, since it is rooted in what is arguably the most important
 inspiration of formal logic, and also the form in which informal mathematics
-present themselves: \emph{natural language}. Indeed, \kl{symbolic} formulas reproduce
-the grammatical structure of sentences expressing logical propositions, and
-formal proofs reproduce the inferential structure of arguments built from
-sequences of sentences.
+present themselves: \emph{natural language}. Indeed, \kl{symbolic} formulas
+reproduce the grammatical structure of sentences expressing logical
+propositions, and formal proofs reproduce the inferential structure of arguments
+built from sequences of sentences.
 
 \paragraph{Context navigation}
 
@@ -3231,7 +3230,7 @@ be justified, which can itself be identified with a partial proof (or a ``\kl{pr
 term} with holes'' in \kl{type-theoretical} parlance)\sidenote{We will come back to
 this idea of merging proofs and statements in the same data structure in the
 conclusion, when discussing \emph{development calculi} and the
-\emph{Curry-Howard correspondence}. Note however that it is already at work in
+\kl{Curry-Howard correspondence}. Note however that it is already at work in
 \emph{dependent} \kl{type theory}, where \kl{proof terms} can freely occur inside
 types. This is exemplified in the \kl{Agda} \kl{proof assistant}, where all
 manipulations are done directly on the partial proof/program text.}.
@@ -3258,7 +3257,7 @@ Since the shelf might contain \emph{a lot} of hypotheses, it will be important
 to provide efficient ways to \emph{filter} or \emph{search} through its content.
 We imagine three main ways of doing so\sidenote{The first two types of filtering
 are already available in most \kl{proof assistants}, e.g. the \texttt{Search} command
-of Coq.}:
+of \kl{Coq}.}:
 \begin{itemize}
   \item[\textbf{By name}] the user can type the \emph{name} of a hypothesis in a
   search bar. This implies that flowers have the ability to be named by the
@@ -3270,7 +3269,7 @@ of Coq.}:
   \item[\textbf{By selection}] the user can select subterms of the goal, and
   then ask the system to display only hypotheses that can \emph{interact} with
   these subterms. Here we imagine something along the lines of what we did for
-  Actema (see \refsec{funcs}).
+  \kl{Actema} (see \refsec{funcs}).
 \end{itemize}
 
 % \section{Towards a Curry-Howard correspondence}\labsec{flowers-curryhoward}
@@ -3388,7 +3387,7 @@ of Dyckhoff already mentioned in \refch{bubbles-symm}.}.
 \paragraph{Development calculi}
 
 In \refsec{flowers-prover}, we have seen how the rules of the flower calculus
-can be understood as a set of (graphical) tactics for building partial proofs
+can be understood as a set of (graphical) \kl{tactics} for building partial proofs
 interactively. In Chapter 3 of his thesis \sidecite{ayers_thesis}, Ayers calls
 such systems \emph{development calculi}. In particular, he presents his own
 development calculus inspired by McBride's OL\kl{EGs} system
@@ -3443,7 +3442,7 @@ between automated and interactive proof search, notably with the so-called
 \emph{rule of thumb} which is another manifestation of subformula linking. This
 integration of automated and interactive aspects is also at work in the Flower
 Prover, and it would be interesting to investigate further how to incorporate
-our drag-and-drop proof tactic (\refch{pba}), but also other \kl{symbolic}
+our drag-and-drop proof \kl{tactic} (\refch{pba}), but also other \kl{symbolic}
 manipulation techniques introduced in the first part of this thesis, into the
 \kl{iconic} framework of the Flower Prover.
 
@@ -3453,8 +3452,8 @@ We have not discussed the rationale behind our notion of analyticity, be it
 historical or formal arguments explaining its origins, motivations and
 consequences. In a recent article \sidecite{bruscoli_analyticity_2019}, Bruscoli
 and Guglielmi propose such a detailed discussion around a precise and generic
-definition of analyticity for \kl{deep inference} \kl{proof systems} (especially the
-\kl{calculus of structures}), which at a glance seems to encompass our own
+definition of analyticity for \kl{deep inference} \kl{proof systems} (especially
+the \kl{calculus of structures}), which at a glance seems to encompass our own
 definition. It would be interesting to study more deeply their work, and related
 parts of the \kl{deep inference} literature concerned with analyticity and its
 applications to efficient proof search procedures
@@ -3516,7 +3515,7 @@ developed by Peirce, and described by Oostra in \sidecite{oostra_advances_2022}.
 
 \paragraph{Curry-Howard}
 
-We have begun to sketch some ideas for a Curry-Howard correspondence, where
+We have begun to sketch some ideas for a \kl{Curry-Howard correspondence}, where
 flowers and \Proof actions for justifying them ($\Nature$-rules) are identified
 respectively with \emph{normal} and \emph{neutral} \kl{terms} of the simply-typed
 \kl{$\lambda$-calculus}. For instance, the computational counterpart of the rule
@@ -3561,12 +3560,12 @@ $$
 $$
 This could also form the basis for further studies on the connections between \kl{EGs}
 and (dependent) \kl{type theory}, and ultimately lead to a tight integration of the
-Flower Prover with \kl{proof assistants} based on the latter such as Coq, Lean and
+Flower Prover with \kl{proof assistants} based on the latter such as \kl{Coq}, \kl{Lean} and
 Agda. Existing explorations of the links between \kl{type theory} and \kl{deep inference}
 include, in historical order:
 \begin{itemize}
-  \item a first attempt by Brünnler and McKinnley to devise a Curry-Howard
-  correspondence for a simple \kl{intuitionistic} \kl{deep inference} calculus with
+  \item a first attempt by Brünnler and McKinnley to devise a \kl{Curry-Howard
+  correspondence} for a simple \kl{intuitionistic} \kl{deep inference} calculus with
   conjunction and implication \sidecite{cervesato_algorithmic_2008};
   \item the thesis of Nicolas Guenot, and more precisely the part on "Nested
   Proofs as Programs" where he gives a correspondence between simply-typed
@@ -3575,7 +3574,7 @@ include, in historical order:
   implicational fragment of \kl{intuitionistic} logic at the other end
   \cite{guenot_nested_2013};
   \item the atomic \kl{$\lambda$-calculus}, a simply-typed \kl{$\lambda$-calculus} with
-  explicit sharing that has a Curry-Howard correspondence with proofs in the
+  explicit sharing that has a \kl{Curry-Howard correspondence} with proofs in the
   formalism of \emph{open deduction} \sidecite{gundersen_atomic_2013};
   \item a \kl{type} system for interaction nets based on a \kl{calculus of structures} for
   Multiplicative Exponential Linear Logic \sidecite{gimenez_structure_2013};
@@ -3612,9 +3611,10 @@ The next step would be to support \kl{first-order} reasoning by adding sprinkler
 
 Last but not least, we want to provide a way to \emph{save} proved lemmas along
 with their proof, so that they can be reused and read statically. This will be
-crucial for \emph{proof evolution} (see \refsubsec{proof-evolution}), and will
-probably rely on the computational, dependently-typed version of the flower
-calculus sketched above, where \kl{proof terms} can appear inside flowers.
+crucial for \emph{\kl{proof evolution}}\sidenote{See also
+\refsubsec{proof-evolution}.}, and will probably rely on the computational,
+dependently-typed version of the flower calculus sketched above, where \kl{proof
+terms} can appear inside flowers.
 
 \subsection{Theory vs. Practice}
 

@@ -13,7 +13,7 @@ application with its own proof engine \sidecite[20em]{Actema:link}. This is
 convenient for distributing it online as a publicly available website, so that
 people can immediately try it out without the hassles of installation
 procedures. However due to both historical choices in its design and lack of
-human resources for development, Actema's proof engine is quite limited in its
+human resources for development, \kl{Actema}'s proof engine is quite limited in its
 features:
 \begin{itemize}
   \item it can only handle goals expressed in many-sorted \kl{intuitionistic}
@@ -21,8 +21,8 @@ features:
     \emph{\kl{higher-order} logic} in one form or another; and \kl{higher-order} features
     are crucial for formalizing many mathematical notions in a concise way, as
     witnessed by the example of \refsec{funcs};
-  \item it does not implement a \emph{certified logical kernel} for checking proof
-    objects, which makes it hard to trust and interoperate with;
+  \item it does not implement a \emph{certified \kl(PA){kernel}} for checking
+    proof objects, which makes it hard to trust and interoperate with;
   \item it has no mechanism for adding new \emph{mathematical notations}, only
     ad hoc support for arithmetical expressions. Thus formulas become very
     quickly impossible to read and manipulate;
@@ -36,21 +36,21 @@ features:
 
 To address these limitations, and thus enable a confrontation of the
 \kl{PbA} paradigm to real mathematical developments, we decided to build
-\texttt{coq-actema}, a Coq plugin that directly connects Actema to a running
-instance of the Coq PA. The idea is that Actema should act as an enhanced
-graphical, interactive proof view that integrates in the usual text-based
-workflow of proof scripts. Thus instead of trying to turn Actema into a
+\texttt{coq-actema}, a \kl{Coq} plugin that directly connects \kl{Actema} to a running
+instance of the \kl{Coq} PA. The idea is that \kl{Actema} should act as an enhanced
+graphical, interactive \kl{proof view} that integrates in the usual text-based
+workflow of \kl{proof scripts}. Thus instead of trying to turn \kl{Actema} into a
 full-fledged PA, we exploit the over 30 years of effort that have been put in
-the development of Coq, and limit the role of Actema to that of a novel frontend
-for building proofs in Coq. This shall open the way to more advanced
-experimentations through the huge body of theories already developed in Coq, and
+the development of \kl{Coq}, and limit the role of \kl{Actema} to that of a novel frontend
+for building proofs in \kl{Coq}. This shall open the way to more advanced
+experimentations through the huge body of theories already developed in \kl{Coq}, and
 make the \kl{PbA} paradigm visible to the large community of existing
 users of this popular PA.
 
 Note that the same approach should be applicable in principle to any \kl{ITP} that
 supports at least \kl{iFOL}, and provides an interaction protocol for building proofs
-in a goal-directed manner. This includes other popular PAs such as Lean and
-Isabelle, but also more specialized software like the Why3 platform for
+in a goal-directed manner. This includes other popular PAs such as \kl{Lean} and
+\kl{Isabelle}, but also more specialized software like the Why3 platform for
 deductive program verification, the Meta-F* framework in the F* programming
 language, or the EasyCrypt toolset for proving cryptographic protocols\todo{add
 citations}.
@@ -60,24 +60,24 @@ citations}.
 % which is virtually every ITP.
 
 The chapter is organized as follows: we start in \refsec{actema} by explaining
-the implementation design of the Actema web application, which follows the
+the implementation design of the \kl{Actema} web application, which follows the
 standard conceptual separation between frontend and backend. In
 \refsec{whyplugin}, we reflect on some considerations that led us to the
-specific choice of a Coq plugin, in order to integrate the Actema web app with
+specific choice of a \kl{Coq} plugin, in order to integrate the \kl{Actema} web app with
 Coq. Then in \refsec{architecture} we present the architecture of the
 \texttt{coq-actema} system, which structures all interactions between the user,
-Coq and Actema. \refsec{protocol} describes in more details the main usage
+Coq and \kl{Actema}. \refsec{protocol} describes in more details the main usage
 scenario of \texttt{coq-actema}, following the flow of data and control between
 the different processes involved. \refsec{compilation} explains how the various
-graphical actions performed by the user in Actema are compiled into Coq tactics,
+graphical actions performed by the user in \kl{Actema} are compiled into \kl{Coq} \kl{tactics},
 ultimately producing certified \kl{proof terms}. Finally in \refsec{pluginfuture}, we
 discuss possible avenues for extending the usability of \texttt{coq-actema} to a
-broader class of Coq goals, as well as prospective solutions to the problem of
-\emph{proof evolution} in our graphical paradigm.
+broader class of \kl{Coq} goals, as well as prospective solutions to the problem of
+\kl{proof evolution} in our graphical paradigm.
 
 \section{Actema}\labsec{actema}
 
-At its core, Actema is a web application made of two components: a
+At its core, \kl{Actema} is a web application made of two components: a
 \emph{frontend} that implements the graphical interface with which the user
 interacts, written in HTML/CSS and JavaScript with the Vue.js framework
 \sidecite{Vuejs}; and a \emph{backend} that implements the proof engine, written in
@@ -88,10 +88,10 @@ a JS object called \texttt{engine}, and whose methods can be called from the Vue
 components in the frontend.
 
 The \texttt{engine} object provides various high-level methods for handling the
-current \emph{proof state}. Common operations include getting the list of open
+current \emph{\kl{proof state}}. Common operations include getting the list of open
 subgoals, querying available proof actions on a subgoal, or applying a given
 proof action. Lower-level methods are also available in other objects to inspect
-the data of the proof state. For instance,
+the data of the \kl{proof state}. For instance,
 $$\mathtt{engine.subgoals[0].context[0]}$$
 will return an object representing the first hypothesis of the first subgoal;
 and this object itself exposes an \texttt{html} method, which returns a string
@@ -100,65 +100,65 @@ holding the HTML code used to display the statement of the hypothesis.
 \todo{Add a little side figure illustrating an API call to the backend? Or we
 wait for the description of the sequence diagram of \refsec{protocol}.}
 
-In the standalone version of Actema, the proof engine takes care of computing
+In the standalone version of \kl{Actema}, the proof engine takes care of computing
 the new subgoals stemming from actions performed by the user. It is thus
 responsible for defining the \emph{semantics} of proof actions. It is also in
-charge of various other tasks that process the logical data of the proof state,
+charge of various other tasks that process the logical data of the \kl{proof state},
 typically checking the \emph{validity} of \kl{linkages} during a \kl{DnD} action, which
 requires the use of a unification algorithm (see \refsec{validity}).
 
 \section{Why a plugin?}\labsec{whyplugin}
 
-Usually, integrated development environments for Coq live in an independent
-process, and exchange data with Coq through a high-level communication protocol:
-either the command line interface provided by \texttt{coqtop}, Coq's default XML
+Usually, integrated development environments for \kl{Coq} live in an independent
+process, and exchange data with \kl{Coq} through a high-level communication protocol:
+either the command line interface provided by \texttt{coqtop}, \kl{Coq}'s default XML
 protocol, or its improved superset SerAPI \sidecite{gallegoarias:hal_01384408}.
 In particular, SerAPI emerged from the development of jsCoq
 \sidecite{Gallego_Arias_2017}, an IDE that runs entirely in web browsers by
-embedding a version of Coq compiled with js\_of\_ocaml. Since Actema is also
+embedding a version of \kl{Coq} compiled with js\_of\_ocaml. Since \kl{Actema} is also
 web-based and uses js\_of\_ocaml, our first idea was essentially to fork jsCoq
-and replace its interface by that of Actema. However as noted by E. J. G. Arias,
+and replace its interface by that of \kl{Actema}. However as noted by E. J. G. Arias,
 the SerAPI protocol --- and in fact all the other protocols turn out to be too
-high-level for our purpose. Typically we need to (partially) translate Coq goals
+high-level for our purpose. Typically we need to (partially) translate \kl{Coq} goals
 into \kl{iFOL} goals, which can be done much more easily with a direct access to
-Coq's low-level API for manipulating kernel \kl{terms}.
+Coq's low-level API for manipulating \kl(PA){kernel} \kl{terms}.
 % We also heavily rely on unification to interactively suggest valid
 % actions on subterms of the goal, and none of the protocols implement unification
 % queries.
 
-Now, remember that Actema is not meant as a full-fledged IDE that can manage the
-edition and execution states of the proof script, but only as an enhanced proof
-view for manipulating already-parsed goals. One should think of Actema's actions
-as just a graphical frontend for invoking a new set of tactics. And this is
-precisely what the plugin system of Coq has been designed for: extending Coq
-with new tactics. Thus the solution of a Coq plugin made a lot more sense, with
+Now, remember that \kl{Actema} is not meant as a full-fledged IDE that can manage the
+edition and execution states of the \kl{proof script}, but only as an enhanced \kl{proof
+view} for manipulating already-parsed goals. One should think of \kl{Actema}'s actions
+as just a graphical frontend for invoking a new set of \kl{tactics}. And this is
+precisely what the plugin system of \kl{Coq} has been designed for: extending Coq
+with new \kl{tactics}. Thus the solution of a \kl{Coq} plugin made a lot more sense, with
 the important benefit of ensuring compatibility with all existing IDEs. This
-would also entail easier adoption of Actema into existing Coq developments and
+would also entail easier adoption of \kl{Actema} into existing \kl{Coq} developments and
 workflows.
 
-In this setting, it is now the Coq plugin which defines the semantics of proof
-actions as new tactics, instead of Actema's backend. This allows us to leverage
-the facilities already provided by Coq to handle the proof state and generate
+In this setting, it is now the \kl{Coq} plugin which defines the semantics of proof
+actions as new \kl{tactics}, instead of \kl{Actema}'s backend. This allows us to leverage
+the facilities already provided by \kl{Coq} to handle the \kl{proof state} and generate
 \kl{proof terms} in the \kl{calculus of inductive constructions}. This does not
-make the backend of Actema completely irrelevant however: we still need it so
-that Actema can maintain its own, \kl{first-order} version of the proof state,
+make the backend of \kl{Actema} completely irrelevant however: we still need it so
+that \kl{Actema} can maintain its own, \kl{first-order} version of the \kl{proof state},
 with additional metadata used to display and interact graphically with objects
 and statements. Also tasks related to the querying of both display data and
 proof actions, like the \texttt{html} method and unification algorithm mentioned
 in the previous section, are at the time of writing of this thesis still
-performed in Actema's backend. It is unclear to what extent this should rather
-be a responsibility of the Coq plugin, relegating Actema to a pure role of
+performed in \kl{Actema}'s backend. It is unclear to what extent this should rather
+be a responsibility of the \kl{Coq} plugin, relegating \kl{Actema} to a pure role of
 frontend to the PA\sidenote{For instance in the ProofWidgets framework of Lean
 \cite{ayers_graphical_2021}, all these tasks are implemented in the
-meta-programming language of Lean itself, which makes it easily extensible by
+meta-programming language of \kl{Lean} itself, which makes it easily extensible by
 (expert) users of the PA.}.
 
 \section{The \texttt{coq-actema} system}\labsec{architecture}
 \begin{figure*}
   \includegraphics[width=1.5\textwidth]{coq-actema.png}
   \caption{ A possible graphical layout of the \texttt{coq-actema} system. On
-    the left, the usual interactive view of the proof script, in the VsCoq IDE.
-    On the right, the graphical proof view of Actema.}
+    the left, the usual interactive view of the \kl{proof script}, in the VsCoq IDE.
+    On the right, the graphical \kl{proof view} of \kl{Actema}.}
   \labfig{coq-actema}
 \end{figure*}
 
@@ -172,7 +172,7 @@ meta-programming language of Lean itself, which makes it easily extensible by
   public)}
 
 Let us now give the full picture of the \texttt{coq-actema} system that
-integrates both Actema and the Coq plugin. A schematic view of its overall
+integrates both \kl{Actema} and the \kl{Coq} plugin. A schematic view of its overall
 architecture, including the various components and their relationships, is
 provided in \reffig{archi}. The different \emph{processes/agents} involved are
 represented by shapes of different \emph{colors}, and we add a directed
@@ -180,20 +180,20 @@ represented by shapes of different \emph{colors}, and we add a directed
 \emph{source} requests data from, or sends instructions to the \emph{target}.
 
 The \process{User} (pink circle) is the only human agent in the system, and
-drives all interactions. She interacts with the Coq and Actema subsystems
+drives all interactions. She interacts with the \kl{Coq} and \kl{Actema} subsystems
 (transparent rectangles), through the interfaces provided by her Coq
-\process{IDE} of choice (blue rectangle) and Actema's \process{Frontend} (yellow
+\process{IDE} of choice (blue rectangle) and \kl{Actema}'s \process{Frontend} (yellow
 rectangle). This will typically take the form of a two-windows layout, as
 depicted by the screenshot of \reffig{coq-actema}.
 
 \subsection{Actema web app}
 
-The Actema web app runs in a process independent from Coq, represented by the
+The \kl{Actema} web app runs in a process independent from \kl{Coq}, represented by the
 yellow \process{Interface} rectangle. We add a third layer to the
 \process{Frontend} and \process{Backend} described in \refsec{actema}, namely a
 HTTP \process{Server} (orange rectangle) that handles requests from, and
-responses to the Coq \process{Plugin}. Thus we implement interprocess
-communication between Actema and Coq through the network layer of the operating
+responses to the \kl{Coq} \process{Plugin}. Thus we implement interprocess
+communication between \kl{Actema} and \kl{Coq} through the network layer of the operating
 system, rather than a more local mechanism such as Unix pipelines. There are a
 few reasons behind our choice of the HTTP protocol:
 \begin{itemize}
@@ -202,15 +202,15 @@ few reasons behind our choice of the HTTP protocol:
   \item it is a widely spread standard, especially in web technologies. Thus we
     were able to reduce development time by reusing generic implementations of
     both client and server from standard libraries;
-  \item more anecdotically, this makes it easy to run Coq and Actema on
+  \item more anecdotically, this makes it easy to run \kl{Coq} and \kl{Actema} on
     different machines connected on the same network. This could be used for
     instance to offload heavy computations in a proof to the machine running
-    Coq, while still being able to interact with Coq through Actema on the
+    \kl{Coq}, while still being able to interact with \kl{Coq} through \kl{Actema} on the
     weaker machine.
 \end{itemize}
 The \process{Server} runs in a process separate from the \process{Interface}, in
 order to avoid any delay in the latter. Then we bundle everything in an Electron
-application \sidecite{Electron}, so that Actema can easily be run locally on
+application \sidecite{Electron}, so that \kl{Actema} can easily be run locally on
 most operating systems. This also allows us to exploit the multi-process
 architecture of Electron \sidecite{ElectronProcess}, where the so-called
 \emph{main} process runs the server and has the ability to issue system calls
@@ -218,31 +218,31 @@ for networking through the Node.js HTTP library \sidecite{NodeJS}; and the
 so-called \emph{renderer} process runs the \process{Interface} in the Chromium
 browser.
 
-\subsection{Coq plugin}
+\subsection{\kl{Coq} plugin}
 
-The \process{Plugin} is loaded dynamically in Coq's \process{Engine} (green
-rectangle) by executing the following command in a proof script:
+The \process{Plugin} is loaded dynamically in \kl{Coq}'s \process{Engine} (green
+rectangle) by executing the following command in a \kl{proof script}:
 \begin{minted}[fontsize=\normalsize]{coq}
   From Actema Require Import Loader.
 \end{minted}
 % This can be done dynamically by the \process{User} in her \process{IDE}, or
 % statically at compile time.
-It essentially exposes a single tactic called \texttt{actema}, which can run in
+It essentially exposes a single \kl{tactic} called \texttt{actema}, which can run in
 two distinct modes:
 \begin{description}
   \item[\bfseries Interactive] The \process{Plugin} sends the current subgoals
-  to Actema, and the user applies a sequence of actions on them. Each time an
-  action is performed, it is sent back to Coq, compiled into the appropriate
-  tactic call, and then executed to generate new subgoals that are sent again to
-  Actema. The \texttt{actema} tactic finishes its execution either when:
+  to \kl{Actema}, and the user applies a sequence of actions on them. Each time an
+  action is performed, it is sent back to \kl{Coq}, compiled into the appropriate
+  \kl{tactic} call, and then executed to generate new subgoals that are sent again to
+  \kl{Actema}. The \texttt{actema} \kl{tactic} finishes its execution either when:
   \begin{itemize}
-    \item all subgoals are proved (in Actema);
+    \item all subgoals are proved (in \kl{Actema});
     \item the \process{User} decides to stop and give back control to the
     \process{IDE};
     \item in some rare cases, an unrecoverable error occurs.
   \end{itemize}
 
-  \item[\bfseries Non-interactive] If the \texttt{actema} tactic has already
+  \item[\bfseries Non-interactive] If the \texttt{actema} \kl{tactic} has already
   been executed on the subgoal under focus, then the \process{Plugin}
   automatically saved the sequence of actions performed by the \process{User} in
   a \process{Database} (gray circle). Currently for ease of development, the
@@ -252,29 +252,29 @@ two distinct modes:
     \item the filename is a hash code that uniquely identifies the goal by both
     its \emph{content}, i.e. the statements of the hypotheses and conclusion,
     and an optional \emph{identifier}, which can be given as argument to the
-    tactic in the form of an arbitrary string;
+    \kl{tactic} in the form of an arbitrary string;
     \item the contents of the file is essentially a Base64 encoding of the data
     specifying each action, whose format will be detailed in
     \refsec{compilation}.
   \end{itemize}
-  Then the tactic will load the sequence of actions from the appropriate file,
-  recompile it into one big tactic, and execute it on the current subgoal.
+  Then the \kl{tactic} will load the sequence of actions from the appropriate file,
+  recompile it into one big \kl{tactic}, and execute it on the current subgoal.
 \end{description}
 One can also force the execution in interactive mode by using a variant of the
 tactic named \texttt{actema\_force}. We provide details of the complete
-interaction protocol followed by the \texttt{actema} tactic in the following
+interaction protocol followed by the \texttt{actema} \kl{tactic} in the following
 section.
 
 Regarding the implementation of the \process{Plugin}, we chose to do it in the
 standard way by interfacing with the \texttt{coq-core} API in OCaml
-\sidecite{CoqCore}, although it has been encouraged in recent versions of Coq to
-interface with more stable APIs such as those provided by Coq-Elpi
+\sidecite{CoqCore}, although it has been encouraged in recent versions of \kl{Coq} to
+interface with more stable APIs such as those provided by \kl{Coq}-Elpi
 \sidecite{CoqELPI} and MetaCoq \sidecite{MetaCoq}\sidenote{Indeed breaking
 changes are frequently introduced in \texttt{coq-core} with newer versions of
 Coq, which requires more maintenance efforts from plugin developers.}. The main
 reason is that our plugin performs \emph{side effects} by interacting with an
 external environment: the file system when saving and retrieving graphical
-proofs, and the network when issueing HTTP requests to Actema. Those cannot be
+proofs, and the network when issueing HTTP requests to \kl{Actema}. Those cannot be
 implemented in the aforementioned frameworks.
 
 \section{Interaction protocol}\labsec{protocol}
@@ -304,7 +304,7 @@ implemented in the aforementioned frameworks.
 \end{figure*}
 
 We will now unroll the details of a complete interaction in \texttt{coq-actema},
-starting from the \process{User} calling the \texttt{actema} tactic in her
+starting from the \process{User} calling the \texttt{actema} \kl{tactic} in her
 \process{IDE}, and ending with her viewing the new subgoals displayed in the
 \process{IDE}. We chose to represent this with a \emph{sequence diagram}, as
 specified by the UML standard \cite{enwiki:1153944336}. This kind of diagram is
@@ -314,19 +314,19 @@ In our case, the objects are the different processes described in the previous
 section, as well as the \process{User}. Since the full interaction is quite
 involved, we split the diagram in three parts: \reffig{protocol1} includes the
 beginning of the interaction, focusing on the non-interactive mode of the
-\texttt{actema} tactic where the \process{Plugin} communicates with Coq's kernel
-and the \process{Database}. \reffig{protocol2} and \reffig{protocol3} tackle the
-interactive mode of the \texttt{actema} tactic: \reffig{protocol2} focuses on
-the conditions for breaking out of the interaction loop, and \reffig{protocol3}
-on the interactions at work when the \process{User} performs a proof action in
-Actema.
+\texttt{actema} \kl{tactic} where the \process{Plugin} communicates with \kl{Coq}'s
+\kl(PA){kernel} and the \process{Database}. \reffig{protocol2} and
+\reffig{protocol3} tackle the interactive mode of the \texttt{actema} \kl{tactic}:
+\reffig{protocol2} focuses on the conditions for breaking out of the interaction
+loop, and \reffig{protocol3} on the interactions at work when the \process{User}
+performs a proof action in \kl{Actema}.
 
 \subsection{Translating goals}
 
 The first task performed by the \process{Plugin} when calling the
-\texttt{actema} tactic is to ask the kernel for the data of the subgoal $G$
+\texttt{actema} \kl{tactic} is to ask the \kl(PA){kernel} for the data of the subgoal $G$
 currently under focus. Then for the goal $G$ to be understandable by the
-\process{Backend} of Actema, the \process{Plugin} will translate it into a new
+\process{Backend} of \kl{Actema}, the \process{Plugin} will translate it into a new
 representation $\trgoal{G}$ in a custom datatype. In order to share the
 definition of this datatype across implementations of the \process{Plugin} and
 \process{Backend}, we decided to use the ATD data specification language
@@ -360,9 +360,9 @@ correspond respectively to the formulas and \emph{signatures} of many-sorted
 could imagine using formulas and environments in \kl{higher-order} logic instead, and
 this would not change the structure of the \texttt{goal} datatype. Note that
 hypotheses are encoded with a \texttt{h\_id} attribute corresponding to their
-string identifier in the Coq goal, even though we do not display it in Actema's
-interface. This is required later by the plugin to compile actions into tactics,
-because we need to identify which Coq hypotheses correspond to those designated
+string identifier in the \kl{Coq} goal, even though we do not display it in \kl{Actema}'s
+interface. This is required later by the plugin to compile actions into \kl{tactics},
+because we need to identify which \kl{Coq} hypotheses correspond to those designated
 graphically by the \process{User}.
 
 \subsection{Retrieving actions}
@@ -373,37 +373,37 @@ then it retrieves it in the form of a list $A$ of \emph{actions}, whose data
 format will be precised in \refsec{compilation}. There is also a positive
 integer $n_i$ associated to each action $A_i$ in the list, corresponding to the
 index of the goal to which $A_i$ applies in the list of subgoals. Then each
-$A_i$ is compiled into a tactic $\traction{A_i}$, and all the $\traction{A_i}$
-are composed into a unique tactic $\tau$, which is executed by the kernel on $G$
-to apply the full sequence of actions.
+$A_i$ is compiled into a \kl{tactic} $\traction{A_i}$, and all the $\traction{A_i}$
+are composed into a unique \kl{tactic} $\tau$, which is executed by the
+\kl(PA){kernel} on $G$ to apply the full sequence of actions.
 
 \begin{remark}
   Currently the translation $\trgoal{\cdot}$ is not \emph{injective}: it might
-  map two different Coq goals to the same Actema goal, because strictly
+  map two different \kl{Coq} goals to the same \kl{Actema} goal, because strictly
   \kl{higher-order} subterms are translated into a \texttt{dummy} atomic predicate.
   Thus one might retrieve a proof from a different goal when calling the
-  \texttt{actema} tactic. However this is not problematic, since the
+  \texttt{actema} \kl{tactic}. However this is not problematic, since the
   \process{User} cannot perform any actions involving the part of the two goals
   that make them distinct; they might as well be seen as the same goal from her
   point of view. It can thus be considered as a feature that maximizes proof
   reuse.
 \end{remark}
 
-Otherwise the \texttt{actema} tactic has never been executed on $\trgoal{G}$,
-and thus we let the \process{User} provide a (partial) proof in Actema. First
+Otherwise the \texttt{actema} \kl{tactic} has never been executed on $\trgoal{G}$,
+and thus we let the \process{User} provide a (partial) proof in \kl{Actema}. First
 the \process{Plugin} retrieves the list $Gs$ of all subgoals, instead of just
 the one under focus. If $Gs$ is empty, which would happen after all subgoals
-have been solved from Actema, then it sends a \request{QED} request to Actema so
+have been solved from \kl{Actema}, then it sends a \request{QED} request to \kl{Actema} so
 that the latter can update its view accordingly, and the interaction loop with
 Actema stops here\sidenote{In \reffig{protocol2} and \reffig{protocol3}, we
-depict requests as being sent to the \process{Frontend} of Actema. This is an
+depict requests as being sent to the \process{Frontend} of \kl{Actema}. This is an
 imprecision for trading some readability, since as reviewed in
 \refsec{architecture} it is the \process{Server} which handles communication
 with the \process{Plugin}, and in particular forwards requests to the
 \process{Frontend}.}.
 
 Otherwise there is at least one subgoal, and we send an \request{action} HTTP
-request to Actema, whose body contains the translated subgoals $\trgoal{Gs}$. To
+request to \kl{Actema}, whose body contains the translated subgoals $\trgoal{Gs}$. To
 do this, we chose to serialize $\trgoal{Gs}$ with the Biniou helpers
 autogenerated by atdgen, the OCaml backend of ATD. According to its authors:
 ``Biniou is a binary format extensible like JSON but more compact and faster to
@@ -427,31 +427,31 @@ Then the \process{User} has two options:
   \emph{rendered} to the \process{User}: here we highlight all valid drop
   targets, which correspond to subterms of the current goal located in other
   items\sidenote{Highlighting is here understood in a \emph{visual} sense: in
-  the current implementation of Actema, subterms are indicated graphically by
+  the current implementation of \kl{Actema}, subterms are indicated graphically by
   squaring them. But one could imagine other modalities for highlighting,
   typically \emph{spelling} the subterms with a speech synthesis algorithm for
   users with impaired vision.}. Lastly, the \textbf{End} column describes how
   the user chooses a specific action $A \in \mathcal{A}$ to apply, here by
   dropping $I$ on a given target. Then $A$ is serialized and sent in the body of
   the response to the \request{action} request, together with the index $n$ of
-  the subgoal under focus in Actema. The \process{Plugin} can therefore compile
-  $A$ into a tactic $\traction{A}$ which is executed on the $n^{\text{th}}$ Coq
-  subgoal, giving a new list of subgoals which is sent again to Actema for
+  the subgoal under focus in \kl{Actema}. The \process{Plugin} can therefore compile
+  $A$ into a \kl{tactic} $\traction{A}$ which is executed on the $n^{\text{th}}$ Coq
+  subgoal, giving a new list of subgoals which is sent again to \kl{Actema} for
   another round of the interaction loop.
 
-  \item or she can click on a \texttt{Done} button in Actema's interface: this
+  \item or she can click on a \texttt{Done} button in \kl{Actema}'s interface: this
   has the effect of answering the \request{action} request from the
   \process{Plugin} with a \request{done} response, and the interaction loop with
-  Actema stops here. This will happen when the \process{User} wants to go back
-  to editing the proof script, either because she is satisfied with the new
+  \kl{Actema} stops here. This will happen when the \process{User} wants to go back
+  to editing the \kl{proof script}, either because she is satisfied with the new
   subgoals obtained from previous actions, or because she is stuck and wants to
-  try native Coq tactics instead. Indeed our protocol is \emph{synchronous}: the
-  \process{IDE}'s interface is stuck until the \texttt{actema} tactic has
-  finished its execution, and thus one cannot edit the proof script \emph{and}
-  build a proof in Actema at the same time.
+  try native \kl{Coq} \kl{tactics} instead. Indeed our protocol is \emph{synchronous}: the
+  \process{IDE}'s interface is stuck until the \texttt{actema} \kl{tactic} has
+  finished its execution, and thus one cannot edit the \kl{proof script} \emph{and}
+  build a proof in \kl{Actema} at the same time.
   % \sidenote{This is because the
-  % \emph{document checking model} of most Coq IDEs is itself synchronous: when
-  % the \process{User} modifies the proof script at a location before the current
+  % \emph{document checking model} of most \kl{Coq} IDEs is itself synchronous: when
+  % the \process{User} modifies the \kl{proof script} at a location before the current
   % execution point, the proof state goes back to how it was at that location, and
   % every command/tactic coming after it needs to be reinterpreted.}
 \end{itemize}
@@ -496,11 +496,11 @@ Then the \process{User} has two options:
 
 Once it has received the actions to execute, either from the \process{Database}
 or the \process{User}, the \process{Plugin} will compile them with a function
-$\traction{\cdot}$ which translates any action $A$ into a Coq tactic
+$\traction{\cdot}$ which translates any action $A$ into a \kl{Coq} tactic
 $\traction{A}$. This function actually has access to some other data used for
-interpreting actions: Coq's goal $G$, its Actema translation $\trgoal{G}$, and a
-bijective mapping $\Sigma$ between Coq constants in the environment of $G$ and
-the corresponding Actema symbols in the \kl{first-order} signature of $\trgoal{G}$.
+interpreting actions: \kl{Coq}'s goal $G$, its \kl{Actema} translation $\trgoal{G}$, and a
+bijective mapping $\Sigma$ between \kl{Coq} constants in the environment of $G$ and
+the corresponding \kl{Actema} symbols in the \kl{first-order} signature of $\trgoal{G}$.
 
 \subsection{The \texttt{action} datatype}
 
@@ -513,7 +513,7 @@ the corresponding Actema symbols in the \kl{first-order} signature of $\trgoal{G
 The \texttt{action} datatype is described thoroughly in the ATD specification
 provided in \reffig{atd-actions}. It is a big algebraic datatype, where each
 constructor encodes a specific \emph{type} of action. An action's type is
-equivalent to the \emph{signature} of a tactic, i.e. its name and the types of
+equivalent to the \emph{signature} of a \kl{tactic}, i.e. its name and the types of
 its arguments. In particular, the translation function $\traction{\cdot}$ is
 defined as a big pattern-matching on the action's type\sidenote{Note that an
 action's type is orthogonal to what we referred to as its \emph{kind} in
@@ -529,16 +529,16 @@ actions that perform subformula linking, to be described soon.
 
 Most click and contextual actions have a straightforward translation as Coq
 tactics. For instance, the \texttt{AIntro} action that corresponds to a click on
-the conclusion $C$ will be mapped to the Coq tactic that introduces the main
+the conclusion $C$ will be mapped to the \kl{Coq} \kl{tactic} that introduces the main
 connective of $C$, and is thus defined by case on the latter: \texttt{intro} for
 $\limp$ and $\forall$, \texttt{split} for $\land$, etc. The actions
 \texttt{AInd}, \texttt{ASimpl} and \texttt{ARed} correspond respectively to the
 contextual actions \action{Induction}, \action{Simplify} and \action{Unfold}
 introduced in \refch{advanced}, and are mapped almost directly to the equivalent
-Coq tactics \texttt{induction}, \texttt{simpl} and \texttt{red}. The only
+Coq \kl{tactics} \texttt{induction}, \texttt{simpl} and \texttt{red}. The only
 difference is that they have a \emph{\kl{deep inference}} flavor, since they can all
 be applied on an arbitrary subterm selected by the \process{User}. This relies
-on our implementation of \kl{deep inference} semantics directly in Coq, that we now
+on our implementation of \kl{deep inference} semantics directly in \kl{Coq}, that we now
 briefly describe.
 
 \subsection{Deep inference semantics}
@@ -556,51 +556,51 @@ the SFL \kl{rewriting rules}, in particular because we need to manipulate
 not available for \kl{CoIC} propositions.
 
 Then we use a technique called \emph{computational reflection} in order to apply
-the embedded \kl{deep inference} semantics to Coq goals. Originating from the
+the embedded \kl{deep inference} semantics to \kl{Coq} goals. Originating from the
 \emph{small scale reflection} methodology supported by the {\ssreflect}
-framework \cite{SSR}, it consists in translating Coq objects into their
+framework \cite{SSR}, it consists in translating \kl{Coq} objects into their
 equivalent formulation in the deep embedding with a \texttt{reify} function,
-reasoning on the deep embedding with Coq programs (also called
-\emph{fixpoints}), and then translating objects back into Coq with a
+reasoning on the deep embedding with \kl{Coq} programs (also called
+\emph{fixpoints}), and then translating objects back into \kl{Coq} with a
 \texttt{reflect} function. It is easy to implement the \texttt{reflect} function
 because the datatypes in a deep embedding are almost always defined as
 \emph{inductive} \kl{types}, and thus one can easily do pattern-matching on them. It
 is a different story for the \texttt{reify} function, especially in our case:
-indeed we want to translate the statements of Coq goals into \kl{first-order}
-propositions. But Coq statements are objects of \kl{type} \texttt{Prop}, and thus
+indeed we want to translate the statements of \kl{Coq} goals into \kl{first-order}
+propositions. But \kl{Coq} statements are objects of \kl{type} \texttt{Prop}, and thus
 cannot be pattern-matched on inside \kl{CoIC}\sidenote{For reasons of
 \kl{consistency} of the logic, well-known in the literature on \kl{type theory}.}.
 Thus we need to have recourse to a \emph{meta-programming} language in order to
-inspect the structure of Coq goals. Here we use the standard {\ltac} language,
+inspect the structure of \kl{Coq} goals. Here we use the standard {\ltac} language,
 which provides powerful constructs for pattern-matching on goals\sidenote{A
 downside of {\ltac} is that it is an \emph{untyped} language, whose programs are
 notoriously hard to debug and maintain. One might consider a cleaner
-implementation with more recent alternatives in the Coq ecosystem, like the
+implementation with more recent alternatives in the \kl{Coq} ecosystem, like the
 successor to {\ltac} Ltac2 \cite{Ltac2}, or the MetaCoq project
 \cite{MetaCoq}.}.
 
-The most complex tactics are those implementing \kl(dnd){backward} and \kl(dnd){forward} \kl{DnD}
+The most complex \kl{tactics} are those implementing \kl(dnd){backward} and \kl(dnd){forward} \kl{DnD}
 actions, called respectively \texttt{backward} and \texttt{forward}. They rely
-on two Coq fixpoints \texttt{b3} and \texttt{f3} which respectively compute the
+on two \kl{Coq} fixpoints \texttt{b3} and \texttt{f3} which respectively compute the
 new conclusion $\mathtt{b3}(p, q, T)$ from a \kl(dnd){backward} \kl{linkage} $p \back q$, and
 the new hypothesis $\mathtt{f3}(p, q, T)$ from a \kl(dnd){forward} \kl{linkage} $p \forw q$,
 where $T$ is the so-called \emph{subformula linking trace} mentioned earlier. Of
 course the paths $p, q$ and the trace $T$ are all expressed with custom Coq
 datatypes relying on our deep embedding of \kl{first-order logic}. The role of the
 trace in particular is to provide the list of SFL \kl{rewriting rules} to apply,
-including Coq \kl{terms} instantiating quantifiers that were computed in Actema by
-unification of the two linked subformulas. Then we formulate in Coq two theorems
+including \kl{Coq} \kl{terms} instantiating quantifiers that were computed in \kl{Actema} by
+unification of the two linked subformulas. Then we formulate in \kl{Coq} two theorems
 that guarantee the logical \emph{soundness} of \texttt{b3} and \texttt{f3}
 (\reffig{dnd-snd}). Note that the theorems are formulated using the native
-implication connective \texttt{->} of Coq, thanks to the \texttt{reflect}
-function. The final tactics \texttt{backward} and \texttt{forward} can thus
+implication connective \texttt{->} of \kl{Coq}, thanks to the \texttt{reflect}
+function. The final \kl{tactics} \texttt{backward} and \texttt{forward} can thus
 modify the goal by simply applying these theorems, first reifying the goal with
-the \texttt{reify} function, and then relying on the fact (also proved in Coq)
+the \texttt{reify} function, and then relying on the fact (also proved in \kl{Coq})
 that \texttt{reflect} is the inverse of \texttt{reify}.
 
 \begin{figure}
   \input{listings/dnd-snd.tex}
-  \caption{Soundness theorems of \kl{DnD} fixpoints in Coq}
+  \caption{Soundness theorems of \kl{DnD} fixpoints in \kl{Coq}}
   \labfig{dnd-snd}
 \end{figure}
 
@@ -618,25 +618,25 @@ that \texttt{reflect} is the inverse of \texttt{reify}.
   implementing various \kl{calculi of structures} inside frameworks like Maude
   \cite{kahramanogullari_maude_2008} and Tom
   \cite{kahramanogullari_implementing_2005}, that are dedicated to the
-  specification of \kl{rewriting systems}. For an integration within modern \kl{proof
-  assistants}, we only know of Chaudhuri's recent work
+  specification of \kl{rewriting systems}. For an integration within modern
+  \kl{proof assistants}, we only know of Chaudhuri's recent work
   \sidecite{chaudhuri_certifying_2022} that explores different techniques in
   addition to reflection, like \emph{combinators} and some more powerful usages
   of \emph{metaprogramming}. He also provides an effective implementation of the
   techniques in his \kl{Profint} tool \cite{DBLP:conf/cade/Chaudhuri21}, that
-  allows to export subformula linking derivations built with \kl{Profint}'s \kl{GUI}
-  as proof scripts directly executable in various \kl{proof assistants} (Coq, Lean,
-  Isabelle/HOL).
+  allows to export subformula linking derivations built with \kl{Profint}'s
+  \kl{GUI} as \kl{proof scripts} directly executable in various \kl{proof
+  assistants} (\kl{Coq}, \kl{Lean}, \kl{Isabelle/HOL}).
 \end{remark}
 
 \section{Future works}\labsec{pluginfuture}
 
 The \texttt{coq-actema} system described in this chapter has been successfully
 implemented and tested on various simple examples, including those of
-\refsec{edukera} and \refsec{arith}. But there are many Coq goals that cannot be
-properly handled in Actema, which still hinders the usability of the system in
+\refsec{edukera} and \refsec{arith}. But there are many \kl{Coq} goals that cannot be
+properly handled in \kl{Actema}, which still hinders the usability of the system in
 real mathematical developments, even in an educational setting. Typically, the
-example of \refsec{funcs} cannot be completely performed in Actema, in this case
+example of \refsec{funcs} cannot be completely performed in \kl{Actema}, in this case
 because of the lack of support for \emph{\kl{higher-order}} functions and predicates,
 but also because of the poor support for user-defined \emph{notations}. Those
 are only a few of the current limitations of \texttt{coq-actema}, and we
@@ -646,28 +646,28 @@ scope and improve the UX of the system.
 \subsection{Higher-order logic}
 
 The importance of being able to express and manipulate \kl{higher-order} functions
-and predicates has been stressed multiple times before. The fact that Actema is
+and predicates has been stressed multiple times before. The fact that \kl{Actema} is
 limited to \kl{first-order logic} is mostly a historical contingency, motivated by
 the fact that some algorithms like unification are more tractable in this
-setting. But now that we rely on Coq's proof engine, there is no fundamental
+setting. But now that we rely on \kl{Coq}'s proof engine, there is no fundamental
 reason for maintaining this choice. Because the language of statements is at the
 foundation of a logical framework, many other components of a \kl{proof assistant}
 will depend on it. Thus the switch to \kl{higher-order} logic should be done as soon
 as possible, to limit the amount of refactoring work to perform in the future.
-This will require changes to Actema's \process{Backend} and \process{Frontend},
-but also to the Coq \process{Plugin}\sidenote{The Coq theory implementing the
+This will require changes to \kl{Actema}'s \process{Backend} and \process{Frontend},
+but also to the \kl{Coq} \process{Plugin}\sidenote{The \kl{Coq} theory implementing the
 tactics for \kl{deep inference}-based actions already has partial support for
 \kl{higher-order} goals, thus work remains mostly on the side of the translation
-module for Actema written in OCaml.} and the ATD datatype definitions enabling
+module for \kl{Actema} written in OCaml.} and the ATD datatype definitions enabling
 communication between the two.
 
 One central question in the transition to \kl{higher-order} logic is how unification
 of subterms will be handled. Algorithms in this setting are known to be
 incomplete because of undecidability \sidecite{huet_undecidability_1973}, and
 their implementation can be very tricky. The most sensible option seems to rely
-on the implementation already provided by Coq, which is the fruit of years of
+on the implementation already provided by \kl{Coq}, which is the fruit of years of
 development and improvements. But this would require changing the interaction
-protocol of \texttt{coq-actema}, by allowing the \process{Backend} of Actema to
+protocol of \texttt{coq-actema}, by allowing the \process{Backend} of \kl{Actema} to
 make unification requests to the \process{Plugin}. This might be doable without
 changing the current client-server architecture, but will probably involve some
 intricate design decisions.
@@ -676,11 +676,11 @@ A more radical solution would be to replace the \request{actions} request from
 the \process{Frontend} to the \process{Backend} by a \texttt{start} response
 from the \process{Frontend} to the \process{Plugin}, with the data of the
 selection in its body. Then we could completely delegate the computation of
-available actions to the \process{Plugin}, allowing us to freely use Coq's
+available actions to the \process{Plugin}, allowing us to freely use \kl{Coq}'s
 unification. This might not be too hard since we should be able to directly
 reuse OCaml code from the \process{Backend}, but is a deeper structural change
 to the interaction protocol, that makes the \process{Plugin} responsible for an
-important part of Actema's behavior. And this would induce a lot of unnecessary
+important part of \kl{Actema}'s behavior. And this would induce a lot of unnecessary
 reimplementation efforts if we were to port the \process{Plugin} to other PAs.
 
 \subsection{Notations}
@@ -690,16 +690,16 @@ that we do not handle custom \emph{notations} for displaying
 terms\sidenote{Apart from expressions in Peano arithmetic, for which we have ad
 hoc support.}. It is however a crucial feature for making proofs in a specific
 domain tractable, especially in the \kl{PbA} paradigm where one needs to
-manipulate directly statements in the goal. Now that we are connected to Coq, we
-can in principle reuse the notation system already implemented within Coq. The
-\texttt{coq-core} OCaml API indeed exposes methods for pretty-printing Coq terms
+manipulate directly statements in the goal. Now that we are connected to \kl{Coq}, we
+can in principle reuse the notation system already implemented within \kl{Coq}. The
+\texttt{coq-core} OCaml API indeed exposes methods for pretty-printing \kl{Coq} terms
 using their assigned notations. The problem is that these methods only return
-\emph{strings}, but in order to manipulate \kl{terms} interactively in Actema we also
+\emph{strings}, but in order to manipulate \kl{terms} interactively in \kl{Actema} we also
 need access to \emph{trees} mapping their subterm structure to the
 pretty-printed string. At the time of writing there is no support for the
-latter, but the Coq development team informed us that they plan to add it. The
-same problem was met by the developers of the ProofWidgets framework in Lean,
-and they had to modify the pretty-printer of Lean upstream\sidenote{Section 4.1
+latter, but the \kl{Coq} development team informed us that they plan to add it. The
+same problem was met by the developers of the ProofWidgets framework in \kl{Lean},
+and they had to modify the pretty-printer of \kl{Lean} upstream\sidenote{Section 4.1
 of \cite{ayers_graphical_2021}.}.
 
 Once one has support for custom notations displayed in an HTML page, it is
@@ -712,7 +712,7 @@ the \emph{diagrammatic} reasoning pervasive in \emph{category theory}, which is
 very hard and cumbersome to express as manipulation of logical statements.
 Actually a system very similar to \texttt{coq-actema} is currently being
 developed by Luc Chabassier \cite{LucTalk}, for the very purpose of integrating
-diagrammatic proofs in category theory to the traditional proof script workflow.
+diagrammatic proofs in category theory to the traditional \kl{proof script} workflow.
 One could imagine in the long-term embedding this system as a subsystem of
 \texttt{coq-actema}, through an advanced protocol for interactive notations.
 
@@ -722,7 +722,7 @@ compared to that of \texttt{coq-actema}, where the methods generating the
 HTML/JS code of pretty-printed \kl{terms} are directly implemented in a DSL embedded
 in the meta-programming language of the PA. While this allows easy access to all
 meta-programming facilities for manipulating \kl{terms}, this makes their framework
-only usable within Lean, while Actema could in principle be used with any PA
+only usable within \kl{Lean}, while \kl{Actema} could in principle be used with any PA
 that implements a corresponding plugin (for example with a \texttt{lean-actema}
 variant of our system).
 
@@ -732,24 +732,25 @@ We already described in \refsec{funcs} the \emph{lemma search} feature of
 Actema. Currently it is implemented only in its standalone version. Adding
 support for it in \texttt{coq-actema} would require additional efforts compared
 to other contextual actions like \action{Induction}. Indeed we do not only need
-access to the current goal, but also to the full global environment of Coq where
+access to the current goal, but also to the full global environment of \kl{Coq} where
 lemmas are stored. While in the standalone version we had a toy lemma database
-with very few entries, the standard library of Coq contains thousands of lemmas.
-And to use our selection-based filtering algorithm implemented in Actema, we
-need to translate the entire library into statements understandable by Actema's
+with very few entries, the standard library of \kl{Coq} contains thousands of lemmas.
+And to use our selection-based filtering algorithm implemented in \kl{Actema}, we
+need to translate the entire library into statements understandable by \kl{Actema}'s
 \process{Backend}, and then send it over HTTP. Thus it will be important to
 implement some cache mechanism to remember which lemmas have already been
-exported to Actema's own database, to avoid recomputing the translation each
+exported to \kl{Actema}'s own database, to avoid recomputing the translation each
 time.
 
 % \subsection{Tighter IDE integration}
 
 % Design a new architecture/protocol that supports \emph{continuous, incremental
-% document checking} (typically by inserting tactic calls in the proof script
+% document checking} (typically by inserting tactic calls in the \kl{proof script}
 % for each action, maybe coq-lsp can do that?)
 
 \subsection{Proof evolution}\labsubsec{proof-evolution}
 
+\AP
 An important question when designing a proving environment is how users will be
 able to manipulate an \emph{existing} (partial) proof, either one they have
 built in the past, one that was built by other people, or a mix of both in a
@@ -759,8 +760,8 @@ constructed; reading it for the first time, or many months/years after it was
 written; updating it after slight changes to the statement of its theorem;
 etc\sidenote{Not very surprisingly, those activities are commonly found in the
 context of \emph{programming} environments. Thus one might get insight by
-cross-pollinating ideas from both domains, in the spirit of the Curry-Howard
-correspondence (which also underlies the design of Coq).}\sidenote{One might
+cross-pollinating ideas from both domains, in the spirit of the \kl{Curry-Howard
+correspondence} (which also underlies the design of \kl{Coq}).}\sidenote{One might
 even argue that thinking about the best way to \emph{represent} a proof leads to
 more fundamental questions, that have been much debated both in \kl{proof theory} and
 the history and philosophy of mathematics: what is the essence of a proof, seen
@@ -770,12 +771,12 @@ and the social and scientific practice of mathematicians
 \cite{bartzia:hal-04087080}?}.
 
 In the literature and community of people designing \kl{proof assistants}, these
-various problematics are generally regrouped under the term of \emph{proof
-evolution}. A fundamental remark about the \kl{PbA} paradigm, and thus
-about the \texttt{coq-actema} system, is that it has not been designed with
-proof evolution in mind from the outset. Indeed, a proof built with the
-\texttt{actema} tactic will provide the least possible amount of information in
-the proof script, since we can just witness the call to that tactic. And
+various problematics are generally regrouped under the term of \intro{proof
+evolution}. A fundamental remark about the \kl{PbA} paradigm, and thus about the
+\texttt{coq-actema} system, is that it has not been designed with \kl{proof
+evolution} in mind from the outset. Indeed, a proof built with the
+\texttt{actema} \kl{tactic} will provide the least possible amount of information in
+the \kl{proof script}, since we can just witness the call to that \kl{tactic}. And
 currently there are no facilities to visualize the associated sequence of
 actions stored in the \process{Database} of graphical proofs.
 
@@ -792,8 +793,8 @@ interface dedicated to the richly-structured navigation inside this sequence of
 animations, in the style of an improved video player.
 
 A more conservative solution would be to find a systematic way to translate a
-sequence of actions into a proof text. The question of generating declarative
-proof texts from imperative proof scripts has already been explored by some
+sequence of actions into a proof text. The question of generating \kl{declarative}
+proof texts from \kl{imperative} \kl{proof scripts} has already been explored by some
 authors, especially in the case of proofs expressed in natural
 language\sidenote{See for example section 3.6 of E. Ayers' thesis
 \cite{ayers_thesis}. We can also mention ongoing work of Patrick Massot in the
@@ -803,19 +804,19 @@ readable and concise proof texts, thanks notably to the subformula linking
 semantics of \kl{DnD} actions that exhibit clearly the flow of argumentation.
 
 An even more pragmatic solution, that should be straightforward to implement in
-the short-term, consists in inserting tactic invokations in the proof script
+the short-term, consists in inserting \kl{tactic} invokations in the \kl{proof script}
 that are in one-to-one correspondence with graphical actions. Since we actually
-compile actions into tactics, this is in principle easy to implement. However,
+compile actions into \kl{tactics}, this is in principle easy to implement. However,
 there are currently two drawbacks to this approach:
 \begin{itemize}
-  \item Since most tactics are \kl{deep inference}-based, they take as arguments the
+  \item Since most \kl{tactics} are \kl{deep inference}-based, they take as arguments the
   paths to manipulated subterms, in the form of lists of integers. Those are
   hard to read by humans, and very sensible to small changes in the shape of the
   goal. This is even worse for the \texttt{backward} and \texttt{forward}
-  tactics, because they also take as argument the subformula linking trace,
+  \kl{tactics}, because they also take as argument the subformula linking trace,
   which is a very complex data structure expressed in our deep embedding of
   \kl{first-order logic}, and hence should not leak into the user interface.
-  Hopefully, relying on Coq's unification instead of Actema's should mitigate
+  Hopefully, relying on \kl{Coq}'s unification instead of \kl{Actema}'s should mitigate
   the complexity of the trace, by removing the need to incorporate full
   substitutions. There is also the possibility of replacing integer-based paths
   by \emph{patterns} in the {\ssreflect} language, which are known to be a more
@@ -825,15 +826,15 @@ there are currently two drawbacks to this approach:
 
   \item The interaction protocol described in \refsec{protocol} does not provide
   any way to send requests to the \process{IDE}, which would be necessary to
-  actually insert the tactic invokation at the right location in the proof
-  script, and this as soon as the action is performed by the \process{User}. A
+  actually insert the \kl{tactic} invokation at the right location in the \kl{proof
+  script}, and this as soon as the action is performed by the \process{User}. A
   ``brutal'' solution would be to reimplement \texttt{coq-actema} as an
   extension of a specific IDE, typically VsCoq which is also based on web
   technologies \cite{VsCoq}. But this would require some big implementation
   efforts, in addition to locking the \process{User} into this specific IDE. A
   better option might be to directly interact with a \emph{language server}
   implementing the Language Server Protocol (LSP) \cite{LSP}. The
-  \texttt{coq-lsp} project aims to provide such a server for Coq, but at the
+  \texttt{coq-lsp} project aims to provide such a server for \kl{Coq}, but at the
   time of writing of this thesis does not implement yet all methods of the LSP
   standard. The one that interests us in particular is the
   \texttt{textDocument/codeAction} method, for which support is currently

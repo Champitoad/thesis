@@ -59,7 +59,7 @@ the \kl{introduction rules} for logical connectives in \kl{sequent calculus} do,
 following the Proof-by-Pointing paradigm \cite{PbP} we map them to click
 actions (see \refsec{clicks}).
 
-So visually, a proof in Actema consists in breaking logical items into subitems
+So visually, a proof in \kl{Actema} consists in breaking logical items into subitems
 positioned freely in space, and then bringing those subitems together to make
 them interact and produce a new item. This is quite evocative of a
 \emph{chemical reaction} controlled by the user, where logical formulas are akin
@@ -96,7 +96,7 @@ interface: if the user is allowed to decompose red $\limp$ and blue $\land$, she
 will assume naturally that she can also decompose blue $\limp$ and red $\land$,
 as well as $\lor$ of any color. While red $\lor$ can be handled by pointing
 directly at the disjunct to be proved, other configurations correspond to rules
-of \kl{sequent calculus} with multiple premisses. In Actema, this corresponds to
+of \kl{sequent calculus} with multiple premisses. In \kl{Actema}, this corresponds to
 creating a new subgoal for each premise, where subgoals are displayed one at a
 time in different \emph{tabs}: this new interface mechanism breaks the chemical
 metaphor. The root cause lies in the way \kl{sequent calculus} implements
@@ -144,7 +144,7 @@ in it.
 
 Bubbles can also be seen as a way to internalize in the syntax of sequents the
 notion of \emph{subgoal}, which requires in turn to allow nesting of sequents
-inside each other. The proof state is not a set of subgoals anymore, but a
+inside each other. The \kl{proof state} is not a set of subgoals anymore, but a
 single nested sequent of this sort, that we call a \emph{solution}\sidenote{The
 term ``solution'' refers here to the metaphor of a \emph{chemical solution} made
 up of an unordered collection of molecules. Which is quite ironic, since we use
@@ -299,7 +299,7 @@ $\mathcal{D}$ of \kl{BJ}-steps with premiss $T$ and conclusion $S$.
 \begin{definition}[\kl{BJ}-proof]\labdef{BJ-proof}
 A \emph{proof} of a solution $S$ in \kl{BJ} is a derivation
 $\deriv{\mathcal{D}}{S}{\piq{}}$ that reduces $S$ to the empty solution, which
-denotes the proof state where there are no subgoals left.
+denotes the \kl{proof state} where there are no subgoals left.
 \end{definition}
 
 \begin{marginfigure}
@@ -395,7 +395,7 @@ as in \reffig{ex-seq-BJ}. Whereas in \reffig{ex-seq-BJ} we squared the whole
 subsolutions corresponding to the conclusions of \kl{inference rules}, here we
 squared on each line the redex modified by the associated \kl{rewriting rule}. This
 example highlights the greater locality of the rewriting approach, by indicating
-more precisely which parts of the proof state are changed by the rules. But it
+more precisely which parts of the \kl{proof state} are changed by the rules. But it
 still over-approximates the modifications that really need to be performed to
 carry the transformations. Indeed, by only exposing the data of a redex $S$ and
 a reddendum $T$, a \kl{rewriting rule} $\rrule{r}{S}{T}$ can only be
@@ -417,8 +417,8 @@ edit operations like these, that can simulate all the rules of
 \kl{BJ}\sidenote{As will become apparent in \refsec{bubbles-completeness},
 \kl{BJ} itself provides a finer-grained simulation of the rules of \kl{sequent
 calculus}, which in turn is known to be a more detailed variant of
-\emph{\kl{natural deduction}}. Interestingly through the Curry-Howard
-isomorphism, this would correspond to a \emph{chain of compilation}, starting
+\emph{\kl{natural deduction}}. Interestingly through the \kl{Curry-Howard
+isomorphism}, this would correspond to a \emph{chain of compilation}, starting
 from the higher-level \kl{$\lambda$-calculus} (\kl{natural deduction}), going into
 abstract machines (\kl{sequent calculus}) \cite{downen_sequent_2016}, down to
 something akin to \emph{assembly language} with \texttt{jump} instructions
@@ -449,7 +449,7 @@ with $\mathbb{H}$-rules, $\mathbb{F}$-rules and $\mathbb{M}$-rules that deal
 with \emph{bubbles}. Remember that the goal behind the idea of bubble calculus
 was precisely to provide a new way to manipulate subgoals through bubbles
 instead of tabs, which are more in line with the chemical metaphor. It is quite
-easy to imagine a \kl{GUI} presenting the proof state as a solution, in a graphical
+easy to imagine a \kl{GUI} presenting the \kl{proof state} as a solution, in a graphical
 layout close to that of \reffig{ex-gra-BJ}\sidenote{Although there might be some
 challenges in implementing an efficient layouting algorithm for bubbles,
 typically to make solutions fit into the screen.}. Like formulas in blue and red
@@ -544,7 +544,7 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
     rules like those of \refsec{dnd-completeness}, but between adjacent formulas
     in a solution (see \reffig{bubbles-linkage}).
 
-    The cut rule was handled in Actema with a separate \textsf{+hyp} button,
+    The cut rule was handled in \kl{Actema} with a separate \textsf{+hyp} button,
     which adds the cut formula $A$ (input by the user in a dialog box) as a new
     hypothesis in the current goal, and as the conclusion in a new subgoal (see
     \refsec{newitems}). Since subgoals are now reified as bubbles, the
@@ -605,7 +605,7 @@ metaphor, \kl{BJ} exhibits some features that are interesting both at the
 \begin{description}
   \item[\textbf{Factorization}] It implements a form of \emph{context-sharing}
     between subgoals: that is, one can perform transformations on shared
-    hypotheses (\kl{forward} reasoning) without going back to a proof state anterior
+    hypotheses (\kl{forward} reasoning) without going back to a \kl{proof state} anterior
     to the splitting of said subgoals. This should simplify the navigation in
     the proof as it is being constructed, by avoiding the need to locate these
     splitting points. In fact often beginners (but also occasionally seasoned
@@ -617,10 +617,10 @@ metaphor, \kl{BJ} exhibits some features that are interesting both at the
     subproofs.\label{par:factorization}
 
   \item[\textbf{Navigation}] The tree structure of subgoals is immediately
-    apparent in the proof state through the nesting of bubbles. Thus part of the
+    apparent in the \kl{proof state} through the nesting of bubbles. Thus part of the
     information on the proof construction process, which was made implicit and
-    temporal in the proof state history, is now made explicit and spatial in the
-    proof state itself\sidenote{This concern of finding an explicit graphical
+    temporal in the \kl{proof state} history, is now made explicit and spatial in the
+    \kl{proof state} itself\sidenote{This concern of finding an explicit graphical
     representation of the ``motions of reasoning \emph{in actu}'', and not only
     the states of mind, can be found already in the works of Peirce on his
     existential graphs \cite[pp.~112--113]{Roberts+1973}. We will come back to
@@ -638,7 +638,7 @@ metaphor, \kl{BJ} exhibits some features that are interesting both at the
     visible anymore. While this is useful to focus attention and avoid being
     distracted by other subgoals, it can quickly become cumbersome for the user
     to always have to zoom out in order to retrieve hypotheses from these shared
-    contexts. One solution would be to rebrand the context zone of Actema as a
+    contexts. One solution would be to rebrand the context zone of \kl{Actema} as a
     \emph{global} context zone, where all the shared contexts available in the
     subgoal under focus are merged in a single list, and immediately accessible
     for manipulation. Of course actions performed in the context zone would be
@@ -652,7 +652,7 @@ metaphor, \kl{BJ} exhibits some features that are interesting both at the
     state (here other items and subgoals) which is not clearly correlated to the
     transformed data, often because it is not immediately visible.
 
-    For instance in Actema, many users have reported difficulties in
+    For instance in \kl{Actema}, many users have reported difficulties in
     understanding the effect of click actions that create new subgoals. A first
     reason that can easily be remedied, is that there was not enough visual
     feedback to indicate the newly created tabs. But a deeper limitation is that

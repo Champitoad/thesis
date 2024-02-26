@@ -49,7 +49,7 @@ For instance, \reffig{lk-tnd} shows a proof of the \kl{law of excluded middle},
 where for each rule we squared the principal formula.
 % Following the mapping of click actions to \kl{sequent calculus} rules
 % (\reftab{click-rules}),
-One could imagine performing the same proof in Actema by successively clicking
+One could imagine performing the same proof in \kl{Actema} by successively clicking
 on these principal formulas, following a bottom-up reading of the \kl{sequent
 calculus} derivation seen as the trace of a proof search process. First we decide
 to prove $A \lor \neg A$: this amounts to proving alternatively $A$ or $\neg
@@ -62,7 +62,7 @@ these multi-conclusion click actions in \refsec{classical-click}.
 It is clear in the proof that the negative occurrence of $A$ in $\neg A$ is the
 one that becomes the assumption $A$ that justifies the conclusion $A$ in the
 last step. It would be natural to specify this causal relationship by linking
-directly the two occurrences of $A$, as we do with \kl{DnD} actions in Actema.
+directly the two occurrences of $A$, as we do with \kl{DnD} actions in \kl{Actema}.
 However for this to be possible, we need to introduce a new linking operator ---
 let us note it $\para$ --- that works between two conclusions, where $A \para B$
 is obviously interpreted as $A \lor B$. Then after clicking on $A \lor \neg A$
@@ -101,7 +101,7 @@ stage.
 In fact backtracking can still be performed in \kl{intuitionistic} logic, but at the
 meta-level of the proof search process instead of the object-level of \kl{inference
 rules}. In an \kl{interactive theorem prover}, this corresponds to the ability for the
-user to \emph{undo} an inference and go back to a previous proof state. However
+user to \emph{undo} an inference and go back to a previous \kl{proof state}. However
 keeping track of the times we undo/redo inferences is very hard to do as humans,
 and the user interfaces of current \kl{proof assistants} do not provide any mechanism
 for it either. This has already been noted by Ayers\sidenote{Section 3.1.3 of
@@ -109,7 +109,7 @@ his thesis \cite{ayers_thesis}.}, and is a good motivation for trying to design
 \kl{proof systems} where the need for meta-level backtracking is reduced, or even
 removed. One way to do this is to maximize the proportion of \kl{inference rules}
 that are \emph{invertible}, meaning that their premisses always follow from
-their conclusion. Indeed when looking at rules as tactics (see \refsec{itps}),
+their conclusion. Indeed when looking at rules as \kl{tactics} (see \refsec{itps}),
 it means that they will always reduce a provable goal to provable subgoals, and
 thus can never induce a backtracking point\sidenote{Except of course if the user
 deems the subgoal too complex to prove in its current form, and explicitly wants
@@ -129,15 +129,15 @@ multiple conclusions in an \kl{intuitionistic} setting.
 
 Despite the aforementioned benefits of multi-conclusion sequents, we do not know
 of any \kl{proof assistant}, whether \kl{classical} or \kl{intuitionistic}, that exposes them
-in its user interface. One reason is that most proof/tactic languages are based
+in its user interface. One reason is that most proof/\kl{tactic} languages are based
 on the rules of \kl{natural deduction}, which use single-conclusion sequents. Another
 reason is that having one conclusion removes the need to designate it with an
 explicit name or number, as is the case with hypotheses\sidenote{The current
 trend is to have user-chosen or automatically generated strings for names as in
-Coq and Lean, but some provers like \kl{HOL Light} ask for the position in the list
+Coq and \kl{Lean}, but some provers like \kl{HOL Light} ask for the position in the list
 as an integer to designate a particular hypothesis.}. And the explicit handling
-of names in tactic invokations is known to be tedious and time-consuming, to the
-point that some tactic languages like \ssreflect have been designed around this
+of names in \kl{tactic} invokations is known to be tedious and time-consuming, to the
+point that some \kl{tactic} languages like \ssreflect have been designed around this
 problem \sidecite{SSR}. Thus having multiple conclusions would only double the
 effort for no compelling reason.
 
@@ -156,7 +156,7 @@ and the theoretical foundations behind it.
 
 \section{Click actions}\labsec{classical-click}
 
-In \reftab{click-rules}, we showed how click actions in Actema are in direct
+In \reftab{click-rules}, we showed how click actions in \kl{Actema} are in direct
 correspondance with the rules of the single-conclusion \kl{sequent calculus} \kl{LJ}
 for \kl{intuitionistic} logic. Following the literature mentioned earlier, we just
 need to replace two actions/\kl{introduction rules} to get a multi-conclusion system

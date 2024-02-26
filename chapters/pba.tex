@@ -86,7 +86,7 @@ software artifacts in a thesis?}. This possibility to experiment in practice,
 even though yet on a small scale, gave valuable feedback for crafting the way
 \kl{DnD} actions are to be translated into proof construction steps in an intuitive
 and practical way. A description of the overall architecture and implementation
-design of Actema will be provided in \refch{plugin}.
+design of \kl{Actema} will be provided in \refch{plugin}.
 
 The chapter is organized as follows: \refsec{setting} briefly outlines its
 logical setting. \refsec{aristote} describes the basic features of a graphical
@@ -157,7 +157,7 @@ $$\forall x.\forall y. x=y\land A \limp \subst{A}{x}{y}.$$
  \end{center}
  The conclusion is red on the right, the two hypotheses blue on the left. The
  gray dotted arrows have been added to show the two possible actions.
- \caption{A partial screenshot showing a goal in the Actema prototype}
+ \caption{A partial screenshot showing a goal in the \kl{Actema} prototype}
  \labfig{aristote}
  \end{figure*}
 
@@ -167,7 +167,7 @@ convention, that bound and free variables are distinct and that a
 variable is bound at most once.
 
 Extending this work to simple extensions of \kl{FOL}, like multi-sorted predicate
-calculus is straightforward (and actually done in the Actema prototype). Some
+calculus is straightforward (and actually done in the \kl{Actema} prototype). Some
 interesting points may show up when considering how to apply this work to more
 complex formalisms like \kl{type theories}. We will not explore these questions here.
 
@@ -180,7 +180,7 @@ complex formalisms like \kl{type theories}. We will not explore these questions 
 
 \subsection{Layout}
 One advantage of the \kl{PbA} paradigm, is that it allows a very lean visual layout
-of the proof state. There is no need to name hypotheses. In the prototype we
+of the \kl{proof state}. There is no need to name hypotheses. In the prototype we
 also dispense with a text buffer, since proofs are solely built through
 graphical actions.
 
@@ -320,7 +320,7 @@ introduction rules} of the head connective for the conclusion, and either the
 \kl{inference rules} is given in \reftab{click-rules}. A few remarks are in
 order:
 \begin{itemize}
-  \item In the current implementation of Actema, clicking on a blue item $A
+  \item In the current implementation of \kl{Actema}, clicking on a blue item $A
   \limp B$ will work only if the conclusion is $B$. An alternative is to use the
   {\rsf{{\limp}L}} rule from \kl{sequent calculus}, which is applicable in every
   context.
@@ -330,7 +330,7 @@ order:
   reason is that one needs additional information about the \emph{witness} to be
   used when instantiating with the $∀L$ or $∃R$ rule. This could be provided
   with further input (e.g. from a dialog box), but this would need a change in
-  the communication protocol between the frontend and backend of Actema. Instead
+  the communication protocol between the frontend and backend of \kl{Actema}. Instead
   we decompose this in two steps: first the user can add the witness as a new
   object by using the \texttt{+expr} button (see \refsec{newitems}); then she
   can drag the corresponding green item and drop it on the quantified item to
@@ -375,7 +375,7 @@ on locations deeper under connectives. This is the essence of Proof-by-Pointing,
 and~\sidecite{PbP} provides ample description. Since we here focus more on
 drag-and-drop actions, we do not detail further more advanced PbP features.
 However we stress that these features are essentially compatible with what we
-describe in this work. In fact the version of Actema presented in \refch{plugin}
+describe in this work. In fact the version of \kl{Actema} presented in \refch{plugin}
 provides an implementation of PbP available as a contextual menu action.
 
 
@@ -396,7 +396,7 @@ prove the conjecture within the current context.
 %   similar problem in the context of functional programming.}.
 
 For now we ask the user to input textual data, in an idiosyncratic syntax
-specific to the logic of Actema. A desirable, but highly non-trivial feature
+specific to the logic of \kl{Actema}. A desirable, but highly non-trivial feature
 would be to provide some elaborate input mechanism tailored to the type of
 object the user wants to create. This would obviously require some extensibility
 to new domain-specific input interfaces: typically one could imagine plugging a
@@ -412,7 +412,7 @@ work}.
 
 \section{A simple example involving equality}\labsec{equality}
 
-Most \kl{interactive theorem provers} expose a \emph{rewrite} tactic that allows the
+Most \kl{interactive theorem provers} expose a \emph{rewrite} \kl{tactic} that allows the
 use of equality hypotheses, that is known equations of the form $t = u$, in
 order to replace some occurrences of $t$ by $u$ (or symmetrically, occurrences
 of $u$ by $t$). This substitution can be performed in the conclusion or in
@@ -504,7 +504,7 @@ $$
 
 Red disjunctions work similarly to conjunctive goals, except that solving one
 branch will solve the entire goal. A nice consequence of this, which is hard to
-simulate with textual tactics, is that one can just simplify one branch of a
+simulate with textual \kl{tactics}, is that one can just simplify one branch of a
 disjunction without comitting to proving it entirely:
 $$
 \begin{array}{llll}
@@ -606,8 +606,8 @@ B\land D \limp C.$$
 Note that there is almost no difference in the way one uses different
 versions of a hypothesis $A\limp B\limp C$, $A\land B\limp
 C$, but also $B\limp A\limp C$, in \kl(dnd){forward} as well as in
-\kl(dnd){backward} steps\sidenote{When viewed as \kl{types} through the Curry-Howard
-isomorphism, $A\limp B\limp C$, $A\land B\limp C$, $B\land
+\kl(dnd){backward} steps\sidenote{When viewed as \kl{types} through the \kl{Curry-Howard
+isomorphism}, $A\limp B\limp C$, $A\land B\limp C$, $B\land
 A\limp C$ and $B\limp A\limp C$ are {\em isomorphic \kl{types}};
 and Roberto di Cosmo~\cite{ISOSBook} has also precisely underlined
 that \kl{type} isomorphisms should help to free the programmer from
@@ -669,7 +669,7 @@ $$\forall a.\exists b. A(g(b)+ f(a)).$$
 Switching from one formulation to the other, involves one use of the
 commutativity property $\forall x.\forall y. x+y=y+x$.
 % But because this has to be performed under two quantifiers, doing this in
-% traditional interactive theorem provers can be tedious. For instance in Coq, one
+% traditional interactive theorem provers can be tedious. For instance in \kl{Coq}, one
 % must use a specific tactic called \texttt{setoid_rewrite}.
 In our setting, the equality can be used under quantifiers in one single action:
 $$
@@ -958,7 +958,7 @@ $$
 
 We have already mentioned Proof-by-Pointing, which was part of the CtCoq and
 Pcoq efforts \sidecite{amerkad-mathematics-2001} to design a \kl{graphical user
-interface} for the Coq \kl{proof assistant}. Another contemporary line of work was the
+interface} for the \kl{Coq} \kl{proof assistant}. Another contemporary line of work was the
 one based on \emph{window inference}, also mentioned in \refsec{intro-rw}. In
 \sidecite{robinson-formalizing-1993}, window inference is described as a general
 \kl{proof-theoretical} framework, which aims to accomodate for the pervasive use of
@@ -1025,8 +1025,8 @@ actions, which requires far less textual inputs from the user. However, they
 only consider point-and-click actions, and rely on a text-heavy presentation at
 two levels:
 \begin{enumerate}
-  \item the proof state, which is a structured proof text in the style of
-  Isar~\sidecite{isar};
+  \item the \kl{proof state}, which is a structured proof text in the style of
+  \kl{Isar}~\sidecite{isar};
   \item the proof commands, which can only be performed through choices in
   textual menus.
 \end{enumerate}

@@ -98,7 +98,7 @@ the subterms to make them interact in some way.
 In this thesis we only consider \kl{linkages} between two subterms. But as noted in
 \refsec{equality}, rewriting is an example of action that can benefit from
 allowing multiple selections\sidenote{A restricted kind of multi-occurrence
-rewrite is already available in the standalone version of Actema: one needs to
+rewrite is already available in the standalone version of \kl{Actema}: one needs to
 enter \emph{selection mode}, by either toggling the dedicated button (the one
 with the mouse cursor in \reffig{aristote}), or holding down the \texttt{shift}
 key. Then one can click successively on all occurrences of a term $t$ that are
@@ -191,7 +191,7 @@ that some simplification occurs, either a justification with the {\rsf{id}}
 rule on \kl{logical linkages}, or a rewriting with the equality rules on \kl{rewrite linkages}. This will be stated more formally in \refsec{productivity}.
 
 Validity is very useful to support the \emph{suggestion} mechanism implemented
-in Actema. The idea is that when the user starts dragging an item, this
+in \kl{Actema}. The idea is that when the user starts dragging an item, this
 indicates to the system that she wants to perform a \kl{DnD} action involving
 subterms of this item. Then the system can suggest such possible actions by
 highlighting subterms in the goal which form a valid \kl{linkage} with the dragged
@@ -927,13 +927,13 @@ subgoal. That is, either the conclusion is \emph{strictly} weakened after a
 way\sidenote{This remark only applies to \kl{logical linkages} however, since
 rewriting equalities can only produce equivalent statements. Some \kl{proof
 assistants} provide facilities to rewrite arbitrary relations in subterms of
-arbitrary depth, such as Coq with its \emph{generalized rewriting} mechanism
+arbitrary depth, such as \kl{Coq} with its \emph{generalized rewriting} mechanism
 \cite{coqman-genrew}. This includes non-symmetric relations that can produce
 non-equivalent statements, and there is no reason in principle it could not be
 integrated in our paradigm, in the form of generalized substitution rules in
 place of {\rsf{L{=}_i}} and {\rsf{F{=}_i}}.}. This again contrasts with the
 release semantics of subformula linking which do not provide this guarantee of
-productivity, or with the logical reasoning tactics of \kl{proof assistants} based on
+productivity, or with the logical reasoning \kl{tactics} of \kl{proof assistants} based on
 \kl{natural deduction} rules.
 
 \section{Focusing}\labsec{invert}
@@ -1004,7 +1004,7 @@ the third case:
   information given by the user to choose the right ordering, which can be done
   by exploiting the \emph{orientation} of the associated \kl{DnD} action, that is
   distinguishing between the source path and the destination path\sidenote{Note
-  that in the current implementation of Actema, we instead rely on an arbitrary
+  that in the current implementation of \kl{Actema}, we instead rely on an arbitrary
   prioritizing fixed in the system, which can hinder in some cases the ability
   to prove a goal through \kl{DnD} actions. In practice, one rarely encounters such
   cases in real examples.}.
@@ -1053,7 +1053,7 @@ on a slight extension of our \kl{rewriting rules}, following ideas from these wo
   % practical completeness of the implementation should in part be bridged by the
   % focusing theorems of \refsec{focusing}, but we did not attempt a full
   % formalization of this. A venue for future work would be a certified
-  % implementation of subformula linking in Coq as presented in \refch{plugin},
+  % implementation of subformula linking in \kl{Coq} as presented in \refch{plugin},
   % with an additional formal proof of completeness.
 \end{remark}
 
@@ -1124,12 +1124,12 @@ under arbitrary contexts.
 An alternative to the full \kl{contraction} rule {\rsf{conn}} is to systematically
 duplicate negative formulas in the \kl{linkage} formation rules, giving the rules
 {\rsf{Bconn} and \rsf{Fconn}} of \reffig{newreslink}. This models more
-closely what we do in Actema, where hypotheses involved in a \kl{DnD} action are
+closely what we do in \kl{Actema}, where hypotheses involved in a \kl{DnD} action are
 always preserved in the new goal. This is important from a usability standpoint,
 because this ensures the user needs not fret with manual duplication of
 hypotheses in order to complete a proof. The downside is that the context always
 grows bigger, but this can be balanced by exposing the \kl{weakening} rule in the
-interface. In Actema it is mapped to a ``delete'' button placed next to every
+interface. In \kl{Actema} it is mapped to a ``delete'' button placed next to every
 hypothesis (the little gray trashbin icons in \reffig{oneplusone}).
 % But for the purpose of completeness only, the weakening rule {\rsf{weak}}
 % should be admissible since its role is already played by the absorption rules
@@ -1474,7 +1474,7 @@ from \cite{negri_structural_2001}.
 \paragraph{Subformula linking under quantifiers}
 
 Very recently, Mulder and Krebbers \sidecite{mulder_unification_2024} proposed
-an improvement over both our method of subformula linking implemented in Actema,
+an improvement over both our method of subformula linking implemented in \kl{Actema},
 and the method of Chaudhuri implemented in the \intro{Profint} prototype
 \sidecite{DBLP:conf/cade/Chaudhuri21}. Like us, they perform \textit{a priori}
 unification on the linked subformulas to determine appropriate substitutions for
@@ -1486,9 +1486,9 @@ the productivity theorem.}:
 $$(\forall x. P(x) \limp \exists y. \select{Q(x,y)}) \back \exists y. \exists z.
 \select{Q(f(z),y)}$$ Because of the intended application of their method to
 \emph{automated} theorem proving in the Iris framework for program verification
-in Coq \sidecite{jung_iris_2018}, it is for now limited to \emph{\kl(dnd){backward}}
-\kl{linkages}. They provide a detailed formalization in Coq that relates their method
-with that of Actema and \kl{Profint}, based on \emph{linking judgments} of the
+in \kl{Coq} \sidecite{jung_iris_2018}, it is for now limited to \emph{\kl(dnd){backward}}
+\kl{linkages}. They provide a detailed formalization in \kl{Coq} that relates their method
+with that of \kl{Actema} and \kl{Profint}, based on \emph{linking judgments} of the
 form $H \curlywedge [O]\VDash G$ that have a derivation precisely when $H \back
 G \steps{} O$\sidenote{Contrary to our usage in this chapter, they use the
 terminology ``linkage'' to denote derivations of these linking judgments, rather
