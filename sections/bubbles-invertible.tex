@@ -45,12 +45,12 @@ from the following modifications to the previous rules:
     \kl{weakening} rule in all \emph{terminal} rules of the calculus (i.e. rules with
     no premisses). In bubble calculi, the notion of premiss is captured by
     neutral bubbles; thus we incorporate \kl{weakenings} in all rules that solve
-    subgoals by closing solutions with no neutral bubbles. Those are the rules
+    \kl{subgoals} by closing solutions with no neutral bubbles. Those are the rules
     $\{\rsf{i{\da}},\rsf{p{-}},\rsf{p{+}}\}$, which for the occasion have
     also been generalized to arbitrary solutions. Indeed in system $\sysB$ we
     restricted them to open solutions to make them \emph{local}, but here the
     \kl{weakenings} break locality anyway, and the general version improves
-    \emph{factorizability} by solving instantly all subgoals inside $\J$.
+    \emph{factorizability} by solving instantly all \kl{subgoals} inside $\J$.
 
   \item[\textbf{Flow}]
     As shown by the simulation of \reflemma{simulation-dbiint}, the
@@ -62,11 +62,11 @@ from the following modifications to the previous rules:
 
     A downside of propagation rules in the style of \kl{DBiInt}, is that they
     create a lot of unnecessary copies of the moved formula $A$. Often, one will
-    want to move $A$ in a subgoal/supergoal at a distance $n$ in the proof tree,
+    want to move $A$ in a \kl{subgoal}/supergoal at a distance $n$ in the proof tree,
     with $n > 1$. Usually this would be performed by $n$ applications of
     $\mathbb{F}$-rules, which by linearity indeed just move the formula. But with
     propagation rules, $n$ copies of $A$ will be created, with one copy in each
-    subgoal met on the path to the destination.
+    \kl{subgoal} met on the path to the destination.
 
     To prevent this, one would need a way to copy formulas at an arbitrary
     distance. This can be done with \kl{inference rules} that are \emph{doubly} deep,
@@ -83,7 +83,7 @@ from the following modifications to the previous rules:
 
     Note also that we removed the \rsf{f{\ua}} rule of \reffig{sequent-B}.
     Indeed even after turning it into a propagation rule, the moved copy of the
-    duplicated subgoal $S$ cannot be weakened because it lives in a neutral
+    duplicated \kl{subgoal} $S$ cannot be weakened because it lives in a neutral
     bubble. Thus the rule stays non-invertible, and cannot be included in
     \kl{B_{inv}}. Fortunately, we showed that it is admissible in
     \refthm{bubbles:cut-admissibility}, so this is not problematic.
@@ -166,7 +166,7 @@ reached:
     when the formula is in an \emph{open} solution. A first option is to let the
     system automatically distribute them in all open subsolutions that are
     reachable, so that it can keep decomposing them. But this might create an
-    explosion in the number of created subgoals. Another option is to let the
+    explosion in the number of created \kl{subgoals}. Another option is to let the
     user manually decompose them. We believe this second option is preferable,
     if one wants to keep control over the proof search process. Indeed, it is
     only natural that the user should be able to choose which \emph{cases} to
@@ -185,7 +185,7 @@ reached:
     if there is no $\mathbb{F}$-law stucking one of the atoms on some membrane
     (orange arrows in \reffig{bubbles-porosity}), then the pinch succeeds, by
     closing the subsolution at the location where it ends with
-    \rsf{i{\da}}. Thus the user can choose the subgoal to solve by
+    \rsf{i{\da}}. Thus the user can choose the \kl{subgoal} to solve by
     controlling the destination of the pinch, which can be seen as a more
     symmetric and powerful version of \kl{DnD} actions. Generally though, one will
     want to apply the following \emph{rule of thumb} (pun intended):
@@ -202,18 +202,18 @@ reached:
     \end{fact}
     The point of this heuristic, is that it should maximize the
     \emph{factorization} of the proof: when it succeeds, it will solve the
-    subgoal that is located closest to the root of the goal, maximizing the size
-    of the pruned branch, and thus the number of subgoals solved in one go. It
+    \kl{subgoal} that is located closest to the root of the \kl{goal}, maximizing the size
+    of the pruned branch, and thus the number of \kl{subgoals} solved in one go. It
     can also be used to completely automate this phase.
 
-  \item[\textbf{Popping}] Pop every closed empty bubble in the goal with the
+  \item[\textbf{Popping}] Pop every closed empty bubble in the \kl{goal} with the
   rules $\{\rsf{p},\rsf{p{-}},\rsf{p{+}}\}$. This phase can also be trivially
   automated, and corresponds to the unit elimination phase in subformula linking
   (\refsec{action}).
 
   \item[\textbf{Application}] When there are no more pairs of dual atoms, or all
     the remaining pairs have been given up (last step of the rule of thumb), let
-    $S$ be the current goal, and
+    $S$ be the current \kl{goal}, and
     $$\imps{S} \defeq \compr{(S_0\hole, A, B, \J, \Delta)}{S = S_0\select{\Gamma,
           A \limp B \J \Delta} \text{ for some $\Gamma$}}$$
 
@@ -229,7 +229,7 @@ reached:
 
     A first possibility is to let the user rely on her intuition, by choosing
     manually a specific subsolution in $\imps{S}$ to apply the \rsf{{\limp}{-}}
-    rule upon. Additionally, she might need to determine a subgoal $T\select{U}$
+    rule upon. Additionally, she might need to determine a \kl{subgoal} $T\select{U}$
     in which $A$ is provable, and first duplicate $\hypo{A\limp B}$ in $T\hole$
     before applying \rsf{{\limp}{-}}. This will always be possible with the
     $\mathbb{F}$-rules \rsf{f{-}{\da}} and \rsf{f{-}{+}{\da}}.
@@ -259,17 +259,17 @@ reached:
 
 A strength of our proof search procedure, compared to the state-of-the-art in
 other formalisms, is that most of its automation preserves the \emph{size}
-(number of atoms) and the \emph{structure} of the goal:
+(number of atoms) and the \emph{structure} of the \kl{goal}:
 \begin{itemize}
   \item In the \textbf{Decomposition} phase, if we opt out of the automatic
   distribution of negative $\hypo{\lor}$ and positive $\conc{\land}$, then the
   system will only apply $\mathbb{H}$-rules that split logical connectives, and
-  create a \emph{partition} of the atoms of the goal by enclosing them in
-  bubbles. Thus the size of the goal is kept intact, and the structure modified
+  create a \emph{partition} of the atoms of the \kl{goal} by enclosing them in
+  bubbles. Thus the size of the \kl{goal} is kept intact, and the structure modified
   but in a controlled, local way.
 
   \item In the \textbf{Absorption} phase, we simply merge some membranes
-  together, preserving both the size and the structure of the goal.
+  together, preserving both the size and the structure of the \kl{goal}.
 
   \item In the \textbf{Linking} phase, the particular way in which we use
   $\mathbb{F}$-rules ensures that we only decrease the number of atoms. Indeed,
@@ -278,20 +278,20 @@ other formalisms, is that most of its automation preserves the \emph{size}
   \begin{enumerate}
     \item the link is successful, and the two created copies of atoms are
   immediately destroyed by the \rsf{i{\da}} rule. Then the solved
-  subsolution is entirely pruned out, decreasing the size of the goal; or
+  subsolution is entirely pruned out, decreasing the size of the \kl{goal}; or
     \item the link fails, but then we can instantly ``undo'' it. Or rather, one
   should consider that rules are applied only when the link is successful.
   \end{enumerate}
 
-  \item In the \textbf{Popping} phase, entire branches of the goal are pruned
-  out, decreasing the size of the goal.
+  \item In the \textbf{Popping} phase, entire branches of the \kl{goal} are pruned
+  out, decreasing the size of the \kl{goal}.
 \end{itemize}
 
 Then only the automation of the \textbf{Application} phase (and part of the
 \textbf{Decomposition} phase) is susceptible of both significantly increasing
-the size of the goal, and altering its global structure. But as is the case for
+the size of the \kl{goal}, and altering its global structure. But as is the case for
 every phase, the user can easily opt out of this automation, and do the
-reasoning manually when it is necessary to keep the goal understandable by
+reasoning manually when it is necessary to keep the \kl{goal} understandable by
 humans. Typically in an educational setting, it should be quite instructive to
 have the ability to perform \textbf{Decomposition} and \textbf{Linking} by hand
 (literally).

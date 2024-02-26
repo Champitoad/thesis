@@ -18,7 +18,7 @@ so-called \intro{bubbles} internalize the notion of \kl{subgoal} inside
 \kl{proof state}, where \kl(sequent){contexts} can be shared between different
 \kl{subgoals}. In addition to the usual textual syntax, the \kl{bubble calculus}
 can be expressed in a graphical syntax, where logical meaning is captured by
-\emph{physical} constraints on diagrammatic manipulations, instead of
+\emph{physical} constraints on \kl{diagrammatic} manipulations, instead of
 \emph{virtual} restrictions on available \kl{inference rules}.
 
 % We introduce a new kind of nested sequent \kl{proof systems} dubbed \emph{bubble
@@ -36,7 +36,7 @@ can be expressed in a graphical syntax, where logical meaning is captured by
 
 We start in \refsec{chemical} with the genesis of the idea of bubble calculus,
 coming from the observation that our \kl{Proof-by-Action} paradigm (\refch{pba})
-lends itself quite naturally to a metaphorical interpretation, where actions are
+lends itself quite naturally to a \kl{metaphorical} interpretation, where actions are
 seen as \emph{chemical} reactions. In \refsec{bubbles} we introduce the concept
 of \emph{bubble} as a way to control the scope of hypotheses inside nested
 sequents that we call \emph{solutions}. In \refsec{asymmetric} we describe our
@@ -53,10 +53,10 @@ The \kl{Proof-by-Action} paradigm introduced in \refch{pba} offers multiple ways
 the user to attack the proof of a theorem: \kl{DnD} actions for subformula linking
 and equality rewriting are the main mechanism, but they only work in a goal
 comprising multiple items. Since it is customary in \kl{proof assistants} to specify
-the goal to be proved as a single logical formula, one needs a way to decompose
+the \kl{goal} to be proved as a single logical formula, one needs a way to decompose
 it into many items for further processing through \kl{DnD}. This is precisely what
 the \kl{introduction rules} for logical connectives in \kl{sequent calculus} do, and
-following the Proof-by-Pointing paradigm \cite{PbP} we map them to click
+following the \kl{Proof-by-Pointing} paradigm \cite{PbP} we map them to click
 actions (see \refsec{clicks}).
 
 So visually, a proof in \kl{Actema} consists in breaking logical items into subitems
@@ -64,12 +64,12 @@ positioned freely in space, and then bringing those subitems together to make
 them interact and produce a new item. This is quite evocative of a
 \emph{chemical reaction} controlled by the user, where logical formulas are akin
 to molecules made of propositional atoms linked together by logical
-connectives\sidenote{This precise metaphor about the molecular structure of
+connectives\sidenote{This precise \kl{metaphor} about the molecular structure of
 propositions can already be found in Russell's introduction to Wittgenstein's
 Tractatus Logico-Philosophicus, which was the main inspiration to his philosophy
 of \emph{logical atomism} \cite[p.~11]{tractatus,klement_russells_2020}. Even
 earlier in the history of logic, C. S. Peirce took inspiration from chemical
-diagrams to devise his \emph{existential graphs} --- see
+\kl{diagrams} to devise his \emph{existential graphs} --- see
 \cite[pp.~17--18]{Roberts+1973}, or our own presentation in \refsec{beta} for
 more details.}. Click actions are then a mean to ``heat'' molecules to the point
 of breaking these chemical bonds. The most canonical examples are the \kl{right
@@ -97,20 +97,20 @@ will assume naturally that she can also decompose blue $\limp$ and red $\land$,
 as well as $\lor$ of any color. While red $\lor$ can be handled by pointing
 directly at the disjunct to be proved, other configurations correspond to rules
 of \kl{sequent calculus} with multiple premisses. In \kl{Actema}, this corresponds to
-creating a new subgoal for each premise, where subgoals are displayed one at a
+creating a new \kl{subgoal} for each premise, where \kl{subgoals} are displayed one at a
 time in different \emph{tabs}: this new interface mechanism breaks the chemical
-metaphor. The root cause lies in the way \kl{sequent calculus} implements
-\emph{context-scoping}: each subgoal will share the same initial context of
+\kl{metaphor}. The root cause lies in the way \kl{sequent calculus} implements
+\emph{context-scoping}: each \kl{subgoal} will share the same initial context of
 hypotheses, but future hypotheses ``buried'' in the conclusions must be
-available only in their respective subgoals. The tabs mechanism implements this
-by forcing the user to focus on exactly one tab/subgoal, thus making it
-impossible to display items from different subgoals on the same screen, which
+available only in their respective \kl{subgoals}. The tabs mechanism implements this
+by forcing the user to focus on exactly one tab/\kl{subgoal}, thus making it
+impossible to display items from different \kl{subgoals} on the same screen, which
 renders interaction between them physically impossible.
 
 
 \section{Bubbles and solutions}\labsec{bubbles}
 
-In order to accomodate context-scoping within the chemical metaphor, we were led
+In order to accomodate context-scoping within the chemical \kl{metaphor}, we were led
 to explore a notion of \emph{bubble} inspired by the \emph{membranes} of the
 {\cham} \sidecite{berry_chemical_1989}. The latter are used to delineate zones
 of \emph{local} interaction, which are still porous to external data. This is
@@ -144,11 +144,11 @@ in it.
 
 Bubbles can also be seen as a way to internalize in the syntax of sequents the
 notion of \emph{subgoal}, which requires in turn to allow nesting of sequents
-inside each other. The \kl{proof state} is not a set of subgoals anymore, but a
+inside each other. The \kl{proof state} is not a set of \kl{subgoals} anymore, but a
 single nested sequent of this sort, that we call a \emph{solution}\sidenote{The
-term ``solution'' refers here to the metaphor of a \emph{chemical solution} made
+term ``solution'' refers here to the \kl{metaphor} of a \emph{chemical solution} made
 up of an unordered collection of molecules. Which is quite ironic, since we use
-it to denote goals waiting to be proved, that is problems lacking a
+it to denote \kl{goals} waiting to be proved, that is problems lacking a
 solution\dots}. In textual syntax, solutions $S$ are generated by the
 following grammar:
 \begin{mathpar}
@@ -158,7 +158,7 @@ S, T, U \Coloneq \Gamma \piq{S_1 \sep \ldots \sep S_n} \Delta
 \end{mathpar}
 where the $A_i$ are usual formulas of \kl{FOL}. Thus solutions are just like
 sequents, except that we add a collection of nested solutions $S_i$ that will
-represent subgoals, or premisses of usual \kl{inference rules}. To be more precise,
+represent \kl{subgoals}, or premisses of usual \kl{inference rules}. To be more precise,
 the collections of formulas $A_i$ and solutions $S_i$ are \emph{multisets},
 which gives the following mutually recursive definitions:
 \begin{definition}[Ion]
@@ -174,7 +174,7 @@ A \emph{solution} $S$ is a multiset of ions and bubbles. It is
 letters $\cS, \mathcal{T}, \mathcal{U}$ to denote multisets of
 solutions.
 \end{definition}
-Note that in the above definitions, bubbles play a purely metaphorical role and
+Note that in the above definitions, bubbles play a purely \kl{metaphorical} role and
 could be dispensed with. But it will be useful later on to distinguish them
 conceptually from solutions.
 
@@ -195,7 +195,7 @@ general case will be studied starting from \refsec{branching}.
 \end{remark}
 
 Just like a sequent, a solution is semantically equivalent to an implication,
-except that we add the \emph{conjunction} of all subgoals to the consequent:
+except that we add the \emph{conjunction} of all \kl{subgoals} to the consequent:
 
 \begin{definition}[Asymmetric interpretation]\labdef{ainterp}
 The \emph{asymmetric interpretation} of a solution is defined recursively by:
@@ -210,9 +210,9 @@ in fact essential to the way we encode the tree structure of proofs inside
 solutions:
 \begin{itemize}
 \item a solution with one conclusion corresponds to a \emph{leaf} of the proof
-tree, i.e. a subgoal;
+tree, i.e. a \kl{subgoal};
 \item a solution with no conclusion corresponds to a \emph{node} of the proof
-tree, i.e. a branching point where we created multiple subgoals.
+tree, i.e. a branching point where we created multiple \kl{subgoals}.
 \end{itemize}
 This will soon become clearer with examples of derivations in our calculus. In
 \refsec{branching}, we will consider a different interpretation of solutions that
@@ -253,7 +253,7 @@ As their name suggests, $\mathbb{M}$-rules handle the behavior of the
 \emph{membrane} of bubbles, but independently from other items as opposed to
 $\mathbb{F}$-rules. In the asymmetric bubble calculus there is only one
 $\mathbb{M}$-rule {\rsf{p}} allowing to \emph{pop} any empty bubble, which
-can be interpreted as the action of dismissing a solved subgoal. In \kl{CoS} it
+can be interpreted as the action of dismissing a solved \kl{subgoal}. In \kl{CoS} it
 would correspond to congruence rules handling the truth unit $\top$, and in
 subformula linking to the unit rules (\reffig{DISL-U}).
 \end{itemize}
@@ -283,7 +283,7 @@ $\irule{r}{S}{T}$ in the empty context, i.e. $S$ and $T$ are respectively the
 conclusion and premiss of the rule {\rsf{r}} in \reffig{sequent-BJ}, modulo
 instantiation of meta-variables\sidenote[][-11cm]{The direction of the arrow
 is from conclusion to premiss, to stay consistent with our interactive proof
-building setting where \kl{inference rules} are seen as goal-modifying actions.}.
+building setting where \kl{inference rules} are seen as \kl{goal}-modifying actions.}.
 Then $\lstep{}$ can be seen as a binary relation on solutions, whose contextual
 closure described above is the \emph{step} relation $\step{}$: $S \step{} T$ if
 and only if there exist $U\hole$, $S_0$ and $T_0$ such that $S =
@@ -299,7 +299,7 @@ $\mathcal{D}$ of \kl{BJ}-steps with premiss $T$ and conclusion $S$.
 \begin{definition}[\kl{BJ}-proof]\labdef{BJ-proof}
 A \emph{proof} of a solution $S$ in \kl{BJ} is a derivation
 $\deriv{\mathcal{D}}{S}{\piq{}}$ that reduces $S$ to the empty solution, which
-denotes the \kl{proof state} where there are no subgoals left.
+denotes the \kl{proof state} where there are no \kl{subgoals} left.
 \end{definition}
 
 \begin{marginfigure}
@@ -447,13 +447,13 @@ the most basic \kl{DnD} action between dual occurrences of a formula.
 As mentioned earlier when comparing \kl{BJ} to \sys{LJ}, the novelty here lies
 with $\mathbb{H}$-rules, $\mathbb{F}$-rules and $\mathbb{M}$-rules that deal
 with \emph{bubbles}. Remember that the goal behind the idea of bubble calculus
-was precisely to provide a new way to manipulate subgoals through bubbles
-instead of tabs, which are more in line with the chemical metaphor. It is quite
+was precisely to provide a new way to manipulate \kl{subgoals} through bubbles
+instead of tabs, which are more in line with the chemical \kl{metaphor}. It is quite
 easy to imagine a \kl{GUI} presenting the \kl{proof state} as a solution, in a graphical
 layout close to that of \reffig{ex-gra-BJ}\sidenote{Although there might be some
 challenges in implementing an efficient layouting algorithm for bubbles,
 typically to make solutions fit into the screen.}. Like formulas in blue and red
-items, whole subgoals could now be shown on the same screen in their respective
+items, whole \kl{subgoals} could now be shown on the same screen in their respective
 bubbles, and be freely moved around with a pointing device. Following are some
 ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
 
@@ -546,8 +546,8 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
 
     The cut rule was handled in \kl{Actema} with a separate \textsf{+hyp} button,
     which adds the cut formula $A$ (input by the user in a dialog box) as a new
-    hypothesis in the current goal, and as the conclusion in a new subgoal (see
-    \refsec{newitems}). Since subgoals are now reified as bubbles, the
+    hypothesis in the current \kl{goal}, and as the conclusion in a new \kl{subgoal} (see
+    \refsec{newitems}). Since \kl{subgoals} are now reified as bubbles, the
     {\rsf{i{\ua}}} rule could be mapped instead to a contextual action
     available on any red item $\conc{\Delta}$, which would have the effect of
     spawning a bubble around it with a blue item $\hypo{A}$, and another bubble
@@ -600,23 +600,23 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
 \end{description}
 
 Beyond the recovered uniformity of the user interface in terms of the chemical
-metaphor, \kl{BJ} exhibits some features that are interesting both at the
+\kl{metaphor}, \kl{BJ} exhibits some features that are interesting both at the
 \kl{proof-theoretical} and user-experience levels:
 \begin{description}
   \item[\textbf{Factorization}] It implements a form of \emph{context-sharing}
-    between subgoals: that is, one can perform transformations on shared
+    between \kl{subgoals}: that is, one can perform transformations on shared
     hypotheses (\kl{forward} reasoning) without going back to a \kl{proof state} anterior
-    to the splitting of said subgoals. This should simplify the navigation in
+    to the splitting of said \kl{subgoals}. This should simplify the navigation in
     the proof as it is being constructed, by avoiding the need to locate these
     splitting points. In fact often beginners (but also occasionally seasoned
     users) do not have the reflex to do this, precisely because the interface
     makes it difficult. This results in proofs with a lot of duplicated
-    arguments, since splitting goals systematically duplicates the context of
+    arguments, since splitting \kl{goals} systematically duplicates the context of
     hypotheses. Thus bubbles can be seen as a mechanism that favors by default a
     style of proof with better factorization of
     subproofs.\label{par:factorization}
 
-  \item[\textbf{Navigation}] The tree structure of subgoals is immediately
+  \item[\textbf{Navigation}] The tree structure of \kl{subgoals} is immediately
     apparent in the \kl{proof state} through the nesting of bubbles. Thus part of the
     information on the proof construction process, which was made implicit and
     temporal in the \kl{proof state} history, is now made explicit and spatial in the
@@ -627,20 +627,20 @@ metaphor, \kl{BJ} exhibits some features that are interesting both at the
     this in \refch{eg}.}.
     
     There are multiple ways to visualize trees on a planar surface, but if we
-    are to maintain the bubble metaphor, \emph{zoomable user interfaces} seem to
+    are to maintain the bubble \kl{metaphor}, \emph{zoomable user interfaces} seem to
     be a right fit: they allow for efficient space management and navigation,
     and zooming in intuitively conveys the idea of focusing on a specific
-    subgoal. One could also zoom out to have an overview of the different
-    subgoals and their shared context, something which is hard to do in current
+    \kl{subgoal}. One could also zoom out to have an overview of the different
+    \kl{subgoals} and their shared context, something which is hard to do in current
     \kl{proof assistants}.
     
-    When zoomed in on a subgoal, the shared contexts around it will not be
+    When zoomed in on a \kl{subgoal}, the shared contexts around it will not be
     visible anymore. While this is useful to focus attention and avoid being
-    distracted by other subgoals, it can quickly become cumbersome for the user
+    distracted by other \kl{subgoals}, it can quickly become cumbersome for the user
     to always have to zoom out in order to retrieve hypotheses from these shared
     contexts. One solution would be to rebrand the context zone of \kl{Actema} as a
     \emph{global} context zone, where all the shared contexts available in the
-    subgoal under focus are merged in a single list, and immediately accessible
+    \kl{subgoal} under focus are merged in a single list, and immediately accessible
     for manipulation. Of course actions performed in the context zone would be
     reflected in the proof canvas, and vice versa.
 
@@ -649,25 +649,25 @@ metaphor, \kl{BJ} exhibits some features that are interesting both at the
     items\sidenote{The only exceptions are clicks on blue $\bot$, $\lor$ and
     ${\limp}$, but the only extra item they involve is the conclusion.}.
     Non-local rules are less natural for a beginner because they modify a global
-    state (here other items and subgoals) which is not clearly correlated to the
+    state (here other items and \kl{subgoals}) which is not clearly correlated to the
     transformed data, often because it is not immediately visible.
 
     For instance in \kl{Actema}, many users have reported difficulties in
-    understanding the effect of click actions that create new subgoals. A first
+    understanding the effect of click actions that create new \kl{subgoals}. A first
     reason that can easily be remedied, is that there was not enough visual
     feedback to indicate the newly created tabs. But a deeper limitation is that
-    the user needs to explicitly focus on these subgoals to show their content,
+    the user needs to explicitly focus on these \kl{subgoals} to show their content,
     which they might not do immediately. And then it gets difficult to keep
-    track of the origin of said subgoals without a way to visualize the tree
+    track of the origin of said \kl{subgoals} without a way to visualize the tree
     structure of the proof.
 
-    All these concerns can be addressed within the bubble metaphor: since
+    All these concerns can be addressed within the bubble \kl{metaphor}: since
     bubbles are items freely positioned on the canvas, all the new items
     produced by an action can stay near the location where the action was
     initiated (i.e. the click or drop location); and since all transformations
     are local, all items not involved in the action can have their locations
     preserved. In other words, bubbles make it easier to understand the
-    \emph{difference} between a goal and subgoals generated by a proof action,
+    \emph{difference} between a \kl{goal} and \kl{subgoals} generated by a proof action,
     which is crucial when learning the semantics of actions through practice.
     % This is of limited importance however in our case, because \kl{sequent calculus}
     % rules always perform the same trivial operation on the global state:

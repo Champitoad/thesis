@@ -33,15 +33,15 @@ semantics, in the spirit of the \emph{normalization-by-evaluation} technique.
 Furthermore, the kernel of rules targetted by completeness is fully invertible,
 a desirable property in both automated and interactive proof search. This is
 illustrated by our implementation of the Flower Prover, an early prototype of
-\kl{GUI} for \kl{ITPs} that uses the rules of the flower calculus both for direct
-manipulation of flowers in its frontend, and automated simplification of goals
+\kl{GUI} for \kl{ITPs} that uses the rules of the flower calculus both for \kl{direct
+manipulation} of flowers in its frontend, and automated simplification of \kl{goal}s
 in its backend.
 
 The chapter is organized as follows: in \refsec{IEGs}, we retrace the origin of
 Oostra's syntax for \kl{intuitionistic} \kl{EGs} (hereafter ``\kl{IEGs}'') as a
 natural generalization of the \emph{scroll}, an \kl{icon} for implication introduced
 by Peirce that inspired the very creation of \kl{EGs}. In \refsec{Flowers}, we
-explain how flowers are really just a fun and metaphorical way to draw
+explain how flowers are really just a fun and \kl{metaphorical} way to draw
 \kl{IEGs}, and proceed to give them an inductive, multiset-based syntax as in
 \refsec{multisets}. In \refsec{Calculus}, we introduce the full set of \kl{inference
 rules} of the flower calculus as well as our notion of proof, and prove a few
@@ -170,7 +170,7 @@ the equivalence $\top \limp A \semequiv A$. The reader might be tempted to see
 the ``former clause'' that permits any insertion in the outer close as a special
 case of the Insertion principle of \kl{Alpha} (\refsec{alpha}). However, we
 stress again that Peirce first identified this clause as a feature of the
-scroll, seen as the diagrammatic embodiment of the ``general form of argument''
+scroll, seen as the \kl{diagrammatic} embodiment of the ``general form of argument''
 mentioned in a previous excerpt. The principle of Insertion only followed as a
 subsequent generalization, stemming from the analysis of the scroll into two
 nested \kl{cuts} \cite[p.~535]{peirce_prolegomena_1906}:
@@ -251,10 +251,10 @@ setting remains noteworthy.
 Note that in \reffig{eg-currying} and \reffig{eg-uncurrying}, we give
 \emph{\kl{forward}} proofs that rewrite the premiss of the argument into its
 conclusion, rather than \emph{\kl{backward}} proofs (\refdef{eg-proof}) that rewrite
-a goal into the empty $\SA$, as we usually did in \refch{eg}. \kl{Forward} proofs
+a \kl{goal} into the empty $\SA$, as we usually did in \refch{eg}. \kl{Forward} proofs
 correspond to Peirce's usage of the illative transformations --- and thus to
 what can be found in most of the literature on \kl{EGs}, and have the advantage
-of being more economical in space by leaving the goal implicit. One can easily
+of being more economical in space by leaving the \kl{goal} implicit. One can easily
 go from a \kl{forward} proof to a \kl{backward} one as shown by the \emph{deduction
 theorem} of Sowa \cite[Section 6]{sowa_peirces_2011}, which also applies in the
 \kl{intuitionistic} setting by substituting the rule of \kl{Double-cut} with the rule
@@ -405,7 +405,7 @@ some extent. We only mention two important ones:
   problems, thanks to their use of the full set of connectives and quantifiers
   of \kl{FOL}; and avoiding complex encodings (as can be found e.g. in SMT solvers)
   is crucial in \emph{interactive} theorem proving, where the user and the
-  computer manipulate the same formulas in goals
+  computer manipulate the same formulas in \kl{goal}s
   \sidecite{bezem_automating_2005}. This has been exploited already in some
   domain-specific theorem provers, like the Larus prover that automatically
   generates illustrated proofs in geometry\sidenote{Incidentally, projective
@@ -429,7 +429,7 @@ the distinction between \kl{classical} and \kl{intuitionistic} logic as being a 
 \emph{continuity} between the space of inputs/hypotheses (outloop) and the
 spaces of outputs/conclusions (inloops), reflecting an intuition discovered much
 later in the denotational semantics of the \kl{$\lambda$-calculus}. However as a
-diagrammatic component to be operated upon through direct manipulation, it has
+\kl{diagrammatic} component to be operated upon through \kl{direct manipulation}, it has
 one notable flaw, also shared with the \kl{classical} \kl{cut}-based syntax: it quickly
 induces heavy nestings of curves in the plane, making even a simple graph like
 that of \reffig{scroll-curried} hard to read for an untrained eye.
@@ -477,7 +477,7 @@ saying goes: make love, not war.}.
   \labfig{flowers}
 \end{marginfigure}
 
-From that point onwards, we decided to fully embrace the flower metaphor: first
+From that point onwards, we decided to fully embrace the flower \kl{metaphor}: first
 in our drawing style as witnessed in \reffig{flowers}, but also in our syntactic
 terminology, to be introduced in the next pages. Negative outloops are now drawn
 as \emph{yellow} pistils for a more colorful experience, and inloops as
@@ -834,7 +834,7 @@ relation of \refsec{atomicity}:
   \labfig{pollination}
 \end{marginfigure}
 
-We now employ the metaphor of \emph{pollination} to speak about (de)iteration in
+We now employ the \kl{metaphor} of \emph{pollination} to speak about (de)iteration in
 flowers. This is illustrated in \reffig{pollination}, where the blue dot marks
 the location of the justifying/pollinating occurrence of $\phi$, and the red
 dots all the areas that it (locally) justifies/pollinates, and thus where $\phi$
@@ -871,7 +871,7 @@ soundness theorem of \refsec{Soundness}.
 But the more interesting direction, and the one around which the calculus has
 been designed, is when you read the rules \emph{bottom-up}: then they are indeed
 \kl{rewriting rules}, telling you the different ways in which you can choose to
-simplify a goal. This is how the \emph{graphical} version of the rules is
+simplify a \kl{goal}. This is how the \emph{graphical} version of the rules is
 presented in \reffig{natural-graphical} and \reffig{cultural-graphical}.
 % Note that in the graphical presentation, the rules
 % $\{\rsf{poll{\da}},\rsf{poll{\ua}},\rsf{grow},\rsf{crop}\}$ (resp.
@@ -1091,7 +1091,7 @@ for \kl{EGs}:
   $\Xi'\hole$, and thus the same rule can be applied.
 \end{proof}
 
-Now we can define our usual ``goal-oriented'' notion of proof:
+Now we can define our usual ``\kl{goal}-oriented'' notion of proof:
 
 \begin{definition}[Proof]\labdef{flowers-proof}
   A \emph{proof} of a bouquet $\Phi$ is a derivation $\Phi \steps{} \emptyset$.
@@ -2575,7 +2575,7 @@ This forms the basis for the first \emph{phase} of our algorithm, that we call
 the \emph{pollination} phase\sidenote{It corresponds roughly to a combination of
 the \emph{application} and \emph{linking} phases of the proof search algorithm
 for \kl{B_{inv}} described in \refsubsec{bubbles-search}.}. Roughly, the idea
-is that given a goal $\Phi$, we want to perform eagerly every justification
+is that given a \kl{goal} $\Phi$, we want to perform eagerly every justification
 $\mathfrak{a}$ in the vehicle $\vehicle{\Phi}$, on the condition that it is
 compatible with the anchor $\anchor{\Phi}$ and all justifications $\mathfrak{H}$
 of the previous phases. It turns out that every such justification can be
@@ -2616,7 +2616,7 @@ on line \ref{remove} corresponds to an instance of the \rsf{poll{\da}} rule.
 
 The second phase of our algorithm is the \emph{reproduction} phase. As its name
 suggests, it consists in repeatedly applying the reproduction rule \rsf{srep} on
-the current goal, until there is no more context in which it is
+the current \kl{goal}, until there is no more context in which it is
 applicable\sidenote{In the algorithm of \refsubsec{bubbles-search}, this
 corresponds to the part of the \emph{decomposition} phase that treats negative
 $\lor$ formulas.}. The reproduction phase can be computed by the following tail
@@ -2644,10 +2644,10 @@ recursive procedure:
 
 The third and last phase of our proof search algorithm, called
 \emph{decomposition}, is also the most trivial: it simply consists in applying
-the \rsf{epet} rule in every applicable context in the goal, which amounts to
+the \rsf{epet} rule in every applicable context in the \kl{goal}, which amounts to
 erasing every flower with an empty petal\sidenote{It corresponds to the
 \emph{popping} phase of bubbles in \refsubsec{bubbles-search}, not the
-decomposition phase: here the term ``decomposition'' refers metaphorically to
+decomposition phase: here the term ``decomposition'' refers \kl{metaphorically} to
 the biological process that applies to organic matter, not to the analysis of
 formulas into their components.}. Unlike the reproduction phase, it cannot be
 computed directly by a tail recursive procedure, because erasing flowers in the
@@ -2847,11 +2847,11 @@ desideratum, our focus in this thesis is not on full automation --- which is not
 possible anyway as soon as we leave the propositional fragment, but rather on
 automation that integrates well with, and even improves the experience of
 building proofs \emph{interactively}. More specifically, the paradigm of
-interaction we are interested in is that of \emph{direct manipulation} in a \kl{GUI}.
+interaction we are interested in is that of \emph{\kl{direct manipulation}} in a \kl{GUI}.
 This was our initial motivation for studying the graphical formalism of \kl{EGs}, and
 we always kept this objective in mind when developing the flower calculus. In
 this section, we present ongoing work on the \emph{Flower Prover}, a prototype
-of \kl{GUI} in the \kl{Proof-by-Action} paradigm based on the direct manipulation of
+of \kl{GUI} in the \kl{Proof-by-Action} paradigm based on the \kl{direct manipulation} of
 flowers, that builds upon the various concepts, rules and metatheory of the
 previous sections.
 
@@ -2880,11 +2880,11 @@ We are not the first to identify the potential of \kl{EGs} for graphical proof
 building \sidecite{eg_youtube,eg_github}. However, we believe that the
 Flower Prover is highly original in mainly two respects:
 \begin{itemize}
-  \item[\textbf{\kl{Intuitionistic} and goal-oriented}] it is based on the flower
+  \item[\textbf{\kl{Intuitionistic} and \kl{goal}-oriented}] it is based on the flower
   calculus, which proposes a quite unusual, non-exegetic take on \kl{EGs}. It does so
   both at the level of \emph{statements}, by building upon the \kl{intuitionistic}
   \kl{icon} of the $n$-ary scroll; and at the level of \emph{proofs}, by focusing on
-  a goal-oriented reading of rules that emphasizes the importance of
+  a \kl{goal}-oriented reading of rules that emphasizes the importance of
   \emph{invertibility} and \emph{analyticity} in the inference process, through
   the distinction between $\Nature$-rules and $\Culture$-rules.
   \item[\textbf{Mobile-friendly}] it has been designed from the outset as a
@@ -2922,13 +2922,13 @@ Flower Prover is highly original in mainly two respects:
 \paragraph{Modal interface}
 
 The Flower Prover is organized in two main \emph{modes} of interaction,
-providing different sets of direct manipulation actions on
+providing different sets of \kl{direct manipulation} actions on
 goals\sidenote{Another example of modal interface is the popular text editor
 \texttt{vim}, with its \emph{normal} mode for high-level manipulation of text
 through commands and macros, and its \emph{edit} mode for low-level insertion
 and deletion of characters.}:
 \begin{itemize}
-  \item[\textbf{\Proof mode}] this is the main mode, where goals can be proved by
+  \item[\textbf{\Proof mode}] this is the main mode, where \kl{goals} can be proved by
   reducing them to the empty bouquet $\emptyset$. It corresponds in purpose to
   the interactive proof mode of modern \kl{proof assistants} like \kl{Coq}, \kl{Lean} and
   \kl{Isabelle}, and to the interactive \kl{proof view} of \kl{Actema}.
@@ -2939,7 +2939,7 @@ and deletion of characters.}:
   between \Proof actions, and the $\Nature$-rules of the flower calculus.
   
   \item[\textbf{\Edit mode}] in this mode, the user can construct arbitrary
-  flowers by clicking on buttons and filling text fields, or modify the goal by
+  flowers by clicking on buttons and filling text fields, or modify the \kl{goal} by
   clicking and dragging flowers around. It corresponds in purpose to the text
   editor used for writing theories in the \emph{vernacular} language of a \kl{proof
   assistant}\sidenote{The term ``vernacular'' was used for the first time in the
@@ -2959,7 +2959,7 @@ and deletion of characters.}:
   $\Culture$-rules.
 \end{remark}
 
-\reffig{flowers-prover-modes} shows side-by-side the same goal representing the
+\reffig{flowers-prover-modes} shows side-by-side the same \kl{goal} representing the
 flower $\flower{(\flower{a}{c}),(\flower{b}{c})}{(\flower{(\flower{}{a \sep
 b})}{c})}$, but viewed through the two different modes. At any point during a
 proof, the user can switch between the two modes by clicking on the
@@ -2993,8 +2993,8 @@ action will automatically switch to the mode in which the action was performed.
 $\Nature$-rules, together with the associated gestures for triggering them; and
 \reffig{flowers-prover-anim} shows a sequence of screenshots of the Flower
 Prover, capturing the execution of a sequence of \Proof actions reducing the
-subgoal $\flower{(\flower{}{a \sep b})}{c}$ to $\flower{b}{c}$. A few comments
-are in order:
+\kl{subgoal} $\flower{(\flower{}{a \sep b})}{c}$ to $\flower{b}{c}$. A few
+comments are in order:
 
 \begin{itemize}
   \item[\textbf{Pollination}] The most central actions are those implementing
@@ -3020,7 +3020,7 @@ are in order:
   \refsec{validity}).}.
 
   In fact, every \Proof action has an associated visual cue, guiding interactive
-  proof search by suggesting to the user areas of the goal where she might want
+  proof search by suggesting to the user areas of the \kl{goal} where she might want
   to focus her attention. Since every action other than \Action{Import} is
   performed by a \emph{click} gesture, the area that is highlighted corresponds
   precisely to the area that can be clicked for triggering the action: either a
@@ -3033,7 +3033,7 @@ are in order:
   \rsf{epis} rule might be admissible. However if it is not, one needs a
   corresponding graphical action in \Proof mode. While it is currently not
   implemented, we plan to add a \emph{selection} mechanism that allows the user
-  to select a set of flowers in the goal. Then, we could add a \Action{Fence}
+  to select a set of flowers in the \kl{goal}. Then, we could add a \Action{Fence}
   action, whose effect is to enclose the selected flowers in a petal attached to
   an empty pistil. This action could be mapped to a dedicated button in the
   toolbar that is visible only in \Proof mode, and enabled only when the
@@ -3042,7 +3042,7 @@ are in order:
 
 Since every \Proof action implements a $\Nature$-rule, it is guaranteed to be
 \emph{invertible}: the user never needs to undo a \Proof action in order to
-complete a proof, because it always preserves the provability of the goal. Of
+complete a proof, because it always preserves the provability of the \kl{goal}. Of
 course it might still be desirable to do so in specific cases, such as
 \Action{Import} actions that may create unneeded copies of flowers\sidenote{In
 this specific case, one might want to relax the atomic restriction on
@@ -3054,11 +3054,11 @@ actions, which can only be performed at the top of the history stack.}.
 \reftab{flowers-edit-actions} shows the precise mapping of \Edit actions to
 $\Culture$-rules, together with the associated gestures for triggering them.
 Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
-\emph{delete} arbitrary flowers in the goal:
+\emph{delete} arbitrary flowers in the \kl{goal}:
 \begin{itemize}
   \item[\textbf{Insertion}] The main interface mechanism that is currently
   implemented is the \texttt{Add} button: since the \rsf{grow} rule allows to
-  insert any flower in a positive bouquet (i.e. add a new subgoal, just like the
+  insert any flower in a positive bouquet (i.e. add a new \kl{subgoal}, just like the
   \kl(rule){cut} rule in \kl{sequent calculus}), we expose buttons in all the corresponding
   areas (blue ``+'' buttons in \reffig{flowers-prover-modes}), that can be
   clicked to insert a new flower precisely at the location of the button. There
@@ -3083,7 +3083,7 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
 
   Grown flowers/petals are distinguished visually by having their border painted
   in blue. Leaving \Edit mode then has the effect of \emph{committing} every
-  \Edit action, i.e. removing every \texttt{grown} tag in the entire goal. This
+  \Edit action, i.e. removing every \texttt{grown} tag in the entire \kl{goal}. This
   mechanism enables an incremental, step-by-step construction of flowers, that
   is still sound logically with respect to $\Culture$-rules.
 
@@ -3097,21 +3097,21 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
 
 Since every \Edit action implements a $\Culture$-rule, it is guaranteed to be
 \emph{non-invertible}: the user might need to undo an \Edit action in order to
-complete a proof, because it may break the provability of the goal.
+complete a proof, because it may break the provability of the \kl{goal}.
 
 \paragraph{\Navigation mode}
 
 The reader might have noticed that there is a third button with a navigation
 icon on the right of the mode selection bar. It can be used to enter
 \emph{\Navigation mode}, the last mode of interaction that we intend to implement
-in the future. The idea is that on real-life goals, both the size and level of
+in the future. The idea is that on real-life \kl{goals}, both the size and level of
 nesting of flowers will quickly render the interface unusable, both for
-reading/understanding the content and structure of goals, and manipulating them
+reading/understanding the content and structure of \kl{goals}, and manipulating them
 through pointing.
 
 The purpose of the \Navigation mode is then to enable the user to \emph{focus} on
-a specific subgoal, by simply clicking on the corresponding nested flower. This
-would make the subgoal take up the whole screen, hiding the outer context from
+a specific \kl{subgoal}, by simply clicking on the corresponding nested flower. This
+would make the \kl{subgoal} take up the whole screen, hiding the outer context from
 view. Dually, it should also be possible to unfocus a previously focused subgoal
 --- e.g. by clicking again on it, so that the full tree structure of the goal
 can be freely navigated. \kl{Proof-theoretically}, the \Navigation mode implements the
@@ -3131,7 +3131,7 @@ Alan Kay in his \intro{Smalltalk} system
 
 The last feature of the Flower Prover that we have implemented is the
 \Action{Auto} \Proof action. It is similar in purpose to the \texttt{auto}
-tactic of \kl{Coq}, that tries to simplify the goal by performing a limited form of
+tactic of \kl{Coq}, that tries to simplify the \kl{goal} by performing a limited form of
 automation. The \Action{Auto} action is mapped to a dedicated button in the
 bottom-left corner of the screen, which is only enabled in \Proof mode
 (\reffig{flowers-prover-modes}).
@@ -3139,7 +3139,7 @@ bottom-left corner of the screen, which is only enabled in \Proof mode
 The idea is quite simple: since all click actions available to the user are
 pre-computed by highlighting the corresponding areas, there can only be a finite
 number of them. So why not try to apply them all automatically? Applying a click
-action might generate new ones in the resulting goal, so we have to perform this
+action might generate new ones in the resulting \kl{goal}, so we have to perform this
 until a fixpoint is reached. This is very much like the \emph{reproduction} and
 \emph{decomposition} phases from the \refproc{life} procedure of
 \refsec{flowers-search}, except that we also apply the \rsf{poll{\da}} rule
@@ -3153,7 +3153,7 @@ In fact, one could fine-tune the level of automation by considering only a
 \emph{subset} of all types of click actions. This is already what we do by
 default, by leaving the application of \Action{Case} actions to the user. This
 is motivated by the fact that the latter can induce an explosion in the size of
-the goal. One could even leave the configuration of automated action types to
+the \kl{goal}. One could even leave the configuration of automated action types to
 the user with a dedicated interface. This could include an additional option for
 executing \Action{Auto} systematically after every (other) \Proof action,
 removing the need to click multiple times on the \Action{Auto} button. In this
@@ -3166,10 +3166,10 @@ setting, any proof in the Flower Prover could be reduced to a sequence of
 \paragraph{Theories and goals}
 
 In the \kl{proof view} of modern \kl{proof assistants} like \kl{Coq} and \kl{Lean},
-there is no distinction between local and global contexts: a subgoal will
-inherit automatically every hypothesis from its parent subgoals, which are
+there is no distinction between local and global contexts: a \kl{subgoal} will
+inherit automatically every hypothesis from its parent \kl{subgoals}, which are
 flattened into a big unstructured list. To recreate this distinction and reduce
-the size of goals to a manageable level, the only interface mechanism offered to
+the size of \kl{goals} to a manageable level, the only interface mechanism offered to
 the user is to exit interactive proof mode, and outsource chunks of the local
 context as additional global lemmas and definitions in the current theory file.
 
@@ -3192,7 +3192,7 @@ goal to be proved in \Proof mode, and the theories that are being built in \Edit
 mode. Thus there are still two distinct modes/interfaces, but they work in
 unison on the same data. The only (major) current limitation, is that we do not
 have any way to \emph{save} proved lemmas for later reuse, because proving a
-flower amounts to \emph{erasing} it from the current goal. In a sense, theories
+flower amounts to \emph{erasing} it from the current \kl{goal}. In a sense, theories
 built in \Edit mode are only \emph{transient}: they live in \emph{working}
 memory, and are disposed of as soon as they become justified in \Proof mode;
 while we would like them to be \emph{persistent}, recorded in \emph{long-term}
@@ -3221,11 +3221,11 @@ After this little conceptual \textit{aparté}, let us come back to the problem o
 managing contexts in proofs. In the Flower Prover, the \emph{local} context is
 naturally represented as \emph{everything that is displayed on-screen}. This
 includes hypotheses that are available from pistils at various levels, but also
-potentially alternative goals (adjacent petals) and further subgoals (positively
+potentially alternative \kl{goals} (adjacent petals) and further \kl{subgoals} (positively
 nested flowers). Then rather than being segregated in a separate interface (the
 text buffer of the theory), the \emph{global} context is simply the
-\emph{entire} goal. In fact, there is no reason anymore to make a terminological
-distinction between goals and theories: a goal is just a theory that has yet to
+\emph{entire} \kl{goal}. In fact, there is no reason anymore to make a terminological
+distinction between \kl{goals} and theories: a \kl{goal} is just a theory that has yet to
 be justified, which can itself be identified with a partial proof (or a ``\kl{proof
 term} with holes'' in \kl{type-theoretical} parlance)\sidenote{We will come back to
 this idea of merging proofs and statements in the same data structure in the
@@ -3250,7 +3250,7 @@ in the shelf:
   \item[\textbf{Pollination} (in \Proof mode)] the user can perform an
   \Action{Import} action by dragging $\phi$;
   \item[\textbf{Jump to definition} (in \Navigation mode)] the user can focus on
-  the subgoal where $\phi$ originates by clicking on $\phi$.
+  the \kl{subgoal} where $\phi$ originates by clicking on $\phi$.
 \end{itemize}
 
 Since the shelf might contain \emph{a lot} of hypotheses, it will be important
@@ -3266,7 +3266,7 @@ of \kl{Coq}.}:
   be satisfied by all hypotheses in the shelf. A pattern is just a flower that
   contains pattern variables, which can match any flower. Thus patterns might be
   built with the same tools offered in \Edit mode.
-  \item[\textbf{By selection}] the user can select subterms of the goal, and
+  \item[\textbf{By selection}] the user can select subterms of the \kl{goal}, and
   then ask the system to display only hypotheses that can \emph{interact} with
   these subterms. Here we imagine something along the lines of what we did for
   \kl{Actema} (see \refsec{funcs}).
@@ -3396,13 +3396,13 @@ development calculus inspired by McBride's OL\kl{EGs} system
 goals and partial proofs are represented by the same \texttt{Box} data
 structure. Once again, \texttt{Box}es seem to share a very similar structure
 with flowers, which was here motivated by the need to avoid backtracking by
-having the ability to maintain a disjunction of goals with so-called
+having the ability to maintain a disjunction of \kl{goals} with so-called
 \emph{disjunctive pairs}, corresponding to the petals of flowers. The main
 difference is that the \texttt{Box} calculus is based on dependent \kl{type theory}
 instead of \kl{first-order logic}: this allows to store the partial \kl{proof terms}
 inside of the \texttt{Box}es themselves, while this information is lost during
 the construction of flowers (but might be reconstructed from the sequence of
-graphical actions and the initial goal).
+graphical actions and the initial \kl{goal}).
 
 Ayers also mentions the category-theoretical treatment of development calculi by
 Sterling and Harper \sidecite{sterling_algebraic_2017}, that abstracts from any
@@ -3631,7 +3631,7 @@ facilitate the study of reasoning.
 
 The various achievements presented in this chapter incite us to depart from this
 conception. Indeed, our particular viewpoint on the illative transformations,
-that emphasizes goal-reduction through invertible and analytic rules, enabled us
+that emphasizes \kl{goal}-reduction through invertible and analytic rules, enabled us
 to design a novel and promising type of graphical interface for interactive
 proof building, which integrates easily and elegantly some (limited) forms of
 automation. This was also made possible by the use of variables instead of lines

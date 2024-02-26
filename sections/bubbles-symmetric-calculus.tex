@@ -23,7 +23,7 @@ representation of rules, thus some explanations are in order:
   \item[Closed solutions] In \refsec{branching}, we mentioned that closed
 solutions with no neutral bubbles can be distinguished visually from open
 solutions by painting their background in a different color; we chose a light
-green, to suggest that they denote \emph{solved} subgoals. In
+green, to suggest that they denote \emph{solved} \kl{subgoals}. In
 \reffig{graphical-B}, we emphasize systematically the distinction by extending
 this convention to all closed solutions.
   \item[Generic statuses] As can be seen in \reffig{sequent-B}, many rules of
@@ -45,14 +45,14 @@ of the canvas depicted by the rule. At first it might appear as breaking
 locality, but it should rather be understood as the result of a perfectly local
 and continuous process: one can imagine a literal \emph{drop} of green paint
 that soaks a growing portion of the canvas, until it reaches an enclosing bubble
---- for the sake of metaphor, let us say a cut in the papersheet --- that stops
-its progression\sidenote{We will come back to this \emph{cuts in a sheet}
-metaphor, first introduced by C. S. Peirce, in \refch{flowers}. When closing the
-top-level solution --- Peirce called it the \emph{\kl{sheet of assertion}}, the drop
-expansion process becomes \emph{infinite}. I find it to be a beautiful allegory
-of the \emph{unreachability} of global, unconditional truth: it is only by being
-confined to a finite, well-delimited space, that we can affirm unequivocally our
-certainty.
+--- for the sake of \kl{metaphor}, let us say a cut in the papersheet --- that
+stops its progression\sidenote{We will come back to this \emph{cuts in a sheet}
+\kl{metaphor}, first introduced by C. S. Peirce, in \refch{eg}. When closing the
+top-level solution --- Peirce called it the \emph{\kl{sheet of assertion}}, the
+drop expansion process becomes \emph{infinite}. I find it to be a beautiful
+allegory of the \emph{unreachability} of global, unconditional truth: it is only
+by being confined to a finite, well-delimited space, that we can affirm
+unequivocally our certainty.
 % What lays behind the fences (possibly some hidden assumptions!), out of our
 % grasp will stay.
 As Wittgenstein famously said at the end of the Tractatus: \textit{``Whereof one
@@ -66,21 +66,21 @@ comparing them to those of the \kl{BJ} calculus:
   A first difference, that we will find in most rules of \kl{system B}, is that
   we rely on the distributive interpretation of conclusions in solutions. For
   instance in the \rsf{i{\ua}} rule, $\Delta$ is available potentially in
-  both subgoals, and we do not need to move it manually: this will be the role
+  both \kl{subgoals}, and we do not need to move it manually: this will be the role
   of the flow rules for red items.
   
   A second difference is that the rules are not applicable in arbitrary
   subsolutions, but only \emph{open} ones. This will also be the case of some
   membrane and heating rules. In the case of the \rsf{i{\da}} rule, it
   guarantees its \emph{locality}: if the conclusion was $\Gamma, A \piq{\cS} A,
-  \Delta$, then the distributive semantics would entail that all subgoals in
+  \Delta$, then the distributive semantics would entail that all \kl{subgoals} in
   $\cS$ must be solved at once, despite the fact that they are not directly
   related to $A$\sidenote{If we were to give up on locality, we could opt for
   this variant, which gives better \emph{factorizability}. In fact we will
   precisely do that in \refsec{invertible-calculus}.}. As for the
   \rsf{i{\ua}} rule, restricting to open solutions makes the rule
   \emph{invertible}, without sacrificing locality. This will in fact be the case
-  of all rules that create multiple subgoals.
+  of all rules that create multiple \kl{subgoals}.
 
   \item[\textbf{\resource}] 
   Here we still have \kl{weakening} and \kl{contraction} for negative items (hypotheses),
@@ -116,7 +116,7 @@ comparing them to those of the \kl{BJ} calculus:
   \end{marginfigure}
   
   Some of them we have already encountered in \refsec{colors}: first the
-  \rsf{f{+}{\da}} rule for distributing conclusions in subgoals, which
+  \rsf{f{+}{\da}} rule for distributing conclusions in \kl{subgoals}, which
   would not have made sense with the asymmetric interpretation of solutions
   (\refdef{ainterp}); but also the \rsf{f{-}{+}{\da}} and
   \rsf{f{+}{-}{\da}} rules, which allow a polarized item to flow
@@ -190,11 +190,11 @@ comparing them to those of the \kl{BJ} calculus:
   \rsf{f{\ua}}, which allows to move neutral bubbles out of other neutral
   bubbles. When looking at it as a graphical \kl{rewriting rule} in
   \reffig{graphical-B}, it can be seen as the act of \emph{abstracting} the
-  subgoal $T$ from its parent subgoal $S$, since the hypotheses and conclusions
+  \kl{subgoal} $T$ from its parent \kl{subgoal} $S$, since the hypotheses and conclusions
   of $S$ cannot be brought to interact with those of $T$ anymore. More generally
   in \kl{bi-intuitionistic} logic, all flow rules can be understood as
-  \emph{abstraction} moves, that strengthen the goal by moving irreversibly an
-  item $I$ out of its subgoal $S$. In the case of outward rules (whose name ends
+  \emph{abstraction} moves, that strengthen the \kl{goal} by moving irreversibly an
+  item $I$ out of its \kl{subgoal} $S$. In the case of outward rules (whose name ends
   with $\ua$), $I$ is brought closer to the \emph{root} of the proof tree;
   and in the case of inward rules (whose name ends with $\da$), $I$ is
   brought closer to the \emph{leaves} of the proof tree.
@@ -253,7 +253,7 @@ comparing them to those of the \kl{BJ} calculus:
   \item[\textbf{\heating}] 
   Like the \rsf{i{\ua}} rule, the \rsf{\bot{-}}, \rsf{\lor{-}} and
   \rsf{{\limp}{-}} rules become truly local in \kl{system B} by letting
-  $\mathbb{F}$-rules handle the distribution of conclusions in subgoals.
+  $\mathbb{F}$-rules handle the distribution of conclusions in \kl{subgoals}.
   Together with their dual rules \rsf{\top{+}}, \rsf{\land{+}} and
   \rsf{{\limp}{+}}, they constitute the \emph{closing} $\mathbb{H}$-rules of
   system $\sysB$. All other $\mathbb{H}$-rules work in arbitrary solutions just

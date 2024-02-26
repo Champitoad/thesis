@@ -57,7 +57,7 @@ assumptions are incompatible:
 \item[(1)] $\forall x. \neg\rich(x)\lor \neg\rich(\mother(\mother(x)))$,
 \item[(2)] $\forall x. \neg\rich(x) \limp \rich(\mother(x)).$
 \end{itemize}
-The original goal thus corresponds to the illustration of \reffig{edukera}.
+The original \kl{goal} thus corresponds to the illustration of \reffig{edukera}.
 
 \begin{figure*}
   \fbox{\includegraphics[width=1.3\textwidth]{edukera.png}}
@@ -138,7 +138,7 @@ things to note:
   \kl{forward} reasoning, one needs to keep track of \emph{a lot} of names, which can
   be overwhelming for many users. This is especially true for beginners
   discovering \kl{Coq}, because the syntax for assigning names, based on patterns
-  like \texttt{[H | H]} that reproduce the subgoal structure, can induce a steep
+  like \texttt{[H | H]} that reproduce the \kl{subgoal} structure, can induce a steep
   learning curve. Of course this problem is mitigated trivially in \kl{Actema}, since
   names are not needed.
 
@@ -166,7 +166,7 @@ things to note:
     \item first a case analysis with \texttt{destruct}, where the expression
     instantiating $H_2$ (e.g. $\mother(mother(h))$) needs to be written down
     explicitly, instead of being inferred automatically from unification;
-    \item optionally focusing on the subgoal corresponding to the contradictory
+    \item optionally focusing on the \kl{subgoal} corresponding to the contradictory
     case if it is the right disjunct (line 56), which requires to know a
     somewhat idiosyncratic and infrequently used syntax of the \kl{tactic} language;
     \item and finally expliciting the contradiction with \texttt{apply} and
@@ -250,7 +250,7 @@ definition of set inclusion in the conclusion $f^{-1}(f(C)) \subseteq C$, so
 that we can see how to prove logically such an inclusion. One might imagine
 multiple kinds of graphical actions for doing this. In \kl{Actema} we implemented a
 general \emph{subterm selection} mechanism, where the user can successively
-point at different subterms appearing in the goal --- either in the context or
+point at different subterms appearing in the \kl{goal} --- either in the context or
 the conclusion --- and then choose from a list of available actions taking the
 selection as argument. In our case we can select the whole conclusion, and then
 choose to apply the \action{Unfold} action:
@@ -323,7 +323,7 @@ will vary:
     \emph{patterns}, i.e. \kl{terms} with holes or so-called \emph{metavariables}, in
     order to filter out results that do not match the given pattern. In \kl{Actema},
     we implemented a novel feature which replaces patterns by a selection of
-    subterms in the current goal, similarly to what is given as argument to
+    subterms in the current \kl{goal}, similarly to what is given as argument to
     contextual actions like \action{Unfold}. Then the system will only look for
     lemmas which can be used in a \kl{DnD} action involving precisely the current
     selection of subterms. In this case, selecting the full statement of $(1)$
@@ -387,7 +387,7 @@ comprehension is \emph{implicit} in the \kl{type-theoretical} encoding, it must 
 manipulated \emph{explicitly} when using the axiom of comprehension\sidenote{In
 fact one could also use the axiom of comprehension implicitly by relying on
 stronger automation. For example in \kl{Isabelle}/\kl{Isar}, one would write explicitly
-the desired goal $f(x) \in f(C)$, refer to the \kl{axiom} by its name in the
+the desired \kl{goal} $f(x) \in f(C)$, refer to the \kl{axiom} by its name in the
 library, and then let the engine find the details of how to apply it. But
 writing statements manually goes against the philosophy of \kl{PbA}, which
 explores to what extent proofs can be carried by pure manipulation of the \kl{proof
@@ -501,26 +501,26 @@ action will simply apply the associated induction scheme. In our commutativity
 example, we can thus start the proof like so:
 $$\select{\forall n \in \nats.\ \forall m \in \nats.\ n + m = m + n} \qquad
 \text{(\action{Induction})}$$
-which performs an induction on $n$, generating the two following subgoals:
+which performs an induction on $n$, generating the two following \kl{subgoals}:
 $$\forall m \in \nats.\ 0 + m = m + 0 \qquad \text{and} \qquad \forall m \in \nats.\ \suc{n} + m = m + \suc{n}$$
-where $S(n)$ denotes the successor of $n$, and the second subgoal has a new
+where $S(n)$ denotes the successor of $n$, and the second \kl{subgoal} has a new
 variable $n \in \nats$ in its context, together with the induction hypothesis
 \begin{itemize}
   \item[(1)] $\forall x \in \nats.\ n + x = x + n$
 \end{itemize}
-The proofs of the two subgoals can be done by induction on $m$. We focus on the
+The proofs of the two \kl{subgoals} can be done by induction on $m$. We focus on the
 second one, which is a bit more involved. As mentioned above, an alternative way
 of performing induction is to first introduce $m$ in the context by clicking on
 the conclusion, and then selecting it to access the contextual action:
 $$\select{m \in \nats} \qquad \text{(\action{Induction})}$$
-which generates again two new subgoals:
+which generates again two new \kl{subgoals}:
 $$S(n) + 0 = 0 + S(n) \qquad \text{and} \qquad S(n) + S(m) = S(m) + S(n)$$ where
-the second subgoal has a new variable $m \in \nats$ in its context, together
+the second \kl{subgoal} has a new variable $m \in \nats$ in its context, together
 with the induction hypothesis
 \begin{itemize}
   \item[(2)] $S(n) + m = m + S(n)$
 \end{itemize}
-Let us now focus on the first subgoal. Once again, as with set comprehension in
+Let us now focus on the first \kl{subgoal}. Once again, as with set comprehension in
 the previous section, the addition operation may have a more \emph{axiomatic} or
 more \emph{computational} definition, depending on the underlying logical
 framework and library used. For instance in \kl{Coq}'s standard library, it is

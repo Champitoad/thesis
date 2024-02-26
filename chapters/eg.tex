@@ -22,7 +22,7 @@ others his eponymous law for \kl{classical} logic, and his pioneering work on th
 algebra of relations and quantification \sidecite{peirce_algebra_1885}. But far
 less widespread are his achievements in the realm of graphical logic, or
 \emph{\kl{iconic} logic} as Shin calls it \sidecite{10.7551/mitpress/3633.001.0001}.
-He dedicated a large chunk of his life to the investigation of diagrammatic
+He dedicated a large chunk of his life to the investigation of \kl{diagrammatic}
 systems, starting in 1882 with the \emph{entitative graphs} and culminating with
 the \kl{existential graphs} (\kl{EGs}), which he developed from 1896 until his
 death in 1914 \sidecite{Roberts+1973}. Interestingly, Peirce perceived
@@ -46,7 +46,7 @@ our work will constitute one more step towards the vision Peirce had in mind.
 
 In this chapter, we propose a self-contained exposition of \kl{EGs}, that tries
 at the same time to be faithful to the original presentation of the systems by
-Peirce, and more modern in some aspects of their formalization. The goal will be
+Peirce, and more modern in some aspects of their formalization. The \kl{goal} will be
 to familiarize the reader with the unique approach to proofs inherent to
 \kl{EGs}, which can be difficult to relate to more standard frameworks like
 \kl[Hilbert system]{Hilbert} and \kl[Gentzen system]{Gentzen} \kl{proof systems}, and
@@ -56,7 +56,7 @@ technical foundations behind our \emph{flower calculus}, to be introduced in
 \refch{flowers}.
 
 The chapter is organized as follows: we start in \refsec{alpha} by presenting
-the diagrammatic syntax of the system \kl{Alpha} of \kl{EGs} for \kl{classical}
+the \kl{diagrammatic} syntax of the system \kl{Alpha} of \kl{EGs} for \kl{classical}
 propositional logic. In \refsec{illative}, we introduce the \kl{inference rules} of
 \kl{Alpha} for manipulating \kl{existential graphs}, called \emph{illative
 transformations} by Peirce. In \refsec{multisets}, we give an equivalent
@@ -94,7 +94,7 @@ Peirce designed in total three systems of \kl{EGs}, which he called respectively
 \intro{Alpha}, \intro{Beta} and \intro{Gamma}. They were invented
 chronologically in that order, which also captures their relationship in terms
 of complexity: \kl{Alpha} is the foundation on which the other systems are
-built, and can today be understood as a diagrammatic calculus for \kl{classical}
+built, and can today be understood as a \kl{diagrammatic} calculus for \kl{classical}
 \emph{propositional} logic. As we will see in \refsec{beta}, \kl{Beta}
 corresponds to a variable-free representation of \emph{predicate} logic without
 function symbols, and with primitive support for \emph{equality}. The last
@@ -130,7 +130,7 @@ The most fundamental concept of \kl{Alpha} is the \intro{sheet of assertion},
 denoted by $\intro*\SA$ thereafter. It is the space where statements are scribed
 by the reasoner, typically a sheet of paper, a blackboard, or a computer
 display. In a \kl{proof assistant}, this would either be the buffer of a text editor
-holding the theory the user is developing, or the \kl{proof view} displaying goals to
+holding the theory the user is developing, or the \kl{proof view} displaying \kl{goals} to
 be proved, depending on who the reasoner is (the user or the computer,
 respectively). This last analogy suggests an important property of $\SA$: it
 must offer a \emph{virtually infinite} amount of space, so that one can perform
@@ -428,7 +428,7 @@ The last rule is more of a \emph{space management} principle that works as an
       space on the verso of $\SA$.
       \item[\textbf{Expansion}] The ring is erased by \emph{expanding} the inner
       area where $G$ resides towards the outer border of the ring. Unfolding the
-      metaphor to its conclusion, the inner area is then ``glued back'' to the
+      \kl{metaphor} to its conclusion, the inner area is then ``glued back'' to the
       rest of $\SA$\sidenote{This is reminiscent of the \emph{absorption} rules
       $\{\kl{a},\kl{a{-},\kl{a{+}}}\}$ of system $\sysB$, as is very clear in
       their graphical presentation (\reffig{graphical-B}).}.
@@ -438,8 +438,8 @@ The last rule is more of a \emph{space management} principle that works as an
 \reffig{eg-peirce-law} shows a derivation of Peirce's law with the rules of
 \kl{Alpha}. Note that the direction of arrows has been reversed compared to the
 above presentation: as usual, we prefer to read rules from conclusion to
-premiss, starting from the goal to prove --- here the \kl{graph} associated to the
-formula $((a \limp b) \limp a) \limp a$ --- that we reduce to the empty goal,
+premiss, starting from the \kl{goal} to prove --- here the \kl{graph} associated to the
+formula $((a \limp b) \limp a) \limp a$ --- that we reduce to the empty \kl{goal},
 represented by the empty $\SA$. Also, the reader unfamiliar with \kl{EGs} might find
 it hard to convince herself that all the steps followed in the derivation are
 sound logically. We suggest her to either build a \emph{syntactic} intuition for
@@ -468,7 +468,7 @@ to wait until we give a formal \emph{semantic} proof of soundness in
 % \todo{ Then compare sequent and \kl{EGs} derivations of the example on p. 111 of
 % \cite{Roberts+1973}, where the latter exposes a lot less steps. Thus, which
 % should be considered more atomic? We will not fret too much over this question,
-% our goal in the end being to hide trivial reasoning steps from the user. We will
+% our \kl{goal} in the end being to hide trivial reasoning steps from the user. We will
 % see in \refsec{flowers-prover} that this is not incompatible with the analytic
 % aspect of \kl{EGs}. }
 
@@ -577,7 +577,7 @@ introduced them in \refsec{illative}.
 % \emph{after the fact}.
 But as already mentioned there, we will rather emphasize their \emph{bottom-up}
 reading: then they express the different ways in which one may choose to
-simplify a goal.
+simplify a \kl{goal}.
 
 \begin{definition}[Derivation]
   We write $G \step{} H$ to indicate a rewrite \emph{step} in \kl{Alpha}, that is
@@ -1720,7 +1720,7 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
   teridentities: their real purpose is to \emph{duplicate} wires (e.g. by
   splitting them), or dually to \emph{merge} two wires into a single one. This
   gives a constructive way to explain the notion of \emph{occurrence} of a
-  variable\sidenote{A very similar metaphor is brought up by Girard in
+  variable\sidenote{A very similar \kl{metaphor} is brought up by Girard in
   \cite{girard:hal-01322183}, where the fact that a variable can have infinitely
   many occurrences is seen precisely as a consequence of the possibility to
   split or ``debit'' indefinitely a wire into smaller wires.}. Then formulas
@@ -1772,7 +1772,7 @@ one extremity of a two-ended pipe $\mathtt{P}$ to the exterior of another pipe
 $\mathtt{Q}$ will not make $\mathtt{P}$ and $\mathtt{Q}$ communicate; and there
 is no reason to interpret the joining, or (infinitesimally) close \kl{juxtaposition}
 of two lines on $\SA$ at one point, as doing more than the gluing of two
-pipes\sidenote{If one wants to keep the wire metaphor, joining two LoI can be
+pipes\sidenote{If one wants to keep the wire \kl{metaphor}, joining two LoI can be
 interpreted as just putting in contact two wires. Then electrical current can
 flow from one wire to the other, but the problem resides elsewhere, at the
 \emph{illative} level: indeed nothing prevents us from separating back the two
@@ -1785,7 +1785,7 @@ eachother (\kl{juxtaposition}), i.e. solder them together (teridentity).}. One
 solution would be to first drill a hole in $\mathtt{Q}$, before glueing
 $\mathtt{P}$ on it. Another is to have \emph{branching} pipes as the basic
 building blocks for our plumbing, i.e. teridentities. This is how we interpret
-and justify metaphorically the following enigmatic quote from Peirce
+and justify \kl{metaphorically} the following enigmatic quote from Peirce
 \cite[p.~116]{Roberts+1973}:
 
 \begin{quote}
@@ -1914,7 +1914,7 @@ decomposition of such a simple syllogism into 8 distinct inferential steps.
 While this is satisfying from the standpoint of meta-logical investigation
 originally pursued by Peirce, this syntax seems to be too cumbersome to form the
 basis for a practical theorem proving interface, where the user would perform
-illative transformations through direct manipulation of \kl{graphs}. In the words of
+illative transformations through \kl{direct manipulation} of \kl{graphs}. In the words of
 Peirce himself \cite[p.~544]{peirce_prolegomena_1906}:
 \begin{quote}
   There are a number of deduced liberties of transformation, by which even much
@@ -2016,7 +2016,7 @@ As it turns out, we can also give a multiset formalization of the syntax of
 \kl{graphs} in \kl{Beta} extending that of \refsec{multisets}, and based on the
 previous idea of replacing teridentities by variables. Every area will now be
 equipped with a set of binders, in addition to the multiset of nodes (i.e. atoms
-and \kl{cuts}). Anticipating our flower metaphor of \refch{flowers}, we call
+and \kl{cuts}). Anticipating our flower \kl{metaphor} of \refch{flowers}, we call
 sets of binders \emph{sprinklers}, which can be imagined as irrigating spots on
 their hooks by sending water through the (now invisible) LoI, seen as hoses.
 Naturally, the pair formed by a sprinkler and a multiset of nodes is called a

@@ -15,11 +15,11 @@ logic that conservatively extends \kl{intuitionistic} logic, but does not prove 
 quest for a \emph{fully \kl{iconic}} \kl{proof system}, where all logical connectives
 can be replaced by appropriate (new) kinds of bubbles. This will lead us to
 rediscover many principles already studied in the \kl{deep inference}
-literature, with topological intuitions of the bubble metaphor shedding a new
+literature, with topological intuitions of the bubble \kl{metaphor} shedding a new
 light on them. We will end up with two symmetric bubble calculi, each with their
 own tradeoffs on the properties satisfied by \kl{inference rules}. In particular,
 their ability to \emph{factorize} both \kl{forward} and \kl{backward} proof steps might
-prove useful to build concise proofs, all through direct manipulation.
+prove useful to build concise proofs, all through \kl{direct manipulation}.
 
 The chapter is organized as follows: in \refsec{non-determinism} we motivate our
 quest for a system where all \kl{introduction rules} for logical connectives are
@@ -106,7 +106,7 @@ actions are redundant. Although we already considered this possibility in
 \refsec{dnd-completeness}, here it goes further by making even \emph{logical
 connectives} superfluous, since all other rules work purely on the structure of
 sequents. This means that all logical connectives could be replaced by
-metaphorical constructs like bubbles, which suggest \emph{physically} the
+\kl{metaphorical} constructs like bubbles, which suggest \emph{physically} the
 possible transformations on the \kl{proof state}.
 % We call this property of a proof system \emph{iconicity}, following a
 % terminology introduced by C. S. Peirce in his \emph{semiotics}
@@ -138,8 +138,8 @@ $$
 $$
 But this interpretation breaks on the 0-ary case when $\Delta$ is empty: instead
 of seeing $\Gamma \piq{\cS}$ as a node of the proof tree with hypotheses
-$\Gamma$ and subgoals $\cS$, it trivializes it to $\sint{\Gamma
-\piq{\cS}} = \bigwedge \Gamma \limp \bot$, i.e. a goal where one has to
+$\Gamma$ and \kl{subgoals} $\cS$, it trivializes it to $\sint{\Gamma
+\piq{\cS}} = \bigwedge \Gamma \limp \bot$, i.e. a \kl{goal} where one has to
 find a contradiction in $\Gamma$; which is obviously not what we have in mind.
 
 \begin{marginfigure}
@@ -160,7 +160,7 @@ as illustrated by the {\rnm{\land R*}} rule (\reffig{multi-and-intro}). Then our
 idea was that instead of implementing distribution/sharing of conclusions inside
 \kl{inference rules}, we could do it implicitly in the interpretation of solutions.
 This is already what happens in the asymmetric interpretation for hypotheses
-(\refdef{ainterp}); indeed the context $\Gamma$ is shared among subgoals,
+(\refdef{ainterp}); indeed the context $\Gamma$ is shared among \kl{subgoals},
 because:
 \begin{enumerate}
   \item it appears on the left of an implication $\limp$
@@ -168,7 +168,7 @@ because:
   \item implication distributes over conjunction thanks to the equivalence $A
   \limp B \land C \semequiv (A \limp B) \land (A \limp C)$.
 \end{enumerate}
-But what does it mean precisely to share conclusions among subgoals? If we
+But what does it mean precisely to share conclusions among \kl{subgoals}? If we
 consider the two following solutions:
 \begin{equation}\label{eq:concdistr}
 \underbrace{\bubble{\hypo{A}~~~\conc{B}}~~~\bubble{\hypo{C}~~~\conc{D}}~~~\conc{E}}_{S} \qquad\qquad
@@ -192,11 +192,11 @@ terminology of Martin-Löf, we could say that we now have two distinct forms of
 \begin{itemize}
   \item \emph{closed} solutions $\Gamma \piq{\cS} \Delta$ correspond
   to branching nodes in the proof tree, or to closed leaves when $\cS =
-  \emptyset$ (i.e. solved subgoals). Thus it becomes sensical to have
+  \emptyset$ (i.e. solved \kl{subgoals}). Thus it becomes sensical to have
   $\sint{\Gamma \piq{} \Delta} = \top$. In the asymmetric interpretation,
   closed solutions were encoded by solutions with no conclusions;
   \item \emph{open} solutions $\Gamma \seq \Delta$ correspond to open leaves
-  in the proof tree (i.e. unsolved subgoals). In the asymmetric interpretation,
+  in the proof tree (i.e. unsolved \kl{subgoals}). In the asymmetric interpretation,
   they were encoded by solutions with one conclusion.
 \end{itemize}
 Then we keep the last proposed interpretation for closed solutions, and
@@ -249,11 +249,11 @@ valid in \kl{FILL}, the restriction of the classical multiplicative linear
 logic \kl{MLL} to single-conclusion sequents, adding Grishin (a) makes
 \kl{FILL} collapse to \sys{MLL}.}. Thus according to this interpretation, $S$
 entails $T$ but $T$ does not entail $S$, which means that it is not able to
-account for the \emph{factorization} of common conclusions in distinct subgoals.
+account for the \emph{factorization} of common conclusions in distinct \kl{subgoals}.
 
 To remedy this situation, we opted for a different strategy: instead of finding
 a logical formula capturing the distributive semantics of conclusions over
-subgoals, we hardcode the latter by defining the interpretation function on
+sub\kl{goals}, we hardcode the latter by defining the interpretation function on
 closed solutions through \emph{non-structural} recursion. This gives the
 following final definitions:
 
@@ -321,7 +321,7 @@ non-invertible.
 A better solution comes from the nested sequent systems of Fitting
 \sidecite{fitting-nested-2014} and Clouston et al.
 \sidecite{clouston-annotation-free-2013}, where sequents can appear as
-\emph{conclusions} of other sequents. In our chemical metaphor, this corresponds
+\emph{conclusions} of other sequents. In our chemical \kl{metaphor}, this corresponds
 to having \emph{red bubbles}. Then the key idea is to allow hypotheses to flow
 into sequents that appear as conclusions\sidenote{This corresponds to the
 {\rnm{Lift}} rule of \cite{fitting-nested-2014} and {\rnm{pl_1}} rule of
@@ -346,7 +346,7 @@ the proofs for both directions of the equivalence are depicted parallely in
   \item the first step is to decompose the conclusion with the new version of
   the rules {\rnm{{\lor}{+}}} and {\rnm{{\limp}{+}}}. While the former simply
   splits disjunctions in two, the latter encapsulates the antecedant and
-  consequent of implications in a red bubble: the goal is to forbid the use of
+  consequent of implications in a red bubble: the \kl{goal} is to forbid the use of
   the antecedant to prove conclusions other than the consequent, as will become
   apparent later;
   \item then in both cases we want to apply the hypothesis $\hypo{A}$ in a
@@ -542,7 +542,7 @@ of priorization relatively to the latter:
     a logical \emph{equivalence}: when all rules in a (bubble) calculus are
     invertible, we get that $S \step{} T$ implies $\sint{S} \semequiv
     \sint{T}$. This entails in particular that a user can apply the rule
-    without fear of turning a provable goal into an unprovable
+    without fear of turning a provable \kl{goal} into an unprovable
     one\sidenote{Assuming that the calculus is \emph{complete}
     (\refsec{bubbles-completeness}).}, eliminating an important source of
     non-determinism in proof search: the need for
@@ -582,7 +582,7 @@ of priorization relatively to the latter:
   \item[Factorizability]
     We say that a proof calculus is \emph{factorizable} when it makes it easier
     to avoid duplicating arguments in subproofs. In \refsec{bubbles-pba}, we
-    already remarked that the ability to share hypotheses between subgoals in
+    already remarked that the ability to share hypotheses between \kl{subgoals} in
     \kl{BJ} enables the factorization of \emph{\kl{forward}} reasoning steps at any
     stage of the proof construction. With our new symmetric interpretation of
     multi-conclusion solutions, we will now be able to factorize \emph{\kl{backward}}
@@ -606,7 +606,7 @@ of priorization relatively to the latter:
     6]{eng_exegesis_2023}.}.
     
     Our conception of locality is related to all the previous ones, although it
-    is guided by the idea of direct manipulation of logical entities by humans,
+    is guided by the idea of \kl{direct manipulation} of logical entities by humans,
     rather than purely \kl{proof-theoretical} considerations. For instance,
     \kl{BJ} has some locality in the \kl{deep inference} sense because all rules
     are applicable in arbitrary contexts; but we relax the \emph{atomicity}
@@ -634,9 +634,9 @@ of priorization relatively to the latter:
     strictly decreasing with the application of rules, avoiding infinite loops
     during proof search as in the calculus \kl{LJT} of R. Dyckhoff
     \cite{dyckhoff_contraction-free_1992}. The third reason is ergonomical: as
-    already remarked by the authors of the Proof-by-Pointing
+    already remarked by the authors of the \kl{Proof-by-Pointing}
     paradigm\sidenote{Section 4.1 of \cite{PbP}.}, rules that systematically
-    duplicate formulas can quickly overload the goal with useless copies, making
+    duplicate formulas can quickly overload the \kl{goal} with useless copies, making
     it harder to read and navigate.
   \item[Symmetry] 
     In \kl{classical} logic, both \kl{sequent calculi} like \kl{LK} and \kl{deep

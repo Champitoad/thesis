@@ -246,8 +246,8 @@ proposition $A$ such that both $A$ and $A \limp B$ are provable. This reading
 corresponds to a form of \intro{backward} reasoning: we start from the conclusion
 $B$ that we want to reach, also called the \intro{goal}, and try to find
 \intro{subgoals} $A$ and $A \limp B$ that are provable, and hopefully simpler to
-prove; then the rule guarantees that proving these subgoals is \emph{sufficient}
-to ensure the truth of the original goal.
+prove; then the rule guarantees that proving these \kl{subgoals} is \emph{sufficient}
+to ensure the truth of the original \kl{goal}.
 
 \kl{Forward} reasoning is typically how mathematicians write (informal) proofs on
 paper, for the \emph{presentation} of their proofs to other mathematicians.
@@ -548,7 +548,7 @@ This notion of \kl{context} serves two purposes:
 Then, a proof of a formula $A$ in the \kl{calculus of structures} is not a
 \emph{tree} of rule instances as in \kl{natural deduction} and \kl{sequent
 calculus}, but a \emph{sequence} of rewritings $A \steps{} \top$ that reduces
-$A$ to the trivially true goal $\top$.
+$A$ to the trivially true \kl{goal} $\top$.
 
 \AP
 The \kl{calculus of structures}, as a \kl{rewriting system}, is closer to the
@@ -791,20 +791,20 @@ languages:
   % partial \emph{program} in a dependently-typed programming language,
   % following the Curry-Howard correspondence.}
   only the \emph{statement} part of the \kl{proof state} is shown, in a so-called
-  \intro{proof view} or \reintro{goal view}. This corresponds to the goals that the
-  user needs to prove, and each goal is presented in the form of a sequent
+  \intro{proof view} or \reintro{goal view}. This corresponds to the \kl{goals} that the
+  user needs to prove, and each \kl{goal} is presented in the form of a sequent
   $\Gamma \seq C$, where $C$ is the conclusion that must be reached under the
-  assumptions in $\Gamma$. \kl{Tactics} generally apply to one goal at a time, and
-  the user can choose which goal to \emph{focus} at any point during the
-  interaction. When the set of goals becomes empty, we say that the initial goal
+  assumptions in $\Gamma$. \kl{Tactics} generally apply to one \kl{goal} at a time, and
+  the user can choose which \kl{goal} to \emph{focus} at any point during the
+  interaction. When the set of \kl{goals} becomes empty, we say that the initial goal
   or conjecture has been \emph{solved}.
 
   The transformations performed by \kl{tactics} can be more or less sophisticated.
   But, fundamentally, one finds elementary commands that correspond roughly to
   the logical rules, generally of \kl{natural deduction} or \kl{sequent calculus}. For
-  instance, a goal $\Gamma\seq A\lor B$ (resp. $\Gamma\seq A\land B$) can be
-  turned into either a goal $\Gamma\seq A$ or a goal $\Gamma\seq B$ (resp. into
-  two goals $\Gamma\seq A$ and $\Gamma\seq B$), corresponding to the rules
+  instance, a \kl{goal} $\Gamma\seq A\lor B$ (resp. $\Gamma\seq A\land B$) can be
+  turned into either a \kl{goal} $\Gamma\seq A$ or a \kl{goal} $\Gamma\seq B$ (resp. into
+  two \kl{goals} $\Gamma\seq A$ and $\Gamma\seq B$), corresponding to the rules
   \kl{\lor R_1} and \kl{\lor R_2} (resp. \kl{\land R}) of \kl{LJ} in their
   \kl{backward} reading (\reffig{calculi-LJ}).
 
@@ -848,33 +848,34 @@ work in \kl{Lean} \cite{LeanIPAM}).
 
 \subsection{Research goals}
 
-\paragraph{Interoperability}
+% \paragraph{Interoperability}
 
-Existing \kl{proof assistants} can (almost) never \emph{interoperate}: a proof or
-theorem written in one system cannot be imported into a different system. This
-is unsatisfactory for many reasons, including fragmentation in the formal
-methods community, and duplication of effort instead of reuse. There have been
-many attempts in recent years to address this issue in the \emph{backend}:
-various pairs of systems are made to exchange formal results through
-translations between their input (high-level) and output (low-level) languages,
-or in some cases by translations to and from more universal languages (see e.g.
-\sidecite{proofcert,dedukti}).
+% Existing \kl{proof assistants} can (almost) never \emph{interoperate}: a proof or
+% theorem written in one system cannot be imported into a different system. This
+% is unsatisfactory for many reasons, including fragmentation in the formal
+% methods community, and duplication of effort instead of reuse. There have been
+% many attempts in recent years to address this issue in the \emph{backend}:
+% various pairs of systems are made to exchange formal results through
+% translations between their input (high-level) and output (low-level) languages,
+% or in some cases by translations to and from more universal languages (see e.g.
+% \sidecite{proofcert,dedukti}).
 
 \paragraph{Universal user interface}
 
-The interoperability problem can also potentially be approached from the
-\emph{front-end}. Many kinds of logical manipulations such as discharging
-assumptions, instantiating quantifiers, and composing lemmas, are conceptually
-universal; yet, a user wishing to carry out such manipulations in a particular
-\kl{proof assistant} must express the wish in terms of the specific proof language of
-the system. A \emph{universal user interface} would instead allow performing
-such manipulations directly on the \emph{goal} itself, using physical,
+% The interoperability problem can also potentially be approached from the
+% \emph{front-end}.
+Many kinds of logical manipulations such as discharging assumptions,
+instantiating quantifiers, and composing lemmas, are conceptually universal;
+yet, a user wishing to carry out such manipulations in a particular \kl{proof
+assistant} must express the wish in terms of the specific proof language of the
+system. A \emph{universal user interface} would instead allow performing such
+manipulations directly on the \emph{\kl{goal}} itself, using physical,
 reversible, and incremental actions with immediate feedback. A sequence of user
 actions should then be representable in terms of any particular proof language.
 
 \paragraph{Direct manipulation}
 
-This approach to user interfaces has been termed \emph{direct manipulation} by
+This approach to user interfaces has been termed \intro{direct manipulation} by
 Shneiderman in the 1980s \sidecite{shneiderman_direct_1983}. It is now at the
 heart of virtually every modern user interface and is arguably the major factor
 in the \emph{personal computing revolution}. Indeed, it has opened the use of
@@ -889,68 +890,69 @@ of computing devices nowadays; to the point that the hurdle is too great to
 overcome for most potential users.
 
 Unfortunately, the user interfaces of state-of-the-art \kl{proof assistants} are
-mostly stuck in the pre-80s era of command-line interfaces, making them reserved
-to an audience of highly motivated, computer-savvy individuals. One could argue
-that like programming languages, this is due to their inherent
-\emph{abstraction} capabilities, that can only be captured through the \kl{symbolic}
-power of language; hence that this state of fact is unavoidable, and can only be
-solved through the addition (or improvement) of computer science curricula in
-primary and secondary education. We do not agree with this conception: we
-believe that the current state of user interfaces in \kl{ITPs} is one of the major
-obstacles to their wider adoption in the mathematical community, both by
-professional researchers, teachers, and novice students alike.
+largely stuck in the pre-80s era of command-line interfaces, making them
+reserved to an audience of highly motivated, computer-savvy individuals. One
+could argue that like programming languages, this is due to their inherent
+\emph{abstraction} capabilities, that can only be captured through the
+\kl{symbolic} power of language; hence that this state of fact is unavoidable,
+and can only be solved through the addition (or improvement) of computer science
+curricula in primary and secondary education. We do not agree with this
+conception: we believe that the current state of user interfaces in \kl{ITPs} is
+one of the major obstacles to their wider adoption in the mathematical
+community, both by professional researchers, teachers, and novice students
+alike.
 
 \begin{emphpar}
-  Our first main working hypothesis is that the direct manipulation paradigm is
-  not only possible, but also \emph{necessary} for building formal proofs in
-  \kl{ITPs}, if they are to become a viable alternative to paper proofs in
-  mathematics.
+  Our first main working hypothesis is that the \kl{direct manipulation}
+  paradigm is not only possible, but also \emph{crucial} for building formal
+  proofs in \kl{ITPs}, if they are to become a viable alternative to paper
+  proofs in mathematics.
 \end{emphpar}
 
-In fact, following the \kl{proofs-as-programs} correspondence, we also believe that
-this applies (to some extent) to \emph{programming}, and that it is only a
+In fact, following the \kl{proofs-as-programs} correspondence, we also believe
+that this applies (to some extent) to \emph{programming}, and that it is only a
 matter of time before direct manipulation becomes viable for building
 (general-purpose) programs, in the spirit of \emph{visual programming
 languages}. We do not explore this direction in this thesis, but it is one of
 our hopes that some of the techniques we develop will apply to programming as
-well; and one of the reasons why we chose to focus as much on
+well; and one of the reasons why we chose to focus so much on
 \emph{intuitionistic} logic.
 
 \paragraph{Graphical deep inference}
 
-A first attempt to design direct manipulation principles for interactive proof
-building was made in the 90s by the team of Gilles Kahn at Inria, where they
-coined the ``Proof-by-Pointing'' (hereafter ``PbP'') paradigm \sidecite{PbP}.
-The idea was to synthesize complex \kl{tactics} from the simple act of
-\emph{pointing} at specific locations inside expressions occurring in the goal,
-typically with a mouse cursor. More recently \sidecite{Chaudhuri2013}, Kaustuv
-Chaudhuri proposed a variation on this idea termed ``subformula linking'' or
-``Proof-by-Linking'' (``SFL'' and ``PbL'' for short), where instead of selecting
-expressions in isolation, one can \emph{link} two of them together to make them
-interact.
+A first attempt to design \kl{direct manipulation} principles for interactive
+proof building was made in the 90s by the team of Gilles Kahn at Inria, where
+they coined the \intro{Proof-by-Pointing} (\reintro{PbP}) paradigm
+\sidecite{PbP}. The idea was to synthesize complex \kl{tactics} from the simple
+act of \emph{pointing} at specific locations inside expressions occurring in the
+\kl{goal}, typically with a mouse cursor. More recently
+\sidecite{Chaudhuri2013}, Kaustuv Chaudhuri proposed a variation on this idea
+called \intro{subformula linking} (\reintro{SFL}) or \intro{Proof-by-Linking}
+(\reintro{PbL}), where instead of selecting expressions in isolation, one can
+\emph{link} two of them together to make them interact.
 
 In both cases, the expressions considered were logical formulas and the
 associated actions chains of inferences in \kl{FOL}. Importantly, both paradigms rely
 on the use of \emph{\kl{deep inference}}, since the user can point at subformulas
-that occur at an arbitrary depth inside the goal. This is in contrast with the
+that occur at an arbitrary depth inside the \kl{goal}. This is in contrast with the
 basic commands found in the proof languages of \kl{ITPs}, where the user can only
-designate formulas appearing at the top level of sequents\sidenote{A notable
+designate formulas appearing at the top-level of sequents\sidenote{A notable
 exception is the \texttt{rewrite} \kl{tactic} of \kl{imperative} proof languages, where
 the user can specify \emph{patterns} to designate particular occurrences of a
 term $t$ that are to be rewritten into an equal term $u$, usually thanks to an
 assumed equation $t = u$. But coming up with such patterns is a lot slower than
 directly \emph{pointing} at the locations of interest onscreen.}. While the
-semantics of PbP actions is still based on the \emph{shallow} \kl{inference rules} of
-\kl{sequent calculus}, PbL fully embraces the \kl{deep inference} paradigm by relying on
+semantics of \kl{PbP} actions is still based on the \emph{shallow} \kl{inference rules} of
+\kl{sequent calculus}, \kl{PbL} fully embraces the \kl{deep inference} paradigm by relying on
 \kl{CoS}-style \kl{rewriting rules}.
 
 \begin{emphpar}
   All the works presented in this thesis can be seen as a direct continuation of
-  the research programme initiated by PbP and PbL. The aim is to \emph{replace}
-  textual proof languages with \emph{gestural} actions performed directly upon
-  \emph{goals} in a \intro{graphical user interface} (\reintro{GUI}). To be as
-  general as possible, we call such a paradigm ``\intro{Proof-by-Action}''
-  (\reintro{PbA}).
+  the research programme initiated by \kl{PbP} and \kl{PbL}. The aim is to
+  \emph{replace} textual proof languages with \emph{gestural} actions performed
+  directly upon \emph{\kl{goals}} in a \intro{graphical user interface}
+  (\reintro{GUI}). To be as general as possible, we call such a paradigm
+  \intro{Proof-by-Action} (\reintro{PbA}).
 \end{emphpar}
 
 \paragraph{Proof exploration}
@@ -969,10 +971,10 @@ the \emph{dynamic} sequence of actions that led to it could be ``compiled'' into
 a \emph{static}, textual representation of the proof in the favorite proof
 language of the user, to facilitate the \emph{reading} phase.
 
-As for the \emph{modification} phase of proofs, the \kl{PbA} paradigm requires a way
-to navigate and edit directly a recorded sequence of actions, and possibly a
-mechanism for mapping parts of a static proof text to the actions that generated
-them.
+As for the \emph{modification} phase of proofs, the \kl{PbA} paradigm requires a
+way to navigate and edit directly a recorded sequence of actions, and possibly a
+mechanism for mapping parts of a static proof object to the actions that
+generated them.
 
 \begin{emphpar}
   In this thesis, we leave the question of \kl{proof evolution} in \kl{PbA} ---
@@ -994,7 +996,7 @@ his \kl{characteristica universalis} as a \kl{symbolic} language, but rather as 
 \begin{quote}
     The true ``real characteristic'' [...] would express the composition of
     concepts by the combination of signs representing their simple elements,
-    such that the correspondence between composite ideas and their \kl{symbols} would
+    such that the correspondence between composite ideas and their symbols would
     be natural and no longer conventional. [...] This shows that the real
     characteristic was for him an ideography, that is, a system of signs that
     directly represent things (or, rather, ideas) and not words.
@@ -1005,17 +1007,17 @@ repeatedly been translated as \emph{ideography}
 \sidecite{Frege1952-FRETFT,Frege1999-FRELUL}.
 
 Following the seminal work of Charles Sanders Peirce in
-\emph{semiotics}\sidenote{Semiotics is the systematic study of sign processes
-and the communication of meaning.}, we define an \intro{iconic} language as one
-whose signs are mainly \reintro{icons}, i.e. signs that \emph{resemble} or share
-qualities with the objects they denote. This is to be contrasted with
-\intro{symbolic} languages where most signs are just \reintro{symbols}, i.e.
-signs that \emph{conventionally} denote their objects. In his systematic usage
-of \emph{triads} of concepts, Peirce identified a third kind of sign,
-\emph{indexes} \sidecite{atkin_peirces_2023}:
+\intro{semiotics}\sidenote{\kl{Semiotics} is the systematic study of sign
+processes and the communication of meaning.}, we define an \intro{iconic}
+language as one whose signs are mainly \reintro{icons}, i.e. signs that
+\emph{resemble} or share qualities with the objects they denote. This is to be
+contrasted with \intro{symbolic} languages where most signs are just
+\reintro{symbols}, i.e. signs that \emph{conventionally} denote their objects.
+In his systematic usage of \emph{triads} of concepts, Peirce identified a third
+kind of sign, \emph{indexes} \sidecite{atkin_peirces_2023}:
 \begin{quote}
   if the constraints of successful signification require that the sign reflect
-  qualitative features of the object, then the sign is an \kl{icon}. If the
+  qualitative features of the object, then the sign is an icon. If the
   constraints of successful signification require that the sign utilize some
   existential or physical connection between it and its object, then the sign is
   an index. And finally, if successful signification of the object requires that
@@ -1025,30 +1027,30 @@ of \emph{triads} of concepts, Peirce identified a third kind of sign,
 He even went further by analyzing \kl{icons} into another
 trichotomy\sidenote{Actually he only applied this trichotomy to pure \kl{icons}
 devoid of any indexical elements, that he called \emph{hypo-icons}.}:
-\emph{images} that depend on simple quality; \emph{diagrams}, who share
+\emph{images} that depend on simple quality; \intro{diagrams}, who share
 \emph{structural} relations among their constituents that are analogous to that
-of their object; and \emph{metaphors}, that denote features of their object by
+of their object; and \intro{metaphors}, that denote features of their object by
 relating them to features of another object \sidecite{legg_problem_2008}.
 
-Interestingly, Peirce held that mathematics relies mostly on \emph{diagrammatic}
-thinking --- observation of, and experimentation on, diagrams
+Interestingly, Peirce held that mathematics relies mostly on \emph{\kl{diagrammatic}}
+thinking --- observation of, and experimentation on, \kl{diagrams}
 \sidecite[][Chpt.~6]{Hookway1985-HOOP-2}. This agrees with the contemporary
 practice of mathematics: indeed, there is an increasing number of areas in
 mathematics --- the most prominent one being category theory --- where the heart
-of a proof lies in the dynamical construction of a \emph{diagram} capturing the
+of a proof lies in the dynamical construction of a \emph{\kl{diagram}} capturing the
 structure of interest in given mathematical objects. The natural language proof
 text is often just a means to explicit the meaning or intuition behind the
-diagrammatic manipulations, or simply a retranscription of the commentary that
+\kl{diagrammatic} manipulations, or simply a retranscription of the commentary that
 the mathematician would give when unfolding the construction on a blackboard.
 
 If one views logic as one particular type of mathematical reasoning --- albeit
 one that is omnipresent in all branches of mathematics, then it is only natural
-to expect that some diagrammatic system should exist for it, that can express in
+to expect that some \kl{diagrammatic} system should exist for it, that can express in
 the most natural way most (if not all) logical arguments. This is the
 \emph{\kl{iconicity}} thesis of Peirce, which motivated his inquiry into what is
-arguably the first diagrammatic \kl{proof system} in history: the \intro{existential
+arguably the first \kl{diagrammatic} \kl{proof system} in history: the \intro{existential
 graphs} (\reintro{EGs}). This will be the subject of \refch{eg}, and the basis
-for the development of a \emph{metaphorical} \kl{proof system} in \refch{flowers}.
+for the development of a \emph{\kl{metaphorical}} \kl{proof system} in \refch{flowers}.
 
 \begin{emphpar}
   Our second main working hypothesis exploited in the second part of this
@@ -1065,11 +1067,11 @@ above.
 \paragraph{Symbolic manipulations}
   
 In the first part of this thesis, we substantiate the \kl{PbA} paradigm in the
-context of traditional representations of goals, by presenting a number of
-techniques based on the direct manipulation of \emph{\kl{symbolic}} formulas in
+context of traditional representations of \kl{goals}, by presenting a number of
+techniques based on the \kl{direct manipulation} of \emph{\kl{symbolic}} formulas in
 sequents.
 
-We start in \refch{pba} with an introduction to PbP and PbL, by describing how
+We start in \refch{pba} with an introduction to \kl{PbP} and \kl{PbL}, by describing how
 to reason with logical connectives, quantifiers and equality through
 \emph{click} and \emph{drag-and-drop} (\intro{DnD}) actions in a prototype of
 \kl{GUI} called \kl{Actema}. In particular, \kl{DnD} actions can be seen as a graphical
@@ -1094,7 +1096,7 @@ problems.
 In \refch{sfl-classical}, we investigate an extension of \kl{PbA} to sequents with
 \emph{multiple} alternative conclusions, as opposed to the
 \emph{single}-conclusion sequents found in the interface of almost every \kl{ITP}. We
-argue that the use of direct manipulation greatly facilitates the handling of
+argue that the use of \kl{direct manipulation} greatly facilitates the handling of
 multiple conclusions, and introduce a so-called \emph{parallel} linking operator
 to model reasoning in \kl{classical} logic that involves the interaction of two
 conclusions.
@@ -1109,9 +1111,9 @@ in particular concerning the question of \kl{proof evolution}.
   
 In the second part of this thesis, we explore a series of \kl{deep inference} \kl{proof
 systems} that give more structure to the notion of \emph{logical goal}. These
-systems share the ability to represent goals in two alternative ways: either
+systems share the ability to represent \kl{goals} in two alternative ways: either
 \emph{textually} through a standard inductive syntax, or \emph{graphically}
-through a metaphorical notation well-suited to direct manipulation. The first
+through a \kl{metaphorical} notation well-suited to \kl{direct manipulation}. The first
 can be used as a machine representation in the backend of an \kl{ITP}, and the latter
 as the substrate for \kl{GUIs} in the frontend.
 
@@ -1121,14 +1123,14 @@ as the substrate for \kl{GUIs} in the frontend.
   \emph{nested sequents} first introduced by Brünnler
   \sidecite{brunnler_deep_2009}, that we reframe as local \kl{rewriting systems} with
   a graphical and topological interpretation. Bubble calculi enable an efficient
-  sharing of contexts between subgoals, making them well-suited to the
+  sharing of contexts between \kl{subgoals}, making them well-suited to the
   factorization of both \kl{forward} and \kl{backward} reasoning steps in proofs.
 
   \refch{bubbles} presents the \emph{asymmetric} bubble calculus \kl{BJ} for
   \kl{intuitionistic} logic, modelled after the \emph{asymmetric} sequents of the
   \kl{intuitionistic} \kl{sequent calculus} \kl{LJ} of Gentzen (\reffig{calculi-LJ}). It
-  introduces the metaphor of \emph{bubbles} as a way to \kl{iconically} represent the
-  separation and sharing of contexts between different subgoals.
+  introduces the \kl{metaphor} of \emph{bubbles} as a way to \kl{iconically} represent the
+  separation and sharing of contexts between different \kl{subgoals}.
 
   \refch{bubbles-symm} refines \kl{BJ} into a more general and symmetric
   calculus for \kl{classical} logic called ``\kl{system B}'', where bubbles can be
@@ -1158,14 +1160,14 @@ as the substrate for \kl{GUIs} in the frontend.
 
   Finally, we introduce in \refch{flowers} the \emph{flower calculus}, an
   \kl{intuitionistic} variant of \kl{EGs} where statements are represented
-  metaphorically as \emph{flowers}. We partition the system into a
+  \kl{metaphorically} as \emph{flowers}. We partition the system into a
   \emph{natural} fragment where every rule is both analytic and invertible, and
   a \emph{cultural} fragment where every rule is non-invertible. We prove that
   the cultural fragment is admissible thanks to a completeness proof for the
   natural fragment with respect to Kripke semantics. We exploit these
   meta-theoretical results to design the Flower Prover, a prototype of \kl{GUI} in
   the \kl{PbA} paradigm that aims to unify the concepts of \emph{goal} and
-  \emph{theory} in a \emph{modal interface}: goals correspond to flowers
+  \emph{theory} in a \emph{modal interface}: \kl{goals} correspond to flowers
   manipulated with natural rules in \Proof mode; while theories correspond to
   the same flowers manipulated with cultural rules in \Edit mode. The Flower
   Prover is also the first \emph{mobile-friendly} interface for \kl{ITPs} that we
@@ -1294,7 +1296,7 @@ quote.
 \end{digression}
 However, we believe our approach is unique in that it emphasizes two aspects:
 \begin{itemize}
-  \item the use of \emph{direct manipulation} on goals to perform proof steps
+  \item the use of \emph{\kl{direct manipulation}} on \kl{goals} to perform proof steps
   (although some pointing interactions were already at work in window
   inference-based systems);
   \item in the second part of this thesis, the use of \emph{\kl{iconic}}
@@ -1311,7 +1313,7 @@ implementations of software evaluated through user studies
 \sidecite{ayers_thesis}. Notable contributions from our point of view are:
 \begin{itemize}
   \item his \texttt{Box} development calculus, which introduces a unified
-\texttt{Box} data structure representing at the same time goals and partial
+\texttt{Box} data structure representing at the same time \kl{goals} and partial
 proofs, with the aim to offer more ``human-like'' interfaces for both the
 \emph{construction} and the \emph{presentation} of proofs;
   \item and his \texttt{ProofWidgets} framework, that allows to extend the

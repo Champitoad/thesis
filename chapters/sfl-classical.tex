@@ -2,7 +2,7 @@
 \chapter{Parallel Conclusions and Classical Logic}
 \labch{sfl-classical}
 
-In virtually every \kl{proof assistant}, the goals the user is faced with are
+In virtually every \kl{proof assistant}, the \kl{goals} the user is faced with are
 sequents of the form $\Gamma \seq C$, with a \emph{single} conclusion $C$ to be
 proved under many hypotheses in $\Gamma$. Historically, this form of sequent was
 introduced by Gentzen to formalize the rules of \kl{intuitionistic} logic in his
@@ -110,9 +110,9 @@ his thesis \cite{ayers_thesis}.}, and is a good motivation for trying to design
 removed. One way to do this is to maximize the proportion of \kl{inference rules}
 that are \emph{invertible}, meaning that their premisses always follow from
 their conclusion. Indeed when looking at rules as \kl{tactics} (see \refsec{itps}),
-it means that they will always reduce a provable goal to provable subgoals, and
+it means that they will always reduce a provable \kl{goal} to provable \kl{subgoals}, and
 thus can never induce a backtracking point\sidenote{Except of course if the user
-deems the subgoal too complex to prove in its current form, and explicitly wants
+deems the \kl{subgoal} too complex to prove in its current form, and explicitly wants
 to backtrack to shape it differently.}. The {\rnm{\lor R}} rule is an example of
 invertible rule, and in \kl{LK} it can replace the other, non-invertible rules
 {\rnm{\lor R_1}} and {\rnm{\lor R_2}}.
@@ -141,7 +141,7 @@ point that some \kl{tactic} languages like \ssreflect have been designed around 
 problem \sidecite{SSR}. Thus having multiple conclusions would only double the
 effort for no compelling reason.
 
-However in our graphical paradigm based on direct manipulation, hypotheses and
+However in our graphical paradigm based on \kl{direct manipulation}, hypotheses and
 conclusions are designated by the act of \emph{pointing} at them with a mouse,
 finger or any other pointing device\sidenote{With the recent advances in natural
 language processing and voice recognition, one could also imagine a system based
@@ -187,7 +187,7 @@ capturing either \kl{intuitionistic} or \kl{classical} \kl{first-order logic}:
   calculus} \kl{LK} of Gentzen (named {\rsf{{\limp}R*c}} in
   \reffig{multi-imp-intro}), and our set of actions becomes a \kl{proof system}
   for \kl{classical} logic. To go back to \kl{intuitionistic} logic, one needs
-  the additional behavior that all the other conclusions of the goal are
+  the additional behavior that all the other conclusions of the \kl{goal} are
   removed. This corresponds to the \kl{right introduction rule} from the
   \kl{GHCP} calculus of Dragalin (named {\rsf{{\limp}R*i}} in
   \reffig{multi-imp-intro}).
@@ -219,7 +219,7 @@ question of provability: given a sequent $\Gamma \seq \Delta$, one just has to
 choose any formula in $\Gamma$ or $\Delta$ and apply the \kl{introduction rule}
 associated to its main connective, or the axiom rule whenever possible. In
 Actema, this would correspond to having the user click randomly on blue and red
-items until all goals are solved. The procedure ends because all \kl{introduction
+items until all \kl{goals} are solved. The procedure ends because all \kl{introduction
 rules} destroy the main connective, and none of them duplicate formulas: thus the
 total size of the sequent decreases strictly after each rule application.
 

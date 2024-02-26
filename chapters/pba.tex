@@ -92,8 +92,8 @@ The chapter is organized as follows: \refsec{setting} briefly outlines its
 logical setting. \refsec{aristote} describes the basic features of a graphical
 proof interface based on our principles, and illustrates them with a famous
 syllogism from Aristotle. \refsec{clicks} shows how it can integrate
-Proof-by-Pointing capabilities through click actions. \refsec{newitems} shows
-very briefly how one can add new formulas and objects to the current goal. The
+\kl{Proof-by-Pointing} capabilities through click actions. \refsec{newitems} shows
+very briefly how one can add new formulas and objects to the current \kl{goal}. The
 last two sections explain, through further examples, how drag-and-drop actions
 work; first for so-called \emph{rewrite} actions involving equalities, then for
 actions involving logical connectives and quantifiers.
@@ -157,7 +157,7 @@ $$\forall x.\forall y. x=y\land A \limp \subst{A}{x}{y}.$$
  \end{center}
  The conclusion is red on the right, the two hypotheses blue on the left. The
  gray dotted arrows have been added to show the two possible actions.
- \caption{A partial screenshot showing a goal in the \kl{Actema} prototype}
+ \caption{A partial screenshot showing a \kl{goal} in the \kl{Actema} prototype}
  \labfig{aristote}
  \end{figure*}
 
@@ -186,7 +186,7 @@ graphical actions.
 
 
 \reffig{aristote} shows the layout of the system using the
-ancient example from Aristotle. A goal appears as a set of {\em items}
+ancient example from Aristotle. A \kl{goal} appears as a set of {\em items}
 whose nature is defined by their respective colors\sidenote{We are
   well aware that, in later implementations, this color-based
   distinction ought to be complemented by some other visual
@@ -204,7 +204,7 @@ by {\em moving} them. Each item can be positioned freely on a so-called
 \emph{proof canvas}, which is depicted by the white background in
 \reffig{aristote}.
 
-Finally, note that each goal is displayed on a tab.
+Finally, note that each \kl{goal} is displayed on a tab.
 
 \subsection{Two kinds of actions}
 In this example, there are two possible actions.
@@ -212,7 +212,7 @@ In this example, there are two possible actions.
 \begin{itemize}
 \item A first one is to bring together, by drag-and-drop, the red conclusion
 $\mortal(\socrates)$ with the succedant of the first hypothesis $\mortal(x)$.
-This will transform the goal by changing the conclusion to $\human(\socrates)$.
+This will transform the \kl{goal} by changing the conclusion to $\human(\socrates)$.
 \item A second possibility is to combine the two hypotheses; more precisely to
 bring together the item $\human(\socrates)$ with the premise $\human(x)$ of the
 first hypothesis. This will yield a new hypothesis $\mortal(\socrates)$.
@@ -266,7 +266,7 @@ Notice that:
   apply in which order.
 \end{itemize}
 
-In general, the action solves the goal when the interaction ends with
+In general, the action solves the \kl{goal} when the interaction ends with
 the trivially true proposition $\top$. The base case being the action
 corresponding to the axiom/identity rule \rsf{id}: $A\back A \step{} \top$.
 
@@ -297,9 +297,9 @@ drag-and-drop actions.
 \begin{itemize}
 \item Clicking on a blue conjunction $A\land B$ transforms the
     item into two separate blue items $A$ and $B$.
-\item Clicking on a red conjunction $A\land B$ splits the goal into
-    two subgoals, whose conclusions are respectively $A$ and $B$.
-\item Clicking on a blue disjunction $A\lor B$ splits the goal into two subgoals
+\item Clicking on a red conjunction $A\land B$ splits the \kl{goal} into
+    two \kl{subgoals}, whose conclusions are respectively $A$ and $B$.
+\item Clicking on a blue disjunction $A\lor B$ splits the \kl{goal} into two \kl{subgoal}s
     of same conclusion, with $A$ (resp. $B$) added as a new hypothesis.
 \item Clicking on the left (resp. right)-hand subterm of a red
       disjunction $A\lor B$ replaces this red conclusion by $A$
@@ -310,7 +310,7 @@ drag-and-drop actions.
   a new object $x$ and the conclusion becomes $A$.
 \item Clicking on a blue existential $\exists x.A$ introduces a new
   object $x$ together with a blue hypothesis $A$.
-\item Clicking on a red equality $t = t$ solves the goal immediately.
+\item Clicking on a red equality $t = t$ solves the \kl{goal} immediately.
 \end{itemize}
 
 One can see that these actions correspond essentially to the \kl{right
@@ -335,7 +335,7 @@ order:
   object by using the \texttt{+expr} button (see \refsec{newitems}); then she
   can drag the corresponding green item and drop it on the quantified item to
   instantiate it. It is also possible to select with the mouse an arbitrary
-  subexpression occurring in any item of the current goal, and then
+  subexpression occurring in any item of the current \kl{goal}, and then
   drag-and-drop the item holding the selected subexpression instead.
 \end{itemize}
 
@@ -371,23 +371,23 @@ order:
 
 
 It is possible to associate some more complex effects to click actions performed
-on locations deeper under connectives. This is the essence of Proof-by-Pointing,
+on locations deeper under connectives. This is the essence of \kl{Proof-by-Pointing},
 and~\sidecite{PbP} provides ample description. Since we here focus more on
-drag-and-drop actions, we do not detail further more advanced PbP features.
+drag-and-drop actions, we do not detail further more advanced \kl{PbP} features.
 However we stress that these features are essentially compatible with what we
 describe in this work. In fact the version of \kl{Actema} presented in \refch{plugin}
-provides an implementation of PbP available as a contextual menu action.
+provides an implementation of \kl{PbP} available as a contextual menu action.
 
 
 \section{Adding new items}\labsec{newitems}
 
 Often in the course of a proof, one will want to add new items: either a new
 conjecture (blue item), or a new object (green item) that would be helpful to
-solve the current goal. These can be done respectively with the blue
+solve the current \kl{goal}. These can be done respectively with the blue
 \texttt{+hyp} and the green \texttt{+expr} buttons, which appear in the
 screenshot of \reffig{edukera}. When clicked, they prompt the user
 for the statement of the conjecture, or the name and expression defining the
-object. The \texttt{+hyp} button will also create a new subgoal requiring to
+object. The \texttt{+hyp} button will also create a new \kl{subgoal} requiring to
 prove the conjecture within the current context.
 
 % This mechanism and the syntax are for now very crude. The design of
@@ -488,7 +488,7 @@ $$
 \end{array}
 $$
 
-On the other hand, considering a conjunctive goal $A\land B$, one can
+On the other hand, considering a conjunctive \kl{goal} $A\land B$, one can
 simplify or solve one of the branches by a \kl{DnD} action. This involves
 rules \rsf{R \land_1} and
 \rsf{R \land_2}. For instance:
@@ -502,8 +502,8 @@ $$
 \end{array}
 $$
 
-Red disjunctions work similarly to conjunctive goals, except that solving one
-branch will solve the entire goal. A nice consequence of this, which is hard to
+Red disjunctions work similarly to conjunctive \kl{goals}, except that solving one
+branch will solve the entire \kl{goal}. A nice consequence of this, which is hard to
 simulate with textual \kl{tactics}, is that one can just simplify one branch of a
 disjunction without comitting to proving it entirely:
 $$
@@ -518,7 +518,7 @@ $$
 
 Disjunctive hypotheses also have a \kl(dnd){backward} behavior defined by the rules
 \rsf{L\lor_1} and \rsf{L\lor_2}, although in most cases one will prefer the
-usual subgoal semantics associated with click actions. More interesting is
+usual \kl{subgoal} semantics associated with click actions. More interesting is
 their \kl(dnd){forward} behavior with the rules \rsf{F\lor_1} and \rsf{F\lor_2}, in
 particular when they interact with negated hypotheses. For instance:
 $$
@@ -628,7 +628,7 @@ quantifiers in the next section.
 As for red implications, they also have a \kl(dnd){backward} semantics with the rules
 \rsf{R{\limp}_1} and \rsf{R{\limp}_2}, but most of the time one
 will want to destruct them immediately by click. An exception could be if one
-wants to simplify some part of an implicative, inductive goal before starting
+wants to simplify some part of an implicative, inductive \kl{goal} before starting
 the induction.
 
 \subsection{Quantifiers}
@@ -649,7 +649,7 @@ $$\begin{array}{llll}
   $$
 
 An interesting feature is the possibility to modify propositions under
-quantifiers. Consider the following possible goal:
+quantifiers. Consider the following possible \kl{goal}:
 % Take this example involving equality:
 % $$\begin{array}{clc}
 %    & \forall x.\select{ x+0 = x }\back \forall a. \select{a+0} = 0 +
@@ -732,7 +732,7 @@ $$
 Some more advanced examples yield simultaneous instantiations of
 existentially and universally quantified variables. In such cases, the
 system needs to check some dependency conditions. For instance, the
-following \kl{linkage} is valid and solves the goal through one action:
+following \kl{linkage} is valid and solves the \kl{goal} through one action:
 $$
 \begin{array}{lll}
   &\exists y. \forall x. \select{R(x,y)}\back \forall x'.\exists
@@ -956,7 +956,7 @@ $$
 
 \paragraph{Window inference}
 
-We have already mentioned Proof-by-Pointing, which was part of the CtCoq and
+We have already mentioned \kl{Proof-by-Pointing}, which was part of the CtCoq and
 Pcoq efforts \sidecite{amerkad-mathematics-2001} to design a \kl{graphical user
 interface} for the \kl{Coq} \kl{proof assistant}. Another contemporary line of work was the
 one based on \emph{window inference}, also mentioned in \refsec{intro-rw}. In

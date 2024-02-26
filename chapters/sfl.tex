@@ -144,7 +144,7 @@ By forgetting the information on which subterms are selected, one can see any
 \kl{linkage} as a formula whose topmost connective is a linking operator $\link \in
 \{\back,\forw\}$. Then it is natural to view \kl{linkages} as the redexes of the
 \kl{rewriting rules} of \reffig{DISL}, although from the user's standpoint \kl{linkages}
-only happen at the top level\sidenote{In fact this is more of a limitation of
+only happen at the top-level\sidenote{In fact this is more of a limitation of
 Actema's current interface: one cannot link two subterms that live in the same
 item, because dragging actions can only be performed on \emph{entire} items. But
 in the original formulation and implementation of subformula linking
@@ -194,12 +194,12 @@ Validity is very useful to support the \emph{suggestion} mechanism implemented
 in \kl{Actema}. The idea is that when the user starts dragging an item, this
 indicates to the system that she wants to perform a \kl{DnD} action involving
 subterms of this item. Then the system can suggest such possible actions by
-highlighting subterms in the goal which form a valid \kl{linkage} with the dragged
+highlighting subterms in the \kl{goal} which form a valid \kl{linkage} with the dragged
 item. Typically in the example of \reffig{aristote}, dragging the hypothesis
 $\forall x. \human(x) \limp \mortal(x)$ will have the effect of highlighting
 exactly $\mortal(\socrates)$ in the conclusion and $\human(\socrates)$ in the
 other hypothesis as possible drop targets. In this case this corresponds to all
-subterms in the goal which are not contained in the dragged item. But if one
+subterms in the \kl{goal} which are not contained in the dragged item. But if one
 were to drag the $\human(\socrates)$ hypothesis, then only the subterm
 $\human(x)$ in the other hypothesis would be suggested as a drop target. This
 could not work with the ``release'' semantics mentioned earlier, since then all
@@ -211,7 +211,7 @@ to guide the user towards the right path to follow in their reasoning. Although
 non-trivial arguments are often based on ``guessing'' the right value or lemma
 to be used, a large part of mathematical reasoning also consists in ``connecting
 the dots'' with information already at hand. Our \kl{DnD} actions capture this
-metaphor quite directly, and thus shall be especially useful to beginners
+\kl{metaphor} quite directly, and thus shall be especially useful to beginners
 unfamiliar with proving, who often show difficulties in understanding how to
 build a proof from scratch. More generally, \kl{proof assistants} have the potential
 to provide a well-defined and rigorous methodology in the art of crafting
@@ -438,7 +438,7 @@ of the units $\top$ and $\bot$.
 Here is a high-level overview of the complete procedure followed to generate a
 proof step:
 \begin{enumerate}
-\item \textbf{Selection:} the user selects two subterms in two items of the current goal; \label{step:selection}
+\item \textbf{Selection:} the user selects two subterms in two items of the current \kl{goal}; \label{step:selection}
 \item \textbf{Linkage:} this either gives rise to a \kl{logical linkage} $B\select{A}
   \link C\select{A'}$ (resp. a \kl{rewrite linkage} $B\select{\select{t} = u} \link
   C\select{t'}$), or does not correspond to a known form of \kl{linkage}. In this case
@@ -466,8 +466,8 @@ $\{\mathsf{L\!\!=\!\!_1}, \mathsf{L\!\!=\!\!_2}, \mathsf{F\!\!=\!\!_1},
 \item \textbf{Unit elimination:} in the case of a logical action, this creates an occurrence of $\top$,
 which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimination}
 \item \textbf{Goal modification:} the two previous steps produced a formula $E$.
-  In the case of a \kl(dnd){forward} \kl{linkage}, a hypothesis $E$ is added to the goal; in
-  the case of a \kl(dnd){backward} \kl{linkage}, the goal's conclusion becomes $E$. In both
+  In the case of a \kl(dnd){forward} \kl{linkage}, a hypothesis $E$ is added to the \kl{goal}; in
+  the case of a \kl(dnd){backward} \kl{linkage}, the \kl{goal}'s conclusion becomes $E$. In both
   cases, the logical soundness is guaranteed by
   Property~\ref{prop:soundness}. \label{step:goal-modification}
 \end{enumerate}
@@ -923,7 +923,7 @@ This is the formal counterpart to the notion of productivity mentioned in
 reasoning: we managed to connect some dots in the problem and actually solve a
 subgoal. That is, either the conclusion is \emph{strictly} weakened after a
 \kl(dnd){backward} \kl{DnD}, or the assumptions are \emph{strictly} strengthened after a
-\kl(dnd){forward} \kl{DnD}, instead of having just an equivalent goal written in a different
+\kl(dnd){forward} \kl{DnD}, instead of having just an equivalent \kl{goal} written in a different
 way\sidenote{This remark only applies to \kl{logical linkages} however, since
 rewriting equalities can only produce equivalent statements. Some \kl{proof
 assistants} provide facilities to rewrite arbitrary relations in subterms of
@@ -1006,7 +1006,7 @@ the third case:
   distinguishing between the source path and the destination path\sidenote{Note
   that in the current implementation of \kl{Actema}, we instead rely on an arbitrary
   prioritizing fixed in the system, which can hinder in some cases the ability
-  to prove a goal through \kl{DnD} actions. In practice, one rarely encounters such
+  to prove a \kl{goal} through \kl{DnD} actions. In practice, one rarely encounters such
   cases in real examples.}.
 \end{enumerate}
 Currently we do not have detailed proofs of permutability for all pairs of
@@ -1023,7 +1023,7 @@ textual proof language, it is important to show that (a subset of) the set of
 actions exposed to the user is \emph{complete} with respect to provability. That
 is, any formula $A$ which is \emph{true} in our logic --- here \kl{intuitionistic}
 \kl{FOL} --- can be proved by executing a sequence of graphical actions that reduces
-it to the empty goal. We noticed in Remark \ref{rem:click-completeness} that
+it to the empty \kl{goal}. We noticed in Remark \ref{rem:click-completeness} that
 click actions are a sufficient basis for completeness. While we believe that a
 combination of both click and \kl{DnD} actions is more comfortable to handle a
 variety of proof situations, it is still interesting to consider the question of
@@ -1125,7 +1125,7 @@ An alternative to the full \kl{contraction} rule {\rsf{conn}} is to systematical
 duplicate negative formulas in the \kl{linkage} formation rules, giving the rules
 {\rsf{Bconn} and \rsf{Fconn}} of \reffig{newreslink}. This models more
 closely what we do in \kl{Actema}, where hypotheses involved in a \kl{DnD} action are
-always preserved in the new goal. This is important from a usability standpoint,
+always preserved in the new \kl{goal}. This is important from a usability standpoint,
 because this ensures the user needs not fret with manual duplication of
 hypotheses in order to complete a proof. The downside is that the context always
 grows bigger, but this can be balanced by exposing the \kl{weakening} rule in the
