@@ -43,31 +43,31 @@
 \knowledge{Automath}{software}
 \knowledge{NuPrl}{software}
 \knowledge{Alf}{software}
-\knowledge{Coq}{software}
-\knowledge{Agda}{software}
-\knowledge{Lean}{software}
-\knowledge{ProofWidgets}{software}
-\knowledge{Mizar}{software}
-\knowledge{Isar}{software}
-\knowledge{software}
+\knowledge{Coq}{software,url={https://coq.inria.fr/}}
+\knowledge{Agda}{software,url={https://wiki.portal.chalmers.se/agda/pmwiki.php}}
+\knowledge{Lean}{software,url={https://lean-lang.org/}}
+\knowledge{ProofWidgets}{software,url={https://github.com/leanprover-community/ProofWidgets4}}
+\knowledge{Mizar}{software,url={http://mizar.org/}}
+\knowledge{Isar}{software,url={https://isabelle.in.tum.de/Isar/}}
+\knowledge{software,url={https://isabelle.in.tum.de/}}
  | Isabelle
  | Isabelle/HOL
-\knowledge{HOL Light}{software}
-\knowledge{Dedukti}{software}
+\knowledge{HOL Light}{software,url={https://www.cl.cam.ac.uk/~jrh13/hol-light/}}
+\knowledge{Dedukti}{software,url={https://deducteam.github.io/}}
 
-\knowledge{Actema}{software}
-\knowledge{coq-actema}{software}
-\knowledge{Profint}{software}
-\knowledge{Flower\,\,Prover}{software}
+\knowledge{Actema}{software,url={https://actema.xyz}}
+\knowledge{coq-actema}{software,url={https://github.com/Champitoad/coq-actema}}
+\knowledge{Profint}{software,url={https://github.com/direct-manipulation/profint}}
+\knowledge{Flower\,\,Prover}{software,url={https://www.lix.polytechnique.fr/Labo/Pablo.DONATO/flowerprover/}}
 
-\knowledge{HTML}{software}
-\knowledge{JavaScript}{software}
-\knowledge{CSS}{software}
-\knowledge{OCaml}{software}
-\knowledge{js\_of\_ocaml}{software}
-\knowledge{Elm}{software}
-\knowledge{Smalltalk}{software}
-\knowledge{Sketchpad}{software}
+\knowledge{HTML}{software,url={https://developer.mozilla.org/en-US/docs/Web/HTML}}
+\knowledge{JavaScript}{software,url={https://developer.mozilla.org/en-US/docs/Web/JavaScript}}
+\knowledge{CSS}{software,url={https://developer.mozilla.org/en-US/docs/Web/CSS}}
+\knowledge{OCaml}{software,url={https://ocaml.org/}}
+\knowledge{js\_of\_ocaml}{software,url={https://ocsigen.org/js_of_ocaml/latest/manual/overview}}
+\knowledge{Elm}{software,url={https://elm-lang.org/}}
+\knowledge{Smalltalk}{software,url={https://en.wikipedia.org/wiki/Smalltalk}}
+\knowledge{Sketchpad}{software,url={https://en.wikipedia.org/wiki/Sketchpad}}
 
 % Proof systems
 
@@ -133,8 +133,10 @@
 
 \knowledgedirective{rule}{notion,wrap=\rsf}
 
+% Modus Ponens
 \knowledge{mp}{rule}
 
+% Natural deduction
 \knowledge{\bot e}{rule}
 \knowledge{{\limp}i}{rule}
 \knowledge{{\limp}e}{rule}
@@ -150,6 +152,7 @@
 \knowledge{\exists e}{rule}
 \knowledge{ip}{rule}
 
+% Sequent calculus
 \knowledge{rule}
  | ax
 \knowledge{notion}
@@ -163,9 +166,12 @@
 \knowledge{ex}{rule}
 \knowledge{ctr}{rule}
 \knowledge{wkn}{rule}
+\knowledge{\top L}{rule}
+\knowledge{\top R}{rule}
 \knowledge{\bot L}{rule}
 \knowledge{{\limp}L}{rule}
 \knowledge{{\limp}R}{rule}
+\knowledge{\land L}{rule}
 \knowledge{\land L_1}{rule}
 \knowledge{\land L_2}{rule}
 \knowledge{\land R}{rule}
@@ -177,12 +183,56 @@
 \knowledge{\exists L}{rule}
 \knowledge{\exists R}{rule}
 
+% Subformula linking
+\knowledge{rule}
+ | id@sfl
+\knowledge{L{=}_1}{rule}
+\knowledge{L{=}_2}{rule}
+\knowledge{L\land_1}{rule}
+\knowledge{L\land_2}{rule}
+\knowledge{R\land_1}{rule}
+\knowledge{R\land_2}{rule}
+\knowledge{L\lor_1}{rule}
+\knowledge{L\lor_2}{rule}
+\knowledge{R\lor_1}{rule}
+\knowledge{R\lor_2}{rule}
+\knowledge{L{\limp}_2}{rule}
+\knowledge{R{\limp}_1}{rule}
+\knowledge{R{\limp}_2}{rule}
+\knowledge{L\forall i}{rule}
+\knowledge{L\forall s}{rule}
+\knowledge{R\forall s}{rule}
+\knowledge{L\exists s}{rule}
+\knowledge{R\exists i}{rule}
+\knowledge{R\exists s}{rule}
+\knowledge{F{=}_1}{rule}
+\knowledge{F{=}_2}{rule}
+\knowledge{F\land_1}{rule}
+\knowledge{F\land_2}{rule}
+\knowledge{F\lor_1}{rule}
+\knowledge{F\lor_2}{rule}
+\knowledge{F{\limp}_1}{rule}
+\knowledge{F{\limp}_2}{rule}
+\knowledge{F\forall i}{rule}
+\knowledge{F\forall s}{rule}
+\knowledge{F\exists s}{rule}
+\knowledge{Fcomm}{rule}
+\knowledge{}{rule}
+\knowledge{neul}{rule}
+\knowledge{neur}{rule}
+\knowledge{absl}{rule}
+\knowledge{absr}{rule}
+\knowledge{absq}{rule}
+\knowledge{efq}{rule}
+
+% Alpha EGs (informal version)
 \knowledge{Iteration}{rule}
 \knowledge{Deiteration}{rule}
 \knowledge{Insertion}{rule}
 \knowledge{Deletion}{rule}
 \knowledge{Double{-}cut}{rule}
 
+% Beta EGs (inductive version)
 \knowledge{Iter}{rule}
 \knowledge{Deit}{rule}
 \knowledge{Ins}{rule}
@@ -192,6 +242,7 @@
 \knowledge{Unif{\da}}{rule}
 \knowledge{Unif{\ua}}{rule}
 
+% Flower calculus
 \knowledge{poll{\da}}{rule}
 \knowledge{poll{\ua}}{rule}
 \knowledge{epis}{rule}
@@ -219,10 +270,10 @@
  | interactive theorem provers
  | Interactive theorem provers
 \knowledge{acronym}
- | PAs
- | PA
  | ITPs
  | ITP
+ | PAs
+ | PA
 
 \knowledge{notion}
  | proof formalism
@@ -694,6 +745,21 @@
  | Window inference
 
 % Proof-by-Action
+
+\knowledge{notion}
+ | item
+ | items
+ | Item
+ | Items
+
+\knowledge{notion}
+ | proof canvas
+
+\knowledge{notion}
+ | interaction operator
+ | interaction operators
+ | Interaction operator
+ | Interaction operators
 
 \knowledge{notion}
  | forward@dnd

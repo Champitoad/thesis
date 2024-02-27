@@ -104,6 +104,15 @@
 \knowledgenewrobustcmd\nsteps[2]{\mathrel{\cmdkl{\rightarrow^{#1}_{#2}}}}
 \knowledgenewrobustcmd\lstep[1]{\mathrel{\cmdkl{\rightharpoonup_{#1}}}}
 
+\begin{scope}\knowledgeimport{sfl}
+\knowledge{notion}
+ | \step
+ | \steps
+ | \notstep
+ | \notsteps
+ | \nsteps
+\end{scope}
+
 \newrobustcmd\xlstep[1]{\withkl{\kl[\lstep]}{\mathrel{\cmdkl{\xrightharpoonup{#1}}}}}
 \newrobustcmd\xstep[1]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\xrightarrow{#1}}}}}
 \newrobustcmd\xsteps[1]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\xrightarrow{#1}\!\!\raisebox{3pt}[3pt]{\small$\ast$}~}}}}
@@ -427,12 +436,34 @@
 
 % Actema
 
-\DeclareMathOperator{\rew}{~~\rhd~~}
-\DeclareMathOperator{\mrew}{~~\rhd^\ast~~}
-\DeclareMathOperator{\link}{\,@\,}
-\DeclareMathOperator{\forw}{\,\varoast\,}
-\DeclareMathOperator{\back}{\,\varogreaterthan\,}
-\DeclareMathOperator{\para}{\,\varobar\,}
+\newrobustcmd\forw{
+  \mathrel{%
+    \withkl{\kl[\forw]}{%
+      \cmdkl{\varoast}
+    }%
+  }%
+}
+\knowledge{\forw}{notion}
+
+\newrobustcmd\back{
+  \mathrel{%
+    \withkl{\kl[\back]}{%
+      \cmdkl{\varogreaterthan}
+    }%
+  }%
+}
+\knowledge{\back}{notion}
+
+\newrobustcmd\para{
+  \mathrel{%
+    \withkl{\kl[\para]}{%
+      \cmdkl{\varobar}
+    }%
+  }%
+}
+\knowledge{\para}{notion}
+
+\DeclareMathOperator{\link}{\mathrel{@}}
 
 \newcommand{\rever}{^*}
 \newcommand{\phole}{\square}

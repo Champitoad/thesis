@@ -141,7 +141,7 @@ informal up to now: that of \emph{logical} action and \emph{rewrite} action.
 \end{itemize}
 
 By forgetting the information on which subterms are selected, one can see any
-\kl{linkage} as a formula whose topmost connective is a linking operator $\link \in
+\kl{linkage} as a formula whose topmost connective is a \kl{interaction operator} $\link \in
 \{\back,\forw\}$. Then it is natural to view \kl{linkages} as the redexes of the
 \kl{rewriting rules} of \reffig{DISL}, although from the user's standpoint \kl{linkages}
 only happen at the top-level\sidenote{In fact this is more of a limitation of
@@ -169,7 +169,7 @@ semantics is associated to every \kl{logical linkage}, even when the selected
 subformulas $A$ and $A'$ are not unifiable. This is made possible by the
 addition of so-called \emph{release} rules\sidenote{A terminology coming from
 the line of works on \emph{focusing} in \kl{proof theory} \cite{andreoli1992}, see
-also \refsec{invert}.}, which simply turn linking operators into their
+also \refsec{invert}.}, which simply turn \kl{interaction operators} into their
 associated logical connective. In our setting this would give the \kl{rewriting rules}
 of \reffig{rellink}. However in this work we opt for a different approach:
 instead we define a \emph{validity criterion} on \kl{linkages}, which guarantees that
@@ -509,7 +509,7 @@ extensively later on:
 
 For each rule, interpreting $\back$ as $\limp$ and $\forw$ as $\land$ is enough
 to show that the rule satisfies Property \ref{prop:soundness} locally. Formally,
-we can define a mapping from formulas containing linking operators to usual
+we can define a mapping from formulas containing \kl{interaction operators} to usual
 formulas where they have been replaced by their interpretation:
 
 \begin{definition}[Interpretation of linking operators]
@@ -542,7 +542,7 @@ consider the polarity of their context.
   First notice that $D$ is necessarily of the form $C\select{D_0}$ where $A
   \link B \step{} D_0$\sidenote{Indeed an implicit assumption in this section,
   which is preserved by all the rules, is that a formula contains at most one
-  linking operator. Thus if $C\select{A \link B} \step{} D$, the only possible
+  \kl{interaction operator}. Thus if $C\select{A \link B} \step{} D$, the only possible
   redex is $A \link B$.}. Then by careful analysis of each rule, it is
   straightforward to show that $\lint{D_0} \seq A \limp B$ if $\link = \back$ or
   $A \land B \seq \lint{D_0}$ if $\link = \forw$. We can conclude in each case
@@ -591,7 +591,7 @@ about the \kl{rewriting rules}:
   list, other cases work similarly. We can assume without loss of generality
   that the derivation has the following shape:
   $$C^+\select{A \back B} \step{} C'\select{A' \link B'} \steps{} D$$
-  Then we reason by case on the linking operator $\link$:
+  Then we reason by case on the \kl{interaction operator} $\link$:
   \begin{itemize}
     \item $\link = \back$: by Fact \ref{prop:rules-preserve-polarity}, $C'$ must
     be positive. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
@@ -819,7 +819,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
         \item In most rules the number of inversions stays unchanged. The only
         exceptions are \rsf{R\!\!\limp_1} and \rsf{F\!\!\limp_1}, which
         decrease the number of inversions of the right context $C\hole$ by $1$.
-        But since they are also the only rules that change the linking operator,
+        But since they are also the only rules that change the \kl{interaction operator},
         the truth of Clause \ref{clause:opposite} is preserved: if the parities
         were opposite (resp. identical) in $\mathcal{L}$, then $\mathcal{L}$
         must be \kl(dnd){forward} (resp. \kl(dnd){backward}). Thus $\mathcal{L'}$ is necessarily
@@ -1080,11 +1080,11 @@ implication in the Curry-Howard-Lambek correspondance for \kl{intuitionistic}
 logic.}. Note that contrary to the rules considered up to now, \kl{linkage} formation
 rules are not closed under arbitrary contexts: indeed the polarity restrictions
 are necessary to ensure soundness, as reviewed in \refsec{soundness}. A \kl(dnd){backward}
-\kl{linkage} in a sequent $\Gamma, D\select{A} \seq E\select{B}$ would be encoded by
+\kl{linkage} in a \kl{sequent} $\Gamma, D\select{A} \seq E\select{B}$ would be encoded by
 the instance
 $$C^+\select{D\select{A} \limp E\select{B}} \step{} C^+\select{D\select{A} \back
 E\select{B}}$$ of {\rsf{B}} where $C^+\hole \syneq \bigwedge Γ \limp \hole$, while
-a \kl(dnd){forward} \kl{linkage} in a sequent $\Gamma, D\select{A}, E\select{B} \seq F$ would
+a \kl(dnd){forward} \kl{linkage} in a \kl{sequent} $\Gamma, D\select{A}, E\select{B} \seq F$ would
 be encoded by the instance $$C^-\select{D\select{A} \land E\select{B}} \step{}
 C^-\select{D\select{A} \forw E\select{B}}$$ of {\rsf{F}} where $C^-\hole \syneq
 \bigwedge \Gamma \wedge \hole \limp F$.
@@ -1196,8 +1196,8 @@ of linking sub-sentences already present in the statement.
 We chose the calculus \kl{G3i} from \cite{negri_structural_2001} as our basis,
 because all \kl{structural rules} are \kl{admissible} in it (but they would be
 straightforward to simulate apart from the cut rule). The first modification we
-do is that we model hypotheses in sequents as lists instead of multisets, to
-make the translation from sequents to formulas completely deterministic. Thus we
+do is that we model hypotheses in \kl{sequents} as lists instead of multisets, to
+make the translation from \kl{sequents} to formulas completely deterministic. Thus we
 need to add the \kl{exchange} rule {\rnm{exch}}, which is simulated
 straightforwardly with the {\rsf{Fcomm}} rule as mentioned earlier. The second
 modification we do is adding \kl{introduction rules} {\rnm{{=}R}} and

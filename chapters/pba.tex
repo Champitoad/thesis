@@ -3,6 +3,8 @@
 \chapter{Proof-by-Action}
 \labch{pba}
 
+\begin{scope}\knowledgeimport{sfl}
+
 % \begin{kaobox}[frametitle=Note]
 %   Most of the content in this chapter has been previously published in
 %   \cite{10.1145/3497775.3503692}.
@@ -63,11 +65,12 @@
 
 
 In this chapter, we focus on how both \emph{click} and \emph{drag-and-drop}
-(\kl{DnD}) actions upon the formulas of a sequent can implement proof construction
-operations corresponding to the core logic; that is how they deal with logical
-connectives, quantifiers and equality. We present these core principles through
-various illustrations and examples in \kl{first-order logic}. The technical and
-\kl{proof-theoretical} foundations for the semantics of \kl{DnD} actions
+(\kl{DnD}) actions upon the formulas of a \kl{sequent} can implement proof
+construction operations corresponding to the core logic; that is how they deal
+with logical connectives, quantifiers and equality. We present these core
+principles through various illustrations and examples in \kl{first-order logic}.
+The technical and \kl{proof-theoretical} foundations for the semantics of
+\kl{DnD} actions
 % , which constitute the main innovation of this work,
 will be investigated more thoroughly in \refch{sfl}.
 % , although the most important meta-theoretical
@@ -76,27 +79,28 @@ More advanced features of the \kl{Proof-by-Action} paradigm that go beyond the c
 logic are illustrated in \refch{advanced}, and \refch{plugin} explains how it
 can be integrated in a mainstream \kl{proof assistant}.
 
-We have started to implement the paradigm in a prototype named {\em Actema} (for
-Active Mathematics) running through a web HTML5/JavaScript interface. At the
-time of writing, a standalone version of the prototype (i.e. which does not use
-an existing theorem prover as its backend) is publicly available online
-\cite{Actema:link}\marginnote[240pt]{\textbf{TODO:} Have a more durable way to
-access the prototype? More generally, what is the correct way to incorporate
-software artifacts in a thesis?}. This possibility to experiment in practice,
-even though yet on a small scale, gave valuable feedback for crafting the way
-\kl{DnD} actions are to be translated into proof construction steps in an intuitive
-and practical way. A description of the overall architecture and implementation
-design of \kl{Actema} will be provided in \refch{plugin}.
+\AP
+We have started to implement the paradigm in a prototype named \reintro{Actema}
+(for ``\textbf{Act}ive math\textbf{ema}tics'') running through a web
+\intro{HTML}/\intro{JavaScript} interface. At the time of writing, a standalone
+version of the prototype (i.e. which does not use an existing theorem prover as
+its backend) is publicly available online \cite{Actema:link}. This possibility
+to experiment in practice, even though yet on a small scale, gave valuable
+feedback for crafting the way \kl{DnD} actions are to be translated into proof
+construction steps in an intuitive and practical way. A description of the
+overall architecture and implementation design of \kl{Actema} will be provided
+in \refch{plugin}.
 
 The chapter is organized as follows: \refsec{setting} briefly outlines its
 logical setting. \refsec{aristote} describes the basic features of a graphical
 proof interface based on our principles, and illustrates them with a famous
 syllogism from Aristotle. \refsec{clicks} shows how it can integrate
-\kl{Proof-by-Pointing} capabilities through click actions. \refsec{newitems} shows
-very briefly how one can add new formulas and objects to the current \kl{goal}. The
-last two sections explain, through further examples, how drag-and-drop actions
-work; first for so-called \emph{rewrite} actions involving equalities, then for
-actions involving logical connectives and quantifiers.
+\kl{Proof-by-Pointing} capabilities through click actions. \refsec{newitems}
+shows very briefly how one can add new formulas and objects to the current
+\kl{goal}. The two following sections explain, through further examples, how
+drag-and-drop actions work; first for so-called \emph{rewrite} actions involving
+equalities, then for actions involving logical connectives and quantifiers. We
+end in \refsec{pba-rw} with a discussion of related works.
 
 % \section{Motivations}\labsec{motivations} Since this work is about changing
 % the very way the user interacts with an interactive theorem prover, we feel it
@@ -132,18 +136,18 @@ actions involving logical connectives and quantifiers.
 
 \section{Logical setting}\labsec{setting}
 
-Any \kl{proof system} must implement a given logical formalism. What we describe here
-ought to be applied to a wide range of formalisms, but in this chapter we focus
-mainly on the core of \kl{intuitionistic} \kl{first-order logic} with equality
-(\kl{FOL}). This allows us to consider sequents where hypotheses are
-unordered which, in turn, simplifies the technical presentation. We will thus
-write $\Gamma,A \seq C$ for a sequent where $A$ is among the hypotheses.
+Any \kl{proof system} must implement a given logical formalism. What we describe
+here ought to be applied to a wide range of formalisms, but in this chapter we
+focus mainly on the core of \kl{intuitionistic} \kl{FOL} with equality. This
+allows us to consider \kl{sequents} where hypotheses are unordered which, in
+turn, simplifies the technical presentation. We will thus write $\Gamma,A \seq
+C$ for a \kl{sequent} where $A$ is among the hypotheses.
 
 We use and do not recall the usual definitions of terms and propositions in
-\kl{first-order logic}. We assume a \kl{first-order} language (function and predicate
-symbols) is given. Provability is defined over sequents $\Gamma\seq C$ by the
-usual logical rules of \kl{natural deduction} (\reffig{calculi-NJ}) and/or
-\kl{sequent calculus} (\reffig{calculi-LJ}).
+\kl{FOL}. We assume a \kl{first-order} language (function and predicate symbols)
+is given. Provability is defined over \kl{sequents} $\Gamma\seq C$ by the usual
+logical rules of \kl{natural deduction} (\reffig{calculi-NJ}) and/or \kl{sequent
+calculus} (\reffig{calculi-LJ}).
 
 Equality is treated in a common way: $=$ is a binary
 predicate symbol written in the usual infix notation, together with the
@@ -159,12 +163,13 @@ $$\forall x.\forall y. x=y\land A \limp \subst{A}{x}{y}.$$
  gray dotted arrows have been added to show the two possible actions.
  \caption{A partial screenshot showing a \kl{goal} in the \kl{Actema} prototype}
  \labfig{aristote}
- \end{figure*}
+\end{figure*}
 
+\AP
 We will not consider, on paper, the details of variable renaming in
-substitutions, implicitly applying the so-called Barendregt
-convention, that bound and free variables are distinct and that a
-variable is bound at most once.
+substitutions, implicitly applying the so-called \intro{Barendregt convention},
+that bound and free variables are distinct and that a variable is bound at most
+once.
 
 Extending this work to simple extensions of \kl{FOL}, like multi-sorted predicate
 calculus is straightforward (and actually done in the \kl{Actema} prototype). Some
@@ -185,74 +190,79 @@ also dispense with a text buffer, since proofs are solely built through
 graphical actions.
 
 
-\reffig{aristote} shows the layout of the system using the
-ancient example from Aristotle. A \kl{goal} appears as a set of {\em items}
-whose nature is defined by their respective colors\sidenote{We are
-  well aware that, in later implementations, this color-based
-  distinction ought to be complemented by some other visual
-  distinction, at least for users with impaired color vision. But in
-  the present description we stick to the red/blue denomination, as it
-  is conveniently concise.}:
+\AP
+\reffig{aristote} shows the layout of the system using the ancient example from
+Aristotle. A \kl{goal} appears as a set of \intro{items} whose nature is defined
+by their respective colors\sidenote{We are well aware that, in later
+implementations, this color-based distinction ought to be complemented by some
+other visual distinction, at least for users with impaired color vision. But in
+the present description we stick to the red/blue denomination, as it is
+conveniently concise.}:
 \begin{itemize}
-\item A {\em red item} which is the proposition to be proved, that is the
+\item A {\em red \kl{item}} which is the proposition to be proved, that is the
  {\em conclusion},
-\item {\em blue items}, which are the local {\em hypotheses}.
+\item {\em blue \kl{items}}, which are the local {\em hypotheses}.
 \end{itemize}
 
-The items are what the user can act upon: either by {\em clicking} on them, or
-by {\em moving} them. Each item can be positioned freely on a so-called
+The \kl{items} are what the user can act upon: either by {\em clicking} on them, or
+by {\em moving} them. Each \kl{item} can be positioned freely on a so-called
 \emph{proof canvas}, which is depicted by the white background in
 \reffig{aristote}.
 
 Finally, note that each \kl{goal} is displayed on a tab.
 
 \subsection{Two kinds of actions}
+
+\AP
 In this example, there are two possible actions.
 
 \begin{itemize}
 \item A first one is to bring together, by drag-and-drop, the red conclusion
 $\mortal(\socrates)$ with the succedant of the first hypothesis $\mortal(x)$.
-This will transform the \kl{goal} by changing the conclusion to $\human(\socrates)$.
+This will transform the \kl{goal} by changing the conclusion to
+$\human(\socrates)$.
 \item A second possibility is to combine the two hypotheses; more precisely to
-bring together the item $\human(\socrates)$ with the premise $\human(x)$ of the
-first hypothesis. This will yield a new hypothesis $\mortal(\socrates)$.
+bring together the \kl{item} $\human(\socrates)$ with the premise $\human(x)$ of
+the first hypothesis. This will yield a new hypothesis $\mortal(\socrates)$.
 \end{itemize}
 
-The first case is what we call a {\em \intro(dnd){backward} step} where the
-conclusion is modified by using a hypothesis. The second case is a {\em
-\intro(dnd){forward} step} where two known facts are combined to deduce a new
-fact, that is an additional blue item.
+The first case is what we call a \intro(dnd){backward} step where the conclusion
+is modified by using a hypothesis. The second case is a \intro(dnd){forward}
+step where two known facts are combined to deduce a new fact, that is an
+additional blue \kl{item}.
 
-In both cases, the proof can then be finished invoking the logical axiom rule.
-In practice this means bringing together the blue hypothesis $\human(\socrates)$
-(resp. the new blue fact $\mortal(\socrates)$) with the identical red
-conclusion.
+In both cases, the proof can then be finished invoking the logical
+\kl(rule){axiom} rule. In practice this means bringing together the blue
+hypothesis $\human(\socrates)$ (resp. the new blue fact $\mortal(\socrates)$)
+with the identical red conclusion.
 
 
 \subsection{Modelling the mechanism}
 
-A \kl(dnd){backward} step involves a hypothesis, here $\forall x.\-\human(x)
+\AP A \kl(dnd){backward} step involves a hypothesis, here $\forall x.\-\human(x)
 \allowbreak\limp \mortal(x)$ and the conclusion, here $\mortal(\socrates)$.
 Furthermore, the action actually links together two {\em subterms} of each of
-these items; this is written by squaring these subterms. The \kl{symbol} ${\back}$,
-used as an operator, is meant to describe the result of the interaction.
-Internally, the behavior of this operator is defined by a set of \kl{rewriting rules}
-given in \reffig{DISL} and \reffig{DISL-U}. Here is the sequence of
-rewrites corresponding to the example\sidenote{Note that $\back$ has lower
-precedence than all logical connectives.}: \renewcommand{\arraystretch}{1.1}
+these \kl{items}; this is written by squaring these subterms. The \kl{symbol}
+$\intro*\back$, called an \intro{interaction operator}, is meant to describe
+the result of the interaction. Internally, the behavior of this operator is
+defined by a set of \kl{rewriting rules} of the form $A \back B \intro*\step{}
+C$ given in \reffig{DISL}. Here is the sequence of rewrites corresponding to the
+example\sidenote{Note that $\back$ has lower precedence than all logical
+connectives.}:
+\renewcommand{\arraystretch}{1.1}
 $$\begin{array}{lll}
     &  \forall x.\human(x)\limp \select{\mortal(x)} \back \select{\mortal(\socrates)}&\\
     \step{} &
            \human(\socrates)\limp \select{\mortal(\socrates)}
            \back \select{\mortal(\socrates)}&
-                                               \mathsf{L\forall i}\\
+                                               \kl{L\forall i}\\
     \step{} &
-           \human(\socrates)\land(\select{\mortal(\socrates)}
-           \back \select{\mortal(\socrates)}) &
-                                                 \mathsf{L{\limp}_2}\\
+           \human(\socrates)\land\left(\select{\mortal(\socrates)}
+           \back \select{\mortal(\socrates)}\right) &
+                                                 \kl{L{\limp}_2}\\
     \step{} &  \human(\socrates)\land \top &
-                                           \mathsf{id}\\
-    \step{} & \human(\socrates)&\mathsf{neur}\\
+                                           \kl{id}\\
+    \step{} & \human(\socrates)&\kl{neur}\\
   \end{array}$$
 
 Notice that:
@@ -266,20 +276,21 @@ Notice that:
   apply in which order.
 \end{itemize}
 
-In general, the action solves the \kl{goal} when the interaction ends with
-the trivially true proposition $\top$. The base case being the action
-corresponding to the axiom/identity rule \rsf{id}: $A\back A \step{} \top$.
+In general, the action solves the \kl{goal} when the interaction ends with the
+trivially true proposition $\top$. The base case being the action corresponding
+to the \kl(rule){axiom}/identity rule \kl{id}: $A\back A \step{} \top$.
 
+\AP
 A \kl(dnd){forward} step, on the other hand, involves two (subterms of two)
 hypotheses. The interaction operator between two hypotheses is written
-$\forw$. In the example above, the detail of the interaction is:
+$\intro*\forw$. In the example above, the detail of the interaction is:
 $$
   \begin{array}{lll}
     &  \forall x .\select{\human(x)}\limp\mortal(x) \forw \select{\human(\socrates)}&\\
-    \step{} & \select{\human(\socrates)}\limp\mortal(\socrates) \forw \select{\human(\socrates)}& \mathsf{F \forall i}\\
-    \step{} & (\select{\human(\socrates)}\back \select{\human(\socrates)} )\limp\mortal(\socrates) &\mathsf{F{\limp}_1}\\
-    \step{} & \top \limp\mortal(\socrates) &\mathsf{id}\\
-    \step{} & \mortal(\socrates) & \mathsf{neul}\\
+    \step{} & \select{\human(\socrates)}\limp\mortal(\socrates) \forw \select{\human(\socrates)}& \kl{F\forall i}\\
+    \step{} & \left(\select{\human(\socrates)}\back \select{\human(\socrates)}\right)\limp\mortal(\socrates) &\kl{F{\limp}_1}\\
+    \step{} & \top \limp\mortal(\socrates) &\kl{id}\\
+    \step{} & \mortal(\socrates) & \kl{neul}\\
   \end{array}
 $$
 
@@ -288,15 +299,15 @@ rules} of ${\back}$ and ${\forw}$ in \refch{sfl}.
 
 
 \section{Proof steps through clicks}\labsec{clicks}
-Drag-and-drop actions involve two items. Some proof steps involve only
-one item; they can be associated to the action of clicking on this
+Drag-and-drop actions involve two \kl{items}. Some proof steps involve only
+one \kl{item}; they can be associated to the action of clicking on this
 item. The general scheme is that clicking on a connective or quantifier
 allows to ``break'' or destruct this connective. The results of clicks
 are not very surprising, but this feature is necessary to complement
 drag-and-drop actions.
 \begin{itemize}
 \item Clicking on a blue conjunction $A\land B$ transforms the
-    item into two separate blue items $A$ and $B$.
+    \kl{item} into two separate blue \kl{items} $A$ and $B$.
 \item Clicking on a red conjunction $A\land B$ splits the \kl{goal} into
     two \kl{subgoals}, whose conclusions are respectively $A$ and $B$.
 \item Clicking on a blue disjunction $A\lor B$ splits the \kl{goal} into two \kl{subgoal}s
@@ -320,28 +331,28 @@ introduction rules} of the head connective for the conclusion, and either the
 \kl{inference rules} is given in \reftab{click-rules}. A few remarks are in
 order:
 \begin{itemize}
-  \item In the current implementation of \kl{Actema}, clicking on a blue item $A
+  \item In the current implementation of \kl{Actema}, clicking on a blue \kl{item} $A
   \limp B$ will work only if the conclusion is $B$. An alternative is to use the
-  {\rsf{{\limp}L}} rule from \kl{sequent calculus}, which is applicable in every
+  {\kl{{\limp}L}} rule from \kl{sequent calculus}, which is applicable in every
   context.
-  \item There is no action mapped to red $\bot$ items, simply because $\bot$
+  \item There is no action mapped to red $\bot$ \kl{items}, simply because $\bot$
   does not have any \kl{introduction rule}.
-  \item There is currently no action mapped to blue $∀$ and red $∃$ items. The
+  \item There is currently no action mapped to blue $∀$ and red $∃$ \kl{items}. The
   reason is that one needs additional information about the \emph{witness} to be
   used when instantiating with the $∀L$ or $∃R$ rule. This could be provided
   with further input (e.g. from a dialog box), but this would need a change in
   the communication protocol between the frontend and backend of \kl{Actema}. Instead
   we decompose this in two steps: first the user can add the witness as a new
   object by using the \texttt{+expr} button (see \refsec{newitems}); then she
-  can drag the corresponding green item and drop it on the quantified item to
+  can drag the corresponding green \kl{item} and drop it on the quantified \kl{item} to
   instantiate it. It is also possible to select with the mouse an arbitrary
-  subexpression occurring in any item of the current \kl{goal}, and then
-  drag-and-drop the item holding the selected subexpression instead.
+  subexpression occurring in any \kl{item} of the current \kl{goal}, and then
+  drag-and-drop the \kl{item} holding the selected subexpression instead.
 \end{itemize}
 
 \begin{remark}[Click completeness]\label{rem:click-completeness}
-  From the previous remarks and the completeness of the cut-free sequent
-  calculus \kl{LJ}, it follows that click actions, when combined with new
+  From the previous remarks and the completeness of the cut-free \kl{sequent
+  calculus} \kl{LJ}, it follows that click actions, when combined with new
   object declarations and \kl{DnD} instantiations, provide a sufficient set of
   interactions to prove any true formula of (\kl{intuitionistic}) \kl{first-order logic}.
 \end{remark}
@@ -351,23 +362,40 @@ order:
 \labtab{click-rules}
 \begin{tabular}{ccc}
 	\toprule
-	\thead{Head connective} & \thead{Red item} & \thead{Blue item} \\
+	\thead{Head connective} & \thead{Red \kl{item}} & \thead{Blue \kl{item}} \\
 	\midrule
-  $\top$ & \rsf{\top R} & \rsf{\top L} \\
+  $\top$ & \kl{\top R} & \kl{\top L} \\
 	\midrule
-  $\bot$ & $\emptyset$ & \rsf{\bot L} \\
+  $\bot$ & $\emptyset$ & \kl{\bot L} \\
 	\midrule
-	$\land$ & \rsf{\land R} & \rsf{\land L} \\
+	$\land$ & \kl{\land R} & \kl{\land L} \\
 	\midrule
-	$\lor$ & \rsf{\lor R_1, \lor R_2} & \rsf{\lor L} \\
+	$\lor$ & \kl{\lor R_1}, \kl{\lor R_2} & \kl{\lor L} \\
 	\midrule
-  $\limp$ & \rsf{{\limp}R} & \rsf{{\limp}E} \\
+  $\limp$ & \kl{{\limp}R} & \kl{{\limp}e} \\
 	\midrule
-  $∀$ & \rsf{∀R} & $\emptyset$ \\
+  $∀$ & \kl{\forall R} & $\emptyset$ \\
 	\midrule
-  $∃$ & $\emptyset$ & \rsf{∃L} \\
+  $∃$ & $\emptyset$ & \kl{\exists L} \\
 \end{tabular}
 \end{table}
+
+\begin{marginfigure}
+  \begin{mathpar}
+    \R[\intro{\top R}]
+      {\Gamma \seq \top}
+    \and
+    \R[\intro{\top L}]
+      {\Gamma \seq C}
+      {\Gamma, \top \seq C}
+    \and
+    \R[\intro{\land L}]
+      {\Gamma, A, B \seq C}
+      {\Gamma, A \land B \seq C}
+  \end{mathpar}
+  \caption{Variants of some sequent calculus rules}
+  \labfig{sequent-variant-rules}
+\end{marginfigure}
 
 
 It is possible to associate some more complex effects to click actions performed
@@ -381,8 +409,8 @@ provides an implementation of \kl{PbP} available as a contextual menu action.
 
 \section{Adding new items}\labsec{newitems}
 
-Often in the course of a proof, one will want to add new items: either a new
-conjecture (blue item), or a new object (green item) that would be helpful to
+Often in the course of a proof, one will want to add new \kl{items}: either a new
+conjecture (blue \kl{item}), or a new object (green \kl{item}) that would be helpful to
 solve the current \kl{goal}. These can be done respectively with the blue
 \texttt{+hyp} and the green \texttt{+expr} buttons, which appear in the
 screenshot of \reffig{edukera}. When clicked, they prompt the user
@@ -443,18 +471,18 @@ terms are directly written in decimal notation. The proof goes as follows:
     $$
       \begin{array}{lll}
         & \forall x. \forall y. \select{x + \suc{y}} = \suc{(x + y)} \back \select{1 + 1} = 2 & \\
-        \step{} & \forall y. \select{1 + \suc{y}} = \suc{(1 + y)} \back \select{1 + 1} = 2 &\mathsf{L\forall i} \\
-        \step{} & \select{1 + \suc{0}} = \suc{(1 + 0)} \back \select{1 + 1} = 2 &\mathsf{L\forall i} \\
+        \step{} & \forall y. \select{1 + \suc{y}} = \suc{(1 + y)} \back \select{1 + 1} = 2 &\kl{L\forall i} \\
+        \step{} & \select{1 + \suc{0}} = \suc{(1 + 0)} \back \select{1 + 1} = 2 &\kl{L\forall i} \\
         \syneq & \select{1 + 1} = \suc{(1 + 0)} \back \select{1 + 1} = 2 & \\
-        \step{} & \suc{(1 + 0)} = 2 &\mathsf{L{=}_1}
+        \step{} & \suc{(1 + 0)} = 2 &\kl{L{=}_1}
       \end{array}
     $$
   \item We link the right-hand side $x + 0$ of the first addition \kl{axiom} with $1 + 0$ in the conclusion, which rewrites $1 + 0$ into $1$:
     $$
       \begin{array}{lll}
         & \forall x. x = \select{x + 0} \back \suc{(\select{1 + 0})} = 2 & \\
-        \step{} & 1 = \select{1 + 0} \back \suc{(\select{1 + 0})} = 2 &\mathsf{L\forall i} \\
-        \step{} & \suc{1} = 2 &\mathsf{L{=}_2} \\
+        \step{} & 1 = \select{1 + 0} \back \suc{(\select{1 + 0})} = 2 &\kl{L\forall i} \\
+        \step{} & \suc{1} = 2 &\kl{L{=}_2} \\
         \syneq & 2 = 2 &
       \end{array}
     $$
@@ -464,41 +492,41 @@ We end up with the conclusion $2 = 2$, which is provable by a simple click.
 Notice how the orientation of the two rewritings is determined by which side of
 the equality is selected. Also, in this case, the rewritings
 correspond to \kl(dnd){backward} proof steps, because the rewriting is performed
-in the conclusion. Similar rules (\rsf{F{=}_1} and \rsf{F{=}_2}) are
+in the conclusion. Similar rules (\kl{F{=}_1} and \kl{F{=}_2}) are
 used to perform rewritings in hypotheses.
 
 
 \section{Drag-and-dropping through connectives}\labsec{dnd-examples}
 We mentioned in \refsec{clicks} that it is possible to destruct logical
 connectives through click actions. In many cases however, this will not be
-necessary: because a drag-and-drop involves subterms of the items involved, one
+necessary: because a drag-and-drop involves subterms of the \kl{items} involved, one
 can often directly use (resp. act on) the part of the hypothesis (resp.
 conclusion) which is of interest.
 
 \subsection{Conjunction and disjunction}
 The conjunction is an easy to explain case. A hypothesis of the form
 $A\land B$ can be used directly both as evidence for $A$ and as evidence
-for $B$. This is modeled by the rules \rsf{L\land_1} and
-\rsf{L\land_2}. A very simple action is thus:
+for $B$. This is modeled by the rules \kl{L\land_1} and
+\kl{L\land_2}. A very simple action is thus:
 $$
 \begin{array}{llll}
   \select{A}\land B \back \select{A} & \step{}& \select{A} \back
-  \select{A} \hbox to 1cm {\hfil}&\mathsf{L \land_1}\\
-                                       & \step{} &\top & \mathsf{id}
+  \select{A} \hbox to 1cm {\hfil}&\kl{L\land_1}\\
+                                       & \step{} &\top & \kl{id}
 \end{array}
 $$
 
 On the other hand, considering a conjunctive \kl{goal} $A\land B$, one can
 simplify or solve one of the branches by a \kl{DnD} action. This involves
-rules \rsf{R \land_1} and
-\rsf{R \land_2}. For instance:
+rules \kl{R\land_1} and
+\kl{R\land_2}. For instance:
 $$
 \begin{array}{llll}
   \select{A} \back \select{A}\land B &
                                          \step{}& (\select{A} \back
-                                         \select{A})\land B &\mathsf{R \land_1}\\
-                                       & \step{}& \top \land B  & \mathsf{id}\\
-  &\step{}& B&\mathsf{neul}
+                                         \select{A})\land B &\kl{R\land_1}\\
+                                       & \step{}& \top \land B  & \kl{id}\\
+  &\step{}& B&\kl{neul}
 \end{array}
 $$
 
@@ -509,26 +537,26 @@ disjunction without comitting to proving it entirely:
 $$
 \begin{array}{llll}
   \select{A} \back (B \land \select{A}) \lor C
-    & \step{} & (\select{A} \back B \land \select{A}) \lor C &\mathsf{R\lor_1}\\
-    & \step{} & (B \land (\select{A} \back \select{A})) \lor C &\mathsf{R\land_2}\\
-    & \step{} & (B \land \top) \lor C &\mathsf{id}\\
-    & \step{} & B \lor C &\mathsf{neur}
+    & \step{} & (\select{A} \back B \land \select{A}) \lor C &\kl{R\lor_1}\\
+    & \step{} & (B \land (\select{A} \back \select{A})) \lor C &\kl{R\land_2}\\
+    & \step{} & (B \land \top) \lor C &\kl{id}\\
+    & \step{} & B \lor C &\kl{neur}
 \end{array}
 $$
 
 Disjunctive hypotheses also have a \kl(dnd){backward} behavior defined by the rules
-\rsf{L\lor_1} and \rsf{L\lor_2}, although in most cases one will prefer the
+\kl{L\lor_1} and \kl{L\lor_2}, although in most cases one will prefer the
 usual \kl{subgoal} semantics associated with click actions. More interesting is
-their \kl(dnd){forward} behavior with the rules \rsf{F\lor_1} and \rsf{F\lor_2}, in
+their \kl(dnd){forward} behavior with the rules \kl{F\lor_1} and \kl{F\lor_2}, in
 particular when they interact with negated hypotheses. For instance:
 $$
 \begin{array}{llll}
   \select{A} \lor B \forw \neg \select{A}
-    & \step{} & (\select{A} \forw \neg\select{A}) \lor B &\mathsf{F\lor_1}\\
-    & \step{} & \neg (\select{A} \back \select{A}) \lor B &\mathsf{F{\limp}_1}\\
-    & \step{} & \neg \top \lor B &\mathsf{id}\\
-    & \step{} & \bot \lor B &\mathsf{neul}\\
-    & \step{} & B &\mathsf{neul}\\
+    & \step{} & (\select{A} \forw \neg\select{A}) \lor B &\kl{F\lor_1}\\
+    & \step{} & \neg (\select{A} \back \select{A}) \lor B &\kl{F{\limp}_1}\\
+    & \step{} & \neg \top \lor B &\kl{id}\\
+    & \step{} & \bot \lor B &\kl{neul}\\
+    & \step{} & B &\kl{neul}\\
 \end{array}
 $$
 
@@ -551,10 +579,9 @@ $$
 \begin{array}{llll}
   A\limp \select{B} \back \select{B} &\step{}& A\land (\select{B}
                                                 \back
-                                                \select{B})&\mathsf{L
-                                                             {\limp}_2}\\
-                                         &\step{}&A\land\top & \mathsf{id}\\
-    &\step{}& A&\mathsf{neul}
+                                                \select{B})&\kl{L{\limp}_2}\\
+                                         &\step{}&A\land\top & \kl{id}\\
+    &\step{}& A&\kl{neul}
 \end{array}
 $$
 
@@ -617,7 +644,7 @@ arbitrary syntactical details, like the order of hypotheses or whether
 they come in curryfied form or not.
 
 Also, the rules for implication combined with the rules for equality
-\rsf{L{=}_i} or \rsf{F{=}_i} naturally give access to {\em
+\kl[L{=}_1]{L{=}_i} or \kl[L{=}_1]{F{=}_i} naturally give access to {\em
   conditional rewriting}; we detail this in combination with
 quantifiers in the next section.
 
@@ -626,7 +653,7 @@ quantifiers in the next section.
 
 
 As for red implications, they also have a \kl(dnd){backward} semantics with the rules
-\rsf{R{\limp}_1} and \rsf{R{\limp}_2}, but most of the time one
+\kl{R{\limp}_1} and \kl{R{\limp}_2}, but most of the time one
 will want to destruct them immediately by click. An exception could be if one
 wants to simplify some part of an implicative, inductive \kl{goal} before starting
 the induction.
@@ -634,7 +661,7 @@ the induction.
 \subsection{Quantifiers}
 As the first example of this chapter shows, drag-and-drop actions work through
 quantifiers and can trigger instantiations of quantified variables. This is made
-possible by the rules \rsf{L\forall i} and \rsf{F\forall i}, which allow the
+possible by the rules \kl{L\forall i} and \kl{F\forall i}, which allow the
 instantiation of a variable universally quantified in a hypothesis.
 
 Symmetrically, a variable quantified existentially in a conclusion can
@@ -642,9 +669,9 @@ also be instantiated. For instance:
 
 $$\begin{array}{llll}
     \select{A(t)}\back \exists x.\select{A(x)}&\step{}&
-                                                      \select{A(t)}\back\select{A(t)}&\mathsf{L}\forall\mathsf{i}
+                                                      \select{A(t)}\back\select{A(t)}&\kl{L\forall i}
     \\
-                                               &\step{}& \top&\mathsf{id}
+                                               &\step{}& \top&\kl{id}
   \end{array}
   $$
 
@@ -680,7 +707,7 @@ $$
 
 
 Note also that it is possible to instantiate only some of the universally
-quantified variables in the items involved. In general, a universally
+quantified variables in the \kl{items} involved. In general, a universally
 quantified variable can be instantiated when the quantifier is in a
 negative position; for instance:
 %\setlength{\abovedisplayskip}{-5pt}
@@ -738,15 +765,15 @@ $$
   &\exists y. \forall x. \select{R(x,y)}\back \forall x'.\exists
     y'. \select{R(x',y')}& \\
   \step{}& \forall y.(\forall x. \select{R(x,y)}\back \forall x'.\exists
-        y'. \select{R(x',y')} ) \mbox{\hbox to 12pt{\hfill}}& \mathsf{L}\exists\mathsf{s}\\
+        y'. \select{R(x',y')} ) \mbox{\hbox to 12pt{\hfill}}& \kl{L\exists s}\\
   \step{} &\forall y. \forall x'. (\forall x. \select{R(x,y)}\back \exists
-  y'. \select{R(x',y')} ) ~~~~~~~~~~~~&\mathsf{R}\forall\mathsf{s}\\
+  y'. \select{R(x',y')} ) ~~~~~~~~~~~~&\kl{R\forall s}\\
   \step{} &  \forall y. \forall x'. (\forall
-         x. \select{R(x,y)}\back\select{R(x',y)} )&\mathsf{R}\exists\mathsf{i}\\
+         x. \select{R(x,y)}\back\select{R(x',y)} )&\kl{R\exists i}\\
   \step{}&   \forall y. \forall
-           x'. (\select{R(x',y)}\back\select{R(x',y)} )&\mathsf{L}\forall\mathsf{i}\\
+           x'. (\select{R(x',y)}\back\select{R(x',y)} )&\kl{L\forall i}\\
    \step{}  &  \forall y. \forall
-           x'. \top & \mathsf{id}\\
+           x'. \top & \kl{id}\\
 \steps{}& \top
 \end{array}
 $$
@@ -778,9 +805,9 @@ which will generate a side-condition $t\neq 0$:
 $$
 \begin{array}{lll}
   &\forall x. x\neq 0 \limp \select{f(x)} = g(x) \back A(\select{f(t)}) &\\
-  \step{} & t\neq 0 \limp \select{f(t)} = g(t) \back A(\select{f(t)}) &\mathsf{L \forall i}\\
-  \step{} & t\neq 0 \land (\select{f(t)} = g(t) \back A(\select{f(t)})) & \mathsf{L{\limp}_2}\\
-  \step{} &  t\neq 0 \land A(g(t)) &\mathsf{L{=}_1} \\
+  \step{} & t\neq 0 \limp \select{f(t)} = g(t) \back A(\select{f(t)}) &\kl{L\forall i}\\
+  \step{} & t\neq 0 \land (\select{f(t)} = g(t) \back A(\select{f(t)})) & \kl{L{\limp}_2}\\
+  \step{} &  t\neq 0 \land A(g(t)) &\kl{L{=}_1} \\
 \end{array}$$
 
 One could similarly do such a rewrite in a hypothesis. Furthermore,
@@ -788,169 +815,12 @@ the conditional rewrite can also be performed under quantifiers; for instance:
 $$
 \begin{array}{lll}
   &\forall x. x\neq 0 \limp \select{f(x)} = g(x) \back \exists y . A(\select{f(y)})
-  &\mathsf{R \exists s}\\
-  \step{} &\exists y. ( \forall x. x\neq 0 \limp \select{f(x)} = g(x) \back A(\select{f(y)})) &\mathsf{L \forall i}\\
-  \step{} & \exists y. ( y\neq 0 \land ( \select{f(y)} = g(y) \back A(\select{f(y)}) )) &\mathsf{L{\limp}_2} \\
-  \step{} & \exists y .( y\neq 0 \land A(g(t))) &\mathsf{L{=}_1} \\
+  &\kl{R\exists s}\\
+  \step{} &\exists y. ( \forall x. x\neq 0 \limp \select{f(x)} = g(x) \back A(\select{f(y)})) &\kl{L\forall i}\\
+  \step{} & \exists y. ( y\neq 0 \land ( \select{f(y)} = g(y) \back A(\select{f(y)}) )) &\kl{L{\limp}_2} \\
+  \step{} & \exists y .( y\neq 0 \land A(g(t))) &\kl{L{=}_1} \\
 \end{array}$$
 
-
-% \todo{Remove page break (while keeping the wide page layout for the rules).}
-
-\pagelayout{wide} % No margins
-\begin{figure}
-  \fontsize{10}{10.5}\selectfont
-    \renewcommand{\arraystretch}{1.25}
-  \begin{framed}
-  \begin{mathpar}
-    \begin{array}{r@{\quad}c@{\quad}lr}
-        \multicolumn{4}{c}{\textsc{\kl(dnd){Backward}}} \\[2em]
-
-        {A \back A}&\step{}&\top &\mathsf{id}\\
-        {t = u \back \subst{A}{t}{x}}&\step{}&\subst{A}{u}{x} &\mathsf{L{=}_1}\\
-        {t = u \back \subst{A}{u}{x}}&\step{}&\subst{A}{t}{x} &\mathsf{L{=}_2}\\[1em]
-
-        {(B \land C) \back A}&\step{}&        {B \back A}&\mathsf{L \land_1}\\
-        {(C \land B) \back A}&\step{}&        {B \back A}&\mathsf{L \land_2}\\
-        {A \back~(B \land C)}&\step{}&        {(A \back B) \land C}&\mathsf{R \land_1}\\
-        {A \back~(C \land B)}&\step{}&        {C \land (A \back B)}&\mathsf{R \land_2}\\[1em]
-        
-        {(B \lor C) \back A}&\step{}&        {(B \back A) \land (C \limp A)}&\mathsf{L \lor_1}\rever\\
-        {(C \lor B) \back A}&\step{}&        {(C \limp A) \land (B \back A)}&\mathsf{L \lor_2}\rever\\
-        {A \back~(B \lor C)}&\step{}&        {(A \back B) \lor C}&\mathsf{R \lor_1}\\
-        {A \back~(C \lor B)}&\step{}&        {C \lor (A \back B)}&\mathsf{R \lor_2}\\[1em]
-
-        {(C \limp B) \back A}&\step{}&        {C \land (B \back A)}&\mathsf{L{\limp}_2}\\
-        {A \back~(B \limp C)}&\step{}&        {(A \forw B) \limp C}&\mathsf{R{\limp}_1}\rever\\
-        {A \back~(C \limp B)}&\step{}&        {C \limp (A \back B)}&\mathsf{R{\limp}_2}\rever\\[1em]
-
-        % {A \back \neg B}&\step{}&        {\neg (A \forw B)}&\mathsf{R\neg}\rever\\[1em]
-
-        {(\forall x. B) \back A}&\step{}&        {\subst{B}{x}{t} \back A}&\mathsf{L \forall i}\\
-        {(\forall x. B) \back A}&\step{}&        {\exists x. (B \back A)}&\mathsf{L \forall s}\\
-        {A \back~(\forall x. B)}&\step{}&        {\forall x. (A \back B)}&\mathsf{R \forall s}\rever\\[1em]
-
-        {(\exists x. B) \back A}&\step{}&        {\forall x. (B \back A)}&\mathsf{L \exists s}\rever\\
-        {A \back~(\exists x. B)}&\step{}&        {A \back \subst{B}{x}{t}}&\mathsf{R \exists i}\\
-        {A \back~(\exists x. B)}&\step{}&        {\exists x. (A \back B)}&\mathsf{R \exists s}\\
-    \end{array}
-  % \end{mathpar}
-  \and
-  % \textsc{Forward}\\
-  % \begin{mathpar}
-    \begin{array}{r@{\quad}c@{\quad}lr}
-      \multicolumn{4}{c}{\textsc{\kl(dnd){Forward}}} \\[2em]
-
-      % \R[\mathsf{lnn}]
-      %   {\ifill{\eta}{\efill{A}{A} \forw \efill{B}{B}}}
-      %   {\ifill{\eta}{\ifill{A}{A} \land \ifill{B}{B}}}
-      % \\
-      {\subst{A}{t}{x} \forw~(t = u)} &\step{}& {\subst{A}{u}{x}}&\mathsf{F{=}_1}\\
-      {\subst{A}{u}{x} \forw~(t = u)} &\step{}& {\subst{A}{t}{x}}&\mathsf{F{=}_2}\\[1em]
-
-        {A \forw~(B \land C)} &\step{}&   {A \forw B}&\mathsf{F\land_1}\\
-        {A \forw~(C \land B)}&\step{}&        {A \forw B}&
-            \mathsf{F \land_2}\\[1em]
-
-        {A \forw~(B \lor C)}& \step{}&       {(A \forw B) \lor C}
-      &
-      \mathsf{F \lor_1}\\
-        {A \forw~(C \lor B)}&\step{}&        {C \lor (A \forw B)}&
-            \mathsf{F \lor_2}\\[1em]
-
-        {A \forw~(B \limp C)}
-&\step{}&        {(A \back B) \limp C}
-      &\mathsf{F{\limp}_1}\\
-        {A \forw~(C \limp B)}&\step{}&        {C \limp (A \forw B)}&
-            \mathsf{F{\limp}_2}\\[1em]
-
-%         {A \forw \neg B}
-% &\step{}&        {\neg (A \back B)}
-%       &\mathsf{F\neg}\\[1em]
-
-        {A \forw~(\forall x. B)}
-&\step{}&        {A \forw \subst{B}{x}{t}}
-      &
-      \mathsf{F \forall i}\\
-        {A \forw~(\forall x. B)}&\step{}&        {\forall x. (A \forw B)}&
-            \mathsf{F \forall s}\\[1em]
-
-              {A \forw~(\exists x. B)}&\step{}&{\exists x. (A \forw B)}&
-              \mathsf{F \exists s}\rever\\[1em]
-              
-          {B \forw A}&\step{}&
-          {A \forw B}& \mathsf{Fcomm}\\
-    \end{array}
-    \end{mathpar}
-    ~\\[1em]
-    In the rules $\{\mathsf{L \forall s}, \mathsf{L \exists s}, \mathsf{R \forall
-    s}, \mathsf{R \exists s}, \mathsf{F \forall s}, \mathsf{F \exists s}\}$, $x$
-    is not free in $A$.
-  \end{framed}
-  \caption{Linking rules}
-  \labfig{DISL}
-\end{figure}
-
-\begin{figure}
-  \fontsize{10}{10.5}\selectfont
-  \begin{framed}
-  {\textsc{Units}}\\
-  \begin{mathpar}
-    \renewcommand{\arraystretch}{1.2}
-    \begin{array}{lr@{\quad}c@{\quad}lc}
-   \pair{\mcirc}{\dagger} \in \{
-      \pair{\land}{\top},
-      \pair{\lor}{\bot},
-      \pair{\limp}{\top}
-      \}&
-      {\dagger \mcirc A}&\step{}&A&\mathsf{neul}\\
- \pair{\mcirc}{\dagger} \in \{
-      \pair{\land}{\top},
-      \pair{\lor}{\bot}
-      \}&
-      {A \mcirc \dagger}&\step{}&A&\mathsf{neur}\\
-   \pair{\mcirc}{\dagger} \in \{
-      \pair{\land}{\bot},
-      \pair{\lor}{\top}
-      \}&
-      {\dagger \mcirc A}&\step{}&\dagger&
-       \mathsf{absl}\\
-  \pair{\mcirc}{\dagger} \in \{
-      \pair{\land}{\bot},
-      \pair{\lor}{\top},
-      \pair{\limp}{\top}
-      \}&
-      {A \mcirc \dagger}
-      &\step{}&\dagger& \mathsf{absr}\\
-  \pair{\mdiam}{\dagger} \in \{
-    \pair{\forall}{\top},
-    \pair{\exists}{\bot}
-    \}&      {\mdiam x. \dagger}&\step{}&\dagger&    \mathsf{absq}
-    \\
-&      {\bot \limp A}&\step{}&\top&\mathsf{efq} 
-      \end{array}
-  \end{mathpar}
-  \end{framed}
-  % \begin{framed}
-  % {\sc Resources}
-  % \begin{mathpar}
-  %   %\R[\mathsf{conp}]
-  %   %  {\pi\{A \lor A\}}
-  %   %  {\pi\{A\}}
-  %   %\and
-  %   \R[\mathsf{conn}]
-  %     {\ifill{\eta}{A \land A}}
-  %     {\ifill{\eta}{A}}
-  %   \and
-  %   \R[\mathsf{wkn}]
-  %     {\ifill{\eta}{\top}}
-  %     {\ifill{\eta}{A}}
-  % \end{mathpar}
-  % \end{framed}
-  \caption{Unit elimination rules}
-  \labfig{DISL-U}
-\end{figure}
-\pagelayout{margin} % Restore margins
 
 \section{Related works}\labsec{pba-rw}
 
@@ -1056,3 +926,161 @@ coLLecT~\sidecite{clickcollect}. In particular, Logitext and Click \& coLLecT
 exploit the same idea of associating click actions on head connectives to
 \kl{inference rules} in \kl{sequent calculus}. But these systems focus more on explicating
 the proof object than on making its construction easier.
+
+
+\pagelayout{wide} % No margins
+\begin{figure}
+  \fontsize{10}{10.5}\selectfont
+    \renewcommand{\arraystretch}{1.25}
+  \begin{framed}
+  \begin{mathpar}
+    \begin{array}{r@{\quad}c@{\quad}lr}
+        \multicolumn{4}{c}{\textsc{\kl(dnd){Backward}}} \\[2em]
+
+        {A \back A}&\step{}&\top &\intro(sfl){id}\\
+        {t = u \back \subst{A}{t}{x}}&\step{}&\subst{A}{u}{x} &\intro{L{=}_1}\\
+        {t = u \back \subst{A}{u}{x}}&\step{}&\subst{A}{t}{x} &\intro{L{=}_2}\\[1em]
+
+        {(B \land C) \back A}&\step{}&        {B \back A}&\intro{L\land_1}\\
+        {(C \land B) \back A}&\step{}&        {B \back A}&\intro{L\land_2}\\
+        {A \back~(B \land C)}&\step{}&        {(A \back B) \land C}&\intro{R\land_1}\\
+        {A \back~(C \land B)}&\step{}&        {C \land (A \back B)}&\intro{R\land_2}\\[1em]
+        
+        {(B \lor C) \back A}&\step{}&        {(B \back A) \land (C \limp A)}&\intro{L\lor_1}\rever\\
+        {(C \lor B) \back A}&\step{}&        {(C \limp A) \land (B \back A)}&\intro{L\lor_2}\rever\\
+        {A \back~(B \lor C)}&\step{}&        {(A \back B) \lor C}&\intro{R\lor_1}\\
+        {A \back~(C \lor B)}&\step{}&        {C \lor (A \back B)}&\intro{R\lor_2}\\[1em]
+
+        {(C \limp B) \back A}&\step{}&        {C \land (B \back A)}&\intro{L{\limp}_2}\\
+        {A \back~(B \limp C)}&\step{}&        {(A \forw B) \limp C}&\intro{R{\limp}_1}\rever\\
+        {A \back~(C \limp B)}&\step{}&        {C \limp (A \back B)}&\intro{R{\limp}_2}\rever\\[1em]
+
+        % {A \back \neg B}&\step{}&        {\neg (A \forw B)}&\intro{R\neg}\rever\\[1em]
+
+        {(\forall x. B) \back A}&\step{}&        {\subst{B}{x}{t} \back A}&\intro{L\forall i}\\
+        {(\forall x. B) \back A}&\step{}&        {\exists x. (B \back A)}&\intro{L\forall s}\\
+        {A \back~(\forall x. B)}&\step{}&        {\forall x. (A \back B)}&\intro{R\forall s}\rever\\[1em]
+
+        {(\exists x. B) \back A}&\step{}&        {\forall x. (B \back A)}&\intro{L\exists s}\rever\\
+        {A \back~(\exists x. B)}&\step{}&        {A \back \subst{B}{x}{t}}&\intro{R\exists i}\\
+        {A \back~(\exists x. B)}&\step{}&        {\exists x. (A \back B)}&\intro{R\exists s}\\
+    \end{array}
+  % \end{mathpar}
+  \and
+  % \textsc{Forward}\\
+  % \begin{mathpar}
+    \begin{array}{r@{\quad}c@{\quad}lr}
+      \multicolumn{4}{c}{\textsc{\kl(dnd){Forward}}} \\[2em]
+
+      % \R[\intro{lnn}]
+      %   {\ifill{\eta}{\efill{A}{A} \forw \efill{B}{B}}}
+      %   {\ifill{\eta}{\ifill{A}{A} \land \ifill{B}{B}}}
+      % \\
+      {\subst{A}{t}{x} \forw~(t = u)} &\step{}& {\subst{A}{u}{x}}&\intro{F{=}_1}\\
+      {\subst{A}{u}{x} \forw~(t = u)} &\step{}& {\subst{A}{t}{x}}&\intro{F{=}_2}\\[1em]
+
+        {A \forw~(B \land C)} &\step{}&   {A \forw B}&\intro{F\land_1}\\
+        {A \forw~(C \land B)}&\step{}&        {A \forw B}&
+            \intro{F\land_2}\\[1em]
+
+        {A \forw~(B \lor C)}& \step{}&       {(A \forw B) \lor C}
+      &
+      \intro{F\lor_1}\\
+        {A \forw~(C \lor B)}&\step{}&        {C \lor (A \forw B)}&
+            \intro{F\lor_2}\\[1em]
+
+        {A \forw~(B \limp C)}
+&\step{}&        {(A \back B) \limp C}
+      &\intro{F{\limp}_1}\\
+        {A \forw~(C \limp B)}&\step{}&        {C \limp (A \forw B)}&
+            \intro{F{\limp}_2}\\[1em]
+
+%         {A \forw \neg B}
+% &\step{}&        {\neg (A \back B)}
+%       &\intro{F\neg}\\[1em]
+
+        {A \forw~(\forall x. B)}
+&\step{}&        {A \forw \subst{B}{x}{t}}
+      &
+      \intro{F\forall i}\\
+        {A \forw~(\forall x. B)}&\step{}&        {\forall x. (A \forw B)}&
+            \intro{F\forall s}\\[1em]
+
+              {A \forw~(\exists x. B)}&\step{}&{\exists x. (A \forw B)}&
+              \intro{F\exists s}\rever\\[1em]
+              
+          {B \forw A}&\step{}&
+          {A \forw B}& \intro{Fcomm}\\
+    \end{array}
+    \end{mathpar}
+    ~\\[1em]
+    In the rules $\{\kl{L\forall s}, \kl{L\exists s}, \kl{R\forall s},
+    \kl{R\exists s}, \kl{F\forall s}, \kl{F\exists s}\}$, $x$ is not free in
+    $A$.
+  \end{framed}
+  \caption{Linking rules}
+  \labfig{DISL}
+\end{figure}
+
+\begin{figure}
+  \fontsize{10}{10.5}\selectfont
+  \begin{framed}
+  {\textsc{Units}}\\
+  \begin{mathpar}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{array}{lr@{\quad}c@{\quad}lc}
+   \pair{\mcirc}{\dagger} \in \{
+      \pair{\land}{\top},
+      \pair{\lor}{\bot},
+      \pair{\limp}{\top}
+      \}&
+      {\dagger \mcirc A}&\step{}&A&\intro{neul}\\
+ \pair{\mcirc}{\dagger} \in \{
+      \pair{\land}{\top},
+      \pair{\lor}{\bot}
+      \}&
+      {A \mcirc \dagger}&\step{}&A&\intro{neur}\\
+   \pair{\mcirc}{\dagger} \in \{
+      \pair{\land}{\bot},
+      \pair{\lor}{\top}
+      \}&
+      {\dagger \mcirc A}&\step{}&\dagger&
+       \intro{absl}\\
+  \pair{\mcirc}{\dagger} \in \{
+      \pair{\land}{\bot},
+      \pair{\lor}{\top},
+      \pair{\limp}{\top}
+      \}&
+      {A \mcirc \dagger}
+      &\step{}&\dagger& \intro{absr}\\
+  \pair{\mdiam}{\dagger} \in \{
+    \pair{\forall}{\top},
+    \pair{\exists}{\bot}
+    \}&      {\mdiam x. \dagger}&\step{}&\dagger&    \intro{absq}
+    \\
+&      {\bot \limp A}&\step{}&\top&\intro{efq} 
+      \end{array}
+  \end{mathpar}
+  \end{framed}
+  % \begin{framed}
+  % {\sc Resources}
+  % \begin{mathpar}
+  %   %\R[\intro{conp}]
+  %   %  {\pi\{A \lor A\}}
+  %   %  {\pi\{A\}}
+  %   %\and
+  %   \R[\intro{conn}]
+  %     {\ifill{\eta}{A \land A}}
+  %     {\ifill{\eta}{A}}
+  %   \and
+  %   \R[\intro{wkn}]
+  %     {\ifill{\eta}{\top}}
+  %     {\ifill{\eta}{A}}
+  % \end{mathpar}
+  % \end{framed}
+  \caption{Unit elimination rules}
+  \labfig{DISL-U}
+\end{figure}
+\pagelayout{margin} % Restore margins
+
+\end{scope}

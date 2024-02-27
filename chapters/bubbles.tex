@@ -115,9 +115,9 @@ to explore a notion of \emph{bubble} inspired by the \emph{membranes} of the
 {\cham} \sidecite{berry_chemical_1989}. The latter are used to delineate zones
 of \emph{local} interaction, which are still porous to external data. This is
 precisely what we want to do here: let us consider that the user tries to prove
-the sequent $\Gamma \seq A \land B$. By clicking on the red item $A \land B$,
+the \kl{sequent} $\Gamma \seq A \land B$. By clicking on the red item $A \land B$,
 she will break it into two \kl{bubbles} $\bubbleT{\seq A}$ and $\bubbleT{\seq B}$.
-Then she might decompose $A$ and $B$ further into sequents $\sigma_A = \Gamma_A
+Then she might decompose $A$ and $B$ further into \kl{sequents} $\sigma_A = \Gamma_A
 \seq C_A$ and $\sigma_B = \Gamma_B \seq C_B$, and use hypotheses from $\Gamma$
 by dragging them inside either $\bubbleT{\sigma_A}$ or $\bubbleT{\sigma_B}$.
 However, hypotheses from $\Gamma_A$ and $\Gamma_B$ cannot be dragged out from
@@ -141,8 +141,8 @@ in it.
 \caption{Context-scoping in \kl{bubbles} as topological constraints}
 \labfig{bubbles-flow}
 \end{figure}
-\kl{Bubbles} can also be seen as a way to internalize in the syntax of sequents the
-notion of \emph{subgoal}, which requires in turn to allow nesting of sequents
+\kl{Bubbles} can also be seen as a way to internalize in the syntax of \kl{sequents} the
+notion of \emph{subgoal}, which requires in turn to allow nesting of \kl{sequents}
 inside each other. The \kl{proof state} is not a set of \kl{subgoals} anymore, but a
 single \kl{nested sequent} of this sort, that we call a \emph{solution}\sidenote{The
 term ``solution'' refers here to the \kl{metaphor} of a \emph{chemical solution} made

@@ -408,7 +408,7 @@ collection/\intro(sequent){context} of hypotheses $\Gamma$ is captured by the
 expression $\Gamma \intro*\seq C$, called a \intro{sequent}. The
 \kl(natded){introduction rule} \kl{{\limp}i} is then expressed by the so-called
 \intro{right introduction rule} \kl{{\limp}R}, which keeps track of the full
-\kl(sequent){context} of hypotheses by having sequents as premiss and
+\kl(sequent){context} of hypotheses by having \kl{sequents} as premiss and
 conclusion, instead of just formulas. \kl{Right introduction rules} for other
 connectives are also obtained straightforwardly from the corresponding
 \kl(natded){introduction rules} in \kl{natural deduction}, by simply making the
@@ -487,7 +487,7 @@ way to invoke the lemma $A$ without duplicating its proof. Moreover, Gentzen's
 proof of the Haupstatz is itself constructive: it describes an \emph{algorithm}
 for transforming every \kl{sequent calculus} proof into a cut-free one. Thus the
 \kl{cut} rule is said to be \intro{admissible}, in the sense that any provable
-sequent can be proved without it.
+\kl{sequent} can be proved without it.
 
 \AP An important consequence of \kl{cut-elimination}, which was the original
 motivation of Gentzen, is the consistency of the logic (\kl{intuitionistic}
@@ -495,7 +495,7 @@ motivation of Gentzen, is the consistency of the logic (\kl{intuitionistic}
 rules apart from the \kl{cut} rule satisfy the \intro{subformula property}:
 every formula $A$ appearing in the premisses is a \emph{subformula} of some
 formula $B$ in the conclusion, i.e. $A$ already occurs inside $B$. Thus there
-cannot exist a proof of the absurd sequent $\seq \bot$, since the only formula
+cannot exist a proof of the absurd \kl{sequent} $\seq \bot$, since the only formula
 that is a subformula of $\bot$ is $\bot$ itself, and there is no rule instance
 with $\seq \bot$ as conclusion that only contains $\bot$ in its premisses. The
 \kl{subformula property} is the first occurrence of the concept of
@@ -542,7 +542,7 @@ This notion of \kl{context} serves two purposes:
   available in the surrounding \kl{context};
   \item it generalizes the \kl(sequent){contexts} $\Gamma, \Delta$ of
   \kl{sequent calculus}, by giving them the full structure of formulas instead
-  of just flat lists of formulas. Indeed, a sequent $\Gamma \seq C$ can be
+  of just flat lists of formulas. Indeed, a \kl{sequent} $\Gamma \seq C$ can be
   interpreted as the formula $\bigwedge \Gamma \limp C$, where $\bigwedge
   \Gamma$ denotes the conjunction of all the formulas in $\Gamma$.
 \end{itemize}
@@ -795,8 +795,7 @@ languages:
   % following the Curry-Howard correspondence.}
   only the \emph{statement} part of the \kl{proof state} is shown, in a so-called
   \intro{proof view} or \reintro{goal view}. This corresponds to the \kl{goals} that the
-  user needs to prove, and each \kl{goal} is presented in the form of a sequent
-  $\Gamma \seq C$, where $C$ is the conclusion that must be reached under the
+  user needs to prove, and each \kl{goal} is presented in the form of a \kl{sequent} $\Gamma \seq C$, where $C$ is the conclusion that must be reached under the
   assumptions in $\Gamma$. \kl{Tactics} generally apply to one \kl{goal} at a time, and
   the user can choose which \kl{goal} to \emph{focus} at any point during the
   interaction. When the set of \kl{goals} becomes empty, we say that the initial goal
@@ -1102,12 +1101,12 @@ as the use of \emph{definitions}, reasoning by \emph{induction}, and the
 illustrated through a few case studies of basic logical and mathematical
 problems.
 
-In \refch{sfl-classical}, we investigate an extension of \kl{PbA} to sequents
+In \refch{sfl-classical}, we investigate an extension of \kl{PbA} to \kl{sequents}
 with \emph{multiple} alternative conclusions, as opposed to the
-\emph{single}-conclusion sequents found in the interface of almost every
+\emph{single}-conclusion \kl{sequents} found in the interface of almost every
 \kl{ITP}. We argue that the use of \kl{direct manipulation} greatly facilitates
 the management of multiple conclusions, and introduce a so-called
-\emph{\kl(dnd){parallel}} linking operator to model reasoning in \kl{classical}
+\emph{\kl(dnd){parallel}} \kl{interaction operator} to model reasoning in \kl{classical}
 logic that involves the interaction of two conclusions.
 
 \AP
@@ -1143,8 +1142,7 @@ frontend.
 
   \AP
   \refch{bubbles} presents the \emph{asymmetric} \kl{bubble calculus} \kl{BJ}
-  for \kl{intuitionistic} logic, modelled after the \emph{asymmetric} sequents
-  of the \kl{intuitionistic} \kl{sequent calculus} \kl{LJ} of Gentzen. It
+  for \kl{intuitionistic} logic, modelled after the \emph{asymmetric} \kl{sequents} of the \kl{intuitionistic} \kl{sequent calculus} \kl{LJ} of Gentzen. It
   introduces the \kl{metaphor} of \intro{bubbles} as a way to \kl{iconically}
   represent the separation and sharing of contexts between different
   \kl{subgoals}.

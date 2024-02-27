@@ -3,16 +3,16 @@
 \labch{sfl-classical}
 
 In virtually every \kl{proof assistant}, the \kl{goals} the user is faced with are
-sequents of the form $\Gamma \seq C$, with a \emph{single} conclusion $C$ to be
-proved under many hypotheses in $\Gamma$. Historically, this form of sequent was
+\kl{sequents} of the form $\Gamma \seq C$, with a \emph{single} conclusion $C$ to be
+proved under many hypotheses in $\Gamma$. Historically, this form of \kl{sequent} was
 introduced by Gentzen to formalize the rules of \kl{intuitionistic} logic in his
 \kl{sequent calculus} \kl{LJ}. But his main interest was in \kl{classical} logic, as
 \kl{intuitionistic} logic was still in its infancy and almost all of mathematics had
 been developed in a \kl{classical} setting. Interestingly, he found that the right
 syntax to develop a rich metatheory of his \kl{classical} \kl{sequent calculus} \kl{LK}
-consisted in \emph{multi-conclusion} sequents of the form $\Gamma \seq \Delta$,
+consisted in \emph{multi-conclusion} \kl{sequents} of the form $\Gamma \seq \Delta$,
 where $\Delta$ is a list of conclusions that should be read
-\emph{disjunctively}. That is, a sequent
+\emph{disjunctively}. That is, a \kl{sequent}
 $$A_1, \ldots, A_n \seq C_1, \ldots, C_m$$
 has the same meaning as the formula
 $$\bigwedge_{i=1}^{n}{A_i} \limp \bigvee_{j=1}^{m}{C_j}$$
@@ -41,7 +41,7 @@ $$\bigwedge_{i=1}^{n}{A_i} \limp \bigvee_{j=1}^{m}{C_j}$$
   \labfig{lk-tnd}
 \end{marginfigure}
 
-One way to get a multi-conclusion sequent in \kl{LK} is to apply the
+One way to get a multi-conclusion \kl{sequent} in \kl{LK} is to apply the
 ``multiplicative''\sidenote{Terminology borrowed from linear logic, where
 {\rnm{\lor R}} is exactly the \kl{right introduction rule} for multiplicative
 disjunction $\parr$.} \kl{introduction rule} {\kl{\lor R}} (\reffig{multintro}).
@@ -63,7 +63,7 @@ It is clear in the proof that the negative occurrence of $A$ in $\neg A$ is the
 one that becomes the assumption $A$ that justifies the conclusion $A$ in the
 last step. It would be natural to specify this causal relationship by linking
 directly the two occurrences of $A$, as we do with \kl{DnD} actions in \kl{Actema}.
-However for this to be possible, we need to introduce a new linking operator ---
+However for this to be possible, we need to introduce a new \kl{interaction operator} ---
 let us note it $\para$ --- that works between two conclusions, where $A \para B$
 is obviously interpreted as $A \lor B$. Then after clicking on $A \lor \neg A$
 we can just finish the proof by connecting $A$ and $\neg A$:
@@ -91,7 +91,7 @@ Interestingly, the \kl{classical} aspect of the proof of $A \lor \neg A$ in
 the last step, a phenomemon which is well known in the literature on
 constructive/computational properties of \kl{classical} logic\todo{add references}.
 Then one can see the \kl{introduction rules} {\rnm{\lor R_1}} and {\rnm{\lor R_2}},
-and the restriction of \kl{intuitionistic} sequents to one conclusion, as ways to
+and the restriction of \kl{intuitionistic} \kl{sequents} to one conclusion, as ways to
 prevent such backtracking by forcing the choice of disjunct to prove at an early
 stage.
 % \sidenote{Although the ability to backtrack can be reintroduced in other
@@ -194,7 +194,7 @@ capturing either \kl{intuitionistic} or \kl{classical} \kl{first-order logic}:
 \end{itemize}
 
 \begin{remark}
-  In the special case of \kl{intuitionistic} sequents with one conclusion, the two
+  In the special case of \kl{intuitionistic} \kl{sequents} with one conclusion, the two
   variants {\rsf{{\limp}R*c}} and {\rsf{{\limp}R*i}} collapse into the usual
   {\rsf{{\limp}R}} rule.
 \end{remark}
@@ -215,13 +215,13 @@ by using a \emph{\kl{nested sequent}} system.}. On the other hand the
 formulation of \kl{sequent calculi} for \kl{classical} logic where \emph{all} rules are
 \kl{invertible}, like the \kl{G3c} calculus of \sidecite{negri_structural_2001}. In
 the propositional case, this gives a constructive decision procedure for the
-question of provability: given a sequent $\Gamma \seq \Delta$, one just has to
+question of provability: given a \kl{sequent} $\Gamma \seq \Delta$, one just has to
 choose any formula in $\Gamma$ or $\Delta$ and apply the \kl{introduction rule}
 associated to its main connective, or the axiom rule whenever possible. In
 Actema, this would correspond to having the user click randomly on blue and red
 items until all \kl{goals} are solved. The procedure ends because all \kl{introduction
 rules} destroy the main connective, and none of them duplicate formulas: thus the
-total size of the sequent decreases strictly after each rule application.
+total size of the \kl{sequent} decreases strictly after each rule application.
 
 \begin{marginfigure}
   \begin{mathpar}
@@ -264,11 +264,11 @@ a hypothesis $A$ and a conclusion $B$, and \emph{\kl{forward}} reasoning with th
 third mode of reasoning, at least in the traditional way of building proofs we
 are used to, either on paper or with \kl{proof assistants}. However from a purely
 formal point of view, there is nothing preventing us from trying to design
-\kl{rewriting rules} for a new linking operator, by following the same recipe we used
+\kl{rewriting rules} for a new \kl{interaction operator}, by following the same recipe we used
 for $\back$ and $\forw$. Furthermore, we already saw earlier in the excluded
 middle example that such an operator did seem useful.
 
-When looking for a proof of a sequent with multiple conclusions, unless we
+When looking for a proof of a \kl{sequent} with multiple conclusions, unless we
 commit to proving one conclusion and give up on the others by applying the
 {\rsf{{\limp}R*i}} rule, we can switch freely our focus between the different
 conclusions. Thus in a way, we are looking for proofs of all the conclusions
@@ -278,8 +278,8 @@ R}} rule of \reffig{multintro}, and whose spelling ``par'' is historically
 motivated by an understanding of the multiplicative fragment of \kl{LL} as a
 logic of parallel computation \cite{girard-linear-1987}.}. Hence we chose to
 call this third kind of interaction between two conclusions \emph{parallel}
-reasoning. This justifies the choice of notation for the parallel linking
-operator $\para$, which is suggestive of the parallel composition $\mid$ from
+reasoning. This justifies the choice of notation for the parallel \kl{interaction
+operator} $\para$, which is suggestive of the parallel composition $\mid$ from
 process calculi.
 
 The rules governing $\para$ are presented in \reffig{parallel}. A parallel
@@ -365,7 +365,7 @@ the same context to produce a new \emph{conclusion}. \kl(dnd){Backward} \kl{link
 be seen as mediating between these two opposite modes of reasoning, by handling
 the interaction of a positive and a negative subformula in the same context. A
 schematic view of the back and forth between the different modes through the 4
-\kl{rewriting rules} that change linking operators is provided in
+\kl{rewriting rules} that change \kl{interaction operators} is provided in
 \reffig{modes-schema}. Notice that the latter correspond exactly to the rules
 that handle interaction with the antecedant of an implication: this is because
 it is the only way to switch polarity when descending into a direct subformula,
@@ -447,7 +447,7 @@ We add the two following cases to Lemmas \ref{lemma:rules-valid-in-context} and
 \end{itemize}
 The proof of Lemma \ref{lemma:rules-valid-in-context} is easily extended by
 inspecting each parallel rule, and we already mentioned that the \kl(dnd){backward} rule
-{\rsf{L{\limp}_1}} is sound \kl{classically}. Note that now sequents have multiple
+{\rsf{L{\limp}_1}} is sound \kl{classically}. Note that now \kl{sequents} have multiple
 conclusions, thus one needs to use rules from a multi-succedant calculus such as
 \kl{G3c} \cite{negri_structural_2001}.
 

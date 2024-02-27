@@ -77,8 +77,8 @@ least two rules which are invariably \emph{non-\kl{invertible}}:
   the calculus \kl{LJT} of \sidecite{dyckhoff_contraction-free_1992});
   \item the right introduction for either:
     \begin{itemize}
-      \item $\lor$ when sequents have at most or exactly one conclusion;
-      \item $\limp$ when sequents have multiple conclusions, e.g. in the
+      \item $\lor$ when \kl{sequents} have at most or exactly one conclusion;
+      \item $\limp$ when \kl{sequents} have multiple conclusions, e.g. in the
         multi-succedant variant of \kl{LJT} in
         \cite{dyckhoff_contraction-free_1992}.
     \end{itemize}
@@ -320,10 +320,10 @@ non-\kl{invertible}.
 
 A better solution comes from the \kl{nested sequent} systems of Fitting
 \sidecite{fitting-nested-2014} and Clouston et al.
-\sidecite{clouston-annotation-free-2013}, where sequents can appear as
+\sidecite{clouston-annotation-free-2013}, where \kl{sequents} can appear as
 \emph{conclusions} of other sequents. In our chemical \kl{metaphor}, this corresponds
 to having \emph{red bubbles}. Then the key idea is to allow hypotheses to flow
-into sequents that appear as conclusions\sidenote{This corresponds to the
+into \kl{sequents} that appear as conclusions\sidenote{This corresponds to the
 {\rnm{Lift}} rule of \cite{fitting-nested-2014} and {\rnm{pl_1}} rule of
 \cite{clouston-annotation-free-2013}.}, but \emph{not other conclusions}.
 Graphically, this means that blue items can enter red \kl{bubbles} (rule
@@ -590,20 +590,20 @@ of priorization relatively to the latter:
     Example \ref{eq:concdistr} in \refsec{branching}.
   \item[Locality]
     There does not seem to be a general consensus on what it means precisely for
-    an \kl{inference rule} to be \emph{local}. This terminology has been employed by
-    various authors in \kl{proof theory}, in ways that are often hard to compare. For
-    instance in \sidecite{negri_structural_2001}, sequent rules are said to be
-    local because the contexts of hypotheses involved in a rule are located in
-    the sequents of that rule, by opposition to \kl{natural deduction} rules in their
-    labelled presentation where hypotheses are located in arbitrary distant
-    leaves of the derivation. In the setting of \kl{deep inference}, local rules are
-    those that can be applied without ``inspection of expressions of arbitrary
-    size''\sidenote{Definition 2.1.1 in \cite{tubella:hal-02390267}. The same
-    definition is used in \cite{tiu_local_2006}.}. Finally in his transcendental
-    syntax, Girard evokes a related but more elusive notion, concerned with the
-    \emph{genericity} of logical objects involved in a rule\sidenote{See the
-    section \emph{Globality and locality in logical systems} in \cite[Chapter
-    6]{eng_exegesis_2023}.}.
+    an \kl{inference rule} to be \emph{local}. This terminology has been
+    employed by various authors in \kl{proof theory}, in ways that are often
+    hard to compare. For instance in \sidecite{negri_structural_2001}, rules are
+    said to be local because the contexts of hypotheses involved in a rule are
+    located in the \kl{sequents} of that rule, by opposition to \kl{natural
+    deduction} rules in their labelled presentation where hypotheses are located
+    in arbitrary distant leaves of the derivation. In the setting of \kl{deep
+    inference}, local rules are those that can be applied without ``inspection
+    of expressions of arbitrary size''\sidenote{Definition 2.1.1 in
+    \cite{tubella:hal-02390267}. The same definition is used in
+    \cite{tiu_local_2006}.}. Finally in his transcendental syntax, Girard evokes
+    a related but more elusive notion, concerned with the \emph{genericity} of
+    logical objects involved in a rule\sidenote{See the section \emph{Globality
+    and locality in logical systems} in \cite[Chapter 6]{eng_exegesis_2023}.}.
     
     Our conception of locality is related to all the previous ones, although it
     is guided by the idea of \kl{direct manipulation} of logical entities by humans,
@@ -648,9 +648,8 @@ of priorization relatively to the latter:
     looked quite unnatural. Of course we will not be able to completely
     eliminate it, but it will be distilled into the flow rules governing the
     \emph{porosity} of \kl{bubbles} that were hinted at in \refsec{colors}, rather
-    than through the arbitrary restriction of sequents to one
-    conclusion\sidenote{Whether it is enforced in the syntax of sequents
-    themselves, or through restriction on rules that manipulate conclusions like
+    than through the arbitrary restriction of \kl{sequents} to one
+    conclusion\sidenote{Whether it is enforced in the syntax of \kl{sequents} themselves, or through restriction on rules that manipulate conclusions like
     \kl{contraction} or the \kl{right introduction rule} for $\limp$.}. Our
     treatment of \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic
     through blue \kl{bubbles} is also motivated by this quest for symmetry. It should

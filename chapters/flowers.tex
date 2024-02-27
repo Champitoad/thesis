@@ -544,7 +544,7 @@ $\flower{\gamma}{\delta_1 \sep \ldots \sep \delta_n}$, where $\gamma$ is the
 \emph{pistil}, and the $\delta_i$ are called \emph{petals}. We write
 $\fset{i}{n}{E_i}$ to denote a finite (multi)set of size $n$ with elements $E_i$
 indexed by $1 \leq i \leq n$. We also omit writing the empty (multi)set,
-accounting for it with blank space as is done in sequent notation or in \kl{EGs}; in
+accounting for it with blank space as is done in \kl{sequent} notation or in \kl{EGs}; in
 particular, $\garden{{}}{{}}$ stands for the empty garden
 $\garden{\emptyset}{\emptyset}$, $\flower{\gamma}{{}}$ for the flower with no
 petals $\flower{\gamma}{\emptyset}$, and $\flower{\gamma}{\garden{{}}{{}}}$ for
@@ -851,7 +851,7 @@ describing the reproduction of flowers. This distinction does not exist in
 instances of \kl{cuts}\sidenote{The same phenomenon is at work in
 \emph{\kl{subformula linking}} (\refch{sfl}): self-pollination and cross-pollination
 correspond respectively to the \emph{\kl(dnd){backward}} $\back$ and
-\emph{\kl(dnd){forward}} $\forw$ linking operators, which are collapsed into a
+\emph{\kl(dnd){forward}} $\forw$ \kl{interaction operators}, which are collapsed into a
 single interaction operator $\ast$ in the original formulation of \kl{subformula
 linking} for classical linear logic \cite{Chaudhuri2013}.}. If we were to replace
 binders by LoI (lines of identity, see \refsec{beta}), then the pollination
@@ -1158,7 +1158,7 @@ A trivial way to circumvent this is to define directly $\Psi \entails{} \Phi$ as
 $\flower{\Psi}{\Phi} \steps{} \emptyset$. In fact this is closer to what one
 would find in \kl{sequent calculus}, where hypothetical proofs are closed
 derivations of hypothetical sequents, not open derivations. The difference is
-that sequents capture only the \intro(implication){first-order} implicative
+that \kl{sequents} capture only the \intro(implication){first-order} implicative
 structure of logic\sidenote{As opposed to \intro(implication){higher-order},
 i.e. negatively nested implications.}, while flowers capture the full structure
 of \kl{intuitionistic} \kl{predicate logic}. This allows for a nice
