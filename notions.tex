@@ -10,13 +10,14 @@
     % If we are NOT in paper mode (i.e. in composition mode or electronic mode)
     \knowledgestyle{intro notion}{color={Dark Ruby Red}, emphasize}
     \knowledgestyle{notion}{color={Dark Blue Sapphire}}
+    % \knowledgestyle{notion}{color={Black}}
     \hypersetup{
         colorlinks=true,
         breaklinks=true,
         linkcolor={Dark Blue Sapphire}, % Links to sections, pages, etc.
         citecolor={Dark Blue Sapphire}, % Links to bibliography
         filecolor={Dark Blue Sapphire}, % Links to local file
-        urlcolor={Dark Blue Sapphire},
+        urlcolor={Dark Blue Sapphire}, % Links to external URL
     }
     \IfKnowledgeElectronicModeTF{
         %
@@ -29,6 +30,9 @@
         \knowledgestyle{kl unknown cont}{color={Dark Gamboge}}
     }
 }
+
+\knowledge{url={https://ctan.org/pkg/knowledge}, typewriter}
+ | knowledge@package
 
 \knowledgedirective{acronym}{synonym,up}
 
@@ -54,13 +58,13 @@
 \knowledge{Actema}{software}
 \knowledge{coq-actema}{software}
 \knowledge{Profint}{software}
-\knowledge{Flower Prover}{software}
+\knowledge{Flower\,\,Prover}{software}
 
 \knowledge{HTML}{software}
 \knowledge{JavaScript}{software}
 \knowledge{CSS}{software}
 \knowledge{OCaml}{software}
-\knowledge{js_of_ocaml}{software}
+\knowledge{js\_of\_ocaml}{software}
 \knowledge{Elm}{software}
 \knowledge{Smalltalk}{software}
 \knowledge{Sketchpad}{software}
@@ -78,7 +82,7 @@
 \knowledge{SKSg}{system}
 \knowledge{\dmdual{KS}}{system}
 \knowledge{B_{inv}}{system}
-\knowledge{system B}{system}
+\knowledge{system~B}{system}
 \knowledge{\sysBH}{system}
 \knowledge{\sysBB}{system}
 \knowledge{\sysBHB}{system}
@@ -150,8 +154,12 @@
  | ax
 \knowledge{notion}
  | axiom@rule
+ | axioms@rule
 \knowledge{rule}
  | cut
+\knowledge{notion}
+ | cut@rule
+ | cuts@rule
 \knowledge{ex}{rule}
 \knowledge{ctr}{rule}
 \knowledge{wkn}{rule}
@@ -211,6 +219,8 @@
  | interactive theorem provers
  | Interactive theorem provers
 \knowledge{acronym}
+ | PAs
+ | PA
  | ITPs
  | ITP
 
@@ -445,6 +455,24 @@
  | Elimination rules
 
 \knowledge{notion}
+ | cut-elimination
+ | Cut-elimination
+
+\knowledge{notion}
+ | admissible
+ | Admissible
+
+\knowledge{notion}
+ | subformula property
+ | Subformula property
+
+\knowledge{notion}
+ | analytic
+ | Analytic
+ | analyticity
+ | Analyticity
+
+\knowledge{notion}
  | deep inference
  | Deep inference
 
@@ -535,6 +563,12 @@
  | sequents
  | Sequent
  | Sequents
+
+\knowledge{notion}
+ | nested sequent
+ | nested sequents
+ | Nested sequent
+ | Nested sequents
 
 \knowledge{notion}
  | context@sequent
@@ -644,6 +678,8 @@
  | Metaphors
  | metaphorical
  | Metaphorical
+ | metaphorically
+ | Metaphorically
 
 \knowledge{notion}
  | existential graphs
@@ -652,6 +688,10 @@
 
 \knowledge{notion}
  | flower calculus
+ 
+\knowledge{notion}
+ | window inference
+ | Window inference
 
 % Proof-by-Action
 
@@ -662,6 +702,10 @@
 \knowledge{notion}
  | backward@dnd
  | Backward@dnd
+
+\knowledge{notion}
+ | parallel@dnd
+ | Parallel@dnd
 
 % Subformula linking
 
@@ -739,8 +783,8 @@
  | juxtaposition
 
 \knowledge{notion}
- | cut@rule
- | cuts@rule
+ | cut
+ | cuts
 
 \knowledge{notion}
  | isotropy
@@ -955,11 +999,6 @@
 \knowledge{notion}
  | cultural
  | Cultural
-
-\knowledge{notion}
- | analytic
- | Analytic
- | analyticity
 
 \knowledge{notion}
  | derivation

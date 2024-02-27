@@ -2,7 +2,7 @@
 \chapter{Symmetric Bubble Calculi}
 \labch{bubbles-symm}
 
-In this chapter, we explore to what extent the bubble calculus of
+In this chapter, we explore to what extent the \kl{bubble calculus} of
 \refch{bubbles} can be made more \emph{symmetric}, by relaxing the restriction
 that solutions must contain at most one conclusion. At a surface level, our
 approach is similar to that of Gentzen, who went from his single-conclusion
@@ -15,26 +15,26 @@ logic that conservatively extends \kl{intuitionistic} logic, but does not prove 
 quest for a \emph{fully \kl{iconic}} \kl{proof system}, where all logical connectives
 can be replaced by appropriate (new) kinds of bubbles. This will lead us to
 rediscover many principles already studied in the \kl{deep inference}
-literature, with topological intuitions of the bubble \kl{metaphor} shedding a new
-light on them. We will end up with two symmetric bubble calculi, each with their
+literature, with topological intuitions of the \kl{bubble} \kl{metaphor} shedding a new
+light on them. We will end up with two symmetric \kl{bubble calculi}, each with their
 own tradeoffs on the properties satisfied by \kl{inference rules}. In particular,
 their ability to \emph{factorize} both \kl{forward} and \kl{backward} proof steps might
 prove useful to build concise proofs, all through \kl{direct manipulation}.
 
 The chapter is organized as follows: in \refsec{non-determinism} we motivate our
 quest for a system where all \kl{introduction rules} for logical connectives are
-\emph{invertible}, to reduce non-determinism in proof search and enable a fully
+\emph{\kl{invertible}}, to reduce non-determinism in proof search and enable a fully
 \emph{\kl{iconic}} approach to proof building. To that effect, we relax in
 \refsec{branching} the restriction to single-conclusion solutions, which
 requires a new distinction between \emph{closed} and \emph{open} solutions. This
 gives rise in \refsec{colors} to an extension of the syntax of solutions, where
-bubbles can themselves be \emph{polarized}. In \refsec{design-props} we identify
+\kl{bubbles} can themselves be \emph{polarized}. In \refsec{design-props} we identify
 key properties that will guide the design of \kl{inference rules}, some of which were
 already aimed for implicitly through the evolution of our concept of bubble. In
-\refsec{symmetric-calculus} we introduce a core \emph{symmetric bubble calculus}
-for \kl{classical} logic called ``\kl{system B}'', in reference to the symmetric
+\refsec{symmetric-calculus} we introduce a core \emph{symmetric \kl{bubble calculus}}
+for \kl{classical} logic called \kl{system~B}, in reference to the symmetric
 \kl{system L} of Herbelin \sidecite[10em]{herbelin_duality_nodate}. Then in
-\refsec{bubbles-soundness} we prove the soundness of \kl{system B}, and show
+\refsec{bubbles-soundness} we prove the soundness of \kl{system~B}, and show
 that by removing selectively among \kl{inference rules} that define the
 \emph{porosity} of polarized bubbles, one gets \kl{intuitionistic},
 \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic as fragments. In
@@ -42,7 +42,7 @@ that by removing selectively among \kl{inference rules} that define the
 \kl{bi-intuitionistic} fragment is not only sound, but also \emph{cut-free complete}
 with respect to the cut-free nested \kl{sequent calculus} \kl{DBiInt} of Postniece
 \cite{postniece_deep_2009}. Finally in \refsec{invertible-calculus}, we
-introduce a fully invertible variant of system $\sysB$ that we conjecture to be
+introduce a fully \kl{invertible} variant of system $\sysB$ that we conjecture to be
 complete, and present a canonical way to search for proofs in this system.
 Unfortunately, invertibility does not entail the full \kl{iconicity} of the system,
 and we reflect on the fundamental reasons that might prevent any variant of
@@ -57,7 +57,7 @@ system $\sysB$ from being fully \kl{iconic}.
 
 \begin{remark}
   Although we include rules for quantifiers, in this thesis we only treat the
-soundness and completeness of bubble calculi for \emph{propositional} logic.
+soundness and completeness of \kl{bubble calculi} for \emph{propositional} logic.
 Indeed quantifiers would make the algebraic semantics more involved when proving
 soundness, and during our literature review we found very few \kl{proof systems}
 for \kl{bi-intuitionistic} logic supporting them, at least none suitable for our
@@ -71,7 +71,7 @@ received less attention in the setting of \kl{FOL}, probably because it is
 \section{Non-determinism and iconicity}\labsec{non-determinism}
 
 In all known \kl{sequent calculus} formulations of \kl{intuitionistic} logic, there are at
-least two rules which are invariably \emph{non-invertible}:
+least two rules which are invariably \emph{non-\kl{invertible}}:
 \begin{enumerate}
   \item a \kl{left introduction rule} for $\limp$ (there might be many ones, as in
   the calculus \kl{LJT} of \sidecite{dyckhoff_contraction-free_1992});
@@ -88,13 +88,13 @@ $\conc{\lor}$ need to be performed in a specific order to be able to complete
 proofs.
 
 In his thesis \cite{guenot_nested_2013}, Guenot introduced a specific kind of
-nested sequent system, where like in \kl{BJ} \kl{inference rules} can be expressed
+\kl{nested sequent} system, where like in \kl{BJ} \kl{inference rules} can be expressed
 as \kl{rewriting rules}. An interesting feature of these systems is that they satisfy
 a \emph{decomposability} property: all \kl{introduction rules} for connectives are
-\emph{invertible}, and formulas can be completely decomposed with them until
+\emph{\kl{invertible}}, and formulas can be completely decomposed with them until
 atoms are reached, before applying other rules. Thus \kl{introduction rules} are
-\emph{admissible} in these systems, because every formula can be translated into
-an equivalent pure nested sequent with the same number of atoms\sidenote{As far
+\emph{\kl{admissible}} in these systems, because every formula can be translated into
+an equivalent pure \kl{nested sequent} with the same number of atoms\sidenote{As far
 as we know, the admissibility of \kl{introduction rules} is not proved, let alone
 mentioned in \cite{guenot_nested_2013}. This is our own observation which lacks
 a proper formal proof, and is thus subject to caution.}. Non-determinism then
@@ -114,8 +114,8 @@ possible transformations on the \kl{proof state}.
 % system of \emph{existential graphs} \sidecite{10.7551/mitpress/3633.001.0001}.
 Unfortunately, the systems in \cite{guenot_nested_2013} only handle \kl{classical}
 logic, and the implicative fragment of \kl{intuitionistic} logic. Thus began our
-quest for a bubble calculus in the style of Guenot capturing full \kl{intuitionistic}
-logic\sidenote{Other nested sequent systems for full \kl{intuitionistic} logic exist
+quest for a \kl{bubble calculus} in the style of Guenot capturing full \kl{intuitionistic}
+logic\sidenote{Other \kl{nested sequent} systems for full \kl{intuitionistic} logic exist
 \cite{postniece_deep_2009,fitting-nested-2014}, but they are based on
 tree-shaped proofs, and thus ignore the whole \emph{raison d'être} of our
 concept of bubble.}.
@@ -126,7 +126,7 @@ concept of bubble.}.
 The first direction we followed was to relax the constraint that solutions must
 be single-conclusion. Indeed as already noted in \refsec{sfl-backtracking}, a
 notable property of \kl{sequent calculi} with multiple conclusions is that their
-\kl{right introduction rule} for $\lor$ is invertible.
+\kl{right introduction rule} for $\lor$ is \kl{invertible}.
 
 The main difficulty lies in the way one should interpret a multi-conclusion
 solution $S$ as a formula $\sint{S}$. If we just take the asymmetric
@@ -164,7 +164,7 @@ This is already what happens in the asymmetric interpretation for hypotheses
 because:
 \begin{enumerate}
   \item it appears on the left of an implication $\limp$
-  \item bubbles are joined conjunctively, and
+  \item \kl{bubbles} are joined conjunctively, and
   \item implication distributes over conjunction thanks to the equivalence $A
   \limp B \land C \semequiv (A \limp B) \land (A \limp C)$.
 \end{enumerate}
@@ -208,11 +208,11 @@ syntax of solutions with so-called \emph{branching} operators $\J$:
   S, T, U &\Coloneq \Gamma \J \Delta \\
   \J, \JB &\Coloneq {\seq} \mid \piq{\cS}
 \end{align*}
-Graphically, closed solutions with no bubbles can be distinguished from open
+Graphically, closed solutions with no \kl{bubbles} can be distinguished from open
 solutions by painting their \emph{background} on the proof canvas in green, the
 intent being to suggest that they have already been solved. A pathological
-example is the distinction between the closed empty bubble
-$\bbubble{\phantom{a}}$ and the open empty bubble $\bubble{\phantom{a}}$, who
+example is the distinction between the closed empty \kl{bubble}
+$\bbubble{\phantom{a}}$ and the open empty \kl{bubble} $\bubble{\phantom{a}}$, who
 are interpreted respectively by $\sint{\piq{\piq{}}} = \top$ and
 $\sint{\piq{\seq}} = \bot$.
 
@@ -305,7 +305,7 @@ collapse to \kl{classical} logic. This fact is well-known in the literature on
 multi-conclusion \kl{intuitionistic} \kl{sequent calculi}, and the solution is usually to
 discard the context of conclusions $\Delta$, as in the {\rnm{{\limp}R*i}} rule
 of \reffig{multi-imp-intro}. But this would make our rule both non-local and
-non-invertible.
+non-\kl{invertible}.
 
 \begin{marginfigure}
   $$
@@ -318,7 +318,7 @@ non-invertible.
   \labfig{flow-red-bubbles}
 \end{marginfigure}
 
-A better solution comes from the nested sequent systems of Fitting
+A better solution comes from the \kl{nested sequent} systems of Fitting
 \sidecite{fitting-nested-2014} and Clouston et al.
 \sidecite{clouston-annotation-free-2013}, where sequents can appear as
 \emph{conclusions} of other sequents. In our chemical \kl{metaphor}, this corresponds
@@ -326,7 +326,7 @@ to having \emph{red bubbles}. Then the key idea is to allow hypotheses to flow
 into sequents that appear as conclusions\sidenote{This corresponds to the
 {\rnm{Lift}} rule of \cite{fitting-nested-2014} and {\rnm{pl_1}} rule of
 \cite{clouston-annotation-free-2013}.}, but \emph{not other conclusions}.
-Graphically, this means that blue items can enter red bubbles (rule
+Graphically, this means that blue items can enter red \kl{bubbles} (rule
 {\rsf{f{-}{+}}} of \reffig{flow-red-bubbles}), but red items cannot: this is
 reminiscent of the electromagnetic phenomemon of \emph{repulsion} between
 objects charged with the same polarity.
@@ -338,7 +338,7 @@ objects charged with the same polarity.
 \end{figure*}
 
 To illustrate why this works, let us consider how one can manipulate with red
-bubbles the \kl{classical} equivalence $ (A \limp B) \lor C \semequiv A \limp (B \lor
+\kl{bubbles} the \kl{classical} equivalence $ (A \limp B) \lor C \semequiv A \limp (B \lor
 C)$, that we already stumbled upon in the previous section. The begginings of
 the proofs for both directions of the equivalence are depicted parallely in
 \reffig{bubbles-grishin}. Indeed both proofs have a very similar structure:
@@ -353,7 +353,7 @@ the proofs for both directions of the equivalence are depicted parallely in
   \kl{forward} step, either with $\hypo{A \limp B}$ or $\hypo{A \limp (B \lor C)}$.
   To do so, we need to bring the two hypotheses together in the same solution.
   And since items are trapped within bubbles, the only way to go is to move the
-  blue $\hypo{A}$ inside the red bubble with the {\rsf{f{-}{+}}} rule;
+  blue $\hypo{A}$ inside the red \kl{bubble} with the {\rsf{f{-}{+}}} rule;
   \item this time we decompose the hypothesis with the new version of the rules
   {\rnm{{\lor}{-}}} and {\rnm{{\limp}{-}}}. They are basically a local variant
   of those of \kl{BJ}: we encapsulate both subformulas in separate bubbles, but
@@ -361,22 +361,22 @@ the proofs for both directions of the equivalence are depicted parallely in
   \item now that all formulas have been decomposed, it only remains to bring
   together dual atoms for annihilation, and pop all empty bubbles. In Grishin
   (b) this is easy, because all necessary movements (indicated by green arrows)
-  are valid: they only cross gray bubbles inward. In Grishin (a) this works for
+  are valid: they only cross gray \kl{bubbles} inward. In Grishin (a) this works for
   $\hypo{A}$ and $\conc{B}$, but not for $\conc{C}$ (orange dotted arrow): it
   would cross the red bubble, which is expressedly forbidden.
 \end{enumerate}
 Thus in order to prove Grishin (a) and recover \kl{classical} logic, it suffices
-either to add the {\rsf{f{+}{+}}} rule allowing red items to enter red bubbles
+either to add the {\rsf{f{+}{+}}} rule allowing red items to enter red \kl{bubbles}
 (\reffig{flow-red-bubbles}), or to use the {\rsf{{\limp}{+}c}} rule which
-avoids red bubbles altogether. In the following we will settle for the first
+avoids red \kl{bubbles} altogether. In the following we will settle for the first
 option: we find it more elegant, because it explains the distinction between
 \kl{intuitionistic} and \kl{classical} logic as a kind of \emph{physical law} independent
 of logical connectives.
 
 \subsection{Blue bubbles}
 
-Now it is only natural to wonder: since bubbles can be colored in red, or
-charged positively, would it also make sense to have \emph{blue} bubbles charged
+Now it is only natural to wonder: since \kl{bubbles} can be colored in red, or
+charged positively, would it also make sense to have \emph{blue} \kl{bubbles} charged
 \emph{negatively}? The answer is \emph{yes}, but we need to broaden our logical
 view and consider more exotic beasts: the adequately named
 \emph{\kl{dual-intuitionistic}} logic, and \emph{\kl{bi-intuitionistic} logic}.
@@ -399,7 +399,7 @@ items can enter blue bubbles, but blue items cannot'', which is enforced by
 allowing only the use of the {\rsf{f{+}{-}}} rule in
 \reffig{flow-blue-bubbles}. Well this is neat, but will not be of much use if
 there is no way to spawn blue bubbles. Be it as it may: we can just craft a new
-logical connective! Since red bubbles are produced by the implication connective
+logical connective! Since red \kl{bubbles} are produced by the implication connective
 $A \limp B$, we define a dual \emph{exclusion} connective $A \lsub B$ (read
 ``$A$ excludes $B$''\sidenote{We ask for the reader's leniency regarding our
 choice of \kl{symbol} and terminology: in \kl{set theory} this would be total nonsense,
@@ -450,20 +450,20 @@ author to be a typing operator for \emph{first-class coroutines}.}
 \sidecite{postniece_proof_2010,pinto_relating_2011}. In particular, we are going
 to rely in \refsec{bubbles-completeness} on the \kl{deep inference} calculus
 developed by Postniece in her thesis \cite{postniece_proof_2010} to get
-completeness and cut admissibility of our symmetric bubble calculus introduced
+completeness and cut admissibility of our symmetric \kl{bubble calculus} introduced
 in the next section.
 
 \subsection{Polarized interpretation}
 
-Let us now extend the formal definition of bubbles so that they can be colored:
+Let us now extend the formal definition of \kl{bubbles} so that they can be colored:
 
 \begin{definition}[Bubble]\labdef{pol-bubble}
   A \emph{bubble} is a solution enclosed in a membrane, which can be either
   unpolarized (neutral), charged positively, or charged negatively.
 \end{definition}
 
-Neutral bubbles are the usual ones depicted in gray, while positive and negative
-bubbles correspond respectively to red and blue bubbles. We also update the
+Neutral \kl{bubbles} are the usual ones depicted in gray, while positive and negative
+\kl{bubbles} correspond respectively to red and blue bubbles. We also update the
 definition of solutions, which can now be open or closed:
 
 \begin{definition}[Solution]\labdef{pol-solution}
@@ -480,7 +480,7 @@ definition of solutions, which can now be open or closed:
   \end{align*}
 \end{definition}
 
-Note that in the textual syntax, bubbles are identified with \emph{subsolutions}
+Note that in the textual syntax, \kl{bubbles} are identified with \emph{subsolutions}
 (\refdef{subsolution}), and their polarity is determined by their position
 relative to branching operators; that is, for any solutions $S, T, U$ such that
 $T \subsol U$, $S$ is either:
@@ -492,9 +492,9 @@ $T \subsol U$, $S$ is either:
 \end{itemize}
 
 Then we need to split our symmetric interpretation accordingly, so that positive
-bubbles are mapped to implications, and negative bubbles to
+\kl{bubbles} are mapped to implications, and negative \kl{bubbles} to
 exclusions\sidenote{Here we took inspiration from the work of Clouston et al. on
-nested sequents for \kl{FILL} \cite{clouston-annotation-free-2013}.}:
+\kl{nested sequents} for \kl{FILL} \cite{clouston-annotation-free-2013}.}:
 
 \begin{definition}[Polarized symmetric interpretation]\labdef{pol-sinterp}
   The \emph{positive} and \emph{negative symmetric interpretations} of solutions
@@ -534,13 +534,13 @@ matters in a graphical proof-building interface. Let us summarize them in order
 of priorization relatively to the latter:
 \begin{description}
   \item[Invertibility]
-    A rule is invertible when it could in principle be applied in the converse
+    A rule is \kl{invertible} when it could in principle be applied in the converse
     direction, while staying logically sound\sidenote{The \textit{``in
     principle''} part is important: more often than not, adding the converse of
     a rule only brings unnecessary complexity in proof search, especially in a
     user interface that aims for simplicity.}. In other words, it corresponds to
     a logical \emph{equivalence}: when all rules in a (bubble) calculus are
-    invertible, we get that $S \step{} T$ implies $\sint{S} \semequiv
+    \kl{invertible}, we get that $S \step{} T$ implies $\sint{S} \semequiv
     \sint{T}$. This entails in particular that a user can apply the rule
     without fear of turning a provable \kl{goal} into an unprovable
     one\sidenote{Assuming that the calculus is \emph{complete}
@@ -552,7 +552,7 @@ of priorization relatively to the latter:
     We already mentioned this property in \refsec{non-determinism} as one of the
     main motivations for this chapter: the ability to decompose all logical
     connectives ``for free'', and thus reason solely on solutions that comprise
-    only bubbles and atomic formulas. As far as we know, it has never been
+    only \kl{bubbles} and atomic formulas. As far as we know, it has never been
     identified explicitly in the literature before, although it can loosely be
     seen as an extension of the decomposition procedures of existing \kl{deep
     inference} systems\sidenote{One could argue that more ``semantic'' approaches
@@ -641,19 +641,19 @@ of priorization relatively to the latter:
   \item[Symmetry] 
     In \kl{classical} logic, both \kl{sequent calculi} like \kl{LK} and \kl{deep
     inference} systems like \kl{CoS} are known for their very rich
-    \emph{symmetries}. In fact, one of our ambitions with bubbles was to bring
+    \emph{symmetries}. In fact, one of our ambitions with \kl{bubbles} was to bring
     back the symmetry of \kl{classical} logic in a constructive setting, without
     resorting to linear logic. This chapter stems in great part from our lack of
     satisfaction with the asymmetry at work in the \kl{BJ} calculus, which
     looked quite unnatural. Of course we will not be able to completely
     eliminate it, but it will be distilled into the flow rules governing the
-    \emph{porosity} of bubbles that were hinted at in \refsec{colors}, rather
+    \emph{porosity} of \kl{bubbles} that were hinted at in \refsec{colors}, rather
     than through the arbitrary restriction of sequents to one
     conclusion\sidenote{Whether it is enforced in the syntax of sequents
     themselves, or through restriction on rules that manipulate conclusions like
     \kl{contraction} or the \kl{right introduction rule} for $\limp$.}. Our
     treatment of \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic
-    through blue bubbles is also motivated by this quest for symmetry. It should
+    through blue \kl{bubbles} is also motivated by this quest for symmetry. It should
     be noted that although we use naming conventions for rules that resemble
     those of \kl{CoS} (e.g. with the identity rules), we do not aim for a
     perfect symmetry where one can get a complete calculus by simply taking the
@@ -668,10 +668,10 @@ of priorization relatively to the latter:
     equivalent of our flow rules) \cite{tiu_local_2006}.
 \end{description}
 
-In the next section we present a core calculus called ``\kl{system B}'' that
+In the next section we present a core calculus called \kl{system~B} that
 maximizes \emph{symmetry}, \emph{linearity} and \emph{locality}. In our opinion
-this makes for a good \kl{proof-theoretical} foundation, around which variant calculi
-with different tradeoffs can be designed.
+this makes for a good \kl{proof-theoretical} foundation, around which variant
+calculi with different tradeoffs can be designed.
 
 % In \refsec{invertible-calculus} we introduce such a variant that focuses on
 % \emph{invertibility} at the cost of \emph{linearity}, and in

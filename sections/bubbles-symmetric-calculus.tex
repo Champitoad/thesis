@@ -4,24 +4,24 @@
 
 \begin{figure*}
   \input{figures/sequent-B.tex}
-  \caption{Sequent-style presentation of \kl{system B}}
+  \caption{Sequent-style presentation of \kl{system~B}}
   \labfig{sequent-B}
 \end{figure*}
 
 \begin{figure*}
   \input{figures/graphical-B.tex}
-  \caption{Graphical presentation of \kl{system B}}
+  \caption{Graphical presentation of \kl{system~B}}
   \labfig{graphical-B}
 \end{figure*}
 
-As for the asymmetric bubble calculus \kl{BJ}, the rules of our full symmetric
-bubble calculus system $\sysB$ enjoy both a sequent-style and a graphical
+As for the asymmetric \kl{bubble calculus} \kl{BJ}, the rules of our full symmetric
+\kl{bubble calculus} system $\sysB$ enjoy both a sequent-style and a graphical
 presentation, given respectively in \reffig{sequent-B} and \reffig{graphical-B}.
 The presence of closed and open solutions complicates quite a bit the graphical
 representation of rules, thus some explanations are in order:
 \begin{description}
   \item[Closed solutions] In \refsec{branching}, we mentioned that closed
-solutions with no neutral bubbles can be distinguished visually from open
+solutions with no neutral \kl{bubbles} can be distinguished visually from open
 solutions by painting their background in a different color; we chose a light
 green, to suggest that they denote \emph{solved} \kl{subgoals}. In
 \reffig{graphical-B}, we emphasize systematically the distinction by extending
@@ -37,14 +37,14 @@ other than green will stand for the status of the solution associated to the
 given location of the canvas. For instance in the \rsf{f{-}{+}{\da}}
 rule, the status of the ambient solution where the rule is applied is denoted by
 a light yellow background, while the status of the solution $S$ enclosed in a
-red bubble is denoted by the light pink background.
+red \kl{bubble} is denoted by the light pink background.
   \item[Status changes] Last but not least, many rules like \rsf{i{\da}} change
 the status of the ambient solution from open to closed: graphically, this means
 that the background must become green \emph{everywhere}, not only in the portion
 of the canvas depicted by the rule. At first it might appear as breaking
 locality, but it should rather be understood as the result of a perfectly local
 and continuous process: one can imagine a literal \emph{drop} of green paint
-that soaks a growing portion of the canvas, until it reaches an enclosing bubble
+that soaks a growing portion of the canvas, until it reaches an enclosing \kl{bubble}
 --- for the sake of \kl{metaphor}, let us say a cut in the papersheet --- that
 stops its progression\sidenote{We will come back to this \emph{cuts in a sheet}
 \kl{metaphor}, first introduced by C. S. Peirce, in \refch{eg}. When closing the
@@ -59,11 +59,11 @@ As Wittgenstein famously said at the end of the Tractatus: \textit{``Whereof one
 cannot speak, thereof one must be silent''}.}.
 \end{description}
 
-We will now analyze the various groups of rules of \kl{system B}, by
+We will now analyze the various groups of rules of \kl{system~B}, by
 comparing them to those of the \kl{BJ} calculus:
 \begin{description}
   \item[\textbf{\identity}] 
-  A first difference, that we will find in most rules of \kl{system B}, is that
+  A first difference, that we will find in most rules of \kl{system~B}, is that
   we rely on the distributive interpretation of conclusions in solutions. For
   instance in the \rsf{i{\ua}} rule, $\Delta$ is available potentially in
   both \kl{subgoals}, and we do not need to move it manually: this will be the role
@@ -79,7 +79,7 @@ comparing them to those of the \kl{BJ} calculus:
   this variant, which gives better \emph{factorizability}. In fact we will
   precisely do that in \refsec{invertible-calculus}.}. As for the
   \rsf{i{\ua}} rule, restricting to open solutions makes the rule
-  \emph{invertible}, without sacrificing locality. This will in fact be the case
+  \emph{\kl{invertible}}, without sacrificing locality. This will in fact be the case
   of all rules that create multiple \kl{subgoals}.
 
   \item[\textbf{\resource}] 
@@ -95,15 +95,15 @@ comparing them to those of the \kl{BJ} calculus:
   \item[\textbf{\flow}]
 
   Compared to \kl{BJ} where we only had neutral bubbles, the presence of
-  polarized bubbles in system $\sysB$ creates a mini-combinatorial explosion in
+  polarized \kl{bubbles} in system $\sysB$ creates a mini-combinatorial explosion in
   the number of possible $\mathbb{F}$-rules. Indeed, the general scheme is to
   consider what types of items are allowed to flow through bubbles, either
-  inwards or outwards. With $i$ item types and $b$ bubble types, this makes for
+  inwards or outwards. With $i$ item types and $b$ \kl{bubble} types, this makes for
   a total of $i \times b \times 2$ possible rules. In \kl{BJ} items consisted
-  only of polarized formulas and neutral bubbles ($i = 3$ and $b = 1$), thus we
+  only of polarized formulas and neutral \kl{bubbles} ($i = 3$ and $b = 1$), thus we
   had a total of $6$ possible $\mathbb{F}$-rules. It turns out that only the
   \rsf{f{-}{\da}} rule was necessary, and it is also present in system
-  $\sysB$. Now with positive and negative bubbles added to the mix ($b = 3$), we
+  $\sysB$. Now with positive and negative \kl{bubbles} added to the mix ($b = 3$), we
   get up to a total of $18$ possible $\mathbb{F}$-rules in system $\sysB$. Out
   of these, $11$ were identified as being sound logically, and thus we decided
   to include all of them in system $\sysB$.
@@ -111,7 +111,7 @@ comparing them to those of the \kl{BJ} calculus:
   \begin{marginfigure}
     % \hspace{0.5em}
     \stkfig{1.3}{bubbles-porosity}
-    \caption{Porosity of bubbles in system $\sysB$}
+    \caption{Porosity of \kl{bubbles} in system $\sysB$}
     \labfig{bubbles-porosity}
   \end{marginfigure}
   
@@ -120,10 +120,10 @@ comparing them to those of the \kl{BJ} calculus:
   would not have made sense with the asymmetric interpretation of solutions
   (\refdef{ainterp}); but also the \rsf{f{-}{+}{\da}} and
   \rsf{f{+}{-}{\da}} rules, which allow a polarized item to flow
-  \emph{into} a bubble of \emph{opposite} polarity. However to get
+  \emph{into} a \kl{bubble} of \emph{opposite} polarity. However to get
   \emph{cut-free} completeness, we will also need a sort of dual of these rules,
   \rsf{f{+}{+}{\ua}} and \rsf{f{-}{-}{\ua}}, which allow a polarized
-  item to flow \emph{out} of a bubble with the \emph{same} polarity. Thus in
+  item to flow \emph{out} of a \kl{bubble} with the \emph{same} polarity. Thus in
   addition to the duality that \emph{swaps} polarities
   (\rsf{f{-}{+}{\da}} versus \rsf{f{+}{-}{\da}}), we have this new
   duality which \emph{reverses} at the same time the \emph{direction} of the
@@ -133,8 +133,7 @@ comparing them to those of the \kl{BJ} calculus:
   Taken together, these $6$ rules capture provability in
   \emph{\kl{bi-intuitionistic}} logic, as will be demonstrated by the soundness and
   completeness theorems for system $\sysB$. By adding any one of the converses
-  to the $4$ rules that define the porosity of polarized bubbles
-  (\rsf{f{-}{+}{\ua}}, \rsf{f{+}{-}{\ua}}, \rsf{f{-}{-}{\da}},
+  to the $4$ rules that define the porosity of polarized \kl{bubbles} (\rsf{f{-}{+}{\ua}}, \rsf{f{+}{-}{\ua}}, \rsf{f{-}{-}{\da}},
   \rsf{f{+}{+}{\da}}), the system collapses to \emph{classical} logic.
   This situation is summarized in \reffig{bubbles-porosity}: as in
   \reffig{bubbles-flow}, green and orange arrows represent respectively valid
@@ -147,9 +146,9 @@ comparing them to those of the \kl{BJ} calculus:
   \reffig{graphical-B}.
 
   \begin{remark}
-    Since all items can freely go in and out of polarized bubbles in \kl{classical}
+    Since all items can freely go in and out of polarized \kl{bubbles} in \kl{classical}
     logic, the latter are useless. In fact, one could restrict the syntax of
-    solutions to neutral bubbles and only one polarity of formulas, say
+    solutions to neutral \kl{bubbles} and only one polarity of formulas, say
     conclusions. This corresponds to the possibility of having one-sided
     formulations of \kl{sequent calculi} for \kl{classical} logic, by restricting negation
     to atomic formulas and extending it to arbitrary formulas through De Morgan
@@ -164,10 +163,10 @@ comparing them to those of the \kl{BJ} calculus:
   \begin{fact}[$\mathbb{F}$-laws]\labfact{bubbles-flaws}
     \sbr
     \begin{enumerate}
-      \item Polarized bubbles trap (resp. repel) items with a different (resp.
+      \item Polarized \kl{bubbles} trap (resp. repel) items with a different (resp.
       identical) polarity.
-      \item Neutral bubbles trap (resp. repel) polarized (resp. neutral) items.
-      \item Polarized bubbles both trap and repel neutral bubbles.
+      \item Neutral \kl{bubbles} trap (resp. repel) polarized (resp. neutral) items.
+      \item Polarized \kl{bubbles} both trap and repel neutral bubbles.
     \end{enumerate}
   % For any bubble $S$, and any trajectory $\mathfrak{T}$ in space of any item $I$
   % that crosses $S$:
@@ -177,7 +176,7 @@ comparing them to those of the \kl{BJ} calculus:
   % \end{align*}
   % where we denote the polarity of any item $J$ in a solution by $\pol{J}$.
   \end{fact}
-  In \reffig{bubbles-porosity}, the ability of bubbles to trap (resp. repel)
+  In \reffig{bubbles-porosity}, the ability of \kl{bubbles} to trap (resp. repel)
   items corresponds to outward (resp. inward) orange arrows. $\mathbb{F}$-laws
   are thus the ``negative'' counterpart --- in the grammatical sense --- of
   $\mathbb{F}$-rules, represented by green arrows. The fact that purple arrows
@@ -187,7 +186,7 @@ comparing them to those of the \kl{BJ} calculus:
   respected by all rules of system $\sysB$.
   
   In particular, they suggest the addition of a new $\mathbb{F}$-rule
-  \rsf{f{\ua}}, which allows to move neutral bubbles out of other neutral
+  \rsf{f{\ua}}, which allows to move neutral \kl{bubbles} out of other neutral
   bubbles. When looking at it as a graphical \kl{rewriting rule} in
   \reffig{graphical-B}, it can be seen as the act of \emph{abstracting} the
   \kl{subgoal} $T$ from its parent \kl{subgoal} $S$, since the hypotheses and conclusions
@@ -227,13 +226,13 @@ comparing them to those of the \kl{BJ} calculus:
 
   The novelty compared to \kl{BJ} is that we also add so-called
   \emph{absorption rules} $\{\rsf{a},\rsf{a{-}},\rsf{a{+}}\}$ for membranes.
-  These rules state that when a bubble contains only a single neutral bubble,
+  These rules state that when a \kl{bubble} contains only a single neutral bubble,
   the membrane of the latter can be absorbed into the membrane of the former.
   This is mainly useful when one wants to apply an outward $\mathbb{F}$-rule to
   an item that has the same polarity as the outer bubble, as witnessed by the
   use of the \rsf{a{+}} rule in the proof of Uustalu's formula in
   \reffig{bubbles-uustalu}. This formula was first introduced in
-  \sidecite{hutchison_proof_2009} as a counter-example to the cut-elimination
+  \sidecite{hutchison_proof_2009} as a counter-example to the \kl{cut-elimination}
   theorem of Rauszer's \kl{sequent calculus} for \kl{bi-intuitionistic} logic
   \sidecite{rauszer_formalization_1974}, and our initial motivation for
   introducing absorption rules was precisely to provide a cut-free proof of this
@@ -244,7 +243,7 @@ comparing them to those of the \kl{BJ} calculus:
   \refsec{bubbles-pba}, popping rules can be understood as resulting from a
   process of \emph{contraction} of membranes into a single point. Dually,
   absorption rules can be seen as the result of a process of \emph{expansion} of
-  the inner bubble towards the outer bubble. While contraction gets stuck on
+  the inner \kl{bubble} towards the outer bubble. While contraction gets stuck on
   polarized items because they cannot cross neutral membranes outwards,
   expansion gets stuck on neutral items because they cannot cross neutral
   membranes inwards. Thus there is a very natural interplay between
@@ -252,13 +251,13 @@ comparing them to those of the \kl{BJ} calculus:
 
   \item[\textbf{\heating}] 
   Like the \rsf{i{\ua}} rule, the \rsf{\bot{-}}, \rsf{\lor{-}} and
-  \rsf{{\limp}{-}} rules become truly local in \kl{system B} by letting
+  \rsf{{\limp}{-}} rules become truly local in \kl{system~B} by letting
   $\mathbb{F}$-rules handle the distribution of conclusions in \kl{subgoals}.
   Together with their dual rules \rsf{\top{+}}, \rsf{\land{+}} and
   \rsf{{\limp}{+}}, they constitute the \emph{closing} $\mathbb{H}$-rules of
   system $\sysB$. All other $\mathbb{H}$-rules work in arbitrary solutions just
   as in \kl{BJ}. But thanks to the ability to have multiple conclusions
-  (\refsec{branching}) and positive bubbles (\refsec{colors}), both the
-  \rsf{\lor{+}} and \rsf{{\limp}{+}} rules are now \emph{invertible}: this was
-  the initial motivation for designing the symmetric bubble calculus.
+  (\refsec{branching}) and positive \kl{bubbles} (\refsec{colors}), both the
+  \rsf{\lor{+}} and \rsf{{\limp}{+}} rules are now \emph{\kl{invertible}}: this was
+  the initial motivation for designing the symmetric \kl{bubble calculus}.
 \end{description}

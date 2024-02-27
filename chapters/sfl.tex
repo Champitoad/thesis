@@ -5,7 +5,7 @@
 In this chapter, we engage in a thorough analysis of the logical semantics of
 \kl{DnD} actions, which were introduced informally through examples in \refch{pba}.
 We do this mainly from the formal perspective of \kl{deep inference} \kl{proof theory},
-following the original work of K. Chaudhuri on \emph{subformula linking}
+following the original work of K. Chaudhuri on \emph{\kl{subformula linking}}
 \cite{Chaudhuri2013}. But we always keep in mind the intended application to
 \kl{proof assistants}, by motivating various design choices --- actual or prospective
 --- as ways to improve the UX of interactive proof building.
@@ -147,7 +147,7 @@ By forgetting the information on which subterms are selected, one can see any
 only happen at the top-level\sidenote{In fact this is more of a limitation of
 Actema's current interface: one cannot link two subterms that live in the same
 item, because dragging actions can only be performed on \emph{entire} items. But
-in the original formulation and implementation of subformula linking
+in the original formulation and implementation of \kl{subformula linking}
 \cite{Chaudhuri2013}, \kl{linkages} can be created between arbitrary subformulas. We
 come back to this issue in \refsec{dnd-completeness}.}.
 
@@ -164,7 +164,7 @@ come back to this issue in \refsec{dnd-completeness}.}.
 \labfig{rellink}
 \end{marginfigure}
 
-In the original formulation of subformula linking \sidecite{Chaudhuri2013}, a
+In the original formulation of \kl{subformula linking} \sidecite{Chaudhuri2013}, a
 semantics is associated to every \kl{logical linkage}, even when the selected
 subformulas $A$ and $A'$ are not unifiable. This is made possible by the
 addition of so-called \emph{release} rules\sidenote{A terminology coming from
@@ -552,7 +552,7 @@ consider the polarity of their context.
   For some rules, like \rsf{R\!\!\limp_1}, the left-hand and
   right-hand propositions are equivalent:
   $$A \limp B \limp C ~~~\Longleftrightarrow~~~ A \land B \limp C$$ Such rules are
-  called {\em invertible} and their names are tagged by *. This point will be
+  called {\em \kl{invertible}} and their names are tagged by *. This point will be
   relevant in \refsec{invert}.
 \end{remark}
 
@@ -932,7 +932,7 @@ arbitrary depth, such as \kl{Coq} with its \emph{generalized rewriting} mechanis
 non-equivalent statements, and there is no reason in principle it could not be
 integrated in our paradigm, in the form of generalized substitution rules in
 place of {\rsf{L{=}_i}} and {\rsf{F{=}_i}}.}. This again contrasts with the
-release semantics of subformula linking which do not provide this guarantee of
+release semantics of \kl{subformula linking} which do not provide this guarantee of
 productivity, or with the logical reasoning \kl{tactics} of \kl{proof assistants} based on
 \kl{natural deduction} rules.
 
@@ -950,8 +950,8 @@ $\select{A}\lor B \back B\lor\select{A}$ one can apply either
 
 Interestingly, an answer is provided by {\em focusing}. It has been noticed by
 Andreoli~\sidecite{andreoli1992} that, in bottom-up proof search, one should
-apply the invertible logical rules first since they preserve provability. In our
-framework, this translates into first applying the invertible \kl{rewriting rules} (the
+apply the \kl{invertible} logical rules first since they preserve provability. In our
+framework, this translates into first applying the \kl{invertible} \kl{rewriting rules} (the
 ones marked by a *).
 % \sidenote{Hopefully at some point, detailed proofs of
 % non-invertibility for intuitionistic/classical logic based on counter-models
@@ -991,11 +991,11 @@ scheme is already present implicitly in the proof of Lemma \ref{thm:vprogress}.}
 There are three possibilities when analysing invertibility of the two rules in
 the third case:
 \begin{enumerate}
-  \item if both are invertible, then the order of application does not matter
+  \item if both are \kl{invertible}, then the order of application does not matter
   since we preserve provability in the end;
-  \item if only one is invertible, we apply it first following the focusing
+  \item if only one is \kl{invertible}, we apply it first following the focusing
   discipline;
-  \item if neither are invertible, we want to choose the order that maximizes
+  \item if neither are \kl{invertible}, we want to choose the order that maximizes
   the preservation of provability. It turns out that in almost all cases the two
   rules commute, that is the formulas obtained in the two orderings are
   equivalent. The only exceptions are the critical pairs \rsf{F\!\!\lor_i
@@ -1013,7 +1013,7 @@ Currently we do not have detailed proofs of permutability for all pairs of
 rules. The reason is mostly pragmatic: given the great number of rules, this
 would take a lot of time to perform a full case analysis. Actually our claim of
 permutability comes from \cite{DBLP:conf/cade/Chaudhuri21} which uses a
-subformula linking system almost identical to ours. We hope we will be able to
+\kl{subformula linking} system almost identical to ours. We hope we will be able to
 provide rigorous proofs in annex when time permits.
 
 \section{Completeness}\labsec{dnd-completeness}
@@ -1028,7 +1028,7 @@ click actions are a sufficient basis for completeness. While we believe that a
 combination of both click and \kl{DnD} actions is more comfortable to handle a
 variety of proof situations, it is still interesting to consider the question of
 completeness for \kl{DnD} actions alone. It turns out that the answer is positive:
-the mechanism of \emph{subformula linking} underlying \kl{DnD} actions is powerful
+the mechanism of \emph{\kl{subformula linking}} underlying \kl{DnD} actions is powerful
 enough to capture provability in \kl{FOL}. This has already been shown by Chaudhuri
 in \cite{Chaudhuri2013} for linear logic, and \cite{DBLP:conf/cade/Chaudhuri21}
 for \kl{intuitionistic} logic. Here we give a completeness proof for a system based
@@ -1036,8 +1036,8 @@ on a slight extension of our \kl{rewriting rules}, following ideas from these wo
 
 \begin{remark}
   What we prove in this section is a \emph{weak} form of completeness: we show
-  that for any true formula, there always exists a derivation in our subformula
-  linking system, but this derivation might not be constructible by the
+  that for any true formula, there always exists a derivation in our \kl{subformula
+  linking} system, but this derivation might not be constructible by the
   deterministic procedure outlined in \refsec{invert}. There are two aspects
   that make the stronger version hard to prove in practice:
   \begin{itemize}
@@ -1045,7 +1045,7 @@ on a slight extension of our \kl{rewriting rules}, following ideas from these wo
     allow to find a proof when there exists one, it would be necessary to
     formulate and prove a \emph{focusing theorem} based on the permutability of
     rules mentioned at the end of \refsec{invert}.
-    \item Even then, some additional rules of our subformula linking system are
+    \item Even then, some additional rules of our \kl{subformula linking} system are
     not simulated in any way by the \kl{DnD} procedure of \refsec{action}. We will come
     back to this point soon.
   \end{itemize}  
@@ -1176,9 +1176,9 @@ of the semantics of \kl{DnD} actions as for release rules.
 Then we simply rely on the completeness of \kl{sequent calculus} by performing a
 proof by simulation. There are many variants of \kl{sequent calculi} for
 \kl{intuitionistic} \kl{first-order logic} described in the literature. In our case the
-choice mostly does not matter: all we need is that it is \emph{analytic}, i.e.
-satisifies the subformula property. Indeed the very idea of subformula linking
-is based on analyticity: one should be able to prove a statement by the sole act
+choice mostly does not matter: all we need is that it is \emph{\kl{analytic}}, i.e.
+satisifies the \kl{subformula property}. Indeed the very idea of \kl{subformula linking}
+is based on \kl{analyticity}: one should be able to prove a statement by the sole act
 of linking sub-sentences already present in the statement.
 
 \begin{marginfigure}
@@ -1189,12 +1189,12 @@ of linking sub-sentences already present in the statement.
   \\
   \top \quad\step{} \quad t = t \quad \mathsf{ref}
 \end{mathpar}
-\caption{Non-analytic reflexivity rules}
+\caption{Non-\kl{analytic} reflexivity rules}
 \labfig{ref-rule}
 \end{marginfigure}
 
 We chose the calculus \kl{G3i} from \cite{negri_structural_2001} as our basis,
-because all \kl{structural rules} are admissible in it (but they would be
+because all \kl{structural rules} are \kl{admissible} in it (but they would be
 straightforward to simulate apart from the cut rule). The first modification we
 do is that we model hypotheses in sequents as lists instead of multisets, to
 make the translation from sequents to formulas completely deterministic. Thus we
@@ -1209,7 +1209,7 @@ instead of multi-succedant sequents). The \kl{right introduction rule}
 from \cite{negri_structural_2001} (\reffig{ref-rule}). The reason is that we
 cannot simulate the latter directly without adding its equivalent rule
 {\rsf{ref}} to our calculus (\reffig{ref-rule}), which we do not want to do
-because it would break the subformula property. We conjecture that using
+because it would break the \kl{subformula property}. We conjecture that using
 {\rnm{{=}R}} instead of {\rnm{Ref}} does not break the cut admissibility theorem
 from \cite{negri_structural_2001}.
 
@@ -1235,7 +1235,7 @@ from \cite{negri_structural_2001}.
   are simulated as usual by composing the derivations obtained from the
   induction hypotheses, making a crucial use of the release rules {\rsf{Brel}}
   and {\rsf{Frel}}. The full mapping from \kl{sequent calculus} rules to
-  derivations in our subformula linking calculus is given in the following
+  derivations in our \kl{subformula linking} calculus is given in the following
   table. Note that we treat conjunctive formulas modulo associativity to avoid
   bureaucratic details.
 
@@ -1474,7 +1474,7 @@ from \cite{negri_structural_2001}.
 \paragraph{Subformula linking under quantifiers}
 
 Very recently, Mulder and Krebbers \sidecite{mulder_unification_2024} proposed
-an improvement over both our method of subformula linking implemented in \kl{Actema},
+an improvement over both our method of \kl{subformula linking} implemented in \kl{Actema},
 and the method of Chaudhuri implemented in the \intro{Profint} prototype
 \sidecite{DBLP:conf/cade/Chaudhuri21}. Like us, they perform \textit{a priori}
 unification on the linked subformulas to determine appropriate substitutions for
@@ -1541,7 +1541,7 @@ the validity criterion of \kl{linkages}:
   The incorrect proof structures of Girard are in a sense more parallel as they
   cannot always be mapped to correct \kl{sequent calculus} derivations.}.
 \end{itemize}
-Hence, our approach to subformula linking seems to exhibit some properties of
+Hence, our approach to \kl{subformula linking} seems to exhibit some properties of
 canonical proofs, but at the level of \emph{partial proofs}: valid \kl{linkages} make
 for \emph{compact-parallel-spatial} representations of inferences, whose
 operational meaning is given by their \emph{detailed-sequential-temporal} \kl{CoS}
@@ -1561,7 +1561,7 @@ derivations.
 We noticed an interesting connection with the work of Conal Elliott on
 tangible functional programming \sidecite{elliott-tangible}. His concept
 of \emph{deep application} of \kl{$\lambda$-terms} seems related to the
-notion of subformula linking, when viewing function and product types
+notion of \kl{subformula linking}, when viewing function and product types
 as implications and conjunctions through the formulae-as-types
 interpretation. He also devised a system of basic combinators which
 are composed sequentially to compute the result of a \kl{DnD}, though it

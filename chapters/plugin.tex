@@ -524,8 +524,8 @@ on most datatypes defined previously in \reffig{atd-fo} and \reffig{atd-goals},
 and on two new datatypes: the type \texttt{ipath} of \emph{paths}, which is used
 pervasively to designate subterms of the current \kl{subgoal} (that are typically
 indicated by the \process{User} through pointing); and the type \texttt{itrace}
-of \emph{subformula linking traces}, which is used in the compilation of \kl{DnD}
-actions that perform subformula linking, to be described soon.
+of \emph{\kl{subformula linking} traces}, which is used in the compilation of \kl{DnD}
+actions that perform \kl{subformula linking}, to be described soon.
 
 Most click and contextual actions have a straightforward translation as Coq
 tactics. For instance, the \texttt{AIntro} action that corresponds to a click on
@@ -584,7 +584,7 @@ actions, called respectively \texttt{backward} and \texttt{forward}. They rely
 on two \kl{Coq} fixpoints \texttt{b3} and \texttt{f3} which respectively compute the
 new conclusion $\mathtt{b3}(p, q, T)$ from a \kl(dnd){backward} \kl{linkage} $p \back q$, and
 the new hypothesis $\mathtt{f3}(p, q, T)$ from a \kl(dnd){forward} \kl{linkage} $p \forw q$,
-where $T$ is the so-called \emph{subformula linking trace} mentioned earlier. Of
+where $T$ is the so-called \emph{\kl{subformula linking} trace} mentioned earlier. Of
 course the paths $p, q$ and the trace $T$ are all expressed with custom Coq
 datatypes relying on our deep embedding of \kl{first-order logic}. The role of the
 trace in particular is to provide the list of SFL \kl{rewriting rules} to apply,
@@ -624,7 +624,7 @@ that \texttt{reflect} is the inverse of \texttt{reify}.
   addition to reflection, like \emph{combinators} and some more powerful usages
   of \emph{metaprogramming}. He also provides an effective implementation of the
   techniques in his \kl{Profint} tool \cite{DBLP:conf/cade/Chaudhuri21}, that
-  allows to export subformula linking derivations built with \kl{Profint}'s
+  allows to export \kl{subformula linking} derivations built with \kl{Profint}'s
   \kl{GUI} as \kl{proof scripts} directly executable in various \kl{proof
   assistants} (\kl{Coq}, \kl{Lean}, \kl{Isabelle/HOL}).
 \end{remark}
@@ -800,7 +800,7 @@ language\sidenote{See for example section 3.6 of E. Ayers' thesis
 \cite{ayers_thesis}. We can also mention ongoing work of Patrick Massot in the
 Lean \kl{proof assistant} \cite{LeanIPAM}.}. Our hope is that the structure of proofs
 in the \kl{PbA} paradigm might be well-suited to the generation of
-readable and concise proof texts, thanks notably to the subformula linking
+readable and concise proof texts, thanks notably to the \kl{subformula linking}
 semantics of \kl{DnD} actions that exhibit clearly the flow of argumentation.
 
 An even more pragmatic solution, that should be straightforward to implement in
@@ -813,7 +813,7 @@ there are currently two drawbacks to this approach:
   paths to manipulated subterms, in the form of lists of integers. Those are
   hard to read by humans, and very sensible to small changes in the shape of the
   \kl{goal}. This is even worse for the \texttt{backward} and \texttt{forward}
-  \kl{tactics}, because they also take as argument the subformula linking trace,
+  \kl{tactics}, because they also take as argument the \kl{subformula linking} trace,
   which is a very complex data structure expressed in our deep embedding of
   \kl{first-order logic}, and hence should not leak into the user interface.
   Hopefully, relying on \kl{Coq}'s unification instead of \kl{Actema}'s should mitigate

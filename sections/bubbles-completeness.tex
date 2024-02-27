@@ -1,15 +1,15 @@
 We are now going to prove the \emph{completeness} of the \kl{bi-intuitionistic} (and
-propositional) fragment $\sysBHB$ of system $\sysB$, by simulating the nested
-sequent system \kl{DBiInt} of Postniece. In \sidecite{postniece_deep_2009} she
+propositional) fragment $\sysBHB$ of system $\sysB$, by simulating the \kl{nested
+sequent} system \kl{DBiInt} of Postniece. In \sidecite{postniece_deep_2009} she
 shows that this calculus is sound and complete with respect to another calculus
 \kl{LBiInt}, and in Chapter 4 of her thesis \sidecite{postniece_proof_2010} she
 proves that \kl{LBiInt} is sound and complete with respect to the Kripke
 semantics of \kl{bi-intuitionistic} logic. Importantly, the cut rule is shown to be
-\emph{admissible} in both systems, through a syntactic process of
-cut-elimination in \kl{LBiInt}. We will rely on this result to obtain
+\emph{\kl{admissible}} in both systems, through a syntactic process of
+\kl{cut-elimination} in \kl{LBiInt}. We will rely on this result to obtain
 admissibility of the cut rule \rsf{i{\ua}} in $\sysBHB$, and by extension
 in $\sysB$, $\sysBH$ and $\sysBB$. It might be interesting to have our own
-internal cut-elimination procedure for system $\sysB$, notably to unveil its
+internal \kl{cut-elimination} procedure for system $\sysB$, notably to unveil its
 computational content in the spirit of the \kl{Curry-Howard correspondence}. But this
 would lead us astray from the purpose of this thesis, and thus we leave this
 task for future work.
@@ -40,7 +40,7 @@ and rely on meta-variables $X, Y$ to distinguish structures from arbitrary
 solutions when necessary.
 
 The rules of \kl{DBiInt} are given in \reffig{rules-dbiint}. Note that like
-bubble calculi, \kl{DBiInt} is truly a \emph{\kl{deep inference}} system, in the
+\kl{bubble calculi}, \kl{DBiInt} is truly a \emph{\kl{deep inference}} system, in the
 sense that rules can be applied on sequents nested arbitrarily deep inside
 structures\sidenote{Our presentation of rules is slightly different from
 \cite{postniece_deep_2009}: the contexts in which rules apply are left implicit,
@@ -60,7 +60,7 @@ can be simulated inside system $\sysB$.
 
 \begin{figure*}
   \input{figures/dbiint.tex}
-  \caption{Rules of the deep nested sequent system \kl{DBiInt}}
+  \caption{Rules of the deep \kl{nested sequent} system \kl{DBiInt}}
   \labfig{rules-dbiint}
 \end{figure*}
 
@@ -114,7 +114,7 @@ than \rsf{p}. Combined with the soundness of $\sysBHB$ (Corollary
   A$.
 \end{theorem}
 
-Although these rules are admissible, they do not seem to be derivable from other
+Although these rules are \kl{admissible}, they do not seem to be derivable from other
 rules. We believe that they might help in making proofs more \emph{compact} by
 improving \emph{factorizability}, just like the cut rule does.
 % We also conjecture that they become necessary (except \rsf{i{\ua}}) if one
@@ -123,20 +123,20 @@ improving \emph{factorizability}, just like the cut rule does.
 % demonstrated.
 
 As in \kl{sequent calculus}, every rule of system $\sysB$ other than
-\rsf{i{\ua}} satisfies the \emph{subformula property}:
+\rsf{i{\ua}} satisfies the \emph{\kl{subformula property}}:
 
 \begin{fact}[Subformula property]\label{cor:subformula-property} If $S
   \step{\sysB \setminus \{\rsf{i{\ua}}\}} T$ and $A \subsol T$, then there is a
   formula $B$ such that $A$ is a subformula of $B$ and $B \subsol S$.
 \end{fact}
 
-Thanks to cut admissibility, we thus get that $\sysBHB$ is \emph{analytic}. This
+Thanks to cut admissibility, we thus get that $\sysBHB$ is \emph{\kl{analytic}}. This
 has many nice consequences, a well-known one being that when searching for a
 proof of a given solution $S$, one does not need to come up with or ``invent'' a
 formula that does not appear in $S$. This is crucial when designing
 \emph{automated} decision procedures because it reduces drastically the search
 space, but is also desirable in the setting of \emph{interactive} proof
-building. Indeed with our \kl{Proof-by-Action} interpretation of bubble calculi
+building. Indeed with our \kl{Proof-by-Action} interpretation of \kl{bubble calculi}
 (\refsec{bubbles-pba}), this means that all logical reasoning can be performed
 by \kl{direct manipulation} of \emph{what is already there}. Then the cut rule is
 indispensable, but confined to a role of \emph{theory building}: it allows the
@@ -149,7 +149,7 @@ the exclusion connective $\lsub$ to get a sound and complete system for
 \rsf{{\lsub}_R} and \rsf{{\lsub}_L}, as well as the propagation rules
 \rsf{{\seq}_{L1}} and \rsf{{\seq}_{R2}}. Indeed the latter are only useful in
 combination with the former, since \rsf{{\lsub}_L} is the only rule of
-\kl{DBiInt} that can introduce nested sequents in negative contexts. The
+\kl{DBiInt} that can introduce \kl{nested sequents} in negative contexts. The
 situation is similar in system $\sysB$, and in fact the proof of
 \reflemma{simulation-dbiint} shows that the \kl{intuitionistic} fragment $\sysBH$ is
 sufficient to simulate \kl{DBiInt} without the aforementioned rules. The dual

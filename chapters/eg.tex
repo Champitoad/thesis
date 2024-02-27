@@ -71,8 +71,8 @@ In \refsec{eg-completeness} we give a syntactic proof of completeness for
 \kl{Alpha}, by simulating the \kl{calculus of structures} \intro{SKS} of Brünnler and
 Tiu \sidecite{brunnler_local_2001}. In this way, \kl{Alpha} is shown to have
 subsystems that inherit the \emph{locality} property of \kl{SKS}, and where the
-deletion and insertion rules are respectively admissible for \emph{provability}
-and \emph{refutability}, making \kl{Alpha} \emph{analytic}. In \refsec{beta}, we
+deletion and insertion rules are respectively \kl{admissible} for \emph{provability}
+and \emph{refutability}, making \kl{Alpha} \emph{\kl{analytic}}. In \refsec{beta}, we
 illustrate the original mechanism of \emph{lines of identity} used by Peirce to
 handle quantifiers and equality in his \kl{Beta} system. We end in
 \refsec{gardens} by showing how to recast lines of identity in a more
@@ -295,7 +295,7 @@ information is immediately apparent in the \kl{subgraph}, and thus completely
 are attached to them as explicit labels.}.
 
 \begin{remark}\labremark{eg-polarity}
-  Whereas in bubble calculi the concept of polarity was understood as a property
+  Whereas in \kl{bubble calculi} the concept of polarity was understood as a property
   of \emph{objects} --- i.e. utterances of propositions --- by assigning them
   opposite colors (blue and red), the previous notations for \kl{graphs} suggest that
   it is instead a property of the \emph{space} in which objects reside. This is
@@ -361,7 +361,7 @@ of any polarity:
     says that a \kl{subgraph} $G$ can be erased if it already occurs ``higher'' on
     $\SA$. Also this does precisely the opposite of copy-pasting, which is known
     in software engineering as \emph{factorization}\sidenote{This is closely
-    related to the kind of factorization at work in bubble calculi. In
+    related to the kind of factorization at work in \kl{bubble calculi}. In
     particular, the fact that the factorizing occurence is higher and usually
     outside of a \kl{cut} is very reminiscent of the \emph{outward} flow rules of
     system $\sysB$ (those whose name ends with $\ua$ in
@@ -389,7 +389,7 @@ The applicability of the next two rules depends on the polarity of the
     
     This is exactly the dual of \kl{Insertion}, stating that if a proposition
     is known to be true, then one might as well refrain from asserting it. It is
-    the only \emph{non-analytic} rule of the system when reading rules from
+    the only \emph{non-\kl{analytic}} rule of the system when reading rules from
     conclusion to premiss, since $G$ does not already appear in the right-hand
     side. It is thus strongly related to the \emph{cut} rule of sequent
     calculus, which it can simulate together with the \kl{Deiteration} rule.
@@ -524,7 +524,7 @@ define the graphs of \kl{Alpha} as (recursive) \emph{finite multisets}:
 \end{definition}
 The terminology written in parentheses is the one used by Peirce to denote the
 same concepts in \sidecite{peirce_prolegomena_1906}. Note the similarity with
-the definitions of bubbles (enclosures) and solutions (areas)
+the definitions of \kl{bubbles} (enclosures) and solutions (areas)
 (\refdef{solution}). The main difference between \kl{graphs} and solutions,
 is that in the former formulas (ions) are restricted to atoms (spots), and they
 are not \emph{polarized} (see \refremark{eg-polarity}).
@@ -628,12 +628,12 @@ prompts us to reevalute our conception of \emph{illative atomicity}, understood
 precisely as the definition of what it means for an inference step to be (the
 most) \emph{elementary}.
 
-Note that this should be distinguished from the notion of \emph{analyticity}, as
-popularized by Gentzen with the \emph{subformula property} in \kl{sequent
+Note that this should be distinguished from the notion of \emph{\kl{analyticity}}, as
+popularized by Gentzen with the \emph{\kl{subformula property}} in \kl{sequent
 calculus}: the latter is concerned with the analysis of \emph{propositions} into
 their constituents through \kl{inference rules}, while here we are interested in
 the analysis of the \kl{inference rules} themselves\sidenote{We will give a
-positive answer to the question of analyticity in \kl{Alpha} at the end of
+positive answer to the question of \kl{analyticity} in \kl{Alpha} at the end of
 \refsec{eg-completeness}.}. However there is a conceptual bottleneck, because
 \kl{inference rules} are usually conceived \emph{by definition} as the smallest
 constituents of proofs in a given \kl{proof system}; and it is very hard to
@@ -841,7 +841,7 @@ $A$. The same applies to \kl{graphs}:
 This follows the standard way to evaluate conjunctions and negations.
 
 To factorize the proof of soundness, we first prove a few lemmas for the
-\emph{invertible} rules of \kl{Alpha}, that is those who satisfy $v(G) = v(H)$
+\emph{\kl{invertible}} rules of \kl{Alpha}, that is those who satisfy $v(G) = v(H)$
 for every valuation $v$ if $G \step{} H$.
 
 \begin{lemma}[Iteration]\lablemma{eg-iteration}
@@ -1012,13 +1012,13 @@ setting.
     briefly comment on locality in \kl{SKS} and \kl{Alpha} and what our
     simulation says about it;
     \item[Analyticity] crucially, our objective is to show at the end of this
-    section that \kl{Alpha} is \emph{analytic}. Ma and Pietarinen discuss this
-    question very quickly in their paper, by affirming that \kl{Alpha} is
+    section that \kl{Alpha} is \emph{\kl{analytic}}. Ma and Pietarinen discuss
+    this question very quickly in their paper, by affirming that \kl{Alpha} is
     analytic both in the sense of Gentzen because it can simulate the \kl{cut}
     rule, and in the sense of \emph{illative atomicity} discussed in
     \refsec{atomicity}. We disagree with the first claim, and use our simulation
-    to show analyticity in the stronger sense of satisfying a form of
-    \emph{subformula property}.
+    to show \kl{analyticity} in the stronger sense of satisfying a form of
+    \kl{\kl{subformula property}}.
   \end{description}
 \end{kaonote}
 
@@ -1444,7 +1444,7 @@ us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
 
 A powerful result of Brünnler and Tiu \cite{brunnler_local_2001}, is that the
 whole up-fragment of \kl{SKS} (all rules whose name ends with $\ua$) is
-\emph{admissible}: if a structure $S$ has a \emph{proof} $S \steps{} \top$, then
+\emph{\kl{admissible}}: if a structure $S$ has a \emph{proof} $S \steps{} \top$, then
 it also has a proof $S \xsteps{\kl{KS}} \top$, with \intro{KS} defined as
 \kl{SKS} without the up-fragment\sidenote{The name \kl{KS} comes from \kl{SKS},
 with the first `\kl{S}' standing for ``symmetric'' dropped.}. Dually, the whole
@@ -1462,7 +1462,7 @@ $\strans{\dmdual{T}} \xstep{\dmdual{r_n}} \ldots \xstep{\dmdual{r_1}}
 \strans{\dmdual{S}}$ (see \reffact{eg-duality}). An important consequence is
 that the deletion rule \kl{Del} is never used in the simulation of \kl{KS}, if
 one chooses the appropriate derivation among the two provided for the switch and
-medial rules \kl{s} and \kl{m}. Thus deletion is admissible in \kl{Alpha}, a
+medial rules \kl{s} and \kl{m}. Thus deletion is \kl{admissible} in \kl{Alpha}, a
 result that seems to be novel in the literature on \kl{EGs}.
 
 \begin{corollary}[Admissibility of Deletion]\label{cor:adm-era}
@@ -1486,9 +1486,9 @@ insertion also never appears in the simulation of \kl{\dmdual{KS}}, while
 \end{corollary}
 
 Corollary \ref{cor:adm-era} is what allows us to conclude that \kl{Alpha} is an
-\emph{analytic} system, in a sense very close to that of Gentzen. Because we do
+\emph{\kl{analytic}} system, in a sense very close to that of Gentzen. Because we do
 not have a notion of logical connective nor tree-shaped derivations, we must
-reduce the subformula property to \emph{atomic} \kl{graphs}. Then it is easy to see
+reduce the \kl{subformula property} to \emph{atomic} \kl{graphs}. Then it is easy to see
 that all rules of \kl{Alpha} except \kl{Del} satisfy this property:
 
 \begin{definition}[Subgraph]
@@ -1650,7 +1650,7 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
   \emph{endoporeutic}\sidenote{From the greek \emph{endon} (`within') and
   \emph{poros} (`passage, pore') \cite{endoporeutic}, literally ``that lets
   through within''. This physically-flavored terminology is reminiscent of the
-  intuition we developed within our own bubble calculus and illustrated in
+  intuition we developed within our own \kl{bubble calculus} and illustrated in
   \reffig{bubbles-flow}, even though we were not aware of the existence of \kl{EGs} at
   the time!} reading of \kl{EGs}, where they are inspected starting from the top-level
   of $\SA$, and then descending (recursively) into their various \kl{cuts}. In
@@ -1894,9 +1894,9 @@ algebra of lines of identity'']{pietarinen_compositional_2020}.
 The essence of the syllogism lies in the instantiation of the universally
 quantified variable $y$ by $x$ in formula (\ref{eq:socrates-mortal-fo}),
 captured by the \kl{Deletion} step in \reffig{eg-socrates-mortal}. Thus
-contrary to \kl{Alpha}, it seems that \kl{Deletion} is not admissible in
+contrary to \kl{Alpha}, it seems that \kl{Deletion} is not \kl{admissible} in
 \kl{Beta} anymore. Because of the \emph{subterm property} of \kl{first-order logic}
-\sidecite{DBLP:books/el/RV01/DegtyarevV01}, this should not break analyticity:
+\sidecite{DBLP:books/el/RV01/DegtyarevV01}, this should not break \kl{analyticity}:
 indeed we should only need \kl{Deletion} on LoI, which connects already
 existing binders. However one still needs to find out the binders that must be
 connected, which we conjecture to be a major factor in the undecidability of

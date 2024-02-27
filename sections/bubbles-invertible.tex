@@ -2,39 +2,39 @@
 
 \begin{figure*}
   \input{figures/sequent-B-inv.tex}
-  \caption{Rules for the invertible bubble calculus \kl{B_{inv}}}
+  \caption{Rules for the \kl{invertible} \kl{bubble calculus} \kl{B_{inv}}}
   \labfig{sequent-B-inv}
 \end{figure*}
 
 An important thing to note, is that all the rules of \kl{DBiInt} are
-\emph{invertible}\sidenote{Lemma 5.2.4 in Postniece's thesis
+\emph{\kl{invertible}}\sidenote{Lemma 5.2.4 in Postniece's thesis
   \cite{postniece_proof_2010}.}. Thus it follows immediately from
 \reflemma{simulation-dbiint} that one can just take the translation of the rules
-of \kl{DBiInt} in system $\sysB$, and get a complete, fully invertible
+of \kl{DBiInt} in system $\sysB$, and get a complete, fully \kl{invertible}
 calculus. But this would be a waste of the expressive power and nice properties
 of system $\sysB$, like linearity and locality.
 
-Instead, we will target precisely the non-invertible rules of system $\sysB$,
+Instead, we will target precisely the non-\kl{invertible} rules of system $\sysB$,
 and modify only those. From the proof of \reflemma{bubbles-local-soundness}, we
-can identify which rules of \kl{system B} are invertible, and which are
+can identify which rules of \kl{system~B} are \kl{invertible}, and which are
 probably not. Indeed if the soundness of a rule only relies on a chain of
-equivalences, then it is necessarily invertible. On the contrary if it relies on
-an inequality, then it is probably not invertible\sidenote{To ensure that it is
-not invertible, we would need additionally to find a counter-model that
+equivalences, then it is necessarily \kl{invertible}. On the contrary if it relies on
+an inequality, then it is probably not \kl{invertible}\sidenote{To ensure that it is
+not \kl{invertible}, we would need additionally to find a counter-model that
 invalidates the converse inequality.}.
 
-\begin{fact}[Invertibility of \kl{system B}]
+\begin{fact}[Invertibility of \kl{system~B}]
   All rules in the fragment $\mathbb{I} \cup \{\rsf{c{-}},\rsf{c{+}}\} \cup
     \mathbb{M} \cup \mathbb{H} \setminus \{\rsf{{\limp}{-}},\rsf{{\lsub}{+}}\}$ of
-  \kl{system B} are invertible.
+  \kl{system~B} are \kl{invertible}.
 \end{fact}
 
-Thus the only remaining rules of \kl{system B} that are (most probably) not
-invertible are the \kl{weakening} rules $\{\rsf{w{-}},\rsf{w{+}}\}$, all the
+Thus the only remaining rules of \kl{system~B} that are (most probably) not
+\kl{invertible} are the \kl{weakening} rules $\{\rsf{w{-}},\rsf{w{+}}\}$, all the
 $\mathbb{F}$-rules, and the $\mathbb{H}$-rules $\{\rsf{{\limp}{-}},
 \rsf{{\lsub}{+}}\}$ that \emph{apply} an implication/exclusion\sidenote{For
 quantifier rules, we conjecture that as in \kl{sequent calculus}, the rules
-$\{\rsf{\forall{+}}, \rsf{\exists{-}}\}$ are invertible, while the rules
+$\{\rsf{\forall{+}}, \rsf{\exists{-}}\}$ are \kl{invertible}, while the rules
 $\{\rsf{\forall{-}}, \rsf{\exists{+}}\}$ are not. And as in \kl{sequent calculus},
 this can be remedied by systematically duplicating the instantiated formula.}.
 In \reffig{sequent-B-inv} we define the \kl{B_{inv}} calculus, which results
@@ -43,7 +43,7 @@ from the following modifications to the previous rules:
   \item[\textbf{Weakening}]
     Here we follow a standard technique in \kl{sequent calculus}, that merges the
     \kl{weakening} rule in all \emph{terminal} rules of the calculus (i.e. rules with
-    no premisses). In bubble calculi, the notion of premiss is captured by
+    no premisses). In \kl{bubble calculi}, the notion of premiss is captured by
     neutral bubbles; thus we incorporate \kl{weakenings} in all rules that solve
     \kl{subgoals} by closing solutions with no neutral bubbles. Those are the rules
     $\{\rsf{i{\da}},\rsf{p{-}},\rsf{p{+}}\}$, which for the occasion have
@@ -57,7 +57,7 @@ from the following modifications to the previous rules:
     \emph{propagation} rules of \kl{DBiInt} combine an instance of
     \emph{\kl{contraction}} followed by the application of a flow rule on the
     duplicated formula. Thus we can make all $\mathbb{F}$-rules of system
-    $\sysB$ invertible by systematically duplicating the moved formula, although
+    $\sysB$ \kl{invertible} by systematically duplicating the moved formula, although
     this breaks \emph{linearity}.
 
     A downside of propagation rules in the style of \kl{DBiInt}, is that they
@@ -84,8 +84,8 @@ from the following modifications to the previous rules:
     Note also that we removed the \rsf{f{\ua}} rule of \reffig{sequent-B}.
     Indeed even after turning it into a propagation rule, the moved copy of the
     duplicated \kl{subgoal} $S$ cannot be weakened because it lives in a neutral
-    bubble. Thus the rule stays non-invertible, and cannot be included in
-    \kl{B_{inv}}. Fortunately, we showed that it is admissible in
+    bubble. Thus the rule stays non-\kl{invertible}, and cannot be included in
+    \kl{B_{inv}}. Fortunately, we showed that it is \kl{admissible} in
     \refthm{bubbles:cut-admissibility}, so this is not problematic.
 
   \item[\textbf{Implication/Exclusion}]
@@ -100,10 +100,10 @@ from the following modifications to the previous rules:
     \kl{introduction rules} of \kl{DBiInt}. Also like in \sys{DBiInt}, we removed
     the \kl{contraction} rules \rsf{c{-}} and \rsf{c{+}}, which are now merged with
     these two rules as well as the $\mathbb{F}$-rules. Although \kl{contraction}
-    rules are invertible, they induce a lot of complexity in proof search,
+    rules are \kl{invertible}, they induce a lot of complexity in proof search,
     because it is hard to predict the (occurrences of) formulas that need to be
     duplicated, and one can duplicate \emph{ad infinitum}. Thus it is preferable
-    to design a calculus where they are admissible. But unlike what is done in
+    to design a calculus where they are \kl{admissible}. But unlike what is done in
     \kl{DBiInt}, we did not incorporate \kl{contraction} in other
     $\mathbb{H}$-rules. Thus we cannot simulate exactly all the \kl{introduction
     rules} of \kl{DBiInt} in \sys{B_{inv}}.
@@ -120,7 +120,7 @@ from the following modifications to the previous rules:
 
 These modifications only change superficially the proof of soundness, and thus
 we do not redo it. As for completeness, we would need to prove that the
-\kl{contraction} rules are admissible, in order to solve the aforementioned problem
+\kl{contraction} rules are \kl{admissible}, in order to solve the aforementioned problem
 of simulating \kl{DBiInt}'s \kl{introduction rules}:
 
 \begin{lemma}[Admissibility of contraction]\lablemma{admissibility-contraction}
@@ -145,7 +145,7 @@ on the depth of the derivation, relying on the fact that all \kl{introduction
 rules} of \kl{DBiInt} preserve the principal formula; but this is precisely what
 we are trying to avoid with our version of the rules. Of course, if we either
 give up on this constraint or include \kl{contraction} rules in \kl{B_{inv}}, then we
-immediately get our desired result: \kl{B_{inv}} is a fully invertible calculus,
+immediately get our desired result: \kl{B_{inv}} is a fully \kl{invertible} calculus,
 where the same fragments as system $\sysB$ capture \kl{intuitionistic},
 \kl{dual-intuitionistic}, \kl{bi-intuitionistic} and \kl{classical} logic.
 
@@ -206,9 +206,9 @@ reached:
     of the pruned branch, and thus the number of \kl{subgoals} solved in one go. It
     can also be used to completely automate this phase.
 
-  \item[\textbf{Popping}] Pop every closed empty bubble in the \kl{goal} with the
+  \item[\textbf{Popping}] Pop every closed empty \kl{bubble} in the \kl{goal} with the
   rules $\{\rsf{p},\rsf{p{-}},\rsf{p{+}}\}$. This phase can also be trivially
-  automated, and corresponds to the unit elimination phase in subformula linking
+  automated, and corresponds to the unit elimination phase in \kl{subformula linking}
   (\refsec{action}).
 
   \item[\textbf{Application}] When there are no more pairs of dual atoms, or all
@@ -318,7 +318,7 @@ they can represent natively all other polarizations of connectives. This is
 illustrated by the mapping of \reffig{bubbles-native} from polarized formulas to
 equivalent solutions, which is really just the $\mathbb{H}$-rules of system
 $\sysB$ (\reffig{graphical-B}) where the right-hand solution is enclosed in a
-bubble of the corresponding polarity. The reader can easily check that if $A$ is
+\kl{bubble} of the corresponding polarity. The reader can easily check that if $A$ is
 mapped to $S$, then $\psint{A} \semequiv \psint{S}$.
 
 \begin{marginfigure}
@@ -332,15 +332,15 @@ mapped to $S$, then $\psint{A} \semequiv \psint{S}$.
 \end{marginfigure}
 
 This seems to be a fundamental limitation of system $\sysB$, caused by its
-symmetric treatment of implication and subtraction. For instance in the nested
-sequent calculus \kl{JN} of Guenot for implicative logic \cite[Chapter
-3]{guenot_nested_2013}, which is fully decomposable, nested sequents that appear
+symmetric treatment of implication and subtraction. For instance in the \kl{nested
+sequent} calculus \kl{JN} of Guenot for implicative logic \cite[Chapter
+3]{guenot_nested_2013}, which is fully decomposable, \kl{nested sequents} that appear
 in negative contexts are interpreted as implications, as illustrated by the
 \kl{left introduction rule} \rsf{e} (\reffig{jn-rule-e}). But we cannot do this
 in system $\sysB$, because this would conflict with the subtractive reading of
 negative solutions, i.e. $\nsint{A \seq B} = \nsint{A} \lsub \nsint{B}$. In
 \refch{flowers}, the problem will also be solved through an asymmetric treatment
-of nested sequents, capturing only \kl{intuitionistic} logic instead of
+of \kl{nested sequents}, capturing only \kl{intuitionistic} logic instead of
 \kl{bi-intuitionistic} logic. But this is a small price to pay, since
 \kl{bi-intuitionistic} logic does not (currently) have any applications in the
 realm of interactive theorem proving.

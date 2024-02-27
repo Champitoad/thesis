@@ -19,20 +19,20 @@ We introduce the \emph{flower calculus}, a novel \kl{proof system} for
 graphical logic, and more specifically from an \kl{intuitionistic} variant of
 the \emph{existential graphs} of C. S. Peirce proposed by A. Oostra. Then we
 present our inductive syntax for flowers, reminiscent at the same time of the
-nested sequents of \kl{deep inference} \kl{proof theory}, and the geometric/coherent
+\kl{nested sequents} of \kl{deep inference} \kl{proof theory}, and the geometric/coherent
 formulas of categorical logic. A salient feature of our calculus inherited from
 \kl{EGs}, is that it is \emph{fully \kl{iconic}}: it dispenses completely with
 the traditional notion of \kl{symbolic} formula, operating instead as a
 \kl{rewriting system} on flowers containing only atomic predicates. We also propose a
-notion of proof geared towards analyticity results à la Gentzen, suggesting new
+notion of proof geared towards \kl{analyticity} results à la Gentzen, suggesting new
 rules absent from other works on \kl{intuitionistic} \kl{EGs}. This allows us to
 prove admissibility theorems for many rules, including Peirce's deletion rule
 which is a variant of Gentzen's cut rule. These results are obtained as a
 consequence of our soundness and completeness proofs with respect to Kripke
 semantics, in the spirit of the \emph{normalization-by-evaluation} technique.
-Furthermore, the kernel of rules targetted by completeness is fully invertible,
+Furthermore, the kernel of rules targetted by completeness is fully \kl{invertible},
 a desirable property in both automated and interactive proof search. This is
-illustrated by our implementation of the Flower Prover, an early prototype of
+illustrated by our implementation of the \kl{Flower\,\,Prover}, an early prototype of
 \kl{GUI} for \kl{ITPs} that uses the rules of the flower calculus both for \kl{direct
 manipulation} of flowers in its frontend, and automated simplification of \kl{goal}s
 in its backend.
@@ -50,13 +50,13 @@ we give a direct Kripke semantics to flowers, avoiding the need for translations
 to and from formulas. In \refsec{Soundness}, we show that the rules of the
 flower calculus are valid with respect to our Kripke semantics, and in
 \refsec{Completeness} we identify a complete fragment of the system where all
-rules are both \emph{analytic} and \emph{invertible}. This entails the
+rules are both \emph{\kl{analytic}} and \emph{\kl{invertible}}. This entails the
 admissibility of all rules outside of this fragment, and as a consequence the
-analyticity of the system. We exploit these properties in
+\kl{analyticity} of the system. We exploit these properties in
 \refsec{flowers-search} by describing an algorithm for fully automated proof
 search in the propositional fragment; unfortunately, the current version of the
 algorithm is neither terminating nor complete. Then in \refsec{flowers-prover}
-we give an overview of the Flower Prover, a prototype of \kl{GUI} in the
+we give an overview of the \kl{Flower\,\,Prover}, a prototype of \kl{GUI} in the
 \kl{Proof-by-Action} paradigm whose actions map directly to the rules of the flower
 calculus, and which integrates nicely with (a restricted version of) our search
 procedure. We conclude in \refsec{Conclusion} by a comparison with some related
@@ -849,11 +849,11 @@ destination of the \kl{DnD}).}. We distinguish two cases of
 describing the reproduction of flowers. This distinction does not exist in
 \kl{classical} \kl{EGs}, because pistils and petals are both identified as
 instances of \kl{cuts}\sidenote{The same phenomenon is at work in
-\emph{subformula linking} (\refch{sfl}): self-pollination and cross-pollination
+\emph{\kl{subformula linking}} (\refch{sfl}): self-pollination and cross-pollination
 correspond respectively to the \emph{\kl(dnd){backward}} $\back$ and
 \emph{\kl(dnd){forward}} $\forw$ linking operators, which are collapsed into a
-single interaction operator $\ast$ in the original formulation of subformula
-linking for classical linear logic \cite{Chaudhuri2013}.}. If we were to replace
+single interaction operator $\ast$ in the original formulation of \kl{subformula
+linking} for classical linear logic \cite{Chaudhuri2013}.}. If we were to replace
 binders by LoI (lines of identity, see \refsec{beta}), then the pollination
 relation would also prescribe in which areas LoI can be extended/iterated,
 providing an explanation for the scope of binders (\refremark{flower-scope}).
@@ -900,7 +900,7 @@ a direct adaptation of the rules of \kl{Beta} (\reffig{beta}):
     (\reffig{rule-empty-antecedant}), which is a weaker, \kl{intuitionistic} version
     of the \kl{classical} rule \rsf{Dcut{\ua}} of \kl{Alpha} and \sys{Beta}. The
     other direction (rule \rsf{epis{\da}} in \reffig{flowers-episda}) is
-    actually admissible, which might be related to the co-admissibility of
+    actually \kl{admissible}, which might be related to the co-admissibility of
     \rsf{Dcut{\da}} in \kl{Alpha} (Corollary \ref{cor:adm-ins}).
   % \item[Blank Antecedant (\rsf{epis{\ua}}, \rsf{epis{\da}})]
   %   They allow to enclose (\rsf{epis{\ua}}) or free (\rsf{epis{\da}}) any
@@ -948,7 +948,7 @@ a direct adaptation of the rules of \kl{Beta} (\reffig{beta}):
     amount of rules to account for the pistil/petal distinction, which is not
     surprising since in the LoI syntax of \kl{EGs}, they are special cases of
     Insertion/Deletion. Note that for the instantiation rules
-    \rsf{ipis}/\rsf{ipet} to be invertible, we duplicate the whole flower/petal
+    \rsf{ipis}/\rsf{ipet} to be \kl{invertible}, we duplicate the whole flower/petal
     where the sprinkler occurs, mirroring what is done in multi-conclusion
     \kl{sequent calculi} (see \reffig{multi-inst}).
 \end{description}
@@ -1030,7 +1030,7 @@ be the rule (\rsf{ipis}) (resp. \rsf{ipet}), whose duplication of flowers (resp.
 petals) prevents $\forall$ from being expressible (i.e. provable) without
 $\land$ (resp. $\lor$). This can be fixed by simply removing the duplication and
 polarizing the context of application as for the rule \rsf{apis} (resp.
-\rsf{apet}), at the cost of making the rule non-invertible.}.
+\rsf{apet}), at the cost of making the rule non-\kl{invertible}.}.
 \reftab{flowers-fragments} shows how all the usual \kl{symbolic} connectives can be
 expressed by \emph{cardinality} constraints on set-based syntactic constructs:
 $<$, $\leq$, $=$, $\geq$, $>$ correspond respectively to a cardinality smaller,
@@ -1053,10 +1053,10 @@ for \kl{EGs} in \refsec{multisets}, except that we distinguish from the outset b
 two kinds of derivations, stemming from our partitioning of the rules into two
 sets: the \emph{natural} rules denoted by $\Nature$, and the \emph{cultural}
 rules denoted by $\Culture$. In particular, every $\Nature$-rule is both
-\emph{analytic} (i.e. every atom in the premiss already appears in the
-conclusion) and \emph{invertible} (this will be shown in \refsec{Soundness}); on
-the contrary, all $\Culture$-rules are \emph{non-invertible}, and they will be
-shown to be \emph{admissible} in \refsec{Completeness}.
+\emph{\kl{analytic}} (i.e. every atom in the premiss already appears in the
+conclusion) and \emph{\kl{invertible}} (this will be shown in \refsec{Soundness}); on
+the contrary, all $\Culture$-rules are \emph{non-\kl{invertible}}, and they will be
+shown to be \emph{\kl{admissible}} in \refsec{Completeness}.
 
 \begin{definition}[Derivation]
   Given a set of rules $\mathsf{R}$, we write $\Phi \step{\mathsf{R}} \Psi$ to
@@ -1147,7 +1147,7 @@ is too weak to satisfy a strong deduction theorem. This can be intuited from the
 proof of \refthm{flowers-strong-deduction}, by noticing that the converse
 direction relies on the $\Culture$-rule \rsf{grow}, a close analog to the cut
 rule in \kl{sequent calculus}. Also as already mentioned, the natural rules of the
-flower calculus are both \emph{invertible} and \emph{complete} for provability.
+flower calculus are both \emph{\kl{invertible}} and \emph{complete} for provability.
 A consequence of invertibility is that natural derivability is only able to
 relate logically equivalent bouquets --- in fact not even all of them. That is,
 as soon as $\flower{\Psi}{\Phi}$ is provable but the converse
@@ -1196,7 +1196,7 @@ comes from the condition that $\chyp{\Psi}{\Xi\hole}$. In practice, the
 pollination rules $\{\text{\rsf{poll{\da}}}, \text{\rsf{poll{\ua}}}\}$ and
 the {\rsf{epis}} rule make this equivalent to the existence of a proof for
 $\flower{\Psi}{\Phi}$. But we conjecture that the {\rsf{epis}} rule might be
-admissible modulo the addition of the distributivity rule
+\kl{admissible} modulo the addition of the distributivity rule
 \rsf{crep}\sidenote{\rsf{crep} stands for \textsf{c}ross-\textsf{rep}roduction,
 mirroring the distinction between cross-pollination and self-pollination, but
 with respect to the self-reproduction rule \rsf{srep}.}\sidenote{It seems that
@@ -1263,7 +1263,7 @@ meta-theoretical proofs slightly shorter. For now we allow the
 \section{Kripke semantics}\labsec{Semantics}
 
 In \refsec{bubbles-soundness}, in order to prove the soundness of system
-\kl{B}, we gave a \kl{bi-intuitionistic} (resp. \kl{classical}) semantics to bubbles in
+\kl{B}, we gave a \kl{bi-intuitionistic} (resp. \kl{classical}) semantics to \kl{bubbles} in
 Heyting-Brouwer (resp. Boolean) algebras, and in \refsec{eg-soundness} we
 interpreted $\alpha$-graphs with simple boolean truth values. For flowers, we
 use a third kind of models that is standard in the literature on \kl{intuitionistic}
@@ -1302,29 +1302,31 @@ Kripke structures, detailed hereafter by order of increasing importance:
   \item[\textbf{Cut-free completeness}]
     Rather than just completeness, we are interested more specifically in the
     completeness of the natural fragment $\Nature$ of the flower calculus, where
-    all rules are \emph{analytic}. In Gentzen systems, this corresponds to the
-    well-known questions of \emph{proof normalization} (\kl{natural deduction}) and
-    \emph{cut admissibility} (\kl{sequent calculus}). Gentzen originally proved cut
-    admissibility through a syntactic procedure of \emph{cut-elimination}, which
-    is very hard to transpose in our \kl{deep inference} setting, especially since
-    there is no known internal cut-elimination procedure in the (sparse)
-    literature on \kl{deep inference} systems for full \kl{intuitionistic} logic. In fact,
-    the requirement that the procedure be \emph{internal} is useful when
-    studying the computational content of proofs, but too strong for our logical
-    study of analyticity. Thus our first attempt was to devise an
-    \emph{external} syntactic procedure, based on the simulation of a cut-free
-    \kl{sequent calculus} as in \sidecite{tiu_local_2006}; and we do have a working,
-    verified implementation of this procedure in \kl{Coq} \cite{flowers-metatheory}.
-    However, we realized \textit{a posteriori} that this only proves a weak form
-    of completeness, in the sense that we only guarantee that a true flower is
-    provable if it is the direct translation of a \kl{symbolic} formula. But formulas
-    are based on binary connectives and unary quantifiers, and are thus less
-    expressive syntactically than flowers and their $n$-ary constructs.
+    all rules are \emph{\kl{analytic}}. In Gentzen systems, this corresponds to
+    the well-known questions of \emph{proof normalization} (\kl{natural
+    deduction}) and \emph{cut admissibility} (\kl{sequent calculus}). Gentzen
+    originally proved cut admissibility through a syntactic procedure of
+    \emph{\kl{cut-elimination}}, which is very hard to transpose in our \kl{deep
+    inference} setting, especially since there is no known internal
+    \kl{cut-elimination} procedure in the (sparse) literature on \kl{deep
+    inference} systems for full \kl{intuitionistic} logic. In fact, the
+    requirement that the procedure be \emph{internal} is useful when studying
+    the computational content of proofs, but too strong for our logical study of
+    \kl{analyticity}. Thus our first attempt was to devise an \emph{external}
+    syntactic procedure, based on the simulation of a cut-free \kl{sequent
+    calculus} as in \sidecite{tiu_local_2006}; and we do have a working,
+    verified implementation of this procedure in \kl{Coq}
+    \cite{flowers-metatheory}. However, we realized \textit{a posteriori} that
+    this only proves a weak form of completeness, in the sense that we only
+    guarantee that a true flower is provable if it is the direct translation of
+    a \kl{symbolic} formula. But formulas are based on binary connectives and
+    unary quantifiers, and are thus less expressive syntactically than flowers
+    and their $n$-ary constructs.
 
     To palliate this limitation, we turned to a more \emph{semantic} (and not
-    so-well known) strand of analyticity proofs, which nowadays tends to be
+    so-well known) strand of \kl{analyticity} proofs, which nowadays tends to be
     labelled \emph{normalization-by-evaluation} \sidecite{NbE}. The idea is to
-    prove completeness of the analytic fragment of the \kl{proof system} with
+    prove completeness of the \kl{analytic} fragment of the \kl{proof system} with
     respect to some semantic models (in our case, $\vDash \phi$ implies
     $\entails{\Nature} \phi$), and then compose with the soundness of the full
     system with respect to the same models ($\entails{} \phi$ implies $\vDash
@@ -1831,7 +1833,7 @@ handled locally with (de)iteration rules.
 
 We are now equipped with enough lemmas to prove the soundness of each rule,
 starting with the \emph{local} version of natural rules. In fact we are able to
-prove more: that every $\Nature$-rule is \emph{invertible}, i.e. its conclusion
+prove more: that every $\Nature$-rule is \emph{\kl{invertible}}, i.e. its conclusion
 entails its premiss.
 
 \begin{lemma}[Local soundness]\lablemma{flowers-local-soundness}
@@ -1978,18 +1980,18 @@ In particular, every provable flower is ``true'':
 In this section, we give a direct completeness proof for the natural fragment
 $\Nature$ of the flower calculus: every true flower $\phi$ is naturally
 provable, i.e. $\kentails{}\phi$ implies $\entails{\Nature} \phi$. Since this
-fragment is analytic, we cannot adapt directly most of the completeness proofs
+fragment is \kl{analytic}, we cannot adapt directly most of the completeness proofs
 for standard \kl{proof systems} that can be found in the literature. Indeed, most of
 them exploit the transitivity of syntactic entailment $\entails{}$, and more
 precisely the fact that it is easily shown syntactically with the help of a
-non-analytic principle for composing proofs: in Hilbert systems it is the rule
+non-\kl{analytic} principle for composing proofs: in Hilbert systems it is the rule
 of \kl{modus ponens} \kl{mp}, in \kl{sequent calculi} the \kl(rule){cut} rule, and
 in \kl{natural deduction} the \emph{substitution theorem}.
 
 Fortunately as mentioned in \refsec{Semantics}, a few people have noticed that
 with Kripke semantics, it is not too difficult to find completeness proofs that
 do not rely on the assumption of transitivity for $\entails{}$, thus allowing
-for a \emph{semantic} proof of cut-elimination. Here we propose an adaptation of
+for a \emph{semantic} proof of \kl{cut-elimination}. Here we propose an adaptation of
 this technique to our flower calculus, based on a completeness proof for
 cut-free \kl{sequent calculus} given by Hermant in
 \sidecite{hutchison_semantic_2005}, which is itself close to the original
@@ -2118,7 +2120,7 @@ $\psi$-complete.
 \subsection{Adequacy}
 
 The following two propositions constitute the central argument that allows the
-completeness proof to go through despite the analyticity of $\Nature$-rules.
+completeness proof to go through despite the \kl{analyticity} of $\Nature$-rules.
 They are a direct adaptation of \cite[Proposition 7]{hutchison_semantic_2005},
 which Hermant identifies as ``an important property of any $A$-consistent,
 $A$-complete theory, [...] that it enjoys some form of the subformula
@@ -2371,21 +2373,21 @@ that some efficient proof search procedure might be devised for the flower
 calculus, and even a complete one for the propositional fragment where every
 sprinkler is empty\sidenote{It is well-known that provability in \kl{intuitionistic}
 propositional logic is decidable, a result first demonstrated by Gentzen
-\cite{gentzen_untersuchungen_1935}.}. Indeed in sequent calculi, analyticity
-(the subformula property) greatly reduces the search space when looking for a
+\cite{gentzen_untersuchungen_1935}.}. Indeed in sequent calculi, \kl{analyticity}
+(the \kl{subformula property}) greatly reduces the search space when looking for a
 proof of a given sequent, and one might expect the same to apply in the natural
 fragment $\Nature$ of the flower calculus. Also, the invertibility of
 $\Nature$-rules implies that the procedure will not need to perform
 \emph{backtracking}, a great source of non-determinism in proof
 search\sidenote{See also \refsec{sfl-backtracking} for a discussion on this
 topic.}, and particularly so in \kl{intuitionistic} logic\sidenote{The only fully
-invertible \kl{proof system} for \kl{intuitionistic} (predicate) logic that we know of is
+\kl{invertible} \kl{proof system} for \kl{intuitionistic} (predicate) logic that we know of is
 the labelled sequent calculus \kl{G3IntQ} from Lyon's thesis
 \cite{lyon_refining_2021} (we thank Lutz Stra{\ss}burger for pointing that to
 us). However, a peculiarity of labelled sequent calculi is that they need to
 incorporate \emph{semantical} notions like the worlds and accessibility relation
 of Kripke structures into the syntax of sequents, in order to make every rule
-invertible \cite{girlando_intuitionistic_2023}. We do not need such devices in
+\kl{invertible} \cite{girlando_intuitionistic_2023}. We do not need such devices in
 the flower calculus, which will be crucial from a user interface standpoint in
 \refsec{flowers-prover}.}.
 
@@ -2646,7 +2648,7 @@ The third and last phase of our proof search algorithm, called
 \emph{decomposition}, is also the most trivial: it simply consists in applying
 the \rsf{epet} rule in every applicable context in the \kl{goal}, which amounts to
 erasing every flower with an empty petal\sidenote{It corresponds to the
-\emph{popping} phase of bubbles in \refsubsec{bubbles-search}, not the
+\emph{popping} phase of \kl{bubbles} in \refsubsec{bubbles-search}, not the
 decomposition phase: here the term ``decomposition'' refers \kl{metaphorically} to
 the biological process that applies to organic matter, not to the analysis of
 formulas into their components.}. Unlike the reproduction phase, it cannot be
@@ -2847,16 +2849,15 @@ desideratum, our focus in this thesis is not on full automation --- which is not
 possible anyway as soon as we leave the propositional fragment, but rather on
 automation that integrates well with, and even improves the experience of
 building proofs \emph{interactively}. More specifically, the paradigm of
-interaction we are interested in is that of \emph{\kl{direct manipulation}} in a \kl{GUI}.
-This was our initial motivation for studying the graphical formalism of \kl{EGs}, and
-we always kept this objective in mind when developing the flower calculus. In
-this section, we present ongoing work on the \emph{Flower Prover}, a prototype
-of \kl{GUI} in the \kl{Proof-by-Action} paradigm based on the \kl{direct manipulation} of
-flowers, that builds upon the various concepts, rules and metatheory of the
-previous sections.
+interaction we are interested in is that of \emph{\kl{direct manipulation}} in a
+\kl{GUI}. This was our initial motivation for studying the graphical formalism
+of \kl{EGs}, and we always kept this objective in mind when developing the
+flower calculus. In this section, we present ongoing work on the \kl{Flower\,\,Prover}, a prototype of \kl{GUI} in the \kl{Proof-by-Action} paradigm based on
+the \kl{direct manipulation} of flowers, that builds upon the various concepts,
+rules and metatheory of the previous sections.
 
 \begin{remark}
-Currently, the Flower Prover only handles propositional flowers with empty
+Currently, the \kl{Flower\,\,Prover} only handles propositional flowers with empty
 sprinklers.
 \end{remark}
 
@@ -2870,7 +2871,7 @@ making it easy to run and test the interface on any device equipped with a web
 browser. The source code is available on GitHub \cite{flower-prover}, and the
 interface is currently hosted online as a simple HTML
 page\sidenote{\url{https://www.lix.polytechnique.fr/Labo/Pablo.DONATO/flowerprover/}}.
-The reader is invited to try out the Flower Prover in her own browser, although
+The reader is invited to try out the \kl{Flower\,\,Prover} in her own browser, although
 we will try to give self-contained explanations illustrated through various
 screenshots.
 
@@ -2878,14 +2879,14 @@ screenshots.
 
 We are not the first to identify the potential of \kl{EGs} for graphical proof
 building \sidecite{eg_youtube,eg_github}. However, we believe that the
-Flower Prover is highly original in mainly two respects:
+\kl{Flower\,\,Prover} is highly original in mainly two respects:
 \begin{itemize}
   \item[\textbf{\kl{Intuitionistic} and \kl{goal}-oriented}] it is based on the flower
   calculus, which proposes a quite unusual, non-exegetic take on \kl{EGs}. It does so
   both at the level of \emph{statements}, by building upon the \kl{intuitionistic}
   \kl{icon} of the $n$-ary scroll; and at the level of \emph{proofs}, by focusing on
   a \kl{goal}-oriented reading of rules that emphasizes the importance of
-  \emph{invertibility} and \emph{analyticity} in the inference process, through
+  \emph{invertibility} and \emph{\kl{analyticity}} in the inference process, through
   the distinction between $\Nature$-rules and $\Culture$-rules.
   \item[\textbf{Mobile-friendly}] it has been designed from the outset as a
   \emph{responsive}, \emph{touch}-based, \emph{mobile}-friendly interface.
@@ -2915,13 +2916,13 @@ Flower Prover is highly original in mainly two respects:
   \includegraphics[width=0.7\textwidth]{flower-prover-proof-mode}
   \hspace{1em}
   \includegraphics[width=0.7\textwidth]{flower-prover-edit-mode}
-  \caption{\Proof mode (left) and \Edit mode (right) of the Flower Prover}
+  \caption{\Proof mode (left) and \Edit mode (right) of the \kl{Flower\,\,Prover}}
   \labfig{flowers-prover-modes}
 \end{figure*}
 
 \paragraph{Modal interface}
 
-The Flower Prover is organized in two main \emph{modes} of interaction,
+The \kl{Flower\,\,Prover} is organized in two main \emph{modes} of interaction,
 providing different sets of \kl{direct manipulation} actions on
 goals\sidenote{Another example of modal interface is the popular text editor
 \texttt{vim}, with its \emph{normal} mode for high-level manipulation of text
@@ -2952,7 +2953,7 @@ and deletion of characters.}:
   A nice analogy for these two modes can be found in the video game
   \emph{Minecraft}: the \emph{survival} mode, where the player has to gather and
   craft resources to survive, corresponds to the \Proof mode, where the user has
-  to combine and justify existing statements with the analytic $\Nature$-rules;
+  to combine and justify existing statements with the \kl{analytic} $\Nature$-rules;
   while the \emph{creative} mode, where the player can build and destroy
   anything instantly with unlimited resources, corresponds to the \Edit mode,
   where the user can insert or delete arbitrary flowers with the (synthetic?)
@@ -2979,20 +2980,19 @@ action will automatically switch to the mode in which the action was performed.
 
 \begin{table*}[h]
   \input{figures/flowers-actions.tex}
-  \caption{Graphical actions of the Flower Prover}
+  \caption{Graphical actions of the \kl{Flower\,\,Prover}}
   \labfig{flowers-actions}
 \end{table*}
 
 \begin{figure*}[h]
   \input{figures/flowers-prover-anim.tex}
-  \caption{A sequence of \Proof actions in the Flower Prover}
+  \caption{A sequence of \Proof actions in the \kl{Flower\,\,Prover}}
   \labfig{flowers-prover-anim}
 \end{figure*}
 
 \reftab{flowers-proof-actions} shows the precise mapping of \Proof actions to
 $\Nature$-rules, together with the associated gestures for triggering them; and
-\reffig{flowers-prover-anim} shows a sequence of screenshots of the Flower
-Prover, capturing the execution of a sequence of \Proof actions reducing the
+\reffig{flowers-prover-anim} shows a sequence of screenshots of the \kl{Flower\,\,Prover}, capturing the execution of a sequence of \Proof actions reducing the
 \kl{subgoal} $\flower{(\flower{}{a \sep b})}{c}$ to $\flower{b}{c}$. A few
 comments are in order:
 
@@ -3014,7 +3014,7 @@ comments are in order:
   highlighted with dashed yellow lines: these correspond to all contexts
   $\Xi\hole$ where $\phi$ can be imported, i.e. such that
   $\chyp{\phi}{\Xi\hole}$. This is a first form of \emph{suggestion} in the
-  Flower Prover, indicating available valid actions to the user through visual
+  \kl{Flower\,\,Prover}, indicating available valid actions to the user through visual
   feedback\sidenote{A similar mechanism is implemented in \kl{Actema}, where subterms
   that are possible drop targets for \kl{DnD} actions are also highlighted (see
   \refsec{validity}).}.
@@ -3030,7 +3030,7 @@ comments are in order:
   \Action{QED} actions.
   
   \item[\textbf{Fencing}] We have already mentioned that we suspect that the
-  \rsf{epis} rule might be admissible. However if it is not, one needs a
+  \rsf{epis} rule might be \kl{admissible}. However if it is not, one needs a
   corresponding graphical action in \Proof mode. While it is currently not
   implemented, we plan to add a \emph{selection} mechanism that allows the user
   to select a set of flowers in the \kl{goal}. Then, we could add a \Action{Fence}
@@ -3041,7 +3041,7 @@ comments are in order:
 \end{itemize}
 
 Since every \Proof action implements a $\Nature$-rule, it is guaranteed to be
-\emph{invertible}: the user never needs to undo a \Proof action in order to
+\emph{\kl{invertible}}: the user never needs to undo a \Proof action in order to
 complete a proof, because it always preserves the provability of the \kl{goal}. Of
 course it might still be desirable to do so in specific cases, such as
 \Action{Import} actions that may create unneeded copies of flowers\sidenote{In
@@ -3071,7 +3071,7 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
     text field empty. Clicking on the button will then insert an empty flower
     with a single petal.
   \end{itemize}
-  In both cases, the inserted flower is marked internally by the Flower Prover
+  In both cases, the inserted flower is marked internally by the \kl{Flower\,\,Prover}
   with a \texttt{grown} tag: this means that as long as the user does not leave
   \Edit mode, she can perform arbitrary insertions and deletions inside of the
   grown flower, disregarding any polarity constraint normally imposed by
@@ -3096,7 +3096,7 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
 \end{itemize}
 
 Since every \Edit action implements a $\Culture$-rule, it is guaranteed to be
-\emph{non-invertible}: the user might need to undo an \Edit action in order to
+\emph{non-\kl{invertible}}: the user might need to undo an \Edit action in order to
 complete a proof, because it may break the provability of the \kl{goal}.
 
 \paragraph{\Navigation mode}
@@ -3129,7 +3129,7 @@ Alan Kay in his \intro{Smalltalk} system
 
 \paragraph{Automation}
 
-The last feature of the Flower Prover that we have implemented is the
+The last feature of the \kl{Flower\,\,Prover} that we have implemented is the
 \Action{Auto} \Proof action. It is similar in purpose to the \texttt{auto}
 tactic of \kl{Coq}, that tries to simplify the \kl{goal} by performing a limited form of
 automation. The \Action{Auto} action is mapped to a dedicated button in the
@@ -3157,7 +3157,7 @@ the \kl{goal}. One could even leave the configuration of automated action types 
 the user with a dedicated interface. This could include an additional option for
 executing \Action{Auto} systematically after every (other) \Proof action,
 removing the need to click multiple times on the \Action{Auto} button. In this
-setting, any proof in the Flower Prover could be reduced to a sequence of
+setting, any proof in the \kl{Flower\,\,Prover} could be reduced to a sequence of
 \Action{Import} and \Action{Case} actions.
 
 
@@ -3186,7 +3186,7 @@ interfaces cannot communicate straightforwardly with eachother. In fact,
 communication is completely one-way: the user can only invoke definitions and
 lemmas of the theory from her \kl{proof script}, by referring to their names.
 
-The Flower Prover can theoretically solve this divide, because it works on a
+The \kl{Flower\,\,Prover} can theoretically solve this divide, because it works on a
 single data structure: flowers represent \emph{at the same time} the current
 goal to be proved in \Proof mode, and the theories that are being built in \Edit
 mode. Thus there are still two distinct modes/interfaces, but they work in
@@ -3218,7 +3218,7 @@ built from sequences of sentences.
 \paragraph{Context navigation}
 
 After this little conceptual \textit{aparté}, let us come back to the problem of
-managing contexts in proofs. In the Flower Prover, the \emph{local} context is
+managing contexts in proofs. In the \kl{Flower\,\,Prover}, the \emph{local} context is
 naturally represented as \emph{everything that is displayed on-screen}. This
 includes hypotheses that are available from pistils at various levels, but also
 potentially alternative \kl{goals} (adjacent petals) and further \kl{subgoals} (positively
@@ -3336,9 +3336,9 @@ as an attempt to stay close to the original system \kl{Alpha} of Peirce. In
 particular, (de)iteration on petals is compatible with the quest for
 \emph{illative atomicity}, where all rules should be expressed in terms of
 insertions and omissions (\refsec{atomicity}); while the \rsf{srep} rule is not.
-In our case, this is justified by our quest for an \emph{invertible} calculus
+In our case, this is justified by our quest for an \emph{\kl{invertible}} calculus
 (natural fragment): indeed to simulate \rsf{srep} with petal (de)iteration, one
-also needs the non-invertible $\Culture$-rule \rsf{crop} (as well as the
+also needs the non-\kl{invertible} $\Culture$-rule \rsf{crop} (as well as the
 $\Culture$-rule \rsf{epis{\da}}), as illustrated by the \rsf{srep}-free proof of
 \reffig{flowers-srep-free}.
 
@@ -3360,7 +3360,7 @@ the absorption rule removes the need for permutation-equivalences between proofs
 involving the \emph{\kl{contraction}} rule, the identity rule $[I]$ of $\Sigma_2$
 removes the need for the \emph{\kl{weakening}} rule by discarding the non-linear
 context in one go, just as the \rsf{epet} rule of the flower calculus renders
-the \rsf{crop} rule admissible.
+the \rsf{crop} rule \kl{admissible}.
 
 Sonia Marin has noticed the connection between \emph{bipoles} in focused proofs,
 and the class of geometric/coherent formulas, where the former are seen as a
@@ -3377,7 +3377,7 @@ same structure as flowers
 \cite[Definition~4.2]{brock-nannestad_intuitionistic_2019}. However, the \kl{sequent
 calculus} \kl{HS} based on them makes the tradeoff opposite to that of the
 natural fragment $\Nature$ of the flower calculus: every \kl{inference rule} is
-\emph{non}-invertible, but the calculus is \kl{contraction}-free. One advantage of
+\emph{non}-\kl{invertible}, but the calculus is \kl{contraction}-free. One advantage of
 this tradeoff is that they can easily show termination of proof search, while we
 have not found a terminating procedure yet for the flower calculus. The authors
 also mention that \kl{HS} could be turned into a \kl{deep inference} calculus in the
@@ -3428,34 +3428,33 @@ to \kl{intuitionistic} logic \sidecite{10.1007/3-540-59338-1_32}, stating that i
 especially well-suited in an interactive theorem proving environment. Thus it
 might be instructive to learn from their proof search algorithm to fix ours.
 
-In fact all proof search procedures designed in this thesis, whether for bubble
-calculi (\refsubsec{bubbles-search}) or the flower calculus
+In fact all proof search procedures designed in this thesis, whether for \kl{bubble
+calculi} (\refsubsec{bubbles-search}) or the flower calculus
 (\refsec{flowers-search}), rest on the fundamental observation coming from the
-subformula linking methodology of Chaudhuri \sidecite{Chaudhuri2013}, that the
+\kl{subformula linking} methodology of Chaudhuri \sidecite{Chaudhuri2013}, that the
 construction of proofs in \kl{deep inference} systems can be driven efficiently and
 incrementally by the connection of dual atoms. With its pollination rules, the
-flower calculus allows for a particularly elegant implementation of subformula
-linking that abstracts away from the syntactic bureaucracy of \kl{symbolic}
+flower calculus allows for a particularly elegant implementation of \kl{subformula
+linking} that abstracts away from the syntactic bureaucracy of \kl{symbolic}
 connectives, as witnessed by the pollination phase of our search procedure. In
 \refsubsec{bubbles-search}, we sketched some ideas that blur the frontier
 between automated and interactive proof search, notably with the so-called
-\emph{rule of thumb} which is another manifestation of subformula linking. This
-integration of automated and interactive aspects is also at work in the Flower
-Prover, and it would be interesting to investigate further how to incorporate
+\emph{rule of thumb} which is another manifestation of \kl{subformula linking}. This
+integration of automated and interactive aspects is also at work in the \kl{Flower\,\,Prover}, and it would be interesting to investigate further how to incorporate
 our drag-and-drop proof \kl{tactic} (\refch{pba}), but also other \kl{symbolic}
 manipulation techniques introduced in the first part of this thesis, into the
-\kl{iconic} framework of the Flower Prover.
+\kl{iconic} framework of the \kl{Flower\,\,Prover}.
 
 \paragraph{Analyticity}
 
-We have not discussed the rationale behind our notion of analyticity, be it
+We have not discussed the rationale behind our notion of \kl{analyticity}, be it
 historical or formal arguments explaining its origins, motivations and
 consequences. In a recent article \sidecite{bruscoli_analyticity_2019}, Bruscoli
 and Guglielmi propose such a detailed discussion around a precise and generic
-definition of analyticity for \kl{deep inference} \kl{proof systems} (especially
+definition of \kl{analyticity} for \kl{deep inference} \kl{proof systems} (especially
 the \kl{calculus of structures}), which at a glance seems to encompass our own
 definition. It would be interesting to study more deeply their work, and related
-parts of the \kl{deep inference} literature concerned with analyticity and its
+parts of the \kl{deep inference} literature concerned with \kl{analyticity} and its
 applications to efficient proof search procedures
 \sidecite{kahramanogullari_reducing_2006,lmcs:1089,10.1145/2003476.2003501,chaudhuri:hal-00772420,10.1007/978-3-662-49630-5_23}.
 
@@ -3485,7 +3484,7 @@ in the \kl{calculus of structures}, where one component of \rsf{poll{\ua}}, the
 duplicating \emph{\kl{contraction}} rule, can be restricted to atomic formulas. This
 probably comes from the fact that \rsf{poll{\ua}} also serves the purpose of
 \emph{moving} flowers deeper, as witnessed by the \kl{DnD} \Action{Import} action of
-the Flower Prover: in the \kl{calculus of structures}, this role is fulfilled by
+the \kl{Flower\,\,Prover}: in the \kl{calculus of structures}, this role is fulfilled by
 \emph{switch} rules, which cannot be restricted to atomic structures. The only
 solution might be to \emph{simulate} a local \kl{calculus of structures} for
 \kl{intuitionistic} logic, like the system \kl{ISp} of Tiu
@@ -3493,11 +3492,11 @@ solution might be to \emph{simulate} a local \kl{calculus of structures} for
 
 Lastly, it would be interesting to exhibit an \emph{internal}, syntactic
 procedure for eliminating cultural $\Culture$-rules in proofs, just like Gentzen
-showed cut-elimination in \kl{sequent calculus}\sidenote{A sort of
+showed \kl{cut-elimination} in \kl{sequent calculus}\sidenote{A sort of
 \emph{cult}-elimination, so to speak.}. In this work we preferred a more
 semantic approach, because it was simpler and at the right level of abstraction
 for our needs. We might be able to take some inspiration from the
-cut-elimination proofs of \kl{calculi of structures}, which are indeed notoriously
+\kl{cut-elimination} proofs of \kl{calculi of structures}, which are indeed notoriously
 involved.
 
 \paragraph{Automated proof search}
@@ -3560,7 +3559,7 @@ $$
 $$
 This could also form the basis for further studies on the connections between \kl{EGs}
 and (dependent) \kl{type theory}, and ultimately lead to a tight integration of the
-Flower Prover with \kl{proof assistants} based on the latter such as \kl{Coq}, \kl{Lean} and
+\kl{Flower\,\,Prover} with \kl{proof assistants} based on the latter such as \kl{Coq}, \kl{Lean} and
 Agda. Existing explorations of the links between \kl{type theory} and \kl{deep inference}
 include, in historical order:
 \begin{itemize}
@@ -3570,7 +3569,7 @@ include, in historical order:
   \item the thesis of Nicolas Guenot, and more precisely the part on "Nested
   Proofs as Programs" where he gives a correspondence between simply-typed
   \kl{$\lambda$-calculi} with explicit substitutions at one end, and calculi of
-  structures (Chapter 6) and nested sequent calculi (Chapter 5) for the
+  structures (Chapter 6) and \kl{nested sequent} calculi (Chapter 5) for the
   implicational fragment of \kl{intuitionistic} logic at the other end
   \cite{guenot_nested_2013};
   \item the atomic \kl{$\lambda$-calculus}, a simply-typed \kl{$\lambda$-calculus} with
@@ -3587,12 +3586,12 @@ include, in historical order:
   \item the \emph{collection calculus} that subsumes resource,
   intersection-typed and simply-typed \kl{$\lambda$-calculi}, with a \kl{type} system
   again in open deduction \sidecite{guerrieri_deep_2021};
-  \item Ongoing research by Kaustuv Chaudhuri to extend subformula linking to
+  \item Ongoing research by Kaustuv Chaudhuri to extend \kl{subformula linking} to
   dependent \kl{type theory}\sidenote{Private communication.}.
 \end{itemize}
-The work of Guenot on computational interpretations of nested sequent calculi
-seems closest to the syntax of flowers. Indeed, nested sequents are variadic by
-nature, and his version of nested sequents in particular exploits the
+The work of Guenot on computational interpretations of \kl{nested sequent} calculi
+seems closest to the syntax of flowers. Indeed, \kl{nested sequents} are variadic by
+nature, and his version of \kl{nested sequents} in particular exploits the
 possibility to have \emph{negative} occurrences of sequents. Combined with the
 dependently-typed \texttt{Box}es of Ayers mentioned earlier (which cannot be
 nested negatively), this should provide great insights for the powerful,
@@ -3631,7 +3630,7 @@ facilitate the study of reasoning.
 
 The various achievements presented in this chapter incite us to depart from this
 conception. Indeed, our particular viewpoint on the illative transformations,
-that emphasizes \kl{goal}-reduction through invertible and analytic rules, enabled us
+that emphasizes \kl{goal}-reduction through \kl{invertible} and \kl{analytic} rules, enabled us
 to design a novel and promising type of graphical interface for interactive
 proof building, which integrates easily and elegantly some (limited) forms of
 automation. This was also made possible by the use of variables instead of lines

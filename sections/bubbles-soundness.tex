@@ -2,11 +2,11 @@
 
 \begin{figure*}
   \tikzfig{1}{0.83}{venn-algebras}
-  \caption{Relationship between the various algebras interpreting \kl{system B}}
+  \caption{Relationship between the various algebras interpreting \kl{system~B}}
   \labfig{venn-algebras}
 \end{figure*}
 
-We are now going to prove the soundness of \kl{system B} with respect to
+We are now going to prove the soundness of \kl{system~B} with respect to
 various classes of \emph{algebras}. While the full system is \kl{classical} and thus
 sound only in \emph{Boolean} algebras, most rules are sound in larger classes of
 algebras, namely: \emph{Heyting} algebras for \kl{intuitionistic} logic,
@@ -220,7 +220,7 @@ formulas have been dualized (\refdef{dual-formula}).
   If $S \lstep{} T$ then $\soldual{S} \lstep{} \soldual{T}$.
 \end{lemma}
 \begin{proof}
-  There is a bijection among the rules of \kl{system B}, that matches each rule
+  There is a bijection among the rules of \kl{system~B}, that matches each rule
   $\irule{r}{S}{T}$ to its dual $\irule{\soldual{r}}{\soldual{S}}{\soldual{T}}$.
   By involutivity (\reflemma{involutivity}), this bijection is self-inverse:
   $\soldual{\soldual{r}} = r$. It is most easily observed in
@@ -476,7 +476,7 @@ an (in)equality in some class of algebras:
 \end{lemma}
 \begin{proof}
   $S \lstep{} T$ implies $\psint{T} \sementC \psint{S}$, which is shown by
-  inspection of each rule of \kl{system B} (see \refsec{bubbles-soundness}).
+  inspection of each rule of \kl{system~B} (see \refsec{bubbles-soundness}).
   That we can mix an arbitrary top-level context $\Gamma \seq \Delta$ into $S$
   and $T$ follows from \reffact{bubbles-top-level}.
 \end{proof}

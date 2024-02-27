@@ -479,35 +479,36 @@ a proof of the \kl{law of non-contradiction} in \kl{LJ}.
 % Both the \kl{cut} and \kl{ax} rules seem completely trivial. Yet surprisingly,
 Gentzen managed to prove a powerful result called alternatively
 \textit{Haupstatz}, \emph{fundamental theorem} (of \kl{proof theory}), or
-\emph{cut-elimination}: every provable formula in \kl{sequent calculus} has a
-\emph{cut-free} proof, i.e. a proof that does not make use of the \kl{cut}
-rule. Intuitively, it can be understood as a formal justification for the
-possibility to \emph{inline} proofs of lemmas, by seeing an instance of
-\kl{cut} on $A$ as a way to invoke the lemma $A$ without duplicating its proof.
-Moreover, Gentzen's proof of the Haupstatz is itself constructive: it describes
-an \emph{algorithm} for transforming every \kl{sequent calculus} proof into a
-cut-free one. Thus the \kl{cut} rule is said to be \emph{admissible}, since any
-provable sequent can be proved without it.
+\intro{cut-elimination}: every provable formula in \kl{sequent calculus} has a
+\emph{cut-free} proof, i.e. a proof that does not make use of the \kl{cut} rule.
+Intuitively, it can be understood as a formal justification for the possibility
+to \emph{inline} proofs of lemmas, by seeing an instance of \kl{cut} on $A$ as a
+way to invoke the lemma $A$ without duplicating its proof. Moreover, Gentzen's
+proof of the Haupstatz is itself constructive: it describes an \emph{algorithm}
+for transforming every \kl{sequent calculus} proof into a cut-free one. Thus the
+\kl{cut} rule is said to be \intro{admissible}, in the sense that any provable
+sequent can be proved without it.
 
-An important consequence of cut-elimination, which was the original motivation
-of Gentzen, is the consistency of the logic (\kl{intuitionistic} \kl{predicate
-logic} in the case of \kl{LJ}). This stems from the fact that all rules apart
-from the \kl{cut} rule satisfy the \emph{subformula property}: every formula $A$
-appearing in the premisses is a \emph{subformula} of some formula $B$ in the
-conclusion, i.e. $A$ already occurs inside $B$. Thus there cannot exist a proof
-of the absurd sequent $\seq \bot$, since the only formula that is a subformula
-of $\bot$ is $\bot$ itself, and there is no rule instance with $\seq \bot$ as
-conclusion that only contains $\bot$ in its premisses. The subformula property
-is the first occurrence of the concept of \emph{analyticity} in \kl{proof
-theory}, and can be seen as a technical realization of the philosophical notion
-of analyticity first applied to propositions by Kant, and later to proofs in
-mathematics by Bolzano \sidecite{bolzano}.
+\AP An important consequence of \kl{cut-elimination}, which was the original
+motivation of Gentzen, is the consistency of the logic (\kl{intuitionistic}
+\kl{predicate logic} in the case of \kl{LJ}). This stems from the fact that all
+rules apart from the \kl{cut} rule satisfy the \intro{subformula property}:
+every formula $A$ appearing in the premisses is a \emph{subformula} of some
+formula $B$ in the conclusion, i.e. $A$ already occurs inside $B$. Thus there
+cannot exist a proof of the absurd sequent $\seq \bot$, since the only formula
+that is a subformula of $\bot$ is $\bot$ itself, and there is no rule instance
+with $\seq \bot$ as conclusion that only contains $\bot$ in its premisses. The
+\kl{subformula property} is the first occurrence of the concept of
+\intro{analyticity} in \kl{proof theory}, and can be seen as a technical
+realization of the philosophical notion of analyticity first applied to
+propositions by Kant, and later to proofs in mathematics by Bolzano
+\sidecite{bolzano}.
 
-Unfortunately, the proof of cut-elimination for the \kl{sequent calculus}
+Unfortunately, the proof of \kl{cut-elimination} for the \kl{sequent calculus}
 incorporating Peano's axioms, found by Gentzen a few years after proving
-cut-elimination for \kl{LJ} \sidecite{gentzen_widerspruchsfreiheit_1936}, is
+\kl{cut-elimination} for \kl{LJ} \sidecite{gentzen_widerspruchsfreiheit_1936}, is
 not finitist: it makes use of a transfinite induction up to the ordinal
-$\epsilon_0$. But the very ideas of cut-elimination and analyticity will have
+$\epsilon_0$. But the very ideas of \kl{cut-elimination} and \kl{analyticity} will have
 far-reaching applications in \kl{proof theory} and beyond, including many of the
 results presented in this thesis.
 
@@ -601,6 +602,7 @@ to communicate its results and suggestions on how to solve problems.
 
 \paragraph{Type theory}
 
+\AP
 The ancestor of all \kl{proof assistants} was the \intro{Automath} project,
 initiated by Nicolaas Govert de Bruijn as soon as 1967. Citing Geuvers
 \sidecite{geuvers_proof_2009}:
@@ -611,6 +613,7 @@ correctness implies mathematical correctness. This language should be computer
 checkable and it should be helpful in improving the reliability of mathematical
 results.
 \end{quote}
+\AP
 Thus the design of \kl{Automath} was focused on the automatic
 \emph{verification} of proofs through \emph{linguistic} means. It introduced
 many fundamental ideas that are still at work in many modern \kl{proof
@@ -824,6 +827,7 @@ languages:
   be put in correspondence with some \kl{proof-theoretical} formalisms, usually
   Fitch-style \kl{natural deduction} \cite{geuvers_proof_2009}.
   
+  \AP
   \kl{Agda}, \kl{Mizar} and \intro{Isabelle} (with its \intro{Isar} proof
   language \sidecite{isar}) are examples of state-of-the-art \kl{proof
   assistants} in the \kl{declarative} paradigm.
@@ -875,6 +879,7 @@ actions should then be representable in terms of any particular proof language.
 
 \paragraph{Direct manipulation}
 
+\AP
 This approach to user interfaces has been termed \intro{direct manipulation} by
 Shneiderman in the 1980s \sidecite{shneiderman_direct_1983}. It is now at the
 heart of virtually every modern user interface and is arguably the major factor
@@ -920,6 +925,7 @@ well; and one of the reasons why we chose to focus so much on
 
 \paragraph{Graphical deep inference}
 
+\AP
 A first attempt to design \kl{direct manipulation} principles for interactive
 proof building was made in the 90s by the team of Gilles Kahn at Inria, where
 they coined the \intro{Proof-by-Pointing} (\reintro{PbP}) paradigm
@@ -947,12 +953,12 @@ semantics of \kl{PbP} actions is still based on the \emph{shallow} \kl{inference
 \kl{CoS}-style \kl{rewriting rules}.
 
 \begin{emphpar}
-  All the works presented in this thesis can be seen as a direct continuation of
-  the research programme initiated by \kl{PbP} and \kl{PbL}. The aim is to
-  \emph{replace} textual proof languages with \emph{gestural} actions performed
-  directly upon \emph{\kl{goals}} in a \intro{graphical user interface}
-  (\reintro{GUI}). To be as general as possible, we call such a paradigm
-  \intro{Proof-by-Action} (\reintro{PbA}).
+  \AP All the works presented in this thesis can be seen as a direct
+  continuation of the research programme initiated by \kl{PbP} and \kl{PbL}. The
+  aim is to \emph{replace} textual proof languages with \emph{gestural} actions
+  performed directly upon \emph{\kl{goals}} in a \intro{graphical user
+  interface} (\reintro{GUI}). To be as general as possible, we call such a
+  paradigm \intro{Proof-by-Action} (\reintro{PbA}).
 \end{emphpar}
 
 \paragraph{Proof exploration}
@@ -1006,6 +1012,7 @@ two-dimensional language and calculus of ``pure thought'', whose name has
 repeatedly been translated as \emph{ideography}
 \sidecite{Frege1952-FRETFT,Frege1999-FRELUL}.
 
+\AP
 Following the seminal work of Charles Sanders Peirce in
 \intro{semiotics}\sidenote{\kl{Semiotics} is the systematic study of sign
 processes and the communication of meaning.}, we define an \intro{iconic}
@@ -1024,7 +1031,7 @@ kind of sign, \emph{indexes} \sidecite{atkin_peirces_2023}:
   the sign utilize some convention, habit, or social rule or law that connects
   it with its object, then the sign is a symbol.
 \end{quote}
-He even went further by analyzing \kl{icons} into another
+\AP He even went further by analyzing \kl{icons} into another
 trichotomy\sidenote{Actually he only applied this trichotomy to pure \kl{icons}
 devoid of any indexical elements, that he called \emph{hypo-icons}.}:
 \emph{images} that depend on simple quality; \intro{diagrams}, who share
@@ -1043,14 +1050,16 @@ text is often just a means to explicit the meaning or intuition behind the
 \kl{diagrammatic} manipulations, or simply a retranscription of the commentary that
 the mathematician would give when unfolding the construction on a blackboard.
 
+\AP
 If one views logic as one particular type of mathematical reasoning --- albeit
 one that is omnipresent in all branches of mathematics, then it is only natural
-to expect that some \kl{diagrammatic} system should exist for it, that can express in
-the most natural way most (if not all) logical arguments. This is the
+to expect that some \kl{diagrammatic} system should exist for it, that can
+express in the most natural way most (if not all) logical arguments. This is the
 \emph{\kl{iconicity}} thesis of Peirce, which motivated his inquiry into what is
-arguably the first \kl{diagrammatic} \kl{proof system} in history: the \intro{existential
-graphs} (\reintro{EGs}). This will be the subject of \refch{eg}, and the basis
-for the development of a \emph{\kl{metaphorical}} \kl{proof system} in \refch{flowers}.
+arguably the first \kl{diagrammatic} \kl{proof system} in history: the
+\intro{existential graphs} (\reintro{EGs}). This will be the subject of
+\refch{eg}, and the basis for the development of a \emph{\kl{metaphorical}}
+\kl{proof system} in \refch{flowers}.
 
 \begin{emphpar}
   Our second main working hypothesis exploited in the second part of this
@@ -1071,74 +1080,83 @@ context of traditional representations of \kl{goals}, by presenting a number of
 techniques based on the \kl{direct manipulation} of \emph{\kl{symbolic}} formulas in
 sequents.
 
-We start in \refch{pba} with an introduction to \kl{PbP} and \kl{PbL}, by describing how
-to reason with logical connectives, quantifiers and equality through
-\emph{click} and \emph{drag-and-drop} (\intro{DnD}) actions in a prototype of
-\kl{GUI} called \kl{Actema}. In particular, \kl{DnD} actions can be seen as a graphical
-generalization of both the \texttt{apply} and \texttt{rewrite} \kl{tactics} of
-\kl{imperative} proof languages.
+\AP
+We start in \refch{pba} with an introduction to \kl{PbP} and \kl{PbL}, by
+describing how to reason with logical connectives, quantifiers and equality
+through \emph{click} and \emph{drag-and-drop} (\intro{DnD}) actions in a
+prototype of \kl{GUI} called \intro{Actema}. In particular, \kl{DnD} actions can
+be seen as a generalization of both the \texttt{apply} and \texttt{rewrite}
+\kl{tactics} of \kl{imperative} proof languages.
 
 In \refch{sfl}, we ground the semantics of \kl{DnD} actions in \kl{deep
-inference} \kl{proof theory}, by designing a variant of the subformula linking
-\kl{CoS} of Chaudhuri introduced in \cite{Chaudhuri2013} for \kl{intuitionistic}
-\kl{FOL} with equality. Our approach differs mainly from Chaudhuri's through our
-notion of \emph{\kl(dnd){valid} \kl{linkage}}, which filters out
-\emph{non-productive} \kl{DnD} actions by restricting them to
-\emph{\kl{unifiable}} subformulas.
+inference} \kl{proof theory}, by designing an \kl{intuitionistic} variant of the
+\kl{CoS} for \kl{subformula linking} introduced by Chaudhuri in \cite{Chaudhuri2013}.
+Our approach differs from Chaudhuri's mainly through our notion of
+\emph{\kl(dnd){valid} \kl{linkage}}, which filters out unproductive \kl{DnD}
+actions by restricting them to \emph{\kl{unifiable}} subformulas.
 
-In \refch{advanced}, we present more advanced techniques in the \kl{PbA} paradigm,
-that handle practical kinds of reasoning found in mathematical practice such as
-the use of \emph{definitions}, reasoning by \emph{induction}, and the
-\emph{simplification} of subterms through automatic computation. This is
+In \refch{advanced}, we present more advanced techniques in the \kl{PbA}
+paradigm, that handle pervasive forms of reasoning in mathematical practice such
+as the use of \emph{definitions}, reasoning by \emph{induction}, and the
+\emph{simplification} of expressions through automatic computation. This is
 illustrated through a few case studies of basic logical and mathematical
 problems.
 
-In \refch{sfl-classical}, we investigate an extension of \kl{PbA} to sequents with
-\emph{multiple} alternative conclusions, as opposed to the
-\emph{single}-conclusion sequents found in the interface of almost every \kl{ITP}. We
-argue that the use of \kl{direct manipulation} greatly facilitates the handling of
-multiple conclusions, and introduce a so-called \emph{parallel} linking operator
-to model reasoning in \kl{classical} logic that involves the interaction of two
-conclusions.
+In \refch{sfl-classical}, we investigate an extension of \kl{PbA} to sequents
+with \emph{multiple} alternative conclusions, as opposed to the
+\emph{single}-conclusion sequents found in the interface of almost every
+\kl{ITP}. We argue that the use of \kl{direct manipulation} greatly facilitates
+the management of multiple conclusions, and introduce a so-called
+\emph{\kl(dnd){parallel}} linking operator to model reasoning in \kl{classical}
+logic that involves the interaction of two conclusions.
 
-Lastly in \refch{plugin}, we present the architecture, interaction protocols and
-\kl{elaboration}/compilation strategy implemented in \texttt{coq-actema}, a
-plugin that integrates the \kl{Actema} web app as an interactive \kl{proof view} in \kl{Coq}.
-We also discuss its current shortcomings and future directions for improvement,
-in particular concerning the question of \kl{proof evolution}.
+\AP
+Lastly in \refch{plugin}, we present \intro{coq-actema}, a plugin that
+integrates the \kl{Actema} web application as an interactive \kl{proof view} in
+\kl{Coq}. We focus on the architecture and interaction protocols that connect
+the different components of the system, and give an overview of the
+\kl{elaboration}/compilation strategy that turns graphical actions performed in
+\kl{Actema} into \kl{Coq} \kl{proof terms}. We also discuss current shortcomings
+of our approach and future directions for improvement, in particular concerning
+the question of \kl{proof evolution}.
 
 \paragraph{Iconic manipulations}
   
-In the second part of this thesis, we explore a series of \kl{deep inference} \kl{proof
-systems} that give more structure to the notion of \emph{logical goal}. These
-systems share the ability to represent \kl{goals} in two alternative ways: either
-\emph{textually} through a standard inductive syntax, or \emph{graphically}
-through a \kl{metaphorical} notation well-suited to \kl{direct manipulation}. The first
-can be used as a machine representation in the backend of an \kl{ITP}, and the latter
-as the substrate for \kl{GUIs} in the frontend.
+In the second part of this thesis, we explore a series of \kl{deep inference}
+\kl{proof systems} that give more structure to the notion of logical
+\emph{\kl{goal}}. These systems share the ability to represent \kl{goals} in two
+alternative ways: either \emph{textually} through a standard inductive syntax,
+or \emph{graphically} through a \kl{metaphorical} notation well-suited to
+\kl{direct manipulation}. The first can be used as a machine representation in
+the backend of an \kl{ITP}, and the latter as the substrate for \kl{GUIs} in the
+frontend.
 
 \begin{description}
-  \item[Bubble calculi] In the first two chapters, we introduce a family of
-  systems called \emph{bubble calculi}. They are an extension of the theory of
-  \emph{nested sequents} first introduced by Brünnler
-  \sidecite{brunnler_deep_2009}, that we reframe as local \kl{rewriting systems} with
-  a graphical and topological interpretation. Bubble calculi enable an efficient
-  sharing of contexts between \kl{subgoals}, making them well-suited to the
-  factorization of both \kl{forward} and \kl{backward} reasoning steps in proofs.
+  \itemAP[Bubble calculi] In the first two chapters, we introduce a family of
+  systems called \intro{bubble calculi}. They are an extension of the theory of
+  \intro{nested sequents} first introduced by Brünnler
+  \sidecite{brunnler_deep_2009}, that we reframe as local \kl{rewriting systems}
+  with a graphical and topological interpretation. \kl{Bubble calculi} enable an
+  efficient sharing of contexts between \kl{subgoals}, making them well-suited
+  to the factorization of both \kl{forward} and \kl{backward} reasoning steps in
+  proofs.
 
-  \refch{bubbles} presents the \emph{asymmetric} bubble calculus \kl{BJ} for
-  \kl{intuitionistic} logic, modelled after the \emph{asymmetric} sequents of the
-  \kl{intuitionistic} \kl{sequent calculus} \kl{LJ} of Gentzen (\reffig{calculi-LJ}). It
-  introduces the \kl{metaphor} of \emph{bubbles} as a way to \kl{iconically} represent the
-  separation and sharing of contexts between different \kl{subgoals}.
+  \AP
+  \refch{bubbles} presents the \emph{asymmetric} \kl{bubble calculus} \kl{BJ}
+  for \kl{intuitionistic} logic, modelled after the \emph{asymmetric} sequents
+  of the \kl{intuitionistic} \kl{sequent calculus} \kl{LJ} of Gentzen. It
+  introduces the \kl{metaphor} of \intro{bubbles} as a way to \kl{iconically}
+  represent the separation and sharing of contexts between different
+  \kl{subgoals}.
 
+  \AP
   \refch{bubbles-symm} refines \kl{BJ} into a more general and symmetric
-  calculus for \kl{classical} logic called ``\kl{system B}'', where bubbles can be
-  \emph{polarized} in addition to formulas. \kl{Intuitionistic}, \kl{dual-intuitionistic}
-  and \kl{bi-intuitionistic} logic can be recovered as fragments of \kl{system B},
-  by forbidding certain \kl{inference rules} that characterize the \emph{porosity} of
-  bubbles. We also devise a fully invertible variant of \kl{system B}, that we
-  conjecture to be complete.
+  calculus for \kl{classical} logic called \intro{system~B}, where \kl{bubbles}
+  can be \emph{polarized} in addition to formulas. \kl{Intuitionistic},
+  \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic can be recovered as
+  fragments of \kl{system~B}, by forbidding certain \kl{inference rules} that
+  characterize the \emph{porosity} of bubbles. We also devise a fully \kl{invertible}
+  variant of \kl{system~B}, that we conjecture to be complete.
   
   \item[Existential graphs] In the last two chapters, we study two systems based
   on the \kl{existential graphs} of Peirce, that allow us to achieve \emph{full
@@ -1148,30 +1166,33 @@ as the substrate for \kl{GUIs} in the frontend.
   which lies in the \emph{arbitrary} correspondence between \kl{symbols} and their
   meaning.
 
-  In \refch{eg}, we give a complete review of the original \kl{EGs} systems of
-  Peirce for propositional and \kl{first-order} \kl{classical} logic, which have
-  been consistently neglected in the \kl{proof theory} literature\sidenote{One
-  reason might be that \kl{EGs} have been invented at the end of the
-  19\textsuperscript{th} century, \emph{before} the birth of \kl{proof theory}
-  as a discipline in the 1920s under the impulse of Hilbert.}. We propose in
-  particular a novel inductive characterization of the syntax of \kl{EGs}, as
-  well as the first identification of an \emph{analytic} fragment of the system
-  for propositional logic that is complete for provability.
+  In \refch{eg}, we give a complete review of Peirce's original systems of
+  \kl{EGs} for propositional and \kl{first-order} \kl{classical} logic, which
+  have been consistently neglected in the \kl{proof theory}
+  literature\sidenote{One reason might be that \kl{EGs} have been invented at
+  the end of the 19\textsuperscript{th} century, \emph{before} the birth of
+  \kl{proof theory} as a discipline in the 1920s under the impulse of Hilbert.}.
+  We propose in particular a novel inductive characterization of the syntax of
+  \kl{EGs}, as well as the first identification of an \emph{\kl{analytic}}
+  fragment of the system for propositional logic that is complete for
+  provability.
 
-  Finally, we introduce in \refch{flowers} the \emph{flower calculus}, an
+  \AP
+  Finally, we introduce in \refch{flowers} the \intro{flower calculus}, an
   \kl{intuitionistic} variant of \kl{EGs} where statements are represented
   \kl{metaphorically} as \emph{flowers}. We partition the system into a
-  \emph{natural} fragment where every rule is both analytic and invertible, and
-  a \emph{cultural} fragment where every rule is non-invertible. We prove that
-  the cultural fragment is admissible thanks to a completeness proof for the
-  natural fragment with respect to Kripke semantics. We exploit these
-  meta-theoretical results to design the Flower Prover, a prototype of \kl{GUI} in
-  the \kl{PbA} paradigm that aims to unify the concepts of \emph{goal} and
-  \emph{theory} in a \emph{modal interface}: \kl{goals} correspond to flowers
-  manipulated with natural rules in \Proof mode; while theories correspond to
-  the same flowers manipulated with cultural rules in \Edit mode. The Flower
-  Prover is also the first \emph{mobile-friendly} interface for \kl{ITPs} that we
-  know of.
+  \emph{\kl{natural}} fragment where every rule is both \kl{analytic} and
+  \kl{invertible}, and a \emph{\kl{cultural}} fragment where every rule is
+  non-\kl{invertible}. We prove that the \kl{cultural} fragment is
+  \kl{admissible} thanks to a completeness proof for the \kl{natural} fragment
+  with respect to Kripke semantics. We exploit these meta-theoretical results to
+  design the \intro{Flower\,\,Prover}, a prototype of \kl{GUI} in the \kl{PbA}
+  paradigm that aims to unify the concepts of \emph{\kl{goal}} and \emph{theory}
+  in a \emph{modal interface}: \kl{goals} correspond to flowers manipulated with
+  \kl{natural} rules in \Proof mode; while theories correspond to the same
+  flowers manipulated with \kl{cultural} rules in \Edit mode. The
+  \kl{Flower\,\,Prover} is also the first \emph{mobile-friendly} interface for
+  \kl{ITPs} that we know of.
 \end{description}
 
 \begin{kaonote}
@@ -1211,13 +1232,13 @@ Four independent paths can be followed:
   you.
 
   \item[\textbf{Proof theory of SFL (\ding{174} $\to$ \ding{176})}]
-  This path is for readers only interested in the \kl{proof theory} of subformula
-  linking, which is the foundation for the semantics of \kl{DnD} actions on \kl{symbolic}
+  This path is for readers only interested in the \kl{proof theory} of \kl{subformula
+  linking}, which is the foundation for the semantics of \kl{DnD} actions on \kl{symbolic}
   formulas.
 
   \item[\textbf{Bubble calculi (\ding{178} $\to$ \ding{179})}]
   This path is for readers only interested in the \kl{proof theory} and potential
-  applications of bubble calculi.
+  applications of \kl{bubble calculi}.
   
   \item[\textbf{Flower calculus (\ding{180} $\to$ \ding{181})}] This path is for
   readers only interested in the \kl{proof theory} of the flower calculus, and its
@@ -1262,9 +1283,10 @@ a more comfortable reading experience.
 
 \paragraph{Window inference}
 
+\AP
 Other researchers have stressed the importance of being able to reason
 \emph{deep} inside formulas to provide intuitive proof steps. The first and
-biggest line of research supporting this idea is probably that of \emph{window
+biggest line of research supporting this idea is probably that of \intro{window
 inference}, which started in 1993 with the seminal article of P.J. Robinson and
 J. Staples \sidecite{robinson-formalizing-1993}, and slowly became out of
 fashion during the 2000s. This is well expressed in the following quote from one
@@ -1273,10 +1295,10 @@ of its main contributors, Serge Autexier \sidecite[][p.~184--187]{autexier_phd}:
 \begin{quote}
 We believe it is an essential feature of a calculus for intuitive reasoning to
 support the transformation of parts of a formula without actually being forced
-to decompose the formula. In that respect the \kl{inference rules} of Schütte's proof
+to decompose the formula. In that respect the inference rules of Schütte's proof
 theory are a clear contribution. [...] One motivation for the development of the
 CORE proof theory was to overcome the need for formula decomposition as enforced
-by sequent and \kl{natural deduction} calculi in order to support an intuitive
+by sequent and natural deduction calculi in order to support an intuitive
 reasoning style.
 \end{quote}
 
@@ -1284,24 +1306,25 @@ Thus we are not the first to attempt to design new \kl{proof systems} based on \
 inference} principles, with the explicit objective of improving the usability of
 \kl{ITPs}.
 \begin{digression}
-  Note that during most of the period when window inference was developed, the
-terminology of ``deep inference'' had not been introduced yet. Indeed, the first
-article on the subject appeared in 1999 \cite{Guglielmi1999ACO}, with very
-different motivations in mind: namely, the development of a \kl{proof-theoretical}
-approach unifying concurrent and sequential computation, resulting in the
-\kl{calculus of structures} for the logic \kl{BV}. However, some \kl{proof systems} based
-on \kl{deep inference} principles already existed and inspired researchers in window
-inference, as witnessed by the reference to Schütte's \kl{proof theory} in the above
-quote.
+  \AP
+  Note that during most of the period when \kl{window inference} was developed,
+the terminology of ``deep inference'' had not been introduced yet. Indeed, the
+first article on the subject appeared in 1999 \cite{Guglielmi1999ACO}, with very
+different motivations in mind: namely, the development of a
+\kl{proof-theoretical} approach unifying concurrent and sequential computation,
+resulting in the \kl{calculus of structures} for the logic \intro{BV}. However,
+some \kl{proof systems} based on \kl{deep inference} principles already existed
+and inspired researchers in \kl{window inference}, as witnessed by the reference
+to Schütte's \kl{proof theory} in the above quote.
 \end{digression}
 However, we believe our approach is unique in that it emphasizes two aspects:
 \begin{itemize}
-  \item the use of \emph{\kl{direct manipulation}} on \kl{goals} to perform proof steps
-  (although some pointing interactions were already at work in window
-  inference-based systems);
+  \item the use of \emph{\kl{direct manipulation}} on \kl{goals} to perform
+  proof steps (although some pointing interactions were already at work in
+  \kl{window inference}-based systems);
   \item in the second part of this thesis, the use of \emph{\kl{iconic}}
-  representations for the \kl{proof state}, that stray away from traditional \kl{symbolic}
-  formulas.
+  representations for the \kl{proof state}, that stray away from traditional
+  \kl{symbolic} formulas.
 \end{itemize}
 
 \paragraph{Ayers' thesis}
@@ -1326,10 +1349,11 @@ two-dimensional graphical notation, while \texttt{ProofWidgets} promises great
 capabilities for proofs by both direct and \kl{iconic} manipulation.
 
 However, the work of Ayers focuses mainly on designing a general framework that
-can integrate modern interfaces for proofs in the \kl{Lean} \kl{proof assistant}, while we
-focus on exploring various proof calculi that provide the foundations for such
-interfaces at the purely logical level, mostly independently of any particular
-\kl{proof assistant}. Thus we believe that our work is quite complementary to Ayers':
-it emphasizes different aspects while sharing a common vision for the future of
-\kl{proof assistants}, where modern graphical interfaces play a crucial role in
-improving the interaction between the user and the computer.
+can integrate modern interfaces for proofs in the \kl{Lean} \kl{proof
+assistant}, while we focus on exploring various proof calculi that provide the
+foundations for such interfaces at the purely logical level, independently of
+any particular \kl{proof assistant}. Thus we believe that our work is quite
+complementary to Ayers': it emphasizes different aspects while sharing a common
+vision for the future of \kl{proof assistants}, where modern graphical
+interfaces play a crucial role in improving the interaction between the user and
+the computer.
