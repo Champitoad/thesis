@@ -1,3 +1,4 @@
+% !TEX root =index.tex
 \setchapterpreamble[u]{\margintoc}
 \chapter{Asymmetric Bubble Calculus}
 \labch{bubbles}
@@ -542,13 +543,14 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
     rules like those of \refsec{dnd-completeness}, but between adjacent formulas
     in a solution (see \reffig{bubbles-linkage}).
 
-    The cut rule was handled in \kl{Actema} with a separate \textsf{+hyp} button,
-    which adds the cut formula $A$ (input by the user in a dialog box) as a new
-    hypothesis in the current \kl{goal}, and as the conclusion in a new \kl{subgoal} (see
-    \refsec{newitems}). Since \kl{subgoals} are now reified as bubbles, the
-    {\rsf{i{\ua}}} rule could be mapped instead to a contextual action
-    available on any red item $\conc{\Delta}$, which would have the effect of
-    spawning a \kl{bubble} around it with a blue item $\hypo{A}$, and another \kl{bubble} nearby it with a red item $\conc{A}$.
+    The cut rule was handled in \kl{Actema} with a separate \textsf{+hyp}
+    button, which adds the cut formula $A$ (input by the user in a dialog box)
+    as a new hypothesis in the current \kl{goal}, and as the conclusion in a new
+    \kl{subgoal} (see \refsubsec{pba-layout}). Since \kl{subgoals} are now reified as
+    bubbles, the {\rsf{i{\ua}}} rule could be mapped instead to a contextual
+    action available on any red item $\conc{\Delta}$, which would have the
+    effect of spawning a \kl{bubble} around it with a blue item $\hypo{A}$, and
+    another \kl{bubble} nearby it with a red item $\conc{A}$.
 
     % Finally, an analog to the cut rule {\rsf{i{\ua}}} is the rule
     % {\rsf{d\ua}} for adding new definitions (\reffig{bubbles-vars}).

@@ -1,3 +1,4 @@
+% !TEX root =index.tex
 \setchapterstyle{kao}
 \setchapterpreamble[u]{\margintoc}
 \chapter{Proof-by-Action}
@@ -95,12 +96,11 @@ The chapter is organized as follows: \refsec{setting} briefly outlines its
 logical setting. \refsec{aristote} describes the basic features of a graphical
 proof interface based on our principles, and illustrates them with a famous
 syllogism from Aristotle. \refsec{clicks} shows how it can integrate
-\kl{Proof-by-Pointing} capabilities through click actions. \refsec{newitems}
-shows very briefly how one can add new formulas and objects to the current
-\kl{goal}. The two following sections explain, through further examples, how
-drag-and-drop actions work; first for so-called \emph{rewrite} actions involving
-equalities, then for actions involving logical connectives and quantifiers. We
-end in \refsec{pba-rw} with a discussion of related works.
+\kl{Proof-by-Pointing} capabilities through click actions. The two following
+sections explain, through further examples, how drag-and-drop actions work;
+first for so-called \emph{rewrite} actions involving equalities, then for
+actions involving logical connectives and quantifiers. We end in \refsec{pba-rw}
+with a discussion of related works.
 
 % \section{Motivations}\labsec{motivations} Since this work is about changing
 % the very way the user interacts with an interactive theorem prover, we feel it
@@ -185,7 +185,7 @@ complex formalisms like \kl{type theories}. We will not explore these questions 
 
 \section{A first example}\labsec{aristote}
 
-\subsection{Layout}
+\subsection{Layout}\labsubsec{pba-layout}
 One advantage of the \kl{PbA} paradigm, is that it allows a very lean visual layout
 of the \kl{proof state}. There is no need to name hypotheses. In the prototype we
 also dispense with a text buffer, since proofs are solely built through
@@ -409,12 +409,12 @@ order:
   This could be provided with further input (e.g. from a dialog box), but this
   would need a change in the communication protocol between the frontend and
   backend of \kl{Actema}. Instead we decompose this in two steps: first the user
-  can add the witness as a new object by using the \texttt{+expr} button (see
-  \refsec{newitems}); then she can drag the corresponding green \kl{item} and
-  drop it on the quantified \kl{item} to instantiate it. It is also possible to
-  select with the mouse an arbitrary subexpression occurring in any \kl{item} of
-  the current \kl{goal}, and then drag-and-drop the \kl{item} holding the
-  selected subexpression instead.
+  can add the witness as a new object by using the \texttt{+expr} button; then
+  she can drag the corresponding green \kl{item} and drop it on the quantified
+  \kl{item} to instantiate it. It is also possible to select with the mouse an
+  arbitrary subexpression occurring in any \kl{item} of the current \kl{goal},
+  and then drag-and-drop the \kl{item} holding the selected subexpression
+  instead.
 \end{itemize}
 
 \begin{remark}[Click completeness]\label{rem:click-completeness}

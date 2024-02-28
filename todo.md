@@ -1,3 +1,5 @@
 - Check errors with Grammarly
 - Use the `knowledge` package (including for inference rules)
 - Turn long sidenotes into digressions
+- Remove TODOs
+- Missing epigraphs
