@@ -73,7 +73,21 @@
 
 \newcommand{\Ceq}{\mathrel{\vcenter{\hbox{::}}{=}}}
 
-\newcommand{\syneq}{\equiv}
+\newrobustcmd\syneq{
+  \mathrel{%
+    \withkl{\kl[\syneq]}{%
+      \cmdkl{\equiv}
+    }%
+  }%
+}
+\knowledge{\syneq}{notion}
+\newrobustcmd\notsyneq{
+  \mathrel{%
+    \withkl{\kl[\syneq]}{%
+      \cmdkl{\not\equiv}
+    }%
+  }%
+}
 
 \newcommand{\nats}{\mathbb{N}}
 
@@ -508,8 +522,8 @@
 \newcommand{\ssreflect}{\textsc{SSReflect}}
 \newcommand{\ltac}{$\mathcal{L}_{tac}$}
 
-% \newcommand{\suc}[1]{#1\!\oplus\! 1}
-\newcommand{\suc}[1]{S(#1)}
+\knowledgenewrobustcmd\suc[1]{#1\cmdkl{\oplus}1}
+% \newcommand{\suc}[1]{S(#1)}
 
 % Type theory
 

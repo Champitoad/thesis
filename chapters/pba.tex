@@ -157,7 +157,9 @@ $$\forall x.\forall y. x=y\land A \limp \subst{A}{x}{y}.$$
 
 \begin{figure*}
  \begin{center}
-\fbox {   \includegraphics[width=1.3\textwidth]{actions-tag.png}}
+   \fbox{
+   \includegraphics[width=1.45\textwidth]{actions-tag.png}
+   }
  \end{center}
  The conclusion is red on the right, the two hypotheses blue on the left. The
  gray dotted arrows have been added to show the two possible actions.
@@ -199,17 +201,37 @@ other visual distinction, at least for users with impaired color vision. But in
 the present description we stick to the red/blue denomination, as it is
 conveniently concise.}:
 \begin{itemize}
-\item A {\em red \kl{item}} which is the proposition to be proved, that is the
- {\em conclusion},
-\item {\em blue \kl{items}}, which are the local {\em hypotheses}.
+  \item a \emph{red \kl{item}} which is the proposition to be proved, that is the
+   \emph{conclusion};
+  \item \emph{blue \kl{items}}, which are the local \emph{hypotheses};
+  \item \emph{green \kl{items}}, which are the declared (\kl{first-order})
+  \emph{objects}.
 \end{itemize}
 
 The \kl{items} are what the user can act upon: either by {\em clicking} on them, or
 by {\em moving} them. Each \kl{item} can be positioned freely on a so-called
-\emph{proof canvas}, which is depicted by the white background in
+\intro{proof canvas}, which is depicted by the white background in
 \reffig{aristote}.
 
-Finally, note that each \kl{goal} is displayed on a tab.
+Often in the course of a proof, one will want to add new \kl{items}: either a
+new conjecture (blue \kl{item}), or a new object (green \kl{item}) that would be
+helpful to solve the current \kl{goal}. These can be done respectively with the
+blue \texttt{+hyp} and the green \texttt{+expr} buttons, placed in the top-left
+corner of the screen in \reffig{aristote}. When clicked, they prompt the user
+for the statement of the conjecture, or the name and expression defining the
+object\sidenote{For now we ask the user to input textual data, in an
+idiosyncratic syntax specific to the logic of \kl{Actema}. A desirable feature
+would be to provide some elaborate input mechanism tailored to the type of
+object the user wants to create. This would obviously require some extensibility
+to new domain-specific input interfaces: typically one could imagine plugging a
+tool like GeoGebra to construct geometrical figures \cite{gg2}, or a categorical
+diagram editor like YADE \cite{lafont:hal-04407118}. The \kl{ProofWidgets}
+framework is particularly well-suited for this task
+\cite{ayers_graphical_2021}.}. The \texttt{+hyp} button will also create a new
+\kl{subgoal} requiring to prove the conjecture within the current context.
+
+Finally, note that each \kl{goal} is displayed in its own \emph{tab}, whose
+title is the statement of the \kl{goal}'s conclusion.
 
 \subsection{Two kinds of actions}
 
@@ -267,13 +289,15 @@ $$\begin{array}{lll}
 
 Notice that:
 \begin{itemize}
-\item   These elementary rewrites are not visible for the user. What she sees is
-  the final result of the action, that is the last expression of the rewrite
-  sequence.
-\item The definitions of the \kl{rewriting rules} in \reffig{DISL} and
-  \reffig{DISL-U} do not involve squared subterms. The information of which
-  subterms are squared is only used by the system to decide which rules to
-  apply in which order.
+  \item These elementary rewrites are not visible for the user. What she sees is
+    the final result of the action, that is the last expression of the rewrite
+    sequence.
+  \item The definitions of the \kl{rewriting rules} in \reffig{DISL} do not
+    involve squared subterms. The information of which subterms are squared is
+    only used by the system to decide which rules to apply in which order.
+  \item The last step applies the \kl{neur} rule defined in \reffig{DISL-U}.
+    % It simplifies away the $\top$ constant, that results from the interaction
+    % between the two squared subterms through the \kl(sfl){id} rule.
 \end{itemize}
 
 In general, the action solves the \kl{goal} when the interaction ends with the
@@ -324,45 +348,12 @@ drag-and-drop actions.
 \item Clicking on a red equality $t = t$ solves the \kl{goal} immediately.
 \end{itemize}
 
-One can see that these actions correspond essentially to the \kl{right
-introduction rules} of the head connective for the conclusion, and either the
-\kl{elimination rule} from \kl{NJ} or the \kl{left introduction rule} from
-\sys{LJ} for hypotheses. The exact mapping between click actions and
-\kl{inference rules} is given in \reftab{click-rules}. A few remarks are in
-order:
-\begin{itemize}
-  \item In the current implementation of \kl{Actema}, clicking on a blue \kl{item} $A
-  \limp B$ will work only if the conclusion is $B$. An alternative is to use the
-  {\kl{{\limp}L}} rule from \kl{sequent calculus}, which is applicable in every
-  context.
-  \item There is no action mapped to red $\bot$ \kl{items}, simply because $\bot$
-  does not have any \kl{introduction rule}.
-  \item There is currently no action mapped to blue $∀$ and red $∃$ \kl{items}. The
-  reason is that one needs additional information about the \emph{witness} to be
-  used when instantiating with the $∀L$ or $∃R$ rule. This could be provided
-  with further input (e.g. from a dialog box), but this would need a change in
-  the communication protocol between the frontend and backend of \kl{Actema}. Instead
-  we decompose this in two steps: first the user can add the witness as a new
-  object by using the \texttt{+expr} button (see \refsec{newitems}); then she
-  can drag the corresponding green \kl{item} and drop it on the quantified \kl{item} to
-  instantiate it. It is also possible to select with the mouse an arbitrary
-  subexpression occurring in any \kl{item} of the current \kl{goal}, and then
-  drag-and-drop the \kl{item} holding the selected subexpression instead.
-\end{itemize}
-
-\begin{remark}[Click completeness]\label{rem:click-completeness}
-  From the previous remarks and the completeness of the cut-free \kl{sequent
-  calculus} \kl{LJ}, it follows that click actions, when combined with new
-  object declarations and \kl{DnD} instantiations, provide a sufficient set of
-  interactions to prove any true formula of (\kl{intuitionistic}) \kl{first-order logic}.
-\end{remark}
-
-\begin{table}[H]
+\begin{margintable}
 \caption[]{Mapping of click actions to \kl{inference rules}}
 \labtab{click-rules}
 \begin{tabular}{ccc}
 	\toprule
-	\thead{Head connective} & \thead{Red \kl{item}} & \thead{Blue \kl{item}} \\
+	\thead{\footnotesize Head\\\footnotesize connective} & \thead{\footnotesize Red \kl{item}} & \thead{\footnotesize Blue \kl{item}} \\
 	\midrule
   $\top$ & \kl{\top R} & \kl{\top L} \\
 	\midrule
@@ -378,7 +369,7 @@ order:
 	\midrule
   $∃$ & $\emptyset$ & \kl{\exists L} \\
 \end{tabular}
-\end{table}
+\end{margintable}
 
 \begin{marginfigure}
   \begin{mathpar}
@@ -397,46 +388,48 @@ order:
   \labfig{sequent-variant-rules}
 \end{marginfigure}
 
+One can see that these actions correspond essentially to the \kl{right
+introduction rules} of the head connective for the conclusion, and either the
+\kl{elimination rule} from \kl{NJ} or the \kl{left introduction rule} from
+\kl{LJ} for hypotheses. The exact mapping between click actions and
+\kl{inference rules} is given in \reftab{click-rules}. A few remarks are in
+order:
+\begin{itemize}
+  \item In the current implementation of \kl{Actema}, clicking on a blue
+  \kl{item} $A \limp B$ will work only if the conclusion is $B$, replacing the
+  latter with $A$. An alternative is to use the {\kl{{\limp}L}} rule from
+  \kl{sequent calculus}, which is applicable in every context.
+  
+  \item There is no action mapped to red $\bot$ \kl{items}, simply because
+  $\bot$ does not have any \kl{introduction rule}.
+
+  \item There is currently no action mapped to blue $∀$ and red $∃$ \kl{items}.
+  The reason is that one needs additional information about the \emph{witness}
+  to be used when instantiating with the \kl{\forall L} or \kl{\exists R} rule.
+  This could be provided with further input (e.g. from a dialog box), but this
+  would need a change in the communication protocol between the frontend and
+  backend of \kl{Actema}. Instead we decompose this in two steps: first the user
+  can add the witness as a new object by using the \texttt{+expr} button (see
+  \refsec{newitems}); then she can drag the corresponding green \kl{item} and
+  drop it on the quantified \kl{item} to instantiate it. It is also possible to
+  select with the mouse an arbitrary subexpression occurring in any \kl{item} of
+  the current \kl{goal}, and then drag-and-drop the \kl{item} holding the
+  selected subexpression instead.
+\end{itemize}
+
+\begin{remark}[Click completeness]\label{rem:click-completeness}
+  From the previous remarks and the completeness of the cut-free \kl{sequent
+  calculus} \kl{LJ}, it follows that click actions, when combined with new
+  object declarations and \kl{DnD} instantiations, provide a sufficient set of
+  interactions to prove any true formula of (\kl{intuitionistic}) \kl{first-order logic}.
+\end{remark}
 
 It is possible to associate some more complex effects to click actions performed
-on locations deeper under connectives. This is the essence of \kl{Proof-by-Pointing},
-and~\sidecite{PbP} provides ample description. Since we here focus more on
-drag-and-drop actions, we do not detail further more advanced \kl{PbP} features.
-However we stress that these features are essentially compatible with what we
-describe in this work. In fact the version of \kl{Actema} presented in \refch{plugin}
+on locations deeper under connectives. This is the essence of
+\kl{Proof-by-Pointing}, and~\sidecite{PbP} provides ample description. Since we
+here focus more on drag-and-drop actions, we do not detail further more advanced
+\kl{PbP} features. The version of \kl{Actema} presented in \refch{plugin}
 provides an implementation of \kl{PbP} available as a contextual menu action.
-
-
-\section{Adding new items}\labsec{newitems}
-
-Often in the course of a proof, one will want to add new \kl{items}: either a new
-conjecture (blue \kl{item}), or a new object (green \kl{item}) that would be helpful to
-solve the current \kl{goal}. These can be done respectively with the blue
-\texttt{+hyp} and the green \texttt{+expr} buttons, which appear in the
-screenshot of \reffig{edukera}. When clicked, they prompt the user
-for the statement of the conjecture, or the name and expression defining the
-object. The \texttt{+hyp} button will also create a new \kl{subgoal} requiring to
-prove the conjecture within the current context.
-
-% This mechanism and the syntax are for now very crude. The design of
-% possible smoother tools is an important issue but left for future
-% work\sidenote{For instance~\cite{omar-filling-2021} deals with a
-%   similar problem in the context of functional programming.}.
-
-For now we ask the user to input textual data, in an idiosyncratic syntax
-specific to the logic of \kl{Actema}. A desirable, but highly non-trivial feature
-would be to provide some elaborate input mechanism tailored to the type of
-object the user wants to create. This would obviously require some extensibility
-to new domain-specific input interfaces: typically one could imagine plugging a
-tool like GeoGebra to construct geometrical figures \sidecite{gg2}, or a
-categorical diagram editor like YADE\todo{add citation/link to Ambroise Lafont's
-work}.
-
-% We will not explore the design of such features in this thesis, since we focus
-% on finding a universal interface for logical reasoning rather than
-% domain-specific interfaces for particular types of mathematical reasoning.  Note
-% however that it is a necessary feature if one wants to achieve a fully graphical
-% theorem proving environment which is accessible to non-expert users.
 
 \section{A simple example involving equality}\labsec{equality}
 
@@ -464,8 +457,11 @@ equality.
 
 \reffig{oneplusone} shows a very elementary example where one wants to prove
 $1+1=2$ in the setting of Peano arithmetic. For any number $n$, we write
-$\suc{n}$ to denote the application of the successor function to $n$; closed
-terms are directly written in decimal notation. The proof goes as follows:
+$\intro*\suc{n}$ to denote the application of the successor function to $n$;
+closed terms are directly written in decimal notation. The proof goes as
+follows\sidenote{\AP Note that we use the symbol $\intro*\syneq$ to denote
+\emph{syntactic equality} of formulas at the meta-level, by contrast to the
+symbol $=$ denoting equality at the object-level.}:
 \begin{itemize}
   \item We link the left-hand side $x + \suc{y}$ of the second addition \kl{axiom} with $1 + 1$ in the conclusion, which has the effect of rewriting $1 + 1$ into $\suc{(1 + 0)}$:
     $$
@@ -489,11 +485,11 @@ terms are directly written in decimal notation. The proof goes as follows:
 \end{itemize}
 
 We end up with the conclusion $2 = 2$, which is provable by a simple click.
-Notice how the orientation of the two rewritings is determined by which side of
-the equality is selected. Also, in this case, the rewritings
-correspond to \kl(dnd){backward} proof steps, because the rewriting is performed
-in the conclusion. Similar rules (\kl{F{=}_1} and \kl{F{=}_2}) are
-used to perform rewritings in hypotheses.
+Notice how the orientation of the two rewrites is determined by which side of
+the equality is selected. Also, in this case, the rewrites correspond to
+\kl(dnd){backward} proof steps, because rewriting is performed in the
+conclusion. Similar rules (\kl{F{=}_1} and \kl{F{=}_2}) are used to perform
+rewriting in hypotheses.
 
 
 \section{Drag-and-dropping through connectives}\labsec{dnd-examples}
@@ -587,7 +583,7 @@ $$
 
 This can also be done under conjunctions and/or disjunctions:
 $$
-  A\limp \select{B} \back C \land (D\lor \select{B}) ~~ \steps{} ~~ C \land (D\lor A)
+  A\limp \select{B} \back C \land (D\lor \select{B}) ~~\steps{}~~ C \land (D\lor A)
 $$
 
 An interesting point is what happens when using implications with
@@ -596,12 +592,12 @@ implication will behave exactly the same way:
 
 $$
   A\limp B \limp \select{C} \back D\lor \select{C}
-  ~~~\/ ~\steps{}~~~  D\lor (A\land B)
+  ~~\steps{}~~  D\lor (A\land B)
 $$
-and:
+and
 $$
   A\land B \limp \select{C} \back D\lor \select{C}
-  ~~~ \/ ~\steps{}~~~  D\lor (A\land B)
+  ~~\steps{}~~  D\lor (A\land B)
 $$
 
 
@@ -612,21 +608,21 @@ hypothesis matches one of their premisses.
 A first nice feature is the ability to strengthen a hypothesis by
 providing evidence for any of its premises:
 $$
-B\limp \select{A}\limp C \forw \select {A}  ~~\/~\/~\steps{}~\/~~~~~
+B\limp \select{A}\limp C \forw \select {A}  ~~\steps{}~~
 B\limp C$$
 and again the same can be done for the uncurryfied version:
 $$
-B\land \select{A}\limp C \forw \select {A}  ~\/~\/~\steps{}~\/~~~~~
+B\land \select{A}\limp C \forw \select {A}  ~~\steps{}~~
 B\limp C.$$
 
 The two aspects of the implication can be combined:
 
 $$
-B\limp \select{A}\limp C \forw D\limp\select {A}  ~\/~\/~\steps{}~\/~~~~~
+B\limp \select{A}\limp C \forw D\limp\select {A}  ~~\steps{}~~
 B\limp D\limp C$$
 or:
 $$
-B\land \select{A}\limp C \forw D\limp\select {A}  ~\/~\/~\steps{}~\/~~~~~
+B\land \select{A}\limp C \forw D\limp\select {A}  ~~\steps{}~~
 B\land D \limp C.$$
 
 
@@ -737,7 +733,7 @@ is usually defined as a special case of universal quantification.}.
 
 
 Again, in some cases, only some existential quantifiers may be
-instantiated following a \kl{linkage}:
+instantiated following a \kl{DnD}:
 $$
 \begin{array}{rcl}
 \select{P(a)}\back \exists x.\exists y. \select{P(y)}\land R(x,y)
@@ -759,7 +755,7 @@ $$
 Some more advanced examples yield simultaneous instantiations of
 existentially and universally quantified variables. In such cases, the
 system needs to check some dependency conditions. For instance, the
-following \kl{linkage} is valid and solves the \kl{goal} through one action:
+following \kl{DnD} is valid and solves the \kl{goal} through one action:
 $$
 \begin{array}{lll}
   &\exists y. \forall x. \select{R(x,y)}\back \forall x'.\exists
@@ -779,29 +775,28 @@ $$
 $$
 
 But the converse situation is not provable; the system will refuse
-the following \kl{linkage}:
+the following \kl{DnD}:
 $$
 \begin{array}{rcl}
   \forall x. \exists y. \select{R(x,y)}\back \exists y'.\forall x'. \select{R(x',y')}
 \end{array}
 $$
-Indeed, there is no reduction path starting from this \kl{linkage} ending with the
+Indeed, there is no reduction path starting from this \kl{DnD} ending with the
 \textsf{id} rule. This can be detected by the system because the unification of
 $R(x,y)$ and $R(x',y')$ here results in a cycle in the instantiations of
-variables\sidenote{We will come back to this in \refsec{linkages}. Also notice
+variables\sidenote{We will come back to this in \refsubsec{identity}. Also notice
 that this example requires to use full (\kl{first-order}) unification, not only
 matching.}. The system thus refuses this action.
 
 \subsection{Conditional rewriting}
-The example given in \refsec{equality}, although very simple,
-already combines the rules for equality and for quantifiers. When also
-using implication, one obtains naturally some form of conditional
-rewriting. To take another simple example, suppose we have a
-hypothesis of the form:
+The example given in \refsec{equality}, although very simple, already combines
+the rules for equality and for quantifiers. When also using implication, one
+obtains naturally some form of \emph{conditional rewriting}. To take another
+simple example, suppose we have a hypothesis of the form:
 $$\forall x. x\neq 0 \limp f(x) = g(x)$$
 
-We can use this hypothesis for replacing a subterm $f(t)$ by $g(t)$,
-which will generate a side-condition $t\neq 0$:
+We can use this hypothesis to replace a subterm $f(t)$ by $g(t)$, which will
+generate a side-condition $t\neq 0$:
 $$
 \begin{array}{lll}
   &\forall x. x\neq 0 \limp \select{f(x)} = g(x) \back A(\select{f(t)}) &\\
@@ -885,9 +880,9 @@ order to apply the latter to the former.
 %This is obviously different from our use of \kl{DnD} between entities
 %of the same kind, and can be explained by the comparison made in the previous
 %paragraph.
-As for the KeY Prover, its usage of \kl{DnD} overlaps only a very small
-portion of usecases that we hinted at in \refsec{edukera}, namely
-the instantiation of quantifiers with objects.
+As for the KeY Prover, its usage of \kl{DnD} overlaps only a very small portion
+of usecases that we hinted at in \refsec{clicks}, namely the instantiation of
+quantifiers with objects.
 
 We can also mention the recent work of Zhan et al. \sidecite{zhan-design-2019}.
 They share with us the vision of a \kl{proof assistant} mainly driven by gestural
