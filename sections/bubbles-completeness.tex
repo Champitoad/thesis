@@ -43,7 +43,7 @@ The rules of \kl{DBiInt} are given in \reffig{rules-dbiint}. Note that like
 \kl{bubble calculi}, \kl{DBiInt} is truly a \emph{\kl{deep inference}} system, in the
 sense that rules can be applied on \kl{sequents} nested arbitrarily deep inside
 structures\sidenote{Our presentation of rules is slightly different from
-\cite{postniece_deep_2009}: the contexts in which rules apply are left implicit,
+\cite{postniece_deep_2009}: the \kl{contexts} in which rules apply are left implicit,
 and thus we do not rely on their polarity. The counterpart is that rules always
 apply on \kl{sequents} and never on formulas, which makes them more verbose. Also we
 do not rely on the notion of ``top-level formulas'' of a structure, making the
@@ -149,7 +149,7 @@ the exclusion connective $\lsub$ to get a sound and complete system for
 \rsf{{\lsub}_R} and \rsf{{\lsub}_L}, as well as the propagation rules
 \rsf{{\seq}_{L1}} and \rsf{{\seq}_{R2}}. Indeed the latter are only useful in
 combination with the former, since \rsf{{\lsub}_L} is the only rule of
-\kl{DBiInt} that can introduce \kl{nested sequents} in negative contexts. The
+\kl{DBiInt} that can introduce \kl{nested sequents} in negative \kl{contexts}. The
 situation is similar in system $\sysB$, and in fact the proof of
 \reflemma{simulation-dbiint} shows that the \kl{intuitionistic} fragment $\sysBH$ is
 sufficient to simulate \kl{DBiInt} without the aforementioned rules. The dual

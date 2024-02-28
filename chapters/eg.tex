@@ -232,7 +232,7 @@ thanks to the topological nature of $\SA$, \kl{juxtaposition} is naturally
 as long as they live in the same area delimited by a \kl{cut}. The combination
 of these properties is called the \intro{isotropy} of $\SA$ in
 \sidecite{minghui_graphical_2019}, and is captured in traditional \kl{proof theory}
-through the use of \emph{(multi)sets} for modelling contexts in sequents.
+through the use of \emph{(multi)sets} for modelling \kl(sequent){contexts} in sequents.
 
 \begin{remark}\labremark{eg-entitative}
   
@@ -331,7 +331,7 @@ of any polarity:
 \begin{itemize}
   \item[\textbf{Iteration} \textit{(Copy \& Paste)}]
     A \kl{graph} $G$ may be duplicated at any depth inside of a juxtaposed \kl{graph} $H$.
-    Using our notation for holed contexts from previous chapters, this can be
+    Using our notation for holed \kl{contexts} from previous chapters, this can be
     represented schematically like so:
     \begin{mathpar}
       G~~~H\select{\phantom{G}} ~~~\step{}~~~ G~~~H\select{G}
@@ -344,7 +344,7 @@ of any polarity:
     \kl{sequent calculus}, where the top-level occurrence of $G$ justifies the
     occurrence inside $H\hole$\sidenote{This might also be related to the notion
     of \emph{justified move} in game semantics, where the nesting of \kl{cuts} in the
-    context $H\hole$ corresponds to a sequence of alternating moves between
+    \kl{context} $H\hole$ corresponds to a sequence of alternating moves between
     Player and Opponent.}. Note that while in the identity axiom, the justifying
     (resp. justified) occurrence must be a negative hypothesis (resp. a positive
     conclusion), the \kl{Iteration} rule also allows the opposite relationship
@@ -536,21 +536,22 @@ apply:
 
 \begin{definition}[Context]
   A \intro{context} $G\hole$ is a \kl{graph} which contains exactly one
-  occurrence of the special node $\hole$ called the \emph{hole}. The hole can
-  always be \emph{filled} (substituted) with any other \kl{graph} $H$ or context
-  $K\hole$, producing a new \kl{graph} $\cfill{G}{H}$ or context $\cfill{G}{K\hole}$.
-  In particular, filling with the empty \kl{graph} $\emptyset$ will yield a \kl{graph}
-  $\cfill{G}{\phantom{G}}$, which is just $G\hole$ with its hole removed.
+  occurrence of a special node written $\hole$, called its \reintro{hole}. The
+  \kl{hole} can always be \emph{filled} (substituted) with any other \kl{graph}
+  $H$ or \kl{context} $K\hole$, producing a new \kl{graph} $\cfill{G}{H}$ or \kl{context}
+  $\cfill{G}{K\hole}$. In particular, filling with the empty \kl{graph}
+  $\emptyset$ will yield a \kl{graph} $\cfill{G}{\phantom{G}}$, which is just
+  $G\hole$ with its \kl{hole} removed.
 \end{definition}
 
-Then to reason by induction on contexts, we need to define formally how to
+Then to reason by induction on \kl{contexts}, we need to define formally how to
 measure their \emph{depth}. It turns out the only way to increase the depth of
 an \kl{graph} is to insert \emph{\kl{cuts}}, and thus the depth of a
-context coincides with its number of \emph{inversions}, i.e. the number of
-\kl{cuts} enclosing its hole:
+\kl{context} coincides with its number of \emph{inversions}, i.e. the number of
+\kl{cuts} enclosing its \kl{hole}:
 
 \begin{definition}[Depth]
-  The \emph{depth} of a context $G\hole$ is defined recursively by
+  The \emph{depth} of a \kl{context} $G\hole$ is defined recursively by
   \begin{align*}
     \gdepth{H, \hole} &= 0 \\
     \gdepth{H, [G\hole]} &= \gdepth{G\hole} + 1
@@ -559,13 +560,13 @@ context coincides with its number of \emph{inversions}, i.e. the number of
 
 \begin{definition}[Inversions]\labdef{eg-inv}
 
-  The number of \emph{inversions} of a context $G\hole$ is defined by
+  The number of \emph{inversions} of a \kl{context} $G\hole$ is defined by
   $\inv(G\hole) = \gdepth{G\hole}$.
 \end{definition}
 
 \begin{definition}[Polarity]
-  We say that a context $G\hole$ is \emph{positive} if $\inv(G\hole)$ is
-  even, and \emph{negative} otherwise. We denote positive and negative contexts
+  We say that a \kl{context} $G\hole$ is \emph{positive} if $\inv(G\hole)$ is
+  even, and \emph{negative} otherwise. We denote positive and negative \kl{contexts}
   respectively by $G^+\hole$ and $G^-\hole$.
 \end{definition}
 
@@ -728,8 +729,8 @@ Peirce\sidenote{Although we limit ourselves to propositional logic in
 \kl{Alpha}, while in \cite{peirce_prolegomena_1906} Peirce also accounts for
 the lines of identity of \kl{Beta} handling \kl{predicate logic}, to be introduced
 in \refsec{beta}.}. In this setting, a location in a \kl{graph} is represented by the
-hole of a context, thus the relation of local justification between two areas is
-defined on contexts:
+\kl{hole} of a \kl{context}, thus the relation of local justification between two areas is
+defined on \kl{contexts}:
 
 \begin{marginfigure}
   \input{figures/eg-local-justification.tex}
@@ -740,7 +741,7 @@ defined on contexts:
 
 \begin{definition}[Local justification]\labdef{eg-local-justification}
 
-  Given two contexts $G\hole$ and $H\hole$, we say that $H\hole$ is
+  Given two \kl{contexts} $G\hole$ and $H\hole$, we say that $H\hole$ is
   \emph{locally justified} by $G\hole$, written $G\hole \ljustif H\hole$, if and
   only if one of the following conditions holds for some $K\hole$, $G_0\hole$,
   $H_0\hole$ such that $G\hole = \cfill{K}{G_0\hole}$ and $H\hole =
@@ -765,8 +766,8 @@ defined on contexts:
 These four conditions are exactly the formal counterpart of those given by
 Peirce in \cite{peirce_prolegomena_1906}. They might be more easily understood
 by looking at their graphical representation in \reffig{eg-local-justification}:
-the red and blue dots denote respectively the locations of the holes in the
-justified context $H\hole$ and justifying context $G\hole$, as suggested by the
+the red and blue dots denote respectively the locations of the \kl{holes} in the
+justified \kl{context} $H\hole$ and justifying \kl{context} $G\hole$, as suggested by the
 arrow between them. In particular, it becomes clear that it is Condition 4 that
 will account for the principle of \kl{Double{-}cut}. Then the new rules of
 iteration \kl{Iter{+}}, \kl{Iter{-}} and deiteration \kl{Deit{+}},
@@ -785,7 +786,7 @@ This will become explicit in \refsec{eg-completeness}, when simulating the
 rules are a restriction of the original ones in two respects:
 \begin{description}
   \item[Locality] Following \refdef{eg-local-justification}, the depth of the
-  justified context $H_T\hole$ can be at most $2$ in the atomic rules, while it
+  justified \kl{context} $H_T\hole$ can be at most $2$ in the atomic rules, while it
   is unbounded in the original rules. This does not hinder their expressivity
   however: global (de)iterations can be simulated by successive applications of
   local ones, by erasing intermediate copies with the \kl{Ins} and \kl{Del}
@@ -796,13 +797,13 @@ rules are a restriction of the original ones in two respects:
   from \cite{minghui_graphical_2019}, where the authors define the same notion
   informally for an \kl{intuitionistic} variant of \kl{EGs}.}.
   \item[Polarity] In the atomic iteration (resp. deiteration) rules, the
-  justified context must be positive (resp. negative), while it can have an
+  justified \kl{context} must be positive (resp. negative), while it can have an
   arbitrary polarity in the original rules. This is expressed by splitting each
-  of the latter into two rules, one where the outer context $K\hole$ is positive
+  of the latter into two rules, one where the outer \kl{context} $K\hole$ is positive
   ($\kl{Iter{+}},\kl{Deit{+}}$), and one where it is negative
   ($\kl{Iter{-}},\kl{Deit{-}}$). Again, this does not alter their deductive
   power: every iteration (resp. deiteration) in a negative (resp. positive)
-  context can be trivially performed by an instance of the \kl{Ins} (resp.
+  \kl{context} can be trivially performed by an instance of the \kl{Ins} (resp.
   \kl{Del}) rule. Thus atomic rules eliminate a redundancy of \kl{Alpha},
   where many insertions/omissions could be interpreted as instances of either
   \kl{Iter/Deit} or \kl{Ins/Del}. They also eliminate the possibility for a
@@ -846,7 +847,7 @@ To factorize the proof of soundness, we first prove a few lemmas for the
 for every valuation $v$ if $G \step{} H$.
 
 \begin{lemma}[Iteration]\lablemma{eg-iteration}
-  For every \kl{graph} $G$, context $H\hole$ and valuation $v$, we have
+  For every \kl{graph} $G$, \kl{context} $H\hole$ and valuation $v$, we have
   $$v\left(G, H\select{\phantom{G}}\right) = v\left(G, H\select{G}\right)$$
 \end{lemma}
 \begin{proof}
@@ -891,7 +892,7 @@ for every valuation $v$ if $G \step{} H$.
   In both cases we have $v([[G]]) = v(G)$.
 \end{proof}
 
-Since all rules apply in an arbitrary deep context $K\hole$, we will benefit
+Since all rules apply in an arbitrary deep \kl{context} $K\hole$, we will benefit
 from the following \emph{functoriality} lemmas:
 
 % \begin{lemma}\lablemma{minleq}
@@ -906,7 +907,7 @@ from the following \emph{functoriality} lemmas:
 
 \begin{lemma}[Variance]\lablemma{eg-variance}
   
-  For every context $K\hole$, \kl{graphs} $G, H$ and valuation $v$ such that $v(G)
+  For every \kl{context} $K\hole$, \kl{graphs} $G, H$ and valuation $v$ such that $v(G)
   \leq v(H)$, we have:
   \begin{enumerate}
     \item $v\left(K\select{G}\right) \leq v\left(K\select{H}\right)$ if $K\hole$
@@ -1064,11 +1065,11 @@ as explicit rules.
 \paragraph{Rules}
 
 The full set of rules of \kl{SKS} is given in \reffig{sks}. All rules are
-implicitly applicable in any \emph{context} $W\hole$ of arbitrary depth, with
-the usual notion of context as a structure with a hole.
+implicitly applicable in any \emph{\kl{context}} $W\hole$ of arbitrary depth, with
+the usual notion of \kl{context} as a structure with a \kl{hole}.
 
 \begin{definition}[Depth]
-  The \emph{depth} $\gdepth{S}$ of a structure context $S\hole$ is defined
+  The \emph{depth} $\gdepth{S}$ of a structure \kl{context} $S\hole$ is defined
   recursively as follows:
   \begin{align*}
     \gdepth{\hole} &= 0 \\
@@ -1077,11 +1078,11 @@ the usual notion of context as a structure with a hole.
 \end{definition}
 
 \begin{remark}\labremark{sks-ctx-pol}
-  Contexts for structures are always \emph{positive}, since negation is pushed
+  \kl{Contexts} for structures are always \emph{positive}, since negation is pushed
 down to atoms. This is the opposite situation from that of \kl{Alpha}, where
 negation is the \emph{only} construct that can increase the depth of a \kl{graph}.
 This explains why some rules in \kl{Alpha} need explicit indications for the
-polarity of the context in which they apply.
+polarity of the \kl{context} in which they apply.
 \end{remark}
 
 The rules of \kl{SKS} satisfy two notable properties:
@@ -1094,7 +1095,7 @@ The rules of \kl{SKS} satisfy two notable properties:
     ending with $\ua$. This corresponds to all rules except the \emph{switch}
     rule \kl{s} and the \emph{medial} rule \kl{m} which are self-dual, i.e.
     $\dmdual{\kl{s}} = \kl{s}$ and $\dmdual{\kl{m}} = \kl{m}$. In \kl{Alpha},
-    duality is captured in the \emph{polarity} of contexts rather than through
+    duality is captured in the \emph{polarity} of \kl{contexts} rather than through
     De Morgan's laws:
     
     \begin{fact}[Duality]\labfact{eg-duality}
@@ -1109,7 +1110,7 @@ The rules of \kl{SKS} satisfy two notable properties:
 
     \begin{remark}\labremark{eg-intuitionism}
       
-    Contrary to De Morgan duality, the notion of polarity of a context also
+    Contrary to De Morgan duality, the notion of polarity of a \kl{context} also
     exists in \kl{intuitionistic} logic, and is in fact used in the same way to
     obtain dual rules in the \kl{intuitionistic} \kl{calculus of structures} \kl{SISa} of
     Tiu \cite{tiu_local_2006}. This constitutes one more argument in favor of
@@ -1159,11 +1160,11 @@ functional completeness of $\{\land, \neg\}$ (see \refsec{alpha}):
   \end{align*}
 \end{definition}
 
-As per \refremark{sks-ctx-pol}, the translation of a structure context (where
-the hole is translated as itself) will always be positive:
+As per \refremark{sks-ctx-pol}, the translation of a structure \kl{context} (where
+the \kl{hole} is translated as itself) will always be positive:
 
 \begin{fact}\labfact{strans-pos}
-  For every context $S\hole$, $\strans{S\hole}$ is positive.
+  For every \kl{context} $S\hole$, $\strans{S\hole}$ is positive.
 \end{fact}
 \begin{proof}
   By a straightforward recurrence on $\gdepth{S\hole}$.
@@ -1176,14 +1177,14 @@ semantically equivalent, i.e. $v(S) = v(\strans{S})$ for any valuation $v$. Thus
 to get the completeness of \kl{Alpha}, it is sufficient to simulate the
 translation of each rule of \kl{SKS}. But first, we need to ensure that
 \kl{Alpha} satisfies a property of \emph{contextual closure}: this will allow
-us to ignore the implicit context $W\hole$ in the rules of \reffig{sks}.
+us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
 
 \begin{lemma}[Positive closure]\lablemma{eg-posclos}
   If $G \step{} H$, then $K^+\select{G} \step{} K^+\select{H}$.
 \end{lemma}
 \begin{proof}
-  Since all rules of \kl{Alpha} apply in a context of unbounded depth, we know
-  that there are some \kl{graphs} $G_0, H_0$ and context $K'\hole$ such that $G =
+  Since all rules of \kl{Alpha} apply in a \kl{context} of unbounded depth, we know
+  that there are some \kl{graphs} $G_0, H_0$ and \kl{context} $K'\hole$ such that $G =
   K'\select{G_0}$ and $H = K'\select{H_0}$. Then either $K'\hole$ is positive,
   and $\inv(K^+\select{K'\hole}) = \inv(K^+\hole) + \inv(K'\hole)$ is even since
   it is the sum of two even numbers; or $K'\hole$ is negative, and
@@ -1494,7 +1495,7 @@ that all rules of \kl{Alpha} except \kl{Del} satisfy this property:
 
 \begin{definition}[Subgraph]
   A \kl{graph} $G$ is a \intro{subgraph} of a \kl{graph} $H$, written $G \intro*\subgraph
-  H$, if there exists a context $K\hole$ such that $H = K\select{G}$.
+  H$, if there exists a \kl{context} $K\hole$ such that $H = K\select{G}$.
 \end{definition}
 
 \begin{fact}
@@ -1778,7 +1779,7 @@ interpreted as just putting in contact two wires. Then electrical current can
 flow from one wire to the other, but the problem resides elsewhere, at the
 \emph{illative} level: indeed nothing prevents us from separating back the two
 wires, or connecting two initially disjoint wires. But in a negative (resp.
-positive) context, the former (resp. latter) action corresponds to forgetting a
+positive) \kl{context}, the former (resp. latter) action corresponds to forgetting a
 possibly necessary equality hypothesis between two variables (resp. identifying
 two possibly distinct individuals), which is not valid logically speaking. To
 prevent this, one needs to do more than just put the two wires in contact with
@@ -1933,7 +1934,7 @@ Peirce himself \cite[p.~544]{peirce_prolegomena_1906}:
   \labfig{eg-socrates-mortal-var}
 \end{marginfigure}
 
-Still, the complexity of \kl{Beta} from a UX perspective stems mostly from the
+Still, the complexity of \kl{Beta} from a \kl{UX} perspective stems mostly from the
 tedious management of LoI. Our analysis into binders and teridentities gives us
 a hint towards the solution: since we now have binders, why not just replace
 the complex circuits of teridentities by \emph{variables}? The process is
@@ -2091,7 +2092,7 @@ instances of \kl{Unif{\ua}} on $z$ and $x$, that would correspond to two
 instances of \kl{Del} on the associated LoI.
 
 \begin{remark}
-  As in \kl{Alpha}, \kl{graphs} $G, H, K$ and their one-holed contexts
+  As in \kl{Alpha}, \kl{graphs} $G, H, K$ and their one-holed \kl{contexts}
   $G\hole, H\hole, K\hole$ are multisets of $\beta$-nodes. But now they do not
   correspond anymore to \emph{areas} in the graphical notation, which are
   instead captured by gardens $\gamma, \delta, \chi$. In particular, this

@@ -70,12 +70,12 @@ from the following modifications to the previous rules:
 
     To prevent this, one would need a way to copy formulas at an arbitrary
     distance. This can be done with \kl{inference rules} that are \emph{doubly} deep,
-    by encoding the path to the destination as a second solution context inside
-    the context where the rule is applied\sidenote{Such rules are sometimes
+    by encoding the path to the destination as a second solution \kl{context} inside
+    the \kl{context} where the rule is applied\sidenote{Such rules are sometimes
     called \emph{super-switch} rules in the \kl{deep inference} literature, see for
     instance Chapter 8, Section 2.1 of \cite{guenot_nested_2013}.}. It turns out
     to be hard to express in bubbles, because this requires a syntactic way to
-    describe contexts that correspond to valid flow paths of arbitrary
+    describe \kl{contexts} that correspond to valid flow paths of arbitrary
     length\sidenote{This problem is solved trivially in the flower calculus
     (\refch{flowers}), by using so-called \emph{pollination} rules.}. But in
     principle it should be feasible, and would enable a more comfortable use in
@@ -224,7 +224,7 @@ reached:
     \Delta}{\soldepth{I}} = 0$ (\refdef{item-depth}), otherwise in some subgoal
     $T\select{U} \in \J \cup \Delta$. This is where the proof needs
     \emph{insight}, because it is not clear if the antecedant $A$ will be
-    provable with the context available in $S_0\hole$ or in one of the $T\hole$,
+    provable with the \kl{context} available in $S_0\hole$ or in one of the $T\hole$,
     or if the hypothesis $B$ is even needed at all.
 
     A first possibility is to let the user rely on her intuition, by choosing
@@ -335,7 +335,7 @@ This seems to be a fundamental limitation of system $\sysB$, caused by its
 symmetric treatment of implication and subtraction. For instance in the \kl{nested
 sequent} calculus \kl{JN} of Guenot for implicative logic \cite[Chapter
 3]{guenot_nested_2013}, which is fully decomposable, \kl{nested sequents} that appear
-in negative contexts are interpreted as implications, as illustrated by the
+in negative \kl{contexts} are interpreted as implications, as illustrated by the
 \kl{left introduction rule} \rsf{e} (\reffig{jn-rule-e}). But we cannot do this
 in system $\sysB$, because this would conflict with the subtractive reading of
 negative solutions, i.e. $\nsint{A \seq B} = \nsint{A} \lsub \nsint{B}$. In

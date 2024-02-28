@@ -4,6 +4,10 @@
 \chapter{Proof-by-Action}
 \labch{pba}
 
+\epigraph{ When it is obvious that the goals cannot be reached, don't adjust the
+goals, adjust the action steps.}{\textbf{Confucius}}
+
+
 \begin{scope}\knowledgeimport{sfl}
 
 % \begin{kaobox}[frametitle=Note]
@@ -433,6 +437,14 @@ provides an implementation of \kl{PbP} available as a contextual menu action.
 
 \section{A simple example involving equality}\labsec{equality}
 
+\begin{figure*}[t]
+  \begin{center}
+    \fbox{\includegraphics[width=1.3\textwidth]{oneplusone.png}}
+  \end{center}
+  \caption{Proving $1 + 1 = 2$ in Peano arithmetic}
+  \labfig{oneplusone}
+\end{figure*}
+
 Most \kl{interactive theorem provers} expose a \emph{rewrite} \kl{tactic} that allows the
 use of equality hypotheses, that is known equations of the form $t = u$, in
 order to replace some occurrences of $t$ by $u$ (or symmetrically, occurrences
@@ -441,14 +453,6 @@ hypotheses. Specifying the occurrences to be replaced with textual commands can
 be quite tedious, since it involves either dealing with some form of
 naming/numbering to designate locations of subterms, or writing manually
 patterns which duplicate parts of the structure of terms.
-
-\begin{figure*}
-  \begin{center}
-    \fbox{\includegraphics[width=1.3\textwidth]{oneplusone.png}}
-  \end{center}
-  \caption{Proving $1 + 1 = 2$ in Peano arithmetic}
-  \labfig{oneplusone}
-\end{figure*}
 
 In our setting we can provide this replacement operation through
 drag-and-drop. The user points at the occurrence(s) of $t$ to be

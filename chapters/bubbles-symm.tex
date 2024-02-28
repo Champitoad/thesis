@@ -155,13 +155,13 @@ find a contradiction in $\Gamma$; which is obviously not what we have in mind.
 \end{marginfigure}
 
 A key observation was that in the rules of multi-conclusion \kl{sequent calculi}, one
-usually distributes the context $\Delta$ of conclusions in all premisses: this
-restores a perfect symmetry with respect to the context of hypotheses $\Gamma$,
+usually distributes the \kl(sequent){context} $\Delta$ of conclusions in all premisses: this
+restores a perfect symmetry with respect to the \kl(sequent){context} of hypotheses $\Gamma$,
 as illustrated by the {\rnm{\land R*}} rule (\reffig{multi-and-intro}). Then our
 idea was that instead of implementing distribution/sharing of conclusions inside
 \kl{inference rules}, we could do it implicitly in the interpretation of solutions.
 This is already what happens in the asymmetric interpretation for hypotheses
-(\refdef{ainterp}); indeed the context $\Gamma$ is shared among \kl{subgoals},
+(\refdef{ainterp}); indeed the \kl(sequent){context} $\Gamma$ is shared among \kl{subgoals},
 because:
 \begin{enumerate}
   \item it appears on the left of an implication $\limp$
@@ -304,7 +304,7 @@ generalization {\rsf{{\limp}{+}c}} of \reffig{wrong-imp-pos}, then we can
 easily build a proof of the excluded middle like in \reffig{lk-tnd}, and thus
 collapse to \kl{classical} logic. This fact is well-known in the literature on
 multi-conclusion \kl{intuitionistic} \kl{sequent calculi}, and the solution is usually to
-discard the context of conclusions $\Delta$, as in the {\rnm{{\limp}R*i}} rule
+discard the \kl(sequent){context} of conclusions $\Delta$, as in the {\rnm{{\limp}R*i}} rule
 of \reffig{multi-imp-intro}. But this would make our rule both non-local and
 non-\kl{invertible}.
 
@@ -565,7 +565,7 @@ of priorization relatively to the latter:
     works starting from \emph{ludics} \cite{girard_locus_2001} and culminating
     in \emph{transcendental syntax} \cite{eng_exegesis_2023}, where both
     frameworks are founded upon the syntactic mechanisms of proof search
-    (focusing in \kl{sequent calculus}, and unification in the resolution algorithm
+    (\kl{focusing} in \kl{sequent calculus}, and unification in the resolution algorithm
     of Robinson, respectively). Here the aim to rid proofs of connectives is
     greatly emphasized by Girard, but the focus is again on \emph{proofs} and
     not \emph{\kl{proof states}}. Also Girard embraces the full space of incomplete
@@ -594,7 +594,7 @@ of priorization relatively to the latter:
     an \kl{inference rule} to be \emph{local}. This terminology has been
     employed by various authors in \kl{proof theory}, in ways that are often
     hard to compare. For instance in \sidecite{negri_structural_2001}, rules are
-    said to be local because the contexts of hypotheses involved in a rule are
+    said to be local because the \kl(sequent){contexts} of hypotheses involved in a rule are
     located in the \kl{sequents} of that rule, by opposition to \kl{natural
     deduction} rules in their labelled presentation where hypotheses are located
     in arbitrary distant leaves of the derivation. In the setting of \kl{deep
@@ -610,7 +610,7 @@ of priorization relatively to the latter:
     is guided by the idea of \kl{direct manipulation} of logical entities by humans,
     rather than purely \kl{proof-theoretical} considerations. For instance,
     \kl{BJ} has some locality in the \kl{deep inference} sense because all rules
-    are applicable in arbitrary contexts; but we relax the \emph{atomicity}
+    are applicable in arbitrary \kl{contexts}; but we relax the \emph{atomicity}
     constraint that reduces $\mathbb{I}$-rules and $\mathbb{R}$-rules to their
     atomic version, because it would be unnecessarily restrictive for the
     purpose of building proofs manually. Still, we want to avoid as much as
@@ -619,7 +619,7 @@ of priorization relatively to the latter:
     the \kl{elimination rule} \kl{\lor e} for disjunction in \kl{natural
     deduction}, corresponding to the {\rsf{{\lor}{-}}} rule of \kl{BJ} that
     involves an arbitrary conclusion $\Delta$. The benefits of locality from a
-    UX point of view have already been discussed at the end of
+    \kl{UX} point of view have already been discussed at the end of
     \refsec{bubbles-pba}.
   \item[Linearity] 
     We consider an \kl{inference rule} to be \emph{linear} when it preserves the

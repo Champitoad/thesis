@@ -591,7 +591,7 @@ $\garden{{}}{\Phi}$.
     Substitutions & $\sigma, \tau$ \\
     Bouquets & $\Phi, \Psi, \Xi$ \\
     Corollas & $\Gamma, \Delta$ \\
-    Contexts & $\Phi\hole, \Psi\hole, \Xi\hole$ \\
+    \kl{Contexts} & $\Phi\hole, \Psi\hole, \Xi\hole$ \\
     Theories & $\mathcall{T}, \mathcall{U}$ \\
     \hline
   \end{tabular}
@@ -753,22 +753,23 @@ update}, which will be useful for the semantic evaluation of flowers in
 Equipped with an inductive syntax, we can now express formally the \kl{inference
 rules} of our flower calculus, just as we did for \kl{Alpha}
 (\refsec{multisets}) and \kl{Beta} (\refsec{gardens}). There, graphs and their
-contexts were defined as multisets of nodes, which have now turned into bouquets
+\kl{contexts} were defined as multisets of nodes, which have now turned into bouquets
 of flowers:
 
 \begin{definition}[Context]
-  A \emph{bouquet context} $\Phi\hole$ is a bouquet which contains exactly one
-  occurrence of the special flower $\hole$ called the \emph{hole}. The hole can
-  always be \emph{filled} (substituted) with any other bouquet $\Psi$ or context
-  $\Xi\hole$, producing a new bouquet $\cfill{\Phi}{\Psi}$ or context
-  $\cfill{\Phi}{\Xi\hole}$. In particular, filling with the empty bouquet will
-  yield a bouquet $\cfill{\Phi}{\phantom{\Phi}}$, which is just $\Phi\hole$ with
-  its hole removed. A \emph{flower context} $\phi\hole$ is a bouquet context of
-  size $1$.
+  A \intro{context} $\Phi\hole$ is a bouquet which contains exactly one
+  occurrence of a special flower written $\hole$, called its \reintro{hole}. The
+  \kl{hole} can always be \emph{filled} (substituted) with any other bouquet
+  $\Psi$ or \kl{context} $\Xi\hole$, producing a new bouquet
+  $\cfill{\Phi}{\Psi}$ or \kl{context} $\cfill{\Phi}{\Xi\hole}$. In particular,
+  filling with the empty bouquet will yield a bouquet
+  $\cfill{\Phi}{\phantom{\Phi}}$, which is just $\Phi\hole$ with its \kl{hole}
+  removed. A \emph{flower context} $\phi\hole$ is a \kl{context} with exactly one
+  flower.
 \end{definition}
 
 \begin{definition}[Depth]
-  The \emph{depth} $\soldepth{\Phi\hole}$ of a bouquet context $\Phi\hole$ is
+  The \emph{depth} $\soldepth{\Phi\hole}$ of a \kl{context} $\Phi\hole$ is
   defined recursively as follows:
   \begin{align*}
     \soldepth{\Psi, \hole} &= 0 \\
@@ -777,11 +778,11 @@ of flowers:
   \end{align*}
 \end{definition}
 
-Contrarily to \kl{EGs} (\refdef{eg-inv}), the number of inversions of a context does
+Contrarily to \kl{EGs} (\refdef{eg-inv}), the number of inversions of a \kl{context} does
 not coincide with its depth, since petals increase depth but preserve polarity:
 
 \begin{definition}[Inversions]
-  The number of \emph{inversions} $\inv(\Phi\hole)$ of a context $\Phi\hole$ is
+  The number of \emph{inversions} $\inv(\Phi\hole)$ of a \kl{context} $\Phi\hole$ is
   defined recursively by:
   \begin{align*}
     \inv(\Psi, \hole) &= 0 \\
@@ -791,8 +792,8 @@ not coincide with its depth, since petals increase depth but preserve polarity:
 \end{definition}
 
 \begin{definition}[Polarity]
-  We say that a context $\Phi\hole$ is \emph{positive} if $\inv(\Phi\hole)$ is even, and
-  \emph{negative} otherwise. We denote positive and negative contexts
+  We say that a \kl{context} $\Phi\hole$ is \emph{positive} if $\inv(\Phi\hole)$ is even, and
+  \emph{negative} otherwise. We denote positive and negative \kl{contexts}
   respectively by $\Phi^+\hole$ and $\Phi^-\hole$.
 \end{definition}
 
@@ -800,14 +801,14 @@ not coincide with its depth, since petals increase depth but preserve polarity:
 
 In order to formulate the equivalent of the (de)iteration rules of \kl{EGs} for
 flowers, we introduce a \emph{pollination} relation that captures the
-availability of a flower in a given context, akin to the \emph{justification}
+availability of a flower in a given \kl{context}, akin to the \emph{justification}
 relation of \refsec{atomicity}:
 
 \begin{definition}[Pollination]\labdef{pollination}
   
-  We say that a flower $\phi$ can be \emph{pollinated} in a context $\Phi\hole$,
+  We say that a flower $\phi$ can be \emph{pollinated} in a \kl{context} $\Phi\hole$,
   written $\chyp{\phi}{\Phi\hole}$, when there exists a bouquet $\Psi$ with
-  $\phi \in \Psi$ and contexts $\Xi\hole$ and $\Xi_0\hole$ such that either:
+  $\phi \in \Psi$ and \kl{contexts} $\Xi\hole$ and $\Xi_0\hole$ such that either:
   \begin{itemize}
     \item (\textbf{Cross-pollination})~ $\Phi\hole = \cfill{\Xi}{\Psi,
     \Xi_0\hole}$;
@@ -844,7 +845,7 @@ of information in flowers, just like \reffig{eg-local-justification} summarized
 the flow of information in \kl{EGs}, and \reffig{bubbles-porosity} in bubbles.
 From a UI point of view, all these figures can be understood as kind of
 ``cheatsheets'', that indicate with arrows the allowed drag-and-drop moves for
-importing a statement (the source of the \kl{DnD}) into a new context (the
+importing a statement (the source of the \kl{DnD}) into a new \kl{context} (the
 destination of the \kl{DnD}).}. We distinguish two cases of
 \emph{cross}-pollination and \emph{self}-pollination, as botanists do when
 describing the reproduction of flowers. This distinction does not exist in
@@ -919,7 +920,7 @@ a direct adaptation of the rules of \kl{Beta} (\reffig{beta}):
     with the pollination relation (\refdef{pollination}). In fact in their
     textual presentation of \reffig{flower-calculus}, they are more general than
     (de)iteration rules, because \refdef{pollination} allows the pollinating
-    bouquet $\Phi$ to be \emph{scattered} in the context $\Xi\hole$, i.e. its
+    bouquet $\Phi$ to be \emph{scattered} in the \kl{context} $\Xi\hole$, i.e. its
     flowers need not be located in the same area. On the contrary in the
     graphical presentation of \reffig{natural-graphical}, they are less general
     since only one flower can be pollinated at a time, rather than an entire
@@ -1030,7 +1031,7 @@ of \kl{intuitionistic} \kl{predicate logic}, understood as any subset $\mathfrak
 be the rule (\rsf{ipis}) (resp. \rsf{ipet}), whose duplication of flowers (resp.
 petals) prevents $\forall$ from being expressible (i.e. provable) without
 $\land$ (resp. $\lor$). This can be fixed by simply removing the duplication and
-polarizing the context of application as for the rule \rsf{apis} (resp.
+polarizing the \kl{context} of application as for the rule \rsf{apis} (resp.
 \rsf{apet}), at the cost of making the rule non-\kl{invertible}.}.
 \reftab{flowers-fragments} shows how all the usual \kl{symbolic} connectives can be
 expressed by \emph{cardinality} constraints on set-based syntactic constructs:
@@ -1068,11 +1069,11 @@ shown to be \emph{\kl{admissible}} in \refsec{Completeness}.
   steps $\Phi_0 \step{\mathsf{R}} \Phi_1 \ldots \step{\mathsf{R}} \Phi_n$ with
   $\Phi_0 = \Phi$, $\Phi_n = \Psi$ and $n \geq 0$. Generally the length $n$ of
   the derivation does not matter, and we just write $\Phi \steps{\mathsf{R}}
-  \Psi$. Finally, natural derivations are closed under arbitrary contexts: for
-  every context $\Xi\hole$, $\Phi \step{\Nature} \Psi$ implies
+  \Psi$. Finally, natural derivations are closed under arbitrary \kl{contexts}: for
+  every \kl{context} $\Xi\hole$, $\Phi \step{\Nature} \Psi$ implies
   $\cfill{\Xi}{\Phi} \step{\Nature} \cfill{\Xi}{\Psi}$. We write $\Phi
   \lstep{\Nature} \Psi$ to denote a \emph{local} natural step, i.e. a direct
-  instance of a natural rule in the empty context.
+  instance of a natural rule in the empty \kl{context}.
 \end{definition}
 
 The following lemma is the flower calculus equivalent of \reflemma{eg-posclos}
@@ -1169,7 +1170,7 @@ in the completeness proof of \refsec{Completeness}.
 \begin{definition}[Hypothetical provability]
   Given two bouquets $\Phi, \Psi$, we say that $\Phi$ is \emph{hypothetically
   provable} from $\Psi$ in a fragment $\mathsf{R}$ of rules, written $\Psi
-  \entails{\mathsf{R}} \Phi$, if for every context $\Xi\hole$ such that
+  \entails{\mathsf{R}} \Phi$, if for every \kl{context} $\Xi\hole$ such that
   $\chyp{\Psi}{\Xi\hole}$, $\cfill{\Xi}{\Phi} \step{\mathsf{R}}
   \cfill{\Xi}{\phantom{\Phi}}$. We write $\Psi \entails{} \Phi$ to denote
   hypothetical provability in the full flower calculus.
@@ -1179,7 +1180,7 @@ in the completeness proof of \refsec{Completeness}.
   For any bouquet $\Phi$, $\Phi \entails{\Nature} \Phi$.
 \end{lemma}
 \begin{proof}
-  For any context $\Xi\hole$ such that $\chyp{\Phi}{\Xi\hole}$, one has the following
+  For any \kl{context} $\Xi\hole$ such that $\chyp{\Phi}{\Xi\hole}$, one has the following
   derivation:
   $$
   \cfill{\Xi}{\Phi} \step{\mathsf{poll{\da}}}
@@ -1228,7 +1229,7 @@ meta-theoretical proofs slightly shorter. For now we allow the
   $\entails{\Nature} \flower{\Psi}{\Phi}$.
 \end{theorem}
 \begin{proof}
-  Let $\Xi\hole$ be some context. If $\Psi \entails{\Nature} \Phi$, then in
+  Let $\Xi\hole$ be some \kl{context}. If $\Psi \entails{\Nature} \Phi$, then in
   particular $\cfill{\Xi'}{\Phi} \step{\Nature} \cfill{\Xi'}{\phantom{\Phi}}$
   for $\Xi'\hole \deq \cfill{\Xi}{\flower{\Psi}{\square}}$. Thus we have:
   $$
@@ -1236,7 +1237,7 @@ meta-theoretical proofs slightly shorter. For now we allow the
   \cfill{\Xi}{\flower{\Psi}{\garden{{}}{{}}}} \step{\mathsf{epet}}
   \cfill{\Xi}{\phantom{\Phi}}
   $$
-  In the other direction, let $\Xi$ be some context such that
+  In the other direction, let $\Xi$ be some \kl{context} such that
   $\chyp{\Psi}{\Xi\hole}$. If $\entails{\Nature}
   \flower{\Psi}{\Phi}$, then in particular
   $\cfill{\Xi}{\flower{\Psi}{\Phi}} \step{\Nature}
@@ -1284,7 +1285,7 @@ Kripke structures, detailed hereafter by order of increasing importance:
     \emph{possible worlds} and the \emph{petals} of flowers, where the
     accessibility relation $\access$ between worlds might be reflected to some
     extent in the pollination relation illustrated in \reffig{pollination} (or
-    more accurately, in a justification relation between contexts in the style
+    more accurately, in a justification relation between \kl{contexts} in the style
     of \refdef{eg-local-justification}). In particular, transitivity of
     $\access$ could correspond to the possibility of cross-pollinating a petal
     by first cross-pollinating the pistil to which it is attached, and then
@@ -1593,7 +1594,7 @@ are purely semantic, but they will participate in the admissibility of the
 \end{proof}
 
 The less obvious rules in terms of soundness are the \emph{pollination} rules
-$\{\rsf{poll{\da}},\rsf{poll{\ua}}\}$, because of the arbitrary context $\Xi$
+$\{\rsf{poll{\da}},\rsf{poll{\ua}}\}$, because of the arbitrary \kl{context} $\Xi$
 and reliance on the pollination relation. The following lemma can be compared to
 \reflemma{eg-iteration} for the (de)iteration rules in \kl{EGs}:
 
@@ -1713,13 +1714,13 @@ Then we also need to account for \emph{self-pollination}:
 \end{lemma}
 \begin{proof}
   We show that $\chyp{\phi}{\Xi\hole}$ implies $\Xi\select{\phi} \kequiv{}
-  \Xi\select{\phantom{\phi}}$ for any flower $\phi$ and context $\Xi\hole$: then
+  \Xi\select{\phantom{\phi}}$ for any flower $\phi$ and \kl{context} $\Xi\hole$: then
   assuming that $\Phi = \phi_1, \ldots, \phi_n$, we get
   $$\underbrace{\Xi\select{\phi_1, \ldots, \phi_n} \kequiv{} \Xi\select{\phi_2,
   \ldots, \phi_n} \kequiv{} \ldots \kequiv{} \Xi\select{\phantom{\phi}}}_{\text{$n$
   times}}$$ and conclude by \reffact{kentails-trans}.
   
-  By \refdef{pollination}, there are a bouquet $\Psi$ and two contexts $\Xi',
+  By \refdef{pollination}, there are a bouquet $\Psi$ and two \kl{contexts} $\Xi',
   \Xi_0\hole$ such that one of the two following cases holds:
   \begin{itemize}
     \item[\textbf{(Cross-pollination)}] $\Xi\hole = \Xi'\select{\Psi, \phi,
@@ -2157,7 +2158,7 @@ material implication, just like Peirce would do with his scroll (see
   \sigma(\phi_i)$}~{\HFour}. Again by weakening and $\psi$-consistency of $\tT$,
   we get $\Psi, \bigcup_{i = 1}^{n}{\Psi_i'}, \phi \nvdash{\Nature} \psi$. Now we
   derive a contradiction by showing $\Psi, \bigcup_{i = 1}^{n}{\Psi_i'}, \phi
-  \entails{\Nature} \psi$. Let $\Xi$ be a context such that \Hyp{$\chyp{\Psi,
+  \entails{\Nature} \psi$. Let $\Xi$ be a \kl{context} such that \Hyp{$\chyp{\Psi,
   \bigcup_{i = 1}^{n}{\Psi_i'}, \phi}{\Xi}$}~{\HFive}. Then $\cfill{\Xi}{\psi}
   \steps{\Nature} \cfill{\Xi}{\phantom{\Phi}}$ with the following derivation:
   $$
@@ -2200,7 +2201,7 @@ of its petals $\Phi_i$ is.
   Therefore there must exist $\Psi \subseteq \tT$ and \Hyp{$\Phi_0 \subseteq
   \Phi$}~{\HOne} such that \Hyp{$\Psi, \Phi_0 \entails{\Nature}
   \sigma(\Phi_i)$}~{\HTwo}. By hypothesis, for every $\Phi' \subseteq \tT$ there
-  is a context $\Xi$ such that $\chyp{\Phi'}{\Xi}$ and $\cfill{\Xi}{\phi}
+  is a \kl{context} $\Xi$ such that $\chyp{\Phi'}{\Xi}$ and $\cfill{\Xi}{\phi}
   \notsteps{\Nature} \cfill{\Xi}{\phantom{\Phi}}$. We now derive a contradiction
   by showing $\cfill{\Xi}{\phi} \steps{\Nature} \cfill{\Xi}{\phantom{\Phi}}$ for
   all $\Xi$ such that \Hyp{$\chyp{\Psi}{\Xi}$}~{\HThree}:
@@ -2396,13 +2397,13 @@ the flower calculus, which will be crucial from a user interface standpoint in
 
 However, there is another great source of non-determinism that does not arise in
 Gentzen systems, but is inherent to any \kl{deep inference} formalism: it is
-precisely the fact that rules can be applied in contexts of \emph{arbitrary}
+precisely the fact that rules can be applied in \kl{contexts} of \emph{arbitrary}
 depth, thus inducing a number of choices that is exponential in the latter.
 Kahramanogullari has proposed some attempts to tame this problem in
 \sidecite{kahramanogullari_reducing_2006,lmcs:1089}, and our approach bears some
 similarities to his. In particular, we propose in the following a (sketch of a)
 proof search algorithm for the propositional flower calculus, whose core rests
-on an \emph{interaction} relation between contexts which is a generalization of
+on an \emph{interaction} relation between \kl{contexts} which is a generalization of
 the pollination relation (\refdef{pollination}), and is close to the
 \emph{structural} relation of Kahramanogullari
 \cite[Definition~2.13]{lmcs:1089}.
@@ -2414,8 +2415,8 @@ the pollination relation (\refdef{pollination}), and is close to the
 
 \begin{definition}[Interaction]\labdef{interaction}
   
-  Let $\Phi\hole, \Psi\hole$ be two contexts. We say that $\Phi\hole$ can
-  \emph{interact} with $\Psi\hole$ when there exist contexts $\Xi\hole,
+  Let $\Phi\hole, \Psi\hole$ be two \kl{contexts}. We say that $\Phi\hole$ can
+  \emph{interact} with $\Psi\hole$ when there exist \kl{contexts} $\Xi\hole,
   \Phi_0\hole, \Psi_0\hole$ such that either:
   \begin{itemize}
     \item \textbf{(Cross-interaction)}
@@ -2444,10 +2445,10 @@ recurring idea in this thesis.
 \begin{definition}[Occurrence]\labdef{occurrence}
   
   An \emph{occurrence} is a pair $(\Phi\hole, \phi)$ of a flower $\phi$ and a
-  context $\Phi\hole$. It is said to be \emph{atomic} if $\phi$ is an atom.
+  \kl{context} $\Phi\hole$. It is said to be \emph{atomic} if $\phi$ is an atom.
 \end{definition}
 
-Then, two atomic occurrences can interact when their contexts can. In the
+Then, two atomic occurrences can interact when their \kl{contexts} can. In the
 (linear) \kl{classical} setting of \cite{lmcs:1089}, there is no preferred direction
 in the information flow between two interacting atoms, which can be seen as the
 essence of the (linear) \kl{law of excluded middle} $A \parr A^\bot$. However in our
@@ -2571,7 +2572,7 @@ the \emph{union} of arguments:
 \paragraph{Pollination}
 
 The vehicle and anchor of any bouquet $\Phi$ can easily by computed, by noticing
-that the context $\Xi\hole$ in \refdef{interaction} is simply the \emph{least
+that the \kl{context} $\Xi\hole$ in \refdef{interaction} is simply the \emph{least
 common ancestor} of the atoms $\Psi\select{a}$ and $\Psi'\select{a'}$ in the
 tree representation of $\Phi$, which we write $\lca{\Psi\hole}{\Psi'\hole}$.
 This forms the basis for the first \emph{phase} of our algorithm, that we call
@@ -2596,8 +2597,8 @@ goal $\Phi$, and the history $\mathfrak{H}$ of justifications performed so far:
 
   \ForEach{$\mathfrak{a} = (\Psi\hole, a) \justi (\Psi'\hole, a') \in \vehicle{\Phi} \setminus \mathfrak{H}$}{
     \If{$\mathfrak{a} \compat \anchor{\Phi} \cup \mathfrak{H}$}{
-      $\phi\hole \longleftarrow $ the direct child flower context of $\lca{\Psi\hole}{\Psi'\hole}$ where $a$ occurs\;
-      $\phi'\hole \longleftarrow $ the direct child flower context of $\lca{\Psi\hole}{\Psi'\hole}$ where $a'$ occurs\;
+      $\phi\hole \longleftarrow $ the direct child flower \kl{context} of $\lca{\Psi\hole}{\Psi'\hole}$ where $a$ occurs\;
+      $\phi'\hole \longleftarrow $ the direct child flower \kl{context} of $\lca{\Psi\hole}{\Psi'\hole}$ where $a'$ occurs\;
       $\Xi\hole \longleftarrow \Psi'\hole$\;
       \If{$\phi\hole \not= \hole$}{
         \ShowLn append a deep copy of $\phi'\select{a'}$ to the bouquet located by $\Psi\hole$\;\label{copy}
@@ -2619,7 +2620,7 @@ on line \ref{remove} corresponds to an instance of the \rsf{poll{\da}} rule.
 
 The second phase of our algorithm is the \emph{reproduction} phase. As its name
 suggests, it consists in repeatedly applying the reproduction rule \rsf{srep} on
-the current \kl{goal}, until there is no more context in which it is
+the current \kl{goal}, until there is no more \kl{context} in which it is
 applicable\sidenote{In the algorithm of \refsubsec{bubbles-search}, this
 corresponds to the part of the \emph{decomposition} phase that treats negative
 $\lor$ formulas.}. The reproduction phase can be computed by the following tail
@@ -2647,7 +2648,7 @@ recursive procedure:
 
 The third and last phase of our proof search algorithm, called
 \emph{decomposition}, is also the most trivial: it simply consists in applying
-the \rsf{epet} rule in every applicable context in the \kl{goal}, which amounts to
+the \rsf{epet} rule in every applicable \kl{context} in the \kl{goal}, which amounts to
 erasing every flower with an empty petal\sidenote{It corresponds to the
 \emph{popping} phase of \kl{bubbles} in \refsubsec{bubbles-search}, not the
 decomposition phase: here the term ``decomposition'' refers \kl{metaphorically} to
@@ -3012,7 +3013,7 @@ comments are in order:
   The fourth screenshot in \reffig{flowers-prover-anim} shows the flower $\phi
   \deq \flower{a}{c}$ being dragged in the process of an \Action{Import} action.
   If you look closely, you will notice that there are many areas whose border is
-  highlighted with dashed yellow lines: these correspond to all contexts
+  highlighted with dashed yellow lines: these correspond to all \kl{contexts}
   $\Xi\hole$ where $\phi$ can be imported, i.e. such that
   $\chyp{\phi}{\Xi\hole}$. This is a first form of \emph{suggestion} in the
   \kl{Flower\,\,Prover}, indicating available valid actions to the user through visual
@@ -3112,12 +3113,12 @@ through pointing.
 
 The purpose of the \Navigation mode is then to enable the user to \emph{focus} on
 a specific \kl{subgoal}, by simply clicking on the corresponding nested flower. This
-would make the \kl{subgoal} take up the whole screen, hiding the outer context from
+would make the \kl{subgoal} take up the whole screen, hiding the outer \kl{context} from
 view. Dually, it should also be possible to unfocus a previously focused subgoal
 --- e.g. by clicking again on it, so that the full tree structure of the goal
 can be freely navigated. \kl{Proof-theoretically}, the \Navigation mode implements the
 \emph{functoriality} of rules, i.e. the fact that they can be applied in
-contexts of \emph{arbitrary} depth.
+\kl{contexts} of \emph{arbitrary} depth.
 
 \begin{remark}
 This way of navigating tree structures represented as nested areas is typical of
@@ -3166,13 +3167,15 @@ setting, any proof in the \kl{Flower\,\,Prover} could be reduced to a sequence o
 
 \paragraph{Theories and goals}
 
-In the \kl{proof view} of modern \kl{proof assistants} like \kl{Coq} and \kl{Lean},
-there is no distinction between local and global contexts: a \kl{subgoal} will
-inherit automatically every hypothesis from its parent \kl{subgoals}, which are
-flattened into a big unstructured list. To recreate this distinction and reduce
-the size of \kl{goals} to a manageable level, the only interface mechanism offered to
-the user is to exit interactive proof mode, and outsource chunks of the local
-context as additional global lemmas and definitions in the current theory file.
+In the \kl{proof view} of modern \kl{proof assistants} like \kl{Coq} and
+\kl{Lean}, there is no distinction between local and global
+\kl(sequent){contexts}: a \kl{subgoal} will inherit automatically every
+hypothesis from its parent \kl{subgoals}, which are flattened into a big
+unstructured list. To recreate this distinction and reduce the size of
+\kl{goals} to a manageable level, the only interface mechanism offered to the
+user is to exit interactive proof mode, and outsource chunks of the local
+\kl(sequent){context} as additional global lemmas and definitions in the current
+theory file.
 
 Thus the user has to juggle between two different interfaces that manipulate two
 distinct data structures: a traditional text editor for modifying
@@ -3353,24 +3356,24 @@ $\Culture$-rule \rsf{epis{\da}}), as illustrated by the \rsf{srep}-free proof of
 
 There is a formal connection between the \rsf{poll{\ua}} rule of the flower
 calculus, and the \emph{absorption} rule $[\mathbf{A}]$ of the dyadic system
-$\Sigma_2$ of Andreoli, that handles the focusing behavior of exponentials in
+$\Sigma_2$ of Andreoli, that handles the \kl{focusing} behavior of exponentials in
 linear logic \sidecite{andreoli1992}. Indeed, both rules duplicate a formula
-available in the (non-linear) context of the sequent/location where the rule is
+available in the (non-linear) \kl{context} of the sequent/location where the rule is
 applied, in order to enable further usage of the formula at said location. While
 the absorption rule removes the need for permutation-equivalences between proofs
 involving the \emph{\kl{contraction}} rule, the identity rule $[I]$ of $\Sigma_2$
 removes the need for the \emph{\kl{weakening}} rule by discarding the non-linear
-context in one go, just as the \rsf{epet} rule of the flower calculus renders
+\kl{context} in one go, just as the \rsf{epet} rule of the flower calculus renders
 the \rsf{crop} rule \kl{admissible}.
 
-Sonia Marin has noticed the connection between \emph{bipoles} in focused proofs,
+Sonia Marin has noticed the connection between \emph{bipoles} in \kl{focused} proofs,
 and the class of geometric/coherent formulas, where the former are seen as a
 generalization of the latter \sidecite{marin_axioms_2022}. This is to be related
 to our own identification of $n$-ary scrolls/flowers as a recursive
 generalization of coherent formulas at the end of \refsec{IEGs}.
 
 Two years earlier, Brock-Nannestad and Ilik had already made some implicit
-connections between focused proofs and coherent formulas, through their
+connections between \kl{focused} proofs and coherent formulas, through their
 \emph{exponential normal form} for \kl{intuitionistic} formulas based on Tarski's
 highschool identities \sidecite{brock-nannestad_intuitionistic_2019}. Quite
 remarkably, \kl{first-order} formulas in their exponential normal form have the exact

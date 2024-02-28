@@ -251,7 +251,7 @@ definition of set inclusion in the conclusion $f^{-1}(f(C)) \subseteq C$, so
 that we can see how to prove logically such an inclusion. One might imagine
 multiple kinds of graphical actions for doing this. In \kl{Actema} we implemented a
 general \emph{subterm selection} mechanism, where the user can successively
-point at different subterms appearing in the \kl{goal} --- either in the context or
+point at different subterms appearing in the \kl{goal} --- either in the \kl(sequent){context} or
 the conclusion --- and then choose from a list of available actions taking the
 selection as argument. In our case we can select the whole conclusion, and then
 choose to apply the \action{Unfold} action:
@@ -261,7 +261,7 @@ selected an instance of the two-place inclusion predicate $\cdot \subseteq
 \cdot$, and thus will replace the head of this definition by its body,
 instantiating parameters accordingly. This gives us a new conclusion
 $$\forall x. x \in f^{-1}(f(C)) \limp x \in C$$
-on which we can click twice to introduce a new variable $x$ in the context,
+on which we can click twice to introduce a new variable $x$ in the \kl(sequent){context},
 together with the hypothesis:
 \begin{itemize}
   \item[(1)] $x \in f^{-1}(f(C))$
@@ -284,7 +284,7 @@ found in \kl{proof assistants}: for instance, the duality between
 the heart of \kl{Martin-Löf type theory}, and it is used extensively in \kl{Coq} to
 perform automation, both in the computation of expressions and the matching of
 statements modulo definitions.}. But we can still unfold some definitions in the
-context, which might suggest further possible interactions. First we can unfold
+\kl(sequent){context}, which might suggest further possible interactions. First we can unfold
 the definition of preimage used in $(1)$ by selecting the precise corresponding
 subterm:
 $$x \in \select{f^{-1}(f(C))} \qquad \text{(\action{Unfold})}$$
@@ -317,11 +317,11 @@ will vary:
     bar, typically in this case the keyword ``comprehension''. Then the system
     will show a list of lemmas whose names match the keywords, and the user can
     click on the lemma she is interested in, in order to add it as a blue item
-    in the current context. An alternative and more precise way of retrieving a
+    in the current \kl(sequent){context}. An alternative and more precise way of retrieving a
     lemma is to search by \emph{content} of the statement instead of searching
     by name. State-of-the-art \kl{proof assistants} usually provide facilities for
     this: for instance \kl{Coq} has a \texttt{Search} command which can take
-    \emph{patterns}, i.e. \kl{terms} with holes or so-called \emph{metavariables}, in
+    \emph{patterns}, i.e. \kl{terms} with \kl{holes} or so-called \emph{metavariables}, in
     order to filter out results that do not match the given pattern. In \kl{Actema},
     we implemented a novel feature which replaces patterns by a selection of
     subterms in the current \kl{goal}, similarly to what is given as argument to
@@ -399,7 +399,7 @@ setting, having to manipulate explicitly the axiomatic definition might be more
 instructive, but also more confusing when carrying formal proofs for the first
 time.
 
-Going back to the proof, we now have the following context of hypotheses:
+Going back to the proof, we now have the following \kl(sequent){context} of hypotheses:
 \begin{itemize}
   \item[(0)] $\injective(f)$
   \item[(2)] $f(x) \in f(C)$
@@ -432,7 +432,7 @@ which gives us immediately that $x = a$ in
   \item[(4)] $\exists a \in A.\ a \in C \land x = a$
 \end{itemize}
 The last steps consist in clicking twice on $(4)$ to introduce $a$ in the
-context together with
+\kl(sequent){context} together with
 \begin{itemize}
   \item[(5)] $a \in C \land x = a$
 \end{itemize}
@@ -483,7 +483,7 @@ the previous section. In this section we focus on describing features of the
 more convenient contextual action.
 
 First and foremost, it only makes sense to apply induction to a variable which
-is quantified \emph{universally}, either because it appears in the context, or
+is quantified \emph{universally}, either because it appears in the \kl(sequent){context}, or
 because it is bound by a $\forall$ in the conclusion. In the first case, one can
 access the contextual action in \kl{Actema} by selecting the green item corresponding
 to the variable; in the latter case, by selecting the subterm of the conclusion
@@ -505,18 +505,18 @@ $$\select{\forall n \in \nats.\ \forall m \in \nats.\ n + m = m + n} \qquad
 which performs an induction on $n$, generating the two following \kl{subgoals}:
 $$\forall m \in \nats.\ 0 + m = m + 0 \qquad \text{and} \qquad \forall m \in \nats.\ \suc{n} + m = m + \suc{n}$$
 where $S(n)$ denotes the successor of $n$, and the second \kl{subgoal} has a new
-variable $n \in \nats$ in its context, together with the induction hypothesis
+variable $n \in \nats$ in its \kl(sequent){context}, together with the induction hypothesis
 \begin{itemize}
   \item[(1)] $\forall x \in \nats.\ n + x = x + n$
 \end{itemize}
 The proofs of the two \kl{subgoals} can be done by induction on $m$. We focus on the
 second one, which is a bit more involved. As mentioned above, an alternative way
-of performing induction is to first introduce $m$ in the context by clicking on
+of performing induction is to first introduce $m$ in the \kl(sequent){context} by clicking on
 the conclusion, and then selecting it to access the contextual action:
 $$\select{m \in \nats} \qquad \text{(\action{Induction})}$$
 which generates again two new \kl{subgoals}:
 $$S(n) + 0 = 0 + S(n) \qquad \text{and} \qquad S(n) + S(m) = S(m) + S(n)$$ where
-the second \kl{subgoal} has a new variable $m \in \nats$ in its context, together
+the second \kl{subgoal} has a new variable $m \in \nats$ in its \kl(sequent){context}, together
 with the induction hypothesis
 \begin{itemize}
   \item[(2)] $S(n) + m = m + S(n)$

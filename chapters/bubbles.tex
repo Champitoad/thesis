@@ -45,7 +45,7 @@ sequents} that we call \emph{solutions}. In \refsec{asymmetric} we describe our
 based on multiset \kl{rewriting rules} over solutions comprising at most one
 conclusion. Finally in \refsec{bubbles-pba}, we import ideas from this \kl{bubble
 calculus} back to the realm of \kl{GUIs} for interactive proof building, analysing
-their possible impact for UX improvements.
+their possible impact for \kl{UX} improvements.
 
 
 \section{The chemical metaphor}\labsec{chemical}
@@ -262,24 +262,24 @@ Now that we have rules for manipulating solutions, and since solutions can be
 nested through bubbles, we need a notion of \emph{context} for applying rules on
 subsolutions of arbitrary depth:
 
-\begin{definition}[Solution context]\labdef{solution-context}
+\begin{definition}[Context]\labdef{solution-context}
 % \emph{Solution contexts} are defined by the following grammar:
 % $$S\hole \Coloneq \hole \mid \Gamma \piq{\cS \sep S\hole \sep
 % \mathcal{T}} \Delta$$
-A \emph{solution context} $S\hole$ is a solution which contains exactly one
-occurrence of the special solution $\hole$ called the \emph{hole}. Given
-another solution $T$, we write $S\select{T}$ to denote the solution equal to
-$S\hole$ where $\hole$ has been replaced by $T$.
+A \intro{context} $S\hole$ is a solution which contains exactly one
+occurrence of a special solution written $\hole$, called its \reintro{hole}.
+Given another solution $T$, we write $S\select{T}$ to denote the solution equal
+to $S\hole$ where $\hole$ has been replaced by $T$.
 \end{definition}
 
 Then every rule of \reffig{sequent-BJ} is applicable in any
-context $U\hole$. That is:
+\kl{context} $U\hole$. That is:
 $$\vcenter{\R{S}{T}} \quad \text{should be read as} \quad
 \vcenter{\R{U\select{S}}{U\select{T}}} \quad \text{for all $U\hole$}$$
 
 \begin{definition}[\kl{BJ}-step]\labdef{BJ-step}
 We write $S \lstep{} T$ to denote the existence of a \kl{BJ}-rule instance
-$\irule{r}{S}{T}$ in the empty context, i.e. $S$ and $T$ are respectively the
+$\irule{r}{S}{T}$ in the empty \kl{context}, i.e. $S$ and $T$ are respectively the
 conclusion and premiss of the rule {\rsf{r}} in \reffig{sequent-BJ}, modulo
 instantiation of meta-variables\sidenote[][-11cm]{The direction of the arrow
 is from conclusion to premiss, to stay consistent with our interactive proof
@@ -362,12 +362,12 @@ prototype of \kl{GUI} presented in \refsec{flowers-prover}.
 
 While the sequent-style presentation of \kl{BJ} clearly shows its filiation
 with \kl{sequent calculus}, its syntax is quite heavy, and obscures an important
-property of the rules: they almost always preserve the contexts $\Gamma, \Delta$
+property of the rules: they almost always preserve the \kl(sequent){contexts} $\Gamma, \Delta$
 of formulas and $\cS$ of bubbles. That is, the rules of \kl{BJ} are
 \emph{local}. This enables a more economical and graphical presentation of the
 rules in \reffig{graphical-BJ}, where \kl{BJ} is seen as a multiset \kl{rewriting
 system} just like the {\cham} thanks to \refdef{solution}. Instead of relying on
-a notion of solution context, we define formally what it means to be a
+a notion of solution \kl{context}, we define formally what it means to be a
 subsolution:
 
 \begin{definition}[Subsolution]\labdef{subsolution}
@@ -610,7 +610,7 @@ Beyond the recovered uniformity of the user interface in terms of the chemical
     splitting points. In fact often beginners (but also occasionally seasoned
     users) do not have the reflex to do this, precisely because the interface
     makes it difficult. This results in proofs with a lot of duplicated
-    arguments, since splitting \kl{goals} systematically duplicates the context of
+    arguments, since splitting \kl{goals} systematically duplicates the \kl(sequent){context} of
     hypotheses. Thus \kl{bubbles} can be seen as a mechanism that favors by default a
     style of proof with better factorization of
     subproofs.\label{par:factorization}
@@ -630,17 +630,17 @@ Beyond the recovered uniformity of the user interface in terms of the chemical
     be a right fit: they allow for efficient space management and navigation,
     and zooming in intuitively conveys the idea of focusing on a specific
     \kl{subgoal}. One could also zoom out to have an overview of the different
-    \kl{subgoals} and their shared context, something which is hard to do in current
+    \kl{subgoals} and their shared \kl(sequent){context}, something which is hard to do in current
     \kl{proof assistants}.
     
-    When zoomed in on a \kl{subgoal}, the shared contexts around it will not be
+    When zoomed in on a \kl{subgoal}, the shared \kl(sequent){contexts} around it will not be
     visible anymore. While this is useful to focus attention and avoid being
     distracted by other \kl{subgoals}, it can quickly become cumbersome for the user
     to always have to zoom out in order to retrieve hypotheses from these shared
-    contexts. One solution would be to rebrand the context zone of \kl{Actema} as a
-    \emph{global} context zone, where all the shared contexts available in the
+    \kl(sequent){contexts}. One solution would be to rebrand the \kl(sequent){context} zone of \kl{Actema} as a
+    \emph{global} \kl(sequent){context} zone, where all the shared \kl(sequent){contexts} available in the
     \kl{subgoal} under focus are merged in a single list, and immediately accessible
-    for manipulation. Of course actions performed in the context zone would be
+    for manipulation. Of course actions performed in the \kl(sequent){context} zone would be
     reflected in the proof canvas, and vice versa.
 
   \item[\textbf{Goal diffing}] From a user perspective, the locality of rules
