@@ -469,7 +469,7 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
   In the case of a \kl(dnd){forward} \kl{linkage}, a hypothesis $E$ is added to the \kl{goal}; in
   the case of a \kl(dnd){backward} \kl{linkage}, the \kl{goal}'s conclusion becomes $E$. In both
   cases, the logical soundness is guaranteed by
-  Theorem~\ref{prop:soundness}. \label{step:goal-modification}
+  \refthm{soundness}. \label{step:goal-modification}
 \end{enumerate}
 
 
@@ -489,7 +489,7 @@ All examples up to now followed the scheme for \kl{DnD} actions sketched in
 Thus for such actions to be logically sound, we have to make sure that our
 \kl{rewriting system} satisfies the following property:
 
-\begin{theorem}[Soundness]\label{prop:soundness}
+\begin{theorem}[Soundness]\labthm{sfl-soundness}
   \phantom{a}
   \begin{itemize}
     \item If $A \back B \steps{} C$, then $A, C \seq B$.
@@ -508,7 +508,7 @@ extensively later on:
 \end{proof}
 
 For each rule, interpreting $\back$ as $\limp$ and $\forw$ as $\land$ is enough
-to show that the rule satisfies Property \ref{prop:soundness} locally. Formally,
+to show that the rule satisfies \refthm{sfl-soundness} locally. Formally,
 we can define a mapping from formulas containing \kl{interaction operators} to usual
 formulas where they have been replaced by their interpretation:
 
@@ -609,7 +609,7 @@ about the \kl{rewriting rules}:
 % We do not detail the proof here, but it relies crucially on the covariance and
 % contravariance property \ref{prop:cov}.
 
-Finally, soundness (Theorem \ref{prop:soundness}) is obtained as the special
+Finally, soundness (\refthm{sfl-soundness}) is obtained as the special
 case where the rewriting starts in the (\kl{positive}) empty \kl{context}.
 
 % Detailed proofs of all the lemmas can be found in \refsec{app:dnd-soundness}.
