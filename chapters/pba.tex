@@ -479,8 +479,8 @@ symbol $=$ denoting equality at the object-level.}:
   \item We link the right-hand side $x + 0$ of the first addition \kl{axiom} with $1 + 0$ in the conclusion, which rewrites $1 + 0$ into $1$:
     $$
       \begin{array}{lll}
-        & \forall x. x = \select{x + 0} \back \suc{(\select{1 + 0})} = 2 & \\
-        \step{} & 1 = \select{1 + 0} \back \suc{(\select{1 + 0})} = 2 &\kl{L\forall i} \\
+        & \forall x. x = \select{x + 0} \back \suc{\left(\select{1 + 0}\right)} = 2 & \\
+        \step{} & 1 = \select{1 + 0} \back \suc{\left(\select{1 + 0}\right)} = 2 &\kl{L\forall i} \\
         \step{} & \suc{1} = 2 &\kl{L{=}_2} \\
         \syneq & 2 = 2 &
       \end{array}
@@ -522,8 +522,8 @@ rules \kl{R\land_1} and
 $$
 \begin{array}{llll}
   \select{A} \back \select{A}\land B &
-                                         \step{}& (\select{A} \back
-                                         \select{A})\land B &\kl{R\land_1}\\
+                                         \step{}& \left(\select{A} \back
+                                         \select{A}\right)\land B &\kl{R\land_1}\\
                                        & \step{}& \top \land B  & \kl(sfl){id}\\
   &\step{}& B&\kl{neul}
 \end{array}
@@ -536,9 +536,9 @@ disjunction without comitting to proving it entirely:
 $$
 \begin{array}{llll}
   \select{A} \back (B \land \select{A}) \lor C
-    & \step{} & (\select{A} \back B \land \select{A}) \lor C &\kl{R\lor_1}\\
-    & \step{} & (B \land (\select{A} \back \select{A})) \lor C &\kl{R\land_2}\\
-    & \step{} & (B \land \top) \lor C &\kl(sfl){id}\\
+    & \step{} & \left(\select{A} \back B \land \select{A}\right) \lor C &\kl{R\lor_1}\\
+    & \step{} & \left(B \land \left(\select{A} \back \select{A}\right)\right) \lor C &\kl{R\land_2}\\
+    & \step{} & \left(B \land \top\right) \lor C &\kl(sfl){id}\\
     & \step{} & B \lor C &\kl{neur}
 \end{array}
 $$
@@ -551,8 +551,8 @@ particular when they interact with negated hypotheses. For instance:
 $$
 \begin{array}{llll}
   \select{A} \lor B \forw \neg \select{A}
-    & \step{} & (\select{A} \forw \neg\select{A}) \lor B &\kl{F\lor_1}\\
-    & \step{} & \neg (\select{A} \back \select{A}) \lor B &\kl{F{\limp}_1}\\
+    & \step{} & \left(\select{A} \forw \neg\select{A}\right) \lor B &\kl{F\lor_1}\\
+    & \step{} & \neg \left(\select{A} \back \select{A}\right) \lor B &\kl{F{\limp}_1}\\
     & \step{} & \neg \top \lor B &\kl(sfl){id}\\
     & \step{} & \bot \lor B &\kl{neul}\\
     & \step{} & B &\kl{neul}\\
@@ -576,9 +576,9 @@ Using the right hand part of a hypothesis $A\limp B$ turns a
 conclusion $B$ into $A$. 
 $$
 \begin{array}{llll}
-  A\limp \select{B} \back \select{B} &\step{}& A\land (\select{B}
+  A\limp \select{B} \back \select{B} &\step{}& A\land \left(\select{B}
                                                 \back
-                                                \select{B})&\kl{L{\limp}_2}\\
+                                                \select{B}\right)&\kl{L{\limp}_2}\\
                                          &\step{}&A\land\top & \kl(sfl){id}\\
     &\step{}& A&\kl{neul}
 \end{array}
@@ -586,7 +586,7 @@ $$
 
 This can also be done under conjunctions and/or disjunctions:
 $$
-  A\limp \select{B} \back C \land (D\lor \select{B}) ~~\steps{}~~ C \land (D\lor A)
+  A\limp \select{B} \back C \land \left(D\lor \select{B}\right) ~~\steps{}~~ C \land (D\lor A)
 $$
 
 An interesting point is what happens when using implications with
@@ -700,7 +700,7 @@ commutativity property $\forall x.\forall y. x+y=y+x$.
 In our setting, the equality can be used under quantifiers in one single action:
 $$
 \begin{array}{ll}
-  &\forall x.\forall y. \select{x+y}=y+x \back \forall a.\exists b. A(\select{f(a)+g(b)})\\
+  &\forall x.\forall y. \select{x+y}=y+x \back \forall a.\exists b. A\left(\select{f(a)+g(b)}\right)\\
 \steps{} & \forall a.\exists b. A(g(b)+f(a))
 \end{array}$$
 
@@ -763,14 +763,14 @@ $$
 \begin{array}{lll}
   &\exists y. \forall x. \select{R(x,y)}\back \forall x'.\exists
     y'. \select{R(x',y')}& \\
-  \step{}& \forall y.(\forall x. \select{R(x,y)}\back \forall x'.\exists
-        y'. \select{R(x',y')} ) \mbox{\hbox to 12pt{\hfill}}& \kl{L\exists s}\\
-  \step{} &\forall y. \forall x'. (\forall x. \select{R(x,y)}\back \exists
-  y'. \select{R(x',y')} ) ~~~~~~~~~~~~&\kl{R\forall s}\\
-  \step{} &  \forall y. \forall x'. (\forall
-         x. \select{R(x,y)}\back\select{R(x',y)} )&\kl{R\exists i}\\
+  \step{}& \forall y.\left(\forall x. \select{R(x,y)}\back \forall x'.\exists
+        y'. \select{R(x',y')} \right) \mbox{\hbox to 12pt{\hfill}}& \kl{L\exists s}\\
+  \step{} &\forall y. \forall x'. \left(\forall x. \select{R(x,y)}\back \exists
+  y'. \select{R(x',y')} \right) ~~~~~~~~~~~~&\kl{R\forall s}\\
+  \step{} &  \forall y. \forall x'. \left(\forall
+         x. \select{R(x,y)}\back\select{R(x',y)} \right)&\kl{R\exists i}\\
   \step{}&   \forall y. \forall
-           x'. (\select{R(x',y)}\back\select{R(x',y)} )&\kl{L\forall i}\\
+           x'. \left(\select{R(x',y)}\back\select{R(x',y)} \right)&\kl{L\forall i}\\
    \step{}  &  \forall y. \forall
            x'. \top & \kl(sfl){id}\\
 \steps{}& \top
@@ -802,9 +802,9 @@ We can use this hypothesis to replace a subterm $f(t)$ by $g(t)$, which will
 generate a side-condition $t\neq 0$:
 $$
 \begin{array}{lll}
-  &\forall x. x\neq 0 \limp \select{f(x)} = g(x) \back A(\select{f(t)}) &\\
-  \step{} & t\neq 0 \limp \select{f(t)} = g(t) \back A(\select{f(t)}) &\kl{L\forall i}\\
-  \step{} & t\neq 0 \land (\select{f(t)} = g(t) \back A(\select{f(t)})) & \kl{L{\limp}_2}\\
+  &\forall x. x\neq 0 \limp \select{f(x)} = g(x) \back A\left(\select{f(t)}\right) &\\
+  \step{} & t\neq 0 \limp \select{f(t)} = g(t) \back A\left(\select{f(t)}\right) &\kl{L\forall i}\\
+  \step{} & t\neq 0 \land \left(\select{f(t)} = g(t) \back A\left(\select{f(t)}\right)\right) & \kl{L{\limp}_2}\\
   \step{} &  t\neq 0 \land A(g(t)) &\kl{L{=}_1} \\
 \end{array}$$
 
@@ -812,11 +812,11 @@ One could similarly do such a rewrite in a hypothesis. Furthermore,
 the conditional rewrite can also be performed under quantifiers; for instance:
 $$
 \begin{array}{lll}
-  &\forall x. x\neq 0 \limp \select{f(x)} = g(x) \back \exists y . A(\select{f(y)})
+  &\forall x. x\neq 0 \limp \select{f(x)} = g(x) \back \exists y . A\left(\select{f(y)}\right)
   &\kl{R\exists s}\\
-  \step{} &\exists y. ( \forall x. x\neq 0 \limp \select{f(x)} = g(x) \back A(\select{f(y)})) &\kl{L\forall i}\\
-  \step{} & \exists y. ( y\neq 0 \land ( \select{f(y)} = g(y) \back A(\select{f(y)}) )) &\kl{L{\limp}_2} \\
-  \step{} & \exists y .( y\neq 0 \land A(g(t))) &\kl{L{=}_1} \\
+  \step{} &\exists y. \left( \forall x. x\neq 0 \limp \select{f(x)} = g(x) \back A\left(\select{f(y)}\right)\right) &\kl{L\forall i}\\
+  \step{} & \exists y. \left( y\neq 0 \land \left( \select{f(y)} = g(y) \back A\left(\select{f(y)}\right) \right)\right) &\kl{L{\limp}_2} \\
+  \step{} & \exists y .\left( y\neq 0 \land A(g(t))\right) &\kl{L{=}_1} \\
 \end{array}$$
 
 
@@ -941,27 +941,27 @@ the proof object than on making its construction easier.
 
         {(B \land C) \back A}&\step{}&        {B \back A}&\intro{L\land_1}\\
         {(C \land B) \back A}&\step{}&        {B \back A}&\intro{L\land_2}\\
-        {A \back~(B \land C)}&\step{}&        {(A \back B) \land C}&\intro{R\land_1}\\
-        {A \back~(C \land B)}&\step{}&        {C \land (A \back B)}&\intro{R\land_2}\\[1em]
+        {A \back (B \land C)}&\step{}&        {(A \back B) \land C}&\intro{R\land_1}\\
+        {A \back (C \land B)}&\step{}&        {C \land (A \back B)}&\intro{R\land_2}\\[1em]
         
         {(B \lor C) \back A}&\step{}&        {(B \back A) \land (C \limp A)}&\intro{L\lor_1}\rever\\
         {(C \lor B) \back A}&\step{}&        {(C \limp A) \land (B \back A)}&\intro{L\lor_2}\rever\\
-        {A \back~(B \lor C)}&\step{}&        {(A \back B) \lor C}&\intro{R\lor_1}\\
-        {A \back~(C \lor B)}&\step{}&        {C \lor (A \back B)}&\intro{R\lor_2}\\[1em]
+        {A \back (B \lor C)}&\step{}&        {(A \back B) \lor C}&\intro{R\lor_1}\\
+        {A \back (C \lor B)}&\step{}&        {C \lor (A \back B)}&\intro{R\lor_2}\\[1em]
 
         {(C \limp B) \back A}&\step{}&        {C \land (B \back A)}&\intro{L{\limp}_2}\\
-        {A \back~(B \limp C)}&\step{}&        {(A \forw B) \limp C}&\intro{R{\limp}_1}\rever\\
-        {A \back~(C \limp B)}&\step{}&        {C \limp (A \back B)}&\intro{R{\limp}_2}\rever\\[1em]
+        {A \back (B \limp C)}&\step{}&        {(A \forw B) \limp C}&\intro{R{\limp}_1}\rever\\
+        {A \back (C \limp B)}&\step{}&        {C \limp (A \back B)}&\intro{R{\limp}_2}\rever\\[1em]
 
         % {A \back \neg B}&\step{}&        {\neg (A \forw B)}&\intro{R\neg}\rever\\[1em]
 
         {(\forall x. B) \back A}&\step{}&        {\subst{B}{x}{t} \back A}&\intro{L\forall i}\\
         {(\forall x. B) \back A}&\step{}&        {\exists x. (B \back A)}&\intro{L\forall s}\\
-        {A \back~(\forall x. B)}&\step{}&        {\forall x. (A \back B)}&\intro{R\forall s}\rever\\[1em]
+        {A \back (\forall x. B)}&\step{}&        {\forall x. (A \back B)}&\intro{R\forall s}\rever\\[1em]
 
         {(\exists x. B) \back A}&\step{}&        {\forall x. (B \back A)}&\intro{L\exists s}\rever\\
-        {A \back~(\exists x. B)}&\step{}&        {A \back \subst{B}{x}{t}}&\intro{R\exists i}\\
-        {A \back~(\exists x. B)}&\step{}&        {\exists x. (A \back B)}&\intro{R\exists s}\\
+        {A \back (\exists x. B)}&\step{}&        {A \back \subst{B}{x}{t}}&\intro{R\exists i}\\
+        {A \back (\exists x. B)}&\step{}&        {\exists x. (A \back B)}&\intro{R\exists s}\\
     \end{array}
   % \end{mathpar}
   \and
@@ -974,37 +974,37 @@ the proof object than on making its construction easier.
       %   {\ifill{\eta}{\efill{A}{A} \forw \efill{B}{B}}}
       %   {\ifill{\eta}{\ifill{A}{A} \land \ifill{B}{B}}}
       % \\
-      {\subst{A}{t}{x} \forw~(t = u)} &\step{}& {\subst{A}{u}{x}}&\intro{F{=}_1}\\
-      {\subst{A}{u}{x} \forw~(t = u)} &\step{}& {\subst{A}{t}{x}}&\intro{F{=}_2}\\[1em]
+      {\subst{A}{t}{x} \forw (t = u)} &\step{}& {\subst{A}{u}{x}}&\intro{F{=}_1}\\
+      {\subst{A}{u}{x} \forw (t = u)} &\step{}& {\subst{A}{t}{x}}&\intro{F{=}_2}\\[1em]
 
-        {A \forw~(B \land C)} &\step{}&   {A \forw B}&\intro{F\land_1}\\
-        {A \forw~(C \land B)}&\step{}&        {A \forw B}&
+        {A \forw (B \land C)} &\step{}&   {A \forw B}&\intro{F\land_1}\\
+        {A \forw (C \land B)}&\step{}&        {A \forw B}&
             \intro{F\land_2}\\[1em]
 
-        {A \forw~(B \lor C)}& \step{}&       {(A \forw B) \lor C}
+        {A \forw (B \lor C)}& \step{}&       {(A \forw B) \lor C}
       &
       \intro{F\lor_1}\\
-        {A \forw~(C \lor B)}&\step{}&        {C \lor (A \forw B)}&
+        {A \forw (C \lor B)}&\step{}&        {C \lor (A \forw B)}&
             \intro{F\lor_2}\\[1em]
 
-        {A \forw~(B \limp C)}
+        {A \forw (B \limp C)}
 &\step{}&        {(A \back B) \limp C}
       &\intro{F{\limp}_1}\\
-        {A \forw~(C \limp B)}&\step{}&        {C \limp (A \forw B)}&
+        {A \forw (C \limp B)}&\step{}&        {C \limp (A \forw B)}&
             \intro{F{\limp}_2}\\[1em]
 
 %         {A \forw \neg B}
 % &\step{}&        {\neg (A \back B)}
 %       &\intro{F\neg}\\[1em]
 
-        {A \forw~(\forall x. B)}
+        {A \forw (\forall x. B)}
 &\step{}&        {A \forw \subst{B}{x}{t}}
       &
       \intro{F\forall i}\\
-        {A \forw~(\forall x. B)}&\step{}&        {\forall x. (A \forw B)}&
+        {A \forw (\forall x. B)}&\step{}&        {\forall x. (A \forw B)}&
             \intro{F\forall s}\\[1em]
 
-              {A \forw~(\exists x. B)}&\step{}&{\exists x. (A \forw B)}&
+              {A \forw (\exists x. B)}&\step{}&{\exists x. (A \forw B)}&
               \intro{F\exists s}\rever\\[1em]
               
           {B \forw A}&\step{}&
