@@ -593,7 +593,7 @@ $\garden{{}}{\Phi}$.
     Gardens ($\gardens$) & $\gamma, \delta$ \\
     Sprinklers & $\bx, \by, \bz$ \\
     Term vectors & $\tvec{t}, \tvec{u}, \tvec{v}$ \\
-    Substitutions & $\sigma, \tau$ \\
+    \kl{Substitutions} & $\sigma, \tau$ \\
     Bouquets & $\Phi, \Psi, \Xi$ \\
     Corollas & $\Gamma, \Delta$ \\
     \kl{Contexts} & $\Phi\hole, \Psi\hole, \Xi\hole$ \\
@@ -716,10 +716,10 @@ update}, which will be useful for the semantic evaluation of flowers in
 \end{fact}
 
 \begin{definition}[Substitution]
-  A \emph{substitution} is a function $\sigma : \vars \to \terms$ with a finite
+  A \intro{substitution} is a function $\sigma : \vars \to \terms$ with a finite
   \emph{support} $\dom(\sigma) = \compr{x}{\sigma(x) \not= x}$. By abuse of
-  notation, we will write $\sigma : \bx \to \terms$ to denote a substitution
-  $\sigma$ whose support is $\bx$. The domain of substitutions is extended to
+  notation, we will write $\sigma : \bx \to \terms$ to denote a \kl{substitution}
+  $\sigma$ whose support is $\bx$. The domain of \kl{substitutions} is extended to
   terms, flowers, bouquets and gardens mutually recursively as follows:
   \begin{align*}
     \sigma(f(t_1, \ldots, t_n)) &= f(\sigma(t_1), \ldots, \sigma(t_n)) \\
@@ -734,7 +734,7 @@ update}, which will be useful for the semantic evaluation of flowers in
 \end{definition}
 
 \begin{definition}[Capture-avoiding substitution]
-  We say that a substitution $\sigma : \bx \to \terms$ is
+  We say that a \kl{substitution} $\sigma : \bx \to \terms$ is
   \emph{capture-avoiding} in a bouquet $\Phi$ if $\fv(\sigma(x)) \cap \bv(\Phi)
   = \emptyset$ for every $x \in \bx$.
   % $\fv(\sigma(x)) \cap \bv(\phi) = \emptyset$ for every $x \in
@@ -947,12 +947,12 @@ a direct adaptation of the rules of \kl{Beta} (\reffig{beta}):
   \item[Unification (\rsf{ipis}, \rsf{ipet}, \rsf{apis}, \rsf{apet})]
     Rules \rsf{ipis} and \rsf{ipet} allow to \textsf{(i)}nstantiate a sprinkler
     located respectively in a \textsf{(pis)}til ($\forall$) and a
-    \textsf{(pet)}al ($\exists$) with an arbitrary substitution, while rules
+    \textsf{(pet)}al ($\exists$) with an arbitrary \kl{substitution}, while rules
     \rsf{apis} and \rsf{apet} do the opposite operation of
     \textsf{(a)}bstracting a set of terms by introducing a sprinkler. They
     correspond respectively to a generalization of the rules \rsf{Unif{\ua}} and
-    \rsf{Unif{\da}} of \kl{Beta}, where the variable substitution $\{z/y\}$
-    becomes an arbitrary substitution $\sigma$. Once again, we have twice the
+    \rsf{Unif{\da}} of \kl{Beta}, where the variable \kl{substitution} $\{z/y\}$
+    becomes an arbitrary \kl{substitution} $\sigma$. Once again, we have twice the
     amount of rules to account for the pistil/petal distinction, which is not
     surprising since in the LoI syntax of \kl{EGs}, they are special cases of
     Insertion/Deletion. Note that for the instantiation rules
@@ -1393,7 +1393,7 @@ world $w$ of a Kripke structure, which is done through the concept of
   \emph{$w$-evaluation} is a function $e : \vars \to M_w$.
   % We write $e : \bx \to M_w$ if $e(x) = \ast$ for every $x \not\in
   % \bx$ and some distinguished element $\ast \in M_w$.
-  The interpretation map of $M_w$ is extended to terms and substitutions with
+  The interpretation map of $M_w$ is extended to terms and \kl{substitutions} with
   respect to any evaluation $e$ as follows:
   \begin{align*}
   \interp{x}_e &= e(x) \\
@@ -1458,7 +1458,7 @@ The following lemmas will be useful for the soundness proof of the next section:
 
 \begin{marginfigure}
   \begin{align*}
-    \text{Substitution } &\hvrefl{e} : \vars \to \terms \\
+    \text{\kl{Substitution} } &\hvrefl{e} : \vars \to \terms \\
     \text{Evaluation } &e : \vars \to M_w
     % \text{Substitution } &\sigma : \vars \to \terms \\
     % \text{Evaluation } &\hvrefl{\sigma} : \vars \to M_w
@@ -1777,7 +1777,7 @@ Then we also need to account for \emph{self-pollination}:
 
 Proving the soundness of rules involving binders (\rsf{ipis}, \rsf{ipet},
 \rsf{apis}, \rsf{apet}) is also quite tedious, which can be understood as
-stemming from the fact that substitutions simulate the complex dynamics of the
+stemming from the fact that \kl{substitutions} simulate the complex dynamics of the
 lines of identity of \kl{EGs} in a \emph{global} rather than local way. In particular,
 one needs to be careful about the scope of bound variables, which in \kl{EGs} would be
 handled locally with (de)iteration rules.
@@ -2146,12 +2146,12 @@ material implication, just like Peirce would do with his scroll (see
   Let $\psi \in \flowers$, $\tT$ some $\psi$-consistent and $\psi$-complete
   theory, and $\phi = \flower{\garden{\bx}{\Phi}}{\Delta}$ with $\Delta
   = \fset{i}{n}{\delta_i} = \fset{i}{n}{\garden{\bx_i}{\Phi_i}}$ such
-  that $\phi \in \tT$. Then for every substitution $\sigma : \bx \to
+  that $\phi \in \tT$. Then for every \kl{substitution} $\sigma : \bx \to
   \terms$, either $\sigma(\Phi_i) \subseteq \tT$ for some $1 \leq i \leq n$, or $\tT
   \nvdash{\Nature} \sigma(\Phi)$.
 \end{proposition}
 \begin{proof}
-  Suppose the contrary, i.e. there is a substitution $\sigma$ such that $\tT
+  Suppose the contrary, i.e. there is a \kl{substitution} $\sigma$ such that $\tT
   \entails{\Nature} \sigma(\Phi)$ and for all $1 \leq i \leq n$, there is some
   \Hyp{$\phi_i \in \Phi_i$}~{\HOne} such that $\sigma(\phi_i) \not\in \tT$. Thus
   by $\psi$-completeness of $\tT$, we get $\tT, \sigma(\phi_i) \entails{\Nature}
@@ -2197,7 +2197,7 @@ of its petals $\Phi_i$ is.
   Let $\psi \in \flowers$, $\tT$ some $\psi$-consistent and $\psi$-complete
   theory, and $\phi = \flower{\garden{\bx}{\Phi}}{\Delta}$ with $\Delta
   = \fset{i}{n}{\delta_i} = \fset{i}{n}{\garden{\bx_i}{\Phi_i}}$ such
-  that $\tT \nvdash{\Nature} \phi$. Then for every $1 \leq i \leq n$ and substitution
+  that $\tT \nvdash{\Nature} \phi$. Then for every $1 \leq i \leq n$ and \kl{substitution}
   $\sigma : \bx_i \to \terms$, there is some $\phi_i \in \Phi_i$ such
   that $\tT, \Phi \nvdash{\Nature} \sigma(\phi_i)$.
 \end{proposition}
@@ -2292,7 +2292,7 @@ forcing in $\rewolF{\psi}$ with $\psi$-consistency and $\psi$-completeness:
       theory. Obviously $\sigma(\phi) =
       \flower{\garden{\bx}{\restr{\sigma}{\bx}(\Phi)}}{\fset{i}{n}{\garden{\bx_i}{\restr{\sigma}{\bx
       \cup \bx_i}(\Phi_i)}}} \in \tU$, and thus by \refprop{inv-elem-flower},
-      for every substitution $\tau$, either $ \update{}{\bx}{\tau} \circ
+      for every \kl{substitution} $\tau$, either $ \update{}{\bx}{\tau} \circ
       \restr{\sigma}{\bx \cup \bx_i}(\Phi_i) =
       \update{\update{\sigma}{\bx}{\tau}}{\bx_i}{}(\Phi_i) \subseteq \tU$ for
       some $1 \leq i \leq n$, or $\tU \nvdash{\Nature} \update{}{\bx}{\tau} \circ
@@ -2305,7 +2305,7 @@ forcing in $\rewolF{\psi}$ with $\psi$-consistency and $\psi$-completeness:
       $\eforces{\tU}{\Phi_i}{\update{\update{\sigma}{\bx}{\tau}}{\bx_i}{}}$,
       that is $\eforces{\tT}{\phi}{\sigma}$.
       \item By \refprop{inv-deriv-flower}, for every $1 \leq i \leq n$ and
-      substitution $\tau$, there is some $\phi_i \in \Phi_i$ such that $\tT,
+      \kl{substitution} $\tau$, there is some $\phi_i \in \Phi_i$ such that $\tT,
       \restr{\sigma}{\bx}(\Phi) \nvdash{\Nature} \update{}{\bx_i}{\tau} \circ
       \restr{\sigma}{\bx \cup \bx_i}(\phi_i) =
       \update{\update{\sigma}{\bx}{}}{\bx_i}{\tau}(\phi_i)$. By the completion
@@ -3646,7 +3646,7 @@ proof building, which integrates easily and elegantly some (limited) forms of
 automation. This was also made possible by the use of variables instead of lines
 of identity, trading a heavy graphical apparatus with local \kl{inference rules} for
 a simple, well-known textual syntax with complex (but automated) global dynamics
-in the form of substitutions. Hence we believe the \emph{opposite}, that \kl{EGs}
+in the form of \kl{substitutions}. Hence we believe the \emph{opposite}, that \kl{EGs}
 \emph{can} form the basis for an ergonomic calculus of logical deduction, in
 addition to being a powerful tool for meta-logical analysis.
 

@@ -171,8 +171,7 @@ $$\forall x.\forall y. x=y\land A \limp \subst{A}{x}{y}.$$
  \labfig{aristote}
 \end{figure*}
 
-\AP
-We will not consider, on paper, the details of variable renaming in
+\AP We will not consider, on paper, the details of variable renaming in
 substitutions, implicitly applying the so-called \intro{Barendregt convention},
 that bound and free variables are distinct and that a variable is bound at most
 once.
@@ -287,7 +286,7 @@ $$\begin{array}{lll}
            \back \select{\mortal(\socrates)}\right) &
                                                  \kl{L{\limp}_2}\\
     \step{} &  \human(\socrates)\land \top &
-                                           \kl{id}\\
+                                           \kl(sfl){id}\\
     \step{} & \human(\socrates)&\kl{neur}\\
   \end{array}$$
 
@@ -306,7 +305,7 @@ Notice that:
 
 In general, the action solves the \kl{goal} when the interaction ends with the
 trivially true proposition $\top$. The base case being the action corresponding
-to the \kl(rule){axiom}/identity rule \kl{id}: $A\back A \step{} \top$.
+to the \kl(rule){axiom}/identity rule \kl(sfl){id}: $A\back A \step{} \top$.
 
 \AP
 A \kl(dnd){forward} step, on the other hand, involves two (subterms of two)
@@ -317,7 +316,7 @@ $$
     &  \forall x .\select{\human(x)}\limp\mortal(x) \forw \select{\human(\socrates)}&\\
     \step{} & \select{\human(\socrates)}\limp\mortal(\socrates) \forw \select{\human(\socrates)}& \kl{F\forall i}\\
     \step{} & \left(\select{\human(\socrates)}\back \select{\human(\socrates)}\right)\limp\mortal(\socrates) &\kl{F{\limp}_1}\\
-    \step{} & \top \limp\mortal(\socrates) &\kl{id}\\
+    \step{} & \top \limp\mortal(\socrates) &\kl(sfl){id}\\
     \step{} & \mortal(\socrates) & \kl{neul}\\
   \end{array}
 $$
@@ -512,7 +511,7 @@ $$
 \begin{array}{llll}
   \select{A}\land B \back \select{A} & \step{}& \select{A} \back
   \select{A} \hbox to 1cm {\hfil}&\kl{L\land_1}\\
-                                       & \step{} &\top & \kl{id}
+                                       & \step{} &\top & \kl(sfl){id}
 \end{array}
 $$
 
@@ -525,7 +524,7 @@ $$
   \select{A} \back \select{A}\land B &
                                          \step{}& (\select{A} \back
                                          \select{A})\land B &\kl{R\land_1}\\
-                                       & \step{}& \top \land B  & \kl{id}\\
+                                       & \step{}& \top \land B  & \kl(sfl){id}\\
   &\step{}& B&\kl{neul}
 \end{array}
 $$
@@ -539,7 +538,7 @@ $$
   \select{A} \back (B \land \select{A}) \lor C
     & \step{} & (\select{A} \back B \land \select{A}) \lor C &\kl{R\lor_1}\\
     & \step{} & (B \land (\select{A} \back \select{A})) \lor C &\kl{R\land_2}\\
-    & \step{} & (B \land \top) \lor C &\kl{id}\\
+    & \step{} & (B \land \top) \lor C &\kl(sfl){id}\\
     & \step{} & B \lor C &\kl{neur}
 \end{array}
 $$
@@ -554,7 +553,7 @@ $$
   \select{A} \lor B \forw \neg \select{A}
     & \step{} & (\select{A} \forw \neg\select{A}) \lor B &\kl{F\lor_1}\\
     & \step{} & \neg (\select{A} \back \select{A}) \lor B &\kl{F{\limp}_1}\\
-    & \step{} & \neg \top \lor B &\kl{id}\\
+    & \step{} & \neg \top \lor B &\kl(sfl){id}\\
     & \step{} & \bot \lor B &\kl{neul}\\
     & \step{} & B &\kl{neul}\\
 \end{array}
@@ -580,7 +579,7 @@ $$
   A\limp \select{B} \back \select{B} &\step{}& A\land (\select{B}
                                                 \back
                                                 \select{B})&\kl{L{\limp}_2}\\
-                                         &\step{}&A\land\top & \kl{id}\\
+                                         &\step{}&A\land\top & \kl(sfl){id}\\
     &\step{}& A&\kl{neul}
 \end{array}
 $$
@@ -671,7 +670,7 @@ $$\begin{array}{llll}
     \select{A(t)}\back \exists x.\select{A(x)}&\step{}&
                                                       \select{A(t)}\back\select{A(t)}&\kl{L\forall i}
     \\
-                                               &\step{}& \top&\kl{id}
+                                               &\step{}& \top&\kl(sfl){id}
   \end{array}
   $$
 
@@ -773,7 +772,7 @@ $$
   \step{}&   \forall y. \forall
            x'. (\select{R(x',y)}\back\select{R(x',y)} )&\kl{L\forall i}\\
    \step{}  &  \forall y. \forall
-           x'. \top & \kl{id}\\
+           x'. \top & \kl(sfl){id}\\
 \steps{}& \top
 \end{array}
 $$
@@ -786,10 +785,10 @@ $$
 \end{array}
 $$
 Indeed, there is no reduction path starting from this \kl{DnD} ending with the
-\textsf{id} rule. This can be detected by the system because the unification of
+\textsf{id} rule. This can be detected by the system because the \kl{unification} of
 $R(x,y)$ and $R(x',y')$ here results in a cycle in the instantiations of
 variables\sidenote{We will come back to this in \refsubsec{identity}. Also notice
-that this example requires to use full (\kl{first-order}) unification, not only
+that this example requires to use full (\kl{first-order}) \kl{unification}, not only
 matching.}. The system thus refuses this action.
 
 \subsection{Conditional rewriting}

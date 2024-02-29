@@ -52,7 +52,7 @@ or to understand the status of quantified variables (\refsubsec{identity}).
   occurrence of a special formula written $\hole$, called its \reintro{hole}.
   Given another proposition $B$, we write $\cfill{A}{B}$ for the proposition
   obtained by replacing $\hole$ in $A\hole$ by $B$. Note that this replacement
-  is not a substitution because it allows variable capture. For instance
+  is not a \kl{substitution} because it allows variable capture. For instance
   $\forall x.\select{P(x)}$ is the proposition $\forall x.P(x)$.
 \end{definition}
 
@@ -173,7 +173,7 @@ can be created between arbitrary subformulas. We come back to this issue in
 
 In the original formulation of \kl{subformula linking} \sidecite{Chaudhuri2013}, a
 semantics is associated to every \kl{logical linkage}, even when the selected
-subformulas $A$ and $A'$ are not unifiable. This is made possible by the
+subformulas $A$ and $A'$ are not \kl{unifiable}. This is made possible by the
 addition of so-called \emph{release} rules\sidenote{A terminology coming from
 the line of works on \emph{\kl{focusing}} in \kl{proof theory} \cite{andreoli1992}, see
 also \refsec{invert}.}, which simply turn \kl{interaction operators} into their
@@ -186,15 +186,15 @@ criterion tackles two issues:
   \item \textbf{Polarity:} the selected subterms must have opposite
   \emph{\kl{polarities}}, so that the \emph{\kl{negative}} subterm justifies the
   \emph{\kl{positive}} one;
-  \item \textbf{Identity:} the selected subterms must be \emph{unifiable}, so
-  that after instantiating some quantifiers in their \kl{context} they can interact
-  through the {\rsf{id}} rule or the equality rules {\rsf{L{=}_i},
-  \rsf{F{=}_i}}.
+  \item \textbf{Identity:} the selected subterms must be \emph{\kl{unifiable}},
+  so that after instantiating some quantifiers in their \kl{context} they can
+  interact through the {\kl(sfl){id}} rule or the equality rules
+  {\kl[L{=}_1]{L{=}_i}, \kl[F{=}_1]{F{=}_i}}.
 \end{itemize}
 One benefit of using this criterion is that it filters out all \kl{linkages} whose
 semantics relies on release rules, capturing intuitively a notion of
 \emph{productivity}: instead of just moving around subformulas, we know for sure
-that some simplification occurs, either a justification with the {\rsf{id}}
+that some simplification occurs, either a justification with the {\kl(sfl){id}}
 rule on \kl{logical linkages}, or a rewriting with the equality rules on \kl{rewrite linkages}. This will be stated more formally in \refsec{productivity}.
 
 Validity is very useful to support the \emph{suggestion} mechanism implemented
@@ -288,7 +288,7 @@ redexes of the form $B\select{A} \limp C \back D\select{A'}$.
 \subsection{Identity}\labsubsec{identity}
 
 A \kl{context} binds variables in the selected proposition. These variables
-will be unifiable or not depending upon: (1) the nature of the quantifier
+will be \kl{unifiable} or not depending upon: (1) the nature of the quantifier
 ($\forall$ or $\exists$), (2) whether they occur in a hypothesis or a
 conclusion, and (3) whether they occur on the left-hand of an (odd number
 of) implication(s). Therefore, we start by splitting the list of
@@ -296,20 +296,18 @@ variables bound by a \kl{context} in two parts.
 
 
 \begin{definition}[Positive and negative variables]
-Given a \kl{context} $A\hole$ seen as a tree, one can always start from
-the root and traverse the branch of $A\hole$ that leads to its \kl{hole}
-$\hole$. We write $\lvar(A\hole)$ the list of all variables
-quantified along the way. This list is ordered, the variables closer
-to the root coming first.
+Given a \kl{context} $A\hole$ seen as a tree, one can always start from the root
+and traverse the branch of $A\hole$ that leads to its \kl{hole} $\hole$. We
+write $\intro*\lvar(A\hole)$ the list of all variables quantified along the way.
+This list is ordered, the variables closer to the root coming first.
 
 $\lvar(A\hole)$ can be seen as the interleaving of two sublists
-$\lvarp(A\hole)$ and $\lvarn(A\hole)$ of \emph{positively} and
-\emph{negatively unifiable} variables, in the following precise sense:
-$x \in \lvarp(A\hole)$ (resp. $x \in \lvarn(A\hole))$ iff there
-are \kl{contexts} $B\hole$, $C^+\hole$ and $D^-\hole$ such that
-$A\hole$ is either $C^+\select{\exists x. B\hole}$ or
-$D^-\select{\forall x. B\hole}$ (resp. $D^-\select{\exists x. B\hole}$
-or $C^+\select{\forall x. B\hole}$).
+$\intro*\lvarp(A\hole)$ and $\intro*\lvarn(A\hole)$ of \emph{positively} and
+\emph{negatively unifiable} variables, in the following precise sense: $x \in
+\lvarp(A\hole)$ (resp. $x \in \lvarn(A\hole))$ iff there are \kl{contexts}
+$B\hole$, $C^+\hole$ and $D^-\hole$ such that $A\hole$ is either
+$C^+\select{\exists x. B\hole}$ or $D^-\select{\forall x. B\hole}$ (resp.
+$D^-\select{\exists x. B\hole}$ or $C^+\select{\forall x. B\hole}$).
 
 For instance, if $A\hole \syneq \forall x. \exists y. (B \land ((\exists x'.
 \forall y'. \hole) \limp \forall z. C))$, then we have:
@@ -351,8 +349,8 @@ For instance, if $A\hole \syneq \forall x. \exists y. (B \land ((\exists x'.
 % not, depending on their quantifier, the position of this quantifier,
 % and whether they are in a hypothesis or the conclusion.
 
-\begin{definition}[Unifiable variables]\label{def:uvars}
-  The set $\uvars(\mathcal{L})$ of {\em unifiable variables} of a \kl{linkage}
+\begin{definition}[Unifiable variables]\label{def:uvars} The set
+  $\intro*\uvars(\mathcal{L})$ of \intro{unifiable variables} of a \kl{linkage}
   $\mathcal{L} \syneq B\select{A}\link C\select{A'}$ is:
   \begin{itemize}
   \item $\lvarn(B\hole)\cup\lvarp(C\hole)$ if $\link$ is $\back$, and
@@ -360,12 +358,13 @@ For instance, if $A\hole \syneq \forall x. \exists y. (B \land ((\exists x'.
   \end{itemize}
 \end{definition}
 
-The following notions of substitution and unification are the usual ones and we
-do not go into details:
+The following notions of \kl{substitution} and \kl{unification} are the usual
+ones and we do not go into details:
  
 \begin{definition}[Substitution]
-  A \emph{substitution} is a mapping from variables to terms such that $\{x ~|~
-  \sigma(x) \not\syneq x \}$ is finite; we call this set the {\em domain} of $\sigma$.
+  A \intro{substitution} is a mapping from variables to terms such that $\{x ~|~
+  \sigma(x) \not\syneq x \}$ is finite; we call this set the {\em domain} of
+  $\sigma$.
 
   When $\sigma(x)\syneq x$ we say that $x$ is  {\em not instantiated} by
   $\sigma$.
@@ -374,33 +373,34 @@ do not go into details:
   %% domain $l$ when $\forall x\notin l, \sigma(x)\syneqx$. When
   %% $\sigma(x)\syneqx$, we also say that $x$ is
   
-  Given a proposition $A$ and a substitution $\sigma$, we write
+  Given a proposition $A$ and a \kl{substitution} $\sigma$, we write
   $\sigma(A)$ for the \emph{application} of $\sigma$ to $A$ in the usual way.
   %% For contexts, substitution in the special propositional variable
   %% $\hole$ is defined trivially by $\hole[\sigma] = \hole$.
 \end{definition}
 
-\begin{definition}[Unification] Given two propositions $A$ and $A'$ and a list of variables
-  $l$, we say that a substitution $\sigma$ \emph{unifies} $A$ and $A'$ over $l$
-  when $\sigma(A)\syneq\sigma(A')$ and the domain of $\sigma$ is a subset of $l$. 
+\begin{definition}[Unification]
+  Given two propositions $A$ and $A'$ and a list of variables $l$, we say that a
+  \kl{substitution} $\sigma$ \intro{unifies} $A$ and $A'$ over $l$ when
+  $\sigma(A)\syneq\sigma(A')$ and the domain of $\sigma$ is a subset of $l$. 
 
-  If such a substitution exists, we say that $A$ and $A'$ are \emph{unifiable}
-  over $l$.
+  If such a \kl{substitution} exists, we say that $A$ and $A'$ are
+  \reintro{unifiable} over $l$.
 \end{definition}
-Given $A$, $A'$ and $l$, the well-known unification algorithm decides
-whether $A$ and $A'$ are unifiable over $l$ and constructs the
-substitution when it exists~\sidecite{Montanari}.
+Given $A$, $A'$ and $l$, the well-known \kl{unification} algorithm decides
+whether $A$ and $A'$ are \kl{unifiable} over $l$ and constructs the
+\kl{substitution} when it exists~\sidecite{Montanari}.
 
 \begin{condition}[Identity]\label{cond:unif} 
   For a \kl{linkage} $B\select{A}\link C\select{A'}$ to be valid, the following must
   be true:
   \begin{enumerate}
-   \item There exists a substitution $\sigma$ which unifies $A$ and
-     $A'$ over the unifiable variables of the \kl{linkage}.\label{clause:unif}
-   \item \label{lab:cond} Furthermore, the unification respects the order over
-     the variables. More precisely, we request that there exists a list $l$
-     which is an interleaving of $\lvar(B\hole)$ and $\lvar(C\hole)$ such
-     that, given a unifiable variable $x$ in the domain of $\sigma$, all
+   \item There exists a \kl{substitution} $\sigma$ which \kl{unifies} $A$ and $A'$
+     over the \kl{unifiable variables} of the \kl{linkage}.\label{clause:unif}
+   \item \label{lab:cond} Furthermore, the \kl{unification} respects the order
+     over the variables. More precisely, we request that there exists a list $l$
+     which is an interleaving of $\lvar(B\hole)$ and $\lvar(C\hole)$ such that,
+     given a \kl{unifiable variable} $x$ in the domain of $\sigma$, all
      variables occuring in $\sigma(x)$ are placed before $x$ in $l$:
      $$\forall y\in\fv(\sigma(x))\cap(\lvar(B\hole)\cup\lvar(C\hole)), y <_l
      x.$$\label{clause:deps}
@@ -456,8 +456,8 @@ proof step:
   \begin{enumerate}
     \item \textbf{Polarity:} the \kl{linkage} must satisfy Condition \ref{cond:pol};
     \item \textbf{Unification:} the selected subterms $A$ and $A'$ (resp. $t$
-    and $t'$) must be unifiable, yielding a substitution $\sigma$;
-    \item \textbf{Dependencies:} the substitution $\sigma$ must satisfy
+    and $t'$) must be \kl{unifiable}, yielding a \kl{substitution} $\sigma$;
+    \item \textbf{Dependencies:} the \kl{substitution} $\sigma$ must satisfy
     Condition \ref{cond:unif}.
   \end{enumerate}
   The procedure stops if it fails at any of the above checks;
@@ -467,7 +467,7 @@ proof step:
   proposition of the form $D\select{\sigma(A) \back \sigma(A')}$ $$\text{(resp.
   $D\select{\select{\sigma(t)} = u \link C_0\select{\sigma(t')}}$)}$$
   \label{step:linking}
-\item \textbf{Interaction:} thus one can apply the {\rsf{id}} rule (resp. an equality rule in
+\item \textbf{Interaction:} thus one can apply the {\kl(sfl){id}} rule (resp. an equality rule in
 $\{\mathsf{L\!\!=\!\!_1}, \mathsf{L\!\!=\!\!_2}, \mathsf{F\!\!=\!\!_1},
 \mathsf{F\!\!=\!\!_2}\}$); \label{step:interaction}
 \item \textbf{Unit elimination:} in the case of a logical action, this creates an occurrence of $\top$,
@@ -663,7 +663,7 @@ ensures that we can proceed to the interaction step \ref{step:interaction}.
 %%   If $\mathcal{L} \step{} C\select{\mathcal{L'}}$, then $\size{\mathcal{L}} > \size{\mathcal{L'}}$.
 %% \end{lemma}
 %% \begin{proof}
-%%   By straightforward inspection of all rules except \rsf{id}.
+%%   By straightforward inspection of all rules except \kl(sfl){id}.
 %% \end{proof}
 
 Because the \kl{rewriting rules} are terminating, the important point is to show that
@@ -698,7 +698,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
 \begin{itemize}
 \item The rules involving a connective always preserve validity.
 \item When one can apply a rule involving a quantifier $\forall x$ (resp.
-  $\exists x$), one checks whether the substitution instantiates $x$ or not. In
+  $\exists x$), one checks whether the \kl{substitution} instantiates $x$ or not. In
   the first case one performs the instantiation rule \rsf{L\forall i} or
   \rsf{F\forall i} (resp. \rsf{R\exists i}); in the second case the
   corresponding \kl{switch rule} in {\small $\{\mathsf{L\forall s}, \mathsf{R\forall
@@ -713,14 +713,14 @@ fundamentally difficult, but understandably verbose. The two main points are:
     $(\inv(B\square), \inv(C\square)) = (0,0)$, thus $\mathcal{L}$ must be a
     \kl(dnd){backward} \kl{linkage}. Also $\lvar(B\square)$ and $\lvar(C\square)$ are empty,
     hence by Condition~\ref{cond:unif} $A$ and $A'$ are unified by an empty
-    substitution, which entails that $A \syneq A'$. Therefore we are in the
+    \kl{substitution}, which entails that $A \syneq A'$. Therefore we are in the
     first case where $\mathcal{L} \syneq \select{A} \back \select{A}$.
 
     \item Otherwise, either $B\hole$ or $C\hole$ is non-empty. In the following,
     we show that we can always apply a \kl{rewriting rule} that produces a new, valid
     \kl{linkage} $\mathcal{L'} \syneq B' \link' C'$.
     
-    Let $\sigma$ and $\lvar$ be respectively the substitution and interleaving
+    Let $\sigma$ and $\lvar$ be respectively the \kl{substitution} and interleaving
     of the quantified variables of $B\square$ and $C\square$ given by Condition
     \ref{cond:unif}, with $\lvar$ decomposed as $x \Colon \lvar'$.
     
@@ -947,7 +947,7 @@ with the logical reasoning \kl{tactics} of \kl{proof assistants} based on
 \section{Focusing}\labsec{invert}
 
 % \sidenote{There are 7 invertible rules, and 23 non-invertible
-%     rules to consider in \reffig{DISL} (we exclude the {\rsf{id}} and
+%     rules to consider in \reffig{DISL} (we exclude the {\kl(sfl){id}} and
 %     {\rsf{Fcomm}} rules).}
 
 A last point to deal with is non-confluence and in particular choosing
@@ -976,7 +976,7 @@ The general scheme for choosing a rule to apply to a redex $C\select{A} \link
 D\select{B}$ is the following\sidenote{A less deterministic version of this
 scheme is already present implicitly in the proof of Lemma \ref{thm:vprogress}.}:
 \begin{enumerate}
-  \item If $C\hole \syneq D\hole \syneq \hole$, we just apply the {\rsf{id}} rule
+  \item If $C\hole \syneq D\hole \syneq \hole$, we just apply the {\kl(sfl){id}} rule
   (assuming $A \syneq B$ by Lemma \ref{thm:vprogress}).
   \item If only one \kl{context} is non-empty, say $C\hole$, we look at its head
   connective as well as the side where its \kl{hole} resides:
@@ -1485,7 +1485,7 @@ Very recently, Mulder and Krebbers \sidecite{mulder_unification_2024} proposed
 an improvement over both our method of \kl{subformula linking} implemented in \kl{Actema},
 and the method of Chaudhuri implemented in the \intro{Profint} prototype
 \sidecite{DBLP:conf/cade/Chaudhuri21}. Like us, they perform \textit{a priori}
-unification on the linked subformulas to determine appropriate substitutions for
+\kl{unification} on the linked subformulas to determine appropriate \kl{substitutions} for
 instantiating quantifiers and rule out unwanted links. But their method improves
 upon ours by being able to link subformulas with non-trivial quantifier
 instantiation, such as the following \kl{linkage} that currently fails in

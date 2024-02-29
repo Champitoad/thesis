@@ -106,7 +106,7 @@ the new \kl{subgoals} stemming from actions performed by the user. It is thus
 responsible for defining the \emph{semantics} of proof actions. It is also in
 charge of various other tasks that process the logical data of the \kl{proof state},
 typically checking the \emph{validity} of \kl{linkages} during a \kl{DnD} action, which
-requires the use of a unification algorithm (see \refsec{validity}).
+requires the use of a \kl{unification} algorithm (see \refsec{validity}).
 
 \section{Why a plugin?}\labsec{whyplugin}
 
@@ -145,7 +145,7 @@ make the backend of \kl{Actema} completely irrelevant however: we still need it 
 that \kl{Actema} can maintain its own, \kl{first-order} version of the \kl{proof state},
 with additional metadata used to display and interact graphically with objects
 and statements. Also tasks related to the querying of both display data and
-proof actions, like the \texttt{html} method and unification algorithm mentioned
+proof actions, like the \texttt{html} method and \kl{unification} algorithm mentioned
 in the previous section, are at the time of writing of this thesis still
 performed in \kl{Actema}'s backend. It is unclear to what extent this should rather
 be a responsibility of the \kl{Coq} plugin, relegating \kl{Actema} to a pure role of
@@ -590,7 +590,7 @@ course the paths $p, q$ and the trace $T$ are all expressed with custom Coq
 datatypes relying on our deep embedding of \kl{first-order logic}. The role of the
 trace in particular is to provide the list of SFL \kl{rewriting rules} to apply,
 including \kl{Coq} \kl{terms} instantiating quantifiers that were computed in \kl{Actema} by
-unification of the two linked subformulas. Then we formulate in \kl{Coq} two theorems
+\kl{unification} of the two linked subformulas. Then we formulate in \kl{Coq} two theorems
 that guarantee the logical \emph{soundness} of \texttt{b3} and \texttt{f3}
 (\reffig{dnd-snd}). Note that the theorems are formulated using the native
 implication connective \texttt{->} of \kl{Coq}, thanks to the \texttt{reflect}
@@ -649,7 +649,7 @@ scope and improve the \kl{UX} of the system.
 The importance of being able to express and manipulate \kl{higher-order} functions
 and predicates has been stressed multiple times before. The fact that \kl{Actema} is
 limited to \kl{first-order logic} is mostly a historical contingency, motivated by
-the fact that some algorithms like unification are more tractable in this
+the fact that some algorithms like \kl{unification} are more tractable in this
 setting. But now that we rely on \kl{Coq}'s proof engine, there is no fundamental
 reason for maintaining this choice. Because the language of statements is at the
 foundation of a logical framework, many other components of a \kl{proof assistant}
@@ -662,14 +662,14 @@ tactics for \kl{deep inference}-based actions already has partial support for
 module for \kl{Actema} written in OCaml.} and the ATD datatype definitions enabling
 communication between the two.
 
-One central question in the transition to \kl{higher-order} logic is how unification
+One central question in the transition to \kl{higher-order} logic is how \kl{unification}
 of subterms will be handled. Algorithms in this setting are known to be
 incomplete because of undecidability \sidecite{huet_undecidability_1973}, and
 their implementation can be very tricky. The most sensible option seems to rely
 on the implementation already provided by \kl{Coq}, which is the fruit of years of
 development and improvements. But this would require changing the interaction
 protocol of \texttt{coq-actema}, by allowing the \process{Backend} of \kl{Actema} to
-make unification requests to the \process{Plugin}. This might be doable without
+make \kl{unification} requests to the \process{Plugin}. This might be doable without
 changing the current client-server architecture, but will probably involve some
 intricate design decisions.
 
@@ -678,7 +678,7 @@ the \process{Frontend} to the \process{Backend} by a \texttt{start} response
 from the \process{Frontend} to the \process{Plugin}, with the data of the
 selection in its body. Then we could completely delegate the computation of
 available actions to the \process{Plugin}, allowing us to freely use \kl{Coq}'s
-unification. This might not be too hard since we should be able to directly
+\kl{unification}. This might not be too hard since we should be able to directly
 reuse OCaml code from the \process{Backend}, but is a deeper structural change
 to the interaction protocol, that makes the \process{Plugin} responsible for an
 important part of \kl{Actema}'s behavior. And this would induce a lot of unnecessary
@@ -817,7 +817,7 @@ there are currently two drawbacks to this approach:
   \kl{tactics}, because they also take as argument the \kl{subformula linking} trace,
   which is a very complex data structure expressed in our deep embedding of
   \kl{first-order logic}, and hence should not leak into the user interface.
-  Hopefully, relying on \kl{Coq}'s unification instead of \kl{Actema}'s should mitigate
+  Hopefully, relying on \kl{Coq}'s \kl{unification} instead of \kl{Actema}'s should mitigate
   the complexity of the trace, by removing the need to incorporate full
   substitutions. There is also the possibility of replacing integer-based paths
   by \emph{patterns} in the {\ssreflect} language, which are known to be a more
