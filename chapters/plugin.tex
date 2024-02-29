@@ -418,7 +418,7 @@ Then the \process{User} has two options:
   \action{Unfold}.}. The precise protocol followed for applying an action is
   summarized in \reftab{action-protocol}. Let us focus on the more complex case
   of \kl{DnD} actions. The \textbf{Start} column describes how the \process{User}
-  \emph{starts} the action, here by dragging some item $I$ of the current
+  \emph{starts} the action, here by dragging some \kl{item} $I$ of the current
   \kl{subgoal}. Then the \process{Frontend} asks the \process{Backend} for the set
   $\mathcal{A}$ of all available \kl{DnD} actions involving $I$. The
   \textbf{Selection} column describes how the computation of $\mathcal{A}$ is
@@ -427,7 +427,7 @@ Then the \process{User} has two options:
   selection. The \textbf{Render} column describes how $\mathcal{A}$ is
   \emph{rendered} to the \process{User}: here we highlight all valid drop
   targets, which correspond to subterms of the current \kl{goal} located in other
-  items\sidenote{Highlighting is here understood in a \emph{visual} sense: in
+  \kl{items}\sidenote{Highlighting is here understood in a \emph{visual} sense: in
   the current implementation of \kl{Actema}, subterms are indicated graphically by
   squaring them. But one could imagine other modalities for highlighting,
   typically \emph{spelling} the subterms with a speech synthesis algorithm for
@@ -463,9 +463,9 @@ Then the \process{User} has two options:
   \hline
   \textbf{Kind} & \textbf{Start}       & \textbf{Selection $S$} &
   \textbf{Render}                      & \textbf{End} \\ \hline
-  Click         & Hover item $I$       & Ignored & Highlight $P \subseteq
+  Click         & Hover \kl{item} $I$       & Ignored & Highlight $P \subseteq
   \subterms{I}$ & Click on some $p \in P$    \\ \hline
-  \kl{DnD}           & Drag item $I$        &
+  \kl{DnD}           & Drag \kl{item} $I$        &
       If $\exists p \in S \cap \subterms{I}$ then match only $p \link q$ where
       $q \in \compl{\subterms{I}}$
       \newline
@@ -473,7 +473,7 @@ Then the \process{User} has two options:
       \link q$ where $p \in \subterms{I}$
     & Highlight $Q \subseteq \compl{\subterms{I}}$ & Drop on some $q \in Q$ \\ \hline
   Contextual    & Open menu & Populate menu only with actions
-  applicable on $S$ & Show menu & Choose an item in the menu \\ \hline
+  applicable on $S$ & Show menu & Choose an \kl{item} in the menu \\ \hline
   \end{tabular}
   \raggedright
   \parbox{\textwidth}{
@@ -482,9 +482,9 @@ Then the \process{User} has two options:
     \begin{itemize}
       \item $p, q$ denote paths to subterms of the current goal
       \item $P, Q$ and the selection $S$ denote sets of paths
-      \item $\subterms{I}$ denotes the set of paths within item $I$
+      \item $\subterms{I}$ denotes the set of paths within \kl{item} $I$
       \item $\compl{\subterms{I}}$ denotes the complement of $\subterms{I}$, i.e.
-      all paths in all items $J \not= I$
+      all paths in all \kl{items} $J \not= I$
       \item $p @ q$ is a \kl{linkage} as introduced in \refsec{linkages}
     \end{itemize}}
 

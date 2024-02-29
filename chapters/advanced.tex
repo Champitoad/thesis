@@ -134,7 +134,7 @@ things to note:
   because it makes \kl{proof scripts} easier to maintain. In our case it also has the
   advantage of expliciting which hypotheses are used exactly in the reasoning,
   something that an \kl{Actema} user does with her pointing device when designating
-  the blue items involved in an action. It appears clearly in
+  the blue \kl{items} involved in an action. It appears clearly in
   \reffig{edukera-coq} that in a moderately long proof like this based mostly on
   \kl{forward} reasoning, one needs to keep track of \emph{a lot} of names, which can
   be overwhelming for many users. This is especially true for beginners
@@ -316,7 +316,7 @@ will vary:
     In \kl{Actema}, one can freely search in this database by typing text in a search
     bar, typically in this case the keyword ``comprehension''. Then the system
     will show a list of lemmas whose names match the keywords, and the user can
-    click on the lemma she is interested in, in order to add it as a blue item
+    click on the lemma she is interested in, in order to add it as a blue \kl{item}
     in the current \kl(sequent){context}. An alternative and more precise way of retrieving a
     lemma is to search by \emph{content} of the statement instead of searching
     by name. State-of-the-art \kl{proof assistants} usually provide facilities for
@@ -478,28 +478,29 @@ usually has special support in mainstream \kl{proof assistants}. In the
 \kl{PbA} paradigm, it seems natural to map it to a special contextual
 action \action{Induction}, whose availability and effect will depend on the
 selected subterm. One could also imagine manipulating explicitly induction
-schemes as blue items, in the same way we did for the axiom of comprehension in
+schemes as blue \kl{items}, in the same way we did for the axiom of comprehension in
 the previous section. In this section we focus on describing features of the
 more convenient contextual action.
 
 First and foremost, it only makes sense to apply induction to a variable which
-is quantified \emph{universally}, either because it appears in the \kl(sequent){context}, or
-because it is bound by a $\forall$ in the conclusion. In the first case, one can
-access the contextual action in \kl{Actema} by selecting the green item corresponding
-to the variable; in the latter case, by selecting the subterm of the conclusion
-whose head connective is the binding $\forall$\sidenote{In the standalone
-version of \kl{Actema}, induction is performed by clicking directly on green items,
-rather than through a contextual action.}. This could also work by selecting any
-occurrence of the variable regardless of its binding point, since the system can
-always infer it. The only condition is that if the variable is bound by a
-$\forall$, it must occur in a \emph{strictly positive} location, i.e. in the
-conclusion and not on the left of an implication $\limp$. Obviously the variable
-should also be of an \emph{inductive} \kl{type}, i.e. one which is mapped to an
-induction scheme in the system\sidenote{The standalone version of \kl{Actema} only
-supports induction on natural numbers, but in a \kl{proof assistant} like \kl{Coq} or Lean
-one can easily check if a given \kl{type} is inductive.}. Then the \action{Induction}
-action will simply apply the associated induction scheme. In our commutativity
-example, we can thus start the proof like so:
+is quantified \emph{universally}, either because it appears in the
+\kl(sequent){context}, or because it is bound by a $\forall$ in the conclusion.
+In the first case, one can access the contextual action in \kl{Actema} by
+selecting the green \kl{item} corresponding to the variable; in the latter case,
+by selecting the subterm of the conclusion whose head connective is the binding
+$\forall$\sidenote{In the standalone version of \kl{Actema}, induction is
+performed by clicking directly on green \kl{items}, rather than through a
+contextual action.}. This could also work by selecting any occurrence of the
+variable regardless of its binding point, since the system can always infer it.
+The only condition is that if the variable is bound by a $\forall$, it must
+occur in a \emph{strictly \kl(sfl){positive}} location, i.e. in the conclusion
+and not on the left of an implication $\limp$. Obviously the variable should
+also be of an \emph{inductive} \kl{type}, i.e. one which is mapped to an
+induction scheme in the system\sidenote{The standalone version of \kl{Actema}
+only supports induction on natural numbers, but in a \kl{proof assistant} like
+\kl{Coq} or Lean one can easily check if a given \kl{type} is inductive.}. Then
+the \action{Induction} action will simply apply the associated induction scheme.
+In our commutativity example, we can thus start the proof like so:
 $$\select{\forall n \in \nats.\ \forall m \in \nats.\ n + m = m + n} \qquad
 \text{(\action{Induction})}$$
 which performs an induction on $n$, generating the two following \kl{subgoals}:

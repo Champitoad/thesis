@@ -3,6 +3,10 @@
 \chapter{Parallel Conclusions and Classical Logic}
 \labch{sfl-classical}
 
+
+\begin{scope}\knowledgeimport{sfl}
+
+
 In virtually every \kl{proof assistant}, the \kl{goals} the user is faced with are
 \kl{sequents} of the form $\Gamma \seq C$, with a \emph{single} conclusion $C$ to be
 proved under many hypotheses in $\Gamma$. Historically, this form of \kl{sequent} was
@@ -54,13 +58,13 @@ One could imagine performing the same proof in \kl{Actema} by successively click
 on these principal formulas, following a bottom-up reading of the \kl{sequent
 calculus} derivation seen as the trace of a proof search process. First we decide
 to prove $A \lor \neg A$: this amounts to proving alternatively $A$ or $\neg
-A$, which now appear as two separate red items in the same tab. Then we try to
+A$, which now appear as two separate red \kl{items} in the same tab. Then we try to
 prove $\neg A$, with the usual method of supposing $A$ to find a contradiction.
 However instead of a contradiction, we decide to backtrack and prove the
 alternative conclusion $A$, which is now trivial by assumption. We come back to
 these multi-conclusion click actions in \refsec{classical-click}.
 
-It is clear in the proof that the negative occurrence of $A$ in $\neg A$ is the
+It is clear in the proof that the \kl{negative} occurrence of $A$ in $\neg A$ is the
 one that becomes the assumption $A$ that justifies the conclusion $A$ in the
 last step. It would be natural to specify this causal relationship by linking
 directly the two occurrences of $A$, as we do with \kl{DnD} actions in \kl{Actema}.
@@ -204,7 +208,7 @@ implication $\limp$ connectives; and for the latter, only in the case when there
 are at least two parallel conclusions, and thus implicitly a disjunction. Then
 it is interesting to notice that the \kl{classical} behavior of the other connectives
 ($\bot, \land, \forall, \exists$) essentially arises from their interaction with
-(positive) disjunctive statements.
+(\kl{positive}) disjunctive statements.
 
 If we stick to \kl{intuitionistic} logic, the benefits of having multiple conclusions
 are unclear. Indeed while the {\rsf{\lor R}} rule is \kl{invertible}, the
@@ -243,11 +247,11 @@ When dealing with quantifiers, the situation is not so simple: if one wants
 formula being instantiated, which can be seen as the root cause of
 undecidability in \kl{predicate logic} as noted by
 Girard\cite[Section~3.3.2]{girard:hal-01322183}. This is already what happens in
-Actema for the universal quantifier: dropping a term $t$ on a blue item $\forall
+Actema for the universal quantifier: dropping a term $t$ on a blue \kl{item} $\forall
 x. A$ will produce a new hypothesis $\subst{A}{t}{x}$, while keeping the
-original $\forall x. A$ item. This corresponds to the \kl{invertible}
+original $\forall x. A$ \kl{item}. This corresponds to the \kl{invertible}
 \kl{left introduction rule} of \kl{G3c} ({\rsf{\forall L*}} in \reffig{multi-inst}).
-But in the single-conclusion framework, dropping a term $t$ on a red item
+But in the single-conclusion framework, dropping a term $t$ on a red \kl{item}
 $\exists x. A$ necessarily replaces it by the instantiated conclusion
 $\subst{A}{t}{x}$. Allowing multiple conclusions circumvents this problem and
 restores the symmetry between $\forall$ and $\exists$, since we can create a new
@@ -360,16 +364,16 @@ $$
 
 The other rules of \reffig{parallel} handle the rewriting of parallel \kl{linkages},
 and were conceived as the dual counterpart of \kl(dnd){forward} rules. Indeed, while a
-\kl(dnd){forward} \kl{linkage} combines two negative subformulas in the same \kl{context} to produce
-a new \emph{hypothesis}, a parallel \kl{linkage} combines two positive subformulas in
+\kl(dnd){forward} \kl{linkage} combines two \kl{negative} subformulas in the same \kl{context} to produce
+a new \emph{hypothesis}, a parallel \kl{linkage} combines two \kl{positive} subformulas in
 the same \kl{context} to produce a new \emph{conclusion}. \kl(dnd){Backward} \kl{linkages} can then
 be seen as mediating between these two opposite modes of reasoning, by handling
-the interaction of a positive and a negative subformula in the same \kl{context}. A
+the interaction of a \kl{positive} and a \kl{negative} subformula in the same \kl{context}. A
 schematic view of the back and forth between the different modes through the 4
 \kl{rewriting rules} that change \kl{interaction operators} is provided in
 \reffig{modes-schema}. Notice that the latter correspond exactly to the rules
 that handle interaction with the antecedant of an implication: this is because
-it is the only way to switch polarity when descending into a direct subformula,
+it is the only way to switch \kl{polarity} when descending into a direct subformula,
 which is what triggers the change of mode.
 
 \section{Metatheory of parallel reasoning}
@@ -398,7 +402,7 @@ only show that the rules of \reffig{parallel} are sufficient for our purpose, by
 extending the results of \refch{sfl} to the \kl{classical}, multi-conclusion setting.
 
 We start by updating the validity criterion on \kl{linkages}, more specifically we
-drop Clause \ref{clause:intuit} of Condition \ref{cond:pol} about the polarities
+drop Clause \ref{clause:intuit} of Condition \ref{cond:pol} about the \kl{polarities}
 of linked subformulas. Indeed it was introduced precisely to forbid behaviors
 which only make sense in \kl{classical} logic, but are now given a semantics with the
 {\rsf{L{\limp}_1}} rule. We also need to add a case for the $\para$ operator
@@ -423,15 +427,15 @@ updated condition:
   \begin{enumerate}
     \item if $B\hole$ holds the equality, then it must be:
       \begin{enumerate}
-        \item positive if $\link = \back$;
-        \item positive if $\link = \forw$;
-        \item negative if $\link = \para$;
+        \item \kl{positive} if $\link = \back$;
+        \item \kl{positive} if $\link = \forw$;
+        \item \kl{negative} if $\link = \para$;
       \end{enumerate}
     \item if $D\hole$ holds the equality, then it must be:
       \begin{enumerate} 
-        \item negative if $\link = \back$;
-        \item positive if $\link = \forw$.
-        \item negative if $\link = \para$.
+        \item \kl{negative} if $\link = \back$;
+        \item \kl{positive} if $\link = \forw$.
+        \item \kl{negative} if $\link = \para$.
       \end{enumerate}
   \end{enumerate}
 \end{condition}
@@ -452,21 +456,21 @@ inspecting each parallel rule, and we already mentioned that the \kl(dnd){backwa
 conclusions, thus one needs to use rules from a multi-succedant calculus such as
 \kl{G3c} \cite{negri_structural_2001}.
 
-Polarity preservation (Fact \ref{prop:rules-preserve-polarity}) is also true
+\kl{Polarity} preservation (Fact \ref{prop:rules-preserve-polarity}) is also true
 with $\para$, we just need to add the missing cases from \reffig{modes-schema}:
 \begin{itemize}
   \item If $C\select{A \para B} \step{} C'\select{A' \para B'}$ then $C\hole$ and
-  $C'\hole$ have the same polarity.
+  $C'\hole$ have the same \kl{polarity}.
   \item If $C\select{A \back B} \step{} C'\select{A' \para B'}$ (resp. $C\select{A
   \para B} \step{} C'\select{A' \back B'}$) then $C\hole$ and $C'\hole$ have the
-  same polarity.
+  same \kl{polarity}.
 \end{itemize}
 The proof of Lemma \ref{lemma:rewriting-valid-in-context} is also extended
 straightforwardly. We only write the added case for $\para$ in the proof of the
 first statement:
 \begin{itemize}
   \item $\link = \para$: by Fact \ref{prop:rules-preserve-polarity}, $C'$ must
-  be positive. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
+  be \kl{positive}. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
   \lor B'}$. By Lemma \ref{lemma:rules-valid-in-context} we have
   $C'\select{A' \lor B'} \seq C^+\select{A \limp B}$. Thus by transitivity
   $\lint{D} \seq C^+\select{A \limp B}$.
@@ -487,3 +491,6 @@ that were not \kl{invertible} in \kl{intuitionistic} logic become \kl{invertible
 logic. Therefore the dynamics of \kl{focusing} should be different, and it might be
 interesting to compare the behaviors of \kl{intuitionistic} and \kl{classical} \kl{DnD} actions
 on specific examples.
+
+
+\end{scope}

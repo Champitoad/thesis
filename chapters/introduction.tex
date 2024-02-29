@@ -558,9 +558,9 @@ equational reasoning that mathematicians are accustomed to in algebra. The main
 difference is that most rules (including the \kl{switch rule} \rsf{s}) can only
 be applied in a \emph{single} direction, because the premiss and conclusion are
 not \emph{equivalent}\sidenote{In the standard system \kl{SKS} from where the
-\kl{s} rule originates, every context is \emph{positive}, in the sense that the
+\kl{s} rule originates, every context is \emph{\kl(sfl){positive}}, in the sense that the
 hole $\hole$ never occurs under a negation $\neg$ or left-hand side of an
-implication $\limp$; otherwise the rule would need to be restricted to positive
+implication $\limp$; otherwise the rule would need to be restricted to \kl{positive}
 contexts to stay valid. See \refsec{eg-completeness} for more details on
 \kl{SKS}.}. When the premiss and conclusion of a rule are equivalent, we say
 that the rule is \intro{invertible}.
@@ -1141,21 +1141,21 @@ frontend.
   to the factorization of both \kl{forward} and \kl{backward} reasoning steps in
   proofs.
 
-  \AP
-  \refch{bubbles} presents the \emph{asymmetric} \kl{bubble calculus} \kl{BJ}
-  for \kl{intuitionistic} logic, modelled after the \emph{asymmetric} \kl{sequents} of the \kl{intuitionistic} \kl{sequent calculus} \kl{LJ} of Gentzen. It
-  introduces the \kl{metaphor} of \intro{bubbles} as a way to \kl{iconically}
-  represent the separation and sharing of contexts between different
-  \kl{subgoals}.
+  \AP \refch{bubbles} presents the \emph{asymmetric} \kl{bubble calculus}
+  \kl{BJ} for \kl{intuitionistic} logic, modelled after the \emph{asymmetric}
+  \kl{sequents} of the \kl{intuitionistic} \kl{sequent calculus} \kl{LJ} of
+  Gentzen. It introduces the \kl{metaphor} of \intro{bubbles} as a way to
+  \kl{iconically} represent the separation and sharing of contexts between
+  different \kl{subgoals}.
 
-  \AP
-  \refch{bubbles-symm} refines \kl{BJ} into a more general and symmetric
+  \AP \refch{bubbles-symm} refines \kl{BJ} into a more general and symmetric
   calculus for \kl{classical} logic called \intro{system~B}, where \kl{bubbles}
-  can be \emph{polarized} in addition to formulas. \kl{Intuitionistic},
-  \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic can be recovered as
-  fragments of \kl{system~B}, by forbidding certain \kl{inference rules} that
-  characterize the \emph{porosity} of bubbles. We also devise a fully \kl{invertible}
-  variant of \kl{system~B}, that we conjecture to be complete.
+  can be \emph{\kl(bubble){polarized}} in addition to formulas.
+  \kl{Intuitionistic}, \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic
+  can be recovered as fragments of \kl{system~B}, by forbidding certain
+  \kl{inference rules} that characterize the \emph{porosity} of bubbles. We also
+  devise a fully \kl{invertible} variant of \kl{system~B}, that we conjecture to
+  be complete.
   
   \item[Existential graphs] In the last two chapters, we study two systems based
   on the \kl{existential graphs} of Peirce, that allow us to achieve \emph{full

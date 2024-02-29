@@ -18,18 +18,22 @@ would feel the benefit of it.}{\textbf{Charles S. Peirce}, \textit{Prolegomena
 to an Apology for Pragmaticism}, 1906}
 
 
-C. S. Peirce is famous for his contributions to \kl{symbolic} logic, including among
-others his eponymous law for \kl{classical} logic, and his pioneering work on the
-algebra of relations and quantification \sidecite{peirce_algebra_1885}. But far
-less widespread are his achievements in the realm of graphical logic, or
-\emph{\kl{iconic} logic} as Shin calls it \sidecite{10.7551/mitpress/3633.001.0001}.
-He dedicated a large chunk of his life to the investigation of \kl{diagrammatic}
-systems, starting in 1882 with the \emph{entitative graphs} and culminating with
-the \kl{existential graphs} (\kl{EGs}), which he developed from 1896 until his
-death in 1914 \sidecite{Roberts+1973}. Interestingly, Peirce perceived
-\kl{existential graphs} as his \textit{``chef d'oeuvre''}, and that they
-\textit{``ought to be the logic of the future''}\sidenote{Both citations are
-sourced in \cite[p.~11]{Roberts+1973}.}.
+\begin{scope}\knowledgeimport{eg}
+
+
+C. S. Peirce is famous for his contributions to \kl{symbolic} logic, including
+among others his eponymous law for \kl{classical} logic, and his pioneering work
+on the algebra of relations and quantification \sidecite{peirce_algebra_1885}.
+But far less widespread are his achievements in the realm of graphical logic, or
+\emph{\kl{iconic} logic} as Shin calls it
+\sidecite{10.7551/mitpress/3633.001.0001}. He dedicated a large chunk of his
+life to the investigation of \kl{diagrammatic} systems, starting in 1882 with
+the \emph{entitative graphs} and culminating with the \kl{existential graphs}
+(\kl{EGs}), which he developed from 1896 until his death in 1914
+\sidecite{Roberts+1973}. Interestingly, Peirce perceived \kl{existential graphs}
+as his \textit{``chef d'oeuvre''}, and that they \textit{``ought to be the logic
+of the future''}\sidenote{Both citations are sourced in
+\cite[p.~11]{Roberts+1973}.}.
 
 Recent works have started to realize this vision: for example Sowa based his
 conceptual graphs for computerized knowledge representation on \kl{EGs}
@@ -47,44 +51,44 @@ our work will constitute one more step towards the vision Peirce had in mind.
 
 In this chapter, we propose a self-contained exposition of \kl{EGs}, that tries
 at the same time to be faithful to the original presentation of the systems by
-Peirce, and more modern in some aspects of their formalization. The \kl{goal} will be
-to familiarize the reader with the unique approach to proofs inherent to
+Peirce, and more modern in some aspects of their formalization. The \kl{goal}
+will be to familiarize the reader with the unique approach to proofs inherent to
 \kl{EGs}, which can be difficult to relate to more standard frameworks like
-\kl[Hilbert system]{Hilbert} and \kl[Gentzen system]{Gentzen} \kl{proof systems}, and
-even \kl{deep inference} \kl{proof systems} like the \kl{calculus of structures}.
-This shall prove useful to get a good understanding of the historical and
-technical foundations behind our \emph{flower calculus}, to be introduced in
-\refch{flowers}.
+\kl[Hilbert system]{Hilbert} and \kl[Gentzen system]{Gentzen} \kl{proof
+systems}, and even \kl{deep inference} \kl{proof systems} like the \kl{calculus
+of structures}. This shall prove useful to get a good understanding of the
+historical and technical foundations behind our \emph{flower calculus}, to be
+introduced in \refch{flowers}.
 
 The chapter is organized as follows: we start in \refsec{alpha} by presenting
-the \kl{diagrammatic} syntax of the system \kl{Alpha} of \kl{EGs} for \kl{classical}
-propositional logic. In \refsec{illative}, we introduce the \kl{inference rules} of
-\kl{Alpha} for manipulating \kl{existential graphs}, called \emph{illative
-transformations} by Peirce. In \refsec{multisets}, we give an equivalent
-formulation of the syntax and rules of \kl{Alpha} as a \emph{multiset} \kl{rewriting
-system}. In \refsec{atomicity}, we formalize a variant of the (de)iteration
-principle described by Peirce in \sidecite{peirce_prolegomena_1906} that
-eliminates the need for the double-\kl{cut} principle, and discuss how it was
-motivated by Peirce's quest for \emph{illative atomicity}. In
-\refsec{eg-soundness}, we take advantage of our reformulation to give a simple
-proof of soundness for \kl{Alpha}, based on a direct truth-evaluation of graphs.
-In \refsec{eg-completeness} we give a syntactic proof of completeness for
-\kl{Alpha}, by simulating the \kl{calculus of structures} \intro{SKS} of Brünnler and
-Tiu \sidecite{brunnler_local_2001}. In this way, \kl{Alpha} is shown to have
-subsystems that inherit the \emph{locality} property of \kl{SKS}, and where the
-deletion and insertion rules are respectively \kl{admissible} for \emph{provability}
-and \emph{refutability}, making \kl{Alpha} \emph{\kl{analytic}}. In \refsec{beta}, we
-illustrate the original mechanism of \emph{lines of identity} used by Peirce to
-handle quantifiers and equality in his \kl{Beta} system. We end in
-\refsec{gardens} by showing how to recast lines of identity in a more
-traditional binder-based syntax.
+the \kl{diagrammatic} syntax of the system \kl{Alpha} of \kl{EGs} for
+\kl{classical} propositional logic. In \refsec{illative}, we introduce the
+\kl{inference rules} of \kl{Alpha} for manipulating \kl{existential graphs},
+called \emph{illative transformations} by Peirce. In \refsec{multisets}, we give
+an equivalent formulation of the syntax and rules of \kl{Alpha} as a
+\emph{multiset} \kl{rewriting system}. In \refsec{atomicity}, we formalize a
+variant of the (de)iteration principle described by Peirce in
+\sidecite{peirce_prolegomena_1906} that eliminates the need for the
+double-\kl{cut} principle, and discuss how it was motivated by Peirce's quest
+for \emph{illative atomicity}. In \refsec{eg-soundness}, we take advantage of
+our reformulation to give a simple proof of soundness for \kl{Alpha}, based on a
+direct truth-evaluation of graphs. In \refsec{eg-completeness} we give a
+syntactic proof of completeness for \kl{Alpha}, by simulating the \kl{calculus
+of structures} \intro{SKS} of Brünnler and Tiu \sidecite{brunnler_local_2001}.
+In this way, \kl{Alpha} is shown to have subsystems that inherit the
+\emph{locality} property of \kl{SKS}, and where the deletion and insertion rules
+are respectively \kl{admissible} for \emph{provability} and \emph{refutability},
+making \kl{Alpha} \emph{\kl{analytic}}. In \refsec{beta}, we illustrate the
+original mechanism of \emph{lines of identity} used by Peirce to handle
+quantifiers and equality in his \kl{Beta} system. We end in \refsec{gardens} by
+showing how to recast lines of identity in a more traditional binder-based
+syntax.
 
 % \todo{IDEA (where should we put it?): \emph{superposition of polarities} in
 % existential graphs. While a cut in bubble calculi is the insertion of \emph{two}
 % occurrences of the same formula with \emph{distinct} polarities, the insertion
 % rule only introduces \emph{one} occurrence of the formula, which plays either a
 % negative role when it is iterated, or a positive role when it is deiterated}
-
 
 \section{\kl{Alpha} graphs}\labsec{alpha}
 
@@ -211,7 +215,7 @@ absurdity $\bot \defeq \neg\top$, \kl{classical} disjunction $A \lor B \defeq
 \neg(\neg A \land \neg B)$ and \kl{classical} implication $A \limp B \defeq \neg (A
 \land \neg B)$ can be expressed by the following three \kl{graphs}\sidenote{Note the
 resemblance with the translation of formulas as \kl{solutions} in
-\reffig{bubbles-native}, in particular for negative disjunctions.}:
+\reffig{bubbles-native}, in particular for \kl{negative} disjunctions.}:
 \begin{mathpar}
   \pcut{\phantom{A}}
   \and
@@ -264,13 +268,13 @@ of \kl{deep inference} system.
 
 \begin{marginfigure}
   $$\ncut{a~~~\pcut{\ncut{b}~~~c}}$$
-  \caption{Peirce's notation for emphasizing negative areas}
+  \caption{Peirce's notation for emphasizing \kl{negative} areas}
   \labfig{peirce-neg-areas}
 \end{marginfigure}
 
 \begin{marginfigure}
   $$\oncut{a~~~\opcut{\oncut{b}~~~c}}$$
-  \caption{Drawing negative areas literally in negative}
+  \caption{Drawing \kl{negative} areas literally in negative}
   \labfig{our-neg-areas}
 \end{marginfigure}
 
@@ -278,13 +282,13 @@ of \kl{deep inference} system.
 
 Before introducing the rules, let us make a small change in the way we depict
 the \kl{graphs}. The idea is that we want to visualize more clearly the
-\emph{polarity} of any \kl{subgraph} $G$, understood as the \emph{parity} of the
+\intro{polarity} of any \kl{subgraph} $G$, understood as the \emph{parity} of the
 number of \kl{cuts} (negations) enclosing $G$. In one of his unpublished manuscripts
-(Ms 514), Peirce did this by \emph{shading} negative areas --- those enclosed in
+(Ms 514), Peirce did this by \emph{shading} \kl{negative} areas --- those enclosed in
 an odd number of \kl{cuts} --- in gray, as illustrated in \reffig{peirce-neg-areas}
 \sidecite{sowa_peirces_2011}. Unconstrained by hand-drawing, one could adopt an
-even more \kl{iconic} notation, where negative areas are \emph{literally} drawn like
-a negative in photography, by inverting white and black. The example of
+even more \kl{iconic} notation, where \kl{negative} areas are \emph{literally} drawn like
+a \kl{negative} in photography, by inverting white and black. The example of
 \reffig{peirce-neg-areas} would then be drawn as in \reffig{our-neg-areas}.
 However in this thesis, we will stick to Peirce's notation, which is both less
 straining for the eyes by being less contrasted, and more economical in ink for
@@ -296,14 +300,14 @@ information is immediately apparent in the \kl{subgraph}, and thus completely
 are attached to them as explicit labels.}.
 
 \begin{remark}\labremark{eg-polarity}
-  Whereas in \kl{bubble calculi} the concept of polarity was understood as a property
-  of \emph{objects} --- i.e. utterances of propositions --- by assigning them
-  opposite colors (blue and red), the previous notations for \kl{graphs} suggest that
-  it is instead a property of the \emph{space} in which objects reside. This is
-  more natural from the point of view of \emph{game semantics}: for instance in
-  a game of chess, the two players can easily exchange their roles by switching
-  places or rotating the board by 180°, rather than by repainting laboriously
-  each piece in the opposite color.
+  Whereas in \kl{bubble calculi} the concept of \kl(bubble){polarity} was
+  understood as a property of \emph{objects} --- i.e. utterances of propositions
+  --- by assigning them opposite colors (blue and red), the previous notations
+  for \kl{graphs} suggest that it is instead a property of the \emph{space} in
+  which objects reside. This is more natural from the point of view of
+  \emph{game semantics}: for instance in a game of chess, the two players can
+  easily exchange their roles by switching places or rotating the board by 180°,
+  rather than by repainting laboriously each piece in the opposite color.
 \end{remark}
 
 \paragraph{Inference rules}
@@ -327,7 +331,7 @@ anticipated many developments in computer science and information technologies,
 such as the use of electrical switches to compute boolean functions, whose
 invention is usually attributed to Claude Shannon.}. The first two rules are the
 most powerful and mysterious in all systems of \kl{EGs}, and can be applied in areas
-of any polarity:
+of any \kl{polarity}:
 \begin{itemize}
   \item[\textbf{Iteration} \textit{(Copy \& Paste)}]
     A \kl{graph} $G$ may be duplicated at any depth inside of a juxtaposed \kl{graph} $H$.
@@ -346,7 +350,7 @@ of any polarity:
     of \emph{justified move} in game semantics, where the nesting of \kl{cuts} in the
     \kl{context} $H\hole$ corresponds to a sequence of alternating moves between
     Player and Opponent.}. Note that while in the identity axiom, the justifying
-    (resp. justified) occurrence must be a negative hypothesis (resp. a positive
+    (resp. justified) occurrence must be a \kl{negative} hypothesis (resp. a \kl{positive}
     conclusion), the \kl{Iteration} rule also allows the opposite relationship
     of a conclusion justifying a hypothesis, thus also exhibiting one aspect of
     the \emph{cut} rule of \kl{sequent calculus}.
@@ -374,18 +378,18 @@ of any polarity:
     \emph{\kl{contraction}} rule, the base case where $H\hole = \hole$ giving $G~G
     ~\step{}~ G$.
 \end{itemize}
-The applicability of the next two rules depends on the polarity of the
+The applicability of the next two rules depends on the \kl{polarity} of the
 \kl{subgraph}'s area:
 \begin{itemize}
   \item[\textbf{Insertion}]
-    Any \kl{graph} $G$ may be inserted in a negative area:
+    Any \kl{graph} $G$ may be inserted in a \kl{negative} area:
     $$\nsheet{~~~\step{}~~~ G}$$
     This is akin to a \emph{\kl{weakening}} rule, stating that if a proposition is
     known to be true, one might add (useless) hypotheses at will. The closest
     equivalent we found in the \kl{deep inference} literature is indeed the \kl{weakening}
     rule \kl{wl{\da}} of \kl{ISp} in \sidecite{tiu_local_2006}.
   \item[\textbf{Deletion}]
-    Any \kl{graph} $G$ occurring in a positive area may be erased:
+    Any \kl{graph} $G$ occurring in a \kl{positive} area may be erased:
     $$G ~~~\step{}~~~$$
     
     This is exactly the dual of \kl{Insertion}, stating that if a proposition
@@ -416,16 +420,16 @@ The last rule is more of a \emph{space management} principle that works as an
     \semequiv A$, where in particular the deletion direction $\neg\neg A \limp A$
     is not true \kl{intuitionistically}. Topollogically, the double-\kl{cut} forms a
     \emph{ring}, that separates $G$ from the rest of $\SA$ while preserving its
-    polarity. Then the two directions of the rules can be understood as the
+    \kl{polarity}. Then the two directions of the rules can be understood as the
     following dual \emph{homotopies}:
     \begin{itemize}
       \item[\textbf{Contraction}] The ring is created by cutting $\SA$ around
       $G$, and then \emph{contracting} the inner area where $G$ resides on
       itself. This effectively ``pulls apart'' $G$ from the rest of the sheet,
       leaving apparent in the empty space of the ring whatever lies behind
-      $\SA$. Peirce thought of positive and negative areas as being the
-      \emph{recto} and \emph{verso} of $\SA$, respectively. Thus in the positive
-      version of the rule (on the left), the ring would represent negative empty
+      $\SA$. Peirce thought of \kl{positive} and \kl{negative} areas as being the
+      \emph{recto} and \emph{verso} of $\SA$, respectively. Thus in the \kl{positive}
+      version of the rule (on the left), the ring would represent \kl{negative} empty
       space on the verso of $\SA$.
       \item[\textbf{Expansion}] The ring is erased by \emph{expanding} the inner
       area where $G$ resides towards the outer border of the ring. Unfolding the
@@ -526,9 +530,9 @@ define the graphs of \kl{Alpha} as (recursive) \emph{finite multisets}:
 The terminology written in parentheses is the one used by Peirce to denote the
 same concepts in \sidecite{peirce_prolegomena_1906}. Note the similarity with
 the definitions of \kl{bubbles} (enclosures) and solutions (areas)
-(\refdef{solution}). The main difference between \kl{graphs} and solutions,
-is that in the former formulas (ions) are restricted to atoms (spots), and they
-are not \emph{polarized} (see \refremark{eg-polarity}).
+(\refdef{solution}). The main difference between \kl{graphs} and solutions, is
+that in the former formulas (ions) are restricted to atoms (spots), and they are
+not \emph{\kl(bubble){polarized}} (see \refremark{eg-polarity}).
 
 The five rules of \kl{Alpha} can now be formalized as multiset \kl{rewriting rules}
 on \kl{graphs}. But first, we need a notion of \emph{context} in which rules
@@ -565,8 +569,9 @@ an \kl{graph} is to insert \emph{\kl{cuts}}, and thus the depth of a
 \end{definition}
 
 \begin{definition}[Polarity]
-  We say that a \kl{context} $G\hole$ is \emph{positive} if $\inv(G\hole)$ is
-  even, and \emph{negative} otherwise. We denote positive and negative \kl{contexts}
+  \phantomintro{polarity}
+  We say that a \kl{context} $G\hole$ is \intro{positive} if $\inv(G\hole)$ is
+  even, and \intro{negative} otherwise. We denote \kl{positive} and \kl{negative} \kl{contexts}
   respectively by $G^+\hole$ and $G^-\hole$.
 \end{definition}
 
@@ -797,12 +802,12 @@ rules are a restriction of the original ones in two respects:
   from \cite{minghui_graphical_2019}, where the authors define the same notion
   informally for an \kl{intuitionistic} variant of \kl{EGs}.}.
   \item[Polarity] In the atomic iteration (resp. deiteration) rules, the
-  justified \kl{context} must be positive (resp. negative), while it can have an
-  arbitrary polarity in the original rules. This is expressed by splitting each
-  of the latter into two rules, one where the outer \kl{context} $K\hole$ is positive
-  ($\kl{Iter{+}},\kl{Deit{+}}$), and one where it is negative
+  justified \kl{context} must be \kl{positive} (resp. \kl{negative}), while it can have an
+  arbitrary \kl{polarity} in the original rules. This is expressed by splitting each
+  of the latter into two rules, one where the outer \kl{context} $K\hole$ is \kl{positive}
+  ($\kl{Iter{+}},\kl{Deit{+}}$), and one where it is \kl{negative}
   ($\kl{Iter{-}},\kl{Deit{-}}$). Again, this does not alter their deductive
-  power: every iteration (resp. deiteration) in a negative (resp. positive)
+  power: every iteration (resp. deiteration) in a \kl{negative} (resp. \kl{positive})
   \kl{context} can be trivially performed by an instance of the \kl{Ins} (resp.
   \kl{Del}) rule. Thus atomic rules eliminate a redundancy of \kl{Alpha},
   where many insertions/omissions could be interpreted as instances of either
@@ -911,9 +916,9 @@ from the following \emph{functoriality} lemmas:
   \leq v(H)$, we have:
   \begin{enumerate}
     \item $v\left(K\select{G}\right) \leq v\left(K\select{H}\right)$ if $K\hole$
-    is positive;
+    is \kl{positive};
     \item $v\left(K\select{H}\right) \leq v\left(K\select{G}\right)$ if $K\hole$
-    is negative.
+    is \kl{negative}.
   \end{enumerate}
 \end{lemma}
 \begin{proof}
@@ -933,7 +938,7 @@ from the following \emph{functoriality} lemmas:
         \end{array}
         $$
 
-        \item We have $\gdepth{K\hole} > 0$ since $K\hole$ is negative.
+        \item We have $\gdepth{K\hole} > 0$ since $K\hole$ is \kl{negative}.
         Contradiction.
       \end{enumerate}
     \item[\rcase~($\gdepth{K\hole} > 0$)]\sbr
@@ -1008,7 +1013,7 @@ setting.
   structures \kl{SKSg} in \kl{Alpha}, and also conversely a simulation of
   \kl{Alpha} in \kl{SKSg}. While they do a similar comparison of features
   between the two systems, in particular concerning their treatment of symmetry
-  and polarity, our work differs mainly in two respects:
+  and \kl{polarity}, our work differs mainly in two respects:
   \begin{description}
     \item[Locality] \kl{SKS} is the \emph{local} version of \kl{SKSg}, thus we
     briefly comment on locality in \kl{SKS} and \kl{Alpha} and what our
@@ -1078,11 +1083,11 @@ the usual notion of \kl{context} as a structure with a \kl{hole}.
 \end{definition}
 
 \begin{remark}\labremark{sks-ctx-pol}
-  \kl{Contexts} for structures are always \emph{positive}, since negation is pushed
+  \kl{Contexts} for structures are always \emph{\kl{positive}}, since negation is pushed
 down to atoms. This is the opposite situation from that of \kl{Alpha}, where
 negation is the \emph{only} construct that can increase the depth of a \kl{graph}.
 This explains why some rules in \kl{Alpha} need explicit indications for the
-polarity of the \kl{context} in which they apply.
+\kl{polarity} of the \kl{context} in which they apply.
 \end{remark}
 
 The rules of \kl{SKS} satisfy two notable properties:
@@ -1095,7 +1100,7 @@ The rules of \kl{SKS} satisfy two notable properties:
     ending with $\ua$. This corresponds to all rules except the \emph{switch}
     rule \kl{s} and the \emph{medial} rule \kl{m} which are self-dual, i.e.
     $\dmdual{\kl{s}} = \kl{s}$ and $\dmdual{\kl{m}} = \kl{m}$. In \kl{Alpha},
-    duality is captured in the \emph{polarity} of \kl{contexts} rather than through
+    duality is captured in the \emph{\kl{polarity}} of \kl{contexts} rather than through
     De Morgan's laws:
     
     \begin{fact}[Duality]\labfact{eg-duality}
@@ -1110,7 +1115,7 @@ The rules of \kl{SKS} satisfy two notable properties:
 
     \begin{remark}\labremark{eg-intuitionism}
       
-    Contrary to De Morgan duality, the notion of polarity of a \kl{context} also
+    Contrary to De Morgan duality, the notion of \kl{polarity} of a \kl{context} also
     exists in \kl{intuitionistic} logic, and is in fact used in the same way to
     obtain dual rules in the \kl{intuitionistic} \kl{calculus of structures} \kl{SISa} of
     Tiu \cite{tiu_local_2006}. This constitutes one more argument in favor of
@@ -1161,10 +1166,10 @@ functional completeness of $\{\land, \neg\}$ (see \refsec{alpha}):
 \end{definition}
 
 As per \refremark{sks-ctx-pol}, the translation of a structure \kl{context} (where
-the \kl{hole} is translated as itself) will always be positive:
+the \kl{hole} is translated as itself) will always be \kl{positive}:
 
 \begin{fact}\labfact{strans-pos}
-  For every \kl{context} $S\hole$, $\strans{S\hole}$ is positive.
+  For every \kl{context} $S\hole$, $\strans{S\hole}$ is \kl{positive}.
 \end{fact}
 \begin{proof}
   By a straightforward recurrence on $\gdepth{S\hole}$.
@@ -1185,11 +1190,11 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
 \begin{proof}
   Since all rules of \kl{Alpha} apply in a \kl{context} of unbounded depth, we know
   that there are some \kl{graphs} $G_0, H_0$ and \kl{context} $K'\hole$ such that $G =
-  K'\select{G_0}$ and $H = K'\select{H_0}$. Then either $K'\hole$ is positive,
+  K'\select{G_0}$ and $H = K'\select{H_0}$. Then either $K'\hole$ is \kl{positive},
   and $\inv(K^+\select{K'\hole}) = \inv(K^+\hole) + \inv(K'\hole)$ is even since
-  it is the sum of two even numbers; or $K'\hole$ is negative, and
+  it is the sum of two even numbers; or $K'\hole$ is \kl{negative}, and
   $\inv(K^+\select{K'\hole})$ is odd since it is the sum of an even and an odd
-  number. In both cases $K^+\select{K'\hole}$ has the same polarity as
+  number. In both cases $K^+\select{K'\hole}$ has the same \kl{polarity} as
   $K'\hole$, and thus the same rule can be applied.
 \end{proof}
 
@@ -1634,7 +1639,7 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
 \begin{description}
   \item[Binder] As we have just seen, one function of LoI is to \emph{quantify}
   over individuals. For now we have only considered LoI located at the top-level
-  of $\SA$, i.e. in a \emph{positive} area, where they are given
+  of $\SA$, i.e. in a \emph{\kl{positive}} area, where they are given
   \emph{existential} force. If we were to negate the \kl{graph}
   (\ref{eq:sitting-socrates}) by enclosing it in a \kl{cut}, we would get a \kl{graph}
   expressing the negation of formula (\ref{eq:sitting-socrates-fo}), which by De
@@ -1664,8 +1669,8 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
   \neg \exists x. P(x)$.
 
   From these observations, we get that the type of quantification performed by a
-  LoI is fully captured by its location: existential in a positive area,
-  universal in a negative area. This leads us to analyze the syntax of LoI into
+  LoI is fully captured by its location: existential in a \kl{positive} area,
+  universal in a \kl{negative} area. This leads us to analyze the syntax of LoI into
   two components: so-called \emph{binders} that encode \emph{quantifiers} as
   distinguished heavy dots on $\SA$ like those of
   \reffig{eg-forall}\sidenote{Peirce liked to insist that LoI should be drawn as
@@ -1778,8 +1783,8 @@ pipes\sidenote{If one wants to keep the wire \kl{metaphor}, joining two LoI can 
 interpreted as just putting in contact two wires. Then electrical current can
 flow from one wire to the other, but the problem resides elsewhere, at the
 \emph{illative} level: indeed nothing prevents us from separating back the two
-wires, or connecting two initially disjoint wires. But in a negative (resp.
-positive) \kl{context}, the former (resp. latter) action corresponds to forgetting a
+wires, or connecting two initially disjoint wires. But in a \kl{negative} (resp.
+\kl{positive}) \kl{context}, the former (resp. latter) action corresponds to forgetting a
 possibly necessary equality hypothesis between two variables (resp. identifying
 two possibly distinct individuals), which is not valid logically speaking. To
 prevent this, one needs to do more than just put the two wires in contact with
@@ -1835,10 +1840,10 @@ what is more linear than a line?}.
   retract) any LoI inside (resp. outside) a \kl{cut}:
   $$\tikzfig{1}{0.5}{eg-iter-loi-left} ~~~\leftrightarrow~~~ \tikzfig{1}{0.5}{eg-iter-loi-right}$$
 
-  \item[Insertion/Deletion] Every pair of binders residing in the same negative
+  \item[Insertion/Deletion] Every pair of binders residing in the same \kl{negative}
   area can be connected and replaced by a wire (\kl{Insertion}):
   $$\nsheet{\tikzfig{1}{0.5}{eg-delins-loi-left}~~~\step{}~~~\tikzfig{1}{0.5}{eg-delins-loi-right}}$$
-  Dually, every wire in a positive area can be severed in two, capping off the
+  Dually, every wire in a \kl{positive} area can be severed in two, capping off the
   newly created ends with two binders (\kl{Deletion}):
   $$\tikzfig{1}{0.5}{eg-delins-loi-right}~~~\step{}~~~\tikzfig{1}{0.5}{eg-delins-loi-left}$$
   By reading the rules from right to left --- i.e. in \emph{proof search} mode,
@@ -2131,4 +2136,6 @@ of capture-avoiding substitution:
 Also, this system supports free variables, and there is no need to forbid them
 like Peirce did in his original LoI-based syntax.
 
+
+\end{scope}
 \end{scope}

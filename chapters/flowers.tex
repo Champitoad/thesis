@@ -14,6 +14,10 @@ flowers you pick, at least one is bound to be blue, doesn't it?" The second
 student said: "Of course not!". Which student was right, and why?
 }{\textbf{Raymond Smullyan}, \textit{The Flower Garden}, 1985}
 
+
+\begin{scope}\knowledgeimport{flowers}
+
+
 We introduce the \emph{flower calculus}, a novel \kl{proof system} for
 \kl{intuitionistic} \kl{predicate logic} based on syntactic objects called
 \emph{flowers}. We start by explaining how flowers stem from considerations in
@@ -365,20 +369,21 @@ expressing the universal quantification $\forall x. p(x)$, and the case where
 $\gamma \deq \garden{\emptyset}{\emptyset}$ and $\Xi \deq (x) \cdot (p(x))$ the graph
 $$\stkfig{1}{scroll-exists}$$
 expressing the existential quantification $\exists x. p(x)$. The interpretation
-is invariant under polarity, meaning that for instance the graphs
+is invariant under \kl(eg){polarity}, meaning that for instance the graphs
 $$\stkfig{1}{scroll-neg-forall} \text{   and   } \stkfig{1}{scroll-neg-exists}$$
-obtained by enclosing the previous graphs in a \kl{cut} are interpreted with the same
-quantifiers, as the formulas $\neg \forall x. p(x)$ and $\neg \exists x. p(x)$.
-In \kl{Beta}, we would have exploited the \kl{classical} equivalences $\neg \forall
-x. A \semequiv \exists x. \neg A$ and $\neg \exists x. A \semequiv \forall x.
-\neg A$ (justified by the \kl{Double{-}cut} principle) in order to interpret them as
-$\exists x. \neg p(x)$ and $\forall x. \neg p(x)$, emphasizing the idea that
-positive and negative binders encode respectively $\exists$ and $\forall$. But
-this is not possible anymore with the \kl{intuitionistic} interpretation of $n$-ary
-scrolls, where the $\exists/\forall$ duality is replaced by the inloop/outloop
-distinction. In fact, we are tempted to further qualify this distinction of
-\emph{adjunction}, following a classical result of Lawvere in the context of
-categorical logic \sidecite{lawvere_quantifiers_sheaves}.
+obtained by enclosing the previous graphs in a \kl{cut} are interpreted with the
+same quantifiers, as the formulas $\neg \forall x. p(x)$ and $\neg \exists x.
+p(x)$. In \kl{Beta}, we would have exploited the \kl{classical} equivalences
+$\neg \forall x. A \semequiv \exists x. \neg A$ and $\neg \exists x. A \semequiv
+\forall x. \neg A$ (justified by the \kl{Double{-}cut} principle) in order to
+interpret them as $\exists x. \neg p(x)$ and $\forall x. \neg p(x)$, emphasizing
+the idea that \kl(eg){positive} and \kl(eg){negative} binders encode
+respectively $\exists$ and $\forall$. But this is not possible anymore with the
+\kl{intuitionistic} interpretation of $n$-ary scrolls, where the
+$\exists/\forall$ duality is replaced by the inloop/outloop distinction. In
+fact, we are tempted to further qualify this distinction of \emph{adjunction},
+following a classical result of Lawvere in the context of categorical logic
+\sidecite{lawvere_quantifiers_sheaves}.
 
 Lawvere is also known for some contributions to the study of \emph{geometric
 logic} \sidecite{lawvere_geometric}, a subset of the formulas of \kl{FOL} first
@@ -450,8 +455,8 @@ observations, we identified two of them:
   \item[\textbf{Continuity}] the scroll is a self-intersecting continuous curve,
   which can be drawn in one stroke of the pen;
   \item[\textbf{Polarity}] this curve delineates two kinds of areas: inloops that have
-  the same polarity as the area on which the scroll is scribed, and the outloop
-  which has the opposite polarity.
+  the same \kl(eg){polarity} as the area on which the scroll is scribed, and the outloop
+  which has the opposite \kl(eg){polarity}.
 \end{itemize}
 
 Fortunately, these two properties are preserved when turning inloops
@@ -478,13 +483,13 @@ saying goes: make love, not war.}.
   \labfig{flowers}
 \end{marginfigure}
 
-From that point onwards, we decided to fully embrace the flower \kl{metaphor}: first
-in our drawing style as witnessed in \reffig{flowers}, but also in our syntactic
-terminology, to be introduced in the next pages. Negative outloops are now drawn
-as \emph{yellow} pistils for a more colorful experience, and inloops as
-transparent petals, i.e. of the same color as the area on which they are
-scribed. We also drop the requirement that petals should intersect their pistil
-at a single point, for purely aesthetic reasons.
+From that point onwards, we decided to fully embrace the flower \kl{metaphor}:
+first in our drawing style as witnessed in \reffig{flowers}, but also in our
+syntactic terminology, to be introduced in the next pages. \kl(eg){Negative}
+outloops are now drawn as \emph{yellow} pistils for a more colorful experience,
+and inloops as transparent petals, i.e. of the same color as the area on which
+they are scribed. We also drop the requirement that petals should intersect
+their pistil at a single point, for purely aesthetic reasons.
 
 \paragraph{Multisets}
 
@@ -779,7 +784,7 @@ of flowers:
 \end{definition}
 
 Contrarily to \kl{EGs} (\refdef{eg-inv}), the number of inversions of a \kl{context} does
-not coincide with its depth, since petals increase depth but preserve polarity:
+not coincide with its depth, since petals increase depth but preserve \kl{polarity}:
 
 \begin{definition}[Inversions]
   The number of \emph{inversions} $\inv(\Phi\hole)$ of a \kl{context} $\Phi\hole$ is
@@ -792,9 +797,10 @@ not coincide with its depth, since petals increase depth but preserve polarity:
 \end{definition}
 
 \begin{definition}[Polarity]
-  We say that a \kl{context} $\Phi\hole$ is \emph{positive} if $\inv(\Phi\hole)$ is even, and
-  \emph{negative} otherwise. We denote positive and negative \kl{contexts}
-  respectively by $\Phi^+\hole$ and $\Phi^-\hole$.
+  \phantomintro{polarity}
+  We say that a \kl{context} $\Phi\hole$ is \intro{positive} if
+  $\inv(\Phi\hole)$ is even, and \intro{negative} otherwise. We denote \kl{positive}
+  and \kl{negative} \kl{contexts} respectively by $\Phi^+\hole$ and $\Phi^-\hole$.
 \end{definition}
 
 \paragraph{Pollination}
@@ -1085,11 +1091,11 @@ for \kl{EGs}:
 \begin{proof}
   In the case of a natural step $\Phi \step{\Nature} \Psi$, this is immediate
   by definition. Otherwise we have a cultural step $\Xi'\select{\Phi_0}
-  \step{\Culture} \Xi'\select{\Psi_0}$. Then either $\Xi'\hole$ is positive,
+  \step{\Culture} \Xi'\select{\Psi_0}$. Then either $\Xi'\hole$ is \kl{positive},
   and $\inv(\Xi^+\select{\Xi'\hole}) = \inv(\Xi^+\hole) + \inv(\Xi'\hole)$ is
-  even since it is the sum of two even numbers; or $\Xi'\hole$ is negative, and
+  even since it is the sum of two even numbers; or $\Xi'\hole$ is \kl{negative}, and
   $\inv(\Xi^+\select{\Xi'\hole})$ is odd since it is the sum of an even and an
-  odd number. In both cases $\Xi^+\select{\Xi'\hole}$ has the same polarity as
+  odd number. In both cases $\Xi^+\select{\Xi'\hole}$ has the same \kl{polarity} as
   $\Xi'\hole$, and thus the same rule can be applied.
 \end{proof}
 
@@ -1162,8 +1168,8 @@ would find in \kl{sequent calculus}, where hypothetical proofs are closed
 derivations of hypothetical sequents, not open derivations. The difference is
 that \kl{sequents} capture only the \intro(implication){first-order} implicative
 structure of logic\sidenote{As opposed to \intro(implication){higher-order},
-i.e. negatively nested implications.}, while flowers capture the full structure
-of \kl{intuitionistic} \kl{predicate logic}. This allows for a nice
+i.e. \kl(sfl){negatively} nested implications.}, while flowers capture the full
+structure of \kl{intuitionistic} \kl{predicate logic}. This allows for a nice
 generalization of the notion of hypothetical provability, which will be useful
 in the completeness proof of \refsec{Completeness}. 
 
@@ -1563,8 +1569,8 @@ Corollary \ref{cor:eg-functoriality}.}:
 
 \begin{lemma}[Functoriality]\lablemma{flowers-functoriality} If $\Phi \kentails{}
   \Psi$, then for any $\Xi\hole$ either $\Xi\select{\Phi} \kentails{}
-  \Xi\select{\Psi}$ if $\Xi\hole$ is positive, or $\Xi\select{\Psi} \kentails{}
-  \Xi\select{\Phi}$ if $\Xi\hole$ is negative.
+  \Xi\select{\Psi}$ if $\Xi\hole$ is \kl{positive}, or $\Xi\select{\Psi} \kentails{}
+  \Xi\select{\Phi}$ if $\Xi\hole$ is \kl{negative}.
 \end{lemma}
 \begin{proof}
   By recurrence on $\soldepth{\Xi\hole}$.
@@ -2434,7 +2440,7 @@ the pollination relation (\refdef{pollination}), and is close to the
   \end{itemize}
   It is clear that $\cinter$ is a symmetric relation, while $\sinter$ is not.
   Also, we write $\cinterpos$ and $\sinterpos$ (resp. $\cinterneg$ and
-  $\sinterneg$) to further specify when $\Xi\hole$ is positive (resp. negative).
+  $\sinterneg$) to further specify when $\Xi\hole$ is \kl{positive} (resp. \kl{negative}).
 \end{definition}
 
 \paragraph{Causality}
@@ -2492,8 +2498,8 @@ We identify two essential arguments inherent to any bouquet:
   (\Psi'\hole, a') \in \vehicle{\Phi}$ iff the following conditions hold:
   \begin{itemize}
     \item[\textbf{(Identity)}] $a = a'$;
-    \item[\textbf{(Polarity)}] $\Psi\hole$ is negative and $\Psi'\hole$ is
-    positive;
+    \item[\textbf{(Polarity)}] $\Psi\hole$ is \kl{negative} and $\Psi'\hole$ is
+    \kl{positive};
     \item[\textbf{(Interaction)}] either $\Psi\hole \cinterneg \Psi'\hole$,
     $\Psi\hole \sinterpos \Psi'\hole$ and $\Psi\hole = \hole$, or $\Psi'\hole
     \sinterpos \Psi\hole$.
@@ -2503,17 +2509,17 @@ We identify two essential arguments inherent to any bouquet:
   \atomoccs{\Phi} \times \atomoccs{\Phi}$ such that $(\Psi\hole, a) \justi
   (\Psi'\hole, a') \in \anchor{\Phi}$ iff the following conditions hold:
   \begin{itemize}
-    \item[\textbf{(Polarity)}] $\Psi\hole$ is positive and $\Psi'\hole$ is
-    negative;
+    \item[\textbf{(Polarity)}] $\Psi\hole$ is \kl{positive} and $\Psi'\hole$ is
+    \kl{negative};
     \item[\textbf{(Interaction)}] $\Psi\hole \sinterneg \Psi'\hole$.
   \end{itemize}
 \end{definition}
 
 Intuitively, the vehicle of a bouquet $\Phi$ is the set of possible
 justifications that \emph{can} be performed by the prover/player, whose goal is
-to justify every positive atom; while the anchor is the set of justifications
+to justify every \kl{positive} atom; while the anchor is the set of justifications
 that \emph{must} be provided on demand by the environment/opponent, whose task
-is to justify every negative atom. The reason that we identify this structure,
+is to justify every \kl{negative} atom. The reason that we identify this structure,
 is that we want crucially to avoid \emph{cycles} in our justification attempts
 during proof search. These may arise in the dialogical interaction between the
 prover and its environment of hypotheses, when justifications of the former are
@@ -2622,9 +2628,9 @@ The second phase of our algorithm is the \emph{reproduction} phase. As its name
 suggests, it consists in repeatedly applying the reproduction rule \rsf{srep} on
 the current \kl{goal}, until there is no more \kl{context} in which it is
 applicable\sidenote{In the algorithm of \refsubsec{bubbles-search}, this
-corresponds to the part of the \emph{decomposition} phase that treats negative
-$\lor$ formulas.}. The reproduction phase can be computed by the following tail
-recursive procedure:
+corresponds to the part of the \emph{decomposition} phase that treats
+\kl(bubble){negative} $\lor$ formulas.}. The reproduction phase can be computed
+by the following tail recursive procedure:
 
 \begin{procedure}[H]
   \caption{reproduction($\Phi$)\labproc{phase-reproduction}}
@@ -2791,7 +2797,7 @@ formulas, using only $\Nature$-rules. While this may include the \rsf{epis}
 rules, we conjecture that it is not actually needed to get a complete decision
 algorithm. Instead, we have implemented an extension of the \refproc{life}
 procedure that accounts specifically for doubly-negated formulas, by first
-duplicating the negative negation as a special additional case of the
+duplicating the \kl{negative} negation as a special additional case of the
 pollination phase. In the case of the double-negation elimination law
 $\flower{(\flower{(\flower{(\flower{(\flower{a}{})}{})}{a})}{})}{}$, this
 would give the flower
@@ -3060,7 +3066,7 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
 \begin{itemize}
   \item[\textbf{Insertion}] The main interface mechanism that is currently
   implemented is the \texttt{Add} button: since the \rsf{grow} rule allows to
-  insert any flower in a positive bouquet (i.e. add a new \kl{subgoal}, just like the
+  insert any flower in a \kl{positive} bouquet (i.e. add a new \kl{subgoal}, just like the
   \kl(rule){cut} rule in \kl{sequent calculus}), we expose buttons in all the corresponding
   areas (blue ``+'' buttons in \reffig{flowers-prover-modes}), that can be
   clicked to insert a new flower precisely at the location of the button. There
@@ -3076,11 +3082,11 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
   In both cases, the inserted flower is marked internally by the \kl{Flower\,\,Prover}
   with a \texttt{grown} tag: this means that as long as the user does not leave
   \Edit mode, she can perform arbitrary insertions and deletions inside of the
-  grown flower, disregarding any polarity constraint normally imposed by
+  grown flower, disregarding any \kl{polarity} constraint normally imposed by
   $\Culture$-rules.
   
   Dually, the \rsf{glue} rule is implemented by exposing \texttt{Add} buttons in
-  all negative corollas: those have the effect of growing a new empty petal,
+  all \kl{negative} corollas: those have the effect of growing a new empty petal,
   that can be further edited through arbitrary insertions and deletions.
 
   Grown flowers/petals are distinguished visually by having their border painted
@@ -3092,8 +3098,8 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
   \item[\textbf{Deletion}] Deleting flowers and petals is a more straightforward
   process: one just has to click on the corresponding area, which is highlighted
   in red. To avoid overlap, the area of a flower is identified with that of its
-  pistil. Thus areas subject to deletion are negative atoms and flowers
-  (\rsf{crop} rule), positive petals (\rsf{pull} rule), as well as any area
+  pistil. Thus areas subject to deletion are \kl{negative} atoms and flowers
+  (\rsf{crop} rule), \kl{positive} petals (\rsf{pull} rule), as well as any area
   marked as \texttt{grown}.
 \end{itemize}
 
@@ -3225,7 +3231,7 @@ After this little conceptual \textit{aparté}, let us come back to the problem o
 managing contexts in proofs. In the \kl{Flower\,\,Prover}, the \emph{local} context is
 naturally represented as \emph{everything that is displayed on-screen}. This
 includes hypotheses that are available from pistils at various levels, but also
-potentially alternative \kl{goals} (adjacent petals) and further \kl{subgoals} (positively
+potentially alternative \kl{goals} (adjacent petals) and further \kl{subgoals} (\kl{positively}
 nested flowers). Then rather than being segregated in a separate interface (the
 text buffer of the theory), the \emph{global} context is simply the
 \emph{entire} \kl{goal}. In fact, there is no reason anymore to make a terminological
@@ -3643,3 +3649,6 @@ a simple, well-known textual syntax with complex (but automated) global dynamics
 in the form of substitutions. Hence we believe the \emph{opposite}, that \kl{EGs}
 \emph{can} form the basis for an ergonomic calculus of logical deduction, in
 addition to being a powerful tool for meta-logical analysis.
+
+
+\end{scope}

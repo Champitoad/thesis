@@ -9,9 +9,6 @@ manages to rise above triviality; and this it does, in those domains, by a
 linking of self-evidence on to self-evidence in the chain reaction known as
 proof.}{\textbf{Willard van Orman Quine}, \textit{The Web of Belief}, 1978}
 
-
-\begin{scope}\knowledgeimport{sfl}
-
 In this chapter, we engage in a thorough analysis of the logical semantics of
 \kl{DnD} actions, which were introduced informally through examples in
 \refch{pba}. We do this mainly from the formal perspective of \kl{deep
@@ -22,8 +19,8 @@ choices --- actual or prospective --- as ways to improve the \intro{user
 experience} (\reintro{UX}) of interactive proof building.
 
 The chapter is organized as follows: \refsec{linkages} introduces the notions of
-\kl{context} and \kl{polarity}, and explains how \kl{DnD} actions are specified
-by the user interactively through schemas called \emph{\kl{linkages}}.
+\kl(sfl){context} and \kl(sfl){polarity}, and explains how \kl{DnD} actions are
+specified by the user interactively through schemas called \emph{\kl{linkages}}.
 \refsec{validity} explains how one can identify a subset of \kl{linkages} that
 guarantees a \emph{productivity} property on \kl{DnD} actions. \refsec{action}
 describes the overall structure of how \kl{linkages} translate into logical
@@ -43,18 +40,16 @@ rewriting occurs can provide important information, either to ensure soundness
 of the performed transformation (\refsec{soundness}, \refsec{dnd-completeness}),
 or to understand the status of quantified variables (\refsubsec{identity}).
 
-As is standard in term rewriting and \kl{deep inference} (see
-\refsubsec{structural-proof-theory}), our notion of \kl{context} will correspond
-to that of a (formula) tree with a distinguished leaf called its \kl{hole}.
-% \sidenote{More precisely, our contexts correspond to what is called a
-% ``structure'' in the first \kl{deep inference} formalism to date, the \emph{Calculus
-% of Structures} (see \refsec{cos}).}
+% As is standard in term rewriting and \kl{deep inference} (see
+% \refsubsec{structural-proof-theory}), our notion of \kl{context} will correspond
+% to that of a (formula) tree with a distinguished leaf called its \kl{hole}.
+
+\begin{scope}\knowledgeimport{sfl}
 
 \begin{definition}[Context]\label{def:formula-context}
 
   A \intro{context}, written $A\hole$, is a proposition containing exactly one
   occurrence of a special formula written $\hole$, called its \reintro{hole}.
-
   Given another proposition $B$, we write $\cfill{A}{B}$ for the proposition
   obtained by replacing $\hole$ in $A\hole$ by $B$. Note that this replacement
   is not a substitution because it allows variable capture. For instance
@@ -92,32 +87,31 @@ $A\select{B}$ for the \kl{path} $(A\hole, B)$.
 
 \begin{definition}[Polarity]\label{def:polarity}
 \phantomintro{polarity}
-We will write $A^+\hole$ to specify that a \kl{context} is {\em positive},
-meaning that $\inv(A^+\hole)$ is even. Symmetrically, $A^-\hole$ will be
-used for {\em negative} \kl{contexts}, meaning that $\inv(A^-\hole)$ is odd.
+We will write $A^+\hole$ to specify that a \kl{context} is \intro{positive},
+meaning that $\inv(A^+\hole)$ is even. Symmetrically, $A^-\hole$ will be used
+for \intro{negative} \kl{contexts}, meaning that $\inv(A^-\hole)$ is odd.
 \end{definition}
 
 % In demonstrating soundness, we focused solely on the two \emph{items} involved
 % in a \kl{DnD} action. But
 
-In addition to the items involved, every \kl{DnD} action specifies the
-\emph{selection} of a subterm in each item, which can be expressed formally as a
-\kl{path} (Definition \ref{def:path}). We call \intro{linkage} the combined data of
-the two items together with the selection, since the intent is to \emph{link}
-the subterms to make them interact in some way.
+In addition to the \kl{items} involved, every \kl{DnD} action specifies the
+\emph{selection} of a subterm in each \kl{item}, which can be expressed formally as a
+\kl{path}. We call \intro{linkage} the combined data of the two \kl{items} together
+with the selection, since the intent is to \emph{link} the subterms to make them
+interact in some way.
 
 \begin{remark}
-In this thesis we only consider \kl{linkages} between two subterms. But as noted in
-\refsec{equality}, rewriting is an example of action that can benefit from
-allowing multiple selections\sidenote{A restricted kind of multi-occurrence
-rewrite is already available in the standalone version of \kl{Actema}: one needs to
-enter \emph{selection mode}, by either toggling the dedicated button (the one
-with the mouse cursor in \reffig{aristote}), or holding down the \texttt{shift}
-key. Then one can click successively on all occurrences of a term $t$ that are
-to be rewritten, in order to add them to the selection. To perform the rewriting
-to some other term $u$, the last step is to drag an equality hypothesis $t = u$
-(or $u = t$) and drop it on any item holding one of the selected occurrences of
-$t$.}.
+In this thesis we only consider \kl{linkages} between two subterms. But as noted
+in \refsec{equality}, rewriting equalities is an example of action that can
+benefit from allowing multiple selections\sidenote{A restricted kind of
+multi-occurrence rewrite is already available in the standalone version of
+\kl{Actema}: one needs to enter \emph{selection mode}, by either toggling the
+dedicated button, or holding down the \texttt{shift} key. Then one can click
+successively on all occurrences of a term $t$ that are to be rewritten, in order
+to add them to the selection. To perform the rewriting to some other term $u$,
+the last step is to drag an equality hypothesis $t = u$ (or $u = t$) and drop it
+on any \kl{item} holding one of the selected occurrences of $t$.}.
 \end{remark}
 
 Each kind of \kl{DnD} action is mapped in the system to a specific form of \kl{linkage},
@@ -133,14 +127,14 @@ associated to these \kl{linkages}.
   in this thesis, such ambiguities never arise.
 \end{remark}
 
-On the ``items axis'', we already distinguished between \kl(dnd){backward} and \kl(dnd){forward}
-\kl{linkages}, written respectively $A \back B$ and $A \forw B$. If the items are
-unspecified, we will write $A \link B$.
+On the ``\kl{items} axis'', we already distinguished between \kl(dnd){backward} and
+\kl(dnd){forward} \kl{linkages}, written respectively $A \back B$ and $A \forw
+B$. If the \kl{items} types are unspecified, we will write $A \link B$.
 
 Using the ``selection axis'', we can specify a further distinction that was
 informal up to now: that of \emph{logical} action and \emph{rewrite} action.
 \begin{itemize}
-  \itemAP \intro{Logical linkages} link two subformulas. Thus they have the form
+  \itemAP \intro{Logical linkages} link two subformulas: they have the form
   $B\select{A} \link C\select{A'}$.
   \itemAP \intro{Rewrite linkages} link one side of an equality with a \kl{first-order}
   term. Using liberally the notations from Definitions \ref{def:formula-context} and
@@ -152,22 +146,23 @@ informal up to now: that of \emph{logical} action and \emph{rewrite} action.
   % hypotheses, and witness choice for existential goals.
 \end{itemize}
 
-By forgetting the information on which subterms are selected, one can see any
-\kl{linkage} as a formula whose topmost connective is a \kl{interaction operator} $\link \in
-\{\back,\forw\}$. Then it is natural to view \kl{linkages} as the redexes of the
-\kl{rewriting rules} of \reffig{DISL}, although from the user's standpoint \kl{linkages}
-only happen at the top-level\sidenote{In fact this is more of a limitation of
-Actema's current interface: one cannot link two subterms that live in the same
-item, because dragging actions can only be performed on \emph{entire} items. But
-in the original formulation and implementation of \kl{subformula linking}
-\cite{Chaudhuri2013}, \kl{linkages} can be created between arbitrary subformulas. We
-come back to this issue in \refsec{dnd-completeness}.}.
+By forgetting the information of which subterms are selected, one can see any
+\kl{linkage} as a formula whose topmost connective is an \kl{interaction
+operator} $\link \in \{\back,\forw\}$. Then it is natural to view \kl{linkages}
+as the redexes of the \kl{rewriting rules} of \reffig{DISL}, although from the
+user's standpoint \kl{linkages} only happen at the top-level\sidenote{In fact
+this is more of a limitation of Actema's current interface: one cannot link two
+subterms that live in the same \kl{item}, because dragging actions can only be
+performed on \emph{entire} \kl{items}. But in the original formulation and
+implementation of \kl{subformula linking} \cite{Chaudhuri2013}, \kl{linkages}
+can be created between arbitrary subformulas. We come back to this issue in
+\refsec{dnd-completeness}.}.
 
 \section{Validity}\labsec{validity}
 
 \begin{marginfigure}
 \begin{mathpar}
-  \begin{array}{r@{\quad}c@{\quad}lr}
+  \begin{array}{r@{\quad}c@{\quad}l@{\quad}r}
     {A \back B}&\step{}&A \limp B &\mathsf{Brel}\\
     {A \forw B}&\step{}&A \land B &\mathsf{Frel}
   \end{array}
@@ -189,8 +184,8 @@ they give rise to the behaviors described in the previous sections. The
 criterion tackles two issues:
 \begin{itemize}
   \item \textbf{Polarity:} the selected subterms must have opposite
-  \emph{polarities}, so that the \emph{negative} subterm justifies the
-  \emph{positive} one;
+  \emph{\kl{polarities}}, so that the \emph{\kl{negative}} subterm justifies the
+  \emph{\kl{positive}} one;
   \item \textbf{Identity:} the selected subterms must be \emph{unifiable}, so
   that after instantiating some quantifiers in their \kl{context} they can interact
   through the {\rsf{id}} rule or the equality rules {\rsf{L{=}_i},
@@ -203,15 +198,15 @@ that some simplification occurs, either a justification with the {\rsf{id}}
 rule on \kl{logical linkages}, or a rewriting with the equality rules on \kl{rewrite linkages}. This will be stated more formally in \refsec{productivity}.
 
 Validity is very useful to support the \emph{suggestion} mechanism implemented
-in \kl{Actema}. The idea is that when the user starts dragging an item, this
+in \kl{Actema}. The idea is that when the user starts dragging an \kl{item}, this
 indicates to the system that she wants to perform a \kl{DnD} action involving
-subterms of this item. Then the system can suggest such possible actions by
+subterms of this \kl{item}. Then the system can suggest such possible actions by
 highlighting subterms in the \kl{goal} which form a valid \kl{linkage} with the dragged
 item. Typically in the example of \reffig{aristote}, dragging the hypothesis
 $\forall x. \human(x) \limp \mortal(x)$ will have the effect of highlighting
 exactly $\mortal(\socrates)$ in the conclusion and $\human(\socrates)$ in the
 other hypothesis as possible drop targets. In this case this corresponds to all
-subterms in the \kl{goal} which are not contained in the dragged item. But if one
+subterms in the \kl{goal} which are not contained in the dragged \kl{item}. But if one
 were to drag the $\human(\socrates)$ hypothesis, then only the subterm
 $\human(x)$ in the other hypothesis would be suggested as a drop target. This
 could not work with the ``release'' semantics mentioned earlier, since then all
@@ -235,7 +230,7 @@ good candidate as a core principle for such a methodology.
 
 \subsection{Polarity}\labsubsec{polarity}
 
-The restrictions on polarities are captured formally by the following condition:
+The restrictions on \kl{polarities} are captured formally by the following condition:
 
 
 \begin{condition}[Polarity]\label{cond:pol}
@@ -262,24 +257,24 @@ The restrictions on polarities are captured formally by the following condition:
     \item if $B\hole$ holds the equality, then it must be:
 
       \begin{enumerate}
-        \item positive if $\link = \back$;
-        \item positive if $\link = \forw$;
+        \item \kl{positive} if $\link = \back$;
+        \item \kl{positive} if $\link = \forw$;
       \end{enumerate}
 
     \item if $D\hole$ holds the equality, then it must be:
 
       \begin{enumerate} 
-        \item negative if $\link = \back$;
-        \item positive if $\link = \forw$.
+        \item \kl{negative} if $\link = \back$;
+        \item \kl{positive} if $\link = \forw$.
       \end{enumerate}
 
   \end{enumerate}
 \end{condition}
 
 One understands that for \kl{rewrite linkages}, this simply guarantees that the
-equality is in negative position. For \kl{logical linkages}, Clause
+equality is in \kl{negative} position. For \kl{logical linkages}, Clause
 \ref{clause:opposite} ensures that the selected subformulas have opposite
-polarities, and Clause \ref{clause:intuit} ensures that the \kl{linkage} makes sense
+\kl{polarities}, and Clause \ref{clause:intuit} ensures that the \kl{linkage} makes sense
 in our \emph{intuitionistic} setting.
 
 Indeed one could imagine the following behavior
@@ -450,7 +445,7 @@ of the units $\top$ and $\bot$.
 Here is a high-level overview of the complete procedure followed to generate a
 proof step:
 \begin{enumerate}
-\item \textbf{Selection:} the user selects two subterms in two items of the current \kl{goal}; \label{step:selection}
+\item \textbf{Selection:} the user selects two subterms in two \kl{items} of the current \kl{goal}; \label{step:selection}
 \item \textbf{Linkage:} this either gives rise to a \kl{logical linkage} $B\select{A}
   \link C\select{A'}$ (resp. a \kl{rewrite linkage} $B\select{\select{t} = u} \link
   C\select{t'}$), or does not correspond to a known form of \kl{linkage}. In this case
@@ -491,10 +486,10 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
 All examples up to now followed the scheme for \kl{DnD} actions sketched in
 \refsec{aristote}:
 \begin{itemize}
-  \item Given a blue item $A$ and a red item $B$, \kl(dnd){backward} proof steps produce a
+  \item Given a blue \kl{item} $A$ and a red \kl{item} $B$, \kl(dnd){backward} proof steps produce a
   new conclusion $C$ by applying a sequence of \kl{rewriting rules} $A \back B \steps{}
   C$.
-  \item Given two blue items $A$ and $B$, \kl(dnd){forward} proof steps produce a new
+  \item Given two blue \kl{items} $A$ and $B$, \kl(dnd){forward} proof steps produce a new
   hypothesis $C$ by applying a sequence of \kl{rewriting rules} $A \forw B \steps{} C$.
 \end{itemize}
 
@@ -537,7 +532,7 @@ formulas where they have been replaced by their interpretation:
 \end{definition}
 
 For rewritings taking place deeper inside a proposition however, we need to
-consider the polarity of their \kl{context}.
+consider the \kl{polarity} of their \kl{context}.
 
 % Using the notation of definition~\ref{def:polarity}, we can state:
 
@@ -570,18 +565,18 @@ consider the polarity of their \kl{context}.
 
 
 An easy but important technical point is that \kl{rewriting rules} preserve the
-polarity of \kl{contexts} around redexes, in the following precise sense:
+\kl{polarity} of \kl{contexts} around redexes, in the following precise sense:
 \begin{fact}[Polarity preservation]\label{prop:rules-preserve-polarity}
   \phantom{a}
   \begin{itemize}
     \item
       If $C\select{A\back B} \step{} C'\select{A'\back B'}$
       (resp. $C\select{A \forw B} \step{} $ $ C' \allowbreak\select{A' \forw B'}$) then
-      $C\hole$ and $C'\hole$ have the same polarity.
+      $C\hole$ and $C'\hole$ have the same \kl{polarity}.
     \item
       If $C\select{A\back B} \step{} C'\select{A'\forw B'}$ (resp.
       $C\select{A\forw B} \step{} C'\select{A'\back B'}$) then $C\hole$ and
-      $C'\hole$ have opposite polarities.
+      $C'\hole$ have opposite \kl{polarities}.
   \end{itemize}
 \end{fact}
 
@@ -606,12 +601,12 @@ about the \kl{rewriting rules}:
   Then we reason by case on the \kl{interaction operator} $\link$:
   \begin{itemize}
     \item $\link = \back$: by Fact \ref{prop:rules-preserve-polarity}, $C'$ must
-    be positive. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
+    be \kl{positive}. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
     \limp B'}$. By Lemma \ref{lemma:rules-valid-in-context} we have
     $C'\select{A' \limp B'} \seq C^+\select{A \limp B}$. Thus by transitivity
     $\lint{D} \seq C^+\select{A \limp B}$.
     \item $\link = \forw$: by Fact \ref{prop:rules-preserve-polarity}, $C'$ must
-    be negative. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
+    be \kl{negative}. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
     \land B'}$. By Lemma \ref{lemma:rules-valid-in-context} we have
     $C'\select{A' \land B'} \seq C^+\select{A \limp B}$. Thus by transitivity
     $\lint{D} \seq C^+\select{A \limp B}$.
@@ -622,7 +617,7 @@ about the \kl{rewriting rules}:
 % contravariance property \ref{prop:cov}.
 
 Finally, soundness (Theorem \ref{prop:soundness}) is obtained as the special
-case where the rewriting starts in the (positive) empty \kl{context}.
+case where the rewriting starts in the (\kl{positive}) empty \kl{context}.
 
 % Detailed proofs of all the lemmas can be found in \refsec{app:dnd-soundness}.
 
@@ -1084,14 +1079,14 @@ on a slight extension of our \kl{rewriting rules}, following ideas from these wo
 To the \kl{rewriting rules} of \reffig{DISL} and \reffig{DISL-U}, we add \emph{\kl{linkage}
 formation} rules (\reffig{newlink}), which are a deep generalization of \kl{linkage}
 creation between two formulas of a sequent. Rule {\rsf{B}} creates a
-\emph{\kl(dnd){backward}} \kl{linkage} between $\limp$-linked formulas in any positive \kl{context}
+\emph{\kl(dnd){backward}} \kl{linkage} between $\limp$-linked formulas in any \kl{positive} \kl{context}
 $C^+\hole$, and dually rule {\rsf{F}} creates a \emph{\kl(dnd){forward}} \kl{linkage} between
-$\land$-linked formulas in any negative \kl{context} $C^-\hole$\sidenote{This is
+$\land$-linked formulas in any \kl{negative} \kl{context} $C^-\hole$\sidenote{This is
 reminiscent of the adjunction between the product and the exponential in
 \emph{cartesian closed categories}, which respectively interpret conjunction and
 implication in the Curry-Howard-Lambek correspondance for \kl{intuitionistic}
 logic.}. Note that contrary to the rules considered up to now, \kl{linkage} formation
-rules are not closed under arbitrary \kl{contexts}: indeed the polarity restrictions
+rules are not closed under arbitrary \kl{contexts}: indeed the \kl{polarity} restrictions
 are necessary to ensure soundness, as reviewed in \refsec{soundness}. A \kl(dnd){backward}
 \kl{linkage} in a \kl{sequent} $\Gamma, D\select{A} \seq E\select{B}$ would be encoded by
 the instance
@@ -1119,8 +1114,8 @@ Another necessary ingredient is the addition of a deep version of the
 as a kind of \kl{exchange} rule. Then we add the equivalent of \kl{contraction}
 and \kl{weakening} with the rules {\rsf{conn}} and {\rsf{weak}}
 (\reffig{reslink}). These allow to erase and duplicate hypotheses at will, by
-identifying any subformula occurring in a negative \kl{context} as a hypothesis. Thus
-once again we need to be careful about polarity, and cannot close these rules
+identifying any subformula occurring in a \kl{negative} \kl{context} as a hypothesis. Thus
+once again we need to be careful about \kl{polarity}, and cannot close these rules
 under arbitrary \kl{contexts}.
 
 \begin{marginfigure}
@@ -1135,7 +1130,7 @@ under arbitrary \kl{contexts}.
 \end{marginfigure}
 
 An alternative to the full \kl{contraction} rule {\rsf{conn}} is to systematically
-duplicate negative formulas in the \kl{linkage} formation rules, giving the rules
+duplicate \kl{negative} formulas in the \kl{linkage} formation rules, giving the rules
 {\rsf{Bconn} and \rsf{Fconn}} of \reffig{newreslink}. This models more
 closely what we do in \kl{Actema}, where hypotheses involved in a \kl{DnD} action are
 always preserved in the new \kl{goal}. This is important from a usability standpoint,
@@ -1177,7 +1172,7 @@ to be closely related to \kl{deep inference} proofs.
 
 Lastly, a trivial but necessary addition is the rule {\rsf{refl}} of
 \reffig{refl-rule} stating the reflexivity of $=$. It was not introduced before
-because it is already handled by click actions on red items in Actema
+because it is already handled by click actions on red \kl{items} in Actema
 (\refsec{clicks}), but here we want a self-contained system that models as
 closely as possible the space of proofs that can be built through \kl{DnD} actions
 only. In this context, one could imagine restricting the usage of the

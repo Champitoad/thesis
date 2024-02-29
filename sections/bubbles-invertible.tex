@@ -44,8 +44,8 @@ from the following modifications to the previous rules:
     Here we follow a standard technique in \kl{sequent calculus}, that merges the
     \kl{weakening} rule in all \emph{terminal} rules of the calculus (i.e. rules with
     no premisses). In \kl{bubble calculi}, the notion of premiss is captured by
-    neutral bubbles; thus we incorporate \kl{weakenings} in all rules that solve
-    \kl{subgoals} by closing solutions with no neutral bubbles. Those are the rules
+    \kl{neutral} bubbles; thus we incorporate \kl{weakenings} in all rules that solve
+    \kl{subgoals} by closing solutions with no \kl{neutral} bubbles. Those are the rules
     $\{\rsf{i{\da}},\rsf{p{-}},\rsf{p{+}}\}$, which for the occasion have
     also been generalized to arbitrary solutions. Indeed in system $\sysB$ we
     restricted them to open solutions to make them \emph{local}, but here the
@@ -83,7 +83,7 @@ from the following modifications to the previous rules:
 
     Note also that we removed the \rsf{f{\ua}} rule of \reffig{sequent-B}.
     Indeed even after turning it into a propagation rule, the moved copy of the
-    duplicated \kl{subgoal} $S$ cannot be weakened because it lives in a neutral
+    duplicated \kl{subgoal} $S$ cannot be weakened because it lives in a \kl{neutral}
     bubble. Thus the rule stays non-\kl{invertible}, and cannot be included in
     \kl{B_{inv}}. Fortunately, we showed that it is \kl{admissible} in
     \refthm{bubbles:cut-admissibility}, so this is not problematic.
@@ -112,7 +112,7 @@ from the following modifications to the previous rules:
 
 \begin{remark}
   We also changed the \rsf{\bot{-}} and \rsf{\top{+}} rules, so that they create
-  polarized, closed empty solutions. This makes them both local, and generic
+  \kl{polarized}, closed empty solutions. This makes them both local, and generic
   with respect to the status of the ambient solution. The previous version can
   then be simulated by combination with the popping rules \rsf{p{-}} and
   \rsf{p{+}}.
@@ -136,7 +136,7 @@ of simulating \kl{DBiInt}'s \kl{introduction rules}:
 \end{lemma}
 
 Note that it is sufficient to prove admissibility of \kl{contraction} on
-formulas, rather than on arbitrary items. Indeed we only need it to simulate the
+formulas, rather than on arbitrary \kl{items}. Indeed we only need it to simulate the
 \kl{introduction rules} of \kl{DBiInt}, which always duplicate formulas. For now
 we only conjecture completeness of \kl{B_{inv}}, since it not clear what method
 should be used to prove \reflemma{admissibility-contraction}. In her thesis
@@ -157,8 +157,8 @@ to search for a proof of a formula $A$ consists in the following $5$
 reached:
 \begin{description}
   \item[\textbf{Decomposition}] Decompose $A$ by applying recursively
-    $\mathbb{H}$-rules, until either atoms, negative implications
-    $\hypo{\limp}$, negative disjunctions $\hypo{\lor}$, or positive
+    $\mathbb{H}$-rules, until either atoms, \kl{negative} implications
+    $\hypo{\limp}$, \kl{negative} disjunctions $\hypo{\lor}$, or \kl{positive}
     conjunctions $\conc{\land}$ are reached. Indeed since the \rsf{{\limp}{-}}
     rule duplicates the implication, it cannot be used to decompose it.
     
@@ -174,7 +174,7 @@ reached:
 
   \item[\textbf{Absorption}] Apply the absorption rules
     $\{\rsf{a},\rsf{a{-}},\rsf{a{+}}\}$ wherever possible. This will prevent
-    atoms from being unnecessarily stuck on neutral membranes in the next phase.
+    atoms from being unnecessarily stuck on \kl{neutral} membranes in the next phase.
     This phase can also be trivially automated.
 
   \item[\textbf{Linking}] Try to bring together every pair of dual atoms, so
@@ -262,7 +262,7 @@ other formalisms, is that most of its automation preserves the \emph{size}
 (number of atoms) and the \emph{structure} of the \kl{goal}:
 \begin{itemize}
   \item In the \textbf{Decomposition} phase, if we opt out of the automatic
-  distribution of negative $\hypo{\lor}$ and positive $\conc{\land}$, then the
+  distribution of \kl{negative} $\hypo{\lor}$ and \kl{positive} $\conc{\land}$, then the
   system will only apply $\mathbb{H}$-rules that split logical connectives, and
   create a \emph{partition} of the atoms of the \kl{goal} by enclosing them in
   bubbles. Thus the size of the \kl{goal} is kept intact, and the structure modified
@@ -301,7 +301,7 @@ have the ability to perform \textbf{Decomposition} and \textbf{Linking} by hand
 Because of the implicit \kl{contraction} in the rules \rsf{{\limp}{-}} and
 \rsf{{\lsub}{+}}, one cannot fully decompose a formula into an equivalent
 solution by deterministically applying a sequence of $\mathbb{H}$-rules (and
-possibly $\mathbb{F}$-rules, to distribute positive conjunctions and negative
+possibly $\mathbb{F}$-rules, to distribute \kl{positive} conjunctions and \kl{negative}
 disjunctions). Thus \kl{B_{inv}} fails to be \emph{fully \kl{iconic}}, because it
 relies on the \emph{\kl{symbolic}} connectives $\limp$ and $\lsub$ to represent
 logical statements.
@@ -313,12 +313,12 @@ logical statements.
 \end{marginfigure}
 
 This can be understood as resulting from the inability of solutions to represent
-natively \emph{negative implications} and \emph{positive subtractions}, although
+natively \emph{\kl{negative} implications} and \emph{\kl{positive} subtractions}, although
 they can represent natively all other polarizations of connectives. This is
-illustrated by the mapping of \reffig{bubbles-native} from polarized formulas to
+illustrated by the mapping of \reffig{bubbles-native} from \kl{polarized} formulas to
 equivalent solutions, which is really just the $\mathbb{H}$-rules of system
 $\sysB$ (\reffig{graphical-B}) where the right-hand solution is enclosed in a
-\kl{bubble} of the corresponding polarity. The reader can easily check that if $A$ is
+\kl{bubble} of the corresponding \kl{polarity}. The reader can easily check that if $A$ is
 mapped to $S$, then $\psint{A} \semequiv \psint{S}$.
 
 \begin{marginfigure}
@@ -338,7 +338,7 @@ sequent} calculus \kl{JN} of Guenot for implicative logic \cite[Chapter
 in negative \kl{contexts} are interpreted as implications, as illustrated by the
 \kl{left introduction rule} \rsf{e} (\reffig{jn-rule-e}). But we cannot do this
 in system $\sysB$, because this would conflict with the subtractive reading of
-negative solutions, i.e. $\nsint{A \seq B} = \nsint{A} \lsub \nsint{B}$. In
+\kl{negative} solutions, i.e. $\nsint{A \seq B} = \nsint{A} \lsub \nsint{B}$. In
 \refch{flowers}, the problem will also be solved through an asymmetric treatment
 of \kl{nested sequents}, capturing only \kl{intuitionistic} logic instead of
 \kl{bi-intuitionistic} logic. But this is a small price to pay, since

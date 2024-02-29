@@ -3,6 +3,10 @@
 \chapter{Symmetric Bubble Calculi}
 \labch{bubbles-symm}
 
+
+\begin{scope}\knowledgeimport{bubble}
+
+
 In this chapter, we explore to what extent the \kl{bubble calculus} of
 \refch{bubbles} can be made more \emph{symmetric}, by relaxing the restriction
 that solutions must contain at most one conclusion. At a surface level, our
@@ -29,7 +33,7 @@ quest for a system where all \kl{introduction rules} for logical connectives are
 \refsec{branching} the restriction to single-conclusion solutions, which
 requires a new distinction between \emph{closed} and \emph{open} solutions. This
 gives rise in \refsec{colors} to an extension of the syntax of solutions, where
-\kl{bubbles} can themselves be \emph{polarized}. In \refsec{design-props} we identify
+\kl{bubbles} can themselves be \emph{\kl{polarized}}. In \refsec{design-props} we identify
 key properties that will guide the design of \kl{inference rules}, some of which were
 already aimed for implicitly through the evolution of our concept of bubble. In
 \refsec{symmetric-calculus} we introduce a core \emph{symmetric \kl{bubble calculus}}
@@ -37,7 +41,7 @@ for \kl{classical} logic called \kl{system~B}, in reference to the symmetric
 \kl{system L} of Herbelin \sidecite[10em]{herbelin_duality_nodate}. Then in
 \refsec{bubbles-soundness} we prove the soundness of \kl{system~B}, and show
 that by removing selectively among \kl{inference rules} that define the
-\emph{porosity} of polarized bubbles, one gets \kl{intuitionistic},
+\emph{porosity} of \kl{polarized} bubbles, one gets \kl{intuitionistic},
 \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic as fragments. In
 \refsec{bubbles-completeness} we support this claim by showing that the
 \kl{bi-intuitionistic} fragment is not only sound, but also \emph{cut-free complete}
@@ -327,8 +331,8 @@ to having \emph{red bubbles}. Then the key idea is to allow hypotheses to flow
 into \kl{sequents} that appear as conclusions\sidenote{This corresponds to the
 {\rnm{Lift}} rule of \cite{fitting-nested-2014} and {\rnm{pl_1}} rule of
 \cite{clouston-annotation-free-2013}.}, but \emph{not other conclusions}.
-Graphically, this means that blue items can enter red \kl{bubbles} (rule
-{\rsf{f{-}{+}}} of \reffig{flow-red-bubbles}), but red items cannot: this is
+Graphically, this means that blue \kl{items} can enter red \kl{bubbles} (rule
+{\rsf{f{-}{+}}} of \reffig{flow-red-bubbles}), but red \kl{items} cannot: this is
 reminiscent of the electromagnetic phenomemon of \emph{repulsion} between
 objects charged with the same polarity.
 
@@ -353,7 +357,7 @@ the proofs for both directions of the equivalence are depicted parallely in
   \item then in both cases we want to apply the hypothesis $\hypo{A}$ in a
   \kl{forward} step, either with $\hypo{A \limp B}$ or $\hypo{A \limp (B \lor C)}$.
   To do so, we need to bring the two hypotheses together in the same solution.
-  And since items are trapped within bubbles, the only way to go is to move the
+  And since \kl{items} are trapped within bubbles, the only way to go is to move the
   blue $\hypo{A}$ inside the red \kl{bubble} with the {\rsf{f{-}{+}}} rule;
   \item this time we decompose the hypothesis with the new version of the rules
   {\rnm{{\lor}{-}}} and {\rnm{{\limp}{-}}}. They are basically a local variant
@@ -367,7 +371,7 @@ the proofs for both directions of the equivalence are depicted parallely in
   would cross the red bubble, which is expressedly forbidden.
 \end{enumerate}
 Thus in order to prove Grishin (a) and recover \kl{classical} logic, it suffices
-either to add the {\rsf{f{+}{+}}} rule allowing red items to enter red \kl{bubbles}
+either to add the {\rsf{f{+}{+}}} rule allowing red \kl{items} to enter red \kl{bubbles}
 (\reffig{flow-red-bubbles}), or to use the {\rsf{{\limp}{+}c}} rule which
 avoids red \kl{bubbles} altogether. In the following we will settle for the first
 option: we find it more elegant, because it explains the distinction between
@@ -377,8 +381,8 @@ of logical connectives.
 \subsection{Blue bubbles}
 
 Now it is only natural to wonder: since \kl{bubbles} can be colored in red, or
-charged positively, would it also make sense to have \emph{blue} \kl{bubbles} charged
-\emph{negatively}? The answer is \emph{yes}, but we need to broaden our logical
+charged \kl{positively}, would it also make sense to have \emph{blue} \kl{bubbles} charged
+\emph{\kl{negatively}}? The answer is \emph{yes}, but we need to broaden our logical
 view and consider more exotic beasts: the adequately named
 \emph{\kl{dual-intuitionistic}} logic, and \emph{\kl{bi-intuitionistic} logic}.
 
@@ -395,8 +399,8 @@ view and consider more exotic beasts: the adequately named
 
 But for now let us stay at a purely syntactic level. The idea is very simple,
 and can be summarized in two words: \emph{color swap}. Thus the law that ``blue
-items can enter red bubbles, but red items cannot'' becomes a new law that ``red
-items can enter blue bubbles, but blue items cannot'', which is enforced by
+items can enter red bubbles, but red \kl{items} cannot'' becomes a new law that ``red
+items can enter blue bubbles, but blue \kl{items} cannot'', which is enforced by
 allowing only the use of the {\rsf{f{+}{-}}} rule in
 \reffig{flow-blue-bubbles}. Well this is neat, but will not be of much use if
 there is no way to spawn blue bubbles. Be it as it may: we can just craft a new
@@ -460,17 +464,18 @@ Let us now extend the formal definition of \kl{bubbles} so that they can be colo
 
 \begin{definition}[Bubble]\labdef{pol-bubble}
   A \emph{bubble} is a solution enclosed in a membrane, which can be either
-  unpolarized (neutral), charged positively, or charged negatively.
+  \intro{unpolarized} (\reintro{neutral}), charged \reintro{positively}, or
+  charged \reintro{negatively}.
 \end{definition}
 
-Neutral \kl{bubbles} are the usual ones depicted in gray, while positive and negative
+\kl{Neutral} \kl{bubbles} are the usual ones depicted in gray, while \kl{positive} and \kl{negative}
 \kl{bubbles} correspond respectively to red and blue bubbles. We also update the
 definition of solutions, which can now be open or closed:
 
 \begin{definition}[Solution]\labdef{pol-solution}
   
   A \emph{solution} is a multiset of ions and bubbles. Its \emph{status} is
-  either \emph{closed} or \emph{open}, and open solutions cannot contain neutral
+  either \emph{closed} or \emph{open}, and open solutions cannot contain \kl{neutral}
   bubbles. Solutions $S$ can be represented textually with the following syntax:
   \begin{align*}
     S, T, U &\Coloneq \Gamma \J \Delta &
@@ -482,18 +487,18 @@ definition of solutions, which can now be open or closed:
 \end{definition}
 
 Note that in the textual syntax, \kl{bubbles} are identified with \emph{subsolutions}
-(\refdef{subsolution}), and their polarity is determined by their position
+(\refdef{subsolution}), and their \kl{polarity} is determined by their position
 relative to branching operators; that is, for any solutions $S, T, U$ such that
 $T \subsol U$, $S$ is either:
 \begin{itemize}
-  \item \emph{neutral} if $T = \Gamma \piq{\cS} \Delta$ and $S \in
+  \item \emph{\kl{neutral}} if $T = \Gamma \piq{\cS} \Delta$ and $S \in
   \cS$;
-  \item \emph{positive} if $T = \Gamma \J \Delta$ and $S \in \Delta$;
-  \item \emph{negative} if $T = \Gamma \J \Delta$ and $S \in \Gamma$.
+  \item \emph{\kl{positive}} if $T = \Gamma \J \Delta$ and $S \in \Delta$;
+  \item \emph{\kl{negative}} if $T = \Gamma \J \Delta$ and $S \in \Gamma$.
 \end{itemize}
 
-Then we need to split our symmetric interpretation accordingly, so that positive
-\kl{bubbles} are mapped to implications, and negative \kl{bubbles} to
+Then we need to split our symmetric interpretation accordingly, so that \kl{positive}
+\kl{bubbles} are mapped to implications, and \kl{negative} \kl{bubbles} to
 exclusions\sidenote{Here we took inspiration from the work of Clouston et al. on
 \kl{nested sequents} for \kl{FILL} \cite{clouston-annotation-free-2013}.}:
 
@@ -517,8 +522,8 @@ exclusions\sidenote{Here we took inspiration from the work of Clouston et al. on
   \end{align*}
 \end{definition}
 
-One can easily check that the interpretation of a solution that has no negative
-(resp. positive) subsolution will not contain any occurrence of the exclusion
+One can easily check that the interpretation of a solution that has no \kl{negative}
+(resp. \kl{positive}) subsolution will not contain any occurrence of the exclusion
 (resp. implication) connective. This will be crucial later to represent proofs
 of both \kl{intuitionistic}, \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic in the
 same system.
@@ -527,7 +532,7 @@ same system.
 
 With our new syntax and interpretation of solutions at hand, we can design a new
 proof calculus including the rules previously discussed for manipulating
-polarized bubbles. The rich structure of solutions offers many possibilities in
+\kl{polarized} bubbles. The rich structure of solutions offers many possibilities in
 the precise formulation of rules, depending on the properties we expect from the
 calculus. We identified \emph{six} of these properties, whose consequences range
 from aesthetic and theoretical considerations on paper, to concrete usability
@@ -716,3 +721,6 @@ calculi with different tradeoffs can be designed.
 % allow taking red items outside of red bubbles: thus if the proof can be made
 % outside with a smaller context, it is more general and immediately solves all
 % subgoals, improving \emph{factorizability}.}
+
+
+\end{scope}
