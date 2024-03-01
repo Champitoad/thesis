@@ -47,6 +47,7 @@
 \knowledge{NuPrl}{software}
 \knowledge{Alf}{software}
 \knowledge{Coq}{software,url={https://coq.inria.fr/}}
+\knowledge{\ssreflect}{notion,up}
 \knowledge{Iris}{software,url={https://iris-project.org/}}
 \knowledge{Agda}{software,url={https://wiki.portal.chalmers.se/agda/pmwiki.php}}
 \knowledge{Lean}{software,url={https://lean-lang.org/}}
@@ -167,14 +168,17 @@
 \knowledge{notion}
  | cut@rule
  | cuts@rule
-\knowledge{ex}{rule}
-\knowledge{ctr}{rule}
-\knowledge{wkn}{rule}
+\knowledge{xL}{rule}
+\knowledge{cL}{rule}
+\knowledge{wL}{rule}
 \knowledge{\top L}{rule}
 \knowledge{\top R}{rule}
 \knowledge{\bot L}{rule}
+\knowledge{\bot R}{rule}
 \knowledge{{\limp}L}{rule}
 \knowledge{{\limp}R}{rule}
+\knowledge{{\limp}R{*}c}{rule}
+\knowledge{{\limp}R{*}i}{rule}
 \knowledge{\land L}{rule}
 \knowledge{\land L_1}{rule}
 \knowledge{\land L_2}{rule}
@@ -182,10 +186,13 @@
 \knowledge{\lor L}{rule}
 \knowledge{\lor R_1}{rule}
 \knowledge{\lor R_2}{rule}
+\knowledge{\lor R}{rule}
 \knowledge{\forall L}{rule}
+\knowledge{\forall L{*}}{rule}
 \knowledge{\forall R}{rule}
 \knowledge{\exists L}{rule}
 \knowledge{\exists R}{rule}
+\knowledge{\exists R{*}}{rule}
 
 % Subformula linking
 \knowledge{rule}
@@ -243,6 +250,18 @@
 \knowledge{{=}R}{rule}
 \knowledge{{=}L}{rule}
 \knowledge{Repl}{rule}
+
+\knowledge{L{\limp}_1}{rule}
+\knowledge{P\land_1}{rule}
+\knowledge{P\land_2}{rule}
+\knowledge{P\lor_1}{rule}
+\knowledge{P\lor_2}{rule}
+\knowledge{P{\limp}_1}{rule}
+\knowledge{P{\limp}_2}{rule}
+\knowledge{P\forall s}{rule}
+\knowledge{P\exists i}{rule}
+\knowledge{P\exists s}{rule}
+\knowledge{Pcomm}{rule}
 
 % Alpha EGs (informal version)
 \knowledge{Iteration}{rule}
@@ -866,6 +885,12 @@
  | Invalid@sfl
  | validity@sfl
  | Validity@sfl
+
+\knowledge{notion}
+ | classically valid@sfl
+ | classical validity@sfl
+ | Classically valid@sfl
+ | Classical validity@sfl
 
 \knowledge{notion}
  | productivity

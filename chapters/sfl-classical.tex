@@ -31,21 +31,27 @@ $$\bigwedge_{i=1}^{n}{A_i} \limp \bigvee_{j=1}^{m}{C_j}$$
 
 \begin{marginfigure}
   \begin{mathpar}
-    \R[\lor R]
+    \R[\intro{\lor R}]
       {\Gamma \seq A, B, \Delta}
       {\Gamma \seq A \lor B, \Delta}
+    \and
+    \R[\intro{\bot R}]
+      {\Gamma \seq \Delta}
+      {\Gamma \seq \bot, \Delta}
   \end{mathpar}
-  \caption{Multiplicative \kl{right introduction rule} for disjunction}
+  \caption{Multiplicative \kl{right introduction rules} for disjunction and absurdity}
   \labfig{multintro}
 \end{marginfigure}
 
 \begin{marginfigure}
   \begin{mathpar}
-    \R[\lor R]
-      {\R[{\limp}R]
-        {\R[ax]
-          {}
-          {A \seq \select{A}, \bot}}
+    \R[\kl{\lor R}]
+      {\R[\kl{{\limp}R}]
+        {\R[\kl{\bot R}]
+          {\R[\kl{ax}]
+            {}
+            {\select{A} \seq A}}
+          {A \seq A, \select{\bot}}}
         {\seq A, \select{\neg A}}}
       {\seq \select{A \lor \neg A}}
   \end{mathpar}
@@ -55,30 +61,33 @@ $$\bigwedge_{i=1}^{n}{A_i} \limp \bigvee_{j=1}^{m}{C_j}$$
 
 One way to get a multi-conclusion \kl{sequent} in \kl{LK} is to apply the
 ``multiplicative''\sidenote{Terminology borrowed from linear logic, where
-{\rnm{\lor R}} is exactly the \kl{right introduction rule} for multiplicative
+{\kl{\lor R}} is exactly the \kl{right introduction rule} for multiplicative
 disjunction $\parr$.} \kl{introduction rule} {\kl{\lor R}} (\reffig{multintro}).
 For instance, \reffig{lk-tnd} shows a proof of the \kl{law of excluded middle},
 where for each rule we squared the principal formula.
 % Following the mapping of click actions to \kl{sequent calculus} rules
 % (\reftab{click-rules}),
-One could imagine performing the same proof in \kl{Actema} by successively clicking
-on these principal formulas, following a bottom-up reading of the \kl{sequent
-calculus} derivation seen as the trace of a proof search process. First we decide
-to prove $A \lor \neg A$: this amounts to proving alternatively $A$ or $\neg
-A$, which now appear as two separate red \kl{items} in the same tab. Then we try to
-prove $\neg A$, with the usual method of supposing $A$ to find a contradiction.
-However instead of a contradiction, we decide to backtrack and prove the
-alternative conclusion $A$, which is now trivial by assumption. We come back to
-these multi-conclusion click actions in \refsec{classical-click}.
+One could imagine performing the same proof in \kl{Actema} by successively
+clicking on these principal formulas, following a bottom-up reading of the
+\kl{sequent calculus} derivation seen as the trace of a proof search process.
+First we decide to prove $A \lor \neg A$: this amounts to proving alternatively
+$A$ or $\neg A$, which now appear as two separate red \kl{items} in the same
+tab. Then we try to prove $\neg A$, with the usual method of supposing $A$ to
+find a contradiction. However instead of a contradiction, we decide to
+\emph{backtrack} and prove the alternative conclusion $A$, which is now trivial
+by assumption. We come back to these multi-conclusion click actions in
+\refsec{classical-click}.
 
-It is clear in the proof that the \kl{negative} occurrence of $A$ in $\neg A$ is the
-one that becomes the assumption $A$ that justifies the conclusion $A$ in the
+\AP
+It is clear in the proof that the \kl{negative} occurrence of $A$ in $\neg A$ is
+the one that becomes the assumption $A$ that justifies the conclusion $A$ in the
 last step. It would be natural to specify this causal relationship by linking
-directly the two occurrences of $A$, as we do with \kl{DnD} actions in \kl{Actema}.
-However for this to be possible, we need to introduce a new \kl{interaction operator} ---
-let us note it $\para$ --- that works between two conclusions, where $A \para B$
-is obviously interpreted as $A \lor B$. Then after clicking on $A \lor \neg A$
-we can just finish the proof by connecting $A$ and $\neg A$:
+directly the two occurrences of $A$, as we do with \kl{DnD} actions in
+\kl{Actema}. However for this to be possible, we need to introduce a new
+\kl{interaction operator} --- let us note it $\intro*\para$ --- that works
+between two conclusions, where $A \para B$ is obviously interpreted as $A \lor
+B$. Then after clicking on $A \lor \neg A$ we can just finish the proof by
+connecting $A$ and $\neg A$:
 $$\select{A} \para \neg \select{A} ~~\steps{}~~ \top$$
 
 This would avoid the additional step of clicking on $\neg A$ to turn it into an
@@ -100,71 +109,77 @@ what we explore in \refsec{classical-dnd}.
 
 Interestingly, the \kl{classical} aspect of the proof of $A \lor \neg A$ in
 \reffig{lk-tnd} comes exclusively from the \emph{backtracking} operation during
-the last step, a phenomemon which is well known in the literature on
-constructive/computational properties of \kl{classical} logic\todo{add references}.
-Then one can see the \kl{introduction rules} {\rnm{\lor R_1}} and {\rnm{\lor R_2}},
-and the restriction of \kl{intuitionistic} \kl{sequents} to one conclusion, as ways to
-prevent such backtracking by forcing the choice of disjunct to prove at an early
-stage.
+the last step, a phenomemon which is well known in the folklore around
+constructive/computational interpretations of \kl{classical} logic, and is
+related to the notion of \emph{continuation} in programming\sidenote{See for
+instance \cite[Section~5.6]{mellies_etude_2017}.}. Then one can see the
+\kl{introduction rules} {\kl{\lor R_1}} and {\kl{\lor R_2}}, and the restriction
+of \kl{intuitionistic} \kl{sequents} to one conclusion, as ways to prevent such
+backtracking by forcing the choice of disjunct to prove at an early stage.
 % \sidenote{Although the ability to backtrack can be reintroduced in other
 % ways, for example with the rule of \textit{reductio ad absurdum} (\reffig{raa})
 % (TODO: add reference).}.
 
-In fact backtracking can still be performed in \kl{intuitionistic} logic, but at the
-meta-level of the proof search process instead of the object-level of \kl{inference
-rules}. In an \kl{interactive theorem prover}, this corresponds to the ability for the
-user to \emph{undo} an inference and go back to a previous \kl{proof state}. However
-keeping track of the times we undo/redo inferences is very hard to do as humans,
-and the user interfaces of current \kl{proof assistants} do not provide any mechanism
-for it either. This has already been noted by Ayers\sidenote{Section 3.1.3 of
-his thesis \cite{ayers_thesis}.}, and is a good motivation for trying to design
-\kl{proof systems} where the need for meta-level backtracking is reduced, or even
-removed. One way to do this is to maximize the proportion of \kl{inference rules}
-that are \emph{\kl{invertible}}, meaning that their premisses always follow from
-their conclusion. Indeed when looking at rules as \kl{tactics} (see \refsec{itps}),
-it means that they will always reduce a provable \kl{goal} to provable \kl{subgoals}, and
-thus can never induce a backtracking point\sidenote{Except of course if the user
-deems the \kl{subgoal} too complex to prove in its current form, and explicitly wants
-to backtrack to shape it differently.}. The {\rnm{\lor R}} rule is an example of
-\kl{invertible} rule, and in \kl{LK} it can replace the other, non-\kl{invertible} rules
-{\rnm{\lor R_1}} and {\rnm{\lor R_2}}.
+In fact backtracking can still be performed in \kl{intuitionistic} logic, but at
+the meta-level of the proof search process instead of the object-level of
+\kl{inference rules}. In an \kl{interactive theorem prover}, this corresponds to
+the ability for the user to \emph{undo} an inference and go back to a previous
+\kl{proof state}. However keeping track of the times we undo/redo inferences is
+very hard to do as humans, and the user interfaces of current \kl{proof
+assistants} do not provide any mechanism that helps in this respect. This has
+already been noted by Ayers\sidenote{Section 3.1.3 of his thesis
+\cite{ayers_thesis}.}, and is a good motivation for trying to design \kl{proof
+systems} where the need for meta-level backtracking is reduced, or even removed.
+One way to do this is to maximize the proportion of \kl{inference rules} that
+are \emph{\kl{invertible}}, meaning that their premisses always follow from
+their conclusion. Indeed when looking at rules as \kl{tactics} (see
+\refremark{tactics-rules}), it means that they will always reduce a provable
+\kl{goal} to provable \kl{subgoals}, and thus can never induce a backtracking
+point\sidenote{Except of course if the user deems the \kl{subgoal} too complex
+to prove in its current form, and explicitly wants to backtrack to shape it
+differently.}. The {\kl{\lor R}} rule is an example of \kl{invertible} rule, and
+in \kl{LK} it can replace the other, non-\kl{invertible} rules {\kl{\lor R_1}}
+and {\kl{\lor R_2}}.
 
-But {\rnm{\lor R}} requires multi-conclusion sequents, and Gentzen restricted
+But {\kl{\lor R}} requires multi-conclusion sequents, and Gentzen restricted
 their use to \kl{classical} logic. It turns out that logicians after Gentzen have
 proposed various multi-conclusion \kl{sequent calculi} that work for \kl{intuitionistic}
 logic, the most famous being \kl{GHCP} from Dragalin
-\sidecite{dragalin_mathematical_1990}, which uses {\rnm{\lor R}}. In the rest of
+\sidecite{dragalin_mathematical_1990}, which uses {\kl{\lor R}}. In the rest of
 this chapter, we will consider to what extent one can benefit from having
 multiple conclusions in an \kl{intuitionistic} setting.
 
 \section{Implementation in theorem provers}
 
+\AP
 Despite the aforementioned benefits of multi-conclusion sequents, we do not know
-of any \kl{proof assistant}, whether \kl{classical} or \kl{intuitionistic}, that exposes them
-in its user interface. One reason is that most proof/\kl{tactic} languages are based
-on the rules of \kl{natural deduction}, which use single-conclusion sequents. Another
-reason is that having one conclusion removes the need to designate it with an
-explicit name or number, as is the case with hypotheses\sidenote{The current
-trend is to have user-chosen or automatically generated strings for names as in
-Coq and \kl{Lean}, but some provers like \kl{HOL Light} ask for the position in the list
-as an integer to designate a particular hypothesis.}. And the explicit handling
-of names in \kl{tactic} invokations is known to be tedious and time-consuming, to the
-point that some \kl{tactic} languages like \ssreflect have been designed around this
-problem \sidecite{SSR}. Thus having multiple conclusions would only double the
-effort for no compelling reason.
+of any \kl{proof assistant}, whether \kl{classical} or \kl{intuitionistic}, that
+exposes them in its user interface. One reason is that most proof/\kl{tactic}
+languages are based on the rules of \kl{natural deduction}, which use
+single-conclusion sequents. Another reason is that having one conclusion removes
+the need to designate it with an explicit name or number, as is the case with
+hypotheses\sidenote{The current trend is to have user-chosen or automatically
+generated strings for names as in \kl{Coq} and \kl{Lean}, but some provers like
+\kl{HOL Light} ask for the position in the list as an integer to designate a
+particular hypothesis.}. And the explicit handling of names in \kl{tactic}
+invokations is known to be tedious and time-consuming, to the point that some
+\kl{tactic} languages like {\intro{\ssreflect}} have been designed around this problem
+\sidecite{SSR}. Thus having multiple conclusions would only double the effort
+for no compelling reason.
 
-However in our graphical paradigm based on \kl{direct manipulation}, hypotheses and
-conclusions are designated by the act of \emph{pointing} at them with a mouse,
-finger or any other pointing device\sidenote{With the recent advances in natural
-language processing and voice recognition, one could also imagine a system based
-on the selection of subterms by spelling their content. Then click and \kl{DnD}
-actions could be triggered by voice commands once the subterms they apply to
-have been selected. This could be an important alternative for users with
-impaired vision and/or motricity.}. This opens up the possibility of exposing
-multiple conclusions in the interface with associated graphical proof actions,
-as outlined in the introductory example on the excluded middle. While we did not
-implement such an extension, we explore in the following sections its design,
-and the theoretical foundations behind it.
+However in our graphical paradigm based on \kl{direct manipulation}, hypotheses
+and conclusions are designated by the act of \emph{pointing} at them with a
+mouse, finger or any other pointing device\sidenote{With the recent advances in
+natural language processing and voice recognition, one could also imagine a
+system based on the selection of subterms by \emph{spelling} their content. Then
+click and \kl{DnD} actions could be triggered by voice commands once the
+subterms they apply to have been selected. This could be an important
+alternative for users with impaired vision and/or motricity.}. This opens up the
+possibility of exposing multiple conclusions in the interface with associated
+graphical proof actions, as outlined in the introductory example of this
+chapter. While we did not implement such an extension in \kl{Actema}, we explore
+in the following sections its design, and the theoretical foundations that lay
+behind it.
 
 \section{Click actions}\labsec{classical-click}
 
@@ -176,11 +191,11 @@ capturing either \kl{intuitionistic} or \kl{classical} \kl{first-order logic}:
 
 \begin{marginfigure}
   \begin{mathpar}
-    \R[{\limp}R*c]
+    \R[\intro{{\limp}R{*}c}]
       {\Gamma, A \seq B, \Delta}
       {\Gamma \seq A \limp B, \Delta}
     \and
-    \R[{\limp}R*i]
+    \R[\intro{{\limp}R{*}i}]
       {\Gamma, A \seq B}
       {\Gamma \seq A \limp B, \Delta}
   \end{mathpar}
@@ -191,24 +206,24 @@ capturing either \kl{intuitionistic} or \kl{classical} \kl{first-order logic}:
 \begin{itemize}
   \item clicking on a red disjunction $A \lor B$ breaks it into two conclusions
   $A$ and $B$. This is the dual behavior to click actions on blue conjunctions,
-  and corresponds to the {\rsf{\lor R}} rule of \reffig{multintro}, which is
+  and corresponds to the {\kl{\lor R}} rule of \reffig{multintro}, which is
   common to both the \kl{intuitionistic} and \kl{classical} variants;
   \item as before, clicking on a red implication $A \limp B$ breaks it into an
   hypothesis $A$ and a conclusion $B$. Without further changes, this corresponds
   to the \kl{right introduction rule} from the \kl{classical} \kl{sequent
-  calculus} \kl{LK} of Gentzen (named {\rsf{{\limp}R*c}} in
+  calculus} \kl{LK} of Gentzen (named {\kl{{\limp}R{*}c}} in
   \reffig{multi-imp-intro}), and our set of actions becomes a \kl{proof system}
   for \kl{classical} logic. To go back to \kl{intuitionistic} logic, one needs
   the additional behavior that all the other conclusions of the \kl{goal} are
   removed. This corresponds to the \kl{right introduction rule} from the
-  \kl{GHCP} calculus of Dragalin (named {\rsf{{\limp}R*i}} in
+  \kl{GHCP} calculus of Dragalin (named {\kl{{\limp}R{*}i}} in
   \reffig{multi-imp-intro}).
 \end{itemize}
 
 \begin{remark}
   In the special case of \kl{intuitionistic} \kl{sequents} with one conclusion, the two
-  variants {\rsf{{\limp}R*c}} and {\rsf{{\limp}R*i}} collapse into the usual
-  {\rsf{{\limp}R}} rule.
+  variants {\kl{{\limp}R{*}c}} and {\kl{{\limp}R{*}i}} collapse into the usual
+  {\kl{{\limp}R}} rule.
 \end{remark}
 Note that we only modified the behavior of the disjunction $\lor$ and
 implication $\limp$ connectives; and for the latter, only in the case when there
@@ -217,31 +232,33 @@ it is interesting to notice that the \kl{classical} behavior of the other connec
 ($\bot, \land, \forall, \exists$) essentially arises from their interaction with
 (\kl{positive}) disjunctive statements.
 
-If we stick to \kl{intuitionistic} logic, the benefits of having multiple conclusions
-are unclear. Indeed while the {\rsf{\lor R}} rule is \kl{invertible}, the
-{\rsf{{\limp}R*i}} rule is not, and thus at some point the choice of which
+If we stick to \kl{intuitionistic} logic, the benefits of having multiple
+conclusions are unclear. Indeed while the {\kl{\lor R}} rule is \kl{invertible},
+the {\kl{{\limp}R{*}i}} rule is not, and thus at some point the choice of which
 conclusion to prove must be made by the user irreversibly, even if the choice is
 delayed\sidenote{In \refsec{colors}, we will see how to overcome this limitation
 by using a \emph{\kl{nested sequent}} system.}. On the other hand the
-{\rsf{{\limp}R*c}} rule \emph{is} \kl{invertible}: this is known to allow the
-formulation of \kl{sequent calculi} for \kl{classical} logic where \emph{all} rules are
-\kl{invertible}, like the \kl{G3c} calculus of \sidecite{negri_structural_2001}. In
-the propositional case, this gives a constructive decision procedure for the
-question of provability: given a \kl{sequent} $\Gamma \seq \Delta$, one just has to
-choose any formula in $\Gamma$ or $\Delta$ and apply the \kl{introduction rule}
-associated to its main connective, or the axiom rule whenever possible. In
-Actema, this would correspond to having the user click randomly on blue and red
-items until all \kl{goals} are solved. The procedure ends because all \kl{introduction
-rules} destroy the main connective, and none of them duplicate formulas: thus the
-total size of the \kl{sequent} decreases strictly after each rule application.
+{\kl{{\limp}R{*}c}} rule \emph{is} \kl{invertible}: this is known to allow the
+formulation of \kl{sequent calculi} for \kl{classical} logic where \emph{all}
+rules are \kl{invertible}, like the \kl{G3c} calculus of
+\sidecite{negri_structural_2001}. In the propositional case, this gives a
+constructive decision procedure for the question of provability: given a
+\kl{sequent} $\Gamma \seq \Delta$, one just has to choose any formula in
+$\Gamma$ or $\Delta$ and apply the \kl{introduction rule} associated to its main
+connective, or the \kl(rule){axiom} rule whenever possible. In \kl{Actema}, this
+would correspond to having the user click randomly on blue and red items until
+all \kl{goals} are solved. The procedure ends because all \kl{introduction
+rules} destroy the main connective, and none of them duplicate formulas: thus
+the total number of connectives in the \kl{sequent} decreases strictly after
+each rule application.
 
 \begin{marginfigure}
   \begin{mathpar}
-    \R[\forall L*]
+    \R[\intro{\forall L{*}}]
       {\Gamma, \forall x. A, \subst{A}{t}{x} \seq \Delta}
       {\Gamma, \forall x. A \seq \Delta}
     \and
-    \R[\exists R*]
+    \R[\intro{\exists R{*}}]
       {\Gamma \seq \subst{A}{t}{x}, \exists x. A, \Delta}
       {\Gamma \seq \exists x. A, \Delta}
   \end{mathpar}
@@ -250,21 +267,21 @@ total size of the \kl{sequent} decreases strictly after each rule application.
 \end{marginfigure}
 
 When dealing with quantifiers, the situation is not so simple: if one wants
-\kl{invertible} \kl{introduction rules}, it is necessary to duplicate the quantified
-formula being instantiated, which can be seen as the root cause of
+\kl{invertible} \kl{introduction rules}, it is necessary to duplicate the
+quantified formula being instantiated, which can be seen as the root cause of
 undecidability in \kl{predicate logic} as noted by
-Girard\cite[Section~3.3.2]{girard:hal-01322183}. This is already what happens in
-Actema for the universal quantifier: dropping a term $t$ on a blue \kl{item} $\forall
-x. A$ will produce a new hypothesis $\subst{A}{t}{x}$, while keeping the
-original $\forall x. A$ \kl{item}. This corresponds to the \kl{invertible}
-\kl{left introduction rule} of \kl{G3c} ({\rsf{\forall L*}} in \reffig{multi-inst}).
-But in the single-conclusion framework, dropping a term $t$ on a red \kl{item}
-$\exists x. A$ necessarily replaces it by the instantiated conclusion
-$\subst{A}{t}{x}$. Allowing multiple conclusions circumvents this problem and
-restores the symmetry between $\forall$ and $\exists$, since we can create a new
-conclusion for $\subst{A}{t}{x}$ while preserving the old one. This corresponds
-to the \kl{invertible} \kl{right introduction rule} of \kl{G3c} ({\rsf{\exists R*}} in
-\reffig{multi-inst}).
+Girard~\cite[Section~3.3.2]{girard:hal-01322183}. This is already what happens
+in \kl{Actema} for the universal quantifier: dropping a term $t$ on a blue
+\kl{item} $\forall x. A$ will produce a new hypothesis $\subst{A}{t}{x}$, while
+keeping the original $\forall x. A$ \kl{item}. This corresponds to the
+\kl{invertible} \kl{left introduction rule} of \kl{G3c} ({\kl{\forall L{*}}} in
+\reffig{multi-inst}). But in the single-conclusion framework, dropping a term
+$t$ on a red \kl{item} $\exists x. A$ necessarily replaces it by the
+instantiated conclusion $\subst{A}{t}{x}$. Allowing multiple conclusions
+circumvents this problem and restores the symmetry between $\forall$ and
+$\exists$, since we can create a new conclusion for $\subst{A}{t}{x}$ while
+preserving the old one. This corresponds to the \kl{invertible} \kl{right
+introduction rule} of \kl{G3c} ({\kl{\exists R{*}}} in \reffig{multi-inst}).
 
 \section{DnD actions}\labsec{classical-dnd}
 
@@ -280,35 +297,35 @@ formal point of view, there is nothing preventing us from trying to design
 for $\back$ and $\forw$. Furthermore, we already saw earlier in the excluded
 middle example that such an operator did seem useful.
 
-When looking for a proof of a \kl{sequent} with multiple conclusions, unless we
-commit to proving one conclusion and give up on the others by applying the
-{\rsf{{\limp}R*i}} rule, we can switch freely our focus between the different
+\AP When looking for a proof of a \kl{sequent} with multiple conclusions, unless
+we commit to proving one conclusion and give up on the others by applying the
+{\kl{{\limp}R{*}i}} rule, we can switch freely our focus between the different
 conclusions. Thus in a way, we are looking for proofs of all the conclusions
 \emph{in parallel}, and we stop as soon as we find one\sidenote{This is also
-related to the $\parr$ connective of linear logic which uses the {\rsf{\lor
-R}} rule of \reffig{multintro}, and whose spelling ``par'' is historically
-motivated by an understanding of the multiplicative fragment of \kl{LL} as a
-logic of parallel computation \cite{girard-linear-1987}.}. Hence we chose to
-call this third kind of interaction between two conclusions \emph{parallel}
-reasoning. This justifies the choice of notation for the parallel \kl{interaction
-operator} $\para$, which is suggestive of the parallel composition $\mid$ from
-process calculi.
+related to the $\parr$ connective of linear logic which uses the {\kl{\lor R}}
+rule of \reffig{multintro}, and whose spelling ``par'' is historically motivated
+by an understanding of the multiplicative fragment of \kl{LL} as a logic of
+parallel computation \cite{girard-linear-1987}.}. Hence we chose to call this
+third kind of interaction between two conclusions \intro(dnd){parallel}
+reasoning. This justifies the choice of notation for the \kl(dnd){parallel}
+\kl{interaction operator} $\para$, which is suggestive of the parallel
+composition $\mid$ from process calculi.
 
-The rules governing $\para$ are presented in \reffig{parallel}. A parallel
-\kl{linkage} can be created either by drag-and-dropping two conclusions together, or
-through an instance of the new \kl(dnd){backward} rule {\rsf{L{\limp}_1}}. It is
-important to note that this rule is only sound \emph{\kl{classically}}; indeed we can
-now come back to the example of \refsubsec{polarity} and give the following
-derivation of Peirce's law with it:
+The rules governing $\para$ are presented in \reffig{parallel}. A \kl(dnd){parallel}
+\kl{linkage} can be created either by drag-and-dropping two conclusions
+together, or through an instance of the new \kl(dnd){backward} rule
+\kl{L{\limp}_1}. It is important to note that this rule is only sound
+\emph{\kl{classically}}; indeed we can now come back to the example of
+\refsubsec{polarity} and give the following derivation of Peirce's law with it:
 
 $$
 \begin{array}{llll}
-  (\select{A} \limp B) \limp A \back \select{A}
-  &\step{}& (\select{A} \limp B \para \select{A}) \land (A \limp A) &\mathsf{L{\limp}_1} \\
-  &\step{}& ((\select{A} \back \select{A}) \lor B) \land (A \limp A) &\mathsf{P{\limp}_1} \\
-  &\step{}& (\top \lor B) \land (A \limp A) &\mathsf{id} \\
-  &\step{}& \top \land (A \limp A) &\mathsf{absl} \\
-  &\step{}& A \limp A &\mathsf{neul}
+  \left(\select{A} \limp B\right) \limp A \back \select{A}
+  &\step{}& \left(\select{A} \limp B \para \select{A}\right) \land (A \limp A) &\kl{L{\limp}_1} \\
+  &\step{}& \left(\left(\select{A} \back \select{A}\right) \lor B\right) \land (A \limp A) &\kl{P{\limp}_1} \\
+  &\step{}& (\top \lor B) \land (A \limp A) &\kl{id} \\
+  &\step{}& \top \land (A \limp A) &\kl{absl} \\
+  &\step{}& A \limp A &\kl{neul}
 \end{array}
 $$
 
@@ -316,37 +333,37 @@ $$
   \fontsize{9}{9.5}\selectfont
     \renewcommand{\arraystretch}{1.25}
   \begin{mathpar}
-    \begin{array}{r@{\,}c@{\,}lr}
+    \begin{array}{rclr}
       \multicolumn{4}{c}{\textsc{\kl(dnd){Backward}}} \\[2em]
-      {B \limp C \back A}   &\step{}&   {(B \para A) \land (C \limp A)} &\mathsf{L{\limp}_1} \\[2em]
+      {B \limp C \back A}   &\step{}&   {(B \para A) \land (C \limp A)} &\intro{L{\limp}_1} \\[2em]
     \end{array}
     \\
-    \begin{array}{r@{\,}c@{\,}lr}
-      \multicolumn{4}{c}{\textsc{Parallel}} \\[2em]
-      {A \para (B \land C)}   &\step{}&   {(A \para B) \land C}   &\mathsf{P\land_1}\\
-      {A \para (C \land B)}   &\step{}&   {C \land (A \para B)}   &\mathsf{P\land_2}\\[1em]
+    \begin{array}{rclr}
+      \multicolumn{4}{c}{\textsc{\kl(dnd){Parallel}}} \\[2em]
+      {A \para (B \land C)}   &\step{}&   {(A \para B) \land C}   &\intro{P\land_1}\\
+      {A \para (C \land B)}   &\step{}&   {C \land (A \para B)}   &\intro{P\land_2}\\[1em]
 
-      {A \para (B \lor C)}   &\step{}&   {A \para B}   &\mathsf{P\lor_1}\\
-      {A \para (C \lor B)}   &\step{}&   {A \para B}   &\mathsf{P\lor_2}\\[1em]
+      {A \para (B \lor C)}   &\step{}&   {A \para B}   &\intro{P\lor_1}\\
+      {A \para (C \lor B)}   &\step{}&   {A \para B}   &\intro{P\lor_2}\\[1em]
 
-      {A \para (B \limp C)}   &\step{}&    {(B \back A) \lor C}   &\mathsf{P\!\!\limp_1}\rever\\
-      {A \para (C \limp B)}   &\step{}&    {C \limp (A \para B)}   &\mathsf{P\!\!\limp_2}\rever\\[1em]
+      {A \para (B \limp C)}   &\step{}&    {(B \back A) \lor C}   &\intro{P{\limp}_1}\rever\\
+      {A \para (C \limp B)}   &\step{}&    {C \limp (A \para B)}   &\intro{P{\limp}_2}\rever\\[1em]
 
-      % {A \para \neg B}   &\step{}&   {B \back A}   &\mathsf{P\neg}\rever\\[1em]
+      % {A \para \neg B}   &\step{}&   {B \back A}   &\kl{P\neg}\rever\\[1em]
 
-      {A \para (\forall x. B)}   &\step{}&{\forall x. (A \para B)}   &\mathsf{P\forall s}\rever\\[1em]
+      {A \para (\forall x. B)}   &\step{}&{\forall x. (A \para B)}   &\intro{P\forall s}\rever\\[1em]
 
-      {A \para (\exists x. B)}   &\step{}&   {A \para \subst{B}{x}{t}}   &\mathsf{P\exists i}\\
-      {A \para (\exists x. B)}   &\step{}&   {\exists x. (A \para B)}   &\mathsf{P\exists s}\rever\\[1em]
+      {A \para (\exists x. B)}   &\step{}&   {A \para \subst{B}{x}{t}}   &\intro{P\exists i}\\
+      {A \para (\exists x. B)}   &\step{}&   {\exists x. (A \para B)}   &\intro{P\exists s}\rever\\[1em]
             
-      {B \para A}   &\step{}&   {A \para B}   &\mathsf{Pcomm}\\
+      {B \para A}   &\step{}&   {A \para B}   &\intro{Pcomm}\\
     \end{array}
   \end{mathpar}
   ~\\[1em]
-  In the rules $\{\mathsf{P \forall s}, \mathsf{P \exists s}\}$, $x$ is not free
+  In the rules $\{\kl{P\forall s}, \kl{P\exists s}\}$, $x$ is not free
   in $A$.
   ~\\[1em]
-  \caption{Parallel linking rules}
+  \caption{\kl(dnd){Parallel} linking rules}
   \labfig{parallel}
 \end{marginfigure}
 
@@ -356,19 +373,19 @@ $$
   \tikzset{/tikz/commutative diagrams/labels={outer sep=4pt}}
   \begin{tikzcd}[ampersand replacement=\&]
     \large
-    \forw \arrow[r, "\mathsf{F{\limp}_1}", bend left] \&
-    \back \arrow[r, "\mathsf{L{\limp}_1}", bend left] \arrow[l, "\mathsf{R{\limp}_1}", bend left] \&
-    \para \arrow[l, "\mathsf{P{\limp}_1}", bend left]
+    \forw \arrow[r, "\kl{F{\limp}_1}", bend left] \&
+    \back \arrow[r, "\kl{L{\limp}_1}", bend left] \arrow[l, "\kl{R{\limp}_1}", bend left] \&
+    \para \arrow[l, "\kl{P{\limp}_1}", bend left]
   \end{tikzcd}
   \end{center}
   \caption{Alternating structure between reasoning modes}
   \labfig{modes-schema}
 \end{marginfigure}
 
-The other rules of \reffig{parallel} handle the rewriting of parallel \kl{linkages},
+The other rules of \reffig{parallel} handle the rewriting of \kl(dnd){parallel} \kl{linkages},
 and were conceived as the dual counterpart of \kl(dnd){forward} rules. Indeed, while a
 \kl(dnd){forward} \kl{linkage} combines two \kl{negative} subformulas in the same \kl{context} to produce
-a new \emph{hypothesis}, a parallel \kl{linkage} combines two \kl{positive} subformulas in
+a new \emph{hypothesis}, a \kl(dnd){parallel} \kl{linkage} combines two \kl{positive} subformulas in
 the same \kl{context} to produce a new \emph{conclusion}. \kl(dnd){Backward} \kl{linkages} can then
 be seen as mediating between these two opposite modes of reasoning, by handling
 the interaction of a \kl{positive} and a \kl{negative} subformula in the same \kl{context}. A
@@ -381,47 +398,49 @@ which is what triggers the change of mode.
 
 \section{Metatheory of parallel reasoning}
 
-Like \kl(dnd){backward} rules, a parallel rule $A \step{} B$ will be logically sound if $B$
+Like \kl(dnd){backward} rules, a \kl(dnd){parallel} rule $A \step{} B$ will be logically sound if $B$
 entails $A$. Then if one wants to stick to an \kl{intuitionistic} setting, one has to
-remove the rules {\rsf{P{\limp}_1}}, {\rsf{P{\limp}_2}} and {\rsf{P\forall
-s}} from the system, in addition to the {\rsf{L{\limp}_1}} rule. Indeed those
+remove the rules {\kl{P{\limp}_1}}, {\kl{P{\limp}_2}} and {\kl{P\forall
+s}} from the system, in addition to the {\kl{L{\limp}_1}} rule. Indeed those
 are all sound \kl{classically} but not \kl{intuitionistically}\sidenote{We do not prove
 this formally here, but this can be done by exhibiting \kl{intuitionistic}
 counter-models in which the entailments are false, i.e. Kripke structures or
 Heyting algebras.}.
 
 Now if we look back at the schema from \reffig{modes-schema}, removing
-{\rsf{L{\limp}_1}} and {\rsf{P{\limp}_1}} in particular has the consequence
-of isolating completely parallel reasoning from the other modes. But remember
-from \refsec{action} that we are only interested in \emph{valid} \kl{linkages}, that
-is those \kl{linkages} who satisfy productivity (\refthm{productivity}) and thus will
-always terminate on an instance of either the {\kl(sfl){id}} rule (\kl(dnd){backward} mode)
-or the equality rules (\kl(dnd){backward}/\kl(dnd){forward} modes). Thus if there is no way to reach
-either \kl(dnd){forward} or \kl(dnd){backward} mode from a parallel \kl{linkage}, it has no meaning in
-our paradigm. Then if we trust that rules {\rsf{L{\limp}_1}} and
-{\rsf{P{\limp}_1}} are necessary to get the intended semantics, it seems that
-parallel reasoning only makes sense in a \kl{classical} setting. In the following, we
-only show that the rules of \reffig{parallel} are sufficient for our purpose, by
-extending the results of \refch{sfl} to the \kl{classical}, multi-conclusion setting.
+{\kl{L{\limp}_1}} and {\kl{P{\limp}_1}} in particular has the consequence of
+isolating completely \kl(dnd){parallel} reasoning from the other modes. But
+remember from \refsec{action} that we are only interested in \emph{\kl{valid}}
+\kl{linkages}, that is those \kl{linkages} who satisfy productivity
+(\refthm{productivity}) and thus will always terminate on an instance of either
+the {\kl(sfl){id}} rule (\kl(dnd){backward} mode) or the equality rules
+(\kl(dnd){backward}/\kl(dnd){forward} modes). Thus if there is no way to reach
+either \kl(dnd){forward} or \kl(dnd){backward} mode from a \kl(dnd){parallel}
+\kl{linkage}, it has no meaning in our paradigm. Then if we trust that rules
+{\kl{L{\limp}_1}} and {\kl{P{\limp}_1}} are necessary to get the intended
+semantics, it seems that \kl(dnd){parallel} reasoning only makes sense in a
+\kl{classical} setting. In the following, we only show that the rules of
+\reffig{parallel} are sufficient for our purpose, by extending the results of
+\refch{sfl} to the \kl{classical}, multi-conclusion setting.
 
-We start by updating the validity criterion on \kl{linkages}, more specifically we
-drop Clause \ref{clause:intuit} of Condition \ref{cond:pol} about the \kl{polarities}
-of linked subformulas. Indeed it was introduced precisely to forbid behaviors
-which only make sense in \kl{classical} logic, but are now given a semantics with the
-{\rsf{L{\limp}_1}} rule. We also need to add a case for the $\para$ operator
-in the other clauses of Condition \ref{cond:pol}, which gives the following
-updated condition:
+We start by updating the \kl{validity} criterion on \kl{linkages}, more
+specifically we drop Clause \ref{clause:intuit} of Condition \ref{cond:pol}
+about the \kl{polarities} of linked subformulas. Indeed it was introduced
+precisely to forbid behaviors which only make sense in \kl{classical} logic, but
+are now given a semantics with the {\kl{L{\limp}_1}} rule. We also need to add a
+case for the $\para$ operator in the other clauses of Condition \ref{cond:pol},
+which gives the following updated condition:
 
 \begin{condition}[Classical Polarity]\label{cond:pol-classical}
   
   The following must be true for a \kl{logical linkage} $B\select{A}\link
-  D\select{A'}$ to be \emph{\kl{classically} valid}:
+  D\select{A'}$ to be \intro{classically valid}:
   \begin{enumerate}
     \item the parity of $\inv(B\hole)$ is:
       \begin{enumerate}
-        \item the same as $\inv(D\hole)$ if $\link = \back$
-        \item the opposite of $\inv(D\hole)$ if $\link = \forw$
-        \item the opposite of $\inv(D\hole)$ if $\link = \para$
+        \item the same as $\inv(D\hole)$ if $\link = {\back}$
+        \item the opposite of $\inv(D\hole)$ if $\link = {\forw}$
+        \item the opposite of $\inv(D\hole)$ if $\link = {\para}$
       \end{enumerate}\label{clause:opposite}
   \end{enumerate}
 
@@ -430,15 +449,15 @@ updated condition:
   \begin{enumerate}
     \item if $B\hole$ holds the equality, then it must be:
       \begin{enumerate}
-        \item \kl{positive} if $\link = \back$;
-        \item \kl{positive} if $\link = \forw$;
-        \item \kl{negative} if $\link = \para$;
+        \item \kl{positive} if $\link = {\back}$;
+        \item \kl{positive} if $\link = {\forw}$;
+        \item \kl{negative} if $\link = {\para}$;
       \end{enumerate}
     \item if $D\hole$ holds the equality, then it must be:
       \begin{enumerate} 
-        \item \kl{negative} if $\link = \back$;
-        \item \kl{positive} if $\link = \forw$.
-        \item \kl{negative} if $\link = \para$.
+        \item \kl{negative} if $\link = {\back}$;
+        \item \kl{positive} if $\link = {\forw}$.
+        \item \kl{negative} if $\link = {\para}$.
       \end{enumerate}
   \end{enumerate}
 \end{condition}
@@ -447,19 +466,19 @@ Then we add the following case to the statement of \refthm{sfl-soundness}:
   $$\text{If $A \para B \steps{} C$, then $C \seq A, B$.}$$
 and we interpret $\para$ as disjunction:
   $$\lint{A \para B} = \lint{A} \lor \lint{B}$$
-We add the two following cases to Lemmas \ref{lemma:rules-valid-in-context} and
-\ref{lemma:rewriting-valid-in-context}:
+We add the two following cases to \reflemma{rules-valid-in-context} and
+\reflemma{rewriting-valid-in-context}:
 \begin{itemize}
   \item If $C^+\select{A\para B}\step{} D$ then $\lint{D} \seq C^+\select{A\lor B}$.
   \item If $C^-\select{A\para B}\step{} D$ then $C^-\select{A\lor B}\seq \lint{D}$.
 \end{itemize}
-The proof of Lemma \ref{lemma:rules-valid-in-context} is easily extended by
-inspecting each parallel rule, and we already mentioned that the \kl(dnd){backward} rule
-{\rsf{L{\limp}_1}} is sound \kl{classically}. Note that now \kl{sequents} have multiple
+The proof of \reflemma{rules-valid-in-context} is easily extended by
+inspecting each \kl(dnd){parallel} rule, and we already mentioned that the \kl(dnd){backward} rule
+{\kl{L{\limp}_1}} is sound \kl{classically}. Note that now \kl{sequents} have multiple
 conclusions, thus one needs to use rules from a multi-conclusion calculus such as
 \kl{G3c} \cite{negri_structural_2001}.
 
-\kl{Polarity} preservation (Fact \ref{prop:rules-preserve-polarity}) is also true
+Polarity preservation (\reffact{rules-preserve-polarity}) is also true
 with $\para$, we just need to add the missing cases from \reffig{modes-schema}:
 \begin{itemize}
   \item If $C\select{A \para B} \step{} C'\select{A' \para B'}$ then $C\hole$ and
@@ -468,13 +487,13 @@ with $\para$, we just need to add the missing cases from \reffig{modes-schema}:
   \para B} \step{} C'\select{A' \back B'}$) then $C\hole$ and $C'\hole$ have the
   same \kl{polarity}.
 \end{itemize}
-The proof of Lemma \ref{lemma:rewriting-valid-in-context} is also extended
+The proof of \reflemma{rewriting-valid-in-context} is also extended
 straightforwardly. We only write the added case for $\para$ in the proof of the
 first statement:
 \begin{itemize}
-  \item $\link = \para$: by Fact \ref{prop:rules-preserve-polarity}, $C'$ must
+  \item $\link = {\para}$: by \reffact{rules-preserve-polarity}, $C'$ must
   be \kl{positive}. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
-  \lor B'}$. By Lemma \ref{lemma:rules-valid-in-context} we have
+  \lor B'}$. By \reflemma{rules-valid-in-context} we have
   $C'\select{A' \lor B'} \seq C^+\select{A \limp B}$. Thus by transitivity
   $\lint{D} \seq C^+\select{A \limp B}$.
 \end{itemize}
@@ -484,7 +503,7 @@ rules now allow us to prove Peirce's law, which is known to be sufficient to
 recover \kl{classical} logic from \kl{intuitionistic} logic.
 
 The proof of productivity (\refthm{productivity}) is again extended
-straightforwardedly, by considering the additional case of parallel \kl{linkages} and
+straightforwardly, by considering the additional case of \kl(dnd){parallel} \kl{linkages} and
 using arguments ``dual'' to those used for \kl(dnd){forward} \kl{linkages}. There is even less
 work to do regarding the preservation of Condition \ref{cond:pol} since we
 dropped the \kl{intuitionistic} restriction.

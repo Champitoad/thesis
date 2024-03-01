@@ -426,8 +426,8 @@ of formulas, since it is implicit in mathematical practice that:
 \reffig{PNC-NJ}).
 \end{enumerate}
 These two conventions are respectively captured by the \intro{structural rules}
-\kl{ex} of \intro{exchange} and \kl{ctr} of \intro{contraction} in
-\reffig{calculi-LJ}. A third \kl{structural rule}, \kl{wkn} for
+\kl{xL} of \intro{exchange} and \kl{cL} of \intro{contraction} in
+\reffig{calculi-LJ}. A third \kl{structural rule}, \kl{wL} for
 \intro{weakening}, accounts for the presence of unused assumptions in some
 proofs, by allowing the introduction of new hypotheses at will (with a top-down
 reading of rules).
@@ -435,7 +435,7 @@ reading of rules).
 \begin{marginfigure}
   $$
   \R[\kl{{\limp}R}]
-  {\R[\kl{ctr}]
+  {\R[\kl{cL}]
   {\R[\kl{\land L_1}]
   {\R[\kl{\land L_2}]
   {\R[\kl{{\limp}L}]
@@ -466,7 +466,7 @@ conclusion of the rule, by justifying it with the proof of $A$ given as premiss.
 The \kl{cut} rule can also be seen as a generalization of the \kl{modus ponens}
 rule of \kl{Hilbert systems}, replacing the logical connective $\limp$ of
 implication by the ``structural connective'' $\seq$ of sequents. The remaining
-\intro(rule){axiom} rule \intro{ax} is in a sense dual to the \kl{cut} rule:
+\intro(rule){axiom} rule \kl{ax} is in a sense dual to the \kl{cut} rule:
 while the latter allows justifying a hypothesis by an identical conclusion, the
 \kl{ax} rule allows justifying a conclusion by an identical
 hypothesis\sidenote{It is not clear where the terminology ``axiom rule'' comes
@@ -802,6 +802,7 @@ languages:
   interaction. When the set of \kl{goals} becomes empty, we say that the initial goal
   or conjecture has been \emph{solved}.
 
+  \begin{remark}\labremark{tactics-rules}
   The transformations performed by \kl{tactics} can be more or less sophisticated.
   But, fundamentally, one finds elementary commands that correspond roughly to
   the logical rules, generally of \kl{natural deduction} or \kl{sequent calculus}. For
@@ -810,6 +811,7 @@ languages:
   two \kl{goals} $\Gamma\seq A$ and $\Gamma\seq B$), corresponding to the rules
   \kl{\lor R_1} and \kl{\lor R_2} (resp. \kl{\land R}) of \kl{LJ} in their
   \kl{backward} reading (\reffig{calculi-LJ}).
+  \end{remark}
 
   \kl{Coq} and \kl{Lean} are examples of state-of-the-art \kl{proof assistants} in the
   \kl{imperative} paradigm.
@@ -1196,7 +1198,7 @@ frontend.
 
 \begin{kaonote}
 Most of the content of \refch{pba} and \refch{sfl} has been previously published
-in \cite{10.1145/3497775.3503692}, and the \texttt{coq-actema} system described
+in \cite{10.1145/3497775.3503692}, and the \kl{coq-actema} system described
 in \refch{plugin} is under active development by us and Benjamin Werner
 \cite{coq-actema}. A shortened version of \refch{eg} and \refch{flowers} has
 been submitted for publication at FSCD 2024 \cite{flower-calculus}. All other

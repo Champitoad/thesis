@@ -545,7 +545,7 @@ consider the \kl{polarity} of their \kl{context}.
 
 % Using the notation of definition~\refdef{polarity}, we can state:
 
-\begin{lemma}[Local soundness]\label{lemma:rules-valid-in-context}
+\begin{lemma}[Local soundness]\lablemma{rules-valid-in-context}
   \phantom{a}
   \begin{itemize}
     \item If $C^+\select{A\back B}\step{} D$ then $\lint{D} \seq C^+\select{A\limp B}$.
@@ -575,7 +575,7 @@ consider the \kl{polarity} of their \kl{context}.
 
 An easy but important technical point is that \kl{rewriting rules} preserve the
 \kl{polarity} of \kl{contexts} around redexes, in the following precise sense:
-\begin{fact}[Polarity preservation]\label{prop:rules-preserve-polarity}
+\begin{fact}[Polarity preservation]\labfact{rules-preserve-polarity}
   \phantom{a}
   \begin{itemize}
     \item
@@ -589,10 +589,10 @@ An easy but important technical point is that \kl{rewriting rules} preserve the
   \end{itemize}
 \end{fact}
 
-Combining Lemma \ref{lemma:rules-valid-in-context} and Fact
-\ref{prop:rules-preserve-polarity}, we obtain the central soundness result
-about the \kl{rewriting rules}:
-\begin{lemma}[Contextual soundness]\label{lemma:rewriting-valid-in-context}
+Combining \reflemma{rules-valid-in-context} and
+\reffact{rules-preserve-polarity}, we obtain the central soundness result about
+the \kl{rewriting rules}:
+\begin{lemma}[Contextual soundness]\lablemma{rewriting-valid-in-context}
   \phantom{a}
   \begin{itemize}
     \item If $C^+\select{A\back B}\steps{} D$ then $\lint{D} \seq C^+\select{A\limp B}$.
@@ -609,14 +609,14 @@ about the \kl{rewriting rules}:
   $$C^+\select{A \back B} \step{} C'\select{A' \link B'} \steps{} D$$
   Then we reason by case on the \kl{interaction operator} $\link$:
   \begin{itemize}
-    \item $\link = {\back}$: by Fact \ref{prop:rules-preserve-polarity}, $C'$ must
+    \item $\link = {\back}$: by \reffact{rules-preserve-polarity}, $C'$ must
     be \kl{positive}. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
-    \limp B'}$. By Lemma \ref{lemma:rules-valid-in-context} we have
+    \limp B'}$. By \reflemma{rules-valid-in-context} we have
     $C'\select{A' \limp B'} \seq C^+\select{A \limp B}$. Thus by transitivity
     $\lint{D} \seq C^+\select{A \limp B}$.
-    \item $\link = {\forw}$: by Fact \ref{prop:rules-preserve-polarity}, $C'$ must
+    \item $\link = {\forw}$: by \reffact{rules-preserve-polarity}, $C'$ must
     be \kl{negative}. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
-    \land B'}$. By Lemma \ref{lemma:rules-valid-in-context} we have
+    \land B'}$. By \reflemma{rules-valid-in-context} we have
     $C'\select{A' \land B'} \seq C^+\select{A \limp B}$. Thus by transitivity
     $\lint{D} \seq C^+\select{A \limp B}$.
   \end{itemize}
