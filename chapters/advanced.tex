@@ -4,19 +4,20 @@
 \labch{advanced}
 
 In the previous chapters, we explained the core principles of our so-called
-\kl{Proof-by-Action} paradigm and especially its drag-and-drop actions, first through
-basic and abstract examples in \refch{pba}, and then from a \kl{proof-theoretical}
-perspective in \refch{sfl}. The goal of this chapter is to provide a better
-sense of what proofs by action/\kl{DnD} look like in practice, and how they compare
-to more traditional approaches to interactive theorem proving. To that effect,
-we perform a case study of a few select examples, unrolling and commenting in
-details one or many of their proofs. Although still basic, they are fully
-fledged, concrete logical riddles or mathematical problems that one might give
-as exercise to an undergraduate student learning formal proofs. Note that our
-analysis will stay quite informal and opinionated: a more systematic approach
-such as a user study would allow for a better evaluation of our paradigm, but at
-the time of writing of this thesis the \kl{Actema} prototype is not mature enough to
-conduct a project of this scale.
+\kl{Proof-by-Action} paradigm and especially of its drag-and-drop actions, first
+through basic and abstract examples in \refch{pba}, and then from a
+\kl{proof-theoretical} perspective in \refch{sfl}. The goal of this chapter is
+to provide a better sense of what proofs by action/\kl{DnD} look like in
+practice, and how they compare to more traditional approaches to interactive
+theorem proving. To that effect, we perform a case study of a few select
+examples, unrolling and commenting in details one or many of their proofs.
+Although still basic, they are fully fledged, concrete logical riddles or
+mathematical problems that one might give as exercise to an undergraduate
+student learning formal proofs. Note that our analysis will stay quite informal
+and opinionated: a more systematic approach such as a user study would allow for
+a better evaluation of our paradigm, but at the time of writing of this thesis
+the \kl{Actema} prototype is not mature enough to conduct a project of this
+scale.
 
 The chapter is organized as follows: \refsec{edukera} studies a proof of a small
 logical riddle in \kl{Actema}, highlighting some benefits of our approach compared to
@@ -27,19 +28,14 @@ Peano arithmetic, showing how one can incorporate additional actions into the
 paradigm to deal with more specialized forms of reasoning: \emph{induction} and
 \emph{automatic computation}.
 
-\todo{ Explain that for all examples, we provide a \kl{Coq} \kl{proof script} that tries
-  to follow the structure of the graphical proof, for the sake of comparison
-  with a more standard text-based interface. But this would obviously compare
-  differently with other textual approaches, e.g. \kl{Isar} which is more
-  declarative, and thus farther from the \kl{Proof-by-Action} paradigm. }
-
-\todo{ Maybe advise the reader to reproduce the examples herself? Supposes an
-  easy way to setup and use coq-actema: nix seems like a good option, but maybe
-  JsCoq could be doable with some efforts, and would provide an even more
-  out-of-the-box experience.}
+\begin{kaonote}
+  For each example, we provide a \kl{Coq} \kl{proof script} that tries to follow
+  the structure of the graphical proof, for the sake of comparison with a more
+  standard text-based interface. But this would obviously compare differently
+  with other textual interfaces like the \kl{Isar} proof language, which is more
+  declarative, and thus farther from the imperative aspects of \kl{PbA}.
+\end{kaonote}
   
-\todo{ Real numbered equations for intermediate proof states. }
-
 \section{Forward reasoning}\labsec{edukera}
 
 % It is too early to perform a detailed case study comparing our approach
@@ -50,74 +46,61 @@ paradigm to deal with more specialized forms of reasoning: \emph{induction} and
 % glimpse of specificities and possible advantages of proofs by actions.
 
 Our first example is a small logical riddle, which we borrow from a textual
-educational system, Edukera~\sidecite{edukera}. One considers a population of
-people, with at least one individual $h$, together with a single function
-$\mother$ and one predicate $\rich$. The aim is to show that the two following
-assumptions are incompatible:
-\begin{itemize}
-\item[(1)] $\forall x. \neg\rich(x)\lor \neg\rich(\mother(\mother(x)))$,
-\item[(2)] $\forall x. \neg\rich(x) \limp \rich(\mother(x)).$
-\end{itemize}
+educational system, \intro{Edukera}~\sidecite{edukera}. We invite readers to try
+to perform the proof themselves in the online version of
+\kl{Actema}\sidenote{\url{https://www.actema.xyz/courses/edukera}}. One
+considers a population of people, with at least one individual $h$, together
+with a single function $\mother$ and one predicate $\rich$. The aim is to show
+that the two following assumptions are incompatible:
+\begin{gather}
+  \forall x. \neg\rich(x)\lor \neg\rich(\mother(\mother(x))) \label{hyp:1} \\
+  \forall x. \neg\rich(x) \limp \rich(\mother(x)) \label{hyp:2}
+\end{gather}
 The original \kl{goal} thus corresponds to the illustration of \reffig{edukera}.
 
 \begin{figure*}
   \fbox{\includegraphics[width=1.3\textwidth]{edukera.png}}
-  \caption{The beginning of an example due to Edukera}
+  \caption{The beginning of an example due to \kl{Edukera}}
   \labfig{edukera}
 \end{figure*}
 
-It is quite natural to approach this problem in a \kl{forward} manner, by starting
-from the hypotheses to establish new facts. And a first point illustrated by
-this example is that \kl{DnD} actions allow to do this in a smooth and precise
-manner. A possible first step is to bring $h$ to the first hypothesis, to obtain
-a new fact:
-
-\medskip
-$(3) ~\neg\rich(h)\lor \neg\rich(\mother(\mother(h))).$
-\medskip
-
-\noindent Double clicking on this new fact yields two cases:
-\begin{itemize}
- \item[(4)~] $ \neg\rich(h)$,
- \item[(4')] $ \neg\rich(\mother(\mother(h)))$.
- \end{itemize}
-Let us detail how one solves the
-second one.
-
-By bringing 
-$\neg\rich(\mother(\mother(h)))$ on the premise of $\forall
-x. \select{\neg\rich(x)} \limp \rich(\mother(x))$
-one obtains
-
-\medskip
-$(6) ~\rich(\mother(\mother(\mother(h)))).$
-\medskip
-
-The next step is a good example where \kl{DnD} actions are useful. By bringing this
-new fact to the right-hand part of
-
-\medskip
-$(1)~\forall x. \neg\rich(x)\lor \neg\select{\rich(\mother(\mother(x)))}$
-\medskip
-
-\noindent
-one immediately obtains a new fact
-
-\medskip
-$(7) ~\neg{\rich(\mother(h))}$.
-\medskip
-
-\noindent In other \kl{proof systems}, this last step requires a somewhat intricate
+It is quite natural to approach this problem in a \kl{forward} manner, by
+starting from the hypotheses to establish new facts. And a first point
+illustrated by this example is that \kl{DnD} actions allow to do this in a
+smooth and precise manner. A possible first step is to bring $h$ to
+hypothesis~(\ref{hyp:1}), to obtain a new fact:
+\begin{gather}
+  ~\neg\rich(h)\lor \neg\rich(\mother(\mother(h))) \label{hyp:3}
+\end{gather}
+Double-clicking on this new fact yields two cases:
+\begin{gather}
+  \neg\rich(h) \label{hyp:4} \\
+  \neg\rich(\mother(\mother(h))) \label{hyp:5}
+\end{gather}
+Let us detail how one solves the second one. By bringing
+hypothesis~(\ref{hyp:5}) on the premise of hypothesis~(\ref{hyp:2}) one obtains
+\begin{gather}
+  \rich(\mother(\mother(\mother(h)))) \label{hyp:6}
+\end{gather}
+The next step is a good example where \kl{DnD} actions are useful. By bringing
+this new fact to the right-hand part of hypothesis~(\ref{hyp:3}) one immediately
+obtains a new fact
+\begin{gather}
+  \neg{\rich(\mother(h))} \label{hyp:7}
+\end{gather}
+In textual proof languages, this last step requires a somewhat intricate
 \kl{tactic} line and/or writing down at least the statement of the new fact.
 
-One can then finish the case by combining $(7)$ and $(2)$ which yields
-$$\rich(\mother(\mother(h)))$$ contradicting $(4')$. These two last steps each
-correspond to a simple \kl{DnD}. The other case, $\neg\rich(h)$, is quite similar.
+One can then finish the case by combining hypotheses (\ref{hyp:7}) and
+(\ref{hyp:2}), which yields
+$$\rich(\mother(\mother(h)))$$
+contradicting hypothesis~(\ref{hyp:5}). These two last steps each correspond to a
+simple \kl{DnD}. The other case, $\neg\rich(h)$, is quite similar.
 
 % Such a simple example is not sufficient to provide significant metrics.
 Note that once a user has understood the proof, the riddle is routinely solved
 in less than a minute in \kl{Actema}, which seems out of reach for about any user in
-a \kl{tactic} based prover. At least as important is the fact that the proof can be
+a \kl{tactic}-based prover. At least as important is the fact that the proof can be
 performed without typing any text, especially no intermediate statement. 
 
 To conclude this example, we propose in \reffig{edukera-coq} a complete proof of
@@ -165,7 +148,7 @@ things to note:
   many administrative steps:
   \begin{enumerate}
     \item first a case analysis with \texttt{destruct}, where the expression
-    instantiating $H_2$ (e.g. $\mother(mother(h))$) needs to be written down
+    instantiating $H_2$ (e.g. $\mother(\mother(h))$) needs to be written down
     explicitly, instead of being inferred automatically from unification;
     \item optionally focusing on the \kl{subgoal} corresponding to the contradictory
     case if it is the right disjunct (line 56), which requires to know a
@@ -191,7 +174,7 @@ things to note:
   % \fontsize{8}{8.5}\selectfont
   % \input{listings/coq-actema-edukera.tex}
   \input{listings/Edukera.tex}
-  \caption{\kl{Coq} \kl{proof script} formalizing Edukera's riddle}
+  \caption{\kl{Coq} \kl{proof script} formalizing \kl{Edukera}'s riddle}
   \labfig{edukera-coq}
 \end{figure}
 
@@ -211,7 +194,7 @@ Our second example comes from a preprint of Bartzia et al.
 aiming to compare the features of different \kl{proof assistants}' interfaces in an
 educational setting. It is ``a typical exercise about sets, relations and
 functions, as commonly found in introductory courses about reasoning and
-proof.'' (p. 6):
+proof.'' (p.~6):
 
 \begin{exercise}
   Given three sets $A$, $B$ and $C$ such that $C \subseteq A$ and a function $f
@@ -228,8 +211,8 @@ Compared to our previous example, this exercise has the particularity of
 involving multiple \emph{definitions}, here about sets and functions between
 them. There are many possible ways to handle definitions in a formal \kl{proof
 system}. A common one is to decompose the definition into a new function or
-predicate symbol, the definition's \emph{head}, and a universally parametrized
-equality or equivalence between the head and the \emph{body} of the definition.
+predicate symbol, the definition's \intro{head}, and a universally parametrized
+equality or equivalence between the \kl{head} and the \intro{body} of the definition.
 For instance, the concept of injectivity can be encoded as a unary predicate
 $\injective(\cdot)$ on functions, satisfying the following equivalence:
 $$\forall A.\ \forall B.\ \forall f{:}A \to B.~\ \injective(f) ~\lequiv~ \forall x
@@ -258,35 +241,34 @@ choose to apply the \action{Unfold} action:
 $$\select{f^{-1}(f(C)) \subseteq C} \qquad \text{(\action{Unfold})}$$
 The system will be able to tell that we
 selected an instance of the two-place inclusion predicate $\cdot \subseteq
-\cdot$, and thus will replace the head of this definition by its body,
+\cdot$, and thus will replace the \kl{head} of this definition by its \kl{body},
 instantiating parameters accordingly. This gives us a new conclusion
 $$\forall x. x \in f^{-1}(f(C)) \limp x \in C$$
 on which we can click twice to introduce a new variable $x$ in the \kl(sequent){context},
-together with the hypothesis:
-\begin{itemize}
-  \item[(1)] $x \in f^{-1}(f(C))$
-\end{itemize}
-
+together with the new hypothesis
+\begin{gather}
+  x \in f^{-1}(f(C)) \label{hyp::1}
+\end{gather}
 Now there is no available action on the conclusion $x \in C$, because set
 membership is a \emph{primitive} predicate in \kl{set theory}: it does not have
 any associated definition in the sense mentioned above\sidenote{Formally, the
 meaning of $\in$ in a \kl{set theory} such as \kl{ZF} comes from the various
-\kl{axioms} involving it. One might call such a definition \emph{behavioral},
+\kl{axioms} involving it. One might call such a definition \intro{behavioral},
 since the meaning of the \kl{symbol} emerges from the way it can be used in
 proofs through \kl{axioms}. In contrast, the usual notion of mathematical
-definition we tackle in this chapter might be called \emph{nominal}, because it
-essentially amounts to giving a name (the head) to a reoccurring pattern of
-statement (the body). Note that the syntax of \kl{first-order logic} is unaware
-of this distinction, since in both cases the defined concepts are encoded as
-\emph{atomic} predicates. This is usually not the case of logical frameworks
-found in \kl{proof assistants}: for instance, the duality between
-\emph{judgmental} (nominal) and \emph{propositional} (behavioral) equality is at
-the heart of \kl{Martin-Löf type theory}, and it is used extensively in \kl{Coq} to
-perform automation, both in the computation of expressions and the matching of
-statements modulo definitions.}. But we can still unfold some definitions in the
-\kl(sequent){context}, which might suggest further possible interactions. First we can unfold
-the definition of preimage used in $(1)$ by selecting the precise corresponding
-subterm:
+definition we tackle in this chapter might be called \intro{nominal}, because it
+essentially amounts to giving a name (the \kl{head}) to a reoccurring pattern of
+statement (the \kl{body}). Note that the syntax of \kl{first-order logic} is
+unaware of this distinction, since in both cases the defined concepts are
+encoded as \emph{atomic} predicates. This is usually not the case of logical
+frameworks found in \kl{proof assistants}: for instance, the duality between
+\emph{judgmental} (\kl{nominal}) and \emph{propositional} (\kl{behavioral}) equality is at
+the heart of \kl{Martin-Löf type theory}, and it is used extensively in \kl{Coq}
+to perform automation, both in the computation of expressions and the matching
+of statements modulo definitions.}. But we can still unfold some definitions in
+the \kl(sequent){context}, which might suggest further possible interactions.
+First we can unfold the definition of preimage used in hypothesis~\ref{hyp::1}
+by selecting the precise corresponding subterm:
 $$x \in \select{f^{-1}(f(C))} \qquad \text{(\action{Unfold})}$$
 which, assuming a definition based on set comprehension, gives:
 \begin{itemize}
@@ -339,7 +321,7 @@ will vary:
     $a$, $y$ with $x$ and $\phi$ with $f(a) \in f(C)$. Performing this \kl{DnD} will
     finally result in a new hypothesis corresponding to the intended unfolding
     of the definition of set comprehension\sidenote{Here in the sense of a
-    \emph{behavioral} definition.}:
+    \emph{\kl{nominal}} definition.}:
     \begin{itemize}
       \item[(2)] $x \in A \land f(x) \in f(C)$
     \end{itemize}
@@ -361,8 +343,8 @@ will vary:
   $\beta$-equivalence, unfolding the ``definition'' of set comprehension just
   amounts to performing one step of $\beta$-reduction\sidenote{One can consider
   this as a third kind of definition qualified of \emph{computational}. In
-  \kl{MLTT}, it is merged with nominal definitions in the concept of judgmental
-  equality. In \kl{Coq} they are distinguished: computational and nominal definitions
+  \kl{MLTT}, it is merged with \kl{nominal} definitions in the concept of judgmental
+  equality. In \kl{Coq} they are distinguished: computational and \kl{nominal} definitions
   correspond respectively to $\beta$-reduction and $\delta$-reduction.}:
   hypothesis $(1)$ becomes
   $$(\lambda a{:}A.\ f(C)\ f(a))\ x$$
