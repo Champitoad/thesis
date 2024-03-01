@@ -8,7 +8,7 @@
   $\psint{S} \sement \psint{S \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 \begin{proof}
-  Let $S = \Gamma' \J \Delta'$. We proceed by recurrence on $\bradepth{\J}$.
+  Let $S = \Gamma' \J \Delta'$. We proceed by recurrence on $\sdepth{\J}$.
   \begin{itemize}
     \item[\bcase]
     $$
@@ -39,7 +39,7 @@
   $\psint{S \mix (I, I \seq)} \semequiv \psint{S \mix (I \seq)}$.
 \end{lemma}
 \begin{proof}
-  Let $S = \Gamma \J \Delta$. We proceed by recurrence on $\bradepth{\J}$.
+  Let $S = \Gamma \J \Delta$. We proceed by recurrence on $\sdepth{\J}$.
   \begin{itemize}
     \item[\bcase]
     $$
@@ -106,7 +106,7 @@
     \text{iff} & \nsint{\Gamma, I \mathbin{\J} \Delta} &\sementB& \nsint{\Gamma \mathbin{\J} \Delta} \land \nsint{I} &\text{(\reflemma{involutivity})} \\
   \end{array}
   $$
-  We prove (\ref{app:eqn:weakdistrib-one}) by recurrence on $\bradepth{\J}$.
+  We prove (\ref{app:eqn:weakdistrib-one}) by recurrence on $\sdepth{\J}$.
   \begin{itemize}
     \item[\bcase]
     $$
@@ -142,7 +142,7 @@
 \begin{proof}
   We only prove (\ref{app:eqn:currying-one}), as (\ref{app:eqn:currying-two}) holds by
   duality as in \reflemma{bubbles-weakdistrib}. We proceed by recurrence on
-  $\bradepth{\J}$.
+  $\sdepth{\J}$.
   \begin{itemize}
     \item[\bcase]
     $$
@@ -212,7 +212,7 @@
 
     % \item[{\rsf{s{-}}}, {\rsf{s{+}}}] We only write the proof for
     % {\rsf{s{-}}}, the proof for {\rsf{s{+}}} is symmetric. We proceed by
-    % recurrence on $\bradepth{\J}$.
+    % recurrence on $\sdepth{\J}$.
     % \begin{itemize}
     %   \item[\bcase]
     %   $$
@@ -275,7 +275,7 @@
     \item[{\rsf{f{-}{+}{\da}}}]
     We show that $\psint{\Gamma \J (\Gamma', I \JB \Delta'), \Delta} \sement
     \psint{\Gamma, I \J (\Gamma' \JB \Delta'), \Delta}$ by recurrence on
-    $\bradepth{\J}$.
+    $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
       $$
@@ -303,7 +303,7 @@
     \item[{\rsf{f{+}{-}{\da}}}]
     We show that $\psint{\Gamma, (\Gamma' \JB I, \Delta') \J \Delta} \sementHB
     \psint{\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}$ by recurrence on
-    $\bradepth{\J}$.
+    $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
       $$
@@ -331,7 +331,7 @@
     \item[{\rsf{f{+}{+}{\ua}}}]
     We show that $\psint{\Gamma \J (\Gamma' \JB \Delta'), I, \Delta} \sement
     \psint{\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}$ by recurrence on
-    $\bradepth{\J}$.
+    $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
       $$
@@ -357,7 +357,7 @@
     \item[{\rsf{f{-}{-}{\ua}}}]
     We show that $\psint{\Gamma, I, (\Gamma' \JB \Delta') \J \Delta} \sementHB
     \psint{\Gamma, (\Gamma', I \JB \Delta') \J \Delta}$ by recurrence on
-    $\bradepth{\J}$.
+    $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
       $$
@@ -433,7 +433,7 @@
 
     \item[\rsf{a{-}}, \rsf{a{+}}] We only do the proof for \rsf{a{-}}, the proof
     for \rsf{a{+}} is symmetric. We show that $\psint{\Gamma, S \J \Delta} =
-    \psint{\Gamma, (\piq{S}) \J \Delta}$ by recurrence on $\bradepth{\J}$.
+    \psint{\Gamma, (\piq{S}) \J \Delta}$ by recurrence on $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
         $$
@@ -458,7 +458,7 @@
     \item[\rsf{\top{-}}, \rsf{\bot{+}}]
     We only do the proof for \rsf{\top{-}}, the proof for \rsf{\bot{+}} is
     symmetric. We show that $\psint{\Gamma \J \Delta} \semequiv \psint{\Gamma,
-    \top \J \Delta}$ by recurrence on $\bradepth{\J}$.
+    \top \J \Delta}$ by recurrence on $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
       $$
@@ -503,7 +503,7 @@
     \item[\rsf{\land{-}}, \rsf{\lor{+}}]
     We only do the proof for \rsf{\land{-}}, the proof for \rsf{\lor{+}} is
     symmetric. We show that $\psint{\Gamma, A, B \J \Delta} = \psint{\Gamma, A
-    \land B \J \Delta}$ by recurrence on $\bradepth{\J}$.
+    \land B \J \Delta}$ by recurrence on $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
       $$
@@ -553,7 +553,7 @@
     \item[\rsf{{\limp}{+}}, \rsf{{\lsub}{-}}]
     We only do the proof for \rsf{{\limp}{+}}, the proof for \rsf{{\lsub}{-}} is
     symmetric. We show that $\psint{\Gamma \J (A \seq B), \Delta} =
-    \psint{\Gamma \J A \limp B, \Delta}$ by recurrence on $\bradepth{\J}$.
+    \psint{\Gamma \J A \limp B, \Delta}$ by recurrence on $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
       $$

@@ -221,7 +221,7 @@ reached:
     the proof search procedure. Otherwise for each $(S_0\hole, A, B, \J, \Delta)
     \in \imps{S}$, we might need to apply the \rsf{{\limp}{-}} rule on $\hypo{A
     \limp B}$, either directly in $S_0\hole$ if $\J = {\seq}$ and $\max_{I \in
-    \Delta}{\soldepth{I}} = 0$ (\refdef{item-depth}), otherwise in some subgoal
+    \Delta}{\sdepth{I}} = 0$ (\refdef{item-depth}), otherwise in some subgoal
     $T\select{U} \in \J \cup \Delta$. This is where the proof needs
     \emph{insight}, because it is not clear if the antecedant $A$ will be
     provable with the \kl{context} available in $S_0\hole$ or in one of the $T\hole$,
@@ -234,7 +234,7 @@ reached:
     before applying \rsf{{\limp}{-}}. This will always be possible with the
     $\mathbb{F}$-rules \rsf{f{-}{\da}} and \rsf{f{-}{+}{\da}}.
     Ideally, she would also pick the most general $T\hole$ to factorize the
-    proof, by minimizing its depth $\soldepth{T\hole}$ (\refdef{solctx-depth}).
+    proof, by minimizing its depth $\sdepth{T\hole}$ (\refdef{solctx-depth}).
 
     A second possibility is to duplicate eagerly every $\hypo{A \limp B}$ of
     $\imps{S}$ in every open subsolutions of $S$ where it can be so, and then

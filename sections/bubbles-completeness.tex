@@ -104,8 +104,7 @@ this gives us the \emph{cut-free} completeness of $\sysBHB$:
 
 In fact there are other rules of $\sysBHB$ that were not used in the simulation,
 namely the $\mathbb{F}$-rule \rsf{f{\ua}}, and all $\mathbb{M}$-rules other
-than \rsf{p}. Combined with the soundness of $\sysBHB$ (Corollary
-\ref{cor:soundness}), this gives us the following \emph{admissibility} theorem:
+than \rsf{p}. Combined with the soundness of $\sysBHB$ (\refcor{soundness}), this gives us the following \emph{admissibility} theorem:
 
 \begin{theorem}[Admissibility]\labthm{bubbles:cut-admissibility}
 
@@ -125,7 +124,7 @@ improving \emph{factorizability}, just like the cut rule does.
 As in \kl{sequent calculus}, every rule of system $\sysB$ other than
 \rsf{i{\ua}} satisfies the \emph{\kl{subformula property}}:
 
-\begin{fact}[Subformula property]\label{cor:subformula-property} If $S
+\begin{fact}[Subformula property]\labcor{subformula-property} If $S
   \step{\sysB \setminus \{\rsf{i{\ua}}\}} T$ and $A \subsol T$, then there is a
   formula $B$ such that $A$ is a subformula of $B$ and $B \subsol S$.
 \end{fact}
@@ -209,7 +208,7 @@ completeness of system $\sysB$. In fact the proof of DNE only relies on the use
 of the \rsf{f{+}{+}{\da}} rule, so we can make the following stronger
 statement:
 
-\begin{corollary}[\kl{Classical} completeness]\label{cor:bubbles-completeness-classical}
+\begin{corollary}[\kl{Classical} completeness]\labcor{bubbles-completeness-classical}
   If $A$ is a theorem of \kl{classical} logic, then $\prov{\sysBH \cup
   \{\rsf{f{+}{+}{\da}}\}} A$.
 \end{corollary}

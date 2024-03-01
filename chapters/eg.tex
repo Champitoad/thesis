@@ -970,7 +970,7 @@ from the following \emph{functoriality} lemmas:
   \end{itemize}
 \end{proof}
 
-\begin{corollary}[Functoriality]\label{cor:eg-functoriality}
+\begin{corollary}[Functoriality]\labcor{eg-functoriality}
   If $v(G) = v(H)$ then $v\left(K\select{G}\right) = v\left(K\select{H}\right)$.
 \end{corollary}
 
@@ -1472,7 +1472,7 @@ one chooses the appropriate derivation among the two provided for the switch and
 medial rules \kl{s} and \kl{m}. Thus deletion is \kl{admissible} in \kl{Alpha}, a
 result that seems to be novel in the literature on \kl{EGs}.
 
-\begin{corollary}[Admissibility of Deletion]\label{cor:adm-era}
+\begin{corollary}[Admissibility of Deletion]\labcor{adm-era}
   $$
   \text{If $G \steps{} \emptyset$, then $G \xsteps{\kl{Alpha}\setminus\{\kl{Del}\}}
   \emptyset$.}
@@ -1485,14 +1485,14 @@ a curious dissymmetry, in that the rule \kl{Dcut{\da}} of \emph{double-\kl{cut}}
 insertion also never appears in the simulation of \kl{\dmdual{KS}}, while
 \kl{Dcut{\ua}} is used multiple times in the simulation of \kl{KS}:
 
-\begin{corollary}[Co-admissibility of Insertion]\label{cor:adm-ins}
+\begin{corollary}[Co-admissibility of Insertion]\labcor{adm-ins}
   $$
   \text{If $[] \steps{} G$, then $[]
   \xsteps{\kl{Alpha}\setminus\{\kl{Ins},\kl{Dcut{\da}}\}} G$.}
   $$
 \end{corollary}
 
-Corollary \ref{cor:adm-era} is what allows us to conclude that \kl{Alpha} is an
+ \refcor{adm-era} is what allows us to conclude that \kl{Alpha} is an
 \emph{\kl{analytic}} system, in a sense very close to that of Gentzen. Because we do
 not have a notion of logical connective nor tree-shaped derivations, we must
 reduce the \kl{subformula property} to \emph{atomic} \kl{graphs}. Then it is easy to see
@@ -1513,21 +1513,6 @@ that all rules of \kl{Alpha} except \kl{Del} satisfy this property:
   \ldots \step{} G_n \step{} \emptyset$ where for all $i$ and $a$ such that $a
   \subgraph G_i$, $a \subgraph G$.
 \end{corollary}
-
-% Thanks to \reffact{eg-duality}, it can easily be shown that \kl{Alpha}
-% satisfies a strong \emph{contraposition} property: $G \steps{} H$ if and only if
-% $[H] \steps{} [G]$. However, the \emph{only if} direction depends crucially on
-% \kl{Dcut{\da}}: indeed, from $[H] \steps{} [G]$ one gets $[[G]] \steps{} [[H]]$
-% through the \emph{if} direction, and then $G \xstep{\kl{Dcut{\ua}}} [[G]]
-% \steps{} [[H]] \xstep{\kl{Dcut{\da}}} H$.
-
-% When taking $H = \emptyset$, this property tells us that in \kl{Alpha},
-% provability coincides with refutability. Now thanks to Corollary
-% \ref{cor:adm-era}, we know that provability in $\kl{Alpha} \setminus
-% \{\kl{Del}\}$ coincides with provability in \kl{Alpha}, and thus with
-% refutability in \kl{Alpha}, which thanks to Corollary \ref{cor:adm-ins}
-% coincides with refutability in
-% $\kl{Alpha}\setminus\{\kl{Ins},\kl{Dcut{\da}}\}$. Hence provability
 
 \end{scope}
 

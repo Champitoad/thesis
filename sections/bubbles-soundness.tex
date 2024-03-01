@@ -185,12 +185,12 @@ been swapped --- i.e. blue \kl{items} become red and red \kl{items} become blue 
 formulas have been dualized (\refdef{dual-formula}).
 
 \begin{definition}\labdef{item-depth}
-  The \emph{depth} $\soldepth{I}$ of an \kl{item} $I$ is defined recursively as
+  The \emph{depth} $\sdepth{I}$ of an \kl{item} $I$ is defined recursively as
   follows:
   \begin{align*}
-    \soldepth{A} &= 0 \\
-    \soldepth{\Gamma \seq \Delta} &= 1 + \max_{J \in \Gamma \cup \Delta}{\soldepth{J}} \\
-    \soldepth{\Gamma \piq{\cS} \Delta} &= 1 + \max_{J \in \Gamma \cup \cS \cup \Delta}{\soldepth{J}}
+    \sdepth{A} &= 0 \\
+    \sdepth{\Gamma \seq \Delta} &= 1 + \max_{J \in \Gamma \cup \Delta}{\sdepth{J}} \\
+    \sdepth{\Gamma \piq{\cS} \Delta} &= 1 + \max_{J \in \Gamma \cup \cS \cup \Delta}{\sdepth{J}}
   \end{align*}
 \end{definition}
 
@@ -198,7 +198,7 @@ formulas have been dualized (\refdef{dual-formula}).
   $\soldual{\soldual{I}} = I$.
 \end{lemma}
 \begin{proof}
-  By recurrence on $\soldepth{I}$.
+  By recurrence on $\sdepth{I}$.
   \begin{itemize}
     \item[\textbf{Formula}] Suppose $I = A$. Then we conclude by a
     straightforward induction on $A$.
@@ -285,7 +285,7 @@ formulas have been dualized (\refdef{dual-formula}).
   \psint{\soldual{I}}$.
 \end{lemma}
 \begin{proof}
-  By a straightforward recurrence on $\soldepth{I}$.
+  By a straightforward recurrence on $\sdepth{I}$.
 \end{proof}
 
 \begin{lemma}\lablemma{int-invert}
@@ -356,11 +356,11 @@ The following definition will be used pervasively to reason by induction on the
 tree structure induced by branching operators:
 
 \begin{definition}
-  The \emph{depth} $\bradepth{\J}$ of a branching operator $\J$ is defined
+  The \emph{depth} $\sdepth{\J}$ of a branching operator $\J$ is defined
   recursively as follows:
   \begin{align*}
-    \bradepth{\seq} &= 0 \\
-    \bradepth{\piq{\cS}} &= 1 + \max_{S \in \cS}{\bradepth{S}}
+    \sdepth{\seq} &= 0 \\
+    \sdepth{\piq{\cS}} &= 1 + \max_{S \in \cS}{\sdepth{S}}
   \end{align*}
 \end{definition}
 
@@ -383,9 +383,9 @@ tree structure induced by branching operators:
 % \end{lemma}
 % \begin{proof}
 %   Let $\cS = S_1 \sep \ldots \sep S_n$. We proceed by recurrence on
-%   $\bradepth{\piq{\cS}}$.
+%   $\sdepth{\piq{\cS}}$.
 %   \begin{itemize}proof
-%     \item[\bcase] Suppose $\bradepth{\piq{\cS}} = 1$, and
+%     \item[\bcase] Suppose $\sdepth{\piq{\cS}} = 1$, and
 %     let $1 \leq i \leq n$. Then we know that $S_i = \Gamma_i \seq \Delta_i$, and
 %     by \reflemma{bubbles-multiweak} we get $\psint{\Gamma \seq \Delta} \sement
 %     \psint{S_i \mix (\Gamma \seq \Delta)}$. Thus we have
@@ -396,7 +396,7 @@ tree structure induced by branching operators:
 %       &=& \psint{\Gamma \piq{\cS} \Delta}
 %     \end{array}
 %     $$
-%     \item[\rcase] Suppose $\bradepth{\piq{\cS}} > 1$.
+%     \item[\rcase] Suppose $\sdepth{\piq{\cS}} > 1$.
 
 %   \end{itemize}
 % \end{proof}
@@ -409,7 +409,7 @@ proofs are available in appendix (\refsec{app:bubbles-soundness}).
   $\psint{S} \sement \psint{S \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 \begin{proof}
-  By recurrence on $\bradepth{\J}$, with $S = \Gamma' \J \Delta'$.
+  By recurrence on $\sdepth{\J}$, with $S = \Gamma' \J \Delta'$.
 \end{proof}
 
 \begin{lemma}[Generalized contraction]\lablemma{bubbles-contraction}
@@ -417,7 +417,7 @@ proofs are available in appendix (\refsec{app:bubbles-soundness}).
   $\psint{S \mix (I, I \seq)} \semequiv \psint{S \mix (I \seq)}$.
 \end{lemma}
 \begin{proof}
-  By recurrence on $\bradepth{\J}$, with $S = \Gamma \J \Delta$.
+  By recurrence on $\sdepth{\J}$, with $S = \Gamma \J \Delta$.
 \end{proof}
 
 \begin{lemma}[Generalized weak distributivity]\lablemma{bubbles-weakdistrib}
@@ -429,7 +429,7 @@ proofs are available in appendix (\refsec{app:bubbles-soundness}).
   \end{align}
 \end{lemma}
 \begin{proof}
-  (\ref{eqn:weakdistrib-one}) holds by recurrence on $\bradepth{\J}$, using the
+  (\ref{eqn:weakdistrib-one}) holds by recurrence on $\sdepth{\J}$, using the
   corresponding inequality from \reffact{weakdistrib}. The proof of
   (\ref{eqn:weakdistrib-two}) is the same, except that we use the converse
   inequality of \reffact{weakdistrib} that holds in Boolean algebras.
@@ -444,7 +444,7 @@ proofs are available in appendix (\refsec{app:bubbles-soundness}).
   \end{align}
 \end{lemma}
 \begin{proof}
-  (\ref{eqn:currying-one}) holds by recurrence on $\bradepth{\J}$, and
+  (\ref{eqn:currying-one}) holds by recurrence on $\sdepth{\J}$, and
   (\ref{eqn:currying-two}) by duality.
 \end{proof}
 
@@ -487,7 +487,7 @@ relative to Boolean algebras. But from the detailed proof in
 $\sysBHB$ of system $\sysB$ that are sound with respect to Heyting and
 Heyting-Brouwer algebras:
 
-\begin{corollary}\label{cor:lsoundness}
+\begin{corollary}\labcor{lsoundness}
   Let
   \begin{align*}
     \sysBHB &\defeq \sysB \setminus \{\rsf{f{-}{+}{\ua}}, \rsf{f{+}{+}{\da}}, \rsf{f{+}{-}{\ua}}, \rsf{f{-}{-}{\da}}\} \\
@@ -513,7 +513,7 @@ main lemma, and assume that its proof will go through mechanically:
 \end{lemma}
 
 Then from the (assumed) proof of \reflemma{bubbles-local-cosoundness} we get:
-\begin{corollary}\label{cor:lcosoundness}
+\begin{corollary}\labcor{lcosoundness}
   Let $\sysBB \defeq \sysBHB \setminus \{\rsf{f{-}{+}{\da}},
   \rsf{f{+}{+}{\ua}}, \rsf{{\limp}{-}}, \rsf{{\limp}{+}}\}$. Then $S
   \lstep{\sysBB} T$ implies $\nsint{S} \sementB \nsint{T}$.
@@ -538,9 +538,9 @@ The full situation is summarized in \reffig{venn-algebras}.
   \end{itemize}
 \end{lemma}
 \begin{proof}
-  Let $S = \Gamma \J \Delta$. We proceed by recurrence on $\bradepth{\J}$.
+  Let $S = \Gamma \J \Delta$. We proceed by recurrence on $\sdepth{\J}$.
   \begin{itemize}
-    \item[\bcase] Suppose $\bradepth{\J} = 0$. Then $\J = {\seq}$,
+    \item[\bcase] Suppose $\sdepth{\J} = 0$. Then $\J = {\seq}$,
     and we have
     $$
     \begin{array}{rcll}
@@ -567,9 +567,9 @@ The full situation is summarized in \reffig{venn-algebras}.
       &=& \psint{(J \seq) \mix S} &
     \end{array}
     $$
-    \item[\rcase] Suppose $\bradepth{\J} > 0$. Then $\J =
+    \item[\rcase] Suppose $\sdepth{\J} > 0$. Then $\J =
     {\piq{\cS}}$, and for all $S_0 = \Gamma_0 \JB \Delta_0 \in
-    \cS$ we have that $\bradepth{\JB} < \bradepth{\J}$. Thus we have
+    \cS$ we have that $\sdepth{\JB} < \sdepth{\J}$. Thus we have
     $$
     \begin{array}{rcll}
       \psint{(\seq I) \mix S}
@@ -609,12 +609,12 @@ formulation equivalent to \refdef{solution-context} as a context-free grammar:
 \end{fact}
 
 \begin{definition}\labdef{solctx-depth}
-The \emph{depth} $\soldepth{S\hole}$ of a solution \kl{context} $S\hole$ is defined
+The \emph{depth} $\sdepth{S\hole}$ of a solution \kl{context} $S\hole$ is defined
 recursively as follows:
 \begin{align*}
-  \soldepth{\hole} &= 0 \\
-  \soldepth{\Gamma \J S\hole, \Delta} = \soldepth{\Gamma, S\hole \J \Delta} =
-  \soldepth{\Gamma \piq{\cS \sep S\hole} \Delta} &= 1 + \soldepth{S\hole}
+  \sdepth{\hole} &= 0 \\
+  \sdepth{\Gamma \J S\hole, \Delta} = \sdepth{\Gamma, S\hole \J \Delta} =
+  \sdepth{\Gamma \piq{\cS \sep S\hole} \Delta} &= 1 + \sdepth{S\hole}
 \end{align*}
 \end{definition}
 
@@ -626,12 +626,12 @@ recursively as follows:
   % \nsint{T \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 \begin{proof}
-  By recurrence on $\soldepth{U\hole}$.
+  By recurrence on $\sdepth{U\hole}$.
   \begin{itemize}
-    \item[\bcase] Suppose $\soldepth{U\hole}$ = 0. Then $U\hole =
+    \item[\bcase] Suppose $\sdepth{U\hole}$ = 0. Then $U\hole =
     \hole$, and we conclude by local soundness
     (\reflemma{bubbles-local-soundness}).
-    \item[\textbf{Positive case}] Suppose $\soldepth{U\hole} > 0$ and $U\hole =
+    \item[\textbf{Positive case}] Suppose $\sdepth{U\hole} > 0$ and $U\hole =
     \Gamma' \J U_0\hole, \Delta'$. Then by IH we have $\psint{U_0\select{T}}
     \sementC \psint{U_0\select{S}}$, and thus
     $$
@@ -643,7 +643,7 @@ recursively as follows:
     \end{array}
     $$
 
-    \item[\textbf{Negative case}] Suppose $\soldepth{U\hole} > 0$ and $U\hole =
+    \item[\textbf{Negative case}] Suppose $\sdepth{U\hole} > 0$ and $U\hole =
     \Gamma', U_0\hole \J \Delta'$. Then by \reflemma{local-rule-duality} we have
     $\soldual{S} \lstep{} \soldual{T}$, and thus by IH
     $\psint{\soldual{U_0}\select{\soldual{T}}} \sementC
@@ -660,7 +660,7 @@ recursively as follows:
     \end{array}
     $$
 
-    \item[\textbf{Neutral case}] Suppose $\soldepth{U\hole} > 0$ and $U\hole =
+    \item[\textbf{Neutral case}] Suppose $\sdepth{U\hole} > 0$ and $U\hole =
     \Gamma \piq{\cS \sep U_0\hole} \Delta$. Then by IH we have
     $\psint{U_0\select{T} \mix (\Gamma \seq \Delta)} \sementC
     \psint{U_0\select{S} \mix (\Gamma \seq \Delta)}$, and thus
@@ -695,12 +695,12 @@ which we call \emph{co-soundness}:
   we can conclude by \reflemma{int-invert}.
 \end{proof}
 
-As for local soundness (Corollaries \ref{cor:lsoundness} and
-\ref{cor:lcosoundness}), we can easily generalize the proof of
+As for local soundness (\refcor{lsoundness} and \refcor{lcosoundness}), we can easily generalize the proof of
 \reflemma{bubbles-ctx-soundness} to Heyting and Heyting-Brouwer algebras, and
-thus extend our soundness result to \kl{intuitionistic} and \kl{bi-intuitionistic} logic:
+thus extend our soundness result to \kl{intuitionistic} and
+\kl{bi-intuitionistic} logic:
 
-\begin{corollary}\label{cor:soundness}
+\begin{corollary}\labcor{soundness}
   \sbr
   \begin{itemize}
     \item $S \step{\sysBH} T$ implies $\psint{T} \sement \psint{S}$
@@ -710,13 +710,13 @@ thus extend our soundness result to \kl{intuitionistic} and \kl{bi-intuitionisti
 \begin{proof}
   \reflemma{bubbles-local-soundness} is the only lemma used in
   \reflemma{bubbles-ctx-soundness} that relies on Boolean algebras. Thus we can
-  easily replace it by Corollary \ref{cor:lsoundness} to get soundness in Heyting-Brouwer
+  easily replace it by \refcor{lsoundness} to get soundness in Heyting-Brouwer
   algebras.
 
   For soundness in Heyting algebras, we know that the negative case will never
   happen because formulas cannot contain exclusions. The other cases only depend
   on \reflemma{bubbles-local-soundness}, thus we can again replace it by
-  Corollary \ref{cor:lsoundness}.
+  \refcor{lsoundness}.
 \end{proof}
 
 Once again in order to extend contextual soundness to \kl{dual-intuitionistic} logic,
@@ -740,7 +740,7 @@ we need to dualize lemmas to the negative interpretation:
 
 From the assumed proof of \reflemma{bubbles-ctx-cosoundness}, we finally get:
 
-\begin{corollary}\label{cor:cosoundness}
+\begin{corollary}\labcor{cosoundness}
   $S \step{\sysBB} T$ implies $\nsint{S} \sementB \nsint{T}$.
 \end{corollary}
 

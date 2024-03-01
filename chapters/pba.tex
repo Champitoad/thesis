@@ -243,7 +243,7 @@ In this example, there are two possible actions.
 
 \begin{itemize}
 \item A first one is to bring together by \kl{DnD} the conclusion
-$\mortal(\socrates)$ with the succedant of the first hypothesis $\mortal(x)$.
+$\mortal(\socrates)$ with the conclusion of the first hypothesis $\mortal(x)$.
 This will transform the \kl{goal} by changing the conclusion to
 $\human(\socrates)$.
 \item A second possibility is to combine the two hypotheses; more precisely to
@@ -420,7 +420,7 @@ order:
   instead.
 \end{itemize}
 
-\begin{remark}[Click completeness]\label{rem:click-completeness}
+\begin{remark}[Click completeness]\labremark{click-completeness}
   From the previous remarks and the completeness of the cut-free \kl{sequent
   calculus} \kl{LJ}, it follows that click actions, when combined with new
   object declarations and \kl{DnD} instantiations, provide a sufficient set of
@@ -970,10 +970,6 @@ the proof object than on making its construction easier.
     \begin{array}{r@{\quad}c@{\quad}lr}
       \multicolumn{4}{c}{\textsc{\kl(dnd){Forward}}} \\[2em]
 
-      % \R[\intro{lnn}]
-      %   {\ifill{\eta}{\efill{A}{A} \forw \efill{B}{B}}}
-      %   {\ifill{\eta}{\ifill{A}{A} \land \ifill{B}{B}}}
-      % \\
       {\subst{A}{t}{x} \forw (t = u)} &\step{}& {\subst{A}{u}{x}}&\intro{F{=}_1}\\
       {\subst{A}{u}{x} \forw (t = u)} &\step{}& {\subst{A}{t}{x}}&\intro{F{=}_2}\\[1em]
 
@@ -1060,22 +1056,6 @@ the proof object than on making its construction easier.
       \end{array}
   \end{mathpar}
   \end{framed}
-  % \begin{framed}
-  % {\sc Resources}
-  % \begin{mathpar}
-  %   %\R[\intro{conp}]
-  %   %  {\pi\{A \lor A\}}
-  %   %  {\pi\{A\}}
-  %   %\and
-  %   \R[\intro{conn}]
-  %     {\ifill{\eta}{A \land A}}
-  %     {\ifill{\eta}{A}}
-  %   \and
-  %   \R[\intro{wkn}]
-  %     {\ifill{\eta}{\top}}
-  %     {\ifill{\eta}{A}}
-  % \end{mathpar}
-  % \end{framed}
   \caption{Unit elimination rules}
   \labfig{DISL-U}
 \end{figure}

@@ -9,6 +9,7 @@ manages to rise above triviality; and this it does, in those domains, by a
 linking of self-evidence on to self-evidence in the chain reaction known as
 proof.}{\textbf{Willard van Orman Quine}, \textit{The Web of Belief}, 1978}
 
+\AP
 In this chapter, we engage in a thorough analysis of the logical semantics of
 \kl{DnD} actions, which were introduced informally through examples in
 \refch{pba}. We do this mainly from the formal perspective of \kl{deep
@@ -46,7 +47,7 @@ or to understand the status of quantified variables (\refsubsec{identity}).
 
 \begin{scope}\knowledgeimport{sfl}
 
-\begin{definition}[Context]\label{def:formula-context}
+\begin{definition}[Context]\labdef{formula-context}
 
   A \intro{context}, written $A\hole$, is a proposition containing exactly one
   occurrence of a special formula written $\hole$, called its \reintro{hole}.
@@ -56,7 +57,7 @@ or to understand the status of quantified variables (\refsubsec{identity}).
   $\forall x.\select{P(x)}$ is the proposition $\forall x.P(x)$.
 \end{definition}
 
-\begin{definition}[Path]\label{def:path}
+\begin{definition}[Path]\labdef{path}
 A \intro{path} is a proposition where one subformula has been
 selected. Formally, a \kl{path} is a pair $(A\hole, B)$ formed by one
 \kl{context} and one proposition:
@@ -85,7 +86,7 @@ $A\select{B}$ for the \kl{path} $(A\hole, B)$.
   $$
 \end{definition}
 
-\begin{definition}[Polarity]\label{def:polarity}
+\begin{definition}[Polarity]\labdef{polarity}
 \phantomintro{polarity}
 We will write $A^+\hole$ to specify that a \kl{context} is \intro{positive},
 meaning that $\inv(A^+\hole)$ is even. Symmetrically, $A^-\hole$ will be used
@@ -95,6 +96,7 @@ for \intro{negative} \kl{contexts}, meaning that $\inv(A^-\hole)$ is odd.
 % In demonstrating soundness, we focused solely on the two \emph{items} involved
 % in a \kl{DnD} action. But
 
+\AP
 In addition to the \kl{items} involved, every \kl{DnD} action specifies the
 \emph{selection} of a subterm in each \kl{item}, which can be expressed formally as a
 \kl{path}. We call \intro{linkage} the combined data of the two \kl{items} together
@@ -137,8 +139,8 @@ informal up to now: that of \emph{logical} action and \emph{rewrite} action.
   \itemAP \intro{Logical linkages} link two subformulas: they have the form
   $B\select{A} \link C\select{A'}$.
   \itemAP \intro{Rewrite linkages} link one side of an equality with a \kl{first-order}
-  term. Using liberally the notations from Definitions \ref{def:formula-context} and
-  \ref{def:path}, they thus have the form
+  term. Using liberally the notations from \refdef{formula-context} and
+  \refdef{path}, they thus have the form
   $$B\select{\select{t} = u} \link C
   \select{t'} ~~\left(\text{or symmetrically $B\select{u = \select{t}} \link C
   \select{t'}$}\right)$$
@@ -191,6 +193,7 @@ criterion tackles two issues:
   interact through the {\kl(sfl){id}} rule or the equality rules
   {\kl[L{=}_1]{L{=}_i}, \kl[F{=}_1]{F{=}_i}}.
 \end{itemize}
+\AP
 One benefit of using this criterion is that it filters out all \kl{linkages}
 whose semantics rely on release rules, capturing intuitively a notion of
 \intro{productivity}: instead of just moving around subformulas, we know for
@@ -349,7 +352,7 @@ For instance, if $A\hole \syneq \forall x. \exists y. (B \land ((\exists x'.
 % not, depending on their quantifier, the position of this quantifier,
 % and whether they are in a hypothesis or the conclusion.
 
-\begin{definition}[Unifiable variables]\label{def:uvars} The set
+\begin{definition}[Unifiable variables]\labdef{uvars} The set
   $\intro*\uvars(\mathcal{L})$ of \intro{unifiable variables} of a \kl{linkage}
   $\mathcal{L} \syneq B\select{A}\link C\select{A'}$ is:
   \begin{itemize}
@@ -390,7 +393,7 @@ whether $A$ and $A'$ are \kl{unifiable} over $l$ and constructs the
    \item There exists a \kl{substitution} $\sigma$ which \kl{unifies} $A$ and
      $A'$ over $\uvars(\mathcal{L})$.\label{clause:unif}
 
-   \item \label{lab:cond} Furthermore, the \kl{unification} respects the order
+   \item Furthermore, the \kl{unification} respects the order
      over the variables. More precisely, we request that there exists a list $l$
      which is an interleaving of $\lvar(B\hole)$ and $\lvar(C\hole)$ such that,
      given a \kl{unifiable variable} $x$ in the domain of $\sigma$, all
@@ -490,21 +493,34 @@ Thus for such actions to be logically sound, we have to make sure that our
 \kl{rewriting system} satisfies the following property:
 
 \begin{theorem}[Soundness]\labthm{sfl-soundness}
-  \phantom{a}
+  ~\\\vspace{-1.5em}
   \begin{itemize}
     \item If $A \back B \steps{} C$, then $A, C \seq B$.
     \item If $A \forw B \steps{} C$, then $A, B \seq C$.
   \end{itemize}
 \end{theorem}
 
+We will need to reason inductively on \kl{contexts}, and more precisely on the
+\emph{depth} of their \kl{hole}:
+
+\begin{definition}[Depth]\labdef{sfl-ctx-depth}
+  The \intro{depth} $\intro*\sdepth{A\hole}$ of a \kl{context} $A\hole$ is
+  defined recursively by:
+  \begin{align*}
+    \sdepth{\hole} &= 0 \\
+    \sdepth{A\hole \mcirc B} = \sdepth{B \mcirc A\hole} &= \sdepth{A\hole} + 1 &\text{for $\mcirc \in \{\land,\lor,\limp\}$}\\
+    \sdepth{\mdiam x. A\hole} &= \sdepth{A\hole} + 1 &\text{for $\mdiam \in \{\forall,\exists\}$}
+  \end{align*}
+\end{definition}
+
 The following simple covariance and contravariance property will be used
 extensively later on:
-\begin{lemma}[Variance]\label{prop:cov}
+\begin{lemma}[Variance]\lablemma{variance}
   If $\, \Gamma, A\seq B$, then $\, \Gamma, C^+\select{A}\seq C^+\select{B}$
   and $\, \Gamma, D^-\select{B}\seq D^-\select{A}$.
 \end{lemma}
 \begin{proof}
-  By induction on the depths of $C^+\hole$ and $D^-\hole$.
+  By induction on $\sdepth{C^+\hole}$ and $\sdepth{D^-\hole}$.
 \end{proof}
 
 For each rule, interpreting $\back$ as $\limp$ and $\forw$ as $\land$ is enough
@@ -512,14 +528,14 @@ to show that the rule satisfies \refthm{sfl-soundness} locally. Formally,
 we can define a mapping from formulas containing \kl{interaction operators} to usual
 formulas where they have been replaced by their interpretation:
 
-\begin{definition}[Interpretation of linking operators]
-  The mapping $\lint{\cdot}$ is defined inductively as follows:
+\begin{definition}[Interpretation of interaction operators]
+  The mapping $\intro*\lint{{\cdot}}$ is defined recursively as follows:
   \begin{align*}
-    \lint{A \back B} &= \lint{A} \limp \lint{B} & \\
-    \lint{A \forw B} &= \lint{A} \land \lint{B} & \\
+    \lint{A \back B} &= \lint{A} \limp \lint{B} &\\
+    \lint{A \forw B} &= \lint{A} \land \lint{B} &\\
     \lint{A \mcirc B} &= \lint{A} \mcirc \lint{B} &\text{for $\mcirc \in \{\land, \lor, \limp\}$} \\
     \lint{\mdiam x. A} &= \mdiam x. \lint{A} &\text{for $\mdiam \in \{\forall, \exists\}$} \\
-    \lint{\dagger} &= \dagger &\text{for $\dagger \in \{\top, \bot\}$} \\
+    \lint{{\dagger}} &= \dagger &\text{for $\dagger \in \{\top, \bot\}$} \\
     \lint{a} &= a &\text{for $a$ atomic} 
   \end{align*}
 \end{definition}
@@ -527,7 +543,7 @@ formulas where they have been replaced by their interpretation:
 For rewritings taking place deeper inside a proposition however, we need to
 consider the \kl{polarity} of their \kl{context}.
 
-% Using the notation of definition~\ref{def:polarity}, we can state:
+% Using the notation of definition~\refdef{polarity}, we can state:
 
 \begin{lemma}[Local soundness]\label{lemma:rules-valid-in-context}
   \phantom{a}
@@ -542,18 +558,18 @@ consider the \kl{polarity} of their \kl{context}.
   First notice that $D$ is necessarily of the form $C\select{D_0}$ where $A
   \link B \step{} D_0$\sidenote{Indeed an implicit assumption in this section,
   which is preserved by all the rules, is that a formula contains at most one
-  \kl{interaction operator}. Thus if $C\select{A \link B} \step{} D$, the only possible
-  redex is $A \link B$.}. Then by careful analysis of each rule, it is
-  straightforward to show that $\lint{D_0} \seq A \limp B$ if $\link = \back$ or
-  $A \land B \seq \lint{D_0}$ if $\link = \forw$. We can conclude in each case
-  by applying Lemma \ref{prop:cov} with $C\hole$ accordingly.
+  \kl{interaction operator}. Thus if $C\select{A \link B} \step{} D$, the only
+  possible redex is $A \link B$.}. Then by careful analysis of each rule, it is
+  straightforward to show that $\lint{D_0} \seq A \limp B$ if $\link = {\back}$
+  or $A \land B \seq \lint{D_0}$ if $\link = {\forw}$. We can conclude in each
+  case by applying \reflemma{variance}.
 \end{proof}
 \begin{remark}
   For some rules, like \kl{R{\limp}_1}, the left-hand and
   right-hand propositions are equivalent:
-  $$A \limp B \limp C ~~~\Longleftrightarrow~~~ A \land B \limp C$$ Such rules are
-  called {\em \kl{invertible}} and their names are tagged by *. This point will be
-  relevant in \refsec{invert}.
+  $$A \limp B \limp C ~~~\Longleftrightarrow~~~ A \land B \limp C$$
+  These rules are thus {\em \kl{invertible}} and their names are tagged by *.
+  This point will be relevant in \refsec{invert}.
 \end{remark}
 
 
@@ -593,21 +609,18 @@ about the \kl{rewriting rules}:
   $$C^+\select{A \back B} \step{} C'\select{A' \link B'} \steps{} D$$
   Then we reason by case on the \kl{interaction operator} $\link$:
   \begin{itemize}
-    \item $\link = \back$: by Fact \ref{prop:rules-preserve-polarity}, $C'$ must
+    \item $\link = {\back}$: by Fact \ref{prop:rules-preserve-polarity}, $C'$ must
     be \kl{positive}. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
     \limp B'}$. By Lemma \ref{lemma:rules-valid-in-context} we have
     $C'\select{A' \limp B'} \seq C^+\select{A \limp B}$. Thus by transitivity
     $\lint{D} \seq C^+\select{A \limp B}$.
-    \item $\link = \forw$: by Fact \ref{prop:rules-preserve-polarity}, $C'$ must
+    \item $\link = {\forw}$: by Fact \ref{prop:rules-preserve-polarity}, $C'$ must
     be \kl{negative}. Therefore by induction hypothesis $\lint{D} \seq C'\select{A'
     \land B'}$. By Lemma \ref{lemma:rules-valid-in-context} we have
     $C'\select{A' \land B'} \seq C^+\select{A \limp B}$. Thus by transitivity
     $\lint{D} \seq C^+\select{A \limp B}$.
   \end{itemize}
 \end{proof}
-
-% We do not detail the proof here, but it relies crucially on the covariance and
-% contravariance property \ref{prop:cov}.
 
 Finally, soundness (\refthm{sfl-soundness}) is obtained as the special
 case where the rewriting starts in the (\kl{positive}) empty \kl{context}.
@@ -691,12 +704,12 @@ fundamentally difficult, but understandably verbose. The two main points are:
 \begin{itemize}
 \item The rules involving a connective always preserve \kl{validity}.
 \item When one can apply a rule involving a quantifier $\forall x$ (resp.
-  $\exists x$), one checks whether the \kl{substitution} instantiates $x$ or not. In
-  the first case one performs the instantiation rule \kl{L\forall i} or
-  \kl{F\forall i} (resp. \kl{R\exists i}); in the second case the
-  corresponding \kl{switch rule} in {\small $\{\kl{L\forall s}, \kl{R\forall
-  s}, \kl{F\forall s}\}$} (resp. {\small $\{\kl{L\exists s},
-  \kl{R\exists s}, \kl{F\exists s}\}$}).
+  $\exists x$), one checks whether the \kl{substitution} produced by unification
+  (Condition \ref{cond:unif}) instantiates $x$ or not. In the first case one
+  performs the instantiation rule \kl{L\forall i} or \kl{F\forall i} (resp.
+  \kl{R\exists i}); in the second case the corresponding \kl{switch rule} in
+  {\small $\{\kl{L\forall s}, \kl{R\forall s}, \kl{F\forall s}\}$} (resp.
+  {\small $\{\kl{L\exists s}, \kl{R\exists s}, \kl{F\exists s}\}$}).
 \end{itemize}
 \begin{proof}
   Let $\mathcal{L} \syneq B\select{A} \link C\select{A'}$ be a \kl{valid} \kl{linkage}.\\
@@ -810,7 +823,7 @@ fundamentally difficult, but understandably verbose. The two main points are:
       rule of the form {\rsf{L\mcirc_i}}, {\rsf{R\mcirc_i}} or
       {\rsf{F\mcirc_i}}, where $\mcirc$ is the connective and $i$ the index of
       the direct subcontext where $A$ or $A'$ occurs, or the {\kl{Fcomm}}
-      rule. Again we check the conditions of Definition \ref{def:valid-linkage}:
+      rule. Again we check the conditions of \refdef{valid-linkage}:
       
       \begin{enumerate}[itemsep=0.4em]
         \renewcommand{\labelenumii}{\theenumii}
@@ -921,7 +934,7 @@ is a sequence of reductions with one of the following forms:
 This is the formal counterpart to the notion of \kl{productivity} mentioned in
 \refsec{validity}. Intuitively, this theorem ensures non-trivial progress in the
 reasoning: we managed to connect some dots in the problem and actually solve a
-subgoal. That is, either the conclusion is \emph{strictly} weakened after a
+``subgoal''. That is, either the conclusion is \emph{strictly} weakened after a
 \kl(dnd){backward} \kl{DnD}, or the assumptions are \emph{strictly} strengthened
 after a \kl(dnd){forward} \kl{DnD}, instead of having just an equivalent
 \kl{goal} written in a different way\sidenote{This remark only applies to
@@ -933,9 +946,9 @@ non-symmetric relations that can produce non-equivalent statements, and there is
 no reason in principle it could not be integrated in our paradigm, in the form
 of generalized substitution rules in place of {\kl[L{=}_1]{L{=}_i}} and
 {\kl[F{=}_1]{F{=}_i}}.}. This again contrasts with the release semantics of
-\kl{subformula linking} which do not provide this guarantee of \kl{productivity}, or
-with the logical reasoning \kl{tactics} of \kl{proof assistants} based on
-\kl{natural deduction} rules.
+\kl{subformula linking} which do not provide this guarantee of
+\kl{productivity}, or with the logical reasoning \kl{tactics} of \kl{proof
+assistants} based on \kl{natural deduction} rules.
 
 \section{Focusing}\labsec{invert}
 
@@ -949,6 +962,7 @@ of $\forw$ or $\back$. For instance in
 $\select{A}\lor B \back B\lor\select{A}$ one can apply either
 \kl{L\lor_1} or \kl{R\lor_2}.
 
+\AP
 Interestingly, an answer is provided by \intro{focusing}. It has been noticed by
 Andreoli~\sidecite{andreoli1992} that, in bottom-up proof search, one should
 apply the \kl{invertible} logical rules first since they preserve provability.
@@ -976,10 +990,10 @@ scheme is already present implicitly in the proof of Lemma \ref{thm:vprogress}.}
   \begin{itemize}
     \item either $C\hole \syneq C_0\hole \mcirc E$ for some binary connective
     $\mcirc$, and we choose the rule {\rsf{L\mcirc_1}} (resp.
-    {\rsf{F\mcirc_1}}) if $\link = \back$ (resp. $\link = \forw$);
+    {\rsf{F\mcirc_1}}) if $\link = {\back}$ (resp. $\link = {\forw}$);
     \item or $C\hole \syneq E \mcirc C_0\hole$ and we choose the rule
-    {\rsf{L\mcirc_2}} (resp. {\rsf{F\mcirc_2}}) if $\link = \back$ (resp.
-    $\link = \forw$).
+    {\rsf{L\mcirc_2}} (resp. {\rsf{F\mcirc_2}}) if $\link = {\back}$ (resp.
+    $\link = {\forw}$).
   \end{itemize}
   In the case where it is $D\hole$ which is non-empty, we apply the same logic
   but with the right rules {\rsf{R\mcirc_i}} instead of the left rules
@@ -1011,45 +1025,49 @@ the third case:
   \kl{DnD} actions. In practice, one rarely encounters such cases in real
   examples.}.
 \end{enumerate}
+
+\begin{remark}\labremark{permutability}
 Currently we do not have detailed proofs of permutability for all pairs of
 rules. The reason is mostly pragmatic: given the great number of rules, this
 would take a lot of time to perform a full case analysis. Actually our claim of
 permutability comes from \cite{DBLP:conf/cade/Chaudhuri21} which uses a
-\kl{subformula linking} system almost identical to ours. We hope we will be able to
-provide rigorous proofs in annex when time permits.
+\kl{subformula linking} system almost identical to ours.
+\end{remark}
 
 \section{Completeness}\labsec{dnd-completeness}
 
 To enable a fully graphical approach to theorem proving that does not rely on a
 textual proof language, it is important to show that (a subset of) the set of
 actions exposed to the user is \emph{complete} with respect to provability. That
-is, any formula $A$ which is \emph{true} in our logic --- here \kl{intuitionistic}
-\kl{FOL} --- can be proved by executing a sequence of graphical actions that reduces
-it to the empty \kl{goal}. We noticed in Remark \ref{rem:click-completeness} that
-click actions are a sufficient basis for completeness. While we believe that a
-combination of both click and \kl{DnD} actions is more comfortable to handle a
-variety of proof situations, it is still interesting to consider the question of
-completeness for \kl{DnD} actions alone. It turns out that the answer is positive:
-the mechanism of \emph{\kl{subformula linking}} underlying \kl{DnD} actions is powerful
-enough to capture provability in \kl{FOL}. This has already been shown by Chaudhuri
-in \cite{Chaudhuri2013} for linear logic, and \cite{DBLP:conf/cade/Chaudhuri21}
-for \kl{intuitionistic} logic. Here we give a completeness proof for a system based
-on a slight extension of our \kl{rewriting rules}, following ideas from these works.
+is, any formula $A$ which is \emph{true} in our logic --- here
+\kl{intuitionistic} \kl{FOL} --- can be proved by executing a sequence of
+graphical actions that reduces it to the empty \kl{goal}. We noticed in
+\refremark{click-completeness} that click actions are a sufficient basis for
+completeness. While we believe that a combination of both click and \kl{DnD}
+actions is more comfortable to handle a variety of proof situations, it is still
+interesting to consider the question of completeness for \kl{DnD} actions alone.
+It turns out that the answer is positive: the mechanism of \emph{\kl{subformula
+linking}} underlying \kl{DnD} actions is powerful enough to capture provability
+in \kl{FOL}. This has already been shown by Chaudhuri in \cite{Chaudhuri2013}
+for linear logic, and \cite{DBLP:conf/cade/Chaudhuri21} for \kl{intuitionistic}
+logic. Here we give a completeness proof for a system based on a slight
+extension of our \kl{rewriting rules}, following ideas from these works.
 
 \begin{remark}
   What we prove in this section is a \emph{weak} form of completeness: we show
-  that for any true formula, there always exists a derivation in our \kl{subformula
-  linking} system, but this derivation might not be constructible by the
-  deterministic procedure outlined in \refsec{invert}. There are two aspects
-  that make the stronger version hard to prove in practice:
+  that for any true formula, there always exists a derivation in our
+  \kl{subformula linking} calculus, but this derivation might not be
+  constructible deterministically by the focusing procedure outlined in
+  \refsec{invert}. There are two aspects that make the stronger version hard to
+  prove in practice:
   \begin{itemize}
-    \item To show that the choices performed by the \kl{focusing} procedure always
-    allow to find a proof when there exists one, it would be necessary to
-    formulate and prove a \emph{\kl{focusing} theorem} based on the permutability of
-    rules mentioned at the end of \refsec{invert}.
-    \item Even then, some additional rules of our \kl{subformula linking} system are
-    not simulated in any way by the \kl{DnD} procedure of \refsec{action}. We will come
-    back to this point soon.
+    \item To show that the choices performed by the \kl{focusing} procedure
+    always allow to find a proof when there exists one, it would be necessary to
+    formulate and prove a \emph{\kl{focusing} theorem} based on the
+    permutability of rules mentioned in \refremark{permutability}.
+    \item Even then, some additional rules of our \kl{subformula linking} system
+    are not simulated in any way by the \kl{DnD} procedure of \refsec{action}.
+    We will come back to this point soon.
   \end{itemize}  
   % The gap between this theoretical completeness and the
   % practical completeness of the implementation should in part be bridged by the
@@ -1070,20 +1088,21 @@ on a slight extension of our \kl{rewriting rules}, following ideas from these wo
   \labfig{newlink}
 \end{marginfigure}
 
-To the \kl{rewriting rules} of \reffig{DISL} and \reffig{DISL-U}, we add \emph{\kl{linkage}
-formation} rules (\reffig{newlink}), which are a deep generalization of \kl{linkage}
-creation between two formulas of a sequent. Rule {\kl{B}} creates a
-\emph{\kl(dnd){backward}} \kl{linkage} between $\limp$-linked formulas in any \kl{positive} \kl{context}
-$C^+\hole$, and dually rule {\kl{F}} creates a \emph{\kl(dnd){forward}} \kl{linkage} between
-$\land$-linked formulas in any \kl{negative} \kl{context} $C^-\hole$\sidenote{This is
-reminiscent of the adjunction between the product and the exponential in
-\emph{cartesian closed categories}, which respectively interpret conjunction and
-implication in the Curry-Howard-Lambek correspondance for \kl{intuitionistic}
-logic.}. Note that contrary to the rules considered up to now, \kl{linkage} formation
-rules are not closed under arbitrary \kl{contexts}: indeed the \kl{polarity} restrictions
-are necessary to ensure soundness, as reviewed in \refsec{soundness}. A \kl(dnd){backward}
-\kl{linkage} in a \kl{sequent} $\Gamma, D\select{A} \seq E\select{B}$ would be encoded by
-the instance
+To the \kl{rewriting rules} of \reffig{DISL} and \reffig{DISL-U}, we add
+\emph{\kl{linkage} formation} rules (\reffig{newlink}), which are a deep
+generalization of \kl{linkage} creation between two formulas of a sequent. Rule
+{\kl{B}} creates a \emph{\kl(dnd){backward}} \kl{linkage} between $\limp$-linked
+formulas in any \kl{positive} \kl{context} $C^+\hole$, and dually rule {\kl{F}}
+creates a \emph{\kl(dnd){forward}} \kl{linkage} between $\land$-linked formulas
+in any \kl{negative} \kl{context} $C^-\hole$\sidenote{This is reminiscent of the
+adjunction between products and exponentials in \emph{cartesian closed
+categories}, which respectively interpret conjunction and implication in the
+\kl[Curry-Howard correspondence]{Curry-Howard-Lambek correspondance} for
+\kl{intuitionistic} logic.}. Note that \kl{linkage} formation rules are not
+closed under arbitrary \kl{contexts}: indeed the \kl{polarity} restrictions are
+necessary to ensure soundness, as reviewed in \refsec{soundness}. A
+\kl(dnd){backward} \kl{linkage} in a \kl{sequent} $\Gamma, D\select{A} \seq
+E\select{B}$ would be encoded by the instance
 $$C^+\select{D\select{A} \limp E\select{B}} \step{} C^+\select{D\select{A} \back
 E\select{B}}$$ of {\kl{B}} where $C^+\hole \syneq \bigwedge Γ \limp \hole$, while
 a \kl(dnd){forward} \kl{linkage} in a \kl{sequent} $\Gamma, D\select{A}, E\select{B} \seq F$ would
@@ -1195,25 +1214,26 @@ of linking sub-sentences already present in the statement.
 \labfig{ref-rule}
 \end{marginfigure}
 
+\AP
 We chose the calculus \intro{G3i} from \cite{negri_structural_2001} as our
 basis, because all \kl{structural rules} are \kl{admissible} in it (but they
-would be straightforward to simulate apart from the cut rule). The first
-modification we do is that we model hypotheses in \kl{sequents} as lists instead
-of multisets, to make the translation from \kl{sequents} to formulas completely
-deterministic. Thus we need to add the \kl{exchange} rule {\kl{exch}}, which is
-simulated straightforwardly with the {\kl{Fcomm}} rule as mentioned earlier. The
-second modification we do is adding \kl{introduction rules} {\kl{{=}R}} and
-{\kl{{=}L}} for equality. The \kl{left introduction rule} {\kl{{=}L}} captures
-Leibniz's elimination scheme, and is in fact the rule {\intro{Repl}} from
-\cite{negri_structural_2001} (modulo the fact that we use single-succedant
-instead of multi-succedant sequents). The \kl{right introduction rule}
-{\kl{{=}R}} is an axiomatic reflexivity rule, instead of the {\kl{Ref}} rule
-from \cite{negri_structural_2001} (\reffig{ref-rule}). The reason is that we
-cannot simulate the latter directly without adding its equivalent rule
-{\kl{ref}} to our calculus (\reffig{ref-rule}), which we do not want to do
-because it would break the \kl{subformula property}. We conjecture that using
-{\kl{{=}R}} instead of {\kl{Ref}} does not break the cut admissibility theorem
-from \cite{negri_structural_2001}.
+would be straightforward to simulate apart from the \kl(rule){cut} rule). The
+first modification we do is that we model hypotheses in \kl{sequents} as lists
+instead of multisets, to make the translation from \kl{sequents} to formulas
+completely deterministic. Thus we need to add the \kl{exchange} rule
+{\kl{exch}}, which is simulated straightforwardly with the {\kl{Fcomm}} rule as
+mentioned earlier. The second modification we do is adding \kl{introduction
+rules} {\kl{{=}R}} and {\kl{{=}L}} for equality. The \kl{left introduction rule}
+{\kl{{=}L}} captures Leibniz's elimination scheme, and is in fact the rule
+{\intro{Repl}} from \cite{negri_structural_2001} (modulo the fact that we use
+single-conclusion instead of multi-conclusion sequents). The \kl{right
+introduction rule} {\kl{{=}R}} is a $0$-ary reflexivity rule, instead of the
+{\kl{Ref}} rule from \cite{negri_structural_2001} (\reffig{ref-rule}). The
+reason is that we cannot simulate the latter directly without adding its
+equivalent rule {\kl{ref}} to our calculus (\reffig{ref-rule}), which we do not
+want to do because it would break the \kl{subformula property}. We conjecture
+that using {\kl{{=}R}} instead of {\kl{Ref}} does not break the cut
+admissibility theorem from \cite{negri_structural_2001}.
 
 % We could not find mention of such a rule in the literature, where instead people
 % use either a non-analytic rule\todo{cite nlab at
@@ -1233,13 +1253,13 @@ from \cite{negri_structural_2001}.
 \end{theorem}
 \begin{proof}
   By induction on the derivation of $\Gamma \seq A$. The base case simulates the
-  rules {\kl{ax}}, {\kl{\top R}}, {\kl{\bot L}} and {\kl{{=}R}}. Other rules
-  are simulated as usual by composing the derivations obtained from the
-  induction hypotheses, making a crucial use of the release rules {\kl{Brel}}
-  and {\kl{Frel}}. The full mapping from \kl{sequent calculus} rules to
-  derivations in our \kl{subformula linking} calculus is given in the following
-  table. Note that we treat conjunctive formulas modulo associativity to avoid
-  bureaucratic details.
+  rules {\kl{ax}}, {\kl{\top R}}, {\kl{\bot L}} and {\kl{{=}R}}. Other rules are
+  simulated as usual by composing the derivations obtained from induction
+  hypotheses, making a crucial use of the release rules {\kl{Brel}} and
+  {\kl{Frel}}. The full mapping from \kl{sequent calculus} rules to derivations
+  in our \kl{subformula linking} calculus is given in the following table. Note
+  that we treat conjunctive formulas modulo associativity to avoid bureaucratic
+  details.
 
   \begin{align*}
     \R[ax]
@@ -1252,7 +1272,7 @@ from \cite{negri_structural_2001}.
       \step{} & \top & \kl{id}
     \end{array}
     \\\\
-    \R[\intro{exch}]
+    \AP \R[\intro{exch}]
       {\summ[$\pi_1$]{\Gamma, B, A, \Gamma' \seq C}}
       {\Gamma, A, B, \Gamma' \seq C}
     &\mt
@@ -1295,7 +1315,7 @@ from \cite{negri_structural_2001}.
     \begin{array}{lll}
             & \Gamma \limp A_0 \lor A_1 & \\
       \step{} & \Gamma \back A_0 \lor A_1 & \kl{B} \\
-      \step{} & (\Gamma \back A_i) \lor A_{1 - i} & \kl{R\lor_i} \\
+      \step{} & (\Gamma \back A_i) \lor A_{1 - i} & \kl[R\lor_1]{R\lor_i} \\
       \step{} & (\Gamma \limp A_i) \lor A_{1 - i} & \kl{Brel} \\
       \steps{} & \top \lor A_{1 - i} & IH(\pi_1) \\
       \step{} & \top & \kl{absl}
@@ -1338,7 +1358,7 @@ from \cite{negri_structural_2001}.
       \steps{} & \top & IH(\pi_1)
     \end{array}
     \\\\
-    \R[\intro{{=}R}]
+    \AP \R[\intro{{=}R}]
       {}
       {\Gamma \seq t = t}
     &\mt
@@ -1458,7 +1478,7 @@ from \cite{negri_structural_2001}.
       \step{} & \top & \kl{absq}
     \end{array}
     \\\\
-    \R[\intro{{=}L}]
+    \AP \R[\intro{{=}L}]
       {\summ[$\pi_1$]{\Gamma, t = u, \subst{A}{u}{x}, \subst{A}{t}{x} \seq C}}
       {\Gamma, t = u, \subst{A}{t}{x} \seq C}
     &\mt
@@ -1475,23 +1495,26 @@ from \cite{negri_structural_2001}.
 
 \paragraph{Subformula linking under quantifiers}
 
+\AP
 Very recently, Mulder and Krebbers \sidecite{mulder_unification_2024} proposed
 an improvement over both our method of \kl{subformula linking} implemented in
 \kl{Actema}, and the method of Chaudhuri implemented in the \intro{Profint}
 prototype \sidecite{DBLP:conf/cade/Chaudhuri21}. Like us, they perform \textit{a
-priori} \kl{unification} on the linked subformulas to determine appropriate
-\kl{substitutions} for instantiating quantifiers and rule out unwanted links.
-But their method improves upon ours by being able to link subformulas with
-non-trivial quantifier instantiation, such as the following \kl{linkage} that
-currently fails in Actema\sidenote{It would be interesting to understand
-precisely why it fails, and if this invalidates the \kl{productivity} theorem.}:
+priori} \kl{unification} on the linked subformulas, both to determine
+appropriate \kl{substitutions} for instantiating quantifiers, and rule out
+\kl{invalid} linkages. But their method improves upon ours by being able to link
+subformulas with non-trivial quantifier instantiations, such as the following
+\kl{linkage} that currently fails in \kl{Actema}\sidenote{It would be
+interesting to understand precisely why it fails, and if this invalidates the
+\kl{productivity} theorem.}:
 $$(\forall x. P(x) \limp \exists y. \select{Q(x,y)}) \back \exists y. \exists z.
 \select{Q(f(z),y)}$$
+\AP
 Because of the intended application of their method to \emph{automated} theorem
-proving in the Iris framework for program verification in \kl{Coq}
+proving in the \intro{Iris} framework for program verification in \kl{Coq}
 \sidecite{jung_iris_2018}, it is for now limited to \emph{\kl(dnd){backward}}
 \kl{linkages}. They provide a detailed formalization in \kl{Coq} that relates
-their method with that of \kl{Actema} and \kl{Profint}, based on \emph{linking
+their method with those of \kl{Actema} and \kl{Profint}, based on \emph{linking
 judgments} of the form $H \curlywedge [O]\VDash G$ that have a derivation
 precisely when $H \back G \steps{} O$\sidenote{Contrary to our usage in this
 chapter, they use the terminology ``linkage'' to denote derivations of these
@@ -1536,7 +1559,7 @@ There is also an analogy between the correctness criterions of proof nets, and
 the \kl{validity} criterion of \kl{linkages}:
 \begin{itemize}
   \item they both identify a subset of valid objects among a larger set of
-  structures characterized by links on formulas;
+  structures characterized by links on subformulas;
   \item they both allow many different \emph{sequential} readings, that is
   \kl{sequent calculus} proofs for proof nets, and \kl{CoS} proofs for
   \kl{linkages}\sidenote{Note that \kl{invalid} \kl{linkages} still give rise to \kl{CoS}-style
@@ -1562,16 +1585,15 @@ derivations.
 \paragraph{Tangible functional programming}
 
 We noticed an interesting connection with the work of Conal Elliott on
-tangible functional programming \sidecite{elliott-tangible}. His concept
-of \emph{deep application} of \kl{$\lambda$-terms} seems related to the
-notion of \kl{subformula linking}, when viewing function and product types
-as implications and conjunctions through the formulae-as-types
-interpretation. He also devised a system of basic combinators which
-are composed sequentially to compute the result of a \kl{DnD}, though it
-follows a more complex dynamic than our \kl{rewriting rules}. Even if the
-mapping between proofs and programs is not exact in this case, it
-suggests a possible interesting field of application for the
-Curry-Howard correspondance, in the realm of graphical
-proving/programming environments.
+\emph{tangible functional programming} \sidecite{elliott-tangible}. His concept
+of \emph{deep application} of \kl{$\lambda$-terms} seems related to the notion
+of \kl{subformula linking}, when viewing function and product types as
+implications and conjunctions through the formulae-as-types interpretation. He
+also devised a system of basic combinators which are composed sequentially to
+compute the result of a \kl{DnD}, though it follows a more complex dynamic than
+our \kl{rewriting rules}. Even if the mapping between proofs and programs is not
+exact in this case, it suggests a possible interesting field of application for
+the Curry-Howard correspondance, in the realm of graphical proving/programming
+environments.
 
 \end{scope}

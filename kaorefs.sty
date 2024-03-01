@@ -31,6 +31,7 @@
 \newcommand{\defname}{}
 \newcommand{\assumname}{}
 \newcommand{\thmname}{}
+\newcommand{\corname}{}
 \newcommand{\propname}{}
 \newcommand{\lemmaname}{}
 \newcommand{\factname}{}
@@ -72,6 +73,7 @@
   \renewcommand{\defname}{Definition}
   \renewcommand{\assumname}{Assumption}
   \renewcommand{\thmname}{Theorem}
+  \renewcommand{\corname}{Corollary}
   \renewcommand{\propname}{Proposition}
   \renewcommand{\lemmaname}{Lemma}
   \renewcommand{\factname}{Fact}
@@ -113,6 +115,7 @@
 \newcommand{\labeq}[1]{\label{eq:#1}}
 \newcommand{\labdef}[1]{\label{def:#1}}
 \newcommand{\labthm}[1]{\label{thm:#1}}
+\newcommand{\labcor}[1]{\label{cor:#1}}
 \newcommand{\labassum}[1]{\label{assum:#1}}
 \newcommand{\labprop}[1]{\label{prop:#1}}
 \newcommand{\lablemma}[1]{\label{lemma:#1}}
@@ -177,6 +180,9 @@
 
 \newcommand{\refthm}[1]{\hyperref[thm:#1]\thmname\xspace\ref{thm:#1}}
 \newcommand{\vrefthm}[1]{\hyperref[thm:#1]\thmname\xspace\vref{thm:#1}}
+
+\newcommand{\refcor}[1]{\hyperref[cor:#1]\corname\xspace\ref{thm:#1}}
+\newcommand{\vrefcor}[1]{\hyperref[cor:#1]\corname\xspace\vref{thm:#1}}
 
 \newcommand{\refprop}[1]{\hyperref[prop:#1]\propname\xspace\ref{prop:#1}}
 \newcommand{\vrefprop}[1]{\hyperref[prop:#1]\propname\xspace\vref{prop:#1}}

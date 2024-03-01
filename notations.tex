@@ -111,21 +111,15 @@
 \newcommand{\mcirc}{\mathbin{⚬}}
 \newcommand{\mdiam}{◇}
 
-\knowledgenewrobustcmd\step[1]{\mathrel{\cmdkl{\rightarrow_{#1}}}}
-\knowledgenewrobustcmd\steps[1]{\mathrel{\cmdkl{\rightarrow^{\ast}_{#1}}}}
+\newrobustcmd\step[1]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\rightarrow_{#1}}}}}
+\knowledge{\step}{notion}
+\newrobustcmd\lstep[1]{\withkl{\kl[\lstep]}{\mathrel{\cmdkl{\rightharpoonup_{#1}}}}}
+\knowledge{\lstep}{notion}
+
+\newrobustcmd\steps[1]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\rightarrow^{\ast}_{#1}}}}}
 \newrobustcmd\notstep[1]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\nrightarrow_{#1}}}}}
 \newrobustcmd\notsteps[1]{\withkl{\kl[\steps]}{\mathrel{\cmdkl{\nrightarrow^{\ast}_{#1}}}}}
-\knowledgenewrobustcmd\nsteps[2]{\mathrel{\cmdkl{\rightarrow^{#1}_{#2}}}}
-\knowledgenewrobustcmd\lstep[1]{\mathrel{\cmdkl{\rightharpoonup_{#1}}}}
-
-\begin{scope}\knowledgeimport{sfl}
-\knowledge{notion}
- | \step
- | \steps
- | \notstep
- | \notsteps
- | \nsteps
-\end{scope}
+\newrobustcmd\nsteps[2]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\rightarrow^{#1}_{#2}}}}}
 
 \newrobustcmd\xlstep[1]{\withkl{\kl[\lstep]}{\mathrel{\cmdkl{\xrightharpoonup{#1}}}}}
 \newrobustcmd\xstep[1]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\xrightarrow{#1}}}}}
@@ -226,8 +220,11 @@
 \newcommand{\lexp}{\limp}
 \newcommand{\lcoexp}{\lsub}
 
-\newcommand{\soldepth}[1]{\left|#1\right|}
-\newcommand{\bradepth}[1]{\left|#1\right|}
+\newrobustcmd\cdepth[1]{\withkl{\kl[\cdepth]}{\cmdkl{|}#1\cmdkl{|}}}
+\knowledge{\cdepth}{notion}
+\newrobustcmd\sdepth[1]{\withkl{\kl[\sdepth]}{\cmdkl{|}#1\cmdkl{|}}}
+\knowledge{\sdepth}{notion}
+
 \newcommand{\soldual}[1]{\overline{#1}}
 
 \newcommand{\Lattice}{\mathcall{L}}
@@ -383,9 +380,6 @@
 \newcommand{\by}{\mathbf{y}}
 \newcommand{\bz}{\mathbf{z}}
 
-\knowledgenewrobustcmd\fdepth[1]{\cmdkl{|}#1\cmdkl{|}}
-\knowledgenewrobustcmd\cdepth[1]{\cmdkl{|}#1\cmdkl{|}}
-
 \newcommand{\atomoccs}[1]{\mathcall{A}(#1)}
 \newcommand{\vehicle}[1]{\mathcall{V}(#1)}
 \newcommand{\anchor}[1]{\vrefl{\mathcall{V}}(#1)}
@@ -480,11 +474,8 @@
 \DeclareMathOperator{\link}{\mathrel{@}}
 
 \newcommand{\rever}{^*}
-\newcommand{\phole}{\square}
-\newcommand{\fhole}{\boxdot}
-\newcommand{\ifill}[2]{#1\left\{#2\right\}}
-\newcommand{\efill}[2]{#1\left[#2\right]}
-\newcommand{\lint}[1]{\lfloor#1\rfloor}
+\newrobustcmd\lint[1]{\withkl{\kl[\lint]}{\cmdkl{\lfloor}#1\cmdkl{\rfloor}}}
+\knowledge{\lint}{notion}
 
 \DeclareRobustCommand{\sys}[1]{\text{$\mathsf{#1}$}}
 \newcommand{\pair}[2]{\left\langle #1, #2 \right\rangle}

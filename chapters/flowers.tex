@@ -607,12 +607,12 @@ $\garden{{}}{\Phi}$.
 As usual, we introduce a \emph{depth} measure that will allow us to reason
 inductively on the structure of flowers:
 \begin{definition}[Depth]
-  The \emph{depth} $\soldepth{-}$ of a flower or garden is defined mutually
+  The \emph{depth} $\sdepth{-}$ of a flower or garden is defined mutually
   recursively as follows:
   \begin{align*}
-    \soldepth{p(\tvec{t})} &= 0 \\
-    \soldepth{\garden{\bx}{\Phi}} &= \max_{\phi \in \Phi}{\soldepth{\phi}} \\
-    \soldepth{\flower{\gamma}{\Delta}} &= 1 + \max(\soldepth{\gamma}, \max_{\delta \in \Delta}{\soldepth{\delta}})
+    \sdepth{p(\tvec{t})} &= 0 \\
+    \sdepth{\garden{\bx}{\Phi}} &= \max_{\phi \in \Phi}{\sdepth{\phi}} \\
+    \sdepth{\flower{\gamma}{\Delta}} &= 1 + \max(\sdepth{\gamma}, \max_{\delta \in \Delta}{\sdepth{\delta}})
   \end{align*}
 \end{definition}
 
@@ -774,12 +774,12 @@ of flowers:
 \end{definition}
 
 \begin{definition}[Depth]
-  The \emph{depth} $\soldepth{\Phi\hole}$ of a \kl{context} $\Phi\hole$ is
+  The \emph{depth} $\sdepth{\Phi\hole}$ of a \kl{context} $\Phi\hole$ is
   defined recursively as follows:
   \begin{align*}
-    \soldepth{\Psi, \hole} &= 0 \\
-    \soldepth{\Psi, (\flower{\garden{\bx}{\Phi\hole}}{\Delta})} &= 1 + \soldepth{\Phi\hole} \\
-    \soldepth{\Psi, (\flower{\gamma}{\garden{\bx}{\Phi\hole} \sep \Delta})} &= 1 + \soldepth{\Phi\hole}
+    \sdepth{\Psi, \hole} &= 0 \\
+    \sdepth{\Psi, (\flower{\garden{\bx}{\Phi\hole}}{\Delta})} &= 1 + \sdepth{\Phi\hole} \\
+    \sdepth{\Psi, (\flower{\gamma}{\garden{\bx}{\Phi\hole} \sep \Delta})} &= 1 + \sdepth{\Phi\hole}
   \end{align*}
 \end{definition}
 
@@ -909,16 +909,7 @@ a direct adaptation of the rules of \kl{Beta} (\reffig{beta}):
     of the \kl{classical} rule \rsf{Dcut{\ua}} of \kl{Alpha} and \sys{Beta}. The
     other direction (rule \rsf{epis{\da}} in \reffig{flowers-episda}) is
     actually \kl{admissible}, which might be related to the co-admissibility of
-    \rsf{Dcut{\da}} in \kl{Alpha} (Corollary \ref{cor:adm-ins}).
-  % \item[Blank Antecedant (\rsf{epis{\ua}}, \rsf{epis{\da}})]
-  %   They allow to enclose (\rsf{epis{\ua}}) or free (\rsf{epis{\da}}) any
-  %   bouquet in a petal attached to an \textsf{(e)}mpty \textsf{(pis)}til. They
-  %   correspond to the rule \rsf{BA} of \reffig{rule-empty-antecedant}, which is
-  %   a weaker, intuitionistic version of the \kl{classical} rules \rsf{Dcut{\ua}} and
-  %   \rsf{Dcut{\da}} of \kl{Alpha} and \sys{Beta}. \rsf{epis{\da}} will be shown
-  %   to be admissible in \refsec{Completeness}, which might be related to the
-  %   co-admissibility of \rsf{Dcut{\da}} in \kl{Alpha} (Corollary
-  %   \ref{cor:adm-ins}).
+    \rsf{Dcut{\da}} in \kl{Alpha} (\refcor{adm-ins}).
 
   \item[(De)iteration (\rsf{poll{\da}}, \rsf{poll{\ua}})]
     Renamed \emph{\textsf{(poll)}ination} rules, they correspond to the rules
@@ -1413,7 +1404,7 @@ one big constructor:
 
   Given some Kripke structure $\mathcal{K}$, the \emph{forcing} relation
   $\eforces{w}{\phi}{e}$ between a world $w$, a flower $\phi$ and a
-  $w$-evaluation $e$ is defined by recurrence on $\soldepth{\phi}$ as follows:
+  $w$-evaluation $e$ is defined by recurrence on $\sdepth{\phi}$ as follows:
   \begin{itemize}
     \item[\textbf{(Atom)}]
     $\eforces{w}{p(\tvec{t})}{e}$ iff $\interp{\tvec{t}}_e \in \interp{p}_w$;
@@ -1438,7 +1429,7 @@ The following lemmas will be useful for the soundness proof of the next section:
   If $w \access w'$ and $\eforces{w}{\phi}{e}$ then $\eforces{w'}{\phi}{e}$.
 \end{lemma}
 \begin{proof}
-  By a straightforward recurrence on $\soldepth{\phi}$.
+  By a straightforward recurrence on $\sdepth{\phi}$.
 \end{proof}
 
 % \begin{lemma}\lablemma{closed-forcing}
@@ -1447,7 +1438,7 @@ The following lemmas will be useful for the soundness proof of the next section:
 %   e'$, if $\eforces{w}{\phi}{e}$ then $\eforces{w}{\phi}{e'}$.
 % \end{lemma}
 % \begin{proof}
-%   By a straightforward recurrence on $\soldepth{\phi}$.
+%   By a straightforward recurrence on $\sdepth{\phi}$.
 % \end{proof}
 
 % \begin{corollary}[Closed forcing]
@@ -1474,14 +1465,14 @@ The following lemmas will be useful for the soundness proof of the next section:
   \terms$ capture-avoiding in $\phi$ and $\bx \cap \bv(\phi) = \emptyset$.
 \end{lemma}
 \begin{proof}
-  By recurrence on $\soldepth{\phi}$.
+  By recurrence on $\sdepth{\phi}$.
   \begin{itemize}
     \item[\textbf{(Base case)}]
     \newcommand{\esigma}{\update{e}{\bx}{\interp{\sigma}_e}} Suppose
     $\phi = p(\tvec{t})$. We show that $\interp{\sigma(\tvec{t})}_e \in
     \interp{p}_w$ iff $\interp{\tvec{t}}_{\esigma} \in \interp{p}_w$ by proving
     that $\interp{t}_{\esigma} = \interp{\sigma(t)}_e$ for any term $t$ by
-    recurrence on $\soldepth{t}$.
+    recurrence on $\sdepth{t}$.
     \begin{itemize}
       \item If $t = x$, then either:
       \begin{itemize}
@@ -1563,9 +1554,9 @@ We now show that every rule of the flower calculus is \emph{sound} with respect
 to our Kripke semantics for flowers, and thus that $\entails{} \phi$ implies
 $\kentails{}\phi$ for every $\phi$. We start with the pervasive
 \emph{functoriality} lemma at the basis of every \kl{deep inference}
-system\sidenote{Other instances in this thesis are Lemma \ref{prop:cov},
+system\sidenote{Other instances in this thesis are \reflemma{variance},
 \reflemma{bubbles-functoriality}, \reflemma{bubbles-cofunctoriality}, and
-Corollary \ref{cor:eg-functoriality}.}:
+\refcor{eg-functoriality}.}:
 
 \begin{lemma}[Functoriality]\lablemma{flowers-functoriality} If $\Phi \kentails{}
   \Psi$, then for any $\Xi\hole$ either $\Xi\select{\Phi} \kentails{}
@@ -1573,7 +1564,7 @@ Corollary \ref{cor:eg-functoriality}.}:
   \Xi\select{\Phi}$ if $\Xi\hole$ is \kl{negative}.
 \end{lemma}
 \begin{proof}
-  By recurrence on $\soldepth{\Xi\hole}$.
+  By recurrence on $\sdepth{\Xi\hole}$.
 \end{proof}
 
 Weakening lemmas are also standard in \kl{proof theory} and \kl{type theory}. Here they
@@ -1611,7 +1602,7 @@ and reliance on the pollination relation. The following lemma can be compared to
   Let $w$ a world in some Kripke structure $\mathcal{K}$, and $e$ a
   $w$-evaluation. We show that $\eforces{w}{\Phi, \Xi\select{\Phi}}{e}$ iff
   $\eforces{w}{\Phi, \Xi{\select{\phantom{\Phi}}}}{e}$ by recurrence on
-  $\soldepth{\Xi\hole}$.
+  $\sdepth{\Xi\hole}$.
   \begin{itemize}
     \item[\textbf{(Base case)}]
       Suppose $\Xi\hole = \Xi', \hole$. Then we trivially have
@@ -2273,7 +2264,7 @@ forcing in $\rewolF{\psi}$ with $\psi$-consistency and $\psi$-completeness:
   \end{enumerate}.
 \end{lemma}
 \begin{proof}
-  By recurrence on $\soldepth{\phi}$.
+  By recurrence on $\sdepth{\phi}$.
   \begin{itemize}
     \item Suppose $\phi = p(\tvec{t})$.
     \begin{enumerate}

@@ -4,6 +4,13 @@
 \labch{sfl-classical}
 
 
+\epigraph{
+  Run parallel to reality, they symbolize it, they squint at it,\\
+  They never touch it: consider what an explosion\\
+  Would rock the bones of men into little white fragments and unsky the world\\
+  If any mind for a moment touch truth.}{\textbf{Robinson Jeffers}, \textit{The Silent Shepherds}, 1958}
+
+
 \begin{scope}\knowledgeimport{sfl}
 
 
@@ -316,10 +323,6 @@ $$
     \\
     \begin{array}{r@{\,}c@{\,}lr}
       \multicolumn{4}{c}{\textsc{Parallel}} \\[2em]
-      % \R[\mathsf{lnn}]
-      %   {\ifill{\eta}{\efill{A}{A} \ast \efill{B}{B}}}
-      %   {\ifill{\eta}{\ifill{A}{A} \land \ifill{B}{B}}}
-      % \\
       {A \para (B \land C)}   &\step{}&   {(A \para B) \land C}   &\mathsf{P\land_1}\\
       {A \para (C \land B)}   &\step{}&   {C \land (A \para B)}   &\mathsf{P\land_2}\\[1em]
 
@@ -453,7 +456,7 @@ We add the two following cases to Lemmas \ref{lemma:rules-valid-in-context} and
 The proof of Lemma \ref{lemma:rules-valid-in-context} is easily extended by
 inspecting each parallel rule, and we already mentioned that the \kl(dnd){backward} rule
 {\rsf{L{\limp}_1}} is sound \kl{classically}. Note that now \kl{sequents} have multiple
-conclusions, thus one needs to use rules from a multi-succedant calculus such as
+conclusions, thus one needs to use rules from a multi-conclusion calculus such as
 \kl{G3c} \cite{negri_structural_2001}.
 
 \kl{Polarity} preservation (Fact \ref{prop:rules-preserve-polarity}) is also true
