@@ -20,19 +20,19 @@ the \kl{Actema} prototype is not mature enough to conduct a project of this
 scale.
 
 The chapter is organized as follows: \refsec{edukera} studies a proof of a small
-logical riddle in \kl{Actema}, highlighting some benefits of our approach compared to
-textual systems. \refsec{funcs} explores how basic properties about functions
-between sets can be proved graphically, introducing the use of definitions in
-addition to logical reasoning steps. In \refsec{arith} we prove equations in
-Peano arithmetic, showing how one can incorporate additional actions into the
-paradigm to deal with more specialized forms of reasoning: \emph{induction} and
-\emph{automatic computation}.
+logical riddle in \kl{Actema}, highlighting some benefits of our approach
+compared to textual systems. \refsec{funcs} explores how basic properties about
+functions between sets can be proved graphically, introducing the use of
+\emph{definitions} in addition to logical reasoning steps. In \refsec{arith} we
+prove equations in Peano arithmetic, showing how one can incorporate additional
+actions into the paradigm to deal with more specialized forms of reasoning:
+\emph{induction} and \emph{automatic computation}.
 
 \begin{kaonote}
   For each example, we provide a \kl{Coq} \kl{proof script} that tries to follow
-  the structure of the graphical proof, for the sake of comparison with a more
-  standard text-based interface. But this would obviously compare differently
-  with other textual interfaces like the \kl{Isar} proof language, which is more
+  the structure of the graphical proof, for the sake of comparison with a
+  textual interface. But this would obviously compare differently with other
+  textual interfaces, like the \kl{Isar} proof language which is more
   declarative, and thus farther from the imperative aspects of \kl{PbA}.
 \end{kaonote}
   
@@ -45,6 +45,9 @@ paradigm to deal with more specialized forms of reasoning: \emph{induction} and
 % implements a limited formalism. However some examples allow to get a
 % glimpse of specificities and possible advantages of proofs by actions.
 
+\subsection{A gestural proof}
+
+\AP
 Our first example is a small logical riddle, which we borrow from a textual
 educational system, \intro{Edukera}~\sidecite{edukera}. We invite readers to try
 to perform the proof themselves in the online version of
@@ -103,6 +106,8 @@ in less than a minute in \kl{Actema}, which seems out of reach for about any use
 a \kl{tactic}-based prover. At least as important is the fact that the proof can be
 performed without typing any text, especially no intermediate statement. 
 
+\subsection{Comparison with a textual proof}
+
 To conclude this example, we propose in \reffig{edukera-coq} a complete proof of
 the riddle formalized in the \kl{Coq} \kl{proof assistant}, which follows very closely the
 structure of the graphical proof just outlined. To make the correspondence more
@@ -111,26 +116,29 @@ of the form \texttt{(** [actions] *)}, where \texttt{[actions]} is a
 sentence describing a sequence of actions in \kl{Actema} that produces the same goal
 transformation as the \kl{tactics} preceding the comment. There are a few interesting
 things to note:
-\begin{itemize}
-  \item We chose to name manually all the hypotheses introduced in the course of
-  the proof. This is generally considered good practice in the \kl{Coq} community,
-  because it makes \kl{proof scripts} easier to maintain. In our case it also has the
-  advantage of expliciting which hypotheses are used exactly in the reasoning,
-  something that an \kl{Actema} user does with her pointing device when designating
-  the blue \kl{items} involved in an action. It appears clearly in
-  \reffig{edukera-coq} that in a moderately long proof like this based mostly on
-  \kl{forward} reasoning, one needs to keep track of \emph{a lot} of names, which can
-  be overwhelming for many users. This is especially true for beginners
-  discovering \kl{Coq}, because the syntax for assigning names, based on patterns
-  like \texttt{[H | H]} that reproduce the \kl{subgoal} structure, can induce a steep
-  learning curve. Of course this problem is mitigated trivially in \kl{Actema}, since
-  names are not needed.
+\begin{description}
+  \item[Hypotheses management] We chose to name manually all the hypotheses
+  introduced in the course of the proof. This is generally considered good
+  practice in the \kl{Coq} community, because it makes \kl{proof scripts} easier
+  to maintain. In our case it also has the advantage of expliciting which
+  hypotheses are used exactly in the reasoning, something that an \kl{Actema}
+  user does with her pointing device when designating the blue \kl{items}
+  involved in an action.
+  
+  It appears clearly in \reffig{edukera-coq} that in a moderately long proof
+  like this based mostly on \kl{forward} reasoning, one needs to keep track of
+  \emph{a lot} of names, which can be overwhelming for many users. This is
+  especially true for beginners discovering \kl{Coq}, because the syntax for
+  assigning names, based on patterns like \texttt{[H | H]} that reproduce the
+  \kl{subgoal} structure, can induce a steep learning curve. Of course this
+  problem is mitigated trivially in \kl{Actema}, since names are not needed.
 
-  \item There is no exact correspondence between the \kl{tactics} of \kl{Coq} and the
-  actions of \kl{Actema}: some \kl{tactics} are simulated by multiple actions, and often a
-  complex sequence of \kl{tactics} can be simulated by a single action\sidenote{This
-  was already noticed in \cite{PbP}, where clicking on a subformula can simulate
-  a sequence of \kl{introduction rules} of arbitrary length.}.
+  \item[Tactics vs. actions] There is no exact correspondence between the
+  \kl{tactics} of \kl{Coq} and the actions of \kl{Actema}: some \kl{tactics} are
+  simulated by multiple actions, and often a complex sequence of \kl{tactics}
+  can be simulated by a single action\sidenote{This was already noticed in
+  \cite{PbP}, where clicking on a subformula can simulate a sequence of
+  \kl{introduction rules} of arbitrary length.}.
   
   For instance, line 23 does at the same time a specialization of the hypothesis
   $H_2 : \forall x. \neg \rich(\mother(\mother(x))) \lor \neg \rich(x)$ to the
@@ -157,18 +165,19 @@ things to note:
     \texttt{exact}.
   \end{enumerate}
 
-  \item More generally, the actions of \kl{Actema} are more \emph{versatile} and
-  \emph{context-dependent} than the \kl{tactics} of \kl{Coq}. For instance, click actions
-  have a different effect depending on the main connective of the formula being
-  clicked, but provide a unique interface for applying rules of natural
-  deduction/\kl{sequent calculus}. On the contrary, there is almost one \kl{tactic} for
-  dealing with each logical connective in \kl{Coq}, e.g. \texttt{intros} for $\limp$
-  and $\forall$, \texttt{split} for $\land$, \texttt{left} and \texttt{right}
-  for $\lor$, \texttt{exists} for $\exists$, etc. The same remark applies to \kl{DnD}
-  actions, whose functionalities are provided in \kl{Coq} by many different \kl{tactics}:
+  \item[Context-sensitivity] More generally, the actions of \kl{Actema} are more
+  \emph{versatile} and \emph{context-aware} than the \kl{tactics} of \kl{Coq}.
+  For instance, click actions have a different effect depending on the main
+  connective of the formula being clicked, but provide a unique interface for
+  applying rules of natural deduction/\kl{sequent calculus}. On the contrary,
+  there is almost one \kl{tactic} for dealing with each logical connective in
+  \kl{Coq}, e.g. \texttt{intros} for $\limp$ and $\forall$, \texttt{split} for
+  $\land$, \texttt{left} and \texttt{right} for $\lor$, \texttt{exists} for
+  $\exists$, etc. The same remark applies to \kl{DnD} actions, whose
+  functionalities are provided in \kl{Coq} by many different \kl{tactics}:
   \texttt{apply \_}, \texttt{apply \_ in \_}, \texttt{pose proof},
   \texttt{specialize}, etc.
-\end{itemize}
+\end{description}
 
 \begin{figure}
   % \fontsize{8}{8.5}\selectfont
@@ -189,12 +198,14 @@ assistant}.
 
 \section{Sets and functions}\labsec{funcs}
 
+\subsection{A simple exercise}
+
 Our second example comes from a preprint of Bartzia et al.
-\cite{bartzia:hal-04087080}, where it is chosen specifically for a case study
-aiming to compare the features of different \kl{proof assistants}' interfaces in an
-educational setting. It is ``a typical exercise about sets, relations and
-functions, as commonly found in introductory courses about reasoning and
-proof.'' (p.~6):
+\sidecite{bartzia:hal-04087080}, where it is chosen specifically for a case
+study aiming to compare the features of different \kl{proof assistants}'
+interfaces in an educational setting. It is ``a typical exercise about sets,
+relations and functions, as commonly found in introductory courses about
+reasoning and proof.'' (p.~6):
 
 \begin{exercise}
   Given three sets $A$, $B$ and $C$ such that $C \subseteq A$ and a function $f
@@ -207,17 +218,18 @@ proof.'' (p.~6):
   (or preimage) of sets $D \subseteq A$ and $E \subseteq B$ by $f$.
 \end{exercise}
 
+\AP
 Compared to our previous example, this exercise has the particularity of
 involving multiple \emph{definitions}, here about sets and functions between
 them. There are many possible ways to handle definitions in a formal \kl{proof
-system}. A common one is to decompose the definition into a new function or
-predicate symbol, the definition's \intro{head}, and a universally parametrized
-equality or equivalence between the \kl{head} and the \intro{body} of the definition.
-For instance, the concept of injectivity can be encoded as a unary predicate
-$\injective(\cdot)$ on functions, satisfying the following equivalence:
+system}. A common one, which might be termed \intro{nominal}, is to decompose
+the definition into a new function or predicate symbol, the definition's
+\intro{head}, and a universally parametrized equality or equivalence between the
+\kl{head} and the \intro{body} of the definition. For instance, the concept of
+injectivity can be encoded as a unary predicate $\injective(\cdot)$ on
+functions, satisfying the following equivalence:
 $$\forall A.\ \forall B.\ \forall f{:}A \to B.~\ \injective(f) ~\lequiv~ \forall x
 \in A.\ \forall y \in A.\ f(x) = f(y) \limp x = y$$
-
 Notice that $\injective(\cdot)$ is a \emph{\kl{higher-order}} predicate, since it
 takes any function as argument. Depending on the underlying logical framework,
 this might have an impact on the exact way the definition is encoded. Here we do
@@ -228,21 +240,24 @@ graphical actions, and we can imagine having a \kl{first-order} \kl{set theory} 
 \kl{ZF} to make everything work behind the scenes\sidenote{See also
 \refsec{pluginfuture} for a discussion on a \kl{higher-order} extension of \kl{Actema}.}.
 
+\subsection{Nominal definitions}
+
+\AP
 Let us now describe how to prove the second question of the exercise in the
-\kl{PbA} paradigm. The first thing we want to do is to unfold the
-definition of set inclusion in the conclusion $f^{-1}(f(C)) \subseteq C$, so
-that we can see how to prove logically such an inclusion. One might imagine
-multiple kinds of graphical actions for doing this. In \kl{Actema} we implemented a
-general \emph{subterm selection} mechanism, where the user can successively
-point at different subterms appearing in the \kl{goal} --- either in the \kl(sequent){context} or
-the conclusion --- and then choose from a list of available actions taking the
-selection as argument. In our case we can select the whole conclusion, and then
-choose to apply the \action{Unfold} action:
-$$\select{f^{-1}(f(C)) \subseteq C} \qquad \text{(\action{Unfold})}$$
-The system will be able to tell that we
-selected an instance of the two-place inclusion predicate $\cdot \subseteq
-\cdot$, and thus will replace the \kl{head} of this definition by its \kl{body},
-instantiating parameters accordingly. This gives us a new conclusion
+\kl{PbA} paradigm. The first thing we want to do is to unfold the definition of
+set inclusion in the conclusion $f^{-1}(f(C)) \subseteq C$, so that we can see
+how to prove logically such an inclusion. One might imagine multiple kinds of
+graphical actions for doing this. In \kl{Actema} we implemented a general
+\emph{subterm selection} mechanism, where the user can successively point at
+different subterms appearing in the \kl{goal} and then choose from a list of
+so-called \intro{contextual actions} that take the selection as argument. In our
+case we can select the whole conclusion, and then choose to apply the
+\intro{Unfold} action:
+$$\select{f^{-1}(f(C)) \subseteq C} \qquad \text{(\kl{Unfold})}$$
+The system will be able to tell that we selected an instance of the two-place
+inclusion predicate $\cdot \subseteq \cdot$, and thus will replace the \kl{head}
+of this definition by its \kl{body}, instantiating parameters accordingly. This
+gives us a new conclusion
 $$\forall x. x \in f^{-1}(f(C)) \limp x \in C$$
 on which we can click twice to introduce a new variable $x$ in the \kl(sequent){context},
 together with the new hypothesis
@@ -250,178 +265,194 @@ together with the new hypothesis
   x \in f^{-1}(f(C)) \label{hyp::1}
 \end{gather}
 Now there is no available action on the conclusion $x \in C$, because set
-membership is a \emph{primitive} predicate in \kl{set theory}: it does not have
-any associated definition in the sense mentioned above\sidenote{Formally, the
-meaning of $\in$ in a \kl{set theory} such as \kl{ZF} comes from the various
-\kl{axioms} involving it. One might call such a definition \intro{behavioral},
-since the meaning of the \kl{symbol} emerges from the way it can be used in
-proofs through \kl{axioms}. In contrast, the usual notion of mathematical
-definition we tackle in this chapter might be called \intro{nominal}, because it
-essentially amounts to giving a name (the \kl{head}) to a reoccurring pattern of
-statement (the \kl{body}). Note that the syntax of \kl{first-order logic} is
-unaware of this distinction, since in both cases the defined concepts are
-encoded as \emph{atomic} predicates. This is usually not the case of logical
-frameworks found in \kl{proof assistants}: for instance, the duality between
-\emph{judgmental} (\kl{nominal}) and \emph{propositional} (\kl{behavioral}) equality is at
-the heart of \kl{Martin-Löf type theory}, and it is used extensively in \kl{Coq}
-to perform automation, both in the computation of expressions and the matching
-of statements modulo definitions.}. But we can still unfold some definitions in
-the \kl(sequent){context}, which might suggest further possible interactions.
-First we can unfold the definition of preimage used in hypothesis~\ref{hyp::1}
-by selecting the precise corresponding subterm:
-$$x \in \select{f^{-1}(f(C))} \qquad \text{(\action{Unfold})}$$
+membership is a \emph{primitive} predicate in \kl{set theory}. But we can still
+unfold some definitions in the \kl(sequent){context}, which might suggest
+further possible interactions. First we can unfold the definition of preimage
+used in hypothesis~(\ref{hyp::1}) by selecting the precise corresponding
+subterm:
+$$x \in \select{f^{-1}(f(C))} \qquad \text{(\kl{Unfold})}$$
 which, assuming a definition based on set comprehension, gives:
-\begin{itemize}
-  \item[(1)] $x \in \compr{a \in A}{f(a) \in f(C)}$
-\end{itemize}
-At this stage, we would like to make the set comprehension in $(1)$ disappear,
-by simply deducing $f(x) \in f(C)$ from it. But depending on the underlying
-logical framework, the way to perform this deduction step in \kl{PbA}
-will vary:
+\begin{gather}
+  x \in \compr{a \in A}{f(a) \in f(C)} \label{hyp::2}
+\end{gather}
+At this stage, we would like to make the set comprehension in
+hypothesis~(\ref{hyp::2}) disappear, by simply deducing $f(x) \in f(C)$ from it.
+But depending on the underlying logical framework, the way to perform this
+deduction step in \kl{PbA} will vary.
 
-\begin{description}
-  \item[In \kl{ZF} set theory]
-    We would need to invoke explicitly the \emph{axiom of comprehension}, which
-    states the following:
-    $$\forall \phi.\ \forall D.\ \forall y.\ y \in \compr{d \in D}{\phi}
-    ~~\lequiv~~ (y \in D \land \subst{\phi}{y}{d})$$ Note that this is again a
-    \kl{higher-order} statement, but this time because it quantifies over every
-    formula $\phi$\sidenote{Traditionnally, logicians preferred to speak of
-    \emph{axiom schemas}, that is countable sets of \kl{axioms}, rather than
-    \kl{higher-order} \kl{axioms}, in order to stay purely in a \kl{first-order}
-    setting. But this does not make much sense from an implementation point of
-    view, as a proof engine will only be able to manipulate a finite amount of
-    \kl{axioms}.}. Thus we assume that the underlying proof engine can handle
-    such \kl{higher-order} statements, and in particular that the axiom of
-    comprehension is available in its database of lemmas.
-    
-    In \kl{Actema}, one can freely search in this database by typing text in a search
-    bar, typically in this case the keyword ``comprehension''. Then the system
-    will show a list of lemmas whose names match the keywords, and the user can
-    click on the lemma she is interested in, in order to add it as a blue \kl{item}
-    in the current \kl(sequent){context}. An alternative and more precise way of retrieving a
-    lemma is to search by \emph{content} of the statement instead of searching
-    by name. State-of-the-art \kl{proof assistants} usually provide facilities for
-    this: for instance \kl{Coq} has a \texttt{Search} command which can take
-    \emph{patterns}, i.e. \kl{terms} with \kl{holes} or so-called \emph{metavariables}, in
-    order to filter out results that do not match the given pattern. In \kl{Actema},
-    we implemented a novel feature which replaces patterns by a selection of
-    subterms in the current \kl{goal}, similarly to what is given as argument to
-    contextual actions like \action{Unfold}. Then the system will only look for
-    lemmas which can be used in a \kl{DnD} action involving precisely the current
-    selection of subterms. In this case, selecting the full statement of $(1)$
-    and searching:
-    $$\select{x \in \compr{a \in A}{f(a) \in f(C)}} \qquad
-    \text{(\action{Search})}$$
-    should return the comprehension axiom among other lemmas, because this axiom
-    and $(1)$ can interact through the following \kl(dnd){forward} \kl{DnD}:
-    $$\select{x \in \compr{a \in A}{f(a) \in f(C)}} ~~\forw~~ \forall \phi.\
-    \forall D.\ \forall y.\ \select{y \in \compr{d \in D}{\phi}} ~~\lequiv~~ (y
-    \in D \land \subst{\phi}{y}{d})$$ by substituting $D$ with $A$, $d$ with
-    $a$, $y$ with $x$ and $\phi$ with $f(a) \in f(C)$. Performing this \kl{DnD} will
-    finally result in a new hypothesis corresponding to the intended unfolding
-    of the definition of set comprehension\sidenote{Here in the sense of a
-    \emph{\kl{nominal}} definition.}:
-    \begin{itemize}
-      \item[(2)] $x \in A \land f(x) \in f(C)$
-    \end{itemize}
+\subsection{Axiomatic definitions}
+
+\AP
+In a set theory such as \kl{ZF}, the meaning of $\in$ comes from the various
+\kl{axioms} involving it. One might call this a \intro{behavioral} (or
+\reintro{axiomatic}) definition, since the meaning of the \kl{symbol} emerges
+from the way it can be used in proofs through \kl{axioms}. This contrasts with
+the previous \kl{nominal} definitions, that have a much simpler semantics
+captured by \kl{Unfold} actions\sidenote{Note that the syntax of
+\kl{first-order logic} is unaware of this distinction, since in both cases the
+defined concepts are encoded as \emph{atomic} predicates. This is usually not
+the case of logical frameworks found in \kl{proof assistants}: for instance, the
+duality between \intro{judgmental} (\kl{nominal}) and \emph{propositional}
+(\kl{behavioral}) equality is at the heart of \kl{Martin-Löf type theory}, and
+it is used extensively in \kl{Coq} to perform automation, both in the
+computation of expressions and the matching of statements modulo definitions.}.
+
+In particular, we can simplify the set comprehension in
+hypothesis~(\ref{hyp::2}) by invoking explicitly the \emph{axiom of
+comprehension}, which states the following:
+$$\forall \phi.\ \forall D.\ \forall y.\ y \in \compr{d \in D}{\phi}
+~~\lequiv~~ (y \in D \land \subst{\phi}{y}{d})$$
+Note that this is again a \kl{higher-order} statement, but this time because it
+quantifies over every formula $\phi$\sidenote{Traditionnally, logicians
+preferred to speak of \emph{axiom schemas}, that is countable sets of
+\kl{axioms}, rather than \kl{higher-order} \kl{axioms}, in order to stay purely
+in a \kl{first-order} setting. But this does not make much sense from an
+implementation point of view, as a proof engine will only be able to manipulate
+a finite amount of \kl{axioms}.}. Thus we assume that the underlying proof
+engine can handle such \kl{higher-order} statements, and in particular that the
+axiom of comprehension is available in its database of lemmas.
+
+In \kl{Actema}, one can freely search in this database by typing text in a
+search bar, typically in this case the keyword ``comprehension''. Then the
+system will show a list of lemmas whose names match the keywords, and the
+user can click on the lemma she is interested in, in order to add it as a
+blue \kl{item} in the current \kl(sequent){context}.
+
+An alternative and more precise way of retrieving a lemma is to search by
+\emph{content} of the statement instead of searching by name. State-of-the-art
+\kl{proof assistants} usually provide facilities for this: for instance \kl{Coq}
+has a \texttt{Search} command which can take \emph{patterns}, i.e. \kl{terms}
+with so-called \emph{holes} or \emph{metavariables}, in order to filter out
+results that do not match the given pattern.
+
+In \kl{Actema}, we implemented a novel feature which replaces patterns by a
+selection of subterms in the current \kl{goal}, similarly to what is given as
+argument to \kl{contextual actions} like \kl{Unfold}. Then the system will
+only look for lemmas which can be used in a \kl{DnD} action involving precisely
+the current selection of subterms.
+
+\AP
+Coming back to our proof, selecting the full statement of
+hypothesis~(\ref{hyp::2}) and searching:
+$$\select{x \in \compr{a \in A}{f(a) \in f(C)}} \qquad
+\text{(\intro{Search})}$$
+should return the comprehension axiom among other lemmas, because this axiom and
+hypothesis can interact through the following \kl(dnd){forward}
+\kl{DnD}:
+$$\select{x \in \compr{a \in A}{f(a) \in f(C)}} ~~\forw~~ \forall \phi.\
+\forall D.\ \forall y.\ \select{y \in \compr{d \in D}{\phi}} ~~\lequiv~~ (y
+\in D \land \subst{\phi}{y}{d})$$
+with the unifying substitution
+$\{D \deq A, d \deq a, y \deq x, \phi \deq f(a) \in f(C)\}$.
+Performing this \kl{DnD} will finally result in a new hypothesis corresponding
+to the intended ``unfolding'' of set comprehension:
+$$x \in A \land f(x) \in f(C)$$
   
-  \item[In higher-order type theory] In \kl{type theory}, every mathematical
-  object or statement is ultimately encoded as a function, in the sense of the
-  \kl{$\lambda$-calculus}. It is Alonzo Church who first got the idea of representing
-  a set by its \emph{characteristic function} in his \intro{higher-order logic}
-  (\reintro{HOL}), as a \kl{$\lambda$-term} of \kl{type} $\iota \to \omicron$ where
-  $\iota$ is the \kl{type} of individuals, and $\omicron$ the \kl{type} of
-  propositions\todo{add citation}. With this encoding, the only way to construct
-  a set is by comprehension, and set membership corresponds to function
-  application; that is, $\compr{x \in A}{\phi}$ is identified with the
-  characteristic function $\lambda x{:}A.\ \phi$, and $x \in t$ is the
-  application $t\ x$\sidenote{Note that this induces a strict hierarchical
-  notion of set as in Russell's type theory, where sets containing other sets
-  have a \kl{higher-order} \kl{type}, i.e. they correspond to functions taking other
-  functions as arguments.}. Then if we consider \kl{$\lambda$-terms} modulo
-  $\beta$-equivalence, unfolding the ``definition'' of set comprehension just
-  amounts to performing one step of $\beta$-reduction\sidenote{One can consider
-  this as a third kind of definition qualified of \emph{computational}. In
-  \kl{MLTT}, it is merged with \kl{nominal} definitions in the concept of judgmental
-  equality. In \kl{Coq} they are distinguished: computational and \kl{nominal} definitions
-  correspond respectively to $\beta$-reduction and $\delta$-reduction.}:
-  hypothesis $(1)$ becomes
-  $$(\lambda a{:}A.\ f(C)\ f(a))\ x$$
-  which $\beta$-reduces to
-  $$f(C)\ f(x)$$ which we can translate back as $f(x) \in f(C)$. This encoding
-  has now found its way in the libraries of many \kl{proof assistants} based on \kl{type
-  theory}, and is the one used in the \kl{Coq} solution to the exercise provided in
-  annex of \cite{bartzia:hal-04087080}. To perform $\beta$-reduction in \kl{Coq},
-  there is a \kl{tactic} called \texttt{simpl} as in ``simplify''\sidenote{There are
-  also \texttt{simp} \kl{tactics} available in \kl{Isabelle} and \kl{Lean}, although they are
-  not restricted to $\beta$-reduction and can perform rewriting of arbitrary
-  equalities and equivalences present in the lemma database, as long as they are
-  flagged as simplification rules.}. Coming back to \kl{PbA}, one can
-  easily imagine a corresponding \action{Simplify} or \action{Compute}
-  contextual action, which performs $\beta$-reduction inside of the selected
-  subterm. Then the previous transormation is achieved by applying this action
-  on hypothesis $(1)$:
-  $$\select{x \in \compr{a \in A}{f(a) \in f(C)}} \qquad \text{(\action{Simplify})}$$
-\end{description}
-From a user perspective, the two styles of actions induced by the two types of
-logical frameworks differ mainly in one aspect: while the definition of set
-comprehension is \emph{implicit} in the \kl{type-theoretical} encoding, it must be
-manipulated \emph{explicitly} when using the axiom of comprehension\sidenote{In
-fact one could also use the axiom of comprehension implicitly by relying on
-stronger automation. For example in \kl{Isabelle}/\kl{Isar}, one would write explicitly
-the desired \kl{goal} $f(x) \in f(C)$, refer to the \kl{axiom} by its name in the
-library, and then let the engine find the details of how to apply it. But
-writing statements manually goes against the philosophy of \kl{PbA}, which
-explores to what extent proofs can be carried by pure manipulation of the \kl{proof
-state}. Of course there is still an escape hatch for doing this when strictly
-necessary or more convenient.}. Depending on the user's background and context
-of usage, one might prefer one style over the other. Typically in an educational
-setting, having to manipulate explicitly the axiomatic definition might be more
-instructive, but also more confusing when carrying formal proofs for the first
-time.
+\subsection{Computational definitions}
 
-Going back to the proof, we now have the following \kl(sequent){context} of hypotheses:
-\begin{itemize}
-  \item[(0)] $\injective(f)$
-  \item[(2)] $f(x) \in f(C)$
-\end{itemize}
-We can unfold the definition of direct image in $(2)$ the same way we did for
-the inverse image in $(1)$: first perform the contextual action
-$$f(x) \in \select{f(C)} \qquad \text{(\action{Unfold})}$$
+\AP
+In \kl{type theory}, every mathematical object or statement is ultimately
+encoded as a function, in the sense of the \kl{$\lambda$-calculus}. It is Alonzo
+Church who first got the idea of representing a set by its \emph{characteristic
+function} in his \intro{higher-order logic} (\reintro{HOL}), in the form of a
+\kl{$\lambda$-term} of \kl{type} $\iota \to \omicron$ where $\iota$ is the
+\kl{type} of individuals and $\omicron$ the \kl{type} of propositions
+\sidecite{e4d9a073-5bba-3a5b-90d3-81832cd433e5}. With this encoding, the only
+way to construct a set is by comprehension, and set membership corresponds to
+function application; that is, $\compr{x \in A}{\phi}$ is identified with the
+characteristic function $\lambda x{:}A.\ \phi$, and $x \in t$ is the application
+$t\ x$\sidenote{Note that this induces a strict hierarchical notion of set as in
+Russell's type theory, where sets containing other sets have a \kl{higher-order}
+\kl{type}, i.e. they correspond to functions taking other functions as
+arguments.}. \AP Then if we consider \kl{$\lambda$-terms} modulo
+$\beta$-equivalence, ``unfolding'' the definition of set comprehension just
+amounts to performing one step of $\beta$-reduction: hypothesis~(\ref{hyp::2})
+becomes
+$$(\lambda a{:}A.\ f(C)\ f(a))\ x \quad\text{which $\beta$-reduces to}\quad
+f(C)\ f(x)$$
+which we can translate back as $f(x) \in f(C)$. One can consider this as a third
+kind of definition qualified of \intro{computational}\sidenote{In \kl{MLTT},
+\kl{computational} definitions are merged with \kl{nominal} definitions in the
+concept of \kl{judgmental} equality. In \kl{Coq} they are distinguished:
+\kl{computational} and \kl{nominal} definitions correspond respectively to
+$\beta$-reduction and $\delta$-reduction.}.
+
+\AP This encoding of sets has now found its way in the libraries of many
+\kl{proof assistants} based on \kl{type theory}, and is the one used in the
+\kl{Coq} solution to the exercise provided in annex of
+\cite{bartzia:hal-04087080}. To perform $\beta$-reduction in \kl{Coq}, there is
+a \kl{tactic} called \texttt{simpl} as in ``simplify''\sidenote{There are also
+\texttt{simp} \kl{tactics} available in \kl{Isabelle} and \kl{Lean}, although
+they are not restricted to $\beta$-reduction and can perform rewriting of
+arbitrary equalities and equivalences present in the lemma database, as long as
+those are flagged as simplification rules.}. Coming back to \kl{PbA}, one can
+easily imagine a corresponding \intro{Simplify} or \intro{Compute}
+\kl{contextual action}, which performs $\beta$-reduction inside of the selected
+subterm. Then the previous transormation is achieved by applying this action on
+hypothesis~(\ref{hyp::2}):
+$$\select{x \in \compr{a \in A}{f(a) \in f(C)}} \qquad \text{(\kl{Simplify})}$$
+
+\subsection{Finishing the proof}
+
+From a user perspective, the two styles of actions induced by the two types of
+definitions (\kl{axiomatic} and \kl{computational}) differ mainly in one
+respect: while the definition of set comprehension is \emph{implicit} in the
+\kl{type-theoretical} encoding, it must be manipulated \emph{explicitly} when
+using the axiom of comprehension\sidenote{In fact one could also use the axiom
+of comprehension implicitly by relying on stronger automation. For example in
+\kl{Isabelle}/\kl{Isar}, one would write explicitly the desired \kl{goal} $f(x)
+\in f(C)$, refer to the \kl{axiom} by its name in the library, and then let the
+engine figure out the details of how to apply it. But writing statements
+manually goes against the philosophy of \kl{PbA}, which explores to what extent
+proofs can be carried by pure manipulation of the \kl{proof state}. Of course
+there is still an escape hatch for doing this when strictly necessary or more
+convenient.}. Depending on the user's background and context of usage, one might
+prefer one style over the other. Typically in an educational setting, having to
+manipulate explicitly the \kl{axiomatic} definition might be more instructive,
+but also more confusing when carrying formal proofs for the first time.
+
+Going back to the exercise, we now have the following \kl(sequent){context} of
+hypotheses:
+\begin{gather}
+  \injective(f) \label{hyp::4} \\
+  f(x) \in f(C) \label{hyp::5}
+\end{gather}
+We can unfold the definition of direct image in hypothesis~(\ref{hyp::5}) the
+same way we did for the inverse image in hypothesis~(\ref{hyp::1}): first
+perform the \kl{contextual action}
+$$f(x) \in \select{f(C)} \qquad \text{(\kl{Unfold})}$$
 which gives us
-\begin{itemize}
-  \item[(2)] $f(x) \in \compr{b \in B}{\exists a \in A.\ a \in C \land b = f(a)}$
-\end{itemize}
+$$f(x) \in \compr{b \in B}{\exists a \in A.\ a \in C \land b = f(a)}$$
 Then we can simplify the set comprehension with
-$$\select{f(x) \in \compr{b \in B}{\exists a \in A.\ a \in C \land b = f(a)}} \qquad \text{(\action{Simplify})}$$
+$$\select{f(x) \in \compr{b \in B}{\exists a \in A.\ a \in C \land b = f(a)}} \qquad \text{(\kl{Simplify})}$$
 which gives us
-\begin{itemize}
-  \item[(3)] $\exists a \in A.\ a \in C \land f(x) = f(a)$
-\end{itemize}
+\begin{gather}
+  \exists a \in A.\ a \in C \land f(x) = f(a) \label{hyp::6}
+\end{gather}
 Now since $f$ is injective, we should be able to deduce that $x = a$. First we
-unfold the definition of injectivity in $(0)$:
-$$\select{\injective(f)} \qquad \text{(\action{Unfold})}$$
+unfold the definition of injectivity in hypothesis~(\ref{hyp::4}):
+$$\select{\injective(f)} \qquad \text{(\kl{Unfold})}$$
 which gives us
-\begin{itemize}
-  \item[(0)] $\forall y \in A.\ \forall z \in A.\ f(y) = f(z) \limp y = z$
-\end{itemize}
-Then we can use injectivity with the following \kl(dnd){forward} \kl{DnD} between $(0)$ and
-$(3)$:
+\begin{gather}
+  \forall y \in A.\ \forall z \in A.\ f(y) = f(z) \limp y = z \label{hyp::7}
+\end{gather}
+Then we can use injectivity with the following \kl(dnd){forward} \kl{DnD}
+between hypotheses~(\ref{hyp::7}) and (\ref{hyp::6}):
 $$\forall y \in A.\ \forall z \in A.\ \select{f(y) = f(z)} \limp y = z ~~\forw~~ \exists a \in A.\ a \in C \land \select{f(x) = f(a)}$$
 which gives us immediately that $x = a$ in
-\begin{itemize}
-  \item[(4)] $\exists a \in A.\ a \in C \land x = a$
-\end{itemize}
-The last steps consist in clicking twice on $(4)$ to introduce $a$ in the
+\begin{gather}
+  \exists a \in A.\ a \in C \land x = a \label{hyp::8}
+\end{gather}
+The last steps consist in clicking on hypothesis~(\ref{hyp::8}) to introduce $a$ in the
 \kl(sequent){context} together with
-\begin{itemize}
-  \item[(5)] $a \in C \land x = a$
-\end{itemize}
-doing a \kl(dnd){backward} \kl{DnD} with $(5)$ to rewrite $x$ in the conclusion
-into $a$:
-$$a \in C \land \select{x} = a ~~\back~~ \select{x} \in C$$ and finally a
-\kl(dnd){backward} \kl{DnD} with $(5)$ to conclude the proof:
+\begin{gather}
+  a \in C \land x = a \label{hyp::9}
+\end{gather}
+doing a \kl(dnd){backward} \kl{DnD} with hypothesis~(\ref{hyp::9}) to rewrite $x$
+in the conclusion into $a$:
+$$a \in C \land \select{x} = a ~~\back~~ \select{x} \in C$$
+and finally another \kl(dnd){backward} \kl{DnD} with hypothesis~(\ref{hyp::9}) to
+conclude the proof:
 $$\select{a \in C} \land x = a ~~\back~~ \select{a \in C}$$
 
 For the sake of completeness, we included in \reffig{funset-defs},
@@ -453,119 +484,125 @@ just outlined for the second question, hence we do not add further commentary.
 
 \section{Peano arithmetic}\labsec{arith}
 
-In our last example, we will analyse a common proof often taught in logic
-courses: the commutativity of addition in Peano arithmetic. The novelty compared
-to previous examples is that it involves reasoning by \emph{induction}, which
-usually has special support in mainstream \kl{proof assistants}. In the
-\kl{PbA} paradigm, it seems natural to map it to a special contextual
-action \action{Induction}, whose availability and effect will depend on the
-selected subterm. One could also imagine manipulating explicitly induction
-schemes as blue \kl{items}, in the same way we did for the axiom of comprehension in
-the previous section. In this section we focus on describing features of the
-more convenient contextual action.
+In our last example, we will analyze a common proof often taught in logic
+courses: the commutativity of addition in Peano arithmetic. Once again, we
+invite readers to try to perform the proof themselves in
+\kl{Actema}\sidenote{\url{https://www.actema.xyz/courses/peano}}.
+
+\AP
+The novelty compared to previous examples is that it involves reasoning by
+\emph{induction}, which usually has special support in mainstream \kl{proof
+assistants}. In the \kl{PbA} paradigm, it seems natural to map it to a special
+\kl{contextual action} \intro{Induction}, whose availability and effect will
+depend on the selected subterm. One could also imagine manipulating explicitly
+induction schemes as blue \kl{items}, similarly to how we manipulated the axiom
+of comprehension in the previous section. In this section we focus on describing
+features of the more convenient \kl{contextual action}.
 
 First and foremost, it only makes sense to apply induction to a variable which
 is quantified \emph{universally}, either because it appears in the
 \kl(sequent){context}, or because it is bound by a $\forall$ in the conclusion.
-In the first case, one can access the contextual action in \kl{Actema} by
+In the first case, one can access the \kl{contextual action} in \kl{Actema} by
 selecting the green \kl{item} corresponding to the variable; in the latter case,
 by selecting the subterm of the conclusion whose head connective is the binding
 $\forall$\sidenote{In the standalone version of \kl{Actema}, induction is
 performed by clicking directly on green \kl{items}, rather than through a
-contextual action.}. This could also work by selecting any occurrence of the
-variable regardless of its binding point, since the system can always infer it.
-The only condition is that if the variable is bound by a $\forall$, it must
-occur in a \emph{strictly \kl(sfl){positive}} location, i.e. in the conclusion
-and not on the left of an implication $\limp$. Obviously the variable should
-also be of an \emph{inductive} \kl{type}, i.e. one which is mapped to an
-induction scheme in the system\sidenote{The standalone version of \kl{Actema}
-only supports induction on natural numbers, but in a \kl{proof assistant} like
-\kl{Coq} or Lean one can easily check if a given \kl{type} is inductive.}. Then
-the \action{Induction} action will simply apply the associated induction scheme.
-In our commutativity example, we can thus start the proof like so:
+\kl{contextual action}.}. This could also work by selecting any occurrence of
+the variable, since the system can always infer its binding point. The only
+condition is that if the variable is bound by a $\forall$, it must occur in a
+\emph{strictly \kl(sfl){positive}} location, i.e. in the conclusion and not on
+the left of an implication $\limp$. Obviously the variable should also be of an
+\emph{inductive} \kl{type}, i.e. one which is mapped to an induction scheme in
+the system\sidenote{The standalone version of \kl{Actema} only supports
+induction on natural numbers, but in a \kl{proof assistant} like \kl{Coq} or
+\kl{Lean} one can easily check if a given \kl{type} is inductive.}. Then the
+\kl{Induction} action will simply apply the associated induction scheme. In
+our commutativity example, we can thus start the proof like so:
 $$\select{\forall n \in \nats.\ \forall m \in \nats.\ n + m = m + n} \qquad
-\text{(\action{Induction})}$$
+\text{(\kl{Induction})}$$
 which performs an induction on $n$, generating the two following \kl{subgoals}:
-$$\forall m \in \nats.\ 0 + m = m + 0 \qquad \text{and} \qquad \forall m \in \nats.\ \suc{n} + m = m + \suc{n}$$
-where $S(n)$ denotes the successor of $n$, and the second \kl{subgoal} has a new
-variable $n \in \nats$ in its \kl(sequent){context}, together with the induction hypothesis
-\begin{itemize}
-  \item[(1)] $\forall x \in \nats.\ n + x = x + n$
-\end{itemize}
+$$\forall m \in \nats.\ 0 + m = m + 0 \qquad \text{and} \qquad \forall m \in
+\nats.\ \suc{n} + m = m + \suc{n}$$
+where the second \kl{subgoal} has a new variable $n \in \nats$ in its
+\kl(sequent){context}, together with the induction hypothesis
+\begin{gather}
+  \forall x \in \nats.\ n + x = x + n \label{hyp:::1}
+\end{gather}
 The proofs of the two \kl{subgoals} can be done by induction on $m$. We focus on the
 second one, which is a bit more involved. As mentioned above, an alternative way
 of performing induction is to first introduce $m$ in the \kl(sequent){context} by clicking on
-the conclusion, and then selecting it to access the contextual action:
-$$\select{m \in \nats} \qquad \text{(\action{Induction})}$$
+the conclusion, and then selecting it to access the \kl{contextual action}:
+$$\select{m \in \nats} \qquad \text{(\kl{Induction})}$$
 which generates again two new \kl{subgoals}:
-$$S(n) + 0 = 0 + S(n) \qquad \text{and} \qquad S(n) + S(m) = S(m) + S(n)$$ where
+$$\suc{n} + 0 = 0 + \suc{n} \qquad \text{and} \qquad \suc{n} + \suc{m} = \suc{m} + \suc{n}$$ where
 the second \kl{subgoal} has a new variable $m \in \nats$ in its \kl(sequent){context}, together
 with the induction hypothesis
-\begin{itemize}
-  \item[(2)] $S(n) + m = m + S(n)$
-\end{itemize}
-Let us now focus on the first \kl{subgoal}. Once again, as with set comprehension in
-the previous section, the addition operation may have a more \emph{axiomatic} or
-more \emph{computational} definition, depending on the underlying logical
-framework and library used. For instance in \kl{Coq}'s standard library, it is
-implemented as a \emph{program} built by recursion on the left-hand argument.
-Thus in this setting, if one performs computation in the whole conclusion like
-so:
-$$\select{S(n) + 0 = 0 + S(n)} \qquad \text{(\action{Simplify})}$$
+\begin{gather}
+  \suc{n} + m = m + \suc{n} \label{hyp:::2}
+\end{gather}
+Let us now focus on the first \kl{subgoal}. Once again, as with set
+comprehension in the previous section, the addition operation may have a more
+\kl{axiomatic} or more \kl{computational} definition, depending on the
+underlying logical framework and library used. For instance in \kl{Coq}'s
+standard library, it is implemented as a \emph{program} built by recursion on
+the left-hand argument. Thus in this setting, if one performs computation in the
+whole conclusion like so:
+$$\select{\suc{n} + 0 = 0 + \suc{n}} \qquad \text{(\kl{Simplify})}$$
 this will give a new conclusion
-$$S(n + 0) = S(n)$$
-where the addition program was able to automatically evaluate $S(n) + 0$ to $S(n
-+ 0)$ on the left-hand side of the equality, and $0 + S(n)$ to $S(n)$ on the
-right-hand side. If the proof engine does not offer such a level of automation,
-one can always fallback to using Peano axioms manually, provided they are
-available in the lemma database. As we have already seen, the most convenient
-way to do this in the \kl{PbA} paradigm is to perform a \action{Search}
-action. For example to evaluate $S(n) + 0$, one might first select it in the
-conclusion and then make a search query:
-$$\select{S(n) + 0} = 0 + S(n) \qquad \text{(\action{Search})}$$
+$$\suc{(n + 0)} = \suc{n}$$
+where the addition program was able to automatically evaluate $\suc{n} + 0$ to
+$\suc{(n + 0)}$ on the left-hand side of the equality, and $0 + \suc{n}$ to
+$\suc{n}$ on the right-hand side. If the proof engine does not offer such a
+level of automation, one can always fallback to using Peano axioms manually,
+provided that they are available in the lemma database. As we have already seen,
+the most convenient way to do this in the \kl{PbA} paradigm is to perform a
+\kl{Search} action. For example to evaluate $\suc{n} + 0$, one might first
+select it in the conclusion and then make a search query:
+$$\select{\suc{n} + 0} = 0 + \suc{n} \qquad \text{(\kl{Search})}$$
 Among the results which are Peano axioms, one will only find the following
 ones:
 \begin{itemize}
-  \item[(a)] $\forall x.\ 0 \not= S(x)$
-  \item[(b)] $\forall x.\ \forall y.\ S(x) = S(y) \limp x = y$
-  \item[(c)] $\forall x.\ \forall y.\ S(x) + y = S(x + y)$
+  \item[(a)] $\forall x.\ 0 \not= \suc{x}$
+  \item[(b)] $\forall x.\ \forall y.\ \suc{x} = \suc{y} \limp x = y$
+  \item[(c)] $\forall x.\ \forall y.\ \suc{x} + y = \suc{(x + y)}$
 \end{itemize}
 because the other \kl{axioms} do not contain any subterm that could form a
 \kl(sfl){valid} \kl(dnd){backward} \kl{linkage} with the selection\sidenote{See
-\refsec{validity} for the notion of \kl[valid@dnd]{validity} of a \kl{linkage}.}. Of
+\refsec{validity} for the notion of \kl(sfl){validity} of a \kl{linkage}.}. Of
 course we are interested in \kl{axiom} $(c)$, which we can use through the following
 \kl(dnd){backward} \kl{DnD}:
-$$\forall x.\ \forall y.\ \select{S(x) + y} = S(x + y) ~~\back~~ \select{S(n) + 0} = 0 + S(n)$$
-in order to rewrite $S(n) + 0$ into $S(n + 0)$ in the conclusion.
+$$\forall x.\ \forall y.\ \select{\suc{x} + y} = \suc{(x + y)} ~~\back~~ \select{\suc{n} + 0} = 0 + \suc{n}$$
+in order to rewrite $\suc{n} + 0$ into $\suc{(n + 0)}$ in the conclusion.
 
 Now notice that the addition program earlier was not able to evaluate $n + 0$ to
 $n$. This is because $0$ occurs on the right-hand side of $+$, and the program
 is not aware of the commutativity of addition, which is precisely what we are
-trying to prove. Fortunately, we can apply our induction hypothesis on $n$
-$(1)$, with the following \kl(dnd){backward} \kl{DnD}:
-$$\forall x \in \nats.\ \select{n + x} = x + n ~~\back~~ S(\select{n + 0}) = S(n)$$
+trying to prove. Fortunately, we can apply our induction
+hypothesis~(\ref{hyp:::1}) on $n$, with the following \kl(dnd){backward}
+\kl{DnD}:
+$$\forall x \in \nats.\ \select{n + x} = x + n ~~\back~~ \suc{\left(\select{n + 0}\right)} = \suc{n}$$
 which rewrites $n + 0$ into $0 + n$ in the conclusion:
-$$S(0 + n) = S(n)$$
+$$\suc{(0 + n)} = \suc{n}$$
 Now we can continue the computation:
-$$S(\select{0 + n}) = S(n) \qquad \text{(\action{Simplify})}$$
+$$\suc{\left(\select{0 + n}\right)} = \suc{n} \qquad \text{(\kl{Simplify})}$$
 and conclude the base case of the induction on $m$ by reflexivity, by clicking
-on the conclusion $S(n) = S(n)$.
+on the conclusion $\suc{n} = \suc{n}$.
 
 The inductive case of the induction on $m$ works similarly, but obviously we
-will also need to use the induction hypothesis on $m$ $(2)$. First we compute
-everywhere we can in the conclusion:
-$$\select{S(n) + S(m) = S(m) + S(n)} \qquad \text{\action{Simplify}}$$
+will also need to use the induction hypothesis~(\ref{hyp:::2}) on $m$.
+First we compute everywhere we can in the conclusion:
+$$\select{\suc{n} + \suc{m} = \suc{m} + \suc{n}} \qquad \text{\kl{Simplify}}$$
 % which gives the new conclusion
-% $$\select{S(n + S(m)) = S(m + S(n))} \qquad \text{\action{Simplify}}$$
-Then we can apply the induction hypothesis on $n$ $(1)$:
-$$\forall x.\ \select{n + x} = x + n ~~\back~~ S(\select{n + S(m)}) = S(m + S(n))$$
-and also the induction hypothesis on $m$ $(2)$:
-$$S(n) + m = \select{m + S(n)} ~~\back~~ S(S(m) + n) = S(\select{m + S(n)})$$
+% $$\select{S(n + \suc{m}) = S(m + \suc{n})} \qquad \text{\kl{Simplify}}$$
+Then we can apply the induction hypothesis~(\ref{hyp:::1}) on $n$:
+$$\forall x.\ \select{n + x} = x + n ~~\back~~ \suc{\left(\select{n + \suc{m}}\right)} = \suc{(m + \suc{n})}$$
+and also the induction hypothesis~(\ref{hyp:::2}) on $m$:
+$$\suc{n} + m = \select{m + \suc{n}} ~~\back~~ \suc{(\suc{m} + n)} = \suc{\left(\select{m + \suc{n}}\right)}$$
 Again we compute everywhere:
-$$\select{S(S(m) + n) = S(S(n) + m)} \qquad \text{(\action{Simplify})}$$
-apply the induction hypothesis on $n$ $(1)$ once again:
-$$\forall x.\ n + x = \select{x + n} ~~\back~~ S(S(\select{m + n})) = S(S(n + m))$$
-and conclude by reflexivity on $S(S(n + m)) = S(S(n + m))$.
+$$\select{\suc{(\suc{m} + n)} = \suc{(\suc{n} + m)}} \qquad \text{(\kl{Simplify})}$$
+apply the induction hypothesis~(\ref{hyp:::1}) on $n$ once again:
+$$\forall x.\ n + x = \select{x + n} ~~\back~~ \suc{\left(\suc{\left(\select{m + n}\right)}\right)} = \suc{(\suc{n + m})}$$
+and conclude by reflexivity on $\suc{(\suc{(n + m)})} = \suc{(\suc{(n + m)})}$.
 
 \begin{figure}
   \input{listings/coq-peano.tex}
@@ -576,6 +613,6 @@ and conclude by reflexivity on $S(S(n + m)) = S(S(n + m))$.
 As in previous sections, the interested reader can find a complete Coq
 formalization in \reffig{coq-peano}, which follows the same structure as the
 graphical proof just outlined. In this case the correspondence between Coq
-\kl{tactics} and graphical actions is almost exact. This suggests that designing a
-compiler from proofs-by-action to \kl{Coq} \kl{proof scripts} might be a reasonable
-endeavor. It will indeed be one of the subjects of \refch{plugin}.
+\kl{tactics} and graphical actions is almost exact. This suggests that designing
+a compiler from graphical proofs to \kl{Coq} \kl{proof scripts} might be a
+reasonable endeavor. It will indeed be one of the subjects of \refch{plugin}.
