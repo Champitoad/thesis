@@ -8,13 +8,14 @@
 
 % \paragraph{Formal manipulations}
 
-\AP \intro{Proof assistants} --- also called \reintro{interactive theorem
-provers} (\reintro{ITPs}) --- are software systems that allow to both create and
-check the correctness of mathematical proofs. They are based on the idea that
-mathematical knowledge can be represented unambiguously inside \intro{proof
-formalisms} --- also called \reintro{proof systems}, where the truth of a
-statement can be reduced to the mechanical application of \kl{symbolic}
-manipulation rules. For instance, consider the equation
+\AP \intro{Proof assistants} (\reintro{PAs}) --- also called
+\reintro{interactive theorem provers} (\reintro{ITPs}) --- are software systems
+that allow to both create and check the correctness of mathematical proofs. They
+are based on the idea that mathematical knowledge can be represented
+unambiguously inside \intro{proof formalisms} --- also called \reintro{proof
+systems}, where the truth of a statement can be reduced to the mechanical
+application of \kl{symbolic} manipulation rules. For instance, consider the
+equation
 $$4x + 6x = (12 - 2)x$$ 
 While any mathematician would immediately recognize it as true, a middle school
 student learning algebra would have to carry manually some computations to
@@ -1340,13 +1341,13 @@ implementations of software evaluated through user studies
 \texttt{Box} data structure representing at the same time \kl{goals} and partial
 proofs, with the aim to offer more ``human-like'' interfaces for both the
 \emph{construction} and the \emph{presentation} of proofs;
-  \item and his \texttt{ProofWidgets} framework, that allows to extend the
+  \item and his \kl{ProofWidgets} framework, that allows to extend the
 \kl{Lean} \kl{proof assistant} with new interactive and domain-specific
 notations for mathematical objects, thus offering a form of \emph{end-user}
 programming.
 \end{itemize}
 The \texttt{Box} data structure easily lends itself to visualization in a two
-dimensional graphical notation, while \texttt{ProofWidgets} promises great
+dimensional graphical notation, while \kl{ProofWidgets} promises great
 capabilities for proofs by both direct and \kl{iconic} manipulation.
 
 However, the work of Ayers focuses mainly on designing a general framework that

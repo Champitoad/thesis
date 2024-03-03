@@ -138,7 +138,7 @@
 \renewcommand{\emptyset}{⌀}
 \newcommand{\subst}[3]{#1 \{ #2 / #3 \}}
 \newcommand{\compr}[2]{\left\{#1 ~\middle|~ #2\right\}}
-\newcommand{\compl}[1]{\overline{#1}}
+\newcommand{\substermscompl}[1]{\overline{#1}}
 \knowledgenewrobustcmd\fset[3]{\cmdkl{\{}#3\cmdkl{\}_{#1}^{#2}}}
 
 \newcommand{\hypo}[1]{{\color{hypo} #1}}
@@ -505,12 +505,11 @@
 \newcommand{\action}[1]{\textsf{#1}}
 \newcommand{\process}[1]{\textsf{#1}}
 \newcommand{\request}[1]{\texttt{#1}}
-\newcommand{\trgoal}[1]{\llbracket #1 \rrbracket}
-\newcommand{\traction}[1]{\llparenthesis #1 \rrparenthesis}
-\newcommand{\subterms}[1]{\lfloor #1 \rfloor}
+\knowledgenewrobustcmd\trgoal[1]{\cmdkl{\llbracket} #1 \cmdkl{\rrbracket}}
+\knowledgenewrobustcmd\traction[1]{\cmdkl{\llparenthesis} #1 \cmdkl{\rrparenthesis}}
+\knowledgenewrobustcmd\subterms[1]{#1\cmdkl{\downzigzagarrow}}
 
 \newcommand{\ssreflect}{\textsc{SSReflect}}
-\newcommand{\ltac}{$\mathcal{L}_{tac}$}
 
 \knowledgenewrobustcmd\suc[1]{#1\cmdkl{\oplus}1}
 % \newcommand{\suc}[1]{S(#1)}

@@ -2762,7 +2762,7 @@ decision procedure is immediate: if $\Phi = \emptyset$ after executing
   \labfig{flowers-formulas}
 \end{marginfigure}
 
-We have implemented the \refproc{life} procedure in the OCaml programming
+We have implemented the \refproc{life} procedure in the \kl{OCaml} programming
 language \cite{flower-auto}. In fact, we refined the design of the algorithm
 iteratively, by testing it on a set of 62 tautologies taken from \kl{Edukera}'s logic
 course \cite{edukera} (the full set is available in
@@ -2865,10 +2865,10 @@ sprinklers.
 The prototype is implemented in \intro{Elm} \sidecite{10.1145/2491956.2462161},
 a modern functional reactive programming language that is particularly
 well-suited for building \kl{GUIs} that are based on complex compositional
-data-structures like flowers. It also natively compiles to HTML and JavaScript,
+data-structures like flowers. It also natively compiles to \kl{HTML} and \kl{JavaScript},
 making it easy to run and test the interface on any device equipped with a web
 browser. The source code is available on GitHub \cite{flower-prover}, and the
-interface is currently hosted online as a simple HTML
+interface is currently hosted online as a simple \kl{HTML}
 page\sidenote{\url{https://www.lix.polytechnique.fr/Labo/Pablo.DONATO/flowerprover/}}.
 The reader is invited to try out the \kl{Flower\,\,Prover} in her own browser, although
 we will try to give self-contained explanations illustrated through various
@@ -3176,12 +3176,12 @@ theory file.
 
 Thus the user has to juggle between two different interfaces that manipulate two
 distinct data structures: a traditional text editor for modifying
-\emph{theories}, and an IDE for writing and executing \kl{proof scripts} that
-modify \emph{\kl{goals}}, themselves visualized in a separate \kl{proof view}.
-This results in a duplication of means to achieve essentially the same things:
-for instance, reordering two lemmas will require to cut and paste one of them in
-the theory file, while reordering two hypotheses will require the use of a
-dedicated \texttt{move} \kl{tactic}. Other examples can be found for renaming
+\emph{theories}, and an \kl{IDE} for writing and executing \kl{proof scripts}
+that modify \emph{\kl{goals}}, themselves visualized in a separate \kl{proof
+view}. This results in a duplication of means to achieve essentially the same
+things: for instance, reordering two lemmas will require to cut and paste one of
+them in the theory file, while reordering two hypotheses will require the use of
+a dedicated \texttt{move} \kl{tactic}. Other examples can be found for renaming
 definitions, applying lemmas, constructing functions, etc. Crucially, the two
 interfaces cannot communicate straightforwardly with eachother. In fact,
 communication is completely one-way: the user can only invoke definitions and
