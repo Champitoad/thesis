@@ -157,7 +157,7 @@
 \newcommand{\cham}{\textsc{Cham}}
 
 \newcommand{\bubbleT}[1]{\llparenthesis~#1~\rrparenthesis}
-\newcommand{\piq}[1]{\mathbin{\langle #1 \rangle}}
+\knowledgenewrobustcmd\piq[1]{\mathbin{\cmdkl{\langle} #1 \cmdkl{\rangle}}}
 
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,fill=white,inner sep=2pt] (char) {#1};}}
@@ -193,10 +193,10 @@
 \newcommand{\gAsheet}[1]{\colorbox{genA}{$#1$}}
 \newcommand{\gBsheet}[1]{\colorbox{genB}{$#1$}}
 
-\newcommand{\aint}[1]{\llfloor #1 \rrfloor}
-\newcommand{\sint}[1]{\left\llbracket #1 \right\rrbracket}
-\newcommand{\psint}[1]{\left\llbracket #1 \right\rrbracket^+}
-\newcommand{\nsint}[1]{\left\llbracket #1 \right\rrbracket^-}
+\knowledgenewrobustcmd\aint[1]{\cmdkl{\llfloor} #1 \cmdkl{\rrfloor}}
+\knowledgenewrobustcmd\sint[1]{\cmdkl{\llbracket} #1 \cmdkl{\rrbracket}}
+\knowledgenewrobustcmd\psint[1]{\cmdkl{\llbracket} #1 \cmdkl{\rrbracket^+}}
+\knowledgenewrobustcmd\nsint[1]{\cmdkl{\llbracket} #1 \cmdkl{\rrbracket^-}}
 
 \newcommand{\identity}{\textsc{$\mathbb{I}$dentity}}
 \newcommand{\flow}{\textsc{$\mathbb{F}$low}}
@@ -204,7 +204,7 @@
 \newcommand{\heating}{\textsc{$\mathbb{H}$eating}}
 \newcommand{\membrane}{\textsc{$\mathbb{M}$embrane}}
 
-\newcommand{\subsol}{\prec}
+\knowledgenewrobustcmd\subsol{\mathrel{\cmdkl{\prec}}}
 
 \newcommand{\deq}{\coloneq}
 \newcommand{\ldef}[2]{#1 \deq #2}

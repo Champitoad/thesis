@@ -5,8 +5,8 @@ $$
 \begin{array}[t]{rlr}
         &\select{\conc{(A \lor B \limp C) \limp (A \limp C) \land (B \limp C)}} &\mathsf{{\limp}{+}} \\
   \step{} &\hypo{A \lor B \limp C}~~~\select{\conc{(A \limp C) \land (B \limp C)}} &\mathsf{{\land}{+}} \\
-  \step{} &\hypo{A \lor B \limp C}~~~\bubble{\select{\conc{A \limp C}}}~~~\bubble{\conc{B \limp C}} &\mathsf{{\limp}{+}} \\
-  \step{} &\hypo{A \lor B \limp C}~~~\bubble{\hypo{A}~~~\conc{C}}~~~\bubble{\select{\conc{B \limp C}}} &\mathsf{{\limp}{+}} \\
+  \step{} &\hypo{A \lor B \limp C}~~~\bubble{\color{black}\select{\conc{A \limp C}}}~~~\bubble{\conc{B \limp C}} &\mathsf{{\limp}{+}} \\
+  \step{} &\hypo{A \lor B \limp C}~~~\bubble{\hypo{A}~~~\conc{C}}~~~\bubble{\color{black}\select{\conc{B \limp C}}} &\mathsf{{\limp}{+}} \\
   \step{} &\select{\hypo{A \lor B \limp C}}~~~\bubble{\hypo{A}~~~\conc{C}}~~~\bubble{\hypo{B}~~~\conc{C}} &\mathsf{c} \\
   \step{} &\select{\hypo{A \lor B \limp C}~~~\bubble{\hypo{A}~~~\conc{C}}}~~~\hypo{A \lor B \limp C}~~~\bubble{\hypo{B}~~~\conc{C}} &\mathsf{f{-}} \\
   \step{} &~~~{\bubble{
@@ -16,7 +16,7 @@ $$
       \end{array}}}
       ~~~\select{\hypo{A \lor B \limp C}
       ~~~\bubble{\hypo{B}~~~\conc{C}}} &\mathsf{f{-}} \\
-  \step{} &\bubble{
+  \step{} &\bubble{\color{black}
       \begin{array}{@{}c@{}}
         \hypo{A} \\
         \select{\hypo{A \lor B \limp C}~~~\conc{C}}
@@ -29,14 +29,14 @@ $$
   \step{} &\bubble{
       \begin{array}{@{}c@{}}
         \hypo{A} \\
-        \bubble{\conc{A \lor B}}~~~\bubble{\select{\hypo{C}~~~\conc{C}}}
+        \bubble{\conc{A \lor B}}~~~\bubble{\color{black}\select{\hypo{C}~~~\conc{C}}}
       \end{array}}
       ~~~\bubble{
         \begin{array}{@{}c@{}}
           \hypo{B}~~~\conc{C} \\
           \hypo{A \lor B \limp C}
-        \end{array}} &\mathsf{{i}{\da}} \\
-  \step{} &\bubble{
+        \end{array}} &\mathsf{{i{\da}}} \\
+  \step{} &\bubble{\color{black}
       \begin{array}{@{}c@{}}
         \hypo{A} \\
         {\bubble{\conc{A \lor B}}}~~~\select{\bubble{\phantom{\hypo{C}~~~\conc{C}}}}
@@ -46,19 +46,19 @@ $$
           \hypo{B}~~~\conc{C} \\
           \hypo{A \lor B \limp C}
         \end{array}} &\mathsf{p} \\
-  \step{} &\bubble{\hypo{A}~~~\bubble{\select{\conc{A \lor B}}}}
+  \step{} &\bubble{\hypo{A}~~~\bubble{\color{black}\select{\conc{A \lor B}}}}
       ~~~\bubble{
         \begin{array}{@{}c@{}}
           \hypo{B}~~~\conc{C} \\
           \hypo{A \lor B \limp C}
         \end{array}} &\mathsf{\lor{+}_1} \\
-  \step{} &\bubble{\select{\hypo{A}~~~\bubble{\conc{A}}}}
+  \step{} &\bubble{\color{black}\select{\hypo{A}~~~\bubble{\conc{A}}}}
       ~~~\bubble{
         \begin{array}{@{}c@{}}
           \hypo{B}~~~\conc{C} \\
           \hypo{A \lor B \limp C}
         \end{array}} &\mathsf{f{-}} \\
-  \step{} &\bubble{\bubble{\select{\hypo{A}~~~\conc{A}}}}
+  \step{} &\bubble{\bubble{\color{black}\select{\hypo{A}~~~\conc{A}}}}
       ~~~\bubble{
         \begin{array}{@{}c@{}}
           \hypo{B}~~~\conc{C} \\
@@ -67,7 +67,7 @@ $$
 \end{array}
 &
 \begin{array}[t]{rlr}
-  \step{} &\bubble{\select{\bubble{\phantom{\hypo{A}~~~\conc{A}}}}}
+  \step{} &\bubble{\color{black}\select{\bubble{\phantom{\hypo{A}~~~\conc{A}}}}}
       ~~~\bubble{
         \begin{array}{@{}c@{}}
           \hypo{B}~~~\conc{C} \\
@@ -80,7 +80,7 @@ $$
           \hypo{A \lor B \limp C}
         \end{array}} &\mathsf{p} \\
   \step{} &
-      ~~~\bubble{
+      ~~~\bubble{\color{black}
         \begin{array}{@{}c@{}}
           \hypo{B} \\
           \select{\hypo{A \lor B \limp C}~~~\conc{C}}
@@ -89,22 +89,22 @@ $$
       ~~~\bubble{
         \begin{array}{@{}c@{}}
           \hypo{B} \\
-          {\bubble{\conc{A \lor B}}}~~~\bubble{\select{\hypo{C}~~~\conc{C}}}
+          {\bubble{\conc{A \lor B}}}~~~\bubble{\color{black}\select{\hypo{C}~~~\conc{C}}}
         \end{array}} &\mathsf{i{\da}} \\
   \step{} &
-      ~~~\bubble{
+      ~~~\bubble{\color{black}
         \begin{array}{@{}c@{}}
           \hypo{B} \\
           {\bubble{\conc{A \lor B}}}~~~\select{\bubble{\phantom{\hypo{C}~~~\conc{C}}}}
         \end{array}} &\mathsf{p} \\
   \step{} &
-      ~~~\bubble{\hypo{B}~~~{\bubble{\select{\conc{A \lor B}}}}} &\mathsf{{\lor}{+}_2} \\
+      ~~~\bubble{\hypo{B}~~~{\bubble{\color{black}\select{\conc{A \lor B}}}}} &\mathsf{{\lor}{+}_2} \\
   \step{} &
-      ~~~\bubble{\select{\hypo{B}~~~{\bubble{\conc{B}}}}} &\mathsf{f{-}} \\
+      ~~~\bubble{\color{black}\select{\hypo{B}~~~{\bubble{\conc{B}}}}} &\mathsf{f{-}} \\
   \step{} &
-      ~~~\bubble{{\bubble{\select{\hypo{B}~~~\conc{B}}}}} &\mathsf{i{\da}} \\
+      ~~~\bubble{{\bubble{\color{black}\select{\hypo{B}~~~\conc{B}}}}} &\mathsf{i{\da}} \\
   \step{} &
-      ~~~\bubble{{\select{\bubble{\phantom{\hypo{B}~~~\conc{B}}}}}} &\mathsf{p} \\
+      ~~~\bubble{\color{black}{\select{\bubble{\phantom{\hypo{B}~~~\conc{B}}}}}} &\mathsf{p} \\
   \step{} &
       ~~~\select{\bubble{{\phantom{\bubble{\phantom{\hypo{B}~~~\conc{B}}}}}}} &\mathsf{p} \\
   \step{} && \\

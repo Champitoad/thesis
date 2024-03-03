@@ -7,12 +7,12 @@
    \hypo{A}~~~\conc{A}
   &\step{}
   &
-  &\mathsf{i}{\da} \\
+  &\kl{i{\da}} \\
 
    \conc{\Delta}
   &\step{}
   &\bubble{\conc{A}}~~~\bubble{\hypo{A}~~~\conc{\Delta}}
-  &\mathsf{i}{\ua} \\
+  &\kl{i{\ua}} \\
 \end{array}
 \and
 \begin{array}{r@{\quad}c@{\quad}lr}
@@ -21,12 +21,12 @@
     \hypo{A}
   &\step{}
   &
-  &\mathsf{w} \\
+  &\kl{w} \\
 
     \hypo{A}
   &\step{}
   &\hypo{A~~~A}
-  &\mathsf{c} \\
+  &\kl{c} \\
 \end{array}
 \vspace{2em}\\
 \begin{array}{r@{\quad}c@{\quad}lr}
@@ -34,8 +34,8 @@
 
     \hypo{A}~~~\bubble{\color{black}S}
   &\step{}
-  &\bubble{\hypo{A}~~~S}
-  &\mathsf{f{-}} \\
+  &\bubble{\hypo{A}~~~\color{black}{S}}
+  &\kl{f{-}} \\
 \end{array}
 \and
 \begin{array}{r@{\quad}c@{\quad}lr}
@@ -44,7 +44,7 @@
     \bubble{\phantom{S}}
   &\step{}
   &
-  &\mathsf{p} \\
+  &\kl{p} \\
 \end{array}
 \vspace{2em}
 \\
@@ -54,80 +54,80 @@
     \hypo{\top}
   &\step{}
   &
-  &\mathsf{\top{-}}
+  &\kl{\top{-}}
 
   &\conc{\top}
   &\step{}
   &
-  &\mathsf{\top{+}} \\
+  &\kl{\top{+}} \\
 
     \hypo{\bot}~~~\conc{\Delta}
   &\step{}
   &
-  &\mathsf{\bot{-}}
+  &\kl{\bot{-}}
 
   &&&&\\
 
     \hypo{A \land B}
   &\step{}
   &\hypo{A}~~~\hypo{B}
-  &\mathsf{\land{-}}
+  &\kl{\land{-}}
 
   &\conc{A \land B}
   &\step{}
   &\bubble{\conc{A}}~~~\bubble{\conc{B}}
-  &\mathsf{\land{+}} \\
+  &\kl{\land{+}} \\
 
     \multirow{2}{*}{$\hypo{A \lor B}~~~\conc{\Delta}$}
   &\multirow{2}{*}{$\step{}$}
   &\multirow{2}{*}{$\bubble{\hypo{A}~~~\conc{\Delta}}~~~\bubble{\hypo{B}~~~\conc{\Delta}}$}
-  &\multirow{2}{*}{$\mathsf{\lor{-}}$}
+  &\multirow{2}{*}{$\kl{\lor{-}}$}
 
   &\conc{A \lor B}
   &\step{}
   &\conc{A}
-  &\mathsf{\lor{+}_1} \\
+  &\kl{\lor{+}_1} \\
 
   &&&
 
   &\conc{A \lor B}
   &\step{}
   &\conc{B}
-  &\mathsf{\lor{+}_2} \\
+  &\kl{\lor{+}_2} \\
 
     \hypo{A \limp B}~~~\conc{\Delta}
   &\step{}
   &\bubble{\conc{A}}~~~\bubble{\hypo{B}~~~\conc{\Delta}}
-  &\mathsf{{\limp}{-}}
+  &\kl{{\limp}{-}}
 
   &\conc{A \limp B}
   &\step{}
   &\hypo{A}~~~\conc{B}
-  &\mathsf{{\limp}{+}} \\
+  &\kl{{\limp}{+}} \\
 
     \hypo{\forall x. A}
   &\step{}
   &\hypo{\subst{A}{t}{x}}
-  &\mathsf{\forall{-}}
+  &\kl{\forall{-}}
 
   &\conc{\forall x. A}
   &\step{}
   &\conc{\subst{A}{y}{x}}
-  &\mathsf{\forall{+}} \\
+  &\kl{\forall{+}} \\
 
     \hypo{\exists x. A}
   &\step{}
   &\hypo{\subst{A}{y}{x}}
-  &\mathsf{\exists{-}}
+  &\kl{\exists{-}}
 
   &\conc{\exists x. A}
   &\step{}
   &\conc{\subst{A}{t}{x}}
-  &\mathsf{\exists{+}} \\
+  &\kl{\exists{+}} \\
 \end{array}
 \vspace{2em}
 \end{mathpar}
-In the {\rsf{i{\ua}}}, {\rnm{\bot{-}}}, {\rnm{\lor{-}}} and {\rnm{{\limp}{-}}} rules, $\Delta$
-is either empty, or a singleton of one \kl{positive} ion.\\
-In the {\rnm{\forall{+}}} and {\rnm{\exists{-}}} rules, $y$ is fresh.
+In the rules {\kl{i{\ua}}}, {\kl{\bot{-}}}, {\kl{\lor{-}}} and {\kl{{\limp}{-}}}, $\Delta$
+is either empty, or a singleton of one \kl{positive} \kl{ion}.\\
+In the rules {\kl{\forall{+}}} and {\kl{\exists{-}}}, $y$ is fresh.
 \end{framed}

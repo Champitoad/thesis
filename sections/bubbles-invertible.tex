@@ -45,10 +45,10 @@ from the following modifications to the previous rules:
     \kl{weakening} rule in all \emph{terminal} rules of the calculus (i.e. rules with
     no premisses). In \kl{bubble calculi}, the notion of premiss is captured by
     \kl{neutral} bubbles; thus we incorporate \kl{weakenings} in all rules that solve
-    \kl{subgoals} by closing solutions with no \kl{neutral} bubbles. Those are the rules
+    \kl{subgoals} by closing \kl{solutions} with no \kl{neutral} bubbles. Those are the rules
     $\{\rsf{i{\da}},\rsf{p{-}},\rsf{p{+}}\}$, which for the occasion have
-    also been generalized to arbitrary solutions. Indeed in system $\sysB$ we
-    restricted them to open solutions to make them \emph{local}, but here the
+    also been generalized to arbitrary \kl{solutions}. Indeed in system $\sysB$ we
+    restricted them to open \kl{solutions} to make them \emph{local}, but here the
     \kl{weakenings} break locality anyway, and the general version improves
     \emph{factorizability} by solving instantly all \kl{subgoals} inside $\J$.
 
@@ -70,7 +70,7 @@ from the following modifications to the previous rules:
 
     To prevent this, one would need a way to copy formulas at an arbitrary
     distance. This can be done with \kl{inference rules} that are \emph{doubly} deep,
-    by encoding the path to the destination as a second solution \kl{context} inside
+    by encoding the path to the destination as a second \kl{solution} \kl{context} inside
     the \kl{context} where the rule is applied\sidenote{Such rules are sometimes
     called \emph{super-switch} rules in the \kl{deep inference} literature, see for
     instance Chapter 8, Section 2.1 of \cite{guenot_nested_2013}.}. It turns out
@@ -97,7 +97,7 @@ from the following modifications to the previous rules:
     % \sidecite{dyckhoff_contraction-free_1992} by splitting the rule
     % \rsf{{\limp}{-}} into  
     Here we can just duplicate the implication/exclusion formula, as in the
-    \kl{introduction rules} of \kl{DBiInt}. Also like in \sys{DBiInt}, we removed
+    \kl{introduction rules} of \kl{DBiInt}. Also like in \kl{DBiInt}, we removed
     the \kl{contraction} rules \rsf{c{-}} and \rsf{c{+}}, which are now merged with
     these two rules as well as the $\mathbb{F}$-rules. Although \kl{contraction}
     rules are \kl{invertible}, they induce a lot of complexity in proof search,
@@ -106,14 +106,14 @@ from the following modifications to the previous rules:
     to design a calculus where they are \kl{admissible}. But unlike what is done in
     \kl{DBiInt}, we did not incorporate \kl{contraction} in other
     $\mathbb{H}$-rules. Thus we cannot simulate exactly all the \kl{introduction
-    rules} of \kl{DBiInt} in \sys{B_{inv}}.
+    rules} of \kl{DBiInt} in \kl{B_{inv}}.
 
 \end{description}
 
 \begin{remark}
   We also changed the \rsf{\bot{-}} and \rsf{\top{+}} rules, so that they create
-  \kl{polarized}, closed empty solutions. This makes them both local, and generic
-  with respect to the status of the ambient solution. The previous version can
+  \kl{polarized}, closed empty \kl{solutions}. This makes them both local, and generic
+  with respect to the status of the ambient \kl{solution}. The previous version can
   then be simulated by combination with the popping rules \rsf{p{-}} and
   \rsf{p{+}}.
 \end{remark}
@@ -153,7 +153,7 @@ where the same fragments as system $\sysB$ capture \kl{intuitionistic},
 
 In the \kl{intuitionistic} (propositional) fragment of \kl{B_{inv}}, a canonical way
 to search for a proof of a formula $A$ consists in the following $5$
-\emph{phases}, applied successively in a loop until the empty closed solution is
+\emph{phases}, applied successively in a loop until the empty closed \kl{solution} is
 reached:
 \begin{description}
   \item[\textbf{Decomposition}] Decompose $A$ by applying recursively
@@ -163,8 +163,8 @@ reached:
     rule duplicates the implication, it cannot be used to decompose it.
     
     As for the \rsf{\lor{-}} and \rsf{\land{+}} rules, they can only be applied
-    when the formula is in an \emph{open} solution. A first option is to let the
-    system automatically distribute them in all open subsolutions that are
+    when the formula is in an \emph{open} \kl{solution}. A first option is to let the
+    system automatically distribute them in all open \kl{subsolutions} that are
     reachable, so that it can keep decomposing them. But this might create an
     explosion in the number of created \kl{subgoals}. Another option is to let the
     user manually decompose them. We believe this second option is preferable,
@@ -184,7 +184,7 @@ reached:
     onto another complex formula, one could \emph{pinch} together the two atoms:
     if there is no $\mathbb{F}$-law stucking one of the atoms on some membrane
     (orange arrows in \reffig{bubbles-porosity}), then the pinch succeeds, by
-    closing the subsolution at the location where it ends with
+    closing the \kl{subsolution} at the location where it ends with
     \rsf{i{\da}}. Thus the user can choose the \kl{subgoal} to solve by
     controlling the destination of the pinch, which can be seen as a more
     symmetric and powerful version of \kl{DnD} actions. Generally though, one will
@@ -228,7 +228,7 @@ reached:
     or if the hypothesis $B$ is even needed at all.
 
     A first possibility is to let the user rely on her intuition, by choosing
-    manually a specific subsolution in $\imps{S}$ to apply the \rsf{{\limp}{-}}
+    manually a specific \kl{subsolution} in $\imps{S}$ to apply the \rsf{{\limp}{-}}
     rule upon. Additionally, she might need to determine a \kl{subgoal} $T\select{U}$
     in which $A$ is provable, and first duplicate $\hypo{A\limp B}$ in $T\hole$
     before applying \rsf{{\limp}{-}}. This will always be possible with the
@@ -237,7 +237,7 @@ reached:
     proof, by minimizing its depth $\sdepth{T\hole}$ (\refdef{solctx-depth}).
 
     A second possibility is to duplicate eagerly every $\hypo{A \limp B}$ of
-    $\imps{S}$ in every open subsolutions of $S$ where it can be so, and then
+    $\imps{S}$ in every open \kl{subsolutions} of $S$ where it can be so, and then
     apply \rsf{{\limp}{-}} on all the newly created copies. To avoid an
     explosion of the size of $S$, the system should mark all the copies as
     \emph{used}, so that during the next \textbf{Application} phases, all the
@@ -278,7 +278,7 @@ other formalisms, is that most of its automation preserves the \emph{size}
   \begin{enumerate}
     \item the link is successful, and the two created copies of atoms are
   immediately destroyed by the \rsf{i{\da}} rule. Then the solved
-  subsolution is entirely pruned out, decreasing the size of the \kl{goal}; or
+  \kl{subsolution} is entirely pruned out, decreasing the size of the \kl{goal}; or
     \item the link fails, but then we can instantly ``undo'' it. Or rather, one
   should consider that rules are applied only when the link is successful.
   \end{enumerate}
@@ -300,7 +300,7 @@ have the ability to perform \textbf{Decomposition} and \textbf{Linking} by hand
 
 Because of the implicit \kl{contraction} in the rules \rsf{{\limp}{-}} and
 \rsf{{\lsub}{+}}, one cannot fully decompose a formula into an equivalent
-solution by deterministically applying a sequence of $\mathbb{H}$-rules (and
+\kl{solution} by deterministically applying a sequence of $\mathbb{H}$-rules (and
 possibly $\mathbb{F}$-rules, to distribute \kl{positive} conjunctions and \kl{negative}
 disjunctions). Thus \kl{B_{inv}} fails to be \emph{fully \kl{iconic}}, because it
 relies on the \emph{\kl{symbolic}} connectives $\limp$ and $\lsub$ to represent
@@ -308,16 +308,16 @@ logical statements.
 
 \begin{marginfigure}
   \input{figures/bubbles-native.tex}
-  \caption{Mapping of formulas to equivalent solutions}
+  \caption{Mapping of formulas to equivalent \kl{solutions}}
   \labfig{bubbles-native}
 \end{marginfigure}
 
-This can be understood as resulting from the inability of solutions to represent
+This can be understood as resulting from the inability of \kl{solutions} to represent
 natively \emph{\kl{negative} implications} and \emph{\kl{positive} subtractions}, although
 they can represent natively all other polarizations of connectives. This is
 illustrated by the mapping of \reffig{bubbles-native} from \kl{polarized} formulas to
-equivalent solutions, which is really just the $\mathbb{H}$-rules of system
-$\sysB$ (\reffig{graphical-B}) where the right-hand solution is enclosed in a
+equivalent \kl{solutions}, which is really just the $\mathbb{H}$-rules of system
+$\sysB$ (\reffig{graphical-B}) where the right-hand \kl{solution} is enclosed in a
 \kl{bubble} of the corresponding \kl{polarity}. The reader can easily check that if $A$ is
 mapped to $S$, then $\psint{A} \semequiv \psint{S}$.
 
@@ -338,7 +338,7 @@ sequent} calculus \kl{JN} of Guenot for implicative logic \cite[Chapter
 in negative \kl{contexts} are interpreted as implications, as illustrated by the
 \kl{left introduction rule} \rsf{e} (\reffig{jn-rule-e}). But we cannot do this
 in system $\sysB$, because this would conflict with the subtractive reading of
-\kl{negative} solutions, i.e. $\nsint{A \seq B} = \nsint{A} \lsub \nsint{B}$. In
+\kl{negative} \kl{solutions}, i.e. $\nsint{A \seq B} = \nsint{A} \lsub \nsint{B}$. In
 \refch{flowers}, the problem will also be solved through an asymmetric treatment
 of \kl{nested sequents}, capturing only \kl{intuitionistic} logic instead of
 \kl{bi-intuitionistic} logic. But this is a small price to pay, since

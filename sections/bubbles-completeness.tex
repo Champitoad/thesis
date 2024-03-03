@@ -35,9 +35,9 @@ task for future work.
 
 Note that the translation $\dtrans{(-)}$ is clearly \emph{injective}: in fact
 structures are isomorphic to multisets of \kl{items} that contain only \emph{open}
-subsolutions. Thus from now on, we will always apply the translation implicitly,
+\kl{subsolutions}. Thus from now on, we will always apply the translation implicitly,
 and rely on meta-variables $X, Y$ to distinguish structures from arbitrary
-solutions when necessary.
+\kl{solutions} when necessary.
 
 The rules of \kl{DBiInt} are given in \reffig{rules-dbiint}. Note that like
 \kl{bubble calculi}, \kl{DBiInt} is truly a \emph{\kl{deep inference}} system, in the
@@ -49,13 +49,13 @@ apply on \kl{sequents} and never on formulas, which makes them more verbose. Als
 do not rely on the notion of ``top-level formulas'' of a structure, making the
 propagation rules yet more verbose.}. The main difference lies in the fact that
 proofs in \kl{DBiInt} are \emph{trees} built up by composing traditional
-\kl{inference rules} with multiple premisses, while we use closed solutions (\kl{neutral}
-bubbles) to internalize the tree structure of proofs inside solutions. This
-gives a lot of expressive power since closed solutions can themselves be nested
-in open solutions and thus \emph{\kl{polarized}}, a phenomemon which cannot be
+\kl{inference rules} with multiple premisses, while we use closed \kl{solutions} (\kl{neutral}
+bubbles) to internalize the tree structure of proofs inside \kl{solutions}. This
+gives a lot of expressive power since closed \kl{solutions} can themselves be nested
+in open \kl{solutions} and thus \emph{\kl{polarized}}, a phenomemon which cannot be
 simulated in \kl{DBiInt}. This is why we did not prove soundness in
 \refsec{bubbles-soundness} by simulating directly system $\sysB$ in
-\kl{DBiInt}, and conversely this will explain the ease with which \sys{DBiInt}
+\kl{DBiInt}, and conversely this will explain the ease with which \kl{DBiInt}
 can be simulated inside system $\sysB$.
 
 \begin{figure*}
@@ -131,7 +131,7 @@ As in \kl{sequent calculus}, every rule of system $\sysB$ other than
 
 Thanks to cut admissibility, we thus get that $\sysBHB$ is \emph{\kl{analytic}}. This
 has many nice consequences, a well-known one being that when searching for a
-proof of a given solution $S$, one does not need to come up with or ``invent'' a
+proof of a given \kl{solution} $S$, one does not need to come up with or ``invent'' a
 formula that does not appear in $S$. This is crucial when designing
 \emph{automated} decision procedures because it reduces drastically the search
 space, but is also desirable in the setting of \emph{interactive} proof
@@ -266,7 +266,7 @@ For soundness, we would need to clarify the relationship between Heyting-Brouwer
 algebras and these consequence relations, which stem instead from an analysis of
 the Kripke semantics of \kl{bi-intuitionistic} logic. Since system $\sysB$ offers a
 very expressive syntax, it would be interesting to investigate its ability to
-capture both \kl{wBIL} and \sys{sBIL}, maybe by using distinct sets of flow
+capture both \kl{wBIL} and \kl{sBIL}, maybe by using distinct sets of flow
 rules. Goré and Shillito suggest that a framework that captures both
 \emph{provability} and \emph{refutability} ``in one shot'' would be needed, and
 we believe system $\sysB$ might just provide this: indeed a derivation $S \steps{}

@@ -4,11 +4,11 @@
 \begin{array}{r@{\quad}l}
 \multicolumn{2}{c}{\identity} \\[1em]
 
-\R[\mathsf{i}{\da}]
+\R[\intro{i{\da}}]
     {\Gamma \piq{\cS} {}}
     {\Gamma, A \piq{\cS} A}
 &
-\R[\mathsf{i}{\ua}]
+\R[\intro{i{\ua}}]
     {\Gamma \piq{\cS \sep {} \piq{} A \sep A \piq{} \Delta} {}}
     {\Gamma \piq{\cS} \Delta} \\
 \end{array}
@@ -16,11 +16,11 @@
 \begin{array}{r@{\quad}l}
 \multicolumn{2}{c}{\resource} \\[1em]
 
-\R[\mathsf{w}]
+\R[\intro{w}]
     {\Gamma \piq{\cS} \Delta}
     {\Gamma, A \piq{\cS} \Delta}
 &
-\R[\mathsf{c}]
+\R[\intro{c}]
     {\Gamma, A, A \piq{\cS} \Delta}
     {\Gamma, A \piq{\cS} \Delta} \\
 \end{array}
@@ -28,7 +28,7 @@
 \begin{array}{r}
 \multicolumn{1}{c}{\flow} \\[1em]
 
-\R[\mathsf{f{-}}]
+\R[\intro{f{-}}]
     {\Gamma \piq{\cS \sep \Gamma', A \piq{\mathcal{S'}} \Delta'} \Delta}
     {\Gamma, A \piq{\cS \sep \Gamma' \piq{\mathcal{S'}} \Delta'} \Delta}
 \end{array}
@@ -36,7 +36,7 @@
 \begin{array}{r}
 \multicolumn{1}{c}{\membrane} \\[1em]
 
-\R[\mathsf{p}]
+\R[\intro{p}]
     {\Gamma \piq{\cS} \Delta}
     {\Gamma \piq{\cS \sep \piq{}} \Delta}
 \end{array}
@@ -44,65 +44,65 @@
 \begin{array}{c@{\quad}c}
 \multicolumn{2}{c}{\heating} \\[1em]
 
-\R[\top{-}]
+\R[\intro{\top{-}}]
     {\Gamma \piq{\cS} \Delta}
     {\Gamma, \top \piq{\cS} \Delta}
 &
-\R[\top{+}]
+\R[\intro{\top{+}}]
     {\Gamma \piq{\cS} {}}
     {\Gamma \piq{\cS} \top}
 \\
-\R[\bot{-}]
+\R[\intro{\bot{-}}]
     {\Gamma \piq{\cS} {}}
     {\Gamma, \bot \piq{\cS} \Delta}
 &\\
-\R[\land{-}]
+\R[\intro{\land{-}}]
     {\Gamma, A, B \piq{\cS} \Delta}
     {\Gamma, A \land B \piq{\cS} \Delta}
 &
-\R[\land{+}]
+\R[\intro{\land{+}}]
     {\Gamma \piq{\cS \sep {} \piq{} A \sep {} \piq{} B} {}}
     {\Gamma \piq{\cS} A \land B}
 \\
 \multirow{2}{*}{
-\R[\lor{-}]
+\R[\intro{\lor{-}}]
     {\Gamma \piq{\cS \sep A \piq{} \Delta \sep B \piq{} \Delta} {}}
     {\Gamma, A \lor B \piq{\cS} \Delta}}
 &
-\R[\lor{+}_1]
+\R[\intro{\lor{+}_1}]
     {\Gamma \piq{\cS} A}
     {\Gamma \piq{\cS} A \lor B}
 \\&
-\R[\lor{+}_2]
+\R[\intro{\lor{+}_2}]
     {\Gamma \piq{\cS} B}
     {\Gamma \piq{\cS} A \lor B}
 \\
-\R[{\limp}{-}]
+\R[\intro{{\limp}{-}}]
     {\Gamma \piq{\cS \sep {} \piq{} A \sep B \piq{} \Delta}}
     {\Gamma, A \limp B \piq{\cS} \Delta}
 &
-\R[{\limp}{+}]
+\R[\intro{{\limp}{+}}]
     {\Gamma, A \piq{\cS} B}
     {\Gamma \piq{\cS} A \limp B}
 \\
-\R[\forall{-}]
+\R[\intro{\forall{-}}]
     {\Gamma, \subst{A}{t}{x} \piq{\cS} \Delta}
     {\Gamma, \forall x. A \piq{\cS} \Delta}
 &
-\R[\forall{+}]
+\R[\intro{\forall{+}}]
     {\Gamma \piq{\cS} A}
     {\Gamma \piq{\cS} \forall x. A}
 \\
-\R[\exists{-}]
+\R[\intro{\exists{-}}]
     {\Gamma, A \piq{\cS} \Delta}
     {\Gamma, \exists x. A \piq{\cS} \Delta}
 &
-\R[\exists{+}]
+\R[\intro{\exists{+}}]
     {\Gamma \piq{\cS} \subst{A}{t}{x}}
     {\Gamma \piq{\cS} \exists x. A}
 \end{array}
 \end{mathpar}
 
-In the {\rnm{\forall{+}}} and {\rnm{\exists{-}}} rules, $x$ is not free in
-$\Gamma$, $\Delta$ and $\cS$.
+In the \kl{\forall{+}} and \kl{\exists{-}} rules, $x$ is not free in $\Gamma$,
+$\Delta$ and $\cS$.
 \end{framed}

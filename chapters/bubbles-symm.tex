@@ -13,49 +13,51 @@ deserts.}{\textbf{Italo Calvino}, \textit{Invisible Cities}, 1972}
 
 In this chapter, we explore to what extent the \kl{bubble calculus} of
 \refch{bubbles} can be made more \emph{symmetric}, by relaxing the restriction
-that solutions must contain at most one conclusion. At a surface level, our
+that \kl{solutions} must contain at most one conclusion. At a surface level, our
 approach is similar to that of Gentzen, who went from his single-conclusion
-\kl{sequent calculus} \kl{LJ} to the multi-conclusion calculus \sys{LK}. Like
+\kl{sequent calculus} \kl{LJ} to the multi-conclusion calculus \kl{LK}. Like
 him, we will uncover beautiful dualities that were hidden by the asymmetry of
 the initial calculus. But by sticking unwaveringly to intuitionism, we will be
 led to the exotic territory of \kl{bi-intuitionistic} logic, an intermediate
-logic that conservatively extends \kl{intuitionistic} logic, but does not prove the
-\kl{law of excluded middle}. An underlying thread of our investigation will be the
-quest for a \emph{fully \kl{iconic}} \kl{proof system}, where all logical connectives
-can be replaced by appropriate (new) kinds of bubbles. This will lead us to
-rediscover many principles already studied in the \kl{deep inference}
-literature, with topological intuitions of the \kl{bubble} \kl{metaphor} shedding a new
-light on them. We will end up with two symmetric \kl{bubble calculi}, each with their
-own tradeoffs on the properties satisfied by \kl{inference rules}. In particular,
-their ability to \emph{factorize} both \kl{forward} and \kl{backward} proof steps might
-prove useful to build concise proofs, all through \kl{direct manipulation}.
+logic that conservatively extends \kl{intuitionistic} logic, but does not prove
+the \kl{law of excluded middle}. An underlying thread of our investigation will
+be the quest for a \emph{fully \kl{iconic}} \kl{proof system}, where all logical
+connectives can be replaced by appropriate (new) kinds of bubbles. This will
+lead us to rediscover many principles already studied in the \kl{deep inference}
+literature, with topological intuitions of the \kl{bubble} \kl{metaphor}
+shedding a new light on them. We will end up with two symmetric \kl{bubble
+calculi}, each with their own tradeoffs on the properties satisfied by
+\kl{inference rules}. In particular, their ability to \emph{factorize} both
+\kl{forward} and \kl{backward} proof steps might prove useful to build concise
+proofs, all through \kl{direct manipulation}.
 
 The chapter is organized as follows: in \refsec{non-determinism} we motivate our
 quest for a system where all \kl{introduction rules} for logical connectives are
-\emph{\kl{invertible}}, to reduce non-determinism in proof search and enable a fully
-\emph{\kl{iconic}} approach to proof building. To that effect, we relax in
-\refsec{branching} the restriction to single-conclusion solutions, which
-requires a new distinction between \emph{closed} and \emph{open} solutions. This
-gives rise in \refsec{colors} to an extension of the syntax of solutions, where
-\kl{bubbles} can themselves be \emph{\kl{polarized}}. In \refsec{design-props} we identify
-key properties that will guide the design of \kl{inference rules}, some of which were
-already aimed for implicitly through the evolution of our concept of bubble. In
-\refsec{symmetric-calculus} we introduce a core \emph{symmetric \kl{bubble calculus}}
-for \kl{classical} logic called \kl{system~B}, in reference to the symmetric
-\kl{system L} of Herbelin \sidecite[10em]{herbelin_duality_nodate}. Then in
-\refsec{bubbles-soundness} we prove the soundness of \kl{system~B}, and show
-that by removing selectively among \kl{inference rules} that define the
-\emph{porosity} of \kl{polarized} bubbles, one gets \kl{intuitionistic},
-\kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic as fragments. In
-\refsec{bubbles-completeness} we support this claim by showing that the
-\kl{bi-intuitionistic} fragment is not only sound, but also \emph{cut-free complete}
-with respect to the cut-free nested \kl{sequent calculus} \kl{DBiInt} of Postniece
+\emph{\kl{invertible}}, to reduce non-determinism in proof search and enable a
+fully \emph{\kl{iconic}} approach to proof building. To that effect, we relax in
+\refsec{branching} the restriction to \kl{single-conclusion} \kl{solutions},
+which requires a new distinction between \emph{closed} and \emph{open}
+\kl{solutions}. This gives rise in \refsec{colors} to an extension of the syntax
+of \kl{solutions}, where \kl{bubbles} can themselves be \emph{\kl{polarized}}.
+In \refsec{design-props} we identify key properties that will guide the design
+of \kl{inference rules}, some of which were already aimed for implicitly through
+the evolution of our concept of bubble. In \refsec{symmetric-calculus} we
+introduce a core \emph{symmetric \kl{bubble calculus}} for \kl{classical} logic
+called \kl{system~B}, in reference to the symmetric \kl{system L} of Herbelin
+\sidecite[10em]{herbelin_duality_nodate}. Then in \refsec{bubbles-soundness} we
+prove the soundness of \kl{system~B}, and show that by removing selectively
+among \kl{inference rules} that define the \emph{porosity} of \kl{polarized}
+bubbles, one gets \kl{intuitionistic}, \kl{dual-intuitionistic} and
+\kl{bi-intuitionistic} logic as fragments. In \refsec{bubbles-completeness} we
+support this claim by showing that the \kl{bi-intuitionistic} fragment is not
+only sound, but also \emph{cut-free complete} with respect to the cut-free
+nested \kl{sequent calculus} \kl{DBiInt} of Postniece
 \cite{postniece_deep_2009}. Finally in \refsec{invertible-calculus}, we
-introduce a fully \kl{invertible} variant of system $\sysB$ that we conjecture to be
-complete, and present a canonical way to search for proofs in this system.
-Unfortunately, invertibility does not entail the full \kl{iconicity} of the system,
-and we reflect on the fundamental reasons that might prevent any variant of
-system $\sysB$ from being fully \kl{iconic}.
+introduce a fully \kl{invertible} variant of system $\sysB$ that we conjecture
+to be complete, and present a canonical way to search for proofs in this system.
+Unfortunately, invertibility does not entail the full \kl{iconicity} of the
+system, and we reflect on the fundamental reasons that might prevent any variant
+of system $\sysB$ from being fully \kl{iconic}.
 
 % In \refsec{invertible-calculus} we present a fully invertible variant of system
 % \kl{B}, whose completeness follows naturally from the proof of
@@ -66,21 +68,22 @@ system $\sysB$ from being fully \kl{iconic}.
 
 \begin{remark}
   Although we include rules for quantifiers, in this thesis we only treat the
-soundness and completeness of \kl{bubble calculi} for \emph{propositional} logic.
-Indeed quantifiers would make the algebraic semantics more involved when proving
-soundness, and during our literature review we found very few \kl{proof systems}
-for \kl{bi-intuitionistic} logic supporting them, at least none suitable for our
-syntactic completeness proof. More generally, \kl{bi-intuitionistic} logic has
-received less attention in the setting of \kl{FOL}, probably because it is
-\emph{not} a conservative extension of \kl{intuitionistic} \kl{FOL}, but only of
-\emph{constant-domain} \kl{intuitionistic} \kl{FOL} (see
+soundness and completeness of \kl{bubble calculi} for \emph{propositional}
+logic. Indeed quantifiers would make the algebraic semantics more involved when
+proving soundness, and during our literature review we found very few \kl{proof
+systems} for \kl{bi-intuitionistic} logic supporting them, at least none
+suitable for our syntactic completeness proof. More generally,
+\kl{bi-intuitionistic} logic has received less attention in the setting of
+\kl{FOL}, probably because it is \emph{not} a conservative extension of
+\kl{intuitionistic} \kl{FOL}, but only of \emph{constant-domain}
+\kl{intuitionistic} \kl{FOL} (see
 \cite{crolard_subtractive_2001,aschieri_natural_2018}).
 \end{remark}
 
 \section{Non-determinism and iconicity}\labsec{non-determinism}
 
-In all known \kl{sequent calculus} formulations of \kl{intuitionistic} logic, there are at
-least two rules which are invariably \emph{non-\kl{invertible}}:
+In all known \kl{sequent calculus} formulations of \kl{intuitionistic} logic,
+there are at least two rules which are invariably \emph{non-\kl{invertible}}:
 \begin{enumerate}
   \item a \kl{left introduction rule} for $\limp$ (there might be many ones, as in
   the calculus \kl{LJT} of \sidecite{dyckhoff_contraction-free_1992});
@@ -97,18 +100,19 @@ $\conc{\lor}$ need to be performed in a specific order to be able to complete
 proofs.
 
 In his thesis \cite{guenot_nested_2013}, Guenot introduced a specific kind of
-\kl{nested sequent} system, where like in \kl{BJ} \kl{inference rules} can be expressed
-as \kl{rewriting rules}. An interesting feature of these systems is that they satisfy
-a \emph{decomposability} property: all \kl{introduction rules} for connectives are
-\emph{\kl{invertible}}, and formulas can be completely decomposed with them until
-atoms are reached, before applying other rules. Thus \kl{introduction rules} are
-\emph{\kl{admissible}} in these systems, because every formula can be translated into
-an equivalent pure \kl{nested sequent} with the same number of atoms\sidenote{As far
-as we know, the admissibility of \kl{introduction rules} is not proved, let alone
-mentioned in \cite{guenot_nested_2013}. This is our own observation which lacks
-a proper formal proof, and is thus subject to caution.}. Non-determinism then
-arises in the choice of atoms that are to be connected in axioms, as well as the
-choice of sub-sequents to be duplicated for reuse.
+\kl{nested sequent} system, where like in \kl{BJ} \kl{inference rules} can be
+expressed as \kl{rewriting rules}. An interesting feature of these systems is
+that they satisfy a \emph{decomposability} property: all \kl{introduction rules}
+for connectives are \emph{\kl{invertible}}, and formulas can be completely
+decomposed with them until atoms are reached, before applying other rules. Thus
+\kl{introduction rules} are \emph{\kl{admissible}} in these systems, because
+every formula can be translated into an equivalent pure \kl{nested sequent} with
+the same number of atoms\sidenote{As far as we know, the admissibility of
+\kl{introduction rules} is not proved, let alone mentioned in
+\cite{guenot_nested_2013}. This is our own observation which lacks a proper
+formal proof, and is thus subject to caution.}. Non-determinism then arises in
+the choice of atoms that are to be connected in axioms, as well as the choice of
+sub-sequents to be duplicated for reuse.
 
 In our graphical setting, this would translate to an interface where all click
 actions are redundant. Although we already considered this possibility in
@@ -121,10 +125,11 @@ possible transformations on the \kl{proof state}.
 % terminology introduced by C. S. Peirce in his \emph{semiotics}
 % \sidecite{noth_peircean_1999}, which he also applied to his diagrammatic proof
 % system of \emph{existential graphs} \sidecite{10.7551/mitpress/3633.001.0001}.
-Unfortunately, the systems in \cite{guenot_nested_2013} only handle \kl{classical}
-logic, and the implicative fragment of \kl{intuitionistic} logic. Thus began our
-quest for a \kl{bubble calculus} in the style of Guenot capturing full \kl{intuitionistic}
-logic\sidenote{Other \kl{nested sequent} systems for full \kl{intuitionistic} logic exist
+Unfortunately, the systems in \cite{guenot_nested_2013} only handle
+\kl{classical} logic, and the implicative fragment of \kl{intuitionistic} logic.
+Thus began our quest for a \kl{bubble calculus} in the style of Guenot capturing
+full \kl{intuitionistic} logic\sidenote{Other \kl{nested sequent} systems for
+full \kl{intuitionistic} logic exist
 \cite{postniece_deep_2009,fitting-nested-2014}, but they are based on
 tree-shaped proofs, and thus ignore the whole \emph{raison d'être} of our
 concept of bubble.}.
@@ -132,13 +137,14 @@ concept of bubble.}.
 
 \section{Conclusions and branching}\labsec{branching}
 
-The first direction we followed was to relax the constraint that solutions must
-be single-conclusion. Indeed as already noted in \refsec{sfl-backtracking}, a
-notable property of \kl{sequent calculi} with multiple conclusions is that their
-\kl{right introduction rule} for $\lor$ is \kl{invertible}.
+The first direction we followed was to relax the constraint that \kl{solutions}
+must be \kl{single-conclusion}. Indeed as already noted in
+\refsec{sfl-backtracking}, a notable property of \kl{sequent calculi} with
+multiple conclusions is that their \kl{right introduction rule} for $\lor$ is
+\kl{invertible}.
 
 The main difficulty lies in the way one should interpret a multi-conclusion
-solution $S$ as a formula $\sint{S}$. If we just take the asymmetric
+\kl{solution} $S$ as a formula $\sint{S}$. If we just take the asymmetric
 interpretation (\refdef{ainterp}) and group conclusions disjunctively instead of
 conjunctively, we get
 $$
@@ -147,9 +153,9 @@ $$
 $$
 But this interpretation breaks on the 0-ary case when $\Delta$ is empty: instead
 of seeing $\Gamma \piq{\cS}$ as a node of the proof tree with hypotheses
-$\Gamma$ and \kl{subgoals} $\cS$, it trivializes it to $\sint{\Gamma
-\piq{\cS}} = \bigwedge \Gamma \limp \bot$, i.e. a \kl{goal} where one has to
-find a contradiction in $\Gamma$; which is obviously not what we have in mind.
+$\Gamma$ and \kl{subgoals} $\cS$, it trivializes it to $\sint{\Gamma \piq{\cS}}
+= \bigwedge \Gamma \limp \bot$, i.e. a \kl{goal} where one has to find a
+contradiction in $\Gamma$; which is obviously not what we have in mind.
 
 \begin{marginfigure}
   $$
@@ -162,15 +168,16 @@ find a contradiction in $\Gamma$; which is obviously not what we have in mind.
   \labfig{multi-and-intro}
 \end{marginfigure}
 
-A key observation was that in the rules of multi-conclusion \kl{sequent calculi}, one
-usually distributes the \kl(sequent){context} $\Delta$ of conclusions in all premisses: this
-restores a perfect symmetry with respect to the \kl(sequent){context} of hypotheses $\Gamma$,
-as illustrated by the {\rnm{\land R*}} rule (\reffig{multi-and-intro}). Then our
-idea was that instead of implementing distribution/sharing of conclusions inside
-\kl{inference rules}, we could do it implicitly in the interpretation of solutions.
-This is already what happens in the asymmetric interpretation for hypotheses
-(\refdef{ainterp}); indeed the \kl(sequent){context} $\Gamma$ is shared among \kl{subgoals},
-because:
+A key observation was that in the rules of multi-conclusion \kl{sequent
+calculi}, one usually distributes the \kl(sequent){context} $\Delta$ of
+conclusions in all premisses: this restores a perfect symmetry with respect to
+the \kl(sequent){context} of hypotheses $\Gamma$, as illustrated by the
+{\rnm{\land R*}} rule (\reffig{multi-and-intro}). Then our idea was that instead
+of implementing distribution/sharing of conclusions inside \kl{inference rules},
+we could do it implicitly in the interpretation of \kl{solutions}. This is
+already what happens in the asymmetric interpretation for hypotheses
+(\refdef{ainterp}); indeed the \kl(sequent){context} $\Gamma$ is shared among
+\kl{subgoals}, because:
 \begin{enumerate}
   \item it appears on the left of an implication $\limp$
   \item \kl{bubbles} are joined conjunctively, and
@@ -178,7 +185,7 @@ because:
   \limp B \land C \semequiv (A \limp B) \land (A \limp C)$.
 \end{enumerate}
 But what does it mean precisely to share conclusions among \kl{subgoals}? If we
-consider the two following solutions:
+consider the two following \kl{solutions}:
 \begin{equation}\label{eq:concdistr}
 \underbrace{\bubble{\hypo{A}~~~\conc{B}}~~~\bubble{\hypo{C}~~~\conc{D}}~~~\conc{E}}_{S} \qquad\qquad
 \underbrace{\bubble{\hypo{A}~~~\conc{B}~~~\conc{E}}~~~\bubble{\hypo{C}~~~\conc{D}~~~\conc{E}}}_{T}
@@ -195,30 +202,30 @@ But this immediately fails whenever $\cS = \emptyset$, because it
 trivializes to $\bigwedge \Gamma \limp \top \lor \bigvee \Delta \semequiv \top$
 instead of $\bigwedge \Gamma \limp \bigvee \Delta$. The only way we found around
 this defect was to internalize \emph{syntactically} a distinction between two
-kinds of solutions, by assigning them one of two \emph{statuses}\sidenote{In the
+kinds of \kl{solutions}, by assigning them one of two \emph{statuses}\sidenote{In the
 terminology of Martin-Löf, we could say that we now have two distinct forms of
 \emph{judgment}.}:
 \begin{itemize}
-  \item \emph{closed} solutions $\Gamma \piq{\cS} \Delta$ correspond
+  \item \emph{closed} \kl{solutions} $\Gamma \piq{\cS} \Delta$ correspond
   to branching nodes in the proof tree, or to closed leaves when $\cS =
   \emptyset$ (i.e. solved \kl{subgoals}). Thus it becomes sensical to have
   $\sint{\Gamma \piq{} \Delta} = \top$. In the asymmetric interpretation,
-  closed solutions were encoded by solutions with no conclusions;
-  \item \emph{open} solutions $\Gamma \seq \Delta$ correspond to open leaves
+  closed \kl{solutions} were encoded by \kl{solutions} with no conclusions;
+  \item \emph{open} \kl{solutions} $\Gamma \seq \Delta$ correspond to open leaves
   in the proof tree (i.e. unsolved \kl{subgoals}). In the asymmetric interpretation,
-  they were encoded by solutions with one conclusion.
+  they were encoded by \kl{solutions} with one conclusion.
 \end{itemize}
-Then we keep the last proposed interpretation for closed solutions, and
-interpret open solutions like usual sequents:
+Then we keep the last proposed interpretation for closed \kl{solutions}, and
+interpret open \kl{solutions} like usual sequents:
 $$\sint{\Gamma \seq \Delta} = \bigwedge{\Gamma} \limp \bigvee{\Delta}$$ To be
-able to abstract from the particular kind of solution at hand, we reframe the
-syntax of solutions with so-called \emph{branching} operators $\J$:
+able to abstract from the particular kind of \kl{solution} at hand, we reframe the
+syntax of \kl{solutions} with so-called \emph{branching} operators $\J$:
 \begin{align*}
   S, T, U &\Coloneq \Gamma \J \Delta \\
   \J, \JB &\Coloneq {\seq} \mid \piq{\cS}
 \end{align*}
-Graphically, closed solutions with no \kl{bubbles} can be distinguished from open
-solutions by painting their \emph{background} on the proof canvas in green, the
+Graphically, closed \kl{solutions} with no \kl{bubbles} can be distinguished from open
+\kl{solutions} by painting their \emph{background} on the proof canvas in green, the
 intent being to suggest that they have already been solved. A pathological
 example is the distinction between the closed empty \kl{bubble}
 $\bbubble{\phantom{a}}$ and the open empty \kl{bubble} $\bubble{\phantom{a}}$, who
@@ -256,18 +263,18 @@ excluded middle}\sidenote{This was already noticed in
 converse Grishin (b). More precisely, it is affirmed that while Grishin (b) is
 valid in \kl{FILL}, the restriction of the classical multiplicative linear
 logic \kl{MLL} to single-conclusion sequents, adding Grishin (a) makes
-\kl{FILL} collapse to \sys{MLL}.}. Thus according to this interpretation, $S$
+\kl{FILL} collapse to \kl{MLL}.}. Thus according to this interpretation, $S$
 entails $T$ but $T$ does not entail $S$, which means that it is not able to
 account for the \emph{factorization} of common conclusions in distinct \kl{subgoals}.
 
 To remedy this situation, we opted for a different strategy: instead of finding
 a logical formula capturing the distributive semantics of conclusions over
 sub\kl{goals}, we hardcode the latter by defining the interpretation function on
-closed solutions through \emph{non-structural} recursion. This gives the
+closed \kl{solutions} through \emph{non-structural} recursion. This gives the
 following final definitions:
 
 \begin{definition}[Mix operator]\labdef{mixop}
-  The commutative \emph{mix operator} $\mix$ on solutions is defined by:
+  The commutative \emph{mix operator} $\mix$ on \kl{solutions} is defined by:
   \begin{align*}
     (\Gamma \J \Delta) \mix (\Gamma' \seq \Delta') &=
       \Gamma, \Gamma' \J \Delta, \Delta' \\
@@ -277,7 +284,7 @@ following final definitions:
 \end{definition}
 
 \begin{definition}[Symmetric interpretation]\labdef{sinterp}
-  The \emph{symmetric interpretation} of a solution is defined recursively by:
+  The \emph{symmetric interpretation} of a \kl{solution} is defined recursively by:
   \begin{align*}
     \sint{\Gamma \piq{\cS} \Delta} &=
       \bigwedge_{S \in \cS} \sint{S \mix (\Gamma \seq \Delta)} \\
@@ -286,7 +293,7 @@ following final definitions:
   \end{align*}
 \end{definition}
 
-This is the right approach for interpreting solutions with multiple conclusions,
+This is the right approach for interpreting \kl{solutions} with multiple conclusions,
 as will be demonstrated formally in \refsec{bubbles-soundness}.
 
 \section{Coloring bubbles}\labsec{colors}
@@ -305,16 +312,16 @@ as will be demonstrated formally in \refsec{bubbles-soundness}.
 
 With our new symmetric interpretation, we can start generalizing the rules of
 \kl{BJ} to multiple conclusions. While for most rules one just has to replace
-single-conclusion (resp. no-conclusion) solutions with open (resp. closed) ones
-(more details will be given in the next section), the ${\limp}{+}$ rule stands
-out as particularly problematic. Indeed if we content ourselves with the natural
-generalization {\rsf{{\limp}{+}c}} of \reffig{wrong-imp-pos}, then we can
-easily build a proof of the excluded middle like in \reffig{lk-tnd}, and thus
-collapse to \kl{classical} logic. This fact is well-known in the literature on
-multi-conclusion \kl{intuitionistic} \kl{sequent calculi}, and the solution is usually to
-discard the \kl(sequent){context} of conclusions $\Delta$, as in the {\rnm{{\limp}R{*}i}} rule
-of \reffig{multi-imp-intro}. But this would make our rule both non-local and
-non-\kl{invertible}.
+\kl{single-conclusion} (resp. no-conclusion) \kl{solutions} with open (resp.
+closed) ones (more details will be given in the next section), the ${\limp}{+}$
+rule stands out as particularly problematic. Indeed if we content ourselves with
+the natural generalization {\rsf{{\limp}{+}c}} of \reffig{wrong-imp-pos}, then
+we can easily build a proof of the excluded middle like in \reffig{lk-tnd}, and
+thus collapse to \kl{classical} logic. This fact is well-known in the literature
+on multi-conclusion \kl{intuitionistic} \kl{sequent calculi}, and the solution
+is usually to discard the \kl(sequent){context} of conclusions $\Delta$, as in
+the {\rnm{{\limp}R{*}i}} rule of \reffig{multi-imp-intro}. But this would make
+our rule both non-local and non-\kl{invertible}.
 
 \begin{marginfigure}
   $$
@@ -360,13 +367,13 @@ the proofs for both directions of the equivalence are depicted parallely in
   apparent later;
   \item then in both cases we want to apply the hypothesis $\hypo{A}$ in a
   \kl{forward} step, either with $\hypo{A \limp B}$ or $\hypo{A \limp (B \lor C)}$.
-  To do so, we need to bring the two hypotheses together in the same solution.
+  To do so, we need to bring the two hypotheses together in the same \kl{solution}.
   And since \kl{items} are trapped within bubbles, the only way to go is to move the
   blue $\hypo{A}$ inside the red \kl{bubble} with the {\rsf{f{-}{+}}} rule;
   \item this time we decompose the hypothesis with the new version of the rules
   {\rnm{{\lor}{-}}} and {\rnm{{\limp}{-}}}. They are basically a local variant
   of those of \kl{BJ}: we encapsulate both subformulas in separate bubbles, but
-  without touching to the conclusions of the ambient solution;
+  without touching to the conclusions of the ambient \kl{solution};
   \item now that all formulas have been decomposed, it only remains to bring
   together dual atoms for annihilation, and pop all empty bubbles. In Grishin
   (b) this is easy, because all necessary movements (indicated by green arrows)
@@ -464,23 +471,26 @@ in the next section.
 
 \subsection{Polarized interpretation}
 
+\begin{scope}\knowledgeimport{symm}
+
 Let us now extend the formal definition of \kl{bubbles} so that they can be colored:
 
 \begin{definition}[Bubble]\labdef{pol-bubble}
-  A \emph{bubble} is a solution enclosed in a membrane, which can be either
+  A \intro{bubble} is a \kl{solution} enclosed in a membrane, which can be either
   \intro{unpolarized} (\reintro{neutral}), charged \reintro{positively}, or
   charged \reintro{negatively}.
 \end{definition}
 
 \kl{Neutral} \kl{bubbles} are the usual ones depicted in gray, while \kl{positive} and \kl{negative}
 \kl{bubbles} correspond respectively to red and blue bubbles. We also update the
-definition of solutions, which can now be open or closed:
+definition of \kl{solutions}, which can now be open or closed:
 
 \begin{definition}[Solution]\labdef{pol-solution}
   
-  A \emph{solution} is a multiset of ions and bubbles. Its \emph{status} is
-  either \emph{closed} or \emph{open}, and open solutions cannot contain \kl{neutral}
-  bubbles. Solutions $S$ can be represented textually with the following syntax:
+  A \intro{solution} is a multiset of \kl{ions} and bubbles. Its \emph{status}
+  is either \emph{closed} or \emph{open}, and open \kl{solutions} cannot contain
+  \kl{neutral} bubbles. \kl{Solutions} $S$ can be represented textually with the
+  following syntax:
   \begin{align*}
     S, T, U &\Coloneq \Gamma \J \Delta &
     \cS &\Coloneq S_1 \sep \ldots \sep S_n \\
@@ -490,9 +500,9 @@ definition of solutions, which can now be open or closed:
   \end{align*}
 \end{definition}
 
-Note that in the textual syntax, \kl{bubbles} are identified with \emph{subsolutions}
+Note that in the textual syntax, \kl{bubbles} are identified with \emph{\kl{subsolutions}}
 (\refdef{subsolution}), and their \kl{polarity} is determined by their position
-relative to branching operators; that is, for any solutions $S, T, U$ such that
+relative to branching operators; that is, for any \kl{solutions} $S, T, U$ such that
 $T \subsol U$, $S$ is either:
 \begin{itemize}
   \item \emph{\kl{neutral}} if $T = \Gamma \piq{\cS} \Delta$ and $S \in
@@ -507,7 +517,7 @@ exclusions\sidenote{Here we took inspiration from the work of Clouston et al. on
 \kl{nested sequents} for \kl{FILL} \cite{clouston-annotation-free-2013}.}:
 
 \begin{definition}[Polarized symmetric interpretation]\labdef{pol-sinterp}
-  The \emph{positive} and \emph{negative symmetric interpretations} of solutions
+  The \emph{positive} and \emph{negative symmetric interpretations} of \kl{solutions}
   $\psint{-}$ and $\nsint{-}$ are defined by mutual recursion as
   follows:
   \begin{align*}
@@ -526,21 +536,21 @@ exclusions\sidenote{Here we took inspiration from the work of Clouston et al. on
   \end{align*}
 \end{definition}
 
-One can easily check that the interpretation of a solution that has no \kl{negative}
-(resp. \kl{positive}) subsolution will not contain any occurrence of the exclusion
+One can easily check that the interpretation of a \kl{solution} that has no \kl{negative}
+(resp. \kl{positive}) \kl{subsolution} will not contain any occurrence of the exclusion
 (resp. implication) connective. This will be crucial later to represent proofs
 of both \kl{intuitionistic}, \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic in the
 same system.
 
 \section{Designing for properties}\labsec{design-props}
 
-With our new syntax and interpretation of solutions at hand, we can design a new
+With our new syntax and interpretation of \kl{solutions} at hand, we can design a new
 proof calculus including the rules previously discussed for manipulating
-\kl{polarized} bubbles. The rich structure of solutions offers many possibilities in
+\kl{polarized} bubbles. The rich structure of \kl{solutions} offers many possibilities in
 the precise formulation of rules, depending on the properties we expect from the
 calculus. We identified \emph{six} of these properties, whose consequences range
 from aesthetic and theoretical considerations on paper, to concrete usability
-matters in a graphical proof-building interface. Let us summarize them in order
+matters in a graphical proof building interface. Let us summarize them in order
 of priorization relatively to the latter:
 \begin{description}
   \item[Invertibility]
@@ -561,7 +571,7 @@ of priorization relatively to the latter:
   \item[Decomposability]
     We already mentioned this property in \refsec{non-determinism} as one of the
     main motivations for this chapter: the ability to decompose all logical
-    connectives ``for free'', and thus reason solely on solutions that comprise
+    connectives ``for free'', and thus reason solely on \kl{solutions} that comprise
     only \kl{bubbles} and atomic formulas. As far as we know, it has never been
     identified explicitly in the literature before, although it can loosely be
     seen as an extension of the decomposition procedures of existing \kl{deep
@@ -595,7 +605,7 @@ of priorization relatively to the latter:
     already remarked that the ability to share hypotheses between \kl{subgoals} in
     \kl{BJ} enables the factorization of \emph{\kl{forward}} reasoning steps at any
     stage of the proof construction. With our new symmetric interpretation of
-    multi-conclusion solutions, we will now be able to factorize \emph{\kl{backward}}
+    multi-conclusion \kl{solutions}, we will now be able to factorize \emph{\kl{backward}}
     reasoning steps as well, which was in fact the main motivation behind
     Example \ref{eq:concdistr} in \refsec{branching}.
   \item[Locality]
@@ -632,7 +642,7 @@ of priorization relatively to the latter:
     \refsec{bubbles-pba}.
   \item[Linearity] 
     We consider an \kl{inference rule} to be \emph{linear} when it preserves the
-    number of atomic formulas in solutions. This is a strong requirement, which
+    number of atomic formulas in \kl{solutions}. This is a strong requirement, which
     for instance excludes the identity rules of \kl{BJ} since they can insert
     or remove (even numbers of) atoms. Thus we cannot achieve full linearity in
     that sense, but it is still interesting to maximize it. The first reason is
@@ -640,7 +650,7 @@ of priorization relatively to the latter:
     \textit{``[...] \kl{deep inference} is obtained by applying some of the main
     concepts behind linear logic to the formalisms, i.e., to the rules by which
     \kl{proof systems} are designed.''} \sidecite{deep_inference}. The second reason
-    is \emph{computational}: it can enable a measure on solutions that is
+    is \emph{computational}: it can enable a measure on \kl{solutions} that is
     strictly decreasing with the application of rules, avoiding infinite loops
     during proof search as in the calculus \kl{LJT} of R. Dyckhoff
     \cite{dyckhoff_contraction-free_1992}. The third reason is ergonomical: as
@@ -727,4 +737,5 @@ calculi with different tradeoffs can be designed.
 % subgoals, improving \emph{factorizability}.}
 
 
+\end{scope}
 \end{scope}

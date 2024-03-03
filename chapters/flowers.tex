@@ -22,7 +22,7 @@ We introduce the \emph{flower calculus}, a novel \kl{proof system} for
 \kl{intuitionistic} \kl{predicate logic} based on syntactic objects called
 \emph{flowers}. We start by explaining how flowers stem from considerations in
 graphical logic, and more specifically from an \kl{intuitionistic} variant of
-the \emph{existential graphs} of C. S. Peirce proposed by A. Oostra. Then we
+the \emph{\kl{existential graphs}} of C. S. Peirce proposed by A. Oostra. Then we
 present our inductive syntax for flowers, reminiscent at the same time of the
 \kl{nested sequents} of \kl{deep inference} \kl{proof theory}, and the geometric/coherent
 formulas of categorical logic. A salient feature of our calculus inherited from
@@ -72,7 +72,7 @@ works, and a discussion of future works and applications that we envision.
 
 \paragraph{The scroll}
 
-In \refsec{alpha}, we presented the syntax of existential graphs (\kl{EGs}) as
+In \refsec{alpha}, we presented the syntax of \kl{existential graphs} (\kl{EGs}) as
 stemming from two fundamental \kl{icons}: the \kl{sheet of assertion} ($\SA$),
 with its ability to represent the conjunction of assertions through
 \emph{\kl{juxtaposition}}, and \emph{\kl{cuts}} in $\SA$ that signify the denial or
@@ -324,7 +324,7 @@ interpretation of proofs as continuous maps in the \emph{denotational semantics}
 of Dana Scott \sidecite{10.5555/218742.218744}. Before the advent of Oostra's
 \kl{IEGs}, Zalamea gave a detailed analysis of Peirce's philosophy of
 the \emph{continuum}, how it relates to modern developments in mathematics, and
-how it is embodied in existential graphs \cite{zalamea_peirces_2003}. Actually
+how it is embodied in \kl{existential graphs} \cite{zalamea_peirces_2003}. Actually
 according to Oostra \sidecite[][p.~162]{oostra_advances_2022}, ``the
 possibility of developing \kl{intuitionistic} existential graphs was first suggested
 by Zalamea in the 1990s \cite{zalamea_ieg_1,zalamea_ieg_2}''.
@@ -906,14 +906,14 @@ a direct adaptation of the rules of \kl{Beta} (\reffig{beta}):
     It allows to enclose any bouquet in a petal attached to an \textsf{(e)}mpty
     \textsf{(pis)}til. This is one direction of the rule \rsf{BA} of
     (\reffig{rule-empty-antecedant}), which is a weaker, \kl{intuitionistic} version
-    of the \kl{classical} rule \rsf{Dcut{\ua}} of \kl{Alpha} and \sys{Beta}. The
+    of the \kl{classical} rule \rsf{Dcut{\ua}} of \kl{Alpha} and \kl{Beta}. The
     other direction (rule \rsf{epis{\da}} in \reffig{flowers-episda}) is
     actually \kl{admissible}, which might be related to the co-admissibility of
     \rsf{Dcut{\da}} in \kl{Alpha} (\refcor{adm-ins}).
 
   \item[(De)iteration (\rsf{poll{\da}}, \rsf{poll{\ua}})]
     Renamed \emph{\textsf{(poll)}ination} rules, they correspond to the rules
-    \rsf{Iter} and \rsf{Deit} of \kl{Alpha} and \sys{Beta}, but reformulated
+    \rsf{Iter} and \rsf{Deit} of \kl{Alpha} and \kl{Beta}, but reformulated
     with the pollination relation (\refdef{pollination}). In fact in their
     textual presentation of \reffig{flower-calculus}, they are more general than
     (de)iteration rules, because \refdef{pollination} allows the pollinating
@@ -3119,11 +3119,10 @@ can be freely navigated. \kl{Proof-theoretically}, the \Navigation mode implemen
 
 \begin{remark}
 This way of navigating tree structures represented as nested areas is typical of
-\intro{zoomable user interfaces} (\reintro{ZUI}), a strand of \kl{GUI} that has been developed
-by many pioneers in the field of human-computer interaction such as Ivan
-Sutherland in his \intro{Sketchpad} system \sidecite{10.1145/800265.810742}, and
-Alan Kay in his \intro{Smalltalk} system
-\sidecite[4em]{goldberg_smalltalk-72_1976}.
+\kl{zoomable user interfaces}, a strand of \kl{GUI} that has been developed by
+many pioneers in the field of human-computer interaction such as Ivan Sutherland
+in his \intro{Sketchpad} system \sidecite{10.1145/800265.810742}, and Alan Kay
+in his \intro{Smalltalk} system \sidecite[4em]{goldberg_smalltalk-72_1976}.
 \end{remark}
 
 \paragraph{Automation}
@@ -3382,7 +3381,7 @@ natural fragment $\Nature$ of the flower calculus: every \kl{inference rule} is
 this tradeoff is that they can easily show termination of proof search, while we
 have not found a terminating procedure yet for the flower calculus. The authors
 also mention that \kl{HS} could be turned into a \kl{deep inference} calculus in the
-style of \kl{G4ip}\sidenote{This is just another name for the system \sys{LJT}
+style of \kl{G4ip}\sidenote{This is just another name for the system \kl{LJT}
 of Dyckhoff already mentioned in \refch{bubbles-symm}.}.
 
 \paragraph{Development calculi}
