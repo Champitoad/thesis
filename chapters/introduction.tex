@@ -622,15 +622,15 @@ many fundamental ideas that are still at work in many modern \kl{proof
 assistants}, the most prominent being the use of a \intro{type theory} to encode
 formal proofs.
 
-\AP
-Contrary to \kl{predicate logic} in traditional \kl{proof theory}, \kl{type theories} break the
-syntactic hierarchy imposed upon mathematical objects, propositions and proofs,
-by giving them a uniform representation as so-called \intro{terms} that can be
-assigned a \intro{type}. The assertion that a \kl{term} $t$ has \kl{type} $T$ is usually
-written with the expression $t : T$, which has come to be called a \emph{typing
-judgment} after Martin-Löf. For instance, the judgment $3 : \nats$ states that
-the \kl{term} $3$ has the \kl{type} $\nats$ of natural numbers, and $1 + 1 = 2 : \Prop$
-states that the \kl{term} $1 + 1 = 2$ has the \kl{type} $\Prop$ of propositions.
+\AP Contrary to \kl{predicate logic} in traditional \kl{proof theory}, \kl{type
+theories} break the syntactic hierarchy imposed upon mathematical objects,
+propositions and proofs, by giving them a uniform representation as so-called
+\intro{terms} that can be assigned a \intro{type}. The assertion that a
+\kl{term} $t$ has \kl{type} $T$ is usually written with the expression $t : T$,
+which has come to be called a typing \intro{judgment} after Martin-Löf. For
+instance, the \kl{judgment} $3 : \nats$ states that the \kl{term} $3$ has the
+\kl{type} $\nats$ of natural numbers, and $1 + 1 = 2 : \Prop$ states that the
+\kl{term} $1 + 1 = 2$ has the \kl{type} $\Prop$ of propositions.
 
 \paragraph{First-order vs. higher-order}
 
@@ -643,7 +643,7 @@ functions and predicates as arguments. This is because they are based on the
 programming language in history. For instance in \emph{simply-typed}
 \kl{$\lambda$-calculus} \sidecite{e4d9a073-5bba-3a5b-90d3-81832cd433e5}, one may
 \kl{type} the \emph{sum operator} over sequences of natural numbers with the
-judgment $\lambda u. \lambda n. \sum_{i = 1}^{n}{u~i} : (\nats \to \nats) \to
+\kl{judgment} $\lambda u. \lambda n. \sum_{i = 1}^{n}{u~i} : (\nats \to \nats) \to
 \nats \to \nats$, where $\lambda u. \lambda n. \sum_{i = 1}^{n}{u~i}$ is a
 \intro{$\lambda$-term} encoding the \kl{higher-order} function that takes a
 sequence represented as a function $u : \nats \to \nats$ and a bound $n :
@@ -683,7 +683,7 @@ We identified a few reasons for working in \kl{FOL}:
 
 \AP
 De Bruijn came up with the revolutionary idea that propositions could themselves
-be seen as \kl{types}, by having judgments such as $~t : 1 + 1 = 2~$ where $t$
+be seen as \kl{types}, by having \kl{judgments} such as $~t : 1 + 1 = 2~$ where $t$
 is a \intro{proof term} representing a proof of the proposition $1 + 1 = 2$.
 This \intro{propositions-as-types} principle was rediscovered independently by
 Howard in 1978 \sidecite{Howard1980-HOWTFN-2}, and developed further into a

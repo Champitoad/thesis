@@ -289,20 +289,19 @@ deduction step in \kl{PbA} will vary.
 
 \subsection{Axiomatic definitions}
 
-\AP
-In a set theory such as \kl{ZF}, the meaning of $\in$ comes from the various
+\AP In a set theory such as \kl{ZF}, the meaning of $\in$ comes from the various
 \kl{axioms} involving it. One might call this a \intro{behavioral} (or
 \reintro{axiomatic}) definition, since the meaning of the \kl{symbol} emerges
 from the way it can be used in proofs through \kl{axioms}. This contrasts with
 the previous \kl{nominal} definitions, that have a much simpler semantics
-captured by \kl{Unfold} actions\sidenote{Note that the syntax of
-\kl{first-order logic} is unaware of this distinction, since in both cases the
-defined concepts are encoded as \emph{atomic} predicates. This is usually not
-the case of logical frameworks found in \kl{proof assistants}: for instance, the
-duality between \intro{judgmental} (\kl{nominal}) and \emph{propositional}
-(\kl{behavioral}) equality is at the heart of \kl{Martin-Löf type theory}, and
-it is used extensively in \kl{Coq} to perform automation, both in the
-computation of expressions and the matching of statements modulo definitions.}.
+captured by \kl{Unfold} actions\sidenote{Note that the syntax of \kl{first-order
+logic} is unaware of this distinction, since in both cases the defined concepts
+are encoded as \emph{atomic} predicates. This is usually not the case of logical
+frameworks found in \kl{proof assistants}: for instance, the duality between
+\kl{judgmental} (\kl{nominal}) and \emph{propositional} (\kl{behavioral})
+equality is at the heart of \kl{Martin-Löf type theory}, and it is used
+extensively in \kl{Coq} to perform automation, both in the computation of
+expressions and the matching of statements modulo definitions.}.
 
 In particular, we can simplify the set comprehension in
 hypothesis~(\ref{hyp::2}) by invoking explicitly the \emph{axiom of

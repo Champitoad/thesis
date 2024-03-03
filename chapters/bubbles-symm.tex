@@ -36,7 +36,7 @@ quest for a system where all \kl{introduction rules} for logical connectives are
 \emph{\kl{invertible}}, to reduce non-determinism in proof search and enable a
 fully \emph{\kl{iconic}} approach to proof building. To that effect, we relax in
 \refsec{branching} the restriction to \kl{single-conclusion} \kl{solutions},
-which requires a new distinction between \emph{closed} and \emph{open}
+which requires a new distinction between \emph{\kl{saturated}} and \emph{\kl{unsaturated}}
 \kl{solutions}. This gives rise in \refsec{colors} to an extension of the syntax
 of \kl{solutions}, where \kl{bubbles} can themselves be \emph{\kl{polarized}}.
 In \refsec{design-props} we identify key properties that will guide the design
@@ -198,25 +198,38 @@ $$
 \sint{\Gamma \piq{\cS} \Delta} =
 \bigwedge{\Gamma} \limp \bigwedge_{S \in \cS}{\sint{S}} \lor \bigvee \Delta
 $$
-But this immediately fails whenever $\cS = \emptyset$, because it
-trivializes to $\bigwedge \Gamma \limp \top \lor \bigvee \Delta \semequiv \top$
-instead of $\bigwedge \Gamma \limp \bigvee \Delta$. The only way we found around
-this defect was to internalize \emph{syntactically} a distinction between two
-kinds of \kl{solutions}, by assigning them one of two \emph{statuses}\sidenote{In the
+But this immediately fails whenever $\cS = \emptyset$, because it trivializes to
+$\bigwedge \Gamma \limp \top \lor \bigvee \Delta \semequiv \top$ instead of
+$\bigwedge \Gamma \limp \bigvee \Delta$. The only way we found around this
+defect was to internalize \emph{syntactically} a distinction between two kinds
+of \kl{solutions}, by assigning them one of two statuses\sidenote{In the
 terminology of Martin-Löf, we could say that we now have two distinct forms of
-\emph{judgment}.}:
+\emph{\kl{judgment}}.}:
 \begin{itemize}
-  \item \emph{closed} \kl{solutions} $\Gamma \piq{\cS} \Delta$ correspond
+  \item \emph{\kl{saturated}} \kl{solutions} $\Gamma \piq{\cS} \Delta$ correspond
   to branching nodes in the proof tree, or to closed leaves when $\cS =
   \emptyset$ (i.e. solved \kl{subgoals}). Thus it becomes sensical to have
   $\sint{\Gamma \piq{} \Delta} = \top$. In the asymmetric interpretation,
-  closed \kl{solutions} were encoded by \kl{solutions} with no conclusions;
-  \item \emph{open} \kl{solutions} $\Gamma \seq \Delta$ correspond to open leaves
-  in the proof tree (i.e. unsolved \kl{subgoals}). In the asymmetric interpretation,
-  they were encoded by \kl{solutions} with one conclusion.
+  \kl{saturated} \kl{solutions} were encoded by \kl{solutions} with no conclusions;
+  \item \emph{\kl{unsaturated}} \kl{solutions} $\Gamma \seq \Delta$ correspond to
+  open leaves in the proof tree (i.e. unsolved \kl{subgoals}). In the asymmetric
+  interpretation, they were encoded by \kl{solutions} with one conclusion.
 \end{itemize}
-Then we keep the last proposed interpretation for closed \kl{solutions}, and
-interpret open \kl{solutions} like usual sequents:
+
+\begin{remark}
+  The terminology of ``saturation'' is also inspired by \emph{chemistry}: in
+  this context, a solution is saturated when it has reached \emph{equilibrium},
+  meaning that the chemical reaction of \emph{dissolution} cannot happen
+  anymore. The analogy applies to our logical setting: a \kl{solution} is
+  \kl{saturated} when it has reached \emph{truth}, meaning that the logical
+  reaction of \emph{\kl(dnd){backward} linking} cannot happen anymore.
+  \emph{\kl(dnd){Forward}} linking is still possible though and may produce
+  additional shared knowledge, akin to solid sugar accumulating at the bottom of
+  a \emph{supersaturated} container of water.
+\end{remark}
+
+Then we keep the last proposed interpretation for \kl{saturated} \kl{solutions}, and
+interpret \kl{unsaturated} \kl{solutions} like usual sequents:
 $$\sint{\Gamma \seq \Delta} = \bigwedge{\Gamma} \limp \bigvee{\Delta}$$ To be
 able to abstract from the particular kind of \kl{solution} at hand, we reframe the
 syntax of \kl{solutions} with so-called \emph{branching} operators $\J$:
@@ -224,11 +237,11 @@ syntax of \kl{solutions} with so-called \emph{branching} operators $\J$:
   S, T, U &\Coloneq \Gamma \J \Delta \\
   \J, \JB &\Coloneq {\seq} \mid \piq{\cS}
 \end{align*}
-Graphically, closed \kl{solutions} with no \kl{bubbles} can be distinguished from open
+Graphically, \kl{saturated} \kl{solutions} with no \kl{bubbles} can be distinguished from \kl{unsaturated}
 \kl{solutions} by painting their \emph{background} on the proof canvas in green, the
 intent being to suggest that they have already been solved. A pathological
-example is the distinction between the closed empty \kl{bubble}
-$\bbubble{\phantom{a}}$ and the open empty \kl{bubble} $\bubble{\phantom{a}}$, who
+example is the distinction between the \kl{saturated} empty \kl{bubble}
+$\bbubble{\phantom{a}}$ and the \kl{unsaturated} empty \kl{bubble} $\bubble{\phantom{a}}$, who
 are interpreted respectively by $\sint{\piq{\piq{}}} = \top$ and
 $\sint{\piq{\seq}} = \bot$.
 
@@ -270,7 +283,7 @@ account for the \emph{factorization} of common conclusions in distinct \kl{subgo
 To remedy this situation, we opted for a different strategy: instead of finding
 a logical formula capturing the distributive semantics of conclusions over
 sub\kl{goals}, we hardcode the latter by defining the interpretation function on
-closed \kl{solutions} through \emph{non-structural} recursion. This gives the
+\kl{saturated} \kl{solutions} through \emph{non-structural} recursion. This gives the
 following final definitions:
 
 \begin{definition}[Mix operator]\labdef{mixop}
@@ -312,8 +325,8 @@ as will be demonstrated formally in \refsec{bubbles-soundness}.
 
 With our new symmetric interpretation, we can start generalizing the rules of
 \kl{BJ} to multiple conclusions. While for most rules one just has to replace
-\kl{single-conclusion} (resp. no-conclusion) \kl{solutions} with open (resp.
-closed) ones (more details will be given in the next section), the ${\limp}{+}$
+\kl{single-conclusion} (resp. no-conclusion) \kl{solutions} with \kl{unsaturated} (resp.
+\kl{saturated}) ones (more details will be given in the next section), the ${\limp}{+}$
 rule stands out as particularly problematic. Indeed if we content ourselves with
 the natural generalization {\rsf{{\limp}{+}c}} of \reffig{wrong-imp-pos}, then
 we can easily build a proof of the excluded middle like in \reffig{lk-tnd}, and
@@ -366,7 +379,7 @@ the proofs for both directions of the equivalence are depicted parallely in
   the antecedant to prove conclusions other than the consequent, as will become
   apparent later;
   \item then in both cases we want to apply the hypothesis $\hypo{A}$ in a
-  \kl{forward} step, either with $\hypo{A \limp B}$ or $\hypo{A \limp (B \lor C)}$.
+  \kl(dnd){forward} step, either with $\hypo{A \limp B}$ or $\hypo{A \limp (B \lor C)}$.
   To do so, we need to bring the two hypotheses together in the same \kl{solution}.
   And since \kl{items} are trapped within bubbles, the only way to go is to move the
   blue $\hypo{A}$ inside the red \kl{bubble} with the {\rsf{f{-}{+}}} rule;
@@ -483,12 +496,12 @@ Let us now extend the formal definition of \kl{bubbles} so that they can be colo
 
 \kl{Neutral} \kl{bubbles} are the usual ones depicted in gray, while \kl{positive} and \kl{negative}
 \kl{bubbles} correspond respectively to red and blue bubbles. We also update the
-definition of \kl{solutions}, which can now be open or closed:
+definition of \kl{solutions}, which can now be \kl{unsaturated} or \kl{saturated}:
 
 \begin{definition}[Solution]\labdef{pol-solution}
   
-  A \intro{solution} is a multiset of \kl{ions} and bubbles. Its \emph{status}
-  is either \emph{closed} or \emph{open}, and open \kl{solutions} cannot contain
+  A \intro{solution} is a multiset of \kl{ions} and bubbles. It can be either
+  \intro{saturated} or \intro{unsaturated}, and \kl{unsaturated} \kl{solutions} cannot contain
   \kl{neutral} bubbles. \kl{Solutions} $S$ can be represented textually with the
   following syntax:
   \begin{align*}
@@ -602,12 +615,12 @@ of priorization relatively to the latter:
   \item[Factorizability]
     We say that a proof calculus is \emph{factorizable} when it makes it easier
     to avoid duplicating arguments in subproofs. In \refsec{bubbles-pba}, we
-    already remarked that the ability to share hypotheses between \kl{subgoals} in
-    \kl{BJ} enables the factorization of \emph{\kl{forward}} reasoning steps at any
-    stage of the proof construction. With our new symmetric interpretation of
-    multi-conclusion \kl{solutions}, we will now be able to factorize \emph{\kl{backward}}
-    reasoning steps as well, which was in fact the main motivation behind
-    Example \ref{eq:concdistr} in \refsec{branching}.
+    already remarked that the ability to share hypotheses between \kl{subgoals}
+    in \kl{BJ} enables the factorization of \emph{\kl{forward}} reasoning steps
+    at any stage of the proof construction. With our new symmetric
+    interpretation of multi-conclusion \kl{solutions}, we will now be able to
+    factorize \emph{\kl{backward}} reasoning steps as well, which was in fact
+    the main motivation behind Example \ref{eq:concdistr} in \refsec{branching}.
   \item[Locality]
     There does not seem to be a general consensus on what it means precisely for
     an \kl{inference rule} to be \emph{local}. This terminology has been
