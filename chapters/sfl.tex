@@ -885,22 +885,6 @@ fundamentally difficult, but understandably verbose. The two main points are:
           a row. Thus technically there are two reduction steps, but we treat
           them as one.
         \end{itemize}
-        
-        % suppose that $\mathcal{L'}$ is backward
-        % and $\inv(C'\hole) = 0$. Then if we applied rule {\rsf{F{\limp}_1}} we
-        % must have $\inv(C\hole) = 1$ and $\mathcal{L}$ is forward. Otherwise in
-        % every other applicable rule the parity and operator are preserved, thus
-        % $\inv(C\hole) = 0$ and $\mathcal{L}$ is backward. In both cases we have
-        % that $\inv(B\hole) = \inv(B'\hole)$, and we want to show that
-        % $\inv(B'\hole) = 0$. In the first case by Clause \ref{clause:opposite}
-        % we know that the $\inv(B\hole)$ is even.
-        
-        % Thus for \rsf{R{\limp}_1} which is backward, we start with either
-        % $(1,1)$ or $(0,2)$, and obtain $(1,0)$ or $(0,1)$ which are valid
-        % according to Condition \ref{cond:pol} since $\mathcal{L'}$ is forward.
-        % Conversely for \rsf{F{\limp}_1} which is forward, we must start with
-        % $(1,0)$, and obtain $(0,0)$ which is valid since $\mathcal{L'}$ is
-        % backward.
 
         \item Since we do not deal with quantifiers, we can just take the same
         unifier $\sigma$.
@@ -911,12 +895,6 @@ fundamentally difficult, but understandably verbose. The two main points are:
   \end{enumerate}
 \end{proof}
 
-%% \begin{proof}
-%%   See appendix \ref{prf:vprogress}.
-%% \end{proof}
-
-% Most of the magic occurs here, but by lack of space we had to move this proof to
-% appendix \ref{?}.
 Then we can state the following \emph{\kl{productivity} theorem}, which is a direct
 consequence of the previous lemma and the fact that the \kl{rewriting rules}
 terminate:
@@ -954,7 +932,7 @@ assistants} based on \kl{natural deduction} rules.
 
 % \sidenote{There are 7 invertible rules, and 23 non-invertible
 %     rules to consider in \reffig{DISL} (we exclude the {\kl(sfl){id}} and
-%     {\rsf{Fcomm}} rules).}
+%     {\kl{Fcomm}} rules).}
 
 A last point to deal with is non-confluence and in particular choosing
 between first simplifying the head connective on the right or the left
@@ -1152,9 +1130,6 @@ hypotheses in order to complete a proof. The downside is that the \kl{context} a
 grows bigger, but this can be balanced by exposing the \kl{weakening} rule in the
 interface. In \kl{Actema} it is mapped to a ``delete'' button placed next to every
 hypothesis (the little gray trashbin icons in \reffig{oneplusone}).
-% But for the purpose of completeness only, the weakening rule {\rsf{weak}}
-% should be admissible since its role is already played by the absorption rules
-% {\rsf{absl}, \rsf{absr} and \rsf{absq}} of \reffig{DISL-U}.
 In our completeness proof we will use all the rules in $\{\text{{\kl{conn}},
 {\kl{weak}}, {\kl{B}}, {\kl{F}}, {\kl{Bconn}}, {\kl{Fconn}}}\}$,
 in order to make derivations more concise.

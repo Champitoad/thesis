@@ -8,13 +8,13 @@
      \hypo{A}~~~\conc{A}
     &\step{}
     &\bsheet{\phantom{\hypo{A}~~~\conc{A}}}
-    &\mathsf{i{\da}} \\
+    &\kl{i{\da}} \\
   
      
      \phantom{\bubble{\conc{A}}~~~\bubble{\hypo{A}}}
     &\step{}
     &\bsheet{\bubble{\conc{A}}~~~\bubble{\hypo{A}}}
-    &\mathsf{i{\ua}} \\
+    &\kl{i{\ua}} \\
   \end{array}
   \and
   \begin{array}{r@{\quad}c@{\quad}ll@{\qquad\qquad}r@{\quad}c@{\quad}ll}
@@ -23,22 +23,22 @@
      \gAsheet{\hypo{I}}
     &\step{}
     &\gAsheet{\phantom{\hypo{I}}}
-    &\mathsf{w{-}} &
+    &\kl{w{-}} &
 
      \gAsheet{\conc{I}}
     &\step{}
     &\gAsheet{\phantom{\hypo{I}}}
-    &\mathsf{w{+}} \\
+    &\kl{w{+}} \\
   
      \gAsheet{\hypo{I}}
     &\step{}
     &\gAsheet{\hypo{I~~~I}}
-    &\mathsf{c{-}} &
+    &\kl{c{-}} &
 
      \gAsheet{\conc{I}}
     &\step{}
     &\gAsheet{\conc{I~~~I}}
-    &\mathsf{c{+}} \\
+    &\kl{c{+}} \\
   \end{array}
   \vspace{2em}\\
   \begin{array}{r@{\quad}c@{\quad}ll@{\qquad\qquad}r@{\quad}c@{\quad}ll}
@@ -47,81 +47,81 @@
     %  \gAsheet{\hbbubble{\gBbubble{\color{black}S}}}
     % &\step{}
     % &\bsheet{\gAbubble{\hgBbubble{\color{black}S}}}
-    % &\mathsf{s{-}} &
+    % &\kl{s{-}} &
 
     %  \gAsheet{\cbbubble{\gBbubble{\color{black}S}}}
     % &\step{}
     % &\bsheet{\gAbubble{\cgBbubble{\color{black}S}}}
-    % &\mathsf{s{+}} \\
+    % &\kl{s{+}} \\
 
     \multicolumn{8}{c}{
       \begin{array}{r@{\quad}c@{\quad}ll}
          \bsheet{\bbubble{\gBbubble{\color{black}T}~~~\color{black}S}}
         &\step{}
         &\bsheet{\gBbubble{\color{black}T}~~~\bbubble{\color{black}S}}
-        &\mathsf{f{\ua}}
+        &\kl{f{\ua}}
       \end{array}
     } \\[3em]
 
     %  \gAsheet{\hbbubble{\gBbubble{\color{black}S}~~~\color{black}T}}
     % &\step{}
     % &\bsheet{\gBbubble{\color{black}S}~~~\hbbubble{\color{black}T}}
-    % &\mathsf{n{-}{\ua}} &
+    % &\kl{n{-}{\ua}} &
 
     %  \gAsheet{\cbbubble{\gBbubble{\color{black}S}~~~\color{black}T}}
     % &\step{}
     % &\bsheet{\gBbubble{\color{black}S}~~~\cbbubble{\color{black}T}}
-    % &\mathsf{n{+}{\ua}} \\
+    % &\kl{n{+}{\ua}} \\
   
      \bsheet{\hypo{I}~~~\gBbubble{\color{black}S}}
     &\step{}
-    &\bsheet{\gBbubble{\hypo{I}~~~S}}
-    &\mathsf{f{-}{\da}} &
+    &\bsheet{\gBbubble{\hypo{I}~~~\color{black}S}}
+    &\kl{f{-}{\da}} &
 
      \bsheet{\conc{I}~~~\gBbubble{\color{black}S}}
     &\step{}
-    &\bsheet{\gBbubble{\conc{I}~~~S}}
-    &\mathsf{f{+{\da}}} \\
+    &\bsheet{\gBbubble{\conc{I}~~~\color{black}S}}
+    &\kl{f{+}{\da}} \\
 
      \gAsheet{\hypo{I}~~~\cgBbubble{\color{black}S}}
     &\step{}
-    &\gAsheet{\cgBbubble{\hypo{I}~~~S}}
-    &\mathsf{f{-}{+}{\da}} &
+    &\gAsheet{\cgBbubble{\hypo{I}~~~\color{black}S}}
+    &\kl{f{-}{+}{\da}} &
 
      \gAsheet{\conc{I}~~~\hgBbubble{\color{black}S}}
     &\step{}
-    &\gAsheet{\hgBbubble{\conc{I}~~~S}}
-    &\mathsf{f{+}{-}{\da}} \\
+    &\gAsheet{\hgBbubble{\conc{I}~~~\color{black}S}}
+    &\kl{f{+}{-}{\da}} \\
 
-     \gAsheet{\hgBbubble{\hypo{I}~~~S}}
+     \gAsheet{\hgBbubble{\hypo{I}~~~\color{black}S}}
     &\step{}
     &\gAsheet{\hypo{I}~~~\hgBbubble{\color{black}S}}
-    &\mathsf{f{-}{-}{\ua}} &
+    &\kl{f{-}{-}{\ua}} &
 
-     \gAsheet{\cgBbubble{\conc{I}~~~S}}
+     \gAsheet{\cgBbubble{\conc{I}~~~\color{black}S}}
     &\step{}
     &\gAsheet{\conc{I}~~~\cgBbubble{\color{black}S}}
-    &\mathsf{f{+}{+}{\ua}} \\
+    &\kl{f{+}{+}{\ua}} \\
 
-     \gAsheet{\cgBbubble{\hypo{I}~~~S}}
+     \gAsheet{\cgBbubble{\hypo{I}~~~\color{black}S}}
     &\step{}
     &\gAsheet{\hypo{I}~~~\cgBbubble{\color{black}S}}
-    &\mathsf{f{-}{+}{\ua}} &
+    &\kl{f{-}{+}{\ua}} &
 
-     \gAsheet{\hgBbubble{\conc{I}~~~S}}
+     \gAsheet{\hgBbubble{\conc{I}~~~\color{black}S}}
     &\step{}
     &\gAsheet{\conc{I}~~~\hgBbubble{\color{black}S}}
-    &\mathsf{f{+}{-}{\ua}} \\
+    &\kl{f{+}{-}{\ua}} \\
 
      \gAsheet{\hypo{I}~~~\hgBbubble{\color{black}S}}
     &\step{}
-    &\gAsheet{\hgBbubble{\hypo{I}~~~S}}
-    &\mathsf{f{-}{-}{\da}} &
+    &\gAsheet{\hgBbubble{\hypo{I}~~~\color{black}S}}
+    &\kl{f{-}{-}{\da}} &
 
      \gAsheet{\conc{I}~~~\cgBbubble{\color{black}S}}
     &\step{}
-    &\gAsheet{\cgBbubble{\conc{I}~~~S}}
-    &\mathsf{f{+}{+}{\da}} \\
+    &\gAsheet{\cgBbubble{\conc{I}~~~\color{black}S}}
+    &\kl{f{+}{+}{\da}} \\
   \end{array}
   \and
   \begin{array}{r@{\quad}c@{\quad}ll}
@@ -130,32 +130,32 @@
      \bsheet{\bbubble{\phantom{S}}}
     &\step{}
     &\bsheet{\phantom{\bbubble{\phantom{S}}}}
-    &\mathsf{p} \\
+    &\kl{p} \\
 
      \hbbubble{\phantom{S}}
     &\step{}
     &\bsheet{\phantom{\bbubble{\phantom{S}}}}
-    &\mathsf{p{-}} \\
+    &\kl{p{-}} \\
 
      \cbbubble{\phantom{S}}
     &\step{}
     &\bsheet{\phantom{\bbubble{\phantom{S}}}}
-    &\mathsf{p{+}} \\
+    &\kl{p{+}} \\
 
      \bsheet{\bbubble{\gBbubble{\color{black}S}}}
     &\step{}
     &\bsheet{\gBbubble{\color{black}S}}
-    &\mathsf{a} \\
+    &\kl{a} \\
 
      \gAsheet{\hbbubble{\gBbubble{\color{black}S}}}
     &\step{}
     &\gAsheet{\hgBbubble{\color{black}S}}
-    &\mathsf{a{-}} \\
+    &\kl{a{-}} \\
 
      \gAsheet{\cbbubble{\gBbubble{\color{black}S}}}
     &\step{}
     &\gAsheet{\cgBbubble{\color{black}S}}
-    &\mathsf{a{+}} \\
+    &\kl{a{+}} \\
   \end{array}
   \vspace{2em}\\
   \begin{array}{r@{\quad}c@{\quad}ll@{\qquad\qquad}r@{\quad}c@{\quad}ll}
@@ -164,82 +164,82 @@
      \gAsheet{\hypo{\top}}
     &\step{}
     &\gAsheet{\phantom{\hypo{\top}}}
-    &\mathsf{\top{-}}
+    &\kl{\top{-}}
   
     &\conc{\top}
     &\step{}
     &\bsheet{\phantom{\top}}
-    &\mathsf{\top{+}} \\
+    &\kl{\top{+}} \\
   
      \hypo{\bot}
     &\step{}
     &\bsheet{\phantom{\bot}}
-    &\mathsf{\bot{-}}
+    &\kl{\bot{-}}
 
     &\gAsheet{\conc{\bot}}
     &\step{}
     &\gAsheet{\phantom{\conc{\bot}}}
-    &\mathsf{\bot{+}} \\
+    &\kl{\bot{+}} \\
   
      \gAsheet{\hypo{A \land B}}
     &\step{}
     &\gAsheet{\hypo{A}~~~\hypo{B}}
-    &\mathsf{\land{-}}
+    &\kl{\land{-}}
   
     &\conc{A \land B}
     &\step{}
     &\bsheet{\bubble{\conc{A}}~~~\bubble{\conc{B}}}
-    &\mathsf{\land{+}} \\
+    &\kl{\land{+}} \\
   
      \hypo{A \lor B}
     &\step{}
     &\bsheet{\bubble{\hypo{A}}~~~\bubble{\hypo{B}}}
-    &\mathsf{\lor{-}}
+    &\kl{\lor{-}}
 
     &\gAsheet{\conc{A \lor B}}
     &\step{}
     &\gAsheet{\conc{A}~~~\conc{B}}
-    &\mathsf{\lor{+}} \\
+    &\kl{\lor{+}} \\
   
      \hypo{A \limp B}
     &\step{}
     &\bsheet{\bubble{\conc{A}}~~~\bubble{\hypo{B}}}
-    &\mathsf{{\limp}{-}}
+    &\kl{{\limp}{-}}
   
     &\gAsheet{\conc{A \limp B}}
     &\step{}
     &\gAsheet{\cbubble{\hypo{A}~~~\conc{B}}}
-    &\mathsf{{\limp}{+}} \\
+    &\kl{{\limp}{+}} \\
   
      \gAsheet{\hypo{A \lsub B}}
     &\step{}
     &\gAsheet{\hbubble{\hypo{A}~~~\conc{B}}}
-    &\mathsf{{\lsub}{-}}
+    &\kl{{\lsub}{-}}
 
     &\conc{A \lsub B}
     &\step{}
     &\bsheet{\bubble{\conc{A}}~~~\bubble{\hypo{B}}}
-    &\mathsf{{\lsub}{+}} \\
+    &\kl{{\lsub}{+}} \\
   
      \gAsheet{\hypo{\forall x. A}}
     &\step{}
     &\gAsheet{\hypo{\subst{A}{t}{x}}}
-    &\mathsf{\forall{-}}
+    &\kl{\forall{-}}
   
     &\gAsheet{\conc{\forall x. A}}
     &\step{}
     &\gAsheet{\conc{\subst{A}{y}{x}}}
-    &\mathsf{\forall{+}} \\
+    &\kl{\forall{+}} \\
   
      \gAsheet{\hypo{\exists x. A}}
     &\step{}
     &\gAsheet{\hypo{\subst{A}{y}{x}}}
-    &\mathsf{\exists{-}}
+    &\kl{\exists{-}}
   
     &\gAsheet{\conc{\exists x. A}}
     &\step{}
     &\gAsheet{\conc{\subst{A}{t}{x}}}
-    &\mathsf{\exists{+}} \\
+    &\kl{\exists{+}} \\
   \end{array}
   \vspace{2em}
   \end{mathpar}

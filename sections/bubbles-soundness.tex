@@ -21,7 +21,7 @@ First we recall the definitions of the various algebras:
   A \emph{bounded lattice} is a structure $(\mathcal{A}, \sement, \ltop, \lbot, \lmeet,
   \ljoin)$ such that:
   \begin{itemize}
-    \item $(\mathcal{A}, \sement)$ is a partial order, i.e. for every $a, b, c
+    \item $(\mathcal{A}, \intro*\sement)$ is a partial order, i.e. for every $a, b, c
     \in \mathcal{A}$ we have:
       \begin{itemize}
         \item $a \sement a$;
@@ -70,7 +70,7 @@ indeed gives the definition of a Heyting algebra:
 \end{definition}
 
 By dualizing this definition, we get a \emph{co-exponential} operation $\lcoexp$
-that models the exclusion connective, and thus \kl{dual-intuitionistic} logic in
+that models the \kl{exclusion} connective, and thus \kl{dual-intuitionistic} logic in
 so-called Brouwer algebras:
 
 \begin{definition}[Brouwer algebra]
@@ -84,7 +84,7 @@ so-called Brouwer algebras:
 \end{definition}
 
 Then we can model \kl{bi-intuitionistic} logic, which comprises both implication and
-exclusion, by just taking pairs of a Heyting and a Brouwer algebra on the same
+\kl{exclusion}, by just taking pairs of a Heyting and a Brouwer algebra on the same
 bounded lattice:
 
 \begin{definition}[Heyting-Brouwer algebra]
@@ -133,7 +133,7 @@ they will stand in perfect bijection.
 
 We now prove a number of lemmas that characterize \emph{duality} both
 semantically, typically between Heyting and Brouwer algebras, and syntactically
-in the rules of system $\sysB$. This will be useful later on to shorten some
+in the rules of \kl{system~B}. This will be useful later on to shorten some
 proofs.
 
 \begin{definition}[Dual formula]\labdef{dual-formula}
@@ -265,8 +265,8 @@ formulas have been dualized (\refdef{dual-formula}).
   \end{array}
   \end{mathpar}
   Notice that some rules are self-dual, namely the identity rules
-  {\rsf{i{\da}}} and {\rsf{i{\ua}}}, and the membrane rules
-  {\rsf{p}} and {\rsf{a}}.
+  {\kl{i{\da}}} and {\kl{i{\ua}}}, and the membrane rules
+  {\kl{p}} and {\kl{a}}.
 \end{proof}
 
 \begin{lemma}[Rule duality]\lablemma{rule-duality}
@@ -353,10 +353,10 @@ adequate \kl{sequent calculus}.
 \end{fact}
 
 The following definition will be used pervasively to reason by induction on the
-tree structure induced by branching operators:
+tree structure induced by \kl{branching operators}:
 
 \begin{definition}
-  The \emph{depth} $\sdepth{\J}$ of a branching operator $\J$ is defined
+  The \emph{depth} $\sdepth{\J}$ of a \kl{branching operator} $\J$ is defined
   recursively as follows:
   \begin{align*}
     \sdepth{\seq} &= 0 \\
@@ -402,7 +402,7 @@ tree structure induced by branching operators:
 % \end{proof}
 
 Now we can give a few lemmas that generalize some semantic (in)equalities to the
-interpretation of \kl{solutions} with arbitrary branching operators. All detailed
+interpretation of \kl{solutions} with arbitrary \kl{branching operators}. All detailed
 proofs are available in appendix (\refsec{app:bubbles-soundness}).
 
 \begin{lemma}[Generalized weakening]\lablemma{bubbles-weakening}
@@ -464,7 +464,7 @@ final proof of soundness to go through:
 \end{fact}
 
 All the previous facts and lemmas can now be used to prove \emph{local
-soundness}, i.e. that the interpretation of each rule of system $\sysB$ maps to
+soundness}, i.e. that the interpretation of each rule of \kl{system~B} maps to
 an (in)equality in some class of algebras:
 
 \begin{lemma}[Local soundness]\lablemma{bubbles-local-soundness}
@@ -483,28 +483,28 @@ an (in)equality in some class of algebras:
 
 Since some rules only hold \kl{classically}, the statement for the full system is
 relative to Boolean algebras. But from the detailed proof in
-\refsec{app:bubbles-soundness}, we can identify two fragments $\sysBH$ and
-$\sysBHB$ of system $\sysB$ that are sound with respect to Heyting and
+\refsec{app:bubbles-soundness}, we can identify two fragments $\kl{\sysBH}$ and
+$\kl{\sysBHB}$ of \kl{system~B} that are sound with respect to Heyting and
 Heyting-Brouwer algebras:
 
 \begin{corollary}\labcor{lsoundness}
   Let
   \begin{align*}
-    \sysBHB &\defeq \sysB \setminus \{\rsf{f{-}{+}{\ua}}, \rsf{f{+}{+}{\da}}, \rsf{f{+}{-}{\ua}}, \rsf{f{-}{-}{\da}}\} \\
-    \sysBH &\defeq \sysBHB \setminus \{\rsf{f{+}{-}{\da}, \rsf{f{-}{-}{\ua}, \rsf{{\lsub}{-}}, \rsf{{\lsub}{+}}}}\}
+    \kl{\sysBHB} &\defeq \sysB \setminus \{\kl{f{-}{+}{\ua}}, \kl{f{+}{+}{\da}}, \kl{f{+}{-}{\ua}}, \kl{f{-}{-}{\da}}\} \\
+    \kl{\sysBH} &\defeq \kl{\sysBHB} \setminus \{\kl{f{+}{-}{\da}, \kl{f{-}{-}{\ua}, \kl{{\lsub}{-}}, \kl{{\lsub}{+}}}}\}
   \end{align*}
   Then we have:
   \begin{itemize}
-    \item $S \lstep{\sysBH} T$ implies $\psint{T} \sement \psint{S}$
-    \item $S \lstep{\sysBHB} T$ implies $\psint{T} \sementHB \psint{S}$
+    \item $S \lstep{\kl{\sysBH}} T$ implies $\psint{T} \sement \psint{S}$
+    \item $S \lstep{\kl{\sysBHB}} T$ implies $\psint{T} \sementHB \psint{S}$
     % \item $S \lstep{\text{\sysB}} T$ implies $\psint{T} \sementC \psint{S}$
   \end{itemize}
 \end{corollary}
 
-In order to get the last missing fragment $\sysBB$ sound with respect to Brouwer
-algebras, we need dual lemmas that are relative to the negative interpretation
-$\nsint{\cdot}$ instead of the positive interpretation $\psint{\cdot}$, since
-implication is replaced by exclusion. To avoid verbosity, we only formulate the
+In order to get the last missing fragment $\kl{\sysBB}$ sound with respect to Brouwer
+algebras, we need dual lemmas that are relative to the \kl{negative interpretation}
+$\nsint{\cdot}$ instead of the \kl{positive interpretation} $\psint{\cdot}$, since
+implication is replaced by \kl{exclusion}. To avoid verbosity, we only formulate the
 main lemma, and assume that its proof will go through mechanically:
 
 \begin{lemma}[Local co-soundness]\lablemma{bubbles-local-cosoundness}
@@ -514,9 +514,9 @@ main lemma, and assume that its proof will go through mechanically:
 
 Then from the (assumed) proof of \reflemma{bubbles-local-cosoundness} we get:
 \begin{corollary}\labcor{lcosoundness}
-  Let $\sysBB \defeq \sysBHB \setminus \{\rsf{f{-}{+}{\da}},
-  \rsf{f{+}{+}{\ua}}, \rsf{{\limp}{-}}, \rsf{{\limp}{+}}\}$. Then $S
-  \lstep{\sysBB} T$ implies $\nsint{S} \sementB \nsint{T}$.
+  Let $\kl{\sysBB} \defeq \kl{\sysBHB} \setminus \{\kl{f{-}{+}{\da}},
+  \kl{f{+}{+}{\ua}}, \kl{{\limp}{-}}, \kl{{\limp}{+}}\}$. Then $S
+  \lstep{\kl{\sysBB}} T$ implies $\nsint{S} \sementB \nsint{T}$.
 \end{corollary}
 
 The full situation is summarized in \reffig{venn-algebras}.
@@ -683,7 +683,7 @@ recursively as follows:
   with $\Gamma = \Delta = \emptyset$.
 \end{proof}
 
-We also get for free soundness with respect to the negative interpretation,
+We also get for free soundness with respect to the \kl{negative interpretation},
 which we call \emph{co-soundness}:
 
 \begin{theorem}[Co-soundness]\labthm{bubbles-cosoundness}
@@ -703,8 +703,8 @@ thus extend our soundness result to \kl{intuitionistic} and
 \begin{corollary}\labcor{soundness}
   \sbr
   \begin{itemize}
-    \item $S \step{\sysBH} T$ implies $\psint{T} \sement \psint{S}$
-    \item $S \step{\sysBHB} T$ implies $\psint{T} \sementHB \psint{S}$
+    \item $S \step{\kl{\sysBH}} T$ implies $\psint{T} \sement \psint{S}$
+    \item $S \step{\kl{\sysBHB}} T$ implies $\psint{T} \sementHB \psint{S}$
   \end{itemize}
 \end{corollary}
 \begin{proof}
@@ -714,13 +714,13 @@ thus extend our soundness result to \kl{intuitionistic} and
   algebras.
 
   For soundness in Heyting algebras, we know that the negative case will never
-  happen because formulas cannot contain exclusions. The other cases only depend
+  happen because formulas cannot contain \kl{exclusions}. The other cases only depend
   on \reflemma{bubbles-local-soundness}, thus we can again replace it by
   \refcor{lsoundness}.
 \end{proof}
 
 Once again in order to extend contextual soundness to \kl{dual-intuitionistic} logic,
-we need to dualize lemmas to the negative interpretation:
+we need to dualize lemmas to the \kl{negative interpretation}:
 
 \begin{lemma}[Co-functoriality]\lablemma{bubbles-cofunctoriality}
   Let $\ACVar \in \{\Brouwer, \HeytingBrouwer, \Boolean\}$.
@@ -741,10 +741,10 @@ we need to dualize lemmas to the negative interpretation:
 From the assumed proof of \reflemma{bubbles-ctx-cosoundness}, we finally get:
 
 \begin{corollary}\labcor{cosoundness}
-  $S \step{\sysBB} T$ implies $\nsint{S} \sementB \nsint{T}$.
+  $S \step{\kl{\sysBB}} T$ implies $\nsint{S} \sementB \nsint{T}$.
 \end{corollary}
 
 Combined with the completeness proof of \refsec{bubbles-completeness}, this will
-give us our main result that $\sysBH$, $\sysBB$, $\sysBHB$ and $\sysB$ capture
+give us our main result that $\kl{\sysBH}$, $\kl{\sysBB}$, $\kl{\sysBHB}$ and $\sysB$ capture
 exactly provability in \kl{intuitionistic}, \kl{dual-intuitionistic}, \kl{bi-intuitionistic}
 and \kl{classical} logic.

@@ -140,12 +140,13 @@
 \knowledge{NK}{system}
 \knowledge{LJ}{system}
 \knowledge{LK}{system}
-\knowledge{system L}{system}
+\knowledge{system~L}{system}
 \knowledge{LL}{system}
 \knowledge{LJT}{system}
 \knowledge{BJ}{system}
 \knowledge{FILL}{system}
 \knowledge{MLL}{system}
+\knowledge{IMLL}{system}
 \knowledge{ISgq}{system}
 \knowledge{cISgq}{system}
 \knowledge{G3IntQ}{system}
@@ -218,6 +219,7 @@
 \knowledge{\land L_1}{rule}
 \knowledge{\land L_2}{rule}
 \knowledge{\land R}{rule}
+\knowledge{\land R{*}}{rule}
 \knowledge{\lor L}{rule}
 \knowledge{\lor R_1}{rule}
 \knowledge{\lor R_2}{rule}
@@ -230,8 +232,7 @@
 \knowledge{\exists R{*}}{rule}
 
 % Subformula linking
-\knowledge{rule}
- | id@sfl
+\knowledge{id}{rule,scope=sfl}
 \knowledge{L{=}_1}{rule}
 \knowledge{L{=}_2}{rule}
 \knowledge{L\land_1}{rule}
@@ -298,7 +299,7 @@
 \knowledge{P\exists s}{rule}
 \knowledge{Pcomm}{rule}
 
-% Bubbles
+% BJ
 \knowledge{i{\da}}{rule}
 \knowledge{i{\ua}}{rule}
 \knowledge{w}{rule}
@@ -315,10 +316,69 @@
 \knowledge{\lor{+}_2}{rule}
 \knowledge{{\limp}{-}}{rule}
 \knowledge{{\limp}{+}}{rule}
+\knowledge{{\limp}{+}c}{rule}
 \knowledge{\forall{-}}{rule}
 \knowledge{\forall{+}}{rule}
 \knowledge{\exists{-}}{rule}
 \knowledge{\exists{+}}{rule}
+
+% System B
+\knowledge{i{\da}}{rule,scope=symm}
+\knowledge{i{\ua}}{rule,scope=symm}
+\knowledge{w{-}}{rule}
+\knowledge{w{+}}{rule}
+\knowledge{c{-}}{rule}
+\knowledge{c{+}}{rule}
+\knowledge{f{\ua}}{rule}
+\knowledge{f{-}{\da}}{rule}
+\knowledge{f{+}{\da}}{rule}
+\knowledge{f{+}{-}{\da}}{rule}
+\knowledge{f{-}{+}{\da}}{rule}
+\knowledge{f{+}{+}{\da}}{rule}
+\knowledge{f{-}{-}{\da}}{rule}
+\knowledge{f{+}{-}{\ua}}{rule}
+\knowledge{f{-}{+}{\ua}}{rule}
+\knowledge{f{+}{+}{\ua}}{rule}
+\knowledge{f{-}{-}{\ua}}{rule}
+\knowledge{a}{rule}
+\knowledge{a{-}}{rule}
+\knowledge{a{+}}{rule}
+\knowledge{p}{rule}
+\knowledge{p{-}}{rule}
+\knowledge{p{+}}{rule}
+\knowledge{\top{-}}{rule,scope=symm}
+\knowledge{\top{+}}{rule,scope=symm}
+\knowledge{\bot{-}}{rule,scope=symm}
+\knowledge{\bot{+}}{rule,scope=symm}
+\knowledge{\land{-}}{rule,scope=symm}
+\knowledge{\land{+}}{rule,scope=symm}
+\knowledge{\lor{-}}{rule,scope=symm}
+\knowledge{\lor{+}}{rule,scope=symm}
+\knowledge{{\limp}{-}}{rule,scope=symm}
+\knowledge{{\limp}{+}}{rule,scope=symm}
+\knowledge{{\lsub}{-}}{rule,scope=symm}
+\knowledge{{\lsub}{+}}{rule,scope=symm}
+\knowledge{{\forall}{-}}{rule,scope=symm}
+\knowledge{{\forall}{+}}{rule,scope=symm}
+\knowledge{{\exists}{-}}{rule,scope=symm}
+\knowledge{{\exists}{+}}{rule,scope=symm}
+
+% DBiInt
+\knowledge{id}{rule,scope=dbiint}
+\knowledge{{\seq}_{L1}}{rule}
+\knowledge{{\seq}_{R1}}{rule}
+\knowledge{{\seq}_{L2}}{rule}
+\knowledge{{\seq}_{R2}}{rule}
+\knowledge{\bot_L}{rule}
+\knowledge{\top_R}{rule}
+\knowledge{\land_L}{rule}
+\knowledge{\land_R}{rule}
+\knowledge{\lor_L}{rule}
+\knowledge{\lor_R}{rule}
+\knowledge{\limp_L}{rule}
+\knowledge{\limp_R}{rule}
+\knowledge{{\lsub}_L}{rule}
+\knowledge{{\lsub}_R}{rule}
 
 % Alpha EGs (informal version)
 \knowledge{Iteration}{rule}
@@ -1116,12 +1176,46 @@
  | Unpolarized@bubble
 
 \knowledge{notion}
+ | asymmetric interpretation
+ | Asymmetric interpretation
+
+\knowledge{notion}
  | saturated
  | Saturated
 
 \knowledge{notion}
  | unsaturated
  | Unsaturated
+
+\knowledge{notion}
+ | branching operator
+ | branching operators
+ | Branching operator
+ | Branching operators
+ 
+\knowledge{notion}
+ | symmetric interpretation
+ | Symmetric interpretation
+
+\knowledge{notion}
+ | positive interpretation
+ | Positive interpretation
+
+\knowledge{notion}
+ | negative interpretation
+ | Negative interpretation
+
+\knowledge{notion}
+ | Grishin (a)
+
+\knowledge{notion}
+ | Grishin (b)
+
+\knowledge{notion}
+ | exclusion
+ | exclusions
+ | Exclusion
+ | Exclusions
 
 % Existential graphs
 

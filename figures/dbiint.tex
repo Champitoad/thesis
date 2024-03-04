@@ -11,65 +11,65 @@
 \and
 \begin{array}{c@{\quad}c}
 \multicolumn{2}{c}{\textsc{Propagation}} \\[1em]
-\R[\rsf{\seq_{L1}}]
+\R[\intro{{\seq}_{L1}}]
   {X, A, (X', A \seq Y') \seq Y}
   {X, (X', A \seq Y') \seq Y}
 &
-\R[\rsf{\seq_{R1}}]
+\R[\intro{{\seq}_{R1}}]
   {X \seq (X' \seq A, Y'), A, Y}
   {X \seq (X' \seq A, Y'), Y}
 \\
-\R[\rsf{\seq_{L2}}]
+\R[\intro{{\seq}_{L2}}]
   {X, A \seq (X', A \seq Y'), Y}
   {X, A \seq (X' \seq Y'), Y}
 &
-\R[\rsf{\seq_{R2}}]
+\R[\intro{{\seq}_{R2}}]
   {X, (X' \seq A, Y') \seq A, Y}
   {X, (X' \seq Y') \seq A, Y}
 \end{array}
 \and
 \begin{array}{c@{\quad}c}
 \multicolumn{2}{c}{\text{\textsc{Logic}}} \\[1em]
-\R[\rsf{\bot_L}]
+\R[\intro{\bot_L}]
   {}
   {X, \bot \seq Y}
 &
-\R[\rsf{\top_R}]
+\R[\intro{\top_R}]
   {}
   {X \seq \top, Y}
 \\
-\R[\rsf{\land_L}]
+\R[\intro{\land_L}]
   {X, A \land B, A, B \seq Y}
   {X, A \land B \seq Y}
 &
-\R[\rsf{\land_R}]
+\R[\intro{\land_R}]
   {X \seq A, A \land B, Y}
   {X \seq B, A \land B, Y}
   {X \seq A \land B, Y}
 \\
-\R[\rsf{\lor_L}]
+\R[\intro{\lor_L}]
   {X, A \lor B, A \seq Y}
   {X, A \lor B, B \seq Y}
   {X, A \lor B \seq Y}
 &
-\R[\rsf{\lor_R}]
+\R[\intro{\lor_R}]
   {X \seq A, B, A \lor B, Y}
   {X \seq A \lor B, Y}
 \\
-\R[\rsf{\limp_L}]
+\R[\intro{\limp_L}]
   {X, A \limp B \seq A, Y}
   {X, A \limp B, B \seq Y}
   {X, A \limp B \seq Y}
 &
-\R[\rsf{\limp_R}]
+\R[\intro{\limp_R}]
   {X \seq (A \seq B), A \limp B, Y}
   {X \seq A \limp B, Y}
 \\
-\R[\rsf{\lsub_L}]
+\R[\intro{\lsub_L}]
   {X, A \lsub B, (A \seq B) \seq Y}
   {X, A \lsub B \seq Y}
 &
-\R[\rsf{\lsub_R}]
+\R[\intro{\lsub_R}]
   {X \seq A, A \lsub B, Y}
   {X, B \seq A \lsub B, Y}
   {X \seq A \lsub B, Y}

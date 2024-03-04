@@ -5,11 +5,11 @@
 \begin{array}{r@{\quad}l}
 \multicolumn{2}{c}{\identity} \\[1em]
 
-\R[\mathsf{i{\da}}]
+\R[\intro{i{\da}}]
     {\Gamma \piq{} \Delta}
     {\Gamma, A \seq A, \Delta}
 &
-\R[\mathsf{i{\ua}}]
+\R[\intro{i{\ua}}]
     {\Gamma \piq{\seq A \sep A \seq} \Delta}
     {\Gamma \seq \Delta}
 \end{array}
@@ -17,19 +17,19 @@
 \begin{array}{c@{\quad}c}
 \multicolumn{2}{c}{\resource} \\[1em]
 
-\R[\mathsf{w{-}}]
+\R[\intro{w{-}}]
     {\Gamma \J \Delta}
     {\Gamma, I \J \Delta}
 &
-\R[\mathsf{w{+}}]
+\R[\intro{w{+}}]
     {\Gamma \J \Delta}
     {\Gamma \J I, \Delta}
 \\
-\R[\mathsf{c{-}}]
+\R[\intro{c{-}}]
     {\Gamma, I, I \J \Delta}
     {\Gamma, I \J \Delta}
 &
-\R[\mathsf{c{+}}]
+\R[\intro{c{+}}]
     {\Gamma \J I, I, \Delta}
     {\Gamma \J I, \Delta}
 \end{array}
@@ -37,66 +37,66 @@
 \begin{array}{c@{\quad}c}
 \multicolumn{2}{c}{\flow} \\[1em]
 
-% \R[\mathsf{s{-}}]
+% \R[\intro{s{-}}]
 %     {\piq{S \seq} \mix \Gamma \J \Delta}
 %     {\Gamma, (\piq{S}) \J \Delta}
 % &
-% \R[\mathsf{s{+}}]
+% \R[\intro{s{+}}]
 %     {\Gamma \J \Delta \mix \piq{\seq S}}
 %     {\Gamma \J (\piq{S}), \Delta}
 % \\
 
 \multicolumn{2}{c}{
-\R[\mathsf{f{\ua}}]
+\R[\intro{f{\ua}}]
     {\Gamma \piq{\mathcal{S} \sep \Gamma' \piq{\mathcal{S'}} \Delta' \sep S} \Delta}
     {\Gamma \piq{\mathcal{S} \sep \Gamma' \piq{\mathcal{S'} \sep S} \Delta'} \Delta}
 } \\
 
-% \R[\mathsf{n{-}{\ua}}]
+% \R[\intro{n{-}{\ua}}]
 %     {(\Gamma, (\piq{\cS}) \J \Delta) \mix \piq{S}}
 %     {\Gamma, (\piq{\cS \sep S}) \J \Delta}
 % &
-% \R[\mathsf{n{+}{\ua}}]
+% \R[\intro{n{+}{\ua}}]
 %     {\piq{S} \mix (\Gamma \J (\piq{\cS}), \Delta)}
 %     {\Gamma  \J (\piq{\cS \sep S}), \Delta}
 % \\
-\R[\mathsf{f{-}{\da}}]
+\R[\intro{f{-}{\da}}]
     {\Gamma \piq{\Gamma', I \JB \Delta' \sep \cS} \Delta}
     {\Gamma, I \piq{\Gamma' \JB \Delta' \sep \cS} \Delta}
 &
-\R[\mathsf{f{+}{\da}}]
+\R[\intro{f{+}{\da}}]
     {\Gamma \piq{\cS \sep \Gamma' \JB I, \Delta'} \Delta}
     {\Gamma \piq{\cS \sep \Gamma' \JB \Delta'} I, \Delta}
 \\
-\R[\mathsf{f{-}{+}}{\da}]
+\R[\intro{f{-}{+}{\da}}]
     {\Gamma \J (\Gamma', I \JB \Delta'), \Delta}
     {\Gamma, I \J (\Gamma' \JB \Delta'), \Delta}
 &
-\R[\mathsf{f{+}{-}}{\da}]
+\R[\intro{f{+}{-}{\da}}]
     {\Gamma, (\Gamma' \JB I, \Delta') \J \Delta}
     {\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}
 \\
-\R[\mathsf{f{-}{-}{\ua}}]
+\R[\intro{f{-}{-}{\ua}}]
     {\Gamma, I, (\Gamma' \JB \Delta') \J \Delta}
     {\Gamma, (\Gamma', I \JB \Delta') \J \Delta}
 &
-\R[\mathsf{f{+}{+}{\ua}}]
+\R[\intro{f{+}{+}{\ua}}]
     {\Gamma \J (\Gamma' \JB \Delta'), I, \Delta}
     {\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}
 \\
-\R[\mathsf{f{-}{+}}{\ua}]
+\R[\intro{f{-}{+}{\ua}}]
     {\Gamma, I \J (\Gamma' \JB \Delta'), \Delta}
     {\Gamma \J (\Gamma', I \JB \Delta'), \Delta}
 &
-\R[\mathsf{f{+}{-}}{\ua}]
+\R[\intro{f{+}{-}{\ua}}]
     {\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}
     {\Gamma, (\Gamma' \JB I, \Delta') \J \Delta}
 \\
-\R[\mathsf{f{-}{-}{\da}}]
+\R[\intro{f{-}{-}{\da}}]
     {\Gamma, (\Gamma', I \JB \Delta') \J \Delta}
     {\Gamma, I, (\Gamma' \JB \Delta') \J \Delta}
 &
-\R[\mathsf{f{+}{+}{\da}}]
+\R[\intro{f{+}{+}{\da}}]
     {\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}
     {\Gamma \J (\Gamma' \JB \Delta'), I, \Delta}
 \end{array}
@@ -105,29 +105,29 @@
 \multicolumn{2}{c}{\membrane} \\[1em]
 
 \multicolumn{2}{c}{
-\R[\mathsf{p}]
+\R[\intro{p}]
     {\Gamma \piq{\cS} \Delta}
     {\Gamma \piq{\cS \sep \piq{}} \Delta}
 } \\
-\R[\mathsf{p{-}}]
+\R[\intro{p{-}}]
     {\Gamma \piq{} \Delta}
     {\Gamma, (\piq{}) \seq \Delta}
 &
-\R[\mathsf{p{+}}]
+\R[\intro{p{+}}]
     {\Gamma \piq{} \Delta}
     {\Gamma \seq (\piq{}), \Delta}
 \\
 
 \multicolumn{2}{c}{
-\R[\mathsf{a}]
+\R[\intro{a}]
     {\Gamma \piq{S} \Delta}
-    {\Gamma \piq{\piq{S}} \Delta}
+    {\Gamma \piq{{}\piq{S}{}} \Delta}
 } \\
-\R[\mathsf{a{-}}]
+\R[\intro{a{-}}]
     {\Gamma, S \J \Delta}
     {\Gamma, (\piq{S}) \J \Delta}
 &
-\R[\mathsf{a{+}}]
+\R[\intro{a{+}}]
     {\Gamma \J S, \Delta}
     {\Gamma \J (\piq{S}), \Delta}
 \\
@@ -136,72 +136,72 @@
 \begin{array}{c@{\quad}c}
 \multicolumn{2}{c}{\heating} \\[1em]
 
-\R[\top{-}]
+\R[\intro{\top{-}}]
     {\Gamma \J \Delta}
     {\Gamma, \top \J \Delta}
 &
-\R[\top{+}]
+\R[\intro{\top{+}}]
     {\Gamma  \piq{} \Delta}
     {\Gamma \seq \top, \Delta}
 \\
-\R[\bot{-}]
+\R[\intro{\bot{-}}]
     {\Gamma \piq{} \Delta}
     {\Gamma, \bot \seq \Delta}
 &
-\R[\bot{+}]
+\R[\intro{\bot{+}}]
     {\Gamma \J \Delta}
     {\Gamma \J \bot, \Delta}
 \\
-\R[\land{-}]
+\R[\intro{\land{-}}]
     {\Gamma, A, B \J \Delta}
     {\Gamma, A \land B \J \Delta}
 &
-\R[\land{+}]
-    {\Gamma \piq{\seq A \sep \seq B {}} \Delta}
+\R[\intro{\land{+}}]
+    {\Gamma \piq{\seq A \sep \seq B\ } \Delta}
     {\Gamma \seq A \land B, \Delta}
 \\
-\R[\lor{-}]
+\R[\intro{\lor{-}}]
     {\Gamma \piq{A \seq \sep B\seq} \Delta}
     {\Gamma, A \lor B \seq \Delta}
 &
-\R[\lor{+}]
+\R[\intro{\lor{+}}]
     {\Gamma \J A, B, \Delta}
     {\Gamma \J A \lor B, \Delta}
 \\
-\R[{\limp}{-}]
+\R[\intro{{\limp}{-}}]
     {\Gamma \piq{\seq A \sep B\seq} \Delta}
     {\Gamma, A \limp B \seq \Delta}
 &
-\R[{\limp}{+}]
+\R[\intro{{\limp}{+}}]
     {\Gamma \J (A \seq B), \Delta}
     {\Gamma \J A \limp B, \Delta}
 \\
-\R[{\lsub}{-}]
+\R[\intro{{\lsub}{-}}]
     {\Gamma, (A \seq B) \J \Delta}
     {\Gamma, A \lsub B \J \Delta}
 &
-\R[{\lsub}{+}]
+\R[\intro{{\lsub}{+}}]
     {\Gamma \piq{\seq A \sep B\seq} \Delta}
     {\Gamma \seq A \lsub B, \Delta}
 \\
-\R[\forall{-}]
+\R[\intro{\forall{-}}]
     {\Gamma, \subst{A}{t}{x} \J \Delta}
     {\Gamma, \forall x. A \J \Delta}
 &
-\R[\forall{+}]
+\R[\intro{\forall{+}}]
     {\Gamma \J A, \Delta}
     {\Gamma \J \forall x. A, \Delta}
 \\
-\R[\exists{-}]
+\R[\intro{\exists{-}}]
     {\Gamma, A \J \Delta}
     {\Gamma, \exists x. A \J \Delta}
 &
-\R[\exists{+}]
+\R[\intro{\exists{+}}]
     {\Gamma \J \subst{A}{t}{x}, \Delta}
     {\Gamma \J \exists x. A, \Delta}
 \end{array}
 \end{mathpar}
 
-In the {\rnm{\forall{+}}} and {\rnm{\exists{-}}} rules, $x$ is not free in
+In the {\kl{\forall{+}}} and {\kl{\exists{-}}} rules, $x$ is not free in
 $\Gamma$, $\Delta$ and $\J$.
 \end{framed}

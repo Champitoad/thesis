@@ -103,10 +103,18 @@
 \newcommand{\da}{\downarrow}
 \newcommand{\ua}{\uparrow}
 
-\knowledgenewrobustcmd\seq{\mathrel{\cmdkl{\Rightarrow}}}
+\newrobustcmd\seq{
+  \mathrel{%
+    \withkl{\kl[\seq]}{%
+      \cmdkl{\Rightarrow}
+    }%
+  }%
+}
+\knowledge{\seq}{notion}
+
 \newcommand{\limp}{\supset}
-\newcommand{\lsub}{\subset}
 \newcommand{\lequiv}{\Leftrightarrow}
+\newcommand{\lsub}{\subset}
 
 \newcommand{\mcirc}{\mathbin{⚬}}
 \newcommand{\mdiam}{◇}
@@ -130,8 +138,8 @@
 \newcommand{\irule}[3]{#1 : #2 \step{} #3}
 \newcommand{\rrule}[3]{#2 \step{#1} #3}
 
-\newcommand{\sement}{\leq}
-\newcommand{\semequiv}{\simeq}
+\knowledgenewrobustcmd\sement{\mathrel{\cmdkl{\leq}}}
+\knowledgenewrobustcmd\semequiv{\mathrel{\cmdkl{\simeq}}}
 
 \knowledgenewrobustcmd\bv{\cmdkl{\mathsf{bv}}}
 \knowledgenewrobustcmd\fv{\cmdkl{\mathsf{fv}}}
@@ -240,7 +248,7 @@
 \newcommand{\sementC}{\sement_{\Boolean}}
 \newcommand{\sementX}{\sement_{\ACVar}}
 
-\newcommand{\sysB}{\kl[system B]{B}}
+\newcommand{\sysB}{\kl[system~B]{B}}
 \newcommand{\sysBH}{B_{\!\Heyting}}
 \newcommand{\sysBB}{B_{\!\Brouwer}}
 \newcommand{\sysBHB}{B_{\!\HeytingBrouwer}}

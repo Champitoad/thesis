@@ -532,7 +532,7 @@ first \kl{deep inference} system was the \intro{calculus of structures}
 on formulas. For instance, the following \intro{switch rule}, when read
 bottom-up (i.e. in \kl{backward} mode), indicates that the formula $A \lor (B
 \land C)$ may be rewritten into $(A \lor B) \land C$:
-$$\R[\rsf{s}]{S\select{(A \lor B) \land C}}{S\select{A \lor (B \land C)}}$$
+$$\R[\kl{s}]{S\select{(A \lor B) \land C}}{S\select{A \lor (B \land C)}}$$
 \AP Importantly, the rule can be applied in any \emph{context} $S\hole$. A
 \intro{context} $S\hole$ is simply a formula containing a single occurrence of a
 special subformula $\hole$ called its \intro{hole}, which can be \emph{filled}
@@ -556,7 +556,7 @@ $A$ to the trivially true \kl{goal} $\top$.
 \AP
 The \kl{calculus of structures}, as a \kl{rewriting system}, is closer to the
 equational reasoning that mathematicians are accustomed to in algebra. The main
-difference is that most rules (including the \kl{switch rule} \rsf{s}) can only
+difference is that most rules (including the \kl{switch rule} \kl{s}) can only
 be applied in a \emph{single} direction, because the premiss and conclusion are
 not \emph{equivalent}\sidenote{In the standard system \kl{SKS} from where the
 \kl{s} rule originates, every context is \emph{\kl(sfl){positive}}, in the sense that the

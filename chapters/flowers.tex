@@ -188,7 +188,7 @@ within another.
 \begin{marginfigure}
   $$
   \!\!\!\!\stkfig{1}{scroll-empty-antecedant}
-  \!\!\!\!\xinvstep{\rsf{BA}}~~~~
+  \!\!\!\!\xinvstep{\intro{BA}}~~~~
   G
   $$
   \caption{The rule of Blank Antecedant}
@@ -873,47 +873,39 @@ As has become standard in this thesis, we define the flower calculus as a
 set of unary \kl{deep inference} rules: when read \emph{top-down}, they correspond to
 usual inferences from premiss to conclusion, and will be justified by the
 soundness theorem of \refsec{Soundness}.
-% This gives them a \emph{static}, \emph{a posteriori} meaning, since this is
-% typically how you would check the validity of an established inference
-% \emph{after the fact}.
 But the more interesting direction, and the one around which the calculus has
 been designed, is when you read the rules \emph{bottom-up}: then they are indeed
 \kl{rewriting rules}, telling you the different ways in which you can choose to
 simplify a \kl{goal}. This is how the \emph{graphical} version of the rules is
 presented in \reffig{natural-graphical} and \reffig{cultural-graphical}.
-% Note that in the graphical presentation, the rules
-% $\{\rsf{poll{\da}},\rsf{poll{\ua}},\rsf{grow},\rsf{crop}\}$ (resp.
-% $\{\rsf{pull},\rsf{glue}\}$) manipulate a single flower (resp. petal) instead of
-% an arbitrary bouquet $\Phi$ (resp. corolla $\Gamma$); but it is easy to see that
-% these two variants are interderivable.
 
 Let us now describe the rules in more detail, starting with the fragment that is
 a direct adaptation of the rules of \kl{Beta} (\reffig{beta}):
 
 \begin{description}
-  \item[Blank Antecedant (\rsf{epis})]
+  \item[Blank Antecedant (\kl{epis})]
     
     \begin{marginfigure}
       $$
-      \R[\rsf{epis{\da}}]
+      \R[\intro{epis{\da}}]
         {\Phi}
         {\flower{\garden{{}}{{}}}{\garden{{}}{\Phi}}}
       $$
-      \caption{Converse of \rsf{epis} rule}
+      \caption{Converse of \kl{epis} rule}
       \labfig{flowers-episda}
     \end{marginfigure}
 
     It allows to enclose any bouquet in a petal attached to an \textsf{(e)}mpty
-    \textsf{(pis)}til. This is one direction of the rule \rsf{BA} of
+    \textsf{(pis)}til. This is one direction of the rule \kl{BA} of
     (\reffig{rule-empty-antecedant}), which is a weaker, \kl{intuitionistic} version
-    of the \kl{classical} rule \rsf{Dcut{\ua}} of \kl{Alpha} and \kl{Beta}. The
-    other direction (rule \rsf{epis{\da}} in \reffig{flowers-episda}) is
+    of the \kl{classical} rule \kl{Dcut{\ua}} of \kl{Alpha} and \kl{Beta}. The
+    other direction (rule \kl{epis{\da}} in \reffig{flowers-episda}) is
     actually \kl{admissible}, which might be related to the co-admissibility of
-    \rsf{Dcut{\da}} in \kl{Alpha} (\refcor{adm-ins}).
+    \kl{Dcut{\da}} in \kl{Alpha} (\refcor{adm-ins}).
 
-  \item[(De)iteration (\rsf{poll{\da}}, \rsf{poll{\ua}})]
+  \item[(De)iteration (\kl{poll{\da}}, \kl{poll{\ua}})]
     Renamed \emph{\textsf{(poll)}ination} rules, they correspond to the rules
-    \rsf{Iter} and \rsf{Deit} of \kl{Alpha} and \kl{Beta}, but reformulated
+    \kl{Iter} and \kl{Deit} of \kl{Alpha} and \kl{Beta}, but reformulated
     with the pollination relation (\refdef{pollination}). In fact in their
     textual presentation of \reffig{flower-calculus}, they are more general than
     (de)iteration rules, because \refdef{pollination} allows the pollinating
@@ -926,28 +918,28 @@ a direct adaptation of the rules of \kl{Beta} (\reffig{beta}):
     bouquet (however scattered) can always be simulated by the successive
     pollinations of each of its flowers.
 
-  \item[Insertion/Deletion (\rsf{grow}, \rsf{crop}, \rsf{pull}, \rsf{glue})]
-    They correspond to the rules \rsf{Ins} and \rsf{Del} of \kl{Alpha} and
+  \item[Insertion/Deletion (\kl{grow}, \kl{crop}, \kl{pull}, \kl{glue})]
+    They correspond to the rules \kl{Ins} and \kl{Del} of \kl{Alpha} and
     \kl{Beta}, but have doubled in number to account for the syntactic
-    distinction between pistils and petals. More precisely, rules \rsf{grow} and
-    \rsf{crop} allow to insert and delete entire flowers, while rules \rsf{pull}
-    and \rsf{glue} deal with petals. As for pollination rules, manipulating
+    distinction between pistils and petals. More precisely, rules \kl{grow} and
+    \kl{crop} allow to insert and delete entire flowers, while rules \kl{pull}
+    and \kl{glue} deal with petals. As for pollination rules, manipulating
     single flowers/petals (graphical version) or entire bouquets/corollas
     (textual version) does not change the deductive power of the rules.
     
-  \item[Unification (\rsf{ipis}, \rsf{ipet}, \rsf{apis}, \rsf{apet})]
-    Rules \rsf{ipis} and \rsf{ipet} allow to \textsf{(i)}nstantiate a sprinkler
+  \item[Unification (\kl{ipis}, \kl{ipet}, \kl{apis}, \kl{apet})]
+    Rules \kl{ipis} and \kl{ipet} allow to \textsf{(i)}nstantiate a sprinkler
     located respectively in a \textsf{(pis)}til ($\forall$) and a
     \textsf{(pet)}al ($\exists$) with an arbitrary \kl{substitution}, while rules
-    \rsf{apis} and \rsf{apet} do the opposite operation of
+    \kl{apis} and \kl{apet} do the opposite operation of
     \textsf{(a)}bstracting a set of terms by introducing a sprinkler. They
-    correspond respectively to a generalization of the rules \rsf{Unif{\ua}} and
-    \rsf{Unif{\da}} of \kl{Beta}, where the variable \kl{substitution} $\{z/y\}$
+    correspond respectively to a generalization of the rules \kl{Unif{\ua}} and
+    \kl{Unif{\da}} of \kl{Beta}, where the variable \kl{substitution} $\{z/y\}$
     becomes an arbitrary \kl{substitution} $\sigma$. Once again, we have twice the
     amount of rules to account for the pistil/petal distinction, which is not
     surprising since in the LoI syntax of \kl{EGs}, they are special cases of
     Insertion/Deletion. Note that for the instantiation rules
-    \rsf{ipis}/\rsf{ipet} to be \kl{invertible}, we duplicate the whole flower/petal
+    \kl{ipis}/\kl{ipet} to be \kl{invertible}, we duplicate the whole flower/petal
     where the sprinkler occurs, mirroring what is done in multi-conclusion
     \kl{sequent calculi} (see \reffig{multi-inst}).
 \end{description}
@@ -957,21 +949,21 @@ statements, i.e. flowers with respectively $n \geq 2$ and $n = 0$ petals, and
 are closer to sequent-style introduction/\kl{elimination rules}:
 
 \begin{description}
-  \item[Disjunction Introduction (\rsf{epet})]
+  \item[Disjunction Introduction (\kl{epet})]
     It allows to erase any flower with an \textsf{(e)}mpty \textsf{(pet)}al.
     According to Oostra \cite[p.~109]{oostra_advances_2022}, Peirce already
-    identified \rsf{epet} as a component of his decision procedure for
+    identified \kl{epet} as a component of his decision procedure for
     \kl{Alpha} (it is simply called ``Operation 1'' in
     \cite{oostra_advances_2022}). This is no coincidence, since we precisely
     came up with this rule when trying to design a decision procedure for
     flowers (see \refsec{flowers-search}).
 
-  \item[Disjunction/Absurdity Elimination (\rsf{srep})]
+  \item[Disjunction/Absurdity Elimination (\kl{srep})]
     It corresponds to a $n$-ary generalization of the \kl{left introduction
     rule} for disjunction in \kl{sequent calculus}, the $0$-ary case capturing
     absurdity elimination (\textit{ex falso quodlibet}). The binary case is also
     used in the \kl{IEGs} system of \cite{minghui_graphical_2019}, together with
-    its converse. The name \rsf{srep} is short for
+    its converse. The name \kl{srep} is short for
     \textsf{(s)}elf-\textsf{(rep)}roduction, which is more clearly visualized in
     the graphical version of the rule in \reffig{natural-graphical}. Through the
     \kl{Curry-Howard correspondence}, it can be related to the \emph{pattern-matching
@@ -1025,11 +1017,11 @@ with any number of petals, flowers and binders. In particular, this means that
 the same rules can be used to capture provability in almost any \emph{fragment}
 of \kl{intuitionistic} \kl{predicate logic}, understood as any subset $\mathfrak{F}
 \subset \flowers$ of the set of all flowers\sidenote{The only exception seems to
-be the rule (\rsf{ipis}) (resp. \rsf{ipet}), whose duplication of flowers (resp.
+be the rule (\kl{ipis}) (resp. \kl{ipet}), whose duplication of flowers (resp.
 petals) prevents $\forall$ from being expressible (i.e. provable) without
 $\land$ (resp. $\lor$). This can be fixed by simply removing the duplication and
-polarizing the \kl{context} of application as for the rule \rsf{apis} (resp.
-\rsf{apet}), at the cost of making the rule non-\kl{invertible}.}.
+polarizing the \kl{context} of application as for the rule \kl{apis} (resp.
+\kl{apet}), at the cost of making the rule non-\kl{invertible}.}.
 \reftab{flowers-fragments} shows how all the usual \kl{symbolic} connectives can be
 expressed by \emph{cardinality} constraints on set-based syntactic constructs:
 $<$, $\leq$, $=$, $\geq$, $>$ correspond respectively to a cardinality smaller,
@@ -1117,8 +1109,8 @@ following strong deduction theorem:
   \begin{array}{rlll}
     \flower{\Psi}{\Phi}
     &\steps{} &\flower{\Psi}{\Psi} &\text{(Hypothesis + \reflemma{flowers-posclos})}\\
-    &\step{\rsf{poll{\da}}} &\flower{\Psi}{\cdot} &\\
-    &\step{\rsf{epet}} &\emptyset &
+    &\step{\kl{poll{\da}}} &\flower{\Psi}{\cdot} &\\
+    &\step{\kl{epet}} &\emptyset &
   \end{array}
   $$
   
@@ -1127,16 +1119,16 @@ following strong deduction theorem:
   $$
   \begin{array}{rlll}
     \Phi
-    &\step{\rsf{epis}} &\flower{}{\Phi} &\\
-    &\step{\rsf{grow}} &(\flower{\Psi}{\Phi}),(\flower{}{\Phi}) &\\
-    &\step{\rsf{poll{\ua}}} &(\flower{\Psi}{\Phi}),(\flower{(\flower{\Psi}{\Phi})}{\Phi}) &\\
+    &\step{\kl{epis}} &\flower{}{\Phi} &\\
+    &\step{\kl{grow}} &(\flower{\Psi}{\Phi}),(\flower{}{\Phi}) &\\
+    &\step{\kl{poll{\ua}}} &(\flower{\Psi}{\Phi}),(\flower{(\flower{\Psi}{\Phi})}{\Phi}) &\\
     &\steps{} &\flower{(\flower{\Psi}{\Phi})}{\Phi} &\text{(Hypothesis + \reflemma{flowers-posclos})}\\
-    &\step{\rsf{grow}} &\Psi,(\flower{(\flower{\Psi}{\Phi})}{\Phi}) &\\
-    &\step{\rsf{poll{\da}}} &\Psi,(\flower{(\flower{}{\Phi})}{\Phi}) &\\
-    &\step{\rsf{srep}} &\Psi,(\flower{}{(\flower{\Phi}{\Phi})}) &\\
-    &\step{\rsf{poll{\da}}} &\Psi,(\flower{}{(\flower{\Phi}{\cdot})}) &\\
-    &\step{\rsf{epet}} &\Psi,(\flower{}{\cdot}) &\\
-    &\step{\rsf{epet}} &\Psi
+    &\step{\kl{grow}} &\Psi,(\flower{(\flower{\Psi}{\Phi})}{\Phi}) &\\
+    &\step{\kl{poll{\da}}} &\Psi,(\flower{(\flower{}{\Phi})}{\Phi}) &\\
+    &\step{\kl{srep}} &\Psi,(\flower{}{(\flower{\Phi}{\Phi})}) &\\
+    &\step{\kl{poll{\da}}} &\Psi,(\flower{}{(\flower{\Phi}{\cdot})}) &\\
+    &\step{\kl{epet}} &\Psi,(\flower{}{\cdot}) &\\
+    &\step{\kl{epet}} &\Psi
   \end{array}
   $$
 \end{proof}
@@ -1144,7 +1136,7 @@ following strong deduction theorem:
 Contrary to full derivability, natural derivability $\Phi \step{\Nature} \Psi$
 is too weak to satisfy a strong deduction theorem. This can be intuited from the
 proof of \refthm{flowers-strong-deduction}, by noticing that the converse
-direction relies on the $\Culture$-rule \rsf{grow}, a close analog to the cut
+direction relies on the $\Culture$-rule \kl{grow}, a close analog to the cut
 rule in \kl{sequent calculus}. Also as already mentioned, the natural rules of the
 flower calculus are both \emph{\kl{invertible}} and \emph{complete} for provability.
 A consequence of invertibility is that natural derivability is only able to
@@ -1192,14 +1184,14 @@ in these settings it is characterized as the existence of a proof for a
 of derivations, here we have the stronger requirement that there exist proofs
 for a \emph{class} of \kl{judgments} $\cfill{\Xi}{\Phi}$, whose hypothetical shape
 comes from the condition that $\chyp{\Psi}{\Xi\hole}$. In practice, the
-pollination rules $\{\text{\rsf{poll{\da}}}, \text{\rsf{poll{\ua}}}\}$ and
-the {\rsf{epis}} rule make this equivalent to the existence of a proof for
-$\flower{\Psi}{\Phi}$. But we conjecture that the {\rsf{epis}} rule might be
+pollination rules $\{\text{\kl{poll{\da}}}, \text{\kl{poll{\ua}}}\}$ and
+the {\kl{epis}} rule make this equivalent to the existence of a proof for
+$\flower{\Psi}{\Phi}$. But we conjecture that the {\kl{epis}} rule might be
 \kl{admissible} modulo the addition of the distributivity rule
-\rsf{crep}\sidenote{\rsf{crep} stands for \textsf{c}ross-\textsf{rep}roduction,
+\kl{crep}\sidenote{\kl{crep} stands for \textsf{c}ross-\textsf{rep}roduction,
 mirroring the distinction between cross-pollination and self-pollination, but
-with respect to the self-reproduction rule \rsf{srep}.}\sidenote{It seems that
-the question of admissibility of \rsf{epis} is very similar to the question of
+with respect to the self-reproduction rule \kl{srep}.}\sidenote{It seems that
+the question of admissibility of \kl{epis} is very similar to the question of
 admissibility of \emph{release} rules discussed in \refsec{dnd-completeness}.
 Both can be used to enable a local simulation of \kl{sequent calculus} rules, but do
 not appear in real proofs because of the arbitrary deep/global power of link
@@ -1207,7 +1199,7 @@ formation and (de)iteration rules.} of \reffig{cross-reproduction}.
 
 \begin{marginfigure}
   $$
-  \R[\rsf{crep}]
+  \R[\kl{crep}]
     {\flower{\gamma}{\fset{i}{n}{\garden{\bx_i}{\Phi_i, \Psi}}}}
     {(\flower{\gamma}{\fset{i}{n}{\garden{\bx_i}{\Phi_i}}}), \Psi}
   $$
@@ -1216,10 +1208,10 @@ formation and (de)iteration rules.} of \reffig{cross-reproduction}.
 \end{marginfigure}
 
 Thus our stronger notion of hypothetical provability makes more sense in the
-variant $\Nature \setminus \{\rsf{epis}\} \cup \{\rsf{crep}\}$ of the
+variant $\Nature \setminus \{\kl{epis}\} \cup \{\kl{crep}\}$ of the
 flower calculus, although it will still be useful in this work to make
 meta-theoretical proofs slightly shorter. For now we allow the
-{\rsf{epis}} rule, which renders the deduction theorem trivial:
+{\kl{epis}} rule, which renders the deduction theorem trivial:
 
 \begin{theorem}[Deduction]\labthm{deduction}
   For any pair $\Phi, \Psi$ of bouquets, $\Psi \entails{\Nature} \Phi$ if and only if
@@ -1569,7 +1561,7 @@ system\sidenote{Other instances in this thesis are \reflemma{variance},
 
 Weakening lemmas are also standard in \kl{proof theory} and \kl{type theory}. Here they
 are purely semantic, but they will participate in the admissibility of the
-\kl{weakening} rules $\{\rsf{grow},\rsf{crop},\rsf{pull},\rsf{glue}\}$:
+\kl{weakening} rules $\{\kl{grow},\kl{crop},\kl{pull},\kl{glue}\}$:
 
 \begin{lemma}[Weakening]\lablemma{flowers-weakening}
   $\Phi \kentails{}\emptyset$.
@@ -1591,7 +1583,7 @@ are purely semantic, but they will participate in the admissibility of the
 \end{proof}
 
 The less obvious rules in terms of soundness are the \emph{pollination} rules
-$\{\rsf{poll{\da}},\rsf{poll{\ua}}\}$, because of the arbitrary \kl{context} $\Xi$
+$\{\kl{poll{\da}},\kl{poll{\ua}}\}$, because of the arbitrary \kl{context} $\Xi$
 and reliance on the pollination relation. The following lemma can be compared to
 \reflemma{eg-iteration} for the (de)iteration rules in \kl{EGs}:
 
@@ -1766,8 +1758,8 @@ Then we also need to account for \emph{self-pollination}:
   \end{itemize}
 \end{proof}
 
-Proving the soundness of rules involving binders (\rsf{ipis}, \rsf{ipet},
-\rsf{apis}, \rsf{apet}) is also quite tedious, which can be understood as
+Proving the soundness of rules involving binders (\kl{ipis}, \kl{ipet},
+\kl{apis}, \kl{apet}) is also quite tedious, which can be understood as
 stemming from the fact that \kl{substitutions} simulate the complex dynamics of the
 lines of identity of \kl{EGs} in a \emph{global} rather than local way. In particular,
 one needs to be careful about the scope of bound variables, which in \kl{EGs} would be
@@ -1844,10 +1836,10 @@ entails its premiss.
   $\Nature$-rule.
   
   \begin{itemize}
-    \item[\textbf{(\rsf{poll{\da}}, \rsf{poll{\ua}})}]
+    \item[\textbf{(\kl{poll{\da}}, \kl{poll{\ua}})}]
       By \reflemma{flowers-pollination}.
     
-    \item[\textbf{(\rsf{epis})}]\sbr
+    \item[\textbf{(\kl{epis})}]\sbr
     \begin{enumerate}
       \item Suppose that $\eforces{w}{\Phi}{e}$. Then by \reflemma{access-mono}
       we have $\eforces{w'}{\Phi}{e}$, and thus we can conclude for instance with
@@ -1859,17 +1851,17 @@ entails its premiss.
       for some $w$-evaluation $e''$, and thus $\eforces{w}{\Phi}{e}$.
     \end{enumerate}
 
-    \item[\textbf{(\rsf{epet})}]
+    \item[\textbf{(\kl{epet})}]
       Let $\gamma = \garden{\bx}{\Phi}$. We trivially have that
       $\eforces{w'}{\emptyset}{\update{e}{\bx}{\update{e'}{\emptyset}{e}}}$,
       and thus can conclude.
 
-    \item[\textbf{(\rsf{ipis})}] We trivially have $\flower{\garden{\bx,\by}{\Phi}}{\Delta}
+    \item[\textbf{(\kl{ipis})}] We trivially have $\flower{\garden{\bx,\by}{\Phi}}{\Delta}
       \kentails{}\flower{\garden{\bx,\by}{\Phi}}{\Delta}$ by
       \reffact{kentails-refl}, and thus we can conclude by
       \reflemma{flowers-univ-inst}.
 
-    \item[\textbf{(\rsf{ipet})}] The first direction is trivial by
+    \item[\textbf{(\kl{ipet})}] The first direction is trivial by
       \reflemma{flowers-coweakening}. In the other direction, let $\gamma =
       \garden{\bz}{\Xi}$, and suppose that
       $\eforces{w}{\flower{\gamma}{\garden{\bx}{\sigma(\Phi)} \sep
@@ -1886,7 +1878,7 @@ entails its premiss.
         \reflemma{flowers-ex-inst}.
       \end{itemize}
       
-    \item[\textbf{(\rsf{srep})}]
+    \item[\textbf{(\kl{srep})}]
       Let $\gamma_i = \garden{\by_i}{\Psi_i}$ for $1 \leq i \leq n$.
       \begin{enumerate}
         \item Suppose that
@@ -1946,15 +1938,15 @@ The soundness of cultural rules is straightforward with the previous lemmas:
 \begin{proof}
   By inspection of every $\Culture$-rule.
   \begin{itemize}
-    \item[(\rsf{grow}, \rsf{crop})] By \reflemma{flowers-weakening} and
+    \item[(\kl{grow}, \kl{crop})] By \reflemma{flowers-weakening} and
     \reflemma{flowers-functoriality}.
     
-    \item[(\rsf{pull}, \rsf{glue})] By \reflemma{flowers-coweakening} and
+    \item[(\kl{pull}, \kl{glue})] By \reflemma{flowers-coweakening} and
     \reflemma{flowers-functoriality}.
     
-    \item[(\rsf{apis})] By \reflemma{flowers-univ-inst} and \reflemma{flowers-functoriality}.
+    \item[(\kl{apis})] By \reflemma{flowers-univ-inst} and \reflemma{flowers-functoriality}.
 
-    \item[(\rsf{apet})] By \reflemma{flowers-ex-inst} and \reflemma{flowers-functoriality}.
+    \item[(\kl{apet})] By \reflemma{flowers-ex-inst} and \reflemma{flowers-functoriality}.
   \end{itemize}
 \end{proof}
 
@@ -2216,8 +2208,8 @@ of its petals $\Phi_i$ is.
 Note that both \refprop{inv-elem-flower} and \refprop{inv-deriv-flower} are
 proved indirectly by contradiction, but that the contradiction is obtained by
 exhibiting a concrete derivation, exploiting respectively the universal
-instantiation of pistils with the \rsf{ipis} rule, and the existential
-instantiation of petals with the \rsf{ipet} rule. Thus there seems to be some
+instantiation of pistils with the \kl{ipis} rule, and the existential
+instantiation of petals with the \kl{ipet} rule. Thus there seems to be some
 constructive content to these proofs, despite their use of a \kl{classical} reasoning
 principle. Also, this is the only place in the completeness proof where we build
 derivations, and all $\Nature$-rules (and only them) seem to be required to
@@ -2353,7 +2345,7 @@ We get completeness as the direct (and \kl{classical}) contraposition of
 
 Combined with strong deduction (\refthm{flowers-strong-deduction}), this also
 yields a strong completeness theorem for the full flower calculus (actually for
-the fragment $\Nature \cup \{\rsf{grow}\}$):
+the fragment $\Nature \cup \{\kl{grow}\}$):
 
 \begin{theorem}[Strong completeness]\labthm{flowers-strong-completeness}
   $\Phi \kentails{}\Psi$ implies $\Psi \steps{} \Phi$.
@@ -2580,8 +2572,8 @@ is that given a \kl{goal} $\Phi$, we want to perform eagerly every justification
 $\mathfrak{a}$ in the vehicle $\vehicle{\Phi}$, on the condition that it is
 compatible with the anchor $\anchor{\Phi}$ and all justifications $\mathfrak{H}$
 of the previous phases. It turns out that every such justification can be
-implemented by an instance of the \rsf{poll{\da}} rule, sometimes preceded by an
-instance of the \rsf{poll{\ua}} rule. This is best described by the following
+implemented by an instance of the \kl{poll{\da}} rule, sometimes preceded by an
+instance of the \kl{poll{\ua}} rule. This is best described by the following
 \emph{imperative} procedure, that takes as input and modifies in-place both the
 goal $\Phi$, and the history $\mathfrak{H}$ of justifications performed so far:
 
@@ -2610,13 +2602,13 @@ goal $\Phi$, and the history $\mathfrak{H}$ of justifications performed so far:
 While this might not be obvious at first glance, the two steps of the
 \refproc{phase-pollination} procedure that modify $\Phi$ are logically
 \emph{sound}: indeed, the \texttt{copy} operation on line \ref{copy} corresponds
-to an instance of the \rsf{poll{\ua}} rule, while the \texttt{remove} operation
-on line \ref{remove} corresponds to an instance of the \rsf{poll{\da}} rule.
+to an instance of the \kl{poll{\ua}} rule, while the \texttt{remove} operation
+on line \ref{remove} corresponds to an instance of the \kl{poll{\da}} rule.
 
 \paragraph{Reproduction}
 
 The second phase of our algorithm is the \emph{reproduction} phase. As its name
-suggests, it consists in repeatedly applying the reproduction rule \rsf{srep} on
+suggests, it consists in repeatedly applying the reproduction rule \kl{srep} on
 the current \kl{goal}, until there is no more \kl{context} in which it is
 applicable\sidenote{In the algorithm of \refsubsec{bubbles-search}, this
 corresponds to the part of the \emph{decomposition} phase that treats
@@ -2645,7 +2637,7 @@ by the following tail recursive procedure:
 
 The third and last phase of our proof search algorithm, called
 \emph{decomposition}, is also the most trivial: it simply consists in applying
-the \rsf{epet} rule in every applicable \kl{context} in the \kl{goal}, which amounts to
+the \kl{epet} rule in every applicable \kl{context} in the \kl{goal}, which amounts to
 erasing every flower with an empty petal\sidenote{It corresponds to the
 \emph{popping} phase of \kl{bubbles} in \refsubsec{bubbles-search}, not the
 decomposition phase: here the term ``decomposition'' refers \kl{metaphorically} to
@@ -2784,7 +2776,7 @@ $\neg\neg(\neg\neg A \limp A)$ and $\neg\neg(((A \limp B) \limp A) \limp A)$ are
 Interestingly on this dataset, the algorithm only fails on formulas that
 correspond to the double-negation of a \kl{classical} law. Of course,
 \refthm{flowers-completeness} guarantees that there must exist proofs for these
-formulas, using only $\Nature$-rules. While this may include the \rsf{epis}
+formulas, using only $\Nature$-rules. While this may include the \kl{epis}
 rules, we conjecture that it is not actually needed to get a complete decision
 algorithm. Instead, we have implemented an extension of the \refproc{life}
 procedure that accounts specifically for doubly-negated formulas, by first
@@ -2997,7 +2989,7 @@ comments are in order:
 
 \begin{itemize}
   \item[\textbf{Pollination}] The most central actions are those implementing
-  the pollination rules \rsf{poll{\da}} and \rsf{poll{\ua}}, called respectively
+  the pollination rules \kl{poll{\da}} and \kl{poll{\ua}}, called respectively
   \kl{Justify} and \kl{Import}. In fact, they are \emph{less} general
   than those rules: one can only \kl{Justify} flowers that are \emph{atomic}
   by clicking on them, and \kl{Import} \emph{non-atomic} flowers by dragging
@@ -3029,7 +3021,7 @@ comments are in order:
   \kl{QED} actions.
   
   \item[\textbf{Fencing}] We have already mentioned that we suspect that the
-  \rsf{epis} rule might be \kl{admissible}. However if it is not, one needs a
+  \kl{epis} rule might be \kl{admissible}. However if it is not, one needs a
   corresponding graphical action in \Proof mode. While it is currently not
   implemented, we plan to add a \emph{selection} mechanism that allows the user
   to select a set of flowers in the \kl{goal}. Then, we could add a \kl{Fence}
@@ -3056,7 +3048,7 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
 \emph{delete} arbitrary flowers in the \kl{goal}:
 \begin{itemize}
   \item[\textbf{Insertion}] The main interface mechanism that is currently
-  implemented is the \texttt{Add} button: since the \rsf{grow} rule allows to
+  implemented is the \texttt{Add} button: since the \kl{grow} rule allows to
   insert any flower in a \kl{positive} bouquet (i.e. add a new \kl{subgoal}, just like the
   \kl(rule){cut} rule in \kl{sequent calculus}), we expose buttons in all the corresponding
   areas (blue ``+'' buttons in \reffig{flowers-prover-modes}), that can be
@@ -3076,7 +3068,7 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
   grown flower, disregarding any \kl{polarity} constraint normally imposed by
   $\Culture$-rules.
   
-  Dually, the \rsf{glue} rule is implemented by exposing \texttt{Add} buttons in
+  Dually, the \kl{glue} rule is implemented by exposing \texttt{Add} buttons in
   all \kl{negative} corollas: those have the effect of growing a new empty petal,
   that can be further edited through arbitrary insertions and deletions.
 
@@ -3090,7 +3082,7 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
   process: one just has to click on the corresponding area, which is highlighted
   in red. To avoid overlap, the area of a flower is identified with that of its
   pistil. Thus areas subject to deletion are \kl{negative} atoms and flowers
-  (\rsf{crop} rule), \kl{positive} petals (\rsf{pull} rule), as well as any area
+  (\kl{crop} rule), \kl{positive} petals (\kl{pull} rule), as well as any area
   marked as \texttt{grown}.
 \end{itemize}
 
@@ -3140,10 +3132,10 @@ number of them. So why not try to apply them all automatically? Applying a click
 action might generate new ones in the resulting \kl{goal}, so we have to perform this
 until a fixpoint is reached. This is very much like the \emph{reproduction} and
 \emph{decomposition} phases from the \refproc{life} procedure of
-\refsec{flowers-search}, except that we also apply the \rsf{poll{\da}} rule
+\refsec{flowers-search}, except that we also apply the \kl{poll{\da}} rule
 (\kl{Justify} actions) wherever possible. The only \Proof action that is not
 considered is the only \kl{DnD} action, \kl{Import}. This is not surprising,
-since it corresponds to the \rsf{poll{\ua}} rule, which is the main source of
+since it corresponds to the \kl{poll{\ua}} rule, which is the main source of
 complexity in the \emph{pollination} phase of the \refproc{life} procedure,
 because of its ability to duplicate flowers of arbitrary size.
 
@@ -3281,18 +3273,18 @@ of \kl{Coq}.}:
 % to the empty bouquet, we want to reduce the bouquet associated to the conclusion
 % of the rule into the bouquet associated to its premisses. \reffig{flowers-mp}
 % shows how to proceed in the case of the elimination rule for $\limp$, or
-% \emph{modus ponens}. A crucial step is the use of the \rsf{grow} rule, which
+% \emph{modus ponens}. A crucial step is the use of the \kl{grow} rule, which
 % allows to create a positive occurrence of $A$ out of thin air. This is the main
 % source of non-analyticity in the flower calculus, in the sense of the
 % \emph{subformula property} of Gentzen. Although we showed in
-% \refsec{Completeness} that the \rsf{grow} rule is admissible, it was for the
+% \refsec{Completeness} that the \kl{grow} rule is admissible, it was for the
 % relation of \emph{provability} (\refdef{flowers-proof}). Here to simulate modus
 % ponens we rely on \emph{derivability}, and thus need this rule.
 
 % The derivation of \reffig{flowers-mp} also makes clear that it is the positive
-% $A$ that justifies the negative one with the \rsf{poll{\ua}} rule, and not
+% $A$ that justifies the negative one with the \kl{poll{\ua}} rule, and not
 % the other way around. Indeed, the presence of the pistil around the negative $A$
-% makes it deeper than the positive $A$, preventing the \rsf{poll{\ua}} rule
+% makes it deeper than the positive $A$, preventing the \kl{poll{\ua}} rule
 % from being applicable in the other direction. This is a manifestation of the
 % inherent dissymmetry in \emph{proof substitution}: the erasure of the negative
 % $A$ can be interpreted as the operation $\subst{\pi_B}{\pi_A}{x}$, which
@@ -3300,7 +3292,7 @@ of \kl{Coq}.}:
 % $\pi_B$ of $B$ by the proof $\pi_A$ of the positive $A$.
 % \todo{ Elaborate further on this computational aspect of \kl{EGs}. }
 % \todo{ Investigate the ``scientific'' iteration rule of Peirce as a means to
-% avoid the need for a computational interpretation of the \rsf{epis} rule. }
+% avoid the need for a computational interpretation of the \kl{epis} rule. }
 
 
 \section{Conclusion}\labsec{Conclusion}
@@ -3311,11 +3303,11 @@ of \kl{Coq}.}:
   
 \begin{marginfigure}
   \begin{mathpar}
-    \R[\rsf{iter}]
+    \R[\kl{iter}]
       {\flower{\gamma}{\delta \sep \Delta}}
       {\flower{\gamma}{\delta \sep \delta \sep \Delta}}
     \and
-    \R[\rsf{deit}]
+    \R[\kl{deit}]
       {\flower{\gamma}{\delta \sep \delta \sep \Delta}}
       {\flower{\gamma}{\delta \sep \Delta}}
   \end{mathpar}
@@ -3323,34 +3315,34 @@ of \kl{Coq}.}:
   \labfig{flowers-deit-petals}
 \end{marginfigure}
 
-In the original \kl{IEGs} system of Oostra, the \rsf{srep} rule is replaced by an
+In the original \kl{IEGs} system of Oostra, the \kl{srep} rule is replaced by an
 extended (de)iteration rule, that allows to duplicate/merge not only identical
 flowers, but also identical \emph{petals}, under the condition that they are
 attached to the same pistil\sidenote{``Cualquier lazo puede iterarse adherido
-\emph{al mismo corte}'' \cite[p.~46]{oostra_graficos_2010}.} (rules \rsf{iter}
-and \rsf{deit} in \reffig{flowers-deit-petals}). Thus in a sense, (de)iteration
+\emph{al mismo corte}'' \cite[p.~46]{oostra_graficos_2010}.} (rules \kl{iter}
+and \kl{deit} in \reffig{flowers-deit-petals}). Thus in a sense, (de)iteration
 on petals is not as \emph{deep} as on whole flowers, where the two identical
 flowers can be separated by an arbitrary number of layers; which might seem like
 an arbitrary restriction. A posteriori, we rationalize this choice by seeing it
 as an attempt to stay close to the original system \kl{Alpha} of Peirce. In
 particular, (de)iteration on petals is compatible with the quest for
 \emph{illative atomicity}, where all rules should be expressed in terms of
-insertions and omissions (\refsec{atomicity}); while the \rsf{srep} rule is not.
+insertions and omissions (\refsec{atomicity}); while the \kl{srep} rule is not.
 In our case, this is justified by our quest for an \emph{\kl{invertible}} calculus
-(natural fragment): indeed to simulate \rsf{srep} with petal (de)iteration, one
-also needs the non-\kl{invertible} $\Culture$-rule \rsf{crop} (as well as the
-$\Culture$-rule \rsf{epis{\da}}), as illustrated by the \rsf{srep}-free proof of
+(natural fragment): indeed to simulate \kl{srep} with petal (de)iteration, one
+also needs the non-\kl{invertible} $\Culture$-rule \kl{crop} (as well as the
+$\Culture$-rule \kl{epis{\da}}), as illustrated by the \kl{srep}-free proof of
 \reffig{flowers-srep-free}.
 
 \begin{figure}
   \input{figures/flowers-srep-free.tex}
-  \caption{Simulating the \rsf{srep} rule by iterating petals}
+  \caption{Simulating the \kl{srep} rule by iterating petals}
   \labfig{flowers-srep-free}
 \end{figure}
 
 \paragraph{Focusing}
 
-There is a formal connection between the \rsf{poll{\ua}} rule of the flower
+There is a formal connection between the \kl{poll{\ua}} rule of the flower
 calculus, and the \emph{absorption} rule $[\mathbf{A}]$ of the dyadic system
 $\Sigma_2$ of Andreoli, that handles the \kl{focusing} behavior of exponentials in
 linear logic \sidecite{andreoli1992}. Indeed, both rules duplicate a formula
@@ -3359,8 +3351,8 @@ applied, in order to enable further usage of the formula at said location. While
 the absorption rule removes the need for permutation-equivalences between proofs
 involving the \emph{\kl{contraction}} rule, the identity rule $[I]$ of $\Sigma_2$
 removes the need for the \emph{\kl{weakening}} rule by discarding the non-linear
-\kl{context} in one go, just as the \rsf{epet} rule of the flower calculus renders
-the \rsf{crop} rule \kl{admissible}.
+\kl{context} in one go, just as the \kl{epet} rule of the flower calculus renders
+the \kl{crop} rule \kl{admissible}.
 
 Sonia Marin has noticed the connection between \emph{bipoles} in \kl{focused} proofs,
 and the class of geometric/coherent formulas, where the former are seen as a
@@ -3463,26 +3455,26 @@ applications to efficient proof search procedures
 \paragraph{Metatheory}
 
 In \refsec{Calculus}, we already mentioned the variant $\Nature \setminus
-\{\rsf{epis}\} \cup \{\rsf{crep}\}$ of the natural fragment, that we conjecture
+\{\kl{epis}\} \cup \{\kl{crep}\}$ of the natural fragment, that we conjecture
 to enjoy both soundness, completeness and a deduction theorem. But these last
 two results shall prove particularly harder to prove, and we currently have very
 few insights into how to extend the proofs of this chapter to this setting.
 Also, this is not withstanding the fact that we do not really see any practical
 applications for such results as of yet. Our initial motivation was to show the
-admissibility of the \rsf{epis} rule, because it never appears in concrete
-proofs. But if this requires adding the \rsf{crep} rule instead, then it greatly
-reduces the pratical interest of the whole endeavor, since the \rsf{crep} rule
+admissibility of the \kl{epis} rule, because it never appears in concrete
+proofs. But if this requires adding the \kl{crep} rule instead, then it greatly
+reduces the pratical interest of the whole endeavor, since the \kl{crep} rule
 does not look particularly well-suited to either automated or interactive
 theorem proving.
 
 Another line of research would concern properties of \emph{locality}, in the
 sense coined by the \kl{deep inference} community with systems like \kl{SKS} (see
 \refsec{eg-completeness}). As mentioned in \refsec{flowers-prover}, we
-conjecture that the \rsf{poll{\da}} and \rsf{poll{\ua}} rules can be restricted
+conjecture that the \kl{poll{\da}} and \kl{poll{\ua}} rules can be restricted
 respectively to atomic and non-atomic flowers. But this is less satisfying than
-in the \kl{calculus of structures}, where one component of \rsf{poll{\ua}}, the
+in the \kl{calculus of structures}, where one component of \kl{poll{\ua}}, the
 duplicating \emph{\kl{contraction}} rule, can be restricted to atomic formulas. This
-probably comes from the fact that \rsf{poll{\ua}} also serves the purpose of
+probably comes from the fact that \kl{poll{\ua}} also serves the purpose of
 \emph{moving} flowers deeper, as witnessed by the \kl{DnD} \kl{Import} action of
 the \kl{Flower\,\,Prover}: in the \kl{calculus of structures}, this role is fulfilled by
 \emph{switch} rules, which cannot be restricted to atomic structures. The only
@@ -3518,11 +3510,11 @@ We have begun to sketch some ideas for a \kl{Curry-Howard correspondence}, where
 flowers and \Proof actions for justifying them ($\Nature$-rules) are identified
 respectively with \emph{normal} and \emph{neutral} \kl{terms} of the simply-typed
 \kl{$\lambda$-calculus}. For instance, the computational counterpart of the rule
-\rsf{poll{\da}} in pistils would be a kind of \emph{function application}
-expressed by the following \rsf{app} rule, which is highly reminiscent of the
-instantiation rule \rsf{ipis}:
+\kl{poll{\da}} in pistils would be a kind of \emph{function application}
+expressed by the following \kl{app} rule, which is highly reminiscent of the
+instantiation rule \kl{ipis}:
 $$
-\R[\rsf{app}]
+\R[\kl{app}]
   {\Xi\select{t~u : (\flower{\subst{\Phi}{u}{x}}{\subst{\Delta}{u}{x}})}}
   {\Xi\select{t : (\flower{\Phi, x : \phi}{\Delta})}}
 $$
@@ -3531,8 +3523,8 @@ application of the form $x~t_1 \ldots t_n$, the expression $t : \phi$ is a
 \emph{\kl{term} annotation}, that should be read in context as ``this occurrence of
 $\phi$ is justified by $t$''. Interestingly, $\phi$ itself may contain \kl{term}
 annotations, mimicking the fact that normal and neutral \kl{terms} can be defined by
-mutual recursion. Then in the \rsf{app} rule, we do not just erase the formula
-$\phi$ as in the \rsf{poll{\da}} rule, but also keep track of the flow of
+mutual recursion. Then in the \kl{app} rule, we do not just erase the formula
+$\phi$ as in the \kl{poll{\da}} rule, but also keep track of the flow of
 information by appending the argument $u$ to the justification $t$ (where
 $\chyp{(u : \phi)}{\Xi\hole}$), and substituting $u$ to every occurrence of the
 hypothetical justification $x$ of $\phi$ in $\Phi$ and $\Delta$.
@@ -3606,8 +3598,8 @@ ability to \emph{select} flowers, the \kl{Fence} \Proof action, and the
 \emph{shelf} mechanism.
 
 The next step would be to support \kl{first-order} reasoning by adding sprinklers and
-\kl{first-order} terms, and devising graphical actions for the rules $\{\rsf{ipis},
-\rsf{ipet}\}$ in \Proof mode, and $\{\rsf{apis}, \rsf{apet}\}$ in \Edit mode.
+\kl{first-order} terms, and devising graphical actions for the rules $\{\kl{ipis},
+\kl{ipet}\}$ in \Proof mode, and $\{\kl{apis}, \kl{apet}\}$ in \Edit mode.
 
 Last but not least, we want to provide a way to \emph{save} proved lemmas along
 with their proof, so that they can be reused and read statically. This will be

@@ -10,11 +10,11 @@ An important thing to note, is that all the rules of \kl{DBiInt} are
 \emph{\kl{invertible}}\sidenote{Lemma 5.2.4 in Postniece's thesis
   \cite{postniece_proof_2010}.}. Thus it follows immediately from
 \reflemma{simulation-dbiint} that one can just take the translation of the rules
-of \kl{DBiInt} in system $\sysB$, and get a complete, fully \kl{invertible}
+of \kl{DBiInt} in \kl{system~B}, and get a complete, fully \kl{invertible}
 calculus. But this would be a waste of the expressive power and nice properties
-of system $\sysB$, like linearity and locality.
+of \kl{system~B}, like linearity and locality.
 
-Instead, we will target precisely the non-\kl{invertible} rules of system $\sysB$,
+Instead, we will target precisely the non-\kl{invertible} rules of \kl{system~B},
 and modify only those. From the proof of \reflemma{bubbles-local-soundness}, we
 can identify which rules of \kl{system~B} are \kl{invertible}, and which are
 probably not. Indeed if the soundness of a rule only relies on a chain of
@@ -24,18 +24,18 @@ not \kl{invertible}, we would need additionally to find a counter-model that
 invalidates the converse inequality.}.
 
 \begin{fact}[Invertibility of \kl{system~B}]
-  All rules in the fragment $\mathbb{I} \cup \{\rsf{c{-}},\rsf{c{+}}\} \cup
-    \mathbb{M} \cup \mathbb{H} \setminus \{\rsf{{\limp}{-}},\rsf{{\lsub}{+}}\}$ of
+  All rules in the fragment $\mathbb{I} \cup \{\kl{c{-}},\kl{c{+}}\} \cup
+    \mathbb{M} \cup \mathbb{H} \setminus \{\kl{{\limp}{-}},\kl{{\lsub}{+}}\}$ of
   \kl{system~B} are \kl{invertible}.
 \end{fact}
 
 Thus the only remaining rules of \kl{system~B} that are (most probably) not
-\kl{invertible} are the \kl{weakening} rules $\{\rsf{w{-}},\rsf{w{+}}\}$, all the
-$\mathbb{F}$-rules, and the $\mathbb{H}$-rules $\{\rsf{{\limp}{-}},
-\rsf{{\lsub}{+}}\}$ that \emph{apply} an implication/exclusion\sidenote{For
+\kl{invertible} are the \kl{weakening} rules $\{\kl{w{-}},\kl{w{+}}\}$, all the
+$\mathbb{F}$-rules, and the $\mathbb{H}$-rules $\{\kl{{\limp}{-}},
+\kl{{\lsub}{+}}\}$ that \emph{apply} an implication/\kl{exclusion}\sidenote{For
 quantifier rules, we conjecture that as in \kl{sequent calculus}, the rules
-$\{\rsf{\forall{+}}, \rsf{\exists{-}}\}$ are \kl{invertible}, while the rules
-$\{\rsf{\forall{-}}, \rsf{\exists{+}}\}$ are not. And as in \kl{sequent calculus},
+$\{\kl{\forall{+}}, \kl{\exists{-}}\}$ are \kl{invertible}, while the rules
+$\{\kl{\forall{-}}, \kl{\exists{+}}\}$ are not. And as in \kl{sequent calculus},
 this can be remedied by systematically duplicating the instantiated formula.}.
 In \reffig{sequent-B-inv} we define the \kl{B_{inv}} calculus, which results
 from the following modifications to the previous rules:
@@ -46,8 +46,8 @@ from the following modifications to the previous rules:
     no premisses). In \kl{bubble calculi}, the notion of premiss is captured by
     \kl{neutral} bubbles; thus we incorporate \kl{weakenings} in all rules that solve
     \kl{subgoals} by closing \kl{solutions} with no \kl{neutral} bubbles. Those are the rules
-    $\{\rsf{i{\da}},\rsf{p{-}},\rsf{p{+}}\}$, which for the occasion have
-    also been generalized to arbitrary \kl{solutions}. Indeed in system $\sysB$ we
+    $\{\kl{i{\da}},\kl{p{-}},\kl{p{+}}\}$, which for the occasion have
+    also been generalized to arbitrary \kl{solutions}. Indeed in \kl{system~B} we
     restricted them to open \kl{solutions} to make them \emph{local}, but here the
     \kl{weakenings} break locality anyway, and the general version improves
     \emph{factorizability} by solving instantly all \kl{subgoals} inside $\J$.
@@ -56,8 +56,8 @@ from the following modifications to the previous rules:
     As shown by the simulation of \reflemma{simulation-dbiint}, the
     \emph{propagation} rules of \kl{DBiInt} combine an instance of
     \emph{\kl{contraction}} followed by the application of a flow rule on the
-    duplicated formula. Thus we can make all $\mathbb{F}$-rules of system
-    $\sysB$ \kl{invertible} by systematically duplicating the moved formula, although
+    duplicated formula. Thus we can make all $\mathbb{F}$-rules of \kl{system
+    B} \kl{invertible} by systematically duplicating the moved formula, although
     this breaks \emph{linearity}.
 
     A downside of propagation rules in the style of \kl{DBiInt}, is that they
@@ -81,7 +81,7 @@ from the following modifications to the previous rules:
     principle it should be feasible, and would enable a more comfortable use in
     a \kl{Proof-by-Action} setting.
 
-    Note also that we removed the \rsf{f{\ua}} rule of \reffig{sequent-B}.
+    Note also that we removed the \kl{f{\ua}} rule of \reffig{sequent-B}.
     Indeed even after turning it into a propagation rule, the moved copy of the
     duplicated \kl{subgoal} $S$ cannot be weakened because it lives in a \kl{neutral}
     bubble. Thus the rule stays non-\kl{invertible}, and cannot be included in
@@ -90,15 +90,11 @@ from the following modifications to the previous rules:
 
   \item[\textbf{Implication/Exclusion}]
     The last source of non-invertibility is the $\mathbb{H}$-rules
-    \rsf{{\limp}{-}} and \rsf{{\lsub}{+}}, that respectively allow to use an
-    implication hypothesis, and prove an exclusion conclusion.
-    % This problem is has been known in the \kl{sequent calculus} literature at least
-    % since \sidecite{nikolai1952vorob}, and a solution is proposed in
-    % \sidecite{dyckhoff_contraction-free_1992} by splitting the rule
-    % \rsf{{\limp}{-}} into  
-    Here we can just duplicate the implication/exclusion formula, as in the
+    \kl{{\limp}{-}} and \kl{{\lsub}{+}}, that respectively allow to use an
+    implication hypothesis, and prove an \kl{exclusion} conclusion.
+    Here we can just duplicate the implication/\kl{exclusion} formula, as in the
     \kl{introduction rules} of \kl{DBiInt}. Also like in \kl{DBiInt}, we removed
-    the \kl{contraction} rules \rsf{c{-}} and \rsf{c{+}}, which are now merged with
+    the \kl{contraction} rules \kl{c{-}} and \kl{c{+}}, which are now merged with
     these two rules as well as the $\mathbb{F}$-rules. Although \kl{contraction}
     rules are \kl{invertible}, they induce a lot of complexity in proof search,
     because it is hard to predict the (occurrences of) formulas that need to be
@@ -111,11 +107,11 @@ from the following modifications to the previous rules:
 \end{description}
 
 \begin{remark}
-  We also changed the \rsf{\bot{-}} and \rsf{\top{+}} rules, so that they create
+  We also changed the \kl{\bot{-}} and \kl{\top{+}} rules, so that they create
   \kl{polarized}, closed empty \kl{solutions}. This makes them both local, and generic
   with respect to the status of the ambient \kl{solution}. The previous version can
-  then be simulated by combination with the popping rules \rsf{p{-}} and
-  \rsf{p{+}}.
+  then be simulated by combination with the popping rules \kl{p{-}} and
+  \kl{p{+}}.
 \end{remark}
 
 These modifications only change superficially the proof of soundness, and thus
@@ -124,8 +120,6 @@ we do not redo it. As for completeness, we would need to prove that the
 of simulating \kl{DBiInt}'s \kl{introduction rules}:
 
 \begin{lemma}[Admissibility of contraction]\lablemma{admissibility-contraction}
-  % If $\prov{\kl{B_{inv}} \cup \{\rsf{c{-}},\rsf{c{+}}\}} S$, then
-  % $\prov{\kl{B_{inv}}} S$.
   \sbr
   \begin{itemize}
     \item If $\prov{\kl{B_{inv}}} S\select{\Gamma, A, A \J \Delta}$, then
@@ -146,7 +140,7 @@ rules} of \kl{DBiInt} preserve the principal formula; but this is precisely what
 we are trying to avoid with our version of the rules. Of course, if we either
 give up on this constraint or include \kl{contraction} rules in \kl{B_{inv}}, then we
 immediately get our desired result: \kl{B_{inv}} is a fully \kl{invertible} calculus,
-where the same fragments as system $\sysB$ capture \kl{intuitionistic},
+where the same fragments as \kl{system~B} capture \kl{intuitionistic},
 \kl{dual-intuitionistic}, \kl{bi-intuitionistic} and \kl{classical} logic.
 
 \subsection{Semi-automated proof search}\labsubsec{bubbles-search}
@@ -159,10 +153,10 @@ reached:
   \item[\textbf{Decomposition}] Decompose $A$ by applying recursively
     $\mathbb{H}$-rules, until either atoms, \kl{negative} implications
     $\hypo{\limp}$, \kl{negative} disjunctions $\hypo{\lor}$, or \kl{positive}
-    conjunctions $\conc{\land}$ are reached. Indeed since the \rsf{{\limp}{-}}
+    conjunctions $\conc{\land}$ are reached. Indeed since the \kl{{\limp}{-}}
     rule duplicates the implication, it cannot be used to decompose it.
     
-    As for the \rsf{\lor{-}} and \rsf{\land{+}} rules, they can only be applied
+    As for the \kl{\lor{-}} and \kl{\land{+}} rules, they can only be applied
     when the formula is in an \emph{open} \kl{solution}. A first option is to let the
     system automatically distribute them in all open \kl{subsolutions} that are
     reachable, so that it can keep decomposing them. But this might create an
@@ -173,19 +167,19 @@ reached:
     consider when building a proof.
 
   \item[\textbf{Absorption}] Apply the absorption rules
-    $\{\rsf{a},\rsf{a{-}},\rsf{a{+}}\}$ wherever possible. This will prevent
+    $\{\kl{a},\kl{a{-}},\kl{a{+}}\}$ wherever possible. This will prevent
     atoms from being unnecessarily stuck on \kl{neutral} membranes in the next phase.
     This phase can also be trivially automated.
 
   \item[\textbf{Linking}] Try to bring together every pair of dual atoms, so
-    that they annihilate each other in an instance of the \rsf{i{\da}}
+    that they annihilate each other in an instance of the \kl{i{\da}}
     rule. This is reminiscent of our \emph{drag-and-drop} actions of
     \refch{pba}. In a touch-based \kl{GUI}, rather than dragging a complex formula
     onto another complex formula, one could \emph{pinch} together the two atoms:
     if there is no $\mathbb{F}$-law stucking one of the atoms on some membrane
     (orange arrows in \reffig{bubbles-porosity}), then the pinch succeeds, by
     closing the \kl{subsolution} at the location where it ends with
-    \rsf{i{\da}}. Thus the user can choose the \kl{subgoal} to solve by
+    \kl{i{\da}}. Thus the user can choose the \kl{subgoal} to solve by
     controlling the destination of the pinch, which can be seen as a more
     symmetric and powerful version of \kl{DnD} actions. Generally though, one will
     want to apply the following \emph{rule of thumb} (pun intended):
@@ -207,7 +201,7 @@ reached:
     can also be used to completely automate this phase.
 
   \item[\textbf{Popping}] Pop every closed empty \kl{bubble} in the \kl{goal} with the
-  rules $\{\rsf{p},\rsf{p{-}},\rsf{p{+}}\}$. This phase can also be trivially
+  rules $\{\kl{p},\kl{p{-}},\kl{p{+}}\}$. This phase can also be trivially
   automated, and corresponds to the unit elimination phase in \kl{subformula linking}
   (\refsec{action}).
 
@@ -219,7 +213,7 @@ reached:
 
     If $\imps{S} = \emptyset$, then $S$ should not be provable, and we can stop
     the proof search procedure. Otherwise for each $(S_0\hole, A, B, \J, \Delta)
-    \in \imps{S}$, we might need to apply the \rsf{{\limp}{-}} rule on $\hypo{A
+    \in \imps{S}$, we might need to apply the \kl{{\limp}{-}} rule on $\hypo{A
     \limp B}$, either directly in $S_0\hole$ if $\J = {\seq}$ and $\max_{I \in
     \Delta}{\sdepth{I}} = 0$ (\refdef{item-depth}), otherwise in some subgoal
     $T\select{U} \in \J \cup \Delta$. This is where the proof needs
@@ -228,17 +222,17 @@ reached:
     or if the hypothesis $B$ is even needed at all.
 
     A first possibility is to let the user rely on her intuition, by choosing
-    manually a specific \kl{subsolution} in $\imps{S}$ to apply the \rsf{{\limp}{-}}
+    manually a specific \kl{subsolution} in $\imps{S}$ to apply the \kl{{\limp}{-}}
     rule upon. Additionally, she might need to determine a \kl{subgoal} $T\select{U}$
     in which $A$ is provable, and first duplicate $\hypo{A\limp B}$ in $T\hole$
-    before applying \rsf{{\limp}{-}}. This will always be possible with the
-    $\mathbb{F}$-rules \rsf{f{-}{\da}} and \rsf{f{-}{+}{\da}}.
+    before applying \kl{{\limp}{-}}. This will always be possible with the
+    $\mathbb{F}$-rules \kl{f{-}{\da}} and \kl{f{-}{+}{\da}}.
     Ideally, she would also pick the most general $T\hole$ to factorize the
     proof, by minimizing its depth $\sdepth{T\hole}$ (\refdef{solctx-depth}).
 
     A second possibility is to duplicate eagerly every $\hypo{A \limp B}$ of
     $\imps{S}$ in every open \kl{subsolutions} of $S$ where it can be so, and then
-    apply \rsf{{\limp}{-}} on all the newly created copies. To avoid an
+    apply \kl{{\limp}{-}} on all the newly created copies. To avoid an
     explosion of the size of $S$, the system should mark all the copies as
     \emph{used}, so that during the next \textbf{Application} phases, all the
     already \emph{used} copies are ignored, and only the original occurrence of
@@ -277,7 +271,7 @@ other formalisms, is that most of its automation preserves the \emph{size}
   at a distance, then either:
   \begin{enumerate}
     \item the link is successful, and the two created copies of atoms are
-  immediately destroyed by the \rsf{i{\da}} rule. Then the solved
+  immediately destroyed by the \kl{i{\da}} rule. Then the solved
   \kl{subsolution} is entirely pruned out, decreasing the size of the \kl{goal}; or
     \item the link fails, but then we can instantly ``undo'' it. Or rather, one
   should consider that rules are applied only when the link is successful.
@@ -298,8 +292,8 @@ have the ability to perform \textbf{Decomposition} and \textbf{Linking} by hand
 
 \subsection{Failure of full iconicity}
 
-Because of the implicit \kl{contraction} in the rules \rsf{{\limp}{-}} and
-\rsf{{\lsub}{+}}, one cannot fully decompose a formula into an equivalent
+Because of the implicit \kl{contraction} in the rules \kl{{\limp}{-}} and
+\kl{{\lsub}{+}}, one cannot fully decompose a formula into an equivalent
 \kl{solution} by deterministically applying a sequence of $\mathbb{H}$-rules (and
 possibly $\mathbb{F}$-rules, to distribute \kl{positive} conjunctions and \kl{negative}
 disjunctions). Thus \kl{B_{inv}} fails to be \emph{fully \kl{iconic}}, because it
@@ -316,14 +310,13 @@ This can be understood as resulting from the inability of \kl{solutions} to repr
 natively \emph{\kl{negative} implications} and \emph{\kl{positive} subtractions}, although
 they can represent natively all other polarizations of connectives. This is
 illustrated by the mapping of \reffig{bubbles-native} from \kl{polarized} formulas to
-equivalent \kl{solutions}, which is really just the $\mathbb{H}$-rules of system
-$\sysB$ (\reffig{graphical-B}) where the right-hand \kl{solution} is enclosed in a
+equivalent \kl{solutions}, which is really just the $\mathbb{H}$-rules of \kl{system~B} (\reffig{graphical-B}) where the right-hand \kl{solution} is enclosed in a
 \kl{bubble} of the corresponding \kl{polarity}. The reader can easily check that if $A$ is
 mapped to $S$, then $\psint{A} \semequiv \psint{S}$.
 
 \begin{marginfigure}
   $$
-  \R[\rsf{e}]
+  \R[\intro{e}]
     {\Gamma, (\Delta, A \seq B) \seq C}
     {\Gamma, (\Delta \seq A \limp B) \seq C}
   $$
@@ -331,13 +324,13 @@ mapped to $S$, then $\psint{A} \semequiv \psint{S}$.
   \labfig{jn-rule-e}
 \end{marginfigure}
 
-This seems to be a fundamental limitation of system $\sysB$, caused by its
+This seems to be a fundamental limitation of \kl{system~B}, caused by its
 symmetric treatment of implication and subtraction. For instance in the \kl{nested
 sequent} calculus \kl{JN} of Guenot for implicative logic \cite[Chapter
 3]{guenot_nested_2013}, which is fully decomposable, \kl{nested sequents} that appear
 in negative \kl{contexts} are interpreted as implications, as illustrated by the
-\kl{left introduction rule} \rsf{e} (\reffig{jn-rule-e}). But we cannot do this
-in system $\sysB$, because this would conflict with the subtractive reading of
+\kl{left introduction rule} \kl{e} (\reffig{jn-rule-e}). But we cannot do this
+in \kl{system~B}, because this would conflict with the subtractive reading of
 \kl{negative} \kl{solutions}, i.e. $\nsint{A \seq B} = \nsint{A} \lsub \nsint{B}$. In
 \refch{flowers}, the problem will also be solved through an asymmetric treatment
 of \kl{nested sequents}, capturing only \kl{intuitionistic} logic instead of

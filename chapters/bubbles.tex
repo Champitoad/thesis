@@ -207,7 +207,7 @@ Just like a sequent, a \kl{solution} is semantically equivalent to an implicatio
 except that we add the \emph{conjunction} of all \kl{subgoals} to the consequent:
 
 \begin{definition}[Asymmetric interpretation]\labdef{ainterp}
-  The \emph{asymmetric interpretation} $\intro*\aint{\cdot}$ on \kl{solutions}
+  The \intro{asymmetric interpretation} $\intro*\aint{\cdot}$ on \kl{solutions}
   is defined recursively by:
 $$\aint{\Gamma \piq{S_1 \sep \ldots \sep S_n} \Delta} = \bigwedge \Gamma
   \limp \left(\bigwedge \Delta \land \bigwedge_i{\aint{S_i}}\right)$$
@@ -225,7 +225,7 @@ tree, i.e. a \kl{subgoal};
 tree, i.e. a branching point where we created multiple \kl{subgoals}.
 \end{itemize}
 This will soon become clearer with examples of derivations in our calculus. In
-\refsec{branching}, we will consider a different interpretation of \kl{solutions} that
+\refsec{symm-interp}, we will consider a different interpretation of \kl{solutions} that
 entails a different encoding of the proof structure in them.
 
 \subsection{Sequent-style rules}
@@ -287,16 +287,6 @@ Then every rule of \reffig{sequent-BJ} is applicable in any
 \kl{context} $U\hole$. That is:
 $$\vcenter{\R{S}{T}} \quad \text{should be read as} \quad
 \vcenter{\R{U\select{S}}{U\select{T}}} \quad \text{for all $U\hole$}$$
-
-% \begin{definition}[\kl{BJ}-step]\labdef{BJ-step} We write $S \intro*\lstep{} T$
-%   to denote the existence of a \kl{BJ}-rule instance $\irule{r}{S}{T}$ in the
-%   empty \kl{context}, i.e. $S$ and $T$ are respectively the conclusion and
-%   premiss of the rule {\rsf{r}} in \reffig{sequent-BJ}. Then $\lstep{}$ can be
-%   seen as a binary relation on \kl{solutions}, whose contextual closure
-%   described above is the \emph{step} relation $\step{}$: $S \step{} T$ if and
-%   only if there exist $U\hole$, $S_0$ and $T_0$ such that $S = U\select{S_0}$,
-%   $T = U\select{T_0}$ and $S_0 \lstep{} T_0$.
-% \end{definition}
 
 \begin{definition}[Derivation]\labdef{BJ-deriv}
   
