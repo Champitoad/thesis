@@ -34,29 +34,30 @@ task for future work.
 \end{definition}
 
 Note that the translation $\dtrans{(-)}$ is clearly \emph{injective}: in fact
-structures are isomorphic to multisets of \kl{items} that contain only \emph{open}
-\kl{subsolutions}. Thus from now on, we will always apply the translation implicitly,
-and rely on meta-variables $X, Y$ to distinguish structures from arbitrary
-\kl{solutions} when necessary.
+structures are isomorphic to multisets of \kl{items} that contain only
+\emph{\kl{unsaturated}} \kl{subsolutions}. Thus from now on, we will always
+apply the translation implicitly, and rely on meta-variables $X, Y$ to
+distinguish structures from arbitrary \kl{solutions} when necessary.
 
 The rules of \kl{DBiInt} are given in \reffig{rules-dbiint}. Note that like
-\kl{bubble calculi}, \kl{DBiInt} is truly a \emph{\kl{deep inference}} system, in the
-sense that rules can be applied on \kl{sequents} nested arbitrarily deep inside
-structures\sidenote{Our presentation of rules is slightly different from
-\cite{postniece_deep_2009}: the \kl{contexts} in which rules apply are left implicit,
-and thus we do not rely on their \kl{polarity}. The counterpart is that rules always
-apply on \kl{sequents} and never on formulas, which makes them more verbose. Also we
-do not rely on the notion of ``top-level formulas'' of a structure, making the
-propagation rules yet more verbose.}. The main difference lies in the fact that
-proofs in \kl{DBiInt} are \emph{trees} built up by composing traditional
-\kl{inference rules} with multiple premisses, while we use closed \kl{solutions} (\kl{neutral}
-bubbles) to internalize the tree structure of proofs inside \kl{solutions}. This
-gives a lot of expressive power since closed \kl{solutions} can themselves be nested
-in open \kl{solutions} and thus \emph{\kl{polarized}}, a phenomemon which cannot be
+\kl{bubble calculi}, \kl{DBiInt} is truly a \emph{\kl{deep inference}} system,
+in the sense that rules can be applied on \kl{sequents} nested arbitrarily deep
+inside structures\sidenote{Our presentation of rules is slightly different from
+\cite{postniece_deep_2009}: the \kl{contexts} in which rules apply are left
+implicit, and thus we do not rely on their \kl{polarity}. The counterpart is
+that rules always apply on \kl{sequents} and never on formulas, which makes them
+more verbose. Also we do not rely on the notion of ``top-level formulas'' of a
+structure, making the propagation rules yet more verbose.}. The main difference
+lies in the fact that proofs in \kl{DBiInt} are \emph{trees} built up by
+composing traditional \kl{inference rules} with multiple premisses, while we use
+\kl{saturated} \kl{solutions} (\kl{neutral} bubbles) to internalize the tree
+structure of proofs inside \kl{solutions}. This gives a lot of expressive power
+since \kl{saturated} \kl{solutions} can themselves be nested in \kl{unsaturated}
+\kl{solutions} and thus \emph{\kl{polarized}}, a phenomemon which cannot be
 simulated in \kl{DBiInt}. This is why we did not prove soundness in
-\refsec{bubbles-soundness} by simulating directly \kl{system~B} in
-\kl{DBiInt}, and conversely this will explain the ease with which \kl{DBiInt}
-can be simulated inside \kl{system~B}.
+\refsec{bubbles-soundness} by simulating directly \kl{system~B} in \kl{DBiInt},
+and conversely this will explain the ease with which \kl{DBiInt} can be
+simulated inside \kl{system~B}.
 
 \begin{figure*}
   \input{figures/dbiint.tex}

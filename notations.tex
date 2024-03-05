@@ -165,7 +165,15 @@
 \newcommand{\cham}{\textsc{Cham}}
 
 \newcommand{\bubbleT}[1]{\llparenthesis~#1~\rrparenthesis}
-\knowledgenewrobustcmd\piq[1]{\mathbin{\cmdkl{\langle} #1 \cmdkl{\rangle}}}
+\newrobustcmd\piq[1]{
+  \mathrel{%
+    \withkl{\kl[\piq]}{%
+      \cmdkl{\langle}#1\cmdkl{\rangle}
+    }%
+  }%
+}
+\knowledge{\piq}{notion}
+
 
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,fill=white,inner sep=2pt] (char) {#1};}}
@@ -217,7 +225,15 @@
 \newcommand{\deq}{\coloneq}
 \newcommand{\ldef}[2]{#1 \deq #2}
 
-\newcommand{\mix}{\,\mathbin{\cupdot}\,}
+\newrobustcmd\mix{
+  \mathbin{%
+    \withkl{\kl[\mix]}{%
+      \cmdkl{\cupdot}
+    }%
+  }%
+}
+\knowledge{\mix}{notion}
+
 \newcommand{\J}{\mathbin{\rhd}}
 \newcommand{\JB}{\mathbin{\RHD}}
 

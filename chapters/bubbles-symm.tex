@@ -45,6 +45,7 @@ extension of the syntax of \kl{solutions}, where \kl{bubbles} can themselves be
 will guide the design of \kl{inference rules}, some of which were already aimed
 for implicitly throughout the evolution of our concept of bubble.
 
+\AP
 In \refsec{symmetric-calculus} we introduce a core \emph{symmetric \kl{bubble
 calculus}} for \kl{classical} logic called \kl{system~B}, in reference to the
 symmetric \intro{system~L} of Herbelin \sidecite{herbelin_duality_nodate}. Then
@@ -90,7 +91,7 @@ suitable for our syntactic completeness proof. More generally,
 In all known \kl{sequent calculus} formulations of \kl{intuitionistic} logic,
 there are at least two rules which are invariably \emph{non-\kl{invertible}}:
 \begin{enumerate}
-  \item a \kl{left introduction rule} for $\limp$ (there might be many ones, as in
+  \itemAP a \kl{left introduction rule} for $\limp$ (there might be many ones, as in
   the calculus \intro{LJT} of Dyckhoff \sidecite{dyckhoff_contraction-free_1992});
   \item the \kl{right introduction rule} for either:
     \begin{itemize}
@@ -236,10 +237,10 @@ have two distinct forms of \emph{\kl{judgment}}.}:
 Then we keep the last proposed interpretation given in \refeq{interp2} for
 \kl{saturated} \kl{solutions}, and interpret \kl{unsaturated} \kl{solutions}
 like usual sequents:
-$$\sint{\Gamma \seq \Delta} = \bigwedge{\Gamma} \limp \bigvee{\Delta}$$ To be
-able to abstract from the \kl[saturated]{saturation} status of \kl{solutions},
-we reframe the syntax of \kl{solutions} with so-called \intro{branching
-operators} $\J$:
+$$\sint{\Gamma \seq \Delta} = \bigwedge{\Gamma} \limp \bigvee{\Delta}$$
+\AP To be able to abstract from the \kl[saturated]{saturation} status of
+\kl{solutions}, we reframe the syntax of \kl{solutions} with so-called
+\intro{branching operators} $\J$:
 \begin{align*}
   S, T, U &\Coloneq \Gamma \J \Delta \\
   \J, \JB &\Coloneq {\seq} \mid {\piq{\cS}}
@@ -284,7 +285,7 @@ turns out that this equivalence is true in \kl{classical} logic, but \emph{not}
 in \kl{intuitionistic} logic. More precisely, it is the implication $G \defeq (A
 \limp (B \lor C)) \limp ((A \limp B) \lor C)$ which is not provable
 \kl{intuitionistically}, since it can easily be shown equivalent to the \kl{law
-of excluded middle}\sidenote{This was already noticed in
+of excluded middle}\sidenote{\AP This was already noticed in
 \cite{clouston-annotation-free-2013}, with the linear version $(A \multimap (B
 \parr C)) \multimap ((A \multimap B) \parr C)$ of $G$ called \intro{Grishin (a)}
 and its converse \intro{Grishin (b)}. More precisely, it is affirmed that while
@@ -302,7 +303,7 @@ function over \kl{saturated} \kl{solutions} through \emph{non-structural}
 recursion. This gives the following final definitions:
 
 \begin{definition}[Mix operator]\labdef{mixop}
-  The commutative \emph{mix operator} $\mix$ on \kl{solutions} is defined by:
+  The commutative \intro{mix operator} $\intro*\mix$ on \kl{solutions} is defined by:
   \begin{align*}
     (\Gamma \J \Delta) \mix (\Gamma' \seq \Delta') &=
       \Gamma, \Gamma' \J \Delta, \Delta' \\
@@ -312,7 +313,8 @@ recursion. This gives the following final definitions:
 \end{definition}
 
 \begin{definition}[Symmetric interpretation]\labdef{sinterp}
-  The \intro{symmetric interpretation} of a \kl{solution} is defined recursively by:
+  \AP The \intro{symmetric interpretation} $\intro*\sint{-}$ of a \kl{solution}
+  is defined recursively by:
   \begin{align*}
     \sint{\Gamma \piq{\cS} \Delta} &=
       \bigwedge_{S \in \cS} \sint{S \mix (\Gamma \seq \Delta)} \\
@@ -443,6 +445,7 @@ view and consider more exotic beasts: the adequately named
   \labfig{flow-blue-bubbles}
 \end{marginfigure}
 
+\AP
 For the moment, let us stay at a purely syntactic level. The idea is very
 simple, and can be summarized in two words: \emph{color swapping}. Thus the law
 that ``blue items can enter red bubbles, but red \kl{items} cannot'' becomes a
@@ -486,6 +489,7 @@ the \kl{classical} connective defined by the truth table of $A \land \neg B$,
 which is dual to the truth table of $\neg A \lor B$ defining material
 implication.
 
+\AP
 While the first paper of Rauszer \cite{Rauszer1974-RAUSAA} belongs to the Polish
 tradition of algebraic logic, she also explored in later works the
 \kl{proof-theoretic} \sidecite{rauszer_formalization_1974} and \kl{model-theoretic}
@@ -509,6 +513,8 @@ in the next section.
 Let us now extend the formal definition of \kl{bubbles} so that they can be colored:
 
 \begin{definition}[Bubble]\labdef{pol-bubble}
+  \AP
+  \phantomintro{polarity}
   A \intro{bubble} is a \kl{solution} enclosed in a membrane. The membrane can
   be either \intro{unpolarized} (\reintro{neutral}), charged
   \reintro{positively}, or charged \reintro{negatively}.
@@ -519,7 +525,7 @@ Let us now extend the formal definition of \kl{bubbles} so that they can be colo
 definition of \kl{solutions}, which can now be \kl{unsaturated} or \kl{saturated}:
 
 \begin{definition}[Solution]\labdef{pol-solution}
-  
+  \AP
   A \intro{solution} is a multiset of \kl{ions} and bubbles. It can be either
   \intro{saturated} or \intro{unsaturated}, and \kl{unsaturated} \kl{solutions} cannot contain
   \kl{neutral} bubbles. \kl{Solutions} $S$ can be represented textually with the
@@ -531,6 +537,8 @@ definition of \kl{solutions}, which can now be \kl{unsaturated} or \kl{saturated
     \Gamma, \Delta &\Coloneq I_1, \ldots, I_n \\
     \J, \JB &\Coloneq {\seq} \mid {\piq{\cS}} &&
   \end{align*}
+  In particular, an \intro{item} $I$ can be either a formula $A$ or a
+  bubble/solution $S$.
 \end{definition}
 
 Note that in the textual syntax, \kl{bubbles} are identified with \emph{\kl{subsolutions}}
@@ -550,7 +558,7 @@ Then we need to split our \kl{symmetric interpretation} accordingly, so that \kl
 \kl{nested sequents} for \kl{FILL} \cite{clouston-annotation-free-2013}.}:
 
 \begin{definition}[Polarized symmetric interpretation]\labdef{pol-sinterp}
-  
+  \AP
   The symmetric \intro{positive interpretation} and \intro{negative
   interpretation} of \kl{solutions} $\intro*\psint{-}$ and $\intro*\nsint{-}$
   are defined by mutual recursion as follows:

@@ -45,10 +45,10 @@ from the following modifications to the previous rules:
     \kl{weakening} rule in all \emph{terminal} rules of the calculus (i.e. rules with
     no premisses). In \kl{bubble calculi}, the notion of premiss is captured by
     \kl{neutral} bubbles; thus we incorporate \kl{weakenings} in all rules that solve
-    \kl{subgoals} by closing \kl{solutions} with no \kl{neutral} bubbles. Those are the rules
+    \kl{subgoals} by \kl[saturated]{saturating} \kl{solutions} with no \kl{neutral} bubbles. Those are the rules
     $\{\kl{i{\da}},\kl{p{-}},\kl{p{+}}\}$, which for the occasion have
     also been generalized to arbitrary \kl{solutions}. Indeed in \kl{system~B} we
-    restricted them to open \kl{solutions} to make them \emph{local}, but here the
+    restricted them to \kl{unsaturated} \kl{solutions} to make them \emph{local}, but here the
     \kl{weakenings} break locality anyway, and the general version improves
     \emph{factorizability} by solving instantly all \kl{subgoals} inside $\J$.
 
@@ -108,7 +108,7 @@ from the following modifications to the previous rules:
 
 \begin{remark}
   We also changed the \kl{\bot{-}} and \kl{\top{+}} rules, so that they create
-  \kl{polarized}, closed empty \kl{solutions}. This makes them both local, and generic
+  \kl{polarized}, \kl{saturated} empty \kl{solutions}. This makes them both local, and generic
   with respect to the status of the ambient \kl{solution}. The previous version can
   then be simulated by combination with the popping rules \kl{p{-}} and
   \kl{p{+}}.
@@ -145,10 +145,10 @@ where the same fragments as \kl{system~B} capture \kl{intuitionistic},
 
 \subsection{Semi-automated proof search}\labsubsec{bubbles-search}
 
-In the \kl{intuitionistic} (propositional) fragment of \kl{B_{inv}}, a canonical way
-to search for a proof of a formula $A$ consists in the following $5$
-\emph{phases}, applied successively in a loop until the empty closed \kl{solution} is
-reached:
+In the \kl{intuitionistic} (propositional) fragment of \kl{B_{inv}}, a canonical
+way to search for a proof of a formula $A$ consists in the following $5$
+\emph{phases}, applied successively in a loop until the \kl{saturated} empty
+\kl{solution} is reached:
 \begin{description}
   \item[\textbf{Decomposition}] Decompose $A$ by applying recursively
     $\mathbb{H}$-rules, until either atoms, \kl{negative} implications
@@ -157,8 +157,8 @@ reached:
     rule duplicates the implication, it cannot be used to decompose it.
     
     As for the \kl{\lor{-}} and \kl{\land{+}} rules, they can only be applied
-    when the formula is in an \emph{open} \kl{solution}. A first option is to let the
-    system automatically distribute them in all open \kl{subsolutions} that are
+    when the formula is in an \emph{\kl{unsaturated}} \kl{solution}. A first option is to let the
+    system automatically distribute them in all \kl{unsaturated} \kl{subsolutions} that are
     reachable, so that it can keep decomposing them. But this might create an
     explosion in the number of created \kl{subgoals}. Another option is to let the
     user manually decompose them. We believe this second option is preferable,
@@ -178,7 +178,7 @@ reached:
     onto another complex formula, one could \emph{pinch} together the two atoms:
     if there is no $\mathbb{F}$-law stucking one of the atoms on some membrane
     (orange arrows in \reffig{bubbles-porosity}), then the pinch succeeds, by
-    closing the \kl{subsolution} at the location where it ends with
+    \kl[saturated]{saturating} the \kl{subsolution} at the location where it ends with
     \kl{i{\da}}. Thus the user can choose the \kl{subgoal} to solve by
     controlling the destination of the pinch, which can be seen as a more
     symmetric and powerful version of \kl{DnD} actions. Generally though, one will
@@ -200,7 +200,7 @@ reached:
     of the pruned branch, and thus the number of \kl{subgoals} solved in one go. It
     can also be used to completely automate this phase.
 
-  \item[\textbf{Popping}] Pop every closed empty \kl{bubble} in the \kl{goal} with the
+  \item[\textbf{Popping}] Pop every \kl{saturated} empty \kl{bubble} in the \kl{goal} with the
   rules $\{\kl{p},\kl{p{-}},\kl{p{+}}\}$. This phase can also be trivially
   automated, and corresponds to the unit elimination phase in \kl{subformula linking}
   (\refsec{action}).
@@ -231,7 +231,7 @@ reached:
     proof, by minimizing its depth $\sdepth{T\hole}$ (\refdef{solctx-depth}).
 
     A second possibility is to duplicate eagerly every $\hypo{A \limp B}$ of
-    $\imps{S}$ in every open \kl{subsolutions} of $S$ where it can be so, and then
+    $\imps{S}$ in every \kl{unsaturated} \kl{subsolution} of $S$ where it can be so, and then
     apply \kl{{\limp}{-}} on all the newly created copies. To avoid an
     explosion of the size of $S$, the system should mark all the copies as
     \emph{used}, so that during the next \textbf{Application} phases, all the
@@ -258,7 +258,7 @@ other formalisms, is that most of its automation preserves the \emph{size}
   \item In the \textbf{Decomposition} phase, if we opt out of the automatic
   distribution of \kl{negative} $\hypo{\lor}$ and \kl{positive} $\conc{\land}$, then the
   system will only apply $\mathbb{H}$-rules that split logical connectives, and
-  create a \emph{partition} of the atoms of the \kl{goal} by enclosing them in
+  create a \emph{partition} of the atoms of the \kl{goal} by en\kl[saturated]{saturating} them in
   bubbles. Thus the size of the \kl{goal} is kept intact, and the structure modified
   but in a controlled, local way.
 
@@ -306,13 +306,15 @@ logical statements.
   \labfig{bubbles-native}
 \end{marginfigure}
 
-This can be understood as resulting from the inability of \kl{solutions} to represent
-natively \emph{\kl{negative} implications} and \emph{\kl{positive} subtractions}, although
-they can represent natively all other polarizations of connectives. This is
-illustrated by the mapping of \reffig{bubbles-native} from \kl{polarized} formulas to
-equivalent \kl{solutions}, which is really just the $\mathbb{H}$-rules of \kl{system~B} (\reffig{graphical-B}) where the right-hand \kl{solution} is enclosed in a
-\kl{bubble} of the corresponding \kl{polarity}. The reader can easily check that if $A$ is
-mapped to $S$, then $\psint{A} \semequiv \psint{S}$.
+This can be understood as resulting from the inability of \kl{solutions} to
+represent natively \emph{\kl{negative} implications} and \emph{\kl{positive}
+subtractions}, although they can represent natively all other polarizations of
+connectives. This is illustrated by the mapping of \reffig{bubbles-native} from
+\kl{polarized} formulas to equivalent \kl{solutions}, which is really just the
+$\mathbb{H}$-rules of \kl{system~B} (\reffig{graphical-B}) where the right-hand
+\kl{solution} is enclosed in a \kl{bubble} of the corresponding \kl{polarity}.
+The reader can easily check that if $A$ is mapped to $S$, then $\psint{A}
+\semequiv \psint{S}$.
 
 \begin{marginfigure}
   $$
