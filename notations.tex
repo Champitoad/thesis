@@ -121,8 +121,13 @@
 
 \newrobustcmd\step[1]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\rightarrow_{#1}}}}}
 \knowledge{\step}{notion}
+\knowledge{\step}{notion,scope=bubble}
+\knowledge{\step}{notion,scope=eg}
+\knowledge{\step}{notion,scope=flower}
 \newrobustcmd\lstep[1]{\withkl{\kl[\lstep]}{\mathrel{\cmdkl{\rightharpoonup_{#1}}}}}
 \knowledge{\lstep}{notion}
+\knowledge{\lstep}{notion,scope=bubble}
+\knowledge{\lstep}{notion,scope=flower}
 
 \newrobustcmd\steps[1]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\rightarrow^{\ast}_{#1}}}}}
 \newrobustcmd\notstep[1]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\nrightarrow_{#1}}}}}
@@ -138,8 +143,23 @@
 \newcommand{\irule}[3]{#1 : #2 \step{} #3}
 \newcommand{\rrule}[3]{#2 \step{#1} #3}
 
-\knowledgenewrobustcmd\sement{\mathrel{\cmdkl{\leq}}}
-\knowledgenewrobustcmd\semequiv{\mathrel{\cmdkl{\simeq}}}
+\newrobustcmd\sement[1]{
+  \mathrel{%
+    \withkl{\kl[\sement]}{%
+      \cmdkl{\leq_{#1}}
+    }%
+  }%
+}
+\knowledge{\sement}{notion}
+
+\newrobustcmd\semequiv[1]{
+  \mathrel{%
+    \withkl{\kl[\semequiv]}{%
+      \cmdkl{\simeq_{#1}}
+    }%
+  }%
+}
+\knowledge{\semequiv}{notion}
 
 \knowledgenewrobustcmd\bv{\cmdkl{\mathsf{bv}}}
 \knowledgenewrobustcmd\fv{\cmdkl{\mathsf{fv}}}
@@ -153,7 +173,14 @@
 \newcommand{\conc}[1]{{\color{conc} #1}}
 \newcommand{\dvar}[1]{{\color{dvar} #1}}
 
-\newcommand{\prov}[1]{\sststile{#1}{}}
+\newrobustcmd\prov[1]{
+  \mathrel{%
+    \withkl{\kl[\prov]}{%
+      \cmdkl{\sststile{#1}{}}
+    }%
+  }%
+}
+\knowledge{\prov}{notion}
 
 \newcommand{\dmdual}[1]{\overline{#1}}
 
@@ -245,24 +272,26 @@
 \newcommand{\lcoexp}{\lsub}
 
 \newrobustcmd\cdepth[1]{\withkl{\kl[\cdepth]}{\cmdkl{|}#1\cmdkl{|}}}
-\knowledge{\cdepth}{notion}
+\knowledge{\cdepth}{notion,scope=sfl}
+\knowledge{\cdepth}{notion,scope=symm}
 \newrobustcmd\sdepth[1]{\withkl{\kl[\sdepth]}{\cmdkl{|}#1\cmdkl{|}}}
-\knowledge{\sdepth}{notion}
+\knowledge{\sdepth}{notion,scope=sfl}
+\knowledge{\sdepth}{notion,scope=symm}
 
-\newcommand{\soldual}[1]{\overline{#1}}
+\knowledgenewrobustcmd\soldual[1]{#1^{\cmdkl{\dagger}}}
 
-\newcommand{\Lattice}{\mathcall{L}}
-\newcommand{\Heyting}{\mathcall{H}}
-\newcommand{\Brouwer}{\mathcall{B}}
-\newcommand{\HeytingBrouwer}{\mathcall{H\!B}}
-\newcommand{\Boolean}{\mathcall{C}}
+\knowledgenewrobustcmd\Lattice{\cmdkl{\mathcall{L}}}
+\knowledgenewrobustcmd\Heyting{\cmdkl{\mathcall{H}}}
+\knowledgenewrobustcmd\Brouwer{\cmdkl{\mathcall{B}}}
+\knowledgenewrobustcmd\HeytingBrouwer{\cmdkl{\mathcall{H\!B}}}
+\knowledgenewrobustcmd\Boolean{\cmdkl{\mathcall{C}}}
 \newcommand{\ACVar}{\mathcall{X}}
-\newcommand{\sementL}{\sement_{\Lattice}}
-\newcommand{\sementH}{\sement_{\Heyting}}
-\newcommand{\sementB}{\sement_{\Brouwer}}
-\newcommand{\sementHB}{\sement_{\HeytingBrouwer}}
-\newcommand{\sementC}{\sement_{\Boolean}}
-\newcommand{\sementX}{\sement_{\ACVar}}
+\newcommand{\sementL}{\sement{\Lattice}}
+\newcommand{\sementH}{\sement{\Heyting}}
+\newcommand{\sementB}{\sement{\Brouwer}}
+\newcommand{\sementHB}{\sement{\HeytingBrouwer}}
+\newcommand{\sementC}{\sement{\Boolean}}
+\newcommand{\sementX}{\sement{\ACVar}}
 
 \newcommand{\sysB}{\kl[system~B]{B}}
 \newcommand{\sysBH}{B_{\!\Heyting}}
@@ -276,12 +305,12 @@
 
 \newcommand{\cS}{\mathcal{S}}
 
-\newcommand{\dseq}{\mathbin{\trhd}}
+\newcommand{\dseq}{\mathbin{\Rightarrow}}
 \newcommand{\dtrans}[1]{\begingroup #1 \endgroup^{\scalebox{1.25}{$\bullet$}}}
 
 \newcommand{\pol}[1]{\mathsf{pol}(#1)}
 
-\newcommand{\imps}[1]{\mathrm{imp}(#1)}
+\knowledgenewrobustcmd\imps[1]{\cmdkl{\mathsf{imp}}(#1)}
 
 % Existential Graphs
 

@@ -396,7 +396,7 @@ $\traction{A_i}$ are composed into a unique \kl{tactic} $\tau$, which is
 executed by the \kl(PA){kernel} on $G$ to apply the full sequence of actions.
 
 \begin{remark}
-  Currently the translation $\trgoal{\cdot}$ is not \emph{injective}: it might
+  Currently the translation $\trgoal{-}$ is not \emph{injective}: it might
   map two different \kl{Coq} \kl{goals} to the same \kl{Actema} \kl{goal},
   because strictly \kl{higher-order} subterms are translated into a
   \texttt{dummy} atomic predicate/function. Thus one might retrieve a proof from
@@ -520,7 +520,7 @@ the goals can be rendered by the \process{Frontend} and exposed to the
 
 Once the \process{Plugin} has received the actions to execute, either from the
 \process{Database} or the \process{User}, it will compile them with the function
-$\traction{\cdot}$ which translates any action $A$ into a \kl{Coq} tactic
+$\traction{-}$ which translates any action $A$ into a \kl{Coq} tactic
 $\traction{A}$. This function actually has access to some other data: \kl{Coq}'s
 \kl{goal} $G$, its \kl{Actema} translation $\trgoal{G}$, and a bijective mapping
 $\Sigma$ between \kl{Coq} constants in the environment of $G$ and the
@@ -539,7 +539,7 @@ The \texttt{action} datatype is described thoroughly in the \kl{ATD} specificati
 provided in \reffig{atd-actions}. It is a big algebraic datatype, where each
 constructor encodes a specific \emph{type} of action. An action's type is
 equivalent to the \emph{signature} of a \kl{tactic}, i.e. its name and the types
-of its arguments. In particular, the translation function $\traction{\cdot}$ is
+of its arguments. In particular, the translation function $\traction{-}$ is
 defined as a big pattern-matching on the action's type\sidenote{Note that an
 action's type is orthogonal to what we referred to as its \emph{kind} in
 \reftab{action-protocol}, that is the interface mechanism through which it is

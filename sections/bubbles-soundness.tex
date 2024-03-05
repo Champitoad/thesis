@@ -12,31 +12,31 @@ sound only in \emph{Boolean} algebras, most rules are sound in larger classes of
 algebras, namely: \emph{Heyting} algebras for \kl{intuitionistic} logic,
 \emph{Brouwer} algebras for \kl{dual-intuitionistic} logic, and
 \emph{Heyting-Brouwer} algebras for \kl{bi-intuitionistic} logic. These 4 classes are
-all instances of \emph{bounded lattices}, and their relationship is summarized
+all instances of \emph{\kl{bounded lattices}}, and their relationship is summarized
 in the Venn \kl{diagram} of \reffig{venn-algebras}.
 
 First we recall the definitions of the various algebras:
 
-\begin{definition}[Bounded lattice]\labdef{bounded-lattice}
-  A \emph{bounded lattice} is a structure $(\mathcal{A}, \sement, \ltop, \lbot, \lmeet,
+\begin{definition}[Bounded lattice]\labdef{bounded-lattice} A \intro{bounded
+  lattice} is a structure $(\mathcal{A}, \sement{}, \ltop, \lbot, \lmeet,
   \ljoin)$ such that:
   \begin{itemize}
-    \item $(\mathcal{A}, \intro*\sement)$ is a partial order, i.e. for every $a, b, c
+    \item $(\mathcal{A}, \sement{})$ is a partial order, i.e. for every $a, b, c
     \in \mathcal{A}$ we have:
       \begin{itemize}
-        \item $a \sement a$;
-        \item if $a \sement b$ and $b \sement a$ then $a = b$;
-        \item if $a \sement b$ and $b \sement c$ then $a \sement c$.
+        \item $a \sement{} a$;
+        \item if $a \sement{} b$ and $b \sement{} a$ then $a = b$;
+        \item if $a \sement{} b$ and $b \sement{} c$ then $a \sement{} c$.
       \end{itemize}
     \item $\lbot$ and $\ltop$ are respectively the smallest and greatest
-    elements of $(\mathcal{A}, \sement)$, i.e. for every $a \in \mathcal{A}$ we
-    have $\bot \sement a$ and $a \sement \ltop$;
+    elements of $(\mathcal{A}, \sement{})$, i.e. for every $a \in \mathcal{A}$ we
+    have $\bot \sement{} a$ and $a \sement{} \ltop$;
     \item For every pair of elements $a, b \in \mathcal{A}$, $a \ljoin b$ is
     their join (least upper bound) and $a \lmeet b$ their meet (greatest lower
     bound), that is:
     \begin{itemize}
-      \item $a \sement a \ljoin b$, $b \sement a \ljoin b$ and $a \ljoin b \sement c$ for all $c \in \mathcal{A}$ s.t. $a \sement c$ and $b \sement c$;
-      \item $a \lmeet b \sement a$, $a \lmeet b \sement b$ and $c \sement a \lmeet b$ for all $c \in \mathcal{A}$ s.t. $c \sement a$ and $c \sement b$.
+      \item $a \sement{} a \ljoin b$, $b \sement{} a \ljoin b$ and $a \ljoin b \sement{} c$ for all $c \in \mathcal{A}$ s.t. $a \sement{} c$ and $b \sement{} c$;
+      \item $a \lmeet b \sement{} a$, $a \lmeet b \sement{} b$ and $c \sement{} a \lmeet b$ for all $c \in \mathcal{A}$ s.t. $c \sement{} a$ and $c \sement{} b$.
     \end{itemize}
   \end{itemize}
 \end{definition}
@@ -44,62 +44,64 @@ First we recall the definitions of the various algebras:
 \begin{remark}
   As mentioned in the introduction, we only conjecture the soundness of rules
   for quantifiers: this would require considering \emph{complete} lattices, i.e.
-  with meets and joins for arbitrary sets rather than just pairs\sidenote{see
-  for instance section 4 of \cite{forster_completeness_2021} for a concise
-  treatment of the soundness and completeness of \kl{intuitionistic} and \kl{classical}
-  \kl{natural deduction} for \kl{first-order logic} with respect to algebraic semantics.}.
+  with meets and joins for arbitrary sets rather than just pairs\sidenote{See
+  for instance \cite[Section~4]{forster_completeness_2021} for a concise
+  treatment of the soundness and completeness of \kl{intuitionistic} and
+  \kl{classical} \kl{natural deduction} for \kl{first-order logic} with respect
+  to algebraic semantics.}.
 \end{remark}
 
 As the notation strongly suggests, the greatest and smallest elements $\top$ and
 $\bot$ will model respectively truth and absurdity, while the meet $\lmeet$ and
 join $\ljoin$ will model conjunction and disjunction. In fact the conditions of
 \refdef{bounded-lattice} are very close to the rules of \kl{natural deduction}
-for these connectives, by replacing the \kl{sequent} operator $\seq$ with the partial
-order relation $\sement$. The same idea can be applied to the implication
-connective, and adding a corresponding \emph{exponential} operation $\lexp$
-indeed gives the definition of a Heyting algebra:
+for these connectives, by replacing the \kl{sequent} operator $\seq$ with the
+partial order relation $\sement{}$. The same idea can be applied to the
+implication connective, and adding a corresponding \kl{exponential} operation
+$\lexp$ indeed gives the definition of a \kl{Heyting algebra}:
 
 \begin{definition}[Heyting algebra]
-  A \emph{Heyting algebra} is a structure $(\mathcal{A}, \sement, \ltop, \lbot,
-  \lmeet, \ljoin, \lexp)$ such that $(\mathcal{A}, \sement, \ltop, \lbot,
-  \lmeet, \ljoin)$ is a bounded lattice and for every pair $a, b \in
-  \mathcal{A}$, the \emph{exponential} $a \lexp b$ is the greatest element of
-  the set $\compr{c \in \mathcal{A}}{c \lmeet a \sement b}$. That is, $(a \lexp
-  b) \lmeet a \sement b$ and $c \sement a \lexp b$ for all $c \in \mathcal{A}$
-  s.t. $c \lmeet a \sement b$.
+  A \intro{Heyting algebra} is a structure $(\mathcal{A}, \sement{}, \ltop, \lbot,
+  \lmeet, \ljoin, \lexp)$ such that $(\mathcal{A}, \sement{}, \ltop, \lbot,
+  \lmeet, \ljoin)$ is a \kl{bounded lattice} and for every pair $a, b \in
+  \mathcal{A}$, the \intro{exponential} $a \lexp b$ is the greatest element of
+  the set $\compr{c \in \mathcal{A}}{c \lmeet a \sement{} b}$. That is, $(a \lexp
+  b) \lmeet a \sement{} b$ and $c \sement{} a \lexp b$ for all $c \in \mathcal{A}$
+  s.t. $c \lmeet a \sement{} b$.
 \end{definition}
 
-By dualizing this definition, we get a \emph{co-exponential} operation $\lcoexp$
+By dualizing this definition, we get a \kl{co-exponential} operation $\lcoexp$
 that models the \kl{exclusion} connective, and thus \kl{dual-intuitionistic} logic in
-so-called Brouwer algebras:
+so-called \kl{Brouwer algebras}:
 
 \begin{definition}[Brouwer algebra]
-  A \emph{Brouwer algebra} is a structure $(\mathcal{A}, \sement, \ltop, \lbot,
-  \lmeet, \ljoin, \lcoexp)$ such that $(\mathcal{A}, \sement, \ltop, \lbot,
-  \lmeet, \ljoin)$ is a bounded lattice and for every pair $a, b \in
-  \mathcal{A}$, the \emph{co-exponential} $a \lcoexp b$ is the smallest element
-  of the set $\compr{c \in \mathcal{A}}{b \sement a \ljoin c}$. That is, $b
-  \sement a \ljoin (b \lcoexp a)$ and $b \lcoexp a \sement c$ for all $c \in
-  \mathcal{A}$ s.t. $b \sement a \ljoin c$.
+  A \intro{Brouwer algebra} is a structure $(\mathcal{A}, \sement{}, \ltop,
+  \lbot, \lmeet, \ljoin, \lcoexp)$ such that $(\mathcal{A}, \sement{}, \ltop,
+  \lbot, \lmeet, \ljoin)$ is a \kl{bounded lattice} and for every pair $a, b \in
+  \mathcal{A}$, the \intro{co-exponential} $a \lcoexp b$ is the smallest element
+  of the set $\compr{c \in \mathcal{A}}{b \sement{} a \ljoin c}$. That is, $b
+  \sement{} a \ljoin (b \lcoexp a)$ and $b \lcoexp a \sement{} c$ for all $c \in
+  \mathcal{A}$ s.t. $b \sement{} a \ljoin c$.
 \end{definition}
 
-Then we can model \kl{bi-intuitionistic} logic, which comprises both implication and
-\kl{exclusion}, by just taking pairs of a Heyting and a Brouwer algebra on the same
-bounded lattice:
+Then we can model \kl{bi-intuitionistic} logic, which comprises both implication
+and \kl{exclusion}, by just taking pairs of a \kl{Heyting algebra} and a
+\kl{Brouwer algebra} on the same \kl{bounded lattice}:
 
 \begin{definition}[Heyting-Brouwer algebra]
-  A \emph{Heyting-Brouwer algebra} is a structure $(\mathcal{A}, \sement, \ltop,
-  \lbot, \lmeet, \ljoin, \lexp, \lcoexp)$ such that $(\mathcal{A}, \sement,
-  \ltop, \lbot, \lmeet, \ljoin, \lexp)$ is a Heyting algebra and $(\mathcal{A},
-  \sement, \ltop, \lbot, \lmeet, \ljoin, \lcoexp)$ is a Brouwer algebra.
+  A \intro{Heyting-Brouwer algebra} is a structure $(\mathcal{A}, \sement{},
+  \ltop, \lbot, \lmeet, \ljoin, \lexp, \lcoexp)$ such that $(\mathcal{A},
+  \sement{}, \ltop, \lbot, \lmeet, \ljoin, \lexp)$ is a \kl{Heyting algebra} and
+  $(\mathcal{A}, \sement{}, \ltop, \lbot, \lmeet, \ljoin, \lcoexp)$ is a
+  \kl{Brouwer algebra}.
 \end{definition}
 
-Finally, we recover \kl{classical} logic by collapsing exponentials and
-co-exponentials to their \kl{classical} definitions, giving a characterization of
-Boolean algebras:
+Finally, we recover \kl{classical} logic by collapsing \kl{exponentials} and
+\kl{co-exponentials} to their \kl{classical} definitions, giving a
+characterization of \kl{Boolean algebras}:
 
 \begin{definition}\labdef{boolean-algebra}
-  A \emph{Boolean algebra} is a Heyting-Brouwer algebra $(\mathcal{A}, \sement,
+  A \intro{Boolean algebra} is a \kl{Heyting-Brouwer algebra} $(\mathcal{A}, \sement{},
   \ltop, \lbot, \lmeet, \ljoin, \lexp, \lcoexp)$ such that for every $a, b \in
   \mathcal{A}$, $a \lexp b = (\ltop \lcoexp a) \ljoin b$ and $a \lcoexp b = a
   \lmeet (b \lexp \bot)$.
@@ -107,46 +109,49 @@ Boolean algebras:
 
 \begin{remark}
 \refdef{boolean-algebra} can be shown equivalent to more
-usual definitions of Boolean algebras, that are based only on lattice operations
+usual definitions of \kl{Boolean algebras}, that are based only on lattice operations
 and a primitive complement operation modelling negation; but including the proof
 here would lead us out of the scope of this chapter.
 % \todo{Proof in appendix?}
 \end{remark}
 
-In the rest of this chapter, we will freely assimilate formulas and their
+In the rest of this chapter, we will freely assimilate formulas with their
 interpretation in the various algebras. Indeed, since we only consider the
-abstract classes of all algebras and never deal with a particular instance,
-they will stand in perfect bijection.
+abstract classes of all algebras and never deal with particular instances, they
+will stand in perfect bijection.
 
 \begin{definition}[Semantic entailment]
-  We will write $A \sement_{\mathcall{X}} B$ (resp. $A \semequiv_{\mathcall{X}}
-  B$) to express that $A \sement B$ (resp. $A \sementX B$ and $B \sementX A$) in
-  every algebra of the class $\mathcall{X}$. More precisely, $\mathcall{X}$ can
-  be one of $\Lattice$, $\Heyting$, $\Brouwer$, $\HeytingBrouwer$ or $\Boolean$,
-  which stand respectively for bounded lattices, Heyting, Brouwer,
-  Heyting-Brouwer and Boolean algebras. We will write $A \sement B$ (resp. $A
-  \semequiv B$) as a shorthand for $A \sementH B$ (resp. $A \semequiv_{\Heyting}
-  B$).
+  We write $A \intro*\sement{\mathcall{X}} B$ (resp. $A
+  \intro*\semequiv{\mathcall{X}} B$) to express that $A \sement{} B$ (resp. $A
+  \sement{} B$ and $B \sement{} A$) in every algebra of the class
+  $\mathcall{X}$. More precisely, $\mathcall{X}$ can be one of
+  $\intro*\Lattice$, $\intro*\Heyting$, $\intro*\Brouwer$,
+  $\intro*\HeytingBrouwer$ or $\intro*\Boolean$, which stand respectively for
+  \kl{bounded lattices}, \kl[Heyting algebra]{Heyting}, \kl[Brouwer
+  algebra]{Brouwer}, \kl[Heyting-Brouwer algebra]{Heyting-Brouwer} and
+  \kl[Boolean algebra]{Boolean} algebras. We write $A \reintro*\sement{} B$
+  (resp. $A \reintro*\semequiv{} B$) as a shorthand for $A \sementH B$ (resp. $A
+  \reintro*\semequiv{\Heyting} B$).
 \end{definition}
 
 \subsection{Duality}
 
 We now prove a number of lemmas that characterize \emph{duality} both
-semantically, typically between Heyting and Brouwer algebras, and syntactically
+semantically, typically between \kl{Heyting algebras} and \kl{Brouwer algebras}, and syntactically
 in the rules of \kl{system~B}. This will be useful later on to shorten some
 proofs.
 
 \begin{definition}[Dual formula]\labdef{dual-formula}
-  The \emph{dual formula} $\soldual{A}$ of a formula $A$ is defined recursively
+  The \emph{dual formula} $\reintro*\soldual{A}$ of a formula $A$ is defined recursively
   as follows:
   \begin{align*}
     \soldual{a} &= a &\\
     \soldual{\top} &= \bot &
     \soldual{\bot} &= \top \\
-    \soldual{A \land B} &= \soldual{A} \lor \soldual{B} &
-    \soldual{A \lor B} &= \soldual{A} \land \soldual{B} \\
-    \soldual{A \limp B} &= \soldual{B} \lsub \soldual{A} &
-    \soldual{A \lsub B} &= \soldual{B} \limp \soldual{A}
+    \soldual{(A \land B)} &= \soldual{A} \lor \soldual{B} &
+    \soldual{(A \lor B)} &= \soldual{A} \land \soldual{B} \\
+    \soldual{(A \limp B)} &= \soldual{B} \lsub \soldual{A} &
+    \soldual{(A \lsub B)} &= \soldual{B} \limp \soldual{A}
   \end{align*}
 \end{definition}
 
@@ -161,21 +166,22 @@ proofs.
 \end{fact}
 
 We omit the proof of \reffact{duality}, but this can easily be obtained from the
-soundness and completeness of a symmetric \kl{sequent calculus} for \kl{bi-intuitionistic}
-logic, see for instance Lemma 2 of \sidecite{restall_extending_1997}.
+soundness and completeness of a symmetric \kl{sequent calculus} for
+\kl{bi-intuitionistic} logic; see for instance
+\sidecite[][Lemma~2]{restall_extending_1997}.
 
 \begin{definition}[Dual solution]\labdef{dual-solution}
-  The \emph{dual solution} $\soldual{S}$ of a \kl{solution} $S$ is defined
+  The \emph{dual solution} $\intro*\soldual{S}$ of a \kl{solution} $S$ is defined
   mutually recursively as follows:
   \begin{align*}
-    \soldual{\Gamma \J \Delta} &= \soldual{\Delta} \mathbin{\soldual{\J}} \soldual{\Gamma} &
-    \soldual{S_1 \sep \ldots \sep S_n} &= \soldual{S_1} \sep \ldots \sep \soldual{S_n} \\
+    \soldual{(\Gamma \J \Delta)} &= \soldual{\Delta} \mathbin{\soldual{\J}} \soldual{\Gamma} &
+    \soldual{(S_1 \sep \ldots \sep S_n)} &= \soldual{S_1} \sep \ldots \sep \soldual{S_n} \\
     \soldual{A} &= \soldual{A} &
-    \soldual{I_1, \ldots, I_n} &= \soldual{I_1}, \ldots, \soldual{I_n} \\
+    \soldual{(I_1, \ldots, I_n)} &= \soldual{I_1}, \ldots, \soldual{I_n} \\
     \soldual{\seq} &= {\seq} &
-    \soldual{\piq{\cS}} &= \piq{\soldual{\cS}}
+    \soldual{\piq{\cS}} &= {\piq{\soldual{\cS}}}
   \end{align*}
-  For \kl{solution} \kl{contexts}, the \kl{hole} is self-dual: $\soldual{\hole} = \hole$. This
+  For \kl{contexts}, the \kl{hole} is self-dual: $\soldual{\hole} = \hole$. This
   entails in particular that $\soldual{S}\select{\soldual{T}} =
   \soldual{S\select{T}}$.
 \end{definition}
@@ -198,25 +204,25 @@ formulas have been dualized (\refdef{dual-formula}).
   $\soldual{\soldual{I}} = I$.
 \end{lemma}
 \begin{proof}
-  By recurrence on $\sdepth{I}$.
+  By induction on $\sdepth{I}$.
   \begin{itemize}
     \item[\textbf{Formula}] Suppose $I = A$. Then we conclude by a
     straightforward induction on $A$.
     \item[\textbf{Unsaturated solution}] Suppose $I = \Gamma \seq \Delta$. Then by
-    definition we have $\soldual{\soldual{\Gamma \seq \Delta}} =
-    \soldual{\soldual{\Delta} \seq \soldual{\Gamma}} =
+    definition we have $\soldual{(\soldual{\Gamma \seq \Delta})} =
+    \soldual{(\soldual{\Delta} \seq \soldual{\Gamma})} =
     \soldual{\soldual{\Gamma}} \seq \soldual{\soldual{\Delta}}$, and we conclude
     by IH.
     \item[\textbf{Saturated solution}] Suppose $I = \Gamma \piq{\cS}
-    \Delta$. Then by definition we have $\soldual{\soldual{\Gamma
-    \piq{\cS} \Delta}} = \soldual{\soldual{\Delta}
-    \piq{\soldual{\cS}} \soldual{\Gamma}} =
+    \Delta$. Then by definition we have $\soldual{(\soldual{\Gamma
+    \piq{\cS} \Delta})} = \soldual{(\soldual{\Delta}
+    \piq{\soldual{\cS}} \soldual{\Gamma})} =
     \soldual{\soldual{\Gamma}} \piq{\soldual{\soldual{\cS}}}
     \soldual{\soldual{\Delta}}$, and we conclude by IH.
   \end{itemize}
 \end{proof}
 
-\begin{lemma}[Local rule duality]\lablemma{local-rule-duality}
+\begin{lemma}[Shallow rule duality]\lablemma{local-rule-duality}
   If $S \lstep{} T$ then $\soldual{S} \lstep{} \soldual{T}$.
 \end{lemma}
 \begin{proof}
@@ -285,7 +291,7 @@ formulas have been dualized (\refdef{dual-formula}).
   \psint{\soldual{I}}$.
 \end{lemma}
 \begin{proof}
-  By a straightforward recurrence on $\sdepth{I}$.
+  By a straightforward induction on $\sdepth{I}$.
 \end{proof}
 
 \begin{lemma}\lablemma{int-invert}
@@ -299,41 +305,41 @@ formulas have been dualized (\refdef{dual-formula}).
   conclude by involutivity (\reflemma{involutivity}).
 \end{proof}
 
-\subsection{Local soundness}
+\subsection{Shallow soundness}
 
 In the following we give a number of (in)equalities that hold in the various
 classes of algebras. They can easily be checked by building derivations in an
 adequate \kl{sequent calculus}.
 
 \begin{fact}[Commutativity]\labfact{lattice-commutativity}
-  $A \lor B \semequiv_{\Lattice} B \lor A$ and $A \land B \semequiv_{\Lattice} B \land A$.
+  $A \lor B \semequiv{\Lattice} B \lor A$ and $A \land B \semequiv{\Lattice} B \land A$.
 \end{fact}
 
 \begin{fact}[Idempotency]\labfact{idempotency}
-  $A \lor A \semequiv_{\Lattice} A$ and $A \land A \semequiv_{\Lattice} A$.
+  $A \lor A \semequiv{\Lattice} A$ and $A \land A \semequiv{\Lattice} A$.
 \end{fact}
 
 \begin{fact}[Currying]\labfact{currying}
   \begin{align*}
-    A \limp (B \limp C) &\semequiv (A \land B) \limp C \\
-    (A \lsub B) \lsub C &\semequiv_{\Brouwer} A \lsub (B \lor C)
+    A \limp (B \limp C) &\semequiv{} (A \land B) \limp C \\
+    (A \lsub B) \lsub C &\semequiv{\Brouwer} A \lsub (B \lor C)
   \end{align*}
 \end{fact}
 
 \begin{fact}[Distributivity]\labfact{distributivity}
   \begin{align*}
-    A \land (B \lor C) &\semequiv_{\Lattice} (A \land B) \lor (A \land C) \\
-    A \lor (B \land C) &\semequiv_{\Lattice} (A \lor B) \land (A \lor C) \\
-    A \limp B \land C &\semequiv (A \limp B) \land (A \limp C) \\
-    A \lor B \limp C &\semequiv (A \limp B) \land (A \limp C) \\
-    A \lor B \lsub C &\semequiv_{\Brouwer} (A \lsub B) \lor (A \lsub C) \\
-    A \lsub B \land C &\semequiv_{\Brouwer} (A \lsub B) \lor (A \lsub C)
+    A \land (B \lor C) &\semequiv{\Lattice} (A \land B) \lor (A \land C) \\
+    A \lor (B \land C) &\semequiv{\Lattice} (A \lor B) \land (A \lor C) \\
+    A \limp B \land C &\semequiv{} (A \limp B) \land (A \limp C) \\
+    A \lor B \limp C &\semequiv{} (A \limp B) \land (A \limp C) \\
+    A \lor B \lsub C &\semequiv{\Brouwer} (A \lsub B) \lor (A \lsub C) \\
+    A \lsub B \land C &\semequiv{\Brouwer} (A \lsub B) \lor (A \lsub C)
   \end{align*}
 \end{fact}
 
 \begin{fact}[Weak distributivity]\labfact{weakdistrib}
   \begin{align*}
-    (A \limp B) \lor C &\sement A \limp (B \lor C) \\
+    (A \limp B) \lor C &\sement{} A \limp (B \lor C) \\
     A \limp (B \lor C) &\sementC (A \limp B) \lor C \\
     (A \land B) \lsub C &\sementB A \land (B \lsub C) \\
     A \land (B \lsub C) &\sementC (A \land B) \lsub C
@@ -342,9 +348,9 @@ adequate \kl{sequent calculus}.
 
 \begin{fact}\labfact{gencut}
   \begin{align*}
-  (A \lor B) \land (C \limp D) &\sement (A \limp C) \limp (B \lor D) \\
+  (A \lor B) \land (C \limp D) &\sement{} (A \limp C) \limp (B \lor D) \\
   (A \lor B) \land (C \limp D) &\sementHB (A \lsub C) \lor (B \lor D) \\
-  (A \lor B) \land (A \limp B) &\semequiv B
+  (A \lor B) \land (A \limp B) &\semequiv{} B
   \end{align*}
 \end{fact}
 
@@ -356,7 +362,7 @@ The following definition will be used pervasively to reason by induction on the
 tree structure induced by \kl{branching operators}:
 
 \begin{definition}
-  The \emph{depth} $\sdepth{\J}$ of a \kl{branching operator} $\J$ is defined
+  The \intro{depth} $\intro*\sdepth{\J}$ of a \kl{branching operator} $\J$ is defined
   recursively as follows:
   \begin{align*}
     \sdepth{\seq} &= 0 \\
@@ -365,34 +371,34 @@ tree structure induced by \kl{branching operators}:
 \end{definition}
 
 % \begin{lemma}\lablemma{bubbles-multiweak}
-%   $\psint{\Gamma \seq \Delta} \sement \psint{\Gamma', \Gamma \seq \Delta, \Delta'}$.
+%   $\psint{\Gamma \seq \Delta} \sement{} \psint{\Gamma', \Gamma \seq \Delta, \Delta'}$.
 % \end{lemma}
 % \begin{proof}
 %   $$
 %   \begin{array}{rcll}
 %     \psint{\Gamma \seq \Delta}
 %     &=& \nsint{\Gamma} \limp \psint{\Delta} & \\
-%     &\sement& \nsint{\Gamma'} \wedge \nsint{\Gamma} \limp \psint{\Delta}} &\text{(Weakening)} \\
+%     &\sement{}& \nsint{\Gamma'} \wedge \nsint{\Gamma} \limp \psint{\Delta}} &\text{(Weakening)} \\
 %     &=& \psint{\Gamma', \Gamma \seq \Delta, \Delta'} & \\
 %   \end{array}
 %   $$
 % \end{proof}
 
 % \begin{lemma}[Sharing]
-%   $\psint{\Gamma \seq \Delta} \sement \psint{\Gamma \piq{\cS} \Delta}$.
+%   $\psint{\Gamma \seq \Delta} \sement{} \psint{\Gamma \piq{\cS} \Delta}$.
 % \end{lemma}
 % \begin{proof}
-%   Let $\cS = S_1 \sep \ldots \sep S_n$. We proceed by recurrence on
+%   Let $\cS = S_1 \sep \ldots \sep S_n$. We proceed by induction on
 %   $\sdepth{\piq{\cS}}$.
 %   \begin{itemize}proof
 %     \item[\bcase] Suppose $\sdepth{\piq{\cS}} = 1$, and
 %     let $1 \leq i \leq n$. Then we know that $S_i = \Gamma_i \seq \Delta_i$, and
-%     by \reflemma{bubbles-multiweak} we get $\psint{\Gamma \seq \Delta} \sement
+%     by \reflemma{bubbles-multiweak} we get $\psint{\Gamma \seq \Delta} \sement{}
 %     \psint{S_i \mix (\Gamma \seq \Delta)}$. Thus we have
 %     $$
 %     \begin{array}{rcll}
 %       \psint{\Gamma \seq \Delta}
-%       &\sement& \bigwedge_{1 \leq i \leq n}{\psint{S_i \mix (\Gamma \seq \Delta)}} & \\
+%       &\sement{}& \bigwedge_{1 \leq i \leq n}{\psint{S_i \mix (\Gamma \seq \Delta)}} & \\
 %       &=& \psint{\Gamma \piq{\cS} \Delta}
 %     \end{array}
 %     $$
@@ -401,120 +407,120 @@ tree structure induced by \kl{branching operators}:
 %   \end{itemize}
 % \end{proof}
 
-Now we can give a few lemmas that generalize some semantic (in)equalities to the
+Now we can prove a few lemmas that generalize some semantic (in)equalities to the
 interpretation of \kl{solutions} with arbitrary \kl{branching operators}. All detailed
 proofs are available in appendix (\refsec{app:bubbles-soundness}).
 
 \begin{lemma}[Generalized weakening]\lablemma{bubbles-weakening}
-  $\psint{S} \sement \psint{S \mix (\Gamma \seq \Delta)}$.
+  $\psint{S} \sement{} \psint{S \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 \begin{proof}
-  By recurrence on $\sdepth{\J}$, with $S = \Gamma' \J \Delta'$.
+  By induction on $\sdepth{\J}$, with $S = \Gamma' \J \Delta'$.
 \end{proof}
 
 \begin{lemma}[Generalized contraction]\lablemma{bubbles-contraction}
-  $\psint{S \mix (\seq I, I)} \semequiv \psint{S \mix (\seq I)}$ and
-  $\psint{S \mix (I, I \seq)} \semequiv \psint{S \mix (I \seq)}$.
+  $\psint{S \mix (\seq I, I)} \semequiv{} \psint{S \mix (\seq I)}$ and
+  $\psint{S \mix (I, I \seq)} \semequiv{} \psint{S \mix (I \seq)}$.
 \end{lemma}
 \begin{proof}
-  By recurrence on $\sdepth{\J}$, with $S = \Gamma \J \Delta$.
+  By induction on $\sdepth{\J}$, with $S = \Gamma \J \Delta$.
 \end{proof}
 
 \begin{lemma}[Generalized weak distributivity]\lablemma{bubbles-weakdistrib}
   \begin{align}
-    \psint{\Gamma \J \Delta} \lor \psint{I} &\sement \psint{\Gamma \J I, \Delta} \label{eqn:weakdistrib-one} \\
+    \psint{\Gamma \J \Delta} \lor \psint{I} &\sement{} \psint{\Gamma \J I, \Delta} \label{eqn:weakdistrib-one} \\
     \psint{\Gamma \J I, \Delta} &\sementC \psint{\Gamma \J \Delta} \lor \psint{I} \label{eqn:weakdistrib-two} \\
     \nsint{\Gamma, I \J \Delta} &\sementB \nsint{I} \land \nsint{\Gamma \J \Delta} \label{eqn:weakdistrib-three} \\
     \nsint{I} \land \nsint{\Gamma \J \Delta} &\sementC \nsint{\Gamma, I \J \Delta} \label{eqn:weakdistrib-four}
   \end{align}
 \end{lemma}
 \begin{proof}
-  (\ref{eqn:weakdistrib-one}) holds by recurrence on $\sdepth{\J}$, using the
+  (\ref{eqn:weakdistrib-one}) holds by induction on $\sdepth{\J}$, using the
   corresponding inequality from \reffact{weakdistrib}. The proof of
   (\ref{eqn:weakdistrib-two}) is the same, except that we use the converse
-  inequality of \reffact{weakdistrib} that holds in Boolean algebras.
+  inequality of \reffact{weakdistrib} that holds in \kl{Boolean algebras}.
   (\ref{eqn:weakdistrib-three}) and (\ref{eqn:weakdistrib-four}) hold by duality
   from (\ref{eqn:weakdistrib-one}) and (\ref{eqn:weakdistrib-two}).
 \end{proof}
 
 \begin{lemma}[Generalized currying]\lablemma{bubbles-currying}
   \begin{align}
-    \psint{\Gamma, I \J \Delta} &\semequiv \nsint{I} \limp \psint{\Gamma \J \Delta} \label{eqn:currying-one} \\
-    \nsint{\Gamma \J I, \Delta} &\semequiv_{\Brouwer} \nsint{\Gamma \J \Delta} \lsub \psint{I} \label{eqn:currying-two}
+    \psint{\Gamma, I \J \Delta} &\semequiv{} \nsint{I} \limp \psint{\Gamma \J \Delta} \label{eqn:currying-one} \\
+    \nsint{\Gamma \J I, \Delta} &\semequiv{\Brouwer} \nsint{\Gamma \J \Delta} \lsub \psint{I} \label{eqn:currying-two}
   \end{align}
 \end{lemma}
 \begin{proof}
-  (\ref{eqn:currying-one}) holds by recurrence on $\sdepth{\J}$, and
+  (\ref{eqn:currying-one}) holds by induction on $\sdepth{\J}$, and
   (\ref{eqn:currying-two}) by duality.
 \end{proof}
 
 % \begin{lemma}[Mix]\lablemma{bubbles-mix}
-%   $\psint{S} \land \psint{T} \sement \psint{S \mix T}$.
+%   $\psint{S} \land \psint{T} \sement{} \psint{S \mix T}$.
 % \end{lemma}
 
 % \begin{lemma}\lablemma{bubbles-piq}
-%   $\psint{S \mix T} \sement \psint{S \mix \piq{T}}$.
+%   $\psint{S \mix T} \sement{} \psint{S \mix \piq{T}}$.
 % \end{lemma}
 
-Lastly, we mention a technical property of rules that will be necessary for the
+Lastly, we mention a technical property of the rules that will be necessary for the
 final proof of soundness to go through:
 
 \begin{fact}[Top-level genericity]\labfact{bubbles-top-level}
   If $S \lstep{} T$, then $S \mix (\Gamma \seq \Delta) \lstep{} T \mix (\Gamma \seq \Delta)$.
 \end{fact}
 
-All the previous facts and lemmas can now be used to prove \emph{local
+All the previous facts and lemmas can now be used to prove \emph{shallow
 soundness}, i.e. that the interpretation of each rule of \kl{system~B} maps to
 an (in)equality in some class of algebras:
 
-\begin{lemma}[Local soundness]\lablemma{bubbles-local-soundness}
+\begin{lemma}[Shallow soundness]\lablemma{bubbles-local-soundness}
   
   If $S \lstep{} T$ then $\psint{T \mix (\Gamma \seq \Delta)} \sementC \psint{S
   \mix (\Gamma \seq \Delta)}$.
-  % and $\nsint{S \mix (\Gamma \seq \Delta)} \sement
+  % and $\nsint{S \mix (\Gamma \seq \Delta)} \sement{}
   % \nsint{T \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 \begin{proof}
   $S \lstep{} T$ implies $\psint{T} \sementC \psint{S}$, which is shown by
-  inspection of each rule of \kl{system~B} (see \refsec{bubbles-soundness}).
+  inspection of each rule of \kl{system~B} (see \refsec{app:bubbles-soundness}).
   That we can mix an arbitrary top-level \kl(sequent){context} $\Gamma \seq \Delta$ into $S$
   and $T$ follows from \reffact{bubbles-top-level}.
 \end{proof}
 
-Since some rules only hold \kl{classically}, the statement for the full system is
-relative to Boolean algebras. But from the detailed proof in
+Since some rules only hold \kl{classically}, the statement for the full system
+is relative to \kl{Boolean algebras}. But from the detailed proof in
 \refsec{app:bubbles-soundness}, we can identify two fragments $\kl{\sysBH}$ and
-$\kl{\sysBHB}$ of \kl{system~B} that are sound with respect to Heyting and
-Heyting-Brouwer algebras:
+$\kl{\sysBHB}$ of \kl{system~B} that are sound respectively for \kl{Heyting
+algebras} and \kl{Heyting-Brouwer algebras}:
 
 \begin{corollary}\labcor{lsoundness}
   Let
   \begin{align*}
-    \kl{\sysBHB} &\defeq \sysB \setminus \{\kl{f{-}{+}{\ua}}, \kl{f{+}{+}{\da}}, \kl{f{+}{-}{\ua}}, \kl{f{-}{-}{\da}}\} \\
-    \kl{\sysBH} &\defeq \kl{\sysBHB} \setminus \{\kl{f{+}{-}{\da}, \kl{f{-}{-}{\ua}, \kl{{\lsub}{-}}, \kl{{\lsub}{+}}}}\}
+    \intro{\sysBHB} &\defeq \sysB \setminus \{\kl{f{-}{+}{\ua}}, \kl{f{+}{+}{\da}}, \kl{f{+}{-}{\ua}}, \kl{f{-}{-}{\da}}\} \\
+    \intro{\sysBH} &\defeq \kl{\sysBHB} \setminus \{\kl{f{+}{-}{\da}}, \kl{f{-}{-}{\ua}}, \kl{{\lsub}{-}}, \kl{{\lsub}{+}}\}
   \end{align*}
   Then we have:
   \begin{itemize}
-    \item $S \lstep{\kl{\sysBH}} T$ implies $\psint{T} \sement \psint{S}$
+    \item $S \lstep{\kl{\sysBH}} T$ implies $\psint{T} \sement{} \psint{S}$
     \item $S \lstep{\kl{\sysBHB}} T$ implies $\psint{T} \sementHB \psint{S}$
     % \item $S \lstep{\text{\sysB}} T$ implies $\psint{T} \sementC \psint{S}$
   \end{itemize}
 \end{corollary}
 
-In order to get the last missing fragment $\kl{\sysBB}$ sound with respect to Brouwer
-algebras, we need dual lemmas that are relative to the \kl{negative interpretation}
-$\nsint{\cdot}$ instead of the \kl{positive interpretation} $\psint{\cdot}$, since
+In order to get the last missing fragment $\kl{\sysBB}$ sound with respect to \kl{Brouwer
+algebras}, we need dual lemmas that are relative to the \kl{negative interpretation}
+$\nsint{-}$ instead of the \kl{positive interpretation} $\psint{-}$, since
 implication is replaced by \kl{exclusion}. To avoid verbosity, we only formulate the
 main lemma, and assume that its proof will go through mechanically:
 
-\begin{lemma}[Local co-soundness]\lablemma{bubbles-local-cosoundness}
+\begin{lemma}[Shallow co-soundness]\lablemma{bubbles-local-cosoundness}
   If $S \lstep{} T$ then $\nsint{S \mix (\Gamma \seq \Delta)} \sementC \nsint{T
   \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 
 Then from the (assumed) proof of \reflemma{bubbles-local-cosoundness} we get:
 \begin{corollary}\labcor{lcosoundness}
-  Let $\kl{\sysBB} \defeq \kl{\sysBHB} \setminus \{\kl{f{-}{+}{\da}},
+  Let $\intro{\sysBB} \defeq \kl{\sysBHB} \setminus \{\kl{f{-}{+}{\da}},
   \kl{f{+}{+}{\ua}}, \kl{{\limp}{-}}, \kl{{\limp}{+}}\}$. Then $S
   \lstep{\kl{\sysBB}} T$ implies $\nsint{S} \sementB \nsint{T}$.
 \end{corollary}
@@ -538,7 +544,7 @@ The full situation is summarized in \reffig{venn-algebras}.
   \end{itemize}
 \end{lemma}
 \begin{proof}
-  Let $S = \Gamma \J \Delta$. We proceed by recurrence on $\sdepth{\J}$.
+  Let $S = \Gamma \J \Delta$. We proceed by induction on $\sdepth{\J}$.
   \begin{itemize}
     \item[\bcase] Suppose $\sdepth{\J} = 0$. Then $\J = {\seq}$,
     and we have
@@ -597,10 +603,10 @@ The full situation is summarized in \reffig{venn-algebras}.
   \end{itemize}
 \end{proof}
 
-In order to ease reasoning by induction on \kl{solution} \kl{contexts}, we give a
-formulation equivalent to \refdef{solution-context} as a context-free grammar:
+In order to ease reasoning by induction on \kl{contexts}, we give a formulation
+equivalent to \refdef{solution-context} as a context-free grammar:
 \begin{fact}
-  \kl{Solution} \kl{contexts} $S\hole$ are generated by the following grammar:
+  \reintro{Contexts} $S\hole$ are generated by the following grammar:
   $$
     S\hole \Coloneq \hole \mid \Gamma \J S\hole, \Delta
                           \mid \Gamma, S\hole \J \Delta
@@ -609,12 +615,12 @@ formulation equivalent to \refdef{solution-context} as a context-free grammar:
 \end{fact}
 
 \begin{definition}\labdef{solctx-depth}
-The \emph{depth} $\sdepth{S\hole}$ of a \kl{solution} \kl{context} $S\hole$ is defined
-recursively as follows:
+  The \reintro{depth} $\intro*\cdepth{S\hole}$ of a \kl{context} $S\hole$ is
+defined recursively as follows:
 \begin{align*}
-  \sdepth{\hole} &= 0 \\
-  \sdepth{\Gamma \J S\hole, \Delta} = \sdepth{\Gamma, S\hole \J \Delta} =
-  \sdepth{\Gamma \piq{\cS \sep S\hole} \Delta} &= 1 + \sdepth{S\hole}
+  \cdepth{\hole} &= 0 \\
+  \cdepth{\Gamma \J S\hole, \Delta} = \cdepth{\Gamma, S\hole \J \Delta} =
+  \cdepth{\Gamma \piq{\cS \sep S\hole} \Delta} &= 1 + \cdepth{S\hole}
 \end{align*}
 \end{definition}
 
@@ -622,16 +628,16 @@ recursively as follows:
 
   If $S \lstep{} T$ then $\psint{U\select{T} \mix (\Gamma \seq \Delta)} \sementC
   \psint{U\select{S} \mix (\Gamma \seq \Delta)}$.
-  % and $\nsint{S \mix (\Gamma \seq \Delta)} \sement
+  % and $\nsint{S \mix (\Gamma \seq \Delta)} \sement{}
   % \nsint{T \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 \begin{proof}
-  By recurrence on $\sdepth{U\hole}$.
+  By induction on $\cdepth{U\hole}$.
   \begin{itemize}
-    \item[\bcase] Suppose $\sdepth{U\hole}$ = 0. Then $U\hole =
-    \hole$, and we conclude by local soundness
+    \item[\bcase] Suppose $\cdepth{U\hole}$ = 0. Then $U\hole =
+    \hole$, and we conclude by shallow soundness
     (\reflemma{bubbles-local-soundness}).
-    \item[\textbf{Positive case}] Suppose $\sdepth{U\hole} > 0$ and $U\hole =
+    \item[\textbf{Positive case}] Suppose $\cdepth{U\hole} > 0$ and $U\hole =
     \Gamma' \J U_0\hole, \Delta'$. Then by IH we have $\psint{U_0\select{T}}
     \sementC \psint{U_0\select{S}}$, and thus
     $$
@@ -643,7 +649,7 @@ recursively as follows:
     \end{array}
     $$
 
-    \item[\textbf{Negative case}] Suppose $\sdepth{U\hole} > 0$ and $U\hole =
+    \item[\textbf{Negative case}] Suppose $\cdepth{U\hole} > 0$ and $U\hole =
     \Gamma', U_0\hole \J \Delta'$. Then by \reflemma{local-rule-duality} we have
     $\soldual{S} \lstep{} \soldual{T}$, and thus by IH
     $\psint{\soldual{U_0}\select{\soldual{T}}} \sementC
@@ -660,7 +666,7 @@ recursively as follows:
     \end{array}
     $$
 
-    \item[\textbf{Neutral case}] Suppose $\sdepth{U\hole} > 0$ and $U\hole =
+    \item[\textbf{Neutral case}] Suppose $\cdepth{U\hole} > 0$ and $U\hole =
     \Gamma \piq{\cS \sep U_0\hole} \Delta$. Then by IH we have
     $\psint{U_0\select{T} \mix (\Gamma \seq \Delta)} \sementC
     \psint{U_0\select{S} \mix (\Gamma \seq \Delta)}$, and thus
@@ -679,8 +685,8 @@ recursively as follows:
   If $S \step{} T$ then $\psint{T} \sementC \psint{S}$.
 \end{theorem}
 \begin{proof}
-  By definition of $\step{}$, and then applying \reflemma{bubbles-ctx-soundness}
-  with $\Gamma = \Delta = \emptyset$.
+  By definition of ${\step{}}$ and \reflemma{bubbles-ctx-soundness} with $\Gamma
+  = \Delta = \emptyset$.
 \end{proof}
 
 We also get for free soundness with respect to the \kl{negative interpretation},
@@ -695,27 +701,28 @@ which we call \emph{co-soundness}:
   we can conclude by \reflemma{int-invert}.
 \end{proof}
 
-As for local soundness (\refcor{lsoundness} and \refcor{lcosoundness}), we can easily generalize the proof of
-\reflemma{bubbles-ctx-soundness} to Heyting and Heyting-Brouwer algebras, and
-thus extend our soundness result to \kl{intuitionistic} and
-\kl{bi-intuitionistic} logic:
+As for shallow soundness (\refcor{lsoundness} and \refcor{lcosoundness}), we can
+easily generalize the proof of \reflemma{bubbles-ctx-soundness} to \kl{Heyting
+algebras} and \kl{Heyting-Brouwer algebras}, and thus extend our soundness
+result to \kl{intuitionistic} and \kl{bi-intuitionistic} logic:
 
 \begin{corollary}\labcor{soundness}
   \sbr
   \begin{itemize}
-    \item $S \step{\kl{\sysBH}} T$ implies $\psint{T} \sement \psint{S}$
+    \item $S \step{\kl{\sysBH}} T$ implies $\psint{T} \sement{} \psint{S}$
     \item $S \step{\kl{\sysBHB}} T$ implies $\psint{T} \sementHB \psint{S}$
   \end{itemize}
 \end{corollary}
 \begin{proof}
-  \reflemma{bubbles-local-soundness} is the only lemma used in
-  \reflemma{bubbles-ctx-soundness} that relies on Boolean algebras. Thus we can
-  easily replace it by \refcor{lsoundness} to get soundness in Heyting-Brouwer
-  algebras.
+  \reflemma{bubbles-local-soundness} is the only lemma used in the proof of
+  \reflemma{bubbles-ctx-soundness} that relies on \kl{Boolean algebras}. Thus we
+  can easily replace it by \refcor{lsoundness} to get soundness in
+  \kl{Heyting-Brouwer algebras}.
 
-  For soundness in Heyting algebras, we know that the negative case will never
-  happen because formulas cannot contain \kl{exclusions}. The other cases only depend
-  on \reflemma{bubbles-local-soundness}, thus we can again replace it by
+  For soundness in \kl{Heyting algebras}, we know that the negative case in the
+  proof of \reflemma{bubbles-ctx-soundness} will never happen because
+  formulas cannot contain \kl{exclusions}. The other cases only depend on
+  \reflemma{bubbles-local-soundness}, thus we can again replace it by
   \refcor{lsoundness}.
 \end{proof}
 
@@ -744,7 +751,7 @@ From the assumed proof of \reflemma{bubbles-ctx-cosoundness}, we finally get:
   $S \step{\kl{\sysBB}} T$ implies $\nsint{S} \sementB \nsint{T}$.
 \end{corollary}
 
-Combined with the completeness proof of \refsec{bubbles-completeness}, this will
-give us our main result that $\kl{\sysBH}$, $\kl{\sysBB}$, $\kl{\sysBHB}$ and $\sysB$ capture
-exactly provability in \kl{intuitionistic}, \kl{dual-intuitionistic}, \kl{bi-intuitionistic}
-and \kl{classical} logic.
+Combined with the completeness proof of the next section, this will give us our
+main result that $\kl{\sysBH}$, $\kl{\sysBB}$, $\kl{\sysBHB}$ and $\sysB$
+capture exactly provability in \kl{intuitionistic}, \kl{dual-intuitionistic},
+\kl{bi-intuitionistic} and \kl{classical} logic.

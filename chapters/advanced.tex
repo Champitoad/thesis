@@ -233,11 +233,11 @@ system}. A common one, which might be termed \intro{nominal}, is to decompose
 the definition into a new function or predicate symbol, the definition's
 \intro{head}, and a universally parametrized equality or equivalence between the
 \kl{head} and the \intro{body} of the definition. For instance, the concept of
-injectivity can be encoded as a unary predicate $\injective(\cdot)$ on
+injectivity can be encoded as a unary predicate $\injective(-)$ on
 functions, satisfying the following equivalence:
 $$\forall A.\ \forall B.\ \forall f{:}A \to B.~\ \injective(f) ~\lequiv~ \forall x
 \in A.\ \forall y \in A.\ f(x) = f(y) \limp x = y$$
-Notice that $\injective(\cdot)$ is a \emph{\kl{higher-order}} predicate, since it
+Notice that $\injective(-)$ is a \emph{\kl{higher-order}} predicate, since it
 takes any function as argument. Depending on the underlying logical framework,
 this might have an impact on the exact way the definition is encoded. Here we do
 not want to bother with such implementation details, and simply assume that
@@ -262,7 +262,7 @@ case we can select the whole conclusion, and then choose to apply the
 \intro{Unfold} action:
 $$\select{f^{-1}(f(C)) \subseteq C} \qquad \text{(\kl{Unfold})}$$
 The system will be able to tell that we selected an instance of the two-place
-inclusion predicate $\cdot \subseteq \cdot$, and thus will replace the \kl{head}
+inclusion predicate $- \subseteq -$, and thus will replace the \kl{head}
 of this definition by its \kl{body}, instantiating parameters accordingly. This
 gives us a new conclusion
 $$\forall x. x \in f^{-1}(f(C)) \limp x \in C$$

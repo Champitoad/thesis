@@ -418,7 +418,7 @@ The last rule is more of a \emph{space management} principle that works as an
     % way, but chose to follow the original presentation of the rules by Peirce
     % instead, as exposed in \cite{Roberts+1973}.}
     Logically, this corresponds to the \kl{classical} equivalence $\neg\neg A
-    \semequiv A$, where in particular the deletion direction $\neg\neg A \limp A$
+    \semequiv{} A$, where in particular the deletion direction $\neg\neg A \limp A$
     is not true \kl{intuitionistically}. Topollogically, the double-\kl{cut} forms a
     \emph{ring}, that separates $G$ from the rest of $\SA$ while preserving its
     \kl{polarity}. Then the two directions of the rules can be understood as the
@@ -857,7 +857,7 @@ for every valuation $v$ if $G \step{} H$.
   $$v\left(G, H\select{\phantom{G}}\right) = v\left(G, H\select{G}\right)$$
 \end{lemma}
 \begin{proof}
-  By recurrence on $\gdepth{H\hole}$.
+  By induction on $\gdepth{H\hole}$.
 
   \def\arraystretch{1.5}
   \begin{itemize}
@@ -923,7 +923,7 @@ from the following \emph{functoriality} lemmas:
   \end{enumerate}
 \end{lemma}
 \begin{proof}
-  By recurrence on $\gdepth{K\hole}$.
+  By induction on $\gdepth{K\hole}$.
 
   \def\arraystretch{1.5}
   \begin{itemize}
@@ -1173,7 +1173,7 @@ the \kl{hole} is translated as itself) will always be \kl{positive}:
   For every \kl{context} $S\hole$, $\strans{S\hole}$ is \kl{positive}.
 \end{fact}
 \begin{proof}
-  By a straightforward recurrence on $\gdepth{S\hole}$.
+  By a straightforward induction on $\gdepth{S\hole}$.
 \end{proof}
 
 \paragraph{Completeness}

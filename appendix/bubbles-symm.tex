@@ -2,21 +2,24 @@
 \chapter{Symmetric Bubble Calculi}
 \labch{app:bubbles-symm}
 
+\begin{scope}\knowledgeimport{bubble}
+\begin{scope}\knowledgeimport{symm}
+
 \section{Soundness}\labsec{app:bubbles-soundness}
 
 \begin{lemma}[Generalized weakening]\lablemma{app:bubbles-weakening}
-  $\psint{S} \sement \psint{S \mix (\Gamma \seq \Delta)}$.
+  $\psint{S} \sement{} \psint{S \mix (\Gamma \seq \Delta)}$.
 \end{lemma}
 \begin{proof}
-  Let $S = \Gamma' \J \Delta'$. We proceed by recurrence on $\sdepth{\J}$.
+  Let $S = \Gamma' \J \Delta'$. We proceed by induction on $\sdepth{\J}$.
   \begin{itemize}
     \item[\bcase]
     $$
     \begin{array}{rcll}
       \psint{\Gamma' \seq \Delta'}
       &=& \nsint{\Gamma} \limp \psint{\Delta} & \\
-      &\sement& \nsint{\Gamma} \limp \psint{\Delta} \lor \psint{\Delta'} & \\
-      &\sement& \nsint{\Gamma'} \wedge \nsint{\Gamma} \limp \psint{\Delta} \lor \psint{\Delta'} & \\
+      &\sement{}& \nsint{\Gamma} \limp \psint{\Delta} \lor \psint{\Delta'} & \\
+      &\sement{}& \nsint{\Gamma'} \wedge \nsint{\Gamma} \limp \psint{\Delta} \lor \psint{\Delta'} & \\
       &=& \psint{\Gamma', \Gamma \seq \Delta, \Delta'} & \\
     \end{array}
     $$
@@ -25,7 +28,7 @@
     \begin{array}{rcll}
       \psint{\Gamma' \piq{\cS} \Delta'}
       &=& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma' \seq \Delta')}} & \\
-      &\sement& \bigwedge_{T \in \cS}{\psint{(T \mix (\Gamma' \seq \Delta')) \mix (\Gamma \seq \Delta)}} &\text{(IH)} \\
+      &\sement{}& \bigwedge_{T \in \cS}{\psint{(T \mix (\Gamma' \seq \Delta')) \mix (\Gamma \seq \Delta)}} &\text{(IH)} \\
       &=& \bigwedge_{T \in \cS}{\psint{T \mix ((\Gamma' \seq \Delta') \mix (\Gamma \seq \Delta))}} & \\
       &=& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma', \Gamma \seq \Delta, \Delta')}} & \\
       &=& \psint{\Gamma', \Gamma \piq{\cS} \Delta, \Delta'} & \\
@@ -35,11 +38,11 @@
 \end{proof}
 
 \begin{lemma}[Generalized contraction]\lablemma{app:bubbles-contraction}
-  $\psint{S \mix (\seq I, I)} \semequiv \psint{S \mix (\seq I)}$ and
-  $\psint{S \mix (I, I \seq)} \semequiv \psint{S \mix (I \seq)}$.
+  $\psint{S \mix (\seq I, I)} \semequiv{} \psint{S \mix (\seq I)}$ and
+  $\psint{S \mix (I, I \seq)} \semequiv{} \psint{S \mix (I \seq)}$.
 \end{lemma}
 \begin{proof}
-  Let $S = \Gamma \J \Delta$. We proceed by recurrence on $\sdepth{\J}$.
+  Let $S = \Gamma \J \Delta$. We proceed by induction on $\sdepth{\J}$.
   \begin{itemize}
     \item[\bcase]
     $$
@@ -84,7 +87,7 @@
 
 \begin{lemma}[Generalized weak distributivity]\lablemma{app:bubbles-weakdistrib}
   \begin{align}
-    \psint{\Gamma \J \Delta} \lor \psint{I} &\sement \psint{\Gamma \J I, \Delta} \label{app:eqn:weakdistrib-one} \\
+    \psint{\Gamma \J \Delta} \lor \psint{I} &\sement{} \psint{\Gamma \J I, \Delta} \label{app:eqn:weakdistrib-one} \\
     \psint{\Gamma \J I, \Delta} &\sementC \psint{\Gamma \J \Delta} \lor \psint{I} \label{app:eqn:weakdistrib-two} \\
     \nsint{\Gamma, I \J \Delta} &\sementB \nsint{I} \land \nsint{\Gamma \J \Delta} \label{app:eqn:weakdistrib-three} \\
     \nsint{I} \land \nsint{\Gamma \J \Delta} &\sementC \nsint{\Gamma, I \J \Delta} \label{app:eqn:weakdistrib-four}
@@ -93,27 +96,27 @@
 \begin{proof}
   We only prove (\ref{app:eqn:weakdistrib-one}): the proof of
   (\ref{app:eqn:weakdistrib-two}) is the same, except that we use the converse
-  inequality of \reffact{weakdistrib} that holds in Boolean algebras.
+  inequality of \reffact{weakdistrib} that holds in \kl{Boolean algebras}.
   (\ref{app:eqn:weakdistrib-three}) and (\ref{app:eqn:weakdistrib-four}) hold by duality
   from (\ref{app:eqn:weakdistrib-one}) and (\ref{app:eqn:weakdistrib-two}), i.e. for
   (\ref{app:eqn:weakdistrib-three}) we have
   $$
   \def\arraystretch{2.5}
   \begin{array}{rrcll}
-               & \psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{\Gamma}} \lor \psint{\soldual{I}} &\sement& \psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{I}, \soldual{\Gamma}} &\text{(\ref{app:eqn:weakdistrib-one})} \\
+               & \psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{\Gamma}} \lor \psint{\soldual{I}} &\sement{}& \psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{I}, \soldual{\Gamma}} &\text{(\ref{app:eqn:weakdistrib-one})} \\
     \text{iff} & \soldual{\psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{I}, \soldual{\Gamma}}} &\sementB& \soldual{\psint{\soldual{\Delta} \mathbin{\soldual{\J}} \soldual{\Gamma}} \lor \psint{\soldual{I}}} &\text{(\reffact{duality})} \\
-    \text{iff} & \nsint{\soldual{\soldual{\Gamma}}, \soldual{\soldual{I}} \mathbin{\soldual{\mathbin{\soldual{\J}}}} \soldual{\soldual{\Delta}}} &\sementB& \nsint{\soldual{\soldual{\Gamma}} \mathbin{\soldual{\mathbin{\soldual{\J}}}} \soldual{\soldual{\Delta}}} \land \nsint{\soldual{\soldual{I}}} &\text{(\reflemma{int-duality})} \\
+    \text{iff} & \nsint{\soldual{\soldual{\Gamma}}, \soldual{\soldual{I}} \mathbin{\soldual{\soldual{{\J}}}} \soldual{\soldual{\Delta}}} &\sementB& \nsint{\soldual{\soldual{\Gamma}} \mathbin{\soldual{\soldual{{\J}}}} \soldual{\soldual{\Delta}}} \land \nsint{\soldual{\soldual{I}}} &\text{(\reflemma{int-duality})} \\
     \text{iff} & \nsint{\Gamma, I \mathbin{\J} \Delta} &\sementB& \nsint{\Gamma \mathbin{\J} \Delta} \land \nsint{I} &\text{(\reflemma{involutivity})} \\
   \end{array}
   $$
-  We prove (\ref{app:eqn:weakdistrib-one}) by recurrence on $\sdepth{\J}$.
+  We prove (\ref{app:eqn:weakdistrib-one}) by induction on $\sdepth{\J}$.
   \begin{itemize}
     \item[\bcase]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \seq \Delta} \lor \psint{I}
       &=& \left(\nsint{\Gamma} \limp \psint{\Delta}\right) \lor \psint{I} & \\
-      &\sement& \nsint{\Gamma} \limp \psint{\Delta} \lor \psint{I} &\text{(\reffact{weakdistrib})} \\
+      &\sement{}& \nsint{\Gamma} \limp \psint{\Delta} \lor \psint{I} &\text{(\reffact{weakdistrib})} \\
       &=& \psint{\Gamma \seq I, \Delta} & \\
     \end{array}
     $$
@@ -123,9 +126,9 @@
       \psint{\Gamma \piq{\cS} \Delta} \lor \psint{I}
       &=& \psintAndMix{(\Gamma' \JB \Delta')}{\cS}{\Gamma}{\Delta} \lor \psint{I} & \\
       &=& \psintAnd{(\Gamma' \JB \Delta')}{\cS}{\Gamma, \Gamma' \JB \Delta', \Delta} \lor \psint{I} & \\
-      &\semequiv_{\Lattice}& \psintAnd{(\Gamma' \JB \Delta')}{\cS}{\Gamma, \Gamma' \JB \Delta', \Delta} \lor \psintAnd{(\Gamma' \JB \Delta')}{\cS}{I} &\text{(\reffact{idempotency})} \\
-      &\semequiv_{\Lattice}& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\left(\psint{\Gamma, \Gamma' \JB \Delta', \Delta} \lor \psint{I}\right)} &\text{(\reffact{distributivity})} \\
-      &\sement& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\left(\psint{\Gamma, \Gamma' \JB I, \Delta', \Delta} \right)} &\text{(IH)} \\
+      &\semequiv{\Lattice}& \psintAnd{(\Gamma' \JB \Delta')}{\cS}{\Gamma, \Gamma' \JB \Delta', \Delta} \lor \psintAnd{(\Gamma' \JB \Delta')}{\cS}{I} &\text{(\reffact{idempotency})} \\
+      &\semequiv{\Lattice}& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\left(\psint{\Gamma, \Gamma' \JB \Delta', \Delta} \lor \psint{I}\right)} &\text{(\reffact{distributivity})} \\
+      &\sement{}& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\left(\psint{\Gamma, \Gamma' \JB I, \Delta', \Delta} \right)} &\text{(IH)} \\
       &=& \psintAndMix{(\Gamma' \JB \Delta')}{\cS}{\Gamma}{I, \Delta} & \\
       &=& \psint{\Gamma \piq{\cS} I, \Delta} & \\
     \end{array}
@@ -135,13 +138,13 @@
 
 \begin{lemma}[Generalized currying]\lablemma{app:bubbles-currying}
   \begin{align}
-    \psint{\Gamma, I \J \Delta} &\semequiv \nsint{I} \limp \psint{\Gamma \J \Delta} \label{app:eqn:currying-one} \\
-    \nsint{\Gamma \J I, \Delta} &\semequiv_{\Brouwer} \nsint{\Gamma \J \Delta} \lsub \psint{I} \label{app:eqn:currying-two}
+    \psint{\Gamma, I \J \Delta} &\semequiv{} \nsint{I} \limp \psint{\Gamma \J \Delta} \label{app:eqn:currying-one} \\
+    \nsint{\Gamma \J I, \Delta} &\semequiv{\Brouwer} \nsint{\Gamma \J \Delta} \lsub \psint{I} \label{app:eqn:currying-two}
   \end{align}
 \end{lemma}
 \begin{proof}
   We only prove (\ref{app:eqn:currying-one}), as (\ref{app:eqn:currying-two}) holds by
-  duality as in \reflemma{bubbles-weakdistrib}. We proceed by recurrence on
+  duality as in \reflemma{bubbles-weakdistrib}. We proceed by induction on
   $\sdepth{\J}$.
   \begin{itemize}
     \item[\bcase]
@@ -212,7 +215,7 @@
 
     % \item[{\kl{s{-}}}, {\kl{s{+}}}] We only write the proof for
     % {\kl{s{-}}}, the proof for {\kl{s{+}}} is symmetric. We proceed by
-    % recurrence on $\sdepth{\J}$.
+    % induction on $\sdepth{\J}$.
     % \begin{itemize}
     %   \item[\bcase]
     %   $$
@@ -233,13 +236,13 @@
     %     &=& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq \Delta)}} \land \psint{\Gamma, S \seq \Delta} & \\
     %     &=& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq \Delta)}} \land \psint{(\Gamma \seq \Delta) \mix (S \seq)} & \\
     %     &\semequiv& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq \Delta)}} \land \bigwedge_{T\in\cS}{\psint{(\Gamma \seq \Delta) \mix (S \seq)}} & \\
-    %     &\sement& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq \Delta) \mix (\Gamma \seq \Delta) \mix (S \seq)}} &\text{(\reflemma{bubbles-mix})} \\
+    %     &\sement{}& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq \Delta) \mix (\Gamma \seq \Delta) \mix (S \seq)}} &\text{(\reflemma{bubbles-mix})} \\
     %     &\semequiv& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq \Delta) \mix (S \seq)}} &\text{(\reflemma{bubbles-contraction})} \\
-    %     &\sement& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq \Delta) \mix \piq{S \seq}}} &\text{(\reflemma{bubbles-piq})} \\
+    %     &\sement{}& \bigwedge_{T \in \cS}{\psint{T \mix (\Gamma \seq \Delta) \mix \piq{S \seq}}} &\text{(\reflemma{bubbles-piq})} \\
     %     &=& \bigwedge_{T \in \cS}{\psint{\piq{S \seq} \mix ((\Gamma \seq \Delta) \mix T)}} & \\
     %     &=& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\psint{\piq{S \seq} \mix ((\Gamma \seq \Delta) \mix (\Gamma' \JB \Delta'))}} & \\
     %     &=& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\psint{\piq{S \seq} \mix (\Gamma', \Gamma \JB \Delta, \Delta')}} & \\
-    %     &\sement& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\psint{\Gamma', \Gamma, (\piq{S}) \JB \Delta, \Delta'}} &\text{(IH)} \\
+    %     &\sement{}& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\psint{\Gamma', \Gamma, (\piq{S}) \JB \Delta, \Delta'}} &\text{(IH)} \\
     %     &=& \bigwedge_{(\Gamma' \JB \Delta') \in \cS}{\psint{(\Gamma' \JB \Delta') \mix (\Gamma, (\piq{S}) \seq \Delta)}} & \\
     %     &=& \psint{\Gamma, (\piq{S}) \piq{\cS} \Delta} & \\
     %   \end{array}
@@ -251,7 +254,7 @@
     \begin{array}{rcll}
       \psint{\Gamma \piq{\cS \sep \Gamma' \piq{\cS'} \Delta' \sep S} \Delta}
       &=& \psintAndMix{T}{\cS}{\Gamma}{\Delta} \land \psint{\Gamma, \Gamma' \piq{\cS'} \Delta', \Delta} \land \psint{S \mix (\Gamma \seq \Delta)} & \\
-      &\sement& \psintAndMix{T}{\cS}{\Gamma}{\Delta} \land \psint{\Gamma, \Gamma' \piq{\cS'} \Delta', \Delta} \land \psint{S \mix (\Gamma, \Gamma' \seq \Delta', \Delta)} &\text{(\reflemma{bubbles-weakening})} \\
+      &\sement{}& \psintAndMix{T}{\cS}{\Gamma}{\Delta} \land \psint{\Gamma, \Gamma' \piq{\cS'} \Delta', \Delta} \land \psint{S \mix (\Gamma, \Gamma' \seq \Delta', \Delta)} &\text{(\reflemma{bubbles-weakening})} \\
       &=& \psint{\Gamma \piq{\cS \sep \Gamma' \piq{\cS' \sep S} \Delta'} \Delta} & \\
     \end{array}
     $$
@@ -273,8 +276,8 @@
     \end{array}
     $$
     \item[{\kl{f{-}{+}{\da}}}]
-    We show that $\psint{\Gamma \J (\Gamma', I \JB \Delta'), \Delta} \sement
-    \psint{\Gamma, I \J (\Gamma' \JB \Delta'), \Delta}$ by recurrence on
+    We show that $\psint{\Gamma \J (\Gamma', I \JB \Delta'), \Delta} \sement{}
+    \psint{\Gamma, I \J (\Gamma' \JB \Delta'), \Delta}$ by induction on
     $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
@@ -283,7 +286,7 @@
         \psint{\Gamma \seq (\Gamma', I \JB \Delta'), \Delta}
         &=& \nsint{\Gamma} \limp \psint{\Gamma', I \JB \Delta'} \lor \psint{\Delta} & \\
         &\semequiv& \nsint{\Gamma} \limp \left(\nsint{I} \limp \psint{\Gamma' \JB \Delta'}\right) \lor \psint{\Delta} &\text{(\reflemma{bubbles-currying})} \\
-        &\sement& \nsint{\Gamma} \limp \left(\nsint{I} \limp \psint{\Gamma' \JB \Delta'} \lor \psint{\Delta}\right) &\text{(\reffact{weakdistrib})} \\
+        &\sement{}& \nsint{\Gamma} \limp \left(\nsint{I} \limp \psint{\Gamma' \JB \Delta'} \lor \psint{\Delta}\right) &\text{(\reffact{weakdistrib})} \\
         &\semequiv& \nsint{\Gamma} \land \nsint{I} \limp \psint{\Gamma' \JB \Delta'} \lor \psint{\Delta} &\text{(\reffact{currying})} \\
         &=& \psint{\Gamma, I \seq (\Gamma' \JB \Delta'), \Delta} & \\
       \end{array}
@@ -294,7 +297,7 @@
         \psint{\Gamma \piq{\cS} (\Gamma', I \JB \Delta'), \Delta}
         &=& \psintAndMix{(\Gamma'' \J \Delta'')}{\cS}{\Gamma}{(\Gamma', I \JB \Delta'), \Delta} & \\
         &=& \psintAnd{(\Gamma'' \J \Delta'')}{\cS}{\Gamma'', \Gamma \J (\Gamma', I \JB \Delta'), \Delta, \Delta''} & \\
-        &\sement& \psintAnd{(\Gamma'' \J \Delta'')}{\cS}{\Gamma'', \Gamma, I \J (\Gamma' \JB \Delta'), \Delta, \Delta''} &\text{(IH)} \\
+        &\sement{}& \psintAnd{(\Gamma'' \J \Delta'')}{\cS}{\Gamma'', \Gamma, I \J (\Gamma' \JB \Delta'), \Delta, \Delta''} &\text{(IH)} \\
         &=& \psintAndMix{(\Gamma'' \J \Delta'')}{\cS}{\Gamma, I}{(\Gamma' \JB \Delta'), \Delta} & \\
         &=& \psint{\Gamma, I \piq{\cS} (\Gamma' \JB \Delta'), \Delta} & \\
       \end{array}
@@ -302,7 +305,7 @@
     \end{itemize}
     \item[{\kl{f{+}{-}{\da}}}]
     We show that $\psint{\Gamma, (\Gamma' \JB I, \Delta') \J \Delta} \sementHB
-    \psint{\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}$ by recurrence on
+    \psint{\Gamma, (\Gamma' \JB \Delta') \J I, \Delta}$ by induction on
     $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
@@ -310,7 +313,7 @@
       \begin{array}{rcll}
         \psint{\Gamma, (\Gamma' \JB I, \Delta') \seq \Delta}
         &=& \nsint{\Gamma} \land \nsint{\Gamma' \JB I, \Delta'} \limp \psint{\Delta} & \\
-        &\semequiv_{\HeytingBrouwer}& \nsint{\Gamma} \land \left(\nsint{\Gamma' \JB \Delta'} \lsub \psint{I}\right) \limp \psint{\Delta} &\text{(\reflemma{bubbles-currying})} \\
+        &\semequiv{\HeytingBrouwer}& \nsint{\Gamma} \land \left(\nsint{\Gamma' \JB \Delta'} \lsub \psint{I}\right) \limp \psint{\Delta} &\text{(\reflemma{bubbles-currying})} \\
         &\sementHB& \left(\nsint{\Gamma} \land \nsint{\Gamma' \JB \Delta'} \lsub \psint{I}\right) \limp \psint{\Delta} &\text{(\reffact{weakdistrib})} \\
         &\sementHB& \nsint{\Gamma} \land \nsint{\Gamma' \JB \Delta'} \limp \psint{I} \lor \psint{\Delta} &\text{(\reffact{impsub})} \\
         &=& \psint{\Gamma, (\Gamma' \JB \Delta') \seq I, \Delta} & \\
@@ -329,8 +332,8 @@
       $$
     \end{itemize}
     \item[{\kl{f{+}{+}{\ua}}}]
-    We show that $\psint{\Gamma \J (\Gamma' \JB \Delta'), I, \Delta} \sement
-    \psint{\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}$ by recurrence on
+    We show that $\psint{\Gamma \J (\Gamma' \JB \Delta'), I, \Delta} \sement{}
+    \psint{\Gamma \J (\Gamma' \JB I, \Delta'), \Delta}$ by induction on
     $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
@@ -338,7 +341,7 @@
       \begin{array}{rcll}
         \psint{\Gamma \seq (\Gamma' \JB \Delta'), I, \Delta}
         &=& \nsint{\Gamma} \limp \psint{\Gamma' \JB \Delta'} \lor \psint{I} \lor \psint{\Delta} & \\
-        &\sement& \nsint{\Gamma} \limp \psint{\Gamma' \JB I, \Delta'} \lor \psint{\Delta} &\text{(\reflemma{bubbles-weakdistrib})} \\
+        &\sement{}& \nsint{\Gamma} \limp \psint{\Gamma' \JB I, \Delta'} \lor \psint{\Delta} &\text{(\reflemma{bubbles-weakdistrib})} \\
         &=& \psint{\Gamma \seq (\Gamma' \JB I, \Delta'), \Delta} & \\
       \end{array}
       $$
@@ -348,7 +351,7 @@
         \psint{\Gamma \piq{\cS} (\Gamma' \JB \Delta'), I, \Delta}
         &=& \psintAndMix{(\Gamma'' \J \Delta'')}{\cS}{\Gamma}{(\Gamma' \JB \Delta'), I, \Delta} & \\
         &=& \psintAnd{(\Gamma'' \J \Delta'')}{\cS}{\Gamma'', \Gamma \J (\Gamma' \JB \Delta'), I, \Delta, \Delta''} & \\
-        &\sement& \psintAnd{(\Gamma'' \J \Delta'')}{\cS}{\Gamma'', \Gamma \J (\Gamma' \JB I, \Delta'), \Delta, \Delta''} &\text{(IH)} \\
+        &\sement{}& \psintAnd{(\Gamma'' \J \Delta'')}{\cS}{\Gamma'', \Gamma \J (\Gamma' \JB I, \Delta'), \Delta, \Delta''} &\text{(IH)} \\
         &=& \psintAndMix{(\Gamma'' \J \Delta'')}{\cS}{\Gamma}{(\Gamma' \JB I, \Delta'), \Delta} & \\
         &=& \psint{\Gamma \piq{\cS} (\Gamma' \JB I, \Delta'), \Delta} & \\
       \end{array}
@@ -356,7 +359,7 @@
     \end{itemize}
     \item[{\kl{f{-}{-}{\ua}}}]
     We show that $\psint{\Gamma, I, (\Gamma' \JB \Delta') \J \Delta} \sementHB
-    \psint{\Gamma, (\Gamma', I \JB \Delta') \J \Delta}$ by recurrence on
+    \psint{\Gamma, (\Gamma', I \JB \Delta') \J \Delta}$ by induction on
     $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
@@ -384,19 +387,19 @@
     \item[{\kl{f{-}{+}{\ua}}}, {\kl{f{+}{-}{\ua}}}] Converse of
     {\kl{f{-}{+}{\da}}} (resp. {\kl{f{+}{-}{\da}}}), using
     the converse inequality of \reffact{weakdistrib} which only holds in
-    Boolean algebras.
+    \kl{Boolean algebras}.
 
     \item[{\kl{f{+}{+}{\da}}}, {\kl{f{-}{-}{\da}}}] Converse
     of {\kl{f{+}{+}{\ua}}} (resp. {\kl{f{-}{-}{\ua}}}), using
     the converse inequality of \reflemma{bubbles-weakdistrib} which only holds
-    in Boolean algebras.
+    in \kl{Boolean algebras}.
 
     \item[\kl{p}]
     $$
     \begin{array}{rcll}
       \psint{\Gamma \piq{\cS} \Delta}
       &=& \psintAndMix{S}{\cS}{\Gamma}{\Delta} \\
-      &\semequiv_{\Lattice}& \psintAndMix{S}{\cS}{\Gamma}{\Delta} \wedge \top \\
+      &\semequiv{\Lattice}& \psintAndMix{S}{\cS}{\Gamma}{\Delta} \wedge \top \\
       &=& \psintAndMix{S}{\cS}{\Gamma}{\Delta} \wedge \psint{\Gamma \piq{} \Delta} \\
       &=& \psint{\Gamma \piq{\cS \sep \piq{}} \Delta} \\
     \end{array}
@@ -433,7 +436,7 @@
 
     \item[\kl{a{-}}, \kl{a{+}}] We only do the proof for \kl{a{-}}, the proof
     for \kl{a{+}} is symmetric. We show that $\psint{\Gamma, S \J \Delta} =
-    \psint{\Gamma, (\piq{S}) \J \Delta}$ by recurrence on $\sdepth{\J}$.
+    \psint{\Gamma, (\piq{S}) \J \Delta}$ by induction on $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
         $$
@@ -457,8 +460,8 @@
     
     \item[\kl{\top{-}}, \kl{\bot{+}}]
     We only do the proof for \kl{\top{-}}, the proof for \kl{\bot{+}} is
-    symmetric. We show that $\psint{\Gamma \J \Delta} \semequiv \psint{\Gamma,
-    \top \J \Delta}$ by recurrence on $\sdepth{\J}$.
+    symmetric. We show that $\psint{\Gamma \J \Delta} \semequiv{} \psint{\Gamma,
+    \top \J \Delta}$ by induction on $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
       $$
@@ -503,7 +506,7 @@
     \item[\kl{\land{-}}, \kl{\lor{+}}]
     We only do the proof for \kl{\land{-}}, the proof for \kl{\lor{+}} is
     symmetric. We show that $\psint{\Gamma, A, B \J \Delta} = \psint{\Gamma, A
-    \land B \J \Delta}$ by recurrence on $\sdepth{\J}$.
+    \land B \J \Delta}$ by induction on $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
       $$
@@ -553,7 +556,7 @@
     \item[\kl{{\limp}{+}}, \kl{{\lsub}{-}}]
     We only do the proof for \kl{{\limp}{+}}, the proof for \kl{{\lsub}{-}} is
     symmetric. We show that $\psint{\Gamma \J (A \seq B), \Delta} =
-    \psint{\Gamma \J A \limp B, \Delta}$ by recurrence on $\sdepth{\J}$.
+    \psint{\Gamma \J A \limp B, \Delta}$ by induction on $\sdepth{\J}$.
     \begin{itemize}
       \item[\bcase]
       $$
@@ -583,7 +586,7 @@
       &=& \left(\nsint{\Gamma} \limp A \lor \psint{\Delta} \right) \land \left(\nsint{\Gamma} \land B \limp \psint{\Delta} \right) & \\
       &\semequiv& \left(\nsint{\Gamma} \limp A \lor \psint{\Delta} \right) \land \left(\nsint{\Gamma} \limp B \limp \psint{\Delta} \right) &\text{(\reffact{currying})} \\
       &\semequiv& \nsint{\Gamma} \limp \left(A \lor \psint{\Delta} \right) \land \left(B \limp \psint{\Delta} \right) &\text{(\reffact{distributivity})} \\
-      &\sement& \nsint{\Gamma} \limp (A \limp B) \limp \psint{\Delta} \lor \psint{\Delta} &\text{(\reffact{gencut})} \\
+      &\sement{}& \nsint{\Gamma} \limp (A \limp B) \limp \psint{\Delta} \lor \psint{\Delta} &\text{(\reffact{gencut})} \\
       &\semequiv& \nsint{\Gamma} \limp (A \limp B) \limp \psint{\Delta} &\text{(\reffact{idempotency})} \\
       &\semequiv& \nsint{\Gamma} \land (A \limp B) \limp \psint{\Delta} &\text{(\reffact{currying})} \\
       &=& \psint{\Gamma, A \limp B \seq \Delta} & \\
@@ -598,7 +601,7 @@
       &=& \left(\nsint{\Gamma} \limp A \lor \psint{\Delta} \right) \land \left(\nsint{\Gamma} \land B \limp \psint{\Delta} \right) & \\
       &\semequiv& \left(\nsint{\Gamma} \limp A \lor \psint{\Delta} \right) \land \left(\nsint{\Gamma} \limp B \limp \psint{\Delta} \right) &\text{(\reffact{currying})} \\
       &\semequiv& \nsint{\Gamma} \limp \left(A \lor \psint{\Delta} \right) \land \left(B \limp \psint{\Delta} \right) &\text{(\reffact{distributivity})} \\
-      &\sement& \nsint{\Gamma} \limp (A \lsub B) \lor \psint{\Delta} \lor \psint{\Delta} &\text{(\reffact{gencut})} \\
+      &\sement{}& \nsint{\Gamma} \limp (A \lsub B) \lor \psint{\Delta} \lor \psint{\Delta} &\text{(\reffact{gencut})} \\
       &\semequiv& \nsint{\Gamma} \limp (A \lsub B) \lor \psint{\Delta} &\text{(\reffact{idempotency})} \\
       &=& \psint{\Gamma \seq A \lsub B, \Delta} & \\
     \end{array}
@@ -625,12 +628,12 @@ induction hypothesis by a dotted line.
       {X, A \seq A, Y}
     &\mt
     \R[\kl{i{\da}}]
-    {\prftree[r][d]{\kl{w{-},w{+}}}
+    {\prftree[r][d]{\kl{w{-}},\kl{w{+}}}
     {\piq{}}
     {X \piq{} Y}}
     {X, A \seq A, Y}
     \\\\
-    \R[\kl{\seq_{L1}}]
+    \R[\kl{{\seq}_{L1}}]
       {\summ[$\pi_1$]{X, A, (X', A \seq Y') \seq Y}}
       {X, (X', A \seq Y') \seq Y}
     &\mt
@@ -642,7 +645,7 @@ induction hypothesis by a dotted line.
     {X, (X', A, A \seq Y') \seq Y}}
     {X, (X', A \seq Y') \seq Y}
     \\\\
-    \R[\kl{\seq_{R1}}]
+    \R[\kl{{\seq}_{R1}}]
       {\summ[$\pi_1$]{X \seq  (X' \seq A, Y'), A, Y}}
       {X \seq (X' \seq A, Y'), Y}
     &\mt
@@ -654,7 +657,7 @@ induction hypothesis by a dotted line.
     {X \seq (X' \seq A, A, Y'), Y}}
     {X \seq (X' \seq A, Y'), Y}
     \\\\
-    \R[\kl{\seq_{L2}}]
+    \R[\kl{{\seq}_{L2}}]
       {\summ[$\pi_1$]{X, A \seq (X', A \seq Y'), Y}}
       {X, A \seq (X' \seq Y'), Y}
     &\mt
@@ -666,7 +669,7 @@ induction hypothesis by a dotted line.
     {X, A, A \seq (X' \seq Y'), Y}}
     {X, A \seq (X' \seq Y'), Y}
     \\\\
-    \R[\kl{\seq_{R2}}]
+    \R[\kl{{\seq}_{R2}}]
       {X, (X' \seq A, Y') \seq A, Y}
       {X, (X' \seq Y') \seq A, Y}
     &\mt
@@ -683,7 +686,7 @@ induction hypothesis by a dotted line.
       {X, \bot \seq Y}
     &\mt
     \R[\kl{\bot{-}}]
-    {\prftree[r][d]{\kl{w{-},w{+}}}
+    {\prftree[r][d]{\kl{w{-}},\kl{w{+}}}
     {\piq{}}
     {X \piq{} Y}}
     {X, \bot \seq Y}
@@ -693,7 +696,7 @@ induction hypothesis by a dotted line.
       {X \seq \top, Y}
     &\mt
     \R[\kl{\top{+}}]
-    {\prftree[r][d]{\kl{w{-},w{+}}}
+    {\prftree[r][d]{\kl{w{-}},\kl{w{+}}}
     {\piq{}}
     {X \piq{} Y}}
     {X \seq \top, Y}
@@ -729,8 +732,8 @@ induction hypothesis by a dotted line.
     &\mt
     \R[\kl{c{+}}]
     {\R[\kl{\land{+}}]
-    {\prftree[r][d]{\kl{c{-},c{+}}}
-    {\prftree[r][d]{\kl{f{-},f{+}}}
+    {\prftree[r][d]{\kl{c{-}},\kl{c{+}}}
+    {\prftree[r][d]{\kl{f{-}{\da}},\kl{f{+}{\da}}}
     {\prftree[r][dotted]{$\pi_1$}
     {\prftree[r][dotted]{$\pi_2$}
     {\prftree[r][d]{\kl{p}}
@@ -750,8 +753,8 @@ induction hypothesis by a dotted line.
     &\mt
     \R[\kl{c{-}}]
     {\R[\kl{\lor{-}}]
-    {\prftree[r][d]{\kl{c{-},c{+}}}
-    {\prftree[r][d]{\kl{f{-},f{+}}}
+    {\prftree[r][d]{\kl{c{-}},\kl{c{+}}}
+    {\prftree[r][d]{\kl{f{-}{\da}},\kl{f{+}{\da}}}
     {\prftree[r][dotted]{$\pi_1$}
     {\prftree[r][dotted]{$\pi_2$}
     {\prftree[r][d]{\kl{p}}
@@ -764,7 +767,7 @@ induction hypothesis by a dotted line.
     {X, A \lor B, A \lor B \seq Y}}
     {X, A \lor B \seq Y}
     \\\\
-    \R[\kl{\limp_R}]
+    \R[\kl{{\limp}_R}]
       {\summ[$\pi_1$]{X \seq (A \seq B), A \limp B, Y}}
       {X \seq A \limp B, Y}
     &\mt
@@ -776,7 +779,7 @@ induction hypothesis by a dotted line.
     {X \seq A \limp B, A \limp B, Y}}
     {X \seq A \limp B, Y}
     \\\\
-    \R[\kl{\lsub_L}]
+    \R[\kl{{\lsub}_L}]
       {\summ[$\pi_1$]{X, A \lsub B, (A \seq B) \seq Y}}
       {X, A \lsub B \seq Y}
     &\mt
@@ -788,15 +791,15 @@ induction hypothesis by a dotted line.
     {X, A \lsub B, A \lsub B \seq Y}}
     {X, A \lsub B \seq Y}
     \\\\
-    \R[\kl{\limp_L}]
+    \R[\kl{{\limp}_L}]
       {\summ[$\pi_1$]{X, A \limp B \seq A, Y}}
       {\summ[$\pi_2$]{X, A \limp B, B \seq Y}}
       {X, A \limp B \seq Y}
     &\mt
     \R[\kl{c{-}}]
     {\R[\kl{{\limp}{-}}]
-    {\prftree[r][d]{\kl{c{-},c{+}}}
-    {\prftree[r][d]{\kl{f{-},f{+}}}
+    {\prftree[r][d]{\kl{c{-}},\kl{c{+}}}
+    {\prftree[r][d]{\kl{f{-}{\da}},\kl{f{+}{\da}}}
     {\prftree[r][dotted]{$\pi_1$}
     {\prftree[r][dotted]{$\pi_2$}
     {\prftree[r][d]{\kl{p}}
@@ -809,15 +812,15 @@ induction hypothesis by a dotted line.
     {X, A \limp B, A \limp B \seq Y}}
     {X, A \limp B \seq Y}
     \\\\
-    \R[\kl{\lsub_R}]
+    \R[\kl{{\lsub}_R}]
       {\summ[$\pi_1$]{X \seq A, A \lsub B, Y}}
       {\summ[$\pi_2$]{X, B \seq A \lsub B, Y}}
       {X \seq A \lsub B, Y}
     &\mt
     \R[\kl{c{+}}]
     {\R[\kl{{\lsub}{+}}]
-    {\prftree[r][d]{\kl{c{-},c{+}}}
-    {\prftree[r][d]{\kl{f{-},f{+}}}
+    {\prftree[r][d]{\kl{c{-}},\kl{c{+}}}
+    {\prftree[r][d]{\kl{f{-}{\da}},\kl{f{+}{\da}}}
     {\prftree[r][dotted]{$\pi_1$}
     {\prftree[r][dotted]{$\pi_2$}
     {\prftree[r][d]{\kl{p}}
@@ -834,7 +837,7 @@ induction hypothesis by a dotted line.
 
 \begin{lemma}[Simulation of \kl{G3cp}]
   If $\Gamma \prov{\kl{G3cp}} \Delta$, then $\Gamma \prov{\kl{\sysBH}\cup
-  \{\kl{f{+}{+}}\} \setminus \{\kl{i{\ua}}\}} \Delta$.
+  \{\kl{f{+}{+}{\da}}\} \setminus \{\kl{i{\ua}}\}} \Delta$.
 \end{lemma}
 \begin{proof}
   By induction on the \kl{G3cp} derivation.
@@ -845,7 +848,7 @@ induction hypothesis by a dotted line.
       {a, \Gamma \seq \Delta, a}
     &\mt
     \R[\kl{i{\da}}]
-    {\prftree[r][d]{\kl{w{-},w{+}}}
+    {\prftree[r][d]{\kl{w{-}},\kl{w{+}}}
     {\piq{}}
     {\Gamma \piq{} \Delta}}
     {a, \Gamma \seq \Delta, a}
@@ -855,7 +858,7 @@ induction hypothesis by a dotted line.
       {\bot, \Gamma \seq \Delta}
     &\mt
     \R[\kl{\bot{-}}]
-    {\prftree[r][d]{\kl{w{-},w{+}}}
+    {\prftree[r][d]{\kl{w{-}},\kl{w{+}}}
     {\piq{}}
     {\Gamma \piq{} \Delta}}
     {\bot, \Gamma \seq \Delta}
@@ -887,7 +890,7 @@ induction hypothesis by a dotted line.
     &\mt
     \R[\kl{\land{+}}]
     {\prftree[r][d]{\kl{c{-}},\kl{c{+}}}
-    {\prftree[r][d]{\kl{f{-}},\kl{f{+}}}
+    {\prftree[r][d]{\kl{f{-}{\da}},\kl{f{+}{\da}}}
     {\prftree[r][dotted]{$\pi_1, \pi_2$}
     {\prftree[r][d]{\kl{p}}
     {\piq{}}
@@ -904,7 +907,7 @@ induction hypothesis by a dotted line.
     &\mt
     \R[\kl{\lor{-}}]
     {\prftree[r][d]{\kl{c{-}},\kl{c{+}}}
-    {\prftree[r][d]{\kl{f{-}},\kl{f{+}}}
+    {\prftree[r][d]{\kl{f{-}{\da}},\kl{f{+}{\da}}}
     {\prftree[r][dotted]{$\pi_1, \pi_2$}
     {\prftree[r][d]{\kl{p}}
     {\piq{}}
@@ -921,7 +924,7 @@ induction hypothesis by a dotted line.
     &\mt
     \R[\kl{{\limp}{-}}]
     {\prftree[r][d]{\kl{c{-}},\kl{c{+}}}
-    {\prftree[r][d]{\kl{f{-}},\kl{f{+}}}
+    {\prftree[r][d]{\kl{f{-}{\da}},\kl{f{+}{\da}}}
     {\prftree[r][dotted]{$\pi_1, \pi_2$}
     {\prftree[r][d]{\kl{p}}
     {\piq{}}
@@ -948,3 +951,6 @@ induction hypothesis by a dotted line.
     {\Gamma \seq \Delta, A \limp B}
   \end{align*}
 \end{proof}
+
+\end{scope}
+\end{scope}

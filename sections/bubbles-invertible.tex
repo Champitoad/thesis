@@ -1,5 +1,7 @@
 \subsection{Modifying rules}
 
+\begin{scope}\knowledgeimport{bubble-inv}
+
 \begin{figure*}
   \input{figures/sequent-B-inv.tex}
   \caption{Rules for the \kl{invertible} \kl{bubble calculus} \kl{B_{inv}}}
@@ -37,28 +39,29 @@ quantifier rules, we conjecture that as in \kl{sequent calculus}, the rules
 $\{\kl{\forall{+}}, \kl{\exists{-}}\}$ are \kl{invertible}, while the rules
 $\{\kl{\forall{-}}, \kl{\exists{+}}\}$ are not. And as in \kl{sequent calculus},
 this can be remedied by systematically duplicating the instantiated formula.}.
-In \reffig{sequent-B-inv} we define the \kl{B_{inv}} calculus, which results
+In \reffig{sequent-B-inv} we define the \intro{B_{inv}} calculus, which results
 from the following modifications to the previous rules:
 \begin{description}
   \item[\textbf{Weakening}]
-    Here we follow a standard technique in \kl{sequent calculus}, that merges the
-    \kl{weakening} rule in all \emph{terminal} rules of the calculus (i.e. rules with
-    no premisses). In \kl{bubble calculi}, the notion of premiss is captured by
-    \kl{neutral} bubbles; thus we incorporate \kl{weakenings} in all rules that solve
-    \kl{subgoals} by \kl[saturated]{saturating} \kl{solutions} with no \kl{neutral} bubbles. Those are the rules
-    $\{\kl{i{\da}},\kl{p{-}},\kl{p{+}}\}$, which for the occasion have
-    also been generalized to arbitrary \kl{solutions}. Indeed in \kl{system~B} we
-    restricted them to \kl{unsaturated} \kl{solutions} to make them \emph{local}, but here the
-    \kl{weakenings} break locality anyway, and the general version improves
-    \emph{factorizability} by solving instantly all \kl{subgoals} inside $\J$.
+    Here we follow a standard technique in \kl{sequent calculus}, that merges
+    the \kl{weakening} rule in all \emph{terminal} rules of the calculus (i.e.
+    rules with no premisses). In \kl{bubble calculi}, the notion of premiss is
+    captured by \kl{neutral} bubbles; thus we incorporate \kl{weakenings} in all
+    rules that solve \kl{subgoals} by \kl[saturated]{saturating} \kl{solutions}.
+    Those are the rules $\{\kl{i{\da}},\kl{p{-}},\kl{p{+}}\}$, which for the
+    occasion have also been generalized to arbitrary \kl{solutions}. Indeed in
+    \kl{system~B} we restricted them to \kl{unsaturated} \kl{solutions} to make
+    them \emph{local}, but here the \kl{weakenings} break locality anyway, and
+    the general version improves \emph{factorizability} by solving instantly all
+    \kl{subgoals} inside $\J$.
 
   \item[\textbf{Flow}]
     As shown by the simulation of \reflemma{simulation-dbiint}, the
     \emph{propagation} rules of \kl{DBiInt} combine an instance of
-    \emph{\kl{contraction}} followed by the application of a flow rule on the
-    duplicated formula. Thus we can make all $\mathbb{F}$-rules of \kl{system
-    B} \kl{invertible} by systematically duplicating the moved formula, although
-    this breaks \emph{linearity}.
+    \emph{\kl{contraction}} followed by the application of a $\mathbb{F}$-rule
+    on the duplicated formula. Thus we can make all $\mathbb{F}$-rules of
+    \kl{system~B} \kl{invertible} by systematically duplicating the moved
+    formula, although this breaks \emph{linearity}.
 
     A downside of propagation rules in the style of \kl{DBiInt}, is that they
     create a lot of unnecessary copies of the moved formula $A$. Often, one will
@@ -69,17 +72,18 @@ from the following modifications to the previous rules:
     \kl{subgoal} met on the path to the destination.
 
     To prevent this, one would need a way to copy formulas at an arbitrary
-    distance. This can be done with \kl{inference rules} that are \emph{doubly} deep,
-    by encoding the path to the destination as a second \kl{solution} \kl{context} inside
-    the \kl{context} where the rule is applied\sidenote{Such rules are sometimes
-    called \emph{super-switch} rules in the \kl{deep inference} literature, see for
-    instance Chapter 8, Section 2.1 of \cite{guenot_nested_2013}.}. It turns out
-    to be hard to express in bubbles, because this requires a syntactic way to
-    describe \kl{contexts} that correspond to valid flow paths of arbitrary
-    length\sidenote{This problem is solved trivially in the flower calculus
-    (\refch{flowers}), by using so-called \emph{pollination} rules.}. But in
-    principle it should be feasible, and would enable a more comfortable use in
-    a \kl{Proof-by-Action} setting.
+    distance. This can be done with \kl{inference rules} that are \emph{doubly}
+    deep, by encoding the path to the destination as a second \kl{context}
+    inside the \kl{context} where the rule is applied\sidenote{Such rules are
+    sometimes called \emph{super-switch} rules in the \kl{deep inference}
+    literature, see for instance \cite[Chapter~8,
+    Section~2.1]{guenot_nested_2013}.}. It turns out to be hard to express in
+    bubbles, because this requires a syntactic way to describe \kl{contexts}
+    that correspond to valid flow paths of arbitrary length\sidenote{This
+    problem is solved trivially in the flower calculus (\refch{flowers}), by
+    formulating a so-called \emph{\kl{pollination}} relation.}. But in principle
+    it should be feasible, and would enable a more comfortable use in a
+    \kl{Proof-by-Action} setting.
 
     Note also that we removed the \kl{f{\ua}} rule of \reffig{sequent-B}.
     Indeed even after turning it into a propagation rule, the moved copy of the
@@ -108,10 +112,10 @@ from the following modifications to the previous rules:
 
 \begin{remark}
   We also changed the \kl{\bot{-}} and \kl{\top{+}} rules, so that they create
-  \kl{polarized}, \kl{saturated} empty \kl{solutions}. This makes them both local, and generic
-  with respect to the status of the ambient \kl{solution}. The previous version can
-  then be simulated by combination with the popping rules \kl{p{-}} and
-  \kl{p{+}}.
+  \kl{polarized}, \kl{saturated} empty \kl{solutions}. This makes them both
+  local, and generic with respect to the \kl[saturated]{saturation} status of
+  the ambient \kl{solution}. The previous version can then be simulated by
+  combination with the popping rules \kl{p{-}} and \kl{p{+}}.
 \end{remark}
 
 These modifications only change superficially the proof of soundness, and thus
@@ -130,18 +134,19 @@ of simulating \kl{DBiInt}'s \kl{introduction rules}:
 \end{lemma}
 
 Note that it is sufficient to prove admissibility of \kl{contraction} on
-formulas, rather than on arbitrary \kl{items}. Indeed we only need it to simulate the
-\kl{introduction rules} of \kl{DBiInt}, which always duplicate formulas. For now
-we only conjecture completeness of \kl{B_{inv}}, since it not clear what method
-should be used to prove \reflemma{admissibility-contraction}. In her thesis
-\cite{postniece_proof_2010} (Lemma 5.2.3), Postniece does a proof by recurrence
-on the depth of the derivation, relying on the fact that all \kl{introduction
-rules} of \kl{DBiInt} preserve the principal formula; but this is precisely what
-we are trying to avoid with our version of the rules. Of course, if we either
-give up on this constraint or include \kl{contraction} rules in \kl{B_{inv}}, then we
-immediately get our desired result: \kl{B_{inv}} is a fully \kl{invertible} calculus,
-where the same fragments as \kl{system~B} capture \kl{intuitionistic},
-\kl{dual-intuitionistic}, \kl{bi-intuitionistic} and \kl{classical} logic.
+formulas, rather than on arbitrary \kl{items}. Indeed we only need it to
+simulate the \kl{introduction rules} of \kl{DBiInt}, which always duplicate
+formulas. For now we only conjecture completeness of \kl{B_{inv}}, since it not
+clear what method should be used to prove \reflemma{admissibility-contraction}.
+In her thesis \cite[Lemma~5.2.3]{postniece_proof_2010}, Postniece does a proof
+by induction on the depth of the derivation, relying on the fact that all
+\kl{introduction rules} of \kl{DBiInt} preserve the principal formula; but this
+is precisely what we are trying to avoid with our version of the rules. Of
+course, if we either give up on this constraint or include \kl{contraction}
+rules in \kl{B_{inv}}, then we immediately get our desired result: \kl{B_{inv}}
+is a fully \kl{invertible} calculus, where the same fragments as \kl{system~B}
+capture \kl{intuitionistic}, \kl{dual-intuitionistic}, \kl{bi-intuitionistic}
+and \kl{classical} logic.
 
 \subsection{Semi-automated proof search}\labsubsec{bubbles-search}
 
@@ -153,18 +158,19 @@ way to search for a proof of a formula $A$ consists in the following $5$
   \item[\textbf{Decomposition}] Decompose $A$ by applying recursively
     $\mathbb{H}$-rules, until either atoms, \kl{negative} implications
     $\hypo{\limp}$, \kl{negative} disjunctions $\hypo{\lor}$, or \kl{positive}
-    conjunctions $\conc{\land}$ are reached. Indeed since the \kl{{\limp}{-}}
-    rule duplicates the implication, it cannot be used to decompose it.
+    conjunctions $\conc{\land}$ are reached.
     
-    As for the \kl{\lor{-}} and \kl{\land{+}} rules, they can only be applied
-    when the formula is in an \emph{\kl{unsaturated}} \kl{solution}. A first option is to let the
-    system automatically distribute them in all \kl{unsaturated} \kl{subsolutions} that are
-    reachable, so that it can keep decomposing them. But this might create an
-    explosion in the number of created \kl{subgoals}. Another option is to let the
-    user manually decompose them. We believe this second option is preferable,
-    if one wants to keep control over the proof search process. Indeed, it is
-    only natural that the user should be able to choose which \emph{cases} to
-    consider when building a proof.
+    Indeed since the \kl{{\limp}{-}} rule duplicates the implication, it cannot
+    be used to decompose it. Regarding the \kl{\lor{-}} and \kl{\land{+}} rules,
+    they can only be applied when the formula is in an \emph{\kl{unsaturated}}
+    \kl{solution}. A first option is to let the system automatically distribute
+    them in all \kl{unsaturated} \kl{subsolutions} that are reachable, so that
+    it can keep decomposing them. But this might create an explosion in the
+    number of created \kl{subgoals}. Another option is to let the user manually
+    decompose them. We believe this second option is preferable, if one wants to
+    keep control over the proof search process. Indeed, it is only natural that
+    the user should be able to choose which \emph{cases} to consider when
+    building a proof.
 
   \item[\textbf{Absorption}] Apply the absorption rules
     $\{\kl{a},\kl{a{-}},\kl{a{+}}\}$ wherever possible. This will prevent
@@ -172,17 +178,18 @@ way to search for a proof of a formula $A$ consists in the following $5$
     This phase can also be trivially automated.
 
   \item[\textbf{Linking}] Try to bring together every pair of dual atoms, so
-    that they annihilate each other in an instance of the \kl{i{\da}}
-    rule. This is reminiscent of our \emph{drag-and-drop} actions of
-    \refch{pba}. In a touch-based \kl{GUI}, rather than dragging a complex formula
-    onto another complex formula, one could \emph{pinch} together the two atoms:
-    if there is no $\mathbb{F}$-law stucking one of the atoms on some membrane
-    (orange arrows in \reffig{bubbles-porosity}), then the pinch succeeds, by
-    \kl[saturated]{saturating} the \kl{subsolution} at the location where it ends with
-    \kl{i{\da}}. Thus the user can choose the \kl{subgoal} to solve by
-    controlling the destination of the pinch, which can be seen as a more
-    symmetric and powerful version of \kl{DnD} actions. Generally though, one will
-    want to apply the following \emph{rule of thumb} (pun intended):
+    that they annihilate each other in an instance of the \kl{i{\da}} rule. This
+    is reminiscent of our \emph{drag-and-drop} actions of \refch{pba}. In a
+    touch-based \kl{GUI}, rather than dragging a complex formula onto another
+    complex formula, one could \emph{pinch} together the two atoms: if there is
+    no $\mathbb{F}$-law stucking one of the atoms on some membrane (orange
+    arrows in \reffig{bubbles-porosity}), then the pinch succeeds, and the
+    system \kl[saturated]{saturates} the \kl{subsolution} at the location where
+    the pinch ends by applying the \kl{i{\da}} rule. Thus the user can choose
+    the \kl{subgoal} to solve by controlling the destination of the pinch, which
+    can be seen as a more symmetric and powerful version of \kl{DnD} actions.
+    Generally though, one will want to apply the following \emph{rule of thumb}
+    (pun intended):
     \begin{fact}[Rule of thumb]
       When linking a pair of dual atoms, follow these steps:
       \begin{enumerate}
@@ -208,18 +215,18 @@ way to search for a proof of a formula $A$ consists in the following $5$
   \item[\textbf{Application}] When there are no more pairs of dual atoms, or all
     the remaining pairs have been given up (last step of the rule of thumb), let
     $S$ be the current \kl{goal}, and
-    $$\imps{S} \defeq \compr{(S_0\hole, A, B, \J, \Delta)}{S = S_0\select{\Gamma,
+    $$\intro*\imps{S} \defeq \compr{(S_0\hole, A, B, \J, \Delta)}{S = S_0\select{\Gamma,
           A \limp B \J \Delta} \text{ for some $\Gamma$}}$$
 
     If $\imps{S} = \emptyset$, then $S$ should not be provable, and we can stop
     the proof search procedure. Otherwise for each $(S_0\hole, A, B, \J, \Delta)
     \in \imps{S}$, we might need to apply the \kl{{\limp}{-}} rule on $\hypo{A
     \limp B}$, either directly in $S_0\hole$ if $\J = {\seq}$ and $\max_{I \in
-    \Delta}{\sdepth{I}} = 0$ (\refdef{item-depth}), otherwise in some subgoal
-    $T\select{U} \in \J \cup \Delta$. This is where the proof needs
-    \emph{insight}, because it is not clear if the antecedant $A$ will be
-    provable with the \kl{context} available in $S_0\hole$ or in one of the $T\hole$,
-    or if the hypothesis $B$ is even needed at all.
+    \Delta}{\sdepth{I}} = 0$, otherwise in some subgoal $T\select{U} \in \J \cup
+    \Delta$. This is where the proof needs \emph{insight}, because it is not
+    clear if the antecedant $A$ will be provable with the \kl{context} available
+    in $S_0\hole$ or in one of the $T\hole$, or if the hypothesis $B$ is even
+    needed at all.
 
     A first possibility is to let the user rely on her intuition, by choosing
     manually a specific \kl{subsolution} in $\imps{S}$ to apply the \kl{{\limp}{-}}
@@ -228,7 +235,7 @@ way to search for a proof of a formula $A$ consists in the following $5$
     before applying \kl{{\limp}{-}}. This will always be possible with the
     $\mathbb{F}$-rules \kl{f{-}{\da}} and \kl{f{-}{+}{\da}}.
     Ideally, she would also pick the most general $T\hole$ to factorize the
-    proof, by minimizing its depth $\sdepth{T\hole}$ (\refdef{solctx-depth}).
+    proof, by minimizing its depth $\cdepth{T\hole}$ (\refdef{solctx-depth}).
 
     A second possibility is to duplicate eagerly every $\hypo{A \limp B}$ of
     $\imps{S}$ in every \kl{unsaturated} \kl{subsolution} of $S$ where it can be so, and then
@@ -256,11 +263,11 @@ other formalisms, is that most of its automation preserves the \emph{size}
 (number of atoms) and the \emph{structure} of the \kl{goal}:
 \begin{itemize}
   \item In the \textbf{Decomposition} phase, if we opt out of the automatic
-  distribution of \kl{negative} $\hypo{\lor}$ and \kl{positive} $\conc{\land}$, then the
-  system will only apply $\mathbb{H}$-rules that split logical connectives, and
-  create a \emph{partition} of the atoms of the \kl{goal} by en\kl[saturated]{saturating} them in
-  bubbles. Thus the size of the \kl{goal} is kept intact, and the structure modified
-  but in a controlled, local way.
+  distribution of \kl{negative} $\hypo{\lor}$ and \kl{positive} $\conc{\land}$,
+  then the system will only apply $\mathbb{H}$-rules that split logical
+  connectives, and create a \emph{partition} of the atoms of the \kl{goal} by
+  enclosing them in bubbles. Thus the size of the \kl{goal} is kept intact, and
+  the structure modified but in a controlled, local way.
 
   \item In the \textbf{Absorption} phase, we simply merge some membranes
   together, preserving both the size and the structure of the \kl{goal}.
@@ -314,7 +321,7 @@ connectives. This is illustrated by the mapping of \reffig{bubbles-native} from
 $\mathbb{H}$-rules of \kl{system~B} (\reffig{graphical-B}) where the right-hand
 \kl{solution} is enclosed in a \kl{bubble} of the corresponding \kl{polarity}.
 The reader can easily check that if $A$ is mapped to $S$, then $\psint{A}
-\semequiv \psint{S}$.
+\semequiv{} \psint{S}$.
 
 \begin{marginfigure}
   $$
@@ -328,7 +335,7 @@ The reader can easily check that if $A$ is mapped to $S$, then $\psint{A}
 
 This seems to be a fundamental limitation of \kl{system~B}, caused by its
 symmetric treatment of implication and subtraction. For instance in the \kl{nested
-sequent} calculus \kl{JN} of Guenot for implicative logic \cite[Chapter
+sequent} calculus \intro{JN} of Guenot for implicative logic \cite[Chapter
 3]{guenot_nested_2013}, which is fully decomposable, \kl{nested sequents} that appear
 in negative \kl{contexts} are interpreted as implications, as illustrated by the
 \kl{left introduction rule} \kl{e} (\reffig{jn-rule-e}). But we cannot do this
@@ -339,3 +346,5 @@ of \kl{nested sequents}, capturing only \kl{intuitionistic} logic instead of
 \kl{bi-intuitionistic} logic. But this is a small price to pay, since
 \kl{bi-intuitionistic} logic does not (currently) have any applications in the
 realm of interactive theorem proving.
+
+\end{scope}

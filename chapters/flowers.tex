@@ -15,7 +15,7 @@ student said: "Of course not!". Which student was right, and why?
 }{\textbf{Raymond Smullyan}, \textit{The Flower Garden}, 1985}
 
 
-\begin{scope}\knowledgeimport{flowers}
+\begin{scope}\knowledgeimport{flower}
 
 
 We introduce the \emph{flower calculus}, a novel \kl{proof system} for
@@ -171,7 +171,7 @@ standing, asserted, in the open field.
 
 This first form of ``collapsing of walls'' is called the \emph{Rule of Blank
 Antecedant} in \cite{minghui_graphical_2019}, and corresponds \kl{symbolically} to
-the equivalence $\top \limp A \semequiv A$. The reader might be tempted to see
+the equivalence $\top \limp A \semequiv{} A$. The reader might be tempted to see
 the ``former clause'' that permits any insertion in the outer close as a special
 case of the Insertion principle of \kl{Alpha} (\refsec{alpha}). However, we
 stress again that Peirce first identified this clause as a feature of the
@@ -229,7 +229,7 @@ joined at a single point highlighted in orange, as illustrated in
 \end{marginfigure}
 
 Peirce was aware of the phenomenon of \emph{currying}, expressed \kl{symbolically} by
-the equivalence $A \limp B \limp C \semequiv A \land B \limp C$, as witnessed by
+the equivalence $A \limp B \limp C \semequiv{} A \land B \limp C$, as witnessed by
 the following passage \cite[p.~535]{peirce_prolegomena_1906}:
 \begin{quote}
 Now, Reader, if you will just take pencil and paper and scribe the scroll
@@ -374,7 +374,7 @@ $$\stkfig{1}{scroll-neg-forall} \text{   and   } \stkfig{1}{scroll-neg-exists}$$
 obtained by enclosing the previous graphs in a \kl{cut} are interpreted with the
 same quantifiers, as the formulas $\neg \forall x. p(x)$ and $\neg \exists x.
 p(x)$. In \kl{Beta}, we would have exploited the \kl{classical} equivalences
-$\neg \forall x. A \semequiv \exists x. \neg A$ and $\neg \exists x. A \semequiv
+$\neg \forall x. A \semequiv{} \exists x. \neg A$ and $\neg \exists x. A \semequiv{}
 \forall x. \neg A$ (justified by the \kl{Double{-}cut} principle) in order to
 interpret them as $\exists x. \neg p(x)$ and $\forall x. \neg p(x)$, emphasizing
 the idea that \kl(eg){positive} and \kl(eg){negative} binders encode
@@ -774,12 +774,12 @@ of flowers:
 \end{definition}
 
 \begin{definition}[Depth]
-  The \emph{depth} $\sdepth{\Phi\hole}$ of a \kl{context} $\Phi\hole$ is
+  The \emph{depth} $\cdepth{\Phi\hole}$ of a \kl{context} $\Phi\hole$ is
   defined recursively as follows:
   \begin{align*}
-    \sdepth{\Psi, \hole} &= 0 \\
-    \sdepth{\Psi, (\flower{\garden{\bx}{\Phi\hole}}{\Delta})} &= 1 + \sdepth{\Phi\hole} \\
-    \sdepth{\Psi, (\flower{\gamma}{\garden{\bx}{\Phi\hole} \sep \Delta})} &= 1 + \sdepth{\Phi\hole}
+    \cdepth{\Psi, \hole} &= 0 \\
+    \cdepth{\Psi, (\flower{\garden{\bx}{\Phi\hole}}{\Delta})} &= 1 + \cdepth{\Phi\hole} \\
+    \cdepth{\Psi, (\flower{\gamma}{\garden{\bx}{\Phi\hole} \sep \Delta})} &= 1 + \cdepth{\Phi\hole}
   \end{align*}
 \end{definition}
 
@@ -1332,7 +1332,7 @@ Kripke structures, detailed hereafter by order of increasing importance:
     Implications (BI) \cite{10.1145/3497775.3503690}, a cousin of linear logic
     at the heart of \emph{separation logic}, which is a very popular framework
     in contemporary deductive program verification. It is based on so-called
-    \emph{BI algebras}, a kind of Heyting algebra with additional structure for
+    \emph{BI algebras}, a kind of \kl{Heyting algebra} with additional structure for
     the linear part of the logic. We should also mention the recent
     normalization proof for \emph{cubical type theory} given by Sterling in his
     thesis \cite{Sterling2022}, based on a categorical and topos-theoretic
@@ -1396,7 +1396,7 @@ one big constructor:
 
   Given some Kripke structure $\mathcal{K}$, the \emph{forcing} relation
   $\eforces{w}{\phi}{e}$ between a world $w$, a flower $\phi$ and a
-  $w$-evaluation $e$ is defined by recurrence on $\sdepth{\phi}$ as follows:
+  $w$-evaluation $e$ is defined by induction on $\sdepth{\phi}$ as follows:
   \begin{itemize}
     \item[\textbf{(Atom)}]
     $\eforces{w}{p(\tvec{t})}{e}$ iff $\interp{\tvec{t}}_e \in \interp{p}_w$;
@@ -1421,7 +1421,7 @@ The following lemmas will be useful for the soundness proof of the next section:
   If $w \access w'$ and $\eforces{w}{\phi}{e}$ then $\eforces{w'}{\phi}{e}$.
 \end{lemma}
 \begin{proof}
-  By a straightforward recurrence on $\sdepth{\phi}$.
+  By a straightforward induction on $\sdepth{\phi}$.
 \end{proof}
 
 % \begin{lemma}\lablemma{closed-forcing}
@@ -1430,7 +1430,7 @@ The following lemmas will be useful for the soundness proof of the next section:
 %   e'$, if $\eforces{w}{\phi}{e}$ then $\eforces{w}{\phi}{e'}$.
 % \end{lemma}
 % \begin{proof}
-%   By a straightforward recurrence on $\sdepth{\phi}$.
+%   By a straightforward induction on $\sdepth{\phi}$.
 % \end{proof}
 
 % \begin{corollary}[Closed forcing]
@@ -1457,14 +1457,14 @@ The following lemmas will be useful for the soundness proof of the next section:
   \terms$ capture-avoiding in $\phi$ and $\bx \cap \bv(\phi) = \emptyset$.
 \end{lemma}
 \begin{proof}
-  By recurrence on $\sdepth{\phi}$.
+  By induction on $\sdepth{\phi}$.
   \begin{itemize}
     \item[\textbf{(Base case)}]
     \newcommand{\esigma}{\update{e}{\bx}{\interp{\sigma}_e}} Suppose
     $\phi = p(\tvec{t})$. We show that $\interp{\sigma(\tvec{t})}_e \in
     \interp{p}_w$ iff $\interp{\tvec{t}}_{\esigma} \in \interp{p}_w$ by proving
     that $\interp{t}_{\esigma} = \interp{\sigma(t)}_e$ for any term $t$ by
-    recurrence on $\sdepth{t}$.
+    induction on $\sdepth{t}$.
     \begin{itemize}
       \item If $t = x$, then either:
       \begin{itemize}
@@ -1556,7 +1556,7 @@ system\sidenote{Other instances in this thesis are \reflemma{variance},
   \Xi\select{\Phi}$ if $\Xi\hole$ is \kl{negative}.
 \end{lemma}
 \begin{proof}
-  By recurrence on $\sdepth{\Xi\hole}$.
+  By induction on $\cdepth{\Xi\hole}$.
 \end{proof}
 
 Weakening lemmas are also standard in \kl{proof theory} and \kl{type theory}. Here they
@@ -1593,8 +1593,8 @@ and reliance on the pollination relation. The following lemma can be compared to
 \begin{proof}
   Let $w$ a world in some Kripke structure $\mathcal{K}$, and $e$ a
   $w$-evaluation. We show that $\eforces{w}{\Phi, \Xi\select{\Phi}}{e}$ iff
-  $\eforces{w}{\Phi, \Xi{\select{\phantom{\Phi}}}}{e}$ by recurrence on
-  $\sdepth{\Xi\hole}$.
+  $\eforces{w}{\Phi, \Xi{\select{\phantom{\Phi}}}}{e}$ by induction on
+  $\cdepth{\Xi\hole}$.
   \begin{itemize}
     \item[\textbf{(Base case)}]
       Suppose $\Xi\hole = \Xi', \hole$. Then we trivially have
@@ -2086,7 +2086,7 @@ $\psi$-complete.
   $\completion{\tT}$ is $\psi$-consistent.
 \end{lemma}
 \begin{proof}
-  It is immediate by recurrence on $n$ that $\ncompletion{\tT}{n}$ is
+  It is immediate by induction on $n$ that $\ncompletion{\tT}{n}$ is
   $\psi$-consistent. Then suppose that $\completion{\tT} \entails{\Nature} \psi$,
   that is there is some bouquet $\Phi \subseteq \completion{\tT}$ such that $\Phi
   \entails{\Nature} \psi$. For each $\phi \in \Phi$, there is some rank $n$ such
@@ -2256,7 +2256,7 @@ forcing in $\rewolF{\psi}$ with $\psi$-consistency and $\psi$-completeness:
   \end{enumerate}.
 \end{lemma}
 \begin{proof}
-  By recurrence on $\sdepth{\phi}$.
+  By induction on $\sdepth{\phi}$.
   \begin{itemize}
     \item Suppose $\phi = p(\tvec{t})$.
     \begin{enumerate}
@@ -2769,7 +2769,7 @@ $\neg\neg(\neg\neg A \limp A)$ and $\neg\neg(((A \limp B) \limp A) \limp A)$ are
 
 \begin{figure*}
   \input{figures/flowers-dneg-traces.tex}
-  \caption{Life trace for doubly-negated double-negation elimination law}
+  \caption{Life trace for doubly-negated \kl{double-negation elimination law}}
   \labfig{dneg-traces}
 \end{figure*}
 
@@ -2781,9 +2781,9 @@ rules, we conjecture that it is not actually needed to get a complete decision
 algorithm. Instead, we have implemented an extension of the \refproc{life}
 procedure that accounts specifically for doubly-negated formulas, by first
 duplicating the \kl{negative} negation as a special additional case of the
-pollination phase. In the case of the double-negation elimination law
-$\flower{(\flower{(\flower{(\flower{(\flower{a}{})}{})}{a})}{})}{}$, this
-would give the flower
+pollination phase. In the case of the \kl{double-negation elimination law}
+$\flower{(\flower{(\flower{(\flower{(\flower{a}{})}{})}{a})}{})}{}$, this would
+give the flower
 $$\flower{(\flower{(\flower{(\flower{(\flower{a}{})}{})}{a})}{}),
 (\flower{(\flower{(\flower{(\flower{a}{})}{})}{a})}{})}{}$$
 which is then provable by the algorithm as shown in \reffig{dneg-traces}.

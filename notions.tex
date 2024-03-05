@@ -34,8 +34,8 @@
 \knowledge{url={https://ctan.org/pkg/knowledge}, typewriter}
  | knowledge@package
 
-\knowledge{notion}
- | depth
+\knowledge{depth}{notion,scope=sfl}
+\knowledge{depth}{notion,scope=symm}
 
 \knowledgedirective{acronym}{synonym,up}
 
@@ -363,6 +363,43 @@
 \knowledge{{\exists}{-}}{rule,scope=symm}
 \knowledge{{\exists}{+}}{rule,scope=symm}
 
+% System B_inv
+\knowledge{i{\da}}{rule,scope=bubble-inv}
+\knowledge{f{-}{\da}}{rule,scope=bubble-inv}
+\knowledge{f{+}{\da}}{rule,scope=bubble-inv}
+\knowledge{f{+}{-}{\da}}{rule,scope=bubble-inv}
+\knowledge{f{-}{+}{\da}}{rule,scope=bubble-inv}
+\knowledge{f{+}{+}{\da}}{rule,scope=bubble-inv}
+\knowledge{f{-}{-}{\da}}{rule,scope=bubble-inv}
+\knowledge{f{+}{-}{\ua}}{rule,scope=bubble-inv}
+\knowledge{f{-}{+}{\ua}}{rule,scope=bubble-inv}
+\knowledge{f{+}{+}{\ua}}{rule,scope=bubble-inv}
+\knowledge{f{-}{-}{\ua}}{rule,scope=bubble-inv}
+\knowledge{a}{rule,scope=bubble-inv}
+\knowledge{a{-}}{rule,scope=bubble-inv}
+\knowledge{a{+}}{rule,scope=bubble-inv}
+\knowledge{p}{rule,scope=bubble-inv}
+\knowledge{p{-}}{rule,scope=bubble-inv}
+\knowledge{p{+}}{rule,scope=bubble-inv}
+\knowledge{\top{-}}{rule,scope=bubble-inv}
+\knowledge{\top{+}}{rule,scope=bubble-inv}
+\knowledge{\bot{-}}{rule,scope=bubble-inv}
+\knowledge{\bot{+}}{rule,scope=bubble-inv}
+\knowledge{\land{-}}{rule,scope=bubble-inv}
+\knowledge{\land{+}}{rule,scope=bubble-inv}
+\knowledge{\lor{-}}{rule,scope=bubble-inv}
+\knowledge{\lor{+}}{rule,scope=bubble-inv}
+\knowledge{{\limp}{-}}{rule,scope=bubble-inv}
+\knowledge{{\limp}{+}}{rule,scope=bubble-inv}
+\knowledge{{\lsub}{-}}{rule,scope=bubble-inv}
+\knowledge{{\lsub}{+}}{rule,scope=bubble-inv}
+\knowledge{{\forall}{-}}{rule,scope=bubble-inv}
+\knowledge{{\forall}{+}}{rule,scope=bubble-inv}
+\knowledge{{\exists}{-}}{rule,scope=bubble-inv}
+\knowledge{{\exists}{+}}{rule,scope=bubble-inv}
+
+\knowledge{e}{rule}
+
 % DBiInt
 \knowledge{id}{rule,scope=dbiint}
 \knowledge{{\seq}_{L1}}{rule}
@@ -375,8 +412,8 @@
 \knowledge{\land_R}{rule}
 \knowledge{\lor_L}{rule}
 \knowledge{\lor_R}{rule}
-\knowledge{\limp_L}{rule}
-\knowledge{\limp_R}{rule}
+\knowledge{{\limp}_L}{rule}
+\knowledge{{\limp}_R}{rule}
 \knowledge{{\lsub}_L}{rule}
 \knowledge{{\lsub}_R}{rule}
 
@@ -546,6 +583,11 @@
  | law of non-contradiction
 
 \knowledge{notion}
+ | double-negation elimination law
+\knowledge{acronym}
+ | DNE
+
+\knowledge{notion}
  | consistency
  | Consistency
 
@@ -628,9 +670,11 @@
 
 \knowledge{notion}
  | contraction
+ | contractions
 
 \knowledge{notion}
  | weakening
+ | weakenings
 
 \knowledge{notion}
  | introduction rule
@@ -1225,6 +1269,46 @@
  | exclusions
  | Exclusion
  | Exclusions
+ 
+\knowledge{notion}
+ | bounded lattice
+ | Bounded lattice
+ | bounded lattices
+ | Bounded lattices
+
+\knowledge{notion}
+ | Heyting algebra
+ | Heyting algebras
+
+\knowledge{notion}
+ | Brouwer algebra
+ | Brouwer algebras
+
+\knowledge{notion}
+ | Heyting-Brouwer algebra
+ | Heyting-Brouwer algebras
+
+\knowledge{notion}
+ | Boolean algebra
+ | Boolean algebras
+
+\knowledge{notion}
+ | exponential
+ | exponentials
+ | Exponential
+ | Exponentials
+
+\knowledge{notion}
+ | co-exponential
+ | co-exponentials
+ | Co-exponential
+ | Co-exponentials
+
+\knowledge{notion}
+ | structure@bubble
+ | structures@bubble
+ | Structure@bubble
+ | Structures@bubble
 
 % Existential graphs
 
@@ -1343,8 +1427,8 @@
  | Flowers
 
 \knowledge{notion}
- | garden@flowers
- | gardens@flowers
+ | garden@flower
+ | gardens@flower
 
 \knowledge{notion}
  | first-order signature

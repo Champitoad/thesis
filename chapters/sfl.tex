@@ -504,12 +504,12 @@ We will need to reason inductively on \kl{contexts}, and more precisely on the
 \emph{depth} of their \kl{hole}:
 
 \begin{definition}[Depth]\labdef{sfl-ctx-depth}
-  The \intro{depth} $\intro*\sdepth{A\hole}$ of a \kl{context} $A\hole$ is
+  The \intro{depth} $\intro*\cdepth{A\hole}$ of a \kl{context} $A\hole$ is
   defined recursively by:
   \begin{align*}
-    \sdepth{\hole} &= 0 \\
-    \sdepth{A\hole \mcirc B} = \sdepth{B \mcirc A\hole} &= \sdepth{A\hole} + 1 &\text{for $\mcirc \in \{\land,\lor,\limp\}$}\\
-    \sdepth{\mdiam x. A\hole} &= \sdepth{A\hole} + 1 &\text{for $\mdiam \in \{\forall,\exists\}$}
+    \cdepth{\hole} &= 0 \\
+    \cdepth{A\hole \mcirc B} = \cdepth{B \mcirc A\hole} &= \cdepth{A\hole} + 1 &\text{for $\mcirc \in \{\land,\lor,\limp\}$}\\
+    \cdepth{\mdiam x. A\hole} &= \cdepth{A\hole} + 1 &\text{for $\mdiam \in \{\forall,\exists\}$}
   \end{align*}
 \end{definition}
 
@@ -520,7 +520,7 @@ extensively later on:
   and $\, \Gamma, D^-\select{B}\seq D^-\select{A}$.
 \end{lemma}
 \begin{proof}
-  By induction on $\sdepth{C^+\hole}$ and $\sdepth{D^-\hole}$.
+  By induction on $\cdepth{C^+\hole}$ and $\cdepth{D^-\hole}$.
 \end{proof}
 
 For each rule, interpreting $\back$ as $\limp$ and $\forw$ as $\land$ is enough
@@ -529,7 +529,7 @@ we can define a mapping from formulas containing \kl{interaction operators} to u
 formulas where they have been replaced by their interpretation:
 
 \begin{definition}[Interpretation of interaction operators]
-  The mapping $\intro*\lint{{\cdot}}$ is defined recursively as follows:
+  The mapping $\intro*\lint{{-}}$ is defined recursively as follows:
   \begin{align*}
     \lint{A \back B} &= \lint{A} \limp \lint{B} &\\
     \lint{A \forw B} &= \lint{A} \land \lint{B} &\\

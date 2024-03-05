@@ -191,7 +191,7 @@ because:
   \item it appears on the left side of an implication $\limp$;
   \item \kl{bubbles} are joined conjunctively;
   \item implication distributes over conjunction thanks to the equivalence $A
-  \limp B \land C \intro*\semequiv (A \limp B) \land (A \limp C)$.
+  \limp B \land C \semequiv{} (A \limp B) \land (A \limp C)$.
 \end{enumerate}
 
 \begin{marginfigure}
@@ -205,7 +205,7 @@ because:
 
 But what does it mean precisely to share conclusions among \kl{subgoals}? If we
 consider the two \kl{solutions} of \reffig{distr-concl}, we would like to have
-$\sint{S} \semequiv \sint{T} \semequiv (A \limp B \lor E) \land (C \limp D \lor
+$\sint{S} \semequiv{} \sint{T} \semequiv{} (A \limp B \lor E) \land (C \limp D \lor
 E)$. Since disjunction distributes over conjunction, a first naive try would
 give the following interpretation, where we just replace $\land$ by $\lor$
 compared to \refeq{interp1}:
@@ -214,7 +214,7 @@ compared to \refeq{interp1}:
 \bigwedge{\Gamma} \limp \bigwedge_{S \in \cS}{\sint{S}} \lor \bigvee \Delta
 \end{equation}
 But this immediately fails whenever $\cS = \emptyset$, because it trivializes to
-$\bigwedge \Gamma \limp \top \lor \bigvee \Delta \semequiv \top$ instead of
+$\bigwedge \Gamma \limp \top \lor \bigvee \Delta \semequiv{} \top$ instead of
 $\bigwedge \Gamma \limp \bigvee \Delta$.
 
 \subsection{Saturated solutions}
@@ -273,14 +273,14 @@ non-equivalent formulas to $S$ and $T$. To show this, let us try to derive the
 equivalence through some algebraic developments:
 \begin{align}
   \sint{S} &= \top \limp ((A \limp B) \land (C \limp D)) \lor E \nonumber\\
-              &\semequiv ((A \limp B) \land (C \limp D)) \lor E \nonumber\\
-              &\semequiv ((A \limp B) \lor E) \land ((C \limp D) \lor E) \nonumber\\
-              &\semequiv (A \limp B \lor E) \land (C \limp D \lor E) \labeq{grishin}\\
-              &\semequiv ((A \limp B) \land (C \limp D)) \lor E \nonumber\\
+              &\semequiv{} ((A \limp B) \land (C \limp D)) \lor E \nonumber\\
+              &\semequiv{} ((A \limp B) \lor E) \land ((C \limp D) \lor E) \nonumber\\
+              &\semequiv{} (A \limp B \lor E) \land (C \limp D \lor E) \labeq{grishin}\\
+              &\semequiv{} ((A \limp B) \land (C \limp D)) \lor E \nonumber\\
   \sint{T} &= \top \limp ((A \limp B \lor E) \land (C \limp D \lor E)) \lor \bot \nonumber
 \end{align}
 Wait, we did manage to prove it! The trick resides in \refeq{grishin}, which
-uses twice the equivalence $(A \limp B) \lor C \semequiv A \limp (B \lor C)$. It
+uses twice the equivalence $(A \limp B) \lor C \semequiv{} A \limp (B \lor C)$. It
 turns out that this equivalence is true in \kl{classical} logic, but \emph{not}
 in \kl{intuitionistic} logic. More precisely, it is the implication $G \defeq (A
 \limp (B \lor C)) \limp ((A \limp B) \lor C)$ which is not provable
@@ -382,7 +382,7 @@ this is reminiscent of the electromagnetic phenomemon of \emph{repulsion}
 between objects charged with the same polarity.
 
 To illustrate why this works, let us consider how one can manipulate with red
-\kl{bubbles} the \kl{classical} equivalence $ (A \limp B) \lor C \semequiv A
+\kl{bubbles} the \kl{classical} equivalence $ (A \limp B) \lor C \semequiv{} A
 \limp (B \lor C)$, that we already encountered in the previous section. The
 begginings of the proofs for both directions of the equivalence are depicted
 parallely in \reffig{bubbles-grishin}. Indeed both proofs have a very similar
@@ -603,7 +603,7 @@ the \emph{theoretical}:
     a rule only brings unnecessary complexity in proof search, especially in a
     user interface that aims for simplicity.}. In other words, it corresponds to
     a logical \emph{equivalence}: when all rules in a (bubble) calculus are
-    \kl{invertible}, we get that $S \step{} T$ implies $\sint{S} \semequiv
+    \kl{invertible}, we get that $S \step{} T$ implies $\sint{S} \semequiv{}
     \sint{T}$. This entails in particular that a user can apply the rule
     without fear of turning a provable \kl{goal} into an unprovable
     one\sidenote{Assuming that the calculus is \emph{complete}

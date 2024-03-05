@@ -207,7 +207,7 @@ Just like a sequent, a \kl{solution} is semantically equivalent to an implicatio
 except that we add the \emph{conjunction} of all \kl{subgoals} to the consequent:
 
 \begin{definition}[Asymmetric interpretation]\labdef{ainterp}
-  The \intro{asymmetric interpretation} $\intro*\aint{\cdot}$ on \kl{solutions}
+  The \intro{asymmetric interpretation} $\intro*\aint{-}$ on \kl{solutions}
   is defined recursively by:
 $$\aint{\Gamma \piq{S_1 \sep \ldots \sep S_n} \Delta} = \bigwedge \Gamma
   \limp \left(\bigwedge \Delta \land \bigwedge_i{\aint{S_i}}\right)$$
@@ -371,8 +371,8 @@ $\Gamma, \Delta$ of formulas and $\cS$ of bubbles. That is, the rules of \kl{BJ}
 are \emph{local}. This enables a more economical and graphical presentation of
 the rules in \reffig{graphical-BJ}, where \kl{BJ} is seen as a multiset
 \kl{rewriting system} just like the \kl{\cham} thanks to \refdef{solution}.
-Instead of relying on a notion of \kl{solution} \kl{context}, we define formally what
-it means to be a \emph{subsolution}:
+Instead of relying on a notion of \kl{context}, we define formally what it means
+to be a \emph{subsolution}:
 
 \begin{definition}[Subsolution]\labdef{subsolution}
   $S$ is a \intro{subsolution} of $T$, written $S \intro*\subsol T$, if either $S
