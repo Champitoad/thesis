@@ -42,7 +42,7 @@ this can be remedied by systematically duplicating the instantiated formula.}.
 In \reffig{sequent-B-inv} we define the \intro{B_{inv}} calculus, which results
 from the following modifications to the previous rules:
 \begin{description}
-  \item[\textbf{Weakening}]
+  \item[Weakening]
     Here we follow a standard technique in \kl{sequent calculus}, that merges
     the \kl{weakening} rule in all \emph{terminal} rules of the calculus (i.e.
     rules with no premisses). In \kl{bubble calculi}, the notion of premiss is
@@ -55,7 +55,7 @@ from the following modifications to the previous rules:
     the general version improves \emph{factorizability} by solving instantly all
     \kl{subgoals} inside $\J$.
 
-  \item[\textbf{Flow}]
+  \item[Flow]
     As shown by the simulation of \reflemma{simulation-dbiint}, the
     \emph{propagation} rules of \kl{DBiInt} combine an instance of
     \emph{\kl{contraction}} followed by the application of a $\mathbb{F}$-rule
@@ -92,7 +92,7 @@ from the following modifications to the previous rules:
     \kl{B_{inv}}. Fortunately, we showed that it is \kl{admissible} in
     \refthm{bubbles:cut-admissibility}, so this is not problematic.
 
-  \item[\textbf{Implication/Exclusion}]
+  \item[Implication/Exclusion]
     The last source of non-invertibility is the $\mathbb{H}$-rules
     \kl{{\limp}{-}} and \kl{{\lsub}{+}}, that respectively allow to use an
     implication hypothesis, and prove an \kl{exclusion} conclusion.
@@ -155,7 +155,7 @@ way to search for a proof of a formula $A$ consists in the following $5$
 \emph{phases}, applied successively in a loop until the \kl{saturated} empty
 \kl{solution} is reached:
 \begin{description}
-  \item[\textbf{Decomposition}] Decompose $A$ by applying recursively
+  \item[Decomposition] Decompose $A$ by applying recursively
     $\mathbb{H}$-rules, until either atoms, \kl{negative} implications
     $\hypo{\limp}$, \kl{negative} disjunctions $\hypo{\lor}$, or \kl{positive}
     conjunctions $\conc{\land}$ are reached.
@@ -172,12 +172,12 @@ way to search for a proof of a formula $A$ consists in the following $5$
     the user should be able to choose which \emph{cases} to consider when
     building a proof.
 
-  \item[\textbf{Absorption}] Apply the absorption rules
+  \item[Absorption] Apply the absorption rules
     $\{\kl{a},\kl{a{-}},\kl{a{+}}\}$ wherever possible. This will prevent
     atoms from being unnecessarily stuck on \kl{neutral} membranes in the next phase.
     This phase can also be trivially automated.
 
-  \item[\textbf{Linking}] Try to bring together every pair of dual atoms, so
+  \item[Linking] Try to bring together every pair of dual atoms, so
     that they annihilate each other in an instance of the \kl{i{\da}} rule. This
     is reminiscent of our \emph{drag-and-drop} actions of \refch{pba}. In a
     touch-based \kl{GUI}, rather than dragging a complex formula onto another
@@ -207,12 +207,12 @@ way to search for a proof of a formula $A$ consists in the following $5$
     of the pruned branch, and thus the number of \kl{subgoals} solved in one go. It
     can also be used to completely automate this phase.
 
-  \item[\textbf{Popping}] Pop every \kl{saturated} empty \kl{bubble} in the \kl{goal} with the
+  \item[Popping] Pop every \kl{saturated} empty \kl{bubble} in the \kl{goal} with the
   rules $\{\kl{p},\kl{p{-}},\kl{p{+}}\}$. This phase can also be trivially
   automated, and corresponds to the unit elimination phase in \kl{subformula linking}
   (\refsec{action}).
 
-  \item[\textbf{Application}] When there are no more pairs of dual atoms, or all
+  \item[Application] When there are no more pairs of dual atoms, or all
     the remaining pairs have been given up (last step of the rule of thumb), let
     $S$ be the current \kl{goal}, and
     $$\intro*\imps{S} \defeq \compr{(S_0\hole, A, B, \J, \Delta)}{S = S_0\select{\Gamma,

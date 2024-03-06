@@ -474,7 +474,7 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
 % \end{marginfigure}
 
 \begin{description}
-  \item[\textbf{\flow}]
+  \item[\flow]
     The {\kl{f{-}}} rule plays a special role, in that it would not be mapped to
     any particular action. Indeed it captures the way information flows in
     \kl{solutions}, and we already described in \refsec{bubbles} how this is
@@ -490,7 +490,7 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
     \kl{DnD} action, where the dragged hypothesis crosses successively the
     various \kl{bubbles} on the way.
     
-  \item[\textbf{\membrane}]
+  \item[\membrane]
     The {\kl{p}} rule can be mapped very straightforwardly to the action of
     clicking on the area of an empty bubble, in order to pop it. It could also
     be entirely automated, by letting the proof engine eagerly pop empty
@@ -503,7 +503,7 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
     topological way to check the emptiness of a bubble, which has the benefit of
     being completely \emph{continous}, in addition to being very clear visually.
 
-  \item[\textbf{\resource}]
+  \item[\resource]
     The \kl{contraction} rule {\kl{c}} could be mapped to a specific triggering
     input when starting to drag a blue \kl{item} $\hypo{A}$ (e.g. a shortkey if
     a keyboard is available, or a long press on the \kl{item} on a touchscreen),
@@ -516,7 +516,7 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
     As for the \kl{weakening} rule {\kl{w}}, it could be available as a
     \kl{contextual action} when selecting blue \kl{items}.
 
-  \item[\textbf{\identity}]
+  \item[\identity]
     \begin{marginfigure}
       $$
       \begin{array}{rcll}
@@ -547,7 +547,7 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
     around it with a blue \kl{item} $\hypo{A}$, and another \kl{bubble} nearby
     it with a red \kl{item} $\conc{A}$.
 
-  \item[\textbf{\heating}]
+  \item[\heating]
     For $\mathbb{H}$-rules that spawn \kl{bubbles} like {\kl{\land{+}}}, it is
     important that \kl{bubbles} stay close to the \kl{item} being clicked, in order to
     make the transformation visually clear. One could even imagine a small
@@ -560,7 +560,7 @@ Beyond the recovered uniformity of the user interface in terms of the chemical
 \kl{metaphor}, \kl{BJ} exhibits some features that are interesting both on the
 \kl{proof-theoretical} and user-experience levels:
 \begin{description}
-  \item[\textbf{Factorization}] It implements a form of \emph{context-sharing}
+  \item[Factorization] It implements a form of \emph{context-sharing}
     between \kl{subgoals}: that is, one can perform transformations on shared
     hypotheses (\kl{forward} reasoning) without going back to a \kl{proof state}
     anterior to the splitting of said \kl{subgoals}. This should simplify the
@@ -573,7 +573,7 @@ Beyond the recovered uniformity of the user interface in terms of the chemical
     seen as a mechanism that favors by default a style of proof with better
     factorization of subproofs.
   
-  \item[\textbf{Parallelism}]
+  \item[Parallelism]
     The locality of \kl{rewriting rules} makes it possible for multiple users to
     reason on different \kl{subgoals} of the same \kl{proof state} \emph{at the
     same time}, without compromising soundness. Combined with the above
@@ -582,7 +582,7 @@ Beyond the recovered uniformity of the user interface in terms of the chemical
     through an online web interface), while still benefitting from the knowledge
     built by collaborators in shared \kl{contexts}.
 
-  \item[\textbf{Navigation}] The tree structure of \kl{subgoals} is immediately
+  \item[Navigation] The tree structure of \kl{subgoals} is immediately
     apparent in the \kl{proof state} through the nesting of bubbles. Thus part of the
     information on the proof construction process, which was made implicit and
     temporal in the \kl{proof state} history, is now made explicit and spatial in the
@@ -613,7 +613,7 @@ Beyond the recovered uniformity of the user interface in terms of the chemical
     \kl(sequent){context} zone would be reflected in the \kl{proof canvas}, and
     vice versa.
 
-  \item[\textbf{Goal diffing}] From a user perspective, the locality of rules
+  \item[Goal diffing] From a user perspective, the locality of rules
     means that applying some action to one or two \kl{items} will not involve
     other \kl{items}\sidenote{The only exceptions are clicks on blue
     $\hypo{\bot}$, $\hypo{\lor}$ and ${\hypo{\limp}}$, but the only extra

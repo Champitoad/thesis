@@ -274,9 +274,13 @@
 \newrobustcmd\cdepth[1]{\withkl{\kl[\cdepth]}{\cmdkl{|}#1\cmdkl{|}}}
 \knowledge{\cdepth}{notion,scope=sfl}
 \knowledge{\cdepth}{notion,scope=symm}
+\knowledge{\cdepth}{notion,scope=eg}
+\knowledge{\cdepth}{notion,scope=flower}
 \newrobustcmd\sdepth[1]{\withkl{\kl[\sdepth]}{\cmdkl{|}#1\cmdkl{|}}}
 \knowledge{\sdepth}{notion,scope=sfl}
 \knowledge{\sdepth}{notion,scope=symm}
+\knowledge{\sdepth}{notion,scope=eg}
+\knowledge{\sdepth}{notion,scope=flower}
 
 \knowledgenewrobustcmd\soldual[1]{#1^{\cmdkl{\dagger}}}
 
@@ -326,6 +330,8 @@
 
 \knowledgenewrobustcmd\atoms{\cmdkl{\mathcal{A}}}
 
+\knowledgenewrobustcmd\acut[1]{\cmdkl{[}#1\cmdkl{]}}
+
 \knowledgenewrobustcmd\anodes{\cmdkl{\symbf{N_\alpha}}}
 \knowledgenewrobustcmd\agraphs{\cmdkl{\symbf{G_\alpha}}}
 
@@ -336,9 +342,8 @@
 \knowledgenewrobustcmd\bcut[1]{\cmdkl{[}#1\cmdkl{]}}
 \knowledgenewrobustcmd\bgarden[2]{#1 \mathbin{\cmdkl{\cdot}} #2}
 
-\newcommand{\gdepth}[1]{\left|#1\right|}
 
-\newcommand{\strans}[1]{\begingroup #1 \endgroup^{\scalebox{1.25}{$\bullet$}}}
+\knowledgenewrobustcmd\strans[1]{\begingroup #1 \endgroup^{\cmdkl{\scalebox{1.25}{$\bullet$}}}}
 
 \newcommand{\itsrc}[1]{\begingroup\setlength{\fboxrule}{0.8pt}\setlength{\fboxsep}{2pt}\color{itsrc}\fbox{\color{black}$#1$}\endgroup}
 \newcommand{\itdst}[1]{\colorbox{itdst}{$#1$}}

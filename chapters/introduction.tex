@@ -516,8 +516,7 @@ results presented in this thesis.
 
 \paragraph{Deep inference}
 
-\AP
-Many years after Gentzen's seminal work, at the advent of the
+\AP Many years after Gentzen's seminal work, at the advent of the
 21\textsuperscript{th} century, Alessio Guglielmi introduced a new methodology
 for designing \kl{proof formalisms} called \intro{deep inference}
 \sidecite{Guglielmi1999ACO}. The idea was to overcome some limitations of
@@ -525,9 +524,9 @@ Gentzen formalisms while preserving their good properties, by allowing
 \kl{inference rules} to be applied \emph{anywhere} inside formulas, instead of
 only at the top-level of sequents\sidenote{In fact, Schütte had already proposed
 a \kl{deep inference} system as early as 1977 \cite{schutte_proof_1977}, as did
-Peirce one century before him with his \emph{entitative graphs} (as we will see
-in \refch{eg}). But the idea did not generate much interest at the times.}. The
-first \kl{deep inference} system was the \intro{calculus of structures}
+Peirce one century before him with his \emph{\kl{entitative graphs}} (as we will
+see in \refch{eg}). But the idea did not generate much interest at the times.}.
+The first \kl{deep inference} system was the \intro{calculus of structures}
 (\reintro{CoS}), which can be succinctly described as a \intro{rewriting system}
 on formulas. For instance, the following \intro{switch rule}, when read
 bottom-up (i.e. in \kl{backward} mode), indicates that the formula $A \lor (B
@@ -736,19 +735,19 @@ on \kl{FOL}.}. The process of compiling a high-level proof text into a low-level
 Any \kl{proof assistant} must provide the two following features in its statement
 language:
 
-\begin{itemize}
-  \item[\textbf{Logical primitives}] Naturally, one needs a way to write
+\begin{description}
+  \item[Logical primitives] Naturally, one needs a way to write
   propositions formed with logical connectives and quantifiers. This is usually
   done in \kl{symbolic} form, either with a custom ASCII notation, or with
   Unicode characters corresponding to the standard \kl{symbols} in more modern
   \kl{proof assistants}. 
-  \item[\textbf{Mathematical notations}] In addition to the logical primitives,
+  \item[Mathematical notations] In addition to the logical primitives,
   one needs to be able to express mathematical objects and operations in the
   domain of interest, e.g. numbers and arithmetic operators. Contrary to the
   logical language that can be hardcoded once and for all in the \kl{proof
   assistant}, the mathematical language needs to be \emph{extensible} by the
   user, so that custom notations can be defined for new mathematical objects.
-\end{itemize}
+\end{description}
 
 \begin{emphpar}
   In this thesis, we focus exclusively on the \emph{logical primitives}, because
@@ -1227,25 +1226,25 @@ the first one.
 
 \reffig{chapter-deps} shows the precise graph of dependencies between chapters.
 Four independent paths can be followed:
-\begin{itemize}
-  \item[\textbf{The applied road (\ding{175} $\to$ \ding{177})}] If
+\begin{description}
+  \item[The applied road (\ding{175} $\to$ \ding{177})] If
   you want to see to what extent the \kl{PbA} paradigm can currently be applied for
   practical theorem proving in real \kl{proof assistants}, this is the right path for
   you.
 
-  \item[\textbf{Proof theory of SFL (\ding{174} $\to$ \ding{176})}]
+  \item[Proof theory of SFL (\ding{174} $\to$ \ding{176})]
   This path is for readers only interested in the \kl{proof theory} of \kl{subformula
   linking}, which is the foundation for the semantics of \kl{DnD} actions on \kl{symbolic}
   formulas.
 
-  \item[\textbf{Bubble calculi (\ding{178} $\to$ \ding{179})}]
+  \item[Bubble calculi (\ding{178} $\to$ \ding{179})]
   This path is for readers only interested in the \kl{proof theory} and potential
   applications of \kl{bubble calculi}.
   
-  \item[\textbf{Flower calculus (\ding{180} $\to$ \ding{181})}] This path is for
+  \item[Flower calculus (\ding{180} $\to$ \ding{181})] This path is for
   readers only interested in the \kl{proof theory} of the flower calculus, and its
   applications to automated and interactive theorem proving.
-\end{itemize}
+\end{description}
 
 A last option is to read only \refch{eg}, skipping even \refch{pba}. This might
 be of interest to people looking for an introduction to the \kl{existential graphs}

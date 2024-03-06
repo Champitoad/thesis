@@ -24,12 +24,12 @@ to an Apology for Pragmaticism}, 1906}
 C. S. Peirce is famous for his contributions to \kl{symbolic} logic, including
 among others his eponymous law for \kl{classical} logic, and his pioneering work
 on the algebra of relations and quantification \sidecite{peirce_algebra_1885}.
-But far less widespread are his achievements in the realm of graphical logic, or
-\emph{\kl{iconic} logic} as Shin calls it
+But far less widespread are his achievements in the realm of \kl{diagrammatic}
+logic, or \emph{\kl{iconic} logic} as Shin calls it
 \sidecite{10.7551/mitpress/3633.001.0001}. He dedicated a large chunk of his
-life to the investigation of \kl{diagrammatic} systems, starting in 1882 with
-the \emph{entitative graphs} and culminating with the \kl{existential graphs}
-(\kl{EGs}), which he developed from 1896 until his death in 1914
+life to the investigation of graphical systems, starting in 1882 with the
+\emph{\kl{entitative graphs}} and culminating with the \emph{\kl{existential
+graphs}} (\kl{EGs}), which he developed from 1896 until his death in 1914
 \sidecite{Roberts+1973}. Interestingly, Peirce perceived \kl{existential graphs}
 as his \textit{``chef d'oeuvre''}, and that they \textit{``ought to be the logic
 of the future''}\sidenote{Both citations are sourced in
@@ -51,38 +51,40 @@ our work will constitute one more step towards the vision Peirce had in mind.
 
 In this chapter, we propose a self-contained exposition of \kl{EGs}, that tries
 at the same time to be faithful to the original presentation of the systems by
-Peirce, and more modern in some aspects of their formalization. The \kl{goal}
-will be to familiarize the reader with the unique approach to proofs inherent to
+Peirce, and more modern in some aspects of their formalization. The goal will be
+to familiarize the reader with the unique approach to proofs inherent to
 \kl{EGs}, which can be difficult to relate to more standard frameworks like
 \kl[Hilbert system]{Hilbert} and \kl[Gentzen system]{Gentzen} \kl{proof
 systems}, and even \kl{deep inference} \kl{proof systems} like the \kl{calculus
 of structures}. This shall prove useful to get a good understanding of the
-historical and technical foundations behind our \emph{flower calculus}, to be
-introduced in \refch{flowers}.
+historical and technical foundations behind our \emph{\kl{flower calculus}}, to
+be introduced in \refch{flowers}.
+
+\newpage
 
 The chapter is organized as follows: we start in \refsec{alpha} by presenting
 the \kl{diagrammatic} syntax of the system \kl{Alpha} of \kl{EGs} for
 \kl{classical} propositional logic. In \refsec{illative}, we introduce the
-\kl{inference rules} of \kl{Alpha} for manipulating \kl{existential graphs},
-called \emph{illative transformations} by Peirce. In \refsec{multisets}, we give
+\kl{inference rules} of \kl{Alpha} for manipulating \kl{EGs}, called
+\emph{\kl{illative transformations}} by Peirce. In \refsec{multisets}, we give
 an equivalent formulation of the syntax and rules of \kl{Alpha} as a
 \emph{multiset} \kl{rewriting system}. In \refsec{atomicity}, we formalize a
-variant of the (de)iteration principle described by Peirce in
+variant of the \kl{(De)iteration} principle described by Peirce in
 \sidecite{peirce_prolegomena_1906} that eliminates the need for the
-double-\kl{cut} principle, and discuss how it was motivated by Peirce's quest
-for \emph{illative atomicity}. In \refsec{eg-soundness}, we take advantage of
-our reformulation to give a simple proof of soundness for \kl{Alpha}, based on a
-direct truth-evaluation of graphs. In \refsec{eg-completeness} we give a
+\kl{Double{-}cut} principle, and discuss how it was motivated by Peirce's quest
+for \emph{\kl{illative atomicity}}. In \refsec{eg-soundness}, we take advantage
+of our reformulation to give a simple proof of soundness for \kl{Alpha}, based
+on a direct truth-evaluation of graphs. In \refsec{eg-completeness} we give a
 syntactic proof of completeness for \kl{Alpha}, by simulating the \kl{calculus
-of structures} \intro{SKS} of Brünnler and Tiu \sidecite{brunnler_local_2001}.
-In this way, \kl{Alpha} is shown to have subsystems that inherit the
-\emph{locality} property of \kl{SKS}, and where the deletion and insertion rules
-are respectively \kl{admissible} for \emph{provability} and \emph{refutability},
-making \kl{Alpha} \emph{\kl{analytic}}. In \refsec{beta}, we illustrate the
-original mechanism of \emph{lines of identity} used by Peirce to handle
-quantifiers and equality in his \kl{Beta} system. We end in \refsec{gardens} by
-showing how to recast lines of identity in a more traditional binder-based
-syntax.
+of structures} \kl{SKS} of Brünnler and Tiu \sidecite{brunnler_local_2001}. In
+this way, \kl{Alpha} is shown to have subsystems that inherit the
+\emph{locality} property of \kl{SKS}, and where the \kl{Deletion} and
+\kl{Insertion} rules are respectively \kl{admissible} for \emph{provability} and
+\emph{refutability}, making \kl{Alpha} \emph{\kl{analytic}}. In \refsec{beta},
+we illustrate the original mechanism of \emph{\kl{lines of identity}} used by
+Peirce to handle quantifiers and equality in his \kl{Beta} system. We end in
+\refsec{gardens} by showing how to recast \kl{lines of identity} in a more
+traditional binder-based syntax.
 
 % \todo{IDEA (where should we put it?): \emph{superposition of polarities} in
 % existential graphs. While a cut in bubble calculi is the insertion of \emph{two}
@@ -90,7 +92,7 @@ syntax.
 % rule only introduces \emph{one} occurrence of the formula, which plays either a
 % negative role when it is iterated, or a positive role when it is deiterated}
 
-\section{\kl{Alpha} graphs}\labsec{alpha}
+\section{Alpha graphs}\labsec{alpha}
 
 \paragraph{Existential Graphs}
 
@@ -110,13 +112,13 @@ have been interpreted as attempts to capture \emph{modal}
 \begin{digression}
 At the end of his life, Peirce pushed his experimentations beyond the scope of
 \emph{logic} in the contemporary sense of the word, with so-called
-\emph{tinctured} \kl{existential graphs} (Chapter 6 in \cite{Roberts+1973}).
+\emph{tinctured} \kl{existential graphs} \cite[Chapter~6]{Roberts+1973}.
 Roughly, the idea was to represent a variety of \emph{modes of expression} with
-different background shades on the canvas where sentences are scribed, not
-unlike our graphical depiction of \emph{\kl{saturated}} \kl{solutions} in
-\reffig{graphical-B}, or the color codes used for the various kinds of text
-boxes in this document. In addition to the usual act of asserting the truth of a
-proposition, one could for instance express a \emph{subjective} or
+different background shades on the \kl{sheet of assertion}, not unlike our
+graphical depiction of \emph{\kl{saturated}} \kl(symm){solutions} in
+\reffig{graphical-B}, or the background colors used for the various kinds of
+text boxes in this document. In addition to the usual act of asserting the truth
+of a proposition, one could for instance express a \emph{subjective} or
 \emph{objective} possibility, or signify an interrogative or imperative mood,
 all by using different colors. For print in publications, he would in fact use
 \emph{heraldic tinctures} instead of colors, hence the ``tinctured''
@@ -129,21 +131,20 @@ Peirce's work.
 % Kant \cite{Martin-Lof1996-MAROTM-7}, who was of great influence on Peirce's own
 % philosophy \cite{sep-peirce}.}.
 
-\paragraph{Sheet of Assertions}
+\paragraph{Sheet of Assertion}
 
-\AP
-The most fundamental concept of \kl{Alpha} is the \intro{sheet of assertion},
-denoted by $\intro*\SA$ thereafter. It is the space where statements are scribed
-by the reasoner, typically a sheet of paper, a blackboard, or a computer
-display. In a \kl{proof assistant}, this would either be the buffer of a text editor
-holding the theory the user is developing, or the \kl{proof view} displaying \kl{goals} to
-be proved, depending on who the reasoner is (the user or the computer,
-respectively). This last analogy suggests an important property of $\SA$: it
-must offer a \emph{virtually infinite} amount of space, so that one can perform
-as much reasoning as needed. Just like a Turing machine has an infinite tape, so
-that one can perform as much computation as needed. In \kl{symbolic} logic, this is
-captured by the fact that formulas, although usually finite, can have an
-unbounded size.
+\AP The most fundamental concept of \kl{Alpha} is the \intro{sheet of
+assertion}, denoted by $\intro*\SA$ thereafter. It is the space where statements
+are scribed by the reasoner, typically a sheet of paper, a blackboard, or a
+computer display. In a \kl{proof assistant}, this would either be the buffer of
+a text editor where the user writes her theories, or the \kl{proof view}
+displaying \kl{goals} to be proved, depending on who the reasoner is (the user
+or the computer, respectively). This last analogy suggests an important property
+of $\SA$: it must offer a \emph{virtually infinite} amount of space, so that one
+can perform as much reasoning as needed. Just like a Turing machine has an
+infinite tape, so that one can perform as much computation as needed. In
+\kl{symbolic} logic, this is captured by the fact that formulas, although
+usually finite, can have an unbounded size.
 
 As its name indicates, scribing a statement on $\SA$ amounts to \emph{asserting
 its truth}. Thus very naturally, the empty $\SA$ where nothing is scribed will
@@ -173,9 +174,10 @@ truth of $a$ and the truth of $b$. In \kl{Alpha}, there is no need to introduce
 the \kl{symbolic} connective $\land$, since one can just write both $a$ and $b$ at
 distinct locations on $\SA$:
 $$a~~~b$$
+\AP
 More generally, one might consider any two portions $G$ and $H$ of $\SA$, and
 interpret their \intro{juxtaposition} $G~H$ as signifying that we assert the
-truth of their \kl{conjunction}.
+truth of their conjunction.
 % This leads us to formulate the first fundamental principle of \kl{Alpha}:
 % $$\text{\emph{Any portion of $\SA$ is a graph.}}$$
 % In particular, the entire $\SA$ itself is a graph.
@@ -208,15 +210,15 @@ needed for doing so are letters $a, b, c\ldots$ denoting atomic propositions,
 that is ``pure'' \kl{symbols} that do not have any logical meaning associated to
 them.
 
-\AP
-Now, it is well-known that $\{\land,\neg\}$ is \emph{functionally complete},
+\AP Now, it is well-known that $\{\land,\neg\}$ is \emph{functionally complete},
 meaning that any boolean truth function can be expressed as the composition of
-boolean conjunctions and negations. In particular, the \kl{symbolic} definitions of
-absurdity $\bot \defeq \neg\top$, \kl{classical} disjunction $A \lor B \defeq
-\neg(\neg A \land \neg B)$ and \kl{classical} implication $A \limp B \defeq \neg (A
-\land \neg B)$ can be expressed by the following three \kl{graphs}\sidenote{Note the
-resemblance with the translation of formulas as \kl{solutions} in
-\reffig{bubbles-native}, in particular for \kl{negative} disjunctions.}:
+boolean conjunctions and negations. In particular, the \kl{symbolic} definitions
+of absurdity $\bot \defeq \neg\top$, \kl{classical} disjunction $A \lor B \defeq
+\neg(\neg A \land \neg B)$ and \kl{classical} implication $A \limp B \defeq \neg
+(A \land \neg B)$ can be expressed by the following three
+\kl{graphs}\sidenote{Note the resemblance with the translation of formulas as
+\kl(symm){solutions} in \reffig{bubbles-native}, in particular for
+\kl(symm){negative} disjunctions.}:
 \begin{mathpar}
   \pcut{\phantom{A}}
   \and
@@ -230,26 +232,27 @@ equivalent \kl{graph}. Conversely, one can translate any \kl{graph} into a
 \sidecite{10.7551/mitpress/3633.001.0001}. In fact, there are usually many
 possible formula readings of a given \kl{graph}. One reason is that
 \kl{juxtaposition} of \kl{graphs} is a \emph{variadic} operation, as opposed to
-\kl{conjunction} of formulas which is \emph{dyadic}: thus formulas that only
-differ up to \emph{associativity} are associated to the same \kl{graph}. Also,
-thanks to the topological nature of $\SA$, \kl{juxtaposition} is naturally
+conjunction of formulas which is \emph{dyadic}: thus formulas that only differ
+up to \emph{associativity} are associated to the same \kl{graph}. Also, thanks
+to the topological nature of $\SA$, \kl{juxtaposition} is naturally
 \emph{commutative}: the locations of two juxtaposed \kl{graphs} do not matter,
-as long as they live in the same area delimited by a \kl{cut}. The combination
-of these properties is called the \intro{isotropy} of $\SA$ in
-\sidecite{minghui_graphical_2019}, and is captured in traditional \kl{proof theory}
-through the use of \emph{(multi)sets} for modelling \kl(sequent){contexts} in sequents.
+as long as they live in the same area delimited by a \kl{cut}. \AP The
+combination of these properties is called the \intro{isotropy} of $\SA$ in
+\sidecite{minghui_graphical_2019}, and is captured in traditional \kl{proof
+theory} through the use of \emph{(multi)sets} for modelling
+\kl(sequent){contexts} in sequents.
 
 \begin{remark}\labremark{eg-entitative}
-  
-  In a first version of \kl{EGs} called \emph{entitative graphs}, Peirce used
+  \AP
+  In a first version of \kl{EGs} called \intro{entitative graphs}, Peirce used
   \kl{juxtaposition} to denote \emph{disjunction} instead of conjunction.
   Although $\{\lor,\neg\}$ is also functionally complete, Peirce quickly grew
-  unsatisfied with these entitative graphs, stating that \kl{EGs} formed ``a far
-  preferable system on the whole'' (Ms 280, pp.~21--22). I find it interesting
-  that more contemporary works in logic have also made the choice to take
-  conjunction and negation as their primitive operations, like the tensorial
-  logic of Melliès \cite{mellies_micrological_2017}, or the realizability
-  constructions for linear logic in Girard's transcendental syntax
+  unsatisfied with these \kl{entitative graphs}, stating that \kl{EGs} formed
+  ``a far preferable system on the whole'' (Ms 280, pp.~21--22). I find it
+  interesting that more contemporary works in logic have also made the choice to
+  take conjunction and negation as their primitive operations, like the
+  tensorial logic of Melliès \cite{mellies_micrological_2017}, or the
+  realizability constructions for linear logic in Girard's transcendental syntax
   \cite{eng_stellar_2020}.
 \end{remark}
 
@@ -259,13 +262,13 @@ through the use of \emph{(multi)sets} for modelling \kl(sequent){contexts} in se
 
 \AP In order to have a \kl{proof system}, one needs a collection of
 \emph{\kl{inference rules}} for deducing true statements from other true
-statements. In \kl{Alpha}, \kl{inference rules} are implemented by what Peirce called
-\intro{illative transformations} on \kl{graphs}. In modern terminology, they
-correspond to \emph{rewriting} rules that can be applied to any \kl{subgraph}.
-By measuring the depth of a \kl{subgraph} as the number of \kl{cuts} in which it
-is enclosed, we thus have that the rules of \kl{Alpha} are applicable on
-\kl{subgraphs} of arbitrary depth. This makes \kl{Alpha} deserving of the title
-of \kl{deep inference} system.
+statements. In \kl{Alpha}, \kl{inference rules} are implemented by what Peirce
+called \intro{illative transformations} on \kl{graphs}. In modern terminology,
+they correspond to \kl{rewriting rules} that can be applied to any
+\kl{subgraph}. By measuring the \kl{depth} of a \kl{subgraph} as the number of
+\kl{cuts} in which it is enclosed, we thus have that the rules of \kl{Alpha} are
+applicable on \kl{subgraphs} of arbitrary \kl{depth}. This makes \kl{Alpha} deserving
+of the title of \kl{deep inference} system.
 
 \begin{marginfigure}
   $$\ncut{a~~~\pcut{\ncut{b}~~~c}}$$
@@ -281,6 +284,7 @@ of \kl{deep inference} system.
 
 \paragraph{Polarity}
 
+\AP
 Before introducing the rules, let us make a small change in the way we depict
 the \kl{graphs}. The idea is that we want to visualize more clearly the
 \intro{polarity} of any \kl{subgraph} $G$, understood as the \emph{parity} of the
@@ -297,7 +301,7 @@ print. A nice advantage of these notations is that they remove the need to count
 manually the number of \kl{cuts} starting from the top-level of $\SA$: the
 information is immediately apparent in the \kl{subgraph}, and thus completely
 \emph{local}\sidenote{A similar device is used in the \kl{deep inference} system
-\kl{ISp} of Tiu \cite{tiu_local_2006}, where the polarities of substructures
+\intro{ISp} of Tiu \cite{tiu_local_2006}, where the polarities of substructures
 are attached to them as explicit labels.}.
 
 \begin{remark}\labremark{eg-polarity}
@@ -313,13 +317,14 @@ are attached to them as explicit labels.}.
 
 \paragraph{Inference rules}
 
-Quite surprisingly, Peirce showed that one only needs five \kl{inference rules} to get
-a \emph{strongly complete} system, in the sense that if the truth of a \kl{graph} $G$
-entails the truth of another \kl{graph} $H$, then $G$ can always be rewritten into
-$H$ by applying exclusively instances of these five rules\sidenote{Of course
-Peirce did not show completeness formally in the sense of modern \kl{model theory},
-although Sowa argues in \cite{sowa_peirces_2011} (Section 4) that he had started
-to develop his own \kl{model theory} equivalent to Tarski's (but closer to the
+Quite surprisingly, Peirce showed that one only needs five \kl{inference rules}
+to get a \emph{strongly complete} system, in the sense that if the truth of a
+\kl{graph} $G$ entails the truth of another \kl{graph} $H$, then $G$ can always
+be rewritten into $H$ by applying exclusively instances of these five
+rules\sidenote{Of course Peirce did not show completeness formally in the sense
+of modern \kl{model theory}, although Sowa argues in
+\cite[Section~4]{sowa_peirces_2011} that he had started to develop his own
+\kl{model theory} equivalent to Tarski's (but closer to the
 \emph{game-theoretical semantics} of Hintikka \cite{Hintikka1973-HINLLA}).
 % One can find a modern categorical treatment of completeness with respect to
 % Boolean algebras, based on a rigorous formalization of the geometry and algebra
@@ -333,9 +338,9 @@ such as the use of electrical switches to compute boolean functions, whose
 invention is usually attributed to Claude Shannon.}. The first two rules are the
 most powerful and mysterious in all systems of \kl{EGs}, and can be applied in areas
 of any \kl{polarity}:
-\begin{itemize}
-  \item[\textbf{Iteration} \textit{(Copy \& Paste)}]
-    A \kl{graph} $G$ may be duplicated at any depth inside of a juxtaposed \kl{graph} $H$.
+\begin{description}
+  \itemAP[\intro{Iteration} \textit{(Copy \& Paste)}]
+    A \kl{graph} $G$ may be duplicated at any \kl{depth} inside of a juxtaposed \kl{graph} $H$.
     Using our notation for holed \kl{contexts} from previous chapters, this can be
     represented schematically like so:
     \begin{mathpar}
@@ -345,17 +350,18 @@ of any \kl{polarity}:
     \end{mathpar}
     % In particular, $H$ can be taken to be any empty portion of $\SA$ in the same
     % area as $G$, giving that $G ~\step{}~ G~G$.
-    It can be seen as a deep generalization of the \emph{identity} axiom of
+    It can be seen as a deep generalization of the \kl(rule){axiom} rule of
     \kl{sequent calculus}, where the top-level occurrence of $G$ justifies the
-    occurrence inside $H\hole$\sidenote{This might also be related to the notion
-    of \emph{justified move} in game semantics, where the nesting of \kl{cuts} in the
-    \kl{context} $H\hole$ corresponds to a sequence of alternating moves between
-    Player and Opponent.}. Note that while in the identity axiom, the justifying
-    (resp. justified) occurrence must be a \kl{negative} hypothesis (resp. a \kl{positive}
-    conclusion), the \kl{Iteration} rule also allows the opposite relationship
-    of a conclusion justifying a hypothesis, thus also exhibiting one aspect of
-    the \emph{cut} rule of \kl{sequent calculus}.
-  \item[\textbf{Deiteration} \textit{(Factorization)}]
+    occurrence of $G$ located inside $H\hole$\sidenote{This might also be
+    related to the notion of \emph{justified move} in game semantics, where the
+    nesting of \kl{cuts} in the \kl{context} $H\hole$ corresponds to a sequence
+    of alternating moves between Player and Opponent.}. Note that while in the
+    \kl(rule){axiom} rule, the justifying (resp. justified) occurrence must be a
+    \kl{negative} hypothesis (resp. a \kl{positive} conclusion), the
+    \kl{Iteration} rule also allows the opposite relationship of a conclusion
+    justifying a hypothesis, thus exhibiting one aspect of the \kl(rule){cut}
+    rule of \kl{sequent calculus}.
+  \itemAP[\intro{Deiteration} \textit{(Factorization)}]
     Formally, this is the converse of \kl{Iteration}:
     \begin{mathpar}
       G~~~H\select{G} ~~~\step{}~~~ G~~~H\select{\phantom{G}}
@@ -378,34 +384,34 @@ of any \kl{polarity}:
     Compared to \kl{sequent calculus}, it can be seen as a deep generalization of the
     \emph{\kl{contraction}} rule, the base case where $H\hole = \hole$ giving $G~G
     ~\step{}~ G$.
-\end{itemize}
+\end{description}
 The applicability of the next two rules depends on the \kl{polarity} of the
 \kl{subgraph}'s area:
-\begin{itemize}
-  \item[\textbf{Insertion}]
+\begin{description}
+  \itemAP[\intro{Insertion}]
     Any \kl{graph} $G$ may be inserted in a \kl{negative} area:
     $$\nsheet{~~~\step{}~~~ G}$$
-    This is akin to a \emph{\kl{weakening}} rule, stating that if a proposition is
-    known to be true, one might add (useless) hypotheses at will. The closest
-    equivalent we found in the \kl{deep inference} literature is indeed the \kl{weakening}
-    rule \kl{wl{\da}} of \kl{ISp} in \sidecite{tiu_local_2006}.
-  \item[\textbf{Deletion}]
+    This is akin to a \emph{\kl{weakening}} rule, stating that one might add
+    (useless) hypotheses at will. The closest equivalent we found in the
+    \kl{deep inference} literature is indeed the \kl{weakening} rule
+    \rsf{wl{\da}} of \kl{ISp} in \sidecite{tiu_local_2006}.
+  \itemAP[\intro{Deletion}]
     Any \kl{graph} $G$ occurring in a \kl{positive} area may be erased:
     $$G ~~~\step{}~~~$$
     
-    This is exactly the dual of \kl{Insertion}, stating that if a proposition
-    is known to be true, then one might as well refrain from asserting it. It is
+    This is exactly the dual of \kl{Insertion}, stating that if a proposition is
+    known to be true, then one might as well refrain from asserting it. It is
     the only \emph{non-\kl{analytic}} rule of the system when reading rules from
     conclusion to premiss, since $G$ does not already appear in the right-hand
-    side. It is thus strongly related to the \emph{cut} rule of \kl{sequent
+    side. It is thus strongly related to the \kl(rule){cut} rule of \kl{sequent
     calculus}, which it can simulate together with the \kl{Deiteration} rule.
     % It is strongly related to the cut rule of \kl{sequent calculus}, as will be
     % demonstrated shortly.
-\end{itemize}
+\end{description}
 The last rule is more of a \emph{space management} principle that works as an
 \emph{isotopy}, i.e. a bidirectional topological deformation:
-\begin{itemize}
-  \item[\textbf{Double-\kl{cut}}]
+\begin{description}
+  \itemAP[\intro{Double{-}cut}]
     A \emph{double-\kl{cut}} may be inserted or erased around any \kl{graph} $G$:
     \begin{mathpar}
       \ncut{\pcut{G}} ~~~\leftrightarrow~~~ G
@@ -423,8 +429,8 @@ The last rule is more of a \emph{space management} principle that works as an
     \emph{ring}, that separates $G$ from the rest of $\SA$ while preserving its
     \kl{polarity}. Then the two directions of the rules can be understood as the
     following dual \emph{homotopies}:
-    \begin{itemize}
-      \item[\textbf{Contraction}] The ring is created by cutting $\SA$ around
+    \begin{description}
+      \item[Contraction] The ring is created by cutting $\SA$ around
       $G$, and then \emph{contracting} the inner area where $G$ resides on
       itself. This effectively ``pulls apart'' $G$ from the rest of the sheet,
       leaving apparent in the empty space of the ring whatever lies behind
@@ -432,14 +438,14 @@ The last rule is more of a \emph{space management} principle that works as an
       \emph{recto} and \emph{verso} of $\SA$, respectively. Thus in the \kl{positive}
       version of the rule (on the left), the ring would represent \kl{negative} empty
       space on the verso of $\SA$.
-      \item[\textbf{Expansion}] The ring is erased by \emph{expanding} the inner
+      \item[Expansion] The ring is erased by \emph{expanding} the inner
       area where $G$ resides towards the outer border of the ring. Unfolding the
       \kl{metaphor} to its conclusion, the inner area is then ``glued back'' to the
       rest of $\SA$\sidenote{This is reminiscent of the \emph{absorption} rules
-      $\{\kl{a},\kl{a{-},\kl{a{+}}}\}$ of \kl{system~B}, as is very clear in
+      $\{\kl{a},\kl{a{-}},\kl{a{+}}\}$ of \kl{system~B}, as is very clear in
       their graphical presentation (\reffig{graphical-B}).}.
-    \end{itemize}
-\end{itemize}
+    \end{description}
+\end{description}
 
 \reffig{eg-peirce-law} shows a derivation of Peirce's law with the rules of
 \kl{Alpha}. Note that the direction of arrows has been reversed compared to the
@@ -478,23 +484,24 @@ to wait until we give a formal \emph{semantic} proof of soundness in
 % see in \refsec{flowers-prover} that this is not incompatible with the analytic
 % aspect of \kl{EGs}. }
 
-\section{\kl{Graphs} as multisets}\labsec{multisets}
+\section{Graphs as multisets}\labsec{multisets}
 
 As noted by various authors\sidenote{See for instance the Tree Existential
-Graphs of Roberts and Pronovost \cite{roberts_existential_1992}, or Section 2.2
-in \cite{brady_categorical_2000}.}, the nesting of \kl{cuts} on $\SA$ induces a
-\emph{tree} structure on \kl{graphs}: each \kl{cut} constitutes a node, whose children are
-either leaves corresponding to atomic propositions residing in the area of the
-\kl{cut}, or nodes corresponding to nested \kl{cuts}. Empty \kl{cuts} have no children, and
-thus also form leaves of the tree. Then $\SA$ may be seen either as a forest of
-atoms and \kl{cuts}, or as a rooted tree whose root represents $\SA$, and is
-distinguished from \kl{cut} nodes. This can be captured by the following grammar:
+Graphs of Roberts and Pronovost \cite{roberts_existential_1992}, or
+\cite[Section~2.2]{brady_categorical_2000}.}, the nesting of \kl{cuts} on $\SA$
+induces a \emph{tree} structure on \kl{graphs}: each \kl{cut} constitutes a
+node, whose children are either leaves corresponding to atomic propositions
+residing in the area of the \kl{cut}, or nodes corresponding to nested
+\kl{cuts}. Empty \kl{cuts} have no children, and thus also form leaves of the
+tree. Then $\SA$ may be seen either as a forest of atoms and \kl{cuts}, or as a
+rooted tree whose root represents $\SA$, and is distinguished from \kl{cut}
+nodes. This can be captured by the following grammar:
 \begin{mathpar}
   \SA \Coloneq G 
   \and
   G, H, K \Coloneq g_1, \ldots, g_n
   \and
-  g, h, k \Coloneq a \mid [G]
+  g, h, k \Coloneq a \mid \acut{G}
 \end{mathpar}
 
 \begin{example}
@@ -502,10 +509,10 @@ The \kl{graph} of \reffig{peirce-neg-areas} may be written as either one of the
 following expressions:
 \begin{mathpar}
 
-  [a, [[b], c]] \and
-  [a, [c, [b]]] \and
-  [[[b], c], a] \and
-  [[c, [b]], a]
+  \acut{a, \acut{\acut{b}, c}} \and
+  \acut{a, \acut{c, \acut{b}}} \and
+  \acut{\acut{\acut{b}, c}, a} \and
+  \acut{\acut{c, \acut{b}}, a}
 \end{mathpar}
 \end{example}
 
@@ -516,30 +523,31 @@ define the graphs of \kl{Alpha} as (recursive) \emph{finite multisets}:
 \begin{scope}\knowledgeimport{alpha}
 
 \begin{definition}[Graph]\labdef{alpha-graph} 
-  
-  Given a denumerable set of atomic propositions $\atoms$, the sets of
-  \intro{nodes} $\intro*\anodes$ and \intro{graphs}
-  $\intro*\agraphs$ are defined mutually inductively as follows:
-  \begin{itemize}
-    \itemAP \textbf{(Spot)} If $a \in \atoms$, then $a \in \anodes$;
-    \itemAP \textbf{(Area)} If $G \subset \anodes$ is a finite multiset, then $G
+  \AP
+  Given a denumerable set of atomic propositions $\intro*\atoms$, the sets of
+  \intro{nodes} $\intro*\anodes$ and \intro{graphs} $\intro*\agraphs$ are
+  defined mutually inductively as follows:
+  \begin{description}
+    \itemAP[(Spot)] If $a \in \atoms$, then $a \in \anodes$;
+    \itemAP[(Area)] If $G \subset \anodes$ is a finite multiset, then $G
     \in \agraphs$;
-    \itemAP \textbf{(Enclosure)} If $G \in \agraphs$, then $\intro*\bcut{G} \in
+    \itemAP[(Enclosure)] If $G \in \agraphs$, then $\intro*\acut{G} \in
     \anodes$.
-  \end{itemize}
+  \end{description}
 \end{definition}
 The terminology written in parentheses is the one used by Peirce to denote the
 same concepts in \sidecite{peirce_prolegomena_1906}. Note the similarity with
-the definitions of \kl{bubbles} (enclosures) and \kl{solutions} (areas)
-(\refdef{solution}). The main difference between \kl{graphs} and \kl{solutions}, is
-that in the former formulas (ions) are restricted to atoms (spots), and they are
-not \emph{\kl(bubble){polarized}} (see \refremark{eg-polarity}).
+the definitions of \kl{bubbles} (enclosures) and \kl(symm){solutions} (areas).
+The main difference between \kl{graphs} and \kl(symm){solutions}, is that in the
+former formulas (\kl{ions}) are restricted to atoms (spots), and they are not
+\emph{\kl(bubble){polarized}} (see \refremark{eg-polarity}).
 
 The five rules of \kl{Alpha} can now be formalized as multiset \kl{rewriting rules}
 on \kl{graphs}. But first, we need a notion of \emph{context} in which rules
 apply:
 
 \begin{definition}[Context]
+  \AP
   A \intro{context} $G\hole$ is a \kl{graph} which contains exactly one
   occurrence of a special node written $\hole$, called its \reintro{hole}. The
   \kl{hole} can always be \emph{filled} (substituted) with any other \kl{graph}
@@ -550,26 +558,29 @@ apply:
 \end{definition}
 
 Then to reason by induction on \kl{contexts}, we need to define formally how to
-measure their \emph{depth}. It turns out the only way to increase the depth of
-an \kl{graph} is to insert \emph{\kl{cuts}}, and thus the depth of a
+measure their \emph{\kl{depth}}. It turns out the only way to increase the \kl{depth} of
+an \kl{graph} is to insert \emph{\kl{cuts}}, and thus the \kl{depth} of a
 \kl{context} coincides with its number of \emph{inversions}, i.e. the number of
 \kl{cuts} enclosing its \kl{hole}:
 
 \begin{definition}[Depth]
-  The \emph{depth} of a \kl{context} $G\hole$ is defined recursively by
+  \AP
+  The \intro{depth} $\intro*\sdepth{-}$ of \kl{contexts} is defined recursively
+  by:
   \begin{align*}
-    \gdepth{H, \hole} &= 0 \\
-    \gdepth{H, [G\hole]} &= \gdepth{G\hole} + 1
+    \sdepth{H, \hole} &= 0 \\
+    \sdepth{H, \acut{G\hole}} &= \sdepth{G\hole} + 1
   \end{align*}
 \end{definition}
 
 \begin{definition}[Inversions]\labdef{eg-inv}
 
   The number of \emph{inversions} of a \kl{context} $G\hole$ is defined by
-  $\inv(G\hole) = \gdepth{G\hole}$.
+  $\inv(G\hole) = \sdepth{G\hole}$.
 \end{definition}
 
 \begin{definition}[Polarity]
+  \AP
   \phantomintro{polarity}
   We say that a \kl{context} $G\hole$ is \intro{positive} if $\inv(G\hole)$ is
   even, and \intro{negative} otherwise. We denote \kl{positive} and \kl{negative} \kl{contexts}
@@ -588,16 +599,17 @@ reading: then they express the different ways in which one may choose to
 simplify a \kl{goal}.
 
 \begin{definition}[Derivation]
-  We write $G \step{} H$ to indicate a rewrite \emph{step} in \kl{Alpha}, that is
-  an instance of some rule from \reffig{alpha} with $H$ as premiss and $G$ as
-  conclusion. A \emph{derivation} $G \nsteps{n}{} H$ is a sequence of rewrite
-  steps $G_0 \step{} G_1 \ldots \step{} G_n$ with $G_0 = G$, $G_n = H$ and $n \geq
-  0$. Generally the length $n$ of the derivation does not matter, and we just
-  write $G \steps{} H$.
+  \AP
+  We write $G \intro*\step{} H$ to indicate a rewrite \emph{step} in \kl{Alpha},
+  that is an instance of some rule from \reffig{alpha} with $H$ as premiss and
+  $G$ as conclusion. A \emph{derivation} $G \reintro*\nsteps{n}{} H$ is a
+  sequence of rewrite steps $G_0 \step{} G_1 \ldots \step{} G_n$ with $G_0 = G$,
+  $G_n = H$ and $n \geq 0$. Generally the length $n$ of the derivation does not
+  matter, and we just write $G \reintro*\steps{} H$.
 \end{definition}
 
 \begin{definition}[Proof]\labdef{eg-proof}
-  A \emph{proof} of an \kl{graph} $G$ is a derivation $G \steps{} \emptyset$.
+  A \emph{proof} of a \kl{graph} $G$ is a derivation $G \steps{} \emptyset$.
 \end{definition}
 
 \begin{figure}
@@ -619,8 +631,8 @@ reasoning could be dissected, making his system extremely appropriate for
 
 \begin{quote}
   In the first place, the most perfectly analytical system of representing
-propositions must enable us to separate illative transformations into
-indecomposable parts. Hence, an illative transformation from any proposition, A,
+propositions must enable us to separate \kl{illative transformations} into
+indecomposable parts. Hence, an \kl{illative transformation} from any proposition, A,
 to any other, B, must in such a system consist in first transforming A into AB,
 followed by the transformation of AB into B. For an omission and an insertion
 appear to be indecomposable transformations and the only indecomposable
@@ -632,59 +644,61 @@ most elementary operations, when reflecting on the graphical presentation of
 \kl{BJ} at the end of \refsec{bubbles-graphical-rules}. In this setting, the
 most basic insertions and omissions we could find were not logically
 \emph{sound}, whereas in \kl{Alpha} they are. This is quite promising, and
-prompts us to reevalute our conception of \emph{illative atomicity}, understood
+prompts us to reevalute our conception of \intro{illative atomicity}, understood
 precisely as the definition of what it means for an inference step to be (the
 most) \emph{elementary}.
 
-Note that this should be distinguished from the notion of \emph{\kl{analyticity}}, as
-popularized by Gentzen with the \emph{\kl{subformula property}} in \kl{sequent
-calculus}: the latter is concerned with the analysis of \emph{propositions} into
-their constituents through \kl{inference rules}, while here we are interested in
-the analysis of the \kl{inference rules} themselves\sidenote{We will give a
-positive answer to the question of \kl{analyticity} in \kl{Alpha} at the end of
-\refsec{eg-completeness}.}. However there is a conceptual bottleneck, because
-\kl{inference rules} are usually conceived \emph{by definition} as the smallest
-constituents of proofs in a given \kl{proof system}; and it is very hard to
-formulate objective criteria for comparing rules in different \kl{proof
-systems}. Apart from Peirce, the only other logician we know of who attempted to
-give a non-trivial account of illative atomicity is J.-Y. Girard. In fact it can
-be argued that it is the principal motivation behind most of his works starting
-from linear logic, which became explicit in ludics with his slogan ``From the
-rules of logic to the logic of rules'' \cite{girard_locus_2001}.
+Note that this should be distinguished from the notion of
+\emph{\kl{analyticity}}, as popularized by Gentzen with the \emph{\kl{subformula
+property}} in \kl{sequent calculus}: the latter is concerned with the analysis
+of \emph{propositions} into their constituents through \kl{inference rules},
+while here we are interested in the analysis of the \kl{inference rules}
+themselves\sidenote{We will give a positive answer to the question of
+\kl{analyticity} in \kl{Alpha} at the end of \refsec{eg-completeness}.}. However
+there is a conceptual bottleneck, because \kl{inference rules} are usually
+conceived \emph{by definition} as the smallest constituents of proofs in a given
+\kl{proof system}; and it is very hard to formulate objective criteria for
+comparing rules in different \kl{proof systems}. Apart from Peirce, the only
+other logician we know of who attempted to give a non-trivial account of
+\kl{illative atomicity} is J.-Y. Girard. In fact it can be argued that it is the main
+motivation behind most of his works starting from linear logic, which became
+explicit in ludics with his slogan ``From the rules of logic to the logic of
+rules'' \sidecite{girard_locus_2001}.
 
 \paragraph{Linearity}
 
 There is an intriguing remark by Peirce in
 \cite[pp.~536--537]{peirce_prolegomena_1906} about the atomicity of the rules
-presented thus far, that seems to have gone unnoticed in the literature on \kl{EGs}.
-Indeed, Peirce argues that the principle of \kl{Double{-}cut} ``cannot be
-assumed as an undeduced Permission'' --- i.e. a primitive rule of the system,
-because the area inside the inner \kl{cut} becomes identified with the area outside
-the outer \kl{cut} when the double \kl{cut} is removed, which ``is not strictly an
-Insertion or a Deletion''. Another way to view this, is that it is the only
-\emph{linear} rule of the system, in the sense that the premiss and conclusion
-contain exactly the same atomic \kl{graphs}. Contrast this with linear logic, which
-instead takes linearity as the criterion for illative atomicity, as exemplified
-by the linear decomposition of implication $A \limp B \defeq \oc A \multimap B$.
-This might be the consequence of an opposite treatment given to \emph{negation}:
-while in \kl{EGs} it is the only primitive constructor of the system --- remember that
-the only way to increase the depth of a \kl{graph} is with a \kl{cut}, in LL negation is
-the only defined notion through De Morgan dualities. Thus \kl{EGs} are closer (at
-least syntactically) to \emph{\kl{type theories}}, which also take a negative
-operation (the arrow or dependent product \kl{type}) as their sole primitive
-construct.
+presented thus far, that seems to have gone unnoticed in the literature on
+\kl{EGs}. Indeed, Peirce argues that the principle of \kl{Double{-}cut} ``cannot
+be assumed as an undeduced Permission'' --- i.e. a primitive rule of the system
+--- because when the double-\kl{cut} is removed, the area inside the inner
+\kl{cut} becomes identified with the area outside the outer \kl{cut}, a
+transformation that ``is not strictly an Insertion or a Deletion''. Another way
+to interpret this, is that \kl{Double{-}cut} is the only \emph{linear} rule of
+the system, in the sense that the premiss and conclusion contain exactly the
+same atomic \kl{graphs}. Contrast this with linear logic, which instead takes
+linearity as the criterion for \kl{illative atomicity}, as exemplified by the linear
+decomposition of implication $A \limp B \defeq \oc A \multimap B$. This might be
+the consequence of an opposite treatment given to \emph{negation}: while in
+\kl{EGs} it is the only primitive constructor of the system --- remember that
+the only way to increase the \kl{depth} of a \kl{graph} is with a \kl{cut}, in
+\sys{LL} negation is the only defined notion through De Morgan dualities. Thus
+\kl{EGs} are closer (at least syntactically) to \emph{\kl{type theories}}, which
+also take a negative operation (the arrow or dependent product \kl{type}) as
+their sole primitive construct.
 
 \paragraph{Interactivity and Locativity}
 
 Peirce then suggests a ``more scientific way'', where the principle of
-\kl{Double{-}cut} is subsumed by a restricted variant of the principle of
-\kl{Iteration} and \kl{Deiteration}. His description of this ``more
-scientific'' (de)iteration principle is based on a relation of \emph{local
-justification} (our terminology) between two areas of a \kl{graph}, that captures the
-fact that the deeper occurrence of $G$ in the \kl{Iter} and \kl{Deit} rules
-(\reffig{alpha}) is justified by the other occurrence by virtue of their
-respective \emph{locations}. Later in the text, Peirce emphasizes the importance
-of this locative aspect of argumentation
+\kl{Double{-}cut} is subsumed by a restricted variant of the principles of
+\kl{Iteration} and \kl{Deiteration}. His description of this ``more scientific''
+\kl{(De)iteration} principle is based on a relation of \emph{local
+justification} (our terminology) between two areas of a \kl{graph}, that
+captures the fact that the deeper occurrence of $G$ in the \kl{Iter} and
+\kl{Deit} rules (\reffig{alpha}) is justified by the other occurrence by virtue
+of their respective \emph{locations}. Later in the text, Peirce emphasizes the
+importance of this locative aspect of argumentation
 \cite[pp.~544--545]{peirce_prolegomena_1906}:
 
 \begin{quote}
@@ -702,12 +716,12 @@ being lead to agree with the Graphist (Player), whenever the latter performs a
 transformation on the \kl{graph} under discussion. The soundness of such a
 transformation guarantees that this will work for \emph{any}
 Interpreter/Opponent, leading to what is known as a \emph{winning strategy} in
-game semantics. Since illative transformations only consist of Insertions and
-Deletions, whose validity depends solely on the positions where they occur in
-the \kl{graph}, it ensues that the components of an argumentation can be reduced to
-``motions'' (moves) that relate pure locations.
+game semantics. Since \kl{illative transformations} only consist of insertions
+and omissions, whose validity depends solely on the positions where they occur
+in the \kl{graph}, it ensues that the components of an argumentation can be
+reduced to ``motions'' (moves) that relate pure locations.
 
-It is then interesting to notice that the quest for illative atomicity, who led
+It is then interesting to notice that the quest for \kl{illative atomicity}, who led
 Peirce to discover these interactive and locative aspects of logic, also led
 Girard to identify these properties as fundamental, in his recent works on
 ludics \cite{girard_locus_2001} and transcendental syntax
@@ -728,15 +742,15 @@ their semantics.}.
 
 \paragraph{The more scientific way}
 
-Let us now go back to the modified (de)iteration principle proposed by Peirce.
-With our formalization of \kl{graphs} as multisets, we can give a more rigorous
-formulation than the original natural language description given by
-Peirce\sidenote{Although we limit ourselves to propositional logic in
-\kl{Alpha}, while in \cite{peirce_prolegomena_1906} Peirce also accounts for
-the lines of identity of \kl{Beta} handling \kl{predicate logic}, to be introduced
-in \refsec{beta}.}. In this setting, a location in a \kl{graph} is represented by the
-\kl{hole} of a \kl{context}, thus the relation of local justification between two areas is
-defined on \kl{contexts}:
+Let us now go back to the ``more scientific'' \kl{(De)iteration} principle
+proposed by Peirce. With our formalization of \kl{graphs} as multisets, we can
+give a more rigorous formulation than the original natural language description
+given by Peirce\sidenote{Although we limit ourselves to propositional logic in
+\kl{Alpha}, while in \cite{peirce_prolegomena_1906} Peirce also accounts for the
+\kl{lines of identity} of \kl{Beta} handling \kl{predicate logic}, to be
+introduced in \refsec{beta}.}. In this setting, a location in a \kl{graph} is
+represented by the \kl{hole} of a \kl{context}, thus the relation of local
+justification between two areas is defined on \kl{contexts}:
 
 \begin{marginfigure}
   \input{figures/eg-local-justification.tex}
@@ -754,11 +768,11 @@ defined on \kl{contexts}:
   \cfill{K}{H_0\hole}$:
   \begin{enumerate}
     \item $G_0\hole = H_0\hole = K_0, \hole$ for some $K_0$;
-    \item $G_0\hole = K_0, [K_1], \hole$ and $H_0\hole = K_0, [K_1, \hole]$ for
+    \item $G_0\hole = K_0, \acut{K_1}, \hole$ and $H_0\hole = K_0, \acut{K_1, \hole}$ for
     some $K_0, K_1$;
-    \item $G_0\hole = K_0, [K_1, [K_2]], \hole$ and $H_0\hole = K_0, [K_1, [K_2,
+    \item $G_0\hole = K_0, \acut{K_1, \acut{K_2}}, \hole$ and $H_0\hole = K_0, [K_1, [K_2,
     \hole]]$ for some $K_0, K_1, K_2$;
-    \item $G_0\hole = K_0, [[K_1, \hole]]$ and $H_0\hole = K_0, \hole, [[K_1]]$
+    \item $G_0\hole = K_0, \acut{\acut{K_1, \hole}}$ and $H_0\hole = K_0, \hole, \acut{\acut{K_1}}$
     for some $K_0, K_1$.
   \end{enumerate}
 \end{definition}
@@ -769,29 +783,31 @@ defined on \kl{contexts}:
   \labfig{eg-atomic-alpha}
 \end{figure}
 
+\AP
 These four conditions are exactly the formal counterpart of those given by
 Peirce in \cite{peirce_prolegomena_1906}. They might be more easily understood
 by looking at their graphical representation in \reffig{eg-local-justification}:
 the red and blue dots denote respectively the locations of the \kl{holes} in the
-justified \kl{context} $H\hole$ and justifying \kl{context} $G\hole$, as suggested by the
-arrow between them. In particular, it becomes clear that it is Condition 4 that
-will account for the principle of \kl{Double{-}cut}. Then the new rules of
-iteration \kl{Iter{+}}, \kl{Iter{-}} and deiteration \kl{Deit{+}},
-\kl{Deit{-}} are given in the so-called \emph{atomic} variant \kl{Alpha^a} of
-\kl{Alpha} in \reffig{eg-atomic-alpha}, which now only comprises rules that
-truly are insertions and omissions of \emph{arbitrary} \kl{graphs}\sidenote{The
-terminology ``atomic'' might be a bit confusing: here we think of
-\emph{illative} atomicity in Peirce's sense, not the fact that the \kl{graphs}
-manipulated by rules are atomic, which might be termed \emph{structural}
-atomicity. There seems to be a symmetric tradeoff when comparing \kl{EGs} to the
-\kl{calculus of structures}: in the former, one maximizes illative atomicity by
-minimizing linearity and structural atomicity; while in the latter, one
-maximizes structural atomicity and linearity by minimizing illative atomicity.
-This will become explicit in \refsec{eg-completeness}, when simulating the
-\kl{calculus of structures} \kl{SKS} in \kl{Alpha}.}. The atomic (de)iteration
-rules are a restriction of the original ones in two respects:
+justified \kl{context} $H\hole$ and justifying \kl{context} $G\hole$, as
+suggested by the arrow between them. In particular, it becomes clear that it is
+Condition 4 that will account for the principle of \kl{Double{-}cut}. Then the
+new rules of iteration \kl{Iter{+}}, \kl{Iter{-}} and deiteration \kl{Deit{+}},
+\kl{Deit{-}} are given in a so-called \emph{atomic} variant of \kl{Alpha}, that
+we name \intro{Alpha^a} in \reffig{eg-atomic-alpha}. As promised, \kl{Alpha^a}
+only comprises rules that truly are insertions and omissions of \emph{arbitrary}
+\kl{graphs}\sidenote{The terminology ``atomic'' might be a bit confusing: here
+we think of \emph{illative} atomicity in Peirce's sense, not the fact that the
+\kl{graphs} manipulated by rules are atomic, which might be termed
+\emph{structural} atomicity. There seems to be a symmetric tradeoff when
+comparing \kl{EGs} to the \kl{calculus of structures}: in the former, one
+maximizes \kl{illative atomicity} by minimizing linearity and structural atomicity;
+while in the latter, one maximizes structural atomicity and linearity by
+minimizing \kl{illative atomicity}. This will become explicit in
+\refsec{eg-completeness}, when simulating the \kl{calculus of structures}
+\kl{SKS} in \kl{Alpha}.}. The atomic (de)iteration rules are a restriction of
+the original ones in two respects:
 \begin{description}
-  \item[Locality] Following \refdef{eg-local-justification}, the depth of the
+  \item[Locality] Following \refdef{eg-local-justification}, the \kl{depth} of the
   justified \kl{context} $H_T\hole$ can be at most $2$ in the atomic rules, while it
   is unbounded in the original rules. This does not hinder their expressivity
   however: global (de)iterations can be simulated by successive applications of
@@ -803,20 +819,21 @@ rules are a restriction of the original ones in two respects:
   from \cite{minghui_graphical_2019}, where the authors define the same notion
   informally for an \kl{intuitionistic} variant of \kl{EGs}.}.
   \item[Polarity] In the atomic iteration (resp. deiteration) rules, the
-  justified \kl{context} must be \kl{positive} (resp. \kl{negative}), while it can have an
-  arbitrary \kl{polarity} in the original rules. This is expressed by splitting each
-  of the latter into two rules, one where the outer \kl{context} $K\hole$ is \kl{positive}
-  ($\kl{Iter{+}},\kl{Deit{+}}$), and one where it is \kl{negative}
-  ($\kl{Iter{-}},\kl{Deit{-}}$). Again, this does not alter their deductive
-  power: every iteration (resp. deiteration) in a \kl{negative} (resp. \kl{positive})
-  \kl{context} can be trivially performed by an instance of the \kl{Ins} (resp.
-  \kl{Del}) rule. Thus atomic rules eliminate a redundancy of \kl{Alpha},
-  where many insertions/omissions could be interpreted as instances of either
-  \kl{Iter/Deit} or \kl{Ins/Del}. They also eliminate the possibility for a
-  conclusion to justify a hypothesis, as remarked in \refsec{illative} when
-  commenting on the principle of \kl{Iteration}, making them closer to the
-  rules of \kl{sequent calculus}\sidenote{We suspect however that the more general
-  (de)iteration rules are still relevant from a computational point of view.}.
+  justified \kl{context} must be \kl{positive} (resp. \kl{negative}), while it
+  can have an arbitrary \kl{polarity} in the original rules. This is expressed
+  by splitting each of the latter into two rules, one where the outer
+  \kl{context} $K\hole$ is \kl{positive} ($\kl{Iter{+}},\kl{Deit{+}}$), and one
+  where it is \kl{negative} ($\kl{Iter{-}},\kl{Deit{-}}$). Again, this does not
+  alter their deductive power: every iteration (resp. deiteration) in a
+  \kl{negative} (resp. \kl{positive}) \kl{context} can be trivially performed by
+  an instance of the \kl{Ins} (resp. \kl{Del}) rule. Thus atomic rules eliminate
+  a redundancy of \kl{Alpha}, where many insertions/omissions could be
+  interpreted as instances of either \kl{Iter}/\kl{Deit} or \kl{Ins}/\kl{Del}.
+  They also eliminate the possibility for a conclusion to justify a hypothesis,
+  as remarked in \refsec{illative} when commenting on the principle of
+  \kl{Iteration}, making them closer to the rules of \kl{sequent
+  calculus}\sidenote{We suspect however that the more general (de)iteration
+  rules are still relevant from a computational point of view.}.
 \end{description}
 
 In the rest of this chapter, we settle on the more standard system \kl{Alpha},
@@ -827,22 +844,23 @@ is, which is the object of the following two sections.
 
 \section{Soundness}\labsec{eg-soundness}
 
+\AP
 We are now going to prove formally the \emph{soundness} of each rule of
 \kl{Alpha}, by showing that if $G \step{} H$ and $H$ is \emph{true}, then so is
-$G$. In \kl{classical} propositional logic, one can easily evaluate the truth of any
-formula $A$, given a truth-valuation $v : \atoms \to \{0,1\}$ for the atoms of
-$A$. The same applies to \kl{graphs}:
+$G$. In \kl{classical} propositional logic, one can easily evaluate the truth of
+any formula $A$, given a \intro[valuation]{truth-valuation} $v : \atoms \to
+\{0,1\}$ for the atoms of $A$. The same applies to \kl{graphs}:
 
 \begin{definition}[Evaluation]
 
-  Given a valuation $v : \atoms \to \{0,1\}$ and a \kl{graph} $G$, the
+  Given a \kl{valuation} $v : \atoms \to \{0,1\}$ and a \kl{graph} $G$, the
   \emph{evaluation} $v(G)$ of G is defined by mutual recursion as follows:
   \begin{align*}
     v(G) &= \begin{cases}
       1 &\text{if $G = \emptyset$} \\
       \min_{g \in G}{v(g)} &\text{otherwise}
     \end{cases} \\
-    v([G]) &= 1 - v(G)
+    v(\acut{G}) &= 1 - v(G)
   \end{align*}
 \end{definition}
 
@@ -850,14 +868,14 @@ This follows the standard way to evaluate conjunctions and negations.
 
 To factorize the proof of soundness, we first prove a few lemmas for the
 \emph{\kl{invertible}} rules of \kl{Alpha}, that is those who satisfy $v(G) = v(H)$
-for every valuation $v$ if $G \step{} H$.
+for every \kl{valuation} $v$ if $G \step{} H$.
 
 \begin{lemma}[Iteration]\lablemma{eg-iteration}
-  For every \kl{graph} $G$, \kl{context} $H\hole$ and valuation $v$, we have
+  For every \kl{graph} $G$, \kl{context} $H\hole$ and \kl{valuation} $v$, we have
   $$v\left(G, H\select{\phantom{G}}\right) = v\left(G, H\select{G}\right)$$
 \end{lemma}
 \begin{proof}
-  By induction on $\gdepth{H\hole}$.
+  By induction on $\sdepth{H\hole}$.
 
   \def\arraystretch{1.5}
   \begin{itemize}
@@ -872,30 +890,30 @@ for every valuation $v$ if $G \step{} H$.
       \end{array}
       $$
     \item[\rcase]
-      Suppose $H = H', [H_0\hole]$. Then we have
+      Suppose $H = H', \acut{H_0\hole}$. Then we have
       $$
       \begin{array}{rcll}
-        v\left(G, H', \left[H_0\select{\phantom{G}}\right]\right)
-        &=& \min\left(v(H'), v\left(G, \left[H_0\select{\phantom{G}}\right]\right)\right) & \\
-        &=& \min\left(v(H'), v\left(G, \left[H_0\select{G}\right]\right)\right) &\text{(IH)} \\
-        &=& v\left(G, H', \left[H_0\select{G}\right]\right) & \\
+        v\left(G, H', \acut{H_0\select{\phantom{G}}}\right)
+        &=& \min\left(v(H'), v\left(G, \acut{H_0\select{\phantom{G}}}\right)\right) & \\
+        &=& \min\left(v(H'), v\left(G, \acut{H_0\select{G}}\right)\right) &\text{(IH)} \\
+        &=& v\left(G, H', \acut{H_0\select{G}}\right) & \\
       \end{array}
       $$
   \end{itemize}
 \end{proof}
 
 \begin{lemma}[Double-cut]\lablemma{eg-doublecut}
-  For every \kl{graph} $G$ and valuation $v$, we have
-  $$v([[G]]) = v(G)$$
+  For every \kl{graph} $G$ and \kl{valuation} $v$, we have
+  $$v(\acut{\acut{G}}) = v(G)$$
 \end{lemma}
 \begin{proof}
   $$
-  v([[G]]) = 1 - (1 - v(G)) = \begin{cases}
+  v(\acut{\acut{G}}) = 1 - (1 - v(G)) = \begin{cases}
     1 - (1 - 0) = 0 &\text{if $v(G) = 0$} \\
     1 - (1 - 1) = 1 &\text{if $v(G) = 1$}
   \end{cases}
   $$
-  In both cases we have $v([[G]]) = v(G)$.
+  In both cases we have $v(\acut{\acut{G}}) = v(G)$.
 \end{proof}
 
 Since all rules apply in an arbitrary deep \kl{context} $K\hole$, we will benefit
@@ -913,7 +931,7 @@ from the following \emph{functoriality} lemmas:
 
 \begin{lemma}[Variance]\lablemma{eg-variance}
   
-  For every \kl{context} $K\hole$, \kl{graphs} $G, H$ and valuation $v$ such that $v(G)
+  For every \kl{context} $K\hole$, \kl{graphs} $G, H$ and \kl{valuation} $v$ such that $v(G)
   \leq v(H)$, we have:
   \begin{enumerate}
     \item $v\left(K\select{G}\right) \leq v\left(K\select{H}\right)$ if $K\hole$
@@ -923,11 +941,11 @@ from the following \emph{functoriality} lemmas:
   \end{enumerate}
 \end{lemma}
 \begin{proof}
-  By induction on $\gdepth{K\hole}$.
+  By induction on $\sdepth{K\hole}$.
 
   \def\arraystretch{1.5}
   \begin{itemize}
-    \item[\bcase~($\gdepth{K\hole} = 0$)]\sbr
+    \item[\bcase~($\sdepth{K\hole} = 0$)]\sbr
       \begin{enumerate}
         \item Suppose $K\hole = K', \hole$. Then we have
         $$
@@ -939,32 +957,32 @@ from the following \emph{functoriality} lemmas:
         \end{array}
         $$
 
-        \item We have $\gdepth{K\hole} > 0$ since $K\hole$ is \kl{negative}.
+        \item We have $\sdepth{K\hole} > 0$ since $K\hole$ is \kl{negative}.
         Contradiction.
       \end{enumerate}
-    \item[\rcase~($\gdepth{K\hole} > 0$)]\sbr
+    \item[\rcase~($\sdepth{K\hole} > 0$)]\sbr
       \begin{enumerate}
-        \item Suppose $K\hole = K', \left[K_0^-\hole\right]$. Then by IH we have
+        \item Suppose $K\hole = K', \acut{K_0^-\hole}$. Then by IH we have
         $v\left(K_0^-\select{H}\right) \leq v\left(K_0^-\select{G}\right)$, and thus
         $1 - v\left(K_0^-\select{G}\right) \leq 1 - v\left(K_0^-\select{H}\right)$. Therefore
         $$
         \begin{array}{rcll}
-          v\left(K', \left[K_0^-\select{G}\right]\right)
+          v\left(K', \acut{K_0^-\select{G}}\right)
           &=& \min\left(v\left(K'\right), 1 - v\left(K_0^-\select{G}\right)\right) & \\
           &\leq& \min\left(v\left(K'\right), 1 - v\left(K_0^-\select{H}\right)\right) & \\
-          &=& v\left(K', \left[K_0^-\select{H}\right]\right) &
+          &=& v\left(K', \acut{K_0^-\select{H}}\right) &
         \end{array}
         $$
 
-        \item Suppose $K\hole = K', \left[K_0^+\hole\right]$. Then by IH we have
+        \item Suppose $K\hole = K', \acut{K_0^+\hole}$. Then by IH we have
         $v\left(K_0^+\select{G}\right) \leq v\left(K_0^+\select{H}\right)$, and thus
         $1 - v\left(K_0^+\select{H}\right) \leq 1 - v\left(K_0^+\select{G}\right)$. Therefore
         $$
         \begin{array}{rcll}
-          v\left(K', \left[K_0^+\select{H}\right]\right)
+          v\left(K', \acut{K_0^+\select{H}}\right)
           &=& \min\left(v\left(K'\right), 1 - v\left(K_0^+\select{H}\right)\right) & \\
           &\leq& \min\left(v\left(K'\right), 1 - v\left(K_0^+\select{G}\right)\right) & \\
-          &=& v\left(K', \left[K_0^+\select{G}\right]\right) &
+          &=& v\left(K', \acut{K_0^+\select{G}}\right) &
         \end{array}
         $$
       \end{enumerate}
@@ -976,7 +994,7 @@ from the following \emph{functoriality} lemmas:
 \end{corollary}
 
 \begin{theorem}[Soundness]
-  If $G \step{} H$, then $v(H) \leq v(G)$ for every valuation $v$.
+  If $G \step{} H$, then $v(H) \leq v(G)$ for every \kl{valuation} $v$.
 \end{theorem}
 \begin{proof}
   By inspection of each rule.
@@ -986,7 +1004,7 @@ from the following \emph{functoriality} lemmas:
     \reflemma{eg-iteration} and functoriality.
 
     \item[\kl{Dcut{\da}}, \kl{Dcut{\ua}}] We have
-    $v\left(K\select{G}\right) = v\left(K\select{[[G]]}\right)$ by
+    $v\left(K\select{G}\right) = v\left(K\select{\acut{\acut{G}}}\right)$ by
     \reflemma{eg-doublecut} and functoriality.
 
     \item[\kl{Ins}, \kl{Del}] This follows from the fact that $v(G) \leq 1 =
@@ -996,22 +1014,24 @@ from the following \emph{functoriality} lemmas:
 
 \section{Completeness}\labsec{eg-completeness}
 
-To show the completeness of \kl{Alpha}, it is standard in the literature on \kl{EGs}
-to simulate an existing \kl{proof system} for \kl{classical} propositional logic, that is
-itself known to be complete. For instance in \cite{Roberts+1973}, completeness
-is shown by simulating the Hilbert-style system \kl{P} of Church, which only
-comprises 3 \kl{axioms} for the (functionally complete) fragment $\{\limp, \neg\}$.
-We propose in this section a proof by simulation of a \emph{\kl{deep inference}}
-system, more specifically the \kl{calculus of structures} \kl{SKS} first introduced
-in \sidecite{brunnler_local_2001}. This should provide a good overview of the
+\AP
+To show the completeness of \kl{Alpha}, it is standard in the literature on
+\kl{EGs} to simulate an existing \kl{proof system} for \kl{classical}
+propositional logic, that is itself known to be complete. For instance in
+\cite{Roberts+1973}, completeness is shown by simulating the Hilbert-style
+system \sys{P} of Church, which only comprises 3 \kl{axioms} for the
+(functionally complete) fragment $\{\limp, \neg\}$. We propose in this section a
+proof by simulation of a \emph{\kl{deep inference}} system, more specifically
+the \kl{calculus of structures} \intro{SKS} first introduced in
+\sidecite{brunnler_local_2001}. This should provide a good overview of the
 similarities and differences between the two systems, and in particular of how
-they exemplify two distinct approaches to \emph{symmetry} in a \kl{deep inference}
-setting.
+they exemplify two distinct approaches to \emph{symmetry} in a \kl{deep
+inference} setting.
 
 \begin{kaonote}
   This section was written without being aware of the work of Ma and Pietarinen
   in \sidecite{ma_proof_2017}, where they give a simulation of the calculus of
-  structures \kl{SKSg} in \kl{Alpha}, and also conversely a simulation of
+  structures \intro{SKSg} in \kl{Alpha}, and also conversely a simulation of
   \kl{Alpha} in \kl{SKSg}. While they do a similar comparison of features
   between the two systems, in particular concerning their treatment of symmetry
   and \kl{polarity}, our work differs mainly in two respects:
@@ -1023,9 +1043,9 @@ setting.
     section that \kl{Alpha} is \emph{\kl{analytic}}. Ma and Pietarinen discuss
     this question very quickly in their paper, by affirming that \kl{Alpha} is
     analytic both in the sense of Gentzen because it can simulate the \kl{cut}
-    rule, and in the sense of \emph{illative atomicity} discussed in
+    rule, and in the sense of \emph{\kl{illative atomicity}} discussed in
     \refsec{atomicity}. We disagree with the first claim, and use our simulation
-    to show \kl{analyticity} in the stronger sense of satisfying a form of
+    to show \kl{analyticity} in the proper sense of satisfying a form of
     \kl{\kl{subformula property}}.
   \end{description}
 \end{kaonote}
@@ -1033,20 +1053,20 @@ setting.
 \paragraph{Structures}
 
 As the name indicates, the objects manipulated by \kl{inference rules} in \kl{calculi of
-structures} are so-called \emph{structures}. In the case of \kl{SKS}, they
+structures} are so-called \emph{\kl{structures}}. In the case of \kl{SKS}, they
 correspond to formulas in \emph{negation normal form} built from atoms and units
 $\{\top, \bot\}$, i.e. where connectives are restricted to the fragment
 $\{\land, \lor\}$, and negation is pushed to atoms by relying on De Morgan's
 laws.
 
 \begin{definition}[Structure]
-  The \emph{structures} of \kl{SKS} are generated by the following grammar:
+  The \intro{structures} of \kl{SKS} are generated by the following grammar:
   $$S, T, U, V, W \Coloneq a \mid \dmdual{a} \mid \top \mid \bot \mid S \land T
   \mid S \lor T$$
 \end{definition}
 
 \begin{definition}[De Morgan dual]
-  The \emph{De Morgan dual} of a structure $S$ is defined recursively as
+  The \emph{De Morgan dual} of a \kl{structure} $S$ is defined recursively as
   follows:
   \begin{align*}
     \dmdual{a} &= \dmdual{a} & \dmdual{\dmdual{a}} &= a \\
@@ -1055,7 +1075,7 @@ laws.
   \end{align*}
 \end{definition}
 
-It is customary in \kl{CoS} to further quotient the set of structures with additional
+It is customary in \kl{CoS} to further quotient the set of \kl{structures} with additional
 equations between them, which account for various algebraic properties of
 connectives such as associativity, commutativity and unitality. Here we will
 rely instead on the formulation of \kl{SKS} given by Tubella and Straßburger in
@@ -1071,22 +1091,22 @@ as explicit rules.
 \paragraph{Rules}
 
 The full set of rules of \kl{SKS} is given in \reffig{sks}. All rules are
-implicitly applicable in any \emph{\kl{context}} $W\hole$ of arbitrary depth, with
-the usual notion of \kl{context} as a structure with a \kl{hole}.
+implicitly applicable in any \emph{\kl(sks){context}} $W\hole$ of arbitrary \kl{depth}, with
+the usual notion of \intro(sks){context} as a \kl{structure} with a \kl{hole}.
 
 \begin{definition}[Depth]
-  The \emph{depth} $\gdepth{S}$ of a structure \kl{context} $S\hole$ is defined
-  recursively as follows:
+  The \reintro{depth} $\sdepth{S\hole}$ of a \kl(sks){context} $S\hole$ is
+  defined recursively as follows:
   \begin{align*}
-    \gdepth{\hole} &= 0 \\
-    \gdepth{S\hole \land T} = \gdepth{T \land S\hole} = \gdepth{S\hole \lor T} = \gdepth{T \lor S\hole} &= \gdepth{S\hole} + 1
+    \sdepth{\hole} &= 0 \\
+    \sdepth{S\hole \land T} = \sdepth{T \land S\hole} = \sdepth{S\hole \lor T} = \sdepth{T \lor S\hole} &= \sdepth{S\hole} + 1
   \end{align*}
 \end{definition}
 
 \begin{remark}\labremark{sks-ctx-pol}
-  \kl{Contexts} for structures are always \emph{\kl{positive}}, since negation is pushed
+  \kl(sks){Contexts} for \kl{structures} are always \emph{\kl{positive}}, since negation is pushed
 down to atoms. This is the opposite situation from that of \kl{Alpha}, where
-negation is the \emph{only} construct that can increase the depth of a \kl{graph}.
+negation is the \emph{only} construct that can increase the \kl{depth} of a \kl{graph}.
 This explains why some rules in \kl{Alpha} need explicit indications for the
 \kl{polarity} of the \kl{context} in which they apply.
 \end{remark}
@@ -1094,19 +1114,19 @@ This explains why some rules in \kl{Alpha} need explicit indications for the
 The rules of \kl{SKS} satisfy two notable properties:
 \begin{description}
   \item[Symmetry] 
-    Every rule $\mathsf{r}$ has a \emph{dual} rule $\dmdual{\mathsf{r}} :
-    U\select{S} \xstep{\mathsf{r}} U\select{T}$ if and only if
+    Every rule $\mathsf{r}$ has a \emph{dual} rule $\dmdual{\mathsf{r}}$, that
+    is $U\select{S} \xstep{\mathsf{r}} U\select{T}$ if and only if
     $U\select{\dmdual{T}} \xstep{\dmdual{\mathsf{r}}} U\select{\dmdual{S}}$. For
     rules whose name ends with $\da$, the dual is the rule with the same name
     ending with $\ua$. This corresponds to all rules except the \emph{switch}
     rule \kl{s} and the \emph{medial} rule \kl{m} which are self-dual, i.e.
     $\dmdual{\kl{s}} = \kl{s}$ and $\dmdual{\kl{m}} = \kl{m}$. In \kl{Alpha},
-    duality is captured in the \emph{\kl{polarity}} of \kl{contexts} rather than through
-    De Morgan's laws:
+    duality is captured in the \emph{\kl{polarity}} of \kl{contexts} rather than
+    through De Morgan's laws:
     
     \begin{fact}[Duality]\labfact{eg-duality}
-      $K^+\select{G} \xstep{\kl{r}} K^+\select{H}$
-      if and only if $K^-\select{H} \xstep{\kl{\dmdual{r}}} K^-\select{G}$, where
+      $K^+\select{G} \xstep{\mathsf{r}} K^+\select{H}$
+      if and only if $K^-\select{H} \xstep{\mathsf{\dmdual{r}}} K^-\select{G}$, where
       \begin{align*}
         \dmdual{\kl{Iter}} &= \kl{Deit} & \dmdual{\kl{Deit}} &= \kl{Iter} \\
         \dmdual{\kl{Ins}} &= \kl{Del} & \dmdual{\kl{Del}} &= \kl{Ins} \\
@@ -1116,30 +1136,31 @@ The rules of \kl{SKS} satisfy two notable properties:
 
     \begin{remark}\labremark{eg-intuitionism}
       
-    Contrary to De Morgan duality, the notion of \kl{polarity} of a \kl{context} also
-    exists in \kl{intuitionistic} logic, and is in fact used in the same way to
-    obtain dual rules in the \kl{intuitionistic} \kl{calculus of structures} \kl{SISa} of
-    Tiu \cite{tiu_local_2006}. This constitutes one more argument in favor of
-    the view defended by Ma and Pietarinen in \sidecite{minghui_graphical_2019},
-    that Peirce had a \emph{pre-intuitionistic} conception of negation. It also
-    echoes our observation in \refremark{eg-entitative}, that the choice of
-    negation and conjunction as primitives is to be connected with the eminently
-    constructive works of Girard and Melliès, in particular the non-involutive
-    tensorial negation of the latter. The issue of finding seeds of intuitionism
-    in Peirce's work will be discussed more in depth in \refsec{Flowers}.
+    Contrary to De Morgan duality, the notion of \kl{polarity} of a \kl{context}
+    also exists in \kl{intuitionistic} logic, and is in fact used in the same
+    way to obtain dual rules in the \kl{intuitionistic} \kl{calculus of
+    structures} \sys{SISa} of Tiu \cite{tiu_local_2006}. This constitutes one
+    more argument in favor of the view defended by Ma and Pietarinen in
+    \sidecite{minghui_graphical_2019}, that Peirce had a
+    \emph{pre-intuitionistic} conception of negation. It also echoes our
+    observation in \refremark{eg-entitative}, that the choice of negation and
+    conjunction as primitives is to be connected with the eminently constructive
+    works of Girard and Melliès, in particular the non-involutive tensorial
+    negation of the latter. The issue of finding seeds of intuitionism in
+    Peirce's work will be discussed more in depth in \refsec{Flowers}.
     \end{remark}
 
   \item[Locality]
     Every rule is \emph{local}, in the sense that it does not require the
     inspection of expressions of arbitrary size (Definition 2.1.1 in
     \cite{tubella:hal-02390267}). This is almost the opposite in \kl{Alpha}: to
-    the exception of the rules of double-\kl{cut} (which are best seen as a
-    structural equivalence like those of \kl{CoS}), all rules depend heavily on the
-    creation, duplication or deletion of \kl{subgraphs} of arbitrary size. This is
-    exemplified by the derivation of Peirce's law in \reffig{eg-peirce-law},
-    where not a single rule is instantiated on atoms. In fact it is quite hard
-    to see how to build a derivation of Peirce's law that performs only local
-    transformations.
+    the exception of the rules \kl{Dcut{\da}} and \kl{Dcut{\ua}} (which are best
+    seen as a structural equivalence like those of \kl{CoS}), all rules depend
+    heavily on the creation, duplication or deletion of \kl{subgraphs} of
+    arbitrary size. This is exemplified by the derivation of Peirce's law in
+    \reffig{eg-peirce-law}, where not a single rule is instantiated on atoms. In
+    fact it is quite hard to see how to build a derivation of Peirce's law that
+    performs only local transformations.
     
     In light of this, it becomes surprising that we \emph{will} be able to
     simulate \kl{SKS} in \kl{Alpha}. Indeed, it means that there is a set
@@ -1152,44 +1173,44 @@ The rules of \kl{SKS} satisfy two notable properties:
 
 \paragraph{Translation}
 
-To formulate the simulation, we need to translate the structures of \kl{SKS}
+To formulate the simulation, we need to translate the \kl{structures} of \kl{SKS}
 into equivalent \kl{graphs}. This is easily done by exploiting the
 functional completeness of $\{\land, \neg\}$ (see \refsec{alpha}):
 
 \begin{definition}[Structure translation]
-  The \emph{translation} $\strans{S}$ of a structure $S$ as an \kl{graph} is
+  The \emph{translation} $\intro*\strans{S}$ of a \kl{structure} $S$ as a \kl{graph} is
   defined recursively as follows:
   \begin{align*}
-    \strans{a} &= a & \strans{\dmdual{a}} &= [a] \\
-    \strans{\top} &= \emptyset & \strans{\bot} &= [] \\
-    \strans{(S \land T)} &= \strans{S}, \strans{T} & \strans{(S \lor T)} &= [[\strans{S}], [\strans{T}]]
+    \strans{a} &= a & \strans{\dmdual{a}} &= \acut{a} \\
+    \strans{\top} &= \emptyset & \strans{\bot} &= \acut{} \\
+    \strans{(S \land T)} &= \strans{S}, \strans{T} & \strans{(S \lor T)} &= \acut{\acut{\strans{S}}, \acut{\strans{T}}}
   \end{align*}
 \end{definition}
 
-As per \refremark{sks-ctx-pol}, the translation of a structure \kl{context} (where
+As per \refremark{sks-ctx-pol}, the translation of a \kl{structure} \kl(sks){context} (where
 the \kl{hole} is translated as itself) will always be \kl{positive}:
 
 \begin{fact}\labfact{strans-pos}
-  For every \kl{context} $S\hole$, $\strans{S\hole}$ is \kl{positive}.
+  For every \kl(sks){context} $S\hole$, $\strans{S\hole}$ is \kl{positive}.
 \end{fact}
 \begin{proof}
-  By a straightforward induction on $\gdepth{S\hole}$.
+  By a straightforward induction on $\sdepth{S\hole}$.
 \end{proof}
 
 \paragraph{Completeness}
 
-It is easy to show that a structure and its translation as a \kl{graph} are
-semantically equivalent, i.e. $v(S) = v(\strans{S})$ for any valuation $v$. Thus
+It is easy to show that a \kl{structure} and its translation as a \kl{graph} are
+semantically equivalent, i.e. $v(S) = v(\strans{S})$ for any \kl{valuation} $v$. Thus
 to get the completeness of \kl{Alpha}, it is sufficient to simulate the
 translation of each rule of \kl{SKS}. But first, we need to ensure that
 \kl{Alpha} satisfies a property of \emph{contextual closure}: this will allow
-us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
+us to ignore the implicit \kl(sks){context} $W\hole$ in the rules of \reffig{sks}.
 
 \begin{lemma}[Positive closure]\lablemma{eg-posclos}
   If $G \step{} H$, then $K^+\select{G} \step{} K^+\select{H}$.
 \end{lemma}
 \begin{proof}
-  Since all rules of \kl{Alpha} apply in a \kl{context} of unbounded depth, we know
+  Since all rules of \kl{Alpha} apply in a \kl{context} of unbounded \kl{depth}, we know
   that there are some \kl{graphs} $G_0, H_0$ and \kl{context} $K'\hole$ such that $G =
   K'\select{G_0}$ and $H = K'\select{H_0}$. Then either $K'\hole$ is \kl{positive},
   and $\inv(K^+\select{K'\hole}) = \inv(K^+\hole) + \inv(K'\hole)$ is even since
@@ -1228,7 +1249,7 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
   We start with the identity rules $\{\kl{i{\da}},\kl{i{\ua}}\}$:
   $$
   \begin{array}{r@{\mt}l@{\qquad\qquad}r@{\mt}l@{\vsp}}
-    \R[\kl{i{\da}}]
+    \R[\kl{ai{\da}}]
       {\top}
       {a \lor \dmdual{a}}
     &
@@ -1237,10 +1258,10 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
     {\R[\kl{Ins}]
     {\R[\kl{Dcut{\da}}]
     {}
-    {[[\dcut{\phantom{\!!\!}}]]}}
-    {[[], \ins{a}]}}
-    {[[\itdst{a}], \itsrc{a}]}}
-    {[[a], [[\dcut{a}]]]}
+    {\acut{\acut{\dcut{\phantom{\!!\!}}}}}}
+    {\acut{\acut{}, \ins{a}}}}
+    {\acut{\acut{\itdst{a}}, \itsrc{a}}}}
+    {\acut{\acut{a}, \acut{\acut{\dcut{a}}}}}
     &
     \R[\kl{ai{\ua}}]
       {a \land \dmdual{a}}
@@ -1248,9 +1269,9 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
     &
     \R[\kl{Del}]
     {\R[\kl{Deit}]
-    {a, [a]}
-    {\itsrc{a}, [\itdst{\phantom{a}}]}}
-    {\ins{\phantom{a}}[]}
+    {a, \acut{a}}
+    {\itsrc{a}, \acut{\itdst{\phantom{a}}}}}
+    {\ins{\phantom{a}}\acut{}}
     \\
   \end{array}
   $$
@@ -1266,8 +1287,8 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
     &
     \R[\kl{Dcut{\ua}}]
     {\R[\kl{Ins}]
-    {[]}
-    {[\ins{[a]}]}}
+    {\acut{}}
+    {\acut{\ins{\acut{a}}}}}
     {\dcut{a}}
     &
     \R[\kl{aw{\ua}}]
@@ -1284,8 +1305,8 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
     &
     \R[\kl{Dcut{\ua}}]
     {\R[\kl{Deit}]
-    {[[a],[a]]}
-    {[\itsrc{[a]}\itdst{\phantom{[a]}}]}}
+    {\acut{\acut{a},\acut{a}}}
+    {\acut{\itsrc{\acut{a}}\itdst{\phantom{\acut{a}}}}}}
     {\dcut{a}}
     &
     \R[\kl{ac{\ua}}]
@@ -1301,8 +1322,8 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
       {\bot \land \bot}
     &
     \R[\kl{Iter}]
-    {[]}
-    {\itsrc{[]},\itdst{[]}}
+    {\acut{}}
+    {\itsrc{\acut{}},\itdst{\acut{}}}
     &
     \R[\kl{nm{\ua}}]
       {\top \lor \top}
@@ -1310,8 +1331,8 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
     &
     \R[\kl{Dcut{\ua}}]
     {\R[\kl{Deit}]
-    {[[],[]]}
-    {[\itsrc{[]}\itdst{\phantom{[]}}]}}
+    {\acut{\acut{},\acut{}}}
+    {\acut{\itsrc{\acut{}}\itdst{\phantom{\acut{}}}}}}
     {\dcut{\phantom{\!!\!}}}
     \\
   \end{array}
@@ -1327,23 +1348,23 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
     {\R[\kl{Deit}]
     {\R[\kl{Ins}]
     {\R[\kl{Dcut{\da}}]
-    {S, [[T], [U]]}
-    {[[\dcut{S, [[T], [U]]}]]}}
-    {[[S, [[T], [U]]], \ins{[U]}]}}
-    {[[S, [[T]\itdst{\phantom{[U]}}]], \itsrc{[U]}]}}
-    {[[S, \dcut{T}], [U]]}
+    {S, \acut{\acut{T}, \acut{U}}}
+    {\acut{\acut{\dcut{S, \acut{\acut{T}, \acut{U}}}}}}}
+    {\acut{\acut{S, \acut{\acut{T}, \acut{U}}}, \ins{\acut{U}}}}}
+    {\acut{\acut{S, \acut{\acut{T}\itdst{\phantom{\acut{U}}}}}, \itsrc{\acut{U}}}}}
+    {\acut{\acut{S, \dcut{T}}, \acut{U}}}
     \and
     \R[\kl{Del}]
     {\R[\kl{Iter}]
-    {S, [[T], [U]]}
-    {\itsrc{S}, [[\itdst{S}, T], [U]]}}
-    {\ins{\phantom{S}}[[S, T], [U]]}
+    {S, \acut{\acut{T}, \acut{U}}}
+    {\itsrc{S}, \acut{\acut{\itdst{S}, T}, \acut{U}}}}
+    {\ins{\phantom{S}}\acut{\acut{S, T}, \acut{U}}}
   \end{mathpar}
 
   Similarly for the medial rule \kl{m}, which is the other self-dual rule of
   \kl{SKS}, we have two dual derivations:
 
-  \begin{mathpar}
+  \begin{equation*}
     \R[\kl{Deit}]
     {\R[\kl{Deit}]
     {\R[\kl{Ins}]
@@ -1351,29 +1372,29 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
     {\R[\kl{Ins}]
     {\R[\kl{Dcut{\da}}]
     {\R[\kl{Dcut{\da}}]
-    {[[S,T],[U,V]]}
-    {[[S,T],[U,[[\dcut{V}]]]]}}
-    {[[S,[[\dcut{T}]]],[U,[[V]]]]}}
-    {[[S,[[T]]],[U,[\ins{[T]},[V]]]]}}
-    {[[S,[[T],\ins{[V]}]],[U,[[T],[V]]]]}}
-    {[[S,[[T],[V]]],[U,[[T],[V]]]],\ins{[[T],[V]]}}}
-    {[[S,[[T],[V]]],[U\itdst{\phantom{[[T],[V]]}}]],\itsrc{[[T],[V]]}}}
-    {[[S\itdst{\phantom{[[T],[V]]}}],[U]],\itsrc{[[T],[V]]}}
-    \and
+    {\acut{\acut{S,T},\acut{U,V}}}
+    {\acut{\acut{S,T},\acut{U,\acut{\acut{\dcut{V}}}}}}}
+    {\acut{\acut{S,\acut{\acut{\dcut{T}}}},\acut{U,\acut{\acut{V}}}}}}
+    {\acut{\acut{S,\acut{\acut{T}}},\acut{U,\acut{\ins{\acut{T}},\acut{V}}}}}}
+    {\acut{\acut{S,\acut{\acut{T},\ins{\acut{V}}}},\acut{U,\acut{\acut{T},\acut{V}}}}}}
+    {\acut{\acut{S,\acut{\acut{T},\acut{V}}},\acut{U,\acut{\acut{T},\acut{V}}}},\ins{\acut{\acut{T},\acut{V}}}}}
+    {\acut{\acut{S,\acut{\acut{T},\acut{V}}},\acut{U\itdst{\phantom{\acut{\acut{T},\acut{V}}}}}},\itsrc{\acut{\acut{T},\acut{V}}}}}
+    {\acut{\acut{S\itdst{\phantom{\acut{\acut{T},\acut{V}}}}},\acut{U}},\itsrc{\acut{\acut{T},\acut{V}}}}
+    \quad\quad
     \R[\kl{Del}]
     {\R[\kl{Del}]
     {\R[\kl{Del}]
     {\R[\kl{Del}]
     {\R[\kl{Iter}]
-    {[[S,T],[U,V]]}
-    {\itsrc{[[S,T],[U,V]]},\itdst{[[S,T],[U,V]]}}}
-    {[[S,T],[U,V]],[[S,T],[\ins{\phantom{U}}V]]}}
-    {[[S,T],[U,V]],[[\ins{\phantom{S}}T],[V]]}}
-    {[[S,T],[U\ins{\phantom{V}}]],[[T],[V]]}}
-    {[[S\ins{\phantom{T}}],[U]],[[T],[V]]}
-  \end{mathpar}
+    {\acut{\acut{S,T},\acut{U,V}}}
+    {\itsrc{\acut{\acut{S,T},\acut{U,V}}},\itdst{\acut{\acut{S,T},\acut{U,V}}}}}
+    {\acut{\acut{S,T},\acut{U,V}},\acut{\acut{S,T},\acut{\ins{\phantom{U}}V}}}}
+    {\acut{\acut{S,T},\acut{U,V}},\acut{\acut{\ins{\phantom{S}}T},\acut{V}}}}
+    {\acut{\acut{S,T},\acut{U\ins{\phantom{V}}}},\acut{\acut{T},\acut{V}}}}
+    {\acut{\acut{S\ins{\phantom{T}}},\acut{U}},\acut{\acut{T},\acut{V}}}
+  \end{equation*}
 
-  The other rules correspond to equations on structures: $\alpha$ for
+  The other rules correspond to equations on \kl{structures}: $\alpha$ for
   \emph{associativity}, $\sigma$ for \emph{commutativity}, and $\mathsf{f}$ and
   $\mathsf{t}$ for unitality. Note that all rules involving $\land$ and $\top$
   are trivially simulated by the \kl{isotropy} of $\SA$. Simulating the other
@@ -1390,9 +1411,9 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
     &
     \R[\kl{Dcut{\da}}]
     {\R[\kl{Dcut{\ua}}]
-    {[[S],[[[T],[U]]]]}
-    {[[S],\dcut{[T],[U]}]}}
-    {[[[\dcut{[S],[T]}]],[U]]}
+    {\acut{\acut{S},\acut{\acut{\acut{T},\acut{U}}}}}
+    {\acut{\acut{S},\dcut{\acut{T},\acut{U}}}}}
+    {\acut{\acut{\acut{\dcut{\acut{S},\acut{T}}}},\acut{U}}}
     &
     \R[\alpha{\ua}]
       {S \land (T \land U)}
@@ -1404,7 +1425,7 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
       {S \lor T}
       {T \lor S}
     &
-    [[S],[T]]
+    \acut{\acut{S},\acut{T}}
     &
     \R[\sigma{\ua}]
       {S \land T}
@@ -1419,8 +1440,8 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
     \R[\kl{Dcut{\da}}]
     {\R[\kl{Dcut{\da}}]
     {S}
-    {[[\dcut{S}]]}}
-    {[[S],[[\dcut{\phantom{\!!\!}}]]]}
+    {\acut{\acut{\dcut{S}}}}}
+    {\acut{\acut{S},\acut{\acut{\dcut{\phantom{\!!\!}}}}}}
     &
     \R[\kl{f{\ua}}]
       {\top \land S}
@@ -1440,8 +1461,8 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
     &
     \R[\kl{Dcut{\ua}}]
     {\R[\kl{Dcut{\ua}}]
-    {[[[]],[S]]}
-    {[[\dcut{\phantom{\!!\!}}S]]}}
+    {\acut{\acut{\acut{}},\acut{S}}}
+    {\acut{\acut{\dcut{\phantom{\!!\!}}S}}}}
     {\dcut{S}}
     \\
   \end{array}
@@ -1450,14 +1471,15 @@ us to ignore the implicit \kl{context} $W\hole$ in the rules of \reffig{sks}.
 
 \paragraph{Analyticity}
 
+\AP
 A powerful result of Brünnler and Tiu \cite{brunnler_local_2001}, is that the
 whole up-fragment of \kl{SKS} (all rules whose name ends with $\ua$) is
-\emph{\kl{admissible}}: if a structure $S$ has a \emph{proof} $S \steps{} \top$, then
+\emph{\kl{admissible}}: if a \kl{structure} $S$ has a \emph{proof} $S \steps{} \top$, then
 it also has a proof $S \xsteps{\kl{KS}} \top$, with \intro{KS} defined as
 \kl{SKS} without the up-fragment\sidenote{The name \kl{KS} comes from \kl{SKS},
-with the first `\kl{S}' standing for ``symmetric'' dropped.}. Dually, the whole
+with the first `S' standing for ``symmetric'' dropped.}. Dually, the whole
 down-fragment (all rules whose name ends with $\da$) is
-\emph{``co-admissible''}: if a structure $S$ has a \emph{refutation} $\bot
+\emph{``co-admissible''}: if a \kl{structure} $S$ has a \emph{refutation} $\bot
 \steps{} S$, then it also has a refutation $\bot \xsteps{\kl{\dmdual{KS}}} S$,
 with $\intro{\dmdual{KS}}$ defined as \kl{SKS} without the down-fragment.
 
@@ -1488,7 +1510,7 @@ insertion also never appears in the simulation of \kl{\dmdual{KS}}, while
 
 \begin{corollary}[Co-admissibility of Insertion]\labcor{adm-ins}
   $$
-  \text{If $[] \steps{} G$, then $[]
+  \text{If $\acut{} \steps{} G$, then $\acut{}
   \xsteps{\kl{Alpha}\setminus\{\kl{Ins},\kl{Dcut{\da}}\}} G$.}
   $$
 \end{corollary}
@@ -1500,37 +1522,38 @@ reduce the \kl{subformula property} to \emph{atomic} \kl{graphs}. Then it is eas
 that all rules of \kl{Alpha} except \kl{Del} satisfy this property:
 
 \begin{definition}[Subgraph]
+  \AP
   A \kl{graph} $G$ is a \intro{subgraph} of a \kl{graph} $H$, written $G \intro*\subgraph
   H$, if there exists a \kl{context} $K\hole$ such that $H = K\select{G}$.
 \end{definition}
 
 \begin{fact}
-  If $G \xstep{\kl{Alpha} \setminus \{\mathsf{Del}\}} H$ and $a \subgraph H$,
-  then $a \subgraph G$.
+  For every $a \in \atoms$, if $G \xstep{\kl{Alpha} \setminus \{\mathsf{Del}\}}
+  H$ and $a \subgraph H$ then $a \subgraph G$.
 \end{fact}
 
 \begin{corollary}[Analyticity]
   If $G$ is provable in \kl{Alpha}, then it has a proof $G \step{} G_1 \step{}
-  \ldots \step{} G_n \step{} \emptyset$ where for all $i$ and $a$ such that $a
-  \subgraph G_i$, $a \subgraph G$.
+  \ldots \step{} G_n \step{} \emptyset$ where $a \subgraph G$ for all $i$ and $a
+  \in \atoms$ such that $a \subgraph G_i$.
 \end{corollary}
 
 \end{scope}
 
 
-\section{\kl{Beta} graphs}\labsec{beta}
+\section{Beta graphs}\labsec{beta}
 
 \begin{scope}\knowledgeimport{beta}
 
 Before working on \kl{EGs}, Peirce had already developed a deep understanding of
 the logic of relations of arbitrary arity, inventing the notions of variables
 and quantifiers 30 years before the standard Russell-Whitehead syntax for
-\kl{predicate logic} appeared in 1910 \cite{sep-peirce}. This all stemmed from
-his extensive study of \emph{relation algebras}, first investigated by De Morgan
-in 1860. However in his system \kl{Beta} of \kl{EGs}, Peirce gives a very
+\kl{predicate logic} appeared in 1910 \sidecite{sep-peirce}. This all stemmed
+from his extensive study of \emph{relation algebras}, first investigated by De
+Morgan in 1860. However in his system \kl{Beta} of \kl{EGs}, Peirce gives a very
 different account of the logic of relations, both in the graphical
-representation of relational statements, and the illative transformations that
-govern them. In the following, we illustrate informally the principles of
+representation of relational statements, and the \kl{illative transformations}
+that govern them. In the following, we illustrate informally the principles of
 \kl{Beta}, and how they are able to capture what is identified nowadays in
 \kl{symbolic} logic as \emph{purely relational} \kl{first-order} theories (that
 is, without constant nor function symbols) equipped with a primitive equality
@@ -1538,20 +1561,22 @@ predicate.
 
 \subsection{Syntax}
 
-\paragraph{Spots} In the propositional system \kl{Alpha}, atomic
-\kl(alpha){graphs} represent sentences that can be asserted or denied (or
-equivalently, assigned a truth value), but they do not exhibit any internal
-structure syntactically: they might as well be depicted just as (distinguished)
-points on $\SA$. As most logicians of his time, Peirce was directly influenced
-by the \emph{term logic} of Aristotle, where assertions are decomposed into a
-\emph{subject} to which applies some \emph{predicate}. However, while
-Aristotle's notion of predicate has a metaphysical flavor, Peirce's notion is
-purely grammatical. For instance, Aristotle rejected the sentence ``The person
-sitting down is Socrates'' as a genuine predication, because Socrates is an
-\emph{individual}, and in his view predicates could only be so-called
-\emph{universals} like ``humans'' or ``mortals''
-\sidecite{smith_aristotles_2022}. In \kl{Beta} there is no such restriction, and
-the previous sentence can be represented by the following \kl{graph}:
+\paragraph{Spots}
+
+In the propositional system \kl{Alpha}, atomic \kl(alpha){graphs} represent
+sentences that can be asserted or denied (or equivalently, assigned a truth
+value), but they do not exhibit any internal structure syntactically: they might
+as well be depicted just as (distinguished) points on $\SA$. As most logicians
+of his time, Peirce was directly influenced by the \emph{term logic} of
+Aristotle, where assertions are decomposed into a \emph{subject} to which
+applies some \emph{predicate}. However, while Aristotle's notion of predicate
+has a metaphysical flavor, Peirce's notion is purely grammatical. For instance,
+Aristotle rejected the sentence ``The person sitting down is Socrates'' as a
+genuine predication, because Socrates is an \emph{individual}, and in his view
+predicates could only be so-called \emph{universals} like ``humans'' or
+``mortals'' \sidecite{smith_aristotles_2022}. In \kl{Beta} there is no such
+restriction, and the previous sentence can be represented by the following
+\kl{graph}:
 \begin{equation}
   \tikzfig{1}{0.5}{sitting-socrates} \label{eq:sitting-socrates}
 \end{equation}
@@ -1568,19 +1593,22 @@ $n$ hooks disposed freely around its periphery. For instance, the sentence
 \end{equation*}
 where ``between'' is modelled as a ternary predicate.
 
-\paragraph{Lines of Identity} To assert that there exists an individual who is
-both the person sitting down and Socrates in \kl{graph} (\ref{eq:sitting-socrates}),
-we connect the two hooks with a so-called \emph{line of identity} (LoI
-hereafter). In Peirce's view, each point in a LoI denotes an individual of the
-universe represented by $\SA$. Since scribing anything on $\SA$ means asserting
-its truth in the universe, then it suffices to reduce the truth of an individual
-to its existence, in order to interpret the marking of LoI as having existential
+\paragraph{Lines of Identity}
+
+\AP
+To assert that there exists an individual who is both the person sitting down
+and Socrates in \kl{graph} (\ref{eq:sitting-socrates}), we connect the two hooks
+with a so-called \intro{line of identity} (\reintro{LoI}). In Peirce's view,
+each point in a \kl{LoI} denotes an individual of the universe represented by
+$\SA$. Since scribing anything on $\SA$ means asserting its truth in the
+universe, then it suffices to reduce the truth of an individual to its
+existence, in order to interpret the marking of \kl{LoI} as having existential
 force. This is actually the origin of the ``existential'' qualificative in the
 denomination ``existential graph''. Note that no information is given but the
 individual's existence: in particular, two distinct points on $\SA$ might or
 might not denote two distinct individuals, just as two distinct variables $x$
 and $y$ might or might not refer to the same object. It is the \emph{continuity}
-of a LoI that signifies, in an \kl{iconic} way, the identity of every
+of a \kl{LoI} that signifies, in an \kl{iconic} way, the identity of every
 point/individual constituting, and connected by the line. Hence the following
 \kl{graph}
 $$\tikzfig{1}{0.5}{sitting-socrates-disconnected}$$ expresses that both the
@@ -1592,7 +1620,7 @@ equivalently expressed in a \kl{first-order} language as the formula
 \begin{equation}
   \exists x. \mathsf{PersonSittingDown}(x) \wedge \mathsf{Socrates}(x) \label{eq:sitting-socrates-fo}
 \end{equation}
-LoI can then be seen as encoding the concept of \emph{existential
+\kl{LoI} can then be seen as encoding the concept of \emph{existential
 quantification} over a single \emph{variable} $x$, where the occurrences of $x$
 correspond to the extremities of the line connected to the hooks. As in
 \kl{Alpha}, the conjunctive aspect of the sentence is accounted for by the fact
@@ -1610,11 +1638,11 @@ formulations, and they would both be represented by \kl{graph}
 (\ref{eq:sitting-socrates}). However in
 \sidecite{pietarinen_compositional_2020}, in order to have a rigorous
 interpretation of the syntax of \kl{Beta} in category theory, the authors
-propose to analyze LoI into essentially two distinct \kl{icons}, \emph{binders} and
+propose to analyze \kl{LoI} into essentially two distinct \kl{icons}, \emph{binders} and
 \emph{teridentities}\sidenote{This is our own terminology, chosen mainly for
 historical reasons. In \cite{pietarinen_compositional_2020}, binders and
 teridentities correspond respectively to the generators of the monoid-comonoid
-pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
+pair of a Frobenius algebra.}, from which every \kl{LoI} can be reconstructed:
 
 \begin{marginfigure}
   \input{figures/eg-forall.tex}
@@ -1623,8 +1651,8 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
 \end{marginfigure}
 
 \begin{description}
-  \item[Binder] As we have just seen, one function of LoI is to \emph{quantify}
-  over individuals. For now we have only considered LoI located at the top-level
+  \item[Binder] As we have just seen, one function of \kl{LoI} is to \emph{quantify}
+  over individuals. For now we have only considered \kl{LoI} located at the top-level
   of $\SA$, i.e. in a \emph{\kl{positive}} area, where they are given
   \emph{existential} force. If we were to negate the \kl{graph}
   (\ref{eq:sitting-socrates}) by enclosing it in a \kl{cut}, we would get a \kl{graph}
@@ -1647,7 +1675,7 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
   \reffig{bubbles-flow}, even though we were not aware of the existence of \kl{EGs} at
   the time!} reading of \kl{EGs}, where they are inspected starting from the top-level
   of $\SA$, and then descending (recursively) into their various \kl{cuts}. In
-  particular, the location of a LoI should be identified with its
+  particular, the location of a \kl{LoI} should be identified with its
   \emph{outermost} end, as illustrated in \kl{graph} \ref{eq:eg-forall-out}; if we
   were to associate it instead with its innermost end as in \kl{graph}
   (\ref{eq:eg-forall-in}), then we would swap the positions of $\exists$ and
@@ -1655,11 +1683,11 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
   \neg \exists x. P(x)$.
 
   From these observations, we get that the type of quantification performed by a
-  LoI is fully captured by its location: existential in a \kl{positive} area,
-  universal in a \kl{negative} area. This leads us to analyze the syntax of LoI into
+  \kl{LoI} is fully captured by its location: existential in a \kl{positive} area,
+  universal in a \kl{negative} area. This leads us to analyze the syntax of \kl{LoI} into
   two components: so-called \emph{binders} that encode \emph{quantifiers} as
   distinguished heavy dots on $\SA$ like those of
-  \reffig{eg-forall}\sidenote{Peirce liked to insist that LoI should be drawn as
+  \reffig{eg-forall}\sidenote{Peirce liked to insist that \kl{LoI} should be drawn as
   \emph{heavy} lines, to distinguish them from the normal lines used to depict
   \kl{cuts}.}; and two-ended \emph{wires} that connect binders to the hooks of
   predicates, encoding the \emph{identity} between a bound variable $x$ and an
@@ -1695,7 +1723,7 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
     \tikzfig{0.8}{0.5}{sitting-socrates-teridentity} \label{eq:sitting-socrates-teridentity} \\[1em]
     \tikzfig{0.8}{0.5}{sitting-socrates-eq-teridentity} \label{eq:sitting-socrates-eq-teridentity}
     \end{gather}
-    \caption{Decomposing lines of identity}
+    \caption{Decomposing \kl{lines of identity}}
     \labfig{sitting-socrates-teridentity}
   \end{marginfigure}
 
@@ -1724,14 +1752,14 @@ pair of a Frobenius algebra.}, from which every LoI can be reconstructed:
   \reffig{sitting-socrates-teridentity}.
 \end{description}
 
-LoI (or their decomposition into the above constructs) constitute the only \kl{icons}
+\kl{LoI} (or their decomposition into the above constructs) constitute the only \kl{icons}
 introduced in \kl{Beta} compared to \kl{Alpha}.
 % We will see shortly that they are sufficiently powerful to express and combine
 % all features of \kl{first-order logic} in an elegant and intuitive way, particulary
 % so at the \emph{illative} level.
 
 \paragraph{Iconic atomicity}
-The fact that Peirce took LoI to be a primitive, unanalyzed \kl{icon} can be seen as
+The fact that Peirce took \kl{LoI} to be a primitive, unanalyzed \kl{icon} can be seen as
 a consequence (or a cause?) of his view that only \emph{closed} sentences should
 be considered. Indeed in an early exposition of \kl{EGs} (Ms 493), he proposed a way
 to show, if necessary, that ``a complete assertion is not intended''
@@ -1739,7 +1767,7 @@ to show, if necessary, that ``a complete assertion is not intended''
 to that of \emph{free variables} in predicate calculus. Our analysis into wires
 that connect hooks, binders and teridentities allows this, and more generally
 makes the syntax of \kl{graphs} closer to predicate calculus. But in later
-expositions, Peirce always required every hook to be filled with a LoI, that is
+expositions, Peirce always required every hook to be filled with a \kl{LoI}, that is
 every variable to be quantified.
 
 \begin{marginfigure}
@@ -1753,19 +1781,19 @@ every variable to be quantified.
 Now, it is unclear which of those presentations is the more ``analytical'' or
 primitive, when restricting oneself to closed (or in Peirce's terminology,
 complete) assertions. Indeed, consider that we give the force of quantification
-to wires, as Peirce does with LoI: then one can replace every binder by a
+to wires, as Peirce does with \kl{LoI}: then one can replace every binder by a
 dangling wire, rendering binders useless in the syntax. Also since empty hooks
 and teridentities are forbidden, they will always be filled with wires. Then
-couldn't we just reduce the full syntax of LoI to wires? A remarkable insight of
+couldn't we just reduce the full syntax of \kl{LoI} to wires? A remarkable insight of
 Peirce, is that one cannot build the concept of teridentity from two-ended
 wires, but that the converse \emph{is} possible, as illustrated in
 \reffig{wire-teridentity}. This is most clearly (and speculatively) understood
-by seeing LoI as made out of \emph{pipes} rather than wires. Indeed, just gluing
+by seeing \kl{LoI} as made out of \emph{pipes} rather than wires. Indeed, just gluing
 one extremity of a two-ended pipe $\mathtt{P}$ to the exterior of another pipe
 $\mathtt{Q}$ will not make $\mathtt{P}$ and $\mathtt{Q}$ communicate; and there
 is no reason to interpret the joining, or (infinitesimally) close \kl{juxtaposition}
 of two lines on $\SA$ at one point, as doing more than the gluing of two
-pipes\sidenote{If one wants to keep the wire \kl{metaphor}, joining two LoI can be
+pipes\sidenote{If one wants to keep the wire \kl{metaphor}, joining two \kl{LoI} can be
 interpreted as just putting in contact two wires. Then electrical current can
 flow from one wire to the other, but the problem resides elsewhere, at the
 \emph{illative} level: indeed nothing prevents us from separating back the two
@@ -1787,7 +1815,7 @@ is a distinct concept [from that denoted by the \kl{juxtaposition} of \kl{graphs
 $\SA$], and is precisely that of teridentity.
 \end{quote}
 
-Then every LoI can be built out of teridentities, which Peirce expressed like
+Then every \kl{LoI} can be built out of teridentities, which Peirce expressed like
 so \cite[p.~117]{Roberts+1973}:
 % \sidenote{This is again reminiscent of Girard's metaphor, where the fact that
 % a cable is just a ``bundle of very small wires'' corresponds to the
@@ -1805,8 +1833,8 @@ $\tikz{\draw (0,0) -- (2,0);
 
 A remarkable fact about \kl{Beta} is that it does not need any new illative
 principle compared to \kl{Alpha}. Rather, it simply generalizes those of
-\kl{Alpha} to account for LoI\sidenote{Thus in a sense, the \kl{first-order}
-individuals denoted by LoI behave in the exact same way as the propositions
+\kl{Alpha} to account for \kl{LoI}\sidenote{Thus in a sense, the \kl{first-order}
+individuals denoted by \kl{LoI} behave in the exact same way as the propositions
 denoted by the \kl{graphs} of \kl{Alpha}. This can be interpreted as a
 manifestation of Peirce's \emph{psycho-physical monism} \cite{sep-peirce}, that
 blurs the distinction between the psychological level of propositions (concepts)
@@ -1819,11 +1847,11 @@ what is more linear than a line?}.
 
 \begin{description}
   \item[Iteration/Deiteration] When a spot is iterated, every hook of the new
-  copy must be connected to the same hook of the original copy with a LoI.
-  Conversely, when a spot is deiterated, every LoI of the deleted copy must be
+  copy must be connected to the same hook of the original copy with a \kl{LoI}.
+  Conversely, when a spot is deiterated, every \kl{LoI} of the deleted copy must be
   retracted to the corresponding hook of the original copy. This applies in
   particular to any binder seen as a unary spot, which allows to extend (resp.
-  retract) any LoI inside (resp. outside) a \kl{cut}:
+  retract) any \kl{LoI} inside (resp. outside) a \kl{cut}:
   $$\tikzfig{1}{0.5}{eg-iter-loi-left} ~~~\leftrightarrow~~~ \tikzfig{1}{0.5}{eg-iter-loi-right}$$
 
   \item[Insertion/Deletion] Every pair of binders residing in the same \kl{negative}
@@ -1833,18 +1861,18 @@ what is more linear than a line?}.
   newly created ends with two binders (\kl{Deletion}):
   $$\tikzfig{1}{0.5}{eg-delins-loi-right}~~~\step{}~~~\tikzfig{1}{0.5}{eg-delins-loi-left}$$
   By reading the rules from right to left --- i.e. in \emph{proof search} mode,
-  \kl{Insertion} and \kl{Deletion} on LoI can be understood as capturing
+  \kl{Insertion} and \kl{Deletion} on \kl{LoI} can be understood as capturing
   respectively the operations of \emph{anti-unification} and \emph{unification}
   on two variables. That is:
-  \begin{itemize}
-    \item[\textbf{Unification}] adding a wire between two disconnected binders $x$
+  \begin{description}
+    \item[Unification] adding a wire between two disconnected binders $x$
   and $y$ is equivalent in purpose to substituting $x$ for $y$ (resp. $y$ for
-  $x$) in every spot/predicate connected by a LoI to $y$ (resp. $x$);
-    \item[\textbf{Anti-unification}] while severing a wire connected to a binder
+  $x$) in every spot/predicate connected by a \kl{LoI} to $y$ (resp. $x$);
+    \item[Anti-unification] while severing a wire connected to a binder
   $z$ in two parts capped by binders $x$ and $y$ amounts to partitioning the set
   of spots connected to $z$ in two sets $\{P_i\}$ and $\{Q_j\}$, and
   substituting $x$ for $z$ in every $P_i$, and $y$ for $z$ in every $Q_j$.
-  \end{itemize}
+  \end{description}
   Unification and anti-unification are the heart of many (semi-)decision
   procedures implemented in automated and \kl{interactive theorem provers},
   including the \kl{unification} of subformulas in our own approach to \kl{SFL}
@@ -1882,7 +1910,7 @@ in \kl{Beta}, by reducing the \kl{graph} associated to the formula
 to the empty $\SA$. Again, we invert the direction of arrows in inference steps,
 to follow the proof search reading of rules. Note that in many steps, we add or
 remove some teridentities and binders without further justification: these
-correspond to splits, merges and rewirings of LoI, and a more rigorous set of
+correspond to splits, merges and rewirings of \kl{LoI}, and a more rigorous set of
 equations describing these operations can be found in \cite[Section 3: ``The
 algebra of lines of identity'']{pietarinen_compositional_2020}.
 
@@ -1892,7 +1920,7 @@ captured by the \kl{Deletion} step in \reffig{eg-socrates-mortal}. Thus
 contrary to \kl{Alpha}, it seems that \kl{Deletion} is not \kl{admissible} in
 \kl{Beta} anymore. Because of the \emph{subterm property} of \kl{first-order logic}
 \sidecite{DBLP:books/el/RV01/DegtyarevV01}, this should not break \kl{analyticity}:
-indeed we should only need \kl{Deletion} on LoI, which connects already
+indeed we should only need \kl{Deletion} on \kl{LoI}, which connects already
 existing binders. However one still needs to find out the binders that must be
 connected, which we conjecture to be a major factor in the undecidability of
 \kl{first-order logic}.
@@ -1904,12 +1932,12 @@ connected, which we conjecture to be a major factor in the undecidability of
 Overall, the example of \reffig{eg-socrates-mortal} demonstrates how \kl{Beta}
 is particularly well-suited to analyze the fine structure of relational
 reasoning: be it at the level of \emph{statements}, with the complex circuits
-resulting from the composition of LoI; or at the level of \emph{proofs}, with a
+resulting from the composition of \kl{LoI}; or at the level of \emph{proofs}, with a
 decomposition of such a simple syllogism into 8 distinct inferential steps.
 While this is satisfying from the standpoint of meta-logical investigation
 originally pursued by Peirce, this syntax seems to be too cumbersome to form the
 basis for a practical theorem proving interface, where the user would perform
-illative transformations through \kl{direct manipulation} of \kl{graphs}. In the words of
+\kl{illative transformations} through \kl{direct manipulation} of \kl{graphs}. In the words of
 Peirce himself \cite[p.~544]{peirce_prolegomena_1906}:
 \begin{quote}
   There are a number of deduced liberties of transformation, by which even much
@@ -1928,12 +1956,12 @@ Peirce himself \cite[p.~544]{peirce_prolegomena_1906}:
 \end{marginfigure}
 
 Still, the complexity of \kl{Beta} from a \kl{UX} perspective stems mostly from the
-tedious management of LoI. Our analysis into binders and teridentities gives us
+tedious management of \kl{LoI}. Our analysis into binders and teridentities gives us
 a hint towards the solution: since we now have binders, why not just replace
 the complex circuits of teridentities by \emph{variables}? The process is
 simple:
 \begin{enumerate}
-  \item Take any complex LoI connected to $n$ binders and $m$ hooks;
+  \item Take any complex \kl{LoI} connected to $n$ binders and $m$ hooks;
   \item Among the $n$ binders, choose one that occurs in the outermost area of
   $\SA$, and give it a fresh name $x$;
   \item Replace the $m$ wires connected to the hooks by $m$ occurrences of $x$;
@@ -1944,7 +1972,7 @@ Thus for instance, both the first and second \kl{graphs} in
 \reffig{eg-socrates-mortal-var}. In fact, Peirce already had the idea to use a
 name-based syntactic device similar to, and arguably more primitive than
 variables, which he called \emph{selectives}, in order to avoid the ambiguity of
-LoI crossing \kl{cuts} \cite[p.~531]{peirce_prolegomena_1906}:
+\kl{LoI} crossing \kl{cuts} \cite[p.~531]{peirce_prolegomena_1906}:
 \begin{quote}
 A Ligature crossing a Cut is to be interpreted as unchanged in meaning by
 erasing the part that crosses to the Cut and attaching to the two Loose Ends so
@@ -1967,7 +1995,7 @@ like syntax of \emph{proof nets} \cite{girard-linear-1987}.
 
 \begin{marginfigure}
   \includegraphics{bridge.png}
-  \caption{A depiction of Peirce's Bridge for lines of identity}
+  \caption{A depiction of Peirce's Bridge for \kl{lines of identity}}
   \footnotesize Source:\hspace{3pt}\url{https://commons.wikimedia.org/wiki/File:4CT_Inadequacy_Explanation.svg}
   \labfig{eg-bridge}
 \end{marginfigure}
@@ -1981,7 +2009,7 @@ ribbon.
 Thus he already identified the problem of readability stemming from having too
 many wires crossing eachother, a well-known concern in the design of graphical
 programming languages\sidenote{This is to be opposed to critics of the syntax of
-EG such as Quine, who devised a notation similar to LoI, and deemed it ``too
+EGs such as Quine, who devised a notation similar to \kl{LoI}, and deemed it ``too
 cumbersome for practical use'' \cite[p.~125]{Roberts+1973}.}. The proposed
 alternative solution of having so-called \emph{bridges} is quite interesting, in
 that it makes the syntax of \kl{EGs} \emph{three-dimensional}, in order to preserve
@@ -2013,27 +2041,27 @@ previous idea of replacing teridentities by variables. Every area will now be
 equipped with a set of binders, in addition to the multiset of nodes (i.e. atoms
 and \kl{cuts}). Anticipating our flower \kl{metaphor} of \refch{flowers}, we call
 sets of binders \emph{sprinklers}, which can be imagined as irrigating spots on
-their hooks by sending water through the (now invisible) LoI, seen as hoses.
+their hooks by sending water through the (now invisible) \kl{LoI}, seen as hoses.
 Naturally, the pair formed by a sprinkler and a multiset of nodes is called a
 \emph{garden}.
 
 \begin{definition}[Graph]\labdef{beta-graph} 
-  
+  \AP
   Given a denumerable set of variables $\vars$ and a denumerable set of
   predicate symbols $\psymbs$ together with their arities $\arity : \psymbs \to
   \nats$, the sets of \intro{nodes} $\intro*\bnodes$, \intro{gardens}
   $\intro*\bgardens$ and \intro{graphs} $\intro*\bgraphs$ are defined mutually
   inductively as follows:
   \begin{itemize}
-    \item \textbf{(Spot)} If $p \in \psymbs$ with $\arity(p) = n$, then $p(x_1,
+    \itemAP \textbf{(Spot)} If $p \in \psymbs$ with $\arity(p) = n$, then $p(x_1,
     \ldots, x_n) \in \bnodes$;
-    \item \textbf{(Graph)} If $G \subset \bnodes$ is a finite multiset, then $G
+    \itemAP \textbf{(Graph)} If $G \subset \bnodes$ is a finite multiset, then $G
     \in \bgraphs$.
-    \item \textbf{(Garden)} If $\bx \subset \vars$ is a finite set and $G
+    \itemAP \textbf{(Garden)} If $\bx \subset \vars$ is a finite set and $G
     \subset \bnodes$ a finite multiset, then $\intro*\bgarden{\bx}{G} \in
     \bgardens$;
-    \item \textbf{(Enclosure)} If $\gamma \in \bgardens$, then
-    $\reintro*\bcut{\gamma} \in \bnodes$.
+    \itemAP \textbf{(Enclosure)} If $\gamma \in \bgardens$, then
+    $\intro*\bcut{\gamma} \in \bnodes$.
   \end{itemize}
 \end{definition}
 
@@ -2041,9 +2069,9 @@ Naturally, the pair formed by a sprinkler and a multiset of nodes is called a
   The \kl{graph} of \reffig{eg-socrates-mortal-var} can be written in textual
   notation as the following expression:
   \begin{align*}
-    [&x \cdot \socrates(x),\human(x), \\
-     &[y \cdot \human(y),[{} \cdot \mortal(y)]], \\
-     &[z \cdot \socrates(z),\mortal(z)]]
+    \bcut{&x \cdot \socrates(x),\human(x), \\
+     &\bcut{y \cdot \human(y),\bcut{{} \cdot \mortal(y)}}, \\
+     &\bcut{z \cdot \socrates(z),\mortal(z)}}
   \end{align*}
   Note that the `$\cdot$' operator for constructing gardens has lower precedence
   than the `$,$' operator for \kl{juxtaposition} of \kl{graphs}. Thus the expression $x
@@ -2067,12 +2095,12 @@ Naturally, the pair formed by a sprinkler and a multiset of nodes is called a
 \end{marginfigure}
 
 As already suggested earlier, the garden syntax for \kl{graphs} quotients the
-LoI syntax: the first \kl{Deiteration} step in \reffig{eg-socrates-mortal}
+\kl{LoI} syntax: the first \kl{Deiteration} step in \reffig{eg-socrates-mortal}
 cannot be performed in the garden syntax, because its premiss and conclusion are
 represented by the same \kl{graph}. In fact, both \kl{Iteration} and
 \kl{Deiteration} are automatically handled by the notion of \emph{scope} for
 binders, that results from the endoporeutic reading of \kl{graphs}. Then it only
-remains to account for \kl{Insertion} and \kl{Deletion} on LoI, which is done
+remains to account for \kl{Insertion} and \kl{Deletion} on \kl{LoI}, which is done
 by capturing our intuition relating these principles to \emph{unification} in
 the rules \kl{Unif{\da}} and \kl{Unif{\ua}} of \reffig{beta}, respectively.
 Thus the inductive version of \kl{Beta} is obtained by simply adding these two
@@ -2082,7 +2110,7 @@ rules to those of \kl{Alpha} introduced in \reffig{alpha}.
 in this system. Even though we do not apply the \kl{Deit} rule anymore compared
 to the graphical proof of \reffig{eg-socrates-mortal}, we need two additional
 instances of \kl{Unif{\ua}} on $z$ and $x$, that would correspond to two
-instances of \kl{Del} on the associated LoI.
+instances of \kl{Del} on the associated \kl{LoI}.
 
 \begin{remark}
   As in \kl{Alpha}, \kl{graphs} $G, H, K$ and their one-holed \kl{contexts}
@@ -2094,7 +2122,7 @@ instances of \kl{Del} on the associated LoI.
   top-level of $\SA$, they must be enclosed in at least one \kl{cut}. Thus to be able
   to reason on (the garden version of) the \kl{graph} (\ref{eq:sitting-socrates}), we
   must first enclose it in a double-\kl{cut}, giving the \kl{graph}
-  $$[\garden{{}}{[\garden{x}{\mathsf{TheSittingPerson}(x),\mathsf{Socrates}(x)}]}]$$
+  $$\bcut{\garden{{}}{\bcut{\garden{x}{\mathsf{TheSittingPerson}(x),\mathsf{Socrates}(x)}}}}$$
   While this choice might seem confusing, it makes the formulation of rules more
   uniform with that of \kl{Alpha}, and will ease the transition to the flower
   calculus in \refch{flowers}.
@@ -2117,12 +2145,12 @@ of capture-avoiding substitution:
       \garden{\bz}{\subst{G}{y}{x}} &\text{if $x \not\in \bz$} \\
       \garden{\bz}{G} &\text{otherwise}
     \end{cases} \\
-    \subst{[\gamma]}{y}{x} &= [\subst{\gamma}{y}{x}]
+    \subst{\bcut{\gamma}}{y}{x} &= \bcut{\subst{\gamma}{y}{x}}
   \end{align*}
 \end{definition}
 
 Also, this system supports free variables, and there is no need to forbid them
-like Peirce did in his original LoI-based syntax.
+like Peirce did in his original \kl{LoI}-based syntax.
 
 
 \end{scope}

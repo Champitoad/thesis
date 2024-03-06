@@ -78,8 +78,8 @@ with its ability to represent the conjunction of assertions through
 \emph{\kl{juxtaposition}}, and \emph{\kl{cuts}} in $\SA$ that signify the denial or
 negation of assertions. However as noted in \refremark{eg-entitative}, the first
 interpretation of \kl{juxtaposition} proposed by Peirce was that of
-\emph{disjunction}, in his system of \emph{entitative graphs}. According to him,
-the illative transformations of \kl{EGs} are a necessary consequence of the
+\emph{disjunction}, in his system of \kl{entitative graphs}. According to him,
+the \kl{illative transformations} of \kl{EGs} are a necessary consequence of the
 \emph{conjunctive} interpretation of \kl{juxtaposition}, as witnessed by the
 following excerpt \sidecite[][p.~533]{peirce_prolegomena_1906}:
 
@@ -204,7 +204,7 @@ joined at a single point highlighted in orange, as illustrated in
   primitive by Peirce, but as a consequence of a \emph{dynamic potential} of the
   scroll: namely, the ability to insert anything in the outer close, at will.
   This is another manifestation of Peirce's concern for the question of
-  \emph{illative atomicity}, and is to be related to the elimination of the
+  \emph{\kl{illative atomicity}}, and is to be related to the elimination of the
   \kl{Double{-}cut} rule discussed in \refsec{atomicity}.
 \end{remark}
 
@@ -257,7 +257,7 @@ Note that in \reffig{eg-currying} and \reffig{eg-uncurrying}, we give
 \emph{\kl{forward}} proofs that rewrite the premiss of the argument into its
 conclusion, rather than \emph{\kl{backward}} proofs (\refdef{eg-proof}) that rewrite
 a \kl{goal} into the empty $\SA$, as we usually did in \refch{eg}. \kl{Forward} proofs
-correspond to Peirce's usage of the illative transformations --- and thus to
+correspond to Peirce's usage of the \kl{illative transformations} --- and thus to
 what can be found in most of the literature on \kl{EGs}, and have the advantage
 of being more economical in space by leaving the \kl{goal} implicit. One can easily
 go from a \kl{forward} proof to a \kl{backward} one as shown by the \emph{deduction
@@ -451,13 +451,13 @@ that of \reffig{scroll-curried} hard to read for an untrained eye.
 Before devising an alternative syntax, one should ask: what are the essential
 features of the scroll that we want to preserve? Following the previous
 observations, we identified two of them:
-\begin{itemize}
-  \item[\textbf{Continuity}] the scroll is a self-intersecting continuous curve,
+\begin{description}
+  \item[Continuity] the scroll is a self-intersecting continuous curve,
   which can be drawn in one stroke of the pen;
-  \item[\textbf{Polarity}] this curve delineates two kinds of areas: inloops that have
+  \item[Polarity] this curve delineates two kinds of areas: inloops that have
   the same \kl(eg){polarity} as the area on which the scroll is scribed, and the outloop
   which has the opposite \kl(eg){polarity}.
-\end{itemize}
+\end{description}
 
 Fortunately, these two properties are preserved when turning inloops
 \emph{inside-out}, as illustrated in \reffig{scroll-inside-out}. This might be
@@ -604,10 +604,10 @@ $\garden{{}}{\Phi}$.
   \labtab{letters}
 \end{marginfigure}
 
-As usual, we introduce a \emph{depth} measure that will allow us to reason
+As usual, we introduce a \emph{\kl{depth}} measure that will allow us to reason
 inductively on the structure of flowers:
 \begin{definition}[Depth]
-  The \emph{depth} $\sdepth{-}$ of a flower or garden is defined mutually
+  The \reintro{depth} $\intro*\sdepth{-}$ of a flower or garden is defined mutually
   recursively as follows:
   \begin{align*}
     \sdepth{p(\tvec{t})} &= 0 \\
@@ -774,7 +774,7 @@ of flowers:
 \end{definition}
 
 \begin{definition}[Depth]
-  The \emph{depth} $\cdepth{\Phi\hole}$ of a \kl{context} $\Phi\hole$ is
+  The \intro{depth} $\intro*\cdepth{\Phi\hole}$ of a \kl{context} $\Phi\hole$ is
   defined recursively as follows:
   \begin{align*}
     \cdepth{\Psi, \hole} &= 0 \\
@@ -784,7 +784,7 @@ of flowers:
 \end{definition}
 
 Contrarily to \kl{EGs} (\refdef{eg-inv}), the number of inversions of a \kl{context} does
-not coincide with its depth, since petals increase depth but preserve \kl{polarity}:
+not coincide with its \kl{depth}, since petals increase \kl{depth} but preserve \kl{polarity}:
 
 \begin{definition}[Inversions]
   The number of \emph{inversions} $\inv(\Phi\hole)$ of a \kl{context} $\Phi\hole$ is
@@ -862,8 +862,8 @@ correspond respectively to the \emph{\kl(dnd){backward}} $\back$ and
 \emph{\kl(dnd){forward}} $\forw$ \kl{interaction operators}, which are collapsed into a
 single interaction operator $\ast$ in the original formulation of \kl{subformula
 linking} for classical linear logic \cite{Chaudhuri2013}.}. If we were to replace
-binders by LoI (lines of identity, see \refsec{beta}), then the pollination
-relation would also prescribe in which areas LoI can be extended/iterated,
+binders by \kl{LoI} (\kl{lines of identity}, see \refsec{beta}), then the pollination
+relation would also prescribe in which areas \kl{LoI} can be extended/iterated,
 providing an explanation for the scope of binders (\refremark{flower-scope}).
 
 \paragraph{Rules}
@@ -937,7 +937,7 @@ a direct adaptation of the rules of \kl{Beta} (\reffig{beta}):
     \kl{Unif{\da}} of \kl{Beta}, where the variable \kl{substitution} $\{z/y\}$
     becomes an arbitrary \kl{substitution} $\sigma$. Once again, we have twice the
     amount of rules to account for the pistil/petal distinction, which is not
-    surprising since in the LoI syntax of \kl{EGs}, they are special cases of
+    surprising since in the \kl{LoI} syntax of \kl{EGs}, they are special cases of
     Insertion/Deletion. Note that for the instantiation rules
     \kl{ipis}/\kl{ipet} to be \kl{invertible}, we duplicate the whole flower/petal
     where the sprinkler occurs, mirroring what is done in multi-conclusion
@@ -1263,8 +1263,8 @@ introducing new definitions in each chapter, but rather to find the simplest
 semantics for our purposes with the specific \kl{proof system} at hand. In the case
 of the flower calculus, there are a few reasons that led us to the choice of
 Kripke structures, detailed hereafter by order of increasing importance:
-\begin{itemize}
-  \item[\textbf{Generalization of \kl{EGs}}]
+\begin{description}
+  \item[Generalization of EGs]
     As mentioned in \refsec{IEGs}, the syntax of \kl{intuitionistic} \kl{EGs} (and thus of
     flowers) subsumes that of Peirce's \kl{classical} \kl{EGs}, by seeing the \kl{cut} as a
     $0$-ary scroll (or a flower with no petals). Similarly, it is well-known
@@ -1283,14 +1283,14 @@ Kripke structures, detailed hereafter by order of increasing importance:
     \cite{girard_parallel}, although as usual he demonstrates his (free)
     criticism towards Kripke semantics.}.
   
-  \item[\textbf{Quantifiers}]
+  \item[Quantifiers]
     It is easy to accomodate quantifiers in Kripke structures, by interpreting
     terms as individuals in the domains of the structure's worlds. In contrast,
     extensions of algebraic semantics that account for quantifiers like polyadic
     and cylindric algebras are more involved, and less studied in the
     literature.
   
-  \item[\textbf{Cut-free completeness}]
+  \item[Cut-free completeness]
     Rather than just completeness, we are interested more specifically in the
     completeness of the natural fragment $\Nature$ of the flower calculus, where
     all rules are \emph{\kl{analytic}}. In Gentzen systems, this corresponds to
@@ -1339,7 +1339,7 @@ Kripke structures, detailed hereafter by order of increasing importance:
     generalization of \kl{Kripke structures}.}
     \sidecite{hutchison_semantic_2005,10.1007/978-3-642-02261-6_17,ilik:tel-00529021}.
     
-\end{itemize}
+\end{description}
 
 We now recall the standard definitions, starting with the interpretation of
 constants in \emph{first-order structures}:
@@ -1397,20 +1397,20 @@ one big constructor:
   Given some Kripke structure $\mathcal{K}$, the \emph{forcing} relation
   $\eforces{w}{\phi}{e}$ between a world $w$, a flower $\phi$ and a
   $w$-evaluation $e$ is defined by induction on $\sdepth{\phi}$ as follows:
-  \begin{itemize}
-    \item[\textbf{(Atom)}]
+  \begin{description}
+    \item[(Atom)]
     $\eforces{w}{p(\tvec{t})}{e}$ iff $\interp{\tvec{t}}_e \in \interp{p}_w$;
       
-    \item[\textbf{(Flower)}]
+    \item[(Flower)]
     $\eforces{w}{\flower{\garden{\bx}{\Phi}}{\fset{i}{n}{\garden{\bx_i}{\Phi_i}}}}{e}$ iff for every $w' \geq
     w$ and every $w'$-evaluation $e'$, if
     $\eforces{w'}{\Phi}{\update{e}{\bx}{e'}} $ then there is some $1
     \leq i \leq n$ and $w'$-evaluation $e''$ such that
     $\eforces{w'}{\Phi_i}{\update{\update{e}{\bx}{e'}}{\bx_i}{e''}}$.
     
-    \item[\textbf{(Bouquet)}]
+    \item[(Bouquet)]
     $\eforces{w}{\Phi}{e}$ iff $\eforces{w}{\phi}{e}$ for every $\phi \in \Phi$.
-  \end{itemize}
+  \end{description}
   % , and $w \forces \Phi$ if $\eforces{w}{\Phi}{e}$ for every
   % $w$-evaluation $e$.
 \end{definition}
@@ -1458,8 +1458,8 @@ The following lemmas will be useful for the soundness proof of the next section:
 \end{lemma}
 \begin{proof}
   By induction on $\sdepth{\phi}$.
-  \begin{itemize}
-    \item[\textbf{(Base case)}]
+  \begin{description}
+    \item[(Base case)]
     \newcommand{\esigma}{\update{e}{\bx}{\interp{\sigma}_e}} Suppose
     $\phi = p(\tvec{t})$. We show that $\interp{\sigma(\tvec{t})}_e \in
     \interp{p}_w$ iff $\interp{\tvec{t}}_{\esigma} \in \interp{p}_w$ by proving
@@ -1483,7 +1483,7 @@ The following lemmas will be useful for the soundness proof of the next section:
         $$
     \end{itemize}
 
-    \item[\textbf{(Recursive case)}]
+    \item[(Recursive case)]
     Suppose $\phi =
     \flower{\garden{\by}{\Phi}}{\fset{i}{n}{\garden{\bz_i}{\Psi_i}}}$. We show
     that
@@ -1513,7 +1513,7 @@ The following lemmas will be useful for the soundness proof of the next section:
     \emptyset$, thus we can conclude that
     $\eforces{w'}{\Psi_i}{\update{e}{\bx}{\update{\interp{\sigma}_{e}}{\by}{\update{e'}{\bz_i}{e''}}}}$
     by \reffact{update-comm}.
-  \end{itemize}
+  \end{description}
 \end{proof}
 
 Lastly, we define the notion of \emph{semantic entailment} $\Phi \vDash \Psi$ on
@@ -1595,15 +1595,15 @@ and reliance on the pollination relation. The following lemma can be compared to
   $w$-evaluation. We show that $\eforces{w}{\Phi, \Xi\select{\Phi}}{e}$ iff
   $\eforces{w}{\Phi, \Xi{\select{\phantom{\Phi}}}}{e}$ by induction on
   $\cdepth{\Xi\hole}$.
-  \begin{itemize}
-    \item[\textbf{(Base case)}]
+  \begin{description}
+    \item[(Base case)]
       Suppose $\Xi\hole = \Xi', \hole$. Then we trivially have
       $\eforces{w}{\Phi, \Xi', \Phi}{e}$ iff $\eforces{w}{\Phi, \Xi'}{e}$ by
       \refdef{forcing}.
-    \item[\textbf{(Recursive case)}]
+    \item[(Recursive case)]
       We distinguish two cases:
-      \begin{itemize}
-        \item[\textbf{(Pistil)}]
+      \begin{description}
+        \item[(Pistil)]
           \newcommand{\FillXi}[1]{\Xi', (\flower{\garden{\bx}{#1}}{\Delta})}
           \newcommand{\rFillXi}[1]{\flower{\garden{\bx}{#1}}{\Delta}}
 
@@ -1652,7 +1652,7 @@ and reliance on the pollination relation. The following lemma can be compared to
             holds by the same argument in the other direction.
           \end{enumerate}
 
-        \item[\textbf{(Petal)}]
+        \item[(Petal)]
           \renewcommand{\FillXi}[1]{\Xi', (\flower{\garden{\bx}{\Psi}}{\garden{\by}{#1}
           \sep \Delta})}
           \renewcommand{\rFillXi}[1]{\flower{\garden{\bx}{\Psi}}{\garden{\by}{#1}
@@ -1690,8 +1690,8 @@ and reliance on the pollination relation. The following lemma can be compared to
             \item $\Phi, \ffillXi{\phantom{\Phi}} \kentails{}\Phi,
             \ffillXi{\Phi}$ holds by the same argument in the other direction.
           \end{enumerate}
-      \end{itemize}
-  \end{itemize}
+      \end{description}
+  \end{description}
 \end{proof}
 
 Then we also need to account for \emph{self-pollination}:
@@ -1711,12 +1711,12 @@ Then we also need to account for \emph{self-pollination}:
   
   By \refdef{pollination}, there are a bouquet $\Psi$ and two \kl{contexts} $\Xi',
   \Xi_0\hole$ such that one of the two following cases holds:
-  \begin{itemize}
-    \item[\textbf{(Cross-pollination)}] $\Xi\hole = \Xi'\select{\Psi, \phi,
+  \begin{description}
+    \item[(Cross-pollination)] $\Xi\hole = \Xi'\select{\Psi, \phi,
     \Xi_0\hole}$. Then $\phi, \Xi_0\select{\phi} \kequiv{} \phi,
     \Xi_0\select{\phantom\phi}$ by \reflemma{flowers-cross-pollination}, and we
     conclude by \reflemma{flowers-functoriality}.
-    \item[\textbf{(Self-pollination)}] $\Xi\hole =
+    \item[(Self-pollination)] $\Xi\hole =
     \Xi'\select{\flower{\garden{\bx}{\Psi,
     \phi}}{\garden{\by}{\Xi_0\hole} \sep \Delta}}$ for some
     $\bx,\by,\Delta$. Let $w$ a world in some Kripke
@@ -1755,13 +1755,13 @@ Then we also need to account for \emph{self-pollination}:
     \phi}}{\garden{\by}{\Xi_0\select{\phi}} \sep \Delta}$ holds by the same
     argument in the other direction.
     \end{enumerate}
-  \end{itemize}
+  \end{description}
 \end{proof}
 
 Proving the soundness of rules involving binders (\kl{ipis}, \kl{ipet},
 \kl{apis}, \kl{apet}) is also quite tedious, which can be understood as
 stemming from the fact that \kl{substitutions} simulate the complex dynamics of the
-lines of identity of \kl{EGs} in a \emph{global} rather than local way. In particular,
+\kl{lines of identity} of \kl{EGs} in a \emph{global} rather than local way. In particular,
 one needs to be careful about the scope of bound variables, which in \kl{EGs} would be
 handled locally with (de)iteration rules.
 
@@ -1835,11 +1835,11 @@ entails its premiss.
   a $w$-evaluation and $e'$ a $w'$-evaluation. We proceed by inspection of every
   $\Nature$-rule.
   
-  \begin{itemize}
-    \item[\textbf{(\kl{poll{\da}}, \kl{poll{\ua}})}]
+  \begin{description}
+    \item[(\kl{poll{\da}}, \kl{poll{\ua}})]
       By \reflemma{flowers-pollination}.
     
-    \item[\textbf{(\kl{epis})}]\sbr
+    \item[(\kl{epis})]\sbr
     \begin{enumerate}
       \item Suppose that $\eforces{w}{\Phi}{e}$. Then by \reflemma{access-mono}
       we have $\eforces{w'}{\Phi}{e}$, and thus we can conclude for instance with
@@ -1851,17 +1851,17 @@ entails its premiss.
       for some $w$-evaluation $e''$, and thus $\eforces{w}{\Phi}{e}$.
     \end{enumerate}
 
-    \item[\textbf{(\kl{epet})}]
+    \item[(\kl{epet})]
       Let $\gamma = \garden{\bx}{\Phi}$. We trivially have that
       $\eforces{w'}{\emptyset}{\update{e}{\bx}{\update{e'}{\emptyset}{e}}}$,
       and thus can conclude.
 
-    \item[\textbf{(\kl{ipis})}] We trivially have $\flower{\garden{\bx,\by}{\Phi}}{\Delta}
+    \item[(\kl{ipis})] We trivially have $\flower{\garden{\bx,\by}{\Phi}}{\Delta}
       \kentails{}\flower{\garden{\bx,\by}{\Phi}}{\Delta}$ by
       \reffact{kentails-refl}, and thus we can conclude by
       \reflemma{flowers-univ-inst}.
 
-    \item[\textbf{(\kl{ipet})}] The first direction is trivial by
+    \item[(\kl{ipet})] The first direction is trivial by
       \reflemma{flowers-coweakening}. In the other direction, let $\gamma =
       \garden{\bz}{\Xi}$, and suppose that
       $\eforces{w}{\flower{\gamma}{\garden{\bx}{\sigma(\Phi)} \sep
@@ -1878,7 +1878,7 @@ entails its premiss.
         \reflemma{flowers-ex-inst}.
       \end{itemize}
       
-    \item[\textbf{(\kl{srep})}]
+    \item[(\kl{srep})]
       Let $\gamma_i = \garden{\by_i}{\Psi_i}$ for $1 \leq i \leq n$.
       \begin{enumerate}
         \item Suppose that
@@ -1917,7 +1917,7 @@ entails its premiss.
         $\eforces{w'}{\Xi}{e \upd{\bx} e' \upd{\by_i \cup \bz} (e'' \upd{\bz}
         e''')}$ by \reffact{update-assoc}.
       \end{enumerate} 
-  \end{itemize}
+  \end{description}
 \end{proof}
 
 Then the soundness of the contextual closure of natural rules follows
@@ -2479,23 +2479,23 @@ We identify two essential arguments inherent to any bouquet:
   The \emph{vehicle} of $\Phi$ is the argument $\vehicle{\Phi} \subseteq
   \atomoccs{\Phi} \times \atomoccs{\Phi}$ such that $(\Psi\hole, a) \justi
   (\Psi'\hole, a') \in \vehicle{\Phi}$ iff the following conditions hold:
-  \begin{itemize}
-    \item[\textbf{(Identity)}] $a = a'$;
-    \item[\textbf{(Polarity)}] $\Psi\hole$ is \kl{negative} and $\Psi'\hole$ is
+  \begin{description}
+    \item[(Identity)] $a = a'$;
+    \item[(Polarity)] $\Psi\hole$ is \kl{negative} and $\Psi'\hole$ is
     \kl{positive};
-    \item[\textbf{(Interaction)}] either $\Psi\hole \cinterneg \Psi'\hole$,
+    \item[(Interaction)] either $\Psi\hole \cinterneg \Psi'\hole$,
     $\Psi\hole \sinterpos \Psi'\hole$ and $\Psi\hole = \hole$, or $\Psi'\hole
     \sinterpos \Psi\hole$.
-  \end{itemize}
+  \end{description}
 
   Dually, the \emph{anchor} of $\Phi$ is the argument $\anchor{\Phi} \subseteq
   \atomoccs{\Phi} \times \atomoccs{\Phi}$ such that $(\Psi\hole, a) \justi
   (\Psi'\hole, a') \in \anchor{\Phi}$ iff the following conditions hold:
-  \begin{itemize}
-    \item[\textbf{(Polarity)}] $\Psi\hole$ is \kl{positive} and $\Psi'\hole$ is
+  \begin{description}
+    \item[(Polarity)] $\Psi\hole$ is \kl{positive} and $\Psi'\hole$ is
     \kl{negative};
-    \item[\textbf{(Interaction)}] $\Psi\hole \sinterneg \Psi'\hole$.
-  \end{itemize}
+    \item[(Interaction)] $\Psi\hole \sinterneg \Psi'\hole$.
+  \end{description}
 \end{definition}
 
 Intuitively, the vehicle of a bouquet $\Phi$ is the set of possible
@@ -2515,48 +2515,6 @@ the \emph{union} of arguments:
   $\mathfrak{a} \compat \mathfrak{A}$, when there is no cycle in $\mathfrak{A}
   \cup \{\mathfrak{a}\}$.
 \end{definition}
-
-% This is captured by the following graph structure on bouquets, that we call a
-% \emph{vehicle}:
-
-% \begin{definition}[Vehicle]\labdef{vehicle}
-  
-%   The \emph{vehicle} of a bouquet $\Phi$ is the graph $\vehicle{\Phi}$ defined
-%   as follows:
-%   \begin{itemize}
-%     \item If $\Phi = \Psi\select{a}$ with $a$ an atomic flower, then the pair
-%     $(\Psi\hole, a)$ is a vertex of $\vehicle{\Phi}$;
-%     \item There is an oriented edge from $(\Psi\hole, a)$ to $(\Psi'\hole, a')$
-%     iff the following conditions hold:
-%     \begin{itemize}
-%       \item[\textbf{(Identity)}] $a = a'$;
-%       \item[\textbf{(Polarity)}] $\Psi\hole$ is negative and $\Psi'\hole$ is
-%       positive;
-%       \item[\textbf{(Interaction)}] there exists $\Xi\hole, \Psi_0\hole,
-%       \Psi'_0\hole$ such that either:
-%       \begin{itemize}
-%         \item[\textbf{(Cross-pollination)}] $\Xi\hole$ is negative, and
-%         \begin{align*}
-%           \Psi\hole &= \Xi\select{\Psi_0\hole, \Psi'_0\select{a'}} \\
-%           \text{and}\quad \Psi'\hole &= \Xi\select{\Psi_0\select{a}, \Psi'_0\hole}
-%         \end{align*}
-%         \item[\textbf{(Self-pollination)}] $\Xi\hole$ is positive, and either:
-%         \begin{itemize}
-%           \item[\textbf{(Pistil)}] there are some $\Phi_0, \Delta$ such that
-%           \begin{align*}
-%             \Psi\hole &= \Xi\select{\flower{\Phi_0, \hole}{\Psi'_0\select{a'} \sep \Delta}} \\
-%             \text{and}\quad \Psi'\hole &= \Xi\select{\flower{\Phi_0, a}{\Psi'_0\hole \sep \Delta}}
-%           \end{align*}
-%           \item[\textbf{(Petal)}] there is some $\Delta$ such that
-%           \begin{align*}
-%             \Psi\hole &= \Xi\select{\flower{\Psi'_0\select{a'}}{\Psi_0\hole \sep \Delta}} \\
-%             \text{and}\quad \Psi'\hole &= \Xi\select{\flower{\Psi'_0\hole}{\Psi_0\select{a} \sep \Delta}}
-%           \end{align*}
-%         \end{itemize}
-%       \end{itemize}
-%     \end{itemize}
-%   \end{itemize}
-% \end{definition}
 
 \paragraph{Pollination}
 
@@ -2871,15 +2829,15 @@ screenshots.
 We are not the first to identify the potential of \kl{EGs} for graphical proof
 building \sidecite{eg_youtube,eg_github}. However, we believe that the
 \kl{Flower\,\,Prover} is highly original in mainly two respects:
-\begin{itemize}
-  \item[\textbf{\kl{Intuitionistic} and \kl{goal}-oriented}] it is based on the flower
+\begin{description}
+  \item[Intuitionistic and goal-oriented] it is based on the flower
   calculus, which proposes a quite unusual, non-exegetic take on \kl{EGs}. It does so
   both at the level of \emph{statements}, by building upon the \kl{intuitionistic}
   \kl{icon} of the $n$-ary scroll; and at the level of \emph{proofs}, by focusing on
   a \kl{goal}-oriented reading of rules that emphasizes the importance of
   \emph{invertibility} and \emph{\kl{analyticity}} in the inference process, through
   the distinction between $\Nature$-rules and $\Culture$-rules.
-  \item[\textbf{Mobile-friendly}] it has been designed from the outset as a
+  \item[Mobile-friendly] it has been designed from the outset as a
   \emph{responsive}, \emph{touch}-based, \emph{mobile}-friendly interface.
   Responsivity means that it can be run on screens of varying formats and
   resolutions, all with the same layout providing a uniform experience across
@@ -2899,7 +2857,7 @@ building \sidecite{eg_youtube,eg_github}. However, we believe that the
   especially in educational settings --- if at all possible, will require a
   reinvention of our means of interaction with formal proofs, that is more in
   phase with contemporary usages of digital devices.
-\end{itemize}
+\end{description}
 
 \subsection{Interaction principles}
 
@@ -2919,8 +2877,8 @@ goals\sidenote{Another example of modal interface is the popular text editor
 \texttt{vim}, with its \emph{normal} mode for high-level manipulation of text
 through commands and macros, and its \emph{edit} mode for low-level insertion
 and deletion of characters.}:
-\begin{itemize}
-  \item[\textbf{\Proof mode}] this is the main mode, where \kl{goals} can be proved by
+\begin{description}
+  \item[\Proof mode] this is the main mode, where \kl{goals} can be proved by
   reducing them to the empty bouquet $\emptyset$. It corresponds in purpose to
   the interactive proof mode of modern \kl{proof assistants} like \kl{Coq}, \kl{Lean} and
   \kl{Isabelle}, and to the interactive \kl{proof view} of \kl{Actema}.
@@ -2930,7 +2888,7 @@ and deletion of characters.}:
   As will be detailed shortly, there is almost a one-to-one correspondence
   between \Proof actions, and the $\Nature$-rules of the flower calculus.
   
-  \item[\textbf{\Edit mode}] in this mode, the user can construct arbitrary
+  \item[\Edit mode] in this mode, the user can construct arbitrary
   flowers by clicking on buttons and filling text fields, or modify the \kl{goal} by
   clicking and dragging flowers around. It corresponds in purpose to the text
   editor used for writing theories in the \emph{vernacular} language of a \kl{proof
@@ -2938,7 +2896,7 @@ and deletion of characters.}:
   context of \kl{proof assistants} by the founder of the field, N. G. de Bruijn
   \cite{de_bruijn_mathematical_1994}.}. \Edit actions implement exactly the
   $\Culture$-rules of the flower calculus.
-\end{itemize}
+\end{description}
 
 \begin{remark}
   A nice analogy for these two modes can be found in the video game
@@ -2987,8 +2945,8 @@ $\Nature$-rules, together with the associated gestures for triggering them; and
 \kl{subgoal} $\flower{(\flower{}{a \sep b})}{c}$ to $\flower{b}{c}$. A few
 comments are in order:
 
-\begin{itemize}
-  \item[\textbf{Pollination}] The most central actions are those implementing
+\begin{description}
+  \item[Pollination] The most central actions are those implementing
   the pollination rules \kl{poll{\da}} and \kl{poll{\ua}}, called respectively
   \kl{Justify} and \kl{Import}. In fact, they are \emph{less} general
   than those rules: one can only \kl{Justify} flowers that are \emph{atomic}
@@ -2997,7 +2955,7 @@ comments are in order:
   restrictions do not jeopardize the completeness of $\Nature$-rules, and
   correspond to the process of $\eta$-expansion in \kl{$\lambda$-calculus}.
   
-  \item[\textbf{Suggestions}]
+  \item[Suggestions]
   
   The fourth screenshot in \reffig{flowers-prover-anim} shows the flower $\phi
   \deq \flower{a}{c}$ being dragged in the process of an \kl{Import} action.
@@ -3020,7 +2978,7 @@ comments are in order:
   \kl{Unlock} actions, or a green box covering the empty petal for
   \kl{QED} actions.
   
-  \item[\textbf{Fencing}] We have already mentioned that we suspect that the
+  \item[Fencing] We have already mentioned that we suspect that the
   \kl{epis} rule might be \kl{admissible}. However if it is not, one needs a
   corresponding graphical action in \Proof mode. While it is currently not
   implemented, we plan to add a \emph{selection} mechanism that allows the user
@@ -3029,7 +2987,7 @@ comments are in order:
   an empty pistil. This action could be mapped to a dedicated button in the
   toolbar that is visible only in \Proof mode, and enabled only when the
   selected flowers are juxtaposed in the same garden.
-\end{itemize}
+\end{description}
 
 Since every \Proof action implements a $\Nature$-rule, it is guaranteed to be
 \emph{\kl{invertible}}: the user never needs to undo a \Proof action in order to
@@ -3046,8 +3004,8 @@ actions, which can only be performed at the top of the history stack.}.
 $\Culture$-rules, together with the associated gestures for triggering them.
 Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
 \emph{delete} arbitrary flowers in the \kl{goal}:
-\begin{itemize}
-  \item[\textbf{Insertion}] The main interface mechanism that is currently
+\begin{description}
+  \item[Insertion] The main interface mechanism that is currently
   implemented is the \texttt{Add} button: since the \kl{grow} rule allows to
   insert any flower in a \kl{positive} bouquet (i.e. add a new \kl{subgoal}, just like the
   \kl(rule){cut} rule in \kl{sequent calculus}), we expose buttons in all the corresponding
@@ -3078,13 +3036,13 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
   mechanism enables an incremental, step-by-step construction of flowers, that
   is still sound logically with respect to $\Culture$-rules.
 
-  \item[\textbf{Deletion}] Deleting flowers and petals is a more straightforward
+  \item[Deletion] Deleting flowers and petals is a more straightforward
   process: one just has to click on the corresponding area, which is highlighted
   in red. To avoid overlap, the area of a flower is identified with that of its
   pistil. Thus areas subject to deletion are \kl{negative} atoms and flowers
   (\kl{crop} rule), \kl{positive} petals (\kl{pull} rule), as well as any area
   marked as \texttt{grown}.
-\end{itemize}
+\end{description}
 
 Since every \Edit action implements a $\Culture$-rule, it is guaranteed to be
 \emph{non-\kl{invertible}}: the user might need to undo an \Edit action in order to
@@ -3107,7 +3065,7 @@ view. Dually, it should also be possible to unfocus a previously focused subgoal
 --- e.g. by clicking again on it, so that the full tree structure of the goal
 can be freely navigated. \kl{Proof-theoretically}, the \Navigation mode implements the
 \emph{functoriality} of rules, i.e. the fact that they can be applied in
-\kl{contexts} of \emph{arbitrary} depth.
+\kl{contexts} of \emph{arbitrary} \kl{depth}.
 
 \begin{remark}
 This way of navigating tree structures represented as nested areas is typical of
@@ -3250,19 +3208,19 @@ to provide efficient ways to \emph{filter} or \emph{search} through its content.
 We imagine three main ways of doing so\sidenote{The first two types of filtering
 are already available in most \kl{proof assistants}, e.g. the \texttt{Search} command
 of \kl{Coq}.}:
-\begin{itemize}
-  \item[\textbf{By name}] the user can type the \emph{name} of a hypothesis in a
+\begin{description}
+  \item[By name] the user can type the \emph{name} of a hypothesis in a
   search bar. This implies that flowers have the ability to be named by the
   user.
-  \item[\textbf{By structure}] the user can specify a \emph{pattern} that must
+  \item[By structure] the user can specify a \emph{pattern} that must
   be satisfied by all hypotheses in the shelf. A pattern is just a flower that
   contains pattern variables, which can match any flower. Thus patterns might be
   built with the same tools offered in \Edit mode.
-  \item[\textbf{By selection}] the user can select subterms of the \kl{goal}, and
+  \item[By selection] the user can select subterms of the \kl{goal}, and
   then ask the system to display only hypotheses that can \emph{interact} with
   these subterms. Here we imagine something along the lines of what we did for
   \kl{Actema} (see \refsec{funcs}).
-\end{itemize}
+\end{description}
 
 % \section{Towards a Curry-Howard correspondence}\labsec{flowers-curryhoward}
 
@@ -3326,7 +3284,7 @@ flowers can be separated by an arbitrary number of layers; which might seem like
 an arbitrary restriction. A posteriori, we rationalize this choice by seeing it
 as an attempt to stay close to the original system \kl{Alpha} of Peirce. In
 particular, (de)iteration on petals is compatible with the quest for
-\emph{illative atomicity}, where all rules should be expressed in terms of
+\emph{\kl{illative atomicity}}, where all rules should be expressed in terms of
 insertions and omissions (\refsec{atomicity}); while the \kl{srep} rule is not.
 In our case, this is justified by our quest for an \emph{\kl{invertible}} calculus
 (natural fragment): indeed to simulate \kl{srep} with petal (de)iteration, one
@@ -3622,16 +3580,17 @@ facilitate the study of reasoning.
 \end{quote}
 
 The various achievements presented in this chapter incite us to depart from this
-conception. Indeed, our particular viewpoint on the illative transformations,
-that emphasizes \kl{goal}-reduction through \kl{invertible} and \kl{analytic} rules, enabled us
-to design a novel and promising type of graphical interface for interactive
-proof building, which integrates easily and elegantly some (limited) forms of
-automation. This was also made possible by the use of variables instead of lines
-of identity, trading a heavy graphical apparatus with local \kl{inference rules} for
-a simple, well-known textual syntax with complex (but automated) global dynamics
-in the form of \kl{substitutions}. Hence we believe the \emph{opposite}, that \kl{EGs}
-\emph{can} form the basis for an ergonomic calculus of logical deduction, in
-addition to being a powerful tool for meta-logical analysis.
+conception. Indeed, our particular viewpoint on the \kl{illative transformations},
+that emphasizes \kl{goal}-reduction through \kl{invertible} and \kl{analytic}
+rules, enabled us to design a novel and promising type of graphical interface
+for interactive proof building, which integrates easily and elegantly some
+(limited) forms of automation. This was also made possible by the use of
+variables instead of \kl{lines of identity}, trading a heavy graphical apparatus
+with local \kl{inference rules} for a simple, well-known textual syntax with
+complex (but automated) global dynamics in the form of \kl{substitutions}. Hence
+we believe the \emph{opposite}, that \kl{EGs} \emph{can} form the basis for an
+ergonomic calculus of logical deduction, in addition to being a powerful tool
+for meta-logical analysis.
 
 
 \end{scope}

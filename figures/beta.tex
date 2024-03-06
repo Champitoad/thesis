@@ -19,19 +19,19 @@
     {K^+\select{\phantom{G}}}
   \\
   \R[\intro{Unif{\da}}]
-    {K^+\select{[\garden{\bx, y}{G}]}}
-    {K^+\select{[\garden{\bx}{\subst{G}{z}{y}}]}}
+    {K^+\select{\bcut{\garden{\bx, y}{G}}}}
+    {K^+\select{\bcut{\garden{\bx}{\subst{G}{z}{y}}}}}
   \and
   \R[\intro{Unif{\ua}}]
-    {K^-\select{[\garden{\bx}{\subst{G}{z}{y}}]}}
-    {K^-\select{[\garden{\bx, y}{G}]}}
+    {K^-\select{\bcut{\garden{\bx}{\subst{G}{z}{y}}}}}
+    {K^-\select{\bcut{\garden{\bx, y}{G}}}}
   \\
   \R[\intro{Dcut{\da}}]
     {K\select{G}}
-    {K\select{[\garden{{}}{[\garden{{}}{G}]}]}}
+    {K\select{\bcut{\garden{{}}{[\garden{{}}{G}]}}}}
   \and
   \R[\intro{Dcut{\ua}}]
-    {K\select{[\garden{{}}{[\garden{{}}{G}]}]}}
+    {K\select{\bcut{\garden{{}}{[\garden{{}}{G}]}}}}
     {K\select{G}}
 \end{mathpar}
 \end{framed}

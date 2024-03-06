@@ -205,21 +205,21 @@ formulas have been dualized (\refdef{dual-formula}).
 \end{lemma}
 \begin{proof}
   By induction on $\sdepth{I}$.
-  \begin{itemize}
-    \item[\textbf{Formula}] Suppose $I = A$. Then we conclude by a
+  \begin{description}
+    \item[Formula] Suppose $I = A$. Then we conclude by a
     straightforward induction on $A$.
-    \item[\textbf{Unsaturated solution}] Suppose $I = \Gamma \seq \Delta$. Then by
+    \item[Unsaturated solution] Suppose $I = \Gamma \seq \Delta$. Then by
     definition we have $\soldual{(\soldual{\Gamma \seq \Delta})} =
     \soldual{(\soldual{\Delta} \seq \soldual{\Gamma})} =
     \soldual{\soldual{\Gamma}} \seq \soldual{\soldual{\Delta}}$, and we conclude
     by IH.
-    \item[\textbf{Saturated solution}] Suppose $I = \Gamma \piq{\cS}
+    \item[Saturated solution] Suppose $I = \Gamma \piq{\cS}
     \Delta$. Then by definition we have $\soldual{(\soldual{\Gamma
     \piq{\cS} \Delta})} = \soldual{(\soldual{\Delta}
     \piq{\soldual{\cS}} \soldual{\Gamma})} =
     \soldual{\soldual{\Gamma}} \piq{\soldual{\soldual{\cS}}}
     \soldual{\soldual{\Delta}}$, and we conclude by IH.
-  \end{itemize}
+  \end{description}
 \end{proof}
 
 \begin{lemma}[Shallow rule duality]\lablemma{local-rule-duality}
@@ -633,11 +633,11 @@ defined recursively as follows:
 \end{lemma}
 \begin{proof}
   By induction on $\cdepth{U\hole}$.
-  \begin{itemize}
+  \begin{description}
     \item[\bcase] Suppose $\cdepth{U\hole}$ = 0. Then $U\hole =
     \hole$, and we conclude by shallow soundness
     (\reflemma{bubbles-local-soundness}).
-    \item[\textbf{Positive case}] Suppose $\cdepth{U\hole} > 0$ and $U\hole =
+    \item[Positive case] Suppose $\cdepth{U\hole} > 0$ and $U\hole =
     \Gamma' \J U_0\hole, \Delta'$. Then by IH we have $\psint{U_0\select{T}}
     \sementC \psint{U_0\select{S}}$, and thus
     $$
@@ -649,7 +649,7 @@ defined recursively as follows:
     \end{array}
     $$
 
-    \item[\textbf{Negative case}] Suppose $\cdepth{U\hole} > 0$ and $U\hole =
+    \item[Negative case] Suppose $\cdepth{U\hole} > 0$ and $U\hole =
     \Gamma', U_0\hole \J \Delta'$. Then by \reflemma{local-rule-duality} we have
     $\soldual{S} \lstep{} \soldual{T}$, and thus by IH
     $\psint{\soldual{U_0}\select{\soldual{T}}} \sementC
@@ -666,7 +666,7 @@ defined recursively as follows:
     \end{array}
     $$
 
-    \item[\textbf{Neutral case}] Suppose $\cdepth{U\hole} > 0$ and $U\hole =
+    \item[Neutral case] Suppose $\cdepth{U\hole} > 0$ and $U\hole =
     \Gamma \piq{\cS \sep U_0\hole} \Delta$. Then by IH we have
     $\psint{U_0\select{T} \mix (\Gamma \seq \Delta)} \sementC
     \psint{U_0\select{S} \mix (\Gamma \seq \Delta)}$, and thus
@@ -678,7 +678,7 @@ defined recursively as follows:
       &=& \psint{\Gamma \piq{\cS \sep U_0\select{S}} \Delta} &
     \end{array}
     $$
-  \end{itemize}
+  \end{description}
 \end{proof}
 
 \begin{theorem}[Soundness]\labthm{bubbles-soundness}

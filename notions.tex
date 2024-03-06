@@ -36,6 +36,8 @@
 
 \knowledge{depth}{notion,scope=sfl}
 \knowledge{depth}{notion,scope=symm}
+\knowledge{depth}{notion,scope=eg}
+\knowledge{depth}{notion,scope=flower}
 
 \knowledgedirective{acronym}{synonym,up}
 
@@ -418,21 +420,58 @@
 \knowledge{{\lsub}_R}{rule}
 
 % Alpha EGs (informal version)
-\knowledge{Iteration}{rule}
-\knowledge{Deiteration}{rule}
-\knowledge{Insertion}{rule}
-\knowledge{Deletion}{rule}
-\knowledge{Double{-}cut}{rule}
+\newcommand{\principle}[1]{\text{$\mathsf{#1}$}}
+\knowledgedirective{principle}{notion,up,wrap=\principle}
+\knowledge{Iteration}{principle}
+\knowledge{(De)iteration}{principle,synonym}
+\knowledge{Deiteration}{principle}
+\knowledge{Insertion}{principle}
+\knowledge{Deletion}{principle}
+\knowledge{Double{-}cut}{principle}
 
-% Beta EGs (inductive version)
+% Alpha
 \knowledge{Iter}{rule}
 \knowledge{Deit}{rule}
 \knowledge{Ins}{rule}
 \knowledge{Del}{rule}
 \knowledge{Dcut{\da}}{rule}
 \knowledge{Dcut{\ua}}{rule}
+
+% Alpha^a
+\knowledge{Iter{+}}{rule}
+\knowledge{Iter{-}}{rule}
+\knowledge{Deit{+}}{rule}
+\knowledge{Deit{-}}{rule}
+
+% Beta EGs (inductive version)
+\knowledge{Iter}{rule,scope=beta}
+\knowledge{Deit}{rule,scope=beta}
+\knowledge{Ins}{rule,scope=beta}
+\knowledge{Del}{rule,scope=beta}
+\knowledge{Dcut{\da}}{rule,scope=beta}
+\knowledge{Dcut{\ua}}{rule,scope=beta}
 \knowledge{Unif{\da}}{rule}
 \knowledge{Unif{\ua}}{rule}
+
+% SKS
+\knowledge{ai{\da}}{rule}
+\knowledge{ai{\ua}}{rule}
+\knowledge{s}{rule}
+\knowledge{aw{\da}}{rule}
+\knowledge{ac{\da}}{rule}
+\knowledge{ac{\ua}}{rule}
+\knowledge{aw{\ua}}{rule}
+\knowledge{nm{\da}}{rule}
+\knowledge{m}{rule}
+\knowledge{nm{\ua}}{rule}
+\knowledge{\alpha{\da}}{rule}
+\knowledge{\sigma{\da}}{rule}
+\knowledge{\sigma{\ua}}{rule}
+\knowledge{\alpha{\ua}}{rule}
+\knowledge{f{\da}}{rule}
+\knowledge{t{\da}}{rule}
+\knowledge{t{\ua}}{rule}
+\knowledge{f{\ua}}{rule}
 
 % Flower calculus
 \knowledge{poll{\da}}{rule}
@@ -1329,15 +1368,29 @@
  | juxtaposition
 
 \knowledge{notion}
- | cut
- | cuts
+ | cut@eg
+ | cuts@eg
 
 \knowledge{notion}
  | isotropy
 
 \knowledge{notion}
+ | entitative graphs
+ | Entitative graphs
+
+\knowledge{notion}
  | illative transformation
  | illative transformations
+
+\knowledge{notion}
+ | illative atomicity
+ | Illative atomicity
+ 
+\knowledge{notion}
+ | context@eg
+ | contexts@eg
+ | Context@eg
+ | Contexts@eg
 
 \knowledge{notion}
  | polarity@eg
@@ -1350,6 +1403,24 @@
 \knowledge{notion}
  | negative@eg
  | Negative@eg
+
+\knowledge{notion}
+ | valuation@eg
+ | valuations@eg
+ | Valuation@eg
+ | Valuations@eg
+
+\knowledge{notion}
+ | structure@eg
+ | structures@eg
+ | Structure@eg
+ | Structures@eg
+
+\knowledge{notion}
+ | context@sks
+ | contexts@sks
+ | Context@sks
+ | Contexts@sks
 
 \knowledge{notion}
  | lines of identity
