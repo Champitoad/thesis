@@ -434,9 +434,9 @@
 
 \newcommand{\pissheet}[1]{\colorbox{pistil}{$#1$}}
 
-\newcommand{\bx}{\mathbf{x}}
-\newcommand{\by}{\mathbf{y}}
-\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bx}{\symbf{x}}
+\newcommand{\by}{\symbf{y}}
+\newcommand{\bz}{\symbf{z}}
 
 \newcommand{\atomoccs}[1]{\mathcall{A}(#1)}
 \newcommand{\vehicle}[1]{\mathcall{V}(#1)}
@@ -458,7 +458,9 @@
 
 % First-order
 
-\knowledgenewrobustcmd\vars{\cmdkl{\mathscr{V}}}
+\newrobustcmd\vars{\withkl{\kl[\vars]}{\cmdkl{\mathscr{V}}}}
+\knowledge{\vars}{notion,scope=eg}
+\knowledge{\vars}{notion,scope=flower}
 \knowledgenewrobustcmd\fsymbs{\cmdkl{\mathscr{F}}}
 \knowledgenewrobustcmd\psymbs{\cmdkl{\mathscr{P}}}
 \knowledgenewrobustcmd\arity{\cmdkl{\mathsf{ar}}}
@@ -469,10 +471,10 @@
 \knowledgenewrobustcmd\upd[1]{\mathbin{\cmdkl{|_{#1}}}}
 \newcommand{\update}[3]{#1 \upd{#2} #3}
 \newcommand{\restr}[2]{#1\!\upd{#2}\!}
-\newcommand{\idsubst}{\mathsf{1}}
+\knowledgenewrobustcmd\idsubst{\cmdkl{\mathsf{1}}}
 \newcommand{\cstsubst}[1]{\overline{#1}}
 
-\newcommand{\tvec}[1]{\vec{\mathbf{#1}}}
+\newcommand{\tvec}[1]{\vec{\symbf{#1}}}
 
 % Kripke
 
@@ -485,13 +487,28 @@
 
 \knowledgenewrobustcmd\evaluation[1]{\cmdkl{$#1$-evaluation}}
 \knowledgenewrobustcmd\consistent[1]{\cmdkl{$#1$-consistent}}
+\knowledgenewrobustcmd\consistency[1]{\cmdkl{$#1$-consistency}}
 \knowledgenewrobustcmd\complete[1]{\cmdkl{$#1$-complete}}
+\knowledgenewrobustcmd\completeness[1]{\cmdkl{$#1$-completeness}}
 
 \knowledgenewrobustcmd\eforces[3]{#1\mathrel{\cmdkl{\Vdash}}#2\,\cmdkl{[}#3\cmdkl{]}}
 \newrobustcmd\neforces[3]{\withkl{\kl[\eforces]}{#1\mathrel{\cmdkl{\nVdash}}#2\,\cmdkl{[}#3\cmdkl{]}}}
 
-\knowledgenewrobustcmd\access{\mathrel{\cmdkl{\leq}}}
-\newrobustcmd\revaccess{\withkl{\kl[\access]}{\mathrel{\cmdkl{\geq}}}}
+\newrobustcmd\access{
+  \mathrel{%
+    \withkl{\kl[\access]}{%
+      \cmdkl{\leq}
+    }%
+  }%
+}
+\knowledge{\access}{notion}
+\newrobustcmd\revaccess{
+  \mathrel{%
+    \withkl{\kl[\access]}{%
+      \cmdkl{\geq}
+    }%
+  }%
+}
 
 \knowledgenewrobustcmd\completion[1]{\cmdkl{\mathsf{Com}}(#1)}
 \knowledgenewrobustcmd\ncompletion[2]{\cmdkl{\mathsf{Com}^{#2}}(#1)}

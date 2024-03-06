@@ -1,0 +1,33 @@
+\begin{tikzpicture}
+\clip (6.2,3) rectangle (-3,-3);
+  \coordinate (x) at (0,0);
+\begin{scope}[shift={(x)}]
+
+  \draw[black] (2.1650635094611,-1.25) .. controls (7.278312163513,-4.2021354868503) and (7.278312163513,4.2021354868503) .. (2.1650635094611,1.25);
+  \coordinate (p) at (4.25,-2.5266077490372e-15);
+  \coordinate (p-top) at (6,-4.4408920985006e-15);
+  \draw[black,fill=pistil] (0,0) circle (2.5);
+\end{scope}
+
+\begin{scope}[shift={(x)}]
+
+  \draw[black] (-0.35355339059327,0.35355339059327) .. controls (-2.8154822031356,2.8154822031356) and (-2.8154822031356,-2.8154822031356) .. (-0.35355339059327,-0.35355339059327);
+  \coordinate (p1) at (-1.35,1.0000510901776e-16);
+  \coordinate (p1-top) at (-2.2,1.3877787807814e-16);
+  \draw[black] (0.35355339059327,-0.35355339059327) .. controls (2.8154822031356,-2.8154822031356) and (2.8154822031356,2.8154822031356) .. (0.35355339059327,0.35355339059327);
+  \coordinate (q1) at (1.35,-3.5613533087342e-16);
+  \coordinate (q1-top) at (2.2,-5.8980598183211e-16);
+  \draw[black,fill=pbg] (0,0) circle (0.5);
+\end{scope}
+
+\begin{scope}[shift={(p1)}]
+
+  \draw[black,fill=pbg] (0,0) circle (0.7);
+\end{scope}
+
+  \node at (x) {$x$}; 
+  \node at (p1) {$p(x)$};
+  \node at (q1) {$q(x)$};
+% \draw [help lines, step=1] (current bounding box.south west) grid (current bounding box.north east);
+% \draw [help lines] (current bounding box.south west) rectangle (current bounding box.north east);
+\end{tikzpicture}

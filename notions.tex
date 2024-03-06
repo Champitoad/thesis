@@ -65,6 +65,7 @@
 \knowledge{Edukera}{software,url={https://edukera.com/}}
 \knowledge{Maude}{software,url={http://maude.cs.illinois.edu/w/index.php/The_Maude_System}}
 \knowledge{Tom}{software,url={https://tom.loria.fr/}}
+\knowledge{Larus}{software,url={https://github.com/janicicpredrag/Larus}}
 
 \knowledge{Actema}{software,url={https://actema.xyz}}
 \knowledge{coq-actema}{software,url={https://github.com/Champitoad/coq-actema}}
@@ -428,6 +429,8 @@
 \knowledge{Insertion}{principle}
 \knowledge{Deletion}{principle}
 \knowledge{Double{-}cut}{principle}
+\knowledge{Blank~Antecedant}{principle}
+\knowledge{BA}{principle}
 
 % Alpha
 \knowledge{Iter}{rule}
@@ -488,6 +491,7 @@
 \knowledge{apis}{rule}
 \knowledge{apet}{rule}
 \knowledge{epis{\da}}{rule}
+\knowledge{crep}{rule}
 
 % Introduction
 
@@ -988,6 +992,11 @@
  | EGs
 
 \knowledge{notion}
+ | intuitionistic existential graphs
+\knowledge{acronym}
+ | IEGs
+
+\knowledge{notion}
  | flower calculus
  
 \knowledge{notion}
@@ -1439,10 +1448,10 @@
  | Endoporeutic
 
 \knowledge{notion}
- | binder
- | binders
- | Binder
- | Binders
+ | binder@eg
+ | binders@eg
+ | Binder@eg
+ | Binders@eg
 
 \knowledge{notion}
  | wire
@@ -1495,11 +1504,21 @@
  | garden@beta
  | gardens@beta
 
+\knowledge{notion}
+ | shallow@eg
+ | Shallow@eg
+
 % Flower calculus
 
 \knowledge{notion}
  | scroll
  | scrolls
+ | Scroll
+ | Scrolls
+
+\knowledge{notion}
+ | $n$-ary scroll
+ | $n$-ary scrolls
 
 \knowledge{notion}
  | curl
@@ -1514,29 +1533,16 @@
  | outloops
 
 \knowledge{notion}
- | flower@informal
- | flowers@informal
- | Flower@informal
- | Flowers@informal
+ | geometric logic
 
 \knowledge{notion}
- | flower
- | flowers
- | Flower
- | Flowers
-
-\knowledge{notion}
- | garden@flower
- | gardens@flower
+ | coherent formula
+ | coherent formulas
+ | Coherent formula
+ | Coherent formulas
 
 \knowledge{notion}
  | first-order signature
-
-\knowledge{notion}
- | predicate symbols
-
-\knowledge{notion}
- | arity
 
 \knowledge{notion}
  | binder@flower
@@ -1549,12 +1555,6 @@
  | sprinklers@flower
  | Sprinkler@flower
  | Sprinklers@flower
-
-\knowledge{notion}
- | garden@flower
- | gardens@flower
- | Garden@flower
- | Gardens@flower
 
 \knowledge{notion}
  | bouquet
@@ -1609,6 +1609,7 @@
 
 \knowledge{notion}
  | capture-avoiding
+ | Capture-avoiding
 
 \knowledge{notion}
  | context@flower
@@ -1630,6 +1631,7 @@
 
 \knowledge{notion}
  | pollination
+ | pollinations
  | Pollination
  | pollinated
  | pollinate
@@ -1639,14 +1641,18 @@
 \knowledge{notion}
  | cross-pollination
  | Cross-pollination
+ | cross-pollinating
+ | Cross-pollinating
 
 \knowledge{notion}
  | self-pollination
  | Self-pollination
+ | self-pollinating
+ | Self-pollinating
 
 \knowledge{notion}
- | shallow
- | Shallow
+ | shallow@flower
+ | Shallow@flower
 
 \knowledge{notion}
  | natural
@@ -1655,18 +1661,6 @@
 \knowledge{notion}
  | cultural
  | Cultural
-
-\knowledge{notion}
- | derivation
- | derivations
- | Derivation
- | Derivations
-
-\knowledge{notion}
- | proof
- | proofs
- | Proof
- | Proofs
  
 \knowledge{notion}
  | first-order@implication
@@ -1675,10 +1669,6 @@
 \knowledge{notion}
  | higher-order@implication
  | Higher-order@implication
-
-\knowledge{notion}
- | hypothetically provable
- | hypothetical provability
 
 \knowledge{notion}
  | first-order structure
@@ -1691,10 +1681,6 @@
 \knowledge{notion}
  | universal Kripke structure
  | universal Kripke structures
-
-\knowledge{notion}
- | domain
- | domains
 
 \knowledge{notion}
  | interpretation
@@ -1711,17 +1697,6 @@
  | forced
 
 \knowledge{notion}
- | consequence
- | semantic entailment
- | semantically entails
-
-\knowledge{notion}
- | equivalence
- | equivalent
- | semantic equivalence
- | semantically equivalent
-
-\knowledge{notion}
  | valid
  | validity
 
@@ -1730,12 +1705,24 @@
  | theories
  | Theory
  | Theories
+ 
+\knowledge{notion}
+ | pollination phase
+ | pollination phases
+ | Pollination phase
+ | Pollination phases
 
 \knowledge{notion}
- | coherent logic
+ | reproduction phase
+ | reproduction phases
+ | Reproduction phase
+ | Reproduction phases
 
 \knowledge{notion}
- | topos theory
+ | decomposition phase
+ | decomposition phases
+ | Decomposition phase
+ | Decomposition phases
 
 \knowledge{Justify}{action}
 \knowledge{Import}{action}
