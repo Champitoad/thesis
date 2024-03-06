@@ -353,7 +353,7 @@ outloop and $\Delta \deq \begin{pmatrix} a_{1,1} & \ldots & a_{1,p_1} \\
 in its inloops, where each row $H_j$ in $\Delta$ encodes an inloop, can be
 interpreted as the formula
 $$\bigwedge_{i = 1}^{m}{a_i} \limp \bigvee_{j = 1}^{n}\bigwedge_{k = 1}^{p_n}{a_{j,k}}$$
-If one adds \emph{binders} to the mix (see \refsec{gardens}) by having $\gamma \deq
+If one adds \emph{\kl(eg){binders}} to the mix (see \refsec{gardens}) by having $\gamma \deq
 \garden{\bx}{G}$ as outloop, and
 $\Xi \deq \begin{pmatrix}
   \bx_1 \\
@@ -377,7 +377,7 @@ p(x)$. In \kl{Beta}, we would have exploited the \kl{classical} equivalences
 $\neg \forall x. A \semequiv{} \exists x. \neg A$ and $\neg \exists x. A \semequiv{}
 \forall x. \neg A$ (justified by the \kl{Double{-}cut} principle) in order to
 interpret them as $\exists x. \neg p(x)$ and $\forall x. \neg p(x)$, emphasizing
-the idea that \kl(eg){positive} and \kl(eg){negative} binders encode
+the idea that \kl(eg){positive} and \kl(eg){negative} \kl(eg){binders} encode
 respectively $\exists$ and $\forall$. But this is not possible anymore with the
 \kl{intuitionistic} interpretation of $n$-ary scrolls, where the
 $\exists/\forall$ duality is replaced by the inloop/outloop distinction. In
@@ -545,7 +545,7 @@ Any finite set $\bx \subset \vars$ of variables is called a \emph{sprinkler},
 finite multiset $\Phi \subset \flowers$ of flowers a \emph{bouquet}, and finite
 multiset $\Gamma \subset \gardens$ of gardens a \emph{corolla}. We will often
 write gardens as $\garden{x_1, \ldots, x_n}{\phi_1, \ldots, \phi_m}$, where the
-$x_i$ are called \emph{binders}; and non-atomic flowers as
+$x_i$ are called \intro{binders}; and non-atomic flowers as
 $\flower{\gamma}{\delta_1 \sep \ldots \sep \delta_n}$, where $\gamma$ is the
 \emph{pistil}, and the $\delta_i$ are called \emph{petals}. We write
 $\fset{i}{n}{E_i}$ to denote a finite (multi)set of size $n$ with elements $E_i$
@@ -638,8 +638,8 @@ of terms in flowers.
 \end{definition}
 
 \begin{remark}\labremark{flower-scope}
-Note that the scope of a binder located in a pistil extends both to the pistil
-\emph{and} to all its attached petals, whereas for a binder located in a petal
+Note that the scope of a \kl{binder} located in a pistil extends both to the pistil
+\emph{and} to all its attached petals, whereas for a \kl{binder} located in a petal
 it is limited to said petal. This is reflected in the above definition of free
 variables for (non-atomic) flowers, and is visually explained by the nesting of
 curves in an $n$-ary scroll.
@@ -664,7 +664,7 @@ curves in an $n$-ary scroll.
 \end{definition}
 
 To avoid reasoning about $\alpha$-equivalence, we adopt in this work the
-so-called \emph{Barendregt convention} that all variable binders are distinct,
+so-called \emph{Barendregt convention} that all variable \kl{binders} are distinct,
 both among themselves and from eventual free variables. Formally, we assume that
 for any bouquet $\Phi$, the two following conditions hold:
 \begin{enumerate}
@@ -862,9 +862,9 @@ correspond respectively to the \emph{\kl(dnd){backward}} $\back$ and
 \emph{\kl(dnd){forward}} $\forw$ \kl{interaction operators}, which are collapsed into a
 single interaction operator $\ast$ in the original formulation of \kl{subformula
 linking} for classical linear logic \cite{Chaudhuri2013}.}. If we were to replace
-binders by \kl{LoI} (\kl{lines of identity}, see \refsec{beta}), then the pollination
-relation would also prescribe in which areas \kl{LoI} can be extended/iterated,
-providing an explanation for the scope of binders (\refremark{flower-scope}).
+\kl{binders} by \kl{LoIs} (\kl{lines of identity}, see \refsec{beta}), then the pollination
+relation would also prescribe in which areas \kl{LoIs} can be extended/iterated,
+providing an explanation for the scope of \kl{binders} (\refremark{flower-scope}).
 
 \paragraph{Rules}
 
@@ -1013,7 +1013,7 @@ are closer to sequent-style introduction/\kl{elimination rules}:
 
 The rules of the flower calculus have an interesting property: they are mostly
 \emph{arity-agnostic}, i.e. they work uniformly on flowers, bouquets and gardens
-with any number of petals, flowers and binders. In particular, this means that
+with any number of petals, flowers and \kl{binders}. In particular, this means that
 the same rules can be used to capture provability in almost any \emph{fragment}
 of \kl{intuitionistic} \kl{predicate logic}, understood as any subset $\mathfrak{F}
 \subset \flowers$ of the set of all flowers\sidenote{The only exception seems to
@@ -1758,7 +1758,7 @@ Then we also need to account for \emph{self-pollination}:
   \end{description}
 \end{proof}
 
-Proving the soundness of rules involving binders (\kl{ipis}, \kl{ipet},
+Proving the soundness of rules involving \kl{binders} (\kl{ipis}, \kl{ipet},
 \kl{apis}, \kl{apet}) is also quite tedious, which can be understood as
 stemming from the fact that \kl{substitutions} simulate the complex dynamics of the
 \kl{lines of identity} of \kl{EGs} in a \emph{global} rather than local way. In particular,
