@@ -492,6 +492,9 @@
 \knowledge{apet}{rule}
 \knowledge{epis{\da}}{rule}
 \knowledge{crep}{rule}
+\knowledge{iter}{rule}
+\knowledge{deit}{rule}
+\knowledge{app}{rule}
 
 % Introduction
 
@@ -1059,10 +1062,13 @@
 \knowledge{notion}
  | positive@sfl
  | Positive@sfl
+ | positively@sfl
+ | Positively@sfl
 \knowledge{notion}
  | negative@sfl
- | negatively@sfl
  | Negative@sfl
+ | negatively@sfl
+ | Negatively@sfl
 
 \knowledge{notion}
  | focusing
@@ -1410,9 +1416,13 @@
 \knowledge{notion}
  | positive@eg
  | Positive@eg
+ | positively@eg
+ | Positively@eg
 \knowledge{notion}
  | negative@eg
  | Negative@eg
+ | negatively@eg
+ | Negatively@eg
 
 \knowledge{notion}
  | valuation@eg
@@ -1626,9 +1636,13 @@
 \knowledge{notion}
  | positive@flower
  | Positive@flower
+ | positively@flower
+ | Positively@flower
 \knowledge{notion}
  | negative@flower
  | Negative@flower
+ | negatively@flower
+ | Negatively@flower
 
 \knowledge{notion}
  | pollination
@@ -1752,12 +1766,19 @@
  | Decomposition phase
  | Decomposition phases
 
+\newcommand\fpmode[1]{\begingroup\textsc{#1}\endgroup}
+\knowledgedirective{mode}{notion,up,wrap=\fpmode}
+\knowledge{Proof}{mode}
+\knowledge{Edit}{mode}
+\knowledge{Navigation}{mode}
+
 \knowledge{Justify}{action}
 \knowledge{Import}{action}
 \knowledge{QED}{action}
 \knowledge{EFQ}{action}
 \knowledge{Case}{action}
 \knowledge{Unlock}{action}
+\knowledge{Fence}{action}
 
 \knowledge{Grow}{action}
 \knowledge{Glue}{action}
@@ -1765,3 +1786,8 @@
 \knowledge{Delete}{action}
 \knowledge{Crop}{action}
 \knowledge{Pull}{action}
+
+\knowledge{Undo}{action}
+\knowledge{Redo}{action}
+
+\knowledge{Auto}{action}
