@@ -1,24 +1,22 @@
-\scalebox{0.8}{
-\begin{mathpar}
+$
   \begin{array}{ll}
     &\flower{(\flower{\garden{x}{}}{(\flower{p(x)}{})\sep q(x)})}{(\flower{\garden{y}{p(y)}}{\garden{z}{q(z)}})}
-    \\\step{\kl{ipet}}
+    \\ \step{\kl{ipet}}
     &\flower{(\flower{\garden{x}{}}{(\flower{p(x)}{})\sep q(x)})}{(\flower{\garden{y}{p(y)}}{q(y)})}
-    \\\step{\kl{poll{\ua}}}
+    \\ \step{\kl{poll{\ua}}}
     &\flower{(\flower{\garden{x}{}}{(\flower{p(x)}{})\sep q(x)})}{(\flower{\garden{y}{p(y),(\flower{\garden{x}{}}{(\flower{p(x)}{})\sep q(x)})}}{q(y)})}
-    \\\step{\kl{ipis}}
+    \\ \step{\kl{ipis}}
     &\flower{(\flower{\garden{x}{}}{(\flower{p(x)}{})\sep q(x)})}{(\flower{\garden{y}{p(y),(\flower{}{(\flower{p(y)}{})\sep q(y)})}}{q(y)})}
-    \\\step{\kl{srep}}
+    \\ \step{\kl{srep}}
     &\flower{(\flower{\garden{x}{}}{(\flower{p(x)}{})\sep q(x)})}{(\flower{\garden{y}{p(y)}}{(\flower{(\flower{p(y)}{})}{q(y)}),(\flower{q(y)}{q(y)})})}
     \\\nsteps{2}{\kl{poll{\da}}}
     &\flower{(\flower{\garden{x}{}}{(\flower{p(x)}{})\sep q(x)})}{(\flower{\garden{y}{p(y)}}{(\flower{(\flower{}{})}{q(y)}),(\flower{q(y)}{\garden{}{}})})}
-    \\\step{\kl{srep}}
+    \\ \step{\kl{srep}}
     &\flower{(\flower{\garden{x}{}}{(\flower{p(x)}{})\sep q(x)})}{(\flower{\garden{y}{p(y)}}{(\flower{}{\garden{}{}}),(\flower{q(y)}{\garden{}{}})})}
     \\\nsteps{2}{\kl{epet}}
     &\flower{(\flower{\garden{x}{}}{(\flower{p(x)}{})\sep q(x)})}{(\flower{\garden{y}{p(y)}}{\garden{}{}})}
-    \\\step{\kl{epet}}
+    \\ \step{\kl{epet}}
     &\flower{(\flower{\garden{x}{}}{(\flower{p(x)}{})\sep q(x)})}{\garden{}{}}
-    \\\step{\kl{epet}}
+    \\ \step{\kl{epet}}
   \end{array}
-\end{mathpar}
-}
+$

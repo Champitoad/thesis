@@ -131,7 +131,7 @@
 
 \newrobustcmd\steps[1]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\rightarrow^{\ast}_{#1}}}}}
 \newrobustcmd\notstep[1]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\nrightarrow_{#1}}}}}
-\newrobustcmd\notsteps[1]{\withkl{\kl[\steps]}{\mathrel{\cmdkl{\nrightarrow^{\ast}_{#1}}}}}
+\newrobustcmd\notsteps[1]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\nrightarrow^{\ast}_{#1}}}}}
 \newrobustcmd\nsteps[2]{\withkl{\kl[\step]}{\mathrel{\cmdkl{\rightarrow^{#1}_{#2}}}}}
 
 \newrobustcmd\xlstep[1]{\withkl{\kl[\lstep]}{\mathrel{\cmdkl{\xrightharpoonup{#1}}}}}
@@ -411,7 +411,8 @@
 
 % Flowers
 
-\knowledgenewrobustcmd\entails[1]{\mathrel{\cmdkl{\vdash_{#1}}}}
+\newrobustcmd\entails[1]{\mathrel{\withkl{\kl[\entails]}{\cmdkl{\vdash_{#1}}}}}
+\knowledge{\entails}{notion}
 \newrobustcmd\nentails[1]{\withkl{\kl[\entails]}{\mathrel{\cmdkl{\nvdash_{#1}}}}}
 
 % \newcommand{\Nature}{\symbol{"2740}}
@@ -419,8 +420,9 @@
 \knowledgenewrobustcmd\Nature{\cmdkl{\text{\ding{96}}}}
 \knowledgenewrobustcmd\Culture{\cmdkl{\text{\ding{34}}}}
 
-\knowledgenewrobustcmd\flower[2]{#1 \mathrel{\cmdkl{\csup}} #2}
-\knowledgenewrobustcmd\garden[2]{#1 \mathbin{\cmdkl{\cdot}} #2}
+\newrobustcmd\flower[2]{#1\mathrel{\withkl{\kl[\flower]}{\cmdkl{\csup}}}#2}
+\knowledge{\flower}{notion}
+\knowledgenewrobustcmd\garden[2]{#1\mathbin{\cmdkl{\cdot}}#2}
 
 \knowledgenewrobustcmd\flowers{\cmdkl{\mathbb{F}}}
 \knowledgenewrobustcmd\gardens{\cmdkl{\mathbb{G}}}
@@ -438,19 +440,23 @@
 \newcommand{\by}{\symbf{y}}
 \newcommand{\bz}{\symbf{z}}
 
-\newcommand{\atomoccs}[1]{\mathcall{A}(#1)}
-\newcommand{\vehicle}[1]{\mathcall{V}(#1)}
-\newcommand{\anchor}[1]{\vrefl{\mathcall{V}}(#1)}
-\newcommand{\lca}[2]{\mathsf{lca}(#1,#2)}
+\knowledgenewrobustcmd\atomoccs[1]{\cmdkl{\mathcall{A}(#1)}}
+\knowledgenewrobustcmd\vehicle[1]{\cmdkl{\mathcall{V}}(#1)}
+\knowledgenewrobustcmd\anchor[1]{\cmdkl{\vrefl{\mathcall{V}}}(#1)}
+\knowledgenewrobustcmd\lca[2]{\cmdkl{\mathsf{lca}}(#1,#2)}
 
-\newcommand{\cinter}{\mathbin{\bowtie}}
-\newcommand{\cinterpos}{\mathbin{\stackon[1pt]{$\cinter$}{$\scriptstyle +$}}}
-\newcommand{\cinterneg}{\mathbin{\stackon[1pt]{$\cinter$}{$\scriptstyle -$}}}
-\newcommand{\sinter}{\mathbin{\hrefl{\propto}}}
-\newcommand{\sinterpos}{\mathbin{\stackon[1pt]{$\sinter$}{$\scriptstyle +$}}}
-\newcommand{\sinterneg}{\mathbin{\stackon[1pt]{$\sinter$}{$\scriptstyle -$}}}
-\newcommand{\justi}{\mathbin{\hookrightarrow}}
-\newcommand{\compat}{\mathbin{\da}}
+\newrobustcmd\cinter{\mathrel{\withkl{\kl[\cinter]}{\cmdkl{\bowtie}}}}
+\knowledge{\cinter}{notion}
+\newrobustcmd\cinterpos{\withkl{\kl[\cinter]}{\mathrel{\cmdkl{\stackon[1pt]{$\cinter$}{$\scriptstyle +$}}}}}
+\newrobustcmd\cinterneg{\withkl{\kl[\cinter]}{\mathrel{\cmdkl{\stackon[1pt]{$\cinter$}{$\scriptstyle -$}}}}}
+
+\newrobustcmd\sinter{\withkl{\kl[\sinter]}{\mathrel{\cmdkl{\hrefl{\propto}}}}}
+\knowledge{\sinter}{notion}
+\newrobustcmd\sinterpos{\withkl{\kl[\sinter]}{\mathrel{\cmdkl{\stackon[1pt]{$\sinter$}{$\scriptstyle +$}}}}}
+\newrobustcmd\sinterneg{\withkl{\kl[\sinter]}{\mathrel{\cmdkl{\stackon[1pt]{$\sinter$}{$\scriptstyle -$}}}}}
+
+\knowledgenewrobustcmd\justi{\mathbin{\cmdkl{\hookrightarrow}}}
+\knowledgenewrobustcmd\compat{\mathbin{\cmdkl{\da}}}
 
 \newcommand{\Proof}{\begingroup \textsc{Proof} \endgroup}
 \newcommand{\Edit}{\begingroup \textsc{Edit} \endgroup}
@@ -468,7 +474,8 @@
 \knowledgenewrobustcmd\terms{\cmdkl{\mathbb{T}}}
 \knowledgenewrobustcmd\csts{\cmdkl{\mathbb{C}}}
 
-\knowledgenewrobustcmd\upd[1]{\mathbin{\cmdkl{|_{#1}}}}
+\newrobustcmd\upd[1]{\withkl{\kl[\upd]}{\mathbin{\cmdkl{|_{#1}}}}}
+\knowledge{\upd}{notion}
 \newcommand{\update}[3]{#1 \upd{#2} #3}
 \newcommand{\restr}[2]{#1\!\upd{#2}\!}
 \knowledgenewrobustcmd\idsubst{\cmdkl{\mathsf{1}}}
@@ -481,15 +488,17 @@
 % \newcommand{\rewolF}[1]{\symbol{2702}(#1)}
 \knowledgenewrobustcmd\rewolF[1]{\cmdkl{\text{\ding{95}}}(#1)}
 
-\knowledgenewrobustcmd\kentails[1]{\mathrel{\cmdkl{\vDash_{#1}}}}
-\newrobustcmd\notkentails[1]{\withkl{\kl[\kentails]}{\mathrel{\cmdkl{\nvDash_{#1}}}}}
-\knowledgenewrobustcmd\kequiv[1]{\mathrel{\cmdkl{\vrefl{{\vDash}} {\vDash}_{#1}}}}
+\newrobustcmd\kentails[1]{\mathrel{\withkl{\kl[\kentails]}{\cmdkl{\vDash_{#1}}}}}
+\knowledge{\kentails}{notion}
+\newrobustcmd\notkentails[1]{\mathrel{\withkl{\kl[\kentails]}{\cmdkl{\nvDash_{#1}}}}}
+\newrobustcmd\kequiv[1]{\mathrel{\withkl{\kl[\kequiv]}{\cmdkl{\vrefl{{\vDash}} {\vDash}_{#1}}}}}
+\knowledge{\kequiv}{notion}
 
 \knowledgenewrobustcmd\evaluation[1]{\cmdkl{$#1$-evaluation}}
 \knowledgenewrobustcmd\consistent[1]{\cmdkl{$#1$-consistent}}
-\knowledgenewrobustcmd\consistency[1]{\cmdkl{$#1$-consistency}}
 \knowledgenewrobustcmd\complete[1]{\cmdkl{$#1$-complete}}
-\knowledgenewrobustcmd\completeness[1]{\cmdkl{$#1$-completeness}}
+\newrobustcmd\consistency[1]{\withkl{\kl[\consistent]}{\cmdkl{$#1$-consistency}}}
+\newrobustcmd\completeness[1]{\withkl{\kl[\complete]}{\cmdkl{$#1$-completeness}}}
 
 \knowledgenewrobustcmd\eforces[3]{#1\mathrel{\cmdkl{\Vdash}}#2\,\cmdkl{[}#3\cmdkl{]}}
 \newrobustcmd\neforces[3]{\withkl{\kl[\eforces]}{#1\mathrel{\cmdkl{\nVdash}}#2\,\cmdkl{[}#3\cmdkl{]}}}

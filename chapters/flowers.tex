@@ -713,7 +713,7 @@ To define \kl{substitutions}, we introduce a general notion of \emph{function
 \kl{update}}, which will be useful for the semantic evaluation of flowers in
 \refsec{Semantics}.
 
-\begin{definition}[Function update]
+\begin{definition}[Function update]\labdef{update}
   Let $A, B$ be two sets, $f, g : A \to B$ two functions and $R \subseteq A$
   some subset of their domain. The \intro{update} of $f$ on $R$ with $g$ is the
   function defined by:
@@ -1019,7 +1019,7 @@ are closer to sequent-style introduction/\kl{elimination rules}:
     & \text{\small\textbf{\kl{Petals}}} &
     < & > & - & - & = & = & = & = \\
     \hline
-    \multirow{2}{*}{\text{\textbf{Sprinklers}}}
+    \multirow{2}{*}{\text{\textbf{\kl{Sprinklers}}}}
     & \text{\small\textbf{\kl{Pistil}}} &
     - & < & < & < & < & < & \geq & < \\
     \cline{2-10}
@@ -1032,25 +1032,26 @@ are closer to sequent-style introduction/\kl{elimination rules}:
   \labtab{flowers-fragments}
 \end{table}
 
-The rules of the \kl{flower calculus} have an interesting property: they are mostly
-\emph{arity-agnostic}, i.e. they work uniformly on flowers, \kl{bouquets} and gardens
-with any number of \kl{petals}, flowers and \kl{binders}. In particular, this means that
-the same rules can be used to capture provability in almost any \emph{fragment}
-of \kl{intuitionistic} \kl{predicate logic}, understood as any subset $\mathfrak{F}
-\subset \flowers$ of the set of all flowers\sidenote{The only exception seems to
-be the rule (\kl{ipis}) (resp. \kl{ipet}), whose duplication of flowers (resp.
-\kl{petals}) prevents $\forall$ from being expressible (i.e. provable) without
-$\land$ (resp. $\lor$). This can be fixed by simply removing the duplication and
-polarizing the \kl{context} of application as for the rule \kl{apis} (resp.
-\kl{apet}), at the cost of making the rule non-\kl{invertible}.}.
-\reftab{flowers-fragments} shows how all the usual \kl{symbolic} connectives can be
-expressed by \emph{cardinality} constraints on set-based syntactic constructs:
-$<$, $\leq$, $=$, $\geq$, $>$ correspond respectively to a cardinality smaller,
-smaller or equal, equal, greater or equal, and greater than $1$; and `$-$'
-denotes the absence of constraint. These constraints are then taken
-\emph{conjunctively} for a single connective (column-wise); and they can be
-freely mixed \emph{disjunctively} (row-wise), in order to capture any fragment
-corresponding to a subset of connectives.
+The rules of the \kl{flower calculus} have an interesting property: they are
+mostly \emph{arity-agnostic}, i.e. they work uniformly on flowers, \kl{bouquets}
+and gardens with any number of \kl{petals}, flowers and \kl{binders}. In
+particular, this means that the same rules can be used to capture provability in
+almost any \emph{fragment} of \kl{intuitionistic} \kl{predicate logic},
+understood as any subset $\mathfrak{F} \subset \flowers$ of the set of all
+flowers\sidenote{The only exception seems to be the rule (\kl{ipis}) (resp.
+\kl{ipet}), whose duplication of flowers (resp. \kl{petals}) prevents $\forall$
+(resp. $\exists$) from being provable without $\land$ (resp. $\lor$). This can
+be fixed by simply removing the duplication, and polarizing the \kl{context} of
+application as for the rule \kl{apis} (resp. \kl{apet}), at the cost of making
+the rule non-\kl{invertible}.}. \reftab{flowers-fragments} shows how all the
+usual \kl{symbolic} connectives can be expressed by \emph{cardinality}
+constraints on set-based syntactic constructs: $<$, $\leq$, $=$, $\geq$, $>$
+correspond respectively to a cardinality smaller, smaller or equal, equal,
+greater or equal, and greater than $1$; and `$-$' denotes the absence of
+constraint. These constraints are then taken \emph{conjunctively} for a single
+connective (column-wise); and they can be freely mixed \emph{disjunctively}
+(row-wise), in order to capture any fragment corresponding to a subset of
+connectives.
 
 \begin{figure*}[h!]
   \input{figures/flower-calculus.tex}
@@ -1088,6 +1089,7 @@ shown to be \emph{\kl{admissible}} in \refsec{Completeness}.
   empty \kl{context}.
 \end{definition}
 
+\newpage
 The following lemma is the \kl{flower calculus} equivalent of \reflemma{eg-posclos}
 for \kl{EGs}:
 
@@ -1161,7 +1163,7 @@ relies on the following strong deduction theorem:
 Contrary to full derivability, \kl{natural} derivability $\Phi \steps{\Nature}
 \Psi$ is too weak to satisfy a strong deduction theorem. This is a consequence
 of the fact that $\Nature$-rules are \emph{\kl{invertible}}, and thus can only
-relate \kl{equivalent} \kl{bouquets}. Indeed, as soon as $\flower{\Psi}{\Phi}$
+relate equivalent \kl{bouquets}. Indeed, as soon as $\flower{\Psi}{\Phi}$
 is $\Nature$-provable but the converse $\flower{\Phi}{\Psi}$ is not, it follows
 from the completeness of $\Nature$-rules that $\Phi$ and $\Psi$ are not
 equivalent: thus $\Phi \notsteps{\Nature} \Psi$, contradicting the strong
@@ -1201,24 +1203,26 @@ in the completeness proof of \refsec{Completeness}.
 \end{proof}
 
 There is a subtle but important shift here with respect to the standard notions
-of hypothetical provability, as found in Gentzen systems or \kl{type theories}: while
-in these settings it is characterized as the existence of a proof for a
-\emph{single} hypothetical \kl{judgment} $\Gamma \seq C$ which constrains the space
-of derivations, here we have the stronger requirement that there exist proofs
-for a \emph{class} of \kl{judgments} $\cfill{\Xi}{\Phi}$, whose hypothetical shape
-comes from the condition that $\chyp{\Psi}{\Xi\hole}$. In practice, the
-\kl{pollination} rules $\{\text{\kl{poll{\da}}}, \text{\kl{poll{\ua}}}\}$ and
-the {\kl{epis}} rule make this equivalent to the existence of a proof for
-$\flower{\Psi}{\Phi}$. But we conjecture that the {\kl{epis}} rule might be
-\kl{admissible} modulo the addition of the distributivity rule
-\kl{crep}\sidenote{\kl{crep} stands for \textsf{c}ross-\textsf{rep}roduction,
-mirroring the distinction between \kl{cross-pollination} and \kl{self-pollination}, but
-with respect to the self-reproduction rule \kl{srep}.}\sidenote{It seems that
+of hypothetical provability, as found in Gentzen systems or \kl{type theories}:
+while in these settings it is characterized as the existence of a proof for a
+\emph{single} hypothetical \kl{judgment} $\Gamma \seq C$ which constrains the
+space of derivations, here we have the stronger requirement that there exist
+proofs for a \emph{class} of \kl{judgments} $\cfill{\Xi}{\Phi}$, whose
+hypothetical shape comes from the condition that $\chyp{\Psi}{\Xi\hole}$. In
+practice, the \kl{pollination} rules $\{\text{\kl{poll{\da}}},
+\text{\kl{poll{\ua}}}\}$ and the {\kl{epis}} rule make this equivalent to the
+existence of a proof for $\flower{\Psi}{\Phi}$. But we conjecture that the
+{\kl{epis}} rule might be \kl{admissible} modulo the addition of the
+distributivity rule \kl{crep}\sidenote{\kl{crep} stands for
+\textsf{(c)}ross-\textsf{(rep)}roduction, mirroring the distinction between
+\kl{cross-pollination} and \kl{self-pollination}, but with respect to the
+\textsf{(s)}elf-\textsf{(r)}eproduction rule \kl{srep}.}\sidenote{It seems that
 the question of admissibility of \kl{epis} is very similar to the question of
 admissibility of \emph{release} rules discussed in \refsec{dnd-completeness}.
-Both can be used to enable a local simulation of \kl{sequent calculus} rules, but do
-not appear in real proofs because of the arbitrary deep/global power of link
-formation and (de)iteration rules.} of \reffig{cross-reproduction}.
+Both can be used to enable a \emph{local} simulation of \kl{sequent calculus}
+rules, but do not appear in real proofs because of the \emph{global} power of
+link formation (\kl{B},\kl{F}) and \kl{pollination}
+(\kl{poll{\da}},\kl{poll{\ua}}) rules.} of \reffig{cross-reproduction}.
 
 \begin{marginfigure}
   $$
@@ -1236,7 +1240,7 @@ variant $\Nature \setminus \{\kl{epis}\} \cup \{\kl{crep}\}$ of the
 meta-theoretical proofs slightly shorter. For now we allow the
 {\kl{epis}} rule, which renders the deduction theorem trivial:
 
-\begin{theorem}[Deduction]\labthm{deduction}
+\begin{theorem}[Deduction]\labthm{flowers-deduction}
   For any pair $\Phi, \Psi$ of \kl{bouquets}, $\Psi \entails{\Nature} \Phi$ if and only if
   $\entails{\Nature} \flower{\Psi}{\Phi}$.
 \end{theorem}
@@ -1300,21 +1304,21 @@ of the \kl{flower calculus}, there are a few reasons that led us to the choice o
     As mentioned in \refsec{IEGs}, the syntax of \kl{intuitionistic} \kl{EGs}
     (and thus of flowers) subsumes that of Peirce's \kl{classical} \kl{EGs}, by
     seeing the \kl(eg){cut} as a \kl[$n$-ary scroll]{$0$-ary scroll} (or a
-    flower with no \kl{petals}). Similarly, it is well-known that \kl{Kripke structures}
-    enable a natural generalization of truth valuations, where \kl{classical}
-    valuations are those limited to ``unary'' structures with a single possible
-    \kl{world}\sidenote{It is tempting to draw a parallel between \emph{possible
-    \kl{worlds}} and the \emph{\kl{petals}} of flowers, where the \kl{accessibility} relation
-    $\access$ between \kl{worlds} might be reflected to some extent in the
-    \kl{pollination} relation illustrated in \reffig{pollination} (or more
-    accurately, in a justification relation between \kl{contexts} in the style
-    of \refdef{eg-local-justification}). In particular, transitivity of
-    $\access$ could correspond to the possibility of \kl{cross-pollinating} a \kl{petal}
-    by first \kl{cross-pollinating} the \kl{pistil} to which it is attached, and then
-    performing \kl{self-pollination}. An analogy between possible \kl{worlds} and
-    \kl{intuitionistic} disjunction is also proposed by Girard in
-    \cite{girard_parallel}, although as usual he demonstrates his (free)
-    criticism towards Kripke semantics.}.
+    flower with no \kl{petals}). Similarly, it is well-known that \kl{Kripke
+    structures} enable a natural generalization of truth valuations, where
+    \kl{classical} valuations are those limited to ``unary'' structures with a
+    single possible \kl{world}\sidenote{It is tempting to draw a parallel
+    between \emph{possible \kl{worlds}} and the \emph{\kl{petals}} of flowers,
+    where the \kl{accessibility} relation $\access$ between \kl{worlds} might be
+    reflected to some extent in the \kl{pollination} relation illustrated in
+    \reffig{pollination}.%
+    % In particular, transitivity of $\access$ could correspond to the possibility
+    % of \kl{cross-pollinating} a \kl{petal} by first \kl{cross-pollinating} the
+    % \kl{pistil} to which it is attached, and then performing
+    % \kl{self-pollination}.
+    An analogy between possible \kl{worlds} and \kl{intuitionistic} disjunction
+    is also proposed by Girard in \cite{girard_parallel}, although as usual he
+    demonstrates his (free) criticism towards Kripke semantics.}.
   
   \item[Quantifiers]
     It is easy to accomodate quantifiers in \kl{Kripke structures}, by interpreting
@@ -1404,19 +1408,25 @@ Then we need a way to interpret arbitrary terms with \kl{free variables} in any 
 \kl{world} $w$ of a \kl{Kripke structure}, which is done through the concept of
 \emph{\evaluation{w}}:
 
+\begin{marginfigure}
+  \begin{align*}
+    \text{\kl{Substitution} } &\hvrefl{e} : \vars \to \terms \\
+    \text{\kl[\evaluation]{Evaluation} } &e : \vars \to M_w
+  \end{align*}
+  \caption{The syntax-semantics mirror}
+  \labfig{syn-sem-mirror}
+\end{marginfigure}
+
 \begin{definition}[$w$-evaluation]
   Given a \kl{Kripke structure} $\mathcal{K}$ and a \kl{world} $w$ in
-  $\mathcal{K}$, a \intro*\evaluation{w} is a function $e : \vars \to M_w$.
-  % We write $e : \bx \to M_w$ if $e(x) = \ast$ for every $x \not\in
-  % \bx$ and some distinguished element $\ast \in M_w$.
-  The \kl{interpretation} map of $M_w$ is extended to terms and \kl{substitutions} with
-  respect to any evaluation $e$ as follows:
-  \begin{align*}
-  \interp{x}_e &= e(x) \\
-  \interp{f(\tvec{t})}_e &= \interp{f}_w(\interp{\tvec{t}}_e) \\
-  \interp{\sigma}_e(x) &= \interp{\sigma(x)}_e
-  % \interp{p(t_1, \ldots, t_n)}_e &~\text{iff}~ (\interp{t_1}_e, \ldots, \interp{t_n}_e) \in \interp{p}_w \\
-  \end{align*}
+  $\mathcal{K}$, a \intro*\evaluation{w} is a function $e : \vars \to M_w$. The
+  \kl{interpretation} map of $M_w$ is extended to terms and \kl{substitutions}
+  with respect to any evaluation $e$ as follows:
+  \begin{mathpar}
+  \interp{x}_e = e(x) \and
+  \interp{f(\tvec{t})}_e = \interp{f}_w(\interp{\tvec{t}}_e) \and
+  \interp{\sigma}_e(x) = \interp{\sigma(x)}_e
+  \end{mathpar}
 \end{definition}
 
 The crux of Kripke semantics is the \emph{\kl{forcing}} relation, that captures the
@@ -1448,7 +1458,59 @@ one big constructor:
   % \evaluation{w} $e$.
 \end{definition}
 
-The following lemmas will be useful for the soundness proof of the next section:
+Lastly, we define the notion of \emph{semantic entailment} $\Phi \kentails{} \Psi$ on
+\kl{bouquets}, mirroring the syntactic entailment $\Phi \entails{} \Psi$ of the last
+section:
+
+\begin{definition}[Semantic entailment]
+  Let $\mathcal{K}$ be a \kl{Kripke structure}, and $\Phi, \Psi$ some
+  \kl{bouquets}. We say that $\Phi$ \emph{semantically entails} $\Psi$ in
+  $\mathcal{K}$, written $\Phi \intro*\kentails{\mathcal{K}} \Psi$, when
+  $\eforces{w}{\Phi}{e}$ implies $\eforces{w}{\Psi}{e}$ for every \kl{world} $w
+  \in W$ and \evaluation{w} $e$. This entailment is \intro{valid} if it holds
+  for any \kl{Kripke structure} $\mathcal{K}$, and in that case we simply write
+  $\Phi \reintro*\kentails{} \Psi$. We say that $\Phi$ is \emph{semantically
+  equivalent} to $\Psi$, written $\Phi \intro*\kequiv{} \Psi$, when $\Phi
+  \kentails{}\Psi$ and $\Psi \kentails{}\Phi$.
+\end{definition}
+
+
+\section{Soundness}\labsec{Soundness}
+
+In this section, we show that every rule of the \kl{flower calculus} is
+\emph{sound} with respect to our Kripke semantics for flowers, and thus
+that $\entails{} \phi$ implies $\kentails{} \phi$ for every $\phi$. We start
+with a few trivial facts about \refdef{update}:
+
+\begin{fact}[Associativity]\labfact{update-assoc}
+  $\update{\update{f}{R}{g}}{S}{h} = \update{f}{R \cup S}{(\update{g}{S}{h})}$.
+\end{fact}
+
+\begin{fact}[Commutativity]\labfact{update-comm}
+  If $R \cap S = \emptyset$ then $f \upd{R} g \upd{S} h = f \upd{S} h \upd{R}
+  g$.
+\end{fact}
+
+\begin{fact}[Agreement]\labfact{update-agree}
+  If $f(x) = g(x)$ for all $x \in R$ then $h \upd{R} f = h \upd{R} g$.
+\end{fact}
+
+\begin{fact}[Idempotency]\labfact{update-idempot}
+  $f \upd{R} f = f$.
+\end{fact}
+
+Semantic entailment is obviously a reflexive and transitive relation:
+
+\begin{fact}[Reflexivity]\labfact{kentails-refl}
+  $\Phi \kentails{} \Phi$.
+\end{fact}
+
+\begin{fact}[Transitivity]\labfact{kentails-trans}
+  If $\Phi \kentails{} \Psi$ and $\Psi \kentails{} \Xi$, then $\Phi \kentails{} \Xi$.
+\end{fact}
+
+The two following lemmas will be useful to reason on the \kl{forcing} relation
+(\refdef{forcing}):
 
 \begin{lemma}[Monotonicity]\lablemma{access-mono}
   If $w \access w'$ and $\eforces{w}{\phi}{e}$ then $\eforces{w'}{\phi}{e}$.
@@ -1456,32 +1518,6 @@ The following lemmas will be useful for the soundness proof of the next section:
 \begin{proof}
   By a straightforward induction on $\sdepth{\phi}$.
 \end{proof}
-
-% \begin{lemma}\lablemma{closed-forcing}
-  
-%   For any closed flower $\phi \in \closed{\flowers}$ and \evaluation{w}s $e,
-%   e'$, if $\eforces{w}{\phi}{e}$ then $\eforces{w}{\phi}{e'}$.
-% \end{lemma}
-% \begin{proof}
-%   By a straightforward induction on $\sdepth{\phi}$.
-% \end{proof}
-
-% \begin{corollary}[Closed forcing]
-  
-%   For any closed flower $\phi \in \closed{\flowers}$, $w \forces \phi$ iff
-%   $\eforces{w}{\phi}{e}$ for some \evaluation{w} $e$.
-% \end{corollary}
-
-\begin{marginfigure}
-  \begin{align*}
-    \text{\kl{Substitution} } &\hvrefl{e} : \vars \to \terms \\
-    \text{Evaluation } &e : \vars \to M_w
-    % \text{Substitution } &\sigma : \vars \to \terms \\
-    % \text{Evaluation } &\hvrefl{\sigma} : \vars \to M_w
-  \end{align*}
-  \caption{The syntax-semantics mirror}
-  \labfig{syn-sem-mirror}
-\end{marginfigure}
 
 \begin{lemma}[Mirroring]\lablemma{mirroring} 
   
@@ -1549,67 +1585,10 @@ The following lemmas will be useful for the soundness proof of the next section:
   \end{description}
 \end{proof}
 
-Lastly, we define the notion of \emph{semantic entailment} $\Phi \kentails{} \Psi$ on
-\kl{bouquets}, mirroring the syntactic entailment $\Phi \entails{} \Psi$ of the last
-section:
-
-\begin{definition}[Semantic entailment]
-  Let $\mathcal{K}$ be a \kl{Kripke structure}, and $\Phi, \Psi$ some
-  \kl{bouquets}. We say that $\Phi$ \emph{semantically entails} $\Psi$ in
-  $\mathcal{K}$, written $\Phi \intro*\kentails{\mathcal{K}} \Psi$, when
-  $\eforces{w}{\Phi}{e}$ implies $\eforces{w}{\Psi}{e}$ for every \kl{world} $w
-  \in W$ and \evaluation{w} $e$. This entailment is \intro{valid} if it holds
-  for any \kl{Kripke structure} $\mathcal{K}$, and in that case we simply write
-  $\Phi \reintro*\kentails{} \Psi$. We say that $\Phi$ is \emph{semantically
-  equivalent} to $\Psi$, written $\Phi \intro*\kequiv{} \Psi$, when $\Phi
-  \kentails{}\Psi$ and $\Psi \kentails{}\Phi$.
-\end{definition}
-
-\begin{fact}[Reflexivity]\labfact{kentails-refl}
-  $\Phi \kentails{}\Phi$.
-\end{fact}
-
-\begin{fact}[Transitivity]\labfact{kentails-trans}
-  If $\Phi \kentails{}\Psi$ and $\Psi \kentails{}\Xi$, then $\Phi \kentails{}\Xi$.
-\end{fact}
-
-
-\section{Soundness}\labsec{Soundness}
-
-In this section, we show that every rule of the \kl{flower calculus} is
-\emph{sound} with respect to our Kripke semantics for flowers, and thus
-that $\entails{} \phi$ implies $\kentails{} \phi$ for every $\phi$. We start
-with a few trivial facts about \refdef{update}:
-
-\begin{fact}[Associativity]\labfact{update-assoc}
-  $\update{\update{f}{R}{g}}{S}{h} = \update{f}{R \cup S}{(\update{g}{S}{h})}$.
-\end{fact}
-
-\begin{fact}[Commutativity]\labfact{update-comm}
-  If $R \cap S = \emptyset$ then $f \upd{R} g \upd{S} h = f \upd{S} h \upd{R}
-  g$.
-\end{fact}
-
-\begin{fact}[Agreement]\labfact{update-agree}
-  If $f(x) = g(x)$ for all $x \in R$ then $h \upd{R} f = h \upd{R} g$.
-\end{fact}
-
-\begin{fact}[Idempotency]\labfact{update-idempot}
-  $f \upd{R} f = f$.
-\end{fact}
-
-Semantic entailment is obviously a reflexive and transitive relation:
-
-\begin{fact}[Reflexivity]\labfact{kentails-refl}
-  $\Phi \kentails{} \Phi$.
-\end{fact}
-
-\begin{fact}[Transitivity]\labfact{kentails-trans}
-  If $\Phi \kentails{} \Psi$ and $\Psi \kentails{} \Xi$, then $\Phi \kentails{} \Xi$.
-\end{fact}
-
-The following \emph{functoriality} lemma is at the heart of every deep inference
-formalism. It requires an induction principle for \emph{\kl{contexts}}:
+The following \emph{functoriality} lemma is at the heart of every \kl{deep
+inference} formalism\sidenote{Other instances in this thesis are
+\reflemma{variance}, \reflemma{bubbles-functoriality},
+\reflemma{bubbles-cofunctoriality}, and \refcor{eg-functoriality}.}:
 
 \begin{lemma}[Functoriality]\lablemma{flowers-functoriality}
   
@@ -1645,12 +1624,12 @@ $\{\kl{poll{\da}},\kl{poll{\ua}}\}$, because of the arbitrary \kl{context} $\Xi\
 and reliance on the \kl{pollination} relation.
 
 \begin{lemma}[Cross-pollination]\lablemma{flowers-cross-pollination}
-  $\Phi, \cfill{\Xi}{\Phi} \kequiv{} \Phi, \cfill{\Xi}{}$.
+  $\Phi, \cfill{\Xi}{\Phi} \kequiv{} \Phi, \cfill{\Xi}{\phantom{\Phi}}$.
 \end{lemma}
 \begin{proof}
   Let $w$ a \kl{world} in some \kl{Kripke structure} $\mathcal{K}$, and $e$ a
   \evaluation{w}. We show that $\eforces{w}{\Phi, \cfill{\Xi}{\Phi}}{e}$ iff
-  $\eforces{w}{\Phi, \cfill{\Xi}{}}{e}$ by induction on $\cdepth{\Xi\hole}$.
+  $\eforces{w}{\Phi, \cfill{\Xi}{\phantom{\Phi}}}{e}$ by induction on $\cdepth{\Xi\hole}$.
   \begin{description}
     \item[Base case]
       Suppose $\Xi\hole = \Xi', \hole$. Then we trivially have
@@ -1670,16 +1649,16 @@ and reliance on the \kl{pollination} relation.
             \item Suppose $\eforces{w}{\Phi, \ffillXi{\Phi}}{e}$. Then
             $\eforces{w}{\Phi}{e}$, $\eforces{w}{\Xi'}{e}$ and
             $\eforces{w}{\rfillXi{\Phi}}{e}$. Thus it remains to show that
-            $\eforces{w}{\rfillXi{}}{e}$. Let $w' \revaccess w$ and $e'$ a
+            $\eforces{w}{\rfillXi{\phantom{\Phi}}}{e}$. Let $w' \revaccess w$ and $e'$ a
             \evaluation{w'} such that
-            $\eforces{w'}{\cfill{\Xi_0}{}}{\update{e}{\bx}{e'}}$. By IH we have
-            $\Phi, \cfill{\Xi_0}{} \kentails{} \Phi, \cfill{\Xi_0}{\Phi}$, and
+            $\eforces{w'}{\cfill{\Xi_0}{\phantom{\Phi}}}{\update{e}{\bx}{e'}}$. By IH we have
+            $\Phi, \cfill{\Xi_0}{\phantom{\Phi}} \kentails{} \Phi, \cfill{\Xi_0}{\Phi}$, and
             thus by \reflemma{flowers-functoriality} $\rFillXi{\Phi,
-            \cfill{\Xi_0}{\Phi}} \kentails{} \rFillXi{\Phi, \cfill{\Xi_0}{}}$.
+            \cfill{\Xi_0}{\Phi}} \kentails{} \rFillXi{\Phi, \cfill{\Xi_0}{\phantom{\Phi}}}$.
             By \reflemma{flowers-weakening} and \reflemma{flowers-functoriality}
             we have $\eforces{w}{\rFillXi{\Phi, \cfill{\Xi_0}{\Phi}}}{e}$, and
-            thus $\eforces{w}{\rFillXi{\Phi, \cfill{\Xi_0}{}}}{e}$. Then since
-            $\eforces{w'}{\cfill{\Xi_0}{}}{\update{e}{\bx}{e'}}$, and since by
+            thus $\eforces{w}{\rFillXi{\Phi, \cfill{\Xi_0}{\phantom{\Phi}}}}{e}$. Then since
+            $\eforces{w'}{\cfill{\Xi_0}{\phantom{\Phi}}}{\update{e}{\bx}{e'}}$, and since by
             \reflemma{access-mono} (and the fact that $\bx \cap \fv(\Phi) =
             \emptyset$) we have $\eforces{w'}{\Phi}{\update{e}{\bx}{e'}}$, we
             can conclude that there are some $\garden{\by}{\Psi} \in \Delta$ and
@@ -1700,7 +1679,7 @@ and reliance on the \kl{pollination} relation.
             % $\eforces{w'}{\cfill{\Xi_0}{\Phi}}{e}$, and since by
             % \reflemma{access-mono} we have $\eforces{w'}{\Phi}{e}$, we can
             % conclude that $\eforces{w'}{\Delta}{e}$.
-            \item $\Phi, \ffillXi{} \kentails{} \Phi, \ffillXi{\Phi}$
+            \item $\Phi, \ffillXi{\phantom{\Phi}} \kentails{} \Phi, \ffillXi{\Phi}$
             holds by the same argument in the other direction.
           \end{enumerate}
 
@@ -1714,7 +1693,7 @@ and reliance on the \kl{pollination} relation.
             \item Suppose $\eforces{x}{\Phi, \ffillXi{\Phi}}{e}$. Then
             $\eforces{w}{\Phi}{e}$, $\eforces{w}{\Xi'}{e}$ and
             $\eforces{w}{\rfillXi{\Phi}}{e}$. Thus it remains to show that
-            $\eforces{w}{\rfillXi{}}{e}$. Let $w' \revaccess w$ and $e'$
+            $\eforces{w}{\rfillXi{\phantom{\Phi}}}{e}$. Let $w' \revaccess w$ and $e'$
             a \evaluation{w'} such that
             $\eforces{w'}{\Psi}{\update{e}{\bx}{e'}}$. Then we can deduce
             that there exists a \evaluation{w'} $e''$ such that either:
@@ -1733,12 +1712,12 @@ and reliance on the \kl{pollination} relation.
               and thus $\eforces{w'}{\Phi,
               \cfill{\Xi_0}{\Phi}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
               Then by IH we have $\eforces{w'}{\Phi,
-              \cfill{\Xi_0}{}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$,
+              \cfill{\Xi_0}{\phantom{\Phi}}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$,
               and thus we can conclude in particular that $\eforces{w'}{
-              \cfill{\Xi_0}{}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
+              \cfill{\Xi_0}{\phantom{\Phi}}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
             \end{itemize}
 
-            \item $\Phi, \ffillXi{} \kentails{} \Phi,
+            \item $\Phi, \ffillXi{\phantom{\Phi}} \kentails{} \Phi,
             \ffillXi{\Phi}$ holds by the same argument in the other direction.
           \end{enumerate}
       \end{description}
@@ -1748,21 +1727,21 @@ and reliance on the \kl{pollination} relation.
 \begin{lemma}[Pollination]\lablemma{flowers-pollination}
   
   If $\chyp{\Phi}{\Xi\hole}$, then $\cfill{\Xi}{\Phi} \kequiv{}
-  \cfill{\Xi}{}$.
+  \cfill{\Xi}{\phantom{\Phi}}$.
 \end{lemma}
 \begin{proof}
   We show that $\chyp{\phi}{\Xi\hole}$ implies $\cfill{\Xi}{\phi} \kequiv{}
-  \cfill{\Xi}{}$ for any flower $\phi$ and \kl{context} $\Xi\hole$: then
+  \cfill{\Xi}{\phantom{\phi}}$ for any flower $\phi$ and \kl{context} $\Xi\hole$: then
   assuming that $\Phi = \phi_1, \ldots, \phi_n$, we get
   $$\underbrace{\cfill{\Xi}{\phi_1, \ldots, \phi_n} \kequiv{} \cfill{\Xi}{\phi_2,
-  \ldots, \phi_n} \kequiv{} \ldots \kequiv{} \cfill{\Xi}{}}_{\text{$n$ times}}$$
+  \ldots, \phi_n} \kequiv{} \ldots \kequiv{} \cfill{\Xi}{\phantom{\phi}}}_{\text{$n$ times}}$$
   and conclude by \reffact{kentails-trans}.
   
   By \refdef{pollination}, there are a \kl{bouquet} $\Psi$ and two
   \kl{contexts} $\Xi'\hole, \Xi_{0}$ such that one of the two following cases holds:
   \begin{description}
     \item[\kl{Cross-pollination}] $\Xi\hole = \cfill{\Xi'}{\Psi, \phi,
-    \Xi_{0}}$. Then $\phi, \cfill{\Xi_0}{\phi} \kequiv{} \phi, \cfill{\Xi_0}{}$
+    \Xi_{0}}$. Then $\phi, \cfill{\Xi_0}{\phi} \kequiv{} \phi, \cfill{\Xi_0}{\phantom{\phi}}$
     by \reflemma{flowers-cross-pollination}, and we conclude by \reflemma{flowers-functoriality}.
     \item[\kl{Self-pollination}] $\Xi\hole =
     \cfill{\Xi'}{\flower{\garden{\bx}{\Psi, \phi}}{\garden{\by}{\Xi_{0}} \sep
@@ -1770,7 +1749,7 @@ and reliance on the \kl{pollination} relation.
     structure} $\mathcal{K}$ and $e$ a \evaluation{w}. We show that
     $\eforces{w}{\flower{\garden{\bx}{\Psi,
     \phi}}{\garden{\by}{\cfill{\Xi_0}{\phi} \sep \Delta}}}{e}$ iff
-    $\eforces{w}{\flower{\garden{\bx}{\Psi, \phi}}{\garden{\by}{\cfill{\Xi_0}{}
+    $\eforces{w}{\flower{\garden{\bx}{\Psi, \phi}}{\garden{\by}{\cfill{\Xi_0}{\phantom{\phi}}
     \sep \Delta}}}{e}$, and conclude by \reflemma{flowers-functoriality}.
     \begin{enumerate}
       \item Suppose that $\eforces{w}{\flower{\garden{\bx}{\Psi,
@@ -1791,12 +1770,12 @@ and reliance on the \kl{pollination} relation.
         and thus $\eforces{w'}{\phi,
         \cfill{\Xi_0}{\phi}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
         Then by \reflemma{flowers-cross-pollination} we have $\eforces{w'}{\phi,
-        \cfill{\Xi_0}{}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$,
+        \cfill{\Xi_0}{\phantom{\phi}}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$,
         and thus we can conclude in particular that
-        $\eforces{w'}{\cfill{\Xi_0}{}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
+        $\eforces{w'}{\cfill{\Xi_0}{\phantom{\phi}}}{\update{e}{\bx}{\update{e'}{\by}{e''}}}$.
       \end{itemize}
     \item $\flower{\garden{\bx}{\Psi,
-    \phi}}{\garden{\by}{\cfill{\Xi_0}{} \sep \Delta}}
+    \phi}}{\garden{\by}{\cfill{\Xi_0}{\phantom{\phi}} \sep \Delta}}
     \kentails{} \flower{\garden{\bx}{\Psi,
     \phi}}{\garden{\by}{\cfill{\Xi_0}{\phi}} \sep \Delta}$ holds by the same
     argument in the other direction.
@@ -1813,7 +1792,7 @@ would be handled locally with (de)iteration rules on \kl{LoIs}.
 
 \begin{lemma}[Universal instantiation]\lablemma{flowers-univ-inst}
   
-  If $\sigma : \by$ is \kl{capture-avoiding} in $\flower{\Phi}{\Delta}$,
+  If $\sigma : \by \to \terms$ is \kl{capture-avoiding} in $\flower{\Phi}{\Delta}$,
   then $\flower{\garden{\bx, \by}{\Phi}}{\Delta} \kentails{}
   \flower{\garden{\bx}{\sigma(\Phi)}}{\sigma(\Delta)}$.
 \end{lemma}
@@ -1841,7 +1820,7 @@ would be handled locally with (de)iteration rules on \kl{LoIs}.
 
 \begin{lemma}[Existential instantiation]\lablemma{flowers-ex-inst}
   
-  If $\sigma : \by$ is \kl{capture-avoiding} in $\Phi$, then
+  If $\sigma : \by \to \terms$ is \kl{capture-avoiding} in $\Phi$, then
   $\flower{\gamma}{\garden{\bx}{\sigma(\Phi)} \sep \Delta} \kentails{}
   \flower{\gamma}{\garden{\bx,\by}{\Phi} \sep \Delta}$.
 \end{lemma}
@@ -1874,7 +1853,7 @@ able to prove more: that every $\Nature$-rule is \emph{invertible}, i.e. its
 conclusion entails its premiss.
 
 \begin{lemma}[Shallow soundness]\lablemma{flowers-local-soundness} If $\Phi
-  \lstep \Psi$, then $\Phi \kequiv{} \Psi$.
+  \lstep{} \Psi$, then $\Phi \kequiv{} \Psi$.
 \end{lemma}
 \begin{proof}
   Let $w$ a \kl{world} in some \kl{Kripke structure} $\mathcal{K}$, $w' \revaccess w$, $e$
@@ -1998,7 +1977,7 @@ The soundness of \kl{cultural} rules is straightforward with the previous lemmas
 
 Then it follows that every derivation in the \kl{flower calculus} is sound:
 
-\begin{theorem}\labthm{flowers-soundness}
+\begin{theorem}[Soundness]\labthm{flowers-soundness}
   If $\Phi \steps{} \Psi$ then $\Psi \kentails{} \Phi$.
 \end{theorem}
 \begin{proof}
@@ -2025,17 +2004,18 @@ in \kl{natural deduction} the \emph{substitution theorem}.
 Fortunately as mentioned in \refsec{Semantics}, a few people have noticed that
 with Kripke semantics, it is not too difficult to find completeness proofs that
 do not rely on the assumption of transitivity for $\entails{}$, thus allowing
-for a \emph{semantic} proof of \kl{cut-elimination}. Here we propose an adaptation of
-this technique to our \kl{flower calculus}, based on a completeness proof for
-cut-free \kl{sequent calculus} given by Hermant in
+for a \emph{semantic} proof of \kl{cut-elimination}. Here we propose an
+adaptation of this technique to our \kl{flower calculus}, based on a
+completeness proof for cut-free \kl{sequent calculus} given by Hermant in
 \sidecite{hutchison_semantic_2005}, which is itself close to the original
 completeness proof of Gödel with respect to \kl{classical} Tarski models. Quite
 remarkably, the overall structure of the argument is the same, even though both
-the \kl{forcing} relation on flowers and the rules of the \kl{flower calculus} differ
-significantly from the \kl{forcing} relation on formulas and \kl{sequent calculus} rules.
-A novelty of our proof is that it dispenses completely with the need for
-\emph{Henkin witnesses}, thus avoiding some technicalities involving among
-others the manipulation of an infinite hierarchy of first-order languages.
+the \kl{forcing} relation on flowers and the rules of the \kl{flower calculus}
+differ significantly from the \kl{forcing} relation on formulas and \kl{sequent
+calculus} rules. A novelty of our proof is that it dispenses completely with the
+need for \emph{Henkin witnesses}, thus avoiding some technicalities involving
+among others the manipulation of an infinite hierarchy of \kl{first-order}
+languages.
 
 \subsection{Theories}
 
@@ -2076,29 +2056,21 @@ the heart of any Gödel-style completeness proof:
   either $\tT, \phi \entails{\Nature} \psi$ or $\phi \in \tT$.
 \end{definition}
 
-Intuitively, a \kl{theory} $\tT$ is \consistent{\psi} when one cannot deduce $\psi$
-from it, and \complete{\psi} when it \emph{decides} any formula $\phi$
-relatively to $\psi$. This is better understood by considering the special case
-where $\psi = \flower{{}}{{}}$ is the \emph{absurd} flower: then consistency
-means that one cannot derive any contradiction from $\tT$; and completeness that
-$\tT$ either \emph{refutes} $\phi$ syntactically with a proof of $\flower{\Phi,
-\phi}{(\flower{}{})}$ for some $\Phi \subseteq \tT$, or already \emph{validates}
-it ``semantically'', i.e. without the need for a proof since $\phi \in \tT$.
-
-% \begin{definition}[$\psi$-Henkin]
-%   A theory $T$ is \emph{$\psi$-Henkin} when for all $\phi =
-%   \flower{\garden{\bx}{\Phi}}{\garden{\bx_1}{\Phi_1} \sep \ldots
-%   \sep \garden{\bx_n}{\Phi_n}} \in T$ and $\sigma : \bx \to
-%   \closed{\terms}$, if $T, \sigma(\Phi) \nentails \psi$ then there are some $1
-%   \leq i \leq n$ and $\sigma_i : \bx_i \to \closed{\terms}$ such that
-%   $\sigma_i \circ \sigma(\Phi_i) \subseteq T$.
-% \end{definition}
+Intuitively, a \kl{theory} $\tT$ is \consistent{\psi} when one cannot deduce
+$\psi$ from it, and \complete{\psi} when it \emph{decides} any formula $\phi$
+when $\psi$ is assumed. This is better understood by considering the special
+case where $\psi = \flower{{}}{{}}$ is the \emph{absurd} flower: then
+\consistency{\psi} means that one cannot derive any contradiction from $\tT$;
+and \completeness{\psi} that $\tT$ either \emph{refutes} $\phi$ syntactically
+with a proof of $\flower{\Phi, \phi}{(\flower{}{})}$ for some $\Phi \subseteq
+\tT$, or already \emph{validates} it ``semantically'', i.e. without the need for
+a proof since $\phi \in \tT$.
 
 \subsection{Completion}
 
 In the following, we suppose some enumeration $(\phi_n)_{n \in \nats}$ of
 $\flowers$, which should be definable constructively given the
-inductive nature of flowers (\refdef{flowers}).
+inductive nature of flowers.
 
 Let $\psi \in \flowers$, and $\tT$ a \consistent{\psi} \kl{theory}. We now define the
 completion procedure, which constructs an extension $\completion{\tT} \supseteq
@@ -2124,30 +2096,25 @@ completion procedure, which constructs an extension $\completion{\tT} \supseteq
   $$\completion{\tT} = \bigcup_{n \in \nats}{\ncompletion{\tT}{n}}$$
 \end{definition}
 
-\begin{lemma}\lablemma{completion-consistent}
-  $\completion{\tT}$ is \consistent{\psi}.
+\begin{lemma}\lablemma{completion-consistent-complete}
+  $\completion{\tT}$ is \consistent{\psi} and \complete{\psi}.
 \end{lemma}
 \begin{proof}
-  It is immediate by induction on $n$ that $\ncompletion{\tT}{n}$ is
-  \consistent{\psi}. Then suppose that $\completion{\tT} \entails{\Nature} \psi$,
-  that is there is some \kl{bouquet} $\Phi \subseteq \completion{\tT}$ such that $\Phi
-  \entails{\Nature} \psi$. For each $\phi \in \Phi$, there is some rank $n$ such
-  that $\phi \in \ncompletion{\tT}{n}$. Let $m$ be the greatest such rank. Then
-  $\Phi \subseteq \ncompletion{\tT}{m}$, and thus by weakening
-  (\reflemma{weakening}) $\Phi \nentails{\Nature} \psi$. Contradiction.
-\end{proof}
-
-
-\begin{lemma}\lablemma{completion-complete}
-  $\completion{\tT}$ is \complete{\psi}.
-\end{lemma}
-\begin{proof}
-  Suppose that there is some $\phi$ such that $\completion{\tT}, \phi
-  \nentails{\Nature} \psi$ and $\phi \not\in \completion{\tT}$, and let $\phi =
-  \phi_n$. Then $\completion{\tT} \cup \phi_n$ is \consistent{\psi}, and thus by
-  weakening (\reflemma{weakening}) so is $\ncompletion{\tT}{n} \cup \phi_n$. This
-  entails that $\phi_n \in \ncompletion{\tT}{n+1} \subseteq \completion{\tT}$.
-  Contradiction.
+  For \consistency{\psi}, it is immediate by induction on $n$ that
+  $\ncompletion{\tT}{n}$ is \consistent{\psi}. Then suppose that
+  $\completion{\tT} \entails{\Nature} \psi$, that is there is some \kl{bouquet}
+  $\Phi \subseteq \completion{\tT}$ such that $\Phi \entails{\Nature} \psi$. For
+  each $\phi \in \Phi$, there is some rank $n$ such that $\phi \in
+  \ncompletion{\tT}{n}$. Let $m$ be the greatest such rank. Then $\Phi \subseteq
+  \ncompletion{\tT}{m}$, and thus by weakening (\reflemma{weakening}) $\Phi
+  \nentails{\Nature} \psi$. Contradiction.
+  
+  For \completeness{\psi}, suppose that there is some $\phi$ such that
+  $\completion{\tT}, \phi \nentails{\Nature} \psi$ and $\phi \not\in
+  \completion{\tT}$, and let $\phi = \phi_n$. Then $\completion{\tT} \cup
+  \phi_n$ is \consistent{\psi}, and thus by weakening (\reflemma{weakening}) so
+  is $\ncompletion{\tT}{n} \cup \phi_n$. This entails that $\phi_n \in
+  \ncompletion{\tT}{n+1} \subseteq \completion{\tT}$. Contradiction.
 \end{proof}
 
 \subsection{Adequacy}
@@ -2165,7 +2132,6 @@ material implication, just like Peirce would do with his \kl{scroll} (see
 \refsec{IEGs}): $\phi$ is true if the content $\Phi_i$ of one of its \kl{petals}
 (consequents) is, or if the content $\Phi$ of its \kl{pistil} (antecedant) is not.
 
-% \newcommand{\ids}{\update{\idsubst}{\bx}{\sigma}}
 \begin{proposition}[Analytic truth]\labprop{inv-elem-flower}
   
   Let $\psi \in \flowers$, $\tT$ some \consistent{\psi} and \complete{\psi}
@@ -2192,7 +2158,7 @@ material implication, just like Peirce would do with his \kl{scroll} (see
   \bigcup_{i = 1}^{n}{\Psi_i'}, \phi \entails{\Nature} \psi$. Let $\Xi\hole$ be
   a \kl{context} such that \Hyp{$\chyp{\Psi, \bigcup_{i = 1}^{n}{\Psi_i'},
   \phi}{\Xi}$}~{\HFive}. Then $\cfill{\Xi}{\psi} \steps{\Nature}
-  \cfill{\Xi}{\phantom{\Phi}}$ with the following derivation:
+  \cfill{\Xi}{\phantom{\psi}}$ with the following derivation:
   $$
   \begin{array}{rlll}
     \cfill{\Xi}{\psi}
@@ -2204,7 +2170,7 @@ material implication, just like Peirce would do with his \kl{scroll} (see
     &= &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\bx_i}{\sigma(\Phi_i)}}{\garden{{}}{\psi}}}}}} & \\
     &\nsteps{n}{\mathsf{poll}{\da}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{\fset{i}{n}{\flower{\garden{\bx_i}{\sigma(\Phi_i)}}{\garden{{}}{{}}}}}}} &\text{(\HOne, \HThree, \HFour, \HFive)} \\
     &\nsteps{n}{\mathsf{epet}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{{}}}} & \\
-    &\step{\mathsf{epet}} &\cfill{\Xi}{\phantom{\Phi}} &
+    &\step{\mathsf{epet}} &\cfill{\Xi}{\phantom{\psi}} &
     % &\step{\mathsf{ipis}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\psi}}), (\flower{\garden{\bx_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
     % && \qquad\quad~~\, (\flower{\garden{{}}{\sigma_n \circ \sigma(\Phi_n)}}{\garden{{}}{\psi}}), (\flower{\garden{\bx_n}{\sigma(\Phi_n)}}{\garden{{}}{\psi}})}}} \\
     % &\step{\mathsf{poll{\da}}} &\cfill{\Xi}{\flower{\garden{{}}{\phi}}{\garden{{}}{(\flower{\garden{}{\sigma_1 \circ \sigma(\Phi_1)}}{\garden{{}}{\phantom{\Phi}}}), (\flower{\garden{\bx_1}{\sigma(\Phi_1)}}{\garden{{}}{\psi}}), \ldots, \\
@@ -2234,20 +2200,20 @@ conclude that one of its \kl{petals} $\Phi_i$ is.
   \Phi$}~{\HOne} such that \Hyp{$\Psi, \Phi_0 \entails{\Nature}
   \sigma(\Phi_i)$}~{\HTwo}. By hypothesis, for every $\Phi' \subseteq \tT$ there
   is a \kl{context} $\Xi$ such that $\chyp{\Phi'}{\Xi}$ and $\cfill{\Xi}{\phi}
-  \notsteps{\Nature} \cfill{\Xi}{\phantom{\Phi}}$. We now derive a contradiction
-  by showing $\cfill{\Xi}{\phi} \steps{\Nature} \cfill{\Xi}{\phantom{\Phi}}$ for
+  \notsteps{\Nature} \cfill{\Xi}{\phantom{\phi}}$. We now derive a contradiction
+  by showing $\cfill{\Xi}{\phi} \steps{\Nature} \cfill{\Xi}{\phantom{\phi}}$ for
   all $\Xi$ such that \Hyp{$\chyp{\Psi}{\Xi}$}~{\HThree}:
   $$
   \begin{array}{rlll}
     \cfill{\Xi}{\phi}
     &\step{\mathsf{ipet}} &\cfill{\Xi}{\flower{\garden{\bx}{\Phi}}{\garden{{}}{\sigma(\Phi_i)} \sep \Delta}} & \\
     &\step{\mathsf{poll}{\da}} &\cfill{\Xi}{\flower{\garden{\bx}{\Phi}}{\garden{{}}{{}} \sep \Delta}} &\text{(\HOne, \HTwo, \HThree)} \\
-    &\step{\mathsf{epet}} &\cfill{\Xi}{\phantom{\Phi}} &
+    &\step{\mathsf{epet}} &\cfill{\Xi}{\phantom{\phi}} &
   \end{array}
   $$
 \end{proof}
 
-\begin{remark}
+\begin{digression}
 Note that both \refprop{inv-elem-flower} and \refprop{inv-deriv-flower} are
 proved indirectly by contradiction, but that the contradiction is obtained by
 exhibiting a concrete derivation, exploiting respectively the universal
@@ -2257,7 +2223,7 @@ constructive content to these proofs, despite their use of a \kl{classical} reas
 principle. Also, this is the only place in the completeness proof where we build
 derivations, and all $\Nature$-rules (and only them) seem to be required to
 conclude.
-\end{remark}
+\end{digression}
 
 Lastly, we define the so-called \emph{\kl{universal Kripke structure}}
 $\rewolF{\psi}$ relative to a flower $\psi$:
@@ -2296,7 +2262,7 @@ We are now equipped to prove the main \emph{adequacy} lemma, which relates
   \begin{enumerate}
     \item $\sigma(\phi) \in \tT$ implies $\eforces{\tT}{\phi}{\sigma}$, and
     \item $\tT \nentails{\Nature} \sigma(\phi)$ implies $\neforces{\tT}{\phi}{\sigma}$
-  \end{enumerate}.
+  \end{enumerate}
 \end{lemma}
 \begin{proof}
   By induction on $\sdepth{\phi}$.
@@ -2355,20 +2321,36 @@ As a near-direct consequence, we get:
 \begin{theorem}[Completeness]\label{thm:flowers-completeness}
   $\Phi \kentails{} \Psi$ implies $\Phi \entails{\Nature} \Psi$.
 \end{theorem}
+\begin{proof}
+  Let $\tT$ be a \consistent{\psi} \kl{theory}. We prove that $\tT \notkentails{} \psi$ by
+  showing in particular that $\tT \notkentails{\rewolF{\psi}} \psi$, and more
+  specifically that $\eforces{\completion{\tT}}{\tT}{\idsubst}$ but
+  $\neforces{\completion{\tT}}{\psi}{\idsubst}$. Then it follows by (classical)
+  contraposition that $\tT \kentails{} \psi$ implies $\tT \entails{\Nature} \psi$ for
+  any $\psi$ and any $\tT$, and thus we can conclude.
+  \begin{itemize}
+    \item Let $\phi \in \tT$. Then $\idsubst(\phi) = \phi \in \completion{\tT}$,
+    thus by \kl[\consistent]{$\psi$-consistency} and
+    \kl[\complete]{$\psi$-completeness} of the completion
+    (\reflemma{completion-consistent-complete}), we can apply adequacy
+    (\reflemma{adequacy}) to get $\eforces{\completion{\tT}}{\phi}{\idsubst}$.
+    \item Similarly, we can apply adequacy to get
+    $\neforces{\completion{\tT}}{\psi}{\idsubst}$.
+  \end{itemize}
+\end{proof}
 
-Combined with strong deduction (Theorem \ref{thm:flowers-strong-deduction}),
-this also yields a strong completeness theorem for the full \kl{flower
-calculus}\footnote{Actually it already works for the fragment $\Nature \cup
-\{\kl{grow}\}$, thanks to the proof of the strong deduction theorem (see
-Appendix \ref{app:Proofs-deduction}).}:
+Combined with strong deduction (\refthm{flowers-strong-deduction}), this
+also yields a strong completeness theorem for the full \kl{flower
+calculus}\sidenote{Actually it already works for the fragment $\Nature \cup
+\{\kl{grow}\}$, thanks to the proof of \refthm{flowers-strong-deduction}.}:
 
 \begin{corollary}[Strong completeness]\label{thm:flowers-strong-completeness}
   $\Phi \kentails{} \Psi$ implies $\Psi \steps{} \Phi$.
 \end{corollary}
 
 Finally, the composition of the soundness, completeness and deduction theorems
-(\ref{thm:flowers-soundness}, \ref{thm:flowers-completeness} and
-\ref{thm:flowers-deduction}) gives the admissibility of $\Culture$-rules, and
+(\refthm{flowers-soundness}, \refthm{flowers-completeness} and
+\refthm{flowers-deduction}) gives the admissibility of $\Culture$-rules, and
 thus the \kl{analyticity} of the \kl{flower calculus}:
 
 \begin{corollary}[Analyticity]
@@ -2376,6 +2358,8 @@ thus the \kl{analyticity} of the \kl{flower calculus}:
 \end{corollary}
 
 \section{Automated proof search}\labsec{flowers-search}
+
+\subsection{Preliminary definitions}
 
 \paragraph{Analyticity and invertibility}
 
@@ -2417,11 +2401,6 @@ the \kl{pollination} relation (\refdef{pollination}), and is close to the
 \emph{structural} relation of Kahramanogullari
 \cite[Definition~2.13]{lmcs:1089}.
 
-% \sidenote{This restriction is also suspiciously similar to the ``more
-% scientific'' presentation of (de)iteration rules intuited by Peirce in
-% \cite{peirce_prolegomena_1906}, and that we formalized in the system
-% \kl{Alpha^a} of \reffig{eg-atomic-alpha}.} \cite[Definition~2.13]{lmcs:1089}.
-
 \begin{definition}[Interaction]\labdef{interaction}
   
   Let $\Phi\hole, \Psi\hole$ be two \kl{contexts}. We say that $\Phi\hole$ can
@@ -2433,31 +2412,34 @@ the \kl{pollination} relation (\refdef{pollination}), and is close to the
       \Phi\hole &= \Xi\select{\Phi_{0}, \Psi_0\select{\emptyset}} \\
       \text{and}\quad \Psi\hole &= \Xi\select{\Phi_0\select{\emptyset}, \Psi_{0}}
     \end{align*}
-    and we write $\Phi\hole \cinter \Psi\hole$;
+    In this case we write $\Phi\hole \intro*\cinter \Psi\hole$;
     \item[(Self-interaction)] there is some $\Delta$ such that
     \begin{align*}
       \Phi\hole &= \Xi\select{\flower{\Phi_{0}}{\Psi_0\select{\emptyset} \sep \Delta}} \\
       \text{and}\quad \Psi\hole &= \Xi\select{\flower{\Phi_0\select{\emptyset}}{\Psi_{0} \sep \Delta}}
     \end{align*}
-    and we write $\Phi\hole \sinter \Psi\hole$.
+    In this case we write $\Phi\hole \intro*\sinter \Psi\hole$.
   \end{description}
   It is clear that $\cinter$ is a symmetric relation, while $\sinter$ is not.
-  Also, we write $\cinterpos$ and $\sinterpos$ (resp. $\cinterneg$ and
-  $\sinterneg$) to further specify when $\Xi\hole$ is \kl{positive} (resp. \kl{negative}).
+  Also, we write $\reintro*\cinterpos$ and $\reintro*\sinterpos$ (resp.
+  $\reintro*\cinterneg$ and $\reintro*\sinterneg$) to further specify when
+  $\Xi\hole$ is \kl{positive} (resp. \kl{negative}).
 \end{definition}
 
 \paragraph{Causality}
 
-Our algorithm will be driven by the search for dual occurrences of atoms, a
-recurring idea in this thesis.
+Our algorithm will be driven by the search for dual
+\emph{\kl{occurrences}}\sidenote{What we call an \kl{occurrence} here
+corresponds to our notion of \kl{path} in \refdef{path}.} of atoms, a recurring
+idea in this thesis.
 
 \begin{definition}[Occurrence]\labdef{occurrence}
   
-  An \emph{occurrence} is a pair $(\Phi\hole, \phi)$ of a flower $\phi$ and a
+  An \intro{occurrence} is a pair $(\Phi\hole, \phi)$ of a flower $\phi$ and a
   \kl{context} $\Phi\hole$. It is said to be \emph{atomic} if $\phi$ is an atom.
 \end{definition}
 
-Then, two atomic occurrences can interact when their \kl{contexts} can. In the
+Then, two atomic \kl{occurrences} can interact when their \kl{contexts} can. In the
 (linear) \kl{classical} setting of \cite{lmcs:1089}, there is no preferred direction
 in the information flow between two interacting atoms, which can be seen as the
 essence of the (linear) \kl{law of excluded middle} $A \parr A^\bot$. However in our
@@ -2475,28 +2457,29 @@ $\sinter$ will impose a causality on atoms, where one atom can potentially be
 
 \begin{definition}[Justification]\labdef{justification}
   
-  A \emph{justification} is an oriented pair of atomic occurrences $\mathfrak{a}
-  = (\Phi\hole, a) \justi (\Psi\hole, b)$.
+  A \intro{justification} is an oriented pair of atomic \kl{occurrences} $\mathfrak{a}
+  = (\Phi\hole, a) \intro*\justi (\Psi\hole, b)$.
 \end{definition}
 
-One can then naturally aggregate justifications into \emph{arguments}:
+One can then naturally aggregate \kl{justifications} into \emph{\kl{arguments}}:
 
 \begin{definition}[Argument]\labdef{argument}
   
-  An \emph{argument} is a finite set $\mathfrak{A}$ of justifications. Every
-  argument $\mathfrak{A}$ can be seen as the set of edges of a directed graph,
-  whose vertices are the occurrences appearing in the justifications of
-  $\mathfrak{A}$. Conversely, every directed graph on a set of occurrences can
-  be seen as an argument, whose justifications are the edges of the graph.
+  An \intro{argument} is a finite set $\mathfrak{A}$ of \kl{justifications}. Every
+  \kl{argument} $\mathfrak{A}$ can be seen as the set of edges of a directed graph,
+  whose vertices are the \kl{occurrences} appearing in the \kl{justifications} of
+  $\mathfrak{A}$. Conversely, every directed graph on a set of \kl{occurrences} can
+  be seen as an \kl{argument}, whose \kl{justifications} are the edges of the graph.
 \end{definition}
 
-We identify two essential arguments inherent to any \kl{bouquet}:
+We identify two essential \kl{arguments} inherent to any \kl{bouquet}:
 
-\begin{definition}[Vehicle and Anchor]\labdef{vehicle} Let $\Phi$ a \kl{bouquet}, and
-  $\atomoccs{\Phi} = \compr{(\Psi\hole, a)}{\Phi = \Psi\select{a}}$ its set of
-  atomic occurrences.
+\begin{definition}[Vehicle and Anchor]\labdef{vehicle}
   
-  The \emph{vehicle} of $\Phi$ is the argument $\vehicle{\Phi} \subseteq
+  Let $\Phi$ a \kl{bouquet}, and $\intro*\atomoccs{\Phi} = \compr{(\Psi\hole,
+  a)}{\Phi = \Psi\select{a}}$ its set of atomic \kl{occurrences}.
+  
+  The \intro{vehicle} of $\Phi$ is the \kl{argument} $\intro*\vehicle{\Phi} \subseteq
   \atomoccs{\Phi} \times \atomoccs{\Phi}$ such that $(\Psi\hole, a) \justi
   (\Psi'\hole, a') \in \vehicle{\Phi}$ iff the following conditions hold:
   \begin{description}
@@ -2508,9 +2491,9 @@ We identify two essential arguments inherent to any \kl{bouquet}:
     \sinterpos \Psi\hole$.
   \end{description}
 
-  Dually, the \emph{anchor} of $\Phi$ is the argument $\anchor{\Phi} \subseteq
-  \atomoccs{\Phi} \times \atomoccs{\Phi}$ such that $(\Psi\hole, a) \justi
-  (\Psi'\hole, a') \in \anchor{\Phi}$ iff the following conditions hold:
+  Dually, the \intro{anchor} of $\Phi$ is the \kl{argument} $\intro*\anchor{\Phi}
+  \subseteq \atomoccs{\Phi} \times \atomoccs{\Phi}$ such that $(\Psi\hole, a)
+  \justi (\Psi'\hole, a') \in \anchor{\Phi}$ iff the following conditions hold:
   \begin{description}
     \item[(Polarity)] $\Psi\hole$ is \kl{positive} and $\Psi'\hole$ is
     \kl{negative};
@@ -2518,42 +2501,47 @@ We identify two essential arguments inherent to any \kl{bouquet}:
   \end{description}
 \end{definition}
 
-Intuitively, the vehicle of a \kl{bouquet} $\Phi$ is the set of possible
-justifications that \emph{can} be performed by the prover/player, whose goal is
-to justify every \kl{positive} atom; while the anchor is the set of justifications
-that \emph{must} be provided on demand by the environment/opponent, whose task
-is to justify every \kl{negative} atom. The reason that we identify this structure,
-is that we want crucially to avoid \emph{cycles} in our justification attempts
-during proof search. These may arise in the dialogical interaction between the
-prover and its environment of hypotheses, when justifications of the former are
-composed with those of the latter. Formally, this interaction is expressed by
-the \emph{union} of arguments:
+Intuitively, the \kl{vehicle} of a \kl{bouquet} $\Phi$ is the set of possible
+\kl{justifications} that \emph{can} be performed by the prover/player, whose
+goal is to \emph{justify} every \kl{positive} atom; while the \kl{anchor} is the
+set of \kl{justifications} that \emph{must} be provided on demand by the
+environment/opponent, whose task is to \emph{be able to justify} every
+\kl{negative} atom. The reason that we identify this structure, is that we want
+crucially to avoid \emph{cycles} in our \kl{justification} attempts during proof
+search. These may arise in the dialogical interaction between the prover and its
+environment of hypotheses, when \kl{justifications} of the former are composed
+with those of the latter. Formally, this interaction is expressed by the
+\emph{union} of \kl{arguments}:
 
 \begin{definition}[Compatibility]
-  Given a justification $\mathfrak{a}$ and an argument $\mathfrak{A}$, we say
-  that $\mathfrak{a}$ is \emph{compatible} with $\mathfrak{A}$, written
-  $\mathfrak{a} \compat \mathfrak{A}$, when there is no cycle in $\mathfrak{A}
-  \cup \{\mathfrak{a}\}$.
+  Given a \kl{justification} $\mathfrak{a}$ and an \kl{argument} $\mathfrak{A}$,
+  we say that $\mathfrak{a}$ is \intro{compatible} with $\mathfrak{A}$, written
+  $\mathfrak{a} \intro*\compat \mathfrak{A}$, when there is no cycle in
+  $\mathfrak{A} \cup \{\mathfrak{a}\}$.
 \end{definition}
+
+\subsection{The algorithm}
 
 \paragraph{Pollination}
 
-The vehicle and anchor of any \kl{bouquet} $\Phi$ can easily by computed, by noticing
-that the \kl{context} $\Xi\hole$ in \refdef{interaction} is simply the \emph{least
-common ancestor} of the atoms $\Psi\select{a}$ and $\Psi'\select{a'}$ in the
-tree representation of $\Phi$, which we write $\lca{\Psi\hole}{\Psi'\hole}$.
-This forms the basis for the first \emph{phase} of our algorithm, that we call
-the \intro{pollination phase}\sidenote{It corresponds roughly to a combination of
-the \emph{application} and \emph{linking} phases of the proof search algorithm
-for \kl{B_{inv}} described in \refsubsec{bubbles-search}.}. Roughly, the idea
-is that given a \kl{goal} $\Phi$, we want to perform eagerly every justification
-$\mathfrak{a}$ in the vehicle $\vehicle{\Phi}$, on the condition that it is
-compatible with the anchor $\anchor{\Phi}$ and all justifications $\mathfrak{H}$
-of the previous phases. It turns out that every such justification can be
-implemented by an instance of the \kl{poll{\da}} rule, sometimes preceded by an
-instance of the \kl{poll{\ua}} rule. This is best described by the following
-\emph{imperative} procedure, that takes as input and modifies in-place both the
-goal $\Phi$, and the history $\mathfrak{H}$ of justifications performed so far:
+The \kl{vehicle} and \kl{anchor} of any \kl{bouquet} $\Phi$ can easily by
+computed, by noticing that the \kl{context} $\Xi\hole$ in \refdef{interaction}
+is simply the \emph{least common ancestor} of the atoms $\Psi\select{a}$ and
+$\Psi'\select{a'}$ in the tree representation of $\Phi$, which we write
+$\intro*\lca{\Psi\hole}{\Psi'\hole}$. This forms the basis for the first
+\emph{phase} of our algorithm, that we call the \intro{pollination
+phase}\sidenote{It corresponds roughly to a combination of the
+\emph{application} and \emph{linking} phases of the proof search algorithm for
+\kl{B_{inv}} described in \refsubsec{bubbles-search}.}. Roughly, the idea is
+that given a \kl{goal} $\Phi$, we want to perform eagerly every
+\kl{justification} $\mathfrak{a}$ in the \kl{vehicle} $\vehicle{\Phi}$, on the
+condition that $\mathfrak{a}$ is \kl{compatible} with the \kl{anchor}
+$\anchor{\Phi}$ and all \kl{justifications} $\mathfrak{H}$ of the previous
+phases. It turns out that every such \kl{justification} can be implemented by an
+instance of the \kl{poll{\da}} rule, sometimes preceded by an instance of the
+\kl{poll{\ua}} rule. This is best described by the following \emph{imperative}
+procedure, that takes as input and modifies in-place both the goal $\Phi$, and
+the history $\mathfrak{H}$ of \kl{justifications} performed so far:
 
 \DontPrintSemicolon
 % \LinesNumberedHidden
@@ -2578,7 +2566,7 @@ goal $\Phi$, and the history $\mathfrak{H}$ of justifications performed so far:
 \end{procedure}
 
 While this might not be obvious at first glance, the two steps of the
-\refproc{phase-pollination} procedure that modify $\Phi$ are logically
+\refproc{phase-pollination} procedure that modify the goal $\Phi$ are logically
 \emph{sound}: indeed, the \texttt{copy} operation on line \ref{copy} corresponds
 to an instance of the \kl{poll{\ua}} rule, while the \texttt{remove} operation
 on line \ref{remove} corresponds to an instance of the \kl{poll{\da}} rule.
@@ -2713,6 +2701,8 @@ phase]{reproduction}/\kl[decomposition phase]{decomposition}) phase.
 Assuming that the \refproc{life} procedure terminates on every input, the
 decision procedure is immediate: if $\Phi = \emptyset$ after executing
 \texttt{life($\Phi$)}, then $\Phi$ is a tautology, otherwise it is not.
+
+\subsection{Empirical assessments}
 
 \paragraph{Implementation}
 
@@ -3037,7 +3027,7 @@ Like the edit mode of \texttt{vim}, \Edit actions are used to \emph{insert} and
   \begin{itemize}
     \item if the user wants to insert an atomic flower, she can enter the name
     of the atom in a text field placed above the button. Clicking on the button
-    will then insert an occurrence of this atom;
+    will then insert an \kl{occurrence} of this atom;
     \item if the user wants to insert a non-atomic flower, she can leave the
     text field empty. Clicking on the button will then insert an empty flower
     with a single \kl{petal}.
@@ -3176,14 +3166,14 @@ we envision to achieve the latter.
 
 Our above example of ``redundant'' manipulations targets \kl{imperative} tactic
 languages, but the argument equally applies to more \kl{declarative} languages
-like \kl{Isar}: the point is that the \emph{proof} language, be it \kl{imperative} or
-\kl{declarative}, is separated both conceptually and through its available means
-of interaction from the language of \emph{statements} used to build theories.
-And this separation between proofs and statements is a natural one that is hard
-to question, since it is rooted in what is arguably the most important
-inspiration of formal logic, and also the form in which informal mathematics
-present themselves: \emph{natural language}. Indeed, \kl{symbolic} formulas
-reproduce the grammatical structure of sentences expressing logical
+like \kl{Isar}: the point is that the \emph{proof} language, be it
+\kl{imperative} or \kl{declarative}, is separated both conceptually and through
+its available means of interaction from the language of \emph{statements} used
+to build theories. And this separation between proofs and statements is a
+natural one that is hard to question, since it is rooted in what is arguably the
+most important inspiration of formal logic, and also the form in which informal
+mathematics present themselves: \emph{natural language}. Indeed, \kl{symbolic}
+formulas reproduce the grammatical structure of sentences expressing logical
 propositions, and formal proofs reproduce the inferential structure of arguments
 built from sequences of sentences.
 
@@ -3357,12 +3347,12 @@ particular those in Sterling's thesis \cite{Sterling2022}. See also
 
 \paragraph{Subformula linking}
 
-Our notion of \emph{vehicle} (\refdef{vehicle}) takes its terminology from
+Our notion of \emph{\kl{vehicle}} (\refdef{vehicle}) takes its terminology from
 Girard, who started giving this name to the set of axiom links of a proof
 structure in his transcendental syntax\sidenote{Also, it conveys nicely the idea
-that the vehicle is the fundamental structure that \emph{drives} the proof
+that the \kl{vehicle} is the fundamental structure that \emph{drives} the proof
 search algorithm.} \sidecite{girard_2017}. But the idea of connecting dual
-occurrences of atoms, and thus forming a graph with an associated adjacency
+\kl{occurrences} of atoms, and thus forming a graph with an associated adjacency
 matrix whose structure can be exploited in proof search, really dates back to
 the \emph{connection method} developed independently by Bibel and Andrews in the
 1970s \sidecite{Bibel:2009}. Otten and Kreitz have adapted the connection method
@@ -3470,13 +3460,13 @@ $$
 $$
 Given a flower $\phi$ and a neutral \kl{term} $t$, i.e. an $n$-ary function
 application of the form $x~t_1 \ldots t_n$, the expression $t : \phi$ is a
-\emph{\kl{term} annotation}, that should be read in context as ``this occurrence of
+\emph{\kl{term} annotation}, that should be read in context as ``this \kl{occurrence} of
 $\phi$ is justified by $t$''. Interestingly, $\phi$ itself may contain \kl{term}
 annotations, mimicking the fact that normal and neutral \kl{terms} can be defined by
 mutual recursion. Then in the \kl{app} rule, we do not just erase the formula
 $\phi$ as in the \kl{poll{\da}} rule, but also keep track of the flow of
 information by appending the argument $u$ to the justification $t$ (where
-$\chyp{(u : \phi)}{\Xi\hole}$), and substituting $u$ to every occurrence of the
+$\chyp{(u : \phi)}{\Xi\hole}$), and substituting $u$ to every \kl{occurrence} of the
 hypothetical justification $x$ of $\phi$ in $\Phi$ and $\Delta$.
 
 As of now the syntax of annotated flowers is not yet stable, and it is unclear
@@ -3536,7 +3526,7 @@ order:
 The work of Guenot on computational interpretations of \kl{nested sequent} calculi
 seems closest to the syntax of flowers. Indeed, \kl{nested sequents} are variadic by
 nature, and his version of \kl{nested sequents} in particular exploits the
-possibility to have \emph{negative} occurrences of sequents. Combined with the
+possibility to have \emph{negative} \kl{occurrences} of sequents. Combined with the
 dependently-typed \texttt{Box}es of Ayers mentioned earlier (which cannot be
 nested negatively), this should provide great insights for the powerful,
 dependently-typed version of the \kl{flower calculus} that we seek for.
