@@ -1,4 +1,3 @@
-% !TEX root =index.tex
 \setchapterpreamble[u]{\margintoc}
 \chapter{Flower Calculus}
 \labch{flowers}
@@ -45,6 +44,7 @@ an early prototype of \kl{GUI} for \kl{ITPs} that uses the rules of the \kl{flow
 calculus} both for \kl{direct manipulation} of flowers in its frontend, and
 automated simplification of \kl{goal}s in its backend.
 
+\AP
 The chapter is organized as follows: in \refsec{IEGs}, we retrace the origin of
 Oostra's syntax for \intro{intuitionistic existential graphs} (\reintro{IEGs})
 as a natural generalization of the \emph{\kl{scroll}}, an \kl{icon} for
@@ -105,6 +105,7 @@ principle by a series of considerations which ultimately arrayed themselves into
 an exact logical deduction of all the features of Existential Graphs.
 \end{quote}
 
+\AP
 Thus the conjunctive reading of \kl{juxtaposition} itself stemmed from ``a
 series of considerations'' that ``forced'' Peirce to adopt it. While in this
 article he does not give the full ``exact logical deduction of all the features
@@ -203,15 +204,18 @@ standing, asserted, in the open field.
   \labfig{eg-uncurrying}
 \end{marginfigure}
 
-This first form of ``collapsing of walls'' is called the rule of \intro{Blank~Antecedant} in \cite{minghui_graphical_2019}, and corresponds \kl{symbolically} to
-the equivalence $\top \limp A \semequiv{} A$. The reader might be tempted to see
-the ``former clause'' that permits any insertion in the outer close as a special
-case of the \kl{Insertion} principle of \kl{Alpha} (\refsec{alpha}). However, we
-stress again that Peirce first identified this clause as a feature of the
-\kl{scroll}, seen as the \kl{diagrammatic} embodiment of the ``general form of argument''
-mentioned in a previous excerpt. The principle of \kl{Insertion} only followed as a
-subsequent generalization, stemming from the analysis of the \kl{scroll} into two
-nested \kl(eg){cuts} \cite[p.~535]{peirce_prolegomena_1906}:
+\AP
+This first form of ``collapsing of walls'' is called the rule of
+\intro{Blank~Antecedant} in \cite{minghui_graphical_2019}, and corresponds
+\kl{symbolically} to the equivalence $\top \limp A \semequiv{} A$. The reader
+might be tempted to see the ``former clause'' that permits any insertion in the
+outer close as a special case of the \kl{Insertion} principle of \kl{Alpha}
+(\refsec{alpha}). However, we stress again that Peirce first identified this
+clause as a feature of the \kl{scroll}, seen as the \kl{diagrammatic} embodiment
+of the ``general form of argument'' mentioned in a previous excerpt. The
+principle of \kl{Insertion} only followed as a subsequent generalization,
+stemming from the analysis of the \kl{scroll} into two nested \kl(eg){cuts}
+\cite[p.~535]{peirce_prolegomena_1906}:
 
 \begin{quote}
   [...] and you will further see that a scroll is really nothing but one oval
@@ -275,6 +279,7 @@ also applies in the \kl{intuitionistic} setting by substituting the rule of
 
 \paragraph{The $n$-ary scroll}
 
+\AP
 In \cite{oostra_graficos_2010}, A. Oostra proposes to take the above remark
 seriously, by reifying the \kl{scroll} as a primitive \kl{icon} of \kl{EGs}
 (``\emph{rizo}'' in Spanish), that exists alongside the \kl(eg){cut}
@@ -398,6 +403,7 @@ following a classical result of Lawvere in the context of categorical logic
 
 \subsection{Coherent formulas}
 
+\AP
 Lawvere is also known for some contributions to the study of \intro{geometric
 logic} \sidecite{lawvere_geometric}, a subset of the formulas of \kl{FOL} first
 discovered by Skolem \sidecite{skolem_geometric} that is capable of expressing
@@ -418,7 +424,7 @@ some extent. We only mention two important ones:
   principle as expressive as arbitrary \kl{first-order} formulas
   \sidecite{negri_geometric}.
   
-  \item[Automation] \kl{Coherent formulas} benefit from faster proof-search
+  \itemAP[Automation] \kl{Coherent formulas} benefit from faster proof-search
   procedures compared to arbitrary formulas, making automation more tractable
   computationally. They also allow the direct encoding of many reasoning
   problems, thanks to their use of the full set of connectives and quantifiers
@@ -523,7 +529,7 @@ convenient to have a dedicated syntax for functions, and we will thus introduce
 them as is usually done in predicate calculus.
 
 \begin{definition}[First-order signature]
-  A \intro{first-order signature} is a triplet $\mathcal{\Sigma} = (
+  \AP A \intro{first-order signature} is a triplet $\mathcal{\Sigma} = (
   \intro*\fsymbs, \intro*\psymbs, \intro*\arity )$, where $\fsymbs$ and $\psymbs$ are
   respectively the countable sets of \emph{function} and \emph{predicate}
   symbols of $\Sigma$, and $\arity : \fsymbs \cup \psymbs \to \nats$ gives an
@@ -535,7 +541,7 @@ In the following, we assume given a denumerable set of variables $\intro*\vars$
 and a \kl{first-order signature} $\Sigma$.
 
 \begin{definition}[Terms]
-  The set of terms $\intro*\terms$ is defined inductively as follows:
+  \AP The set of terms $\intro*\terms$ is defined inductively as follows:
   \begin{description}
     \item[(Variable)] If $x \in \vars$ then $x \in \terms$;
     \item[(Application)] If $f \in \fsymbs$ and $\tvec{t}
@@ -559,7 +565,7 @@ and a \kl{first-order signature} $\Sigma$.
 \end{digression}
 
 \begin{definition}[Flowers]\labdef{flowers}
-  The sets of \emph{flowers} $\intro*\flowers$ and \emph{gardens}
+  \AP The sets of \emph{flowers} $\intro*\flowers$ and \emph{gardens}
   $\intro*\gardens$ are defined mutually inductively as follows:
   \begin{description}
     \itemAP[(Atom)] If $p \in \psymbs$ and $\tvec{t} \in
@@ -572,6 +578,7 @@ and a \kl{first-order signature} $\Sigma$.
   \end{description}
 \end{definition}
 
+\AP
 Any finite set $\bx \subset \vars$ of variables is called a \intro{sprinkler},
 finite multiset $\Phi \subset \flowers$ of flowers a \intro{bouquet}, and finite
 multiset $\Gamma \subset \gardens$ of gardens a \intro{corolla}. We will often
@@ -638,7 +645,7 @@ $\garden{{}}{\Phi}$.
 As usual, we introduce a \emph{\kl{depth}} measure that will allow us to reason
 inductively on the structure of flowers:
 \begin{definition}[Depth]
-  The \reintro{depth} $\intro*\sdepth{-}$ of a flower or garden is defined mutually
+  \AP The \reintro{depth} $\intro*\sdepth{-}$ of a flower or garden is defined mutually
   recursively as follows:
   \begin{align*}
     \sdepth{p(\tvec{t})} &= 0 \\
@@ -654,7 +661,7 @@ of terms in flowers.
 
 \begin{definition}[Free variables]\labdef{fv}
   
-  The sets of \intro{free variables} $\intro*\fv(-)$ of a term, flower,
+  \AP The sets of \intro{free variables} $\intro*\fv(-)$ of a term, flower,
   \kl{bouquet} or garden are defined mutually recursively as follows:
   \begin{align*}
     \fv(x) &= \{x\} &
@@ -686,7 +693,7 @@ curves in an \kl{$n$-ary scroll}.
   %   \bv(\Psi, (\flower{\garden{\bx}{X}}{\Delta})) &= \bx \cup \bv(X) \\
   %   \bv(\Psi, (\flower{\garden{\bx}{\Phi}}{\garden{\by}{X} \sep \Delta})) &= \bx \cup \by \cup \bv(X)
   % \end{align*}
-  The sets of \intro{bound variables} $\intro*\bv(-)$ of a flower, \kl{bouquet}
+  \AP The sets of \intro{bound variables} $\intro*\bv(-)$ of a flower, \kl{bouquet}
   or garden are defined mutually recursively as follows:
   \begin{align*}
     \bv(p(\tvec{t})) &= \emptyset &
@@ -714,7 +721,7 @@ To define \kl{substitutions}, we introduce a general notion of \emph{function
 \refsec{Semantics}.
 
 \begin{definition}[Function update]\labdef{update}
-  Let $A, B$ be two sets, $f, g : A \to B$ two functions and $R \subseteq A$
+  \AP Let $A, B$ be two sets, $f, g : A \to B$ two functions and $R \subseteq A$
   some subset of their domain. The \intro{update} of $f$ on $R$ with $g$ is the
   function defined by:
   $$
@@ -732,7 +739,7 @@ To define \kl{substitutions}, we introduce a general notion of \emph{function
 \end{definition}
 
 \begin{definition}[Substitution]
-  A \intro{substitution} is a function $\sigma : \vars \to \terms$ with a finite
+  \AP A \intro{substitution} is a function $\sigma : \vars \to \terms$ with a finite
   \intro{support} $\dom(\sigma) = \compr{x}{\sigma(x) \not= x}$. By abuse of
   notation, we will write $\sigma : \bx \to \terms$ to denote a \kl{substitution}
   $\sigma$ whose \kl{support} is $\bx$. The domain of \kl{substitutions} is extended to
@@ -750,7 +757,7 @@ To define \kl{substitutions}, we introduce a general notion of \emph{function
 \end{definition}
 
 \begin{definition}[Capture-avoiding substitution]
-  We say that a \kl{substitution} $\sigma : \bx \to \terms$ is
+  \AP We say that a \kl{substitution} $\sigma : \bx \to \terms$ is
   \intro{capture-avoiding} in a \kl{bouquet} $\Phi$ if $\fv(\sigma(x)) \cap \bv(\Phi)
   = \emptyset$ for every $x \in \bx$.
   % $\fv(\sigma(x)) \cap \bv(\phi) = \emptyset$ for every $x \in
@@ -780,7 +787,7 @@ rules} of our \kl{flower calculus}, just as we did for \kl{Alpha}
 into \kl{bouquets} of flowers:
 
 \begin{definition}[Context]
-  A \intro{context} $\Phi\hole$ is a \kl{bouquet} which contains exactly one
+  \AP A \intro{context} $\Phi\hole$ is a \kl{bouquet} which contains exactly one
   occurrence of a special flower written $\hole$, called its \reintro{hole}. The
   \kl{hole} can always be \emph{filled} (substituted) with any other
   \kl{bouquet} $\Psi$ or \kl{context} $\Xi\hole$, producing a new \kl{bouquet}
@@ -792,7 +799,7 @@ into \kl{bouquets} of flowers:
 \end{definition}
 
 \begin{definition}[Depth]
-  The \intro{depth} $\intro*\cdepth{\Phi\hole}$ of a \kl{context} $\Phi\hole$ is
+  \AP The \intro{depth} $\intro*\cdepth{\Phi\hole}$ of a \kl{context} $\Phi\hole$ is
   defined recursively as follows:
   \begin{align*}
     \cdepth{\Psi, \hole} &= 0 \\
@@ -805,7 +812,7 @@ Contrarily to \kl{EGs} (\refdef{eg-inv}), the number of inversions of a \kl{cont
 not coincide with its \kl{depth}, since \kl{petals} increase \kl{depth} but preserve \kl{polarity}:
 
 \begin{definition}[Inversions]
-  The number of \emph{inversions} $\intro*\inv(\Phi\hole)$ of a \kl{context} $\Phi\hole$ is
+  \AP The number of \emph{inversions} $\intro*\inv(\Phi\hole)$ of a \kl{context} $\Phi\hole$ is
   defined recursively by:
   \begin{align*}
     \inv(\Psi, \hole) &= 0 \\
@@ -815,7 +822,7 @@ not coincide with its \kl{depth}, since \kl{petals} increase \kl{depth} but pres
 \end{definition}
 
 \begin{definition}[Polarity]
-  \phantomintro{polarity}
+  \AP\phantomintro{polarity}
   We say that a \kl{context} $\Phi\hole$ is \intro{positive} if
   $\inv(\Phi\hole)$ is even, and \intro{negative} otherwise. We denote \kl{positive}
   and \kl{negative} \kl{contexts} respectively by $\Phi^+\hole$ and $\Phi^-\hole$.
@@ -830,7 +837,7 @@ relation of \refsubsec{scientific-way}:
 
 \begin{definition}[Pollination]\labdef{pollination}
   
-  We say that a flower $\phi$ can be \intro{pollinated} in a \kl{context}
+  \AP We say that a flower $\phi$ can be \intro{pollinated} in a \kl{context}
   $\Phi\hole$, written $\intro*\chyp{\phi}{\Phi\hole}$, when there exists a
   \kl{bouquet} $\Psi$ with $\phi \in \Psi$ and \kl{contexts} $\Xi\hole$ and
   $\Xi_{0}$ such that either:
@@ -1061,6 +1068,7 @@ connectives.
 
 \subsection{Proofs}
 
+\AP
 Our notions of derivation and proof are essentially the same as the ones given
 for \kl{EGs} in \refsec{multisets}, except that we distinguish from the outset between
 two kinds of derivations, stemming from our partitioning of the rules into two
@@ -1072,7 +1080,7 @@ the contrary, all $\Culture$-rules are \emph{non-\kl{invertible}}, and they will
 shown to be \emph{\kl{admissible}} in \refsec{Completeness}.
 
 \begin{definition}[Derivation]
-  Given a set of rules $\mathsf{R}$, we write $\Phi \intro*\step{\mathsf{R}}
+  \AP Given a set of rules $\mathsf{R}$, we write $\Phi \intro*\step{\mathsf{R}}
   \Psi$ to indicate a rewrite \emph{step} in $\mathsf{R}$, that is an instance
   of some $r \in \mathsf{R}$ from \reffig{flower-calculus} with $\Psi$ as
   premiss and $\Phi$ as conclusion. We just write $\Phi \reintro*\step{} \Psi$
@@ -1181,7 +1189,7 @@ generalization of the notion of hypothetical provability, which will be useful
 in the completeness proof of \refsec{Completeness}. 
 
 \begin{definition}[Hypothetical provability]
-  Given two \kl{bouquets} $\Phi, \Psi$, we say that $\Phi$ is
+  \AP Given two \kl{bouquets} $\Phi, \Psi$, we say that $\Phi$ is
   \emph{hypothetically provable} from $\Psi$ in a fragment $\mathsf{R}$ of
   rules, written $\Psi \intro*\entails{\mathsf{R}} \Phi$, if for every
   \kl{context} $\Xi\hole$ such that $\chyp{\Psi}{\Xi\hole}$, $\cfill{\Xi}{\Phi}
@@ -1382,7 +1390,7 @@ We now recall the standard definitions, starting with the \kl{interpretation} of
 constants in \emph{\kl{first-order structures}}:
 
 \begin{definition}[First-order structure]
-  A \intro{first-order structure} is a pair $( M, \interp{\cdot} )$ where $M$ is
+  \AP A \intro{first-order structure} is a pair $( M, \interp{\cdot} )$ where $M$ is
   a non-empty set, and $\intro*\interp{\cdot}$ is a map called the
   \intro{interpretation} that associates to each function symbol $f \in \fsymbs$
   a function $\interp{f} : M^{\arity(f)} \to M$, and to each predicate symbol $p
@@ -1390,7 +1398,7 @@ constants in \emph{\kl{first-order structures}}:
 \end{definition}
 
 \begin{definition}[Kripke structure]
-  A \intro{Kripke structure} is a triplet $\mathcal{K} = ( W, \intro*\access,
+  \AP A \intro{Kripke structure} is a triplet $\mathcal{K} = ( W, \intro*\access,
   (M_w)_{w \in W} )$, where $W$ is the set of \intro{worlds}, $\access$ is
   a pre-order on $W$ called \intro{accessibility}, and $(M_w)_{w \in W}$ is a
   family of \kl{first-order structures} indexed by $W$. Furthermore, we require the
@@ -1418,7 +1426,7 @@ Then we need a way to interpret arbitrary terms with \kl{free variables} in any 
 \end{marginfigure}
 
 \begin{definition}[$w$-evaluation]
-  Given a \kl{Kripke structure} $\mathcal{K}$ and a \kl{world} $w$ in
+  \AP Given a \kl{Kripke structure} $\mathcal{K}$ and a \kl{world} $w$ in
   $\mathcal{K}$, a \intro*\evaluation{w} is a function $e : \vars \to M_w$. The
   \kl{interpretation} map of $M_w$ is extended to terms and \kl{substitutions}
   with respect to any evaluation $e$ as follows:
@@ -1436,7 +1444,7 @@ it simpler and more uniform since flowers can be seen as built from essentially
 one big constructor:
 
 \begin{definition}[Forcing]\labdef{forcing}
-
+  \AP
   Given some \kl{Kripke structure} $\mathcal{K}$, the \intro{forcing} relation
   $\intro*\eforces{w}{\phi}{e}$ between a \kl{world} $w$, a flower $\phi$ and a
   \evaluation{w} $e$ is defined by induction on $\sdepth{\phi}$ as follows:
@@ -1463,7 +1471,7 @@ Lastly, we define the notion of \emph{semantic entailment} $\Phi \kentails{} \Ps
 section:
 
 \begin{definition}[Semantic entailment]
-  Let $\mathcal{K}$ be a \kl{Kripke structure}, and $\Phi, \Psi$ some
+  \AP Let $\mathcal{K}$ be a \kl{Kripke structure}, and $\Phi, \Psi$ some
   \kl{bouquets}. We say that $\Phi$ \emph{semantically entails} $\Psi$ in
   $\mathcal{K}$, written $\Phi \intro*\kentails{\mathcal{K}} \Psi$, when
   $\eforces{w}{\Phi}{e}$ implies $\eforces{w}{\Psi}{e}$ for every \kl{world} $w
@@ -2023,7 +2031,7 @@ First we need to generalize our notions of syntactic and semantic entailment to
 possibly \emph{infinite} sets of flowers, so-called \emph{\kl{theories}}:
 
 \begin{definition}[Theory]\labdef{theory} 
-  Any set $\tT \subseteq \flowers$ of flowers is called a \intro{theory}. In
+  \AP Any set $\tT \subseteq \flowers$ of flowers is called a \intro{theory}. In
   particular, a \kl{bouquet} can be regarded as a finite \kl{theory}, by forgetting the
   number of repetitions of its elements. We say that a \kl{bouquet} $\Phi$ is
   \emph{provable from} a \kl{theory} $\tT$, written $\tT \entails{} \Phi$, if there exists a
@@ -2048,11 +2056,11 @@ The following notions our crucial to define the \emph{completion} procedure at
 the heart of any Gödel-style completeness proof:
 
 \begin{definition}[$\psi$-consistency]
-  A \kl{theory} $\tT$ is \intro*\consistent{\psi} when $\tT \nentails{\Nature} \psi$.
+  \AP A \kl{theory} $\tT$ is \intro*\consistent{\psi} when $\tT \nentails{\Nature} \psi$.
 \end{definition}
 
 \begin{definition}[$\psi$-completeness]
-  A \kl{theory} $\tT$ is \intro*\complete{\psi} when for all $\phi \in \flowers$,
+  \AP A \kl{theory} $\tT$ is \intro*\complete{\psi} when for all $\phi \in \flowers$,
   either $\tT, \phi \entails{\Nature} \psi$ or $\phi \in \tT$.
 \end{definition}
 
@@ -2078,7 +2086,7 @@ completion procedure, which constructs an extension $\completion{\tT} \supseteq
 \complete{\psi}.
 
 \begin{definition}[$n$-completion]
-  The \emph{$n$-completion} $\intro*\ncompletion{\tT}{n}$ of $\tT$ is defined recursively
+  \AP The \emph{$n$-completion} $\intro*\ncompletion{\tT}{n}$ of $\tT$ is defined recursively
   as follows:
   \begin{align*}
     \ncompletion{\tT}{0} &= \tT \\
@@ -2091,7 +2099,7 @@ completion procedure, which constructs an extension $\completion{\tT} \supseteq
 \end{definition}
 
 \begin{definition}[Completion]
-  The \emph{completion} $\intro*\completion{\tT}$ of $\tT$ is the denumerable union of all
+  \AP The \emph{completion} $\intro*\completion{\tT}$ of $\tT$ is the denumerable union of all
   $n$-completions:
   $$\completion{\tT} = \bigcup_{n \in \nats}{\ncompletion{\tT}{n}}$$
 \end{definition}
@@ -2234,7 +2242,7 @@ $\rewolF{\psi}$ relative to a flower $\psi$:
 % formulas should not have any significance.}.
 
 \begin{definition}[Universal Kripke structure]\labdef{kcanon}
-  Let $\psi \in \flowers$. The \intro{universal Kripke structure}
+  \AP Let $\psi \in \flowers$. The \intro{universal Kripke structure}
   $\intro*\rewolF{\psi}$ has:
   \begin{itemize}
     \item The set of \consistent{\psi} and \complete{\psi} \kl{theories} as its \kl{worlds};
@@ -2344,7 +2352,7 @@ also yields a strong completeness theorem for the full \kl{flower
 calculus}\sidenote{Actually it already works for the fragment $\Nature \cup
 \{\kl{grow}\}$, thanks to the proof of \refthm{flowers-strong-deduction}.}:
 
-\begin{corollary}[Strong completeness]\label{thm:flowers-strong-completeness}
+\begin{corollary}[Strong completeness]\labcor{flowers-strong-completeness}
   $\Phi \kentails{} \Psi$ implies $\Psi \steps{} \Phi$.
 \end{corollary}
 
@@ -2366,24 +2374,25 @@ thus the \kl{analyticity} of the \kl{flower calculus}:
 The completeness of $\Nature$-rules (\refthm{flowers-completeness}) suggests
 that some efficient proof search procedure might be devised for the \kl{flower
 calculus}, and even a complete one for the propositional fragment where every
-\kl{sprinkler} is empty\sidenote{It is well-known that provability in \kl{intuitionistic}
-propositional logic is decidable, a result first demonstrated by Gentzen
-\cite{gentzen_untersuchungen_1935}.}. Indeed in sequent calculi, \kl{analyticity}
-(the \kl{subformula property}) greatly reduces the search space when looking for a
-proof of a given sequent, and one might expect the same to apply in the natural
-fragment $\Nature$ of the \kl{flower calculus}. Also, the invertibility of
-$\Nature$-rules implies that the procedure will not need to perform
-\emph{backtracking}, a great source of non-determinism in proof
+\kl{sprinkler} is empty\sidenote{It is well-known that provability in
+\kl{intuitionistic} propositional logic is decidable, a result first
+demonstrated by Gentzen \cite{gentzen_untersuchungen_1935}.}. Indeed in sequent
+calculi, \kl{analyticity} (the \kl{subformula property}) greatly reduces the
+search space when looking for a proof of a given sequent, and one might expect
+the same to apply in the natural fragment $\Nature$ of the \kl{flower calculus}.
+Also, the invertibility of $\Nature$-rules implies that the procedure will not
+need to perform \emph{backtracking}, a great source of non-determinism in proof
 search\sidenote{See also \refsec{sfl-backtracking} for a discussion on this
-topic.}, and particularly so in \kl{intuitionistic} logic\sidenote{The only fully
-\kl{invertible} \kl{proof system} for \kl{intuitionistic} (predicate) logic that we know of is
-the labelled sequent calculus \kl{G3IntQ} from Lyon's thesis
-\cite{lyon_refining_2021} (we thank Lutz Stra{\ss}burger for pointing that to
-us). However, a peculiarity of labelled sequent calculi is that they need to
-incorporate \emph{semantical} notions like the \kl{worlds} and \kl{accessibility} relation
-of \kl{Kripke structures} into the syntax of sequents, in order to make every rule
-\kl{invertible} \cite{girlando_intuitionistic_2023}. We do not need such devices in
-the \kl{flower calculus}, which will be crucial from a user interface standpoint in
+topic.}, and particularly so in \kl{intuitionistic} logic\sidenote{The only
+fully \kl{invertible} \kl{proof system} for \kl{intuitionistic} (predicate)
+logic that we know of is the labelled sequent calculus \kl{G3IntQ} from Lyon's
+thesis \cite{lyon_refining_2021} (we thank Lutz Stra{\ss}burger for pointing
+that to us). However, a peculiarity of labelled sequent calculi is that they
+need to incorporate \emph{semantical} notions like the \kl{worlds} and
+\kl{accessibility} relation of \kl{Kripke structures} into the syntax of
+sequents, in order to make every rule \kl{invertible}
+\cite{girlando_intuitionistic_2023}. We do not need such devices in the
+\kl{flower calculus}, which will be crucial from a user interface standpoint in
 \refsec{flowers-prover}.}.
 
 \paragraph{Depth and interaction}
@@ -2402,7 +2411,7 @@ the \kl{pollination} relation (\refdef{pollination}), and is close to the
 \cite[Definition~2.13]{lmcs:1089}.
 
 \begin{definition}[Interaction]\labdef{interaction}
-  
+  \AP
   Let $\Phi\hole, \Psi\hole$ be two \kl{contexts}. We say that $\Phi\hole$ can
   \emph{interact} with $\Psi\hole$ when there exist \kl{contexts} $\Xi\hole,
   \Phi_{0}, \Psi_{0}$ such that either:
@@ -2434,7 +2443,7 @@ corresponds to our notion of \kl{path} in \refdef{path}.} of atoms, a recurring
 idea in this thesis.
 
 \begin{definition}[Occurrence]\labdef{occurrence}
-  
+  \AP
   An \intro{occurrence} is a pair $(\Phi\hole, \phi)$ of a flower $\phi$ and a
   \kl{context} $\Phi\hole$. It is said to be \emph{atomic} if $\phi$ is an atom.
 \end{definition}
@@ -2456,7 +2465,7 @@ $\sinter$ will impose a causality on atoms, where one atom can potentially be
 \emph{justified} by the other:
 
 \begin{definition}[Justification]\labdef{justification}
-  
+  \AP
   A \intro{justification} is an oriented pair of atomic \kl{occurrences} $\mathfrak{a}
   = (\Phi\hole, a) \intro*\justi (\Psi\hole, b)$.
 \end{definition}
@@ -2464,7 +2473,7 @@ $\sinter$ will impose a causality on atoms, where one atom can potentially be
 One can then naturally aggregate \kl{justifications} into \emph{\kl{arguments}}:
 
 \begin{definition}[Argument]\labdef{argument}
-  
+  \AP
   An \intro{argument} is a finite set $\mathfrak{A}$ of \kl{justifications}. Every
   \kl{argument} $\mathfrak{A}$ can be seen as the set of edges of a directed graph,
   whose vertices are the \kl{occurrences} appearing in the \kl{justifications} of
@@ -2475,7 +2484,7 @@ One can then naturally aggregate \kl{justifications} into \emph{\kl{arguments}}:
 We identify two essential \kl{arguments} inherent to any \kl{bouquet}:
 
 \begin{definition}[Vehicle and Anchor]\labdef{vehicle}
-  
+  \AP
   Let $\Phi$ a \kl{bouquet}, and $\intro*\atomoccs{\Phi} = \compr{(\Psi\hole,
   a)}{\Phi = \Psi\select{a}}$ its set of atomic \kl{occurrences}.
   
@@ -2514,6 +2523,7 @@ with those of the latter. Formally, this interaction is expressed by the
 \emph{union} of \kl{arguments}:
 
 \begin{definition}[Compatibility]
+  \AP
   Given a \kl{justification} $\mathfrak{a}$ and an \kl{argument} $\mathfrak{A}$,
   we say that $\mathfrak{a}$ is \intro{compatible} with $\mathfrak{A}$, written
   $\mathfrak{a} \intro*\compat \mathfrak{A}$, when there is no cycle in
@@ -2524,6 +2534,7 @@ with those of the latter. Formally, this interaction is expressed by the
 
 \paragraph{Pollination}
 
+\AP
 The \kl{vehicle} and \kl{anchor} of any \kl{bouquet} $\Phi$ can easily by
 computed, by noticing that the \kl{context} $\Xi\hole$ in \refdef{interaction}
 is simply the \emph{least common ancestor} of the atoms $\Psi\select{a}$ and
@@ -2573,6 +2584,7 @@ on line \ref{remove} corresponds to an instance of the \kl{poll{\da}} rule.
 
 \paragraph{Reproduction}
 
+\AP
 The second phase of our algorithm is the \intro{reproduction phase}. As its name
 suggests, it consists in repeatedly applying the reproduction rule \kl{srep} on
 the current \kl{goal}, until there is no more \kl{context} in which it is
@@ -2601,6 +2613,7 @@ by the following tail recursive procedure:
 
 \paragraph{Decomposition}
 
+\AP
 The third and last phase of our proof search algorithm, called
 \intro{decomposition phase}, is also the most trivial: it simply consists in applying
 the \kl{epet} rule in every applicable \kl{context} in the \kl{goal}, which amounts to
@@ -2824,6 +2837,7 @@ Currently, the \kl{Flower\,\,Prover} only handles propositional flowers with emp
 
 \paragraph{Implementation}
 
+\AP
 The prototype is implemented in \intro{Elm} \sidecite{10.1145/2491956.2462161},
 a modern functional reactive programming language that is particularly
 well-suited for building \kl{GUIs} that are based on complex compositional
@@ -3083,7 +3097,7 @@ the \kl{Navigation} mode implements the \emph{functoriality} of rules, i.e. the
 fact that they can be applied in \kl{contexts} of \emph{arbitrary} \kl{depth}.
 
 \begin{remark}
-This way of navigating tree structures represented as nested areas is typical of
+\AP This way of navigating tree structures represented as nested areas is typical of
 \kl{zoomable user interfaces}, a strand of \kl{GUI} that has been developed by
 many pioneers in the field of human-computer interaction such as Ivan Sutherland
 in his \intro{Sketchpad} system \sidecite{10.1145/800265.810742}, and Alan Kay
@@ -3092,6 +3106,7 @@ in his \intro{Smalltalk} system \sidecite[4em]{goldberg_smalltalk-72_1976}.
 
 \paragraph{Automation}
 
+\AP
 The last feature of the \kl{Flower\,\,Prover} that we have implemented is the
 \intro{Auto} \kl{Proof} action. It is similar in purpose to the \texttt{auto}
 tactic of \kl{Coq}, that tries to simplify the \kl{goal} by performing a limited
@@ -3202,6 +3217,7 @@ correspondence}. Note however that it is already at work in \emph{dependent}
 exemplified in the \kl{Agda} \kl{proof assistant}, where all manipulations are
 done directly on the partial proof/program text.}.
 
+\AP
 It would still be useful to be able to aggregate automatically the set of all
 lemmas, definitions and hypotheses available in a focused subgoal located in
 $\Phi\hole$, so that the user does not need to navigate up and down the
@@ -3347,6 +3363,7 @@ as a generalization of the latter \sidecite{marin_axioms_2022}. This is to be
 related to our own identification of \kl{$n$-ary scrolls}/flowers as a recursive
 generalization of \kl{coherent formulas} at the end of \refsec{IEGs}.
 
+\AP
 Two years earlier, Brock-Nannestad and Ilik had already made some implicit
 connections between \kl{focused} proofs and \kl{coherent formulas}, through their
 \emph{exponential normal form} for \kl{intuitionistic} formulas based on Tarski's

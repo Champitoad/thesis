@@ -1,4 +1,3 @@
-% !TEX root =index.tex
 \setchapterpreamble[u]{\margintoc}
 \chapter{Subformula Linking}
 \labch{sfl}
@@ -1209,18 +1208,6 @@ equivalent rule {\kl{ref}} to our calculus (\reffig{ref-rule}), which we do not
 want to do because it would break the \kl{subformula property}. We conjecture
 that using {\kl{{=}R}} instead of {\kl{Ref}} does not break the cut
 admissibility theorem from \cite{negri_structural_2001}.
-
-% We could not find mention of such a rule in the literature, where instead people
-% use either a non-analytic rule\todo{cite nlab at
-% https://ncatlab.org/nlab/show/sequent+calculus}, a unification-based
-% rule\todo{cite Dale Miller's paper}, or the more traditional axiomatic
-% formulation of equality as a congruent equivalence relation instead of a left
-% \kl{introduction rule}\todo{cite someone}. But our rule looks reasonable enough, so
-% we did not attempt a formal justification of soundness/completeness that would
-% certainly lead us astray. The only problematic aspect would be if it breaks cut
-% admissibility. We conjecture it does not, and postpone an update of the cut
-% admissibility proof of \cite{negri_structural_2001} with our equality rules as
-% future work.
 
 \begin{theorem}[Completeness of subformula linking]\labthm{sfl-completeness} If
   $\Gamma \seq A$ is provable in $\text{\kl{G3i}} + \{\kl{exch}, \kl{{=}R},

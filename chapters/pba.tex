@@ -1,4 +1,3 @@
-% !TEX root =index.tex
 \setchapterstyle{kao}
 \setchapterpreamble[u]{\margintoc}
 \chapter{Proof-by-Action}
@@ -9,64 +8,6 @@ goals, adjust the action steps.}{\textbf{Confucius}}
 
 
 \begin{scope}\knowledgeimport{sfl}
-
-% \begin{kaobox}[frametitle=Note]
-%   Most of the content in this chapter has been previously published in
-%   \cite{10.1145/3497775.3503692}.
-% \end{kaobox}
-
-% \section{What is a sequent?}
-
-% In its original formulation by Gentzen\todo{citation of original paper
-% introducing the sequent calculus}, a sequent is simply an expression of the form
-% $Γ ⊢ C$, where $\Gamma$ is a list of formulas in the logic of interest, and $C$
-% is a distinguished formula. In the context of theorem proving, sequents are
-% usually seen as \emph{goals}, a denomination dating back to the LCF prover
-% \cite{doi:10.1098/rsta.1984.0067}. That is, the statement $C$ corresponds to the
-% \emph{conclusion} the user wants to reach that still needs justification, and
-% the latter can be achieved by using either \emph{hypotheses} in $\Gamma$, or
-% already proved lemmas stored in a global environment\sidenote{From a purely
-% proof-theoretical point of view, having a separate global environment is
-% unnecessary, and every statement considered justified --- either proved or
-% assumed --- can be put in the hypotheses $Γ$.}.
-
-% One can find a number of extensions and variants to the syntax of sequents,
-% depending on the logic under consideration. For example, it is customary in
-% propositional and predicate logic to describe $Γ$ as a set or multiset, because
-% the way hypotheses are ordered is immaterial with regard to provability.
-
-% However many modern \kl{proof assistants} are based on \emph{dependent type theory},
-% where hypotheses have explicit \emph{names} identifying them, corresponding to
-% \emph{variables}. Then sequents have the form $x_1 : A_1, …, x_n : A_n ⊢ C$, and
-% oftentimes the type $A_i$ of some hypothesis will refer to variables in $x_1, …,
-% x_n$, thus creating dependencies between hypotheses. In this case, one wants to
-% avoid dependency cycles by forcing $A_i$ to refer only to previously occuring
-% variables $x_j$ where $j < i$, hence the order of hypotheses becomes logically
-% meaningful. From a usability point of view, it can also be beneficial to let the
-% user reorganize hypotheses in the order she deems most readable in the course of
-% a proof.
-
-% Another common feature consists in extending $Γ$ with \emph{definitions} of the
-% form $x := b : A$, where $b$ is some term \emph{provably} of type
-% $A$\sidenote{This \kl{type-theoretical} encoding of definitions dates back to the
-% work of N. G. De Bruijn on Automath, according to \cite{geuvers_proof_2009}.}.
-% Then $x$ acts as a name for the body $b$ of the definition, and is not just
-% assumed to be of type $A$. The more neutral word \emph{context} is usually
-% preferred over the word \emph{hypotheses} to denote this mixed list of
-% assumptions and definitions. It is also common to qualify the definitions in
-% $\Gamma$, or even the full context $\Gamma$, as being \emph{local}, to
-% distinguish them from the \emph{global} environment of lemmas and definitions
-% mentioned earlier.
-
-% We mention one last possible variation, which is to replace the conclusion $C$
-% by a list of conclusions $Δ$, which ought to be understood \emph{disjunctively}.
-% That is, a sequent $Γ ⊢ Δ$ seen as a goal can be read ``at least one of the
-% conclusions in Δ must be proved under the context $Γ$''. Although introduced
-% originally by Gentzen in the context of classical logic, this syntax can also be
-% used for \kl{intuitionistic} logics, for example to implement efficient proof search
-% procedures \cite{dyckhoff_contraction-free_1992}. In practice however, we do not
-% know of any existing \kl{proof assistant} using multi-conclusion goals at the user
-% interface level.
 
 
 In this chapter, we focus on how both \emph{click} and \emph{drag-and-drop}
