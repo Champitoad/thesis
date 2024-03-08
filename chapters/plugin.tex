@@ -20,10 +20,10 @@ human resources for development, \kl{Actema}'s proof engine is quite limited in
 its features:
 \begin{itemize}
   \itemAP it can only handle \kl{goals} expressed in many-sorted
-    \kl{intuitionistic} \kl{FOL} (\intro{iFOL}), whereas all
-    state-of-the-art \kl{PAs} support \emph{\kl{higher-order}} logic in one
-    form or another; and \kl{higher-order} features are crucial for formalizing
-    many mathematical notions in a concise way, as witnessed by the example of
+    \intro{intuitionistic first-order logic} (\reintro{iFOL}), whereas all
+    state-of-the-art \kl{PAs} support \emph{\kl{higher-order}} logic in one form
+    or another; and \kl{higher-order} features are crucial for formalizing many
+    mathematical notions in a concise way, as witnessed by the example of
     \refsec{funcs};
   \item it does not implement a \emph{certified \kl(PA){kernel}} for checking
     proof objects, which makes it hard to trust and interoperate with;
@@ -74,7 +74,7 @@ which structures all interactions between the user, \kl{Coq} and \kl{Actema}.
 \refsec{protocol} describes in more details the main usage scenario of
 \kl{coq-actema}, following the flow of data and control between the different
 processes involved. \refsec{compilation} explains how the various graphical
-actions performed by the user in \kl{Actema} are compiled into \kl{Coq}
+\kl{actions} performed by the user in \kl{Actema} are compiled into \kl{Coq}
 \kl{tactics}, ultimately producing certified \kl{proof terms}. Finally in
 \refsec{pluginfuture}, we discuss possible avenues for extending the usability
 of \kl{coq-actema} to a broader class of \kl{Coq} \kl{goals}, as well as
@@ -86,18 +86,18 @@ paradigm.
 \AP
 At its core, \kl{Actema} is a web application made of two components: a
 \emph{frontend} that implements the graphical interface with which the user
-interacts, written in \kl{HTML}/\intro{CSS}/\kl{JavaScript} with the \kl{Vue.js}
+interacts, written in \kl{HTML}/\intro{CSS}/\kl{JavaScript} with the \intro{Vue.js}
 framework \cite{Vuejs}; and a \emph{backend} that implements the proof engine,
-written in \intro{OCaml} and compiled to \kl{JavaScript} (\reintro{JS}) with
-\kl{js\_of\_ocaml} \sidecite{vouillon_bytecode_2014}. The two components
+written in \intro{OCaml} and compiled to \kl{JavaScript} (\intro{JS}) with
+\intro{js\_of\_ocaml} \sidecite{vouillon_bytecode_2014}. The two components
 interact through an object-oriented API written in \kl{OCaml}, which is loaded
 at runtime in the form of a \kl{JS} object called \texttt{engine}, and whose
-methods can be called from the \kl{Vue} components in the frontend.
+methods can be called from the \kl[Vue.js]{Vue} components in the frontend.
 
 The \texttt{engine} object provides various high-level methods for handling the
 current \emph{\kl{proof state}}. Common operations include getting the list of open
-\kl{subgoals}, querying available proof actions on a \kl{subgoal}, or applying a given
-proof action. Lower-level methods are also available in other objects to inspect
+\kl{subgoals}, querying available proof \kl{actions} on a \kl{subgoal}, or applying a given
+proof \kl{action}. Lower-level methods are also available in other objects to inspect
 the data of the \kl{proof state}. For instance,
 $$\mathtt{engine.subgoals[0].context[0]}$$ will return an object representing
 the first hypothesis of the first \kl{subgoal}; and this object itself exposes
@@ -105,11 +105,11 @@ an \texttt{html} method, which returns a string holding the \kl{HTML} code used 
 display the statement of the hypothesis.
 
 In the standalone version of \kl{Actema}, the proof engine takes care of
-computing the new \kl{subgoals} stemming from actions performed by the user. It
-is thus responsible for defining the \emph{semantics} of proof actions. It is
+computing the new \kl{subgoals} stemming from \kl{actions} performed by the user. It
+is thus responsible for defining the \emph{semantics} of proof \kl{actions}. It is
 also in charge of various other tasks that process the logical data of the
 \kl{proof state}, typically checking the \kl(sfl){validity} of \kl{linkages}
-during a \kl{DnD} action, which requires the use of a \kl{unification} algorithm
+during a \kl{DnD} \kl{action}, which requires the use of a \kl{unification} algorithm
 (see \refsec{validity}).
 
 \section{Why a plugin?}\labsec{whyplugin}
@@ -137,7 +137,7 @@ API for manipulating \kl(PA){kernel} \kl{terms}.
 Now, remember that \kl{Actema} is not meant as a full-fledged \kl{IDE} that can
 manage the edition and execution states of the \kl{proof script}, but only as an
 enhanced \kl{proof view} for manipulating already-parsed \kl{goals}. One should
-think of \kl{Actema}'s actions simply as a graphical frontend for invoking a new
+think of \kl{Actema}'s \kl{actions} simply as a graphical frontend for invoking a new
 set of \kl{tactics}. And this is precisely what the plugin system of \kl{Coq}
 has been designed for: extending \kl{Coq} with new \kl{tactics}. Thus the
 solution of a \kl{Coq} plugin made a lot more sense, with the important benefit
@@ -146,14 +146,14 @@ easier adoption of \kl{Actema} into existing \kl{Coq} developments and
 workflows.
 
 In this setting, it is now the \kl{Coq} plugin which implements the semantics of
-proof actions as new \kl{tactics}, instead of \kl{Actema}'s backend. This allows
+proof \kl{actions} as new \kl{tactics}, instead of \kl{Actema}'s backend. This allows
 us to leverage the facilities already provided by \kl{Coq} to handle the
 \kl{proof state} and generate \kl{proof terms} in the \kl{calculus of inductive
 constructions}. This does not make the backend of \kl{Actema} completely
 irrelevant however: we still need it so that \kl{Actema} can maintain its own,
 \kl{first-order} version of the \kl{proof state}, with additional metadata used
 to display and interact graphically with objects and statements. Also tasks
-related to the querying of both display data and proof actions, like the
+related to the querying of both display data and proof \kl{actions}, like the
 \texttt{html} method and \kl{unification} algorithm mentioned in the previous
 section, are at the time of writing of this thesis still performed in
 \kl{Actema}'s backend. It is unclear to what extent this should rather be a
@@ -241,8 +241,8 @@ It exposes a single \kl{tactic} called \texttt{actema}, which can run in two
 distinct modes:
 \begin{description}
   \item[\bfseries Interactive] The \process{Plugin} sends the current
-  \kl{subgoal}s to \kl{Actema}, and the user applies a sequence of actions on
-  them. Each time an action is performed, it is sent back to \kl{Coq}, compiled
+  \kl{subgoal}s to \kl{Actema}, and the user applies a sequence of \kl{actions} on
+  them. Each time an \kl{action} is performed, it is sent back to \kl{Coq}, compiled
   into the appropriate \kl{tactic} call, and then executed to generate new
   \kl{subgoals} that are sent again to \kl{Actema}. The \texttt{actema}
   \kl{tactic} finishes its execution either when:
@@ -255,7 +255,7 @@ distinct modes:
 
   \item[\bfseries Non-interactive] If the \texttt{actema} \kl{tactic} has
   already been executed on the \kl{subgoal} under focus, then the
-  \process{Plugin} automatically saved the sequence of actions performed by the
+  \process{Plugin} automatically saved the sequence of \kl{actions} performed by the
   \process{User} in a \process{Database} (gray circle). Currently for ease of
   development, the \process{Database} is implemented as a simple directory on
   the local filesystem, where each file encodes an entry as follows:
@@ -265,10 +265,10 @@ distinct modes:
     and an optional \emph{identifier}, which can be given as argument to the
     \kl{tactic} in the form of an arbitrary string;
     \item the contents of the file is a \intro{Base64} encoding of
-    the data specifying each action, whose format will be detailed in
+    the data specifying each \kl{action}, whose format will be detailed in
     \refsec{compilation}.
   \end{itemize}
-  Then the \kl{tactic} will load the sequence of actions from the appropriate file,
+  Then the \kl{tactic} will load the sequence of \kl{actions} from the appropriate file,
   recompile it into one big \kl{tactic}, and execute it on the current \kl{subgoal}.
 \end{description}
 One can also force the execution in interactive mode by using a variant of the
@@ -333,7 +333,7 @@ non-interactive mode of the \texttt{actema} \kl{tactic} where the
 interactive mode of the \texttt{actema} \kl{tactic}: \reffig{protocol2} focuses
 on the conditions for breaking out of the interaction loop, and
 \reffig{protocol3} on the interactions at work when the \process{User} performs
-a proof action in \kl{Actema}.
+a proof \kl{action} in \kl{Actema}.
 
 \subsection{Translating goals}
 
@@ -378,7 +378,7 @@ instead, and this would not change the structure of the \texttt{goal} datatype.
 Note that hypotheses are encoded with a \texttt{h\_id} attribute corresponding
 to their string identifier in the \kl{Coq} \kl{goal}, even though we do not
 display it in \kl{Actema}'s interface. This is required later by the plugin to
-compile actions into \kl{tactics}, because we need to identify which \kl{Coq}
+compile \kl{actions} into \kl{tactics}, because we need to identify which \kl{Coq}
 hypotheses correspond to those designated graphically by the \process{User}.
 
 \subsection{Retrieving actions}
@@ -388,11 +388,11 @@ The next step for the \process{Plugin} is to check if there already exists a
 graphical proof associated to $\trgoal{G}$ in the \process{Database}. If so,
 then it retrieves it in the form of a list $A$ of \emph{actions}, whose data
 format will be precised in \refsec{compilation}. There is also a positive
-integer $n_i$ associated to each action $A_i$ in the list, corresponding to the
+integer $n_i$ associated to each \kl{action} $A_i$ in the list, corresponding to the
 index of the \kl{goal} to which $A_i$ applies in the list of \kl{subgoals}. Then
 each $A_i$ is compiled into a \kl{tactic} $\intro*\traction{A_i}$, and all the
 $\traction{A_i}$ are composed into a unique \kl{tactic} $\tau$, which is
-executed by the \kl(PA){kernel} on $G$ to apply the full sequence of actions.
+executed by the \kl(PA){kernel} on $G$ to apply the full sequence of \kl{actions}.
 
 \begin{remark}
   Currently the translation $\trgoal{-}$ is not \emph{injective}: it might
@@ -400,7 +400,7 @@ executed by the \kl(PA){kernel} on $G$ to apply the full sequence of actions.
   because strictly \kl{higher-order} subterms are translated into a
   \texttt{dummy} atomic predicate/function. Thus one might retrieve a proof from
   a different \kl{goal} when calling the \texttt{actema} \kl{tactic}. However
-  this is not problematic, since the \process{User} cannot perform any actions
+  this is not problematic, since the \process{User} cannot perform any \kl{actions}
   involving the parts of the two goals that make them distinct; they might as
   well be seen as the same \kl{goal} from her point of view. It can thus be
   considered as a feature that maximizes proof reuse.
@@ -435,14 +435,14 @@ the goals can be rendered by the \process{Frontend} and exposed to the
   \item she can apply either a click, \kl{DnD} or \kl{contextual
   action}\sidenote{See \refsec{funcs} for an introductory example of
   \kl{contextual action} with \kl{Unfold}.}. The precise protocol followed for
-  applying an action is summarized in \reftab{action-protocol}. Let us focus on
-  the more complex case of \kl{DnD} actions. The \textbf{Start} column describes
-  how the \process{User} \emph{starts} the action, here by dragging some
+  applying an \kl{action} is summarized in \reftab{action-protocol}. Let us focus on
+  the more complex case of \kl{DnD} \kl{actions}. The \textbf{Start} column describes
+  how the \process{User} \emph{starts} the \kl{action}, here by dragging some
   \kl{item} $I$ of the current \kl{subgoal}. Then the \process{Frontend} asks
   the \process{Backend} for the set $\mathcal{A}$ of all available \kl{DnD}
-  actions involving $I$. The \textbf{Selection} column describes how the
+  \kl{actions} involving $I$. The \textbf{Selection} column describes how the
   computation of $\mathcal{A}$ is impacted by the set $S$ of subterms that are
-  selected in the current \kl{subgoal}. For \kl{DnD} actions, we essentially
+  selected in the current \kl{subgoal}. For \kl{DnD} \kl{actions}, we essentially
   filter out all \kl{linkages} that do not match the selection. The
   \textbf{Render} column describes how $\mathcal{A}$ is \emph{rendered} to the
   \process{User}: here we highlight the set $Q$ of all \kl(sfl){valid} drop
@@ -452,7 +452,7 @@ the goals can be rendered by the \process{Frontend} and exposed to the
   graphically by squaring them. But one could imagine other modalities for
   highlighting, typically \emph{spelling} the subterms with a speech synthesis
   algorithm, e.g. for users with impaired vision.}. Lastly, the \textbf{End}
-  column describes how the user chooses a specific action $A \in \mathcal{A}$ to
+  column describes how the user chooses a specific \kl{action} $A \in \mathcal{A}$ to
   apply, here by dropping $I$ on a given target $q$. Then $A$ is serialized and
   sent in the body of the response to the \request{action} request, together
   with the index $n$ of the \kl{subgoal} under focus in \kl{Actema}. The
@@ -466,7 +466,7 @@ the goals can be rendered by the \process{Frontend} and exposed to the
   \process{Plugin} with a \request{done} response, and the interaction loop with
   \kl{Actema} stops here. This will happen when the \process{User} wants to go
   back to editing the \kl{proof script}, either because she is satisfied with
-  the new \kl{subgoals} obtained from previous actions, or because she is stuck
+  the new \kl{subgoals} obtained from previous \kl{actions}, or because she is stuck
   and wants to try native \kl{Coq} \kl{tactics} instead. Indeed our protocol is
   \emph{synchronous}: the \process{IDE}'s interface is stuck until the
   \texttt{actema} \kl{tactic} has finished its execution, and thus one cannot
@@ -494,7 +494,7 @@ the goals can be rendered by the \process{Frontend} and exposed to the
       If $\exists q \in S \cap \substermscompl{\subterms{I}}$ then match only $p
       \link q$ where $p \in \subterms{I}$
     & Highlight $Q \subseteq \substermscompl{\subterms{I}}$ & Drop on some $q \in Q$ \\ \hline
-  Contextual    & Open menu & Populate menu only with actions
+  Contextual    & Open menu & Populate menu only with \kl{actions}
   applicable on $S$ & Show menu & Choose an \kl{item} in the menu \\ \hline
   \end{tabular}
   \raggedright
@@ -510,16 +510,16 @@ the goals can be rendered by the \process{Frontend} and exposed to the
       \item $p @ q$ is a \kl{linkage} as introduced in \refsec{linkages}
     \end{itemize}}
 
-  \caption{Protocol for applying an action in Actema}
+  \caption{Protocol for applying an \kl{action} in Actema}
   \labtab{action-protocol}
 \end{table*}
 
 
 \section{Compiling actions}\labsec{compilation}
 
-Once the \process{Plugin} has received the actions to execute, either from the
+Once the \process{Plugin} has received the \kl{actions} to execute, either from the
 \process{Database} or the \process{User}, it will compile them with the function
-$\traction{-}$ which translates any action $A$ into a \kl{Coq} tactic
+$\traction{-}$ which translates any \kl{action} $A$ into a \kl{Coq} tactic
 $\traction{A}$. This function actually has access to some other data: \kl{Coq}'s
 \kl{goal} $G$, its \kl{Actema} translation $\trgoal{G}$, and a bijective mapping
 $\Sigma$ between \kl{Coq} constants in the environment of $G$ and the
@@ -536,28 +536,28 @@ $\trgoal{G}$.
 
 The \texttt{action} datatype is described thoroughly in the \kl{ATD} specification
 provided in \reffig{atd-actions}. It is a big algebraic datatype, where each
-constructor encodes a specific \emph{type} of action. An action's type is
+constructor encodes a specific \emph{type} of \kl{action}. An action's type is
 equivalent to the \emph{signature} of a \kl{tactic}, i.e. its name and the types
 of its arguments. In particular, the translation function $\traction{-}$ is
 defined as a big pattern-matching on the action's type\sidenote{Note that an
 action's type is orthogonal to what we referred to as its \emph{kind} in
 \reftab{action-protocol}, that is the interface mechanism through which it is
-accessible. One might for example want to map some action types to \emph{vocal
-commands} instead of click or \kl{DnD} gestures.}. The arguments in action types
+accessible. One might for example want to map some \kl{action} types to \emph{vocal
+commands} instead of click or \kl{DnD} gestures.}. The arguments in \kl{action} types
 rely on most datatypes defined previously in \reffig{atd-fo} and
 \reffig{atd-goals}, and on two new datatypes: the type \texttt{ipath} of
 \emph{\kl{paths}}, which is used pervasively to designate subterms of the current
 \kl{subgoal} (that are typically indicated by the \process{User} through
 pointing); and the type \texttt{itrace} of \emph{\kl{subformula linking}
-traces}, which is used in the compilation of \kl{DnD} actions that perform
+traces}, which is used in the compilation of \kl{DnD} \kl{actions} that perform
 \kl{subformula linking}, to be described soon.
 
 Most click and \kl{contextual actions} have a straightforward translation as \kl{Coq}
-tactics. For instance, the \texttt{AIntro} action that corresponds to a click on
+tactics. For instance, the \texttt{AIntro} \kl{action} that corresponds to a click on
 the conclusion $C$ will be mapped to the \kl{Coq} \kl{tactic} that introduces
 the main connective of $C$, and is thus defined by case on the latter:
 \texttt{intro} for $\limp$ and $\forall$, \texttt{split} for $\land$, etc. The
-actions \texttt{AInd}, \texttt{ASimpl} and \texttt{ARed} correspond respectively
+\kl{actions} \texttt{AInd}, \texttt{ASimpl} and \texttt{ARed} correspond respectively
 to the \kl{contextual actions} \kl{Induction}, \kl{Simplify} and
 \kl{Unfold} introduced in \refch{advanced}, and are mapped almost directly
 to the equivalent \kl{Coq} \kl{tactics} \texttt{induction}, \texttt{simpl} and
@@ -571,7 +571,7 @@ semantics directly in \kl{Coq}, that we now briefly describe.
 \AP
 In a \kl{deep inference} setting, one can reason on subterms located arbitrarily
 \emph{deep} inside statements, usually by applying some kind of \kl{rewriting
-rules} on them. In particular, the semantics of \kl{DnD} actions described in
+rules} on them. In particular, the semantics of \kl{DnD} \kl{actions} described in
 \refch{sfl} are based on the rules of \kl{SFL} (\reffig{DISL}). To implement
 them, we chose to do a \intro{deep embedding} of \kl{FOL} inside \kl{CoIC}. Here
 the word ``deep'' has a different meaning, related to the fact that we encode
@@ -612,7 +612,7 @@ ecosystem, such as the successor to \kl{Ltac} \intro{Ltac2} \cite{Ltac2}, or the
 \kl{MetaCoq} project \cite{MetaCoq}.}.
 
 The most complex \kl{tactics} are those implementing \kl(dnd){backward} and
-\kl(dnd){forward} \kl{DnD} actions, called respectively \texttt{backward} and
+\kl(dnd){forward} \kl{DnD} \kl{actions}, called respectively \texttt{backward} and
 \texttt{forward}. They rely on two \kl{Coq} fixpoints \texttt{b3} and
 \texttt{f3} which respectively compute the new conclusion $\mathtt{b3}(p, q, T)$
 from a \kl(dnd){backward} \kl{linkage} $p \back q$, and the new hypothesis
@@ -693,7 +693,7 @@ components of a \kl{proof assistant} will depend on it. Thus the switch to
 of refactoring work to perform in the future. This will require changes to
 \kl{Actema}'s \process{Backend} and \process{Frontend}, but also to the \kl{Coq}
 \process{Plugin}\sidenote{The \kl{Coq} theory implementing the tactics for
-\kl{deep inference}-based actions already has partial support for
+\kl{deep inference}-based \kl{actions} already has partial support for
 \kl{higher-order} \kl{goals}, thus work remains mostly on the side of the
 translation module for \kl{Actema} written in \kl{OCaml}.} and the \kl{ATD}
 datatype definitions enabling communication between the two.
@@ -714,7 +714,7 @@ A more radical solution would be to replace the \request{actions} request from
 the \process{Frontend} to the \process{Backend} by a \texttt{start} response
 from the \process{Frontend} to the \process{Plugin}, with the data of the
 selection in its body. Then we could completely delegate the computation of
-available actions to the \process{Plugin}, allowing us to freely use \kl{Coq}'s
+available \kl{actions} to the \process{Plugin}, allowing us to freely use \kl{Coq}'s
 \kl{unification}. This might not be too hard since we should be able to directly
 reuse \kl{OCaml} code from the \process{Backend}, but is a deeper structural change
 to the interaction protocol, that makes the \process{Plugin} responsible for an
@@ -787,7 +787,7 @@ to avoid recomputing the translation each time.
 
 % Design a new architecture/protocol that supports \emph{continuous, incremental
 % document checking} (typically by inserting tactic calls in the \kl{proof script}
-% for each action, maybe coq-lsp can do that?)
+% for each \kl{action}, maybe coq-lsp can do that?)
 
 \subsection{Proof evolution}\labsubsec{proof-evolution}
 
@@ -822,22 +822,22 @@ evolution} in mind from the outset. Indeed, a proof built with the
 \texttt{actema} \kl{tactic} will provide the least possible amount of information in
 the \kl{proof script}, since we can just witness the call to that \kl{tactic}. And
 currently there are no facilities to visualize the associated sequence of
-actions stored in the \process{Database} of graphical proofs.
+\kl{actions} stored in the \process{Database} of graphical proofs.
 
 The first question that should be answered is: how do we represent statically a
-sequence of graphical actions, let alone a single action? For a machine
-representation, we can just dump the data of the action invokation, and this is
+sequence of graphical \kl{actions}, let alone a single \kl{action}? For a machine
+representation, we can just dump the data of the \kl{action} invokation, and this is
 indeed what we do with the \process{Database}. But finding a human-readable
 representation that an average user can quickly manipulate and reason about is a
 lot more delicate. The most direct way may be to abandon text altogether, and
-just replay the action on the interface through a graphical \emph{animation}.
+just replay the \kl{action} on the interface through a graphical \emph{animation}.
 This is an intrisically temporal and dynamic representation, akin to a
 mathematician unfolding her demonstration on the blackboard. One could then
 imagine an interface dedicated to richly-structured navigation inside this
 sequence of animations, in the style of an improved video player.
 
 A more conservative solution would be to find a systematic way to translate a
-sequence of actions into a proof text. The question of generating
+sequence of \kl{actions} into a proof text. The question of generating
 \kl{declarative} proof texts from \kl{imperative} \kl{proof scripts} has already
 been explored by some authors, especially in the case of proofs expressed in
 natural language\sidenote{See for example section 3.6 of E. Ayers' thesis
@@ -845,12 +845,12 @@ natural language\sidenote{See for example section 3.6 of E. Ayers' thesis
 \kl{Lean} \kl{proof assistant} \cite{LeanIPAM}.}. Our hope is that the structure
 of proofs in the \kl{PbA} paradigm might be well-suited to the generation of
 readable and concise proof texts, thanks notably to the \kl{subformula linking}
-semantics of \kl{DnD} actions that exhibit clearly the flow of argumentation.
+semantics of \kl{DnD} \kl{actions} that exhibit clearly the flow of argumentation.
 
 An even more pragmatic solution, that should be straightforward to implement in
 the short-term, consists in inserting \kl{tactic} invokations in the \kl{proof script}
-that are in one-to-one correspondence with graphical actions. Since we actually
-compile actions into \kl{tactics}, this is in principle easy to implement. However,
+that are in one-to-one correspondence with graphical \kl{actions}. Since we actually
+compile \kl{actions} into \kl{tactics}, this is in principle easy to implement. However,
 there are currently two drawbacks to this approach:
 \begin{description}
   \item[Leaking SFL data] Since most \kl{tactics} are \kl{deep inference}-based,
@@ -873,7 +873,7 @@ there are currently two drawbacks to this approach:
   \refsec{protocol} does not provide any way to send requests to the
   \process{IDE}, which would be necessary to actually insert the \kl{tactic}
   invokation at the right location in the \kl{proof script}, and this as soon as
-  the action is performed by the \process{User}. A ``brutal'' solution would be
+  the \kl{action} is performed by the \process{User}. A ``brutal'' solution would be
   to reimplement \kl{coq-actema} as an extension of a specific \kl{IDE},
   typically \kl{VsCoq} which is also based on web technologies. But this would
   require some big implementation efforts, in addition to locking the

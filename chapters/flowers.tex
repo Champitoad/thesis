@@ -65,7 +65,7 @@ exploit these properties in \refsec{flowers-search} by describing an algorithm
 for fully automated proof search in the propositional fragment; unfortunately,
 the current version of the algorithm is neither terminating nor complete. Then
 in \refsec{flowers-prover} we give an overview of the \kl{Flower\,\,Prover}, a
-prototype of \kl{GUI} in the \kl{Proof-by-Action} paradigm whose actions map
+prototype of \kl{GUI} in the \kl{Proof-by-Action} paradigm whose \kl{actions} map
 directly to the rules of the \kl{flower calculus}, and which integrates nicely
 with (a restricted version of) our search procedure. We conclude in
 \refsec{Conclusion} by a comparison with some related works, and a discussion of
@@ -712,9 +712,6 @@ for any \kl{bouquet} $\Phi$, the two following conditions hold:
   it as a set;
   \item $\bv(\Phi) \cap \fv(\Phi) = \emptyset$.
 \end{enumerate} 
-% To preserve this convention, in this paper we will only consider
-% \emph{non-circular} substitutions $\sigma$ where $x \not\in \fv(\sigma(x))$ for
-% all $x \in \dom(\sigma)$.
 
 To define \kl{substitutions}, we introduce a general notion of \emph{function
 \kl{update}}, which will be useful for the semantic evaluation of flowers in
@@ -739,11 +736,12 @@ To define \kl{substitutions}, we introduce a general notion of \emph{function
 \end{definition}
 
 \begin{definition}[Substitution]
-  \AP A \intro{substitution} is a function $\sigma : \vars \to \terms$ with a finite
-  \intro{support} $\dom(\sigma) = \compr{x}{\sigma(x) \not= x}$. By abuse of
-  notation, we will write $\sigma : \bx \to \terms$ to denote a \kl{substitution}
-  $\sigma$ whose \kl{support} is $\bx$. The domain of \kl{substitutions} is extended to
-  terms, flowers, \kl{bouquets} and gardens mutually recursively as follows:
+  \AP A \intro{substitution} is a function $\sigma : \vars \to \terms$ with a
+  finite \intro{support} $\intro*\dom(\sigma) = \compr{x}{\sigma(x) \not= x}$.
+  By abuse of notation, we will write $\sigma : \bx \to \terms$ to denote a
+  \kl{substitution} $\sigma$ whose \kl{support} is $\bx$. The domain of
+  \kl{substitutions} is extended to terms, flowers, \kl{bouquets} and gardens
+  mutually recursively as follows:
   \begin{align*}
     \sigma(f(t_1, \ldots, t_n)) &= f(\sigma(t_1), \ldots, \sigma(t_n)) \\
     \sigma(p(t_1, \ldots, t_n)) &= p(\sigma(t_1), \ldots, \sigma(t_n)) \\
@@ -877,7 +875,7 @@ justifies/\kl{pollinates}, and thus where $\phi$ can be
 information in flowers, just like \reffig{eg-local-justification} summarized the
 flow of information in \kl{EGs}, and \reffig{bubbles-porosity} in bubbles. From
 a UI point of view, all these figures can be understood as kind of
-``cheatsheets'', that indicate with arrows the allowed drag-and-drop moves for
+``cheatsheets'', that indicate with arrows the allowed \kl{drag-and-drop} moves for
 importing a statement (the source of the \kl{DnD}) into a new \kl{context} (the
 destination of the \kl{DnD}).}. We distinguish two cases of
 \emph{\kl{cross-pollination}} and \emph{\kl{self-pollination}}, as botanists do
@@ -2385,7 +2383,7 @@ need to perform \emph{backtracking}, a great source of non-determinism in proof
 search\sidenote{See also \refsec{sfl-backtracking} for a discussion on this
 topic.}, and particularly so in \kl{intuitionistic} logic\sidenote{The only
 fully \kl{invertible} \kl{proof system} for \kl{intuitionistic} (predicate)
-logic that we know of is the labelled sequent calculus \kl{G3IntQ} from Lyon's
+logic that we know of is the labelled sequent calculus \intro{G3IntQ} from Lyon's
 thesis \cite{lyon_refining_2021} (we thank Lutz Stra{\ss}burger for pointing
 that to us). However, a peculiarity of labelled sequent calculi is that they
 need to incorporate \emph{semantical} notions like the \kl{worlds} and
@@ -2543,7 +2541,7 @@ $\intro*\lca{\Psi\hole}{\Psi'\hole}$. This forms the basis for the first
 \emph{phase} of our algorithm, that we call the \intro{pollination
 phase}\sidenote{It corresponds roughly to a combination of the
 \emph{application} and \emph{linking} phases of the proof search algorithm for
-\kl{B_{inv}} described in \refsubsec{bubbles-search}.}. Roughly, the idea is
+\kl{Binv} described in \refsubsec{bubbles-search}.}. Roughly, the idea is
 that given a \kl{goal} $\Phi$, we want to perform eagerly every
 \kl{justification} $\mathfrak{a}$ in the \kl{vehicle} $\vehicle{\Phi}$, on the
 condition that $\mathfrak{a}$ is \kl{compatible} with the \kl{anchor}
@@ -2891,7 +2889,7 @@ the \kl{Flower\,\,Prover} is highly original in mainly two respects:
 \paragraph{Modal interface}
 
 The \kl{Flower\,\,Prover} is organized in two main \emph{modes} of interaction,
-providing different sets of \kl{direct manipulation} actions on
+providing different sets of \kl{direct manipulation} \kl{actions} on
 goals\sidenote{Another example of modal interface is the popular text editor
 \texttt{vim}, with its \emph{normal} mode for high-level manipulation of text
 through commands and macros, and its \emph{edit} mode for low-level insertion
@@ -2901,11 +2899,11 @@ and deletion of characters.}:
   reducing them to the empty \kl{bouquet} $\emptyset$. It corresponds in purpose to
   the interactive proof mode of modern \kl{proof assistants} like \kl{Coq}, \kl{Lean} and
   \kl{Isabelle}, and to the interactive \kl{proof view} provided by \kl{Actema}.
-  % Indeed, every action in this mode is performed by direct manipulation of
+  % Indeed, every \kl{action} in this mode is performed by direct manipulation of
   % flowers through pointing interactions: either clicking on empty areas/gardens,
   % or dragging and dropping flowers into gardens.
   As will be detailed shortly, there is almost a one-to-one correspondence
-  between \kl{Proof} actions, and the $\Nature$-rules of the \kl{flower calculus}.
+  between \kl{Proof} \kl{actions}, and the $\Nature$-rules of the \kl{flower calculus}.
   
   \itemAP[\intro{Edit} mode] in this mode, the user can construct arbitrary
   flowers by clicking on buttons and filling text fields, or modify the
@@ -2914,7 +2912,7 @@ and deletion of characters.}:
   language of a \kl{proof assistant}\sidenote{The term ``vernacular'' was used
   for the first time in the context of \kl{proof assistants} by the founder of
   the field, N. G. de Bruijn \cite{de_bruijn_mathematical_1994}.}. \kl{Edit}
-  actions implement exactly the $\Culture$-rules of the \kl{flower calculus}.
+  \kl{actions} implement exactly the $\Culture$-rules of the \kl{flower calculus}.
 \end{description}
 
 \begin{remark}
@@ -2945,36 +2943,36 @@ the screen: \kl{Proof} and \kl{Edit} modes are mapped respectively to the left b
 a checkmark icon, and the middle button with a pencil icon.
 
 \AP
-It is also possible to \intro{Undo}/\intro{Redo} any action, whichever mode it was done
+It is also possible to \intro{Undo}/\intro{Redo} any \kl{action}, whichever mode it was done
 in, by clicking on the arrow buttons located on the bottom-right corner of the
 screen. This is implemented by a simple stack recording the entire state of the
-application, that is updated every time the user performs an action, and
+application, that is updated every time the user performs an \kl{action}, and
 popped/pushed when the user clicks on the \kl{Undo}/\kl{Redo} buttons. Since the
 application state includes the current interaction mode, undoing/redoing an
-action will automatically switch to the mode in which the action was performed.
+\kl{action} will automatically switch to the mode in which the \kl{action} was performed.
 
 \paragraph{\kl{Proof} actions}
 
 \begin{table*}[h]
   \input{figures/flowers-actions.tex}
-  \caption{Graphical actions of the \kl{Flower\,\,Prover}}
+  \caption{Graphical \kl{actions} of the \kl{Flower\,\,Prover}}
   \labfig{flowers-actions}
 \end{table*}
 
 \begin{figure*}[h]
   \input{figures/flowers-prover-anim.tex}
-  \caption{A sequence of \kl{Proof} actions in the \kl{Flower\,\,Prover}}
+  \caption{A sequence of \kl{Proof} \kl{actions} in the \kl{Flower\,\,Prover}}
   \labfig{flowers-prover-anim}
 \end{figure*}
 
-\reftab{flowers-proof-actions} shows the precise mapping of \kl{Proof} actions to
+\reftab{flowers-proof-actions} shows the precise mapping of \kl{Proof} \kl{actions} to
 $\Nature$-rules, together with the associated gestures for triggering them; and
-\reffig{flowers-prover-anim} shows a sequence of screenshots of the \kl{Flower\,\,Prover}, capturing the execution of a sequence of \kl{Proof} actions reducing the
+\reffig{flowers-prover-anim} shows a sequence of screenshots of the \kl{Flower\,\,Prover}, capturing the execution of a sequence of \kl{Proof} \kl{actions} reducing the
 \kl{subgoal} $\flower{(\flower{}{a \sep b})}{c}$ to $\flower{b}{c}$. A few
 comments are in order:
 
 \begin{description}
-  \item[Pollination] The most central actions are those implementing
+  \item[Pollination] The most central \kl{actions} are those implementing
   the \kl{pollination} rules \kl{poll{\da}} and \kl{poll{\ua}}, called respectively
   \kl{Justify} and \kl{Import}. In fact, they are \emph{less} general
   than those rules: one can only \kl{Justify} flowers that are \emph{atomic}
@@ -2986,51 +2984,51 @@ comments are in order:
   \item[Suggestions]
   
   The fourth screenshot in \reffig{flowers-prover-anim} shows the flower $\phi
-  \deq \flower{a}{c}$ being dragged in the process of an \kl{Import} action.
+  \deq \flower{a}{c}$ being dragged in the process of an \kl{Import} \kl{action}.
   If you look closely, you will notice that there are many areas whose border is
   highlighted with dashed yellow lines: these correspond to all \kl{contexts}
   $\Xi\hole$ where $\phi$ can be imported, i.e. such that
   $\chyp{\phi}{\Xi\hole}$. This is a first form of \emph{suggestion} in the
-  \kl{Flower\,\,Prover}, indicating available valid actions to the user through visual
+  \kl{Flower\,\,Prover}, indicating available valid \kl{actions} to the user through visual
   feedback\sidenote{A similar mechanism is implemented in \kl{Actema}, where subterms
-  that are possible drop targets for \kl{DnD} actions are also highlighted (see
+  that are possible drop targets for \kl{DnD} \kl{actions} are also highlighted (see
   \refsec{validity}).}.
 
-  In fact, every \kl{Proof} action has an associated visual cue, guiding interactive
+  In fact, every \kl{Proof} \kl{action} has an associated visual cue, guiding interactive
   proof search by suggesting to the user areas of the \kl{goal} where she might want
-  to focus her attention. Since every action other than \kl{Import} is
+  to focus her attention. Since every \kl{action} other than \kl{Import} is
   performed by a \emph{click} gesture, the area that is highlighted corresponds
   precisely to the area that can be clicked for triggering the action: either a
-  green box enclosing the justifiable atom for \kl{Justify} actions, an
+  green box enclosing the justifiable atom for \kl{Justify} \kl{actions}, an
   orange box covering the empty \kl{pistil} for \kl{EFQ}, \kl{Case} and
-  \kl{Unlock} actions, or a green box covering the empty \kl{petal} for
-  \kl{QED} actions.
+  \kl{Unlock} \kl{actions}, or a green box covering the empty \kl{petal} for
+  \kl{QED} \kl{actions}.
   
   \itemAP[Fencing] We have already mentioned that we suspect that the
   \kl{epis} rule might be \kl{admissible}. However if it is not, one needs a
-  corresponding graphical action in \kl{Proof} mode. While it is currently not
+  corresponding graphical \kl{action} in \kl{Proof} mode. While it is currently not
   implemented, we plan to add a \emph{selection} mechanism that allows the user
   to select a set of flowers in the \kl{goal}. Then, we could add a \intro{Fence}
-  action, whose effect is to enclose the selected flowers in a \kl{petal} attached to
-  an empty \kl{pistil}. This action could be mapped to a dedicated button in the
+  \kl{action}, whose effect is to enclose the selected flowers in a \kl{petal} attached to
+  an empty \kl{pistil}. This \kl{action} could be mapped to a dedicated button in the
   toolbar that is visible only in \kl{Proof} mode, and enabled only when the
   selected flowers are juxtaposed in the same garden.
 \end{description}
 
-Since every \kl{Proof} action implements a $\Nature$-rule, it is guaranteed to be
-\emph{\kl{invertible}}: the user never needs to \kl{Undo} a \kl{Proof} action in order to
+Since every \kl{Proof} \kl{action} implements a $\Nature$-rule, it is guaranteed to be
+\emph{\kl{invertible}}: the user never needs to \kl{Undo} a \kl{Proof} \kl{action} in order to
 complete a proof, because it always preserves the provability of the \kl{goal}. Of
 course it might still be desirable to do so in specific cases, such as
-\kl{Import} actions that may create unneeded copies of flowers\sidenote{In
+\kl{Import} \kl{actions} that may create unneeded copies of flowers\sidenote{In
 this specific case, one might want to relax the atomic restriction on
-\kl{Justify} actions, in order to avoid the recourse to \kl{Undo}
-actions, which can only be performed at the top of the history stack.}.
+\kl{Justify} \kl{actions}, in order to avoid the recourse to \kl{Undo}
+\kl{actions}, which can only be performed at the top of the history stack.}.
 
 \paragraph{\kl{Edit} actions}
 
-\reftab{flowers-edit-actions} shows the precise mapping of \kl{Edit} actions to
+\reftab{flowers-edit-actions} shows the precise mapping of \kl{Edit} \kl{actions} to
 $\Culture$-rules, together with the associated gestures for triggering them.
-Like the edit mode of \texttt{vim}, \kl{Edit} actions are used to \emph{insert} and
+Like the edit mode of \texttt{vim}, \kl{Edit} \kl{actions} are used to \emph{insert} and
 \emph{delete} arbitrary flowers in the \kl{goal}:
 \begin{description}
   \item[Insertion] The main interface mechanism that is currently
@@ -3060,7 +3058,7 @@ Like the edit mode of \texttt{vim}, \kl{Edit} actions are used to \emph{insert} 
 
   \texttt{Grown} flowers/\kl{petals} are distinguished visually by having their
   border painted in blue. Leaving \kl{Edit} mode then has the effect of
-  \emph{committing} every \kl{Edit} action, i.e. removing every \texttt{grown}
+  \emph{committing} every \kl{Edit} \kl{action}, i.e. removing every \texttt{grown}
   tag in the entire \kl{goal}. This mechanism enables an incremental,
   step-by-step construction of flowers, that is still sound logically with
   respect to $\Culture$-rules.
@@ -3073,8 +3071,8 @@ Like the edit mode of \texttt{vim}, \kl{Edit} actions are used to \emph{insert} 
   as any area marked as \texttt{grown}.
 \end{description}
 
-Since every \kl{Edit} action implements a $\Culture$-rule, it is guaranteed to be
-\emph{non-\kl{invertible}}: the user might need to \kl{Undo} an \kl{Edit} action in order to
+Since every \kl{Edit} \kl{action} implements a $\Culture$-rule, it is guaranteed to be
+\emph{non-\kl{invertible}}: the user might need to \kl{Undo} an \kl{Edit} \kl{action} in order to
 complete a proof, because it may break the provability of the \kl{goal}.
 
 \paragraph{\intro{Navigation} mode}
@@ -3108,36 +3106,36 @@ in his \intro{Smalltalk} system \sidecite[4em]{goldberg_smalltalk-72_1976}.
 
 \AP
 The last feature of the \kl{Flower\,\,Prover} that we have implemented is the
-\intro{Auto} \kl{Proof} action. It is similar in purpose to the \texttt{auto}
+\intro{Auto} \kl{Proof} \kl{action}. It is similar in purpose to the \texttt{auto}
 tactic of \kl{Coq}, that tries to simplify the \kl{goal} by performing a limited
-(but customizable) amount of automation. The \kl{Auto} action is mapped to a
+(but customizable) amount of automation. The \kl{Auto} \kl{action} is mapped to a
 dedicated button in the bottom-left corner of the screen, which is only enabled
 in \kl{Proof} mode (see \reffig{flowers-prover-modes}).
 
-The idea is quite simple: since all click actions available to the user are
+The idea is quite simple: since all click \kl{actions} available to the user are
 pre-computed by highlighting the corresponding areas, there can only be a finite
 number of them. So why not try to apply them all automatically? Applying a click
-action might generate new ones in the resulting \kl{goal}, so we have to perform
+\kl{action} might generate new ones in the resulting \kl{goal}, so we have to perform
 this until a fixpoint is reached. This is very much like the \kl[reproduction
 phase]{reproduction} and \kl[decomposition phase]{decomposition} phases from the
 \refproc{life} procedure of \refsec{flowers-search}, except that we also apply
 the \kl{poll{\da}} rule (\kl{Justify} actions) wherever possible. The only
-\kl{Proof} action that is not considered is the only \kl{DnD} action,
+\kl{Proof} \kl{action} that is not considered is the only \kl{DnD} \kl{action},
 \kl{Import}. This is not surprising, since it corresponds to the \kl{poll{\ua}}
 rule, which is the main source of complexity in the \kl{pollination phase} of
 the \refproc{life} procedure, because of its ability to duplicate flowers of
 arbitrary size.
 
 In fact, one could fine-tune the level of automation by considering only a
-\emph{subset} of all types of click actions. This is already what we do by
-default, by leaving the application of \kl{Case} actions to the user. This is
+\emph{subset} of all types of click \kl{actions}. This is already what we do by
+default, by leaving the application of \kl{Case} \kl{actions} to the user. This is
 motivated by the fact that the latter can induce an explosion in the size of the
-\kl{goal}. One could even leave the configuration of automated action types to
+\kl{goal}. One could even leave the configuration of automated \kl{action} types to
 the user with a dedicated interface. This could include an additional option for
-executing \kl{Auto} systematically after every (other) \kl{Proof} action,
+executing \kl{Auto} systematically after every (other) \kl{Proof} \kl{action},
 removing the need to click on the \kl{Auto} button. In this setting, any proof
 in the \kl{Flower\,\,Prover} could be reduced to a sequence of \kl{Import} and
-\kl{Case} actions.
+\kl{Case} \kl{actions}.
 
 
 \subsection{Towards a unified workflow}\labsubsec{flowers-unified}
@@ -3231,7 +3229,7 @@ $\ctxt{\Phi\hole}$ in all interaction modes. We anticipate only two kinds of
 interaction with any flower $\phi \in \ctxt{\Phi\hole}$ in the shelf:
 \begin{description}
   \item[Pollination (in \kl{Proof} mode)] the user can perform an
-  \kl{Import} action by dragging $\phi$;
+  \kl{Import} \kl{action} by dragging $\phi$;
   \item[Jump to definition (in \kl{Navigation} mode)] the user can focus on
   the \kl{subgoal} where $\phi$ originates by clicking on $\phi$.
 \end{description}
@@ -3325,7 +3323,7 @@ Our work brings several new contributions on top of those:
   isomorphic to formulas built with binary connectives\sidenote{Thus we reject
   the claim made in \cite{minghui_graphical_2019} that their system is ``solving
   the problem of defining a sequent calculus in the style of deep inference for
-  intuitionistic propositional logic''. In our opinion, \kl{flowers} are closer
+  intuitionistic propositional logic''. In our opinion, flowers are closer
   to a form of nested sequent, although there is no consensus in the literature
   on what makes some inductive data structure a nested sequent.}.
 
@@ -3377,7 +3375,7 @@ natural fragment $\Nature$ of the \kl{flower calculus}: every \kl{inference rule
 this tradeoff is that they can easily show termination of proof search, while we
 have not found a terminating procedure yet for the \kl{flower calculus}. The authors
 also mention that \kl{HS} could be turned into a \kl{deep inference} calculus in the
-style of \kl{G4ip}\sidenote{This is just another name for the system \kl{LJT}
+style of \intro{G4ip}\sidenote{This is just another name for the system \kl{LJT}
 of Dyckhoff already mentioned in \refch{bubbles-symm}.}.
 
 \paragraph{Development calculi}
@@ -3398,7 +3396,7 @@ difference is that the \texttt{Box} calculus is based on dependent \kl{type
 theory} instead of \kl{first-order logic}: this allows to store the partial
 \kl{proof terms} inside of the \texttt{Box}es themselves, while this information
 is lost during the construction of flowers (but might be reconstructed from the
-sequence of graphical actions and the initial \kl{goal}).
+sequence of graphical \kl{actions} and the initial \kl{goal}).
 
 Ayers also mentions the category-theoretical treatment of development calculi by
 Sterling and Harper \sidecite{sterling_algebraic_2017}, that abstracts from any
@@ -3437,7 +3435,7 @@ connectives, as witnessed by the \kl{pollination phase} of our search procedure.
 between automated and interactive proof search, notably with the so-called
 \emph{rule of thumb} which is another manifestation of \kl{subformula linking}. This
 integration of automated and interactive aspects is also at work in the \kl{Flower\,\,Prover}, and it would be interesting to investigate further how to incorporate
-our drag-and-drop proof \kl{tactic} (\refch{pba}), but also other \kl{symbolic}
+our \kl{drag-and-drop} proof \kl{tactic} (\refch{pba}), but also other \kl{symbolic}
 manipulation techniques introduced in the first part of this thesis, into the
 \kl{iconic} framework of the \kl{Flower\,\,Prover}.
 
@@ -3479,7 +3477,7 @@ respectively to atomic and non-atomic flowers. But this is less satisfying than
 in the \kl{calculus of structures}, where one component of \kl{poll{\ua}}, the
 duplicating \emph{\kl{contraction}} rule, can be restricted to atomic formulas. This
 probably comes from the fact that \kl{poll{\ua}} also serves the purpose of
-\emph{moving} flowers deeper, as witnessed by the \kl{DnD} \kl{Import} action of
+\emph{moving} flowers deeper, as witnessed by the \kl{DnD} \kl{Import} \kl{action} of
 the \kl{Flower\,\,Prover}: in the \kl{calculus of structures}, this role is fulfilled by
 \emph{switch} rules, which cannot be restricted to atomic structures. The only
 solution might be to \emph{simulate} a local \kl{calculus of structures} for
@@ -3511,7 +3509,7 @@ developed by Peirce, and described by Oostra in \sidecite{oostra_advances_2022}.
 \paragraph{Curry-Howard}
 
 We have begun to sketch some ideas for a \kl{Curry-Howard correspondence}, where
-flowers and \kl{Proof} actions for justifying them ($\Nature$-rules) are identified
+flowers and \kl{Proof} \kl{actions} for justifying them ($\Nature$-rules) are identified
 respectively with \emph{normal} and \emph{neutral} \kl{terms} of the simply-typed
 \kl{$\lambda$-calculus}. For instance, the computational counterpart of the rule
 \kl{poll{\da}} in \kl{pistils} would be a kind of \emph{function application}
@@ -3599,11 +3597,11 @@ dependently-typed version of the \kl{flower calculus} that we seek for.
 
 We have already described many features in \refsec{flowers-prover} that we
 intend to implement in the future. This includes the \kl{Navigation} mode, the
-ability to \emph{select} flowers, the \kl{Fence} \kl{Proof} action, and the
+ability to \emph{select} flowers, the \kl{Fence} \kl{Proof} \kl{action}, and the
 \emph{shelf} mechanism.
 
 The next step would be to support \kl{first-order} reasoning by adding \kl{sprinklers} and
-\kl{first-order} terms, and devising graphical actions for the rules $\{\kl{ipis},
+\kl{first-order} terms, and devising graphical \kl{actions} for the rules $\{\kl{ipis},
 \kl{ipet}\}$ in \kl{Proof} mode, and $\{\kl{apis}, \kl{apet}\}$ in \kl{Edit} mode.
 
 Last but not least, we want to provide a way to \emph{save} proved lemmas along

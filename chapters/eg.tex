@@ -53,7 +53,7 @@ at the same time to be faithful to the original presentation of the systems by
 Peirce, and more modern in some aspects of their formalization. The goal will be
 to familiarize the reader with the unique approach to proofs inherent to
 \kl{EGs}, which can be difficult to relate to more standard frameworks like
-\kl[Hilbert system]{Hilbert} and \kl[Gentzen system]{Gentzen} \kl{proof
+\kl[Hilbert system]{Hilbert} and \kl[sequent calculus]{Gentzen} \kl{proof
 systems}, and even \kl{deep inference} \kl{proof systems} like the \kl{calculus
 of structures}. This shall prove useful to get a good understanding of the
 historical and technical foundations behind our \emph{\kl{flower calculus}}, to
@@ -68,7 +68,7 @@ the \kl{diagrammatic} syntax of the system \kl{Alpha} of \kl{EGs} for
 \emph{\kl{illative transformations}} by Peirce. In \refsec{multisets}, we give
 an equivalent formulation of the syntax and rules of \kl{Alpha} as a
 \emph{multiset} \kl{rewriting system}. In \refsec{atomicity}, we formalize a
-variant of the \kl{(De)iteration} principle described by Peirce in
+variant of the \kl[Iteration]{(De)iteration} principle described by Peirce in
 \sidecite{peirce_prolegomena_1906} that eliminates the need for the
 \kl{Double{-}cut} principle, and discuss how it was motivated by Peirce's quest
 for \emph{\kl{illative atomicity}}. In \refsec{eg-soundness}, we take advantage
@@ -278,16 +278,16 @@ of the title of \kl{deep inference} system.
   \labfig{our-neg-areas}
 \end{marginfigure}
 
-\AP
-Before introducing the rules, let us make a small change in the way we depict
-the \kl{graphs}. The idea is that we want to visualize more clearly the
-\intro{polarity} of any \kl{subgraph} $G$, understood as the \emph{parity} of the
-number of \kl{cuts} (negations) enclosing $G$. In one of his unpublished manuscripts
-(Ms 514), Peirce did this by \emph{shading} \kl{negative} areas --- those enclosed in
-an odd number of \kl{cuts} --- in gray, as illustrated in \reffig{peirce-neg-areas}
-\sidecite{sowa_peirces_2011}. Unconstrained by hand-drawing, one could adopt an
-even more \kl{iconic} notation, where \kl{negative} areas are \emph{literally} drawn like
-a \kl{negative} in photography, by inverting white and black. The example of
+\AP Before introducing the rules, let us make a small change in the way we
+depict the \kl{graphs}. The idea is that we want to visualize more clearly the
+\kl{polarity} of any \kl{subgraph} $G$, understood as the \emph{parity} of the
+number of \kl{cuts} (negations) enclosing $G$. In one of his unpublished
+manuscripts (Ms 514), Peirce did this by \emph{shading} \kl{negative} areas ---
+those enclosed in an odd number of \kl{cuts} --- in gray, as illustrated in
+\reffig{peirce-neg-areas} \sidecite{sowa_peirces_2011}. Unconstrained by
+hand-drawing, one could adopt an even more \kl{iconic} notation, where
+\kl{negative} areas are \emph{literally} drawn like a \kl{negative} in
+photography, by inverting white and black. The example of
 \reffig{peirce-neg-areas} would then be drawn as in \reffig{our-neg-areas}.
 However in this thesis, we will stick to Peirce's notation, which is both less
 straining for the eyes by being less contrasted, and more economical in ink for
@@ -326,7 +326,7 @@ of modern \kl{model theory}, although Sowa argues in
 % Boolean algebras, based on a rigorous formalization of the geometry and algebra
 % of \kl{Alpha}, in \cite{brady_categorical_2000}.
 }. A nice way to understand the rules of \kl{Alpha} is as \emph{edition
-principles}, like the most basic actions one executes pervasively when editing
+principles}, like the most basic \kl{actions} one executes pervasively when editing
 text on a computer\sidenote{Even though computers did not exist yet in Peirce's
 time! In fact, Martin Irvine argues in \cite{irvine_semiotics_2022} that Peirce
 anticipated many developments in computer science and information technologies,
@@ -374,7 +374,7 @@ of any \kl{polarity}:
     outside of a \kl{cut} is very reminiscent of the \emph{outward} flow rules of
     \kl{system~B} (those whose name ends with $\ua$ in
     \reffig{sequent-B}); and the deduplicating effect makes \kl{Deiteration}
-    even closer to the variant of the same rules in \kl{B_{inv}}
+    even closer to the variant of the same rules in \kl{Binv}
     (\reffig{sequent-B-inv}).}.
     
     Compared to \kl{sequent calculus}, it can be seen as a deep generalization of the
@@ -631,8 +631,7 @@ precisely as the definition of what it means for an inference step to be (the
 most) \emph{elementary}.
 
 Note that this should be distinguished from the notion of
-\emph{\kl{analyticity}}, as popularized by Gentzen with the \emph{\kl{subformula
-property}} in \kl{sequent calculus}: the latter is concerned with the analysis
+\emph{\kl{analyticity}}, as popularized by Gentzen with the \emph{\kl{subformula property}} in \kl{sequent calculus}: the latter is concerned with the analysis
 of \emph{propositions} into their constituents through \kl{inference rules},
 while here we are interested in the analysis of the \kl{inference rules}
 themselves\sidenote{We will give a positive answer to the question of
@@ -679,7 +678,7 @@ dependent product \kl{type}) as their sole primitive construct.
 Peirce then suggests a ``more scientific way'', where the principle of
 \kl{Double{-}cut} is subsumed by a restricted variant of the principles of
 \kl{Iteration} and \kl{Deiteration}. His description of this ``more scientific''
-\kl{(De)iteration} principle is based on a relation of \emph{local
+\kl[Iteration]{(De)iteration} principle is based on a relation of \emph{local
 justification} (our terminology) between two areas of a \kl{graph}, that
 captures the fact that the deeper occurrence of $G$ in the \kl{Iter} and
 \kl{Deit} rules (\reffig{alpha}) is justified by the other occurrence by virtue
@@ -728,7 +727,7 @@ their semantics.}.
 
 \subsection{The more scientific way}\labsubsec{scientific-way}
 
-Let us now go back to the ``more scientific'' \kl{(De)iteration} principle
+Let us now go back to the ``more scientific'' \kl[Iteration]{(De)iteration} principle
 proposed by Peirce. With our formalization of \kl{graphs} as multisets, we can
 give a more rigorous formulation than the original natural language description
 given by Peirce\sidenote{Although we limit ourselves to propositional logic in
@@ -765,7 +764,7 @@ justification between two areas is defined on \kl{contexts}:
 
 \begin{figure}
   \input{figures/alpha-a.tex}
-  \caption{The illatively atomic system \kl{Alpha^a}}
+  \caption{The illatively atomic system \kl{Alphaa}}
   \labfig{eg-atomic-alpha}
 \end{figure}
 
@@ -780,8 +779,8 @@ Condition 4 that will account for the principle of \kl{Double{-}cut}.
 
 Then the new rules of iteration \kl{Iter{+}}, \kl{Iter{-}} and deiteration
 \kl{Deit{+}}, \kl{Deit{-}} are given in a so-called \emph{atomic} variant of
-\kl{Alpha}, that we name \intro{Alpha^a} in \reffig{eg-atomic-alpha}. As
-promised, \kl{Alpha^a} only comprises rules that truly are insertions and
+\kl{Alpha}, that we name \intro{Alphaa} in \reffig{eg-atomic-alpha}. As
+promised, \kl{Alphaa} only comprises rules that truly are insertions and
 omissions of \emph{arbitrary} \kl{graphs}\sidenote{The terminology ``atomic''
 might be a bit confusing: here we think of \emph{illative} atomicity in Peirce's
 sense, not the fact that the \kl{graphs} manipulated by rules are atomic, which
@@ -826,9 +825,9 @@ the original ones in two respects:
 \end{description}
 
 In the rest of this chapter, we settle on the more standard system \kl{Alpha},
-and leave a more detailed and rigorous study of \kl{Alpha^a} for future work.
+and leave a more detailed and rigorous study of \kl{Alphaa} for future work.
 But the above informal arguments should convince the reader that there is little
-doubt that \kl{Alpha^a} is both sound and complete if and only if \kl{Alpha}
+doubt that \kl{Alphaa} is both sound and complete if and only if \kl{Alpha}
 is, which is the object of the following two sections.
 
 \section{Soundness}\labsec{eg-soundness}
@@ -1465,8 +1464,8 @@ it also has a proof $S \xsteps{\kl{KS}} \top$, with \intro{KS} defined as
 with the first `S' standing for ``symmetric'' dropped.}. Dually, the whole
 down-fragment (all rules whose name ends with $\da$) is
 \emph{``co-admissible''}: if a \kl{structure} $S$ has a \emph{refutation} $\bot
-\steps{} S$, then it also has a refutation $\bot \xsteps{\kl{\dmdual{KS}}} S$,
-with $\intro{\dmdual{KS}}$ defined as \kl{SKS} without the down-fragment.
+\steps{} S$, then it also has a refutation $\bot \xsteps{\kl{dualKS}} S$,
+with $\intro{dualKS}$ defined as \kl{SKS} without the down-fragment.
 
 This duality reflects nicely in our simulation: we were careful to always give
 derivations for up-rules that mirror closely those for down-rules, modulo the
@@ -1488,9 +1487,9 @@ result that seems to be novel in the literature on \kl{EGs}.
 \end{corollary}
 
 Dually, the insertion rule \kl{Ins} is never used in the simulation of
-\kl{\dmdual{KS}}, implying the co-admissibility of insertion. In fact there is
+\kl{dualKS}, implying the co-admissibility of insertion. In fact there is
 a curious dissymmetry, in that the rule \kl{Dcut{\da}} of \emph{double-\kl{cut}}
-insertion also never appears in the simulation of \kl{\dmdual{KS}}, while
+insertion also never appears in the simulation of \kl{dualKS}, while
 \kl{Dcut{\ua}} is used multiple times in the simulation of \kl{KS}:
 
 \begin{corollary}[Co-admissibility of Insertion]\labcor{adm-ins}
@@ -1796,7 +1795,7 @@ can flow from one \kl{wire} to the other, but the problem resides elsewhere, at
 the \emph{illative} level: indeed nothing prevents us from separating back the
 two \kl{wires}, or connecting two initially disjoint \kl{wires}. But in a
 \kl{negative} (resp. \kl{positive}) \kl{context}, the former (resp. latter)
-action corresponds to forgetting a possibly necessary equality hypothesis
+\kl{action} corresponds to forgetting a possibly necessary equality hypothesis
 between two variables (resp. identifying two possibly distinct individuals),
 which is not valid logically speaking. To prevent this, one needs to do more
 than just put the two \kl{wires} in contact with eachother (\kl{juxtaposition}),

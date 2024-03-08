@@ -4,19 +4,19 @@
 \labch{pba}
 
 \epigraph{ When it is obvious that the goals cannot be reached, don't adjust the
-goals, adjust the action steps.}{\textbf{Confucius}}
+goals, adjust the \kl{action} steps.}{\textbf{Confucius}}
 
 
 \begin{scope}\knowledgeimport{sfl}
 
 
-In this chapter, we focus on how both \emph{click} and \emph{drag-and-drop}
-(\kl{DnD}) actions upon the formulas of a \kl{sequent} can implement proof
+In this chapter, we focus on how both \emph{click} and \emph{\kl{drag-and-drop}}
+(\kl{DnD}) \kl{actions} upon the formulas of a \kl{sequent} can implement proof
 construction operations corresponding to the core logic; that is how they deal
 with logical connectives, quantifiers and equality. We present these core
 principles through various illustrations and examples in \kl{first-order logic}.
 The technical and \kl{proof-theoretical} foundations for the semantics of
-\kl{DnD} actions
+\kl{DnD} \kl{actions}
 % , which constitute the main innovation of this work,
 will be investigated more thoroughly in \refch{sfl}.
 % , although the most important meta-theoretical
@@ -32,7 +32,7 @@ We have started to implement the paradigm in a prototype named \reintro{Actema}
 version of the prototype (i.e. which does not use an existing theorem prover as
 its backend) is publicly available online \cite{Actema:link}. This possibility
 to experiment in practice, even though yet on a small scale, gave valuable
-feedback for crafting the way \kl{DnD} actions are to be translated into proof
+feedback for crafting the way \kl{DnD} \kl{actions} are to be translated into proof
 construction steps in an intuitive and practical way. A description of the
 overall architecture and implementation design of \kl{Actema} will be provided
 in \refch{plugin}.
@@ -41,10 +41,10 @@ The chapter is organized as follows: \refsec{setting} briefly outlines its
 logical setting. \refsec{aristote} describes the basic features of a graphical
 proof interface based on our principles, and illustrates them with a famous
 syllogism from Aristotle. \refsec{clicks} shows how it can integrate
-\kl{Proof-by-Pointing} capabilities through click actions. The two following
-sections explain, through further examples, how drag-and-drop actions work;
-first for so-called \emph{rewrite} actions involving equalities, then for
-actions involving logical connectives and quantifiers. We end in \refsec{pba-rw}
+\kl{Proof-by-Pointing} capabilities through click \kl{actions}. The two following
+sections explain, through further examples, how \kl{drag-and-drop} \kl{actions} work;
+first for so-called \emph{rewrite} \kl{actions} involving equalities, then for
+\kl{actions} involving logical connectives and quantifiers. We end in \refsec{pba-rw}
 with a discussion of related works.
 
 % \section{Motivations}\labsec{motivations} Since this work is about changing
@@ -72,7 +72,7 @@ with a discussion of related works.
 
 % The idea of interactive theorem provers is that automation and user actions
 % complement each other, and we here focus on the latter for the time being. The
-% question of integrating drag-and-drop actions and powerful proof automation
+% question of integrating drag-and-drop \kl{actions} and powerful proof automation
 % techniques is left for future work.
 
 % Finally, precisely because our approach is about giving the user a smoother
@@ -107,7 +107,7 @@ $$\forall x.\forall y. x=y\land A \limp \subst{A}{x}{y}.$$
    }
  \end{center}
  The conclusion is red on the right, the two hypotheses blue on the left. The
- gray dotted arrows have been added to show the two possible actions.
+ gray dotted arrows have been added to show the two possible \kl{actions}.
  \caption{A partial screenshot showing a \kl{goal} in the \kl{Actema} prototype}
  \labfig{aristote}
 \end{figure*}
@@ -133,7 +133,7 @@ complex formalisms like \kl{type theories}. We will not explore these questions 
 One advantage of the \kl{PbA} paradigm, is that it allows a very lean visual layout
 of the \kl{proof state}. There is no need to name hypotheses. In the prototype we
 also dispense with a text buffer, since proofs are solely built through
-graphical actions.
+graphical \kl{actions}.
 
 
 \AP
@@ -180,7 +180,7 @@ title is the statement of the \kl{goal}'s conclusion.
 \subsection{Two kinds of actions}
 
 \AP
-In this example, there are two possible actions.
+In this example, there are two possible \kl{actions}.
 
 \begin{itemize}
 \item A first one is to bring together by \kl{DnD} the conclusion
@@ -207,7 +207,7 @@ with the identical red conclusion.
 
 \AP A \kl(dnd){backward} step involves a hypothesis, here $\forall x.\-\human(x)
 \allowbreak\limp \mortal(x)$ and the conclusion, here $\mortal(\socrates)$.
-Furthermore, the action actually links together two {\em subterms} of each of
+Furthermore, the \kl{action} actually links together two {\em subterms} of each of
 these \kl{items}; this is written by squaring these subterms. The \kl{symbol}
 $\intro*\back$, called an \intro{interaction operator}, is meant to describe
 the result of the interaction. Internally, the behavior of this operator is
@@ -234,7 +234,7 @@ $$\begin{array}{lll}
 Notice that:
 \begin{itemize}
   \item These elementary rewrites are not visible for the user. What she sees is
-    the final result of the action, that is the last expression of the rewrite
+    the final result of the \kl{action}, that is the last expression of the rewrite
     sequence.
   \item The definitions of the \kl{rewriting rules} in \reffig{DISL} do not
     involve squared subterms. The information of which subterms are squared is
@@ -244,8 +244,8 @@ Notice that:
     % between the two squared subterms through the \kl(sfl){id} rule.
 \end{itemize}
 
-In general, the action solves the \kl{goal} when the interaction ends with the
-trivially true proposition $\top$. The base case being the action corresponding
+In general, the \kl{action} solves the \kl{goal} when the interaction ends with the
+trivially true proposition $\top$. The base case being the \kl{action} corresponding
 to the \kl(rule){axiom}/identity rule \kl(sfl){id}: $A\back A \step{} \top$.
 
 \AP
@@ -267,12 +267,12 @@ rules} of ${\back}$ and ${\forw}$ in \refch{sfl}.
 
 
 \section{Proof steps through clicks}\labsec{clicks}
-Drag-and-drop actions involve two \kl{items}. Some proof steps involve only
-one \kl{item}; they can be associated to the action of clicking on this
+\kl{Drag-and-drop} \kl{actions} involve two \kl{items}. Some proof steps involve only
+one \kl{item}; they can be associated to the \kl{action} of clicking on this
 item. The general scheme is that clicking on a connective or quantifier
 allows to ``break'' or destruct this connective. The results of clicks
 are not very surprising, but this feature is necessary to complement
-drag-and-drop actions.
+\kl{drag-and-drop} \kl{actions}.
 \begin{itemize}
 \item Clicking on a blue conjunction $A\land B$ transforms the
     \kl{item} into two separate blue \kl{items} $A$ and $B$.
@@ -293,7 +293,7 @@ drag-and-drop actions.
 \end{itemize}
 
 \begin{margintable}
-\caption[]{Mapping of click actions to \kl{inference rules}}
+\caption[]{Mapping of click \kl{actions} to \kl{inference rules}}
 \labtab{click-rules}
 \begin{tabular}{ccc}
 	\toprule
@@ -332,10 +332,10 @@ drag-and-drop actions.
   \labfig{sequent-variant-rules}
 \end{marginfigure}
 
-One can see that these actions correspond essentially to the \kl{right
+One can see that these \kl{actions} correspond essentially to the \kl{right
 introduction rules} of the head connective for the conclusion, and either the
 \kl{elimination rule} from \kl{NJ} or the \kl{left introduction rule} from
-\kl{LJ} for hypotheses. The exact mapping between click actions and
+\kl{LJ} for hypotheses. The exact mapping between click \kl{actions} and
 \kl{inference rules} is given in \reftab{click-rules}. A few remarks are in
 order:
 \begin{itemize}
@@ -344,10 +344,10 @@ order:
   latter with $A$. An alternative is to use the {\kl{{\limp}L}} rule from
   \kl{sequent calculus}, which is applicable in every context.
   
-  \item There is no action mapped to red $\bot$ \kl{items}, simply because
+  \item There is no \kl{action} mapped to red $\bot$ \kl{items}, simply because
   $\bot$ does not have any \kl{introduction rule}.
 
-  \item There is currently no action mapped to blue $∀$ and red $∃$ \kl{items}.
+  \item There is currently no \kl{action} mapped to blue $∀$ and red $∃$ \kl{items}.
   The reason is that one needs additional information about the \emph{witness}
   to be used when instantiating with the \kl{\forall L} or \kl{\exists R} rule.
   This could be provided with further input (e.g. from a dialog box), but this
@@ -357,23 +357,23 @@ order:
   she can drag the corresponding green \kl{item} and drop it on the quantified
   \kl{item} to instantiate it. It is also possible to select with the mouse an
   arbitrary subexpression occurring in any \kl{item} of the current \kl{goal},
-  and then drag-and-drop the \kl{item} holding the selected subexpression
+  and then \kl{drag-and-drop} the \kl{item} holding the selected subexpression
   instead.
 \end{itemize}
 
 \begin{remark}[Click completeness]\labremark{click-completeness}
   From the previous remarks and the completeness of the cut-free \kl{sequent
-  calculus} \kl{LJ}, it follows that click actions, when combined with new
+  calculus} \kl{LJ}, it follows that click \kl{actions}, when combined with new
   object declarations and \kl{DnD} instantiations, provide a sufficient set of
   interactions to prove any true formula of (\kl{intuitionistic}) \kl{first-order logic}.
 \end{remark}
 
-It is possible to associate some more complex effects to click actions performed
+It is possible to associate some more complex effects to click \kl{actions} performed
 on locations deeper under connectives. This is the essence of
 \kl{Proof-by-Pointing}, and~\sidecite{PbP} provides ample description. Since we
-here focus more on drag-and-drop actions, we do not detail further more advanced
+here focus more on \kl{drag-and-drop} \kl{actions}, we do not detail further more advanced
 \kl{PbP} features. The version of \kl{Actema} presented in \refch{plugin}
-provides an implementation of \kl{PbP} available as a contextual menu action.
+provides an implementation of \kl{PbP} available as a contextual menu \kl{action}.
 
 \section{A simple example involving equality}\labsec{equality}
 
@@ -395,7 +395,7 @@ naming/numbering to designate locations of subterms, or writing manually
 patterns which duplicate parts of the structure of terms.
 
 In our setting we can provide this replacement operation through
-drag-and-drop. The user points at the occurrence(s) of $t$ to be
+\kl{drag-and-drop}. The user points at the occurrence(s) of $t$ to be
 replaced, and then brings them to the corresponding side of the
 equality.
 
@@ -439,8 +439,8 @@ rewriting in hypotheses.
 
 \section{Drag-and-dropping through connectives}\labsec{dnd-examples}
 We mentioned in \refsec{clicks} that it is possible to destruct logical
-connectives through click actions. In many cases however, this will not be
-necessary: because a drag-and-drop involves subterms of the \kl{items} involved, one
+connectives through click \kl{actions}. In many cases however, this will not be
+necessary: because a \kl{drag-and-drop} involves subterms of the \kl{items} involved, one
 can often directly use (resp. act on) the part of the hypothesis (resp.
 conclusion) which is of interest.
 
@@ -448,7 +448,7 @@ conclusion) which is of interest.
 The conjunction is an easy to explain case. A hypothesis of the form
 $A\land B$ can be used directly both as evidence for $A$ and as evidence
 for $B$. This is modeled by the rules \kl{L\land_1} and
-\kl{L\land_2}. A very simple action is thus:
+\kl{L\land_2}. A very simple \kl{action} is thus:
 $$
 \begin{array}{llll}
   \select{A}\land B \back \select{A} & \step{}& \select{A} \back
@@ -458,7 +458,7 @@ $$
 $$
 
 On the other hand, considering a conjunctive \kl{goal} $A\land B$, one can
-simplify or solve one of the branches by a \kl{DnD} action. This involves
+simplify or solve one of the branches by a \kl{DnD} \kl{action}. This involves
 rules \kl{R\land_1} and
 \kl{R\land_2}. For instance:
 $$
@@ -487,7 +487,7 @@ $$
 
 Disjunctive hypotheses also have a \kl(dnd){backward} behavior defined by the rules
 \kl{L\lor_1} and \kl{L\lor_2}, although in most cases one will prefer the
-usual \kl{subgoal} semantics associated with click actions. More interesting is
+usual \kl{subgoal} semantics associated with click \kl{actions}. More interesting is
 their \kl(dnd){forward} behavior with the rules \kl{F\lor_1} and \kl{F\lor_2}, in
 particular when they interact with negated hypotheses. For instance:
 $$
@@ -501,7 +501,7 @@ $$
 \end{array}
 $$
 
-We have noticed that on some examples, such actions could provide a
+We have noticed that on some examples, such \kl{actions} could provide a
 significant speed-up with respect to traditional textual command
 provers. We give a more concrete example in \refsec{edukera}.
 
@@ -600,7 +600,7 @@ wants to simplify some part of an implicative, inductive \kl{goal} before starti
 the induction.
 
 \subsection{Quantifiers}
-As the first example of this chapter shows, drag-and-drop actions work through
+As the first example of this chapter shows, \kl{drag-and-drop} \kl{actions} work through
 quantifiers and can trigger instantiations of quantified variables. This is made
 possible by the rules \kl{L\forall i} and \kl{F\forall i}, which allow the
 instantiation of a variable universally quantified in a hypothesis.
@@ -731,7 +731,7 @@ Indeed, there is no reduction path starting from this \kl{DnD} ending with the
 $R(x,y)$ and $R(x',y')$ here results in a cycle in the instantiations of
 variables\sidenote{We will come back to this in \refsubsec{identity}. Also notice
 that this example requires to use full (\kl{first-order}) \kl{unification}, not only
-matching.}. The system thus refuses this action.
+matching.}. The system thus refuses this \kl{action}.
 
 \subsection{Conditional rewriting}
 The example given in \refsec{equality}, although very simple, already combines
@@ -797,7 +797,7 @@ transformations to the parent window by replacing the old subexpression by the
 new one, without modifying the surrounding context.
 
 This process is quite reminiscent of the rewriting produced by our \kl{DnD}
-actions. One key difference is that window \kl{inference rules} can be
+\kl{actions}. One key difference is that window \kl{inference rules} can be
 applied stepwise, while we choose to hide the sequence of rules that
 justifies a \kl{DnD}. The \kl{window inference} approach gives to the user a
 precise control of the transformations to be performed and thus could
@@ -817,10 +817,10 @@ inspire interesting extensions of our work.
 
 \paragraph{Other gestural proving interfaces}
 
-There are other proving interfaces which include drag-and-drop features. Two of
+There are other proving interfaces which include \kl{drag-and-drop} features. Two of
 them are the KeY Prover \sidecite{ahrendt-using-2016} and TAS
 \sidecite{goos-tas-2000}. TAS is a \kl{window inference} system tailored for program
-refinement, and uses \kl{DnD} actions between an expression and a transformation, in
+refinement, and uses \kl{DnD} \kl{actions} between an expression and a transformation, in
 order to apply the latter to the former.
 %This is obviously different from our use of \kl{DnD} between entities
 %of the same kind, and can be explained by the comparison made in the previous
@@ -831,8 +831,8 @@ quantifiers with objects.
 
 We can also mention the recent work of Zhan et al. \sidecite{zhan-design-2019}.
 They share with us the vision of a \kl{proof assistant} mainly driven by gestural
-actions, which requires far less textual inputs from the user. However, they
-only consider point-and-click actions, and rely on a text-heavy presentation at
+\kl{actions}, which requires far less textual inputs from the user. However, they
+only consider point-and-click \kl{actions}, and rely on a text-heavy presentation at
 two levels:
 \begin{enumerate}
   \item the \kl{proof state}, which is a structured proof text in the style of
@@ -863,7 +863,7 @@ construct proofs graphically: Building Blocks~\sidecite{buildingblocks}, the
 Incredible Proof Machine~\sidecite{blanchette-visual-2016},
 Logitext\sidenote{\url{http://logitext.mit.edu/main}} and Click \&
 coLLecT~\sidecite{clickcollect}. In particular, Logitext and Click \& coLLecT
-exploit the same idea of associating click actions on head connectives to
+exploit the same idea of associating click \kl{actions} on head connectives to
 \kl{inference rules} in \kl{sequent calculus}. But these systems focus more on explicating
 the proof object than on making its construction easier.
 

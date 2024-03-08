@@ -488,25 +488,25 @@ an (in)equality in some class of algebras:
 
 Since some rules only hold \kl{classically}, the statement for the full system
 is relative to \kl{Boolean algebras}. But from the detailed proof in
-\refsec{app:bubbles-soundness}, we can identify two fragments $\kl{\sysBH}$ and
-$\kl{\sysBHB}$ of \kl{system~B} that are sound respectively for \kl{Heyting
+\refsec{app:bubbles-soundness}, we can identify two fragments $\kl{sysBH}$ and
+$\kl{sysBHB}$ of \kl{system~B} that are sound respectively for \kl{Heyting
 algebras} and \kl{Heyting-Brouwer algebras}:
 
 \begin{corollary}\labcor{lsoundness}
   Let
   \begin{align*}
-    \intro{\sysBHB} &\defeq \sysB \setminus \{\kl{f{-}{+}{\ua}}, \kl{f{+}{+}{\da}}, \kl{f{+}{-}{\ua}}, \kl{f{-}{-}{\da}}\} \\
-    \intro{\sysBH} &\defeq \kl{\sysBHB} \setminus \{\kl{f{+}{-}{\da}}, \kl{f{-}{-}{\ua}}, \kl{{\lsub}{-}}, \kl{{\lsub}{+}}\}
+    \intro{sysBHB} &\defeq \sysB \setminus \{\kl{f{-}{+}{\ua}}, \kl{f{+}{+}{\da}}, \kl{f{+}{-}{\ua}}, \kl{f{-}{-}{\da}}\} \\
+    \intro{sysBH} &\defeq \kl{sysBHB} \setminus \{\kl{f{+}{-}{\da}}, \kl{f{-}{-}{\ua}}, \kl{{\lsub}{-}}, \kl{{\lsub}{+}}\}
   \end{align*}
   Then we have:
   \begin{itemize}
-    \item $S \lstep{\kl{\sysBH}} T$ implies $\psint{T} \sement{} \psint{S}$
-    \item $S \lstep{\kl{\sysBHB}} T$ implies $\psint{T} \sementHB \psint{S}$
+    \item $S \lstep{\kl{sysBH}} T$ implies $\psint{T} \sement{} \psint{S}$
+    \item $S \lstep{\kl{sysBHB}} T$ implies $\psint{T} \sementHB \psint{S}$
     % \item $S \lstep{\text{\sysB}} T$ implies $\psint{T} \sementC \psint{S}$
   \end{itemize}
 \end{corollary}
 
-In order to get the last missing fragment $\kl{\sysBB}$ sound with respect to \kl{Brouwer
+In order to get the last missing fragment $\kl{sysBB}$ sound with respect to \kl{Brouwer
 algebras}, we need dual lemmas that are relative to the \kl{negative interpretation}
 $\nsint{-}$ instead of the \kl{positive interpretation} $\psint{-}$, since
 implication is replaced by \kl{exclusion}. To avoid verbosity, we only formulate the
@@ -519,9 +519,9 @@ main lemma, and assume that its proof will go through mechanically:
 
 Then from the (assumed) proof of \reflemma{bubbles-local-cosoundness} we get:
 \begin{corollary}\labcor{lcosoundness}
-  Let $\intro{\sysBB} \defeq \kl{\sysBHB} \setminus \{\kl{f{-}{+}{\da}},
+  Let $\intro{sysBB} \defeq \kl{sysBHB} \setminus \{\kl{f{-}{+}{\da}},
   \kl{f{+}{+}{\ua}}, \kl{{\limp}{-}}, \kl{{\limp}{+}}\}$. Then $S
-  \lstep{\kl{\sysBB}} T$ implies $\nsint{S} \sementB \nsint{T}$.
+  \lstep{\kl{sysBB}} T$ implies $\nsint{S} \sementB \nsint{T}$.
 \end{corollary}
 
 The full situation is summarized in \reffig{venn-algebras}.
@@ -708,8 +708,8 @@ result to \kl{intuitionistic} and \kl{bi-intuitionistic} logic:
 \begin{corollary}\labcor{soundness}
   \sbr
   \begin{itemize}
-    \item $S \step{\kl{\sysBH}} T$ implies $\psint{T} \sement{} \psint{S}$
-    \item $S \step{\kl{\sysBHB}} T$ implies $\psint{T} \sementHB \psint{S}$
+    \item $S \step{\kl{sysBH}} T$ implies $\psint{T} \sement{} \psint{S}$
+    \item $S \step{\kl{sysBHB}} T$ implies $\psint{T} \sementHB \psint{S}$
   \end{itemize}
 \end{corollary}
 \begin{proof}
@@ -747,10 +747,10 @@ we need to dualize lemmas to the \kl{negative interpretation}:
 From the assumed proof of \reflemma{bubbles-ctx-cosoundness}, we finally get:
 
 \begin{corollary}\labcor{cosoundness}
-  $S \step{\kl{\sysBB}} T$ implies $\nsint{S} \sementB \nsint{T}$.
+  $S \step{\kl{sysBB}} T$ implies $\nsint{S} \sementB \nsint{T}$.
 \end{corollary}
 
 Combined with the completeness proof of the next section, this will give us our
-main result that $\kl{\sysBH}$, $\kl{\sysBB}$, $\kl{\sysBHB}$ and $\sysB$
+main result that $\kl{sysBH}$, $\kl{sysBB}$, $\kl{sysBHB}$ and $\sysB$
 capture exactly provability in \kl{intuitionistic}, \kl{dual-intuitionistic},
 \kl{bi-intuitionistic} and \kl{classical} logic.

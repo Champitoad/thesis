@@ -13,7 +13,7 @@ then, indeed, the labor of thought is wonderfully diminished.''}
 
 
 We introduce a new kind of \kl{nested sequent} \kl{proof system} dubbed
-\intro{bubble calculus}. Inspired by the \emph{membrane} mechanism of the
+\kl{bubble calculus}. Inspired by the \emph{membrane} mechanism of the
 \intro{chemical abstract machine} (\reintro{\cham})
 \sidecite[5em]{berry_chemical_1989}, so-called \emph{\kl{bubbles}} internalize
 the notion of \kl{subgoal} inside \kl{sequents}, rather than through the tree
@@ -41,7 +41,7 @@ restrictions on available \kl{inference rules}.
 We start in \refsec{chemical} with the genesis of the idea of \kl{bubble
 calculus}, coming from the observation that our \kl{Proof-by-Action} paradigm
 (\refch{pba}) lends itself quite naturally to a \kl{metaphorical}
-interpretation, where actions are seen as \emph{chemical} reactions. In
+interpretation, where \kl{actions} are seen as \emph{chemical} reactions. In
 \refsec{bubbles} we introduce the concept of \emph{bubble} as a way to control
 the scope of hypotheses inside \kl{nested sequents} that we call
 \emph{\kl{solutions}}. In \refsec{asymmetric} we describe our \kl{proof system} for
@@ -54,14 +54,14 @@ building, analyzing their possible impact for \kl{UX} improvements.
 \section{The chemical metaphor}\labsec{chemical}
 
 The \kl{Proof-by-Action} paradigm introduced in \refch{pba} offers multiple ways to
-the user to attack the proof of a theorem. \kl{DnD} actions for \kl{subformula linking}
+the user to attack the proof of a theorem. \kl{DnD} \kl{actions} for \kl{subformula linking}
 and equality rewriting are the main mechanism, but they only work in a goal
 comprising multiple \kl{items}. Since it is customary in \kl{proof assistants} to specify
 the \kl{goal} to be proved as a single logical formula, one needs a way to decompose
 it into many \kl{items} for further processing through \kl{DnD}. This is precisely what
 the \kl{introduction rules} for logical connectives in \kl{sequent calculus} do, and
 following the \kl{Proof-by-Pointing} paradigm \cite{PbP} we map them to click
-actions (see \refsec{clicks}).
+\kl{actions} (see \refsec{clicks}).
 
 So visually, a proof in \kl{Actema} consists in breaking logical \kl{items} into
 subitems positioned freely in space, and then bringing those subitems together
@@ -75,14 +75,14 @@ main inspiration to his philosophy of \emph{logical atomism}
 \cite{klement_russells_2020}. Even earlier in the history of logic, C. S. Peirce
 took inspiration from chemical \kl{diagrams} to devise his \emph{\kl{existential
 graphs}} --- see \cite[pp.~17--18]{Roberts+1973} or our own presentation in
-\refsec{beta} for more details.}. Click actions are then a mean to ``heat''
+\refsec{beta} for more details.}. Click \kl{actions} are then a mean to ``heat''
 molecules to the point of breaking these chemical bonds. The most canonical
 examples are the \kl{right introduction rule} for implication \kl{{\limp}R},
 which breaks a conclusion/\kl{positive} \kl{ion} into a new
 hypothesis/\kl{negative} \kl{ion} and a new conclusion; and the \kl{left
 introduction rule} for conjunction \kl{\land L}, which breaks a hypothesis into
 two hypotheses. In fact, we strongly conjecture that these are the only click
-actions needed to obtain a complete deductive system for propositional logic:
+\kl{actions} needed to obtain a complete deductive system for propositional logic:
 breaking red implications allows for \kl(dnd){backward} \kl{DnDs}, and blue
 conjunctions for \kl(dnd){forward} \kl{DnDs}\sidenote{In \kl{predicate logic},
 one would also need the \kl[right introduction rule]{right} (resp. \kl[left
@@ -263,7 +263,7 @@ As their name suggests, $\mathbb{M}$-rules handle the behavior of the
 \emph{membrane} of bubbles, but independently from other \kl{items} as opposed to
 $\mathbb{F}$-rules. In the asymmetric \kl{bubble calculus} there is only one
 $\mathbb{M}$-rule {\kl{p}} allowing to \emph{pop} any empty bubble, which
-can be interpreted as the action of dismissing a solved \kl{subgoal}. In \kl{CoS} it
+can be interpreted as the \kl{action} of dismissing a solved \kl{subgoal}. In \kl{CoS} it
 would correspond to congruence rules handling the truth unit $\top$, and in
 \kl{subformula linking} to the unit elimination rules (\reffig{DISL-U}).
 \end{itemize}
@@ -293,7 +293,7 @@ $$\vcenter{\R{S}{T}} \quad \text{should be read as} \quad
   instance of some rule from \reffig{sequent-BJ} with $T$ as premiss and $S$ as
   conclusion\sidenote[][-18cm]{The direction of the arrow is from conclusion to
   premiss, to stay consistent with our interactive proof building setting where
-  \kl{inference rules} are seen as \kl{goal}-modifying actions.}. A
+  \kl{inference rules} are seen as \kl{goal}-modifying \kl{actions}.}. A
   \emph{derivation} $S \reintro*\nsteps{n}{} T$ is a sequence of rewrite steps
   $S_0 \step{} S_1 \ldots \step{} S_n$ with $S_0 = S$, $S_n = T$ and $n \geq 0$.
   Generally the length $n$ of the derivation does not matter, and we just write
@@ -341,15 +341,15 @@ process, rather than the constructed proof\sidenote{The idea of
 \emph{proof-as-trace} is relatively common in logic programming
 \cite{miller_survey_2022}, but not so much in \kl{deep inference} \kl{proof
 theory}. It is Jean-Baptiste Joinet who shared with us his idea of applying it
-in this setting, based on his own work interpreting the \kl{CoS} for \kl{MLL} as
-a system for building \emph{multiplicative proof nets}
+in this setting, based on his own work interpreting the \kl{CoS} for \intro{MLL}
+as a system for building \emph{multiplicative proof nets}
 \cite{joinet_completeness_2007}.}. And the fact that this trace corresponds, or
 can be transformed into a more canonical representation is of no concern to the
 user. What matters for a good proof building interface is to be as flexible as
 possible, in order to match the user's own mental process of argumentation.
 
 Of course flexibility comes at a price, and the rules of \kl{BJ} are probably
-too numerous and low-level to be mapped directly into individual proof actions
+too numerous and low-level to be mapped directly into individual proof \kl{actions}
 in a user interface. Some of these concerns will be tackled in
 \refsubsec{bubbles-search}, but we think a better answer might have been found
 with the \kl{proof system} introduced in \refch{flowers}, and its associated
@@ -435,11 +435,11 @@ enabling efficient implementations of the rules with a small memory footprint.
 
 When looking at the \kl{BJ}-proof of \reffig{ex-gra-BJ}, the astute reader might
 have been reminded of the \kl{Proof-by-Action} paradigm as introduced in
-\refch{pba}, by seeing redexes as the \kl{items} involved in a graphical action
+\refch{pba}, by seeing redexes as the \kl{items} involved in a graphical \kl{action}
 --- there are always at most two such items. More precisely, $\mathbb{H}$-rules
-correspond to \emph{click} actions on blue ({\rnm{\mcirc{-}}} rules) or red
+correspond to \emph{click} \kl{actions} on blue ({\rnm{\mcirc{-}}} rules) or red
 \kl{items} ({\rnm{\mcirc{+}}} rules), and the {\kl{i{\da}}} rule corresponds to
-the most basic \kl{DnD} action between dual occurrences of a formula.
+the most basic \kl{DnD} \kl{action} between dual occurrences of a formula.
 
 As mentioned earlier when comparing \kl{BJ} to \kl{LJ}, the novelty here lies
 with $\mathbb{H}$-rules, $\mathbb{F}$-rules and $\mathbb{M}$-rules that deal
@@ -475,7 +475,7 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
 \begin{description}
   \item[\flow]
     The {\kl{f{-}}} rule plays a special role, in that it would not be mapped to
-    any particular action. Indeed it captures the way information flows in
+    any particular \kl{action}. Indeed it captures the way information flows in
     \kl{solutions}, and we already described in \refsec{bubbles} how this is
     reflected in the topological behavior of \kl{bubbles}. Thus it could be
     implemented in the graphical interface as a kind of \emph{physics engine},
@@ -484,13 +484,13 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
     except when the \kl{item} is blue and the drag movement goes inward. This of
     course would provide a level of interactivity unseen before in a proving
     interface, making it very discoverable and playful. It also combines nicely
-    with \kl{DnD} actions in general: for instance a sequence of applications of
+    with \kl{DnD} \kl{actions} in general: for instance a sequence of applications of
     {\kl{f{-}}} followed by {\kl{i{\da}}} could be performed as a single
-    \kl{DnD} action, where the dragged hypothesis crosses successively the
+    \kl{DnD} \kl{action}, where the dragged hypothesis crosses successively the
     various \kl{bubbles} on the way.
     
   \item[\membrane]
-    The {\kl{p}} rule can be mapped very straightforwardly to the action of
+    The {\kl{p}} rule can be mapped very straightforwardly to the \kl{action} of
     clicking on the area of an empty bubble, in order to pop it. It could also
     be entirely automated, by letting the proof engine eagerly pop empty
     \kl{bubbles} as soon as they appear in a \kl{solution}. Note that in this
@@ -528,8 +528,8 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
     \end{marginfigure}
 
     Although the {\kl{i{\da}}} rule only corresponds to the base case of
-    \kl{DnD} actions, it would be easy to integrate the full \kl{SFL} semantics
-    of \kl{DnD} actions directly in \kl{BJ}. Indeed our \kl{SFL} rules
+    \kl{DnD} \kl{actions}, it would be easy to integrate the full \kl{SFL} semantics
+    of \kl{DnD} \kl{actions} directly in \kl{BJ}. Indeed our \kl{SFL} rules
     (\reffig{DISL}) are already expressed as \kl{rewriting rules}, just like the
     graphical rules of \kl{BJ} (\reffig{graphical-BJ}). Thus it is just a matter
     of adding \kl{linkage} creation rules like those of
@@ -541,7 +541,7 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
     dialog box) as a new hypothesis in the current \kl{goal}, and as the
     conclusion in a new \kl{subgoal} (see \refsubsec{pba-layout}). Since
     \kl{subgoals} are now reified as bubbles, the {\kl{i{\ua}}} rule could be
-    mapped instead to a contextual action available on any red \kl{item}
+    mapped instead to a contextual \kl{action} available on any red \kl{item}
     $\conc{\Delta}$, which would have the effect of spawning a \kl{bubble}
     around it with a blue \kl{item} $\hypo{A}$, and another \kl{bubble} nearby
     it with a red \kl{item} $\conc{A}$.
@@ -608,12 +608,12 @@ Beyond the recovered uniformity of the user interface in terms of the chemical
     to rebrand the \kl(sequent){context} zone of \kl{Actema} as a \emph{global}
     \kl(sequent){context} zone, where all the shared \kl(sequent){contexts}
     available in the \kl{subgoal} under focus are merged in a single list, and
-    immediately accessible for manipulation. Of course actions performed in the
+    immediately accessible for manipulation. Of course \kl{actions} performed in the
     \kl(sequent){context} zone would be reflected in the \kl{proof canvas}, and
     vice versa.
 
   \item[Goal diffing] From a user perspective, the locality of rules
-    means that applying some action to one or two \kl{items} will not involve
+    means that applying some \kl{action} to one or two \kl{items} will not involve
     other \kl{items}\sidenote{The only exceptions are clicks on blue
     $\hypo{\bot}$, $\hypo{\lor}$ and ${\hypo{\limp}}$, but the only extra
     \kl{item} they involve is the conclusion.}. Non-local rules are less natural
@@ -622,7 +622,7 @@ Beyond the recovered uniformity of the user interface in terms of the chemical
     often because it is not immediately visible.
 
     For instance in \kl{Actema}, many users have reported difficulties in
-    understanding the effect of click actions that create new \kl{subgoals}. A first
+    understanding the effect of click \kl{actions} that create new \kl{subgoals}. A first
     reason that can easily be remedied, is that there was not enough visual
     feedback to indicate the newly created tabs. But a deeper limitation is that
     the user needs to explicitly focus on these \kl{subgoals} to show their content,
@@ -632,13 +632,13 @@ Beyond the recovered uniformity of the user interface in terms of the chemical
 
     All these concerns can be addressed within the \kl{bubble} \kl{metaphor}:
     since \kl{bubbles} are \kl{items} freely positioned on the \kl{proof
-    canvas}, all the new \kl{items} produced by an action can stay near the
-    location where the action was initiated (i.e. the click or drop location);
+    canvas}, all the new \kl{items} produced by an \kl{action} can stay near the
+    location where the \kl{action} was initiated (i.e. the click or drop location);
     and since all transformations are local, all \kl{items} not involved in the
-    action can have their locations preserved. In other words, \kl{bubbles} make
+    \kl{action} can have their locations preserved. In other words, \kl{bubbles} make
     it easier to understand the \emph{difference} between a \kl{goal} and
-    \kl{subgoals} generated by a proof action, which is crucial when learning
-    the semantics of actions through practice.
+    \kl{subgoals} generated by a proof \kl{action}, which is crucial when learning
+    the semantics of \kl{actions} through practice.
     % This is of limited importance however in our case, because \kl{sequent calculus}
     % rules always perform the same trivial operation on the global state:
     % duplicating the whole context of hypotheses.

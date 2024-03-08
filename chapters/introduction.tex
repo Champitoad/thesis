@@ -146,7 +146,7 @@ of \kl{proof theory} concerned with the study of \kl{inference rules} is called
 \AP
 In the very beginnings of \kl{proof theory} in the 1920s, under the influence of
 Hilbert, the axiomatic method was predominant, and thus \kl{proof systems} of
-this era --- now called \intro{Hilbert systems} --- featured very few
+this era --- now called \reintro{Hilbert systems} --- featured very few
 \kl{inference rules}. Almost all logical reasoning principles were encoded as
 \emph{axiom schemas} involving generic \emph{propositional variables}. For
 instance, the famous \intro{law of excluded middle} (\reintro{LEM}), that states
@@ -699,11 +699,11 @@ and the \kl{Curry-Howard correspondence} has fostered many fruitful interactions
 between computer science, logic and constructive mathematics, with \kl{proof
 assistants} acting as a crucial tool and source of investigations. One
 influential development in this direction has been the \intro{intuitionistic
-type theory} of Martin-Löf (\reintro{MLTT}), which formed the basis for the
+type theory} of Martin-Löf (\intro{MLTT}), which formed the basis for the
 implementation of many \kl{proof assistants} like \intro{NuPrl}, \intro{Alf},
 and most recently \intro{Agda} \cite{geuvers_proof_2009}. A system closely
 related to \kl{MLTT}, the \intro{calculus of inductive constructions}
-(\reintro{CoIC}), is also implemented in two leading \kl{proof assistants}:
+(\intro{CoIC}), is also implemented in two leading \kl{proof assistants}:
 \intro{Coq} \sidecite{the_coq_development_team_2022_7313584} and \intro{Lean}
 \sidecite{10.1007/978-3-030-79876-5_37}. Following the \kl{proofs-as-programs}
 correspondence, these systems support the creation of both proofs and programs
@@ -875,8 +875,9 @@ yet, a user wishing to carry out such manipulations in a particular \kl{proof
 assistant} must express the wish in terms of the specific proof language of the
 system. A \emph{universal user interface} would instead allow performing such
 manipulations directly on the \emph{\kl{goal}} itself, using physical,
-reversible, and incremental actions with immediate feedback. A sequence of user
-actions should then be representable in terms of any particular proof language.
+reversible, and incremental \intro{actions} with immediate feedback. A sequence
+of user \kl{actions} should then be representable in terms of any particular proof
+language.
 
 \paragraph{Direct manipulation}
 
@@ -949,16 +950,16 @@ the user can specify \emph{patterns} to designate particular occurrences of a
 term $t$ that are to be rewritten into an equal term $u$, usually thanks to an
 assumed equation $t = u$. But coming up with such patterns is a lot slower than
 directly \emph{pointing} at the locations of interest onscreen.}. While the
-semantics of \kl{PbP} actions is still based on the \emph{shallow} \kl{inference rules} of
+semantics of \kl{PbP} \kl{actions} is still based on the \emph{shallow} \kl{inference rules} of
 \kl{sequent calculus}, \kl{PbL} fully embraces the \kl{deep inference} paradigm by relying on
 \kl{CoS}-style \kl{rewriting rules}.
 
 \begin{emphpar}
   \AP All the works presented in this thesis can be seen as a direct
   continuation of the research programme initiated by \kl{PbP} and \kl{PbL}. The
-  aim is to \emph{replace} textual proof languages with \emph{gestural} actions
-  performed directly upon \emph{\kl{goals}} in a \intro{graphical user
-  interface} (\reintro{GUI}). To be as general as possible, we call such a
+  aim is to \emph{replace} textual proof languages with \emph{gestural
+  \kl{actions}} performed directly upon \emph{\kl{goals}} in a \intro{graphical
+  user interface} (\reintro{GUI}). To be as general as possible, we call such a
   paradigm \intro{Proof-by-Action} (\reintro{PbA}).
 \end{emphpar}
 
@@ -974,13 +975,13 @@ object of interest directly and to generate multiple alternatives rapidly.
 Thus in the context of \kl{ITPs}, the major advantage of a (well-designed) \kl{GUI} in the
 \kl{PbA} paradigm would be to enable the \emph{rapid exploration} of multiple paths
 towards the construction of a complete proof. But once a proof has been found,
-the \emph{dynamic} sequence of actions that led to it could be ``compiled'' into
+the \emph{dynamic} sequence of \kl{actions} that led to it could be ``compiled'' into
 a \emph{static}, textual representation of the proof in the favorite proof
 language of the user, to facilitate the \emph{reading} phase.
 
 As for the \emph{modification} phase of proofs, the \kl{PbA} paradigm requires a
-way to navigate and edit directly a recorded sequence of actions, and possibly a
-mechanism for mapping parts of a static proof object to the actions that
+way to navigate and edit directly a recorded sequence of \kl{actions}, and possibly a
+mechanism for mapping parts of a static proof object to the \kl{actions} that
 generated them.
 
 \begin{emphpar}
@@ -1081,20 +1082,19 @@ context of traditional representations of \kl{goals}, by presenting a number of
 techniques based on the \kl{direct manipulation} of \emph{\kl{symbolic}} formulas in
 sequents.
 
-\AP
-We start in \refch{pba} with an introduction to \kl{PbP} and \kl{PbL}, by
+\AP We start in \refch{pba} with an introduction to \kl{PbP} and \kl{PbL}, by
 describing how to reason with logical connectives, quantifiers and equality
-through \emph{click} and \emph{drag-and-drop} (\intro{DnD}) actions in a
-prototype of \kl{GUI} called \intro{Actema}. In particular, \kl{DnD} actions can
-be seen as a generalization of both the \texttt{apply} and \texttt{rewrite}
-\kl{tactics} of \kl{imperative} proof languages.
+through \emph{click} and \intro{drag-and-drop} (\reintro{DnD}) \kl{actions} in a
+prototype of \kl{GUI} called \intro{Actema}. In particular, \kl{DnD}
+\kl{actions} can be seen as a generalization of both the \texttt{apply} and
+\texttt{rewrite} \kl{tactics} of \kl{imperative} proof languages.
 
-In \refch{sfl}, we ground the semantics of \kl{DnD} actions in \kl{deep
+In \refch{sfl}, we ground the semantics of \kl{DnD} \kl{actions} in \kl{deep
 inference} \kl{proof theory}, by designing an \kl{intuitionistic} variant of the
 \kl{CoS} for \kl{subformula linking} introduced by Chaudhuri in \cite{Chaudhuri2013}.
 Our approach differs from Chaudhuri's mainly through our notion of
 \emph{\kl(sfl){valid} \kl{linkage}}, which filters out unproductive \kl{DnD}
-actions by restricting them to \emph{\kl{unifiable}} subformulas.
+\kl{actions} by restricting them to \emph{\kl{unifiable}} subformulas.
 
 In \refch{advanced}, we present more advanced techniques in the \kl{PbA}
 paradigm, that handle pervasive forms of reasoning in mathematical practice such
@@ -1116,7 +1116,7 @@ Lastly in \refch{plugin}, we present \intro{coq-actema}, a plugin that
 integrates the \kl{Actema} web application as an interactive \kl{proof view} in
 \kl{Coq}. We focus on the architecture and interaction protocols that connect
 the different components of the system, and give an overview of the
-\kl{elaboration}/compilation strategy that turns graphical actions performed in
+\kl{elaboration}/compilation strategy that turns graphical \kl{actions} performed in
 \kl{Actema} into \kl{Coq} \kl{proof terms}. We also discuss current shortcomings
 of our approach and future directions for improvement, in particular concerning
 the question of \kl{proof evolution}.
@@ -1233,7 +1233,7 @@ Four independent paths can be followed:
 
   \item[Proof theory of SFL (\ding{174} $\to$ \ding{176})]
   This path is for readers only interested in the \kl{proof theory} of \kl{subformula
-  linking}, which is the foundation for the semantics of \kl{DnD} actions on \kl{symbolic}
+  linking}, which is the foundation for the semantics of \kl{DnD} \kl{actions} on \kl{symbolic}
   formulas.
 
   \item[Bubble calculi (\ding{178} $\to$ \ding{179})]

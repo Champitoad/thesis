@@ -31,26 +31,24 @@
     }
 }
 
+% Indexed notions
+\knowledgedirective{inotion}{notion,index,index name=notion}
+
 \knowledge{url={https://ctan.org/pkg/knowledge}, typewriter}
  | knowledge@package
 
-\knowledge{depth}{notion,scope=sfl}
-\knowledge{depth}{notion,scope=symm}
-\knowledge{depth}{notion,scope=eg}
-\knowledge{depth}{notion,scope=flower}
-
-\knowledgedirective{acronym}{synonym,up}
+\knowledgedirective{acronym}{synonym,up,index,index name=acronym}
 
 % Software systems
 
-\knowledgedirective{software}{notion,typewriter,up}
+\knowledgedirective{software}{notion,typewriter,up,index,index name=software}
 
 \knowledge{Automath}{software}
 \knowledge{NuPrl}{software}
 \knowledge{Alf}{software}
 \knowledge{Coq}{software,url={https://coq.inria.fr/}}
 \knowledge{coq-core}{software,url={https://coq.inria.fr/doc/v8.15/api/coq-core/index.html}}
-\knowledge{\ssreflect}{notion,up,url={https://coq.inria.fr/doc/V8.19.0/refman/proof-engine/ssreflect-proof-language.html?highlight=ssreflect}}
+\knowledge{\ssreflect}{software,url={https://coq.inria.fr/doc/V8.19.0/refman/proof-engine/ssreflect-proof-language.html?highlight=ssreflect}}
 \knowledge{Iris}{software,url={https://iris-project.org/}}
 \knowledge{Agda}{software,url={https://wiki.portal.chalmers.se/agda/pmwiki.php}}
 \knowledge{Lean}{software,url={https://lean-lang.org/}}
@@ -114,21 +112,21 @@
 
 % Proof systems
 
-\knowledgedirective{system}{notion,wrap=\sys}
+\knowledgedirective{system}{notion,wrap=\sys,index,index name=system}
 
 \knowledge{Alpha}{system}
-\knowledge{Alpha^a}{system}
+\knowledge{Alphaa}{system,text=Alpha^a}
 \knowledge{Beta}{system}
 \knowledge{Gamma}{system}
 \knowledge{KS}{system}
+\knowledge{dualKS}{system,text=\dmdual{KS}}
 \knowledge{SKS}{system}
 \knowledge{SKSg}{system}
-\knowledge{\dmdual{KS}}{system}
-\knowledge{B_{inv}}{system}
+\knowledge{Binv}{system,text=B_{inv}}
 \knowledge{system~B}{system}
-\knowledge{\sysBH}{system}
-\knowledge{\sysBB}{system}
-\knowledge{\sysBHB}{system}
+\knowledge{sysBH}{system,text=\sysBH}
+\knowledge{sysBB}{system,text=\sysBB}
+\knowledge{sysBHB}{system,text=\sysBHB}
 \knowledge{LBiInt}{system}
 \knowledge{DBiInt}{system}
 \knowledge{wBIL}{system}
@@ -159,23 +157,24 @@
 \knowledge{ISp}{system}
 \knowledge{JN}{system}
 
-\knowledge{notion}
+\knowledge{inotion}
  | calculus of inductive constructions
  | Calculus of Inductive Constructions
-\knowledge{system,acronym}
+\knowledge{system}
  | CoIC
 
-\knowledge{notion}
+\knowledge{inotion}
  | Martin-Löf type theory
  | constructive type theory
  | intuitionistic type theory
  | Intuitionistic type theory
-\knowledge{system,acronym}
+\knowledge{system}
  | MLTT
 
 % Inference rules
 
 \knowledgedirective{rule}{notion,wrap=\rsf}
+% \knowledgedirective{rule}{inotion,wrap=\rsf}
 
 % Modus Ponens
 \knowledge{mp}{rule}
@@ -199,12 +198,12 @@
 % Sequent calculus
 \knowledge{rule}
  | ax
-\knowledge{notion}
+\knowledge{inotion}
  | axiom@rule
  | axioms@rule
 \knowledge{rule}
  | cut
-\knowledge{notion}
+\knowledge{inotion}
  | cut@rule
  | cuts@rule
 \knowledge{xL}{rule}
@@ -346,7 +345,7 @@
 \knowledge{a}{rule}
 \knowledge{a{-}}{rule}
 \knowledge{a{+}}{rule}
-\knowledge{p}{rule}
+\knowledge{p}{rule,scope=symm}
 \knowledge{p{-}}{rule}
 \knowledge{p{+}}{rule}
 \knowledge{\top{-}}{rule,scope=symm}
@@ -361,10 +360,10 @@
 \knowledge{{\limp}{+}}{rule,scope=symm}
 \knowledge{{\lsub}{-}}{rule,scope=symm}
 \knowledge{{\lsub}{+}}{rule,scope=symm}
-\knowledge{{\forall}{-}}{rule,scope=symm}
-\knowledge{{\forall}{+}}{rule,scope=symm}
-\knowledge{{\exists}{-}}{rule,scope=symm}
-\knowledge{{\exists}{+}}{rule,scope=symm}
+\knowledge{\forall{-}}{rule,scope=symm}
+\knowledge{\forall{+}}{rule,scope=symm}
+\knowledge{\exists{-}}{rule,scope=symm}
+\knowledge{\exists{+}}{rule,scope=symm}
 
 % System B_inv
 \knowledge{i{\da}}{rule,scope=bubble-inv}
@@ -396,10 +395,10 @@
 \knowledge{{\limp}{+}}{rule,scope=bubble-inv}
 \knowledge{{\lsub}{-}}{rule,scope=bubble-inv}
 \knowledge{{\lsub}{+}}{rule,scope=bubble-inv}
-\knowledge{{\forall}{-}}{rule,scope=bubble-inv}
-\knowledge{{\forall}{+}}{rule,scope=bubble-inv}
-\knowledge{{\exists}{-}}{rule,scope=bubble-inv}
-\knowledge{{\exists}{+}}{rule,scope=bubble-inv}
+\knowledge{\forall{-}}{rule,scope=bubble-inv}
+\knowledge{\forall{+}}{rule,scope=bubble-inv}
+\knowledge{\exists{-}}{rule,scope=bubble-inv}
+\knowledge{\exists{+}}{rule,scope=bubble-inv}
 
 \knowledge{e}{rule}
 
@@ -422,7 +421,7 @@
 
 % Alpha EGs (informal version)
 \newcommand{\principle}[1]{\text{$\mathsf{#1}$}}
-\knowledgedirective{principle}{notion,up,wrap=\principle}
+\knowledgedirective{principle}{inotion,up,wrap=\principle,index parent key=illtrans}
 \knowledge{Iteration}{principle}
 \knowledge{(De)iteration}{principle,synonym}
 \knowledge{Deiteration}{principle}
@@ -430,7 +429,6 @@
 \knowledge{Deletion}{principle}
 \knowledge{Double{-}cut}{principle}
 \knowledge{Blank~Antecedant}{principle}
-\knowledge{BA}{principle}
 
 % Alpha
 \knowledge{Iter}{rule}
@@ -439,6 +437,7 @@
 \knowledge{Del}{rule}
 \knowledge{Dcut{\da}}{rule}
 \knowledge{Dcut{\ua}}{rule}
+\knowledge{BA}{rule}
 
 % Alpha^a
 \knowledge{Iter{+}}{rule}
@@ -474,7 +473,7 @@
 \knowledge{f{\da}}{rule}
 \knowledge{t{\da}}{rule}
 \knowledge{t{\ua}}{rule}
-\knowledge{f{\ua}}{rule}
+\knowledge{f{\ua}}{rule,scope=eg}
 
 % Flower calculus
 \knowledge{poll{\da}}{rule}
@@ -498,7 +497,7 @@
 
 % Introduction
 
-\knowledge{notion}
+\knowledge{inotion}
  | proof assistant
  | Proof assistant
  | proof assistants
@@ -513,7 +512,7 @@
  | PAs
  | PA
 
-\knowledge{notion}
+\knowledge{inotion}
  | proof formalism
  | Proof formalism
  | proof formalisms
@@ -523,71 +522,74 @@
  | proof systems
  | Proof systems
 
-\knowledge{notion}
+\knowledge{inotion}
  | rewriting rule
  | rewriting rules
  | Rewriting rule
  | Rewriting rules
 
-\knowledge{notion}
+\knowledge{inotion}
  | rewriting system
  | rewriting systems
  | Rewriting system
  | Rewriting systems
 
-\knowledge{notion}
+\knowledge{inotion}
  | mathematical logic
  | Mathematical logic
 
-\knowledge{notion,italic}
+\knowledge{inotion,italic}
  | characteristica universalis
 
-\knowledge{notion,italic}
+\knowledge{inotion,italic}
  | calculus ratiocinator
  
-\knowledge{notion}
+\knowledge{inotion}
  | set theory
  | Set theory
  | set-theoretical
 
-\knowledge{notion}
+\knowledge{inotion}
  | axiom
  | axioms
  | Axiom
  | Axioms
 
-\knowledge{notion}
+\knowledge{inotion}
  | first-order
  | First-order
 
-\knowledge{notion}
+\knowledge{inotion}
  | higher-order
  | Higher-order
 
-\knowledge{notion}
+\knowledge{inotion}
  | predicate logic
  | Predicate logic
  | first-order logic
  | First-order logic
 \knowledge{acronym}
  | FOL
+
+\knowledge{inotion}
+ | intuitionistic first-order logic
 \knowledge{acronym}
  | iFOL
  
-\knowledge{notion}
+\knowledge{inotion}
  | higher-order logic
 \knowledge{acronym}
  | HOL
 
-\knowledge{notion}
+\knowledge{inotion}
  | $\lambda$-calculus
  | $\lambda$-calculi
  
-\knowledge{notion}
+\knowledge{inotion}
  | $\lambda$-term
  | $\lambda$-terms
 
-\knowledge{notion}
+\knowledge{inotion}
  | model theory
  | Model theory
  | model-theoretic
@@ -597,7 +599,7 @@
  | model-theoretically
  | Model-theoretically
 
-\knowledge{notion}
+\knowledge{inotion}
  | proof theory
  | Proof theory
  | proof-theoretic
@@ -607,37 +609,37 @@
  | proof-theoretically
  | Proof-theoretically
 
-\knowledge{notion}
+\knowledge{inotion}
  | structural proof theory
  | Structural proof theory
 
-\knowledge{notion}
+\knowledge{inotion,index key=irule}
  | inference rule
  | inference rules
  | Inference rule
  | Inference rules
 
-\knowledge{notion,italic}
+\knowledge{inotion,italic}
  | modus ponens
 
-\knowledge{notion}
+\knowledge{inotion}
  | law of excluded middle
 \knowledge{acronym}
  | LEM
 
-\knowledge{notion}
+\knowledge{inotion}
  | law of non-contradiction
 
-\knowledge{notion}
+\knowledge{inotion}
  | double-negation elimination law
 \knowledge{acronym}
  | DNE
 
-\knowledge{notion}
+\knowledge{inotion}
  | consistency
  | Consistency
 
-\knowledge{notion}
+\knowledge{inotion}
  | symbol
  | symbols
  | Symbol
@@ -649,7 +651,7 @@
  | symbolize
  | symbolized
 
-\knowledge{notion}
+\knowledge{inotion}
  | icon
  | icons
  | Icon
@@ -661,29 +663,29 @@
  | iconically
  | Iconically
  
-\knowledge{notion}
+\knowledge{inotion}
  | classical
  | Classical
  | classically
  | Classically
 
-\knowledge{notion}
+\knowledge{inotion}
  | intuitionistic
  | Intuitionistic
  | intuitionistically
  | Intuitionistically
 
-\knowledge{notion}
+\knowledge{inotion}
  | bi-intuitionistic
  | Bi-intuitionistic
  | Bi-Intuitionistic
 
-\knowledge{notion}
+\knowledge{inotion}
  | dual-intuitionistic
  | Dual-intuitionistic
  | Dual-Intuitionistic
 
-\knowledge{notion}
+\knowledge{inotion}
  | Hilbert system
  | Hilbert systems
  | axiomatic system
@@ -691,38 +693,38 @@
  | axiomatic systems
  | Axiomatic systems
 
-\knowledge{notion}
+\knowledge{inotion}
  | Gentzen system
  | Gentzen systems
 
-\knowledge{notion}
+\knowledge{inotion}
  | sequent calculus
  | sequent calculi
  | Sequent calculus
  | Sequent calculi
 
-\knowledge{notion}
+\knowledge{inotion}
  | natural deduction
  | Natural deduction
 
-\knowledge{notion}
+\knowledge{inotion}
  | structural rule
  | structural rules
  | Structural rule
  | Structural rules
 
-\knowledge{notion}
+\knowledge{inotion}
  | exchange
 
-\knowledge{notion}
+\knowledge{inotion}
  | contraction
  | contractions
 
-\knowledge{notion}
+\knowledge{inotion}
  | weakening
  | weakenings
 
-\knowledge{notion}
+\knowledge{inotion}
  | introduction rule
  | introduction rules
  | Introduction rule
@@ -732,75 +734,75 @@
  | Right introduction rule
  | Right introduction rules
 
-\knowledge{notion}
+\knowledge{inotion}
  | left introduction rule
  | left introduction rules
  | Left introduction rule
  | Left introduction rules
 
-\knowledge{notion}
+\knowledge{inotion}
  | introduction rule@natded
  | introduction rules@natded
  | Introduction rule@natded
  | Introduction rules@natded
 
-\knowledge{notion}
+\knowledge{inotion}
  | elimination rule
  | elimination rules
  | Elimination rule
  | Elimination rules
 
-\knowledge{notion}
+\knowledge{inotion}
  | cut-elimination
  | Cut-elimination
 
-\knowledge{notion}
+\knowledge{inotion}
  | admissible
  | Admissible
 
-\knowledge{notion}
+\knowledge{inotion}
  | subformula property
  | Subformula property
 
-\knowledge{notion}
+\knowledge{inotion}
  | analytic
  | Analytic
  | analyticity
  | Analyticity
 
-\knowledge{notion}
+\knowledge{inotion}
  | deep inference
  | Deep inference
 
-\knowledge{notion}
+\knowledge{inotion}
  | calculus of structures
  | calculi of structures
 \knowledge{acronym}
  | CoS
  
-\knowledge{notion}
+\knowledge{inotion}
  | switch rule
  | switch rules
  | Switch rule
  | Switch rules
  
-\knowledge{notion}
+\knowledge{inotion}
  | context
  | contexts
  | Context
  | Contexts
 
-\knowledge{notion}
+\knowledge{inotion}
  | hole
  | holes
  | Hole
  | Holes
 
-\knowledge{notion}
+\knowledge{inotion}
  | invertible
  | Invertible
 
-\knowledge{notion}
+\knowledge{inotion}
  | type theory
  | type theories
  | type-theoretical
@@ -808,13 +810,13 @@
  | Type theories
  | Type-theoretical
 
-\knowledge{notion}
+\knowledge{inotion}
  | term
  | terms
  | Term
  | Terms
 
-\knowledge{notion}
+\knowledge{inotion}
  | type
  | types
  | typed
@@ -822,156 +824,159 @@
  | Types
  | Typed
 
-\knowledge{notion}
+\knowledge{inotion}
  | proof term
  | proof terms
  | Proof term
  | Proof terms
 
-\knowledge{notion}
+\knowledge{inotion}
  | propositions-as-types
 
-\knowledge{notion}
+\knowledge{inotion}
  | proofs-as-programs
  | Curry-Howard correspondence
  | Curry-Howard isomorphism
 
-\knowledge{notion}
+\knowledge{inotion}
  | kernel@PA
 
-\knowledge{notion}
+\knowledge{inotion}
  | elaboration
 
-\knowledge{notion}
+\knowledge{inotion}
  | proof evolution
  | Proof evolution
 
-\knowledge{notion}
+\knowledge{inotion}
  | forward
  | Forward
 
-\knowledge{notion}
+\knowledge{inotion}
  | backward
  | Backward
  
-\knowledge{notion}
+\knowledge{inotion}
  | goal
  | goals
  | Goal
  | Goals
 
-\knowledge{notion}
+\knowledge{inotion}
  | subgoal
  | subgoals
  | Subgoal
  | Subgoals
 
-\knowledge{notion}
+\knowledge{inotion}
  | sequent
  | sequents
  | Sequent
  | Sequents
 
-\knowledge{notion}
+\knowledge{inotion}
  | nested sequent
  | nested sequents
  | Nested sequent
  | Nested sequents
 
-\knowledge{notion}
+\knowledge{inotion}
  | context@sequent
  | contexts@sequent
  | Context@sequent
  | Contexts@sequent
 
-\knowledge{notion}
+\knowledge{inotion}
  | proof state
  | proof states
  | Proof state
  | Proof states
 
-\knowledge{notion}
+\knowledge{inotion}
  | tactic
  | tactics
  | Tactic
  | Tactics
 
-\knowledge{notion}
+\knowledge{inotion}
  | proof script
  | proof scripts
  | Proof script
  | Proof scripts
 
-\knowledge{notion}
+\knowledge{inotion}
  | proof view
  | proof views
  | Proof view
  | Proof views
-
-\knowledge{notion}
  | goal view
  | goal views
  | Goal view
  | Goal views
 
-\knowledge{notion}
+\knowledge{inotion}
  | declarative
  | Declarative
 
-\knowledge{notion}
+\knowledge{inotion}
  | imperative
  | Imperative
 
-\knowledge{notion}
+\knowledge{inotion}
  | direct manipulation
 
-\knowledge{notion}
+\knowledge{inotion}
  | graphical user interface
  | graphical user interfaces
 \knowledge{acronym}
  | GUI
  | GUIs
 
-\knowledge{notion}
+\knowledge{inotion}
  | zoomable user interface
  | zoomable user interfaces
 \knowledge{acronym}
  | ZUI
  | ZUIs
 
-\knowledge{notion}
+\knowledge{inotion}
  | proof-by-pointing
  | Proof-by-Pointing
 \knowledge{acronym}
  | PbP
 
-\knowledge{notion}
+\knowledge{inotion}
  | proof-by-linking
  | Proof-by-Linking
 \knowledge{acronym}
  | PbL
 
-\knowledge{notion}
+\knowledge{inotion}
  | proof-by-action
  | Proof-by-Action
 \knowledge{acronym}
  | PbA
 
+\knowledge{inotion}
+ | drag-and-drop
+ | drag-and-drops
+ | Drag-and-drop
+ | Drag-and-drops
 \knowledge{acronym}
  | DnD
  | DnDs
 
-\knowledge{notion}
+\knowledge{inotion}
  | subformula linking
  | Subformula linking
 \knowledge{acronym}
  | SFL
 
-\knowledge{notion}
+\knowledge{inotion}
  | semiotics
  | Semiotics
 
-\knowledge{notion}
+\knowledge{inotion}
  | diagram
  | diagrams
  | Diagram
@@ -979,7 +984,7 @@
  | diagrammatic
  | Diagrammatic
 
-\knowledge{notion}
+\knowledge{inotion}
  | metaphor
  | metaphors
  | Metaphor
@@ -989,112 +994,112 @@
  | metaphorically
  | Metaphorically
 
-\knowledge{notion}
+\knowledge{inotion}
  | existential graphs
 \knowledge{acronym}
  | EGs
 
-\knowledge{notion}
+\knowledge{inotion}
  | intuitionistic existential graphs
 \knowledge{acronym}
  | IEGs
 
-\knowledge{notion}
+\knowledge{inotion}
  | flower calculus
  
-\knowledge{notion}
+\knowledge{inotion}
  | window inference
  | Window inference
 
 % Proof-by-Action
 
-\knowledge{notion}
+\knowledge{inotion}
  | item
  | items
  | Item
  | Items
 
-\knowledge{notion}
+\knowledge{inotion}
  | proof canvas
 
-\knowledge{notion}
+\knowledge{inotion}
  | interaction operator
  | interaction operators
  | Interaction operator
  | Interaction operators
 
-\knowledge{notion}
+\knowledge{inotion}
  | forward@dnd
  | Forward@dnd
 
-\knowledge{notion}
+\knowledge{inotion}
  | backward@dnd
  | Backward@dnd
 
-\knowledge{notion}
+\knowledge{inotion}
  | parallel@dnd
  | Parallel@dnd
 
 % Subformula linking
 
-\knowledge{notion}
+\knowledge{inotion}
  | user experience
 \knowledge{acronym}
  | UX
  
-\knowledge{notion}
+\knowledge{inotion}
  | context@sfl
  | contexts@sfl
  | Context@sfl
  | Contexts@sfl
 
-\knowledge{notion}
+\knowledge{inotion}
  | path
  | paths
  | Path
  | Paths
 
-\knowledge{notion}
+\knowledge{inotion}
  | polarity@sfl
  | Polaritys@sfl
  | polarities@sfl
  | Polarities@sfl
-\knowledge{notion}
+\knowledge{inotion}
  | positive@sfl
  | Positive@sfl
  | positively@sfl
  | Positively@sfl
-\knowledge{notion}
+\knowledge{inotion}
  | negative@sfl
  | Negative@sfl
  | negatively@sfl
  | Negatively@sfl
 
-\knowledge{notion}
+\knowledge{inotion}
  | focusing
  | Focusing
  | focused
  | Focused
 
-\knowledge{notion}
+\knowledge{inotion}
  | linkage
  | linkages
  | Linkage
  | Linkages
 
-\knowledge{notion}
+\knowledge{inotion}
  | logical linkage
  | Logical linkage
  | logical linkages
  | Logical linkages
 
-\knowledge{notion}
+\knowledge{inotion}
  | rewrite linkage
  | Rewrite linkage
  | rewrite linkages
  | Rewrite linkages
 
-\knowledge{notion}
+\knowledge{inotion}
  | valid@sfl
  | Valid@sfl
  | invalid@sfl
@@ -1102,23 +1107,23 @@
  | validity@sfl
  | Validity@sfl
 
-\knowledge{notion}
+\knowledge{inotion}
  | classically valid@sfl
  | classical validity@sfl
  | Classically valid@sfl
  | Classical validity@sfl
 
-\knowledge{notion}
+\knowledge{inotion}
  | productivity
  | Productivity
  
-\knowledge{notion}
+\knowledge{inotion}
  | substitution@sfl
  | substitutions@sfl
  | Substitution@sfl
  | Substitutions@sfl
 
-\knowledge{notion}
+\knowledge{inotion}
  | unifiable
  | unify
  | unifies
@@ -1128,17 +1133,23 @@
  | Unifies
  | Unification
 
-\knowledge{notion}
+\knowledge{inotion}
  | unifiable variable
  | unifiable variables
 
-\knowledge{notion}
+\knowledge{inotion}
  | parallel@dnd
  | Parallel@dnd
 
 % Proof-by-Action in Practice
 
-\knowledgedirective{action}{notion,wrap=\action,up}
+\knowledge{inotion,index=Actions,index key=action}
+ | action
+ | actions
+ | Action
+ | Actions
+
+\knowledgedirective{action}{inotion,wrap=\action,up,index parent key=action}
 
 \knowledge{Unfold}{action}
 \knowledge{Simplify}{action}
@@ -1146,27 +1157,27 @@
 \knowledge{Search}{action}
 \knowledge{Induction}{action}
 
-\knowledge{notion}
+\knowledge{inotion}
  | head
 
-\knowledge{notion}
+\knowledge{inotion}
  | body
 
-\knowledge{notion}
+\knowledge{inotion}
  | contextual action
  | contextual actions
  
-\knowledge{notion}
+\knowledge{inotion}
  | behavioral
  | axiomatic
 
-\knowledge{notion}
+\knowledge{inotion}
  | nominal
 
-\knowledge{notion}
+\knowledge{inotion}
  | computational
 
-\knowledge{notion}
+\knowledge{inotion}
  | judgment
  | judgments
  | Judgment
@@ -1176,190 +1187,196 @@
 
 % Integration in a proof assistant
 
-\knowledge{notion}
+\knowledge{inotion}
  | integrated development environments
  | integrated development environment
 \knowledge{acronym}
  | IDEs
  | IDE
 
-\knowledge{notion}
+\knowledge{inotion}
  | sequence diagram
 
-\knowledge{notion}
+\knowledge{inotion}
  | deep embedding
 
-\knowledge{notion}
+\knowledge{inotion}
  | computational reflection
 
 % Bubble calculi
 
-\knowledge{notion}
+\knowledge{inotion}
  | bubble calculus
  | bubble calculi
  | Bubble calculus
  | Bubble calculi
 
-\knowledge{notion}
+\knowledge{inotion}
  | chemical abstract machine
 \knowledge{acronym}
  | \cham
  
-\knowledge{notion}
+\knowledge{inotion}
  | ion
  | ions
  | Ion
  | Ions
 
-\knowledge{notion}
+\knowledge{inotion}
  | bubble
  | Bubble
  | bubbles
  | Bubbles
 
-\knowledge{notion}
+\knowledge{inotion}
+ | bubble@bubble
+ | Bubble@bubble
+ | bubbles@bubble
+ | Bubbles@bubble
+
+\knowledge{inotion}
  | bubble@symm
  | Bubble@symm
  | bubbles@symm
  | Bubbles@symm
 
-\knowledge{notion}
+\knowledge{inotion}
  | solution@bubble
  | solutions@bubble
  | Solution@bubble
  | Solutions@bubble
 
-\knowledge{notion}
+\knowledge{inotion}
  | solution@symm
  | solutions@symm
  | Solution@symm
  | Solutions@symm
 
-\knowledge{notion}
+\knowledge{inotion}
  | subsolution@bubble
  | subsolutions@bubble
  | Subsolution@bubble
  | Subsolutions@bubble
 
-\knowledge{notion}
+\knowledge{inotion}
  | context@bubble
  | contexts@bubble
  | Context@bubble
  | Context@bubble
 
-\knowledge{notion}
+\knowledge{inotion}
  | single-conclusion
  | Single-conclusion
 
-\knowledge{notion}
+\knowledge{inotion}
  | polarity@bubble
  | Polarity@bubble
  | polarities@bubble
  | Polarities@bubble
  | polarized@bubble
  | Polarized@bubble
-\knowledge{notion}
+\knowledge{inotion}
  | positive@bubble
  | Positive@bubble
  | positively@bubble
  | Positively@bubble
-\knowledge{notion}
+\knowledge{inotion}
  | negative@bubble
  | Negative@bubble
  | negatively@bubble
  | Negatively@bubble
-\knowledge{notion}
+\knowledge{inotion}
  | neutral@bubble
  | Neutral@bubble
  | unpolarized@bubble
  | Unpolarized@bubble
 
-\knowledge{notion}
+\knowledge{inotion}
  | asymmetric interpretation
  | Asymmetric interpretation
 
-\knowledge{notion}
+\knowledge{inotion}
  | saturated
  | Saturated
 
-\knowledge{notion}
+\knowledge{inotion}
  | unsaturated
  | Unsaturated
 
-\knowledge{notion}
+\knowledge{inotion}
  | branching operator
  | branching operators
  | Branching operator
  | Branching operators
 
-\knowledge{notion}
+\knowledge{inotion}
  | item@symm
  | items@symm
  | Item@symm
  | Items@symm
 
-\knowledge{notion}
+\knowledge{inotion}
  | mix operator
  
-\knowledge{notion}
+\knowledge{inotion}
  | symmetric interpretation
  | Symmetric interpretation
 
-\knowledge{notion}
+\knowledge{inotion}
  | positive interpretation
  | Positive interpretation
 
-\knowledge{notion}
+\knowledge{inotion}
  | negative interpretation
  | Negative interpretation
 
-\knowledge{notion}
+\knowledge{inotion}
  | Grishin (a)
 
-\knowledge{notion}
+\knowledge{inotion}
  | Grishin (b)
 
-\knowledge{notion}
+\knowledge{inotion}
  | exclusion
  | exclusions
  | Exclusion
  | Exclusions
  
-\knowledge{notion}
+\knowledge{inotion}
  | bounded lattice
  | Bounded lattice
  | bounded lattices
  | Bounded lattices
 
-\knowledge{notion}
+\knowledge{inotion}
  | Heyting algebra
  | Heyting algebras
 
-\knowledge{notion}
+\knowledge{inotion}
  | Brouwer algebra
  | Brouwer algebras
 
-\knowledge{notion}
+\knowledge{inotion}
  | Heyting-Brouwer algebra
  | Heyting-Brouwer algebras
 
-\knowledge{notion}
+\knowledge{inotion}
  | Boolean algebra
  | Boolean algebras
 
-\knowledge{notion}
+\knowledge{inotion}
  | exponential
  | exponentials
  | Exponential
  | Exponentials
 
-\knowledge{notion}
+\knowledge{inotion}
  | co-exponential
  | co-exponentials
  | Co-exponential
  | Co-exponentials
 
-\knowledge{notion}
+\knowledge{inotion}
  | structure@bubble
  | structures@bubble
  | Structure@bubble
@@ -1367,284 +1384,284 @@
 
 % Existential graphs
 
-\knowledge{notion}
+\knowledge{inotion}
  | sheet of assertion
  
-\knowledge{notion}
+\knowledge{inotion}
  | graph
  | graphs
  | Graph
  | Graphs
 
-\knowledge{notion}
+\knowledge{inotion}
  | subgraph
  | subgraphs
 
-\knowledge{notion}
+\knowledge{inotion}
  | juxtaposition
 
-\knowledge{notion}
+\knowledge{inotion}
  | cut@eg
  | cuts@eg
 
-\knowledge{notion}
+\knowledge{inotion}
  | isotropy
 
-\knowledge{notion}
+\knowledge{inotion}
  | entitative graphs
  | Entitative graphs
 
-\knowledge{notion}
+\knowledge{inotion,index=Illative transformations,index key=illtrans}
  | illative transformation
  | illative transformations
 
-\knowledge{notion}
+\knowledge{inotion}
  | illative atomicity
  | Illative atomicity
  
-\knowledge{notion}
+\knowledge{inotion}
  | context@eg
  | contexts@eg
  | Context@eg
  | Contexts@eg
 
-\knowledge{notion}
+\knowledge{inotion}
  | polarity@eg
  | Polaritys@eg
  | polarities@eg
  | Polarities@eg
-\knowledge{notion}
+\knowledge{inotion}
  | positive@eg
  | Positive@eg
  | positively@eg
  | Positively@eg
-\knowledge{notion}
+\knowledge{inotion}
  | negative@eg
  | Negative@eg
  | negatively@eg
  | Negatively@eg
 
-\knowledge{notion}
+\knowledge{inotion}
  | valuation@eg
  | valuations@eg
  | Valuation@eg
  | Valuations@eg
 
-\knowledge{notion}
+\knowledge{inotion}
  | structure@eg
  | structures@eg
  | Structure@eg
  | Structures@eg
 
-\knowledge{notion}
+\knowledge{inotion}
  | context@sks
  | contexts@sks
  | Context@sks
  | Contexts@sks
 
-\knowledge{notion}
+\knowledge{inotion}
  | hook
  | hooks
  | Hook
  | Hooks
 
-\knowledge{notion}
+\knowledge{inotion}
  | spot
  | spots
  | Spot
  | Spots
  
-\knowledge{notion}
+\knowledge{inotion}
  | endoporeutic
  | Endoporeutic
 
-\knowledge{notion}
+\knowledge{inotion}
  | binder@eg
  | binders@eg
  | Binder@eg
  | Binders@eg
 
-\knowledge{notion}
+\knowledge{inotion}
  | wire
  | wires
  | Wire
  | Wires
 
-\knowledge{notion}
+\knowledge{inotion}
  | teridentity
  | teridentities
  | Teridentity
  | Teridentities
 
-\knowledge{notion}
+\knowledge{inotion}
  | lines of identity
  | line of identity
 \knowledge{acronym}
  | LoI
  | LoIs
 
-\knowledge{notion}
+\knowledge{inotion}
  | sprinkler
  | sprinklers
  | Sprinkler
  | Sprinklers
 
-\knowledge{notion}
+\knowledge{inotion}
  | garden
  | gardens
  | Garden
  | Gardens
 
-\knowledge{notion}
+\knowledge{inotion}
  | node@alpha
  | nodes@alpha
 
-\knowledge{notion}
+\knowledge{inotion}
  | graph@alpha
  | graphs@alpha
 
-\knowledge{notion}
+\knowledge{inotion}
  | node@beta
  | nodes@beta
 
-\knowledge{notion}
+\knowledge{inotion}
  | graph@beta
  | graphs@beta
 
-\knowledge{notion}
+\knowledge{inotion}
  | garden@beta
  | gardens@beta
 
-\knowledge{notion}
+\knowledge{inotion}
  | shallow@eg
  | Shallow@eg
 
 % Flower calculus
 
-\knowledge{notion,index=scroll}
+\knowledge{inotion,index=scroll}
  | scroll
  | scrolls
  | Scroll
  | Scrolls
 
-\knowledge{notion}
+\knowledge{inotion}
  | $n$-ary scroll
  | $n$-ary scrolls
 
-\knowledge{notion}
+\knowledge{inotion}
  | curl
  | curls
 
-\knowledge{notion}
+\knowledge{inotion}
  | inloop
  | inloops
 
-\knowledge{notion}
+\knowledge{inotion}
  | outloop
  | outloops
 
-\knowledge{notion}
+\knowledge{inotion}
  | geometric logic
 
-\knowledge{notion}
+\knowledge{inotion}
  | coherent formula
  | coherent formulas
  | Coherent formula
  | Coherent formulas
 
-\knowledge{notion}
+\knowledge{inotion}
  | first-order signature
 
-\knowledge{notion}
+\knowledge{inotion}
  | binder@flower
  | binders@flower
  | Binder@flower
  | Binders@flower
 
-\knowledge{notion}
+\knowledge{inotion}
  | sprinkler@flower
  | sprinklers@flower
  | Sprinkler@flower
  | Sprinklers@flower
 
-\knowledge{notion}
+\knowledge{inotion}
  | bouquet
  | bouquets
  | Bouquet
  | Bouquets
 
-\knowledge{notion}
+\knowledge{inotion}
  | corolla
  | corollas
  | Corolla
  | Corollas
 
-\knowledge{notion}
+\knowledge{inotion}
  | pistil
  | pistils
  | Pistil
  | Pistils
 
-\knowledge{notion}
+\knowledge{inotion}
  | petal
  | petals
  | Petal
  | Petals
 
-\knowledge{notion}
+\knowledge{inotion}
  | free variable
  | free variables
  | Free variable
  | Free variables
 
-\knowledge{notion}
+\knowledge{inotion}
  | bound variable
  | bound variables
  | Bound variable
  | Bound variables
 
-\knowledge{notion}
+\knowledge{inotion}
  | Barendregt convention
 
-\knowledge{notion}
+\knowledge{inotion}
  | update
 
-\knowledge{notion}
+\knowledge{inotion}
  | substitution
  | substitutions
  | Substitution
  | Substitutions
 
-\knowledge{notion}
+\knowledge{inotion}
  | support
 
-\knowledge{notion}
+\knowledge{inotion}
  | capture-avoiding
  | Capture-avoiding
 
-\knowledge{notion}
+\knowledge{inotion}
  | context@flower
  | contexts@flower
  | Context@flower
  | Contexts@flower
 
-\knowledge{notion}
+\knowledge{inotion}
  | polarity@flower
  | Polarity@flower
  | polarities@flower
  | Polarities@flower
-\knowledge{notion}
+\knowledge{inotion}
  | positive@flower
  | Positive@flower
  | positively@flower
  | Positively@flower
-\knowledge{notion}
+\knowledge{inotion}
  | negative@flower
  | Negative@flower
  | negatively@flower
  | Negatively@flower
 
-\knowledge{notion}
+\knowledge{inotion}
  | pollination
  | pollinations
  | Pollination
@@ -1653,114 +1670,114 @@
  | pollinates
  | pollinating
 
-\knowledge{notion}
+\knowledge{inotion}
  | cross-pollination
  | Cross-pollination
  | cross-pollinating
  | Cross-pollinating
 
-\knowledge{notion}
+\knowledge{inotion}
  | self-pollination
  | Self-pollination
  | self-pollinating
  | Self-pollinating
 
-\knowledge{notion}
+\knowledge{inotion}
  | shallow@flower
  | Shallow@flower
 
-\knowledge{notion}
+\knowledge{inotion}
  | natural
  | Natural
 
-\knowledge{notion}
+\knowledge{inotion}
  | cultural
  | Cultural
  
-\knowledge{notion}
+\knowledge{inotion}
  | first-order@implication
  | First-order@implication
 
-\knowledge{notion}
+\knowledge{inotion}
  | higher-order@implication
  | Higher-order@implication
 
-\knowledge{notion}
+\knowledge{inotion}
  | first-order structure
  | first-order structures
 
-\knowledge{notion}
+\knowledge{inotion}
  | Kripke structure
  | Kripke structures
 
-\knowledge{notion}
+\knowledge{inotion}
  | universal Kripke structure
  | universal Kripke structures
 
-\knowledge{notion}
+\knowledge{inotion}
  | interpretation
 
-\knowledge{notion}
+\knowledge{inotion}
  | world
  | worlds
 
-\knowledge{notion}
+\knowledge{inotion}
  | accessibility
 
-\knowledge{notion}
+\knowledge{inotion}
  | forcing
  | forced
 
-\knowledge{notion}
+\knowledge{inotion}
  | valid
  | validity
 
-\knowledge{notion}
+\knowledge{inotion}
  | theory
  | theories
  | Theory
  | Theories
  
-\knowledge{notion}
+\knowledge{inotion}
  | occurrence
  | occurrences
  | Occurrence
  | Occurrences
 
-\knowledge{notion}
+\knowledge{inotion}
  | justification
  | justifications
  | Justification
  | Justifications
 
-\knowledge{notion}
+\knowledge{inotion}
  | argument
  | arguments
  | Argument
  | Arguments
 
-\knowledge{notion}
+\knowledge{inotion}
  | compatible
 
-\knowledge{notion}
+\knowledge{inotion}
  | vehicle
 
-\knowledge{notion}
+\knowledge{inotion}
  | anchor
  
-\knowledge{notion}
+\knowledge{inotion}
  | pollination phase
  | pollination phases
  | Pollination phase
  | Pollination phases
 
-\knowledge{notion}
+\knowledge{inotion}
  | reproduction phase
  | reproduction phases
  | Reproduction phase
  | Reproduction phases
 
-\knowledge{notion}
+\knowledge{inotion}
  | decomposition phase
  | decomposition phases
  | Decomposition phase
@@ -1791,3 +1808,14 @@
 \knowledge{Redo}{action}
 
 \knowledge{Auto}{action}
+
+\knowledge{depth}{inotion,scope=sfl}
+\knowledge{depth}{inotion,scope=symm}
+\knowledge{depth}{inotion,scope=eg}
+\knowledge{depth}{inotion,scope=flower}
+
+% Bug?
+
+\knowledge{notion}
+ | solutions
+ | positive

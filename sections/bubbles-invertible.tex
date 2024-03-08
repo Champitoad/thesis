@@ -4,7 +4,7 @@
 
 \begin{figure*}
   \input{figures/sequent-B-inv.tex}
-  \caption{Rules for the \kl{invertible} \kl{bubble calculus} \kl{B_{inv}}}
+  \caption{Rules for the \kl{invertible} \kl{bubble calculus} \kl{Binv}}
   \labfig{sequent-B-inv}
 \end{figure*}
 
@@ -39,7 +39,7 @@ quantifier rules, we conjecture that as in \kl{sequent calculus}, the rules
 $\{\kl{\forall{+}}, \kl{\exists{-}}\}$ are \kl{invertible}, while the rules
 $\{\kl{\forall{-}}, \kl{\exists{+}}\}$ are not. And as in \kl{sequent calculus},
 this can be remedied by systematically duplicating the instantiated formula.}.
-In \reffig{sequent-B-inv} we define the \intro{B_{inv}} calculus, which results
+In \reffig{sequent-B-inv} we define the \intro{Binv} calculus, which results
 from the following modifications to the previous rules:
 \begin{description}
   \item[Weakening]
@@ -89,7 +89,7 @@ from the following modifications to the previous rules:
     Indeed even after turning it into a propagation rule, the moved copy of the
     duplicated \kl{subgoal} $S$ cannot be weakened because it lives in a \kl{neutral}
     bubble. Thus the rule stays non-\kl{invertible}, and cannot be included in
-    \kl{B_{inv}}. Fortunately, we showed that it is \kl{admissible} in
+    \kl{Binv}. Fortunately, we showed that it is \kl{admissible} in
     \refthm{bubbles:cut-admissibility}, so this is not problematic.
 
   \item[Implication/Exclusion]
@@ -106,7 +106,7 @@ from the following modifications to the previous rules:
     to design a calculus where they are \kl{admissible}. But unlike what is done in
     \kl{DBiInt}, we did not incorporate \kl{contraction} in other
     $\mathbb{H}$-rules. Thus we cannot simulate exactly all the \kl{introduction
-    rules} of \kl{DBiInt} in \kl{B_{inv}}.
+    rules} of \kl{DBiInt} in \kl{Binv}.
 
 \end{description}
 
@@ -126,31 +126,31 @@ of simulating \kl{DBiInt}'s \kl{introduction rules}:
 \begin{lemma}[Admissibility of contraction]\lablemma{admissibility-contraction}
   \sbr
   \begin{itemize}
-    \item If $\prov{\kl{B_{inv}}} S\select{\Gamma, A, A \J \Delta}$, then
-          $\prov{\kl{B_{inv}}} S\select{\Gamma, A \J \Delta}$.
-    \item If $\prov{\kl{B_{inv}}} S\select{\Gamma \J A, A, \Delta}$, then
-          $\prov{\kl{B_{inv}}} S\select{\Gamma \J A, \Delta}$.
+    \item If $\prov{\kl{Binv}} S\select{\Gamma, A, A \J \Delta}$, then
+          $\prov{\kl{Binv}} S\select{\Gamma, A \J \Delta}$.
+    \item If $\prov{\kl{Binv}} S\select{\Gamma \J A, A, \Delta}$, then
+          $\prov{\kl{Binv}} S\select{\Gamma \J A, \Delta}$.
   \end{itemize}
 \end{lemma}
 
 Note that it is sufficient to prove admissibility of \kl{contraction} on
 formulas, rather than on arbitrary \kl{items}. Indeed we only need it to
 simulate the \kl{introduction rules} of \kl{DBiInt}, which always duplicate
-formulas. For now we only conjecture completeness of \kl{B_{inv}}, since it not
+formulas. For now we only conjecture completeness of \kl{Binv}, since it not
 clear what method should be used to prove \reflemma{admissibility-contraction}.
 In her thesis \cite[Lemma~5.2.3]{postniece_proof_2010}, Postniece does a proof
 by induction on the depth of the derivation, relying on the fact that all
 \kl{introduction rules} of \kl{DBiInt} preserve the principal formula; but this
 is precisely what we are trying to avoid with our version of the rules. Of
 course, if we either give up on this constraint or include \kl{contraction}
-rules in \kl{B_{inv}}, then we immediately get our desired result: \kl{B_{inv}}
+rules in \kl{Binv}, then we immediately get our desired result: \kl{Binv}
 is a fully \kl{invertible} calculus, where the same fragments as \kl{system~B}
 capture \kl{intuitionistic}, \kl{dual-intuitionistic}, \kl{bi-intuitionistic}
 and \kl{classical} logic.
 
 \subsection{Semi-automated proof search}\labsubsec{bubbles-search}
 
-In the \kl{intuitionistic} (propositional) fragment of \kl{B_{inv}}, a canonical
+In the \kl{intuitionistic} (propositional) fragment of \kl{Binv}, a canonical
 way to search for a proof of a formula $A$ consists in the following $5$
 \emph{phases}, applied successively in a loop until the \kl{saturated} empty
 \kl{solution} is reached:
@@ -303,7 +303,7 @@ Because of the implicit \kl{contraction} in the rules \kl{{\limp}{-}} and
 \kl{{\lsub}{+}}, one cannot fully decompose a formula into an equivalent
 \kl{solution} by deterministically applying a sequence of $\mathbb{H}$-rules (and
 possibly $\mathbb{F}$-rules, to distribute \kl{positive} conjunctions and \kl{negative}
-disjunctions). Thus \kl{B_{inv}} fails to be \emph{fully \kl{iconic}}, because it
+disjunctions). Thus \kl{Binv} fails to be \emph{fully \kl{iconic}}, because it
 relies on the \emph{\kl{symbolic}} connectives $\limp$ and $\lsub$ to represent
 logical statements.
 

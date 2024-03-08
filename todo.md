@@ -1,4 +1,3 @@
-- Remove all warnings in build/main.diagnose
 - Make proper index, with subcategories for rules, software, etc
 - Version vulgarisée de l'abstract < 1000 mots
 - Done!

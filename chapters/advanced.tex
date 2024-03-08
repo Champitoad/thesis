@@ -4,13 +4,13 @@
 
 \epigraph{Practical life is not necessarily directed toward other people, as
 some think; and it is not the case that practical thoughts are only those which
-result from action for the sake of what ensues. On the contrary, much more
+result from \kl{action} for the sake of what ensues. On the contrary, much more
 practical are those mental activities and reflections which have their goal in
 themselves and take place for their own sake.}{\textbf{Aristotle},
 \textit{Politics, VII, 3, 8, 1325b16-20}}
 
 In the previous chapters, we explained the core principles of our so-called
-\kl{Proof-by-Action} paradigm and especially of its drag-and-drop actions, first
+\kl{Proof-by-Action} paradigm and especially of its \kl{drag-and-drop} \kl{actions}, first
 through basic and abstract examples in \refch{pba}, and then from a
 \kl{proof-theoretical} perspective in \refch{sfl}. The goal of this chapter is
 to provide a better sense of what proofs by action/\kl{DnD} look like in
@@ -31,7 +31,7 @@ compared to textual systems. \refsec{funcs} explores how basic properties about
 functions between sets can be proved graphically, introducing the use of
 \emph{definitions} in addition to logical reasoning steps. In \refsec{arith} we
 prove equations in Peano arithmetic, showing how one can incorporate additional
-actions into the paradigm to deal with more specialized forms of reasoning:
+\kl{actions} into the paradigm to deal with more specialized forms of reasoning:
 \emph{induction} and \emph{automatic computation}.
 
 \begin{kaonote}
@@ -49,7 +49,7 @@ actions into the paradigm to deal with more specialized forms of reasoning:
 % declarative, {\em etc}\dots~This is due primarily to the fact that
 % our prototype is not mature enough; it cannot handle lemmas and
 % implements a limited formalism. However some examples allow to get a
-% glimpse of specificities and possible advantages of proofs by actions.
+% glimpse of specificities and possible advantages of proofs by \kl{actions}.
 
 \subsection{A gestural proof}
 
@@ -75,7 +75,7 @@ The original \kl{goal} thus corresponds to the illustration of \reffig{edukera}.
 
 It is quite natural to approach this problem in a \kl{forward} manner, by
 starting from the hypotheses to establish new facts. And a first point
-illustrated by this example is that \kl{DnD} actions allow to do this in a
+illustrated by this example is that \kl{DnD} \kl{actions} allow to do this in a
 smooth and precise manner. A possible first step is to bring $h$ to
 hypothesis~(\ref{hyp:1}), to obtain a new fact:
 \begin{gather}
@@ -91,7 +91,7 @@ hypothesis~(\ref{hyp:5}) on the premise of hypothesis~(\ref{hyp:2}) one obtains
 \begin{gather}
   \rich(\mother(\mother(\mother(h)))) \label{hyp:6}
 \end{gather}
-The next step is a good example where \kl{DnD} actions are useful. By bringing
+The next step is a good example where \kl{DnD} \kl{actions} are useful. By bringing
 this new fact to the right-hand part of hypothesis~(\ref{hyp:3}) one immediately
 obtains a new fact
 \begin{gather}
@@ -119,7 +119,7 @@ the riddle formalized in the \kl{Coq} \kl{proof assistant}, which follows very c
 structure of the graphical proof just outlined. To make the correspondence more
 visible and ease the comparison, we interspersed the \kl{proof script} with comments
 of the form \texttt{(** [actions] *)}, where \texttt{[actions]} is a
-sentence describing a sequence of actions in \kl{Actema} that produces the same goal
+sentence describing a sequence of \kl{actions} in \kl{Actema} that produces the same goal
 transformation as the \kl{tactics} preceding the comment. There are a few interesting
 things to note:
 \begin{description}
@@ -129,7 +129,7 @@ things to note:
   to maintain. In our case it also has the advantage of expliciting which
   hypotheses are used exactly in the reasoning, something that an \kl{Actema}
   user does with her pointing device when designating the blue \kl{items}
-  involved in an action.
+  involved in an \kl{action}.
   
   It appears clearly in \reffig{edukera-coq} that in a moderately long proof
   like this based mostly on \kl{forward} reasoning, one needs to keep track of
@@ -140,8 +140,8 @@ things to note:
   problem is mitigated trivially in \kl{Actema}, since names are not needed.
 
   \item[Tactics vs. actions] There is no exact correspondence between the
-  \kl{tactics} of \kl{Coq} and the actions of \kl{Actema}: some \kl{tactics} are
-  simulated by multiple actions, and often a complex sequence of \kl{tactics}
+  \kl{tactics} of \kl{Coq} and the \kl{actions} of \kl{Actema}: some \kl{tactics} are
+  simulated by multiple \kl{actions}, and often a complex sequence of \kl{tactics}
   can be simulated by a single action\sidenote{This was already noticed in
   \cite{PbP}, where clicking on a subformula can simulate a sequence of
   \kl{introduction rules} of arbitrary length.}.
@@ -149,10 +149,11 @@ things to note:
   For instance, line 23 does at the same time a specialization of the hypothesis
   $H_2 : \forall x. \neg \rich(\mother(\mother(x))) \lor \neg \rich(x)$ to the
   individual $h$ with the application \texttt{(H2 h)}, and a case analysis with
-  the \texttt{destruct} \kl{tactic}. In \kl{Actema} this is performed in two steps, first
-  by drag-and-dropping $h$ on $H_2$, and then by clicking on the resulting
-  hypothesis\sidenote{This could also be achieved in two steps in \kl{Coq}, by using
-  the \texttt{specialize} \kl{tactic} instead of the inlined application.}.
+  the \texttt{destruct} \kl{tactic}. In \kl{Actema} this is performed in two
+  steps, first by \kl[drag-and-drop]{drag-and-dropping} $h$ on $H_2$, and then
+  by clicking on the resulting hypothesis\sidenote{This could also be achieved
+  in two steps in \kl{Coq}, by using the \texttt{specialize} \kl{tactic} instead
+  of the inlined application.}.
 
   In the other direction, a pattern of reasoning that occurs multiple times in
   the proof is the combination of $H_2$ with another hypothesis which
@@ -171,15 +172,15 @@ things to note:
     \texttt{exact}.
   \end{enumerate}
 
-  \item[Context-sensitivity] More generally, the actions of \kl{Actema} are more
+  \item[Context-sensitivity] More generally, the \kl{actions} of \kl{Actema} are more
   \emph{versatile} and \emph{context-aware} than the \kl{tactics} of \kl{Coq}.
-  For instance, click actions have a different effect depending on the main
+  For instance, click \kl{actions} have a different effect depending on the main
   connective of the formula being clicked, but provide a unique interface for
   applying rules of natural deduction/\kl{sequent calculus}. On the contrary,
   there is almost one \kl{tactic} for dealing with each logical connective in
   \kl{Coq}, e.g. \texttt{intros} for $\limp$ and $\forall$, \texttt{split} for
   $\land$, \texttt{left} and \texttt{right} for $\lor$, \texttt{exists} for
-  $\exists$, etc. The same remark applies to \kl{DnD} actions, whose
+  $\exists$, etc. The same remark applies to \kl{DnD} \kl{actions}, whose
   functionalities are provided in \kl{Coq} by many different \kl{tactics}:
   \texttt{apply \_}, \texttt{apply \_ in \_}, \texttt{pose proof},
   \texttt{specialize}, etc.
@@ -196,7 +197,7 @@ things to note:
 From this detailed comparison, it appears that the interface offered by the
 \kl{PbA} paradigm might be more suited to \kl{forward} reasoning than the
 \kl{tactic} language of \kl{Coq}, at least in some respects. It makes the flow of
-argumentation more straightforward to express with \kl{DnD} actions, and avoids the
+argumentation more straightforward to express with \kl{DnD} \kl{actions}, and avoids the
 overheads of name management and syntax memorization. This altogether shall
 prove to be particularly helpful to beginners and learners of the \kl{proof
 assistant}.
@@ -242,7 +243,7 @@ this might have an impact on the exact way the definition is encoded. Here we do
 not want to bother with such implementation details, and simply assume that
 \kl{higher-order} definitions are possible, even though \kl{Actema} is currently limited
 to \kl{first-order logic}. In practice this does not affect the semantics of
-graphical actions, and we can imagine having a \kl{first-order} \kl{set theory} such as
+graphical \kl{actions}, and we can imagine having a \kl{first-order} \kl{set theory} such as
 \kl{ZF} to make everything work behind the scenes\sidenote{See also
 \refsec{pluginfuture} for a discussion on a \kl{higher-order} extension of \kl{Actema}.}.
 
@@ -253,7 +254,7 @@ Let us now describe how to prove the second question of the exercise in the
 \kl{PbA} paradigm. The first thing we want to do is to unfold the definition of
 set inclusion in the conclusion $f^{-1}(f(C)) \subseteq C$, so that we can see
 how to prove logically such an inclusion. One might imagine multiple kinds of
-graphical actions for doing this. In \kl{Actema} we implemented a general
+graphical \kl{actions} for doing this. In \kl{Actema} we implemented a general
 \emph{subterm selection} mechanism, where the user can successively point at
 different subterms appearing in the \kl{goal} and then choose from a list of
 so-called \intro{contextual actions} that take the selection as argument. In our
@@ -270,7 +271,7 @@ together with the new hypothesis
 \begin{gather}
   x \in f^{-1}(f(C)) \label{hyp::1}
 \end{gather}
-Now there is no available action on the conclusion $x \in C$, because set
+Now there is no available \kl{action} on the conclusion $x \in C$, because set
 membership is a \emph{primitive} predicate in \kl{set theory}. But we can still
 unfold some definitions in the \kl(sequent){context}, which might suggest
 further possible interactions. First we can unfold the definition of preimage
@@ -333,7 +334,7 @@ results that do not match the given pattern.
 In \kl{Actema}, we implemented a novel feature which replaces patterns by a
 selection of subterms in the current \kl{goal}, similarly to what is given as
 argument to \kl{contextual actions} like \kl{Unfold}. Then the system will
-only look for lemmas which can be used in a \kl{DnD} action involving precisely
+only look for lemmas which can be used in a \kl{DnD} \kl{action} involving precisely
 the current selection of subterms.
 
 \AP
@@ -393,13 +394,13 @@ arbitrary equalities and equivalences present in the lemma database, as long as
 those are flagged as simplification rules.}. Coming back to \kl{PbA}, one can
 easily imagine a corresponding \intro{Simplify} or \intro{Compute}
 \kl{contextual action}, which performs $\beta$-reduction inside of the selected
-subterm. Then the previous transormation is achieved by applying this action on
+subterm. Then the previous transormation is achieved by applying this \kl{action} on
 hypothesis~(\ref{hyp::2}):
 $$\select{x \in \compr{a \in A}{f(a) \in f(C)}} \qquad \text{(\kl{Simplify})}$$
 
 \subsection{Finishing the proof}
 
-From a user perspective, the two styles of actions induced by the two types of
+From a user perspective, the two styles of \kl{actions} induced by the two types of
 definitions (\kl{axiomatic} and \kl{computational}) differ mainly in one
 respect: while the definition of set comprehension is \emph{implicit} in the
 \kl{type-theoretical} encoding, it must be manipulated \emph{explicitly} when
@@ -464,7 +465,7 @@ For the sake of completeness, we included in \reffig{funset-defs},
 \reffig{funset-q1} and \reffig{funset-q2} a \kl{Coq} formalization of the
 definitions, solution to the first question, and solution to the second question
 of the exercise, respectively. We simply took the data provided in
-\cite{bartzia:hal-04087080}, and added corresponding \kl{Actema} actions below \kl{tactic}
+\cite{bartzia:hal-04087080}, and added corresponding \kl{Actema} \kl{actions} below \kl{tactic}
 invokations, as in the previous section. It is quite close to the graphical proof
 just outlined for the second question, hence we do not add further commentary.
 
@@ -520,7 +521,7 @@ the left of an implication $\limp$. Obviously the variable should also be of an
 the system\sidenote{The standalone version of \kl{Actema} only supports
 induction on natural numbers, but in a \kl{proof assistant} like \kl{Coq} or
 \kl{Lean} one can easily check if a given \kl{type} is inductive.}. Then the
-\kl{Induction} action will simply apply the associated induction scheme. In
+\kl{Induction} \kl{action} will simply apply the associated induction scheme. In
 our commutativity example, we can thus start the proof like so:
 $$\select{\forall n \in \nats.\ \forall m \in \nats.\ n + m = m + n} \qquad
 \text{(\kl{Induction})}$$
@@ -560,7 +561,7 @@ $\suc{n}$ on the right-hand side. If the proof engine does not offer such a
 level of automation, one can always fallback to using Peano axioms manually,
 provided that they are available in the lemma database. As we have already seen,
 the most convenient way to do this in the \kl{PbA} paradigm is to perform a
-\kl{Search} action. For example to evaluate $\suc{n} + 0$, one might first
+\kl{Search} \kl{action}. For example to evaluate $\suc{n} + 0$, one might first
 select it in the conclusion and then make a search query:
 $$\select{\suc{n} + 0} = 0 + \suc{n} \qquad \text{(\kl{Search})}$$
 Among the results which are Peano axioms, one will only find the following
@@ -617,6 +618,6 @@ and conclude by reflexivity on $\suc{(\suc{(n + m)})} = \suc{(\suc{(n + m)})}$.
 As in previous sections, the interested reader can find a complete \kl{Coq}
 formalization in \reffig{coq-peano}, which follows the same structure as the
 graphical proof just outlined. In this case the correspondence between \kl{Coq}
-\kl{tactics} and graphical actions is almost exact. This suggests that designing
+\kl{tactics} and graphical \kl{actions} is almost exact. This suggests that designing
 a compiler from graphical proofs to \kl{Coq} \kl{proof scripts} might be a
 reasonable endeavor. It will indeed be one of the subjects of \refch{plugin}.

@@ -1,14 +1,14 @@
 We are now going to prove the \emph{completeness} of the \kl{bi-intuitionistic} (and
-propositional) fragment $\kl{\sysBHB}$ of \kl{system~B}, by simulating the \kl{nested
+propositional) fragment $\kl{sysBHB}$ of \kl{system~B}, by simulating the \kl{nested
 sequent} system \kl{DBiInt} of Postniece. In \sidecite{postniece_deep_2009} she
 shows that this calculus is sound and complete with respect to another calculus
-\kl{LBiInt}, and in Chapter 4 of her thesis \sidecite{postniece_proof_2010} she
+\intro{LBiInt}, and in Chapter 4 of her thesis \sidecite{postniece_proof_2010} she
 proves that \kl{LBiInt} is sound and complete with respect to the Kripke
 semantics of \kl{bi-intuitionistic} logic. Importantly, the cut rule is shown to be
 \emph{\kl{admissible}} in both systems, through a syntactic process of
 \kl{cut-elimination} in \kl{LBiInt}. We will rely on this result to obtain
-admissibility of the cut rule \kl{i{\ua}} in $\kl{\sysBHB}$, and by extension
-in $\sysB$, $\kl{\sysBH}$ and $\sysBB$. It might be interesting to have our own
+admissibility of the cut rule \kl{i{\ua}} in $\kl{sysBHB}$, and by extension
+in $\sysB$, $\kl{sysBH}$ and $\sysBB$. It might be interesting to have our own
 internal \kl{cut-elimination} procedure for \kl{system~B}, notably to unveil its
 computational content in the spirit of the \kl{Curry-Howard correspondence}. But this
 would lead us astray from the purpose of this thesis, and thus we leave this
@@ -76,7 +76,7 @@ can be simulated inside \kl{system~B}.
 
 \begin{lemma}[Simulation of \kl{DBiInt}]\lablemma{simulation-dbiint}
   
-  If $X \prov{\kl{DBiInt}} Y$ then $X \prov{\kl{\sysBHB} \setminus
+  If $X \prov{\kl{DBiInt}} Y$ then $X \prov{\kl{sysBHB} \setminus
   \{\kl{i{\ua}}\}} Y$.
 \end{lemma}
 \begin{proof}
@@ -93,23 +93,23 @@ to prove the completeness of \kl{DBiInt} coincides with the order relation of
 \end{fact}
 
 Combined with the simulation of \kl{DBiInt} from \reflemma{simulation-dbiint},
-this gives us the \emph{cut-free} completeness of $\kl{\sysBHB}$:
+this gives us the \emph{cut-free} completeness of $\kl{sysBHB}$:
 
 \begin{theorem}[Cut-free completeness]\labthm{bubbles-completeness}
-  If $A \sementHB B$ then $A \prov{\kl{\sysBHB} \setminus \{\kl{i{\ua}}\}} B$.
+  If $A \sementHB B$ then $A \prov{\kl{sysBHB} \setminus \{\kl{i{\ua}}\}} B$.
 \end{theorem}
 % \begin{proof}
 %   This follows immediately from \reffact{completeness-dbiint} and
 %   \reflemma{simulation-dbiint}.
 % \end{proof}
 
-In fact there are other rules of $\kl{\sysBHB}$ that were not used in the simulation,
+In fact there are other rules of $\kl{sysBHB}$ that were not used in the simulation,
 namely the $\mathbb{F}$-rule \kl{f{\ua}}, and all $\mathbb{M}$-rules other
-than \kl{p}. Combined with the soundness of $\kl{\sysBHB}$ (\refcor{soundness}), this gives us the following \emph{admissibility} theorem:
+than \kl{p}. Combined with the soundness of $\kl{sysBHB}$ (\refcor{soundness}), this gives us the following \emph{admissibility} theorem:
 
 \begin{theorem}[Admissibility]\labthm{bubbles:cut-admissibility}
 
-  If $\prov{\kl{\sysBHB}} A$ then $\prov{\kl{\sysBHB} \setminus
+  If $\prov{\kl{sysBHB}} A$ then $\prov{\kl{sysBHB} \setminus
   \{\kl{i{\ua}},\kl{f{\ua}},\kl{p{-}},\kl{p{+}},\kl{a},\kl{a{-}},\kl{a{+}}\}}
   A$.
 \end{theorem}
@@ -128,7 +128,7 @@ As in \kl{sequent calculus}, every rule of \kl{system~B} other than
 \end{fact}
 
 Thanks to \refthm{bubbles:cut-admissibility}, we thus get that
-$\kl{\sysBHB}$ is \emph{\kl{analytic}}. This has many nice consequences, a
+$\kl{sysBHB}$ is \emph{\kl{analytic}}. This has many nice consequences, a
 well-known one being that when searching for a proof of a given \kl{solution}
 $S$, one does not need to come up with or ``invent'' a formula that does not
 appear in $S$. This is crucial when designing \emph{automated} decision
@@ -150,15 +150,15 @@ in combination with \kl{introduction rules}, since \kl{{\lsub}_L} is the only
 rule of \kl{DBiInt} that can introduce \kl{nested sequents} in \kl{negative}
 \kl{contexts}. The situation is similar in \kl{system~B}, and in fact the proof
 of \reflemma{simulation-dbiint} shows that the \kl{intuitionistic} fragment
-$\kl{\sysBH}$ is sufficient to simulate \kl{DBiInt} without the aforementioned
+$\kl{sysBH}$ is sufficient to simulate \kl{DBiInt} without the aforementioned
 rules. The dual argument can be made for \kl{dual-intuitionistic} logic, and
 thus we obtain (cut-free) \kl{intuitionistic} (resp. \kl{dual-intuitionistic})
-completeness of $\kl{\sysBH}$ (resp. $\sysBB$):
+completeness of $\kl{sysBH}$ (resp. $\sysBB$):
 
 \begin{corollary}[Intuitionistic completeness]
   \sbr
   \begin{itemize}
-    \item If $A \sementH B$ then $A \prov{\kl{\sysBH} \setminus
+    \item If $A \sementH B$ then $A \prov{\kl{sysBH} \setminus
     \{\kl{i{\ua}}\}} B$.
     \item If $A \sementB B$ then $A \prov{\sysBB \setminus
     \{\kl{i{\ua}}\}} B$.
@@ -195,21 +195,21 @@ completeness of $\kl{\sysBH}$ (resp. $\sysBB$):
 
 \AP
 \reffig{dne-bubbles} shows a proof of the \intro{double-negation elimination
-law} (\reintro{DNE}) $\neg \neg A \seq A$ in \kl{system~B}. Since $\kl{\sysBH}$
+law} (\reintro{DNE}) $\neg \neg A \seq A$ in \kl{system~B}. Since $\kl{sysBH}$
 is \kl{intuitionistically} complete, the well-known double-negation embedding of
 \kl{classical} logic into \kl{intuitionistic} logic tells us that $\neg \neg A$
-is provable in $\kl{\sysBH}$ (and a fortiori in \kl{system~B}) if $A$ is a
+is provable in $\kl{sysBH}$ (and a fortiori in \kl{system~B}) if $A$ is a
 theorem of \kl{classical} logic. Combining the two previous facts, we obtain the
 \kl{classical} completeness of \kl{system~B}. In fact the proof of \kl{DNE} only
 relies on the use of the \kl{f{+}{+}{\da}} rule, so we can make the following
 stronger statement:
 
 \begin{corollary}[\kl{Classical} completeness]\labcor{bubbles-completeness-classical}
-  If $A$ is a theorem of \kl{classical} logic, then $\prov{\kl{\sysBH} \cup
+  If $A$ is a theorem of \kl{classical} logic, then $\prov{\kl{sysBH} \cup
   \{\kl{f{+}{+}{\da}}\}} A$.
 \end{corollary}
 \begin{proof}
-  By the double-negation embedding, we have $\prov{\kl{\sysBH}} \neg \neg A$. Then we
+  By the double-negation embedding, we have $\prov{\kl{sysBH}} \neg \neg A$. Then we
   can build the following derivation:
   $$
   \R[\kl{i{\ua}}]
@@ -236,11 +236,11 @@ system like \kl{DBiInt}, was that standard \kl{sequent calculi} for
 our literature review, \kl{DBiInt} was the cut-free system closest in its syntax
 and rules to \kl{system~B}. But for \kl{classical} logic we do not have this
 limitation, and thus it is straightforward to simulate directly a cut-free
-\kl{sequent calculus} such as \kl{G3cp} inside \kl{system~B}
+\kl{sequent calculus} such as \intro{G3cp} inside \kl{system~B}
 \sidecite{negri_structural_2001}:
 
 \begin{lemma}[Simulation of \kl{G3cp}]
-  If $\Gamma \prov{\kl{G3cp}} \Delta$, then $\Gamma \prov{\kl{\sysBH} \cup
+  If $\Gamma \prov{\kl{G3cp}} \Delta$, then $\Gamma \prov{\kl{sysBH} \cup
   \{\kl{f{+}{+}{\da}}\} \setminus \{\kl{i{\ua}}\}} \Delta$.
 \end{lemma}
 \begin{proof}

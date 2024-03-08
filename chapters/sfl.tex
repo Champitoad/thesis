@@ -10,7 +10,7 @@ proof.}{\textbf{Willard van Orman Quine}, \textit{The Web of Belief}, 1978}
 
 \AP
 In this chapter, we engage in a thorough analysis of the logical semantics of
-\kl{DnD} actions, which were introduced informally through examples in
+\kl{DnD} \kl{actions}, which were introduced informally through examples in
 \refch{pba}. We do this mainly from the formal perspective of \kl{deep
 inference} \kl{proof theory}, following the original work of K. Chaudhuri on
 \emph{\kl{subformula linking}} \cite{Chaudhuri2013}. But we always keep in mind
@@ -19,17 +19,17 @@ choices --- actual or prospective --- as ways to improve the \intro{user
 experience} (\reintro{UX}) of interactive proof building.
 
 The chapter is organized as follows: \refsec{linkages} introduces the notions of
-\kl(sfl){context} and \kl(sfl){polarity}, and explains how \kl{DnD} actions are
+\kl(sfl){context} and \kl(sfl){polarity}, and explains how \kl{DnD} \kl{actions} are
 specified by the user interactively through schemas called \emph{\kl{linkages}}.
 \refsec{validity} explains how one can identify a subset of \kl{linkages} that
-guarantees a \kl{productivity} property on \kl{DnD} actions. \refsec{action}
+guarantees a \kl{productivity} property on \kl{DnD} \kl{actions}. \refsec{action}
 describes the overall structure of how \kl{linkages} translate into logical
 steps, and \refsec{invert} discusses some subtleties of this translation that
 are related to the concept of \emph{\kl{focusing}} in automated proof search.
 \refsec{soundness} shows that the logical steps are sound, and
 \refsec{productivity} states and proves formally the \kl{productivity} property.
-Finally, \refsec{dnd-completeness} shows how \kl{DnD} actions can be turned into
-a complete deductive system without any need for click actions.
+Finally, \refsec{dnd-completeness} shows how \kl{DnD} \kl{actions} can be turned into
+a complete deductive system without any need for click \kl{actions}.
 
 \section{Linkages}\labsec{linkages}
 
@@ -93,10 +93,10 @@ for \intro{negative} \kl{contexts}, meaning that $\inv(A^-\hole)$ is odd.
 \end{definition}
 
 % In demonstrating soundness, we focused solely on the two \emph{items} involved
-% in a \kl{DnD} action. But
+% in a \kl{DnD} \kl{action}. But
 
 \AP
-In addition to the \kl{items} involved, every \kl{DnD} action specifies the
+In addition to the \kl{items} involved, every \kl{DnD} \kl{action} specifies the
 \emph{selection} of a subterm in each \kl{item}, which can be expressed formally as a
 \kl{path}. We call \intro{linkage} the combined data of the two \kl{items} together
 with the selection, since the intent is to \emph{link} the subterms to make them
@@ -104,7 +104,7 @@ interact in some way.
 
 \begin{remark}
 In this thesis we only consider \kl{linkages} between two subterms. But as noted
-in \refsec{equality}, rewriting equalities is an example of action that can
+in \refsec{equality}, rewriting equalities is an example of \kl{action} that can
 benefit from allowing multiple selections\sidenote{A restricted kind of
 multi-occurrence rewrite is already available in the standalone version of
 \kl{Actema}: one needs to enter \emph{selection mode}, by either toggling the
@@ -115,16 +115,16 @@ the last step is to drag an equality hypothesis $t = u$ (or $u = t$) and drop it
 on any \kl{item} holding one of the selected occurrences of $t$.}.
 \end{remark}
 
-Each kind of \kl{DnD} action is mapped in the system to a specific form of \kl{linkage},
+Each kind of \kl{DnD} \kl{action} is mapped in the system to a specific form of \kl{linkage},
 which is designed to hold all the information necessary for the correct
-execution of the action. In this way the system can automatically search for
-\kl{linkages} of a certain form, and propose to the user all well-defined actions
+execution of the \kl{action}. In this way the system can automatically search for
+\kl{linkages} of a certain form, and propose to the user all well-defined \kl{actions}
 associated to these \kl{linkages}.
 
 \begin{remark}
-  In the future, one can imagine several \kl{DnD} actions associated to a given
-  \kl{linkage}. In this case, the user could be queried to choose the action to be
-  performed (typically with a pop-up menu). However with the actions considered
+  In the future, one can imagine several \kl{DnD} \kl{actions} associated to a given
+  \kl{linkage}. In this case, the user could be queried to choose the \kl{action} to be
+  performed (typically with a pop-up menu). However with the \kl{actions} considered
   in this thesis, such ambiguities never arise.
 \end{remark}
 
@@ -133,7 +133,7 @@ On the ``\kl{items} axis'', we already distinguished between \kl(dnd){backward} 
 B$. If the \kl{items} types are unspecified, we will write $A \link B$.
 
 Using the ``selection axis'', we can specify a further distinction that was
-informal up to now: that of \emph{logical} action and \emph{rewrite} action.
+informal up to now: that of \emph{logical} \kl{action} and \emph{rewrite} \kl{action}.
 \begin{itemize}
   \itemAP \intro{Logical linkages} link two subformulas: they have the form
   $B\select{A} \link C\select{A'}$.
@@ -143,7 +143,7 @@ informal up to now: that of \emph{logical} action and \emph{rewrite} action.
   $$B\select{\select{t} = u} \link C
   \select{t'} ~~\left(\text{or symmetrically $B\select{u = \select{t}} \link C
   \select{t'}$}\right)$$
-  % \item \emph{Instanciation} actions correspond to specialization of universal
+  % \item \emph{Instanciation} \kl{actions} correspond to specialization of universal
   % hypotheses, and witness choice for existential goals.
 \end{itemize}
 
@@ -153,7 +153,7 @@ operator} $\link \in \{\back,\forw\}$. Then it is natural to view \kl{linkages}
 as the redexes of the \kl{rewriting rules} of \reffig{DISL}, although from the
 user's standpoint \kl{linkages} only happen at the top-level\sidenote{In fact
 this is more of a limitation of Actema's current interface: one cannot link two
-subterms that live in the same \kl{item}, because dragging actions can only be
+subterms that live in the same \kl{item}, because dragging \kl{actions} can only be
 performed on \emph{entire} \kl{items}. But in the original formulation and
 implementation of \kl{subformula linking} \cite{Chaudhuri2013}, \kl{linkages}
 can be created between arbitrary subformulas. We come back to this issue in
@@ -204,8 +204,8 @@ rules on \kl{rewrite linkages}. This will be stated more formally in
 \kl{Validity} is very useful to support the \emph{suggestion} mechanism
 implemented in \kl{Actema}. The idea is that when the user starts dragging an
 \kl{item}, this indicates to the system that she wants to perform a \kl{DnD}
-action involving subterms of this \kl{item}. Then the system can suggest such
-possible actions by highlighting subterms in the \kl{goal} which form a
+\kl{action} involving subterms of this \kl{item}. Then the system can suggest such
+possible \kl{actions} by highlighting subterms in the \kl{goal} which form a
 \kl{valid} \kl{linkage} with the dragged \kl{item}. Typically in the example of
 \reffig{aristote}, dragging the hypothesis $\forall x. \human(x) \limp
 \mortal(x)$ will have the effect of highlighting exactly $\mortal(\socrates)$ in
@@ -221,7 +221,7 @@ We believe that in more complex situations, this filtering can be quite helpful
 to guide the user towards the right path to follow in their reasoning. Although
 non-trivial arguments are often based on ``guessing'' the right value or lemma
 to be used, a large part of mathematical reasoning also consists in ``connecting
-the dots'' with information already at hand. Our \kl{DnD} actions capture this
+the dots'' with information already at hand. Our \kl{DnD} \kl{actions} capture this
 \kl{metaphor} quite directly, and thus shall be especially useful to beginners
 unfamiliar with proving, who often show difficulties in understanding how to
 build a proof from scratch. More generally, \kl{proof assistants} have the
@@ -444,7 +444,7 @@ proof step:
 \item \textbf{Linkage:} this either gives rise to a \kl{logical linkage} $B\select{A}
   \link C\select{A'}$ (resp. a \kl{rewrite linkage} $B\select{\select{t} = u} \link
   C\select{t'}$), or does not correspond to a known form of \kl{linkage}. In this case
-  the procedure stops here, and the system does not propose any action to the
+  the procedure stops here, and the system does not propose any \kl{action} to the
   user; \label{step:linkage}
 \item \textbf{Validity:} the system verifies that the \kl{linkage} is \emph{\kl{valid}},
   by performing successively the following checks:
@@ -465,7 +465,7 @@ proof step:
 \item \textbf{Interaction:} thus one can apply the {\kl(sfl){id}} rule (resp. an
 equality rule in $\{\kl{L{=}_1}, \kl{L{=}_2}, \kl{F{=}_1}, \kl{F{=}_2}\}$);
 \label{step:interaction}
-\item \textbf{Unit elimination:} in the case of a logical action, this creates an occurrence of $\top$,
+\item \textbf{Unit elimination:} in the case of a logical \kl{action}, this creates an occurrence of $\top$,
 which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimination}
 \item \textbf{Goal modification:} the two previous steps produced a formula $E$.
   In the case of a \kl(dnd){forward} \kl{linkage}, a hypothesis $E$ is added to the \kl{goal}; in
@@ -478,7 +478,7 @@ which is eliminated using the rules of \reffig{DISL-U}; \label{step:unit-elimina
 \section{Soundness}\labsec{soundness}
 
 
-All examples up to now followed the scheme for \kl{DnD} actions sketched in
+All examples up to now followed the scheme for \kl{DnD} \kl{actions} sketched in
 \refsec{aristote}:
 \begin{itemize}
   \item Given a blue \kl{item} $A$ and a red \kl{item} $B$, \kl(dnd){backward} proof steps produce a
@@ -488,7 +488,7 @@ All examples up to now followed the scheme for \kl{DnD} actions sketched in
   hypothesis $C$ by applying a sequence of \kl{rewriting rules} $A \forw B \steps{} C$.
 \end{itemize}
 
-Thus for such actions to be logically sound, we have to make sure that our
+Thus for such \kl{actions} to be logically sound, we have to make sure that our
 \kl{rewriting system} satisfies the following property:
 
 \begin{theorem}[Soundness]\labthm{sfl-soundness}
@@ -627,7 +627,7 @@ case where the rewriting starts in the (\kl{positive}) empty \kl{context}.
 % Detailed proofs of all the lemmas can be found in \refsec{app:dnd-soundness}.
 
 % In the previous chapter, we showed how to associate a logical behaviour to
-% drag-and-drop actions involving two subterms in a sequent, by following a set of
+% drag-and-drop \kl{actions} involving two subterms in a sequent, by following a set of
 % \kl{rewriting rules} on formulas. While we proved the soundness of these rules and a
 % so-called \emph{productivity} property that makes them suitable for interactive
 % proof exploration, we left untreated a central question when doing proof theory:
@@ -995,11 +995,11 @@ the third case:
   independently in \sidecite{DBLP:conf/cade/Chaudhuri21}. In this case, one
   should rely on information given by the user to choose the right ordering,
   which can be done by exploiting the \emph{orientation} of the associated
-  \kl{DnD} action, that is distinguishing between the source \kl{path} and the
+  \kl{DnD} \kl{action}, that is distinguishing between the source \kl{path} and the
   destination \kl{path}\sidenote{Note that in the current implementation of
   \kl{Actema}, we instead rely on an arbitrary prioritizing fixed in the system,
   which can hinder in some cases the ability to prove a \kl{goal} through
-  \kl{DnD} actions. In practice, one rarely encounters such cases in real
+  \kl{DnD} \kl{actions}. In practice, one rarely encounters such cases in real
   examples.}.
 \end{enumerate}
 
@@ -1015,16 +1015,16 @@ permutability comes from \cite{DBLP:conf/cade/Chaudhuri21} which uses a
 
 To enable a fully graphical approach to theorem proving that does not rely on a
 textual proof language, it is important to show that (a subset of) the set of
-actions exposed to the user is \emph{complete} with respect to provability. That
+\kl{actions} exposed to the user is \emph{complete} with respect to provability. That
 is, any formula $A$ which is \emph{true} in our logic --- here
 \kl{intuitionistic} \kl{FOL} --- can be proved by executing a sequence of
-graphical actions that reduces it to the empty \kl{goal}. We noticed in
-\refremark{click-completeness} that click actions are a sufficient basis for
+graphical \kl{actions} that reduces it to the empty \kl{goal}. We noticed in
+\refremark{click-completeness} that click \kl{actions} are a sufficient basis for
 completeness. While we believe that a combination of both click and \kl{DnD}
-actions is more comfortable to handle a variety of proof situations, it is still
-interesting to consider the question of completeness for \kl{DnD} actions alone.
+\kl{actions} is more comfortable to handle a variety of proof situations, it is still
+interesting to consider the question of completeness for \kl{DnD} \kl{actions} alone.
 It turns out that the answer is positive: the mechanism of \emph{\kl{subformula
-linking}} underlying \kl{DnD} actions is powerful enough to capture provability
+linking}} underlying \kl{DnD} \kl{actions} is powerful enough to capture provability
 in \kl{FOL}. This has already been shown by Chaudhuri in \cite{Chaudhuri2013}
 for linear logic, and \cite{DBLP:conf/cade/Chaudhuri21} for \kl{intuitionistic}
 logic. Here we give a completeness proof for a system based on a slight
@@ -1122,7 +1122,7 @@ under arbitrary \kl{contexts}.
 An alternative to the full \kl{contraction} rule {\kl{conn}} is to systematically
 duplicate \kl{negative} formulas in the \kl{linkage} formation rules, giving the rules
 {\kl{Bconn} and \kl{Fconn}} of \reffig{newreslink}. This models more
-closely what we do in \kl{Actema}, where hypotheses involved in a \kl{DnD} action are
+closely what we do in \kl{Actema}, where hypotheses involved in a \kl{DnD} \kl{action} are
 always preserved in the new \kl{goal}. This is important from a usability standpoint,
 because this ensures the user needs not fret with manual duplication of
 hypotheses in order to complete a proof. The downside is that the \kl{context} always
@@ -1139,7 +1139,7 @@ mentioned in \refsec{linkages} (\reffig{rellink}). In fact these rules are
 crucial in order to simulate rules from \kl{sequent calculus}, which will be the
 backbone of our completeness proof as in \cite{Chaudhuri2013}. It is interesting
 to consider the question of completeness without release rules, especially since
-we do not use them in the semantics of \kl{DnD} actions. We conjecture that it should
+we do not use them in the semantics of \kl{DnD} \kl{actions}. We conjecture that it should
 hold but would require a completely different argument, maybe of a more semantic
 nature like the original proof of Gödel with Tarski models\sidenote{Or Kripke
 models in an \kl{intuitionistic} setting. }. Another possibility might be to use a
@@ -1159,14 +1159,14 @@ to be closely related to \kl{deep inference} proofs.
 
 Lastly, a trivial but necessary addition is the rule {\kl{refl}} of
 \reffig{refl-rule} stating the reflexivity of $=$. It was not introduced before
-because it is already handled by click actions on red \kl{items} in \kl{Actema}
+because it is already handled by click \kl{actions} on red \kl{items} in \kl{Actema}
 (\refsec{clicks}), but here we want a self-contained system that models as
-closely as possible the space of proofs that can be built through \kl{DnD} actions
+closely as possible the space of proofs that can be built through \kl{DnD} \kl{actions}
 only. In this context, one could imagine restricting the usage of the
 {\kl{refl}} rule to the unit elimination phase (\refsec{action}), where it
 would play the same role as the rules of \reffig{DISL-U}. Thus adding this rule
-does not correspond morally to modelling a click action, nor to a modification
-of the semantics of \kl{DnD} actions as for release rules.
+does not correspond morally to modelling a click \kl{action}, nor to a modification
+of the semantics of \kl{DnD} \kl{actions} as for release rules.
 
 Then we simply rely on the completeness of \kl{sequent calculus} by performing a
 proof by simulation. There are many variants of \kl{sequent calculi} for
@@ -1539,9 +1539,9 @@ derivations.
 % More
 % broadly, we envision a generalization of the linking method to any set of
 % subexpressions, which might or might not be equivalent or have equivalent types,
-% depending on the semantics of the action under consideration. Such a generalized
+% depending on the semantics of the \kl{action} under consideration. Such a generalized
 % method might be dubbed \emph{``link inference''}. Subformula linking then
-% corresponds to a particular kind of action, which justifies any occurrence of
+% corresponds to a particular kind of \kl{action}, which justifies any occurrence of
 % proposition given another known, unifiable proposition.
 
 \paragraph{Tangible functional programming}

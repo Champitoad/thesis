@@ -49,7 +49,11 @@
 % Load the package for hyperreferences
 \usepackage{kaorefs}
 
-\makeindex[columns=3, title=Alphabetical Index, intoc] % Make LaTeX produce the files required to compile the index
+% Indexes
+\makeindex[name=notion, title=Concept Index, columns=3, intoc]
+\makeindex[name=acronym, title=Acronym Index, columns=3, intoc]
+\makeindex[name=system, title=Proof System Index, columns=3, intoc]
+\makeindex[name=software, title=Software System Index, columns=3, intoc]
 
 \input{config}
 
@@ -62,7 +66,7 @@
 \titlehead{}
 \title{Deep Inference for Graphical Theorem Proving}
 \author[PD]{Pablo Donato}
-\date{March 7, 2024}
+\date{March 8, 2024}
 \publishers{}
 
 %----------------------------------------------------------------------------------------
@@ -215,8 +219,16 @@
 %	INDEX
 %----------------------------------------------------------------------------------------
 
-% The index needs to be compiled on the command line with 'makeindex main' from the template directory
+\indexprologue{Here are the introduced concepts in alphabetical order.}
+\printindex[notion]
 
-\printindex % Output the index
+\indexprologue{Here are the introduced acronyms in alphabetical order.}
+\printindex[acronym]
+
+\indexprologue{Here are the introduced \kl{proof systems} in alphabetical order.}
+\printindex[system]
+
+\indexprologue{Here are the introduced software systems in alphabetical order.}
+\printindex[software]
 
 \end{document}

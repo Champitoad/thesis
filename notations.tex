@@ -470,8 +470,12 @@
 \knowledge{\vars}{notion,scope=eg}
 \knowledge{\vars}{notion,scope=flower}
 \knowledgenewrobustcmd\fsymbs{\cmdkl{\mathscr{F}}}
-\knowledgenewrobustcmd\psymbs{\cmdkl{\mathscr{P}}}
-\knowledgenewrobustcmd\arity{\cmdkl{\mathsf{ar}}}
+\newrobustcmd\psymbs{\withkl{\kl[\psymbs]}{\cmdkl{\mathscr{P}}}}
+\knowledge{\psymbs}{notion,scope=eg}
+\knowledge{\psymbs}{notion,scope=flower}
+\newrobustcmd\arity{\withkl{\kl[\arity]}{\cmdkl{\mathsf{ar}}}}
+\knowledge{\arity}{notion,scope=eg}
+\knowledge{\arity}{notion,scope=flower}
 \knowledgenewrobustcmd\dom{\cmdkl{\mathsf{supp}}}
 \knowledgenewrobustcmd\terms{\cmdkl{\mathbb{T}}}
 \knowledgenewrobustcmd\csts{\cmdkl{\mathbb{C}}}

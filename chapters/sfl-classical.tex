@@ -65,7 +65,7 @@ One way to get a multi-conclusion \kl{sequent} in \kl{LK} is to apply the
 disjunction $\parr$.} \kl{introduction rule} {\kl{\lor R}} (\reffig{multintro}).
 For instance, \reffig{lk-tnd} shows a proof of the \kl{law of excluded middle},
 where for each rule we squared the principal formula.
-% Following the mapping of click actions to \kl{sequent calculus} rules
+% Following the mapping of click \kl{actions} to \kl{sequent calculus} rules
 % (\reftab{click-rules}),
 One could imagine performing the same proof in \kl{Actema} by successively
 clicking on these principal formulas, following a bottom-up reading of the
@@ -75,14 +75,14 @@ $A$ or $\neg A$, which now appear as two separate red \kl{items} in the same
 tab. Then we try to prove $\neg A$, with the usual method of supposing $A$ to
 find a contradiction. However instead of a contradiction, we decide to
 \emph{backtrack} and prove the alternative conclusion $A$, which is now trivial
-by assumption. We come back to these multi-conclusion click actions in
+by assumption. We come back to these multi-conclusion click \kl{actions} in
 \refsec{classical-click}.
 
 \AP
 It is clear in the proof that the \kl{negative} occurrence of $A$ in $\neg A$ is
 the one that becomes the assumption $A$ that justifies the conclusion $A$ in the
 last step. It would be natural to specify this causal relationship by linking
-directly the two occurrences of $A$, as we do with \kl{DnD} actions in
+directly the two occurrences of $A$, as we do with \kl{DnD} \kl{actions} in
 \kl{Actema}. However for this to be possible, we need to introduce a new
 \kl{interaction operator} --- let us note it $\intro*\para$ --- that works
 between two conclusions, where $A \para B$ is obviously interpreted as $A \lor
@@ -144,7 +144,7 @@ and {\kl{\lor R_2}}.
 But {\kl{\lor R}} requires multi-conclusion sequents, and Gentzen restricted
 their use to \kl{classical} logic. It turns out that logicians after Gentzen have
 proposed various multi-conclusion \kl{sequent calculi} that work for \kl{intuitionistic}
-logic, the most famous being \kl{GHCP} from Dragalin
+logic, the most famous being \intro{GHCP} from Dragalin
 \sidecite{dragalin_mathematical_1990}, which uses {\kl{\lor R}}. In the rest of
 this chapter, we will consider to what extent one can benefit from having
 multiple conclusions in an \kl{intuitionistic} setting.
@@ -160,7 +160,7 @@ single-conclusion sequents. Another reason is that having one conclusion removes
 the need to designate it with an explicit name or number, as is the case with
 hypotheses\sidenote{The current trend is to have user-chosen or automatically
 generated strings for names as in \kl{Coq} and \kl{Lean}, but some provers like
-\kl{HOL Light} ask for the position in the list as an integer to designate a
+\intro{HOL Light} ask for the position in the list as an integer to designate a
 particular hypothesis.}. And the explicit handling of names in \kl{tactic}
 invokations is known to be tedious and time-consuming, to the point that some
 \kl{tactic} languages like {\intro{\ssreflect}} have been designed around this problem
@@ -172,18 +172,18 @@ and conclusions are designated by the act of \emph{pointing} at them with a
 mouse, finger or any other pointing device\sidenote{With the recent advances in
 natural language processing and voice recognition, one could also imagine a
 system based on the selection of subterms by \emph{spelling} their content. Then
-click and \kl{DnD} actions could be triggered by voice commands once the
+click and \kl{DnD} \kl{actions} could be triggered by voice commands once the
 subterms they apply to have been selected. This could be an important
 alternative for users with impaired vision and/or motricity.}. This opens up the
 possibility of exposing multiple conclusions in the interface with associated
-graphical proof actions, as outlined in the introductory example of this
+graphical proof \kl{actions}, as outlined in the introductory example of this
 chapter. While we did not implement such an extension in \kl{Actema}, we explore
 in the following sections its design, and the theoretical foundations that lay
 behind it.
 
 \section{Click actions}\labsec{classical-click}
 
-In \reftab{click-rules}, we showed how click actions in \kl{Actema} are in direct
+In \reftab{click-rules}, we showed how click \kl{actions} in \kl{Actema} are in direct
 correspondance with the rules of the single-conclusion \kl{sequent calculus} \kl{LJ}
 for \kl{intuitionistic} logic. Following the literature mentioned earlier, we just
 need to replace two actions/\kl{introduction rules} to get a multi-conclusion system
@@ -205,14 +205,14 @@ capturing either \kl{intuitionistic} or \kl{classical} \kl{first-order logic}:
 
 \begin{itemize}
   \item clicking on a red disjunction $A \lor B$ breaks it into two conclusions
-  $A$ and $B$. This is the dual behavior to click actions on blue conjunctions,
+  $A$ and $B$. This is the dual behavior to click \kl{actions} on blue conjunctions,
   and corresponds to the {\kl{\lor R}} rule of \reffig{multintro}, which is
   common to both the \kl{intuitionistic} and \kl{classical} variants;
   \item as before, clicking on a red implication $A \limp B$ breaks it into an
   hypothesis $A$ and a conclusion $B$. Without further changes, this corresponds
   to the \kl{right introduction rule} from the \kl{classical} \kl{sequent
   calculus} \kl{LK} of Gentzen (named {\kl{{\limp}R{*}c}} in
-  \reffig{multi-imp-intro}), and our set of actions becomes a \kl{proof system}
+  \reffig{multi-imp-intro}), and our set of \kl{actions} becomes a \kl{proof system}
   for \kl{classical} logic. To go back to \kl{intuitionistic} logic, one needs
   the additional behavior that all the other conclusions of the \kl{goal} are
   removed. This corresponds to the \kl{right introduction rule} from the
@@ -240,7 +240,7 @@ delayed\sidenote{In \refsec{colors}, we will see how to overcome this limitation
 by using a \emph{\kl{nested sequent}} system.}. On the other hand the
 {\kl{{\limp}R{*}c}} rule \emph{is} \kl{invertible}: this is known to allow the
 formulation of \kl{sequent calculi} for \kl{classical} logic where \emph{all}
-rules are \kl{invertible}, like the \kl{G3c} calculus of
+rules are \kl{invertible}, like the \intro{G3c} calculus of
 \sidecite{negri_structural_2001}. In the propositional case, this gives a
 constructive decision procedure for the question of provability: given a
 \kl{sequent} $\Gamma \seq \Delta$, one just has to choose any formula in
@@ -286,7 +286,7 @@ introduction rule} of \kl{G3c} ({\kl{\exists R{*}}} in \reffig{multi-inst}).
 \section{DnD actions}\labsec{classical-dnd}
 
 Once we allow for more than one conclusion, it is natural to wonder whether it
-makes sense to also allow for \kl{DnD} actions between two conclusions. But we
+makes sense to also allow for \kl{DnD} \kl{actions} between two conclusions. But we
 already capture \emph{\kl{backward}} reasoning with the $A \back B$ operator between
 a hypothesis $A$ and a conclusion $B$, and \emph{\kl{forward}} reasoning with the $A
 \forw B$ operator between two hypotheses. There does not seem to be room for a
@@ -311,12 +311,13 @@ chose to call this third kind of interaction between two conclusions
 \kl(dnd){parallel} \kl{interaction operator} $\para$, which is suggestive of the
 parallel composition $\mid$ from process calculi.
 
-The rules governing $\para$ are presented in \reffig{parallel}. A \kl(dnd){parallel}
-\kl{linkage} can be created either by drag-and-dropping two conclusions
-together, or through an instance of the new \kl(dnd){backward} rule
-\kl{L{\limp}_1}. It is important to note that this rule is only sound
-\emph{\kl{classically}}; indeed we can now come back to the example of
-\refsubsec{polarity} and give the following derivation of Peirce's law with it:
+The rules governing $\para$ are presented in \reffig{parallel}. A
+\kl(dnd){parallel} \kl{linkage} can be created either by
+\kl[drag-and-drop]{drag-and-dropping} two conclusions together, or through an
+instance of the new \kl(dnd){backward} rule \kl{L{\limp}_1}. It is important to
+note that this rule is only sound \emph{\kl{classically}}; indeed we can now
+come back to the example of \refsubsec{polarity} and give the following
+derivation of Peirce's law with it:
 
 $$
 \begin{array}{llll}
@@ -511,7 +512,7 @@ dropped the \kl{intuitionistic} restriction.
 Finally about \kl{focusing} (\refsec{invert}), we can just remark that some rules
 that were not \kl{invertible} in \kl{intuitionistic} logic become \kl{invertible} in \kl{classical}
 logic. Therefore the dynamics of \kl{focusing} should be different, and it might be
-interesting to compare the behaviors of \kl{intuitionistic} and \kl{classical} \kl{DnD} actions
+interesting to compare the behaviors of \kl{intuitionistic} and \kl{classical} \kl{DnD} \kl{actions}
 on specific examples.
 
 
