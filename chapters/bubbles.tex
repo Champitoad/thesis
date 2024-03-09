@@ -14,7 +14,7 @@ then, indeed, the labor of thought is wonderfully diminished.''}
 
 We introduce a new kind of \kl{nested sequent} \kl{proof system} dubbed
 \kl{bubble calculus}. Inspired by the \emph{membrane} mechanism of the
-\intro{chemical abstract machine} (\reintro{\cham})
+\intro{chemical abstract machine} (\intro{\cham})
 \sidecite[5em]{berry_chemical_1989}, so-called \emph{\kl{bubbles}} internalize
 the notion of \kl{subgoal} inside \kl{sequents}, rather than through the tree
 structure induced by traditional \kl{inference rules}. This allows for a more
@@ -242,27 +242,28 @@ presented in \reffig{sequent-BJ}, which defines our asymmetric \kl{bubble
 calculus} for \kl{intuitionistic} logic dubbed \intro{BJ}. It is divided in five
 groups:
 \begin{itemize}
-\item The {\identity}, {\resource} and {\heating} groups correspond respectively
-to the identity, structural and logical rules of \kl{sequent calculus},
-following the terminology of \sidecite{girard:hal-01322183}. More precisely,
-rules {\kl{i{\da}}} and {\kl{i{\ua}}} correspond to the \kl(rule){axiom} and
-\kl(rule){cut} rules; rules {\kl{w}} and {\kl{c}} to the \kl{weakening} and
-\kl{contraction} rules; and every rule of the form $\mcirc{-}$ (resp.
-$\mcirc{+}$) to the \kl{left introduction rule} (resp. \kl{right introduction
-rule}) for the logical connective $\mcirc$.
-\item The {\flow} and {\membrane} groups are new, and define the behavior of
-bubbles. More specifically, $\mathbb{F}$-rules characterize how information
+\item The \kl{\identity}, \kl{\resource} and \kl{\heating} groups correspond
+respectively to the \kl(sequent)[identity rule]{identity}, \kl[structural
+rule]{structural} and \kl[introduction rule]{introduction} rules of \kl{sequent
+calculus}, following the terminology of \sidecite{girard:hal-01322183}. More
+precisely, rules {\kl{i{\da}}} and {\kl{i{\ua}}} correspond to the
+\kl(rule){axiom} and \kl(rule){cut} rules; rules {\kl{w}} and {\kl{c}} to the
+\kl{weakening} and \kl{contraction} rules; and every rule of the form
+$\mcirc{-}$ (resp. $\mcirc{+}$) to the \kl{left introduction rule} (resp.
+\kl{right introduction rule}) for the logical connective $\mcirc$.
+\item The \kl{\flow} and \kl{\membrane} groups are new, and define the behavior of
+bubbles. More specifically, \kl{$\mathbb{F}$-rules} characterize how information
 flows inside \kl{solutions} by specifying what kinds of objects can traverse
 bubbles, and in which direction. They play the same role as \emph{switch} rules
 in formalisms based on \kl{CoS} \cite{Guglielmi1999ACO}, which includes our own
 \kl{subformula linking} rules (\reffig{DISL}). In the asymmetric \kl{bubble
-calculus} there is only one $\mathbb{F}$-rule {\kl{f{-}}} allowing hypotheses to
+calculus} there is only one \kl{$\mathbb{F}$-rule} {\kl{f{-}}} allowing hypotheses to
 flow inside bubbles.
 
-As their name suggests, $\mathbb{M}$-rules handle the behavior of the
+As their name suggests, \kl{$\mathbb{M}$-rules} handle the behavior of the
 \emph{membrane} of bubbles, but independently from other \kl{items} as opposed to
-$\mathbb{F}$-rules. In the asymmetric \kl{bubble calculus} there is only one
-$\mathbb{M}$-rule {\kl{p}} allowing to \emph{pop} any empty bubble, which
+\kl{$\mathbb{F}$-rules}. In the asymmetric \kl{bubble calculus} there is only one
+\kl{$\mathbb{M}$-rule} {\kl{p}} allowing to \emph{pop} any empty bubble, which
 can be interpreted as the \kl{action} of dismissing a solved \kl{subgoal}. In \kl{CoS} it
 would correspond to congruence rules handling the truth unit $\top$, and in
 \kl{subformula linking} to the unit elimination rules (\reffig{DISL-U}).
@@ -324,7 +325,7 @@ have been applied in a different order: for instance all applications of the
 {\kl{p}} rule could have been postponed to the top/end of the derivation.
 This is generally true of all formalisms based on \kl{CoS}, which is known in the
 \kl{deep inference} literature for its ``bureaucracy''. In \kl{BJ},
-$\mathbb{H}$-rules aggravate the matter by adding all inessential rule
+\kl{$\mathbb{H}$-rules} aggravate the matter by adding all inessential rule
 permutations from \kl{sequent calculus} to those of \kl{CoS}. As our wording suggests,
 this is usually perceived negatively in \kl{deep inference} \kl{proof theory}, where a
 central question is that of finding \emph{canonical} representations of proof
@@ -436,13 +437,13 @@ enabling efficient implementations of the rules with a small memory footprint.
 When looking at the \kl{BJ}-proof of \reffig{ex-gra-BJ}, the astute reader might
 have been reminded of the \kl{Proof-by-Action} paradigm as introduced in
 \refch{pba}, by seeing redexes as the \kl{items} involved in a graphical \kl{action}
---- there are always at most two such items. More precisely, $\mathbb{H}$-rules
+--- there are always at most two such items. More precisely, \kl{$\mathbb{H}$-rules}
 correspond to \emph{click} \kl{actions} on blue ({\rnm{\mcirc{-}}} rules) or red
 \kl{items} ({\rnm{\mcirc{+}}} rules), and the {\kl{i{\da}}} rule corresponds to
 the most basic \kl{DnD} \kl{action} between dual occurrences of a formula.
 
 As mentioned earlier when comparing \kl{BJ} to \kl{LJ}, the novelty here lies
-with $\mathbb{H}$-rules, $\mathbb{F}$-rules and $\mathbb{M}$-rules that deal
+with \kl{$\mathbb{H}$-rules}, \kl{$\mathbb{F}$-rules} and \kl{$\mathbb{M}$-rules} that deal
 with \emph{bubbles}. Remember that the goal behind the idea of \kl{bubble calculus}
 was precisely to provide a new way to manipulate \kl{subgoals} through \kl{bubbles}
 instead of tabs, which are more in line with the chemical \kl{metaphor}. It is quite
@@ -547,11 +548,11 @@ ideas for mapping the remaining rules of \kl{BJ} in such a \kl{GUI}:
     it with a red \kl{item} $\conc{A}$.
 
   \item[\heating]
-    For $\mathbb{H}$-rules that spawn \kl{bubbles} like {\kl{\land{+}}}, it is
+    For \kl{$\mathbb{H}$-rules} that spawn \kl{bubbles} like {\kl{\land{+}}}, it is
     important that \kl{bubbles} stay close to the \kl{item} being clicked, in order to
     make the transformation visually clear. One could even imagine a small
     animation that smoothly turns the main connective into bubbles, to convey
-    more effectively the intuition that heating rules break logical connectives
+    more effectively the intuition that \kl{heating rules} break logical connectives
     seen as chemical bonds.
 \end{description}
 
@@ -593,7 +594,7 @@ Beyond the recovered uniformity of the user interface in terms of the chemical
     
     There are multiple ways to visualize trees on a planar surface, but if we
     are to maintain the \kl{bubble} \kl{metaphor}, \intro{zoomable user
-    interfaces} (\reintro{ZUI}) seem to be a right fit: they allow for efficient
+    interfaces} (\intro{ZUI}) seem to be a right fit: they allow for efficient
     space management and navigation, and \emph{zooming in} intuitively conveys
     the idea of focusing on a specific \kl{subgoal}. One could also \emph{zoom
     out} to have an overview of the different \kl{subgoals} and their shared

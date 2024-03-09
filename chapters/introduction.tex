@@ -8,7 +8,7 @@
 % \paragraph{Formal manipulations}
 
 \AP \intro{Proof assistants} (\reintro{PAs}) --- also called
-\reintro{interactive theorem provers} (\reintro{ITPs}) --- are software systems
+\reintro{interactive theorem provers} (\intro{ITPs}) --- are software systems
 that allow to both create and check the correctness of mathematical proofs. They
 are based on the idea that mathematical knowledge can be represented
 unambiguously inside \intro{proof formalisms} --- also called \reintro{proof
@@ -149,7 +149,7 @@ Hilbert, the axiomatic method was predominant, and thus \kl{proof systems} of
 this era --- now called \reintro{Hilbert systems} --- featured very few
 \kl{inference rules}. Almost all logical reasoning principles were encoded as
 \emph{axiom schemas} involving generic \emph{propositional variables}. For
-instance, the famous \intro{law of excluded middle} (\reintro{LEM}), that states
+instance, the famous \intro{law of excluded middle} (\intro{LEM}), that states
 that every proposition is either true or false, is expressed formally by the
 schema
 $$A \lor \neg A$$
@@ -453,8 +453,7 @@ reading of rules).
   \labfig{PNC-LJ}
 \end{marginfigure}
 
-\AP
-The main difference between \kl{sequent calculus} and \kl{natural deduction}
+\AP The main difference between \kl{sequent calculus} and \kl{natural deduction}
 lies in its splitting of \kl{elimination rules} into two parts: \intro{left
 introduction rules}, and the \intro(rule){cut} rule \kl{cut}. As their name
 indicates, \kl{left introduction rules} serve a purpose symmetric to \kl{right
@@ -466,16 +465,18 @@ conclusion of the rule, by justifying it with the proof of $A$ given as premiss.
 The \kl{cut} rule can also be seen as a generalization of the \kl{modus ponens}
 rule of \kl{Hilbert systems}, replacing the logical connective $\limp$ of
 implication by the ``structural connective'' $\seq$ of sequents. The remaining
-\intro(rule){axiom} rule \kl{ax} is in a sense dual to the \kl{cut} rule:
-while the latter allows justifying a hypothesis by an identical conclusion, the
+\intro(rule){axiom} rule \kl{ax} is in a sense dual to the \kl{cut} rule: while
+the latter allows justifying a hypothesis by an identical conclusion, the
 \kl{ax} rule allows justifying a conclusion by an identical
 hypothesis\sidenote{It is not clear where the terminology ``axiom rule'' comes
 from. It might be because hypotheses can be considered as \kl{axioms} in the
 sense we introduced earlier, i.e. statements that we \emph{assume} to be true.
 In any case, it would be a misattribution of category to consider the \kl{ax}
 rule itself as an \kl{axiom}, and some authors like Girard call it the
-\emph{identity} or \rsf{id} rule to avoid the confusion.}. \reffig{PNC-LJ} shows
-a proof of the \kl{law of non-contradiction} in \kl{LJ}.
+\intro(sequent){identity rule} or \rsf{id} rule to avoid the confusion --- which
+also coincides with the concept of \emph{identity morphism} in \kl{category
+theory}.}. \reffig{PNC-LJ} shows a proof of the \kl{law of non-contradiction} in
+\kl{LJ}.
 
 % Both the \kl{cut} and \kl{ax} rules seem completely trivial. Yet surprisingly,
 Gentzen managed to prove a powerful result called alternatively
@@ -526,7 +527,7 @@ a \kl{deep inference} system as early as 1977 \cite{schutte_proof_1977}, as did
 Peirce one century before him with his \emph{\kl{entitative graphs}} (as we will
 see in \refch{eg}). But the idea did not generate much interest at the times.}.
 The first \kl{deep inference} system was the \intro{calculus of structures}
-(\reintro{CoS}), which can be succinctly described as a \intro{rewriting system}
+(\intro{CoS}), which can be succinctly described as a \intro{rewriting system}
 on formulas. For instance, the following \intro{switch rule}, when read
 bottom-up (i.e. in \kl{backward} mode), indicates that the formula $A \lor (B
 \land C)$ may be rewritten into $(A \lor B) \land C$:
@@ -656,7 +657,7 @@ encoded as the function application $u~i$.
 
 \begin{emphpar}
 In this thesis, we exclusively study \kl{proof formalisms} for
-\emph{\kl{first-order}} \kl{predicate logic} (``\reintro{FOL}'' hereafter).
+\emph{\kl{first-order}} \kl{predicate logic} (``\intro{FOL}'' hereafter).
 \end{emphpar}
 
 We identified a few reasons for working in \kl{FOL}:
@@ -802,14 +803,15 @@ languages:
   or conjecture has been \emph{solved}.
 
   \begin{remark}\labremark{tactics-rules}
-  The transformations performed by \kl{tactics} can be more or less sophisticated.
-  But, fundamentally, one finds elementary commands that correspond roughly to
-  the logical rules, generally of \kl{natural deduction} or \kl{sequent calculus}. For
-  instance, a \kl{goal} $\Gamma\seq A\lor B$ (resp. $\Gamma\seq A\land B$) can be
-  turned into either a \kl{goal} $\Gamma\seq A$ or a \kl{goal} $\Gamma\seq B$ (resp. into
-  two \kl{goals} $\Gamma\seq A$ and $\Gamma\seq B$), corresponding to the rules
-  \kl{\lor R_1} and \kl{\lor R_2} (resp. \kl{\land R}) of \kl{LJ} in their
-  \kl{backward} reading (\reffig{calculi-LJ}).
+    The transformations performed by \kl{tactics} can be more or less
+  sophisticated. But, fundamentally, one finds elementary commands that
+  correspond roughly to the \kl{inference rules}, generally of \kl{natural
+  deduction} or \kl{sequent calculus}. For instance, a \kl{goal} $\Gamma\seq
+  A\lor B$ (resp. $\Gamma\seq A\land B$) can be turned into either a \kl{goal}
+  $\Gamma\seq A$ or a \kl{goal} $\Gamma\seq B$ (resp. into two \kl{goals}
+  $\Gamma\seq A$ and $\Gamma\seq B$), corresponding to the rules \kl{\lor R_1}
+  and \kl{\lor R_2} (resp. \kl{\land R}) of \kl{LJ} in their \kl{backward}
+  reading (\reffig{calculi-LJ}).
   \end{remark}
 
   \kl{Coq} and \kl{Lean} are examples of state-of-the-art \kl{proof assistants} in the
@@ -930,13 +932,13 @@ well; and one of the reasons why we chose to focus so much on
 \AP
 A first attempt to design \kl{direct manipulation} principles for interactive
 proof building was made in the 90s by the team of Gilles Kahn at Inria, where
-they coined the \intro{Proof-by-Pointing} (\reintro{PbP}) paradigm
+they coined the \intro{Proof-by-Pointing} (\intro{PbP}) paradigm
 \sidecite{PbP}. The idea was to synthesize complex \kl{tactics} from the simple
 act of \emph{pointing} at specific locations inside expressions occurring in the
 \kl{goal}, typically with a mouse cursor. More recently
 \sidecite{Chaudhuri2013}, Kaustuv Chaudhuri proposed a variation on this idea
-called \intro{subformula linking} (\reintro{SFL}) or \intro{Proof-by-Linking}
-(\reintro{PbL}), where instead of selecting expressions in isolation, one can
+called \intro{subformula linking} (\intro{SFL}) or \intro{Proof-by-Linking}
+(\intro{PbL}), where instead of selecting expressions in isolation, one can
 \emph{link} two of them together to make them interact.
 
 In both cases, the expressions considered were logical formulas and the
@@ -959,8 +961,8 @@ semantics of \kl{PbP} \kl{actions} is still based on the \emph{shallow} \kl{infe
   continuation of the research programme initiated by \kl{PbP} and \kl{PbL}. The
   aim is to \emph{replace} textual proof languages with \emph{gestural
   \kl{actions}} performed directly upon \emph{\kl{goals}} in a \intro{graphical
-  user interface} (\reintro{GUI}). To be as general as possible, we call such a
-  paradigm \intro{Proof-by-Action} (\reintro{PbA}).
+  user interface} (\intro{GUI}). To be as general as possible, we call such a
+  paradigm \intro{Proof-by-Action} (\intro{PbA}).
 \end{emphpar}
 
 \paragraph{Proof exploration}
@@ -1041,16 +1043,17 @@ devoid of any indexical elements, that he called \emph{hypo-icons}.}:
 of their object; and \intro{metaphors}, that denote features of their object by
 relating them to features of another object \sidecite{legg_problem_2008}.
 
-Interestingly, Peirce held that mathematics relies mostly on \emph{\kl{diagrammatic}}
-thinking --- observation of, and experimentation on, \kl{diagrams}
-\sidecite[][Chpt.~6]{Hookway1985-HOOP-2}. This agrees with the contemporary
-practice of mathematics: indeed, there is an increasing number of areas in
-mathematics --- the most prominent one being category theory --- where the heart
-of a proof lies in the dynamical construction of a \emph{\kl{diagram}} capturing the
-structure of interest in given mathematical objects. The natural language proof
-text is often just a means to explicit the meaning or intuition behind the
-\kl{diagrammatic} manipulations, or simply a retranscription of the commentary that
-the mathematician would give when unfolding the construction on a blackboard.
+Interestingly, Peirce held that mathematics relies mostly on
+\emph{\kl{diagrammatic}} thinking --- observation of, and experimentation on,
+\kl{diagrams} \sidecite[][Chpt.~6]{Hookway1985-HOOP-2}. This agrees with the
+contemporary practice of mathematics: indeed, there is an increasing number of
+areas in mathematics --- the most prominent one being \intro{category theory}
+--- where the heart of a proof lies in the dynamical construction of a
+\emph{\kl{diagram}} capturing the structure of interest in given mathematical
+objects. The natural language proof text is often just a means to explicit the
+meaning or intuition behind the \kl{diagrammatic} manipulations, or simply a
+retranscription of the commentary that the mathematician would give when
+unfolding the construction on a blackboard.
 
 \AP
 If one views logic as one particular type of mathematical reasoning --- albeit
@@ -1059,7 +1062,7 @@ to expect that some \kl{diagrammatic} system should exist for it, that can
 express in the most natural way most (if not all) logical arguments. This is the
 \emph{\kl{iconicity}} thesis of Peirce, which motivated his inquiry into what is
 arguably the first \kl{diagrammatic} \kl{proof system} in history: the
-\intro{existential graphs} (\reintro{EGs}). This will be the subject of
+\intro{existential graphs} (\intro{EGs}). This will be the subject of
 \refch{eg}, and the basis for the development of a \emph{\kl{metaphorical}}
 \kl{proof system} in \refch{flowers}.
 
@@ -1084,7 +1087,7 @@ sequents.
 
 \AP We start in \refch{pba} with an introduction to \kl{PbP} and \kl{PbL}, by
 describing how to reason with logical connectives, quantifiers and equality
-through \emph{click} and \intro{drag-and-drop} (\reintro{DnD}) \kl{actions} in a
+through \emph{click} and \intro{drag-and-drop} (\intro{DnD}) \kl{actions} in a
 prototype of \kl{GUI} called \intro{Actema}. In particular, \kl{DnD}
 \kl{actions} can be seen as a generalization of both the \texttt{apply} and
 \texttt{rewrite} \kl{tactics} of \kl{imperative} proof languages.

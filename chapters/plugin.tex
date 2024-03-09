@@ -20,7 +20,7 @@ human resources for development, \kl{Actema}'s proof engine is quite limited in
 its features:
 \begin{itemize}
   \itemAP it can only handle \kl{goals} expressed in many-sorted
-    \intro{intuitionistic first-order logic} (\reintro{iFOL}), whereas all
+    \intro{intuitionistic first-order logic} (\intro{iFOL}), whereas all
     state-of-the-art \kl{PAs} support \emph{\kl{higher-order}} logic in one form
     or another; and \kl{higher-order} features are crucial for formalizing many
     mathematical notions in a concise way, as witnessed by the example of
@@ -83,13 +83,12 @@ paradigm.
 
 \section{Actema}\labsec{actema}
 
-\AP
-At its core, \kl{Actema} is a web application made of two components: a
+\AP At its core, \kl{Actema} is a web application made of two components: a
 \emph{frontend} that implements the graphical interface with which the user
-interacts, written in \kl{HTML}/\intro{CSS}/\kl{JavaScript} with the \intro{Vue.js}
-framework \cite{Vuejs}; and a \emph{backend} that implements the proof engine,
-written in \intro{OCaml} and compiled to \kl{JavaScript} (\intro{JS}) with
-\intro{js\_of\_ocaml} \sidecite{vouillon_bytecode_2014}. The two components
+interacts, written in \kl{HTML}/\intro{CSS}/\kl{JavaScript} with the
+\intro{Vue.js} framework \cite{Vuejs}; and a \emph{backend} that implements the
+proof engine, written in \intro{OCaml} and compiled to \kl{JavaScript} (\kl{JS})
+with \intro{js\_of\_ocaml} \sidecite{vouillon_bytecode_2014}. The two components
 interact through an object-oriented API written in \kl{OCaml}, which is loaded
 at runtime in the form of a \kl{JS} object called \texttt{engine}, and whose
 methods can be called from the \kl[Vue.js]{Vue} components in the frontend.
@@ -115,7 +114,7 @@ during a \kl{DnD} \kl{action}, which requires the use of a \kl{unification} algo
 \section{Why a plugin?}\labsec{whyplugin}
 
 \AP
-Usually, \intro{integrated development environments} (\reintro{IDEs}) for
+Usually, \intro{integrated development environments} (\intro{IDEs}) for
 \kl{Coq} live in an independent process, and exchange data with \kl{Coq} through
 a high-level communication protocol: either the command line interface provided
 by \texttt{coqtop}, \kl{Coq}'s default \intro{XML} protocol, or its improved
@@ -749,10 +748,10 @@ representations of mathematical objects, which could greatly improve the
 accessibility of \kl{PAs}, but also their expert usage by enabling
 domain-specific interfaces targetting non-standard methods of reasoning. A
 typical example is the \emph{\kl{diagrammatic}} reasoning pervasive in
-\emph{category theory}, which is very hard and cumbersome to express as
+\emph{\kl{category theory}}, which is very hard and cumbersome to express as
 manipulation of logical statements. Actually a system very similar to
 \kl{coq-actema} is currently being developed by Luc Chabassier \cite{LucTalk},
-for the very purpose of integrating \kl{diagrammatic} proofs in category theory
+for the very purpose of integrating \kl{diagrammatic} proofs in \kl{category theory}
 to the traditional \kl{proof script} workflow. One could imagine in the
 long-term embedding this system as a subsystem of \kl{coq-actema}, through an
 advanced protocol for interactive notations.

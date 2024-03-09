@@ -47,7 +47,7 @@ from \cite{postniece_deep_2009}: the \kl{contexts} in which rules apply are left
 implicit, and thus we do not rely on their \kl{polarity}. The counterpart is
 that rules always apply on \kl{sequents} and never on formulas, which makes them
 more verbose. Also we do not rely on the notion of ``top-level formulas'' of a
-\kl{structure}, making the propagation rules yet more verbose.}. The main
+\kl{structure}, making the \kl{propagation rules} yet more verbose.}. The main
 difference lies in the fact that proofs in \kl{DBiInt} are \emph{trees} built up
 by composing traditional \kl{inference rules} with multiple premisses, while we
 use \kl{saturated} \kl{solutions} (\kl{neutral} bubbles) to internalize the tree
@@ -104,7 +104,7 @@ this gives us the \emph{cut-free} completeness of $\kl{sysBHB}$:
 % \end{proof}
 
 In fact there are other rules of $\kl{sysBHB}$ that were not used in the simulation,
-namely the $\mathbb{F}$-rule \kl{f{\ua}}, and all $\mathbb{M}$-rules other
+namely the \kl{$\mathbb{F}$-rule} \kl{f{\ua}}, and all \kl{$\mathbb{M}$-rules} other
 than \kl{p}. Combined with the soundness of $\kl{sysBHB}$ (\refcor{soundness}), this gives us the following \emph{admissibility} theorem:
 
 \begin{theorem}[Admissibility]\labthm{bubbles:cut-admissibility}
@@ -144,8 +144,8 @@ more tractable by humans.
 As noted in \sidecite{postniece_deep_2009}, one can simply ignore rules related
 to the \kl{exclusion} connective $\lsub$ to get a sound and complete system for
 \kl{intuitionistic} logic. In \kl{DBiInt}, these rules are the \kl{introduction
-rules} \kl{{\lsub}_R} and \kl{{\lsub}_L}, as well as the propagation rules
-\kl{{\seq}_{L1}} and \kl{{\seq}_{R2}}. Indeed, propagation rules are only useful
+rules} \kl{{\lsub}_R} and \kl{{\lsub}_L}, as well as the \kl{propagation rules}
+\kl{{\seq}_{L1}} and \kl{{\seq}_{R2}}. Indeed, \kl{propagation rules} are only useful
 in combination with \kl{introduction rules}, since \kl{{\lsub}_L} is the only
 rule of \kl{DBiInt} that can introduce \kl{nested sequents} in \kl{negative}
 \kl{contexts}. The situation is similar in \kl{system~B}, and in fact the proof
@@ -195,7 +195,7 @@ completeness of $\kl{sysBH}$ (resp. $\sysBB$):
 
 \AP
 \reffig{dne-bubbles} shows a proof of the \intro{double-negation elimination
-law} (\reintro{DNE}) $\neg \neg A \seq A$ in \kl{system~B}. Since $\kl{sysBH}$
+law} (\intro{DNE}) $\neg \neg A \seq A$ in \kl{system~B}. Since $\kl{sysBH}$
 is \kl{intuitionistically} complete, the well-known double-negation embedding of
 \kl{classical} logic into \kl{intuitionistic} logic tells us that $\neg \neg A$
 is provable in $\kl{sysBH}$ (and a fortiori in \kl{system~B}) if $A$ is a
@@ -265,7 +265,7 @@ relationship between \kl{Heyting-Brouwer algebras} and these consequence
 relations, which stem instead from an analysis of the Kripke semantics of
 \kl{bi-intuitionistic} logic. Since \kl{system~B} offers a very expressive
 syntax, it would be interesting to investigate its ability to capture both
-\kl{wBIL} and \kl{sBIL}, maybe by using distinct sets of $\mathbb{F}$-rules.
+\kl{wBIL} and \kl{sBIL}, maybe by using distinct sets of \kl{$\mathbb{F}$-rules}.
 Goré and Shillito suggest that a framework that captures both \emph{provability}
 and \emph{refutability} ``in one shot'' would be needed, and we believe
 \kl{system~B} might just provide this: indeed a derivation $S \steps{} \piq{}$

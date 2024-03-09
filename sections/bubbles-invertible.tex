@@ -33,7 +33,7 @@ invalidates the converse inequality.}.
 
 Thus the only remaining rules of \kl{system~B} that are (most probably) not
 \kl{invertible} are the \kl{weakening} rules $\{\kl{w{-}},\kl{w{+}}\}$, all the
-$\mathbb{F}$-rules, and the $\mathbb{H}$-rules $\{\kl{{\limp}{-}},
+\kl{$\mathbb{F}$-rules}, and the \kl{$\mathbb{H}$-rules} $\{\kl{{\limp}{-}},
 \kl{{\lsub}{+}}\}$ that \emph{apply} an implication/\kl{exclusion}\sidenote{For
 quantifier rules, we conjecture that as in \kl{sequent calculus}, the rules
 $\{\kl{\forall{+}}, \kl{\exists{-}}\}$ are \kl{invertible}, while the rules
@@ -58,17 +58,17 @@ from the following modifications to the previous rules:
   \item[Flow]
     As shown by the simulation of \reflemma{simulation-dbiint}, the
     \emph{propagation} rules of \kl{DBiInt} combine an instance of
-    \emph{\kl{contraction}} followed by the application of a $\mathbb{F}$-rule
-    on the duplicated formula. Thus we can make all $\mathbb{F}$-rules of
+    \emph{\kl{contraction}} followed by the application of a \kl{$\mathbb{F}$-rule}
+    on the duplicated formula. Thus we can make all \kl{$\mathbb{F}$-rules} of
     \kl{system~B} \kl{invertible} by systematically duplicating the moved
     formula, although this breaks \emph{linearity}.
 
-    A downside of propagation rules in the style of \kl{DBiInt}, is that they
+    A downside of \kl{propagation rules} in the style of \kl{DBiInt}, is that they
     create a lot of unnecessary copies of the moved formula $A$. Often, one will
     want to move $A$ in a \kl{subgoal}/supergoal at a distance $n$ in the proof tree,
     with $n > 1$. Usually this would be performed by $n$ applications of
-    $\mathbb{F}$-rules, which by linearity indeed just move the formula. But with
-    propagation rules, $n$ copies of $A$ will be created, with one copy in each
+    \kl{$\mathbb{F}$-rules}, which by linearity indeed just move the formula. But with
+    \kl{propagation rules}, $n$ copies of $A$ will be created, with one copy in each
     \kl{subgoal} met on the path to the destination.
 
     To prevent this, one would need a way to copy formulas at an arbitrary
@@ -86,26 +86,26 @@ from the following modifications to the previous rules:
     \kl{Proof-by-Action} setting.
 
     Note also that we removed the \kl{f{\ua}} rule of \reffig{sequent-B}.
-    Indeed even after turning it into a propagation rule, the moved copy of the
+    Indeed even after turning it into a \kl{propagation rule}, the moved copy of the
     duplicated \kl{subgoal} $S$ cannot be weakened because it lives in a \kl{neutral}
     bubble. Thus the rule stays non-\kl{invertible}, and cannot be included in
     \kl{Binv}. Fortunately, we showed that it is \kl{admissible} in
     \refthm{bubbles:cut-admissibility}, so this is not problematic.
 
   \item[Implication/Exclusion]
-    The last source of non-invertibility is the $\mathbb{H}$-rules
+    The last source of non-invertibility is the \kl{$\mathbb{H}$-rules}
     \kl{{\limp}{-}} and \kl{{\lsub}{+}}, that respectively allow to use an
     implication hypothesis, and prove an \kl{exclusion} conclusion.
     Here we can just duplicate the implication/\kl{exclusion} formula, as in the
     \kl{introduction rules} of \kl{DBiInt}. Also like in \kl{DBiInt}, we removed
     the \kl{contraction} rules \kl{c{-}} and \kl{c{+}}, which are now merged with
-    these two rules as well as the $\mathbb{F}$-rules. Although \kl{contraction}
+    these two rules as well as the \kl{$\mathbb{F}$-rules}. Although \kl{contraction}
     rules are \kl{invertible}, they induce a lot of complexity in proof search,
     because it is hard to predict the (occurrences of) formulas that need to be
     duplicated, and one can duplicate \emph{ad infinitum}. Thus it is preferable
     to design a calculus where they are \kl{admissible}. But unlike what is done in
     \kl{DBiInt}, we did not incorporate \kl{contraction} in other
-    $\mathbb{H}$-rules. Thus we cannot simulate exactly all the \kl{introduction
+    \kl{$\mathbb{H}$-rules}. Thus we cannot simulate exactly all the \kl{introduction
     rules} of \kl{DBiInt} in \kl{Binv}.
 
 \end{description}
@@ -156,7 +156,7 @@ way to search for a proof of a formula $A$ consists in the following $5$
 \kl{solution} is reached:
 \begin{description}
   \item[Decomposition] Decompose $A$ by applying recursively
-    $\mathbb{H}$-rules, until either atoms, \kl{negative} implications
+    \kl{$\mathbb{H}$-rules}, until either atoms, \kl{negative} implications
     $\hypo{\limp}$, \kl{negative} disjunctions $\hypo{\lor}$, or \kl{positive}
     conjunctions $\conc{\land}$ are reached.
     
@@ -233,7 +233,7 @@ way to search for a proof of a formula $A$ consists in the following $5$
     rule upon. Additionally, she might need to determine a \kl{subgoal} $T\select{U}$
     in which $A$ is provable, and first duplicate $\hypo{A\limp B}$ in $T\hole$
     before applying \kl{{\limp}{-}}. This will always be possible with the
-    $\mathbb{F}$-rules \kl{f{-}{\da}} and \kl{f{-}{+}{\da}}.
+    \kl{$\mathbb{F}$-rules} \kl{f{-}{\da}} and \kl{f{-}{+}{\da}}.
     Ideally, she would also pick the most general $T\hole$ to factorize the
     proof, by minimizing its depth $\cdepth{T\hole}$ (\refdef{solctx-depth}).
 
@@ -250,7 +250,7 @@ way to search for a proof of a formula $A$ consists in the following $5$
 \end{description}
 
 \begin{remark}
-  By adopting $\mathbb{H}$-rules in the style of \kl{DBiInt}'s \kl{introduction
+  By adopting \kl{$\mathbb{H}$-rules} in the style of \kl{DBiInt}'s \kl{introduction
   rules}, we would make the \textbf{Decomposition} phase, and thus the whole
   procedure inoperable, since the \textbf{Linking} phase depends crucially on
   it. Allowing \kl{contraction} rules would also jeopardize the potential
@@ -264,7 +264,7 @@ other formalisms, is that most of its automation preserves the \emph{size}
 \begin{itemize}
   \item In the \textbf{Decomposition} phase, if we opt out of the automatic
   distribution of \kl{negative} $\hypo{\lor}$ and \kl{positive} $\conc{\land}$,
-  then the system will only apply $\mathbb{H}$-rules that split logical
+  then the system will only apply \kl{$\mathbb{H}$-rules} that split logical
   connectives, and create a \emph{partition} of the atoms of the \kl{goal} by
   enclosing them in bubbles. Thus the size of the \kl{goal} is kept intact, and
   the structure modified but in a controlled, local way.
@@ -273,7 +273,7 @@ other formalisms, is that most of its automation preserves the \emph{size}
   together, preserving both the size and the structure of the \kl{goal}.
 
   \item In the \textbf{Linking} phase, the particular way in which we use
-  $\mathbb{F}$-rules ensures that we only decrease the number of atoms. Indeed,
+  \kl{$\mathbb{F}$-rules} ensures that we only decrease the number of atoms. Indeed,
   if we assume as discussed earlier that we have ``super-flow'' rules that copy
   at a distance, then either:
   \begin{enumerate}
@@ -301,8 +301,8 @@ have the ability to perform \textbf{Decomposition} and \textbf{Linking} by hand
 
 Because of the implicit \kl{contraction} in the rules \kl{{\limp}{-}} and
 \kl{{\lsub}{+}}, one cannot fully decompose a formula into an equivalent
-\kl{solution} by deterministically applying a sequence of $\mathbb{H}$-rules (and
-possibly $\mathbb{F}$-rules, to distribute \kl{positive} conjunctions and \kl{negative}
+\kl{solution} by deterministically applying a sequence of \kl{$\mathbb{H}$-rules} (and
+possibly \kl{$\mathbb{F}$-rules}, to distribute \kl{positive} conjunctions and \kl{negative}
 disjunctions). Thus \kl{Binv} fails to be \emph{fully \kl{iconic}}, because it
 relies on the \emph{\kl{symbolic}} connectives $\limp$ and $\lsub$ to represent
 logical statements.
@@ -318,7 +318,7 @@ represent natively \emph{\kl{negative} implications} and \emph{\kl{positive}
 subtractions}, although they can represent natively all other polarizations of
 connectives. This is illustrated by the mapping of \reffig{bubbles-native} from
 \kl{polarized} formulas to equivalent \kl{solutions}, which is really just the
-$\mathbb{H}$-rules of \kl{system~B} (\reffig{graphical-B}) where the right-hand
+\kl{$\mathbb{H}$-rules} of \kl{system~B} (\reffig{graphical-B}) where the right-hand
 \kl{solution} is enclosed in a \kl{bubble} of the corresponding \kl{polarity}.
 The reader can easily check that if $A$ is mapped to $S$, then $\psint{A}
 \semequiv{} \psint{S}$.

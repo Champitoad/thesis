@@ -74,11 +74,11 @@ calculus}:
   we rely on the distributive interpretation of conclusions in \kl{solutions}. For
   instance in the \kl{i{\ua}} rule, $\Delta$ is available potentially in
   both \kl{subgoals}, and we do not need to move it manually: this will be the role
-  of the $\mathbb{F}$-rules for red \kl{items}.
+  of the \kl{$\mathbb{F}$-rules} for red \kl{items}.
   
-  A second difference is that $\mathbb{I}$-rules are not applicable in arbitrary
+  A second difference is that \kl{$\mathbb{I}$-rules} are not applicable in arbitrary
   \kl{subsolutions}, but only \emph{\kl{unsaturated}} ones. This will also be
-  the case of some $\mathbb{M}$-rules and $\mathbb{H}$-rules. In the case of the
+  the case of some \kl{$\mathbb{M}$-rules} and \kl{$\mathbb{H}$-rules}. In the case of the
   \kl{i{\da}} rule, it guarantees its \emph{locality}: if the conclusion was
   $\Gamma, A \piq{\cS} A, \Delta$, then the distributive semantics would entail
   that all \kl{subgoals} in $\cS$ must be solved at once, despite the fact that
@@ -93,7 +93,7 @@ calculus}:
   \item[\resource] 
   Here we still have \kl{weakening} and \kl{contraction} for \kl{negative} \kl{items} (hypotheses),
   and we also allow them for \kl{positive} \kl{items} (conclusions). Note that contrary to
-  the $\mathbb{I}$-rules which apply only to a formula $A$, $\mathbb{R}$-rules
+  the \kl{$\mathbb{I}$-rules} which apply only to a formula $A$, \kl{$\mathbb{R}$-rules}
   apply to an arbitrary \kl{item} $I$, which can either be a formula or a \kl{solution}.
   Combined to the fact that the ambient \kl{solution} can be either \kl{unsaturated} or \kl{saturated},
   this gives the most general and expressive formulation of the rules. We
@@ -103,10 +103,10 @@ calculus}:
   \item[\heating] 
   Like the \kl{i{\ua}} rule, the \kl{\bot{-}}, \kl{\lor{-}} and
   \kl{{\limp}{-}} rules become truly local in \kl{system~B} by letting
-  $\mathbb{F}$-rules handle the distribution of conclusions in \kl{subgoals}.
+  \kl{$\mathbb{F}$-rules} handle the distribution of conclusions in \kl{subgoals}.
   Together with their dual rules \kl{\top{+}}, \kl{\land{+}} and
-  \kl{{\limp}{+}}, they constitute the \emph{\kl[saturated]{saturating}} $\mathbb{H}$-rules of
-  \kl{system~B}. All other $\mathbb{H}$-rules work in arbitrary \kl{solutions} just
+  \kl{{\limp}{+}}, they constitute the \emph{\kl[saturated]{saturating}} \kl{$\mathbb{H}$-rules} of
+  \kl{system~B}. All other \kl{$\mathbb{H}$-rules} work in arbitrary \kl{solutions} just
   as in \kl{BJ}. But thanks to the ability to have multiple conclusions
   (\refsec{symm-interp}) and \kl{positive} \kl{bubbles} (\refsec{colors}), both the
   \kl{\lor{+}} and \kl{{\limp}{+}} rules are now \emph{\kl{invertible}}: this was
@@ -123,16 +123,16 @@ behavior of \kl{bubbles}:
 
   Compared to \kl{BJ} where we only had \kl{neutral} \kl{bubbles}, the presence of
   \kl{polarized} \kl{bubbles} in \kl{system~B} creates a mini-combinatorial
-  explosion in the number of possible $\mathbb{F}$-rules. Indeed, the general
+  explosion in the number of possible \kl{$\mathbb{F}$-rules}. Indeed, the general
   scheme is to consider what \emph{polarities} of \kl{items} are allowed to flow
   through \kl{bubbles}, either inwards or outwards. With $p$ \kl{item} polarities and
   $b$ \kl{bubble} polatities, this makes for a total of $p \times b \times 2$
   possible rules. In \kl{BJ} \kl{items} consisted only of
   \kl{positive}/\kl{negative} formulas and \kl{neutral} \kl{bubbles} ($p = 3$
-  and $b = 1$), thus we had a total of $6$ possible $\mathbb{F}$-rules. It turns
+  and $b = 1$), thus we had a total of $6$ possible \kl{$\mathbb{F}$-rules}. It turns
   out that only the \kl{f{-}{\da}} rule was necessary, and it is also present in
   \kl{system~B}. Now with \kl{positive} and \kl{negative} \kl{bubbles} added to
-  the mix ($b = 3$), we get up to a total of $18$ possible $\mathbb{F}$-rules in
+  the mix ($b = 3$), we get up to a total of $18$ possible \kl{$\mathbb{F}$-rules} in
   \kl{system~B}. Out of these, $11$ were identified as being sound logically,
   and thus we decided to include all of them in \kl{system~B}.
 
@@ -170,7 +170,7 @@ behavior of \kl{bubbles}:
   \kl{dual-intuitionistic} logic. Then the purple arrows represent moves that
   are valid only in \kl{classical} logic. The reader can easily check that there
   is a total of $18$ arrows, and map the green and purple arrows back to the
-  corresponding $\mathbb{F}$-rules of \reffig{graphical-B}.
+  corresponding \kl{$\mathbb{F}$-rules} of \reffig{graphical-B}.
 
   \begin{remark}
     Since all \kl{polarized} \kl{items} can freely go in and out of
@@ -184,7 +184,7 @@ behavior of \kl{bubbles}:
     \cite{girard:hal-01322183}.}.
   \end{remark}
   
-  In their graphical representation, the \kl{bi-intuitionistic} $\mathbb{F}$-rules of
+  In their graphical representation, the \kl{bi-intuitionistic} \kl{$\mathbb{F}$-rules} of
   \kl{system~B} are equivalent to the three following \emph{topological laws},
   that we call the \emph{$\mathbb{F}$-laws}\sidenote{Hopefully, those are not
   \emph{flaws} of our \emph{flow} rules, but rather the opposite\dots}:
@@ -208,27 +208,27 @@ behavior of \kl{bubbles}:
   In \reffig{bubbles-porosity}, the ability of \kl{bubbles} to \emph{trap} or
   \emph{repel} \kl{items} correspond respectively to \emph{outward} and
   \emph{inward} orange arrows. $\mathbb{F}$-laws are thus the ``negative''
-  counterpart --- in the grammatical sense --- of $\mathbb{F}$-rules,
+  counterpart --- in the grammatical sense --- of \kl{$\mathbb{F}$-rules},
   represented by green arrows. The fact that purple arrows are demoted to orange
   arrows in \kl{bi-intuitionistic} logic, can be interpreted as resulting from
   their violation of the first $\mathbb{F}$-law. The second and third
   $\mathbb{F}$-laws characterize the behavior of \kl{neutral} \kl{bubbles}, and are
   respected by all rules of \kl{system~B}.
   
-  In particular, they suggest the addition of a new $\mathbb{F}$-rule
+  In particular, they suggest the addition of a new \kl{$\mathbb{F}$-rule}
   \kl{f{\ua}}, which allows to move \kl{neutral} \kl{bubbles} out of other
   \kl{neutral} \kl{bubbles}. When looking at it as a graphical \kl{rewriting rule} in
   \reffig{graphical-B}, it can be seen as the act of \emph{abstracting} the
   \kl{subgoal} $T$ from its parent \kl{subgoal} $S$, since the hypotheses and
   conclusions of $S$ cannot be brought to interact with those of $T$ anymore.
-  More generally in \kl{bi-intuitionistic} logic, all $\mathbb{F}$-rules can be
+  More generally in \kl{bi-intuitionistic} logic, all \kl{$\mathbb{F}$-rules} can be
   understood as \emph{abstraction} moves, that strengthen the \kl{goal} by
   moving irreversibly an \kl{item} $I$ out of its \kl{subgoal} $S$. In the case
   of outward rules (whose name ends with $\ua$), $I$ is brought closer to the
   \emph{root} of the proof tree; and in the case of inward rules (whose name
   ends with $\da$), $I$ is brought closer to the \emph{leaves} of the proof
   tree.
-  % More generally, all outwards flow rules (whose name ends with $\ua$) can
+  % More generally, all outwards \kl{flow rules} (whose name ends with $\ua$) can
   % be understood as \emph{abstraction} moves that strengthen the goal, by moving
   % an item closer to the root of the proof tree; and dually, all inwards flow
   % rules (whose name ends with $\da$) correspond to \emph{concretization}
@@ -259,7 +259,7 @@ behavior of \kl{bubbles}:
   \emph{absorption rules} $\{\kl{a},\kl{a{-}},\kl{a{+}}\}$ for membranes.
   These rules state that when a \kl{bubble} contains only a single \kl{neutral} \kl{bubble},
   the membrane of the latter can be absorbed into the membrane of the former.
-  This is mainly useful when one wants to apply an outward $\mathbb{F}$-rule to
+  This is mainly useful when one wants to apply an outward \kl{$\mathbb{F}$-rule} to
   an \kl{item} that has the same \kl{polarity} as the outer \kl{bubble}, as witnessed by the
   use of the \kl{a{+}} rule in the proof of Uustalu's formula in
   \reffig{bubbles-uustalu}. This formula was first introduced in
@@ -278,5 +278,5 @@ behavior of \kl{bubbles}:
   \kl{polarized} \kl{items} because they cannot cross \kl{neutral} membranes outwards,
   expansion gets stuck on \kl{neutral} \kl{items} because they cannot cross \kl{neutral}
   membranes inwards. Thus there is a very natural interplay between
-  $\mathbb{M}$-rules and $\mathbb{F}$-laws.
+  \kl{$\mathbb{M}$-rules} and $\mathbb{F}$-laws.
 \end{description}

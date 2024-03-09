@@ -37,7 +37,7 @@
 \knowledge{url={https://ctan.org/pkg/knowledge}, typewriter}
  | knowledge@package
 
-\knowledgedirective{acronym}{synonym,up,index,index name=acronym}
+\knowledgedirective{acronym}{notion,up,index,index name=acronym}
 
 % Software systems
 
@@ -174,7 +174,185 @@
 % Inference rules
 
 \knowledgedirective{rule}{notion,wrap=\rsf}
-% \knowledgedirective{rule}{inotion,wrap=\rsf}
+
+\knowledge{inotion}
+ | inference rule
+ | inference rules
+ | Inference rule
+ | Inference rules
+
+\knowledge{inotion,index parent key=inference rule}
+ | propagation rule
+ | propagation rules
+ | Propagation rule
+ | Propagation rules
+
+\knowledge{inotion,index parent key=inference rule,scope=sequent}
+ | identity rule
+ | identity rules
+ | Identity rule
+ | Identity rules
+\knowledge{inotion,index parent key=inference rule}
+ | structural rule
+ | structural rules
+ | Structural rule
+ | Structural rules
+\knowledge{inotion,index parent key=inference rule}
+ | introduction rule
+ | introduction rules
+ | Introduction rule
+ | Introduction rules
+ | right introduction rule
+ | right introduction rules
+ | Right introduction rule
+ | Right introduction rules
+\knowledge{inotion,index parent key=inference rule}
+ | introduction rule@natded
+ | introduction rules@natded
+ | Introduction rule@natded
+ | Introduction rules@natded
+\knowledge{inotion,index parent key=inference rule}
+ | left introduction rule
+ | left introduction rules
+ | Left introduction rule
+ | Left introduction rules
+\knowledge{inotion,index parent key=inference rule}
+ | elimination rule
+ | elimination rules
+ | Elimination rule
+ | Elimination rules
+
+\knowledge{inotion,index parent key=inference rule,scope=bubble}
+ | \identity
+\knowledge{inotion,index parent key=inference rule,scope=bubble,synonym}
+ | identity rule
+ | identity rules
+ | Identity rule
+ | Identity rules
+ | $\mathbb{I}$-rule
+ | $\mathbb{I}$-rules
+\knowledge{inotion,index parent key=inference rule,scope=symm}
+ | \identity
+\knowledge{inotion,index parent key=inference rule,scope=symm,synonym}
+ | identity rule
+ | identity rules
+ | Identity rule
+ | Identity rules
+ | $\mathbb{I}$-rule
+ | $\mathbb{I}$-rules
+\knowledge{inotion,index parent key=inference rule,scope=bubble-inv}
+ | \identity
+\knowledge{inotion,index parent key=inference rule,scope=bubble-inv,synonym}
+ | identity rule
+ | identity rules
+ | Identity rule
+ | Identity rules
+ | $\mathbb{I}$-rule
+ | $\mathbb{I}$-rules
+
+\knowledge{inotion,index parent key=inference rule,scope=bubble}
+ | \resource
+\knowledge{inotion,index parent key=inference rule,scope=bubble,synonym}
+ | resource rule
+ | resource rules
+ | Resource rule
+ | Resource rules
+ | $\mathbb{R}$-rule
+ | $\mathbb{R}$-rules
+\knowledge{inotion,index parent key=inference rule,scope=symm}
+ | \resource
+\knowledge{inotion,index parent key=inference rule,scope=symm,synonym}
+ | resource rule
+ | resource rules
+ | Resource rule
+ | Resource rules
+ | $\mathbb{R}$-rule
+ | $\mathbb{R}$-rules
+
+\knowledge{inotion,index parent key=inference rule,scope=bubble}
+ | \flow
+\knowledge{inotion,index parent key=inference rule,scope=bubble,synonym}
+ | flow rule
+ | flow rules
+ | Flow rule
+ | Flow rules
+ | $\mathbb{F}$-rule
+ | $\mathbb{F}$-rules
+\knowledge{inotion,index parent key=inference rule,scope=symm}
+ | \flow
+\knowledge{inotion,index parent key=inference rule,scope=symm,synonym}
+ | flow rule
+ | flow rules
+ | Flow rule
+ | Flow rules
+ | $\mathbb{F}$-rule
+ | $\mathbb{F}$-rules
+\knowledge{inotion,index parent key=inference rule,scope=bubble-inv}
+ | \flow
+\knowledge{inotion,index parent key=inference rule,scope=bubble-inv,synonym}
+ | flow rule
+ | flow rules
+ | Flow rule
+ | Flow rules
+ | $\mathbb{F}$-rule
+ | $\mathbb{F}$-rules
+
+\knowledge{inotion,index parent key=inference rule,scope=bubble}
+ | \membrane
+\knowledge{inotion,index parent key=inference rule,scope=bubble,synonym}
+ | membrane rule
+ | membrane rules
+ | Membrane rule
+ | Membrane rules
+ | $\mathbb{M}$-rule
+ | $\mathbb{M}$-rules
+\knowledge{inotion,index parent key=inference rule,scope=symm}
+ | \membrane
+\knowledge{inotion,index parent key=inference rule,scope=symm,synonym}
+ | membrane rule
+ | membrane rules
+ | Membrane rule
+ | Membrane rules
+ | $\mathbb{M}$-rule
+ | $\mathbb{M}$-rules
+\knowledge{inotion,index parent key=inference rule,scope=bubble-inv}
+ | \membrane
+\knowledge{inotion,index parent key=inference rule,scope=bubble-inv,synonym}
+ | membrane rule
+ | membrane rules
+ | Membrane rule
+ | Membrane rules
+ | $\mathbb{M}$-rule
+ | $\mathbb{M}$-rules
+ | \membrane
+
+\knowledge{inotion,index parent key=inference rule,scope=bubble}
+ | \heating
+\knowledge{inotion,index parent key=inference rule,scope=bubble,synonym}
+ | heating rule
+ | heating rules
+ | Heating rule
+ | Heating rules
+ | $\mathbb{H}$-rule
+ | $\mathbb{H}$-rules
+\knowledge{inotion,index parent key=inference rule,scope=symm}
+ | \heating
+\knowledge{inotion,index parent key=inference rule,scope=symm,synonym}
+ | heating rule
+ | heating rules
+ | Heating rule
+ | Heating rules
+ | $\mathbb{H}$-rule
+ | $\mathbb{H}$-rules
+\knowledge{inotion,index parent key=inference rule,scope=bubble-inv}
+ | \heating
+\knowledge{inotion,index parent key=inference rule,scope=bubble-inv,synonym}
+ | heating rule
+ | heating rules
+ | Heating rule
+ | Heating rules
+ | $\mathbb{H}$-rule
+ | $\mathbb{H}$-rules
 
 % Modus Ponens
 \knowledge{mp}{rule}
@@ -198,12 +376,12 @@
 % Sequent calculus
 \knowledge{rule}
  | ax
-\knowledge{inotion}
+\knowledge{inotion,index key=axiom rule,index parent key=inference rule}
  | axiom@rule
  | axioms@rule
 \knowledge{rule}
  | cut
-\knowledge{inotion}
+\knowledge{inotion,index key=cut rule,index parent key=inference rule}
  | cut@rule
  | cuts@rule
 \knowledge{xL}{rule}
@@ -421,7 +599,7 @@
 
 % Alpha EGs (informal version)
 \newcommand{\principle}[1]{\text{$\mathsf{#1}$}}
-\knowledgedirective{principle}{inotion,up,wrap=\principle,index parent key=illtrans}
+\knowledgedirective{principle}{inotion,up,wrap=\principle,index parent key=illative transformation}
 \knowledge{Iteration}{principle}
 \knowledge{(De)iteration}{principle,synonym}
 \knowledge{Deiteration}{principle}
@@ -613,12 +791,6 @@
  | structural proof theory
  | Structural proof theory
 
-\knowledge{inotion,index key=irule}
- | inference rule
- | inference rules
- | Inference rule
- | Inference rules
-
 \knowledge{inotion,italic}
  | modus ponens
 
@@ -708,12 +880,6 @@
  | Natural deduction
 
 \knowledge{inotion}
- | structural rule
- | structural rules
- | Structural rule
- | Structural rules
-
-\knowledge{inotion}
  | exchange
 
 \knowledge{inotion}
@@ -723,34 +889,6 @@
 \knowledge{inotion}
  | weakening
  | weakenings
-
-\knowledge{inotion}
- | introduction rule
- | introduction rules
- | Introduction rule
- | Introduction rules
- | right introduction rule
- | right introduction rules
- | Right introduction rule
- | Right introduction rules
-
-\knowledge{inotion}
- | left introduction rule
- | left introduction rules
- | Left introduction rule
- | Left introduction rules
-
-\knowledge{inotion}
- | introduction rule@natded
- | introduction rules@natded
- | Introduction rule@natded
- | Introduction rules@natded
-
-\knowledge{inotion}
- | elimination rule
- | elimination rules
- | Elimination rule
- | Elimination rules
 
 \knowledge{inotion}
  | cut-elimination
@@ -780,7 +918,7 @@
 \knowledge{acronym}
  | CoS
  
-\knowledge{inotion}
+\knowledge{inotion,index parent key=inference rule}
  | switch rule
  | switch rules
  | Switch rule
@@ -995,13 +1133,21 @@
  | Metaphorically
 
 \knowledge{inotion}
+ | existential graph
  | existential graphs
+ | Existential graph
+ | Existential graphs
 \knowledge{acronym}
+ | EG
  | EGs
 
 \knowledge{inotion}
+ | intuitionistic existential graph
  | intuitionistic existential graphs
+ | Intuitionistic existential graph
+ | Intuitionistic existential graphs
 \knowledge{acronym}
+ | IEG
  | IEGs
 
 \knowledge{inotion}
@@ -1087,13 +1233,13 @@
  | Linkage
  | Linkages
 
-\knowledge{inotion}
+\knowledge{inotion,index parent key=linkage}
  | logical linkage
  | Logical linkage
  | logical linkages
  | Logical linkages
 
-\knowledge{inotion}
+\knowledge{inotion,index parent key=linkage}
  | rewrite linkage
  | Rewrite linkage
  | rewrite linkages
@@ -1107,7 +1253,7 @@
  | validity@sfl
  | Validity@sfl
 
-\knowledge{inotion}
+\knowledge{inotion,index parent key=valid}
  | classically valid@sfl
  | classical validity@sfl
  | Classically valid@sfl
@@ -1143,7 +1289,7 @@
 
 % Proof-by-Action in Practice
 
-\knowledge{inotion,index=Actions,index key=action}
+\knowledge{inotion}
  | action
  | actions
  | Action
@@ -1163,7 +1309,7 @@
 \knowledge{inotion}
  | body
 
-\knowledge{inotion}
+\knowledge{inotion,index parent key=action}
  | contextual action
  | contextual actions
  
@@ -1188,11 +1334,11 @@
 % Integration in a proof assistant
 
 \knowledge{inotion}
- | integrated development environments
  | integrated development environment
+ | integrated development environments
 \knowledge{acronym}
- | IDEs
  | IDE
+ | IDEs
 
 \knowledge{inotion}
  | sequence diagram
@@ -1291,7 +1437,7 @@
  | unpolarized@bubble
  | Unpolarized@bubble
 
-\knowledge{inotion}
+\knowledge{inotion,index parent key=interpretation}
  | asymmetric interpretation
  | Asymmetric interpretation
 
@@ -1318,15 +1464,15 @@
 \knowledge{inotion}
  | mix operator
  
-\knowledge{inotion}
+\knowledge{inotion,index parent key=interpretation}
  | symmetric interpretation
  | Symmetric interpretation
 
-\knowledge{inotion}
+\knowledge{inotion,index parent key=interpretation}
  | positive interpretation
  | Positive interpretation
 
-\knowledge{inotion}
+\knowledge{inotion,index parent key=interpretation}
  | negative interpretation
  | Negative interpretation
 
@@ -1408,12 +1554,16 @@
  | isotropy
 
 \knowledge{inotion}
+ | entitative graph
+ | Entitative graph
  | entitative graphs
  | Entitative graphs
 
-\knowledge{inotion,index=Illative transformations,index key=illtrans}
+\knowledge{inotion}
  | illative transformation
  | illative transformations
+ | Illative transformation
+ | Illative transformations
 
 \knowledge{inotion}
  | illative atomicity
@@ -1494,8 +1644,8 @@
  | Teridentities
 
 \knowledge{inotion}
- | lines of identity
  | line of identity
+ | lines of identity
 \knowledge{acronym}
  | LoI
  | LoIs
@@ -1670,13 +1820,13 @@
  | pollinates
  | pollinating
 
-\knowledge{inotion}
+\knowledge{inotion,index parent key=pollination}
  | cross-pollination
  | Cross-pollination
  | cross-pollinating
  | Cross-pollinating
 
-\knowledge{inotion}
+\knowledge{inotion,index parent key=pollination}
  | self-pollination
  | Self-pollination
  | self-pollinating
@@ -1686,11 +1836,11 @@
  | shallow@flower
  | Shallow@flower
 
-\knowledge{inotion}
+\knowledge{inotion,index parent key=inference rule}
  | natural
  | Natural
 
-\knowledge{inotion}
+\knowledge{inotion,index parent key=inference rule}
  | cultural
  | Cultural
  
@@ -1813,6 +1963,12 @@
 \knowledge{depth}{inotion,scope=symm}
 \knowledge{depth}{inotion,scope=eg}
 \knowledge{depth}{inotion,scope=flower}
+
+\knowledge{inotion}
+ | category theory
+ | Category theory
+ | category-theoretical
+ | Category-theoretical
 
 % Bug?
 

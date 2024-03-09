@@ -4,7 +4,7 @@
 \labch{pba}
 
 \epigraph{ When it is obvious that the goals cannot be reached, don't adjust the
-goals, adjust the \kl{action} steps.}{\textbf{Confucius}}
+goals, adjust the action steps.}{\textbf{Confucius}}
 
 
 \begin{scope}\knowledgeimport{sfl}
@@ -91,8 +91,8 @@ C$ for a \kl{sequent} where $A$ is among the hypotheses.
 We use and do not recall the usual definitions of terms and propositions in
 \kl{FOL}. We assume a \kl{first-order} language (function and predicate symbols)
 is given. Provability is defined over \kl{sequents} $\Gamma\seq C$ by the usual
-logical rules of \kl{natural deduction} (\reffig{calculi-NJ}) and/or \kl{sequent
-calculus} (\reffig{calculi-LJ}).
+\kl{inference rules} of \kl{natural deduction} (\reffig{calculi-NJ}) and/or
+\kl{sequent calculus} (\reffig{calculi-LJ}).
 
 Equality is treated in a common way: $=$ is a binary
 predicate symbol written in the usual infix notation, together with the
@@ -244,9 +244,10 @@ Notice that:
     % between the two squared subterms through the \kl(sfl){id} rule.
 \end{itemize}
 
-In general, the \kl{action} solves the \kl{goal} when the interaction ends with the
-trivially true proposition $\top$. The base case being the \kl{action} corresponding
-to the \kl(rule){axiom}/identity rule \kl(sfl){id}: $A\back A \step{} \top$.
+In general, the \kl{action} solves the \kl{goal} when the interaction ends with
+the trivially true proposition $\top$. The base case being the \kl{action}
+corresponding to the \kl(rule){axiom}/\kl(sequent){identity rule} \kl(sfl){id}:
+$A\back A \step{} \top$.
 
 \AP
 A \kl(dnd){forward} step, on the other hand, involves two (subterms of two)

@@ -46,7 +46,7 @@ automated simplification of \kl{goal}s in its backend.
 
 \AP
 The chapter is organized as follows: in \refsec{IEGs}, we retrace the origin of
-Oostra's syntax for \intro{intuitionistic existential graphs} (\reintro{IEGs})
+Oostra's syntax for \intro{intuitionistic existential graphs} (\intro{IEGs})
 as a natural generalization of the \emph{\kl{scroll}}, an \kl{icon} for
 implication introduced by Peirce that inspired the very creation of \kl{EGs}. In
 \refsec{Flowers}, we explain how flowers are really just a fun and
@@ -179,9 +179,9 @@ A first principle that Peirce derives from the \kl{scroll} is the following
 \begin{quote}
   [...] any insertion [is] permitted in the outer close, and any omission from
 the inner close. By applying the former clause of this rule to
-[\reffig{empty-antecedant}], we see that this \kl{scroll} with the outer close void,
+[\reffig{empty-antecedant}], we see that this scroll with the outer close void,
 justifies the assertion that if no matter what be true, C is in any case true;
-so that the two walls of the \kl{scroll}, when nothing is between them, fall
+so that the two walls of the scroll, when nothing is between them, fall
 together, collapse, disappear, and leave only the contents of the inner close
 standing, asserted, in the open field.
 \end{quote}
@@ -3345,15 +3345,16 @@ Our work brings several new contributions on top of those:
 
 There is a formal connection between the \kl{poll{\ua}} rule of the \kl{flower
 calculus}, and the \emph{absorption} rule $[\mathbf{A}]$ of the dyadic system
-$\Sigma_2$ of Andreoli, that handles the \kl{focusing} behavior of exponentials in
-linear logic \sidecite{andreoli1992}. Indeed, both rules duplicate a formula
-available in the (non-linear) \kl{context} of the sequent/location where the rule is
-applied, in order to enable further usage of the formula at said location. While
-the absorption rule removes the need for permutation-equivalences between proofs
-involving the \emph{\kl{contraction}} rule, the identity rule $[I]$ of $\Sigma_2$
-removes the need for the \emph{\kl{weakening}} rule by discarding the non-linear
-\kl{context} in one go, just as the \kl{epet} rule of the \kl{flower calculus} renders
-the \kl{crop} rule \kl{admissible}.
+$\Sigma_2$ of Andreoli, that handles the \kl{focusing} behavior of exponentials
+in linear logic \sidecite{andreoli1992}. Indeed, both rules duplicate a formula
+available in the (non-linear) \kl{context} of the sequent/location where the
+rule is applied, in order to enable further usage of the formula at said
+location. While the absorption rule removes the need for
+permutation-equivalences between proofs involving the \emph{\kl{contraction}}
+rule, the \kl(sequent){identity rule} $[I]$ of $\Sigma_2$ removes the need for
+the \emph{\kl{weakening}} rule by discarding the non-linear \kl{context} in one
+go, just as the \kl{epet} rule of the \kl{flower calculus} renders the \kl{crop}
+rule \kl{admissible}.
 
 Sonia Marin has noticed the connection between \emph{bipoles} in \kl{focused}
 proofs, and the class of geometric/\kl{coherent formulas}, where the former are seen
@@ -3398,14 +3399,15 @@ theory} instead of \kl{first-order logic}: this allows to store the partial
 is lost during the construction of flowers (but might be reconstructed from the
 sequence of graphical \kl{actions} and the initial \kl{goal}).
 
-Ayers also mentions the category-theoretical treatment of development calculi by
-Sterling and Harper \sidecite{sterling_algebraic_2017}, that abstracts from any
-particular type of \kl{judgment}. Thus it might be possible to fit the \kl{flower
-calculus} into this framework, by identifying the set of flowers $\flowers$ as a
-category of \emph{nested \kl{judgments}}\sidenote{Nested \kl{judgments} are already
-considered in some recent categorical semantics of \kl{type theory}, and in
-particular those in Sterling's thesis \cite{Sterling2022}. See also
-\cite{huang2023synthetic} for a (technical) introduction to the subject.}.
+Ayers also mentions the \kl{category-theoretical} treatment of development
+calculi by Sterling and Harper \sidecite{sterling_algebraic_2017}, that
+abstracts from any particular type of \kl{judgment}. Thus it might be possible
+to fit the \kl{flower calculus} into this framework, by identifying the set of
+flowers $\flowers$ as a category of \emph{nested \kl{judgments}}\sidenote{Nested
+\kl{judgments} are already considered in some recent categorical semantics of
+\kl{type theory}, and in particular those in Sterling's thesis
+\cite{Sterling2022}. See also \cite{huang2023synthetic} for a (technical)
+introduction to the subject.}.
 
 \paragraph{Subformula linking}
 

@@ -362,7 +362,7 @@ rule both non-local and non-\kl{invertible}.
     \conc{A}~~~\cbubble{\color{black}S} &\step{} &\cbubble{\conc{A}~~~\color{black}S} &\kl{f{+}{+}{\da}}
   \end{array}
   $$
-  \caption{$\mathbb{F}$-rules for red bubbles}
+  \caption{\kl{$\mathbb{F}$-rules} for red bubbles}
   \labfig{flow-red-bubbles}
 \end{marginfigure}
 
@@ -440,7 +440,7 @@ view and consider more exotic beasts: the adequately named
     \hypo{A}~~~\hbubble{\color{black}S} &\step{} &\hbubble{\hypo{A}~~~\color{black}S} &\kl{f{-}{-}{\da}} \vspace{1em}\\
   \end{array}
   $$
-  \caption{$\mathbb{F}$-rules for blue bubbles}
+  \caption{\kl{$\mathbb{F}$-rules} for blue bubbles}
   \labfig{flow-blue-bubbles}
 \end{marginfigure}
 
@@ -461,7 +461,7 @@ $B$''. Even worse, in the boolean algebra induced by set operations, $A \subset
 B$ is interpreted as $A$ \emph{implies} $B$\ldots~But we want to emphasize the
 duality between \kl{exclusion} and implication by mirroring the \kl{symbol}, as
 it is traditionally done with conjunction $\land$ and disjunction $\lor$.}),
-whose heating rules are those of $\limp$ where blue and red have been swapped
+whose \kl{heating rules} are those of $\limp$ where blue and red have been swapped
 (\reffig{heating-exclusion}).
 
 \begin{marginfigure}
@@ -471,7 +471,7 @@ whose heating rules are those of $\limp$ where blue and red have been swapped
     \conc{A \lsub B} &\step{} &{\bubble{\conc{A}}}~~~\bubble{\hypo{B}} &\kl{{\lsub}{+}}
   \end{array}
   $$
-  \caption{$\mathbb{H}$-rules for \kl{exclusion} $\lsub$}
+  \caption{\kl{$\mathbb{H}$-rules} for \kl{exclusion} $\lsub$}
   \labfig{heating-exclusion}
 \end{marginfigure}
 
@@ -679,8 +679,8 @@ the \emph{theoretical}:
     humans, rather than purely \kl{proof-theoretical} considerations. For
     instance, \kl{BJ} has some locality in the \kl{deep inference} sense because
     all rules are applicable in arbitrary \kl{contexts}; but we relax the
-    \emph{atomicity} constraint that reduces $\mathbb{I}$-rules and
-    $\mathbb{R}$-rules to their atomic version, because it would be
+    \emph{atomicity} constraint that reduces \kl{$\mathbb{I}$-rules} and
+    \kl{$\mathbb{R}$-rules} to their atomic version, because it would be
     unnecessarily restrictive for the purpose of building proofs manually.
     Still, we want to avoid as much as possible referring to generic objects
     that are not directly related to the manipulated data, in the spirit of
@@ -692,7 +692,7 @@ the \emph{theoretical}:
   \item[Linearity] 
     We consider an \kl{inference rule} to be \emph{linear} when it preserves the
     number of atomic formulas in \kl{solutions}. This is a strong requirement,
-    which for instance excludes the $\mathbb{I}$-rules of \kl{BJ} since they can
+    which for instance excludes the \kl{$\mathbb{I}$-rules} of \kl{BJ} since they can
     insert or remove (even numbers of) atoms. Thus we cannot achieve full
     linearity in that sense, but it is still interesting to maximize it.
     
@@ -719,7 +719,7 @@ the \emph{theoretical}:
     without resorting to linear logic. This chapter stems in great part from our
     lack of satisfaction with the asymmetry at work in the \kl{BJ} calculus,
     which looked quite unnatural. Of course we will not be able to completely
-    eliminate it, but it will be distilled into the flow rules governing the
+    eliminate it, but it will be distilled into the \kl{flow rules} governing the
     \emph{porosity} of \kl{bubbles} that were hinted at in \refsec{colors},
     rather than through the arbitrary restriction of \kl{sequents} to one
     conclusion\sidenote{Whether it is enforced in the syntax of \kl{sequents}
@@ -729,14 +729,14 @@ the \emph{theoretical}:
     Our treatment of \kl{dual-intuitionistic} and \kl{bi-intuitionistic} logic
     through blue \kl{bubbles} is also motivated by this quest for symmetry. It
     should be noted that although we use naming conventions for rules that
-    resemble those of \kl{CoS} (e.g. with $\mathbb{I}$-rules), we do not aim for
+    resemble those of \kl{CoS} (e.g. with \kl{$\mathbb{I}$-rules}), we do not aim for
     a perfect symmetry where one can get a complete calculus by simply taking
     the dual of each rule. Thus we will content ourselves with the
     hypothesis/conclusion symmetry coming from \kl{sequent calculus}.
     Interestingly, the calculus \intro{ISgq} of Tiu for \kl{intuitionistic}
     \kl{predicate logic} does the opposite, by having a perfect dual system
     \intro{cISgq}, but no symmetries among its \kl{switch rules} (the equivalent of
-    our $\mathbb{F}$-rules) \sidecite{tiu_local_2006}.
+    our \kl{$\mathbb{F}$-rules}) \sidecite{tiu_local_2006}.
 \end{description}
 
 In the next section we present a core calculus called \kl{system~B} that
