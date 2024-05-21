@@ -597,7 +597,7 @@ $\flower{\gamma}{\garden{{}}{{}}}$ for the flower with one empty \kl{petal}.
 Note that the order of precedence of operators is
 $\mathop{,} < \garden{{}}{{}} < \mathop{;} < \mathop{\flower{}{}}$
 so that for instance, the string
-$$\flower{\garden{x_1, x_2}{\phi_1, \phi_2}}{\garden{y_1}{\psi, (\flower{\gamma}{\Delta})} \sep \garden{y_2}{\Phi}}$$
+$$\flower{\garden{x_1, x_2}{\phi_1, \phi_2}}{\garden{y_1}{\psi, (\flower{\gamma}{\delta})} \sep \garden{y_2}{\Phi}}$$
 is parsed as the flower
 % $$\left(\flower{\left(\garden{\{x_1, x_2\}}{\{\phi_1,
 % \phi_2\}}\right)}{\{\left(\garden{\{y_1\}}{\{\psi,
@@ -3015,14 +3015,16 @@ comments are in order:
   selected flowers are juxtaposed in the same garden.
 \end{description}
 
-Since every \kl{Proof} \kl{action} implements a $\Nature$-rule, it is guaranteed to be
-\emph{\kl{invertible}}: the user never needs to \kl{Undo} a \kl{Proof} \kl{action} in order to
-complete a proof, because it always preserves the provability of the \kl{goal}. Of
-course it might still be desirable to do so in specific cases, such as
-\kl{Import} \kl{actions} that may create unneeded copies of flowers\sidenote{In
-this specific case, one might want to relax the atomic restriction on
-\kl{Justify} \kl{actions}, in order to avoid the recourse to \kl{Undo}
-\kl{actions}, which can only be performed at the top of the history stack.}.
+Since every \kl{Proof} \kl{action} implements a $\Nature$-rule, it is guaranteed
+to be \emph{\kl{invertible}}: the user never needs to \kl{Undo} a \kl{Proof}
+\kl{action} in order to complete a proof, because it always preserves the
+provability of the \kl{goal}. Of course it might still be desirable to do so in
+specific cases, such as \kl{Import} \kl{actions} that may create unneeded copies
+of flowers\sidenote{In this specific case, one might want to relax the atomic
+restriction on \kl{Justify} \kl{actions}, in order to avoid the recourse to
+\kl{Undo} \kl{actions}, which can only be performed at the top of the history
+stack.}. Said differently, \kl{Proof} \kl{actions} never \emph{strengthen} the
+goal.
 
 \paragraph{\kl{Edit} actions}
 
@@ -3071,9 +3073,11 @@ Like the edit mode of \texttt{vim}, \kl{Edit} \kl{actions} are used to \emph{ins
   as any area marked as \texttt{grown}.
 \end{description}
 
-Since every \kl{Edit} \kl{action} implements a $\Culture$-rule, it is guaranteed to be
-\emph{non-\kl{invertible}}: the user might need to \kl{Undo} an \kl{Edit} \kl{action} in order to
-complete a proof, because it may break the provability of the \kl{goal}.
+Since every \kl{Edit} \kl{action} implements a $\Culture$-rule, it is guaranteed
+to be \emph{non-\kl{invertible}}: the user might need to \kl{Undo} an \kl{Edit}
+\kl{action} in order to complete a proof, because it may break the provability
+of the \kl{goal}. In other words, \kl{Edit} \kl{actions} always (strictly)
+\emph{strengthen} the goal.
 
 \paragraph{\intro{Navigation} mode}
 
