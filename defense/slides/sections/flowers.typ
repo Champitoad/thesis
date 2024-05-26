@@ -47,8 +47,8 @@
         $A and B$,
         $not A$,
       ),
-      text(size: 30pt)[$->$],
-      grid(
+      uncover("2-", text(size: 30pt)[$->$]),
+      uncover("2-", grid(
         columns: (5cm, 5cm),
         align: center,
         inset: 15pt,
@@ -58,14 +58,17 @@
         grid.hline(),
         $A or B$,
         $A #limp B$,
-      )
+      ))
     )
   ]
-
-  - "_Illative transformations_" = inference rules on #alert[locations]
 ]
 
-#slide(title: [Example: _modus ponens_])[
+#slide(title: "Illative transformations")[
+  #v(-3cm)
+  #centerFocus[
+    Inference rules on #alert[locations]
+  ]
+  #v(1.5cm)
   $
     #uncover("1-")[$a #juxt #cut(inv: true, $a #juxt #cut($b$)$)$]
     #uncover("2-")[$#xrule[Deiteration] a #juxt #cut(inv: true, $#phantom[a #juxt] #cut($b$)$)$]
@@ -158,6 +161,19 @@
   #only("4")[
     #link("https://en.wikipedia.org/wiki/Make_love,_not_war")[_"Make love, not war"_]
   ]
+]
+
+#slide(title: "Pollination")[
+  #set align(center)
+  #grid(
+    columns: (auto, auto),
+    inset: 5mm,
+    align: bottom,
+    image("../images/cross-pollination.png", width: 50%, fit: "contain"),
+    image("../images/self-pollination.png", width: 47%, fit: "contain"),
+    "Cross-pollination",
+    "Self-pollination",
+  )
 ]
 
 #slide(title: [Flower Calculus #title-right[@flower-calculus]])[

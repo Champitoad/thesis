@@ -42,6 +42,10 @@
   }
 }
 
+#let bubble(content) = context {
+  circle(inset: 5pt, stroke: text.fill, content)
+}
+
 #let subst(vt, vu, vx) = {
   $vt[vu\/vx]$
 }

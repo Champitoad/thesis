@@ -1,3 +1,5 @@
+#import "../defense-template.typ": *
+
 #new-section-slide[Contributions]
 
 #slide(title: [Textual vs. #titleWord[Graphical]])[

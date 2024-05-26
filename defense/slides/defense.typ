@@ -21,13 +21,13 @@
 
 #part-slide[Introduction]
 
-// #include "sections/context.typ"
-// #include "sections/contrib.typ"
+#include "sections/context.typ"
+#include "sections/contribs.typ"
 
 #part-slide[Symbolic Manipulations]
 
-// #include "sections/pba.typ"
-// #include "sections/sfl.typ"
+#include "sections/pba.typ"
+#include "sections/sfl.typ"
 
 #part-slide[Iconic Manipulations]
 

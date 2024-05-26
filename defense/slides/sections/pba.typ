@@ -1,3 +1,5 @@
+#import "../defense-template.typ": *
+
 #new-section-slide[Proof-by-Action]
 
 #focus-slide[

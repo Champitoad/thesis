@@ -1,3 +1,5 @@
+#import "../defense-template.typ": *
+
 #new-section-slide[Context]
 
 #slide(title: [Logic])[
