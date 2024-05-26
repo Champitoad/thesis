@@ -16,6 +16,7 @@
 #let forw = math.class("relation", text(font: "STIX Two Math", "⊛"))
 
 #let step = spar(spacing: 3mm, math.class("relation", sym.arrow.r))
+#let steps = spar(spacing: 3mm, math.class("relation", math.attach(sym.arrow.r, tr: $*$)))
 
 #let eqdef = math.class("relation", sym.eq.delta)
 #let simeq = scale(x: 150%, y: 150%, reflow: true, math.class("relation", sym.tilde.eq))
@@ -36,7 +37,9 @@
 #let cfill(ctx, content) = {
   ctx
   h(1pt)
-  square(inset: 5pt, content)
+  context {
+    rect(inset: 5pt, stroke: text.fill, content)
+  }
 }
 
 #let subst(vt, vu, vx) = {
@@ -52,7 +55,7 @@
 #let sys(name) = text(font: "Fira Code", name)
 
 // Inference rule name
-#let irule(name) = text(font: "New Computer Modern Sans", name)
+#let irule(name) = text(font: "Libertinus Sans", name)
 
 
 /********** Misc **********/
