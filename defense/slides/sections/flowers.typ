@@ -8,7 +8,7 @@
   #v(2em)
   #pause
   #set text(size: 26pt)
-  Key idea: #alert[*space*] is _polarized_, not *objects*
+  Key insight: #alert[*space*] is _polarized_, not *objects*
   // #v(2em)
 
   // #pause
