@@ -3,28 +3,25 @@
 #new-section-slide[Flower Calculus]
 
 #slide(title: "Polarity meets Space")[
-  - Bubble calculi are not *fully iconic* (need for _symbolic_ connectives)
-
-
+  #set align(center)
+  Bubble calculi are not *fully iconic* (need for _symbolic_ connectives)
   #v(2em)
   #pause
-  #align(center)[
-    #set text(size: 26pt)
-    Key idea: #alert[*space*] is _polarized_, not *objects*
-  ]
-  #v(2em)
+  #set text(size: 26pt)
+  Key idea: #alert[*space*] is _polarized_, not *objects*
+  // #v(2em)
 
-  #pause
+  // #pause
   
-  - (Peirce, 1896): *existential graphs (EGs)* for _classical_ logic
+  // - (Peirce, 1896): *existential graphs (EGs)* for _classical_ logic
   
-  #pause
+  // #pause
   
-  - @oostra_graficos_2010@minghui_graphical_2019: EGs for _intuitionistic_ logic
+  // - @oostra_graficos_2010@minghui_graphical_2019: EGs for _intuitionistic_ logic
 
-  #pause
+  // #pause
   
-  #thus *Flower calculus*: intuitionistic variant that is #alert[analytic]
+  // #thus *Flower calculus*: intuitionistic variant that is #alert[analytic]
 ]
 
 #slide(title: [Existential Graphs #title-right[@peirce_prolegomena_1906]])[
@@ -47,7 +44,7 @@
         $A and B$,
         $not A$,
       ),
-      uncover("2-", text(size: 30pt)[$->$]),
+      uncover("2-", text(size: 30pt)[$arrow.r.triple$]),
       uncover("2-", grid(
         columns: (5cm, 5cm),
         align: center,

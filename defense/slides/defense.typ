@@ -15,7 +15,7 @@
     #v(1em)
     PhD defense, Palaiseau
     
-    Supervised by Benjamin Werner
+    Supervised by Benjamin Werner & Pierre-Yves Strub
   ]
 )
 

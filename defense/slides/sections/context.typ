@@ -208,7 +208,7 @@
 //   ]
 // ]
 
-#slide(title: [#titleWord[Inference] rules])[
+#slide(title: [Mathematical logic])[
   $
     #proof-tree(rule(
       [$x "is" Q$],
@@ -238,7 +238,7 @@
   #centerFocus[
     Maths as a huge *game*
 
-    Goal: to #titleWord[prove] #titleWord[theorems] by following rules
+    Goal: to _#titleWord[prove] #titleWord[theorems]_ by following _#titleWord[inference] rules_
   ]]
   
   #uncover("5-")[

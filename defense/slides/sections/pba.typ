@@ -28,7 +28,7 @@
   ]
 ]
 
-#slide(title: [#sys[coq-actema]])[
+#slide(title: [#sys[coq-actema] #title-right[(Bouverot, Donato, Najjar, Strub, Werner)]])[
   #set align(center)
   #image("../images/archi.png", width: 65%, height: 125%, fit: "stretch")
 ]

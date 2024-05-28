@@ -34,7 +34,7 @@
         [*1st contribution:* build proofs by #alert[direct manipulation] of _formulas_],
         [
           #thus  No need to _memorize_ the rules \
-          #thus  No risks of _errors_
+          #thus  More _straightforward_ interaction
         ]
       )
     ]

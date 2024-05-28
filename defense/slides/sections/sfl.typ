@@ -13,31 +13,50 @@
   *Idea:* bring matching subformulas through #alert[switch] rules
   
   #{
-    set text(size: 18.5pt)
+    set text(size: 16.75pt)
     set math.cases(gap: 0.5em)
+  
+    let s2 = alternatives-match((
+      "-2": $#hypo($#select($A$)$) #back A$,
+      "3-": identity($#hypo($#select($A$)$) #back A$)
+    ))
 
+    let s3 = alternatives-match((
+      "-3": $#limp top$,
+      "4-": unit($#limp top$)
+    ))
+  
     $
+    #only(1)[$
+      &#phantom(step) quad #conc($#hypo($#select($A$) and B$) #back B and (#select($A$) or C) and D$)
+    $] \
+
+    #uncover("2-")[$
     #switch[switch] &cases(
       #phantom(step) #conc($#hypo($#select($A$) and B$) #back #switch($B and$) (#select($A$) or C) and D$),
       #step #conc($B and (#hypo($#select($A$) and B$) #back (#select($A$) or C) #switch[$and D$])$),
       #step #conc($B and (#hypo($#select($A$) and B$) #back #select($A$) #switch($or C$)) and D$),
       #step #conc($B and ((#hypo($#select($A$) #switch($and B$)$) #back #select($A$)) or C) and D$),
-      #step #conc($B and ((B #limp (#identity($#hypo($#select($A$)$) #back #select($A$)$))) or C) and D$),
-    ) \
+      #step #conc($B and ((B #limp #s2) or C) and D$),
+    ) $] \
     
+    #uncover("3-")[$
     #identity[identity] &cases(
-      #step #conc($B and ((B #unit($#limp top$)) or C) and D$),
-    ) \
+      #step #conc($B and ((B #s3) or C) and D$),
+    ) $] \
 
+    #uncover("4-")[$
     #unit[unit elimination] &cases(
       #step #conc($B and (#unit($top or$) C) and D$),
       #step #conc($B #unit($and top$) and D$),
       #step #conc($B and D$),
-    ) \
+    ) $]
     $
   }
   
-  Variant of the *Calculus of Structures* @Guglielmi1999ACO
+  #uncover(5)[
+    Variant of the *Calculus of Structures* @Guglielmi1999ACO
+  ]
 ]
 
 #slide(title: [Linking under quantifiers #title-right[@dnd-tactic]])[
@@ -86,7 +105,7 @@
       inset: 8pt,
       alternatives-match((
         "1-5": [$#phantom(step) #conc($#hypo($#ex1 forall x. #select($R(x,y)$)$) #back forall a. exists b. #select($R(a,b)$)$)$],
-        "6-":  [$#phantom(step) #conc($forall a. exists b. #select($R(a,b)$) #back #hypo($exists y. forall x. #select($R(x,y)$)$)$)$],
+        "6-":  [$#phantom(step) #conc($#hypo($forall a. exists b. #select($R(a,b)$)$) #back exists y. forall x. #select($R(x,y)$)$)$],
       )),
       uncover("4-5")[$#step #conc($#conc($forall y. (#hypo($forall x. #select($R(x,y)$)$) #back #switch($forall a.$) exists b. #select($R(a,b)$))$)$)$],
       uncover("4-5")[$
@@ -185,11 +204,11 @@
 ]
 
 #slide(title: [Conclusion])[
-  - Based on the solid proof theory of SFL
-
-  - #sys[coq-actema] still in development, but _already usable_ \
+  - #sys[*coq-actema*] still in development, but _already usable_ \
     #thus follow install instructions on #link("https://github.com/Champitoad/coq-actema")[GitHub]!
   
+  - Based on the solid proof theory of *subformula linking*
+
   - Next step: exposure to _real users_
 
     - *Beginners/students:* introductory logic/proof assistants course

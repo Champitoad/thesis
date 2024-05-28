@@ -22,9 +22,11 @@
   ]
 ]
 
-#slide(title: "Context scoping")[
+#slide(title: "Bubbles")[
+  #v(-2em)
+  #centerFocus[Natural way to depict #alert[context scoping]]
   #side-by-side(columns: (1.5fr, 1fr))[
-    #image("../images/context-scoping.png")
+    #image("../images/context-scoping.png", width: 90%)
   ][
     Two main inspirations:
 
@@ -65,19 +67,19 @@
       #conc($#bubble($#hypo($A$) med med #text(fill: black, $sigma$)$)$)
     $],
     select((2,3,4,5))[$
-      #hypo($A$) med med #conc($#bubble(text(fill: black, $sigma$))$)
+      #conc($A$) med med #hypo($#bubble(text(fill: black, $sigma$))$)
       step
-      #conc($#bubble($#hypo($A$) med med #text(fill: black, $sigma$)$)$)
+      #hypo($#bubble($#conc($A$) med med #text(fill: black, $sigma$)$)$)
     $],
     select((4,))[$
-      #hypo($A$) med med #conc($#bubble(text(fill: black, $sigma$))$)
+      #conc($A$) med med #conc($#bubble(text(fill: black, $sigma$))$)
       step
-      #conc($#bubble($#hypo($A$) med med #text(fill: black, $sigma$)$)$)
+      #conc($#bubble($#conc($A$) med med #text(fill: black, $sigma$)$)$)
     $],
     select((4,))[$
-      #hypo($A$) med med #conc($#bubble(text(fill: black, $sigma$))$)
+      #hypo($A$) med med #hypo($#bubble(text(fill: black, $sigma$))$)
       step
-      #conc($#bubble($#hypo($A$) med med #text(fill: black, $sigma$)$)$)
+      #hypo($#bubble($#hypo($A$) med med #text(fill: black, $sigma$)$)$)
     $],
   )
   
