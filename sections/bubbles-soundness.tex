@@ -200,7 +200,7 @@ formulas have been dualized (\refdef{dual-formula}).
 \end{definition}
 
 \begin{lemma}[Involutivity]\lablemma{involutivity}
-  $\soldual{\soldual{I}} = I$.
+  $\solddual{I} = I$.
 \end{lemma}
 \begin{proof}
   By induction on $\sdepth{I}$.
@@ -210,14 +210,14 @@ formulas have been dualized (\refdef{dual-formula}).
     \item[Unsaturated solution] Suppose $I = \Gamma \seq \Delta$. Then by
     definition we have $\soldual{(\soldual{\Gamma \seq \Delta})} =
     \soldual{(\soldual{\Delta} \seq \soldual{\Gamma})} =
-    \soldual{\soldual{\Gamma}} \seq \soldual{\soldual{\Delta}}$, and we conclude
+    \solddual{\Gamma} \seq \solddual{\Delta}$, and we conclude
     by IH.
     \item[Saturated solution] Suppose $I = \Gamma \piq{\cS}
     \Delta$. Then by definition we have $\soldual{(\soldual{\Gamma
     \piq{\cS} \Delta})} = \soldual{(\soldual{\Delta}
     \piq{\soldual{\cS}} \soldual{\Gamma})} =
-    \soldual{\soldual{\Gamma}} \piq{\soldual{\soldual{\cS}}}
-    \soldual{\soldual{\Delta}}$, and we conclude by IH.
+    \solddual{\Gamma} \piq{\solddual{\cS}}
+    \solddual{\Delta}$, and we conclude by IH.
   \end{description}
 \end{proof}
 
@@ -228,7 +228,7 @@ formulas have been dualized (\refdef{dual-formula}).
   There is a bijection among the rules of \kl{system~B}, that matches each rule
   $\irule{r}{S}{T}$ to its dual $\irule{\soldual{r}}{\soldual{S}}{\soldual{T}}$.
   By involutivity (\reflemma{involutivity}), this bijection is self-inverse:
-  $\soldual{\soldual{r}} = r$. It is most easily observed in
+  $\solddual{r} = r$. It is most easily observed in
   the graphical presentation of the rules (\reffig{graphical-B}), where looking
   for the dual rule boils down to swapping red and blue (and mirroring logical
   connectives). The mapping goes as follows:
@@ -299,7 +299,7 @@ formulas have been dualized (\refdef{dual-formula}).
 \begin{proof}
   By duality (\reffact{duality}) we have $\soldual{\psint{\soldual{T}}} \sementX
   \soldual{\psint{\soldual{S}}}$, and then by \reflemma{int-duality}
-  $\nsint{\soldual{\soldual{T}}} \sementX \nsint{\soldual{\soldual{S}}}$. We
+  $\nsint{\solddual{T}} \sementX \nsint{\solddual{S}}$. We
   conclude by involutivity (\reflemma{involutivity}).
 \end{proof}
 

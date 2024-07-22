@@ -7,3 +7,4 @@ _minted*
 *.fls
 flowers.pdf
 plan-intro.md
+.DS_Store
