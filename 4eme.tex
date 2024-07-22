@@ -1,0 +1,193 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Modèle pour la 4ème de couverture des thèses préparées à l'Institut Polytechnique de Paris, basé sur le modèle produit par Nikolas STOTT / Template for back cover of thesis made at Institut Polytechnique de Paris, based on the template made by Nikolas STOTT
+%%% Mis à jour par Aurélien ARNOUX (École polytechnique)/ Updated by Aurélien ARNOUX (École polytechnique)
+%%% Les instructions concernant chaque donnée à remplir sont données en bloc de commentaire / Rules to fill this file are given in comment blocks
+%%% ATTENTION Ces informations doivent tenir sur une seule page une fois compilées / WARNING These informations must contain in no more than one page once compiled
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Version du 28 avril 2020 : utilisation de .png au lieu de .jpg pour les logos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{geometry}
+\geometry{
+left=16mm,
+top=30mm,
+right=16mm,
+bottom=30mm
+}
+\usepackage{xcolor}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{multicol}
+\setlength{\columnseprule}{0pt}
+\setlength\columnsep{10pt}
+
+\usepackage[french]{babel}
+
+\label{form}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Formulaire / Form
+%%% Remplacer les paramètres des \newcommand par les informations demandées / Replace \newcommand parameters by asked informations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\logoEd}{EDIPP}															            %% Logo de l'école doctorale. Indiquer le sigle (EDIPP, EDMH) / Doctoral school logo. Indicate the acronym : EDMH, EDIPP
+\newcommand{\PhDTitleFR}{Inférence Profonde pour la Démonstration Graphique de Théorèmes}		%% Titre de la thèse en français / Thesis title in french
+\newcommand{\keywordsFR}{Assistants de preuve, Théorie de la démonstration, Interfaces humain-machine, Mathématiques formelles, Inférence profonde, Manipulation directe}														%% Mots clés en français, séprarés par des , / Keywords in french, separated by ,
+\newcommand{\abstractFR}{
+    Les assistants de preuve sont des logiciels permettant de vérifier
+	rigoureusement des raisonnements mathématiques. Ils peuvent être généraux
+	(comme Coq, Lean, Isabelle...) ou plus spécialisés (comme EasyCrypt). Ils
+	permettent un niveau de précision qui certifie qu'aucune erreur ne peut se
+	produire, mais restent difficiles d'utilisation.
+	
+	Nous proposons un nouveau paradigme de construction de preuves formelles par
+	actions effectuées dans une interface graphique, afin de permettre une
+	utilisation plus confortable et plus intuitive. Notre paradigme s'appuie sur
+	des principes de manipulation directe, combinant des techniques
+	d'interactions anciennes (Proof-by-Pointing) et récentes (Proof-by-Linking)
+	qui exploitent les dernières avancées en théorie de la démonstration par
+	inférence profonde. Nous implantons le paradigme dans un prototype
+	d'interface graphique appelé Actema, que nous intégrons par la suite à
+	l'assistant de preuves Coq en concevant le plugin coq-actema. Ce dernier
+	offre aux utilisateurs de Coq la possibilité d'intégrer des preuves
+	graphiques dans des développements textuels existants.
+	
+	Puis nous explorons une série de systèmes d'inférence profonde qui donnent
+	plus de structure à la notion de but logique. Ces systèmes ont en commun de
+	pouvoir représenter les buts de deux manières alternatives : soit
+	textuellement au travers d'une syntaxe inductive standard, soit
+	graphiquement à l'aide d'une notation métaphorique adaptée à la manipulation
+	directe.
+	
+	La première famille de systèmes, appelée calculs de bulles, est une
+	reformulation topologique de la théorie des séquents imbriqués. Elle permet
+	un partage efficace des contextes communs entre sous-buts, facilitant la
+	factorisation des étapes de raisonnement avant et arrière. Le second
+	système, appelé calcul des fleurs, est un raffinement intuitionniste de la
+	théorie des graphes existentiels de C. S. Peirce. Les deux types de systèmes
+	sont démontrés analytiques et complètement réversibles, ce qui les rend
+	adaptés à des techniques d'automatisation de la preuve. Nous développons
+	finalement le Flower Prover, un prototype d'interface graphique pour la
+	construction interactive de démonstrations basé sur le calcul des fleurs.}
+%% Résumé en français / abstract in french
+
+\newcommand{\PhDTitleEN}{
+	Deep Inference for Graphical Theorem Proving
+}	%% Titre de la thèse en anglais / Thesis title in english
+\newcommand{\keywordsEN}{
+	Proof assistants, Proof theory, Human-computer interfaces, Formal mathematics, Deep inference, Direct manipulation
+}	%% Mots clés en anglais, séprarés par des , / Keywords in english, separated by ,
+\newcommand{\abstractEN}{
+	Proof assistants are software systems that allow for the precise checking of
+	mathematical reasoning. They can be general purpose (like Coq, Lean,
+	Isabelle...) or more specialized like EasyCrypt. They enable a level of accuracy
+	which certifies that no error can occur, but remain difficult to use.
+	
+	We propose a new paradigm for constructing formal proofs through actions
+	performed in a graphical user interface (GUI), in order to enable a more
+	comfortable and intuitive use. Our paradigm builds upon direct manipulation
+	principles, combining both old (Proof-by-Pointing) and new
+	(Proof-by-Linking) interaction techniques that exploit recent advances in
+	deep inference proof theory. We implement the paradigm in a prototype of GUI
+	called Actema, which we subsequently integrate into the Coq proof assistant
+	by designing the coq-actema plugin. The latter offers Coq users the ability
+	to integrate graphical proofs into existing textual developments.
+	
+	We then explore a series of deep inference proof systems that give more
+	structure to the notion of logical goal. These systems share the ability to
+	represent goals in two alternative ways: either textually through a standard
+	inductive syntax, or graphically using a metaphorical notation well-suited
+	to direct manipulation.
+	
+	The first family of systems, called bubble calculi, is a topological
+	reformulation of the theory of nested sequents. It allows for efficient
+	sharing of hypotheses and conclusions among subgoals, facilitating the
+	factorization of both forward and backward proof steps. The second system,
+	called flower calculus, is an intuitionistic refinement of C. S. Peirce's
+	theory of existential graphs. Both types of systems are shown to be analytic
+	and fully invertible, making them amenable to proof automation techniques.
+	We finally develop the Flower Prover, another prototype of GUI for
+	interactive proof construction based on the flower calculus. }
+	%% Résumé en anglais / abstract in english
+
+\label{layout}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Mise en page / Page layout      
+%%% NE RIEN MODIFIER / DO NOT MODIFY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\pagestyle{empty}
+
+%%% Logo de l'école doctorale. Le nom du fichier correspond au sigle de l'ED / Doctoral school logo. Filename correspond to doctoral school acronym
+%%% Les noms valides sont / Valid names are : EDMH, (EDIPP)
+\begin{textblock*}{61mm}(16mm,3mm)
+	\noindent\includegraphics[height=24mm]{media/ed/\logoEd.png}
+\end{textblock*}
+
+
+
+%%%Titre de la thèse en français / Thesis title in french
+\begin{center}
+\fcolorbox{black}{white}{\parbox{0.95\textwidth}{
+{\bf Titre:} \PhDTitleFR 
+\medskip
+
+%%%Mots clés en français, séprarés par des ; / Keywords in french, separated by ;
+{\bf Mots clés:} \keywordsFR 
+\vspace{-2mm}
+
+%%% Résumé en français / abstract in french
+\begin{multicols}{2}
+{\bf Résumé:} 
+\abstractFR 
+\end{multicols}
+}}
+\end{center}
+
+\vspace*{0mm}
+
+%%%Titre de la thèse en anglais / Thesis title in english
+\begin{center}
+\fcolorbox{black}{white}{\parbox{0.95\textwidth}{
+{\bf Title:} \PhDTitleEN 
+
+\medskip
+
+%%%Mots clés en anglais, séprarés par des ; / Keywords in english, separated by ;
+{\bf Keywords:}  \keywordsEN %%3 à 6 mots clés%%
+\vspace{-2mm}
+\begin{multicols}{2}
+	
+%%% Résumé en anglais / abstract in english
+{\bf Abstract:} 
+\abstractEN
+\end{multicols}
+}}
+\end{center}
+
+
+\begin{textblock*}{161mm}(10mm,270mm)
+\color{black}
+{\bf\noindent Institut Polytechnique de Paris	         }
+
+\noindent
+\noindent 91120 Palaiseau, France 
+\end{textblock*}
+
+\begin{textblock*}{20mm}(175mm,265mm)
+\includegraphics[width=20mm]{media/IPPARIS-petit}
+\end{textblock*}
+
+\end{document}
