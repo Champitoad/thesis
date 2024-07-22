@@ -8,3 +8,5 @@ _minted*
 flowers.pdf
 plan-intro.md
 .DS_Store
+*.synctex.gz
+*.fdb_latexmk
