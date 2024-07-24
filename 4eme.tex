@@ -77,7 +77,8 @@ bottom=30mm
 	sont démontrés analytiques et complètement réversibles, ce qui les rend
 	adaptés à des techniques d'automatisation de la preuve. Nous développons
 	finalement le Flower Prover, un prototype d'interface graphique pour la
-	construction interactive de démonstrations basé sur le calcul des fleurs.}
+	construction interactive de démonstrations basé sur le calcul des fleurs.
+}
 %% Résumé en français / abstract in french
 
 \newcommand{\PhDTitleEN}{
@@ -87,37 +88,9 @@ bottom=30mm
 	Proof assistants, Proof theory, Human-computer interfaces, Formal mathematics, Deep inference, Direct manipulation
 }	%% Mots clés en anglais, séprarés par des , / Keywords in english, separated by ,
 \newcommand{\abstractEN}{
-	Proof assistants are software systems that allow for the precise checking of
-	mathematical reasoning. They can be general purpose (like Coq, Lean,
-	Isabelle...) or more specialized like EasyCrypt. They enable a level of accuracy
-	which certifies that no error can occur, but remain difficult to use.
-	
-	We propose a new paradigm for constructing formal proofs through actions
-	performed in a graphical user interface (GUI), in order to enable a more
-	comfortable and intuitive use. Our paradigm builds upon direct manipulation
-	principles, combining both old (Proof-by-Pointing) and new
-	(Proof-by-Linking) interaction techniques that exploit recent advances in
-	deep inference proof theory. We implement the paradigm in a prototype of GUI
-	called Actema, which we subsequently integrate into the Coq proof assistant
-	by designing the coq-actema plugin. The latter offers Coq users the ability
-	to integrate graphical proofs into existing textual developments.
-	
-	We then explore a series of deep inference proof systems that give more
-	structure to the notion of logical goal. These systems share the ability to
-	represent goals in two alternative ways: either textually through a standard
-	inductive syntax, or graphically using a metaphorical notation well-suited
-	to direct manipulation.
-	
-	The first family of systems, called bubble calculi, is a topological
-	reformulation of the theory of nested sequents. It allows for efficient
-	sharing of hypotheses and conclusions among subgoals, facilitating the
-	factorization of both forward and backward proof steps. The second system,
-	called flower calculus, is an intuitionistic refinement of C. S. Peirce's
-	theory of existential graphs. Both types of systems are shown to be analytic
-	and fully invertible, making them amenable to proof automation techniques.
-	We finally develop the Flower Prover, another prototype of GUI for
-	interactive proof construction based on the flower calculus. }
-	%% Résumé en anglais / abstract in english
+	\input{abstract.tex}
+}
+%% Résumé en anglais / abstract in english
 
 \label{layout}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

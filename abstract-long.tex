@@ -1,0 +1,42 @@
+Proof assistants are software systems that allow for the precise checking of
+mathematical reasoning. They can be general purpose (like Coq, Lean,
+Isabelle...) or more specialized like EasyCrypt. They enable a level of accuracy
+which certifies that no error can occur, but remain difficult to use.
+
+We propose a new paradigm of formal proof construction through actions performed
+in a graphical user interface, to enable a more comfortable and intuitive use.
+Our paradigm builds upon direct manipulation principles, combining both old
+(Proof-by-Pointing) and new (Proof-by-Linking) interaction techniques that
+exploit recent advances in deep inference proof theory. We implement this
+paradigm in a prototype of graphical user interface called Actema, using modern
+web-based technologies. We also design a generic protocol for plugging Actema on
+any proof system that supports first-order intuitionistic logic. This protocol
+is deployed inside the Coq proof assistant through the coq-actema plugin,
+offering users the ability to integrate graphical proofs into existing textual
+developments.
+
+Then, driven by the will to improve the various interaction techniques of Actema
+in a unified formalism, we explore a series of deep inference proof systems that
+give more structure to the notion of logical goal. These systems share the
+ability to represent goals in two alternative ways: either textually through a
+standard inductive syntax, or graphically through a metaphorical notation
+well-suited to direct manipulation.
+
+The first family of systems, called bubble calculi, is an extension of the
+theory of nested sequents, that we reframe as local rewriting systems with a
+graphical and topological interpretation. Bubble calculi enable an efficient
+sharing of contexts between subgoals, making them well-suited to the
+factorization of both forward and backward reasoning steps in proofs. The second
+system, called flower calculus, is an intuitionistic refinement of C.S. Peirce's
+theory of existential graphs, understood as a system for interactive,
+goal-directed proof building. It provides more iconic and economical means of
+reasoning than bubble calculi, by exposing a small number of expressive rules
+that apply to the goals themselves, removing the need for logical connectives.
+Both types of systems are shown to be analytic and fully invertible, making them
+amenable to proof automation techniques.
+
+We finally go back to practical experimentation by designing and implementing
+the Flower Prover, another web-based prototype of GUI for interactive proof
+building based on the flower calculus. An innovative feature of the Flower
+Prover is that it works well on modern mobile devices, thanks to its responsive
+layout and first-class support for touch interactions.

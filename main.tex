@@ -55,6 +55,9 @@
 \makeindex[name=system, title=Proof System Index, columns=3, intoc]
 \makeindex[name=software, title=Software System Index, columns=3, intoc]
 
+% To include front and back matter
+\usepackage{pdfpages}
+
 \input{config}
 
 \begin{document}
@@ -63,11 +66,11 @@
 %	BOOK INFORMATION
 %----------------------------------------------------------------------------------------
 
-\titlehead{}
-\title{Deep Inference for Graphical Theorem Proving}
-\author[PD]{Pablo Donato}
-\date{March 9, 2024}
-\publishers{}
+% \titlehead{}
+% \title{Deep Inference for Graphical Theorem Proving}
+% \author[PD]{Pablo Donato}
+% \date{March 9, 2024}
+% \publishers{}
 
 %----------------------------------------------------------------------------------------
 
@@ -77,43 +80,36 @@
 %	COPYRIGHT PAGE
 %----------------------------------------------------------------------------------------
 
-\makeatletter
-\uppertitleback{\@titlehead} % Header
+% \makeatletter
+% \uppertitleback{\@titlehead} % Header
 
-\lowertitleback{
-	\textbf{Disclaimer} \\
-	You can edit this page to suit your needs. For instance, here we have a no copyright statement, a colophon and some other information. This page is based on the corresponding page of Ken Arroyo Ohori's thesis, with minimal changes.
+% \lowertitleback{
+% 	\textbf{Disclaimer} \\
+% 	You can edit this page to suit your needs. For instance, here we have a no copyright statement, a colophon and some other information. This page is based on the corresponding page of Ken Arroyo Ohori's thesis, with minimal changes.
 	
-	\medskip
+% 	\medskip
 	
-	\textbf{No copyright} \\
-	\cczero\ This book is released into the public domain using the CC0 code. To the extent possible under law, I waive all copyright and related or neighbouring rights to this work.
+% 	\textbf{No copyright} \\
+% 	\cczero\ This book is released into the public domain using the CC0 code. To the extent possible under law, I waive all copyright and related or neighbouring rights to this work.
 	
-	To view a copy of the CC0 code, visit: \\\url{http://creativecommons.org/publicdomain/zero/1.0/}
+% 	To view a copy of the CC0 code, visit: \\\url{http://creativecommons.org/publicdomain/zero/1.0/}
 	
-	\medskip
+% 	\medskip
 	
-	\textbf{Colophon} \\
-	This document was typeset with the help of \href{https://sourceforge.net/projects/koma-script/}{\KOMAScript} and \href{https://www.latex-project.org/}{\LaTeX} using the \href{https://github.com/fmarotta/kaobook/}{kaobook} class.
+% 	\textbf{Colophon} \\
+% 	This document was typeset with the help of \href{https://sourceforge.net/projects/koma-script/}{\KOMAScript} and \href{https://www.latex-project.org/}{\LaTeX} using the \href{https://github.com/fmarotta/kaobook/}{kaobook} class.
 	
-	\medskip
+% 	\medskip
 	
-	\textbf{Publisher} \\
-	First printed in May 2019 by \@publishers
-}
-\makeatother
+% 	\textbf{Publisher} \\
+% 	First printed in May 2019 by \@publishers
+% }
+% \makeatother
 
 %----------------------------------------------------------------------------------------
 %	DEDICATION
 %----------------------------------------------------------------------------------------
 
-% \dedication{
-% 	The ultimate meaning of logic is this ability to manipulate.
-% 	\flushright -- Jean-Yves Girard.
-% 	\small
-% 	TODO: Move this as the epigraph of some chapter (either Introduction or
-% 	Proof-by-Action)
-% }
 
 
 %----------------------------------------------------------------------------------------
@@ -121,7 +117,8 @@
 %----------------------------------------------------------------------------------------
 
 % Note that \maketitle outputs the pages before here
-\maketitle
+% \maketitle
+\includepdf[pages=-]{1ere.pdf}
 
 %----------------------------------------------------------------------------------------
 %	ABSTRACT
@@ -230,5 +227,11 @@
 
 \indexprologue{Here are the introduced software systems in alphabetical order.}
 \printindex[software]
+
+%----------------------------------------------------------------------------------------
+%	BACK COVER
+%----------------------------------------------------------------------------------------
+
+\includepdf[pages=-]{4eme.pdf}
 
 \end{document}
