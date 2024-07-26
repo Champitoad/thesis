@@ -44,20 +44,21 @@ bottom=30mm
 \newcommand{\keywordsFR}{Assistants de preuve, Théorie de la démonstration, Interfaces humain-machine, Mathématiques formelles, Inférence profonde, Manipulation directe}														%% Mots clés en français, séprarés par des , / Keywords in french, separated by ,
 \newcommand{\abstractFR}{
     Les assistants de preuve sont des logiciels permettant de vérifier
-	rigoureusement des raisonnements mathématiques. Ils peuvent être généraux
-	(comme Coq, Lean, Isabelle...) ou plus spécialisés (comme EasyCrypt). Ils
-	permettent un niveau de précision qui certifie qu'aucune erreur ne peut se
-	produire, mais restent difficiles d'utilisation.
+    rigoureusement des raisonnements mathématiques. Ils peuvent être généraux
+    (comme Coq, Lean, Isabelle...) ou plus spécialisés (comme EasyCrypt). Ils
+    permettent un niveau de précision qui certifie qu'aucune erreur ne peut se
+    produire, mais restent difficiles d'utilisation.
 	
 	Nous proposons un nouveau paradigme de construction de preuves formelles par
 	actions effectuées dans une interface graphique, afin de permettre une
-	utilisation plus confortable et plus intuitive. Notre paradigme s'appuie sur
-	des principes de manipulation directe, combinant des techniques
-	d'interactions anciennes (Proof-by-Pointing) et récentes (Proof-by-Linking)
-	qui exploitent les dernières avancées en théorie de la démonstration par
-	inférence profonde. Nous implantons le paradigme dans un prototype
-	d'interface graphique appelé Actema, que nous intégrons par la suite à
-	l'assistant de preuves Coq en développant le plugin coq-actema.
+	utilisation plus confortable et plus intuitive. Intitulé Proof-by-Action,
+	notre paradigme s'appuie sur des principes de manipulation directe,
+	combinant des techniques d'interactions anciennes (Proof-by-Pointing) et
+	récentes (Proof-by-Linking) qui exploitent les dernières avancées en théorie
+	de la démonstration par inférence profonde. Nous implantons le paradigme
+	dans un prototype d'interface graphique appelé Actema, que nous intégrons
+	par la suite à l'assistant de preuves Coq en développant le plugin
+	coq-actema.
 	
 	Puis nous explorons une série de systèmes d'inférence profonde qui donnent
 	plus de structure à la notion de but logique. Ces systèmes ont en commun de
@@ -68,12 +69,12 @@ bottom=30mm
 	
 	La première famille de systèmes, appelée calculs de bulles, est une
 	reformulation topologique de la théorie des séquents imbriqués. Elle permet
-	un partage efficace des contextes communs entre sous-buts, facilitant la
-	factorisation des étapes de raisonnement avant et arrière. Le second
-	système, appelé calcul des fleurs, est un raffinement intuitionniste de la
-	théorie des graphes existentiels de C. S. Peirce. Les deux types de systèmes
-	sont démontrés analytiques et complètement réversibles, ce qui les rend
-	adaptés à des techniques d'automatisation de la preuve.
+	un partage efficace des hypothèses et conclusions entre sous-buts,
+	facilitant la factorisation des étapes de raisonnement avant et arrière. Le
+	second système, appelé calcul des fleurs, est un raffinement intuitionniste
+	de la théorie des graphes existentiels de C. S. Peirce. Les deux types de
+	systèmes sont démontrés analytiques et complètement réversibles, ce qui les
+	rend adaptés à des techniques d'automatisation de la preuve.
 	
 	Nous développons finalement le Flower Prover, un second prototype
 	d'interface graphique pour la construction interactive de démonstrations

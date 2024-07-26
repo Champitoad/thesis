@@ -5,12 +5,12 @@ which certifies that no error can occur, but remain difficult to use.
 
 We propose a new paradigm for constructing formal proofs through actions
 performed in a graphical user interface (GUI), in order to enable a more
-comfortable and intuitive use. Our paradigm builds upon direct manipulation
-principles, combining both old (Proof-by-Pointing) and new (Proof-by-Linking)
-interaction techniques that exploit recent advances in deep inference proof
-theory. We implement the paradigm in a web-based GUI called Actema, which we
-subsequently integrate into the Coq proof assistant by developing the coq-actema
-plugin.
+comfortable and intuitive use. Dubbed Proof-by-Action, our paradigm builds upon
+direct manipulation principles, combining both old (Proof-by-Pointing) and new
+(Proof-by-Linking) interaction techniques that exploit recent advances in deep
+inference proof theory. We implement the paradigm in a web-based GUI called
+Actema, which we subsequently integrate into the Coq proof assistant by
+developing the coq-actema plugin.
 
 We then explore a series of deep inference proof systems that give more
 structure to the notion of logical goal. These systems share the ability to
@@ -19,12 +19,14 @@ inductive syntax, or graphically using a metaphorical notation well-suited
 to direct manipulation.
 
 The first family of systems, called bubble calculi, is a topological
-reformulation of the theory of nested sequents. It allows for efficient
-sharing of hypotheses and conclusions among subgoals, facilitating the
-factorization of both forward and backward proof steps. The second system,
-called flower calculus, is an intuitionistic refinement of C. S. Peirce's
-theory of existential graphs. Both types of systems are shown to be analytic
-and fully invertible, making them amenable to proof automation techniques.
+reformulation of the theory of nested sequents. It allows for efficient sharing
+of hypotheses and conclusions among subgoals, facilitating the factorization of
+both forward and backward proof steps. The second system, called flower
+calculus, is an intuitionistic refinement of C. S. Peirce's theory of
+existential graphs. It is thus purely diagrammatic: there are no symbolic
+connectives involved in the representation of logical statements. Both types of
+systems are shown to be analytic and fully invertible, making them amenable to
+proof automation techniques.
 
 We finally go back to practical experimentation by designing and implementing
 the Flower Prover, another web-based GUI for interactive proof building based on
