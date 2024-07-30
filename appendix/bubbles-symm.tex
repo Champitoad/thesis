@@ -251,6 +251,7 @@
 
     \item[{\kl{f{\ua}}}]
     $$
+    \hspace{-12em}
     \begin{array}{rcll}
       \psint{\Gamma \piq{\cS \sep \Gamma' \piq{\cS'} \Delta' \sep S} \Delta}
       &=& \psintAndMix{T}{\cS}{\Gamma}{\Delta} \land \psint{\Gamma, \Gamma' \piq{\cS'} \Delta', \Delta} \land \psint{S \mix (\Gamma \seq \Delta)} & \\
@@ -724,7 +725,9 @@ induction hypothesis by a dotted line.
     {X \seq A, B, A \lor B \seq Y}}
     {X \seq A \lor B, A \lor B, Y}}
     {X \seq A \lor B, Y}
-    \\\\
+  \end{align*}
+  \pagelayout{wide} % No margins
+  \begin{align*}
     \R[\kl{\land_R}]
       {\summ[$\pi_1$]{X \seq A, A \land B, Y}}
       {\summ[$\pi_2$]{X \seq B, A \land B, Y}}
@@ -811,7 +814,9 @@ induction hypothesis by a dotted line.
     {X, A \limp B \piq{\seq A \sep B \seq} Y}}
     {X, A \limp B, A \limp B \seq Y}}
     {X, A \limp B \seq Y}
-    \\\\
+  \end{align*}
+  \pagelayout{margin} % Restore margins
+  \begin{align*}
     \R[\kl{{\lsub}_R}]
       {\summ[$\pi_1$]{X \seq A, A \lsub B, Y}}
       {\summ[$\pi_2$]{X, B \seq A \lsub B, Y}}
