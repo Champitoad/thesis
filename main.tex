@@ -58,9 +58,27 @@
 % To include front and back matter
 \usepackage{pdfpages}
 
+% PDF/A-1b compliance
+\usepackage{luatex85}
+\usepackage[a-1b,mathxmp]{pdfx}
+\usepackage{colorprofiles}
+
 \input{config}
 
 \begin{document}
+
+%----------------------------------------------------------------------------------------
+%	PDF/A-1b COMPLIANCE
+%----------------------------------------------------------------------------------------
+
+\directlua{pdf.setminorversion(6)}
+\begin{filecontents*}[overwrite]{\jobname.xmpdata}
+\Title{Deep Inference for Graphical Theorem Proving}
+\Author{Pablo Donato}
+\Language{en-US}
+\Subject{Proof assistants are software systems that ensure error-free mathematical reasoning, but their complexity can be a barrier to use. To address this, we introduce Proof-by-Action, a new paradigm for constructing formal proofs through a graphical user interface (GUI), combining direct manipulation techniques from Proof-by-Pointing and Proof-by-Linking. We implemented this paradigm in a web-based GUI called Actema and integrated it into the Coq proof assistant via the coq-actema plugin. We also developed deep inference proof systems, including bubble calculi and flower calculus, which provide structured, graphical representations of logical goals and facilitate proof automation. Additionally, we created the Flower Prover, a web-based GUI optimized for mobile devices, allowing intuitive, touch-based interactive proof building using the flower calculus.}
+\Keywords{Proof assistants\sep Proof theory\sep Human-computer interfaces\sep Formal mathematics\sep Deep inference\sep Direct manipulation}
+\end{filecontents*}
 
 %----------------------------------------------------------------------------------------
 %	BOOK INFORMATION
