@@ -1,0 +1,249 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{biblatex}
+\addbibresource{main.bib}
+
+% \setlist[description]{leftmargin=1.75pc}
+\setlist[description]{leftmargin=0pc}
+
+\title{Abstract of the PhD Dissertation: \\ \textit{Deep Inference for Graphical Theorem Proving}}
+\author{Pablo Donato}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% Proof assistants are software tools used to rigorously verify mathematical reasoning. They can be general-purpose (such as \emph{Coq} \cite{the_coq_development_team_2022_7313584}, \emph{Lean} \cite{10.1007/978-3-030-79876-5_37}, \emph{Isabelle} \cite{nipkow2002isabelle}, etc.) or more specialized (such as \emph{EasyCrypt} \cite{Barthe2014}). They offer a level of precision that guarantees no errors can occur, but present some important usability challenges --- particularly for beginners, but also for experts working in complex settings. This limits their application potential with regard to two related issues:
+% \begin{enumerate}
+%     \item their usage beyond the sole purpose of verifying correctness of proofs, for instance as expressive programming languages, or as a medium for understanding and exploring new mathematical concepts interactively;
+%     \item their adoption in non-research contexts such as industry and education.
+% \end{enumerate}
+% In this thesis, we are concerned primarily with the \emph{human}-centered aspects (or ``frontend'') of proof assistants: we aim to provide smoother means for the user to communicate her intent to the proof assistant, and conversely for the proof assistant to communicate its results and suggestions on how to solve problems. Furthermore, we restrict the scope of our investigations to the purely \emph{logical} aspects at the heart of proof assistants --- that is, the exact representation and manipulation of logical statements for the purpose of deductive reasoning.
+
+% To that end, we propose a new paradigm for constructing formal proofs through actions performed in a graphical user interface, making the experience more comfortable and intuitive. Entitled \emph{Proof-by-Action} (\emph{PbA}), our paradigm builds on principles of \emph{direct manipulation}, combining earlier interaction techniques such as \emph{Proof-by-Pointing} (\emph{PbP}) \cite{PbP} and more recent ones such as \emph{Proof-by-Linking} (\emph{PbL}) \cite{chaudhuri_certifying_2022}. All techniques studied in this thesis are grounded in a recent branch of proof theory known as “\emph{deep inference}”, first introduced under this name by Alessio Guglielmi in the context of his \emph{calculus of structures} \cite{Guglielmi1999ACO}.
+
+% The dissertation is divided into two parts. The first half (Chapters~2--6) develops the foundations of PbA in the traditional \emph{symbolic} setting for logic, along with its integration into existing proof assistants. The second half (Chapters~7--10) explores how similar principles can be used to define \emph{iconic} forms of reasoning, where inference operates on structured diagrams rather than textual sentences. In the following sections, we will summarize the main content and contributions of each chapter.
+
+\section{Introduction}
+
+Proof assistants are software tools used to rigorously verify mathematical reasoning. 
+Contemporary systems such as \emph{Coq}~\cite{the_coq_development_team_2022_7313584}, \emph{Lean}~\cite{10.1007/978-3-030-79876-5_37}, and \emph{Isabelle}~\cite{nipkow2002isabelle} offer powerful frameworks for constructing formal proofs, yet they remain notoriously difficult to learn and use. This usability barrier affects not only newcomers but also experienced users working in complex proof settings, limiting the application potential of proof assistants in two respects:
+\begin{enumerate}
+    \item their use beyond the sole purpose of verifying correctness of proofs, for instance as expressive programming languages, or as a medium for understanding and exploring new mathematical concepts interactively;
+    \item hence their adoption outside of academic research in industry and education.
+\end{enumerate}
+
+In this dissertation, we are concerned primarily with the \emph{human}-centered aspects (or ``frontend'') of proof assistants: we aim to provide smoother means for the user to communicate her intent to the proof assistant, and conversely for the proof assistant to communicate its results and suggestions on how to solve problems. Furthermore, we restrict the scope of our investigations to the purely \emph{logical} aspects at the heart of proof assistants --- that is, the exact representation and manipulation of logical statements for the purpose of deductive reasoning.
+\\
+
+The core thesis is that these challenges are not inherent to formal logic itself, but stem in great part from the \emph{textual} mode of representation and interaction imposed by current tools, from the imperative (tactic-based) languages of Coq and Lean --- or their more declarative counterparts in Isabelle --- to the foundational symbolic formalisms of proof theory and type theory that those languages build upon.
+
+To address this, we introduce a novel paradigm called \emph{Proof-by-Action} (PbA), in which users construct proofs through familiar graphical actions --- such as pointing, clicking and dragging --- performed directly on the logical content. Inspired by the \emph{direct manipulation} principle from human-computer interaction \cite{shneiderman_direct_1983}, as well as earlier techniques like \emph{Proof-by-Pointing} (PbP)~\cite{PbP} and \emph{Proof-by-Linking} (PbL)~\cite{chaudhuri_certifying_2022}, PbA seeks to bridge the gap between the user’s intent and the underlying formal system. Each user interaction is interpreted as a meaningful proof step, and the challenge is to ensure that these actions are semantically grounded, precise, and general enough to express a wide range of logical reasoning in a concise way.
+
+To provide this foundation, we draw on the framework of \emph{deep inference}, a modern approach to proof theory that enables fine-grained, local transformations within proofs. Deep inference was first introduced under this name by Guglielmi in the context of his \emph{calculus of structures}~\cite{Guglielmi1999ACO}, and it offers the flexibility and structural expressiveness needed to model direct manipulation in a formally sound way.
+
+Chapter 1 of the dissertation introduces informally the necessary conceptual and historical background from the \emph{proof theory} and \emph{interactive theorem proving} literature, before presenting the motivations, research goals and methodology summarized above. It then goes on to outline the structure and main contributions of the thesis, as we are about to do in some more details in the next sections. To give a brief overview, the thesis is divided into two parts:
+
+The first part (Chapters 2--6) formalizes PbA in the traditional setting of \emph{symbolic} logic. It introduces \emph{Actema}~\cite{Actema:link}, a graphical user interface (GUI) where gestural actions perform logical inferences, and defines a semantic framework specifically for drag-and-drop actions based on the \emph{subformula linking} technique in deep inference~\cite{Chaudhuri2013}. It also explores more advanced features like inductive reasoning and simplification, extends PbA to classical logic via multi-conclusion sequents, and integrates the interface into Coq via the \texttt{coq-actema} plugin~\cite{coq-actema}, translating GUI actions into verified proof terms.
+
+The second part (Chapters 7--10) investigates \emph{iconic} systems for logic, where goals are represented as diagrams rather than formulas. It introduces \emph{bubble calculi}, which extend the nested sequents of Brünnler~\cite{brunnler_deep_2009} with topological structure, and revisits C. S. Peirce's \emph{existential graphs}~\cite{Roberts+1973} in an intuitionistic light through the design of the \emph{flower calculus}~\cite{flower-calculus}. The latter system is the foundation for the \emph{Flower Prover}, another prototype of GUI for interactive proof building designed to work well with modern devices based on touch interactions.
+
+\begin{description}
+    \item[Publications] Most of the content of Chapters 2 and 3 has been previously published in
+    \cite{dragndrop}. A shortened version of Chapters 9 and 10 has been published
+    in \cite{flower-calculus}. All other chapters present completely original and personal work.
+\end{description}
+
+In sum, the thesis contributes both a theoretical framework and a set of practical tools for reimagining how users interact with formal proofs. By treating interaction as a first-class element of proof theory, it opens the way for new kinds of logical literacy that are more intuitive, visual, and expressive.
+
+\section{Proof-by-Action}
+
+Chapter 2 explains how both \emph{click} and \emph{drag-and-drop} (DnD) actions upon the formulas of
+a sequent can implement proof construction operations corresponding to the core logic; that is, how
+they deal with logical connectives, quantifiers, and equality. We present these core principles
+through various illustrations and examples in first-order logic. More advanced features of the
+Proof-by-Action paradigm that go beyond the core logic are illustrated in Chapter~4, and Chapter~6
+explains how it can be integrated in a mainstream proof assistant.
+
+This chapter focuses mostly on two broad categories of DnD actions: \emph{forward steps}, where two
+existing facts are combined to deduce a new one, and \emph{backward steps}, where a known fact is
+used to transform the goal. These operations are backed by a proof-theoretic technique known as
+\emph{subformula linking} that will be formally defined in the next chapter. It can roughly be
+understood as a kind of operational semantics, where the result of a DnD action is computed by
+applying rewriting rules inside logical formulas. This is illustrated in examples by giving both the
+resulting new statement and its derivation computed by the system. The set of rewriting rules is
+also given at the end of the chapter for reference.
+
+We have started to implement the paradigm in a prototype named \emph{Actema}
+(for ``\textbf{Act}ive math\textbf{ema}tics'') running through a web
+\textsf{HTML}/\textsf{JavaScript} interface. At the time of writing, a standalone
+version of the prototype (i.e., which does not use an existing theorem prover as
+its backend) is publicly available online \cite{Actema:link}. This possibility
+to experiment in practice, even though yet on a small scale, gave valuable
+feedback for crafting the way DnD actions are to be translated into proof
+construction steps in an intuitive and practical way. A description of the
+overall architecture and implementation design of Actema is provided
+in Chapter~6.
+
+% The chapter is organized as follows: the first section briefly outlines its
+% logical setting. The second section describes the basic features of a graphical
+% proof interface based on our principles and illustrates them with a famous
+% syllogism from Aristotle. The third section shows how it can integrate
+% Proof-by-Pointing capabilities through click actions. The two following
+% sections explain, through further examples, how drag-and-drop actions work;
+% first for so-called \emph{rewrite} actions involving equalities, then for
+% actions involving logical connectives and quantifiers. We end with a discussion
+% of related works.
+
+Overall, this chapter serves as a practical and motivational entry point into the thesis, demonstrating how logical reasoning can be made more intuitive and accessible through carefully designed graphical interactions that remain formally sound.
+
+\section{Subformula Linking}
+
+In Chapter 3, we engage in a thorough analysis of the logical semantics of
+DnD actions, which were introduced informally through examples in Chapter~2.
+We do this mainly from the formal perspective of deep inference proof theory,
+following the original work of K. Chaudhuri on \emph{subformula linking}
+\cite{Chaudhuri2013}. But we always keep in mind the intended application to
+proof assistants, by motivating various design choices --- actual or prospective ---
+as ways to improve the \emph{user experience} (\emph{UX}) of interactive proof building.
+
+\begin{description}
+\item[3.1 Linkages]
+This section introduces the notion of a \emph{linkage} as the formal representation of a DnD action connecting two selected subformulas. It defines the standard deep inference notions of \emph{context} and \emph{polarity}, and details how linkages are structured to determine the kind of interaction intended by the user.
+
+\item[3.2 Validity]
+Here, a precise criterion is established for when a linkage is considered valid, combining two key conditions: opposite polarities between the linked subterms and their unifiability. These conditions ensure that the interaction leads to productive simplification rather than vacuous transformation. This is a novelty and the main point of divergence with the original approach of Chaudhuri.
+
+\item[3.3 Describing DnD Actions]
+This section outlines the full process by which a DnD action is transformed into a valid proof step, including the generation, validation, and execution of linkages. It defines a deterministic and terminating procedure that guarantees logical soundness by alignment with the system's rewriting rules.
+
+\item[3.4 Soundness]
+This part formally proves that all rewriting steps preserve logical validity (Theorem 3.4.1). It establishes contextual soundness (Lemma 3.4.4) by ensuring that every transformation corresponds to a provable sequent in intuitionistic first-order logic with equality.
+
+\item[3.5 Productivity]
+The section shows that for every valid linkage, the system can always reach a final interaction point (corresponding to an identity axiom or substitution rule for equality) in a finite number of steps (Theorem 3.5.2). This ensures that DnD actions are not just sound but also effective in progressing toward the completion of proofs.
+
+\item[3.6 Focusing]
+The set of rewriting rules for subformula linking turns out to be non-confluent. To resolve ambiguities in rule application, this section adapts the focusing discipline well known from the sequent calculus literature, preferring invertible rules to guide the rewriting strategy. This helps avoid dead ends and heuristically makes the semantics of DnD actions more natural (at least in common situations).
+
+\item[3.7 Completeness]
+This section demonstrates that the set of DnD actions, taken alone, can form a complete deductive system for first-order intuitionistic logic. It constructs a simulation argument to relate the deep inference system to standard sequent calculi (Theorem 3.7.1).
+
+\item[3.8 Related Works]
+The final section surveys related literature, comparing this approach to subformula linking with alternatives in deep inference \cite{DBLP:conf/cade/Chaudhuri21}, proof nets \cite{girard-linear-1987,strasburger-problem-2019,hughes2019firstorder}, automated theorem proving \cite{1674698}, program verification \cite{mulder_unification_2024} and functional programming \cite{elliott-tangible}. It highlights how the notion of valid linkage simplifies usability while retaining semantic power.
+
+\end{description}
+
+\section{Proof-by-Action in Practice}
+
+In the previous chapters, we explained the core principles of our so-called
+Proof-by-Action paradigm and especially of its drag-and-drop actions, first
+through basic and abstract examples in Chapter~2, and then from a
+proof-theoretical perspective in Chapter~3. The goal of this chapter is
+to provide a better sense of what proofs by action/DnD look like in
+practice, and how they compare to more traditional approaches to interactive
+theorem proving. To that effect, we perform a case study of a few select
+examples, unrolling and commenting in detail one or many of their proofs.
+Although still basic, they are fully fledged, concrete logical riddles or
+mathematical problems that one might give as exercises to an undergraduate
+student learning formal proofs. Note that our analysis stays quite informal
+and opinionated: a more systematic approach such as a user study would allow for
+a better evaluation of our paradigm, but at the time of writing of this thesis
+the Actema prototype was not mature enough to conduct a project of this
+scale.
+
+\begin{description}
+\item[4.1 Forward Reasoning]
+This section presents a proof of a simple logical riddle taken from the Edukera project \cite{edukera} within the Actema interface. The visual approach reduces the cognitive overhead of naming hypotheses and structuring tactic sequences, especially for beginners. A comparison with the equivalent Coq script shows that the graphical version is not only more accessible but often faster to construct.
+
+\item[4.2 Sets and Functions]
+Here, the paradigm is extended to reasoning about functions and sets. We distinguish between nominal, axiomatic, and computational \emph{definitions}, each supported by corresponding contextual menu actions in Actema such as \textsf{Simplify} or \textsf{Unfold}. The case study demonstrates that PbA can accommodate both explicit and implicit styles of proof found in various proof assistants.
+
+\item[4.3 Peano Arithmetic]
+The final section tackles a more complex proof: the commutativity of addition on natural numbers, using \emph{induction}. It shows how inductive steps can be triggered via contextual actions, and how automation (e.g. simplification and lemma search) can be performed with more power, precision and ease than is possible with a textual language. The close match between the graphical proof and a Coq script suggests promising directions for compiling PbA proofs to traditional languages.
+\end{description}
+
+\section{Parallel Conclusions and Classical Logic}
+
+This chapter extends the Proof-by-Action paradigm to support sequents with multiple conclusions, as used for classical logic by Gentzen \cite{gentzen_untersuchungen_1935}. It explores how graphical reasoning can be adapted to this setting by introducing a new form of subformula linking --- \emph{parallel interaction} --- and formalizes it through an original set of rules and linking semantics \cite{Chaudhuri2013}.
+
+\begin{description}
+
+  \item[5.1 Backtracking]
+  Discusses the limitations of single-conclusion systems in handling disjunctive goals and the cognitive burden of backtracking in traditional proof assistants. The section motivates the need for invertible rules and the expressive power of multi-conclusion sequents for reducing backtracking, as noticed by other authors \cite{ayers_thesis}.
+
+  \item[5.2 Implementation in Theorem Provers]
+  Notes that despite the advantages, most modern proof assistants avoid multi-conclusion sequents due to UI complexity. The Actema interface circumvents these limitations through direct manipulation, making multiple conclusions manageable.
+
+  \item[5.3 Click Actions]
+  Explains how click actions in Actema are extended to support multi-conclusion sequents. Modifications to disjunction and implication actions allow Actema to capture both intuitionistic and classical behavior, depending on how extra conclusions are treated.
+
+  \item[5.4 Drag-and-Drop Actions]
+  Introduces the concept of \emph{parallel linking} between two conclusions, interpreted as disjunction. This gives rise to a third mode of interaction --- parallel reasoning --- complementing forward and backward reasoning, and supported by a new logical operator.
+
+  \item[5.5 Metatheory of Parallel Reasoning]
+  Establishes the soundness of parallel rules in the classical setting, while noting their incompatibility with intuitionistic logic. Updates are made to the validity conditions for linkages to allow for parallel interactions, and extensions to the core metatheory of Chapter~3 are proposed to accommodate classical completeness and productivity.
+
+\end{description}
+
+\section{Integration in a Proof Assistant}
+
+This chapter describes how the Proof-by-Action paradigm has been integrated into the Coq proof assistant through the \texttt{coq-actema} system \cite{coq-actema}. The goal is to connect the graphical interface developed in earlier chapters with an industrial-strength proof assistant, enabling users to benefit from its large ecosystem of existing tools and formalizations. This is also a necessary step to test how the PbA paradigm scales to real-world mathematical developments.
+
+\begin{description}
+
+  \item[6.1 Actema] 
+  Introduces the architecture of the Actema web application \cite{Actema:link}, which separates a JavaScript frontend from an OCaml backend compiled via \texttt{js\_of\_ocaml} \cite{vouillon_bytecode_2014}. The two components communicate via an object-oriented API, enabling interaction between the UI and the proof engine.
+
+  \item[6.2 Why a Plugin?]
+  Argues for integrating Actema via a dedicated Coq plugin rather than modifying Coq itself or relying on high-level protocols like SerAPI \cite{gallegoarias:hal_01384408}. This design enables Actema to function as an alternative, graphical proof view within standard Coq IDEs such as CoqIDE or Proof General.
+
+  \item[6.3 The \texttt{coq-actema} System]
+  Describes the full-stack communication setup, where a plugin running inside Coq interacts with the Actema frontend over HTTP. This enables real-time, bidirectional proof interaction and allows packaging the interface as a standalone Electron application for ease of deployment.
+
+  \item[6.4 Interaction Protocol]
+  Details the communication protocol using UML-style sequence diagrams. These diagrams illustrate how proof goals are exported, actions are queried and selected, and proof steps are sent back to Coq to be compiled as executable tactics, capturing subformula linking and other PbA operations.
+
+  \item[6.5 Compiling Actions]
+  Explains how user actions in the graphical interface are serialized via ATD \cite{atdgen} and compiled into Coq tactics through metaprogramming, using $\mathcal{L}_{tac}$ to implement the semantics of subformula linking in a deep embedding of first-order logic.
+
+  \item[6.6 Future Work]
+  Outlines limitations of the current system, such as incomplete support for advanced Coq features and lack of robust proof maintenance tools. It also addresses the issue of proof evolution and proposes directions for improving the long-term usability of Actema for real-world developments.
+
+\end{description}
+
+\section{Asymmetric Bubble Calculus}
+
+This chapter introduces the \emph{asymmetric bubble calculus} as a new kind of nested sequent system \cite{brunnler_deep_2009}. By internalizing the notion of subgoals as ``bubbles'', it provides a more topological and hierarchical way to represent logical contexts. This enables efficient sharing of hypotheses between subgoals, as well as more local proof steps.
+
+\begin{description}
+
+  \item[7.1 The chemical metaphor]
+  Explains how Actema's interface can be interpreted through a \emph{chemical} metaphor, with formulas viewed as reactants that can break or merge under user-driven proof actions, inspired by the \emph{chemical abstract machine} (\textsc{Cham}) of Berry and Boudol \cite{berry_chemical_1989}. This perspective guides the design of \emph{bubble} boundaries akin to the \textsc{Cham}'s \emph{membrane} mechanism, that manage context scope without relying on multiple tabs or separate subgoals.
+
+  \item[7.2 Bubbles and solutions]
+  Introduces bubbles as a device for delineating subgoals and allowing selective flow of hypotheses. The idea of a \emph{``solution''} generalizes a sequent by blending hypotheses, conclusions and subgoals into a single space, giving users a more direct handle on scoping.
+
+  \item[7.3 Asymmetric calculus]
+  Presents the collection of local rewriting rules constituting the asymmetric bubble calculus, specialized for single-conclusion intuitionistic logic. Each rule concerns either structural manipulations (like context sharing) or logical connectives (like introductions and eliminations), and it is shown how these rules remain faithful to a standard sequent system.
+
+  \item[7.4 Back to Proof-by-Action]
+  Connects the rules for manipulating bubbles to the gestural actions of PbA described in the first part of the thesis. The membranes of bubbles can be represented in a GUI, suggesting a continuous, topological model of scoping and subgoal management providing a more physical way to interact with the proof state.
+
+\end{description}
+
+\section{Symmetric Bubble Calculi}
+
+\section{Existential Graphs}
+
+\section{Flower Calculus}
+
+\printbibliography
+
+\end{document}
