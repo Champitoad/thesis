@@ -112,7 +112,7 @@ a better evaluation of our paradigm, but at the time of writing of this thesis
 the Actema prototype was not mature enough to conduct a project of this
 scale.
 
-We begin in Section~4.1 by showing how \emph{forward reasoning} can be used to solve a simple puzzle borrowed from Edukera \cite{edukera}, demonstrating how DnD actions reduce cognitive load by eliminating explicit hypothesis naming or tactic structuring. In Section~4.2 we explore how to reason with \emph{sets and functions}, distinguishing nominal, axiomatic, and computational \emph{definitions}, each supported by contextual Actema actions like \textsf{Simplify} or \textsf{Unfold}. Finally we address in Section~4.3 a more complex proof in Peano arithmetic, showing how \emph{induction} can be triggered through direct manipulation, and how automation and lemma search fit naturally into a graphical workflow. Throughout, we compare the resulting Actema sessions to their Rocq script counterparts, suggesting that the PbA paradigm is accessible to novices yet powerful enough for (at least) mid-level formal developments.
+We begin in Section~4.1 by showing how \emph{forward reasoning} can be used to solve a simple puzzle borrowed from Edukera \cite{edukera}, demonstrating how DnD actions reduce cognitive load by eliminating explicit hypothesis naming or tactic structuring. In Section~4.2 we explore how to reason with \emph{sets and functions}, distinguishing nominal, axiomatic, and computational \emph{definitions}, each supported by contextual Actema actions like \textsf{Simplify} or \textsf{Unfold}. Finally we address in Section~4.3 a more complex proof in Peano arithmetic, showing how \emph{induction} can be triggered through direct manipulation, and how \emph{simplification} and \emph{lemma search} fit naturally into a graphical workflow. Throughout, we compare the resulting Actema sessions to their Rocq script counterparts, suggesting that the PbA paradigm is accessible to novices yet powerful enough for (at least) mid-level formal developments.
 
 \section{Parallel Conclusions and Classical Logic}
 
@@ -122,7 +122,7 @@ We begin by discussing the limitations of single-conclusion systems in handling 
 
 \section{Integration in a Proof Assistant}
 
-This chapter describes how the Proof-by-Action paradigm has been integrated into the Rocq proof assistant through the \texttt{coq-actema} system \cite{coq-actema}. The goal is to connect the graphical interface developed in earlier chapters with an industrial-strength proof assistant, enabling users to benefit from its large ecosystem of existing tools and formalizations. This is also a necessary step to evaluate to which extent the PbA paradigm scales to real-world mathematical developments.
+This chapter describes how the Proof-by-Action paradigm has been integrated into the Rocq proof assistant through the design and implementation of the \texttt{coq-actema} system \cite{coq-actema}. The goal is to connect the graphical interface developed in earlier chapters with an industrial-strength proof assistant, enabling users to benefit from its large ecosystem of existing tools and formalizations. This is also a necessary step to evaluate to which extent the PbA paradigm scales to real-world mathematical developments.
 
 We introduce in Section~6.1 the architecture of the Actema web application, separating a JavaScript frontend from an OCaml backend compiled via \texttt{js\_of\_ocaml} \cite{vouillon_bytecode_2014}, and explain in Section~6.2 why a plugin is preferable to modifying Rocq itself or relying on high-level protocols like SerAPI \cite{gallegoarias:hal_01384408}. We describe the \texttt{coq-actema} system (Section~6.3) in which a plugin running inside Rocq communicates with the Actema frontend over HTTP, enabling real-time, bidirectional proof interaction and packaging the interface as a standalone Electron app. The \emph{interaction protocol} (Section~6.4) is illustrated with UML-style sequence diagrams, showing how proof goals are retrieved, user actions are performed, and proof steps are sent back to Rocq as executable tactics. We then detail how user actions are compiled (Section~6.5) by using the $\mathcal{L}_{tac}$ metalanguage to implement subformula linking in a deep embedding of first-order logic. A final section outlines current limitations, such as incomplete support for advanced Rocq features, and discusses \emph{proof evolution} issues in a graphical environment, suggesting future directions for improving the system's usability.
 
@@ -137,6 +137,7 @@ We begin in Section~7.1 with the \emph{chemical metaphor}, showing how Actema's 
 In this chapter, we explore to what extent the bubble calculus of Chapter~7 can be made more symmetric by relaxing the restriction that solutions must contain at most one conclusion. At a surface level, our approach is similar to that of Gentzen, who went from his single-conclusion sequent calculus LJ to the multi-conclusion calculus LK \cite{gentzen_untersuchungen_1935}. Like him, we uncover beautiful dualities that were hidden by the asymmetry of the initial calculus. But by sticking unwaveringly to intuitionism, we are led to the exotic territory of bi-intuitionistic logic, an intermediate logic that conservatively extends intuitionistic logic, and in particular does not prove the law of excluded middle.
 
 An underlying thread of our investigation is the quest for a fully iconic proof system, where all logical connectives can be replaced by appropriate new kinds of bubbles. This makes us rediscover many principles already studied in the deep inference literature, with topological intuitions of the bubble metaphor shedding a new light on them. We end up with two symmetric bubble calculi, each with its own tradeoff on the properties satisfied by inference rules. In particular, the ability of the calculi to factorize \emph{backward} in addition to forward proof steps might prove useful to build concise proofs, all through direct manipulation.
+\\
 
 The chapter is organized as follows: in Section~8.1 we motivate our quest for a system where all introduction rules for logical connectives are invertible, to reduce non-determinism in proof search and enable a fully iconic approach to proof building. To that effect, we relax in Section~8.2 the restriction to single-conclusion solutions, which requires a new distinction between saturated and unsaturated solutions. This gives rise in Section~8.3 to an extension of the syntax of solutions, where bubbles can themselves be polarized. In Section~8.4 we identify key properties that have guided the design of inference rules, some of which were already aimed for implicitly throughout the evolution of our concept of bubble.
 
@@ -201,15 +202,15 @@ showing how to recast lines of identity in a more traditional binder-based synta
 \section{Flower Calculus}
 
 In this final chapter we introduce the \emph{flower calculus}, a novel proof system for
-intuitionistic predicate logic based on syntactic objects called
-\emph{flowers}. We start by explaining how flowers stem from an intuitionistic variant of
-the existential graphs of C. S. Peirce proposed recently by A. Oostra \cite{oostra_graficos_2010,oostra_graficos_2011,zalamea_advances_2022}. We then
-present our inductive syntax for flowers, reminiscent at the same time of the
-nested sequents of deep inference proof theory \cite{brunnler_deep_2009,fitting-nested-2014,guenot_nested_2013,lyon_nested_2021}, and the
-geometric/coherent formulas of categorical logic \cite{skolem_geometric,negri_geometric,Johnstone2002-rm}. A salient feature of our calculus inherited from EGs, is that it is
-\emph{fully iconic}: it dispenses completely with the traditional notion of
-symbolic formula, operating instead as a rewriting system on flowers
-containing only atomic predicates.
+intuitionistic predicate logic based on syntactic objects called \emph{flowers}. Flowers stem (!) from an intuitionistic variant of the existential graphs of C. S. Peirce
+proposed recently by A. Oostra
+\cite{oostra_graficos_2010,oostra_graficos_2011,zalamea_advances_2022}, but they also enjoy a fully inductive syntax that is reminiscent at the same time of the nested sequents of deep inference
+proof theory \cite{brunnler_deep_2009,fitting-nested-2014,guenot_nested_2013,lyon_nested_2021} and of
+the geometric/coherent formulas of categorical logic
+\cite{skolem_geometric,negri_geometric,Johnstone2002-rm}. A salient feature of our calculus
+inherited from EGs is that it is \emph{fully iconic}, thus giving resolution to our quest initiated
+in Chapter 8: it dispenses completely with the traditional notion of symbolic formula, operating
+instead as a rewriting system on flowers containing only atomic predicates. 
 
 The chapter is organized as follows: in Section 10.1, we retrace the origin of Oostra's syntax for
 intuitionistic existential graphs (IEGs) as a natural generalization of the \emph{scroll}, an icon
@@ -225,11 +226,11 @@ system where all rules are both \emph{analytic} and \emph{invertible} (Theorem 1
 the admissibility of all rules outside of this fragment, and as a consequence the analyticity of the
 system. We exploit these properties in Section 10.7 by describing an algorithm for fully automated
 proof search in the propositional fragment; unfortunately, the current version of the algorithm is
-neither terminating nor complete. Then in Section 10.8, we give an overview of the Flower\,\,Prover,
-a prototype of GUI in the Proof-by-Action paradigm whose actions map directly to the rules of the
-flower calculus, and which integrates nicely with (a restricted version of) our search procedure. We
-conclude in Section 10.9 with a comparison to some related works, and a discussion of future
-directions and applications we envision.
+neither terminating nor complete. Then in Section 10.8, we give an overview of the Flower\,\,Prover
+\cite{flower-prover}, a prototype of GUI in the Proof-by-Action paradigm whose actions map directly
+to the rules of the flower calculus, and which integrates nicely with (a restricted version of) our
+search procedure. We conclude in Section 10.9 with a comparison to some related works, and a
+discussion of future directions and applications we envision.
 
 \printbibliography
 
